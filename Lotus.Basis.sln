@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lotus.Object3D", "Lotus.Object3D\Lotus.Object3D.csproj", "{804039DD-E3BA-42D1-A736-01A048DAC94C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{D8FA50A2-1013-4901-B70E-A9E0EEAEC5EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8FA50A2-1013-4901-B70E-A9E0EEAEC5EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8FA50A2-1013-4901-B70E-A9E0EEAEC5EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

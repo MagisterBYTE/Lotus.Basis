@@ -481,15 +481,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String SetLengthTabs(this String @this, Int32 length, Char symbol)
 			{
-				Int32 l = @this.Length;
 				String original = @this.Replace("\t", "[tt]");
-				l = original.Length;
 
 				original = SetLength(original, length, symbol);
-				l = original.Length;
 
 				original = original.Replace("[tt]", "\t");
-				l = original.Length;
 
 				return original;
 			}
@@ -966,8 +962,7 @@ namespace Lotus
 					}
 				}
 
-				Int32 result = -1;
-				Int32.TryParse(number.ToString(), out result);
+				Int32 result = XNumbers.ParseInt(number.ToString(), -1);
 				return result;
 			}
 
@@ -999,8 +994,7 @@ namespace Lotus
 					}
 				}
 
-				Int32 result = -1;
-				Int32.TryParse(number.ToString().GetReverseCopy(), out result);
+				Int32 result = XNumbers.ParseInt(number.ToString().GetReverseCopy(), -1);
 				return result;
 			}
 
@@ -1027,7 +1021,7 @@ namespace Lotus
 					}
 				}
 
-				return "";
+				return String.Empty;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1050,7 +1044,7 @@ namespace Lotus
 					return @this.Substring(start, l);
 				}
 
-				return "";
+				return String.Empty;
 			}
 			#endregion
 
@@ -1107,7 +1101,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ToVarName(this String @this)
 			{
-				return (@this.Replace(" ", ""));
+				return (@this.Replace(" ", String.Empty));
 			}
 
 			//---------------------------------------------------------------------------------------------------------

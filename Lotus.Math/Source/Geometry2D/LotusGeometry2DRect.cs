@@ -54,31 +54,13 @@ namespace Lotus
 			#region ======================================= СТАТИЧЕСКИЕ МЕТОДЫ ========================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Десереализация двухмерного прямоугольника из строки
-			/// </summary>
-			/// <param name="data">Строка данных</param>
-			/// <returns>Прямоугольник</returns>
-			//----------------------------------------------------------------------------------------------------------
-			public static Rect2D DeserializeFromString(String data)
-			{
-				Rect2D rect = new Rect2D();
-				String[] rect_data = data.Split(';');
-				rect.X = XMath.ParseDouble(rect_data[0]);
-				rect.Y = XMath.ParseDouble(rect_data[1]);
-				rect.Width = XMath.ParseDouble(rect_data[2]);
-				rect.Height = XMath.ParseDouble(rect_data[3]);
-				return rect;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
 			/// Определение пересечения двух прямоугольников
 			/// </summary>
 			/// <param name="a">Первый прямоугольник</param>
 			/// <param name="b">Второй прямоугольник</param>
 			/// <returns>Прямоугольник полученный в результате пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2D IntersectRect(Rect2D a, Rect2D b)
+			public static Rect2D IntersectRect(in Rect2D a, in Rect2D b)
 			{
 				Double x1 = Math.Max(a.X, b.X);
 				Double x2 = Math.Min(a.X + a.Width, b.X + b.Width);
@@ -101,7 +83,7 @@ namespace Lotus
 			/// <param name="b">Второй прямоугольник</param>
 			/// <returns>Прямоугольник полученный в результате объединения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2D UnionRect(Rect2D a, Rect2D b)
+			public static Rect2D UnionRect(in Rect2D a, in Rect2D b)
 			{
 				Double x1 = Math.Min(a.X, b.X);
 				Double x2 = Math.Max(a.X + a.Width, b.X + b.Width);
@@ -109,6 +91,24 @@ namespace Lotus
 				Double y2 = Math.Max(a.Y + a.Height, b.Y + b.Height);
 
 				return new Rect2D(x1, y1, x2 - x1, y2 - y1);
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Десереализация двухмерного прямоугольника из строки
+			/// </summary>
+			/// <param name="data">Строка данных</param>
+			/// <returns>Прямоугольник</returns>
+			//----------------------------------------------------------------------------------------------------------
+			public static Rect2D DeserializeFromString(String data)
+			{
+				Rect2D rect = new Rect2D();
+				String[] rect_data = data.Split(';');
+				rect.X = XMath.ParseDouble(rect_data[0]);
+				rect.Y = XMath.ParseDouble(rect_data[1]);
+				rect.Width = XMath.ParseDouble(rect_data[2]);
+				rect.Height = XMath.ParseDouble(rect_data[3]);
+				return rect;
 			}
 			#endregion
 
@@ -535,7 +535,7 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(Vector2D point)
+			public Boolean Contains(in Vector2D point)
 			{
 				return X <= point.X && X + Width >= point.X && Y <= point.Y && Y + Height >= point.Y;
 			}
@@ -546,7 +546,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="offset">Смещение</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Offset(Vector2D offset)
+			public void Offset(in Vector2D offset)
 			{
 				X += offset.X;
 				Y += offset.Y;
@@ -559,7 +559,7 @@ namespace Lotus
 			/// <param name="a">Первый прямоугольник</param>
 			/// <param name="b">Второй прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(Rect2D a, Rect2D b)
+			public void SetMaximize(in Rect2D a, in Rect2D b)
 			{
 				X = a.X > b.X ? a.X : b.X;
 				Y = a.Y > b.Y ? a.Y : b.Y;
@@ -574,7 +574,7 @@ namespace Lotus
 			/// <param name="a">Первый прямоугольник</param>
 			/// <param name="b">Второй прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(Rect2D a, Rect2D b)
+			public void SetMinimize(in Rect2D a, in Rect2D b)
 			{
 				X = a.X < b.X ? a.X : b.X;
 				Y = a.Y < b.Y ? a.Y : b.Y;
@@ -588,9 +588,9 @@ namespace Lotus
 			/// </summary>
 			/// <param name="rect">Прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetIntersect(Rect2D rect)
+			public void SetIntersect(in Rect2D rect)
 			{
-				this = IntersectRect(this, rect);
+				this = IntersectRect(in this, in rect);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -599,9 +599,9 @@ namespace Lotus
 			/// </summary>
 			/// <param name="rect">Прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetUnion(Rect2D rect)
+			public void SetUnion(in Rect2D rect)
 			{
-				this = UnionRect(this, rect);
+				this = UnionRect(in this, in rect);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -625,7 +625,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="point">Точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void InflateInPoint(ref Vector2D point)
+			public void InflateInPoint(in Vector2D point)
 			{
 				if (X > point.X)
 				{
@@ -702,19 +702,11 @@ namespace Lotus
 			/// <param name="b">Второй прямоугольник</param>
 			/// <returns>Прямоугольник полученный в результате пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2Df IntersectRect(Rect2Df a, Rect2Df b)
+			public static Rect2Df IntersectRect(in Rect2Df a, in Rect2Df b)
 			{
-				Single x1 = Math.Max(a.X, b.X);
-				Single x2 = Math.Min(a.X + a.Width, b.X + b.Width);
-				Single y1 = Math.Max(a.Y, b.Y);
-				Single y2 = Math.Min(a.Y + a.Height, b.Y + b.Height);
-
-				if (x2 >= x1 && y2 >= y1)
-				{
-					return new Rect2Df(x1, y1, x2 - x1, y2 - y1);
-				}
-
-				return new Rect2Df();
+				Rect2Df result;
+				IntersectRect(in a, in b, out result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -725,7 +717,7 @@ namespace Lotus
 			/// <param name="b">Второй прямоугольник</param>
 			/// <param name="result">Прямоугольник полученный в результате пересечения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void IntersectRect(ref Rect2Df a, ref Rect2Df b, out Rect2Df result)
+			public static void IntersectRect(in Rect2Df a, in Rect2Df b, out Rect2Df result)
 			{
 				Single x1 = Math.Max(a.X, b.X);
 				Single x2 = Math.Min(a.X + a.Width, b.X + b.Width);
@@ -751,14 +743,11 @@ namespace Lotus
 			/// <param name="b">Второй прямоугольник</param>
 			/// <returns>Прямоугольник полученный в результате объединения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2Df UnionRect(Rect2Df a, Rect2Df b)
+			public static Rect2Df UnionRect(in Rect2Df a, in Rect2Df b)
 			{
-				Single x1 = Math.Min(a.X, b.X);
-				Single x2 = Math.Max(a.X + a.Width, b.X + b.Width);
-				Single y1 = Math.Min(a.Y, b.Y);
-				Single y2 = Math.Max(a.Y + a.Height, b.Y + b.Height);
-
-				return new Rect2Df(x1, y1, x2 - x1, y2 - y1);
+				Rect2Df result;
+				UnionRect(in a, in b, out result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -769,7 +758,7 @@ namespace Lotus
 			/// <param name="b">Второй прямоугольник</param>
 			/// <param name="result">Прямоугольник полученный в результате объединения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void UnionRect(ref Rect2Df a, ref Rect2Df b, out Rect2Df result)
+			public static void UnionRect(in Rect2Df a, in Rect2Df b, out Rect2Df result)
 			{
 				Single x1 = Math.Min(a.X, b.X);
 				Single x2 = Math.Max(a.X + a.Width, b.X + b.Width);
@@ -1371,19 +1360,7 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(Vector2Df point)
-			{
-				return X <= point.X && X + Width >= point.X && Y <= point.Y && Y + Height >= point.Y;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Проверка на попадание точки в область прямоугольника
-			/// </summary>
-			/// <param name="point">Проверяемая точка</param>
-			/// <returns>Статус попадания</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(ref Vector2Df point)
+			public Boolean Contains(in Vector2Df point)
 			{
 				return X <= point.X && X + Width >= point.X && Y <= point.Y && Y + Height >= point.Y;
 			}
@@ -1394,7 +1371,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="offset">Смещение</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Offset(Vector2Df offset)
+			public void Offset(in Vector2Df offset)
 			{
 				X += offset.X;
 				Y += offset.Y;
@@ -1420,22 +1397,7 @@ namespace Lotus
 			/// <param name="a">Первый прямоугольник</param>
 			/// <param name="b">Второй прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(Rect2Df a, Rect2Df b)
-			{
-				X = a.X > b.X ? a.X : b.X;
-				Y = a.Y > b.Y ? a.Y : b.Y;
-				Width = a.Width > b.Width ? a.Width : b.Width;
-				Height = a.Height > b.Height ? a.Height : b.Height;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Установка компонентов прямоугольника из наибольших компонентов двух прямоугольников
-			/// </summary>
-			/// <param name="a">Первый прямоугольник</param>
-			/// <param name="b">Второй прямоугольник</param>
-			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(ref Rect2Df a, ref Rect2Df b)
+			public void SetMaximize(in Rect2Df a, in Rect2Df b)
 			{
 				X = a.X > b.X ? a.X : b.X;
 				Y = a.Y > b.Y ? a.Y : b.Y;
@@ -1450,22 +1412,7 @@ namespace Lotus
 			/// <param name="a">Первый прямоугольник</param>
 			/// <param name="b">Второй прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(Rect2Df a, Rect2Df b)
-			{
-				X = a.X < b.X ? a.X : b.X;
-				Y = a.Y < b.Y ? a.Y : b.Y;
-				Width = a.Width < b.Width ? a.Width : b.Width;
-				Height = a.Height < b.Height ? a.Height : b.Height;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Установка компонентов прямоугольника из наименьших компонентов двух прямоугольников
-			/// </summary>
-			/// <param name="a">Первый прямоугольник</param>
-			/// <param name="b">Второй прямоугольник</param>
-			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(ref Rect2Df a, ref Rect2Df b)
+			public void SetMinimize(in Rect2Df a, in Rect2Df b)
 			{
 				X = a.X < b.X ? a.X : b.X;
 				Y = a.Y < b.Y ? a.Y : b.Y;
@@ -1479,20 +1426,9 @@ namespace Lotus
 			/// </summary>
 			/// <param name="rect">Прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetIntersect(Rect2Df rect)
+			public void SetIntersect(in Rect2Df rect)
 			{
-				IntersectRect(ref this, ref rect, out this);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Определение пересечения двух прямоугольников
-			/// </summary>
-			/// <param name="rect">Прямоугольник</param>
-			//---------------------------------------------------------------------------------------------------------
-			public void SetIntersect(ref Rect2Df rect)
-			{
-				IntersectRect(ref this, ref rect, out this);
+				IntersectRect(in this, in rect, out this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1501,20 +1437,9 @@ namespace Lotus
 			/// </summary>
 			/// <param name="rect">Прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetUnion(Rect2Df rect)
+			public void SetUnion(in Rect2Df rect)
 			{
-				UnionRect(ref this, ref rect, out this);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Объединение двух прямоугольников
-			/// </summary>
-			/// <param name="rect">Прямоугольник</param>
-			//---------------------------------------------------------------------------------------------------------
-			public void SetUnion(ref Rect2Df rect)
-			{
-				UnionRect(ref this, ref rect, out this);
+				UnionRect(in this, in rect, out this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1525,7 +1450,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetBoundsRect(Rect2Df rect)
 			{
-				//UnionRect(ref this, ref rect, out this);
+				//UnionRect(in this, in rect, out this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1549,7 +1474,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="point">Точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void InflateInPoint(ref Vector2Df point)
+			public void InflateInPoint(in Vector2Df point)
 			{
 				if (X > point.X)
 				{

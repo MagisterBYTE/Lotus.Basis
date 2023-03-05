@@ -61,7 +61,7 @@ namespace Lotus
 			/// <param name="time">Время от 0 до 1</param>
 			/// <returns>Интерполированный размер</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Size2D Lerp(ref Size2D from, ref Size2D to, Double time)
+			public static Size2D Lerp(in Size2D from, in Size2D to, Double time)
 			{
 				Size2D size;
 				size.Width = from.Width + ((to.Width - from.Width) * time);
@@ -510,7 +510,7 @@ namespace Lotus
 			/// <param name="a">Первый размер</param>
 			/// <param name="b">Второй размер</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(Size2D a, Size2D b)
+			public void SetMaximize(in Size2D a, in Size2D b)
 			{
 				Width = a.Width > b.Width ? a.Width : b.Width;
 				Height = a.Height > b.Height ? a.Height : b.Height;
@@ -523,7 +523,7 @@ namespace Lotus
 			/// <param name="a">Первый размер</param>
 			/// <param name="b">Второй размер</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(Size2D a, Size2D b)
+			public void SetMinimize(in Size2D a, in Size2D b)
 			{
 				Width = a.Width < b.Width ? a.Width : b.Width;
 				Height = a.Height < b.Height ? a.Height : b.Height;
@@ -580,7 +580,7 @@ namespace Lotus
 			/// <param name="time">Время от 0 до 1</param>
 			/// <returns>Интерполированный размер</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Size2Df Lerp(ref Size2Df from, ref Size2Df to, Single time)
+			public static Size2Df Lerp(in Size2Df from, in Size2Df to, Single time)
 			{
 				Size2Df size;
 				size.Width = from.Width + ((to.Width - from.Width) * time);
@@ -1067,7 +1067,7 @@ namespace Lotus
 			/// <param name="a">Первый размер</param>
 			/// <param name="b">Второй размер</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(Size2Df a, Size2Df b)
+			public void SetMaximize(in Size2Df a, in Size2Df b)
 			{
 				Width = a.Width > b.Width ? a.Width : b.Width;
 				Height = a.Height > b.Height ? a.Height : b.Height;
@@ -1080,7 +1080,7 @@ namespace Lotus
 			/// <param name="a">Первый размер</param>
 			/// <param name="b">Второй размер</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(Size2Df a, Size2Df b)
+			public void SetMinimize(in Size2Df a, in Size2Df b)
 			{
 				Width = a.Width < b.Width ? a.Width : b.Width;
 				Height = a.Height < b.Height ? a.Height : b.Height;

@@ -99,7 +99,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Add(ref Vector3D a, ref Vector3D b, out Vector3D result)
+			public static void Add(in Vector3D a, in Vector3D b, out Vector3D result)
 			{
 				result.X = a.X + b.X;
 				result.Y = a.Y + b.Y;
@@ -114,7 +114,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Subtract(ref Vector3D a, ref Vector3D b, out Vector3D result)
+			public static void Subtract(in Vector3D a, in Vector3D b, out Vector3D result)
 			{
 				result.X = a.X - b.X;
 				result.Y = a.Y - b.Y;
@@ -129,7 +129,7 @@ namespace Lotus
 			/// <param name="to">Конечный вектор</param>
 			/// <returns>Косинус угла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Cos(ref Vector3D from, ref Vector3D to)
+			public static Double Cos(in Vector3D from, in Vector3D to)
 			{
 				Double dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
 				Double ll = from.Length * to.Length;
@@ -144,7 +144,7 @@ namespace Lotus
 			/// <param name="to">Конечные вектор</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Angle(ref Vector3D from, ref Vector3D to)
+			public static Double Angle(in Vector3D from, in Vector3D to)
 			{
 				Double dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
 				Double ll = from.Length * to.Length;
@@ -160,7 +160,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Расстояние между двумя векторами</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Distance(ref Vector3D a, ref Vector3D b)
+			public static Double Distance(in Vector3D a, in Vector3D b)
 			{
 				Double x = b.X - a.X;
 				Double y = b.Y - a.Y;
@@ -177,7 +177,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Скаляр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Dot(ref Vector3D a, ref Vector3D b)
+			public static Double Dot(in Vector3D a, in Vector3D b)
 			{
 				return (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z);
 			}
@@ -190,7 +190,7 @@ namespace Lotus
 			/// <param name="right">Правый вектор</param>
 			/// <returns>Вектор, перпендикулярный обоим векторам</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3D Cross(ref Vector3D left, ref Vector3D right)
+			public static Vector3D Cross(in Vector3D left, in Vector3D right)
 			{
 				return new Vector3D((left.Y * right.Z) - (left.Z * right.Y),
 					(left.Z * right.X) - (left.X * right.Z),
@@ -206,7 +206,7 @@ namespace Lotus
 			/// <param name="time">Время от 0 до 1</param>
 			/// <returns>Интерполированный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3D Lerp(ref Vector3D from, ref Vector3D to, Double time)
+			public static Vector3D Lerp(in Vector3D from, in Vector3D to, Double time)
 			{
 				Vector3D vector;
 				vector.X = from.X + ((to.X - from.X) * time);
@@ -754,7 +754,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double Distance(ref Vector3D vector)
+			public Double Distance(in Vector3D vector)
 			{
 				Double x = vector.X - X;
 				Double y = vector.Y - Y;
@@ -770,7 +770,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double Dot(ref Vector3D vector)
+			public Double Dot(in Vector3D vector)
 			{
 				return (X * vector.X) + (Y * vector.Y) + (Z * vector.Z);
 			}
@@ -782,7 +782,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(ref Vector3D a, ref Vector3D b)
+			public void SetMaximize(in Vector3D a, in Vector3D b)
 			{
 				X = a.X > b.X ? a.X : b.X;
 				Y = a.Y > b.Y ? a.Y : b.Y;
@@ -796,7 +796,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(ref Vector3D a, ref Vector3D b)
+			public void SetMinimize(in Vector3D a, in Vector3D b)
 			{
 				X = a.X < b.X ? a.X : b.X;
 				Y = a.Y < b.Y ? a.Y : b.Y;
@@ -810,7 +810,7 @@ namespace Lotus
 			/// <param name="left">Левый вектор</param>
 			/// <param name="right">Правый вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CrossNormalize(ref Vector3D left, ref Vector3D right)
+			public void CrossNormalize(in Vector3D left, in Vector3D right)
 			{
 				X = (left.Y * right.Z) - (left.Z * right.Y);
 				Y = (left.Z * right.X) - (left.X * right.Z);
@@ -827,7 +827,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsPoint(ref Matrix4Dx4 matrix)
+			public void TransformAsPoint(in Matrix4Dx4 matrix)
 			{
 				this = new Vector3D((X * matrix.M11) + (Y * matrix.M21) + (Z * matrix.M31) + matrix.M41,
 									(X * matrix.M12) + (Y * matrix.M22) + (Z * matrix.M32) + matrix.M42,
@@ -840,7 +840,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsVector(ref Matrix4Dx4 matrix)
+			public void TransformAsVector(in Matrix4Dx4 matrix)
 			{
 				this = new Vector3D((X * matrix.M11) + (Y * matrix.M21) + (Z * matrix.M31),
 									(X * matrix.M12) + (Y * matrix.M22) + (Z * matrix.M32),
@@ -1053,7 +1053,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Add(ref Vector3Df a, ref Vector3Df b, out Vector3Df result)
+			public static void Add(in Vector3Df a, in Vector3Df b, out Vector3Df result)
 			{
 				result.X = a.X + b.X;
 				result.Y = a.Y + b.Y;
@@ -1068,7 +1068,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Subtract(ref Vector3Df a, ref Vector3Df b, out Vector3Df result)
+			public static void Subtract(in Vector3Df a, in Vector3Df b, out Vector3Df result)
 			{
 				result.X = a.X - b.X;
 				result.Y = a.Y - b.Y;
@@ -1096,7 +1096,7 @@ namespace Lotus
 			/// <param name="to">Конечный вектор</param>
 			/// <returns>Косинус угла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Cos(ref Vector3Df from, ref Vector3Df to)
+			public static Single Cos(in Vector3Df from, in Vector3Df to)
 			{
 				Single dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
 				Single ll = from.Length * to.Length;
@@ -1111,7 +1111,7 @@ namespace Lotus
 			/// <param name="to">Конечные вектор</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Angle(ref Vector3Df from, ref Vector3Df to)
+			public static Single Angle(in Vector3Df from, in Vector3Df to)
 			{
 				Single dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
 				Single ll = from.Length * to.Length;
@@ -1127,24 +1127,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Расстояние между двумя векторами</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Distance(ref Vector3Df a, ref Vector3Df b)
-			{
-				Single x = b.X - a.X;
-				Single y = b.Y - a.Y;
-				Single z = b.Z - a.Z;
-
-				return (Single)Math.Sqrt((x * x) + (y * y) + (z * z));
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Расстояние между двумя векторами
-			/// </summary>
-			/// <param name="a">Первый вектор</param>
-			/// <param name="b">Второй вектор</param>
-			/// <returns>Расстояние между двумя векторами</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Single Distance(Vector3Df a, Vector3Df b)
+			public static Single Distance(in Vector3Df a, in Vector3Df b)
 			{
 				Single x = b.X - a.X;
 				Single y = b.Y - a.Y;
@@ -1160,7 +1143,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Нормализованный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df Normalize(Vector3Df vector)
+			public static Vector3Df Normalize(in Vector3Df vector)
 			{
 				Single inv_lentgh = XMath.InvSqrt((vector.X * vector.X) + (vector.Y * vector.Y) + (vector.Z * vector.Z));
 				return new Vector3Df(vector.X * inv_lentgh, vector.Y * inv_lentgh, vector.Z * inv_lentgh);
@@ -1174,20 +1157,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Скаляр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Dot(Vector3Df a, Vector3Df b)
-			{
-				return (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Скалярное произведение векторов
-			/// </summary>
-			/// <param name="a">Первый вектор</param>
-			/// <param name="b">Второй вектор</param>
-			/// <returns>Скаляр</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Single Dot(ref Vector3Df a, ref Vector3Df b)
+			public static Single Dot(in Vector3Df a, in Vector3Df b)
 			{
 				return (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z);
 			}
@@ -1200,26 +1170,11 @@ namespace Lotus
 			/// <param name="right">Правый вектор</param>
 			/// <returns>Вектор, перпендикулярный обоим векторам</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df Cross(ref Vector3Df left, ref Vector3Df right)
+			public static Vector3Df Cross(in Vector3Df left, in Vector3Df right)
 			{
-				return new Vector3Df((left.Y * right.Z) - (left.Z * right.Y),
-					(left.Z * right.X) - (left.X * right.Z),
-					(left.X * right.Y) - (left.Y * right.X));
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Векторное произведение векторов
-			/// </summary>
-			/// <param name="left">Левый вектор</param>
-			/// <param name="right">Правый вектор</param>
-			/// <returns>Вектор, перпендикулярный обоим векторам</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df Cross(Vector3Df left, Vector3Df right)
-			{
-				return new Vector3Df((left.Y * right.Z) - (left.Z * right.Y),
-					(left.Z * right.X) - (left.X * right.Z),
-					(left.X * right.Y) - (left.Y * right.X));
+				Vector3Df result;
+				Cross(in left, in right, out result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1230,7 +1185,7 @@ namespace Lotus
 			/// <param name="right">Правый вектор</param>
 			/// <param name="result">Вектор, перпендикулярный обоим векторам</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Cross(ref Vector3Df left, ref Vector3Df right, out Vector3Df result)
+			public static void Cross(in Vector3Df left, in Vector3Df right, out Vector3Df result)
 			{
 				result.X = (left.Y * right.Z) - (left.Z * right.Y);
 				result.Y = (left.Z * right.X) - (left.X * right.Z);
@@ -1246,7 +1201,7 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус равенства значений векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean Approximately(ref Vector3Df left, ref Vector3Df right, Single epsilon = 0.01f)
+			public static Boolean Approximately(in Vector3Df left, in Vector3Df right, Single epsilon = 0.01f)
 			{
 				if (Math.Abs(left.X - right.X) < epsilon &&
 					Math.Abs(left.Y - right.Y) < epsilon &&
@@ -1861,7 +1816,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Distance(ref Vector3Df vector)
+			public Single Distance(in Vector3Df vector)
 			{
 				Single x = vector.X - X;
 				Single y = vector.Y - Y;
@@ -1877,7 +1832,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Dot(ref Vector3Df vector)
+			public Single Dot(in Vector3Df vector)
 			{
 				return (X * vector.X) + (Y * vector.Y) + (Z * vector.Z);
 			}
@@ -1889,7 +1844,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(ref Vector3Df a, ref Vector3Df b)
+			public void SetMaximize(in Vector3Df a, in Vector3Df b)
 			{
 				X = a.X > b.X ? a.X : b.X;
 				Y = a.Y > b.Y ? a.Y : b.Y;
@@ -1903,7 +1858,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(ref Vector3Df a, ref Vector3Df b)
+			public void SetMinimize(in Vector3Df a, in Vector3Df b)
 			{
 				X = a.X < b.X ? a.X : b.X;
 				Y = a.Y < b.Y ? a.Y : b.Y;
@@ -1917,7 +1872,7 @@ namespace Lotus
 			/// <param name="left">Левый вектор</param>
 			/// <param name="right">Правый вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CrossNormalize(ref Vector3Df left, ref Vector3Df right)
+			public void CrossNormalize(in Vector3Df left, in Vector3Df right)
 			{
 				X = (left.Y * right.Z) - (left.Z * right.Y);
 				Y = (left.Z * right.X) - (left.X * right.Z);
@@ -1934,7 +1889,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsPoint(ref Matrix4Dx4 matrix)
+			public void TransformAsPoint(in Matrix4Dx4 matrix)
 			{
 				Single x = (Single)((X * matrix.M11) + (Y * matrix.M21) + (Z * matrix.M31) + matrix.M41);
 				Single y = (Single)((X * matrix.M12) + (Y * matrix.M22) + (Z * matrix.M32) + matrix.M42);
@@ -1950,7 +1905,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsVector(ref Matrix4Dx4 matrix)
+			public void TransformAsVector(in Matrix4Dx4 matrix)
 			{
 				Single x = (Single)((X * matrix.M11) + (Y * matrix.M21) + (Z * matrix.M31));
 				Single y = (Single)((X * matrix.M12) + (Y * matrix.M22) + (Z * matrix.M32));

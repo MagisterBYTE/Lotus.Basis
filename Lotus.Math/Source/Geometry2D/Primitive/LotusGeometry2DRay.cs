@@ -288,7 +288,7 @@ namespace Lotus
 			/// <param name="start_point">Начальная точка</param>
 			/// <param name="end_point">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromPoint(Vector2Df start_point, Vector2Df end_point)
+			public void SetFromPoint(in Vector2Df start_point, in Vector2Df end_point)
 			{
 				Position = start_point;
 				Direction = (end_point - start_point).Normalized;
@@ -303,8 +303,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TIntersectType2D IntersectRay(Ray2Df ray)
 			{
-				TIntersectHit2Df raycast_hit = new TIntersectHit2Df();
-				return XIntersect2D.RayToRay(ref Position, ref Direction, ref ray.Position, ref ray.Direction, ref raycast_hit);
+				return XIntersect2D.RayToRay(in Position, in Direction, in ray.Position, in ray.Direction, out _);
 			}
 			#endregion
 		}

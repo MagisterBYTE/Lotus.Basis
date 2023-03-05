@@ -236,9 +236,9 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(Vector3Df point)
+			public Boolean Contains(in Vector3Df point)
 			{
-				Single d = Vector3Df.Distance(ref Center, ref point);
+				Single d = Vector3Df.Distance(in Center, in point);
 				return (Math.Abs(d - Radius) < XGeometry3D.Eplsilon_f);
 			}
 			#endregion

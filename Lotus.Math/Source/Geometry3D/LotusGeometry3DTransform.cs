@@ -179,7 +179,7 @@ namespace Lotus
 			/// <param name="axis">Ось вращения</param>
 			/// <param name="angle">Угол вращения, задается в градусах</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetRotate(Vector3Df axis, Single angle)
+			public void SetRotate(in Vector3Df axis, Single angle)
 			{
 				// Локальное вращение
 				mRotation = new Quaternion3Df(axis, angle);
@@ -198,7 +198,7 @@ namespace Lotus
 			/// <param name="axis">Ось вращения</param>
 			/// <param name="angle">Угол приращения, задается в градусах</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Rotate(Vector3Df axis, Single angle)
+			public void Rotate(in Vector3Df axis, Single angle)
 			{
 				//// Локальное вращение
 				//mAngleAxisPivot += angle;
@@ -219,7 +219,7 @@ namespace Lotus
 			/// <param name="axis">Ось вращения</param>
 			/// <param name="angle">Угол вращения, задается в градусах</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetRotateAround(Vector3Df center, Vector3Df axis, Single angle)
+			public void SetRotateAround(in Vector3Df center, in Vector3Df axis, Single angle)
 			{
 				// Глобальное вращение
 				//Quaternion3D rotation = new Quaternion3D(axis, angle + 180);
@@ -237,7 +237,7 @@ namespace Lotus
 			/// <param name="angle">Угол вращения, задается в градусах</param>
 			/// <param name="parent">Родительская трансформация</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetRotateAround(Vector3Df center, Vector3Df axis, Single angle, Transform3Df parent)
+			public void SetRotateAround(in Vector3Df center, in Vector3Df axis, Single angle, Transform3Df parent)
 			{
 				// Глобальное вращение
 				//Vector3Df axis_d = new Vector3Df(axis);
@@ -255,7 +255,7 @@ namespace Lotus
 			/// <param name="axis">Ось вращения</param>
 			/// <param name="angle">Угол приращения, задается в градусах</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateAround(Vector3Df center, Vector3Df axis, Single angle)
+			public void RotateAround(in Vector3Df center, in Vector3Df axis, Single angle)
 			{
 				// Глобальное вращение
 				//mAngleAxisGlobal += angle;
@@ -273,7 +273,7 @@ namespace Lotus
 			/// <param name="angle">Угол приращения, задается в градусах</param>
 			/// <param name="parent">Родительская трансформация</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateAround(Vector3Df center, Vector3Df axis, Single angle, Transform3Df parent)
+			public void RotateAround(in Vector3Df center, in Vector3Df axis, Single angle, Transform3Df parent)
 			{
 				//// Глобальное вращение
 				//Vector3Df axis_d = new Vector3Df(axis);
@@ -297,12 +297,12 @@ namespace Lotus
 			{
 				Vector3Df direction = point - Pivot;
 				direction.Normalize();
-				mRotation.SetLookRotation(ref direction, ref up);
+				mRotation.SetLookRotation(in direction, in up);
 				
 				// Трансформируем орты
 				mForward = direction;
 				mUp = up;
-				mRight = Vector3Df.Cross(ref mUp, ref mForward);
+				mRight = Vector3Df.Cross(in mUp, in mForward);
 				mUpdateOrt = true;
 			}
 
@@ -315,8 +315,8 @@ namespace Lotus
 			{
 				if (mUpdateOrt)
 				{
-					mUp = Vector3Df.Cross(ref mForward, ref mRight);
-					mRight = Vector3Df.Cross(ref mUp, ref mForward);
+					mUp = Vector3Df.Cross(in mForward, in mRight);
+					mRight = Vector3Df.Cross(in mUp, in mForward);
 					
 
 					mForward.Normalize();

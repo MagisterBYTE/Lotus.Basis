@@ -36,10 +36,9 @@ namespace Lotus
 			/// <param name="line">Линия</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointLine(Vector2Df point, Line2Df line)
+			public static Vector2Df PointLine(in Vector2Df point, in Line2Df line)
 			{
-				Single distance;
-				return PointLine(point, line.Position, line.Direction, out distance);
+				return PointLine(in point, in line.Position, in line.Direction, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -51,9 +50,9 @@ namespace Lotus
 			/// <param name="distance">Расстояние от позиции линии до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointLine(Vector2Df point, Line2Df line, out Single distance)
+			public static Vector2Df PointLine(in Vector2Df point, in Line2Df line, out Single distance)
 			{
-				return PointLine(point, line.Position, line.Direction, out distance);
+				return PointLine(in point, in line.Position, in line.Direction, out distance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -65,10 +64,9 @@ namespace Lotus
 			/// <param name="line_dir">Направление линии</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointLine(Vector2Df point, Vector2Df line_pos, Vector2Df line_dir)
+			public static Vector2Df PointLine(in Vector2Df point, in Vector2Df line_pos, in Vector2Df line_dir)
 			{
-				Single distance;
-				return PointLine(point, line_pos, line_dir, out distance);
+				return PointLine(in point, in line_pos, in line_dir, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -85,7 +83,7 @@ namespace Lotus
 			/// <param name="distance">Расстояние от позиции линии до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointLine(Vector2Df point, Vector2Df line_pos, Vector2Df line_dir, out Single distance)
+			public static Vector2Df PointLine(in Vector2Df point, in Vector2Df line_pos, in Vector2Df line_dir, out Single distance)
 			{
 				// In theory, sqrMagnitude should be 1, but in practice this division helps with numerical stability
 				distance = Vector2Df.Dot(line_dir, point - line_pos) / line_dir.SqrLength;
@@ -102,10 +100,9 @@ namespace Lotus
 			/// <param name="ray">Луч</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointRay(Vector2Df point, Ray2Df ray)
+			public static Vector2Df PointRay(in Vector2Df point, in Ray2Df ray)
 			{
-				Single distance;
-				return PointRay(point, ray.Position, ray.Direction, out distance);
+				return PointRay(in point, in ray.Position, in ray.Direction, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -117,9 +114,9 @@ namespace Lotus
 			/// <param name="distance">Расстояние от позиции луча до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointRay(Vector2Df point, Ray2Df ray, out Single distance)
+			public static Vector2Df PointRay(in Vector2Df point, in Ray2Df ray, out Single distance)
 			{
-				return PointRay(point, ray.Position, ray.Direction, out distance);
+				return PointRay(in point, in ray.Position, in ray.Direction, out distance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -131,10 +128,9 @@ namespace Lotus
 			/// <param name="ray_dir">Направление луча</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointRay(Vector2Df point, Vector2Df ray_pos, Vector2Df ray_dir)
+			public static Vector2Df PointRay(in Vector2Df point, in Vector2Df ray_pos, in Vector2Df ray_dir)
 			{
-				Single distance;
-				return PointRay(point, ray_pos, ray_dir, out distance);
+				return PointRay(point, ray_pos, ray_dir, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -151,9 +147,9 @@ namespace Lotus
 			/// <param name="distance">Расстояние от позиции луча до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointRay(Vector2Df point, Vector2Df ray_pos, Vector2Df ray_dir, out Single distance)
+			public static Vector2Df PointRay(in Vector2Df point, in Vector2Df ray_pos, in Vector2Df ray_dir, out Single distance)
 			{
-				Single point_projection = Vector2Df.Dot(ray_dir, point - ray_pos);
+				Single point_projection = Vector2Df.Dot(in ray_dir, point - ray_pos);
 				if (point_projection <= 0)
 				{
 					// Мы находимся по другую сторону луча
@@ -176,10 +172,9 @@ namespace Lotus
 			/// <param name="segment">Отрезок</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointSegment(Vector2Df point, Segment2Df segment)
+			public static Vector2Df PointSegment(in Vector2Df point, in Segment2Df segment)
 			{
-				Single normalize_distance;
-				return PointSegment(point, segment.Start, segment.End, out normalize_distance);
+				return PointSegment(in point, in segment.Start, in segment.End, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -191,9 +186,9 @@ namespace Lotus
 			/// <param name="normalize_distance">Нормализованная дистанция проецируемой точки от начала отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointSegment(Vector2Df point, Segment2Df segment, out Single normalize_distance)
+			public static Vector2Df PointSegment(in Vector2Df point, in Segment2Df segment, out Single normalize_distance)
 			{
-				return PointSegment(point, segment.Start, segment.End, out normalize_distance);
+				return PointSegment(in point, in segment.Start, in segment.End, out normalize_distance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -205,10 +200,9 @@ namespace Lotus
 			/// <param name="end">Конец отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointSegment(Vector2Df point, Vector2Df start, Vector2Df end)
+			public static Vector2Df PointSegment(in Vector2Df point, in Vector2Df start, in Vector2Df end)
 			{
-				Single normalize_distance;
-				return PointSegment(point, start, end, out normalize_distance);
+				return PointSegment(in point, in start, in end, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -225,7 +219,7 @@ namespace Lotus
 			/// <param name="normalize_distance">Нормализованная дистанция проецируемой точки от начала отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointSegment(Vector2Df point, Vector2Df start, Vector2Df end, out Single normalize_distance)
+			public static Vector2Df PointSegment(in Vector2Df point, in Vector2Df start, in Vector2Df end, out Single normalize_distance)
 			{
 				Vector2Df segment_direction = end - start;
 				Single sqr_segment_length = segment_direction.SqrLength;
@@ -236,7 +230,7 @@ namespace Lotus
 					return start;
 				}
 
-				Single point_projection = Vector2Df.Dot(segment_direction, point - start);
+				Single point_projection = Vector2Df.Dot(in segment_direction, point - start);
 				if (point_projection <= 0)
 				{
 					normalize_distance = 0;
@@ -263,10 +257,10 @@ namespace Lotus
 			/// <param name="segment_length">Длина отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			private static Vector2Df PointSegment(Vector2Df point, Vector2Df start, Vector2Df end, 
-				Vector2Df segment_direction, Single segment_length)
+			private static Vector2Df PointSegment(in Vector2Df point, in Vector2Df start, in Vector2Df end, 
+				in Vector2Df segment_direction, Single segment_length)
 			{
-				Single point_projection = Vector2Df.Dot(segment_direction, point - start);
+				Single point_projection = Vector2Df.Dot(in segment_direction, point - start);
 				if (point_projection <= 0)
 				{
 					return start;
@@ -288,9 +282,9 @@ namespace Lotus
 			/// <param name="circle">Окружность</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointCircle(Vector2Df point, Circle2Df circle)
+			public static Vector2Df PointCircle(in Vector2Df point, in Circle2Df circle)
 			{
-				return PointCircle(point, circle.Center, circle.Radius);
+				return PointCircle(in point, in circle.Center, circle.Radius);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -306,7 +300,7 @@ namespace Lotus
 			/// <param name="circle_radius">Радиус окружности</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df PointCircle(Vector2Df point, Vector2Df circle_center, 
+			public static Vector2Df PointCircle(in Vector2Df point, in Vector2Df circle_center, 
 				Single circle_radius)
 			{
 				return circle_center + ((point - circle_center).Normalized * circle_radius);
@@ -323,9 +317,9 @@ namespace Lotus
 			/// <param name="point_a">Первая точка пересечения</param>
 			/// <param name="point_b">Вторая точка пересечения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineLine(Line2Df line_a, Line2Df line_b, out Vector2Df point_a, out Vector2Df point_b)
+			public static void LineLine(in Line2Df line_a, in Line2Df line_b, out Vector2Df point_a, out Vector2Df point_b)
 			{
-				LineLine(line_a.Position, line_a.Direction, line_b.Position, line_b.Direction, out point_a, out point_b);
+				LineLine(in line_a.Position, in line_a.Direction, in line_b.Position, in line_b.Direction, out point_a, out point_b);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -339,22 +333,22 @@ namespace Lotus
 			/// <param name="point_a">Первая точка пересечения</param>
 			/// <param name="point_b">Вторая точка пересечения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineLine(Vector2Df pos_a, Vector2Df dir_a, Vector2Df pos_b, 
-				Vector2Df dir_b, out Vector2Df point_a, out Vector2Df point_b)
+			public static void LineLine(in Vector2Df pos_a, in Vector2Df dir_a, in Vector2Df pos_b, 
+				in Vector2Df dir_b, out Vector2Df point_a, out Vector2Df point_b)
 			{
 				Vector2Df pos_b_to_a = pos_a - pos_b;
-				Single denominator = Vector2Df.DotPerp(ref dir_a, ref dir_b);
-				Single perp_dot_b = Vector2Df.DotPerp(ref dir_b, ref pos_b_to_a);
+				Single denominator = Vector2Df.DotPerp(in dir_a, in dir_b);
+				Single perp_dot_b = Vector2Df.DotPerp(in dir_b, in pos_b_to_a);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
 					// Parallel
 					if (Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f ||
-						Math.Abs(Vector2Df.DotPerp(ref dir_a, ref pos_b_to_a)) > XGeometry2D.Eplsilon_f)
+						Math.Abs(Vector2Df.DotPerp(in dir_a, in pos_b_to_a)) > XGeometry2D.Eplsilon_f)
 					{
 						// Not collinear
 						point_a = pos_a;
-						point_b = pos_b + (dir_b * Vector2Df.Dot(ref dir_b, ref pos_b_to_a));
+						point_b = pos_b + (dir_b * Vector2Df.Dot(in dir_b, pos_b_to_a));
 						return;
 					}
 
@@ -378,9 +372,9 @@ namespace Lotus
 			/// <param name="line_point">Точка проекции на линии</param>
 			/// <param name="ray_point">Точка проекции на луче</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineRay(Line2Df line, Ray2Df ray, out Vector2Df line_point, out Vector2Df ray_point)
+			public static void LineRay(in Line2Df line, in Ray2Df ray, out Vector2Df line_point, out Vector2Df ray_point)
 			{
-				LineRay(line.Position, line.Direction, ray.Position, ray.Direction, out line_point, out ray_point);
+				LineRay(in line.Position, in line.Direction, in ray.Position, in ray.Direction, out line_point, out ray_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -394,21 +388,21 @@ namespace Lotus
 			/// <param name="line_point">Точка проекции на линии</param>
 			/// <param name="ray_point">Точка проекции на луче</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineRay(Vector2Df line_pos, Vector2Df line_dir, Vector2Df ray_pos, Vector2Df ray_dir,
+			public static void LineRay(in Vector2Df line_pos, in Vector2Df line_dir, in Vector2Df ray_pos, in Vector2Df ray_dir,
 				out Vector2Df line_point, out Vector2Df ray_point)
 			{
 				Vector2Df ray_pos_to_line_pos = line_pos - ray_pos;
-				Single denominator = Vector2Df.DotPerp(ref line_dir, ref ray_dir);
-				Single perp_dot_a = Vector2Df.DotPerp(ref line_dir, ref ray_pos_to_line_pos);
+				Single denominator = Vector2Df.DotPerp(in line_dir, in ray_dir);
+				Single perp_dot_a = Vector2Df.DotPerp(in line_dir, in ray_pos_to_line_pos);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
 					// Parallel
-					Single perp_dot_b = Vector2Df.DotPerp(ref ray_dir, ref ray_pos_to_line_pos);
+					Single perp_dot_b = Vector2Df.DotPerp(in ray_dir, in ray_pos_to_line_pos);
 					if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
 					{
 						// Not collinear
-						Single ray_pos_projection = Vector2Df.Dot(ref line_dir, ref ray_pos_to_line_pos);
+						Single ray_pos_projection = Vector2Df.Dot(in line_dir, in ray_pos_to_line_pos);
 						line_point = line_pos - (line_dir * ray_pos_projection);
 						ray_point = ray_pos;
 						return;
@@ -423,7 +417,7 @@ namespace Lotus
 				if (ray_distance < -XGeometry2D.Eplsilon_f)
 				{
 					// No intersection
-					Single ray_pos_projection = Vector2Df.Dot(ref line_dir, ref ray_pos_to_line_pos);
+					Single ray_pos_projection = Vector2Df.Dot(in line_dir, in ray_pos_to_line_pos);
 					line_point = line_pos - (line_dir * ray_pos_projection);
 					ray_point = ray_pos;
 					return;
@@ -444,10 +438,10 @@ namespace Lotus
 			/// <param name="line_point">Точка проекции на линии</param>
 			/// <param name="segment_point">Точка проекции на сегменте</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineSegment(Line2Df line, Segment2Df segment, out Vector2Df line_point, 
+			public static void LineSegment(in Line2Df line, in Segment2Df segment, out Vector2Df line_point, 
 				out Vector2Df segment_point)
 			{
-				LineSegment(line.Position, line.Direction, segment.Start, segment.End, out line_point, out segment_point);
+				LineSegment(in line.Position, in line.Direction, in segment.Start, in segment.End, out line_point, out segment_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -461,18 +455,18 @@ namespace Lotus
 			/// <param name="line_point">Точка проекции на линии</param>
 			/// <param name="segment_point">Точка проекции на сегменте</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineSegment(Vector2Df line_pos, Vector2Df line_dir, Vector2Df start, Vector2Df end,
+			public static void LineSegment(in Vector2Df line_pos, in Vector2Df line_dir, in Vector2Df start, in Vector2Df end,
 				out Vector2Df line_point, out Vector2Df segment_point)
 			{
 				Vector2Df segment_direction = end - start;
 				Vector2Df segment_start_to_pos = line_pos - start;
-				Single denominator = Vector2Df.DotPerp(ref line_dir, ref segment_direction);
-				Single perp_dot_start = Vector2Df.DotPerp(ref line_dir, ref segment_start_to_pos);
+				Single denominator = Vector2Df.DotPerp(in line_dir, in segment_direction);
+				Single perp_dot_start = Vector2Df.DotPerp(in line_dir, in segment_start_to_pos);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
 					// Parallel
-					Boolean codirected = Vector2Df.Dot(ref line_dir, ref segment_direction) > 0;
+					Boolean codirected = Vector2Df.Dot(in line_dir, in segment_direction) > 0;
 
 					// Normalized direction gives more stable results 
 					Single perp_dot_end = Vector2Df.DotPerp(segment_direction.Normalized, segment_start_to_pos);
@@ -481,13 +475,13 @@ namespace Lotus
 						// Not collinear
 						if (codirected)
 						{
-							Single segment_start_projection = Vector2Df.Dot(ref line_dir, ref segment_start_to_pos);
+							Single segment_start_projection = Vector2Df.Dot(in line_dir, in segment_start_to_pos);
 							line_point = line_pos - (line_dir * segment_start_projection);
 							segment_point = start;
 						}
 						else
 						{
-							Single segment_end_projection = Vector2Df.Dot(line_dir, line_pos - end);
+							Single segment_end_projection = Vector2Df.Dot(in line_dir, line_pos - end);
 							line_point = line_pos - (line_dir * segment_end_projection);
 							segment_point = end;
 						}
@@ -512,7 +506,7 @@ namespace Lotus
 				{
 					// No intersection
 					segment_point = start + (segment_direction * XMath.Clamp01(segment_distance));
-					Single segment_point_projection = Vector2Df.Dot(line_dir, segment_point - line_pos);
+					Single segment_point_projection = Vector2Df.Dot(in line_dir, segment_point - line_pos);
 					line_point = line_pos + (line_dir * segment_point_projection);
 					return;
 				}
@@ -531,10 +525,10 @@ namespace Lotus
 			/// <param name="line_point">Точка проекции на линии</param>
 			/// <param name="circle_point">Точка проекции на окружности</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineCircle(Line2Df line, Circle2Df circle, out Vector2Df line_point, 
+			public static void LineCircle(in Line2Df line, in Circle2Df circle, out Vector2Df line_point, 
 				out Vector2Df circle_point)
 			{
-				LineCircle(line.Position, line.Direction, circle.Center, circle.Radius, out line_point, out circle_point);
+				LineCircle(in line.Position, in line.Direction, in circle.Center, circle.Radius, out line_point, out circle_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -548,11 +542,11 @@ namespace Lotus
 			/// <param name="line_point">Точка проекции на линии</param>
 			/// <param name="circle_point">Точка проекции на окружности</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineCircle(Vector2Df line_pos, Vector2Df line_dir, Vector2Df circle_center, 
+			public static void LineCircle(in Vector2Df line_pos, in Vector2Df line_dir, in Vector2Df circle_center, 
 				Single circle_radius, out Vector2Df line_point, out Vector2Df circle_point)
 			{
 				Vector2Df pos_to_center = circle_center - line_pos;
-				Single center_projection = Vector2Df.Dot(line_dir, pos_to_center);
+				Single center_projection = Vector2Df.Dot(in line_dir, in pos_to_center);
 				Single sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
 				Single sqr_distance_to_intersection = (circle_radius * circle_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry2D.Eplsilon_f)
@@ -586,7 +580,7 @@ namespace Lotus
 			/// <param name="point_a">Точка пересечения на первом луче</param>
 			/// <param name="point_b">Точка пересечения на втором луче</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RayRay(Ray2Df ray_a, Ray2Df ray_b, out Vector2Df point_a, out Vector2Df point_b)
+			public static void RayRay(in Ray2Df ray_a, in Ray2Df ray_b, out Vector2Df point_a, out Vector2Df point_b)
 			{
 				RayRay(ray_a.Position, ray_a.Direction, ray_b.Position, ray_b.Direction, out point_a, out point_b);
 			}
@@ -602,14 +596,14 @@ namespace Lotus
 			/// <param name="point_a">Точка пересечения на первом луче</param>
 			/// <param name="point_b">Точка пересечения на втором луче</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RayRay(Vector2Df pos_a, Vector2Df dir_a, Vector2Df pos_b, Vector2Df dir_b,
+			public static void RayRay(in Vector2Df pos_a, in Vector2Df dir_a, in Vector2Df pos_b, in Vector2Df dir_b,
 				out Vector2Df point_a, out Vector2Df point_b)
 			{
 				Vector2Df pos_b_to_a = pos_a - pos_b;
-				Single denominator = Vector2Df.DotPerp(ref dir_a, ref dir_b);
-				Single perp_dot_a = Vector2Df.DotPerp(ref dir_a, ref pos_b_to_a);
-				Single perp_dot_b = Vector2Df.DotPerp(ref dir_b, ref pos_b_to_a);
-				Boolean codirected = Vector2Df.Dot(dir_a, dir_b) > 0;
+				Single denominator = Vector2Df.DotPerp(in dir_a, in dir_b);
+				Single perp_dot_a = Vector2Df.DotPerp(in dir_a, in pos_b_to_a);
+				Single perp_dot_b = Vector2Df.DotPerp(in dir_b, in pos_b_to_a);
+				Boolean codirected = Vector2Df.Dot(in dir_a, in dir_b) > 0;
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
@@ -694,14 +688,14 @@ namespace Lotus
 					// No intersection
 					if (codirected)
 					{
-						Single originAProjection = Vector2Df.Dot(ref dir_b, ref pos_b_to_a);
+						Single originAProjection = Vector2Df.Dot(in dir_b, in pos_b_to_a);
 						if (originAProjection > -XGeometry2D.Eplsilon_f)
 						{
 							point_a = pos_a;
 							point_b = pos_b + (dir_b * originAProjection);
 							return;
 						}
-						Single originBProjection = -Vector2Df.Dot(ref dir_a, ref pos_b_to_a);
+						Single originBProjection = -Vector2Df.Dot(in dir_a, in pos_b_to_a);
 						if (originBProjection > -XGeometry2D.Eplsilon_f)
 						{
 							point_a = pos_a + (dir_a * originBProjection);
@@ -716,7 +710,7 @@ namespace Lotus
 					{
 						if (distance_a > -XGeometry2D.Eplsilon_f)
 						{
-							Single originBProjection = -Vector2Df.Dot(ref dir_a, ref pos_b_to_a);
+							Single originBProjection = -Vector2Df.Dot(in dir_a, in pos_b_to_a);
 							if (originBProjection > -XGeometry2D.Eplsilon_f)
 							{
 								point_a = pos_a + (dir_a * originBProjection);
@@ -726,7 +720,7 @@ namespace Lotus
 						}
 						else if (distance_b > -XGeometry2D.Eplsilon_f)
 						{
-							Single originAProjection = Vector2Df.Dot(ref dir_b, ref pos_b_to_a);
+							Single originAProjection = Vector2Df.Dot(in dir_b, in pos_b_to_a);
 							if (originAProjection > -XGeometry2D.Eplsilon_f)
 							{
 								point_a = pos_a;
@@ -754,9 +748,9 @@ namespace Lotus
 			/// <param name="ray_point">Точка проекции на луче</param>
 			/// <param name="segment_point">Точка проекции на отрезке</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RaySegment(Ray2Df ray, Segment2Df segment, out Vector2Df ray_point, out Vector2Df segment_point)
+			public static void RaySegment(in Ray2Df ray, in Segment2Df segment, out Vector2Df ray_point, out Vector2Df segment_point)
 			{
-				RaySegment(ray.Position, ray.Direction, segment.Start, segment.End, out ray_point, out segment_point);
+				RaySegment(in ray.Position, in ray.Direction, in segment.Start, in segment.End, out ray_point, out segment_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -770,13 +764,15 @@ namespace Lotus
 			/// <param name="ray_point">Точка проекции на луче</param>
 			/// <param name="segment_point">Точка проекции на отрезке</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RaySegment(Vector2Df ray_pos, Vector2Df ray_dir, Vector2Df start, Vector2Df end,
+			public static void RaySegment(in Vector2Df ray_pos, in Vector2Df ray_dir, in Vector2Df start, in Vector2Df end,
 				out Vector2Df ray_point, out Vector2Df segment_point)
 			{
-				Vector2Df segment_direction = end - start;
-				Vector2Df segment_start_to_pos = ray_pos - start;
-				Single denominator = Vector2Df.DotPerp(ref ray_dir, ref segment_direction);
-				Single perp_dot_a = Vector2Df.DotPerp(ref ray_dir, ref segment_start_to_pos);
+				Vector2Df start_copy = start;
+				Vector2Df end_copy = end;
+				Vector2Df segment_direction = end_copy - start_copy;
+				Vector2Df segment_start_to_pos = ray_pos - start_copy;
+				Single denominator = Vector2Df.DotPerp(in ray_dir, in segment_direction);
+				Single perp_dot_a = Vector2Df.DotPerp(in ray_dir, in segment_start_to_pos);
 				// Normalized direction gives more stable results 
 				Single perp_dot_b = Vector2Df.DotPerp(segment_direction.Normalized, segment_start_to_pos);
 
@@ -784,7 +780,7 @@ namespace Lotus
 				{
 					// Parallel
 					Single segment_start_projection = -Vector2Df.Dot(ray_dir, segment_start_to_pos);
-					Vector2Df ray_posToSegmentB = end - ray_pos;
+					Vector2Df ray_posToSegmentB = end_copy - ray_pos;
 					Single segment_end_projection = Vector2Df.Dot(ray_dir, ray_posToSegmentB);
 					if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
 					{
@@ -794,13 +790,13 @@ namespace Lotus
 							if (segment_start_projection < segment_end_projection)
 							{
 								ray_point = ray_pos + (ray_dir * segment_start_projection);
-								segment_point = start;
+								segment_point = start_copy;
 								return;
 							}
 							else
 							{
 								ray_point = ray_pos + (ray_dir * segment_end_projection);
-								segment_point = end;
+								segment_point = end_copy;
 								return;
 							}
 						}
@@ -810,17 +806,17 @@ namespace Lotus
 							Single sqr_segment_length = segment_direction.SqrLength;
 							if (sqr_segment_length > XGeometry2D.Eplsilon_f)
 							{
-								Single ray_pos_projection = Vector2Df.Dot(ref segment_direction, ref segment_start_to_pos) / sqr_segment_length;
-								segment_point = start + (segment_direction * ray_pos_projection);
+								Single ray_pos_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_pos) / sqr_segment_length;
+								segment_point = start_copy + (segment_direction * ray_pos_projection);
 							}
 							else
 							{
-								segment_point = start;
+								segment_point = start_copy;
 							}
 							return;
 						}
 						ray_point = ray_pos;
-						segment_point = segment_start_projection > segment_end_projection ? start : end;
+						segment_point = segment_start_projection > segment_end_projection ? start_copy : end_copy;
 						return;
 					}
 
@@ -828,7 +824,7 @@ namespace Lotus
 					if (segment_start_projection > -XGeometry2D.Eplsilon_f && segment_end_projection > -XGeometry2D.Eplsilon_f)
 					{
 						// Segment intersection
-						ray_point = segment_point = segment_start_projection < segment_end_projection ? start : end;
+						ray_point = segment_point = segment_start_projection < segment_end_projection ? start_copy : end_copy;
 						return;
 					}
 					if (segment_start_projection > -XGeometry2D.Eplsilon_f || segment_end_projection > -XGeometry2D.Eplsilon_f)
@@ -839,7 +835,7 @@ namespace Lotus
 					}
 					// No intersection
 					ray_point = ray_pos;
-					segment_point = segment_start_projection > segment_end_projection ? start : end;
+					segment_point = segment_start_projection > segment_end_projection ? start_copy : end_copy;
 					return;
 				}
 
@@ -850,23 +846,23 @@ namespace Lotus
 					segment_distance < -XGeometry2D.Eplsilon_f || segment_distance > 1 + XGeometry2D.Eplsilon_f)
 				{
 					// No intersection
-					Boolean codirected = Vector2Df.Dot(ref ray_dir, ref segment_direction) > 0;
+					Boolean codirected = Vector2Df.Dot(in ray_dir, in segment_direction) > 0;
 					Vector2Df segment_end_to_pos;
 					if (!codirected)
 					{
-						XMath.Swap(ref start, ref end);
+						XMath.Swap(ref start_copy, ref end_copy);
 						segment_direction = -segment_direction;
 						segment_end_to_pos = segment_start_to_pos;
-						segment_start_to_pos = ray_pos - start;
+						segment_start_to_pos = ray_pos - start_copy;
 						segment_distance = 1 - segment_distance;
 					}
 					else
 					{
-						segment_end_to_pos = ray_pos - end;
+						segment_end_to_pos = ray_pos - end_copy;
 					}
 
-					Single segment_start_projection = -Vector2Df.Dot(ref ray_dir, ref segment_start_to_pos);
-					Single segment_end_projection = -Vector2Df.Dot(ref ray_dir, ref segment_end_to_pos);
+					Single segment_start_projection = -Vector2Df.Dot(in ray_dir, in segment_start_to_pos);
+					Single segment_end_projection = -Vector2Df.Dot(in ray_dir, in segment_end_to_pos);
 					Boolean segment_start_on_ray = segment_start_projection > -XGeometry2D.Eplsilon_f;
 					Boolean segment_end_on_ray = segment_end_projection > -XGeometry2D.Eplsilon_f;
 					if (segment_start_on_ray && segment_end_on_ray)
@@ -874,13 +870,13 @@ namespace Lotus
 						if (segment_distance < 0)
 						{
 							ray_point = ray_pos + (ray_dir * segment_start_projection);
-							segment_point = start;
+							segment_point = start_copy;
 							return;
 						}
 						else
 						{
 							ray_point = ray_pos + (ray_dir * segment_end_projection);
-							segment_point = end;
+							segment_point = end_copy;
 							return;
 						}
 					}
@@ -889,20 +885,20 @@ namespace Lotus
 						if (segment_distance < 0)
 						{
 							ray_point = ray_pos;
-							segment_point = start;
+							segment_point = start_copy;
 							return;
 						}
 						else if (segment_distance > 1 + XGeometry2D.Eplsilon_f)
 						{
 							ray_point = ray_pos + (ray_dir * segment_end_projection);
-							segment_point = end;
+							segment_point = end_copy;
 							return;
 						}
 						else
 						{
 							ray_point = ray_pos;
-							Single pos_projection = Vector2Df.Dot(ref segment_direction, ref segment_start_to_pos);
-							segment_point = start + (segment_direction * pos_projection / segment_direction.SqrLength);
+							Single pos_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_pos);
+							segment_point = start_copy + (segment_direction * pos_projection / segment_direction.SqrLength);
 							return;
 						}
 					}
@@ -910,27 +906,27 @@ namespace Lotus
 					{
 						// Not on ray
 						ray_point = ray_pos;
-						Single pos_projection = Vector2Df.Dot(ref segment_direction, ref segment_start_to_pos);
+						Single pos_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_pos);
 						Single sqr_segment_length = segment_direction.SqrLength;
 						if (pos_projection < 0)
 						{
-							segment_point = start;
+							segment_point = start_copy;
 							return;
 						}
 						else if (pos_projection > sqr_segment_length)
 						{
-							segment_point = end;
+							segment_point = end_copy;
 							return;
 						}
 						else
 						{
-							segment_point = start + (segment_direction * pos_projection / sqr_segment_length);
+							segment_point = start_copy + (segment_direction * pos_projection / sqr_segment_length);
 							return;
 						}
 					}
 				}
 				// Point intersection
-				ray_point = segment_point = start + (segment_direction * segment_distance);
+				ray_point = segment_point = start_copy + (segment_direction * segment_distance);
 			}
 			#endregion
 
@@ -944,9 +940,9 @@ namespace Lotus
 			/// <param name="ray_point">Точка проекции на луче</param>
 			/// <param name="circle_point">Точка проекции на окружности</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RayCircle(Ray2Df ray, Circle2Df circle, out Vector2Df ray_point, out Vector2Df circle_point)
+			public static void RayCircle(in Ray2Df ray, in Circle2Df circle, out Vector2Df ray_point, out Vector2Df circle_point)
 			{
-				RayCircle(ray.Position, ray.Direction, circle.Center, circle.Radius, out ray_point, out circle_point);
+				RayCircle(in ray.Position, in ray.Direction, in circle.Center, circle.Radius, out ray_point, out circle_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -960,11 +956,11 @@ namespace Lotus
 			/// <param name="ray_point">Точка проекции на луче</param>
 			/// <param name="circle_point">Точка проекции на окружности</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RayCircle(Vector2Df ray_pos, Vector2Df ray_dir, Vector2Df circle_center, Single circle_radius,
+			public static void RayCircle(in Vector2Df ray_pos, in Vector2Df ray_dir, in Vector2Df circle_center, Single circle_radius,
 				out Vector2Df ray_point, out Vector2Df circle_point)
 			{
 				Vector2Df pos_to_center = circle_center - ray_pos;
-				Single center_projection = Vector2Df.Dot(ray_dir, pos_to_center);
+				Single center_projection = Vector2Df.Dot(in ray_dir, in pos_to_center);
 				if (center_projection + circle_radius < -XGeometry2D.Eplsilon_f)
 				{
 					// No intersection
@@ -1037,10 +1033,10 @@ namespace Lotus
 			/// <param name="segment1_point">Точка проекции на первом отрезке</param>
 			/// <param name="segment2_point">Точка проекции на втором отрезке</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SegmentSegment(Segment2Df segment1, Segment2Df segment2, out Vector2Df segment1_point, 
+			public static void SegmentSegment(in Segment2Df segment1, in Segment2Df segment2, out Vector2Df segment1_point, 
 				out Vector2Df segment2_point)
 			{
-				SegmentSegment(segment1.Start, segment1.End, segment2.Start, segment2.End, out segment1_point, out segment2_point);
+				SegmentSegment(in segment1.Start, in segment1.End, in segment2.Start, in segment2.End, out segment1_point, out segment2_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1054,49 +1050,51 @@ namespace Lotus
 			/// <param name="segment1_point">Точка проекции на первом отрезке</param>
 			/// <param name="segment2_point">Точка проекции на втором отрезке</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SegmentSegment(Vector2Df segment1_start, Vector2Df segment1_end, 
-				Vector2Df segment2_start, Vector2Df segment2_end, out Vector2Df segment1_point, 
+			public static void SegmentSegment(in Vector2Df segment1_start, in Vector2Df segment1_end, 
+				in Vector2Df segment2_start, in Vector2Df segment2_end, out Vector2Df segment1_point, 
 				out Vector2Df segment2_point)
 			{
-				Vector2Df from_2start_to_1start = segment1_start - segment2_start;
+				Vector2Df segment2_start_copy = segment2_start;
+				Vector2Df segment2_end_copy = segment2_end;
+				Vector2Df from_2start_to_1start = segment1_start - segment2_start_copy;
 				Vector2Df direction1 = segment1_end - segment1_start;
-				Vector2Df direction2 = segment2_end - segment2_start;
+				Vector2Df direction2 = segment2_end_copy - segment2_start_copy;
 				Single segment_1length = direction1.Length;
 				Single segment_2length = direction2.Length;
-
+				
 				Boolean segment1IsAPoint = segment_1length < XGeometry2D.Eplsilon_f;
 				Boolean segment2IsAPoint = segment_2length < XGeometry2D.Eplsilon_f;
 				if (segment1IsAPoint && segment2IsAPoint)
 				{
-					if (segment1_start == segment2_start)
+					if (segment1_start == segment2_start_copy)
 					{
 						segment1_point = segment2_point = segment1_start;
 						return;
 					}
 					segment1_point = segment1_start;
-					segment2_point = segment2_start;
+					segment2_point = segment2_start_copy;
 					return;
 				}
 				if (segment1IsAPoint)
 				{
 					direction2.Normalize();
 					segment1_point = segment1_start;
-					segment2_point = PointSegment(segment1_start, segment2_start, segment2_end, direction2, segment_2length);
+					segment2_point = PointSegment(in segment1_start, in segment2_start_copy, in segment2_end_copy, in direction2, segment_2length);
 					return;
 				}
 				if (segment2IsAPoint)
 				{
 					direction1.Normalize();
-					segment1_point = PointSegment(segment2_start, segment1_start, segment1_end, direction1, segment_1length);
-					segment2_point = segment2_start;
+					segment1_point = PointSegment(in segment2_start_copy, in segment1_start, in segment1_end, in direction1, segment_1length);
+					segment2_point = segment2_start_copy;
 					return;
 				}
 
 				direction1.Normalize();
 				direction2.Normalize();
-				Single denominator = Vector2Df.DotPerp(ref direction1, ref direction2);
-				Single perpDot1 = Vector2Df.DotPerp(ref direction1, ref from_2start_to_1start);
-				Single perpDot2 = Vector2Df.DotPerp(ref direction2, ref from_2start_to_1start);
+				Single denominator = Vector2Df.DotPerp(in direction1, in direction2);
+				Single perpDot1 = Vector2Df.DotPerp(in direction1, in from_2start_to_1start);
+				Single perpDot2 = Vector2Df.DotPerp(in direction2, in from_2start_to_1start);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
@@ -1108,14 +1106,14 @@ namespace Lotus
 						Vector2Df from1ATo2B;
 						if (!codirected)
 						{
-							XMath.Swap(ref segment2_start, ref segment2_end);
+							XMath.Swap(ref segment2_start_copy, ref segment2_end_copy);
 							direction2 = -direction2;
 							from1ATo2B = -from_2start_to_1start;
-							from_2start_to_1start = segment1_start - segment2_start;
+							from_2start_to_1start = segment1_start - segment2_start_copy;
 						}
 						else
 						{
-							from1ATo2B = segment2_end - segment1_start;
+							from1ATo2B = segment2_end_copy - segment1_start;
 						}
 						Single segment2AProjection = -Vector2Df.Dot(direction1, from_2start_to_1start);
 						Single segment2BProjection = Vector2Df.Dot(direction1, from1ATo2B);
@@ -1127,7 +1125,7 @@ namespace Lotus
 							//           1A------1B
 							// 2A------2B
 							segment1_point = segment1_start;
-							segment2_point = segment2_end;
+							segment2_point = segment2_end_copy;
 							return;
 						}
 						Boolean segment2AIsBefore1B = segment2AProjection < segment_1length + XGeometry2D.Eplsilon_f;
@@ -1137,7 +1135,7 @@ namespace Lotus
 							// 1A------1B
 							//           2A------2B
 							segment1_point = segment1_end;
-							segment2_point = segment2_start;
+							segment2_point = segment2_start_copy;
 							return;
 						}
 
@@ -1146,7 +1144,7 @@ namespace Lotus
 							// 1A------1B
 							//   2A--2B
 							segment1_point = segment1_start + (direction1 * segment2AProjection);
-							segment2_point = segment2_start;
+							segment2_point = segment2_start_copy;
 							return;
 						}
 
@@ -1155,7 +1153,7 @@ namespace Lotus
 							// 1A------1B
 							//     2A------2B
 							segment1_point = segment1_start + (direction1 * segment2AProjection);
-							segment2_point = segment2_start;
+							segment2_point = segment2_start_copy;
 							return;
 						}
 						else
@@ -1164,8 +1162,8 @@ namespace Lotus
 							// 2A----2B
 							// 2A----------2B
 							segment1_point = segment1_start;
-							Single segment1AProjection = Vector2Df.Dot(direction2, from_2start_to_1start);
-							segment2_point = segment2_start + (direction2 * segment1AProjection);
+							Single segment1AProjection = Vector2Df.Dot(in direction2, in from_2start_to_1start);
+							segment2_point = segment2_start_copy + (direction2 * segment1AProjection);
 							return;
 						}
 					}
@@ -1174,38 +1172,38 @@ namespace Lotus
 					if (codirected)
 					{
 						// Codirected
-						Single segment2AProjection = -Vector2Df.Dot(direction1, from_2start_to_1start);
+						Single segment2AProjection = -Vector2Df.Dot(in direction1, in from_2start_to_1start);
 						if (segment2AProjection > -XGeometry2D.Eplsilon_f)
 						{
 							// 1A------1B
 							//     2A------2B
-							SegmentSegmentCollinear(segment1_start, segment1_end, segment2_start, out segment1_point, out segment2_point);
+							SegmentSegmentCollinear(in segment1_start, in segment1_end, in segment2_start_copy, out segment1_point, out segment2_point);
 							return;
 						}
 						else
 						{
 							//     1A------1B
 							// 2A------2B
-							SegmentSegmentCollinear(segment2_start, segment2_end, segment1_start, out segment2_point, out segment1_point);
+							SegmentSegmentCollinear(in segment2_start_copy, in segment2_end_copy, in segment1_start, out segment2_point, out segment1_point);
 							return;
 						}
 					}
 					else
 					{
 						// Contradirected
-						Single segment2BProjection = Vector2Df.Dot(direction1, segment2_end - segment1_start);
+						Single segment2BProjection = Vector2Df.Dot(in direction1, segment2_end_copy - segment1_start);
 						if (segment2BProjection > -XGeometry2D.Eplsilon_f)
 						{
 							// 1A------1B
 							//     2B------2A
-							SegmentSegmentCollinear(segment1_start, segment1_end, segment2_end, out segment1_point, out segment2_point);
+							SegmentSegmentCollinear(in segment1_start, in segment1_end, in segment2_end_copy, out segment1_point, out segment2_point);
 							return;
 						}
 						else
 						{
 							//     1A------1B
 							// 2B------2A
-							SegmentSegmentCollinear(segment2_end, segment2_start, segment1_start, out segment2_point, out segment1_point);
+							SegmentSegmentCollinear(in segment2_end_copy, in segment2_start_copy, in segment1_start, out segment2_point, out segment1_point);
 							return;
 						}
 					}
@@ -1218,19 +1216,19 @@ namespace Lotus
 					distance2 < -XGeometry2D.Eplsilon_f || distance2 > segment_2length + XGeometry2D.Eplsilon_f)
 				{
 					// No intersection
-					Boolean codirected = Vector2Df.Dot(direction1, direction2) > 0;
+					Boolean codirected = Vector2Df.Dot(in direction1, in direction2) > 0;
 					Vector2Df from1ATo2B;
 					if (!codirected)
 					{
-						XMath.Swap(ref segment2_start, ref segment2_end);
+						XMath.Swap(ref segment2_start_copy, ref segment2_end_copy);
 						direction2 = -direction2;
 						from1ATo2B = -from_2start_to_1start;
-						from_2start_to_1start = segment1_start - segment2_start;
+						from_2start_to_1start = segment1_start - segment2_start_copy;
 						distance2 = segment_2length - distance2;
 					}
 					else
 					{
-						from1ATo2B = segment2_end - segment1_start;
+						from1ATo2B = segment2_end_copy - segment1_start;
 					}
 
 					Single segment2AProjection = -Vector2Df.Dot(direction1, from_2start_to_1start);
@@ -1245,12 +1243,12 @@ namespace Lotus
 						if (distance2 < -XGeometry2D.Eplsilon_f)
 						{
 							segment1_point = segment1_start + (direction1 * segment2AProjection);
-							segment2_point = segment2_start;
+							segment2_point = segment2_start_copy;
 						}
 						else
 						{
 							segment1_point = segment1_start + (direction1 * segment2BProjection);
-							segment2_point = segment2_end;
+							segment2_point = segment2_end_copy;
 						}
 					}
 					else if (!segment2AOnSegment1 && !segment2BOnSegment1)
@@ -1264,23 +1262,23 @@ namespace Lotus
 							// Not on segment
 							segment1_point = segment2AIsAfter1A ? segment1_end : segment1_start;
 						}
-						Single segment1PointProjection = Vector2Df.Dot(direction2, segment1_point - segment2_start);
+						Single segment1PointProjection = Vector2Df.Dot(in direction2, segment1_point - segment2_start_copy);
 						segment1PointProjection = XMath.Clamp(segment1PointProjection, 0, segment_2length);
-						segment2_point = segment2_start + (direction2 * segment1PointProjection);
+						segment2_point = segment2_start_copy + (direction2 * segment1PointProjection);
 					}
 					else if (segment2AOnSegment1)
 					{
 						if (distance2 < -XGeometry2D.Eplsilon_f)
 						{
 							segment1_point = segment1_start + (direction1 * segment2AProjection);
-							segment2_point = segment2_start;
+							segment2_point = segment2_start_copy;
 						}
 						else
 						{
 							segment1_point = segment1_end;
-							Single segment1PointProjection = Vector2Df.Dot(direction2, segment1_point - segment2_start);
+							Single segment1PointProjection = Vector2Df.Dot(in direction2, segment1_point - segment2_start_copy);
 							segment1PointProjection = XMath.Clamp(segment1PointProjection, 0, segment_2length);
-							segment2_point = segment2_start + (direction2 * segment1PointProjection);
+							segment2_point = segment2_start_copy + (direction2 * segment1PointProjection);
 						}
 					}
 					else
@@ -1288,14 +1286,14 @@ namespace Lotus
 						if (distance2 > segment_2length + XGeometry2D.Eplsilon_f)
 						{
 							segment1_point = segment1_start + (direction1 * segment2BProjection);
-							segment2_point = segment2_end;
+							segment2_point = segment2_end_copy;
 						}
 						else
 						{
 							segment1_point = segment1_start;
-							Single segment1PointProjection = Vector2Df.Dot(direction2, segment1_point - segment2_start);
+							Single segment1PointProjection = Vector2Df.Dot(in direction2, segment1_point - segment2_start_copy);
 							segment1PointProjection = XMath.Clamp(segment1PointProjection, 0, segment_2length);
-							segment2_point = segment2_start + (direction2 * segment1PointProjection);
+							segment2_point = segment2_start_copy + (direction2 * segment1PointProjection);
 						}
 					}
 					return;
@@ -1315,7 +1313,7 @@ namespace Lotus
 			/// <param name="left_point">Точка проекции на отрезке слева</param>
 			/// <param name="right_point">Точка проекции на отрезке справа</param>
 			//---------------------------------------------------------------------------------------------------------
-			private static void SegmentSegmentCollinear(Vector2Df left_a, Vector2Df left_b, Vector2Df right_a,
+			private static void SegmentSegmentCollinear(in Vector2Df left_a, in Vector2Df left_b, in Vector2Df right_a,
 				out Vector2Df left_point, out Vector2Df right_point)
 			{
 				Vector2Df left_direction = left_b - left_a;
@@ -1362,9 +1360,9 @@ namespace Lotus
 			/// <param name="segment_point">Точка проекции на отрезки</param>
 			/// <param name="circle_point">Точка проекции на окружности</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SegmentCircle(Segment2Df segment, Circle2Df circle, out Vector2Df segment_point, out Vector2Df circle_point)
+			public static void SegmentCircle(in Segment2Df segment, in Circle2Df circle, out Vector2Df segment_point, out Vector2Df circle_point)
 			{
-				SegmentCircle(segment.Start, segment.End, circle.Center, circle.Radius, out segment_point, out circle_point);
+				SegmentCircle(in segment.Start, in segment.End, in circle.Center, circle.Radius, out segment_point, out circle_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1378,7 +1376,7 @@ namespace Lotus
 			/// <param name="segment_point">Точка проекции на отрезки</param>
 			/// <param name="circle_point">Точка проекции на окружности</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SegmentCircle(Vector2Df start, Vector2Df end, Vector2Df circle_center, Single circle_radius,
+			public static void SegmentCircle(in Vector2Df start, in Vector2Df end, in Vector2Df circle_center, Single circle_radius,
 				out Vector2Df segment_point, out Vector2Df circle_point)
 			{
 				Vector2Df segment_start_to_center = circle_center - start;
@@ -1407,7 +1405,7 @@ namespace Lotus
 				}
 
 				Vector2Df segment_direction = from_start_to_end.Normalized;
-				Single center_projection = Vector2Df.Dot(ref segment_direction, ref segment_start_to_center);
+				Single center_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_center);
 				if (center_projection + circle_radius < -XGeometry2D.Eplsilon_f ||
 					center_projection - circle_radius > segment_length + XGeometry2D.Eplsilon_f)
 				{
@@ -1530,7 +1528,7 @@ namespace Lotus
 			/// <param name="point_a">Точка проекции на первую окружность</param>
 			/// <param name="point_b">Точка проекции на вторую окружность</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void CircleCircle(Circle2Df circle_a, Circle2Df circle_b, out Vector2Df point_a, out Vector2Df point_b)
+			public static void CircleCircle(in Circle2Df circle_a, in Circle2Df circle_b, out Vector2Df point_a, out Vector2Df point_b)
 			{
 				CircleCircle(circle_a.Center, circle_a.Radius, circle_b.Center, circle_b.Radius, out point_a, out point_b);
 			}
@@ -1546,7 +1544,7 @@ namespace Lotus
 			/// <param name="point_a">Точка проекции на первую окружность</param>
 			/// <param name="point_b">Точка проекции на вторую окружность</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void CircleCircle(Vector2Df center_a, Single radius_a, Vector2Df center_b, Single radius_b,
+			public static void CircleCircle(in Vector2Df center_a, Single radius_a, in Vector2Df center_b, Single radius_b,
 				out Vector2Df point_a, out Vector2Df point_b)
 			{
 				Vector2Df from_b_to_a = (center_a - center_b).Normalized;

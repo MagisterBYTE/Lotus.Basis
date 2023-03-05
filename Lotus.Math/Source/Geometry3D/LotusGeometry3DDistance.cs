@@ -12,6 +12,7 @@
 // Последнее изменение от 27.03.2022
 //=====================================================================================================================
 using System;
+using System.Security.Cryptography;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -36,9 +37,9 @@ namespace Lotus
 			/// <param name="line">Линия</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointLine(Vector3Df point, Line3Df line)
+			public static Single PointLine(in Vector3Df point, in Line3Df line)
 			{
-				return Vector3Df.Distance(point, XClosest3D.PointLine(point, line));
+				return Vector3Df.Distance(in point, XClosest3D.PointLine(in point, in line));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -50,9 +51,9 @@ namespace Lotus
 			/// <param name="line_dir">Направление линии</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointLine(Vector3Df point, Vector3Df line_pos, Vector3Df line_dir)
+			public static Single PointLine(in Vector3Df point, in Vector3Df line_pos, in Vector3Df line_dir)
 			{
-				return Vector3Df.Distance(point, XClosest3D.PointLine(point, line_pos, line_dir));
+				return Vector3Df.Distance(in point, XClosest3D.PointLine(in point, in line_pos, in line_dir));
 			}
 			#endregion
 
@@ -65,9 +66,9 @@ namespace Lotus
 			/// <param name="ray">Луч</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointRay(Vector3Df point, Ray3Df ray)
+			public static Single PointRay(in Vector3Df point, in Ray3Df ray)
 			{
-				return Vector3Df.Distance(point, XClosest3D.PointRay(point, ray));
+				return Vector3Df.Distance(in point, XClosest3D.PointRay(in point, in ray));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -79,9 +80,9 @@ namespace Lotus
 			/// <param name="ray_dir">Направление луча</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointRay(Vector3Df point, Vector3Df ray_pos, Vector3Df ray_dir)
+			public static Single PointRay(in Vector3Df point, in Vector3Df ray_pos, in Vector3Df ray_dir)
 			{
-				return Vector3Df.Distance(point, XClosest3D.PointRay(point, ray_pos, ray_dir));
+				return Vector3Df.Distance(in point, XClosest3D.PointRay(in point, in ray_pos, in ray_dir));
 			}
 			#endregion
 
@@ -94,9 +95,9 @@ namespace Lotus
 			/// <param name="segment">Отрезок</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointSegment(Vector3Df point, Segment3Df segment)
+			public static Single PointSegment(in Vector3Df point, in Segment3Df segment)
 			{
-				return Vector3Df.Distance(point, XClosest3D.PointSegment(point, segment));
+				return Vector3Df.Distance(in point, XClosest3D.PointSegment(in point, in segment));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -108,9 +109,9 @@ namespace Lotus
 			/// <param name="end">Конец отрезка</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointSegment(Vector3Df point, Vector3Df start, Vector3Df end)
+			public static Single PointSegment(in Vector3Df point, in Vector3Df start, in Vector3Df end)
 			{
-				return Vector3Df.Distance(point, XClosest3D.PointSegment(point, start, end));
+				return Vector3Df.Distance(in point, XClosest3D.PointSegment(in point, in start, in end));
 			}
 			#endregion
 
@@ -123,9 +124,9 @@ namespace Lotus
 			/// <param name="sphere">Сфера</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointSphere(Vector3Df point, Sphere3Df sphere)
+			public static Single PointSphere(in Vector3Df point, in Sphere3Df sphere)
 			{
-				return PointSphere(point, sphere.Center, sphere.Radius);
+				return PointSphere(in point, in sphere.Center, sphere.Radius);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -137,7 +138,7 @@ namespace Lotus
 			/// <param name="sphere_radius">Радиус сферы</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointSphere(Vector3Df point, Vector3Df sphere_center, Single sphere_radius)
+			public static Single PointSphere(in Vector3Df point, in Vector3Df sphere_center, Single sphere_radius)
 			{
 				return (sphere_center - point).Length - sphere_radius;
 			}
@@ -152,9 +153,9 @@ namespace Lotus
 			/// <param name="sphere">Сфера</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single LineSphere(Line3Df line, Sphere3Df sphere)
+			public static Single LineSphere(in Line3Df line, in Sphere3Df sphere)
 			{
-				return LineSphere(line.Position, line.Direction, sphere.Center, sphere.Radius);
+				return LineSphere(in line.Position, in line.Direction, in sphere.Center, sphere.Radius);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -167,10 +168,10 @@ namespace Lotus
 			/// <param name="sphere_radius">Радиус сферы</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single LineSphere(Vector3Df line_pos, Vector3Df line_dir, Vector3Df sphere_center, Single sphere_radius)
+			public static Single LineSphere(in Vector3Df line_pos, in Vector3Df line_dir, in Vector3Df sphere_center, Single sphere_radius)
 			{
 				Vector3Df pos_to_center = sphere_center - line_pos;
-				Single center_projection = Vector3Df.Dot(ref line_dir, ref pos_to_center);
+				Single center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
 				Single sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
 				Single sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
@@ -191,9 +192,9 @@ namespace Lotus
 			/// <param name="sphere">Сфера</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single RaySphere(Ray3Df ray, Sphere3Df sphere)
+			public static Single RaySphere(in Ray3Df ray, in Sphere3Df sphere)
 			{
-				return RaySphere(ray.Position, ray.Direction, sphere.Center, sphere.Radius);
+				return RaySphere(in ray.Position, in ray.Direction, in sphere.Center, sphere.Radius);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -206,10 +207,10 @@ namespace Lotus
 			/// <param name="sphere_radius">Радиус сферы</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single RaySphere(Vector3Df ray_pos, Vector3Df ray_dir, Vector3Df sphere_center, Single sphere_radius)
+			public static Single RaySphere(in Vector3Df ray_pos, in Vector3Df ray_dir, in Vector3Df sphere_center, Single sphere_radius)
 			{
 				Vector3Df pos_to_center = sphere_center - ray_pos;
-				Single center_projection = Vector3Df.Dot(ref ray_dir, ref pos_to_center);
+				Single center_projection = Vector3Df.Dot(in ray_dir, in pos_to_center);
 				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
@@ -270,9 +271,9 @@ namespace Lotus
 			/// <param name="sphere">Сфера</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single SegmentSphere(Segment3Df segment, Sphere3Df sphere)
+			public static Single SegmentSphere(in Segment3Df segment, in Sphere3Df sphere)
 			{
-				return SegmentSphere(segment.Start, segment.End, sphere.Center, sphere.Radius);
+				return SegmentSphere(in segment.Start, in segment.End, in sphere.Center, sphere.Radius);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -285,7 +286,7 @@ namespace Lotus
 			/// <param name="sphere_radius">Радиус сферы</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single SegmentSphere(Vector3Df start, Vector3Df end, Vector3Df sphere_center, Single sphere_radius)
+			public static Single SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphere_center, Single sphere_radius)
 			{
 				Vector3Df segment_start_to_center = sphere_center - start;
 				Vector3Df from_start_to_end = end - start;
@@ -296,7 +297,7 @@ namespace Lotus
 				}
 
 				Vector3Df segment_direction = from_start_to_end.Normalized;
-				Single center_projection = Vector3Df.Dot(ref segment_direction, ref segment_start_to_center);
+				Single center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
 				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f ||
 					center_projection - sphere_radius > segment_length + XGeometry3D.Eplsilon_f)
 				{
@@ -391,13 +392,13 @@ namespace Lotus
 			/// <param name="sphere_a">Первая сфера</param>
 			/// <param name="sphere_b">Вторая сфера</param>
 			/// <returns>
-			/// Положительное значение, если сферы не пересекаются, отрицательный иначе
+			/// Положительное значение, если сферы не пересекаются, отрицательное иначе
 			/// Отрицательная величина может быть интерпретирована как глубина проникновения
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single SphereSphere(Sphere3Df sphere_a, Sphere3Df sphere_b)
+			public static Single SphereSphere(in Sphere3Df sphere_a, in Sphere3Df sphere_b)
 			{
-				return SphereSphere(sphere_a.Center, sphere_a.Radius, sphere_b.Center, sphere_b.Radius);
+				return SphereSphere(in sphere_a.Center, sphere_a.Radius, in sphere_b.Center, sphere_b.Radius);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -409,13 +410,13 @@ namespace Lotus
 			/// <param name="center_b">Центр второй сферы</param>
 			/// <param name="radius_b">Радиус второй сферы</param>
 			/// <returns>
-			/// Положительное значение, если сферы не пересекаются, отрицательный иначе
+			/// Положительное значение, если сферы не пересекаются, отрицательное иначе
 			/// Отрицательная величина может быть интерпретирована как глубина проникновения
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single SphereSphere(Vector3Df center_a, Single radius_a, Vector3Df center_b, Single radius_b)
+			public static Single SphereSphere(in Vector3Df center_a, Single radius_a, in Vector3Df center_b, Single radius_b)
 			{
-				return Vector3Df.Distance(center_a, center_b) - radius_a - radius_b;
+				return Vector3Df.Distance(in center_a, in center_b) - radius_a - radius_b;
 			}
 
 			#endregion

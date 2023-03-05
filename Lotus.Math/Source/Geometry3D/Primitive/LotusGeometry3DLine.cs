@@ -292,7 +292,7 @@ namespace Lotus
 			/// <param name="start_point">Начальная точка</param>
 			/// <param name="end_point">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromPoint(Vector3Df start_point, Vector3Df end_point)
+			public void SetFromPoint(in Vector3Df start_point, in Vector3Df end_point)
 			{
 				Position = start_point;
 				Direction = (end_point - start_point).Normalized;

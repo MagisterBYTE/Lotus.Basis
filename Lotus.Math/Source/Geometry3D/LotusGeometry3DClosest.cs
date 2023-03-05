@@ -36,10 +36,9 @@ namespace Lotus
 			/// <param name="line">Линия</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointLine(Vector3Df point, Line3Df line)
+			public static Vector3Df PointLine(in Vector3Df point, in Line3Df line)
 			{
-				Single distance;
-				return PointLine(point, line.Position, line.Direction, out distance);
+				return PointLine(in point, in line.Position, in line.Direction, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -51,9 +50,9 @@ namespace Lotus
 			/// <param name="distance">Расстояние от начала линии до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointLine(Vector3Df point, Line3Df line, out Single distance)
+			public static Vector3Df PointLine(in Vector3Df point, in Line3Df line, out Single distance)
 			{
-				return PointLine(point, line.Position, line.Direction, out distance);
+				return PointLine(in point, in line.Position, in line.Direction, out distance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -65,10 +64,9 @@ namespace Lotus
 			/// <param name="line_dir">Направление линии</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointLine(Vector3Df point, Vector3Df line_pos, Vector3Df line_dir)
+			public static Vector3Df PointLine(in Vector3Df point, in Vector3Df line_pos, in Vector3Df line_dir)
 			{
-				Single distance;
-				return PointLine(point, line_pos, line_dir, out distance);
+				return PointLine(in point, in line_pos, in line_dir, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -81,7 +79,7 @@ namespace Lotus
 			/// <param name="distance">Расстояние от начала линии до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointLine(Vector3Df point, Vector3Df line_pos, Vector3Df line_dir, out Single distance)
+			public static Vector3Df PointLine(in Vector3Df point, in Vector3Df line_pos, in Vector3Df line_dir, out Single distance)
 			{
 				// In theory, SqrLength should be 1, but in practice this division helps with numerical stability
 				distance = Vector3Df.Dot(line_dir, point - line_pos) / line_dir.SqrLength;
@@ -98,10 +96,9 @@ namespace Lotus
 			/// <param name="ray">Луч</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointRay(Vector3Df point, Ray3Df ray)
+			public static Vector3Df PointRay(in Vector3Df point, in Ray3Df ray)
 			{
-				Single distance;
-				return PointRay(point, ray.Position, ray.Direction, out distance);
+				return PointRay(in point, in ray.Position, in ray.Direction, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -113,9 +110,9 @@ namespace Lotus
 			/// <param name="distance">Расстояние от начала луча до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointRay(Vector3Df point, Ray3Df ray, out Single distance)
+			public static Vector3Df PointRay(in Vector3Df point, in Ray3Df ray, out Single distance)
 			{
-				return PointRay(point, ray.Position, ray.Direction, out distance);
+				return PointRay(in point, in ray.Position, in ray.Direction, out distance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -127,10 +124,9 @@ namespace Lotus
 			/// <param name="ray_dir">Направление луча</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointRay(Vector3Df point, Vector3Df ray_pos, Vector3Df ray_dir)
+			public static Vector3Df PointRay(in Vector3Df point, in Vector3Df ray_pos, in Vector3Df ray_dir)
 			{
-				Single distance;
-				return PointRay(point, ray_pos, ray_dir, out distance);
+				return PointRay(in point, in ray_pos, in ray_dir, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -143,10 +139,10 @@ namespace Lotus
 			/// <param name="distance">Расстояние от начала луча до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointRay(Vector3Df point, Vector3Df ray_pos, Vector3Df ray_dir, out Single distance)
+			public static Vector3Df PointRay(in Vector3Df point, in Vector3Df ray_pos, in Vector3Df ray_dir, out Single distance)
 			{
 				Vector3Df to_point = point - ray_pos;
-				Single point_projection = Vector3Df.Dot(ref ray_dir, ref to_point);
+				Single point_projection = Vector3Df.Dot(in ray_dir, in to_point);
 				if (point_projection <= 0)
 				{
 					distance = 0;
@@ -168,10 +164,9 @@ namespace Lotus
 			/// <param name="segment">Отрезок</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointSegment(Vector3Df point, Segment3Df segment)
+			public static Vector3Df PointSegment(in Vector3Df point, in Segment3Df segment)
 			{
-				Single distance;
-				return PointSegment(point, segment.Start, segment.End, out distance);
+				return PointSegment(in point, in segment.Start, in segment.End, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -183,9 +178,9 @@ namespace Lotus
 			/// <param name="normalize_distance">Нормализованная позиция проецируемой точки от начала отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointSegment(Vector3Df point, Segment3Df segment, out Single normalize_distance)
+			public static Vector3Df PointSegment(in Vector3Df point, in Segment3Df segment, out Single normalize_distance)
 			{
-				return PointSegment(point, segment.Start, segment.End, out normalize_distance);
+				return PointSegment(in point, in segment.Start, in segment.End, out normalize_distance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -197,10 +192,9 @@ namespace Lotus
 			/// <param name="end">Конец отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointSegment(Vector3Df point, Vector3Df start, Vector3Df end)
+			public static Vector3Df PointSegment(in Vector3Df point, in Vector3Df start, in Vector3Df end)
 			{
-				Single distance;
-				return PointSegment(point, start, end, out distance);
+				return PointSegment(in point, in start, in end, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -213,7 +207,7 @@ namespace Lotus
 			/// <param name="normalize_distance">Нормализованная позиция проецируемой точки от начала отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointSegment(Vector3Df point, Vector3Df start, Vector3Df end, 
+			public static Vector3Df PointSegment(in Vector3Df point, in Vector3Df start, in Vector3Df end, 
 				out Single normalize_distance)
 			{
 				Vector3Df segment_direction = end - start;
@@ -225,7 +219,7 @@ namespace Lotus
 					return start;
 				}
 
-				Single point_projection = Vector3Df.Dot(segment_direction, point - start);
+				Single point_projection = Vector3Df.Dot(in segment_direction, point - start);
 				if (point_projection <= 0)
 				{
 					normalize_distance = 0;
@@ -251,9 +245,9 @@ namespace Lotus
 			/// <param name="sphere">Сфера</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointSphere(Vector3Df point, Sphere3Df sphere)
+			public static Vector3Df PointSphere(in Vector3Df point, in Sphere3Df sphere)
 			{
-				return PointSphere(point, sphere.Center, sphere.Radius);
+				return PointSphere(in point, in sphere.Center, sphere.Radius);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -265,7 +259,7 @@ namespace Lotus
 			/// <param name="sphere_radius">Радиус сферы</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointSphere(Vector3Df point, Vector3Df sphere_center, Single sphere_radius)
+			public static Vector3Df PointSphere(in Vector3Df point, in Vector3Df sphere_center, Single sphere_radius)
 			{
 				return sphere_center + ((point - sphere_center).Normalized * sphere_radius);
 			}
@@ -281,7 +275,7 @@ namespace Lotus
 			/// <param name="line_point">Точка проекции на линии</param>
 			/// <param name="sphere_point">Точка проекции на сфере</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineSphere(Line3Df line, Sphere3Df sphere, out Vector3Df line_point, out Vector3Df sphere_point)
+			public static void LineSphere(in Line3Df line, in Sphere3Df sphere, out Vector3Df line_point, out Vector3Df sphere_point)
 			{
 				LineSphere(line.Position, line.Direction, sphere.Center, sphere.Radius, out line_point, out sphere_point);
 			}
@@ -297,11 +291,11 @@ namespace Lotus
 			/// <param name="line_point">Точка проекции на линии</param>
 			/// <param name="sphere_point">Точка проекции на сфере</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineSphere(Vector3Df line_pos, Vector3Df line_dir, Vector3Df sphere_center, Single sphere_radius,
+			public static void LineSphere(in Vector3Df line_pos, in Vector3Df line_dir, in Vector3Df sphere_center, Single sphere_radius,
 				out Vector3Df line_point, out Vector3Df sphere_point)
 			{
 				Vector3Df pos_to_center = sphere_center - line_pos;
-				Single center_projection = Vector3Df.Dot(ref line_dir, ref pos_to_center);
+				Single center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
 				Single sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
 				Single sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
@@ -335,9 +329,9 @@ namespace Lotus
 			/// <param name="ray_point">Точка проекции на луче</param>
 			/// <param name="sphere_point">Точка проекции на сферы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RaySphere(Ray3Df ray, Sphere3Df sphere, out Vector3Df ray_point, out Vector3Df sphere_point)
+			public static void RaySphere(in Ray3Df ray, in Sphere3Df sphere, out Vector3Df ray_point, out Vector3Df sphere_point)
 			{
-				RaySphere(ray.Position, ray.Direction, sphere.Center, sphere.Radius, out ray_point, out sphere_point);
+				RaySphere(in ray.Position, in ray.Direction, in sphere.Center, sphere.Radius, out ray_point, out sphere_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -351,7 +345,7 @@ namespace Lotus
 			/// <param name="ray_point">Точка проекции на луче</param>
 			/// <param name="sphere_point">Точка проекции на сферы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RaySphere(Vector3Df ray_pos, Vector3Df ray_dir, Vector3Df sphere_center, Single sphere_radius,
+			public static void RaySphere(in Vector3Df ray_pos, in Vector3Df ray_dir, in Vector3Df sphere_center, Single sphere_radius,
 				out Vector3Df ray_point, out Vector3Df sphere_point)
 			{
 				Vector3Df pos_to_center = sphere_center - ray_pos;
@@ -428,9 +422,9 @@ namespace Lotus
 			/// <param name="segment_point">Точка проекции на отрезки</param>
 			/// <param name="sphere_point">Точка проекции на сферы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SegmentSphere(Segment3Df segment, Sphere3Df sphere, out Vector3Df segment_point, out Vector3Df sphere_point)
+			public static void SegmentSphere(in Segment3Df segment, in Sphere3Df sphere, out Vector3Df segment_point, out Vector3Df sphere_point)
 			{
-				SegmentSphere(segment.Start, segment.End, sphere.Center, sphere.Radius, out segment_point, out sphere_point);
+				SegmentSphere(in segment.Start, in segment.End, in sphere.Center, sphere.Radius, out segment_point, out sphere_point);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -444,7 +438,7 @@ namespace Lotus
 			/// <param name="segment_point">Точка проекции на отрезки</param>
 			/// <param name="sphere_point">Точка проекции на сферы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SegmentSphere(Vector3Df start, Vector3Df end, Vector3Df sphere_center, Single sphere_radius,
+			public static void SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphere_center, Single sphere_radius,
 				out Vector3Df segment_point, out Vector3Df sphere_point)
 			{
 				Vector3Df segment_start_to_center = sphere_center - start;
@@ -473,7 +467,7 @@ namespace Lotus
 				}
 
 				Vector3Df segment_direction = from_start_to_end.Normalized;
-				Single center_projection = Vector3Df.Dot(ref segment_direction, ref segment_start_to_center);
+				Single center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
 				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f ||
 					center_projection - sphere_radius > segment_length + XGeometry3D.Eplsilon_f)
 				{
@@ -596,9 +590,9 @@ namespace Lotus
 			/// <param name="point_a">Точка проекции на первую окружность</param>
 			/// <param name="point_b">Точка проекции на вторую окружность</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SphereSphere(Sphere3Df sphere_a, Sphere3Df sphere_b, out Vector3Df point_a, out Vector3Df point_b)
+			public static void SphereSphere(in Sphere3Df sphere_a, in Sphere3Df sphere_b, out Vector3Df point_a, out Vector3Df point_b)
 			{
-				SphereSphere(sphere_a.Center, sphere_a.Radius, sphere_b.Center, sphere_b.Radius, out point_a, out point_b);
+				SphereSphere(in sphere_a.Center, sphere_a.Radius, in sphere_b.Center, sphere_b.Radius, out point_a, out point_b);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -612,7 +606,7 @@ namespace Lotus
 			/// <param name="point_a">Точка проекции на первую окружность</param>
 			/// <param name="point_b">Точка проекции на вторую окружность</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SphereSphere(Vector3Df center_a, Single radius_a, Vector3Df center_b, Single radius_b,
+			public static void SphereSphere(in Vector3Df center_a, Single radius_a, in Vector3Df center_b, Single radius_b,
 				out Vector3Df point_a, out Vector3Df point_b)
 			{
 				Vector3Df from_b_to_a = (center_a - center_b).Normalized;

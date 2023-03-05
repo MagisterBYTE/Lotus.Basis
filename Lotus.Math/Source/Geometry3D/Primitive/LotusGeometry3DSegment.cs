@@ -293,9 +293,9 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(Vector3Df point)
+			public Boolean Contains(in Vector3Df point)
 			{
-				return (XIntersect3D.PointSegment(point, Start, End));
+				return (XIntersect3D.PointSegment(in point, in Start, in End));
 			}
 			#endregion
 		}

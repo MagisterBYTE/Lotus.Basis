@@ -89,7 +89,7 @@ namespace Lotus
 			/// <param name="to">Конечный вектор</param>
 			/// <returns>Косинус угла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Cos(ref Vector2D from, ref Vector2D to)
+			public static Double Cos(in Vector2D from, in Vector2D to)
 			{
 				Double dot = (from.X * to.X) + (from.Y * to.Y);
 				Double ll = from.Length * to.Length;
@@ -104,7 +104,7 @@ namespace Lotus
 			/// <param name="to">Конечные вектор</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Angle(ref Vector2D from, ref Vector2D to)
+			public static Double Angle(in Vector2D from, in Vector2D to)
 			{
 				Double dot = (from.X * to.X) + (from.Y * to.Y);
 				Double ll = from.Length * to.Length;
@@ -120,7 +120,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Расстояние между двумя векторами</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Distance(ref Vector2D a, ref Vector2D b)
+			public static Double Distance(in Vector2D a, in Vector2D b)
 			{
 				Double x = b.X - a.X;
 				Double y = b.Y - a.Y;
@@ -136,7 +136,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Скаляр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Dot(ref Vector2D a, ref Vector2D b)
+			public static Double Dot(in Vector2D a, in Vector2D b)
 			{
 				return (a.X * b.X) + (a.Y * b.Y);
 			}
@@ -150,7 +150,7 @@ namespace Lotus
 			/// <param name="time">Время от 0 до 1</param>
 			/// <returns>Интерполированный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2D Lerp(ref Vector2D from, ref Vector2D to, Double time)
+			public static Vector2D Lerp(in Vector2D from, in Vector2D to, Double time)
 			{
 				Vector2D vector;
 				vector.X = from.X + ((to.X - from.X) * time);
@@ -165,7 +165,7 @@ namespace Lotus
 			/// <param name="value">Исходный вектор</param>
 			/// <returns>Негативный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2D Negate(ref Vector2D value)
+			public static Vector2D Negate(in Vector2D value)
 			{
 				return new Vector2D(-value.X, -value.Y);
 			}
@@ -178,7 +178,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Max(ref Vector2D a, ref Vector2D b, out Vector2D result)
+			public static void Max(in Vector2D a, in Vector2D b, out Vector2D result)
 			{
 				result.X = a.X > b.X ? a.X : b.X;
 				result.Y = a.Y > b.Y ? a.Y : b.Y;
@@ -192,7 +192,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Результирующий вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2D Max(ref Vector2D a, ref Vector2D b)
+			public static Vector2D Max(in Vector2D a, in Vector2D b)
 			{
 				return new Vector2D(a.X > b.X ? a.X : b.X, a.Y > b.Y ? a.Y : b.Y);
 			}
@@ -205,7 +205,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Min(ref Vector2D a, ref Vector2D b, out Vector2D result)
+			public static void Min(in Vector2D a, in Vector2D b, out Vector2D result)
 			{
 				result.X = a.X < b.X ? a.X : b.X;
 				result.Y = a.Y < b.Y ? a.Y : b.Y;
@@ -219,7 +219,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Результирующий вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2D Min(ref Vector2D a, ref Vector2D b)
+			public static Vector2D Min(in Vector2D a, in Vector2D b)
 			{
 				return new Vector2D(a.X < b.X ? a.X : b.X, a.Y < b.Y ? a.Y : b.Y);
 			}
@@ -232,7 +232,7 @@ namespace Lotus
 			/// <param name="normal">Вектор нормали</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Reflect(ref Vector2D vector, ref Vector2D normal, out Vector2D result)
+			public static void Reflect(in Vector2D vector, in Vector2D normal, out Vector2D result)
 			{
 				Double dot = (vector.X * normal.X) + (vector.Y * normal.Y);
 
@@ -248,10 +248,10 @@ namespace Lotus
 			/// <param name="normal">Вектор нормали</param>
 			/// <returns>Результирующий вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2D Reflect(ref Vector2D vector, ref Vector2D normal)
+			public static Vector2D Reflect(in Vector2D vector, in Vector2D normal)
 			{
 				Vector2D result;
-				Reflect(ref vector, ref normal, out result);
+				Reflect(in vector, in normal, out result);
 				return result;
 			}
 
@@ -264,7 +264,7 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус равенства значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean Approximately(ref Vector2D a, ref Vector2D b, Single epsilon = 0.001f)
+			public static Boolean Approximately(in Vector2D a, in Vector2D b, Single epsilon = 0.001f)
 			{
 				if (Math.Abs(a.X - b.X) < epsilon && Math.Abs(a.Y - b.Y) < epsilon)
 				{
@@ -821,7 +821,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double Distance(Vector2D vector)
+			public Double Distance(in Vector2D vector)
 			{
 				Double x = vector.X - X;
 				Double y = vector.Y - Y;
@@ -836,7 +836,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double Dot(Vector2D vector)
+			public Double Dot(in Vector2D vector)
 			{
 				return (X * vector.X) + (Y * vector.Y);
 			}
@@ -848,7 +848,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(Vector2D a, Vector2D b)
+			public void SetMaximize(in Vector2D a, in Vector2D b)
 			{
 				X = a.X > b.X ? a.X : b.X;
 				Y = a.Y > b.Y ? a.Y : b.Y;
@@ -861,7 +861,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(Vector2D a, Vector2D b)
+			public void SetMinimize(in Vector2D a, in Vector2D b)
 			{
 				X = a.X < b.X ? a.X : b.X;
 				Y = a.Y < b.Y ? a.Y : b.Y;
@@ -873,7 +873,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsPoint(Matrix4Dx4 matrix)
+			public void TransformAsPoint(in Matrix4Dx4 matrix)
 			{
 				this = new Vector2D((X * matrix.M11) + (Y * matrix.M21) + matrix.M41,
 									(X * matrix.M12) + (Y * matrix.M22) + matrix.M42);
@@ -885,7 +885,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsVector(Matrix4Dx4 matrix)
+			public void TransformAsVector(in Matrix4Dx4 matrix)
 			{
 				this = new Vector2D((X * matrix.M11) + (Y * matrix.M21),
 									(X * matrix.M12) + (Y * matrix.M22));
@@ -942,7 +942,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение с перпендикулярным вектором</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double DotPerp(Vector2D vector)
+			public Double DotPerp(in Vector2D vector)
 			{
 				return (X * vector.Y) - (Y * vector.X);
 			}
@@ -1077,22 +1077,7 @@ namespace Lotus
 			/// <param name="to">Конечный вектор</param>
 			/// <returns>Косинус угла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Cos(ref Vector2Df from, ref Vector2Df to)
-			{
-				Single dot = (from.X * to.X) + (from.Y * to.Y);
-				Single ll = from.Length * to.Length;
-				return dot / ll;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Косинус угла между векторами
-			/// </summary>
-			/// <param name="from">Начальный вектор</param>
-			/// <param name="to">Конечный вектор</param>
-			/// <returns>Косинус угла</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Single Cos(Vector2Df from, Vector2Df to)
+			public static Single Cos(in Vector2Df from, in Vector2Df to)
 			{
 				Single dot = (from.X * to.X) + (from.Y * to.Y);
 				Single ll = from.Length * to.Length;
@@ -1107,23 +1092,7 @@ namespace Lotus
 			/// <param name="to">Конечные вектор</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Angle(ref Vector2Df from, ref Vector2Df to)
-			{
-				Single dot = (from.X * to.X) + (from.Y * to.Y);
-				Single ll = from.Length * to.Length;
-				Single csv = dot / ll;
-				return (Single)(Math.Acos(csv) * XMath.RadianToDegree_d);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Угол между двумя векторами (в градусах)
-			/// </summary>
-			/// <param name="from">Начальный вектор</param>
-			/// <param name="to">Конечные вектор</param>
-			/// <returns>Угол в градусах</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Single Angle(Vector2Df from, Vector2Df to)
+			public static Single Angle(in Vector2Df from, in Vector2Df to)
 			{
 				Single dot = (from.X * to.X) + (from.Y * to.Y);
 				Single ll = from.Length * to.Length;
@@ -1139,23 +1108,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Расстояние между двумя векторами</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Distance(ref Vector2Df a, ref Vector2Df b)
-			{
-				Single x = b.X - a.X;
-				Single y = b.Y - a.Y;
-
-				return (Single)Math.Sqrt((x * x) + (y * y));
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Расстояние между двумя векторами
-			/// </summary>
-			/// <param name="a">Первый вектор</param>
-			/// <param name="b">Второй вектор</param>
-			/// <returns>Расстояние между двумя векторами</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Single Distance(Vector2Df a, Vector2Df b)
+			public static Single Distance(in Vector2Df a, in Vector2Df b)
 			{
 				Single x = b.X - a.X;
 				Single y = b.Y - a.Y;
@@ -1171,20 +1124,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Скаляр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Dot(ref Vector2Df a, ref Vector2Df b)
-			{
-				return (a.X * b.X) + (a.Y * b.Y);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Скалярное произведение векторов
-			/// </summary>
-			/// <param name="a">Первый вектор</param>
-			/// <param name="b">Второй вектор</param>
-			/// <returns>Скаляр</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Single Dot(Vector2Df a, Vector2Df b)
+			public static Single Dot(in Vector2Df a, in Vector2Df b)
 			{
 				return (a.X * b.X) + (a.Y * b.Y);
 			}
@@ -1197,20 +1137,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Скалярное произведение с перпендикулярным вектором</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single DotPerp(ref Vector2Df a, ref Vector2Df b)
-			{
-				return (a.X * b.Y) - (a.Y * b.X);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Возвращение скалярного произведения с перпендикулярным вектором
-			/// </summary>
-			/// <param name="a">Первый вектор</param>
-			/// <param name="b">Второй вектор</param>
-			/// <returns>Скалярное произведение с перпендикулярным вектором</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Single DotPerp(Vector2Df a, Vector2Df b)
+			public static Single DotPerp(in Vector2Df a, in Vector2Df b)
 			{
 				return (a.X * b.Y) - (a.Y * b.X);
 			}
@@ -1239,7 +1166,7 @@ namespace Lotus
 			/// <param name="value">Исходный вектор</param>
 			/// <returns>Негативный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df Negate(ref Vector2Df value)
+			public static Vector2Df Negate(in Vector2Df value)
 			{
 				return new Vector2Df(-value.X, -value.Y);
 			}
@@ -1252,7 +1179,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Max(ref Vector2Df a, ref Vector2Df b, out Vector2Df result)
+			public static void Max(in Vector2Df a, in Vector2Df b, out Vector2Df result)
 			{
 				result.X = a.X > b.X ? a.X : b.X;
 				result.Y = a.Y > b.Y ? a.Y : b.Y;
@@ -1266,7 +1193,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Результирующий вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df Max(ref Vector2Df a, ref Vector2Df b)
+			public static Vector2Df Max(in Vector2Df a, in Vector2Df b)
 			{
 				return new Vector2Df(a.X > b.X ? a.X : b.X, a.Y > b.Y ? a.Y : b.Y);
 			}
@@ -1279,7 +1206,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Min(ref Vector2Df a, ref Vector2Df b, out Vector2Df result)
+			public static void Min(in Vector2Df a, in Vector2Df b, out Vector2Df result)
 			{
 				result.X = a.X < b.X ? a.X : b.X;
 				result.Y = a.Y < b.Y ? a.Y : b.Y;
@@ -1293,7 +1220,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Результирующий вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df Min(ref Vector2Df a, ref Vector2Df b)
+			public static Vector2Df Min(in Vector2Df a, in Vector2Df b)
 			{
 				return new Vector2Df(a.X < b.X ? a.X : b.X, a.Y < b.Y ? a.Y : b.Y);
 			}
@@ -1306,7 +1233,7 @@ namespace Lotus
 			/// <param name="normal">Вектор нормали</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Reflect(ref Vector2Df vector, ref Vector2Df normal, out Vector2Df result)
+			public static void Reflect(in Vector2Df vector, in Vector2Df normal, out Vector2Df result)
 			{
 				Single dot = (vector.X * normal.X) + (vector.Y * normal.Y);
 
@@ -1322,10 +1249,10 @@ namespace Lotus
 			/// <param name="normal">Вектор нормали</param>
 			/// <returns>Результирующий вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df Reflect(ref Vector2Df vector, ref Vector2Df normal)
+			public static Vector2Df Reflect(in Vector2Df vector, in Vector2Df normal)
 			{
 				Vector2Df result;
-				Reflect(ref vector, ref normal, out result);
+				Reflect(in vector, in normal, out result);
 				return result;
 			}
 
@@ -1338,26 +1265,7 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус равенства значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean Approximately(ref Vector2Df a, ref Vector2Df b, Single epsilon = 0.001f)
-			{
-				if (Math.Abs(a.X - b.X) < epsilon && Math.Abs(a.Y - b.Y) < epsilon)
-				{
-					return true;
-				}
-
-				return false;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Аппроксимация равенства значений векторов
-			/// </summary>
-			/// <param name="a">Первый вектор</param>
-			/// <param name="b">Второй вектор</param>
-			/// <param name="epsilon">Погрешность</param>
-			/// <returns>Статус равенства значений</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean Approximately(Vector2Df a, Vector2Df b, Single epsilon = 0.001f)
+			public static Boolean Approximately(in Vector2Df a, in Vector2Df b, Single epsilon = 0.001f)
 			{
 				if (Math.Abs(a.X - b.X) < epsilon && Math.Abs(a.Y - b.Y) < epsilon)
 				{
@@ -1988,7 +1896,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Distance(Vector2Df vector)
+			public Single Distance(in Vector2Df vector)
 			{
 				Single x = vector.X - X;
 				Single y = vector.Y - Y;
@@ -2003,7 +1911,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Dot(Vector2Df vector)
+			public Single Dot(in Vector2Df vector)
 			{
 				return (X * vector.X) + (Y * vector.Y);
 			}
@@ -2015,7 +1923,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(Vector2Df a, Vector2Df b)
+			public void SetMaximize(in Vector2Df a, in Vector2Df b)
 			{
 				X = a.X > b.X ? a.X : b.X;
 				Y = a.Y > b.Y ? a.Y : b.Y;
@@ -2028,7 +1936,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(Vector2Df a, Vector2Df b)
+			public void SetMinimize(in Vector2Df a, in Vector2Df b)
 			{
 				X = a.X < b.X ? a.X : b.X;
 				Y = a.Y < b.Y ? a.Y : b.Y;
@@ -2040,10 +1948,10 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsPoint(Matrix3Dx2f matrix)
+			public void TransformAsPoint(in Matrix3Dx2f matrix)
 			{
 				this = new Vector2Df((X * matrix.M11) + (Y * matrix.M21) + matrix.M31,
-									(X * matrix.M12) + (Y * matrix.M22) + matrix.M31);
+									 (X * matrix.M12) + (Y * matrix.M22) + matrix.M31);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2052,10 +1960,10 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsPoint(Matrix4Dx4 matrix)
+			public void TransformAsPoint(in Matrix4Dx4 matrix)
 			{
 				this = new Vector2Df((Single)((X * matrix.M11) + (Y * matrix.M21) + matrix.M41),
-									(Single)((X * matrix.M12) + (Y * matrix.M22) + matrix.M42));
+									 (Single)((X * matrix.M12) + (Y * matrix.M22) + matrix.M42));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2064,10 +1972,10 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsVector(Matrix3Dx2f matrix)
+			public void TransformAsVector(in Matrix3Dx2f matrix)
 			{
 				this = new Vector2Df((X * matrix.M11) + (Y * matrix.M21),
-									(X * matrix.M12) + (Y * matrix.M22));
+									 (X * matrix.M12) + (Y * matrix.M22));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2076,10 +1984,10 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsVector(Matrix4Dx4 matrix)
+			public void TransformAsVector(in Matrix4Dx4 matrix)
 			{
 				this = new Vector2Df((Single)((X * matrix.M11) + (Y * matrix.M21)),
-									(Single)((X * matrix.M12) + (Y * matrix.M22)));
+									 (Single)((X * matrix.M12) + (Y * matrix.M22)));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2133,20 +2041,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение с перпендикулярным вектором</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single DotPerp(Vector2Df vector)
-			{
-				// x*V.y - y*V.x.
-				return (X * vector.Y) - (Y * vector.X);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Возвращение скалярного произведения с перпендикулярным вектором
-			/// </summary>
-			/// <param name="vector">Вектор</param>
-			/// <returns>Скалярное произведение с перпендикулярным вектором</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Single DotPerp(ref Vector2Df vector)
+			public Single DotPerp(in Vector2Df vector)
 			{
 				// x*V.y - y*V.x.
 				return (X * vector.Y) - (Y * vector.X);
@@ -2301,7 +2196,7 @@ namespace Lotus
 			/// <param name="to">Конечный вектор</param>
 			/// <returns>Косинус угла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Cos(ref Vector2Di from, ref Vector2Di to)
+			public static Single Cos(in Vector2Di from, in Vector2Di to)
 			{
 				Single dot = (from.X * to.X) + (from.Y * to.Y);
 				Single ll = from.Length * to.Length;
@@ -2316,7 +2211,7 @@ namespace Lotus
 			/// <param name="to">Конечные вектор</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Angle(ref Vector2Di from, ref Vector2Di to)
+			public static Single Angle(in Vector2Di from, in Vector2Di to)
 			{
 				Single dot = (from.X * to.X) + (from.Y * to.Y);
 				Single ll = from.Length * to.Length;
@@ -2332,7 +2227,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Расстояние между двумя векторами</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Distance(ref Vector2Di a, ref Vector2Di b)
+			public static Single Distance(in Vector2Di a, in Vector2Di b)
 			{
 				Single x = b.X - a.X;
 				Single y = b.Y - a.Y;
@@ -2348,7 +2243,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Скаляр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Dot(ref Vector2Di a, ref Vector2Di b)
+			public static Single Dot(in Vector2Di a, in Vector2Di b)
 			{
 				return (a.X * b.X) + (a.Y * b.Y);
 			}
@@ -2362,7 +2257,7 @@ namespace Lotus
 			/// <param name="time">Время от 0 до 1</param>
 			/// <returns>Интерполированный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Di Lerp(ref Vector2Di from, ref Vector2Di to, Single time)
+			public static Vector2Di Lerp(in Vector2Di from, in Vector2Di to, Single time)
 			{
 				Vector2Di vector;
 				vector.X = (Int32)(from.X + ((to.X - from.X) * time));
@@ -2377,7 +2272,7 @@ namespace Lotus
 			/// <param name="value">Исходный вектор</param>
 			/// <returns>Негативный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Di Negate(ref Vector2Di value)
+			public static Vector2Di Negate(in Vector2Di value)
 			{
 				return new Vector2Di(-value.X, -value.Y);
 			}
@@ -2390,7 +2285,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Max(ref Vector2Di a, ref Vector2Di b, out Vector2Di result)
+			public static void Max(in Vector2Di a, in Vector2Di b, out Vector2Di result)
 			{
 				result.X = a.X > b.X ? a.X : b.X;
 				result.Y = a.Y > b.Y ? a.Y : b.Y;
@@ -2404,7 +2299,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Результирующий вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Di Max(ref Vector2Di a, ref Vector2Di b)
+			public static Vector2Di Max(in Vector2Di a, in Vector2Di b)
 			{
 				return new Vector2Di(a.X > b.X ? a.X : b.X, a.Y > b.Y ? a.Y : b.Y);
 			}
@@ -2417,7 +2312,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <param name="result">Результирующий вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Min(ref Vector2Di a, ref Vector2Di b, out Vector2Di result)
+			public static void Min(in Vector2Di a, in Vector2Di b, out Vector2Di result)
 			{
 				result.X = a.X < b.X ? a.X : b.X;
 				result.Y = a.Y < b.Y ? a.Y : b.Y;
@@ -2431,7 +2326,7 @@ namespace Lotus
 			/// <param name="b">Второй вектор</param>
 			/// <returns>Результирующий вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Di Min(ref Vector2Di a, ref Vector2Di b)
+			public static Vector2Di Min(in Vector2Di a, in Vector2Di b)
 			{
 				return new Vector2Di(a.X < b.X ? a.X : b.X, a.Y < b.Y ? a.Y : b.Y);
 			}
@@ -3007,7 +2902,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Distance(Vector2Di vector)
+			public Single Distance(in Vector2Di vector)
 			{
 				Single x = vector.X - X;
 				Single y = vector.Y - Y;
@@ -3022,7 +2917,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Dot(Vector2Di vector)
+			public Single Dot(in Vector2Di vector)
 			{
 				return (X * vector.X) + (Y * vector.Y);
 			}
@@ -3034,7 +2929,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMaximize(Vector2Di a, Vector2Di b)
+			public void SetMaximize(in Vector2Di a, in Vector2Di b)
 			{
 				X = a.X > b.X ? a.X : b.X;
 				Y = a.Y > b.Y ? a.Y : b.Y;
@@ -3047,7 +2942,7 @@ namespace Lotus
 			/// <param name="a">Первый вектор</param>
 			/// <param name="b">Второй вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMinimize(Vector2Di a, Vector2Di b)
+			public void SetMinimize(in Vector2Di a, in Vector2Di b)
 			{
 				X = a.X < b.X ? a.X : b.X;
 				Y = a.Y < b.Y ? a.Y : b.Y;
@@ -3059,10 +2954,10 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsPoint(Matrix3Dx2f matrix)
+			public void TransformAsPoint(in Matrix3Dx2f matrix)
 			{
 				this = new Vector2Di((X * matrix.M11) + (Y * matrix.M21) + matrix.M31,
-									(X * matrix.M12) + (Y * matrix.M22) + matrix.M31);
+									 (X * matrix.M12) + (Y * matrix.M22) + matrix.M31);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -3071,10 +2966,10 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsPoint(Matrix4Dx4 matrix)
+			public void TransformAsPoint(in Matrix4Dx4 matrix)
 			{
 				this = new Vector2Di((Int32)((X * matrix.M11) + (Y * matrix.M21) + matrix.M41),
-									(Int32)((X * matrix.M12) + (Y * matrix.M22) + matrix.M42));
+									 (Int32)((X * matrix.M12) + (Y * matrix.M22) + matrix.M42));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -3083,10 +2978,10 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsVector(Matrix3Dx2f matrix)
+			public void TransformAsVector(in Matrix3Dx2f matrix)
 			{
 				this = new Vector2Di((X * matrix.M11) + (Y * matrix.M21),
-									(X * matrix.M12) + (Y * matrix.M22));
+									 (X * matrix.M12) + (Y * matrix.M22));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -3095,10 +2990,10 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">Матрица трансформации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void TransformAsVector(Matrix4Dx4 matrix)
+			public void TransformAsVector(in  Matrix4Dx4 matrix)
 			{
 				this = new Vector2Di((Int32)((X * matrix.M11) + (Y * matrix.M21)),
-									(Int32)((X * matrix.M12) + (Y * matrix.M22)));
+									 (Int32)((X * matrix.M12) + (Y * matrix.M22)));
 			}
 
 			//---------------------------------------------------------------------------------------------------------

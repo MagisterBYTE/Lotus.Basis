@@ -292,9 +292,9 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(Vector2Df point, Single epsilon = 0.01f)
+			public Boolean Contains(in Vector2Df point, Single epsilon = 0.01f)
 			{
-				return(XIntersect2D.PointOnSegment(ref Start, ref End, ref point, epsilon));
+				return(XIntersect2D.PointOnSegment(in Start, in End, in point, epsilon));
 			}
 			#endregion
 		}

@@ -265,9 +265,9 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(Vector2Df point)
+			public Boolean Contains(in Vector2Df point)
 			{
-				Single d = Vector2Df.Distance(ref Center, ref point);
+				Single d = Vector2Df.Distance(in Center, in point);
 				return (Math.Abs(d - Radius) < XGeometry2D.Eplsilon_f);
 			}
 			#endregion

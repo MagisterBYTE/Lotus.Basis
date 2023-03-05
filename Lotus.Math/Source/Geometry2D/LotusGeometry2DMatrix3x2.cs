@@ -51,7 +51,7 @@ namespace Lotus
 			/// <param name="right">The second matrix to add</param>
 			/// <param name="result">When the method completes, contains the sum of the two matrices</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Add(ref Matrix3Dx2f left, ref Matrix3Dx2f right, out Matrix3Dx2f result)
+			public static void Add(in Matrix3Dx2f left, in Matrix3Dx2f right, out Matrix3Dx2f result)
 			{
 				result.M11 = left.M11 + right.M11;
 				result.M12 = left.M12 + right.M12;
@@ -69,10 +69,10 @@ namespace Lotus
 			/// <param name="right">The second matrix to add</param>
 			/// <returns>The sum of the two matrices</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Add(Matrix3Dx2f left, Matrix3Dx2f right)
+			public static Matrix3Dx2f Add(in Matrix3Dx2f left, in Matrix3Dx2f right)
 			{
 				Matrix3Dx2f result;
-				Add(ref left, ref right, out result);
+				Add(in left, in right, out result);
 				return result;
 			}
 
@@ -84,7 +84,7 @@ namespace Lotus
 			/// <param name="right">The second matrix to subtract</param>
 			/// <param name="result">When the method completes, contains the difference between the two matrices</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Subtract(ref Matrix3Dx2f left, ref Matrix3Dx2f right, out Matrix3Dx2f result)
+			public static void Subtract(in Matrix3Dx2f left, in Matrix3Dx2f right, out Matrix3Dx2f result)
 			{
 				result.M11 = left.M11 - right.M11;
 				result.M12 = left.M12 - right.M12;
@@ -102,10 +102,10 @@ namespace Lotus
 			/// <param name="right">The second matrix to subtract</param>
 			/// <returns>The difference between the two matrices</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Subtract(Matrix3Dx2f left, Matrix3Dx2f right)
+			public static Matrix3Dx2f Subtract(in Matrix3Dx2f left, in Matrix3Dx2f right)
 			{
 				Matrix3Dx2f result;
-				Subtract(ref left, ref right, out result);
+				Subtract(in left, in right, out result);
 				return result;
 			}
 
@@ -117,7 +117,7 @@ namespace Lotus
 			/// <param name="right">The amount by which to scale</param>
 			/// <param name="result">When the method completes, contains the scaled matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Multiply(ref Matrix3Dx2f left, Single right, out Matrix3Dx2f result)
+			public static void Multiply(in Matrix3Dx2f left, Single right, out Matrix3Dx2f result)
 			{
 				result.M11 = left.M11 * right;
 				result.M12 = left.M12 * right;
@@ -135,10 +135,10 @@ namespace Lotus
 			/// <param name="right">The amount by which to scale</param>
 			/// <returns>The scaled matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Multiply(Matrix3Dx2f left, Single right)
+			public static Matrix3Dx2f Multiply(in Matrix3Dx2f left, Single right)
 			{
 				Matrix3Dx2f result;
-				Multiply(ref left, right, out result);
+				Multiply(in left, right, out result);
 				return result;
 			}
 
@@ -150,7 +150,7 @@ namespace Lotus
 			/// <param name="right">The second matrix to multiply</param>
 			/// <param name="result">The product of the two matrices</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Multiply(ref Matrix3Dx2f left, ref Matrix3Dx2f right, out Matrix3Dx2f result)
+			public static void Multiply(in Matrix3Dx2f left, in Matrix3Dx2f right, out Matrix3Dx2f result)
 			{
 				result = new Matrix3Dx2f();
 				result.M11 = (left.M11 * right.M11) + (left.M12 * right.M21);
@@ -169,10 +169,10 @@ namespace Lotus
 			/// <param name="right">The second matrix to multiply</param>
 			/// <returns>The product of the two matrices</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Multiply(Matrix3Dx2f left, Matrix3Dx2f right)
+			public static Matrix3Dx2f Multiply(in Matrix3Dx2f left, in Matrix3Dx2f right)
 			{
 				Matrix3Dx2f result;
-				Multiply(ref left, ref right, out result);
+				Multiply(in left, in right, out result);
 				return result;
 			}
 
@@ -184,7 +184,7 @@ namespace Lotus
 			/// <param name="right">The amount by which to scale</param>
 			/// <param name="result">When the method completes, contains the scaled matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Divide(ref Matrix3Dx2f left, Single right, out Matrix3Dx2f result)
+			public static void Divide(in Matrix3Dx2f left, Single right, out Matrix3Dx2f result)
 			{
 				Single inv = 1.0f / right;
 
@@ -204,7 +204,7 @@ namespace Lotus
 			/// <param name="right">The second matrix to divide</param>
 			/// <param name="result">When the method completes, contains the quotient of the two matrices</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Divide(ref Matrix3Dx2f left, ref Matrix3Dx2f right, out Matrix3Dx2f result)
+			public static void Divide(in Matrix3Dx2f left, in Matrix3Dx2f right, out Matrix3Dx2f result)
 			{
 				result.M11 = left.M11 / right.M11;
 				result.M12 = left.M12 / right.M12;
@@ -221,7 +221,7 @@ namespace Lotus
 			/// <param name="value">The matrix to be negated</param>
 			/// <param name="result">When the method completes, contains the negated matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Negate(ref Matrix3Dx2f value, out Matrix3Dx2f result)
+			public static void Negate(in Matrix3Dx2f value, out Matrix3Dx2f result)
 			{
 				result.M11 = -value.M11;
 				result.M12 = -value.M12;
@@ -238,10 +238,10 @@ namespace Lotus
 			/// <param name="value">The matrix to be negated</param>
 			/// <returns>The negated matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Negate(Matrix3Dx2f value)
+			public static Matrix3Dx2f Negate(in Matrix3Dx2f value)
 			{
 				Matrix3Dx2f result;
-				Negate(ref value, out result);
+				Negate(in value, out result);
 				return result;
 			}
 
@@ -254,7 +254,7 @@ namespace Lotus
 			/// <param name="time">Time between 0 and 1 indicating the weight</param>
 			/// <param name="result">When the method completes, contains the linear interpolation of the two matrices</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Lerp(ref Matrix3Dx2f start, ref Matrix3Dx2f end, Single time, out Matrix3Dx2f result)
+			public static void Lerp(in Matrix3Dx2f start, in Matrix3Dx2f end, Single time, out Matrix3Dx2f result)
 			{
 				result.M11 = XMathInterpolation.Lerp(start.M11, end.M11, time);
 				result.M12 = XMathInterpolation.Lerp(start.M12, end.M12, time);
@@ -273,10 +273,10 @@ namespace Lotus
 			/// <param name="time">Time between 0 and 1 indicating the weight</param>
 			/// <returns>The linear interpolation of the two matrices</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Lerp(Matrix3Dx2f start, Matrix3Dx2f end, Single time)
+			public static Matrix3Dx2f Lerp(in Matrix3Dx2f start, in Matrix3Dx2f end, Single time)
 			{
 				Matrix3Dx2f result;
-				Lerp(ref start, ref end, time, out result);
+				Lerp(in start, in end, time, out result);
 				return result;
 			}
 
@@ -289,10 +289,10 @@ namespace Lotus
 			/// <param name="time">Time between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
 			/// <param name="result">When the method completes, contains the cubic interpolation of the two matrices</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SmoothStep(ref Matrix3Dx2f start, ref Matrix3Dx2f end, Single time, out Matrix3Dx2f result)
+			public static void SmoothStep(in Matrix3Dx2f start, in Matrix3Dx2f end, Single time, out Matrix3Dx2f result)
 			{
 				time = XMathInterpolation.SmoothStep(time);
-				Lerp(ref start, ref end, time, out result);
+				Lerp(in start, in end, time, out result);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -304,10 +304,10 @@ namespace Lotus
 			/// <param name="time">Time between 0 and 1 indicating the weight of <paramref name="end"/></param>
 			/// <returns>The cubic interpolation of the two matrices</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f SmoothStep(Matrix3Dx2f start, Matrix3Dx2f end, Single time)
+			public static Matrix3Dx2f SmoothStep(in Matrix3Dx2f start, in Matrix3Dx2f end, Single time)
 			{
 				Matrix3Dx2f result;
-				SmoothStep(ref start, ref end, time, out result);
+				SmoothStep(in start, in end, time, out result);
 				return result;
 			}
 
@@ -318,7 +318,7 @@ namespace Lotus
 			/// <param name="scale">Scaling factor for both axes</param>
 			/// <param name="result">When the method completes, contains the created scaling matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Scaling(ref Vector2Df scale, out Matrix3Dx2f result)
+			public static void Scaling(in Vector2Df scale, out Matrix3Dx2f result)
 			{
 				Scaling(scale.X, scale.Y, out result);
 			}
@@ -330,10 +330,10 @@ namespace Lotus
 			/// <param name="scale">Scaling factor for both axes</param>
 			/// <returns>The created scaling matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Scaling(Vector2Df scale)
+			public static Matrix3Dx2f Scaling(in Vector2Df scale)
 			{
 				Matrix3Dx2f result;
-				Scaling(ref scale, out result);
+				Scaling(in scale, out result);
 				return result;
 			}
 
@@ -403,7 +403,7 @@ namespace Lotus
 			/// <param name="center">The center of the scaling</param>
 			/// <returns>The created scaling matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Scaling(Single x, Single y, Vector2Df center)
+			public static Matrix3Dx2f Scaling(Single x, Single y, in Vector2Df center)
 			{
 				Matrix3Dx2f result;
 
@@ -425,7 +425,7 @@ namespace Lotus
 			/// <param name="center">The center of the scaling</param>
 			/// <param name="result">The created scaling matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Scaling(Single x, Single y, ref Vector2Df center, out Matrix3Dx2f result)
+			public static void Scaling(Single x, Single y, in Vector2Df center, out Matrix3Dx2f result)
 			{
 				Matrix3Dx2f local_result;
 
@@ -479,7 +479,7 @@ namespace Lotus
 			/// <param name="center">The center of the rotation</param>
 			/// <returns>The created rotation matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Rotation(Single angle, Vector2Df center)
+			public static Matrix3Dx2f Rotation(Single angle, in Vector2Df center)
 			{
 				Matrix3Dx2f result;
 				Rotation(angle, center, out result);
@@ -494,7 +494,7 @@ namespace Lotus
 			/// <param name="center">The center of the rotation.</param>
 			/// <param name="result">When the method completes, contains the created rotation matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Rotation(Single angle, Vector2Df center, out Matrix3Dx2f result)
+			public static void Rotation(Single angle, in Vector2Df center, out Matrix3Dx2f result)
 			{
 				result = Translation(-center) * Rotation(angle) * Translation(center);
 			}
@@ -541,7 +541,7 @@ namespace Lotus
 			/// <param name="value">The offset for both coordinate planes</param>
 			/// <param name="result">When the method completes, contains the created translation matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Translation(ref Vector2Df value, out Matrix3Dx2f result)
+			public static void Translation(in Vector2Df value, out Matrix3Dx2f result)
 			{
 				Translation(value.X, value.Y, out result);
 			}
@@ -553,10 +553,10 @@ namespace Lotus
 			/// <param name="value">The offset for both coordinate planes</param>
 			/// <returns>The created translation matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Translation(Vector2Df value)
+			public static Matrix3Dx2f Translation(in Vector2Df value)
 			{
 				Matrix3Dx2f result;
-				Translation(ref value, out result);
+				Translation(in value, out result);
 				return result;
 			}
 
@@ -598,7 +598,7 @@ namespace Lotus
 			/// <param name="point">The original vector to apply the transformation</param>
 			/// <returns>The result of the transformation for the input vector</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df TransformPoint(Matrix3Dx2f matrix, Vector2Df point)
+			public static Vector2Df TransformPoint(in Matrix3Dx2f matrix, in Vector2Df point)
 			{
 				Vector2Df result;
 				result.X = (point.X * matrix.M11) + (point.Y * matrix.M21) + matrix.M31;
@@ -612,23 +612,9 @@ namespace Lotus
 			/// </summary>
 			/// <param name="matrix">The matrix to use as a transformation matrix</param>
 			/// <param name="point">The original vector to apply the transformation</param>
-			/// <returns>The result of the transformation for the input vector</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df TransformPoint(ref Matrix3Dx2f matrix, ref Vector2Df point)
-			{
-				return new Vector2Df((point.X * matrix.M11) + (point.Y * matrix.M21) + matrix.M31,
-					(point.X * matrix.M12) + (point.Y * matrix.M22) + matrix.M32);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Transforms a vector by this matrix
-			/// </summary>
-			/// <param name="matrix">The matrix to use as a transformation matrix</param>
-			/// <param name="point">The original vector to apply the transformation</param>
 			/// <param name="result">The result of the transformation for the input vector</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void TransformPoint(ref Matrix3Dx2f matrix, ref Vector2Df point, out Vector2Df result)
+			public static void TransformPoint(in Matrix3Dx2f matrix, in Vector2Df point, out Vector2Df result)
 			{
 				Vector2Df local_result;
 				local_result.X = (point.X * matrix.M11) + (point.Y * matrix.M21) + matrix.M31;
@@ -645,7 +631,7 @@ namespace Lotus
 			/// <param name="point">The original vector to apply the transformation</param>
 			/// <returns>The result of the transformation for the input vector</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df TransformVector(ref Matrix3Dx2f matrix, ref Vector2Df point)
+			public static Vector2Df TransformVector(in Matrix3Dx2f matrix, in Vector2Df point)
 			{
 				return new Vector2Df((point.X * matrix.M11) + (point.Y * matrix.M21),
 					(point.X * matrix.M12) + (point.Y * matrix.M22));
@@ -688,24 +674,10 @@ namespace Lotus
 			/// <param name="value">The matrix whose inverse is to be calculated</param>
 			/// <returns>the inverse of the specified matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Invert(Matrix3Dx2f value)
+			public static Matrix3Dx2f Invert(in Matrix3Dx2f value)
 			{
 				Matrix3Dx2f result;
-				Invert(ref value, out result);
-				return result;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Calculates the inverse of the specified matrix
-			/// </summary>
-			/// <param name="value">The matrix whose inverse is to be calculated</param>
-			/// <returns>the inverse of the specified matrix</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Invert(ref Matrix3Dx2f value)
-			{
-				Matrix3Dx2f result;
-				Invert(ref value, out result);
+				Invert(in value, out result);
 				return result;
 			}
 
@@ -716,7 +688,7 @@ namespace Lotus
 			/// <param name="value">The matrix whose inverse is to be calculated</param>
 			/// <param name="result">When the method completes, contains the inverse of the specified matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Invert(ref Matrix3Dx2f value, out Matrix3Dx2f result)
+			public static void Invert(in Matrix3Dx2f value, out Matrix3Dx2f result)
 			{
 				Single determinant = value.Determinant();
 
@@ -917,7 +889,7 @@ namespace Lotus
 				}
 
 				var matrix = (Matrix3Dx2f)value;
-				return Equals(ref matrix);
+				return Equals(in matrix);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -931,7 +903,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(Matrix3Dx2f other)
 			{
-				return Equals(ref other);
+				return Equals(in other);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -943,7 +915,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="Matrix3Dx2f"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(ref Matrix3Dx2f other)
+			public Boolean Equals(in Matrix3Dx2f other)
 			{
 				return (XMath.Approximately(other.M11, M11) &&
 					XMath.Approximately(other.M12, M12) &&
@@ -1064,7 +1036,7 @@ namespace Lotus
 			public static Matrix3Dx2f operator +(Matrix3Dx2f left, Matrix3Dx2f right)
 			{
 				Matrix3Dx2f result;
-				Add(ref left, ref right, out result);
+				Add(in left, in right, out result);
 				return result;
 			}
 
@@ -1091,7 +1063,7 @@ namespace Lotus
 			public static Matrix3Dx2f operator -(Matrix3Dx2f left, Matrix3Dx2f right)
 			{
 				Matrix3Dx2f result;
-				Subtract(ref left, ref right, out result);
+				Subtract(in left, in right, out result);
 				return result;
 			}
 
@@ -1105,7 +1077,7 @@ namespace Lotus
 			public static Matrix3Dx2f operator -(Matrix3Dx2f value)
 			{
 				Matrix3Dx2f result;
-				Negate(ref value, out result);
+				Negate(in value, out result);
 				return result;
 			}
 
@@ -1120,7 +1092,7 @@ namespace Lotus
 			public static Matrix3Dx2f operator *(Single left, Matrix3Dx2f right)
 			{
 				Matrix3Dx2f result;
-				Multiply(ref right, left, out result);
+				Multiply(in right, left, out result);
 				return result;
 			}
 
@@ -1135,7 +1107,7 @@ namespace Lotus
 			public static Matrix3Dx2f operator *(Matrix3Dx2f left, Single right)
 			{
 				Matrix3Dx2f result;
-				Multiply(ref left, right, out result);
+				Multiply(in left, right, out result);
 				return result;
 			}
 
@@ -1150,7 +1122,7 @@ namespace Lotus
 			public static Matrix3Dx2f operator *(Matrix3Dx2f left, Matrix3Dx2f right)
 			{
 				Matrix3Dx2f result;
-				Multiply(ref left, ref right, out result);
+				Multiply(in left, in right, out result);
 				return result;
 			}
 
@@ -1165,7 +1137,7 @@ namespace Lotus
 			public static Matrix3Dx2f operator /(Matrix3Dx2f left, Single right)
 			{
 				Matrix3Dx2f result;
-				Divide(ref left, right, out result);
+				Divide(in left, right, out result);
 				return result;
 			}
 
@@ -1180,7 +1152,7 @@ namespace Lotus
 			public static Matrix3Dx2f operator /(Matrix3Dx2f left, Matrix3Dx2f right)
 			{
 				Matrix3Dx2f result;
-				Divide(ref left, ref right, out result);
+				Divide(in left, in right, out result);
 				return result;
 			}
 
@@ -1194,7 +1166,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean operator ==(Matrix3Dx2f left, Matrix3Dx2f right)
 			{
-				return left.Equals(ref right);
+				return left.Equals(in right);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1207,7 +1179,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean operator !=(Matrix3Dx2f left, Matrix3Dx2f right)
 			{
-				return !left.Equals(ref right);
+				return !left.Equals(in right);
 			}
 			#endregion
 
@@ -1341,7 +1313,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Invert()
 			{
-				Invert(ref this, out this);
+				Invert(in this, out this);
 			}
 			#endregion
 		}

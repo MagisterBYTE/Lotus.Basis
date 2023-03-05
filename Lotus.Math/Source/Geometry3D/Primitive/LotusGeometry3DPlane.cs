@@ -71,7 +71,7 @@ namespace Lotus
 			/// <param name="point">Координаты точки принадлежащей плоскости</param>
 			/// <param name="normal">Вектор нормали к плоскости</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Plane3D(ref Vector3D point, ref Vector3D normal)
+			public Plane3D(in Vector3D point, in Vector3D normal)
 			{
 				Normal.X = normal.X;
 				Normal.Y = normal.Y;
@@ -87,7 +87,7 @@ namespace Lotus
 			/// <param name="p2">Точка принадлежащая плоскости</param>
 			/// <param name="p3">Точка принадлежащая плоскости</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Plane3D(ref Vector3D p1, ref Vector3D p2, ref Vector3D p3)
+			public Plane3D(in Vector3D p1, in Vector3D p2, in Vector3D p3)
 			{
 				Vector3D v1 = p2 - p1;
 				Vector3D v2 = p3 - p1;
@@ -105,7 +105,7 @@ namespace Lotus
 			/// <param name="point">Точка в пространстве</param>
 			/// <returns>Расстояние до точки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double GetDistanceToPoint(ref Vector3D point)
+			public Double GetDistanceToPoint(in Vector3D point)
 			{
 				return (Normal.X * point.X) + (Normal.Y * point.Y) + (Normal.Z * point.Z) + Distance;
 			}
@@ -121,7 +121,7 @@ namespace Lotus
 			/// Если n * p меньше 0, то вектор p находится за плоскостью в отрицательном полупространстве плоскости
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double ComputeVector(ref Vector3D vector)
+			public Double ComputeVector(in Vector3D vector)
 			{
 				return (Normal.X * vector.X) + (Normal.Y * vector.Y) + (Normal.Z * vector.Z);
 			}
@@ -137,7 +137,7 @@ namespace Lotus
 			/// Если n * p + d меньше 0, то точка p находится за плоскостью в отрицательном полупространстве плоскости
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double ComputePoint(ref Vector3D point)
+			public Double ComputePoint(in Vector3D point)
 			{
 				return (Normal.X * point.X) + (Normal.Y * point.Y) + (Normal.Z * point.Z) + Distance;
 			}
@@ -207,7 +207,7 @@ namespace Lotus
 			/// <param name="point">Координаты точки принадлежащей плоскости</param>
 			/// <param name="normal">Вектор нормали к плоскости</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Plane3Df(ref Vector3Df point, ref Vector3Df normal)
+			public Plane3Df(in Vector3Df point, in Vector3Df normal)
 			{
 				Normal.X = normal.X;
 				Normal.Y = normal.Y;
@@ -223,7 +223,7 @@ namespace Lotus
 			/// <param name="p2">Точка принадлежащая плоскости</param>
 			/// <param name="p3">Точка принадлежащая плоскости</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Plane3Df(ref Vector3Df p1, ref Vector3Df p2, ref Vector3Df p3)
+			public Plane3Df(in Vector3Df p1, in Vector3Df p2, in Vector3Df p3)
 			{
 				Vector3Df v1 = p2 - p1;
 				Vector3Df v2 = p3 - p1;
@@ -265,7 +265,7 @@ namespace Lotus
 				}
 
 				var plane = (Plane3Df)value;
-				return Equals(ref plane);
+				return Equals(in plane);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -279,7 +279,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(Plane3Df value)
 			{
-				return Equals(ref value);
+				return Equals(in value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="Plane3Df"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(ref Plane3Df value)
+			public Boolean Equals(in Plane3Df value)
 			{
 				return Normal == value.Normal && Distance == value.Distance;
 			}
@@ -426,7 +426,7 @@ namespace Lotus
 			/// <param name="point">Точка в пространстве</param>
 			/// <returns>Расстояние до точки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single GetDistanceToPoint(ref Vector3Df point)
+			public Single GetDistanceToPoint(in Vector3Df point)
 			{
 				return (Normal.X * point.X) + (Normal.Y * point.Y) + (Normal.Z * point.Z) + Distance;
 			}
@@ -442,7 +442,7 @@ namespace Lotus
 			/// Если n * p меньше 0, то вектор p находится за плоскостью в отрицательном полупространстве плоскости
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single ComputeVector(ref Vector3Df vector)
+			public Single ComputeVector(in Vector3Df vector)
 			{
 				return (Normal.X * vector.X) + (Normal.Y * vector.Y) + (Normal.Z * vector.Z);
 			}
@@ -458,7 +458,7 @@ namespace Lotus
 			/// Если n * p + d меньше 0, то точка p находится за плоскостью в отрицательном полупространстве плоскости
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single ComputePoint(ref Vector3Df point)
+			public Single ComputePoint(in Vector3Df point)
 			{
 				return (Normal.X * point.X) + (Normal.Y * point.Y) + (Normal.Z * point.Z) + Distance;
 			}

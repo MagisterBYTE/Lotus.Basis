@@ -50,7 +50,7 @@ namespace Lotus
 			/// <param name="angle">Угол поворота (в градусах)</param>
 			/// <param name="result">Результирующий кватернион</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void AxisAngle(ref Vector3D axis, Double angle, out Quaternion3D result)
+			public static void AxisAngle(in Vector3D axis, Double angle, out Quaternion3D result)
 			{
 				Vector3D v = axis.Normalized;
 
@@ -71,7 +71,7 @@ namespace Lotus
 			/// <param name="to_direction">Требуемое направление</param>
 			/// <param name="result">Результирующий кватернион</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void FromToRotation(ref Vector3D from_direction, ref Vector3D to_direction, out Quaternion3D result)
+			public static void FromToRotation(in Vector3D from_direction, in Vector3D to_direction, out Quaternion3D result)
 			{
 				// Получаем ось вращения
 				Vector3D axis = from_direction ^ to_direction;
@@ -112,24 +112,24 @@ namespace Lotus
 			/// <param name="up">Вектор "вверх"</param>
 			/// <param name="result">Результирующий кватернион</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SetLookRotation(ref Vector3D direction, ref Vector3D up, out Quaternion3D result)
+			public static void SetLookRotation(in Vector3D direction, in Vector3D up, out Quaternion3D result)
 			{
 				// Step 1. Setup basis vectors describing the rotation given the
 				// input vector and assuming an initial up direction of (0, 1, 0)
 				// The perpendicular vector to Up and Direction
-				Vector3D right = Vector3D.Cross(ref up, ref direction);
+				Vector3D right = Vector3D.Cross(in up, in direction);
 
 				// The actual up vector given the direction and the right vector
-				up = Vector3D.Cross(ref direction, ref right);
+				Vector3D upCalc = Vector3D.Cross(in direction, in right);
 
 
 				// Step 2. Put the three vectors into the matrix to bulid a basis rotation matrix
 				// This step isnt necessary, but im adding it because often you would want to convert from matricies to quaternions instead of vectors to quaternions
 				// If you want to skip this step, you can use the vector values directly in the quaternion setup below
 				Matrix4Dx4 basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
-											  up.X, up.Y, up.Z, 0.0,
-											  direction.X, direction.Y, direction.Z, 0.0,
-											  0.0, 0.0, 0.0, 1.0);
+												  upCalc.X, upCalc.Y, upCalc.Z, 0.0,
+												  direction.X, direction.Y, direction.Z, 0.0,
+												  0.0, 0.0, 0.0, 1.0);
 
 				// Преобразуем в кватернион.
 				result = basis.ToQuaternion3D();
@@ -146,7 +146,7 @@ namespace Lotus
 			/// <param name="time">Время от 0 до 1</param>
 			/// <returns>Интерполированный кватернион</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Quaternion3D Lerp(ref Quaternion3D from, ref Quaternion3D to, Double time)
+			public static Quaternion3D Lerp(in Quaternion3D from, in Quaternion3D to, Double time)
 			{
 				Quaternion3D quaternion;
 				quaternion.X = from.X + ((to.X - from.X) * time);
@@ -624,7 +624,7 @@ namespace Lotus
 			/// <param name="axis">Ось поворота</param>
 			/// <param name="angle">Угол поворота (в градусах)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromAxisAngle(ref Vector3D axis, Double angle)
+			public void SetFromAxisAngle(in Vector3D axis, Double angle)
 			{
 				Vector3D v = axis.Normalized;
 
@@ -644,7 +644,7 @@ namespace Lotus
 			/// <param name="from_direction">Начальное направление</param>
 			/// <param name="to_direction">Требуемое направление</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromToRotation(ref Vector3D from_direction, ref Vector3D to_direction)
+			public void SetFromToRotation(in Vector3D from_direction, in Vector3D to_direction)
 			{
 				// Получаем ось вращения
 				Vector3D axis = from_direction ^ to_direction;
@@ -681,24 +681,24 @@ namespace Lotus
 			/// <param name="direction">Вектор взгляда</param>
 			/// <param name="up">Вектор "вверх"</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetLookRotation(ref Vector3D direction, ref Vector3D up)
+			public void SetLookRotation(in Vector3D direction, in Vector3D up)
 			{
 				// Step 1. Setup basis vectors describing the rotation given the
 				// input vector and assuming an initial up direction of (0, 1, 0)
 				// The perpendicular vector to Up and Direction
-				Vector3D right = Vector3D.Cross(ref up, ref direction);
+				Vector3D right = Vector3D.Cross(in up, in direction);
 
 				// The actual up vector given the direction and the right vector
-				up = Vector3D.Cross(ref direction, ref right);
+				Vector3D compUp = Vector3D.Cross(in direction, in right);
 
 
 				// Step 2. Put the three vectors into the matrix to bulid a basis rotation matrix
 				// This step isnt necessary, but im adding it because often you would want to convert from matricies to quaternions instead of vectors to quaternions
 				// If you want to skip this step, you can use the vector values directly in the quaternion setup below
 				Matrix4Dx4 basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
-											  up.X, up.Y, up.Z, 0.0,
-											  direction.X, direction.Y, direction.Z, 0.0,
-											  0.0, 0.0, 0.0, 1.0);
+												  compUp.X, compUp.Y, compUp.Z, 0.0,
+											      direction.X, direction.Y, direction.Z, 0.0,
+											      0.0, 0.0, 0.0, 1.0);
 
 				// Преобразуем в кватернион
 				this = basis.ToQuaternion3D();
@@ -713,21 +713,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Трансформированный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D TransformVector(ref Vector3D vector)
-			{
-				// Быстрая трансформация
-				Quaternion3D r = this * new Quaternion3D(vector.X, vector.Y, vector.Z, 0) * Conjugated;
-				return new Vector3D(r.X, r.Y, r.Z);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Трансформация вектора
-			/// </summary>
-			/// <param name="vector">Вектор</param>
-			/// <returns>Трансформированный вектор</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Vector3D TransformVector(Vector3D vector)
+			public Vector3D TransformVector(in Vector3D vector)
 			{
 				// Быстрая трансформация
 				Quaternion3D r = this * new Quaternion3D(vector.X, vector.Y, vector.Z, 0) * Conjugated;
@@ -775,7 +761,7 @@ namespace Lotus
 			/// <param name="angle">Угол поворота (в градусах)</param>
 			/// <param name="result">Результирующий кватернион</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void AxisAngle(ref Vector3Df axis, Single angle, out Quaternion3Df result)
+			public static void AxisAngle(in Vector3Df axis, Single angle, out Quaternion3Df result)
 			{
 				Vector3Df v = axis.Normalized;
 
@@ -796,7 +782,7 @@ namespace Lotus
 			/// <param name="to_direction">Требуемое направление</param>
 			/// <param name="result">Результирующий кватернион</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void FromToRotation(ref Vector3Df from_direction, ref Vector3Df to_direction, out Quaternion3Df result)
+			public static void SetFromToRotation(in Vector3Df from_direction, in Vector3Df to_direction, out Quaternion3Df result)
 			{
 				// Получаем ось вращения
 				Vector3Df axis = from_direction ^ to_direction;
@@ -837,24 +823,24 @@ namespace Lotus
 			/// <param name="up">Вектор "вверх"</param>
 			/// <param name="result">Результирующий кватернион</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SetLookRotation(ref Vector3Df direction, ref Vector3Df up, out Quaternion3Df result)
+			public static void SetLookRotation(in Vector3Df direction, in Vector3Df up, out Quaternion3Df result)
 			{
 				// Step 1. Setup basis vectors describing the rotation given the
 				// input vector and assuming an initial up direction of (0, 1, 0)
 				// The perpendicular vector to Up and Direction
-				Vector3Df right = Vector3Df.Cross(ref up, ref direction);
+				Vector3Df right = Vector3Df.Cross(in up, in direction);
 
 				// The actual up vector given the direction and the right vector
-				up = Vector3Df.Cross(ref direction, ref right);
+				Vector3Df compUp = Vector3Df.Cross(in direction, in right);
 
 
 				// Step 2. Put the three vectors into the matrix to build a basis rotation matrix
 				// This step isnt necessary, but im adding it because often you would want to convert from matricies to quaternions instead of vectors to quaternions
 				// If you want to skip this step, you can use the vector values directly in the quaternion setup below
 				Matrix4Dx4 basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
-											  up.X, up.Y, up.Z, 0.0,
-											  direction.X, direction.Y, direction.Z, 0.0,
-											  0.0, 0.0, 0.0, 1.0);
+												  compUp.X, compUp.Y, compUp.Z, 0.0,
+												  direction.X, direction.Y, direction.Z, 0.0,
+												  0.0, 0.0, 0.0, 1.0);
 
 				// Преобразуем в кватернион.
 				result = basis.ToQuaternion3Df();
@@ -869,7 +855,7 @@ namespace Lotus
 			/// <param name="matrix">The rotation matrix</param>
 			/// <param name="result">When the method completes, contains the newly created quaternion</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RotationMatrix(ref Matrix3Dx3f matrix, out Quaternion3Df result)
+			public static void RotationMatrix(in Matrix3Dx3f matrix, out Quaternion3Df result)
 			{
 				Single sqrt;
 				Single half;
@@ -970,7 +956,7 @@ namespace Lotus
 			/// <param name="time">Время от 0 до 1</param>
 			/// <returns>Интерполированный кватернион</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Quaternion3Df Lerp(ref Quaternion3Df from, ref Quaternion3Df to, Single time)
+			public static Quaternion3Df Lerp(in Quaternion3Df from, in Quaternion3Df to, Single time)
 			{
 				Quaternion3Df quaternion;
 				quaternion.X = from.X + ((to.X - from.X) * time);
@@ -1448,7 +1434,7 @@ namespace Lotus
 			/// <param name="axis">Ось поворота</param>
 			/// <param name="angle">Угол поворота (в градусах)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromAxisAngle(ref Vector3Df axis, Single angle)
+			public void SetFromAxisAngle(in Vector3Df axis, Single angle)
 			{
 				Vector3Df v = axis.Normalized;
 
@@ -1468,34 +1454,9 @@ namespace Lotus
 			/// <param name="from_direction">Начальное направление</param>
 			/// <param name="to_direction">Требуемое направление</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromToRotation(ref Vector3Df from_direction, ref Vector3Df to_direction)
+			public void SetFromToRotation(in Vector3Df from_direction, in Vector3Df to_direction)
 			{
-				// Получаем ось вращения
-				Vector3Df axis = from_direction ^ to_direction;
-
-				Set(axis.X, axis.Y, axis.Z, from_direction * to_direction);
-				Normalize();
-
-				// reducing angle to halfangle
-				W += 1.0f;
-
-				// angle close to PI
-				if (W <= XMath.Eplsilon_d)
-				{
-					if (from_direction.Z * from_direction.Z > from_direction.X * from_direction.X)
-					{
-						// from * vector3(1,0,0) 
-						Set(0, from_direction.Z, -from_direction.Y, W);
-					}
-					else
-					{
-						//from * vector3(0,0,1) 
-						Set(from_direction.Y, -from_direction.X, 0, W);
-					}
-				}
-
-				// Нормализация
-				Normalize();
+				SetFromToRotation(in from_direction, in to_direction, out this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1505,29 +1466,9 @@ namespace Lotus
 			/// <param name="direction">Вектор взгляда</param>
 			/// <param name="up">Вектор "вверх"</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetLookRotation(ref Vector3Df direction, ref Vector3Df up)
+			public void SetLookRotation(in Vector3Df direction, in Vector3Df up)
 			{
-				// Step 1. Setup basis vectors describing the rotation given the
-				// input vector and assuming an initial up direction of (0, 1, 0)
-				// The perpendicular vector to Up and Direction
-				Vector3Df right = Vector3Df.Cross(ref up, ref direction);
-
-				// The actual up vector given the direction and the right vector
-				up = Vector3Df.Cross(ref direction, ref right);
-
-
-				// Step 2. Put the three vectors into the matrix to bulid a basis rotation matrix
-				// This step isnt necessary, but im adding it because often you would want to convert from matricies to quaternions instead of vectors to quaternions
-				// If you want to skip this step, you can use the vector values directly in the quaternion setup below
-				Matrix4Dx4 basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
-											  up.X, up.Y, up.Z, 0.0,
-											  direction.X, direction.Y, direction.Z, 0.0,
-											  0.0, 0.0, 0.0, 1.0);
-
-				// Преобразуем в кватернион
-				this = basis.ToQuaternion3Df();
-
-				Normalize();
+				SetLookRotation(in direction, in up, out this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1537,21 +1478,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Трансформированный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df TransformVector(ref Vector3Df vector)
-			{
-				// Быстрая трансформация
-				Quaternion3Df r = this * new Quaternion3Df(vector.X, vector.Y, vector.Z, 0) * Conjugated;
-				return new Vector3Df(r.X, r.Y, r.Z);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Трансформация вектора
-			/// </summary>
-			/// <param name="vector">Вектор</param>
-			/// <returns>Трансформированный вектор</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df TransformVector(Vector3Df vector)
+			public Vector3Df TransformVector(in Vector3Df vector)
 			{
 				// Быстрая трансформация
 				Quaternion3Df r = this * new Quaternion3Df(vector.X, vector.Y, vector.Z, 0) * Conjugated;

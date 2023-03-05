@@ -71,7 +71,7 @@ namespace Lotus
 			/// <param name="axis">Ось проекции</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double AngleAroundAxis(ref Vector3D dir_a, ref Vector3D dir_b, ref Vector3D axis)
+			public static Double AngleAroundAxis(in Vector3D dir_a, in Vector3D dir_b, in Vector3D axis)
 			{
 				return 0;
 			}
@@ -86,7 +86,7 @@ namespace Lotus
 			/// <param name="axis">Ось проекции</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single AngleAroundAxis(ref UnityEngine.Vector3 dir_a, ref UnityEngine.Vector3 dir_b, ref UnityEngine.Vector3 axis)
+			public static Single AngleAroundAxis(in UnityEngine.Vector3 dir_a, in UnityEngine.Vector3 dir_b, in UnityEngine.Vector3 axis)
 			{
 				// TODO Project A and B onto the plane orthogonal target axis
 				dir_a = dir_a - UnityEngine.Vector3.Project(dir_a, axis);

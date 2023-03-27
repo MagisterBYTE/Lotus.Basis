@@ -104,6 +104,19 @@ namespace Lotus
 				String token = test.ExtractString(">", "<");
 				Assert.AreEqual(token, "String begin");
 
+				test = "222.3333";
+				String before = test.SubstringTo(".", false);
+				Assert.AreEqual(before, "222");
+
+				String after = test.SubstringFrom(".", false);
+				Assert.AreEqual(after, "3333");
+
+				before = test.SubstringTo(".", true);
+				Assert.AreEqual(before, "222.");
+
+				after = test.SubstringFrom(".", true);
+				Assert.AreEqual(after, ".3333");
+
 
 				//
 				// МЕТОДЫ РАБОТЫ СО СЛОВАМИ

@@ -950,11 +950,11 @@ namespace Lotus
 				{
 					if (include)
 					{
-						return @this.Substring(0, index);
+						return @this.Substring(0, index + what.Length);
 					}
 					else
 					{
-						return @this.Substring(0, index + what.Length);
+						return @this.Substring(0, index);
 					}
 				}
 				return @this;
@@ -980,7 +980,7 @@ namespace Lotus
 					}
 					else
 					{
-						return @this.Substring(index - what.Length);
+						return @this.Substring(index + what.Length);
 					}
 				}
 				return @this;

@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputPath>..\Output\$(Configuration)\</OutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>MagistrBYTE</Authors>
+    <Company>LotusPlatform</Company>
+    <Copyright>MagistrBYTE</Copyright>
+    <AssemblyVersion>1.7.0.0</AssemblyVersion>
+    <FileVersion>1.7.0.0</FileVersion>
+    <Version>1.7.0</Version>
+    <Title>Lotus.UnitMeasurement</Title>
+    <PackageTags></PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Модуль единиц измерения обеспечивает начальную инфраструктуру для представления базовых типов измерения и соответствующую им систему единиц измерения</Description>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <PackageIcon>IconTemplate.png</PackageIcon>
+    <PackageIconUrl />
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <NoWarn>1587,1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Resources\IconTemplate.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="Readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

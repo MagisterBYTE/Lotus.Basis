@@ -936,6 +936,58 @@ namespace Lotus
 			#region ======================================= МЕТОДЫ ИЗВЛЕЧЕНИЯ =========================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
+			/// Получение подстроки до первого вхождения указанной строки
+			/// </summary>
+			/// <param name="this">Строка</param>
+			/// <param name="what">Заданная строка</param>
+			/// <param name="include">Включать ли заданную строку в результат</param>
+			/// <returns>Найденная подстрока или текущая строка</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static string SubstringTo(this String @this, String what, Boolean include)
+			{
+				Int32 index = @this.IndexOf(what);
+				if (index > -1)
+				{
+					if (include)
+					{
+						return @this.Substring(0, index);
+					}
+					else
+					{
+						return @this.Substring(0, index + what.Length);
+					}
+				}
+				return @this;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получение подстроки от первого вхождения указанной строки и до конца строки
+			/// </summary>
+			/// <param name="this">Строка</param>
+			/// <param name="what">Заданная строка</param>
+			/// <param name="include">Включать ли заданную строку в результат</param>
+			/// <returns>Найденная подстрока или текущая строка</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static string SubstringFrom(this String @this, String what, Boolean include)
+			{
+				Int32 index = @this.IndexOf(what);
+				if (index > -1)
+				{
+					if (include)
+					{
+						return @this.Substring(index);
+					}
+					else
+					{
+						return @this.Substring(index - what.Length);
+					}
+				}
+				return @this;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
 			/// Извлечение из строки числа
 			/// </summary>
 			/// <param name="this">Строка</param>

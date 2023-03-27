@@ -62,7 +62,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetPeriodOfText(this ILotusDatePeriod @this)
 			{
-				if(@this.EndPeriodDate is not null)
+				if(@this.EndPeriodDate != null)
 				{
 					return @this.BeginPeriodDate.ToString(XDateFormats.Default) 
 						+ "г. - " + @this.EndPeriodDate.GetValueOrDefault().ToString(XDateFormats.Default) + "г.";

@@ -49,7 +49,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public EntityDb()
-				: this(default(TKey))
+				: this(default)
 			{
 
 			}
@@ -186,7 +186,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public EntityNameDb()
-				: this(default(TKey))
+				: this(default)
 			{
 
 			}

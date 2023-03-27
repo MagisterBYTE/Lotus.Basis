@@ -3,14 +3,15 @@
 // Раздел: Подсистема защиты
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusObfuscator.cs
-*		Простой обфускатор данных.
+/** \file LotusHashHelper.cs
+*		Работа с хешами по различным алгоритмам.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
 // Последнее изменение от 27.03.2022
 //=====================================================================================================================
 using System;
+using System.Security.Cryptography;
 using System.Text;
 //=====================================================================================================================
 namespace Lotus
@@ -18,58 +19,65 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup CoreProtection Подсистема защиты
-		//! Подсистема защиты представляет собой подсистему работы с криптографическим средствами, работу с
-		//! утверждениями, а несложные механизмы защиты (шифрования/декодирование) для примитивных типов данных,
-		//! где используются простые методы - манипулирование и операции с битами и циклические сдвиги.
-		//! \ingroup Core
-		/*@{*/
-		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
-		/// Статический класс для обфускации примитивных данных
+		/// Статический класс для работы с хешами по различным алгоритмам
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public static class XObfuscator
+		public static class XHashHelper
 		{
-			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
-			/// <summary>
-			/// Маска для шифрования/декодирование
-			/// </summary>
-			public const Byte XOR_MASK = 0x53;
-			#endregion
-
 			#region ======================================= МЕТОДЫ ====================================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Закодировать строку
+			/// Получение хеша строки
 			/// </summary>
-			/// <param name="original">Оригинальная строка</param>
-			/// <returns>Закодированная строка</returns>
+			/// <remarks>
+			/// Используется алгоритм SHA1
+			/// </remarks>
+			/// <param name="input">Входная строка</param>
+			/// <returns>Хеш строки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Encode(String original)
+			public static String GetHash(String input)
 			{
-				Byte[] data = Encoding.UTF8.GetBytes(original);
-				for (Int32 i = 0; i < data.Length; i++)
+				using SHA1 sha1Hash = SHA1.Create();
+
+				// Convert the input string to a byte array and compute the hash.
+				byte[] data = sha1Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+				// Create a new Stringbuilder to collect the bytes
+				// and create a string.
+				var sBuilder = new StringBuilder();
+
+				// Loop through each byte of the hashed data
+				// and format each one as a hexadecimal string.
+				for (int i = 0; i < data.Length; i++)
 				{
-					data[i] = (Byte)(data[i] ^ XOR_MASK);
+					sBuilder.Append(data[i].ToString("x2"));
 				}
-				return Convert.ToBase64String(data);
+
+				// Return the hexadecimal string.
+				return sBuilder.ToString();
 			}
+
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Раскодировать строку
+			/// Проверка хеша
 			/// </summary>
-			/// <param name="decode">Закодированная строка</param>
-			/// <returns>Оригинальная строка</returns>
+			/// <remarks>
+			/// Используется алгоритм SHA1
+			/// </remarks>
+			/// <param name="input">Входная строка</param>
+			/// <param name="hash">Хеш строки</param>
+			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Decode(String decode)
+			public static Boolean VerifyHash(String input, String hash)
 			{
-				Byte[] data = Convert.FromBase64String(decode);
-				for (Int32 i = 0; i < data.Length; i++)
-				{
-					data[i] = (Byte)(data[i] ^ XOR_MASK);
-				}
-				return Encoding.UTF8.GetString(data);
+				// Hash the input.
+				var hashOfInput = GetHash(input);
+
+				// Create a StringComparer an compare the hashes.
+				StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+				return comparer.Compare(hashOfInput, hash) == 0;
 			}
 			#endregion
 		}

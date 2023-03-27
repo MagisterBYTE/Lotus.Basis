@@ -101,7 +101,7 @@ namespace Lotus
 				DateOnly beginRange, DateOnly endRange)
 #endif
 			{
-				if (endCheck is not null)
+				if (endCheck != null)
 				{
 					var endDate = endCheck.GetValueOrDefault();
 

@@ -316,7 +316,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ComputeDistance(ref Vector2Df point)
 			{
-				Distance = Vector2Df.Distance(ref Point, ref point);
+				Distance = Vector2Df.Distance(in Point, in point);
 			}
 
 #if UNITY_2017_1_OR_NEWER

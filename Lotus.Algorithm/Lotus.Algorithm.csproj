@@ -3,14 +3,15 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Lotus.Algorithm</RootNamespace>
+    <Configurations>Debug;Release;Publish</Configurations>
     <OutputPath>..\Output\$(Configuration)\</OutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>MagistrBYTE aka DanielDem</Authors>
     <Company>LotusPlatform</Company>
     <Copyright>MagistrBYTE aka DanielDem</Copyright>
-    <AssemblyVersion>1.7.0.0</AssemblyVersion>
-    <FileVersion>1.7.0.0</FileVersion>
-    <Version>1.7.0</Version>
+    <AssemblyVersion>1.8.0.0</AssemblyVersion>
+    <FileVersion>1.8.0.0</FileVersion>
+    <Version>1.8.0</Version>
     <Title>Lotus.Algorithm</Title>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Модуль алгоритмов реализует распространены алгоритмы по поиску пути, интерполяции данных, работу с графами, алгоритмы сортировки и упорядочивания данных, заливку областей, а также базовые алгоритмы генерации контента</Description>
@@ -28,10 +29,15 @@
     </None>
     <None Include="Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
+ 
+  <ItemGroup Condition="'$(Configuration)' == 'Publish'">
+    <PackageReference Include="Lotus.Core" Version="1.8.0" />
+    <PackageReference Include="Lotus.Math" Version="1.8.0" />
+  </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Lotus.Core" Version="1.7.0" />
-    <PackageReference Include="Lotus.Math" Version="1.7.0" />
+  <ItemGroup Condition="'$(Configuration)' != 'Publish'">
+    <ProjectReference Include="..\Lotus.Core\Lotus.Core.csproj" />
+    <ProjectReference Include="..\Lotus.Math\Lotus.Math.csproj" />
   </ItemGroup>
 
 </Project>

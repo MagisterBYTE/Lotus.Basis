@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Lotus.Core.Test</RootNamespace>
-    <Configurations>Debug;Release</Configurations>
+    <Configurations>Debug;Release;Publish</Configurations>
     <OutputPath>..\Output\$(Configuration)\</OutputPath>
   </PropertyGroup>
 

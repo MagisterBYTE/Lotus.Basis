@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -23,8 +23,8 @@ namespace Lotus
 	namespace Algorithm
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup AlgorithmPathFinder
-		/*@{*/
+		/** \addtogroup AlgorithmPathFinder
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Точка пути для алгоритма A-Star
@@ -429,7 +429,7 @@ namespace Lotus
 					}
 
 					// Проводим вычисления для каждого смежного элемента
-					for (Int32 i = 0; i < (mIsAllowDiagonal ? 8 : 4); i++)
+					for (var i = 0; i < (mIsAllowDiagonal ? 8 : 4); i++)
 					{
 						TPathPointStar new_node;
 						new_node.X = parent_node.X + mDirections[i, 0];
@@ -475,8 +475,8 @@ namespace Lotus
 							}
 						}
 
-						Int32 found_in_open_index = -1;
-						for (Int32 j = 0; j < mOpenList.Count; j++)
+						var found_in_open_index = -1;
+						for (var j = 0; j < mOpenList.Count; j++)
 						{
 							if (mOpenList[j].X == new_node.X && mOpenList[j].Y == new_node.Y)
 							{
@@ -489,8 +489,8 @@ namespace Lotus
 							continue;
 						}
 
-						Int32 found_in_close_index = -1;
-						for (Int32 j = 0; j < mCloseList.Count; j++)
+						var found_in_close_index = -1;
+						for (var j = 0; j < mCloseList.Count; j++)
 						{
 							if (mCloseList[j].X == new_node.X && mCloseList[j].Y == new_node.Y)
 							{
@@ -522,8 +522,8 @@ namespace Lotus
 								break;
 							case THeuristicFormula.DiagonalShortCut:
 								{
-									Int32 h_diagonal = Math.Min(Math.Abs(new_node.X - mTarget.X), Math.Abs(new_node.Y - mTarget.Y));
-									Int32 h_straight = Math.Abs(new_node.X - mTarget.X) + Math.Abs(new_node.Y - mTarget.Y);
+									var h_diagonal = Math.Min(Math.Abs(new_node.X - mTarget.X), Math.Abs(new_node.Y - mTarget.Y));
+									var h_straight = Math.Abs(new_node.X - mTarget.X) + Math.Abs(new_node.Y - mTarget.Y);
 									new_node.HeuristicEstimatePathLength = mHeuristicEstimate * 2 * h_diagonal + mHeuristicEstimate * (h_straight - 2 * h_diagonal);
 								}
 								break;
@@ -538,20 +538,20 @@ namespace Lotus
 								}
 								break;
 							case THeuristicFormula.Custom1:
-								TMapPoint dxy = new TMapPoint(Math.Abs(mTarget.X - new_node.X), Math.Abs(mTarget.Y - new_node.Y));
-								Int32 Orthogonal = Math.Abs(dxy.X - dxy.Y);
-								Int32 Diagonal = Math.Abs((dxy.X + dxy.Y - Orthogonal) / 2);
+								var dxy = new TMapPoint(Math.Abs(mTarget.X - new_node.X), Math.Abs(mTarget.Y - new_node.Y));
+								var Orthogonal = Math.Abs(dxy.X - dxy.Y);
+								var Diagonal = Math.Abs((dxy.X + dxy.Y - Orthogonal) / 2);
 								new_node.HeuristicEstimatePathLength = mHeuristicEstimate * (Diagonal + Orthogonal + dxy.X + dxy.Y);
 								break;
 						}
 
 						if (mTieBreaker)
 						{
-							Int32 dx1 = parent_node.X - mTarget.X;
-							Int32 dy1 = parent_node.Y - mTarget.Y;
-							Int32 dx2 = mStart.X - mTarget.X;
-							Int32 dy2 = mStart.Y - mTarget.Y;
-							Int32 cross = Math.Abs(dx1 * dy2 - dx2 * dy1);
+							var dx1 = parent_node.X - mTarget.X;
+							var dy1 = parent_node.Y - mTarget.Y;
+							var dx2 = mStart.X - mTarget.X;
+							var dy2 = mStart.Y - mTarget.Y;
+							var cross = Math.Abs(dx1 * dy2 - dx2 * dy1);
 							new_node.HeuristicEstimatePathLength = (Int32)(new_node.HeuristicEstimatePathLength + cross * 0.001);
 						}
 
@@ -575,7 +575,7 @@ namespace Lotus
 			{
 				mPath.Clear();
 				TPathPointStar node = mCloseList[mCloseList.Count - 1];
-				for (Int32 i = mCloseList.Count - 1; i >= 0; i--)
+				for (var i = mCloseList.Count - 1; i >= 0; i--)
 				{
 					if (node.ParentX == mCloseList[i].X && node.ParentY == mCloseList[i].Y || i == mCloseList.Count - 1)
 					{
@@ -653,7 +653,7 @@ namespace Lotus
 				}
 
 				// Проводим вычисления для каждого смежного элемента
-				for (Int32 i = 0; i < (mIsAllowDiagonal ? 8 : 4); i++)
+				for (var i = 0; i < (mIsAllowDiagonal ? 8 : 4); i++)
 				{
 					TPathPointStar new_node;
 					new_node.X = parent_node.X + mDirections[i, 0];
@@ -699,8 +699,8 @@ namespace Lotus
 						}
 					}
 
-					Int32 found_in_open_index = -1;
-					for (Int32 j = 0; j < mOpenList.Count; j++)
+					var found_in_open_index = -1;
+					for (var j = 0; j < mOpenList.Count; j++)
 					{
 						if (mOpenList[j].X == new_node.X && mOpenList[j].Y == new_node.Y)
 						{
@@ -713,8 +713,8 @@ namespace Lotus
 						continue;
 					}
 
-					Int32 found_in_close_index = -1;
-					for (Int32 j = 0; j < mCloseList.Count; j++)
+					var found_in_close_index = -1;
+					for (var j = 0; j < mCloseList.Count; j++)
 					{
 						if (mCloseList[j].X == new_node.X && mCloseList[j].Y == new_node.Y)
 						{
@@ -746,8 +746,8 @@ namespace Lotus
 							break;
 						case THeuristicFormula.DiagonalShortCut:
 							{
-								Int32 h_diagonal = Math.Min(Math.Abs(new_node.X - mTarget.X), Math.Abs(new_node.Y - mTarget.Y));
-								Int32 h_straight = Math.Abs(new_node.X - mTarget.X) + Math.Abs(new_node.Y - mTarget.Y);
+								var h_diagonal = Math.Min(Math.Abs(new_node.X - mTarget.X), Math.Abs(new_node.Y - mTarget.Y));
+								var h_straight = Math.Abs(new_node.X - mTarget.X) + Math.Abs(new_node.Y - mTarget.Y);
 								new_node.HeuristicEstimatePathLength = mHeuristicEstimate * 2 * h_diagonal + mHeuristicEstimate * (h_straight - 2 * h_diagonal);
 							}
 							break;
@@ -762,20 +762,20 @@ namespace Lotus
 							}
 							break;
 						case THeuristicFormula.Custom1:
-							TMapPoint dxy = new TMapPoint(Math.Abs(mTarget.X - new_node.X), Math.Abs(mTarget.Y - new_node.Y));
-							Int32 Orthogonal = Math.Abs(dxy.X - dxy.Y);
-							Int32 Diagonal = Math.Abs((dxy.X + dxy.Y - Orthogonal) / 2);
+							var dxy = new TMapPoint(Math.Abs(mTarget.X - new_node.X), Math.Abs(mTarget.Y - new_node.Y));
+							var Orthogonal = Math.Abs(dxy.X - dxy.Y);
+							var Diagonal = Math.Abs((dxy.X + dxy.Y - Orthogonal) / 2);
 							new_node.HeuristicEstimatePathLength = mHeuristicEstimate * (Diagonal + Orthogonal + dxy.X + dxy.Y);
 							break;
 					}
 
 					if (mTieBreaker)
 					{
-						Int32 dx1 = parent_node.X - mTarget.X;
-						Int32 dy1 = parent_node.Y - mTarget.Y;
-						Int32 dx2 = mStart.X - mTarget.X;
-						Int32 dy2 = mStart.Y - mTarget.Y;
-						Int32 cross = Math.Abs(dx1 * dy2 - dx2 * dy1);
+						var dx1 = parent_node.X - mTarget.X;
+						var dy1 = parent_node.Y - mTarget.Y;
+						var dx2 = mStart.X - mTarget.X;
+						var dy2 = mStart.Y - mTarget.Y;
+						var cross = Math.Abs(dx1 * dy2 - dx2 * dy1);
 						new_node.HeuristicEstimatePathLength = (Int32)(new_node.HeuristicEstimatePathLength + cross * 0.001);
 					}
 
@@ -800,7 +800,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void SetWave(Int32[,] wave)
 			{
-				for (Int32 i = 0; i < mCloseList.Count; i++)
+				for (var i = 0; i < mCloseList.Count; i++)
 				{
 					wave[mCloseList[i].X, mCloseList[i].Y] = mCloseList[i].PathLengthFromStart;
 				}
@@ -808,7 +808,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

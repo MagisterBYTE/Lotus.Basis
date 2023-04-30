@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Reflection;
@@ -23,8 +23,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreExtension
-		/*@{*/
+		/** \addtogroup CoreExtension
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы расширений для типа <see cref="Type"/>
@@ -188,7 +188,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsCollectionType(this Type @this)
 			{
-				Boolean status = (@this.IsGenericType && @this.Name == COLLECTION_1);
+				var status = (@this.IsGenericType && @this.Name == COLLECTION_1);
 				if (status == false)
 				{
 					// Пробуем проверить базовый тип
@@ -234,7 +234,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsListType(this Type @this)
 			{
-				Boolean status = (@this.IsGenericType && @this.Name == LIST_1);
+				var status = (@this.IsGenericType && @this.Name == LIST_1);
 				if (status == false)
 				{
 					// Пробуем проверить базовый тип
@@ -280,7 +280,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsListLotusType(this Type @this)
 			{
-				Boolean status = (@this.IsGenericType && @this.Name == LIST_ARRAY_1);
+				var status = (@this.IsGenericType && @this.Name == LIST_ARRAY_1);
 				if (status == false)
 				{
 					// Пробуем проверить базовый тип
@@ -327,7 +327,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsClassicCollectionType(this Type @this)
 			{
-				Boolean status = @this.IsArray || IsGenericCollectionType(@this);
+				var status = @this.IsArray || IsGenericCollectionType(@this);
 				if (status == false)
 				{
 					// Пробуем проверить базовый тип
@@ -370,7 +370,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsObservableCollectionType(this Type @this)
 			{
-				Boolean status = (@this.IsGenericType && @this.Name == OBSERVABLE_COLLECTION_1);
+				var status = (@this.IsGenericType && @this.Name == OBSERVABLE_COLLECTION_1);
 				if (status == false)
 				{
 					// Пробуем проверить базовый тип
@@ -881,7 +881,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetMemberPath(this MemberInfo @this)
 			{
-				String base_path = @this.DeclaringType.Name + '.' + @this.Name;
+				var base_path = @this.DeclaringType.Name + '.' + @this.Name;
 				if (@this.DeclaringType.DeclaringType != null)
 				{
 					if (@this.DeclaringType.DeclaringType.DeclaringType != null)
@@ -1099,7 +1099,7 @@ namespace Lotus
 			{
 				if (instance == null)
 				{
-					String error = String.Format("Instance = NULL, Member name: [{0}] = Value: [{1}]", @this.Name, value.ToString());
+					var error = String.Format("Instance = NULL, Member name: [{0}] = Value: [{1}]", @this.Name, value.ToString());
 #if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError(error);
 #else
@@ -1332,7 +1332,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

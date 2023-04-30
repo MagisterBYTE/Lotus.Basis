@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry3D
-		/*@{*/
+		/** \addtogroup MathGeometry3D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Четырехмерный вектор
@@ -77,8 +77,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Cos(in Vector4D from, in Vector4D to)
 			{
-				Double dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
-				Double ll = from.Length * to.Length;
+				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
+				var ll = from.Length * to.Length;
 				return dot / ll;
 			}
 
@@ -92,9 +92,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Angle(in Vector4D from, in Vector4D to)
 			{
-				Double dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
-				Double ll = from.Length * to.Length;
-				Double csv = dot / ll;
+				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
+				var ll = from.Length * to.Length;
+				var csv = dot / ll;
 				return Math.Acos(csv) * XMath.RadianToDegree_d;
 			}
 
@@ -108,9 +108,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Distance(in Vector4D a, in Vector4D b)
 			{
-				Double x = b.X - a.X;
-				Double y = b.Y - a.Y;
-				Double z = b.Z - a.Z;
+				var x = b.X - a.X;
+				var y = b.Y - a.Y;
+				var z = b.Z - a.Z;
 
 				return Math.Sqrt((x * x) + (y * y) + (z * z));
 			}
@@ -156,8 +156,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector4D DeserializeFromString(String data)
 			{
-				Vector4D vector = new Vector4D();
-				String[] vector_data = data.Split(';');
+				var vector = new Vector4D();
+				var vector_data = data.Split(';');
 				vector.X = XMath.ParseDouble(vector_data[0]);
 				vector.Y = XMath.ParseDouble(vector_data[1]);
 				vector.Z = XMath.ParseDouble(vector_data[2]);
@@ -212,7 +212,7 @@ namespace Lotus
 			{
 				get
 				{
-					Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 					return new Vector4D(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh);
 				}
 			}
@@ -265,7 +265,7 @@ namespace Lotus
 				{
 					if (typeof(Vector4D) == obj.GetType())
 					{
-						Vector4D vector = (Vector4D)obj;
+						var vector = (Vector4D)obj;
 						return Equals(vector);
 					}
 				}
@@ -624,7 +624,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+				var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 				X *= inv_lentgh;
 				Y *= inv_lentgh;
 				Z *= inv_lentgh;
@@ -639,9 +639,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double Distance(in Vector4D vector)
 			{
-				Double x = vector.X - X;
-				Double y = vector.Y - Y;
-				Double z = vector.Z - Z;
+				var x = vector.X - X;
+				var y = vector.Y - Y;
+				var z = vector.Z - Z;
 
 				return Math.Sqrt((x * x) + (y * y) + (z * z));
 			}
@@ -698,7 +698,7 @@ namespace Lotus
 				X = (left.Y * right.Z) - (left.Z * right.Y);
 				Y = (left.Z * right.X) - (left.X * right.Z);
 				Z = (left.X * right.Y) - (left.Y * right.X);
-				Double inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+				var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 				X *= inv_length;
 				Y *= inv_length;
 				Z *= inv_length;
@@ -797,8 +797,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Cos(in Vector4Df from, in Vector4Df to)
 			{
-				Single dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
-				Single ll = from.Length * to.Length;
+				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
+				var ll = from.Length * to.Length;
 				return dot / ll;
 			}
 
@@ -812,9 +812,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Angle(in Vector4Df from, in Vector4Df to)
 			{
-				Single dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
-				Single ll = from.Length * to.Length;
-				Single csv = dot / ll;
+				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
+				var ll = from.Length * to.Length;
+				var csv = dot / ll;
 				return (Single)(Math.Acos(csv) * XMath.RadianToDegree_d);
 			}
 
@@ -828,9 +828,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Distance(in Vector4Df a, in Vector4Df b)
 			{
-				Single x = b.X - a.X;
-				Single y = b.Y - a.Y;
-				Single z = b.Z - a.Z;
+				var x = b.X - a.X;
+				var y = b.Y - a.Y;
+				var z = b.Z - a.Z;
 
 				return (Single)Math.Sqrt((x * x) + (y * y) + (z * z));
 			}
@@ -876,8 +876,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector4Df DeserializeFromString(String data)
 			{
-				Vector4Df vector = new Vector4Df();
-				String[] vector_data = data.Split(';');
+				var vector = new Vector4Df();
+				var vector_data = data.Split(';');
 				vector.X = XMath.ParseSingle(vector_data[0]);
 				vector.Y = XMath.ParseSingle(vector_data[1]);
 				vector.Z = XMath.ParseSingle(vector_data[2]);
@@ -932,7 +932,7 @@ namespace Lotus
 			{
 				get
 				{
-					Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 					return new Vector4Df(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh);
 				}
 			}
@@ -985,7 +985,7 @@ namespace Lotus
 				{
 					if (typeof(Vector4Df) == obj.GetType())
 					{
-						Vector4Df vector = (Vector4Df)obj;
+						var vector = (Vector4Df)obj;
 						return Equals(vector);
 					}
 				}
@@ -1344,7 +1344,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+				var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 				X *= inv_lentgh;
 				Y *= inv_lentgh;
 				Z *= inv_lentgh;
@@ -1359,9 +1359,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single Distance(in Vector4Df vector)
 			{
-				Single x = vector.X - X;
-				Single y = vector.Y - Y;
-				Single z = vector.Z - Z;
+				var x = vector.X - X;
+				var y = vector.Y - Y;
+				var z = vector.Z - Z;
 
 				return (Single)Math.Sqrt((x * x) + (y * y) + (z * z));
 			}
@@ -1418,7 +1418,7 @@ namespace Lotus
 				X = (left.Y * right.Z) - (left.Z * right.Y);
 				Y = (left.Z * right.X) - (left.X * right.Z);
 				Z = (left.X * right.Y) - (left.Y * right.X);
-				Single inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+				var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 				X *= inv_length;
 				Y *= inv_length;
 				Z *= inv_length;
@@ -1463,7 +1463,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

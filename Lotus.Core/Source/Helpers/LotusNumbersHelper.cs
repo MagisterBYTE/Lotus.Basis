@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Globalization;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreHelpers
-		/*@{*/
+		/** \addtogroup CoreHelpers
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий дополнительные методы для работы с числовыми типами
@@ -176,11 +176,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double ParseDoubleFormat(String text, Double default_value = 0)
 			{
-				StringBuilder number = new StringBuilder(text.Length);
+				var number = new StringBuilder(text.Length);
 
-				for (Int32 i = 0; i < text.Length; i++)
+				for (var i = 0; i < text.Length; i++)
 				{
-					Char c = text[i];
+					var c = text[i];
 
 					if(c == '-')
 					{
@@ -223,11 +223,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean ParseDoubleFormat(String text, out Double result)
 			{
-				StringBuilder number = new StringBuilder(text.Length);
+				var number = new StringBuilder(text.Length);
 
-				for (Int32 i = 0; i < text.Length; i++)
+				for (var i = 0; i < text.Length; i++)
 				{
-					Char c = text[i];
+					var c = text[i];
 
 					if (c == '-')
 					{
@@ -310,7 +310,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

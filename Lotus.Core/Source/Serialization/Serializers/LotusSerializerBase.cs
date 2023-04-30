@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreSerialization
-		/*@{*/
+		/** \addtogroup CoreSerialization
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Интерфейс сериализатор данных
@@ -257,7 +257,7 @@ namespace Lotus
 			{
 				if (SerializableObjects.Count > 0)
 				{
-					CParameters parameters = new CParameters( new CParameterObject(this.Name, this));
+					var parameters = new CParameters( new CParameterObject(this.Name, this));
 					foreach (var item in SerializableObjects.Values)
 					{
 						if (item is ILotusBeforeSave before_save)
@@ -277,7 +277,7 @@ namespace Lotus
 			{
 				if (SerializableObjects.Count > 0)
 				{
-					CParameters parameters = new CParameters(new CParameterObject(this.Name, this));
+					var parameters = new CParameters(new CParameterObject(this.Name, this));
 					foreach (var item in SerializableObjects.Values)
 					{
 						if (item is ILotusAfterSave after_save)
@@ -297,7 +297,7 @@ namespace Lotus
 			{
 				if (SerializableObjects.Count > 0)
 				{
-					CParameters parameters = new CParameters(new CParameterObject(this.Name, this));
+					var parameters = new CParameters(new CParameterObject(this.Name, this));
 					foreach (var item in SerializableObjects.Values)
 					{
 						if (item is ILotusBeforeLoad before_load)
@@ -317,7 +317,7 @@ namespace Lotus
 			{
 				if (SerializableObjects.Count > 0)
 				{
-					CParameters parameters = new CParameters(new CParameterObject(this.Name, this));
+					var parameters = new CParameters(new CParameterObject(this.Name, this));
 					foreach (var item in SerializableObjects.Values)
 					{
 						if (item is ILotusAfterLoad after_load)
@@ -367,7 +367,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

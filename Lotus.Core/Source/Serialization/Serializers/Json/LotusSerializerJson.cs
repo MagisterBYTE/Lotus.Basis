@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Text;
@@ -23,8 +23,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreSerialization
-		/*@{*/
+		/** \addtogroup CoreSerialization
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Cериализатор для сохранения/загрузки объектов в формат Json
@@ -171,10 +171,10 @@ namespace Lotus
 			public override void SaveTo(String file_name, System.Object instance, CParameters parameters = null)
 			{
 				// Формируем правильный путь
-				String path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
+				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
 
 				// Создаем поток для записи
-				StreamWriter stream_writer = new StreamWriter(path, false, Encoding.UTF8);
+				var stream_writer = new StreamWriter(path, false, Encoding.UTF8);
 				SaveTo(stream_writer, instance, parameters);
 				stream_writer.Close();
 
@@ -195,10 +195,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String SaveTo(System.Object instance, CParameters parameters = null)
 			{
-				StringBuilder file_data = new StringBuilder(200);
+				var file_data = new StringBuilder(200);
 
 				// Создаем поток для записи
-				StringWriter string_writer = new StringWriter(file_data);
+				var string_writer = new StringWriter(file_data);
 				SaveTo(string_writer, instance, parameters);
 				string_writer.Close();
 
@@ -245,13 +245,13 @@ namespace Lotus
 			public override System.Object LoadFrom(String file_name, CParameters parameters = null)
 			{
 				// Формируем правильный путь
-				String path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
+				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
 
 				// Читаем данные
-				String string_json = File.ReadAllText(path);
+				var string_json = File.ReadAllText(path);
 
 				// Читаем объект
-				System.Object result = LoadFromString(string_json, parameters);
+				var result = LoadFromString(string_json, parameters);
 
 				return (result);
 			}
@@ -268,13 +268,13 @@ namespace Lotus
 			public override TResultType LoadFrom<TResultType>(String file_name, CParameters parameters = null)
 			{
 				// Формируем правильный путь
-				String path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
+				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
 
 				// Читаем данные
-				String string_json = File.ReadAllText(path);
+				var string_json = File.ReadAllText(path);
 
 				// Открываем поток
-				StringReader string_reader = new StringReader(string_json);
+				var string_reader = new StringReader(string_json);
 
 				// Читаем объект
 				TResultType result = LoadFrom<TResultType>(string_reader, parameters);
@@ -294,7 +294,7 @@ namespace Lotus
 			public System.Object LoadFromString(String string_json, CParameters parameters = null)
 			{
 				// Читаем объект
-				System.Object result = JsonConvert.DeserializeObject(string_json);
+				var result = JsonConvert.DeserializeObject(string_json);
 
 				if (result is ILotusAfterLoad after_load)
 				{
@@ -350,10 +350,10 @@ namespace Lotus
 			public override void UpdateFrom(System.Object instance, String file_name, CParameters parameters = null)
 			{
 				// Формируем правильный путь
-				String path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
+				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
 
 				// Читаем данные
-				String string_json = File.ReadAllText(path);
+				var string_json = File.ReadAllText(path);
 
 				// Обновляем объект
 				UpdateFromString(instance, string_json, parameters);
@@ -402,7 +402,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

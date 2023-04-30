@@ -11,7 +11,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreCommonTypes
-		/*@{*/
+		/** \addtogroup CoreCommonTypes
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Логический тип который информирует об изменении своего значения
@@ -40,7 +40,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static BoolObserved DeserializeFromString(String data)
 			{
-				BoolObserved value = new BoolObserved();
+				var value = new BoolObserved();
 				value.SetValue(XBoolean.Parse(data));
 				return value;
 			}
@@ -123,7 +123,7 @@ namespace Lotus
 				{
 					if (typeof(BoolObserved) == obj.GetType())
 					{
-						BoolObserved value = (BoolObserved)obj;
+						var value = (BoolObserved)obj;
 						return Equals(value);
 					}
 				}
@@ -295,7 +295,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static IntObserved DeserializeFromString(String data)
 			{
-				IntObserved value = new IntObserved();
+				var value = new IntObserved();
 				value.SetValue(Int32.Parse(data));
 				return value;
 			}
@@ -378,7 +378,7 @@ namespace Lotus
 				{
 					if (typeof(IntObserved) == obj.GetType())
 					{
-						IntObserved value = (IntObserved)obj;
+						var value = (IntObserved)obj;
 						return Equals(value);
 					}
 				}
@@ -550,7 +550,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static SingleObserved DeserializeFromString(String data)
 			{
-				SingleObserved value = new SingleObserved();
+				var value = new SingleObserved();
 				value.SetValue(XNumbers.ParseSingle(data));
 				return value;
 			}
@@ -633,7 +633,7 @@ namespace Lotus
 				{
 					if (typeof(SingleObserved) == obj.GetType())
 					{
-						SingleObserved value = (SingleObserved)obj;
+						var value = (SingleObserved)obj;
 						return Equals(value);
 					}
 				}
@@ -805,7 +805,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static StringObserved DeserializeFromString(String data)
 			{
-				StringObserved value = new StringObserved(data);
+				var value = new StringObserved(data);
 				return value;
 			}
 			#endregion
@@ -887,7 +887,7 @@ namespace Lotus
 				{
 					if (typeof(StringObserved) == obj.GetType())
 					{
-						StringObserved value = (StringObserved)obj;
+						var value = (StringObserved)obj;
 						return Equals(value);
 					}
 				}
@@ -1041,7 +1041,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

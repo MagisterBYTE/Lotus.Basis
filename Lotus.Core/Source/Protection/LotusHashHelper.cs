@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Security.Cryptography;
@@ -18,6 +18,9 @@ namespace Lotus
 {
 	namespace Core
 	{
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreProtection
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс для работы с хешами по различным алгоритмам
@@ -38,10 +41,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetHash(String input)
 			{
-				using SHA1 sha1Hash = SHA1.Create();
+				using var sha1Hash = SHA1.Create();
 
 				// Convert the input string to a byte array and compute the hash.
-				byte[] data = sha1Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+				var data = sha1Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
 				// Create a new Stringbuilder to collect the bytes
 				// and create a string.
@@ -49,7 +52,7 @@ namespace Lotus
 
 				// Loop through each byte of the hashed data
 				// and format each one as a hexadecimal string.
-				for (int i = 0; i < data.Length; i++)
+				for (var i = 0; i < data.Length; i++)
 				{
 					sBuilder.Append(data[i].ToString("x2"));
 				}
@@ -82,7 +85,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

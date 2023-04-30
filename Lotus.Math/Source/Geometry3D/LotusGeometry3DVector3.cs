@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry3D
-		/*@{*/
+		/** \addtogroup MathGeometry3D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Трехмерный вектор
@@ -131,8 +131,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Cos(in Vector3D from, in Vector3D to)
 			{
-				Double dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
-				Double ll = from.Length * to.Length;
+				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
+				var ll = from.Length * to.Length;
 				return dot / ll;
 			}
 
@@ -146,9 +146,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Angle(in Vector3D from, in Vector3D to)
 			{
-				Double dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
-				Double ll = from.Length * to.Length;
-				Double csv = dot / ll;
+				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
+				var ll = from.Length * to.Length;
+				var csv = dot / ll;
 				return XMathAngle.NormalizationFull(Math.Acos(csv) * XMath.RadianToDegree_d);
 			}
 
@@ -162,9 +162,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Distance(in Vector3D a, in Vector3D b)
 			{
-				Double x = b.X - a.X;
-				Double y = b.Y - a.Y;
-				Double z = b.Z - a.Z;
+				var x = b.X - a.X;
+				var y = b.Y - a.Y;
+				var z = b.Z - a.Z;
 
 				return Math.Sqrt((x * x) + (y * y) + (z * z));
 			}
@@ -224,8 +224,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3D DeserializeFromString(String data)
 			{
-				Vector3D vector = new Vector3D();
-				String[] vector_data = data.Split(';');
+				var vector = new Vector3D();
+				var vector_data = data.Split(';');
 				vector.X = XMath.ParseDouble(vector_data[0]);
 				vector.Y = XMath.ParseDouble(vector_data[1]);
 				vector.Z = XMath.ParseDouble(vector_data[2]);
@@ -274,7 +274,7 @@ namespace Lotus
 			{
 				get
 				{
-					Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 					return new Vector3D(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh);
 				}
 			}
@@ -365,7 +365,7 @@ namespace Lotus
 				{
 					if (typeof(Vector3D) == obj.GetType())
 					{
-						Vector3D vector = (Vector3D)obj;
+						var vector = (Vector3D)obj;
 						return Equals(vector);
 					}
 				}
@@ -741,7 +741,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+				var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 				X *= inv_lentgh;
 				Y *= inv_lentgh;
 				Z *= inv_lentgh;
@@ -756,9 +756,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double Distance(in Vector3D vector)
 			{
-				Double x = vector.X - X;
-				Double y = vector.Y - Y;
-				Double z = vector.Z - Z;
+				var x = vector.X - X;
+				var y = vector.Y - Y;
+				var z = vector.Z - Z;
 
 				return Math.Sqrt((x * x) + (y * y) + (z * z));
 			}
@@ -815,7 +815,7 @@ namespace Lotus
 				X = (left.Y * right.Z) - (left.Z * right.Y);
 				Y = (left.Z * right.X) - (left.X * right.Z);
 				Z = (left.X * right.Y) - (left.Y * right.X);
-				Double inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+				var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 				X *= inv_length;
 				Y *= inv_length;
 				Z *= inv_length;
@@ -1098,8 +1098,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Cos(in Vector3Df from, in Vector3Df to)
 			{
-				Single dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
-				Single ll = from.Length * to.Length;
+				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
+				var ll = from.Length * to.Length;
 				return dot / ll;
 			}
 
@@ -1113,9 +1113,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Angle(in Vector3Df from, in Vector3Df to)
 			{
-				Single dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
-				Single ll = from.Length * to.Length;
-				Single csv = dot / ll;
+				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
+				var ll = from.Length * to.Length;
+				var csv = dot / ll;
 				return (Single)XMathAngle.NormalizationFull(Math.Acos(csv) * XMath.RadianToDegree_d);
 			}
 
@@ -1129,9 +1129,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Distance(in Vector3Df a, in Vector3Df b)
 			{
-				Single x = b.X - a.X;
-				Single y = b.Y - a.Y;
-				Single z = b.Z - a.Z;
+				var x = b.X - a.X;
+				var y = b.Y - a.Y;
+				var z = b.Z - a.Z;
 
 				return (Single)Math.Sqrt((x * x) + (y * y) + (z * z));
 			}
@@ -1145,7 +1145,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df Normalize(in Vector3Df vector)
 			{
-				Single inv_lentgh = XMath.InvSqrt((vector.X * vector.X) + (vector.Y * vector.Y) + (vector.Z * vector.Z));
+				var inv_lentgh = XMath.InvSqrt((vector.X * vector.X) + (vector.Y * vector.Y) + (vector.Z * vector.Z));
 				return new Vector3Df(vector.X * inv_lentgh, vector.Y * inv_lentgh, vector.Z * inv_lentgh);
 			}
 
@@ -1253,12 +1253,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df FromSpherical(Single radius, Single theta, Single phi)
 			{
-				Single radian_theta = theta * XMath.DegreeToRadian_f;
-				Single radian_phi = phi * XMath.DegreeToRadian_f;
+				var radian_theta = theta * XMath.DegreeToRadian_f;
+				var radian_phi = phi * XMath.DegreeToRadian_f;
 				
-				Single z = (Single)(Math.Sin(radian_theta) * Math.Cos(radian_phi)) * radius;
-				Single x = (Single)(Math.Sin(radian_theta) * Math.Sin(radian_phi)) * radius;
-				Single y = (Single)(Math.Cos(radian_theta)) * radius;
+				var z = (Single)(Math.Sin(radian_theta) * Math.Cos(radian_phi)) * radius;
+				var x = (Single)(Math.Sin(radian_theta) * Math.Sin(radian_phi)) * radius;
+				var y = (Single)(Math.Cos(radian_theta)) * radius;
 
 				return (new Vector3Df(x, y, z));
 			}
@@ -1289,12 +1289,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df FromGeographicCoordSystem(Single radius, Single latitude, Single longitude)
 			{
-				Single theta = latitude * XMath.DegreeToRadian_f;
-				Single phi = longitude * XMath.DegreeToRadian_f;
+				var theta = latitude * XMath.DegreeToRadian_f;
+				var phi = longitude * XMath.DegreeToRadian_f;
 
-				Single z = (Single)(Math.Sin(theta) * Math.Cos(phi)) * radius;
-				Single x = (Single)(Math.Sin(theta) * Math.Sin(phi)) * radius;
-				Single y = (Single)(Math.Cos(theta)) * radius;
+				var z = (Single)(Math.Sin(theta) * Math.Cos(phi)) * radius;
+				var x = (Single)(Math.Sin(theta) * Math.Sin(phi)) * radius;
+				var y = (Single)(Math.Cos(theta)) * radius;
 
 				return (new Vector3Df(x, y, z));
 			}
@@ -1334,8 +1334,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df DeserializeFromString(String data)
 			{
-				Vector3Df vector = new Vector3Df();
-				String[] vector_data = data.Split(';');
+				var vector = new Vector3Df();
+				var vector_data = data.Split(';');
 				vector.X = XMath.ParseSingle(vector_data[0]);
 				vector.Y = XMath.ParseSingle(vector_data[1]);
 				vector.Z = XMath.ParseSingle(vector_data[2]);
@@ -1384,7 +1384,7 @@ namespace Lotus
 			{
 				get
 				{
-					Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 					return new Vector3Df(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh);
 				}
 			}
@@ -1434,7 +1434,7 @@ namespace Lotus
 				{
 					if (typeof(Vector3Df) == obj.GetType())
 					{
-						Vector3Df vector = (Vector3Df)obj;
+						var vector = (Vector3Df)obj;
 						return Equals(vector);
 					}
 				}
@@ -1666,9 +1666,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df operator *(Vector3Df vector, Matrix4Dx4 matrix)
 			{
-				Single x = (Single)((vector.X * matrix.M11) + (vector.Y * matrix.M21) + (vector.Z * matrix.M31) + matrix.M41);
-				Single y = (Single)((vector.X * matrix.M12) + (vector.Y * matrix.M22) + (vector.Z * matrix.M32) + matrix.M42);
-				Single z = (Single)((vector.X * matrix.M13) + (vector.Y * matrix.M23) + (vector.Z * matrix.M33) + matrix.M43);
+				var x = (Single)((vector.X * matrix.M11) + (vector.Y * matrix.M21) + (vector.Z * matrix.M31) + matrix.M41);
+				var y = (Single)((vector.X * matrix.M12) + (vector.Y * matrix.M22) + (vector.Z * matrix.M32) + matrix.M42);
+				var z = (Single)((vector.X * matrix.M13) + (vector.Y * matrix.M23) + (vector.Z * matrix.M33) + matrix.M43);
 				return new Vector3Df(x, y, z);
 			}
 
@@ -1803,7 +1803,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+				var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 				X *= inv_lentgh;
 				Y *= inv_lentgh;
 				Z *= inv_lentgh;
@@ -1818,9 +1818,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single Distance(in Vector3Df vector)
 			{
-				Single x = vector.X - X;
-				Single y = vector.Y - Y;
-				Single z = vector.Z - Z;
+				var x = vector.X - X;
+				var y = vector.Y - Y;
+				var z = vector.Z - Z;
 
 				return (Single)Math.Sqrt((x * x) + (y * y) + (z * z));
 			}
@@ -1877,7 +1877,7 @@ namespace Lotus
 				X = (left.Y * right.Z) - (left.Z * right.Y);
 				Y = (left.Z * right.X) - (left.X * right.Z);
 				Z = (left.X * right.Y) - (left.Y * right.X);
-				Single inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+				var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
 				X *= inv_length;
 				Y *= inv_length;
 				Z *= inv_length;
@@ -1891,9 +1891,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void TransformAsPoint(in Matrix4Dx4 matrix)
 			{
-				Single x = (Single)((X * matrix.M11) + (Y * matrix.M21) + (Z * matrix.M31) + matrix.M41);
-				Single y = (Single)((X * matrix.M12) + (Y * matrix.M22) + (Z * matrix.M32) + matrix.M42);
-				Single z = (Single)((X * matrix.M13) + (Y * matrix.M23) + (Z * matrix.M33) + matrix.M43);
+				var x = (Single)((X * matrix.M11) + (Y * matrix.M21) + (Z * matrix.M31) + matrix.M41);
+				var y = (Single)((X * matrix.M12) + (Y * matrix.M22) + (Z * matrix.M32) + matrix.M42);
+				var z = (Single)((X * matrix.M13) + (Y * matrix.M23) + (Z * matrix.M33) + matrix.M43);
 				X = x;
 				Y = y;
 				Z = z;
@@ -1907,9 +1907,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void TransformAsVector(in Matrix4Dx4 matrix)
 			{
-				Single x = (Single)((X * matrix.M11) + (Y * matrix.M21) + (Z * matrix.M31));
-				Single y = (Single)((X * matrix.M12) + (Y * matrix.M22) + (Z * matrix.M32));
-				Single z = (Single)((X * matrix.M13) + (Y * matrix.M23) + (Z * matrix.M33));
+				var x = (Single)((X * matrix.M11) + (Y * matrix.M21) + (Z * matrix.M31));
+				var y = (Single)((X * matrix.M12) + (Y * matrix.M22) + (Z * matrix.M32));
+				var z = (Single)((X * matrix.M13) + (Y * matrix.M23) + (Z * matrix.M33));
 				X = x;
 				Y = y;
 				Z = z;
@@ -2071,7 +2071,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

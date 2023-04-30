@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Runtime.CompilerServices;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreECS
-		/*@{*/
+		/** \addtogroup CoreECS
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Интерфейс фильтра компонентов для хранения списка сущностей с набором определенных компонентов
@@ -293,7 +293,7 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mWorld.mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					Int32[] exclude_entities = component_data.GetEntities();
+					var exclude_entities = component_data.GetEntities();
 					mEntities.RemoveValues(exclude_entities);
 				}
 
@@ -315,12 +315,12 @@ namespace Lotus
 					ILotusEcsComponentData component_data;
 					if (mWorld.mComponentsData.TryGetValue(first_type_filter, out component_data))
 					{
-						Int32[] entities = component_data.GetEntities();
-						for (Int32 i = 0; i < component_data.Count; i++)
+						var entities = component_data.GetEntities();
+						for (var i = 0; i < component_data.Count; i++)
 						{
-							Int32 id = entities[i];
-							Int32 find_count = 0;
-							for (Int32 f = 1; f < mIncludedComponents.Count; f++)
+							var id = entities[i];
+							var find_count = 0;
+							for (var f = 1; f < mIncludedComponents.Count; f++)
 							{
 								Type type_filter = mIncludedComponents[f];
 								ILotusEcsComponentData filter_data;
@@ -345,12 +345,12 @@ namespace Lotus
 					}
 				}
 
-				for (Int32 i = 0; i < mExcludedComponents.Count; i++)
+				for (var i = 0; i < mExcludedComponents.Count; i++)
 				{
 					ILotusEcsComponentData component_data;
 					if (mWorld.mComponentsData.TryGetValue(mExcludedComponents[i], out component_data))
 					{
-						Int32[] include_entities = component_data.GetEntities();
+						var include_entities = component_data.GetEntities();
 						mEntities.RemoveValues(include_entities);
 					}
 				}
@@ -369,7 +369,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

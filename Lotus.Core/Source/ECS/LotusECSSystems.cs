@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -17,8 +17,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreECS
-		/*@{*/
+		/** \addtogroup CoreECS
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Базовый интерфейс определения системы для реализации логики в ECS
@@ -264,7 +264,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnPreInitSystems()
 			{
-				for (Int32 i = 0; i < mPreInitSystems.Count; i++)
+				for (var i = 0; i < mPreInitSystems.Count; i++)
 				{
 					if (mPreInitSystems[i].IsDisabled == false)
 					{
@@ -280,7 +280,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnInitSystems()
 			{
-				for (Int32 i = 0; i < mInitSystems.Count; i++)
+				for (var i = 0; i < mInitSystems.Count; i++)
 				{
 					if (mInitSystems[i].IsDisabled == false)
 					{
@@ -296,7 +296,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnUpdateSystems()
 			{
-				for (Int32 i = 0; i < mUpdateSystems.Count; i++)
+				for (var i = 0; i < mUpdateSystems.Count; i++)
 				{
 					if (mUpdateSystems[i].IsDisabled == false)
 					{
@@ -312,7 +312,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnLateUpdateSystems()
 			{
-				for (Int32 i = 0; i < mLateUpdateSystems.Count; i++)
+				for (var i = 0; i < mLateUpdateSystems.Count; i++)
 				{
 					if (mLateUpdateSystems[i].IsDisabled == false)
 					{
@@ -328,7 +328,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnFixedUpdateSystems()
 			{
-				for (Int32 i = 0; i < mFixedUpdateSystems.Count; i++)
+				for (var i = 0; i < mFixedUpdateSystems.Count; i++)
 				{
 					if (mFixedUpdateSystems[i].IsDisabled == false)
 					{
@@ -344,7 +344,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnDestroySystems()
 			{
-				for (Int32 i = 0; i < mDestroySystems.Count; i++)
+				for (var i = 0; i < mDestroySystems.Count; i++)
 				{
 					if (mDestroySystems[i].IsDisabled == false)
 					{
@@ -360,7 +360,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnPostDestroySystems()
 			{
-				for (Int32 i = 0; i < mPostDestroySystems.Count; i++)
+				for (var i = 0; i < mPostDestroySystems.Count; i++)
 				{
 					if (mPostDestroySystems[i].IsDisabled == false)
 					{
@@ -371,7 +371,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreDataBinding
-		/*@{*/
+		/** \addtogroup CoreDataBinding
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Диспетчер привязок данных для хранения и управления всем привязками данных
@@ -71,7 +71,7 @@ namespace Lotus
 			public static CBindingReflection CreateReflection(String name, System.Object model, String model_name, System.Object view, 
 				String view_name, TBindingMode mode = TBindingMode.ViewData)
 			{
-				CBindingReflection binding = new CBindingReflection(model, model_name, view, view_name);
+				var binding = new CBindingReflection(model, model_name, view, view_name);
 				binding.Name = name;
 				binding.Mode = mode;
 				Bindings.Add(binding);
@@ -94,7 +94,7 @@ namespace Lotus
 			public static CBindingReflection CreateReflection(String name, System.Object model, String model_name, System.Object view,
 				String view_name, TBindingMode mode, Func<System.Object, System.Object> on_convert_to_view)
 			{
-				CBindingReflection binding = new CBindingReflection(model, model_name, view, view_name);
+				var binding = new CBindingReflection(model, model_name, view, view_name);
 				binding.Name = name;
 				binding.Mode = mode;
 				binding.OnConvertToView = on_convert_to_view;
@@ -120,7 +120,7 @@ namespace Lotus
 				String view_name, TBindingMode mode, Func<System.Object, System.Object> on_convert_to_view,
 				Func<System.Object, System.Object> on_convert_to_model)
 			{
-				CBindingReflection binding = new CBindingReflection(model, model_name, view, view_name);
+				var binding = new CBindingReflection(model, model_name, view, view_name);
 				binding.Name = name;
 				binding.Mode = mode;
 				binding.OnConvertToView = on_convert_to_view;
@@ -146,7 +146,7 @@ namespace Lotus
 			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String model_name, System.Object view,
 				String view_name, TBindingMode mode = TBindingMode.ViewData)
 			{
-				BindingDelegate<TTypeModel, TTypeView> binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
+				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
 				binding.Name = name;
 				binding.Mode = mode;
 				Bindings.Add(binding);
@@ -171,7 +171,7 @@ namespace Lotus
 			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String model_name, System.Object view,
 				String view_name, TBindingMode mode, Func<TTypeModel, TTypeView> on_convert_to_view)
 			{
-				BindingDelegate<TTypeModel, TTypeView> binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
+				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
 				binding.Name = name;
 				binding.Mode = mode;
 				binding.OnConvertToView = on_convert_to_view;
@@ -199,7 +199,7 @@ namespace Lotus
 				String view_name, TBindingMode mode, Func<TTypeModel, TTypeView> on_convert_to_view, 
 				Func<TTypeView, TTypeModel> on_convert_to_model)
 			{
-				BindingDelegate<TTypeModel, TTypeView> binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
+				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
 				binding.Name = name;
 				binding.Mode = mode;
 				binding.OnConvertToView = on_convert_to_view;
@@ -219,7 +219,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CBindingBase GetBinding(String name)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -238,7 +238,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RemoveBinding(String name)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -278,7 +278,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SetBindingEnabled(String name, Boolean is_enabled)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -297,7 +297,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SetBindingModel(String name, System.Object model_instance)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -316,7 +316,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SetBindingView(String name, System.Object view_instance)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -335,7 +335,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static System.Object GetBindingModel(String name)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -355,7 +355,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static System.Object GetBindingView(String name)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -375,7 +375,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static System.Object GetBindingModelValue(String name)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -395,7 +395,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static System.Object GetBindingViewValue(String name)
 			{
-				for (Int32 i = 0; i < Bindings.Count; i++)
+				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
@@ -408,7 +408,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

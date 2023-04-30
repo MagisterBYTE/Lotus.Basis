@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -17,8 +17,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreCollections
-		/*@{*/
+		/** \addtogroup CoreCollections
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Очередь на основе массива
@@ -128,8 +128,8 @@ namespace Lotus
 				// Если текущие количество элементов равно максимально возможному
 				if (mCount == mMaxCount)
 				{
-					mMaxCount = mMaxCount * 2;
-					TItem[] items = new TItem[mMaxCount];
+					mMaxCount *= 2;
+					var items = new TItem[mMaxCount];
 					Array.Copy(mArrayOfItems, items, mCount);
 					mArrayOfItems = items;
 				}
@@ -150,7 +150,7 @@ namespace Lotus
 				if (mCount > 0)
 				{
 					TItem item = mArrayOfItems[mHead];
-					mArrayOfItems[mHead] = default(TItem);
+					mArrayOfItems[mHead] = default;
 					mHead = (mHead + 1) % mMaxCount;
 					mCount--;
 					return item;
@@ -162,7 +162,7 @@ namespace Lotus
 #else
 					XLogger.LogError("Not element in queue!!!");
 #endif
-					return default(TItem);
+					return default;
 				}
 
 			}
@@ -186,7 +186,7 @@ namespace Lotus
 #else
 					XLogger.LogError("Not element in queue!!!");
 #endif
-					return default(TItem);
+					return default;
 				}
 
 			}
@@ -200,8 +200,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public new Boolean Contains(in TItem item)
 			{
-				Int32 index = mHead;
-				Int32 count = mCount;
+				var index = mHead;
+				var count = mCount;
 
 				while (count-- > 0)
 				{
@@ -239,7 +239,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathRandom
-		/*@{*/
+		/** \addtogroup MathRandom
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Стандартный генератор .NET псевдослучайных значений
@@ -198,15 +198,15 @@ namespace Lotus
 				mMti = SIZE + 1;
 
 				// auto generate seed for .NET
-				UInt32[] seed_key = new UInt32[6];
-				Byte[] rnseed = new Byte[8];
+				var seed_key = new UInt32[6];
+				var rnseed = new Byte[8];
 
 				seed_key[0] = (UInt32)System.DateTime.UtcNow.Millisecond;
 				seed_key[1] = (UInt32)System.DateTime.UtcNow.Second;
 				seed_key[2] = (UInt32)System.DateTime.UtcNow.DayOfYear;
 				seed_key[3] = (UInt32)System.DateTime.UtcNow.Year;
 
-				System.Security.Cryptography.RandomNumberGenerator rn =
+				var rn =
 					System.Security.Cryptography.RandomNumberGenerator.Create();
 				rn.GetNonZeroBytes(rnseed);
 
@@ -277,7 +277,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single NextSingle(Single min, Single max)
 			{
-				Single delta = max - min;
+				var delta = max - min;
 				return min + (GenerateInt32() * TO_SINGLE_COEFF * delta);
 			}
 
@@ -314,7 +314,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public UInt32 NextInteger(UInt32 min, UInt32 max)
 			{
-				UInt32 delta = max - min;
+				var delta = max - min;
 				return min + (GenerateInt32() % delta);
 			}
 			#endregion
@@ -350,7 +350,7 @@ namespace Lotus
 			{
 				UInt32 i, j;
 				Int32 k;
-				Int32 key_length = init_key.Length;
+				var key_length = init_key.Length;
 
 				InitGenrand(19650218);
 				i = 1; j = 0;
@@ -532,7 +532,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single NextSingle(Single min, Single max)
 			{
-				Single delta = max - min;
+				var delta = max - min;
 				return min + (NextInteger() * TO_SINGLE_COEFF * delta);
 			}
 
@@ -573,13 +573,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public UInt32 NextInteger(UInt32 min, UInt32 max)
 			{
-				UInt32 delta = max - min;
+				var delta = max - min;
 				return min + (NextInteger() % delta);
 			}
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

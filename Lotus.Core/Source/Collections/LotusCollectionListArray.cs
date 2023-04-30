@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -24,8 +24,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreCollections
-		/*@{*/
+		/** \addtogroup CoreCollections
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Список на основе массива
@@ -93,7 +93,7 @@ namespace Lotus
 				{
 					mList = list;
 					mIndex = 0;
-					mCurrent = default(TItem);
+					mCurrent = default;
 				}
 				#endregion
 
@@ -124,7 +124,7 @@ namespace Lotus
 					else
 					{
 						mIndex = mList.Count + 1;
-						mCurrent = default(TItem);
+						mCurrent = default;
 						return (false);
 					}
 				}
@@ -137,7 +137,7 @@ namespace Lotus
 				void IEnumerator.Reset()
 				{
 					mIndex = 0;
-					mCurrent = default(TItem);
+					mCurrent = default;
 				}
 				#endregion
 			}
@@ -149,11 +149,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			internal sealed class FunctorComparer : IComparer<TItem>
 			{
-				Comparison<TItem> Comparison;
+				readonly Comparison<TItem> Comparison;
 
 				public FunctorComparer(Comparison<TItem> comparison)
 				{
-					this.Comparison = comparison;
+					Comparison = comparison;
 				}
 
 				public Int32 Compare(TItem x, TItem y)
@@ -499,7 +499,7 @@ namespace Lotus
 					mCount = items.Count;
 					mArrayOfItems = new TItem[mMaxCount];
 
-					for (Int32 i = 0; i < items.Count; i++)
+					for (var i = 0; i < items.Count; i++)
 					{
 						mArrayOfItems[i] = items[i];
 					}
@@ -790,14 +790,14 @@ namespace Lotus
 						mMaxCount <<= 1;
 					}
 
-					TItem[] items = new TItem[mMaxCount];
+					var items = new TItem[mMaxCount];
 					Array.Copy(mArrayOfItems, items, mCount);
 					mArrayOfItems = items;
 
 					// Проходим по всем объектам и если надо создаем объект
 					if (IsNullable)
 					{
-						for (Int32 i = mCount; i < new_count; i++)
+						for (var i = mCount; i < new_count; i++)
 						{
 							if (mArrayOfItems[i] == null)
 							{
@@ -820,7 +820,7 @@ namespace Lotus
 				if (new_max_count > mMaxCount)
 				{
 					mMaxCount = new_max_count;
-					TItem[] items = new TItem[mMaxCount];
+					var items = new TItem[mMaxCount];
 					Array.Copy(mArrayOfItems, items, mCount);
 					mArrayOfItems = items;
 				}
@@ -832,15 +832,15 @@ namespace Lotus
 					{
 						if (IsNullable)
 						{
-							for (Int32 i = new_max_count; i < mCount; i++)
+							for (var i = new_max_count; i < mCount; i++)
 							{
-								mArrayOfItems[i] = default(TItem);
+								mArrayOfItems[i] = default;
 							}
 						}
 
 						mCount = new_max_count;
 						mMaxCount = new_max_count;
-						TItem[] items = new TItem[mMaxCount];
+						var items = new TItem[mMaxCount];
 						Array.Copy(mArrayOfItems, items, mCount);
 						mArrayOfItems = items;
 					}
@@ -848,7 +848,7 @@ namespace Lotus
 					{
 						// Простое уменьшение размера массива
 						mMaxCount = new_max_count;
-						TItem[] items = new TItem[mMaxCount];
+						var items = new TItem[mMaxCount];
 						Array.Copy(mArrayOfItems, items, mCount);
 						mArrayOfItems = items;
 					}
@@ -862,7 +862,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void TrimExcess()
 			{
-				TItem[] items = new TItem[mCount];
+				var items = new TItem[mCount];
 				Array.Copy(mArrayOfItems, items, mCount);
 				mArrayOfItems = items;
 				mMaxCount = mCount;
@@ -917,7 +917,7 @@ namespace Lotus
 			{
 				if (IsIndexable)
 				{
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						((ILotusIndexable)mArrayOfItems[i]).Index = i;
 					}
@@ -931,12 +931,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void NotifyCollectionReset()
 			{
-				if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-				if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
-				if(CollectionChanged != null)
-				{
-					CollectionChanged(this, CollectionArgsReset);
-				}
+				PropertyChanged?.Invoke(this, PropertyArgsCount);
+				PropertyChanged?.Invoke(this, PropertyArgsIndexer);
+				CollectionChanged?.Invoke(this, CollectionArgsReset);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -946,12 +943,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void NotifyCollectionClear()
 			{
-				if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-				if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
-				if (CollectionChanged != null)
-				{
-					CollectionChanged(this, CollectionArgsReset);
-				}
+				PropertyChanged?.Invoke(this, PropertyArgsCount);
+				PropertyChanged?.Invoke(this, PropertyArgsIndexer);
+				CollectionChanged?.Invoke(this, CollectionArgsReset);
 			}
 			#endregion
 
@@ -967,8 +961,8 @@ namespace Lotus
 				// Если текущие количество элементов равно максимально возможному
 				if (mCount == mMaxCount)
 				{
-					mMaxCount = mMaxCount * 2;
-					TItem[] items = new TItem[mMaxCount];
+					mMaxCount *= 2;
+					var items = new TItem[mMaxCount];
 					Array.Copy(mArrayOfItems, items, mCount);
 					mArrayOfItems = items;
 				}
@@ -978,8 +972,8 @@ namespace Lotus
 
 				if (mIsNotify)
 				{
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+					PropertyChanged?.Invoke(this, PropertyArgsCount);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 					NotifyCollectionChanged(NotifyCollectionChangedAction.Add, item, mCount - 1);
 				}
 			}
@@ -996,13 +990,13 @@ namespace Lotus
 					// Если текущие количество элементов равно максимально возможному
 					if (mCount == mMaxCount)
 					{
-						mMaxCount = mMaxCount * 2;
-						TItem[] items = new TItem[mMaxCount];
+						mMaxCount *= 2;
+						var items = new TItem[mMaxCount];
 						Array.Copy(mArrayOfItems, items, mCount);
 						mArrayOfItems = items;
 					}
 
-					TItem item = default(TItem);
+					var item = default(TItem);
 					if (IsDuplicatable)
 					{
 						item = (ItemLast as ILotusDuplicate<TItem>).Duplicate();
@@ -1031,8 +1025,8 @@ namespace Lotus
 
 					if (mIsNotify)
 					{
-						if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-						if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+						PropertyChanged?.Invoke(this, PropertyArgsCount);
+						PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 						NotifyCollectionChanged(NotifyCollectionChangedAction.Add, item, mCount - 1);
 					}
 				}
@@ -1052,10 +1046,10 @@ namespace Lotus
 
 				if (mIsNotify)
 				{
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
-					Int32 original_count = mCount - items.Length;
-					for (Int32 i = 0; i < items.Length; i++)
+					PropertyChanged?.Invoke(this, PropertyArgsCount);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
+					var original_count = mCount - items.Length;
+					for (var i = 0; i < items.Length; i++)
 					{
 						NotifyCollectionChanged(NotifyCollectionChangedAction.Add, items[i], original_count + i);
 					}
@@ -1071,7 +1065,7 @@ namespace Lotus
 			public void AddItems(IList<TItem> items)
 			{
 				Reserve(items.Count);
-				for (Int32 i = 0; i < items.Count; i++)
+				for (var i = 0; i < items.Count; i++)
 				{
 					mArrayOfItems[i + mCount] = items[i];
 				}
@@ -1079,10 +1073,10 @@ namespace Lotus
 
 				if (mIsNotify)
 				{
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
-					Int32 original_count = mCount - items.Count;
-					for (Int32 i = 0; i < items.Count; i++)
+					PropertyChanged?.Invoke(this, PropertyArgsCount);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
+					var original_count = mCount - items.Count;
+					for (var i = 0; i < items.Count; i++)
 					{
 						NotifyCollectionChanged(NotifyCollectionChangedAction.Add, items[i], original_count + i);
 					}
@@ -1109,8 +1103,8 @@ namespace Lotus
 				// Если текущие количество элементов равно максимально возможному
 				if (mCount == mMaxCount)
 				{
-					mMaxCount = mMaxCount * 2;
-					TItem[] items = new TItem[mMaxCount];
+					mMaxCount *= 2;
+					var items = new TItem[mMaxCount];
 					Array.Copy(mArrayOfItems, items, mCount);
 					mArrayOfItems = items;
 				}
@@ -1121,8 +1115,8 @@ namespace Lotus
 
 				if (mIsNotify)
 				{
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+					PropertyChanged?.Invoke(this, PropertyArgsCount);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 					NotifyCollectionChanged(NotifyCollectionChangedAction.Add, item, index);
 				}
 			}
@@ -1136,7 +1130,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void InsertAfter(in TItem original, in TItem item)
 			{
-				Int32 index = Array.IndexOf(mArrayOfItems, original);
+				var index = Array.IndexOf(mArrayOfItems, original);
 				Insert(index + 1, item);
 			}
 
@@ -1149,7 +1143,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void InsertBefore(in TItem original, in TItem item)
 			{
-				Int32 index = Array.IndexOf(mArrayOfItems, original);
+				var index = Array.IndexOf(mArrayOfItems, original);
 				Insert(index, item);
 			}
 
@@ -1175,10 +1169,10 @@ namespace Lotus
 
 				if (mIsNotify)
 				{
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
-					Int32 original_count = mCount - items.Length;
-					for (Int32 i = 0; i < items.Length; i++)
+					PropertyChanged?.Invoke(this, PropertyArgsCount);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
+					var original_count = mCount - items.Length;
+					for (var i = 0; i < items.Length; i++)
 					{
 						NotifyCollectionChanged(NotifyCollectionChangedAction.Add, items[i], index + i);
 					}
@@ -1202,7 +1196,7 @@ namespace Lotus
 
 				Reserve(items.Count);
 				Array.Copy(mArrayOfItems, index, mArrayOfItems, index + items.Count, mCount - index);
-				for (Int32 i = 0; i < items.Count; i++)
+				for (var i = 0; i < items.Count; i++)
 				{
 					mArrayOfItems[i + index] = items[i];
 				}
@@ -1210,10 +1204,10 @@ namespace Lotus
 
 				if (mIsNotify)
 				{
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
-					Int32 original_count = mCount - items.Count;
-					for (Int32 i = 0; i < items.Count; i++)
+					PropertyChanged?.Invoke(this, PropertyArgsCount);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
+					var original_count = mCount - items.Count;
+					for (var i = 0; i < items.Count; i++)
 					{
 						NotifyCollectionChanged(NotifyCollectionChangedAction.Add, items[i], index + i);
 					}
@@ -1231,17 +1225,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Remove(in TItem item)
 			{
-				Int32 index = Array.IndexOf(mArrayOfItems, item, 0, mCount);
+				var index = Array.IndexOf(mArrayOfItems, item, 0, mCount);
 				if (index != -1)
 				{
 					mCount--;
 					Array.Copy(mArrayOfItems, index + 1, mArrayOfItems, index, mCount - index);
-					mArrayOfItems[mCount] = default(TItem);
+					mArrayOfItems[mCount] = default;
 
 					if (mIsNotify)
 					{
-						if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-						if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+						PropertyChanged?.Invoke(this, PropertyArgsCount);
+						PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 						NotifyCollectionChanged(NotifyCollectionChangedAction.Remove, item, index);
 					}
 
@@ -1261,20 +1255,20 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 RemoveItems(params TItem[] items)
 			{
-				Int32 count = 0;
-				for (Int32 i = 0; i < items.Length; i++)
+				var count = 0;
+				for (var i = 0; i < items.Length; i++)
 				{
-					Int32 index = Array.IndexOf(mArrayOfItems, items[i], 0, mCount);
+					var index = Array.IndexOf(mArrayOfItems, items[i], 0, mCount);
 					if (index != -1)
 					{
 						mCount--;
 						Array.Copy(mArrayOfItems, index + 1, mArrayOfItems, index, mCount - index);
-						mArrayOfItems[mCount] = default(TItem);
+						mArrayOfItems[mCount] = default;
 						count++;
 
 						if (mIsNotify)
 						{
-							if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+							PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 							NotifyCollectionChanged(NotifyCollectionChangedAction.Remove, items[i], index);
 						}
 					}
@@ -1292,21 +1286,21 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 RemoveItems(IList<TItem> items)
 			{
-				Int32 count = 0;
-				for (Int32 i = 0; i < items.Count; i++)
+				var count = 0;
+				for (var i = 0; i < items.Count; i++)
 				{
-					Int32 index = Array.IndexOf(mArrayOfItems, items[i], 0, mCount);
+					var index = Array.IndexOf(mArrayOfItems, items[i], 0, mCount);
 					if (index != -1)
 					{
 						mCount--;
 						Array.Copy(mArrayOfItems, index + 1, mArrayOfItems, index, mCount - index);
-						mArrayOfItems[mCount] = default(TItem);
+						mArrayOfItems[mCount] = default;
 						count++;
 
 						if (mIsNotify)
 						{
-							if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-							if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+							PropertyChanged?.Invoke(this, PropertyArgsCount);
+							PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 							NotifyCollectionChanged(NotifyCollectionChangedAction.Remove, items[i], index);
 						}
 					}
@@ -1323,7 +1317,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RemoveItemsEnd(Int32 index)
 			{
-				Int32 count = mCount - index;
+				var count = mCount - index;
 				RemoveRange(index, count);
 			}
 
@@ -1371,7 +1365,7 @@ namespace Lotus
 
 				if (count > 0)
 				{
-					Int32 i = mCount;
+					var i = mCount;
 					mCount -= count;
 
 					if (index < mCount)
@@ -1383,8 +1377,8 @@ namespace Lotus
 
 					if (mIsNotify)
 					{
-						if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-						if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+						PropertyChanged?.Invoke(this, PropertyArgsCount);
+						PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 						NotifyCollectionReset();
 					}
 				}
@@ -1426,17 +1420,17 @@ namespace Lotus
 
 					mCount--;
 					Array.Copy(mArrayOfItems, index + 1, mArrayOfItems, index, mCount - index);
-					mArrayOfItems[mCount] = default(TItem);
+					mArrayOfItems[mCount] = default;
 
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsCount);
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+					PropertyChanged?.Invoke(this, PropertyArgsCount);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 					NotifyCollectionChanged(NotifyCollectionChangedAction.Remove, temp, index);
 				}
 				else
 				{
 					mCount--;
 					Array.Copy(mArrayOfItems, index + 1, mArrayOfItems, index, mCount - index);
-					mArrayOfItems[mCount] = default(TItem);
+					mArrayOfItems[mCount] = default;
 				}
 			}
 
@@ -1471,12 +1465,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 RemoveDuplicates()
 			{
-				TItem[] unique = new TItem[mCount];
-				Int32 count = 0;
-				for (Int32 i = 0; i < mCount; i++)
+				var unique = new TItem[mCount];
+				var count = 0;
+				for (var i = 0; i < mCount; i++)
 				{
 					TItem item = mArrayOfItems[i];
-					Int32 index = Array.IndexOf(unique, item);
+					var index = Array.IndexOf(unique, item);
 					if(index == -1)
 					{
 						unique[count] = item;
@@ -1489,12 +1483,12 @@ namespace Lotus
 				{
 					Array.Copy(unique, 0, mArrayOfItems, 0, count);
 
-					for (Int32 i = count; i < mCount; i++)
+					for (var i = count; i < mCount; i++)
 					{
-						mArrayOfItems[i] = default(TItem);
+						mArrayOfItems[i] = default;
 					}
 
-					Int32 delta = mCount - count;
+					var delta = mCount - count;
 					mCount = count;
 
 					if (mIsNotify)
@@ -1517,13 +1511,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 RemoveAll(Predicate<TItem> match)
 			{
-				Int32 free_index = 0;   // the first free slot in items array
+				var free_index = 0;   // the first free slot in items array
 
 				// Find the first item which needs to be removed.
 				while (free_index < mCount && !match(mArrayOfItems[free_index])) free_index++;
 				if (free_index >= mCount) return 0;
 
-				Int32 current = free_index + 1;
+				var current = free_index + 1;
 				while (current < mCount)
 				{
 					// Find the first item which needs to be kept.
@@ -1537,7 +1531,7 @@ namespace Lotus
 				}
 
 				Array.Clear(mArrayOfItems, free_index, mCount - free_index);
-				Int32 result = mCount - free_index;
+				var result = mCount - free_index;
 				mCount = free_index;
 
 				if (mIsNotify)
@@ -1558,7 +1552,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 TrimStart(in TItem item, Boolean included = true)
 			{
-				Int32 index = Array.IndexOf(mArrayOfItems, item);
+				var index = Array.IndexOf(mArrayOfItems, item);
 				if(index > -1)
 				{
 					if(index == 0)
@@ -1581,14 +1575,14 @@ namespace Lotus
 							// Удаляем все элементы
 							if (included)
 							{
-								Int32 count = mCount;
+								var count = mCount;
 								Clear();
 								return (count);
 							}
 							else
 							{
 								// Удаляем элементы до последнего
-								Int32 count = mCount - 1;
+								var count = mCount - 1;
 								RemoveRange(0, count);
 								return (count);
 							}
@@ -1622,7 +1616,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 TrimEnd(in TItem item, Boolean included = true)
 			{
-				Int32 index = Array.LastIndexOf(mArrayOfItems, item);
+				var index = Array.LastIndexOf(mArrayOfItems, item);
 				if (index > -1)
 				{
 					if (index == 0)
@@ -1630,14 +1624,14 @@ namespace Lotus
 						// Удаляем все элементы
 						if (included)
 						{
-							Int32 count = mCount;
+							var count = mCount;
 							Clear();
 							return (count);
 						}
 						else
 						{
 							// Удаляем элементы до первого
-							Int32 count = mCount - 1;
+							var count = mCount - 1;
 							RemoveRange(1, count);
 							return (count);
 						}
@@ -1661,13 +1655,13 @@ namespace Lotus
 						{
 							if (included)
 							{
-								Int32 count = mCount - index;
+								var count = mCount - index;
 								RemoveRange(index, count);
 								return (count);
 							}
 							else
 							{
-								Int32 count = mCount - index - 1;
+								var count = mCount - index - 1;
 								RemoveRange(index + 1, count);
 								return (count);
 							}
@@ -1723,7 +1717,7 @@ namespace Lotus
 			public void AssignItems(IList<TItem> items)
 			{
 				Reserve(items.Count - mCount);
-				for (Int32 i = 0; i < items.Count; i++)
+				for (var i = 0; i < items.Count; i++)
 				{
 					mArrayOfItems[i] = items[i];
 				}
@@ -1747,7 +1741,7 @@ namespace Lotus
 			public void UnionItems(params TItem[] items)
 			{
 				Reserve(items.Length);
-				for (Int32 i = 0; i < items.Length; i++)
+				for (var i = 0; i < items.Length; i++)
 				{
 					if (Array.IndexOf(mArrayOfItems, items[i]) == -1)
 					{
@@ -1769,7 +1763,7 @@ namespace Lotus
 			public void UnionItems(IList<TItem> items)
 			{
 				Reserve(items.Count);
-				for (Int32 i = 0; i < items.Count; i++)
+				for (var i = 0; i < items.Count; i++)
 				{
 					if(Array.IndexOf(mArrayOfItems, items[i]) == -1)
 					{
@@ -1793,9 +1787,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray<TItem> DifferenceItems(IList<TItem> items)
 			{
-				ListArray<TItem> difference = new ListArray<TItem>();
+				var difference = new ListArray<TItem>();
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (items.Contains(mArrayOfItems[i]) == false)
 					{
@@ -1828,9 +1822,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray<TItem> DifferenceItems(params TItem[] items)
 			{
-				ListArray<TItem> difference = new ListArray<TItem>();
+				var difference = new ListArray<TItem>();
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (items.Contains(mArrayOfItems[i]) == false)
 					{
@@ -1888,7 +1882,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 Find(Predicate<TItem> match)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (match(mArrayOfItems[i])) { return i; }
 				}
@@ -1905,7 +1899,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindLast(Predicate<TItem> match)
 			{
-				for (Int32 i = LastIndex; i >= 0; i--)
+				for (var i = LastIndex; i >= 0; i--)
 				{
 					if (match(mArrayOfItems[i])) { return i; }
 				}
@@ -1922,7 +1916,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem Search(Predicate<TItem> match)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (match(mArrayOfItems[i])) { return (mArrayOfItems[i]); }
 				}
@@ -1939,7 +1933,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem SearchLast(Predicate<TItem> match)
 			{
-				for (Int32 i = LastIndex; i >= 0; i--)
+				for (var i = LastIndex; i >= 0; i--)
 				{
 					if (match(mArrayOfItems[i])) { return (mArrayOfItems[i]); }
 				}
@@ -1961,8 +1955,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Boolean CheckAll(Predicate<TItem> match)
 			{
-				Boolean result = true;
-				for (Int32 i = 0; i < mCount; i++)
+				var result = true;
+				for (var i = 0; i < mCount; i++)
 				{
 					if(match(mArrayOfItems[i]) == false)
 					{
@@ -1985,8 +1979,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Boolean CheckOne(Predicate<TItem> match)
 			{
-				Boolean result = false;
-				for (Int32 i = 0; i < mCount; i++)
+				var result = false;
+				for (var i = 0; i < mCount; i++)
 				{
 					if (match(mArrayOfItems[i]))
 					{
@@ -2005,7 +1999,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Visit(Action<TItem> on_visitor)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					on_visitor(mArrayOfItems[i]);
 				}
@@ -2028,7 +2022,7 @@ namespace Lotus
 
 				if (mIsNotify)
 				{
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 					NotifyCollectionChanged(NotifyCollectionChangedAction.Move, temp, new_index, old_index);
 				}
 			}
@@ -2048,7 +2042,7 @@ namespace Lotus
 
 				if (mIsNotify)
 				{
-					if (PropertyChanged != null) PropertyChanged(this, PropertyArgsIndexer);
+					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
 					NotifyCollectionChanged(NotifyCollectionChangedAction.Move, temp, new_index, old_index);
 				}
 			}
@@ -2064,7 +2058,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void MoveDown(Int32 element_index)
 			{
-				Int32 next = (element_index + 1) % mCount;
+				var next = (element_index + 1) % mCount;
 				Swap(element_index, next);
 			}
 
@@ -2079,7 +2073,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void MoveUp(Int32 element_index)
 			{
-				Int32 previous = element_index - 1;
+				var previous = element_index - 1;
 				if (previous < 0) previous = LastIndex;
 				Swap(element_index, previous);
 			}
@@ -2231,10 +2225,10 @@ namespace Lotus
 					return (LastIndex);
 				}
 
-				for (Int32 i = 1; i < mCount; i++)
+				for (var i = 1; i < mCount; i++)
 				{
 					// Получаем статус сравнения
-					Int32 status = ComparerDefault.Compare(item, mArrayOfItems[i]);
+					var status = ComparerDefault.Compare(item, mArrayOfItems[i]);
 
 					// Если элемент равен возвращаем данный индекс
 					if (status == 0)
@@ -2268,8 +2262,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 TrimClosestStart(in TItem item, Boolean included = true)
 			{
-				Int32 comprare_first = ComparerDefault.Compare(item, ItemFirst);
-				Int32 comprare_last = ComparerDefault.Compare(item, ItemLast);
+				var comprare_first = ComparerDefault.Compare(item, ItemFirst);
+				var comprare_last = ComparerDefault.Compare(item, ItemLast);
 
 				// Элемент находиться за пределами списка - в начале
 				if (comprare_first <= 0)
@@ -2293,24 +2287,24 @@ namespace Lotus
 					if (comprare_last == 0 && included == false)
 					{
 						// Удаляем элементы до последнего
-						Int32 count = Count - 1;
+						var count = Count - 1;
 						RemoveRange(0, count);
 						return (count);
 					}
 					else
 					{
 						// Удаляем все элементы
-						Int32 count = mCount;
+						var count = mCount;
 						Clear();
 						return (count);
 					}
 				}
 
 				// Элемент находиться в пределах списка
-				Int32 max_count = Count - 1;
-				for (Int32 i = 1; i < max_count; i++)
+				var max_count = Count - 1;
+				for (var i = 1; i < max_count; i++)
 				{
-					Int32 status = ComparerDefault.Compare(item, mArrayOfItems[i]);
+					var status = ComparerDefault.Compare(item, mArrayOfItems[i]);
 
 					// Элемент полностью совпал
 					if (status == 0)
@@ -2354,8 +2348,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 TrimClosestEnd(in TItem item, Boolean included = true)
 			{
-				Int32 comprare_first = ComparerDefault.Compare(item, ItemFirst);
-				Int32 comprare_last = ComparerDefault.Compare(item, ItemLast);
+				var comprare_first = ComparerDefault.Compare(item, ItemFirst);
+				var comprare_last = ComparerDefault.Compare(item, ItemLast);
 
 				// Элемент находиться за пределами списка - в начале
 				if (comprare_first <= 0)
@@ -2363,14 +2357,14 @@ namespace Lotus
 					// Удаляем до первого элементы если он выключен и совпадает
 					if (comprare_first == 0 && included == false)
 					{
-						Int32 count = Count - 1;
+						var count = Count - 1;
 						RemoveRange(1, count);
 						return (count);
 					}
 					else
 					{
 						// Удаляем все элементы
-						Int32 count = Count;
+						var count = Count;
 						Clear();
 						return (count);
 					}
@@ -2393,22 +2387,22 @@ namespace Lotus
 				}
 
 				// Элемент находиться в пределах списка
-				for (Int32 i = Count - 1; i >= 1; i--)
+				for (var i = Count - 1; i >= 1; i--)
 				{
-					Int32 status = ComparerDefault.Compare(item, mArrayOfItems[i]);
+					var status = ComparerDefault.Compare(item, mArrayOfItems[i]);
 
 					// Элемент полностью совпал
 					if (status == 0)
 					{
 						if (included)
 						{
-							Int32 count = mCount;
+							var count = mCount;
 							RemoveItemsEnd(i);
 							return (count - i);
 						}
 						else
 						{
-							Int32 count = mCount;
+							var count = mCount;
 							RemoveItemsEnd(i + 1);
 							return (count - i - 1);
 						}
@@ -2418,7 +2412,7 @@ namespace Lotus
 						// Только если он больше
 						if (status == 1)
 						{
-							Int32 count = mCount;
+							var count = mCount;
 							RemoveItemsEnd(i + 1);
 							return (count - i - 1);
 						}
@@ -2440,15 +2434,15 @@ namespace Lotus
 			public virtual ListArray<ListArray<TItem>> GetGroupedByProperty(String property_name)
 			{
 				// Список групп
-				ListArray<ListArray<TItem>> groups = new ListArray<ListArray<TItem>>();
+				var groups = new ListArray<ListArray<TItem>>();
 
 				// Cписок уникальных значений
-				ListArray<System.Object> unique_list = new ListArray<System.Object>();
+				var unique_list = new ListArray<System.Object>();
 
 				if (IsNullable)
 				{
 					// Будем получать свойство для каждого элемента так как возможно наследование
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						// Получем свойство
 						PropertyInfo property_info = mArrayOfItems[i].GetType().GetProperty(property_name, BindingFlags.Public | BindingFlags.Instance);
@@ -2456,9 +2450,9 @@ namespace Lotus
 						if (property_info != null)
 						{
 							// Ищем совпадение в существующем списке
-							Int32 find_index = unique_list.Find((System.Object value) =>
+							var find_index = unique_list.Find((System.Object value) =>
 							{
-								System.Object property_value = property_info.GetValue(mArrayOfItems[i], null);
+								var property_value = property_info.GetValue(mArrayOfItems[i], null);
 								return (value.Equals(property_value));
 							});
 
@@ -2469,7 +2463,7 @@ namespace Lotus
 								unique_list.Add(property_info.GetValue(mArrayOfItems[i], null));
 
 								// Создаем группу
-								ListArray<TItem> group = new ListArray<TItem>();
+								var group = new ListArray<TItem>();
 
 								// Добавляем туда данный элемент
 								group.Add(mArrayOfItems[i]);
@@ -2495,10 +2489,10 @@ namespace Lotus
 					PropertyInfo property_info = typeof(TItem).GetType().GetProperty(property_name, BindingFlags.Public | BindingFlags.Instance);
 					if (property_info != null)
 					{
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							// Ищем совпадение в существующем списке
-							Int32 find_index = unique_list.Find((System.Object value) =>
+							var find_index = unique_list.Find((System.Object value) =>
 							{
 								return (value.Equals(property_info.GetValue(mArrayOfItems[i], null)));
 							});
@@ -2507,7 +2501,7 @@ namespace Lotus
 							if (find_index == -1)
 							{
 								// Создаем группу
-								ListArray<TItem> group = new ListArray<TItem>();
+								var group = new ListArray<TItem>();
 
 								// Добавляем туда данный элемент
 								group.Add(mArrayOfItems[i]);
@@ -2542,7 +2536,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray<TItem> GetItemsDuplicate()
 			{
-				ListArray<TItem> items = new ListArray<TItem>(this.MaxCount);
+				var items = new ListArray<TItem>(MaxCount);
 				Array.Copy(mArrayOfItems, 0, items.mArrayOfItems, 0, mCount);
 				items.mCount = Count;
 				return (items);
@@ -2556,12 +2550,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray<TItem> GetItemsDistinct()
 			{
-				ListArray<TItem> unique_list = new ListArray<TItem>();
+				var unique_list = new ListArray<TItem>();
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					// Ищем совпадение в существующем списке
-					Int32 find_index = unique_list.Find((TItem value) =>
+					var find_index = unique_list.Find((TItem value) =>
 					{
 						return (value.Equals(mArrayOfItems[i]));
 					});
@@ -2589,12 +2583,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray<System.Object> GetDistinctValueFromPropertyName(String property_name)
 			{
-				ListArray<System.Object> unique_list = new ListArray<System.Object>();
+				var unique_list = new ListArray<System.Object>();
 
 				if (IsNullable)
 				{
 					// Будем получать свойство и каждого элемента так как возможно наследование
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						// Получем свойство
 						PropertyInfo property_info = mArrayOfItems[i].GetType().GetProperty(property_name, BindingFlags.Public | BindingFlags.Instance);
@@ -2602,7 +2596,7 @@ namespace Lotus
 						if (property_info != null)
 						{
 							// Ищем совпадение в существующем списке
-							Int32 find_index = unique_list.Find((System.Object value) =>
+							var find_index = unique_list.Find((System.Object value) =>
 							{
 								return (value.Equals(property_info.GetValue(mArrayOfItems[i], null)));
 							});
@@ -2622,10 +2616,10 @@ namespace Lotus
 					PropertyInfo property_info = typeof(TItem).GetType().GetProperty(property_name, BindingFlags.Public | BindingFlags.Instance);
 					if (property_info != null)
 					{
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							// Ищем совпадение в существующем списке
-							Int32 find_index = unique_list.Find((System.Object value) =>
+							var find_index = unique_list.Find((System.Object value) =>
 							{
 								return (value.Equals(property_info.GetValue(mArrayOfItems[i], null)));
 							});
@@ -2646,96 +2640,6 @@ namespace Lotus
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Получение списка элементов по указанному условию
-			/// </summary>
-			/// <param name="comparison">Оператор сравнения</param>
-			/// <param name="match">Объект с которым производится сравнение</param>
-			/// <returns>Список элементов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public ListArray<TItem> GetItemsWhere(TComparisonOperator comparison, TItem match)
-			{
-				ListArray<TItem> result = new ListArray<TItem>(mMaxCount);
-
-				switch (comparison)
-				{
-					case TComparisonOperator.Equality:
-						{
-							for (Int32 i = 0; i < mCount; i++)
-							{
-								if (ComparerDefault.Compare(mArrayOfItems[i], match) == 0)
-								{
-									result.Add(mArrayOfItems[i]);
-								}
-							}
-						}
-						break;
-					case TComparisonOperator.Inequality:
-						{
-							for (Int32 i = 0; i < mCount; i++)
-							{
-								if (ComparerDefault.Compare(mArrayOfItems[i], match) != 0)
-								{
-									result.Add(mArrayOfItems[i]);
-								}
-							}
-						}
-						break;
-					case TComparisonOperator.LessThan:
-						{
-							for (Int32 i = 0; i < mCount; i++)
-							{
-								if (ComparerDefault.Compare(mArrayOfItems[i], match) == -1)
-								{
-									result.Add(mArrayOfItems[i]);
-								}
-							}
-						}
-						break;
-					case TComparisonOperator.LessThanOrEqual:
-						{
-							for (Int32 i = 0; i < mCount; i++)
-							{
-								Int32 status = ComparerDefault.Compare(mArrayOfItems[i], match);
-								if (status == 0 || status == -1)
-								{
-									result.Add(mArrayOfItems[i]);
-								}
-							}
-						}
-						break;
-					case TComparisonOperator.GreaterThan:
-						{
-							for (Int32 i = 0; i < mCount; i++)
-							{
-								Int32 status = ComparerDefault.Compare(mArrayOfItems[i], match);
-								if (status == 1)
-								{
-									result.Add(mArrayOfItems[i]);
-								}
-							}
-						}
-						break;
-					case TComparisonOperator.GreaterThanOrEqual:
-						{
-							for (Int32 i = 0; i < mCount; i++)
-							{
-								Int32 status = ComparerDefault.Compare(mArrayOfItems[i], match);
-								if (status == 0 || status == 1)
-								{
-									result.Add(mArrayOfItems[i]);
-								}
-							}
-						}
-						break;
-					default:
-						break;
-				}
-
-				return (result);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
 			/// Получение списка элементов по указанному предикату
 			/// </summary>
 			/// <param name="match">Предикатор</param>
@@ -2743,9 +2647,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray<TItem> GetItemsWhere(Predicate<TItem> match)
 			{
-				ListArray<TItem> result = new ListArray<TItem>(mMaxCount);
+				var result = new ListArray<TItem>(mMaxCount);
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if(match(mArrayOfItems[i]))
 					{
@@ -2771,10 +2675,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void NotifyPropertyChanged(String property_name = "")
 			{
-				if (PropertyChanged != null)
-				{
-					PropertyChanged(this, new PropertyChangedEventArgs(property_name));
-				}
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property_name));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2785,10 +2686,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void NotifyPropertyChanged(PropertyChangedEventArgs args)
 			{
-				if (PropertyChanged != null)
-				{
-					PropertyChanged(this, args);
-				}
+				PropertyChanged?.Invoke(this, args);
 			}
 			#endregion
 
@@ -2808,10 +2706,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object item, Int32 index)
 			{
-				if (CollectionChanged != null)
-				{
-					CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, item, index));
-				}
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item, index));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2825,10 +2720,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object item, Int32 index, Int32 old_index)
 			{
-				if (CollectionChanged != null)
-				{
-					CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, item, index, old_index));
-				}
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item, index, old_index));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2842,15 +2734,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object old_item, System.Object new_item, Int32 index)
 			{
-				if (CollectionChanged != null)
-				{
-					CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, new_item, old_item, index));
-				}
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, new_item, old_item, index));
 			}
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

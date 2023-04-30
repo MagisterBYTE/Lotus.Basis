@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreExtension
-		/*@{*/
+		/** \addtogroup CoreExtension
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Компаратор для сортировки списка файлов и директорий
@@ -200,7 +200,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsLetterSymbols(this String @this)
 			{
-				for (Int32 i = 0; i < @this.Length; i++)
+				for (var i = 0; i < @this.Length; i++)
 				{
 					if (Char.IsLetter(@this[i]))
 					{
@@ -220,7 +220,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsDotOrCommaSymbols(this String @this)
 			{
-				for (Int32 i = 0; i < @this.Length; i++)
+				for (var i = 0; i < @this.Length; i++)
 				{
 					if (@this[i] == XChar.Dot || @this[i] == XChar.Comma)
 					{
@@ -395,8 +395,8 @@ namespace Lotus
 			{
 				if (@this.Length > 1)
 				{
-					StringBuilder result = new StringBuilder(@this.Length * 2);
-					for (Int32 i = 0; i < @this.Length - 1; i++)
+					var result = new StringBuilder(@this.Length * 2);
+					for (var i = 0; i < @this.Length - 1; i++)
 					{
 						result.Append(@this[i]);
 						result.Append("\n");
@@ -421,7 +421,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetReverseCopy(this String @this)
 			{
-				Char[] char_array = @this.ToCharArray();
+				var char_array = @this.ToCharArray();
 				Array.Reverse(char_array);
 				return new String(char_array);
 			}
@@ -460,7 +460,7 @@ namespace Lotus
 				{
 					if (@this.Length < length)
 					{
-						Int32 count = length - @this.Length;
+						var count = length - @this.Length;
 						return @this.Insert(@this.Length - 1, new String(symbol, count));
 					}
 					else
@@ -481,7 +481,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String SetLengthTabs(this String @this, Int32 length, Char symbol)
 			{
-				String original = @this.Replace("\t", "[tt]");
+				var original = @this.Replace("\t", "[tt]");
 
 				original = SetLength(original, length, symbol);
 
@@ -502,8 +502,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 GetCountSymbol(this String @this, Char symbol)
 			{
-				Int32 count = 0;
-				for (Int32 i = 0; i < @this.Length; i++)
+				var count = 0;
+				for (var i = 0; i < @this.Length; i++)
 				{
 					if (@this[i] == symbol)
 					{
@@ -523,8 +523,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 GetCountNewLine(this String @this)
 			{
-				Int32 count = 0;
-				for (Int32 i = 0; i < @this.Length; i++)
+				var count = 0;
+				for (var i = 0; i < @this.Length; i++)
 				{
 					if (@this[i] == XChar.NewLine)
 					{
@@ -544,8 +544,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 GetCountTab(this String @this)
 			{
-				Int32 count = 0;
-				for (Int32 i = 0; i < @this.Length; i++)
+				var count = 0;
+				for (var i = 0; i < @this.Length; i++)
 				{
 					if (@this[i] == XChar.Tab)
 					{
@@ -585,9 +585,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 IndexOf(this String @this, IList<String> list)
 			{
-				Int32 result = -1;
+				var result = -1;
 
-				for (Int32 i = 0; i < list.Count; i++)
+				for (var i = 0; i < list.Count; i++)
 				{
 					result = @this.IndexOf(list[i]);
 					if (result > -1)
@@ -683,7 +683,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveTo(this String @this, String what)
 			{
-				Int32 index = @this.IndexOf(what);
+				var index = @this.IndexOf(what);
 				if (index > -1)
 				{
 					return @this.Remove(0, index);
@@ -701,7 +701,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveToWith(this String @this, String what)
 			{
-				Int32 index = @this.IndexOf(what);
+				var index = @this.IndexOf(what);
 				if (index > -1)
 				{
 					return @this.Remove(0, index + what.Length);
@@ -719,7 +719,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveFrom(this String @this, String what)
 			{
-				Int32 index = @this.IndexOf(what);
+				var index = @this.IndexOf(what);
 				if (index > -1)
 				{
 					return @this.Remove(index + what.Length);
@@ -737,7 +737,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveFirstOccurrence(this String @this, String what)
 			{
-				Int32 index = @this.IndexOf(what);
+				var index = @this.IndexOf(what);
 				if (index > -1)
 				{
 					return @this.Remove(index, what.Length);
@@ -755,7 +755,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveLastOccurrence(this String @this, String what)
 			{
-				Int32 index = @this.LastIndexOf(what);
+				var index = @this.LastIndexOf(what);
 				if (index > -1)
 				{
 					return @this.Remove(index, what.Length);
@@ -772,7 +772,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveExtension(this String @this)
 			{
-				Int32 index = @this.LastIndexOf(XChar.Dot);
+				var index = @this.LastIndexOf(XChar.Dot);
 				if (index > -1)
 				{
 					return @this.Remove(index);
@@ -790,8 +790,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveTokens(this String @this, params String[] tokens)
 			{
-				String result = @this;
-				for (Int32 i = 0; i < tokens.Length; i++)
+				var result = @this;
+				for (var i = 0; i < tokens.Length; i++)
 				{
 					result = result.Replace(tokens[i], String.Empty);
 				}
@@ -810,11 +810,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveAllBetweenSymbol(this String @this, Char left, Char right)
 			{
-				StringBuilder builder = new StringBuilder(@this.Length);
+				var builder = new StringBuilder(@this.Length);
 
-				Boolean is_opened = false;
-				Boolean is_pre_opened = false;
-				for (Int32 i = 0; i < @this.Length; i++)
+				var is_opened = false;
+				var is_pre_opened = false;
+				for (var i = 0; i < @this.Length; i++)
 				{
 					if(is_pre_opened)
 					{
@@ -852,11 +852,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String RemoveAllBetweenSymbolWithSymbols(this String @this, Char left, Char right)
 			{
-				StringBuilder builder = new StringBuilder(@this.Length);
+				var builder = new StringBuilder(@this.Length);
 
-				Boolean is_opened = false;
-				Boolean is_pre_opened = false;
-				for (Int32 i = 0; i < @this.Length; i++)
+				var is_opened = false;
+				var is_pre_opened = false;
+				for (var i = 0; i < @this.Length; i++)
 				{
 					if (@this[i] == left)
 					{
@@ -914,7 +914,7 @@ namespace Lotus
 						break;
 					case TStringSearchOption.Contains:
 						{
-							Int32 index = @this.IndexOf(check);
+							var index = @this.IndexOf(check);
 							if(index > -1)
 							{
 								return (@this.Remove(index, check.Length));
@@ -945,7 +945,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static string SubstringTo(this String @this, String what, Boolean include)
 			{
-				Int32 index = @this.IndexOf(what);
+				var index = @this.IndexOf(what);
 				if (index > -1)
 				{
 					if (include)
@@ -971,7 +971,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static string SubstringFrom(this String @this, String what, Boolean include)
 			{
-				Int32 index = @this.IndexOf(what);
+				var index = @this.IndexOf(what);
 				if (index > -1)
 				{
 					if (include)
@@ -995,9 +995,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 ExtractNumber(this String @this)
 			{
-				StringBuilder number = new StringBuilder(4);
-				Boolean find = false;
-				for (Int32 i = 0; i < @this.Length; i++)
+				var number = new StringBuilder(4);
+				var find = false;
+				for (var i = 0; i < @this.Length; i++)
 				{
 					if(Char.IsDigit(@this[i]))
 					{
@@ -1014,7 +1014,7 @@ namespace Lotus
 					}
 				}
 
-				Int32 result = XNumbers.ParseInt(number.ToString(), -1);
+				var result = XNumbers.ParseInt(number.ToString(), -1);
 				return result;
 			}
 
@@ -1027,9 +1027,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 ExtractNumberLast(this String @this)
 			{
-				StringBuilder number = new StringBuilder(4);
-				Boolean find = false;
-				for (Int32 i = @this.Length - 1; i >= 0; i--)
+				var number = new StringBuilder(4);
+				var find = false;
+				for (var i = @this.Length - 1; i >= 0; i--)
 				{
 					if (Char.IsDigit(@this[i]))
 					{
@@ -1046,7 +1046,7 @@ namespace Lotus
 					}
 				}
 
-				Int32 result = XNumbers.ParseInt(number.ToString().GetReverseCopy(), -1);
+				var result = XNumbers.ParseInt(number.ToString().GetReverseCopy(), -1);
 				return result;
 			}
 
@@ -1061,14 +1061,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ExtractString(this String @this, String begin, String end)
 			{
-				Int32 pos_begin = @this.IndexOf(begin);
+				var pos_begin = @this.IndexOf(begin);
 				if (pos_begin > -1)
 				{
-					Int32 pos_end = @this.IndexOf(end, pos_begin);
-					Int32 start = pos_begin + begin.Length;
+					var pos_end = @this.IndexOf(end, pos_begin);
+					var start = pos_begin + begin.Length;
 					if (pos_end > start)
 					{
-						Int32 l = pos_end - start;
+						var l = pos_end - start;
 						return @this.Substring(start, l);
 					}
 				}
@@ -1087,12 +1087,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ExtractStringLast(this String @this, String begin, String end)
 			{
-				Int32 pos_begin = @this.LastIndexOf(begin);
-				Int32 pos_end = @this.LastIndexOf(end);
-				Int32 start = pos_begin + begin.Length;
+				var pos_begin = @this.LastIndexOf(begin);
+				var pos_end = @this.LastIndexOf(end);
+				var start = pos_begin + begin.Length;
 				if (pos_end > start)
 				{
-					Int32 l = pos_end - start;
+					var l = pos_end - start;
 					return @this.Substring(start, l);
 				}
 
@@ -1111,7 +1111,7 @@ namespace Lotus
 			public static String ToWordUpper(this String @this)
 			{
 				var builder = new StringBuilder(@this);
-				for (Int32 i = 0; i < builder.Length; i++)
+				for (var i = 0; i < builder.Length; i++)
 				{
 					if(Char.IsLetter(builder[i]))
 					{
@@ -1133,7 +1133,7 @@ namespace Lotus
 			public static String ToWordLower(this String @this)
 			{
 				var builder = new StringBuilder(@this);
-				for (Int32 i = 0; i < builder.Length; i++)
+				for (var i = 0; i < builder.Length; i++)
 				{
 					if (Char.IsLetter(builder[i]))
 					{
@@ -1166,7 +1166,7 @@ namespace Lotus
 			public static String ToTitleCase(this String @this)
 			{
 				var builder = new StringBuilder();
-				for (Int32 i = 0; i < @this.Length; i++)
+				for (var i = 0; i < @this.Length; i++)
 				{
 					var current = @this[i];
 					if (current == '_' && i + 1 < @this.Length)
@@ -1197,7 +1197,7 @@ namespace Lotus
 			public static String ToConstCase(this String @this)
 			{
 				var builder = new StringBuilder();
-				for (Int32 i = 0; i < @this.Length; i++)
+				for (var i = 0; i < @this.Length; i++)
 				{
 					var current = @this[i];
 
@@ -1283,21 +1283,21 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static List<String> SplitToTokensFromWord(this String @this)
 			{
-				List<String> tokens = new List<String>();
+				var tokens = new List<String>();
 
 				// Статус окончания
-				Boolean end = false;
-				for (Int32 i = 0; i < @this.Length; i++)
+				var end = false;
+				for (var i = 0; i < @this.Length; i++)
 				{
-					StringBuilder token = new StringBuilder(10);
-					Boolean start = false;
+					var token = new StringBuilder(10);
+					var start = false;
 
 					if (end)
 					{
 						break;
 					}
 
-					for (Int32 j = i; j < @this.Length; j++)
+					for (var j = i; j < @this.Length; j++)
 					{
 						// Информируем о конце
 						if (j == @this.Length - 1)
@@ -1343,8 +1343,8 @@ namespace Lotus
 				if (list == null || list.Length < 2) return;
 
 				// Ищем первый элемент списка
-				Int32 index = -1;
-				for (Int32 i = 0; i < tokens.Count; i++)
+				var index = -1;
+				for (var i = 0; i < tokens.Count; i++)
 				{
 					if (tokens[i] == list[0])
 					{
@@ -1359,7 +1359,7 @@ namespace Lotus
 					// Рассмотрим частные случае
 					if (list.Length == 2)
 					{
-						Int32 i1 = tokens.IndexOf(list[1], index);
+						var i1 = tokens.IndexOf(list[1], index);
 						if (i1 != -1)
 						{
 							tokens[index] = tokens[index] + tokens[i1];
@@ -1369,8 +1369,8 @@ namespace Lotus
 
 					if (list.Length == 3)
 					{
-						Int32 i1 = tokens.IndexOf(list[1], index);
-						Int32 i2 = tokens.IndexOf(list[2], index);
+						var i1 = tokens.IndexOf(list[1], index);
+						var i2 = tokens.IndexOf(list[2], index);
 						if (i1 != -1 && i2 != -1 && i1 == i2 - 1)
 						{
 							tokens[index] = tokens[index] + tokens[i1] + tokens[i2];
@@ -1410,7 +1410,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

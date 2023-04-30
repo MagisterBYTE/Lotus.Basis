@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.ComponentModel;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreInspector
-		/*@{*/
+		/** \addtogroup CoreInspector
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Описание свойства объекта для его актуального описания, отображения и редактирования пользователем
@@ -59,7 +59,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CPropertyDesc OverrideDisplayNameAndDescription<TType>(String property_name, String display_name, String description = null)
 			{
-				CPropertyDesc property_desc = new CPropertyDesc();
+				var property_desc = new CPropertyDesc();
 
 				// Проверяем
 				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -85,7 +85,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CPropertyDesc OverrideCategory<TType>(String property_name, String category)
 			{
-				CPropertyDesc property_desc = new CPropertyDesc();
+				var property_desc = new CPropertyDesc();
 
 				// Проверяем
 				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -109,7 +109,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CPropertyDesc OverrideHide<TType>(String property_name)
 			{
-				CPropertyDesc property_desc = new CPropertyDesc();
+				var property_desc = new CPropertyDesc();
 
 				// Проверяем
 				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -134,7 +134,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CPropertyDesc OverrideOrder<TType>(String property_name, Int32 order)
 			{
-				CPropertyDesc property_desc = new CPropertyDesc();
+				var property_desc = new CPropertyDesc();
 
 				// Проверяем
 				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -159,7 +159,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CPropertyDesc OverrideDefaultValue<TType>(String property_name, System.Object default_value)
 			{
-				CPropertyDesc property_desc = new CPropertyDesc();
+				var property_desc = new CPropertyDesc();
 
 				// Проверяем
 				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -184,7 +184,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CPropertyDesc OverrideListValues<TType>(String property_name, System.Object list_values)
 			{
-				CPropertyDesc property_desc = new CPropertyDesc();
+				var property_desc = new CPropertyDesc();
 
 				// Проверяем
 				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -235,7 +235,7 @@ namespace Lotus
 					if(declare_value is Type && member_name.IsExists())
 					{
 						// Получаем тип
-						Type type = declare_value as Type;
+						var type = declare_value as Type;
 						switch (member_type)
 						{
 							case TInspectorMemberType.Field:
@@ -259,7 +259,7 @@ namespace Lotus
 						// 2) Это может быть метаданные поля 
 						if (declare_value is FieldInfo)
 						{
-							FieldInfo field_info = declare_value as FieldInfo;
+							var field_info = declare_value as FieldInfo;
 							if(field_info.IsStatic)
 							{
 								result = field_info.GetValue(null);
@@ -275,7 +275,7 @@ namespace Lotus
 						// 3) Это может быть метаданные свойства
 						if (declare_value is PropertyInfo)
 						{
-							PropertyInfo property_info = declare_value as PropertyInfo;
+							var property_info = declare_value as PropertyInfo;
 							if (property_info.IsStatic())
 							{
 								result = property_info.GetValue(null, null);
@@ -531,7 +531,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

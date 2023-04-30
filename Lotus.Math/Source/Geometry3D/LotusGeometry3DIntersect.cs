@@ -12,7 +12,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry3D
-		/*@{*/
+		/** \addtogroup MathGeometry3D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Тип пересечения в 3D пространстве
@@ -123,7 +123,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectHit3Df None()
 			{
-				TIntersectHit3Df hit = new TIntersectHit3Df();
+				var hit = new TIntersectHit3Df();
 				hit.IntersectType = TIntersectType3D.None;
 				return (hit);
 			}
@@ -137,7 +137,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectHit3Df Point(in Vector3Df point)
 			{
-				TIntersectHit3Df hit = new TIntersectHit3Df();
+				var hit = new TIntersectHit3Df();
 				hit.IntersectType = TIntersectType3D.Point;
 				hit.Point1 = point;
 				return (hit);
@@ -153,7 +153,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectHit3Df Point(in Vector3Df point, Single distance)
 			{
-				TIntersectHit3Df hit = new TIntersectHit3Df();
+				var hit = new TIntersectHit3Df();
 				hit.IntersectType = TIntersectType3D.Point;
 				hit.Point1 = point;
 				hit.Distance = distance;
@@ -170,7 +170,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectHit3Df Segment(in Vector3Df point_1, in Vector3Df point_2)
 			{
-				TIntersectHit3Df hit = new TIntersectHit3Df();
+				var hit = new TIntersectHit3Df();
 				hit.IntersectType = TIntersectType3D.Segment;
 				hit.Point1 = point_1;
 				hit.Point2 = point_2;
@@ -255,7 +255,7 @@ namespace Lotus
 			public static TIntersectType3D PointRay(in Vector3D point, in Ray3D ray, out Double length)
 			{
 				Vector3D delta = point - ray.Position;
-				Vector3D tim = new Vector3D(delta.X / ray.Direction.X, delta.Y / ray.Direction.Y,
+				var tim = new Vector3D(delta.X / ray.Direction.X, delta.Y / ray.Direction.Y,
 					delta.Z / ray.Direction.Z);
 
 				// Сравниваем по компонентно
@@ -415,21 +415,21 @@ namespace Lotus
 			public static Boolean LineLine(in Vector3Df pos_a, in Vector3Df dir_a, in Vector3Df pos_b, in Vector3Df dir_b,
 				out Vector3Df hit)
 			{
-				Single sqr_length_a = dir_a.SqrLength;
-				Single sqr_length_b = dir_b.SqrLength;
-				Single dot_a_b = Vector3Df.Dot(in dir_a, in dir_b);
+				var sqr_length_a = dir_a.SqrLength;
+				var sqr_length_b = dir_b.SqrLength;
+				var dot_a_b = Vector3Df.Dot(in dir_a, in dir_b);
 
-				Single denominator = (sqr_length_a * sqr_length_b) - (dot_a_b * dot_a_b);
+				var denominator = (sqr_length_a * sqr_length_b) - (dot_a_b * dot_a_b);
 				Vector3Df pos_b_to_a = pos_a - pos_b;
-				Single a = Vector3Df.Dot(in dir_a, in pos_b_to_a);
-				Single b = Vector3Df.Dot(in dir_b, in pos_b_to_a);
+				var a = Vector3Df.Dot(in dir_a, in pos_b_to_a);
+				var b = Vector3Df.Dot(in dir_b, in pos_b_to_a);
 
 				Vector3Df closest_point_a;
 				Vector3Df closest_point_b;
 				if (Math.Abs(denominator) < XGeometry3D.Eplsilon_f)
 				{
 					// Parallel
-					Single distance_b = dot_a_b > sqr_length_b ? a / dot_a_b : b / sqr_length_b;
+					var distance_b = dot_a_b > sqr_length_b ? a / dot_a_b : b / sqr_length_b;
 
 					closest_point_a = pos_a;
 					closest_point_b = pos_b + (dir_b * distance_b);
@@ -437,8 +437,8 @@ namespace Lotus
 				else
 				{
 					// Not parallel
-					Single distance_a = ((sqr_length_a * b) - (dot_a_b * a)) / denominator;
-					Single distance_b = ((dot_a_b * b) - (sqr_length_b * a)) / denominator;
+					var distance_a = ((sqr_length_a * b) - (dot_a_b * a)) / denominator;
+					var distance_b = ((dot_a_b * b) - (sqr_length_b * a)) / denominator;
 
 					closest_point_a = pos_a + (dir_a * distance_a);
 					closest_point_b = pos_b + (dir_b * distance_b);
@@ -512,10 +512,10 @@ namespace Lotus
 				out TIntersectHit3Df hit)
 			{
 				Vector3Df pos_to_center = sphere_center - line_pos;
-				Single center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
-				Single sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
+				var center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
+				var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
 
-				Single sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();
@@ -527,9 +527,9 @@ namespace Lotus
 					return true;
 				}
 
-				Single distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-				Single distance_a = center_projection - distance_to_intersection;
-				Single distance_b = center_projection + distance_to_intersection;
+				var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
+				var distance_a = center_projection - distance_to_intersection;
+				var distance_b = center_projection + distance_to_intersection;
 
 				Vector3Df point_a = line_pos + (line_dir * distance_a);
 				Vector3Df point_b = line_pos + (line_dir * distance_b);
@@ -567,8 +567,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectType3D RayToPlane(in Ray3D ray, in Plane3D plane, out Vector3D point)
 			{
-				Double dot = Vector3D.Dot(in ray.Direction, in plane.Normal);
-				Double distance = plane.GetDistanceToPoint(in ray.Position);
+				var dot = Vector3D.Dot(in ray.Direction, in plane.Normal);
+				var distance = plane.GetDistanceToPoint(in ray.Position);
 
 				// Не должно быть равным нулю
 				if (XMath.Approximately(dot, 0) == false)
@@ -607,20 +607,20 @@ namespace Lotus
 			{
 				point = Vector3D.Zero;
 
-				Double l = ray.Direction.X;
-				Double m = ray.Direction.Y;
-				Double n = ray.Direction.Z;
+				var l = ray.Direction.X;
+				var m = ray.Direction.Y;
+				var n = ray.Direction.Z;
 
-				Double dx = ray.Position.X - position.X;
-				Double dy = ray.Position.Y - position.Y;
-				Double dz = ray.Position.Z - position.Z;
+				var dx = ray.Position.X - position.X;
+				var dy = ray.Position.Y - position.Y;
+				var dz = ray.Position.Z - position.Z;
 
-				Double a = (l * l) + (m * m) + (n * n);
-				Double b = (2 * dx * l) + (2 * dy * m) + (2 * dz * n);
-				Double c = (dx * dx) + (dy * dy * dz * dz) - (radius * radius);
+				var a = (l * l) + (m * m) + (n * n);
+				var b = (2 * dx * l) + (2 * dy * m) + (2 * dz * n);
+				var c = (dx * dx) + (dy * dy * dz * dz) - (radius * radius);
 
 				Double t1, t2;
-				Int32 result = XMathSolver.SolveQuadraticEquation(a, b, c, out t1, out t2);
+				var result = XMathSolver.SolveQuadraticEquation(a, b, c, out t1, out t2);
 				if (result == -1)
 				{
 					return TIntersectType3D.None;
@@ -734,15 +734,15 @@ namespace Lotus
 				out TIntersectHit3Df hit)
 			{
 				Vector3Df pos_to_center = sphere_center - ray_pos;
-				Single center_projection = Vector3Df.Dot(in ray_dir, in pos_to_center);
+				var center_projection = Vector3Df.Dot(in ray_dir, in pos_to_center);
 				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();
 					return false;
 				}
 
-				Single sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
-				Single sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
+				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();
@@ -760,9 +760,9 @@ namespace Lotus
 				}
 
 				// Line hit
-				Single distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-				Single distance_a = center_projection - distance_to_intersection;
-				Single distance_b = center_projection + distance_to_intersection;
+				var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
+				var distance_a = center_projection - distance_to_intersection;
+				var distance_b = center_projection + distance_to_intersection;
 
 				if (distance_a < -XGeometry3D.Eplsilon_f)
 				{
@@ -804,10 +804,10 @@ namespace Lotus
 				Vector3D edge2 = p3 - p1;
 
 				// Begin calculating determinant - also used to calculate U parameter
-				Vector3D pvec = Vector3D.Cross(in ray.Direction, in edge2);
+				var pvec = Vector3D.Cross(in ray.Direction, in edge2);
 
 				// If determinant is near zero, ray lies in plane of triangle
-				Double det = Vector3D.Dot(in edge1, in pvec);
+				var det = Vector3D.Dot(in edge1, in pvec);
 
 				Vector3D tvec;
 				if (det > 0)
@@ -826,25 +826,25 @@ namespace Lotus
 				}
 
 				// Calculate U parameter and test bounds
-				Double u = Vector3D.Dot(in tvec, in pvec);
+				var u = Vector3D.Dot(in tvec, in pvec);
 				if (u < 0.0 || u > det)
 				{
 					return TIntersectType3D.None;
 				}
 
 				// Prepare to test V parameter
-				Vector3D qvec = Vector3D.Cross(in tvec, in edge1);
+				var qvec = Vector3D.Cross(in tvec, in edge1);
 
 				// Calculate V parameter and test bounds
-				Double v = Vector3D.Dot(in ray.Direction, in qvec);
+				var v = Vector3D.Dot(in ray.Direction, in qvec);
 				if (v < 0.0 || u + v > det)
 				{
 					return TIntersectType3D.None;
 				}
 
 				// Calculate t, scale parameters, ray intersects triangle
-				Double t = Vector3D.Dot(in edge2, in qvec);
-				Double invert_t = 1.0 / det;
+				var t = Vector3D.Dot(in edge2, in qvec);
+				var invert_t = 1.0 / det;
 				t *= invert_t;
 				u *= invert_t;
 				v *= invert_t;
@@ -918,10 +918,10 @@ namespace Lotus
 			{
 				Vector3Df segment_start_to_center = sphere_center - start;
 				Vector3Df from_start_to_end = end - start;
-				Single segment_length = from_start_to_end.Length;
+				var segment_length = from_start_to_end.Length;
 				if (segment_length < XGeometry3D.Eplsilon_f)
 				{
-					Single distanceToPoint = segment_start_to_center.Length;
+					var distanceToPoint = segment_start_to_center.Length;
 					if (distanceToPoint < sphere_radius + XGeometry3D.Eplsilon_f)
 					{
 						if (distanceToPoint > sphere_radius - XGeometry3D.Eplsilon_f)
@@ -937,7 +937,7 @@ namespace Lotus
 				}
 
 				Vector3Df segment_direction = from_start_to_end.Normalized;
-				Single center_projection = Vector3Df.Dot(segment_direction, segment_start_to_center);
+				var center_projection = Vector3Df.Dot(segment_direction, segment_start_to_center);
 				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f ||
 					center_projection - sphere_radius > segment_length + XGeometry3D.Eplsilon_f)
 				{
@@ -945,8 +945,8 @@ namespace Lotus
 					return false;
 				}
 
-				Single sqr_distance_to_line = segment_start_to_center.SqrLength - (center_projection * center_projection);
-				Single sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_line = segment_start_to_center.SqrLength - (center_projection * center_projection);
+				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();
@@ -966,12 +966,12 @@ namespace Lotus
 				}
 
 				// Line hit
-				Single distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-				Single distance_a = center_projection - distance_to_intersection;
-				Single distance_b = center_projection + distance_to_intersection;
+				var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
+				var distance_a = center_projection - distance_to_intersection;
+				var distance_b = center_projection + distance_to_intersection;
 
-				Boolean point_a_is_after_segment_start = distance_a > -XGeometry3D.Eplsilon_f;
-				Boolean point_b_is_before_segment_end = distance_b < segment_length + XGeometry3D.Eplsilon_f;
+				var point_a_is_after_segment_start = distance_a > -XGeometry3D.Eplsilon_f;
+				var point_b_is_before_segment_end = distance_b < segment_length + XGeometry3D.Eplsilon_f;
 
 				if (point_a_is_after_segment_start && point_b_is_before_segment_end)
 				{
@@ -987,14 +987,14 @@ namespace Lotus
 					return true;
 				}
 
-				Boolean point_a_is_before_segment_end = distance_a < segment_length + XGeometry3D.Eplsilon_f;
+				var point_a_is_before_segment_end = distance_a < segment_length + XGeometry3D.Eplsilon_f;
 				if (point_a_is_after_segment_start && point_a_is_before_segment_end)
 				{
 					// Point A hit
 					hit = TIntersectHit3Df.Point(start + (segment_direction * distance_a));
 					return true;
 				}
-				Boolean point_b_is_after_segment_start = distance_b > -XGeometry3D.Eplsilon_f;
+				var point_b_is_after_segment_start = distance_b > -XGeometry3D.Eplsilon_f;
 				if (point_b_is_after_segment_start && point_b_is_before_segment_end)
 				{
 					// Point B hit
@@ -1008,7 +1008,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.ComponentModel;
@@ -23,8 +23,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreViewItem
-		/*@{*/
+		/** \addtogroup CoreViewItem
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Интерфейс для определения коллекции элементов отображения
@@ -218,7 +218,7 @@ namespace Lotus
 				//-----------------------------------------------------------------------------------------------------
 				public Int32 Compare(TViewItem left, TViewItem right)
 				{
-					Int32 result = ComprareOfAscending(left, right);
+					var result = ComprareOfAscending(left, right);
 					if(result == 1)
 					{
 						return (-1);
@@ -742,10 +742,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual System.Object Clone()
 			{
-				CollectionView<TViewItem, TData> clone = new CollectionView<TViewItem, TData>();
+				var clone = new CollectionView<TViewItem, TData>();
 				clone.Name = mName;
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					clone.Add(mArrayOfItems.Clone());
 				}
@@ -835,7 +835,7 @@ namespace Lotus
 			{
 				if (exclude != null)
 				{
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						if (Object.ReferenceEquals(mArrayOfItems[i], exclude) == false)
 						{
@@ -847,7 +847,7 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].IsSelected = false;
 					}
@@ -869,7 +869,7 @@ namespace Lotus
 				{
 					if (parameters == null)
 					{
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							if (Object.ReferenceEquals(mArrayOfItems[i], exclude) == false)
 							{
@@ -893,7 +893,7 @@ namespace Lotus
 					if (parameters == null)
 					{
 						// Выключаем все элемента отображения
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							mArrayOfItems[i].IsPresented = false;
 						}
@@ -961,7 +961,7 @@ namespace Lotus
 					if (remove)
 					{
 						// Ищем его
-						Int32 index = IndexOf(view_item);
+						var index = IndexOf(view_item);
 						if (index != -1)
 						{
 							// Удаляем
@@ -978,7 +978,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void UpdateOwnedObjects()
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].IOwner = this;
 				}
@@ -1032,7 +1032,7 @@ namespace Lotus
 				// Смотрим статус фильта
 				if (mFilter != null && mIsFiltered == true)
 				{
-					for (Int32 i = 0; i < list.Count; i++)
+					for (var i = 0; i < list.Count; i++)
 					{
 						// Если тип поддерживается
 						if (list[i] is TData item)
@@ -1040,7 +1040,7 @@ namespace Lotus
 							// И проходит условия фильтрации
 							if (mFilter(item))
 							{
-								TViewItem view_item = new TViewItem();
+								var view_item = new TViewItem();
 								view_item.IOwner = this;
 								view_item.DataContext = item;
 
@@ -1057,12 +1057,12 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < list.Count; i++)
+					for (var i = 0; i < list.Count; i++)
 					{
 						// Если тип поддерживается
 						if (list[i] is TData item)
 						{
-							TViewItem view_item = new TViewItem();
+							var view_item = new TViewItem();
 							view_item.IOwner = this;
 							view_item.DataContext = item;
 
@@ -1156,7 +1156,7 @@ namespace Lotus
 
 					if (mIsMultiSelected && mIsEnabledUnselectingItem)
 					{
-						for (Int32 i = 0; i < mSelectedItems.Count; i++)
+						for (var i = 0; i < mSelectedItems.Count; i++)
 						{
 						}
 
@@ -1175,7 +1175,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			internal void ActivatedItemDirect(ILotusViewSelected item)
 			{
-				for (Int32 i = 0; i < Count; i++)
+				for (var i = 0; i < Count; i++)
 				{
 					// 1) Смотрим на совпадение
 					if (mArrayOfItems[i].DataContext.Equals(item))
@@ -1203,14 +1203,14 @@ namespace Lotus
 					// Выключенный элемент выбрать нельзя
 					if (IsSupportViewSelected)
 					{
-						ILotusViewSelected selected_item = mArrayOfItems[index].DataContext as ILotusViewSelected;
+						var selected_item = mArrayOfItems[index].DataContext as ILotusViewSelected;
 						if (selected_item != null && selected_item.CanViewSelected(mArrayOfItems[index]) == false)
 						{
 							return;
 						}
 					}
 
-					Int32 old_index = mSelectedIndex;
+					var old_index = mSelectedIndex;
 
 					// Если выбран другой элемент
 					if (old_index != index)
@@ -1387,8 +1387,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String GetSelectedIndexes()
 			{
-				String result = "{" + mSelectedItems.Count.ToString() + "} ";
-				for (Int32 i = 0; i < mSelectedItems.Count; i++)
+				var result = "{" + mSelectedItems.Count.ToString() + "} ";
+				for (var i = 0; i < mSelectedItems.Count; i++)
 				{
 					if (mSelectedItems[i] != null)
 					{
@@ -1417,11 +1417,11 @@ namespace Lotus
 							IList new_objects = args.NewItems;
 							if (new_objects != null && new_objects.Count > 0)
 							{
-								for (Int32 i = 0; i < new_objects.Count; i++)
+								for (var i = 0; i < new_objects.Count; i++)
 								{
 									// Проверяем на дубликаты
-									Boolean is_dublicate = false;
-									for (Int32 j = 0; j < Count; j++)
+									var is_dublicate = false;
+									for (var j = 0; j < Count; j++)
 									{
 										if (mArrayOfItems[j].DataContext == new_objects[i])
 										{
@@ -1432,10 +1432,10 @@ namespace Lotus
 
 									if (is_dublicate == false)
 									{
-										TViewItem view_item = new TViewItem();
+										var view_item = new TViewItem();
 										view_item.IOwner = this;
 
-										TData data = (TData)new_objects[i];
+										var data = (TData)new_objects[i];
 										view_item.DataContext = data;
 
 										if (data is ILotusViewItemOwner view_item_owner)
@@ -1452,8 +1452,8 @@ namespace Lotus
 						break;
 					case NotifyCollectionChangedAction.Move:
 						{
-							Int32 old_index = args.OldStartingIndex;
-							Int32 new_index = args.NewStartingIndex;
+							var old_index = args.OldStartingIndex;
+							var new_index = args.NewStartingIndex;
 							Move(old_index, new_index);
 						}
 						break;
@@ -1462,9 +1462,9 @@ namespace Lotus
 							IList old_items = args.OldItems;
 							if (old_items != null && old_items.Count > 0)
 							{
-								for (Int32 i = 0; i < old_items.Count; i++)
+								for (var i = 0; i < old_items.Count; i++)
 								{
-									TData data_context = (TData)old_items[i];
+									var data_context = (TData)old_items[i];
 
 									// Находим элемент с данным контекстом
 									ILotusViewItem view_item = this.Search((item) =>
@@ -1554,7 +1554,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

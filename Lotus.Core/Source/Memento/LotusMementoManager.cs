@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.ComponentModel;
@@ -18,8 +18,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreMemento
-		/*@{*/
+		/** \addtogroup CoreMemento
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Интерфейс менеджера для отмены/повторения действия
@@ -243,7 +243,7 @@ namespace Lotus
 				}
 
 				// Get the Command object to redo
-				Int32 item_to_redo = mNextUndo + 1;
+				var item_to_redo = mNextUndo + 1;
 				ILotusMementoState state = mHistoryStates[item_to_redo];
 
 				// Execute the Command object
@@ -282,7 +282,7 @@ namespace Lotus
 				}
 
 				// Purge all items below the NextUndo pointer
-				for (Int32 i = mHistoryStates.Count - 1; i > mNextUndo; i--)
+				for (var i = mHistoryStates.Count - 1; i > mNextUndo; i--)
 				{
 					mHistoryStates.RemoveAt(i);
 				}
@@ -290,7 +290,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.IO;
@@ -18,8 +18,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreText
-		/*@{*/
+		/** \addtogroup CoreText
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Список строк текстовых данных
@@ -104,7 +104,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddNewLine()
 			{
-				CTextLine line = new CTextLine(XString.NewLine);
+				var line = new CTextLine(XString.NewLine);
 				line.Index = mLines.Count;
 				line.Owned = this;
 				line.Indent = mCurrentIndent;
@@ -118,7 +118,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddEmptyLine()
 			{
-				CTextLine line = new CTextLine(String.Empty);
+				var line = new CTextLine(String.Empty);
 				line.Index = mLines.Count;
 				line.Owned = this;
 				line.Indent = mCurrentIndent;
@@ -138,7 +138,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLength(Int32 length)
 			{
-				for (Int32 i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < mLines.Count; i++)
 				{
 					mLines[i].SetLength(length);
 				}
@@ -156,7 +156,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLength(Int32 length, Char symbol)
 			{
-				for (Int32 i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < mLines.Count; i++)
 				{
 					mLines[i].SetLength(length, symbol);
 				}
@@ -175,7 +175,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthAndLastChar(Int32 length, Char symbol)
 			{
-				for (Int32 i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < mLines.Count; i++)
 				{
 					mLines[i].SetLengthAndLastChar(length, symbol);
 				}
@@ -193,7 +193,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthWithTabs(Int32 length, Int32 tabs_equiv = 4)
 			{
-				for (Int32 i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < mLines.Count; i++)
 				{
 					mLines[i].SetLengthWithTabs(length, tabs_equiv);
 				}
@@ -212,7 +212,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthWithTabs(Int32 length, Char symbol, Int32 tabs_equiv = 4)
 			{
-				for (Int32 i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < mLines.Count; i++)
 				{
 					mLines[i].SetLengthWithTabs(length, symbol, tabs_equiv);
 				}
@@ -230,7 +230,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthWithTabsOnlyDelimetrs(Int32 length, Int32 tabs_equiv = 4)
 			{
-				for (Int32 i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < mLines.Count; i++)
 				{
 					if(mLines[i].RawString.Contains("//---------"))
 					{
@@ -258,13 +258,13 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 				String path = XFilePath.GetFileName(XCoreSettings.ASSETS_PATH, file_name, ".cs");
 #else
-				String path = XFilePath.GetFileName(Environment.CurrentDirectory, file_name, ".cs");
+				var path = XFilePath.GetFileName(Environment.CurrentDirectory, file_name, ".cs");
 #endif
 				// Создаем поток для записи
-				StreamWriter stream_writer = new StreamWriter(path);
+				var stream_writer = new StreamWriter(path);
 
 				// Записываем данные
-				for (Int32 i = 0; i < mLines.Count - 1; i++)
+				for (var i = 0; i < mLines.Count - 1; i++)
 				{
 					stream_writer.WriteLine(mLines[i].RawString);
 				}
@@ -281,7 +281,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

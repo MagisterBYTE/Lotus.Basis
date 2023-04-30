@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreUtilities
-		/*@{*/
+		/** \addtogroup CoreUtilities
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс для упаковки/распаковки данных в битовом формате
@@ -43,7 +43,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void PackInteger(ref Int32 pack, Int32 bit_start, Int32 bit_count, Int32 value)
 			{
-				Int32 mask = (1 << bit_count) - 1;
+				var mask = (1 << bit_count) - 1;
 				pack = (pack & ~(mask << bit_start)) | ((value & mask) << bit_start);
 			}
 
@@ -58,7 +58,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void PackLong(ref Int64 pack, Int32 bit_start, Int32 bit_count, Int64 value)
 			{
-				Int64 mask = (1L << bit_count) - 1L;
+				var mask = (1L << bit_count) - 1L;
 				pack = (pack & ~(mask << bit_start)) | ((value & mask) << bit_start);
 			}
 
@@ -72,7 +72,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void PackBoolean(ref Int32 pack, Int32 bit_start, Boolean value)
 			{
-				Int32 mask = (1 << 1) - 1;
+				var mask = (1 << 1) - 1;
 				if (value)
 				{
 					pack = (pack & ~(mask << bit_start)) | ((1 & mask) << bit_start);
@@ -94,7 +94,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 UnpackInteger(Int32 pack, Int32 bit_start, Int32 bit_count)
 			{
-				Int32 mask = (1 << bit_count) - 1;
+				var mask = (1 << bit_count) - 1;
 				return (pack >> bit_start) & mask;
 			}
 
@@ -109,7 +109,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int64 UnpackLong(Int64 pack, Int32 bit_start, Int32 bit_count)
 			{
-				Int64 mask = (1L << bit_count) - 1L;
+				var mask = (1L << bit_count) - 1L;
 				return (pack >> bit_start) & mask;
 			}
 
@@ -123,8 +123,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean UnpackBoolean(Int32 pack, Int32 bit_start)
 			{
-				Int32 mask = (1 << 1) - 1;
-				Int32 data = (pack >> bit_start) & mask;
+				var mask = (1 << 1) - 1;
+				var data = (pack >> bit_start) & mask;
 				if (data == 0)
 				{
 					return false;
@@ -136,7 +136,7 @@ namespace Lotus
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

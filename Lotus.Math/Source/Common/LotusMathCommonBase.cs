@@ -11,7 +11,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Globalization;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathCommon
-		/*@{*/
+		/** \addtogroup MathCommon
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий математические методы и функции
@@ -433,7 +433,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double InvSqrt(Double value)
 			{
-				Double result = Math.Sqrt(value);
+				var result = Math.Sqrt(value);
 
 				if (result > ZeroTolerance_d)
 				{
@@ -452,7 +452,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single InvSqrt(Single value)
 			{
-				Single result = (Single)Math.Sqrt(value);
+				var result = (Single)Math.Sqrt(value);
 
 				if (result > ZeroTolerance_f)
 				{
@@ -508,15 +508,15 @@ namespace Lotus
 			public static Double ConvertInterval(Double dest_start, Double dest_end, Double source_start,
 				Double source_end, Double value)
 			{
-				Double x1 = dest_start;
-				Double x2 = dest_end;
-				Double y1 = source_start;
-				Double y2 = source_end;
+				var x1 = dest_start;
+				var x2 = dest_end;
+				var y1 = source_start;
+				var y2 = source_end;
 
-				Double k = (y2 - y1) / (x2 - x1);
-				Double b = y1 - (k * x1);
+				var k = (y2 - y1) / (x2 - x1);
+				var b = y1 - (k * x1);
 
-				Double result = ((k * value) + b);
+				var result = ((k * value) + b);
 
 				return (result);
 			}
@@ -543,15 +543,15 @@ namespace Lotus
 			public static Single ConvertInterval(Single dest_start, Single dest_end, Single source_start,
 				Single source_end, Single value)
 			{
-				Single x1 = dest_start;
-				Single x2 = dest_end;
-				Single y1 = source_start;
-				Single y2 = source_end;
+				var x1 = dest_start;
+				var x2 = dest_end;
+				var y1 = source_start;
+				var y2 = source_end;
 
-				Single k = (y2 - y1) / (x2 - x1);
-				Single b = y1 - (k * x1);
+				var k = (y2 - y1) / (x2 - x1);
+				var b = y1 - (k * x1);
 
-				Single result = ((k * value) + b);
+				var result = ((k * value) + b);
 
 				return (result);
 			}
@@ -590,12 +590,12 @@ namespace Lotus
 			{
 				if (value >= 0)
 				{
-					Double result = Math.Floor((value + ((Double)round / 2)) / round) * round;
+					var result = Math.Floor((value + ((Double)round / 2)) / round) * round;
 					return (result);
 				}
 				else
 				{
-					Double result = Math.Ceiling((value - ((Double)round / 2)) / round) * round;
+					var result = Math.Ceiling((value - ((Double)round / 2)) / round) * round;
 					return (result);
 				}
 			}
@@ -720,11 +720,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double ParseDoubleFormat(String text, Double default_value = 0)
 			{
-				StringBuilder number = new StringBuilder(text.Length);
+				var number = new StringBuilder(text.Length);
 
-				for (Int32 i = 0; i < text.Length; i++)
+				for (var i = 0; i < text.Length; i++)
 				{
-					Char c = text[i];
+					var c = text[i];
 
 					if (c == '-')
 					{
@@ -767,11 +767,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean ParseDoubleFormat(String text, out Double result)
 			{
-				StringBuilder number = new StringBuilder(text.Length);
+				var number = new StringBuilder(text.Length);
 
-				for (Int32 i = 0; i < text.Length; i++)
+				for (var i = 0; i < text.Length; i++)
 				{
-					Char c = text[i];
+					var c = text[i];
 
 					if (c == '-')
 					{
@@ -917,8 +917,8 @@ namespace Lotus
 			{
 				if (array.Length < current_count + items.Length)
 				{
-					Int32 max_size = current_count + items.Length;
-					TType[] new_arary = new TType[max_size];
+					var max_size = current_count + items.Length;
+					var new_arary = new TType[max_size];
 					Array.Copy(array, new_arary, current_count);
 					array = items;
 				}
@@ -999,7 +999,7 @@ namespace Lotus
 				TType[] temp = array;
 				array = new TType[array.Length - count >= 0 ? array.Length - count : 0];
 				Array.Copy(temp, array, start);
-				Int32 index = start + count;
+				var index = start + count;
 				if (index < temp.Length)
 				{
 					Array.Copy(temp, index, array, start, temp.Length - index);
@@ -1102,7 +1102,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TType[] Remove<TType>(TType[] array, in TType item)
 			{
-				Int32 index = Array.IndexOf(array, item);
+				var index = Array.IndexOf(array, item);
 				if (index >= 0)
 				{
 					return RemoveAt(array, index);
@@ -1148,15 +1148,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TType[] Shift<TType>(TType[] array, Int32 start_index, Int32 offset, Int32 count)
 			{
-				TType[] result = (TType[])array.Clone();
+				var result = (TType[])array.Clone();
 
 				start_index = start_index < 0 ? 0 : (start_index >= result.Length ? result.Length - 1 : start_index);
 				count = count < 0 ? 0 : (start_index + count >= result.Length ? result.Length - start_index - 1 : count);
 				offset = start_index + offset < 0 ? -start_index : (start_index + count + offset >= result.Length ? result.Length - start_index - count : offset);
 
-				Int32 abs_offset = Math.Abs(offset);
-				TType[] items = new TType[count]; // What we want to move
-				TType[] dec = new TType[abs_offset]; // What is going to replace the thing we move
+				var abs_offset = Math.Abs(offset);
+				var items = new TType[count]; // What we want to move
+				var dec = new TType[abs_offset]; // What is going to replace the thing we move
 				Array.Copy(array, start_index, items, 0, count);
 				Array.Copy(array, start_index + (offset >= 0 ? count : offset), dec, 0, abs_offset);
 				Array.Copy(dec, 0, result, start_index + (offset >= 0 ? 0 : offset + count), abs_offset);
@@ -1194,7 +1194,7 @@ namespace Lotus
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

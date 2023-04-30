@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Runtime.InteropServices;
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry2D
-		/*@{*/
+		/** \addtogroup MathGeometry2D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Структура прямоугольника в двухмерном пространстве
@@ -62,10 +62,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Rect2D IntersectRect(in Rect2D a, in Rect2D b)
 			{
-				Double x1 = Math.Max(a.X, b.X);
-				Double x2 = Math.Min(a.X + a.Width, b.X + b.Width);
-				Double y1 = Math.Max(a.Y, b.Y);
-				Double y2 = Math.Min(a.Y + a.Height, b.Y + b.Height);
+				var x1 = Math.Max(a.X, b.X);
+				var x2 = Math.Min(a.X + a.Width, b.X + b.Width);
+				var y1 = Math.Max(a.Y, b.Y);
+				var y2 = Math.Min(a.Y + a.Height, b.Y + b.Height);
 
 				if (x2 >= x1 && y2 >= y1)
 				{
@@ -85,10 +85,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Rect2D UnionRect(in Rect2D a, in Rect2D b)
 			{
-				Double x1 = Math.Min(a.X, b.X);
-				Double x2 = Math.Max(a.X + a.Width, b.X + b.Width);
-				Double y1 = Math.Min(a.Y, b.Y);
-				Double y2 = Math.Max(a.Y + a.Height, b.Y + b.Height);
+				var x1 = Math.Min(a.X, b.X);
+				var x2 = Math.Max(a.X + a.Width, b.X + b.Width);
+				var y1 = Math.Min(a.Y, b.Y);
+				var y2 = Math.Max(a.Y + a.Height, b.Y + b.Height);
 
 				return new Rect2D(x1, y1, x2 - x1, y2 - y1);
 			}
@@ -102,8 +102,8 @@ namespace Lotus
 			//----------------------------------------------------------------------------------------------------------
 			public static Rect2D DeserializeFromString(String data)
 			{
-				Rect2D rect = new Rect2D();
-				String[] rect_data = data.Split(';');
+				var rect = new Rect2D();
+				var rect_data = data.Split(';');
 				rect.X = XMath.ParseDouble(rect_data[0]);
 				rect.Y = XMath.ParseDouble(rect_data[1]);
 				rect.Width = XMath.ParseDouble(rect_data[2]);
@@ -314,7 +314,7 @@ namespace Lotus
 				{
 					if (typeof(Rect2D) == obj.GetType())
 					{
-						Rect2D rect = (Rect2D)obj;
+						var rect = (Rect2D)obj;
 						return Equals(rect);
 					}
 				}
@@ -719,10 +719,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void IntersectRect(in Rect2Df a, in Rect2Df b, out Rect2Df result)
 			{
-				Single x1 = Math.Max(a.X, b.X);
-				Single x2 = Math.Min(a.X + a.Width, b.X + b.Width);
-				Single y1 = Math.Max(a.Y, b.Y);
-				Single y2 = Math.Min(a.Y + a.Height, b.Y + b.Height);
+				var x1 = Math.Max(a.X, b.X);
+				var x2 = Math.Min(a.X + a.Width, b.X + b.Width);
+				var y1 = Math.Max(a.Y, b.Y);
+				var y2 = Math.Min(a.Y + a.Height, b.Y + b.Height);
 
 				if (x2 >= x1 && y2 >= y1)
 				{
@@ -760,13 +760,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void UnionRect(in Rect2Df a, in Rect2Df b, out Rect2Df result)
 			{
-				Single x1 = Math.Min(a.X, b.X);
-				Single x2 = Math.Max(a.X + a.Width, b.X + b.Width);
+				var x1 = Math.Min(a.X, b.X);
+				var x2 = Math.Max(a.X + a.Width, b.X + b.Width);
 				result.X = x1;
 				result.Width = x2 - x1;
 
-				Single y1 = Math.Min(a.Y, b.Y);
-				Single y2 = Math.Max(a.Y + a.Height, b.Y + b.Height);
+				var y1 = Math.Min(a.Y, b.Y);
+				var y2 = Math.Max(a.Y + a.Height, b.Y + b.Height);
 				result.Y = y1;
 				result.Height = y2 - y1;
 			}
@@ -780,8 +780,8 @@ namespace Lotus
 			//----------------------------------------------------------------------------------------------------------
 			public static Rect2Df DeserializeFromString(String data)
 			{
-				Rect2Df rect = new Rect2Df();
-				String[] rect_data = data.Split(';');
+				var rect = new Rect2Df();
+				var rect_data = data.Split(';');
 				rect.X = XMath.ParseSingle(rect_data[0]);
 				rect.Y = XMath.ParseSingle(rect_data[1]);
 				rect.Width = XMath.ParseSingle(rect_data[2]);
@@ -1102,7 +1102,7 @@ namespace Lotus
 				{
 					if (typeof(Rect2Df) == obj.GetType())
 					{
-						Rect2Df rect = (Rect2Df)obj;
+						var rect = (Rect2Df)obj;
 						return Equals(rect);
 					}
 				}
@@ -1514,7 +1514,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -11,7 +11,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.IO;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreLogger
-		/*@{*/
+		/** \addtogroup CoreLogger
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Центральный диспетчер для трассировки, диагностики, отладки и логирования процесса работы приложения.
@@ -94,10 +94,10 @@ namespace Lotus
 			{
 				if (mMessages != null)
 				{
-					FileStream file_stream = new FileStream(file_name, FileMode.Create, FileAccess.Write);
-					StreamWriter stream_writer = new StreamWriter(file_stream);
+					var file_stream = new FileStream(file_name, FileMode.Create, FileAccess.Write);
+					var stream_writer = new StreamWriter(file_stream);
 
-					for (Int32 i = 0; i < mMessages.Count; i++)
+					for (var i = 0; i < mMessages.Count; i++)
 					{
 						stream_writer.WriteLine(mMessages[i].Text);
 					}
@@ -125,9 +125,9 @@ namespace Lotus
 			{
 				if (info != null)
 				{
-					String text = info.ToString();
+					var text = info.ToString();
 
-					TLogMessage message = new TLogMessage(text, TLogType.Info);
+					var message = new TLogMessage(text, TLogType.Info);
 					message.MemberName = member_name;
 					message.FilePath = file_path;
 					message.LineNumber = line_number;
@@ -154,9 +154,9 @@ namespace Lotus
 			{
 				if (info != null)
 				{
-					String text = info.ToString();
+					var text = info.ToString();
 
-					TLogMessage message = new TLogMessage(module_name, text, TLogType.Info);
+					var message = new TLogMessage(module_name, text, TLogType.Info);
 					message.MemberName = member_name;
 					message.FilePath = file_path;
 					message.LineNumber = line_number;
@@ -176,9 +176,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogInfoFormat(String format, params Object[] args)
 			{
-				String text = String.Format(format, args);
+				var text = String.Format(format, args);
 
-				TLogMessage message = new TLogMessage(text, TLogType.Info);
+				var message = new TLogMessage(text, TLogType.Info);
 				Messages.Add(message);
 
 				if (mLogger != null) mLogger.Log(text, TLogType.Info);
@@ -194,9 +194,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogInfoFormatModule(String module_name, String format, params Object[] args)
 			{
-				String text = String.Format(format, args);
+				var text = String.Format(format, args);
 
-				TLogMessage message = new TLogMessage(module_name, text, TLogType.Info);
+				var message = new TLogMessage(module_name, text, TLogType.Info);
 				Messages.Add(message);
 
 				if (mLogger != null) mLogger.LogModule(module_name, text, TLogType.Info);
@@ -220,9 +220,9 @@ namespace Lotus
 			{
 				if (warning != null)
 				{
-					String text = warning.ToString();
+					var text = warning.ToString();
 
-					TLogMessage message = new TLogMessage(text, TLogType.Warning);
+					var message = new TLogMessage(text, TLogType.Warning);
 					message.MemberName = member_name;
 					message.FilePath = file_path;
 					message.LineNumber = line_number;
@@ -250,9 +250,9 @@ namespace Lotus
 			{
 				if (warning != null)
 				{
-					String text = warning.ToString();
+					var text = warning.ToString();
 
-					TLogMessage message = new TLogMessage(module_name, text, TLogType.Warning);
+					var message = new TLogMessage(module_name, text, TLogType.Warning);
 					message.MemberName = member_name;
 					message.FilePath = file_path;
 					message.LineNumber = line_number;
@@ -272,9 +272,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogWarningFormat(String format, params Object[] args)
 			{
-				String text = String.Format(format, args);
+				var text = String.Format(format, args);
 
-				TLogMessage message = new TLogMessage(text, TLogType.Warning);
+				var message = new TLogMessage(text, TLogType.Warning);
 				Messages.Add(message);
 
 				if (mLogger != null) mLogger.Log(text, TLogType.Warning);
@@ -290,9 +290,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogWarningFormatModule(String module_name, String format, params Object[] args)
 			{
-				String text = String.Format(format, args);
+				var text = String.Format(format, args);
 
-				TLogMessage message = new TLogMessage(module_name, text, TLogType.Warning);
+				var message = new TLogMessage(module_name, text, TLogType.Warning);
 				Messages.Add(message);
 
 				if (mLogger != null) mLogger.LogModule(module_name, text, TLogType.Warning);
@@ -316,9 +316,9 @@ namespace Lotus
 			{
 				if (error != null)
 				{
-					String text = error.ToString();
+					var text = error.ToString();
 
-					TLogMessage message = new TLogMessage(text, TLogType.Error);
+					var message = new TLogMessage(text, TLogType.Error);
 					message.MemberName = member_name;
 					message.FilePath = file_path;
 					message.LineNumber = line_number;
@@ -346,9 +346,9 @@ namespace Lotus
 			{
 				if (error != null)
 				{
-					String text = error.ToString();
+					var text = error.ToString();
 
-					TLogMessage message = new TLogMessage(module_name, text, TLogType.Error);
+					var message = new TLogMessage(module_name, text, TLogType.Error);
 					message.MemberName = member_name;
 					message.FilePath = file_path;
 					message.LineNumber = line_number;
@@ -368,9 +368,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogErrorFormat(String format, params Object[] args)
 			{
-				String text = String.Format(format, args);
+				var text = String.Format(format, args);
 
-				TLogMessage message = new TLogMessage(text, TLogType.Error);
+				var message = new TLogMessage(text, TLogType.Error);
 				Messages.Add(message);
 
 				if (mLogger != null) mLogger.Log(text, TLogType.Error);
@@ -386,9 +386,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogErrorFormatModule(String module_name, String format, params Object[] args)
 			{
-				String text = String.Format(format, args);
+				var text = String.Format(format, args);
 
-				TLogMessage message = new TLogMessage(module_name, text, TLogType.Error);
+				var message = new TLogMessage(module_name, text, TLogType.Error);
 				Messages.Add(message);
 
 				if (mLogger != null) mLogger.LogModule(module_name, text, TLogType.Error);
@@ -410,7 +410,7 @@ namespace Lotus
 				[CallerFilePath] String file_path = "",
 				[CallerLineNumber] Int32 line_number = 0)
 			{
-				TLogMessage message = new TLogMessage(exc.Message, TLogType.Exception);
+				var message = new TLogMessage(exc.Message, TLogType.Exception);
 				message.MemberName = member_name;
 				message.FilePath = file_path;
 				message.LineNumber = line_number;
@@ -435,7 +435,7 @@ namespace Lotus
 				[CallerFilePath] String file_path = "",
 				[CallerLineNumber] Int32 line_number = 0)
 			{
-				TLogMessage message = new TLogMessage(module_name, exc.Message, TLogType.Exception);
+				var message = new TLogMessage(module_name, exc.Message, TLogType.Exception);
 				message.MemberName = member_name;
 				message.FilePath = file_path;
 				message.LineNumber = line_number;
@@ -447,7 +447,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

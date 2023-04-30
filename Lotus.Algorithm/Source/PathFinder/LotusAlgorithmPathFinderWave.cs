@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -18,8 +18,8 @@ namespace Lotus
 	namespace Algorithm
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup AlgorithmPathFinder
-		/*@{*/
+		/** \addtogroup AlgorithmPathFinder
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Волновой поиск пути
@@ -91,9 +91,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ResetWave()
 			{
-				for (Int32 y = 0; y < mMap.MapHeight; y++)
+				for (var y = 0; y < mMap.MapHeight; y++)
 				{
-					for (Int32 x = 0; x < mMap.MapWidth; x++)
+					for (var x = 0; x < mMap.MapWidth; x++)
 					{
 						mWaveMap[x, y] = -1;
 					}
@@ -110,15 +110,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Boolean ExpansionWave()
 			{
-				Boolean add = true;
+				var add = true;
 				Int32 indicate_wall = -2, indicate_empty = -1;
 				mIsFoundPath = false;
 				mStepWave = 0;
 
 				// Заполняем карту поиска пути на основе карты препятствий
-				for (Int32 y = 0; y < mMap.MapHeight; y++)
+				for (var y = 0; y < mMap.MapHeight; y++)
 				{
-					for (Int32 x = 0; x < mMap.MapWidth; x++)
+					for (var x = 0; x < mMap.MapWidth; x++)
 					{
 						if (mMap.Map[x, y] == XMapCode.BLOCK)
 						{
@@ -149,9 +149,9 @@ namespace Lotus
 				while (add == true)
 				{
 					add = false;
-					for (Int32 x = 0; x < mMap.MapWidth; x++)
+					for (var x = 0; x < mMap.MapWidth; x++)
 					{
-						for (Int32 y = 0; y < mMap.MapHeight; y++)
+						for (var y = 0; y < mMap.MapHeight; y++)
 						{
 							// Если ячейка свободная
 							if (mWaveMap[x, y] == mStepWave)
@@ -216,12 +216,12 @@ namespace Lotus
 				if (mIsFoundPath == false) return;
 				mPath.Clear();
 
-				Int32 minimum = 100000;
-				Boolean found = true;
+				var minimum = 100000;
+				var found = true;
 				Int32 current_value;
-				Int32 count = 0;
-				Int32 cx = mStart.X;
-				Int32 cy = mStart.Y;
+				var count = 0;
+				var cx = mStart.X;
+				var cy = mStart.Y;
 
 				while (found)
 				{
@@ -297,9 +297,9 @@ namespace Lotus
 				Int32 indicate_wall = -2, indicate_empty = -1;
 
 				// Заполняем карту поиска пути на основе карты препятствий
-				for (Int32 y = 0; y < mMap.MapHeight; y++)
+				for (var y = 0; y < mMap.MapHeight; y++)
 				{
-					for (Int32 x = 0; x < mMap.MapWidth; x++)
+					for (var x = 0; x < mMap.MapWidth; x++)
 					{
 						if (mMap.Map[x, y] == XMapCode.BLOCK)
 						{
@@ -341,11 +341,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Boolean ExpansionWaveOnStep()
 			{
-				Int32 indicate_empty = -1;
+				var indicate_empty = -1;
 
-				for (Int32 x = 0; x < mMap.MapWidth; x++)
+				for (var x = 0; x < mMap.MapWidth; x++)
 				{
-					for (Int32 y = 0; y < mMap.MapHeight; y++)
+					for (var y = 0; y < mMap.MapHeight; y++)
 					{
 						// Если ячейка свободная
 						if (mWaveMap[x, y] == mStepWave)
@@ -408,9 +408,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void SetWave(Int32[,] wave)
 			{
-				for (Int32 ix = 0; ix < mMap.MapWidth; ix++)
+				for (var ix = 0; ix < mMap.MapWidth; ix++)
 				{
-					for (Int32 iy = 0; iy < mMap.MapHeight; iy++)
+					for (var iy = 0; iy < mMap.MapHeight; iy++)
 					{
 						wave[ix, iy] = mWaveMap[ix, iy];
 					}
@@ -419,7 +419,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

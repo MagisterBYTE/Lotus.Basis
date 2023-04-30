@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Reflection;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreDataBinding
-		/*@{*/
+		/** \addtogroup CoreDataBinding
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Класс реализующий привязку данных между свойством/методом объекта модели и объекта представления
@@ -129,7 +129,7 @@ namespace Lotus
 				ResetModel(model_instance);
 				if (mMode != TBindingMode.ViewData)
 				{
-					String member_name_model = mModelMemberName;
+					var member_name_model = mModelMemberName;
 					if (mModelMemberType == TBindingMemberType.Property)
 					{
 						member_name_model = "set_" + mModelMemberName;
@@ -165,7 +165,7 @@ namespace Lotus
 					mModelMemberName = member_name;
 					if (mMode != TBindingMode.ViewData)
 					{
-						String member_name_model = mModelMemberName;
+						var member_name_model = mModelMemberName;
 						if (mModelMemberType == TBindingMemberType.Property)
 						{
 							member_name_model = "set_" + mModelMemberName;
@@ -227,7 +227,7 @@ namespace Lotus
 						if (mModelPropertyChanged != null)
 						{
 							// Получаем актуальное значение
-							System.Object value = GetModelValue();
+							var value = GetModelValue();
 							if (mOnConvertToView != null)
 							{
 								mActionView(mOnConvertToView((TTypeModel)value));
@@ -264,7 +264,7 @@ namespace Lotus
 				ResetView(view_instance);
 				if (mMode != TBindingMode.DataManager)
 				{
-					String member_name_view = mViewMemberName;
+					var member_name_view = mViewMemberName;
 					if (mViewMemberType == TBindingMemberType.Property)
 					{
 						member_name_view = "set_" + mViewMemberName;
@@ -300,7 +300,7 @@ namespace Lotus
 					mViewMemberName = member_name;
 					if (mMode != TBindingMode.DataManager)
 					{
-						String member_name_view = mViewMemberName;
+						var member_name_view = mViewMemberName;
 						if (mViewMemberType == TBindingMemberType.Property)
 						{
 							member_name_view = "set_" + mViewMemberName;
@@ -362,7 +362,7 @@ namespace Lotus
 						if (mViewPropertyChanged != null)
 						{
 							// Получаем актуальное значение
-							System.Object value = GetModelValue();
+							var value = GetModelValue();
 
 							if (mOnConvertToModel != null)
 							{
@@ -379,7 +379,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

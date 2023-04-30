@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Security.Cryptography;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry3D
-		/*@{*/
+		/** \addtogroup MathGeometry3D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы вычисление дистанции между основными геометрическими телами/примитивами
@@ -171,9 +171,9 @@ namespace Lotus
 			public static Single LineSphere(in Vector3Df line_pos, in Vector3Df line_dir, in Vector3Df sphere_center, Single sphere_radius)
 			{
 				Vector3Df pos_to_center = sphere_center - line_pos;
-				Single center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
-				Single sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
-				Single sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
+				var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
+				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
@@ -210,16 +210,16 @@ namespace Lotus
 			public static Single RaySphere(in Vector3Df ray_pos, in Vector3Df ray_dir, in Vector3Df sphere_center, Single sphere_radius)
 			{
 				Vector3Df pos_to_center = sphere_center - ray_pos;
-				Single center_projection = Vector3Df.Dot(in ray_dir, in pos_to_center);
+				var center_projection = Vector3Df.Dot(in ray_dir, in pos_to_center);
 				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
 					return XMath.Sqrt(pos_to_center.SqrLength) - sphere_radius;
 				}
 
-				Single sqr_distance_to_pos = pos_to_center.SqrLength;
-				Single sqr_distance_to_line = sqr_distance_to_pos - (center_projection * center_projection);
-				Single sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_pos = pos_to_center.SqrLength;
+				var sqr_distance_to_line = sqr_distance_to_pos - (center_projection * center_projection);
+				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
@@ -241,9 +241,9 @@ namespace Lotus
 				}
 
 				// Line intersection
-				Single distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-				Single distance_a = center_projection - distance_to_intersection;
-				Single distance_b = center_projection + distance_to_intersection;
+				var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
+				var distance_a = center_projection - distance_to_intersection;
+				var distance_b = center_projection + distance_to_intersection;
 
 				if (distance_a < -XGeometry3D.Eplsilon_f)
 				{
@@ -290,14 +290,14 @@ namespace Lotus
 			{
 				Vector3Df segment_start_to_center = sphere_center - start;
 				Vector3Df from_start_to_end = end - start;
-				Single segment_length = from_start_to_end.Length;
+				var segment_length = from_start_to_end.Length;
 				if (segment_length < XGeometry3D.Eplsilon_f)
 				{
 					return segment_start_to_center.Length - sphere_radius;
 				}
 
 				Vector3Df segment_direction = from_start_to_end.Normalized;
-				Single center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
+				var center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
 				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f ||
 					center_projection - sphere_radius > segment_length + XGeometry3D.Eplsilon_f)
 				{
@@ -309,9 +309,9 @@ namespace Lotus
 					return (sphere_center - end).Length - sphere_radius;
 				}
 
-				Single sqr_distance_to_a = segment_start_to_center.SqrLength;
-				Single sqr_distance_to_line = sqr_distance_to_a - (center_projection * center_projection);
-				Single sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_a = segment_start_to_center.SqrLength;
+				var sqr_distance_to_line = sqr_distance_to_a - (center_projection * center_projection);
+				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
@@ -343,12 +343,12 @@ namespace Lotus
 				}
 
 				// Line intersection
-				Single distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-				Single distance_a = center_projection - distance_to_intersection;
-				Single distance_b = center_projection + distance_to_intersection;
+				var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
+				var distance_a = center_projection - distance_to_intersection;
+				var distance_b = center_projection + distance_to_intersection;
 
-				Boolean point_a_is_after_segment_start = distance_a > -XGeometry3D.Eplsilon_f;
-				Boolean point_b_is_before_segment_end = distance_b < segment_length + XGeometry3D.Eplsilon_f;
+				var point_a_is_after_segment_start = distance_a > -XGeometry3D.Eplsilon_f;
+				var point_b_is_before_segment_end = distance_b < segment_length + XGeometry3D.Eplsilon_f;
 
 				if (point_a_is_after_segment_start && point_b_is_before_segment_end)
 				{
@@ -362,13 +362,13 @@ namespace Lotus
 					return distance_a > distance_b ? distance_a : distance_b;
 				}
 
-				Boolean point_a_is_before_segment_end = distance_a < segment_length + XGeometry3D.Eplsilon_f;
+				var point_a_is_before_segment_end = distance_a < segment_length + XGeometry3D.Eplsilon_f;
 				if (point_a_is_after_segment_start && point_a_is_before_segment_end)
 				{
 					// Point A intersection
 					return 0;
 				}
-				Boolean point_b_is_after_segment_start = distance_b > -XGeometry3D.Eplsilon_f;
+				var point_b_is_after_segment_start = distance_b > -XGeometry3D.Eplsilon_f;
 				if (point_b_is_after_segment_start && point_b_is_before_segment_end)
 				{
 					// Point B intersection
@@ -422,7 +422,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

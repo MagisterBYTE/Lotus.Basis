@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -102,9 +102,6 @@ namespace Lotus
 				result = testB.Duplicate();
 				result = testC.Duplicate();
 				result = testOther.Duplicate();
-
-				TComparisonOperator equality = (TComparisonOperator)XEnum.ConvertFromAbbreviationOrName(typeof(TComparisonOperator), "=");
-				Assert.AreEqual(equality, TComparisonOperator.Equality);
 			}
 
 			//---------------------------------------------------------------------------------------------------------

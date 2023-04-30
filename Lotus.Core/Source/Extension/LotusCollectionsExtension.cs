@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreExtension
-		/*@{*/
+		/** \addtogroup CoreExtension
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы расширений для работы с коллекциями
@@ -52,7 +52,7 @@ namespace Lotus
 #if (UNITY_2017_1_OR_NEWER)
 				return @this.ElementAt(UnityEngine.Random.Range(0, count));
 #else
-				System.Random rand = new Random(System.Environment.TickCount);
+				var rand = new Random(System.Environment.TickCount);
 				return (@this.ElementAt(rand.Next(0, count)));
 #endif
 			}
@@ -63,14 +63,14 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TItem">Тип элемента коллекции</typeparam>
 			/// <param name="this">Коллекция</param>
-			/// <param name="on_action_item">Обработчик действия над каждым элементов коллекции</param>
+			/// <param name="onActionItem">Обработчик действия над каждым элементов коллекции</param>
 			/// <returns>Коллекция</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static IEnumerable<TItem> ForEach<TItem>(this IEnumerable<TItem> @this, Action<TItem> on_action_item)
+			public static IEnumerable<TItem> ForEach<TItem>(this IEnumerable<TItem> @this, Action<TItem> onActionItem)
 			{
 				foreach (var item in @this)
 				{
-					on_action_item.Invoke(item);
+					onActionItem.Invoke(item);
 				}
 
 				return @this;
@@ -95,13 +95,13 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TItem">Тип элемента коллекции</typeparam>
 			/// <param name="this">Коллекция</param>
-			/// <param name="on_output_item">Обработчик вывода (печати) каждого элемента коллекции</param>
+			/// <param name="onOutputItem">Обработчик вывода (печати) каждого элемента коллекции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Print<TItem>(this IEnumerable<TItem> @this, Action<String> on_output_item)
+			public static void Print<TItem>(this IEnumerable<TItem> @this, Action<String> onOutputItem)
 			{
 				foreach (var item in @this)
 				{
-					on_output_item(item.ToString());
+					onOutputItem(item.ToString());
 				}
 			}
 
@@ -206,9 +206,9 @@ namespace Lotus
 				}
 				else
 				{
-					StringBuilder builder = new StringBuilder(@this.Count * 10);
+					var builder = new StringBuilder(@this.Count * 10);
 
-					Int32 i = 0;
+					var i = 0;
 					foreach (var item in @this)
 					{
 						builder.Append(item);
@@ -243,8 +243,8 @@ namespace Lotus
 			{
 				if (index >= @this.Count)
 				{
-					Int32 delta = index - @this.Count + 1;
-					for (Int32 i = 0; i < delta; i++)
+					var delta = index - @this.Count + 1;
+					for (var i = 0; i < delta; i++)
 					{
 						@this.Add(element);
 					}
@@ -340,7 +340,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void MoveObjectDown(this IList @this, Int32 element_index)
 			{
-				Int32 next = (element_index + 1) % @this.Count;
+				var next = (element_index + 1) % @this.Count;
 				SwapObject(@this, element_index, next);
 			}
 
@@ -353,7 +353,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void MoveObjectUp(this IList @this, Int32 element_index)
 			{
-				Int32 previous = element_index - 1;
+				var previous = element_index - 1;
 				if (previous < 0) previous = @this.Count - 1;
 				SwapObject(@this, element_index, previous);
 			}
@@ -369,7 +369,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static IList SwapObject(this IList @this, Int32 old_index, Int32 new_index)
 			{
-				System.Object temp = @this[old_index];
+				var temp = @this[old_index];
 				@this[old_index] = @this[new_index];
 				@this[new_index] = temp;
 				return @this;
@@ -431,7 +431,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void MoveElementDown<TItem>(this IList<TItem> @this, Int32 element_index)
 			{
-				Int32 next = (element_index + 1) % @this.Count;
+				var next = (element_index + 1) % @this.Count;
 				Swap(@this, element_index, next);
 			}
 
@@ -445,7 +445,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void MoveElementUp<TItem>(this IList<TItem> @this, Int32 element_index)
 			{
-				Int32 previous = element_index - 1;
+				var previous = element_index - 1;
 				if (previous < 0) previous = @this.Count - 1;
 				Swap(@this, element_index, previous);
 			}
@@ -463,7 +463,7 @@ namespace Lotus
 			{
 				if (typeof(TItem).IsValueType)
 				{
-					for (Int32 i = 0; i < @this.Count; i++)
+					for (var i = 0; i < @this.Count; i++)
 					{
 						if (@this[i].Equals(element))
 						{
@@ -474,7 +474,7 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < @this.Count; i++)
+					for (var i = 0; i < @this.Count; i++)
 					{
 						if (XObject.ObjectEquals(@this[i], element))
 						{
@@ -498,9 +498,9 @@ namespace Lotus
 			{
 				if (typeof(TItem).IsValueType)
 				{
-					for (Int32 i = 0; i < @this.Count - 1; i++)
+					for (var i = 0; i < @this.Count - 1; i++)
 					{
-						for (Int32 j = i + 1; j < @this.Count; j++)
+						for (var j = i + 1; j < @this.Count; j++)
 						{
 							if (@this[i].Equals(@this[j]))
 							{
@@ -511,9 +511,9 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < @this.Count - 1; i++)
+					for (var i = 0; i < @this.Count - 1; i++)
 					{
-						for (Int32 j = i + 1; j < @this.Count; j++)
+						for (var j = i + 1; j < @this.Count; j++)
 						{
 							if (XObject.ObjectEquals(@this[i], @this[j]))
 							{
@@ -539,7 +539,7 @@ namespace Lotus
 			{
 				if (typeof(TItem).IsValueType)
 				{
-					for (Int32 i = 0; i < @this.Count; i++)
+					for (var i = 0; i < @this.Count; i++)
 					{
 						if (@this[i].Equals(element))
 						{
@@ -549,7 +549,7 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < @this.Count; i++)
+					for (var i = 0; i < @this.Count; i++)
 					{
 						if (XObject.ObjectEquals(@this[i], element))
 						{
@@ -578,7 +578,7 @@ namespace Lotus
 
 				if (typeof(TItem).IsValueType)
 				{
-					for (Int32 i = 0; i < @this.Count; i++)
+					for (var i = 0; i < @this.Count; i++)
 					{
 						if (!@this[i].Equals(other[i]))
 						{
@@ -588,7 +588,7 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < @this.Count; i++)
+					for (var i = 0; i < @this.Count; i++)
 					{
 						if (XObject.ObjectEquals(@this[i], other[i]) == false)
 						{
@@ -622,12 +622,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Shuffle<TItem>(this IList<TItem> @this)
 			{
-				Random rand = new Random();
-				Int32 n = @this.Count;
+				var rand = new Random();
+				var n = @this.Count;
 				while (n > 1)
 				{
 					n--;
-					Int32 k = rand.Next(n + 1);
+					var k = rand.Next(n + 1);
 					@this.Swap(n, k);
 				}
 			}
@@ -661,10 +661,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static IList<TItem> Shift<TItem>(this IList<TItem> @this, Boolean forward)
 			{
-				Int32 length = @this.Count;
+				var length = @this.Count;
 				Int32 start;
 				Int32 sign;
-				Int32 i = 0;
+				var i = 0;
 				Func<Boolean> condition;
 				if (forward)
 				{
@@ -724,12 +724,12 @@ namespace Lotus
 					return (@this.Count - 1);
 				}
 
-				for (Int32 i = 0; i < @this.Count; i++)
+				for (var i = 0; i < @this.Count; i++)
 				{
 					if(value < @this[i])
 					{
-						Single prev_delta = Math.Abs(value - @this[i - 1]);
-						Single curr_delta = Math.Abs(@this[i] - value);
+						var prev_delta = Math.Abs(value - @this[i - 1]);
+						var curr_delta = Math.Abs(@this[i] - value);
 						if(prev_delta < curr_delta)
 						{
 							return (i - 1);
@@ -778,12 +778,12 @@ namespace Lotus
 					return (@this.Count - 1);
 				}
 
-				for (Int32 i = 0; i < @this.Count; i++)
+				for (var i = 0; i < @this.Count; i++)
 				{
 					if (value < @this[i])
 					{
-						Double prev_delta = Math.Abs(value - @this[i - 1]);
-						Double curr_delta = Math.Abs(@this[i] - value);
+						var prev_delta = Math.Abs(value - @this[i - 1]);
+						var curr_delta = Math.Abs(@this[i] - value);
 						if (prev_delta < curr_delta)
 						{
 							return (i - 1);
@@ -963,8 +963,8 @@ namespace Lotus
 			{
 				if (index >= @this.Count)
 				{
-					Int32 delta = index - @this.Count + 1;
-					for (Int32 i = 0; i < delta; i++)
+					var delta = index - @this.Count + 1;
+					for (var i = 0; i < delta; i++)
 					{
 						@this.Add(default(TItem));
 					}
@@ -1037,8 +1037,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 TrimStart<TItem>(this List<TItem> @this, in TItem item, Boolean included = true) where TItem : IComparable<TItem>
 			{
-				Int32 comprare_first = item.CompareTo(@this[0]);
-				Int32 comprare_last = item.CompareTo(@this[@this.Count - 1]);
+				var comprare_first = item.CompareTo(@this[0]);
+				var comprare_last = item.CompareTo(@this[@this.Count - 1]);
 
 				// Элемент находиться за пределами списка
 				if (comprare_first <= 0)
@@ -1050,7 +1050,7 @@ namespace Lotus
 					// Удаляем все элементы
 					if (comprare_last > 0)
 					{
-						Int32 count = @this.Count;
+						var count = @this.Count;
 						@this.Clear();
 						return (count);
 					}
@@ -1061,21 +1061,21 @@ namespace Lotus
 						{
 							if (included)
 							{
-								Int32 count = @this.Count;
+								var count = @this.Count;
 								@this.Clear();
 								return (count);
 							}
 							else
 							{
-								Int32 count = @this.Count - 1;
+								var count = @this.Count - 1;
 								@this.RemoveRange(0, count);
 								return (count);
 							}
 						}
 						else
 						{
-							Int32 max_count = @this.Count - 1;
-							for (Int32 i = 1; i < max_count; i++)
+							var max_count = @this.Count - 1;
+							for (var i = 1; i < max_count; i++)
 							{
 								if (@this[i].CompareTo(item) == 0)
 								{
@@ -1151,7 +1151,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

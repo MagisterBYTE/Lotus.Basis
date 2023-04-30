@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -18,8 +18,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreECS
-		/*@{*/
+		/** \addtogroup CoreECS
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Конфигурация начальных настроек мира
@@ -151,7 +151,7 @@ namespace Lotus
 					Array.Resize(ref mRemovedEntities, mMaxCountEntity);
 				}
 
-				Int32 current_count = mCountEntity;
+				var current_count = mCountEntity;
 				mSparseEntities[current_id] = current_count;
 				mDenseEntities[current_count] = new TEcsEntity(current_id);
 				mCountEntity++;
@@ -241,7 +241,7 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					CEcsComponentData<TComponent> component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 
 					if (component_data_exist.HasEntity(entity_id) == false)
 					{
@@ -257,7 +257,7 @@ namespace Lotus
 				}
 				else
 				{
-					CEcsComponentData<TComponent> component_data_new = new CEcsComponentData<TComponent>();
+					var component_data_new = new CEcsComponentData<TComponent>();
 					component_data_new.World = this;
 					mComponentsData.Add(component_type, component_data_new);
 					ref TComponent value = ref component_data_new.AddEntity(entity_id);
@@ -279,7 +279,7 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					CEcsComponentData<TComponent> component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 
 					if (component_data_exist.HasEntity(entity_id) == false)
 					{
@@ -296,7 +296,7 @@ namespace Lotus
 				}
 				else
 				{
-					CEcsComponentData<TComponent> component_data_new = new CEcsComponentData<TComponent>();
+					var component_data_new = new CEcsComponentData<TComponent>();
 					mComponentsData.Add(component_type, component_data_new);
 					ref TComponent value = ref component_data_new.AddEntity(entity_id);
 					return ref value;
@@ -337,7 +337,7 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					CEcsComponentData<TComponent> component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					ref TComponent value = ref component_data_exist.GetValue(entity_id);
 					return ref value;
 				}
@@ -359,7 +359,7 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					CEcsComponentData<TComponent> component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					component_data_exist.SetValue(entity_id, in value);
 				}
 			}
@@ -377,7 +377,7 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					CEcsComponentData<TComponent> component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					component_data_exist.RemoveEntity(entity_id);
 				}
 			}
@@ -395,7 +395,7 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					CEcsComponentData<TComponent> component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					return component_data_exist.Components.mItems;
 				}
 
@@ -415,7 +415,7 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					CEcsComponentData<TComponent> component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					return component_data_exist;
 				}
 
@@ -432,7 +432,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CEcsFilterComponent CreateFilterComponent()
 			{
-				CEcsFilterComponent filter_сomponent = new CEcsFilterComponent();
+				var filter_сomponent = new CEcsFilterComponent();
 				filter_сomponent.World = this;
 				mFilterComponents.Add(filter_сomponent);
 				return (filter_сomponent);
@@ -446,7 +446,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void UpdateFilterComponentsForAdd(Type component_type)
 			{
-				for (Int32 i = 0; i < mFilterComponents.Count; i++)
+				for (var i = 0; i < mFilterComponents.Count; i++)
 				{
 					if (mFilterComponents[i].IncludedComponents.Contains(component_type))
 					{
@@ -458,7 +458,7 @@ namespace Lotus
 
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

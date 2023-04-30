@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathSpline
-		/*@{*/
+		/** \addtogroup MathSpline
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Квадратичная кривая Безье
@@ -48,9 +48,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df CalculatePoint(Single time, Vector2Df start, Vector2Df handle_point, Vector2Df end)
 			{
-				Single u = 1 - time;
-				Single tt = time * time;
-				Single uu = u * u;
+				var u = 1 - time;
+				var tt = time * time;
+				var uu = u * u;
 
 				return (uu * start) + (2 * time * u * handle_point) + (tt * end);
 			}
@@ -68,9 +68,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df CalculatePoint(Single time, ref Vector2Df start, ref Vector2Df handle_point, ref Vector2Df end)
 			{
-				Single u = 1 - time;
-				Single tt = time * time;
-				Single uu = u * u;
+				var u = 1 - time;
+				var tt = time * time;
+				var uu = u * u;
 
 				return (uu * start) + (2 * time * u * handle_point) + (tt * end);
 			}
@@ -164,9 +164,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Vector2Df CalculatePoint(Single time)
 			{
-				Single u = 1 - time;
-				Single tt = time * time;
-				Single uu = u * u;
+				var u = 1 - time;
+				var tt = time * time;
+				var uu = u * u;
 
 				return (uu * mControlPoints[0]) + (2 * time * u * mControlPoints[1]) + (tt * mControlPoints[2]);
 			}
@@ -232,11 +232,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df CalculatePoint(Single time, Vector2Df start, Vector2Df handle_point1, Vector2Df handle_point2, Vector2Df end)
 			{
-				Single u = 1 - time;
-				Single tt = time * time;
-				Single uu = u * u;
-				Single uuu = uu * u;
-				Single ttt = tt * time;
+				var u = 1 - time;
+				var tt = time * time;
+				var uu = u * u;
+				var uuu = uu * u;
+				var ttt = tt * time;
 
 				Vector2Df point = uuu * start;
 
@@ -262,11 +262,11 @@ namespace Lotus
 			public static Vector2Df CalculatePoint(Single time, ref Vector2Df start, ref Vector2Df handle_point1,
 				ref Vector2Df handle_point2, ref Vector2Df end)
 			{
-				Single u = 1 - time;
-				Single tt = time * time;
-				Single uu = u * u;
-				Single uuu = uu * u;
-				Single ttt = tt * time;
+				var u = 1 - time;
+				var tt = time * time;
+				var uu = u * u;
+				var uuu = uu * u;
+				var ttt = tt * time;
 
 				Vector2Df point = uuu * start;
 
@@ -295,7 +295,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df CalculateFirstDerivative(Single time, Vector2Df start, Vector2Df handle_point1, Vector2Df handle_point2, Vector2Df end)
 			{
-				Single u = 1 - time;
+				var u = 1 - time;
 				return (3f * u * u * (handle_point1 - start)) +
 				       (6f * u * time * (handle_point2 - handle_point1)) +
 				       (3f * time * time * (end - handle_point2));
@@ -321,7 +321,7 @@ namespace Lotus
 			public static Vector2Df CalculateFirstDerivative(Single time, ref Vector2Df start, ref Vector2Df handle_point1,
 				ref Vector2Df handle_point2, ref Vector2Df end)
 			{
-				Single u = 1 - time;
+				var u = 1 - time;
 				return (3f * u * u * (handle_point1 - start)) +
 				       (6f * u * time * (handle_point2 - handle_point1)) +
 				       (3f * time * time * (end - handle_point2));
@@ -389,11 +389,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Vector2Df CalculatePoint(Single time)
 			{
-				Single u = 1 - time;
-				Single tt = time * time;
-				Single uu = u * u;
-				Single uuu = uu * u;
-				Single ttt = tt * time;
+				var u = 1 - time;
+				var tt = time * time;
+				var uu = u * u;
+				var uuu = uu * u;
+				var ttt = tt * time;
 
 				Vector2Df point = uuu * mControlPoints[0];
 
@@ -439,7 +439,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Vector2Df CalculateFirstDerivative(Single time)
 			{
-				Single u = 1 - time;
+				var u = 1 - time;
 				return (3f * u * u * (HandlePoint1 - StartPoint)) +
 				       (6f * u * time * (HandlePoint2 - HandlePoint1)) +
 				       (3f * time * time * (EndPoint - HandlePoint2));
@@ -614,13 +614,13 @@ namespace Lotus
 			{
 				mDrawingPoints.Clear();
 
-				for (Int32 i = 0; i < CurveCount; i++)
+				for (var i = 0; i < CurveCount; i++)
 				{
 					Vector2Df prev = CalculateCurvePoint(i, 0);
 					mDrawingPoints.Add(prev);
-					for (Int32 ip = 1; ip < SegmentsSpline; ip++)
+					for (var ip = 1; ip < SegmentsSpline; ip++)
 					{
-						Single time = (Single)ip / SegmentsSpline;
+						var time = (Single)ip / SegmentsSpline;
 						Vector2Df point = CalculateCurvePoint(i, time);
 
 						// Добавляем если длина больше 1,4
@@ -652,14 +652,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void SetHandleMode(Int32 index)
 			{
-				Int32 mode_index = (index + 1) / 3;
+				var mode_index = (index + 1) / 3;
 				TBezierHandleMode mode = mHandleModes[mode_index];
 				if (mode == TBezierHandleMode.Free || !mIsClosed && (mode_index == 0 || mode_index == mHandleModes.Length - 1))
 				{
 					return;
 				}
 
-				Int32 middle_index = mode_index * 3;
+				var middle_index = mode_index * 3;
 				Int32 fixed_index, enforced_index;
 				if (index <= middle_index)
 				{
@@ -715,8 +715,8 @@ namespace Lotus
 					return;
 				}
 
-				List<Vector2Df> points = new List<Vector2Df>();
-				for (Int32 i = 0; i < pivot_points.Length; i++)
+				var points = new List<Vector2Df>();
+				for (var i = 0; i < pivot_points.Length; i++)
 				{
 					// Первая точка
 					if (i == 0)
@@ -725,7 +725,7 @@ namespace Lotus
 						Vector2Df p2 = pivot_points[i + 1];
 
 						// Расстояние
-						Single distance = (p2 - p1).Length;
+						var distance = (p2 - p1).Length;
 						Vector2Df q1 = p1 + (distance * 0.5f * Vector2Df.Right);
 
 						points.Add(p1);
@@ -737,7 +737,7 @@ namespace Lotus
 						Vector2Df p1 = pivot_points[i];
 
 						// Расстояние
-						Single distance = (p0 - p1).Length;
+						var distance = (p0 - p1).Length;
 						Vector2Df q0 = p1 + (distance * 0.5f * Vector2Df.Right);
 
 						points.Add(q0);
@@ -750,8 +750,8 @@ namespace Lotus
 						Vector2Df p2 = pivot_points[i + 1];
 
 						// Расстояние
-						Single distance1 = (p1 - p0).Length;
-						Single distance2 = (p2 - p1).Length;
+						var distance1 = (p1 - p0).Length;
+						var distance2 = (p2 - p1).Length;
 
 						Vector2Df q0 = p1 + (distance1 * 0.5f * Vector2Df.Left);
 						Vector2Df q1 = p1 + (distance2 * 0.5f * Vector2Df.Right);
@@ -769,7 +769,7 @@ namespace Lotus
 				}
 
 				// Копируем данные
-				for (Int32 i = 0; i < points.Count; i++)
+				for (var i = 0; i < points.Count; i++)
 				{
 					mControlPoints[i] = points[i];
 				}
@@ -896,7 +896,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Vector2Df CalculateCurvePoint(Int32 curve_index, Single time)
 			{
-				Int32 node_index = curve_index * 3;
+				var node_index = curve_index * 3;
 
 				return CBezierCubic2D.CalculatePoint(time,
 					ref mControlPoints[node_index],
@@ -971,7 +971,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetHandleMode(Int32 index, TBezierHandleMode mode)
 			{
-				Int32 mode_index = (index + 1) / 3;
+				var mode_index = (index + 1) / 3;
 				mHandleModes[mode_index] = mode;
 
 				if (mIsClosed)
@@ -991,7 +991,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

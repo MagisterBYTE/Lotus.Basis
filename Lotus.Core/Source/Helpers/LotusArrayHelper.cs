@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -18,10 +18,12 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup CoreHelpers Вспомогательная подсистема
-		//! Вспомогательная подсистема содержит хелперы расширяющие возможности базовых типов платформы NET
-		//! \ingroup Core
-		/*@{*/
+		/**
+         * \defgroup CoreHelpers Вспомогательная подсистема
+         * \ingroup Core
+         * \brief Вспомогательная подсистема содержит хелперы расширяющие возможности базовых типов платформы NET.
+         * @{
+         */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий дополнительные методы для работы с массивом
@@ -85,8 +87,8 @@ namespace Lotus
 			{
 				if(array.Length < current_count + items.Length)
 				{
-					Int32 max_size = current_count + items.Length;
-					TType[] new_arary = new TType[max_size];
+					var max_size = current_count + items.Length;
+					var new_arary = new TType[max_size];
 					Array.Copy(array, new_arary, current_count);
 					array = items;
 				}
@@ -167,7 +169,7 @@ namespace Lotus
 				TType[] temp = array;
 				array = new TType[array.Length - count >= 0 ? array.Length - count : 0];
 				Array.Copy(temp, array, start);
-				Int32 index = start + count;
+				var index = start + count;
 				if (index < temp.Length)
 				{
 					Array.Copy(temp, index, array, start, temp.Length - index);
@@ -270,7 +272,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TType[] Remove<TType>(TType[] array, in TType item)
 			{
-				Int32 index = Array.IndexOf(array, item);
+				var index = Array.IndexOf(array, item);
 				if (index >= 0)
 				{
 					return RemoveAt(array, index);
@@ -290,7 +292,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TType[] RemoveAll<TType>(TType[] array, in TType item)
 			{
-				Int32 index = 0;
+				var index = 0;
 				do
 				{
 					index = Array.IndexOf(array, item);
@@ -316,15 +318,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TType[] Shift<TType>(TType[] array, Int32 start_index, Int32 offset, Int32 count)
 			{
-				TType[] result = (TType[])array.Clone();
+				var result = (TType[])array.Clone();
 
 				start_index = start_index < 0 ? 0 : (start_index >= result.Length ? result.Length - 1 : start_index);
 				count = count < 0 ? 0 : (start_index + count >= result.Length ? result.Length - start_index - 1 : count);
 				offset = start_index + offset < 0 ? -start_index : (start_index + count + offset >= result.Length ? result.Length - start_index - count : offset);
 
-				Int32 abs_offset = Math.Abs(offset);
-				TType[] items = new TType[count]; // What we want to move
-				TType[] dec = new TType[abs_offset]; // What is going to replace the thing we move
+				var abs_offset = Math.Abs(offset);
+				var items = new TType[count]; // What we want to move
+				var dec = new TType[abs_offset]; // What is going to replace the thing we move
 				Array.Copy(array, start_index, items, 0, count);
 				Array.Copy(array, start_index + (offset >= 0 ? count : offset), dec, 0, abs_offset);
 				Array.Copy(dec, 0, result, start_index + (offset >= 0 ? 0 : offset + count), abs_offset);
@@ -362,7 +364,7 @@ namespace Lotus
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

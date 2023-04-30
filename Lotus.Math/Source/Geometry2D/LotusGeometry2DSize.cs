@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Runtime.InteropServices;
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry2D
-		/*@{*/
+		/** \addtogroup MathGeometry2D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Структура размерности в двухмерном пространстве
@@ -78,8 +78,8 @@ namespace Lotus
 			//-------------------------------------------------------------------------------------------------------------
 			public static Size2D DeserializeFromString(String data)
 			{
-				Size2D size = new Size2D();
-				String[] size_data = data.Split(';');
+				var size = new Size2D();
+				var size_data = data.Split(';');
 				size.Width = XMath.ParseDouble(size_data[0]);
 				size.Height = XMath.ParseDouble(size_data[1]);
 				return size;
@@ -216,7 +216,7 @@ namespace Lotus
 				{
 					if (typeof(Size2D) == obj.GetType())
 					{
-						Size2D size = (Size2D)obj;
+						var size = (Size2D)obj;
 						return Equals(size);
 					}
 				}
@@ -597,8 +597,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Size2Df DeserializeFromString(String data)
 			{
-				Size2Df size = new Size2Df();
-				String[] size_data = data.Split(';');
+				var size = new Size2Df();
+				var size_data = data.Split(';');
 				size.Width = XMath.ParseSingle(size_data[0]);
 				size.Height = XMath.ParseSingle(size_data[1]);
 				return size;
@@ -735,7 +735,7 @@ namespace Lotus
 				{
 					if (typeof(Size2Df) == obj.GetType())
 					{
-						Size2Df size = (Size2Df)obj;
+						var size = (Size2Df)obj;
 						return Equals(size);
 					}
 				}
@@ -1099,7 +1099,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

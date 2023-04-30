@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.IO;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreSerialization
-		/*@{*/
+		/** \addtogroup CoreSerialization
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Диспетчер подсистемы сериализации данных для сохранения/загрузки объектов в различных форматах
@@ -58,7 +58,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SaveTo(String file_name, System.Object instance)
 			{
-				String ext = Path.GetExtension(file_name).ToLower();
+				var ext = Path.GetExtension(file_name).ToLower();
 				switch (ext)
 				{
 					case XFileExtension.XML_D:
@@ -105,7 +105,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static System.Object LoadFrom(String file_name)
 			{
-				String ext = Path.GetExtension(file_name).ToLower();
+				var ext = Path.GetExtension(file_name).ToLower();
 				System.Object result = null;
 				switch (ext)
 				{
@@ -154,7 +154,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TResultType LoadFrom<TResultType>(String file_name)
 			{
-				String ext = Path.GetExtension(file_name).ToLower();
+				var ext = Path.GetExtension(file_name).ToLower();
 				TResultType result = default;
 				switch (ext)
 				{
@@ -204,7 +204,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void UpdateFrom(System.Object instance, String file_name)
 			{
-				String ext = Path.GetExtension(file_name).ToLower();
+				var ext = Path.GetExtension(file_name).ToLower();
 				switch (ext)
 				{
 					case XFileExtension.XML_D:
@@ -239,7 +239,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

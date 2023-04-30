@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreExtension
-		/*@{*/
+		/** \addtogroup CoreExtension
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы расширения потоков чтения и записи XML данных для сериализации 
@@ -125,10 +125,10 @@ namespace Lotus
 				if (integers != null && integers.Count > 0)
 				{
 					xml_writer.WriteStartAttribute(name);
-					StringBuilder sb = new StringBuilder(integers.Count * 4);
+					var sb = new StringBuilder(integers.Count * 4);
 
 					// Записываем данные по порядку
-					for (Int32 i = 0; i < integers.Count; i++)
+					for (var i = 0; i < integers.Count; i++)
 					{
 						// Для лучшей читаемости
 						if (length_string > 0)
@@ -161,10 +161,10 @@ namespace Lotus
 				if (floats != null && floats.Count > 0)
 				{
 					xml_writer.WriteStartAttribute(name);
-					StringBuilder sb = new StringBuilder(floats.Count * 4);
+					var sb = new StringBuilder(floats.Count * 4);
 
 					// Записываем данные по порядку
-					for (Int32 i = 0; i < floats.Count; i++)
+					for (var i = 0; i < floats.Count; i++)
 					{
 						// Для лучшей читаемости
 						if (length_string > 0)
@@ -197,10 +197,10 @@ namespace Lotus
 				if (doubles != null && doubles.Count > 0)
 				{
 					xml_writer.WriteStartAttribute(name);
-					StringBuilder sb = new StringBuilder(doubles.Count * 4);
+					var sb = new StringBuilder(doubles.Count * 4);
 
 					// Записываем данные по порядку
-					for (Int32 i = 0; i < doubles.Count; i++)
+					for (var i = 0; i < doubles.Count; i++)
 					{
 						// Для лучшей читаемости
 						if (length_string > 0)
@@ -428,12 +428,12 @@ namespace Lotus
 				String value;
 				if ((value = xml_reader.GetAttribute(name)) != null)
 				{
-					String[] values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
+					var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
 					if (values.Length > 0)
 					{
-						Int32[] massive = new Int32[values.Length];
+						var massive = new Int32[values.Length];
 
-						for (Int32 i = 0; i < values.Length; i++)
+						for (var i = 0; i < values.Length; i++)
 						{
 							massive[i] = Int32.Parse(values[i]);
 						}
@@ -457,12 +457,12 @@ namespace Lotus
 				String value;
 				if ((value = xml_reader.GetAttribute(name)) != null)
 				{
-					String[] values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
+					var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
 					if (values.Length > 0)
 					{
-						Single[] massive = new Single[values.Length];
+						var massive = new Single[values.Length];
 
-						for (Int32 i = 0; i < values.Length; i++)
+						for (var i = 0; i < values.Length; i++)
 						{
 							massive[i] = XNumbers.ParseSingle(values[i]);
 						}
@@ -486,12 +486,12 @@ namespace Lotus
 				String value;
 				if ((value = xml_reader.GetAttribute(name)) != null)
 				{
-					String[] values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
+					var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
 					if (values.Length > 0)
 					{
-						Double[] massive = new Double[values.Length];
+						var massive = new Double[values.Length];
 
-						for (Int32 i = 0; i < values.Length; i++)
+						for (var i = 0; i < values.Length; i++)
 						{
 							massive[i] = XNumbers.ParseDouble(values[i]);
 						}
@@ -667,7 +667,7 @@ namespace Lotus
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
 						return (@this.Attributes[upper_name].Value);
@@ -692,15 +692,15 @@ namespace Lotus
 			{
 				if (@this.Attributes[attribute_name] != null)
 				{
-					String value = @this.Attributes[attribute_name].Value;
+					var value = @this.Attributes[attribute_name].Value;
 					return (XBoolean.Parse(value));
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						String value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name].Value;
 						return (XBoolean.Parse(value));
 					}
 					else
@@ -723,15 +723,15 @@ namespace Lotus
 			{
 				if (@this.Attributes[attribute_name] != null)
 				{
-					String value = @this.Attributes[attribute_name].Value;
+					var value = @this.Attributes[attribute_name].Value;
 					return (Int32.Parse(value));
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						String value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name].Value;
 						return (Int32.Parse(value));
 					}
 					else
@@ -754,15 +754,15 @@ namespace Lotus
 			{
 				if (@this.Attributes[attribute_name] != null)
 				{
-					String value = @this.Attributes[attribute_name].Value;
+					var value = @this.Attributes[attribute_name].Value;
 					return (Int64.Parse(value));
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						String value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name].Value;
 						return (Int64.Parse(value));
 					}
 					else
@@ -785,15 +785,15 @@ namespace Lotus
 			{
 				if (@this.Attributes[attribute_name] != null)
 				{
-					String value = @this.Attributes[attribute_name].Value;
+					var value = @this.Attributes[attribute_name].Value;
 					return (XNumbers.ParseSingle(value, default_value));
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						String value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name].Value;
 						return (XNumbers.ParseSingle(value, default_value));
 					}
 					else
@@ -816,15 +816,15 @@ namespace Lotus
 			{
 				if (@this.Attributes[attribute_name] != null)
 				{
-					String value = @this.Attributes[attribute_name].Value;
+					var value = @this.Attributes[attribute_name].Value;
 					return (XNumbers.ParseDouble(value, default_value));
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						String value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name].Value;
 						return (XNumbers.ParseDouble(value, default_value));
 					}
 					else
@@ -847,15 +847,15 @@ namespace Lotus
 			{
 				if (@this.Attributes[attribute_name] != null)
 				{
-					String value = @this.Attributes[attribute_name].Value;
+					var value = @this.Attributes[attribute_name].Value;
 					return (XNumbers.ParseDecimal(value, default_value));
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						String value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name].Value;
 						return (XNumbers.ParseDecimal(value, default_value));
 					}
 					else
@@ -879,15 +879,15 @@ namespace Lotus
 			{
 				if (@this.Attributes[attribute_name] != null)
 				{
-					String value = @this.Attributes[attribute_name].Value;
+					var value = @this.Attributes[attribute_name].Value;
 					return (TEnum)Enum.Parse(typeof(TEnum), value);
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						String value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name].Value;
 						return (TEnum)Enum.Parse(typeof(TEnum), value);
 					}
 					else
@@ -909,15 +909,15 @@ namespace Lotus
 			{
 				if (@this.Attributes[attribute_name] != null)
 				{
-					String value = @this.Attributes[attribute_name].Value;
+					var value = @this.Attributes[attribute_name].Value;
 					return (DateTime.Parse(value));
 				}
 				else
 				{
-					String upper_name = attribute_name.ToUpper();
+					var upper_name = attribute_name.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						String value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name].Value;
 						return (DateTime.Parse(value));
 					}
 					else
@@ -960,7 +960,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

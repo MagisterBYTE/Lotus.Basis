@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -17,8 +17,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreIdentifiers
-		/*@{*/
+		/** \addtogroup CoreIdentifiers
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий работу генерации идентификаторов и уникальных значений
@@ -54,8 +54,8 @@ namespace Lotus
 				else
 				{
 					DateTime current_date = DateTime.UtcNow;
-					Int64 elapsed_ticks = current_date.Ticks - StartDate.Ticks;
-					Int64 elapsed_millisecond = elapsed_ticks / 100000;
+					var elapsed_ticks = current_date.Ticks - StartDate.Ticks;
+					var elapsed_millisecond = elapsed_ticks / 100000;
 
 					Int64 result = 0;
 
@@ -90,15 +90,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static DateTime UnpackIdToDateTime(Int64 id)
 			{
-				Int64 elapsed_millisecond = XPacked.UnpackLong(id, 28, 36);
-				Int64 elapsed_ticks = elapsed_millisecond * 100000;
-				DateTime result = new DateTime(StartDate.Ticks + elapsed_ticks);
+				var elapsed_millisecond = XPacked.UnpackLong(id, 28, 36);
+				var elapsed_ticks = elapsed_millisecond * 100000;
+				var result = new DateTime(StartDate.Ticks + elapsed_ticks);
 				return (result);
 			}
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry2D
-		/*@{*/
+		/** \addtogroup MathGeometry2D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Двухмерный вектор
@@ -91,8 +91,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Cos(in Vector2D from, in Vector2D to)
 			{
-				Double dot = (from.X * to.X) + (from.Y * to.Y);
-				Double ll = from.Length * to.Length;
+				var dot = (from.X * to.X) + (from.Y * to.Y);
+				var ll = from.Length * to.Length;
 				return dot / ll;
 			}
 
@@ -106,9 +106,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Angle(in Vector2D from, in Vector2D to)
 			{
-				Double dot = (from.X * to.X) + (from.Y * to.Y);
-				Double ll = from.Length * to.Length;
-				Double csv = dot / ll;
+				var dot = (from.X * to.X) + (from.Y * to.Y);
+				var ll = from.Length * to.Length;
+				var csv = dot / ll;
 				return Math.Acos(csv) * XMath.RadianToDegree_d;
 			}
 
@@ -122,8 +122,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Distance(in Vector2D a, in Vector2D b)
 			{
-				Double x = b.X - a.X;
-				Double y = b.Y - a.Y;
+				var x = b.X - a.X;
+				var y = b.Y - a.Y;
 
 				return Math.Sqrt((x * x) + (y * y));
 			}
@@ -234,7 +234,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Reflect(in Vector2D vector, in Vector2D normal, out Vector2D result)
 			{
-				Double dot = (vector.X * normal.X) + (vector.Y * normal.Y);
+				var dot = (vector.X * normal.X) + (vector.Y * normal.Y);
 
 				result.X = vector.X - (2.0 * dot * normal.X);
 				result.Y = vector.Y - (2.0 * dot * normal.Y);
@@ -283,8 +283,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2D DeserializeFromString(String data)
 			{
-				Vector2D vector = new Vector2D();
-				String[] vector_data = data.Split(';');
+				var vector = new Vector2D();
+				var vector_data = data.Split(';');
 				vector.X = XMath.ParseDouble(vector_data[0]);
 				vector.Y = XMath.ParseDouble(vector_data[1]);
 				return vector;
@@ -327,7 +327,7 @@ namespace Lotus
 			{
 				get
 				{
-					Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
 					return new Vector2D(X * inv_lentgh, Y * inv_lentgh);
 				}
 			}
@@ -413,7 +413,7 @@ namespace Lotus
 				{
 					if (typeof(Vector2D) == obj.GetType())
 					{
-						Vector2D vector = (Vector2D)obj;
+						var vector = (Vector2D)obj;
 						return Equals(vector);
 					}
 				}
@@ -809,7 +809,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
+				var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
 				X *= inv_lentgh;
 				Y *= inv_lentgh;
 			}
@@ -823,8 +823,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double Distance(in Vector2D vector)
 			{
-				Double x = vector.X - X;
-				Double y = vector.Y - Y;
+				var x = vector.X - X;
+				var y = vector.Y - Y;
 
 				return Math.Sqrt((x * x) + (y * y));
 			}
@@ -1079,8 +1079,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Cos(in Vector2Df from, in Vector2Df to)
 			{
-				Single dot = (from.X * to.X) + (from.Y * to.Y);
-				Single ll = from.Length * to.Length;
+				var dot = (from.X * to.X) + (from.Y * to.Y);
+				var ll = from.Length * to.Length;
 				return dot / ll;
 			}
 
@@ -1094,9 +1094,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Angle(in Vector2Df from, in Vector2Df to)
 			{
-				Single dot = (from.X * to.X) + (from.Y * to.Y);
-				Single ll = from.Length * to.Length;
-				Single csv = dot / ll;
+				var dot = (from.X * to.X) + (from.Y * to.Y);
+				var ll = from.Length * to.Length;
+				var csv = dot / ll;
 				return (Single)(Math.Acos(csv) * XMath.RadianToDegree_d);
 			}
 
@@ -1110,8 +1110,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Distance(in Vector2Df a, in Vector2Df b)
 			{
-				Single x = b.X - a.X;
-				Single y = b.Y - a.Y;
+				var x = b.X - a.X;
+				var y = b.Y - a.Y;
 
 				return (Single)Math.Sqrt((x * x) + (y * y));
 			}
@@ -1235,7 +1235,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Reflect(in Vector2Df vector, in Vector2Df normal, out Vector2Df result)
 			{
-				Single dot = (vector.X * normal.X) + (vector.Y * normal.Y);
+				var dot = (vector.X * normal.X) + (vector.Y * normal.Y);
 
 				result.X = vector.X - (2.0f * dot * normal.X);
 				result.Y = vector.Y - (2.0f * dot * normal.Y);
@@ -1284,8 +1284,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df DeserializeFromString(String data)
 			{
-				Vector2Df vector = new Vector2Df();
-				String[] vector_data = data.Split(';');
+				var vector = new Vector2Df();
+				var vector_data = data.Split(';');
 				vector.X = XMath.ParseSingle(vector_data[0]);
 				vector.Y = XMath.ParseSingle(vector_data[1]);
 				return vector;
@@ -1328,7 +1328,7 @@ namespace Lotus
 			{
 				get
 				{
-					Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
 					return new Vector2Df(X * inv_lentgh, Y * inv_lentgh);
 				}
 			}
@@ -1440,7 +1440,7 @@ namespace Lotus
 				{
 					if (typeof(Vector2Df) == obj.GetType())
 					{
-						Vector2Df vector = (Vector2Df)obj;
+						var vector = (Vector2Df)obj;
 						return Equals(vector);
 					}
 				}
@@ -1871,7 +1871,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
+				var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
 				X *= inv_lentgh;
 				Y *= inv_lentgh;
 			}
@@ -1898,8 +1898,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single Distance(in Vector2Df vector)
 			{
-				Single x = vector.X - X;
-				Single y = vector.Y - Y;
+				var x = vector.X - X;
+				var y = vector.Y - Y;
 
 				return (Single)Math.Sqrt((x * x) + (y * y));
 			}
@@ -2199,7 +2199,7 @@ namespace Lotus
 			public static Single Cos(in Vector2Di from, in Vector2Di to)
 			{
 				Single dot = (from.X * to.X) + (from.Y * to.Y);
-				Single ll = from.Length * to.Length;
+				var ll = from.Length * to.Length;
 				return dot / ll;
 			}
 
@@ -2214,8 +2214,8 @@ namespace Lotus
 			public static Single Angle(in Vector2Di from, in Vector2Di to)
 			{
 				Single dot = (from.X * to.X) + (from.Y * to.Y);
-				Single ll = from.Length * to.Length;
-				Single csv = dot / ll;
+				var ll = from.Length * to.Length;
+				var csv = dot / ll;
 				return (Int32)(Math.Acos(csv) * XMath.RadianToDegree_d);
 			}
 
@@ -2340,8 +2340,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Di DeserializeFromString(String data)
 			{
-				Vector2Di vector = new Vector2Di();
-				String[] vector_data = data.Split(';');
+				var vector = new Vector2Di();
+				var vector_data = data.Split(';');
 				vector.X = Int32.Parse(vector_data[0]);
 				vector.Y = Int32.Parse(vector_data[1]);
 				return vector;
@@ -2512,7 +2512,7 @@ namespace Lotus
 				{
 					if (typeof(Vector2Di) == obj.GetType())
 					{
-						Vector2Di vector = (Vector2Di)obj;
+						var vector = (Vector2Di)obj;
 						return Equals(vector);
 					}
 				}
@@ -3033,7 +3033,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

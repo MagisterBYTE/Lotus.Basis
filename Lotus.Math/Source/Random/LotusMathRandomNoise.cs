@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -18,8 +18,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathRandom
-		/*@{*/
+		/** \addtogroup MathRandom
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий различных методы генерации шума
@@ -78,15 +78,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single SmoothNoiseSingle2D(Single x, Single y)
 			{
-				Single corners = (NoiseSingle2D(x - 1, y - 1) +
+				var corners = (NoiseSingle2D(x - 1, y - 1) +
 					NoiseSingle2D(x + 1, y - 1) +
 					NoiseSingle2D(x - 1, y + 1) +
 					NoiseSingle2D(x + 1, y + 1)) / 16;
-				Single sides = (NoiseSingle2D(x - 1, y) +
+				var sides = (NoiseSingle2D(x - 1, y) +
 					NoiseSingle2D(x + 1, y) +
 					NoiseSingle2D(x, y - 1) +
 					NoiseSingle2D(x, y + 1)) / 8;
-				Single center = NoiseSingle2D(x, y) / 4;
+				var center = NoiseSingle2D(x, y) / 4;
 
 				return corners + sides + center;
 			}
@@ -102,25 +102,25 @@ namespace Lotus
 			public static Single InterpolatedNoiseSingle2D(Single x, Single y)
 			{
 				// Вычисляем целую и дробную часть по X
-				Int32 integer_x = (Int32)x;
-				Single fractional_x = x - integer_x;
+				var integer_x = (Int32)x;
+				var fractional_x = x - integer_x;
 
 				// Вычисляем целую и дробную часть по Y
-				Int32 integer_y = (Int32)y;
-				Single fractional_y = y - integer_y;
+				var integer_y = (Int32)y;
+				var fractional_y = y - integer_y;
 
-				Int32 integer_x1 = integer_x + 1;
-				Int32 integer_y1 = integer_y + 1;
+				var integer_x1 = integer_x + 1;
+				var integer_y1 = integer_y + 1;
 
 				// Получаем 4 сглаженных значения
-				Single v1 = SmoothNoiseSingle2D(integer_x, integer_y);
-				Single v2 = SmoothNoiseSingle2D(integer_x1, integer_y);
-				Single v3 = SmoothNoiseSingle2D(integer_x, integer_y1);
-				Single v4 = SmoothNoiseSingle2D(integer_x1, integer_y1);
+				var v1 = SmoothNoiseSingle2D(integer_x, integer_y);
+				var v2 = SmoothNoiseSingle2D(integer_x1, integer_y);
+				var v3 = SmoothNoiseSingle2D(integer_x, integer_y1);
+				var v4 = SmoothNoiseSingle2D(integer_x1, integer_y1);
 
 				// Интерполируем значения 1 и 2 пары и производим интерполяцию между ними
-				Single i1 = XMathInterpolation.Lerp(v1, v2, fractional_x);
-				Single i2 = XMathInterpolation.Lerp(v3, v4, fractional_x);
+				var i1 = XMathInterpolation.Lerp(v1, v2, fractional_x);
+				var i2 = XMathInterpolation.Lerp(v3, v4, fractional_x);
 
 				return XMathInterpolation.Lerp(i1, i2, fractional_y);
 			}
@@ -140,9 +140,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 NoiseInteger1D_v1(Int32 value)
 			{
-				Int32 m = value;
+				var m = value;
 				m = (m >> 13) ^ m;
-				Int32 nn = ((m * ((m * m * 60493) + 19990303)) + 1376312589) & 0x7fffffff;
+				var nn = ((m * ((m * m * 60493) + 19990303)) + 1376312589) & 0x7fffffff;
 				return nn;
 			}
 
@@ -159,13 +159,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 NoiseInteger1D_v2(Int32 value)
 			{
-				UInt64 state = (UInt64)value;
+				var state = (UInt64)value;
 				state = state * state;
 				state = (state * 6364136223846793005UL) + 1442695040888963407UL;
-				Int64 xorshifted = (Int64)(((state >> 18) ^ state) >> 27);
-				Int32 rot = (Int32)(state >> 59);
-				Int64 v1 = xorshifted >> rot;
-				Int64 v2 = xorshifted << (-rot & 31);
+				var xorshifted = (Int64)(((state >> 18) ^ state) >> 27);
+				var rot = (Int32)(state >> 59);
+				var v1 = xorshifted >> rot;
+				var v2 = xorshifted << (-rot & 31);
 				return (Int32)(v1 | v2);
 			}
 			#endregion
@@ -184,8 +184,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 NoiseInteger2D_v1(Int32 x, Int32 y)
 			{
-				Int32 m_w = 43;//x * 7 + y * 17 + x * y + 1; //x * 43 + 1;    /* must not be zero, nor 0x464fffff */
-				Int32 m_z = ((x * y * 57) + y) ^ (2 + (x * 7) + 1);    /* must not be zero, nor 0x9068ffff */
+				var m_w = 43;//x * 7 + y * 17 + x * y + 1; //x * 43 + 1;    /* must not be zero, nor 0x464fffff */
+				var m_z = ((x * y * 57) + y) ^ (2 + (x * 7) + 1);    /* must not be zero, nor 0x9068ffff */
 
 				m_z = (36969 * (m_z & 65535)) + (m_z >> 16);
 				m_w = (18000 * (m_w & 65535)) + (m_w >> 16);
@@ -207,7 +207,7 @@ namespace Lotus
 			{
 				const Int32 generator_noise_x = 1619;
 				const Int32 generator_noise_y = 31337;
-				Int32 n = ((generator_noise_x * x) + (generator_noise_y * y) + Seed) & 0x7fffffff;
+				var n = ((generator_noise_x * x) + (generator_noise_y * y) + Seed) & 0x7fffffff;
 				n = (n >> 13) ^ n;
 				return ((n * ((n * n * 60493) + 19990303)) + 1376312589) & 0x7fffffff;
 			}
@@ -222,7 +222,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single NoiseSingle2D_v1(Single x, Single y)
 			{
-				UInt32 u = (UInt32)NoiseInteger2D_v1((Int32)x, (Int32)y);
+				var u = (UInt32)NoiseInteger2D_v1((Int32)x, (Int32)y);
 				return (u + 1.0f) * 2.328306435454494e-10f;
 			}
 
@@ -242,7 +242,7 @@ namespace Lotus
 
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

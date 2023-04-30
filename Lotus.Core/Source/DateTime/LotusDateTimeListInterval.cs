@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreDateTime
-		/*@{*/
+		/** \addtogroup CoreDateTime
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Коллекция содержащая объекты реализующие интерфейс <see cref="ILotusDateTimeable"/> с определённым временным интервалом
@@ -322,7 +322,7 @@ namespace Lotus
 					return (LastIndex);
 				}
 
-				for (Int32 i = 1; i < mCount; i++)
+				for (var i = 1; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].Date == date)
 					{
@@ -351,9 +351,9 @@ namespace Lotus
 			{
 				if (index > 0)
 				{
-					Int32 start_index = (Int32)Math.Floor(index);
-					Int32 end_index = (Int32)Math.Ceiling(index);
-					Single delta = index - start_index;
+					var start_index = (Int32)Math.Floor(index);
+					var end_index = (Int32)Math.Ceiling(index);
+					var delta = index - start_index;
 
 					return (mArrayOfItems[start_index].Date.GetInterpolatedDate(mArrayOfItems[end_index].Date, delta));
 				}
@@ -371,9 +371,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CountWeekends()
 			{
-				Int32 count = 0;
+				var count = 0;
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					TItemTimeable item = mArrayOfItems[i];
 					if (item.Date.DayOfWeek == DayOfWeek.Sunday || item.Date.DayOfWeek == DayOfWeek.Saturday)
@@ -393,7 +393,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 RemoveWeekends()
 			{
-				Int32 count = RemoveAll((TItemTimeable item) =>
+				var count = RemoveAll((TItemTimeable item) =>
 				{
 					if (item.Date.DayOfWeek == DayOfWeek.Sunday || item.Date.DayOfWeek == DayOfWeek.Saturday)
 					{
@@ -448,11 +448,11 @@ namespace Lotus
 			public virtual TResult GetListPeriod<TResult>(Int32 start_index, Int32 end_index)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				TResult list = new TResult();
+				var list = new TResult();
 				list.TimeInterval = mTimeInterval;
 
 				// Это не количество, а индекс поэтому и равно
-				for (Int32 i = start_index; i <= end_index; i++)
+				for (var i = start_index; i <= end_index; i++)
 				{
 					list.Add(mArrayOfItems[i]);
 				}
@@ -473,8 +473,8 @@ namespace Lotus
 			public virtual TResult GetListPeriod<TResult>(DateTime start_date, DateTime end_data)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				Int32 start_index = GetIndexFromDate(start_date);
-				Int32 end_index = GetIndexFromDate(end_data);
+				var start_index = GetIndexFromDate(start_date);
+				var end_index = GetIndexFromDate(end_data);
 
 				return (GetListPeriod<TResult>(start_index, end_index));
 			}
@@ -491,11 +491,11 @@ namespace Lotus
 			public virtual TResult DublicateListPeriod<TResult>(Int32 start_index, Int32 end_index)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				TResult list = new TResult();
+				var list = new TResult();
 				list.TimeInterval = mTimeInterval;
 
 				//Это не количество, а индекс поэтому и равно
-				for (Int32 i = start_index; i <= end_index; i++)
+				for (var i = start_index; i <= end_index; i++)
 				{
 					list.Add((TItemTimeable)mArrayOfItems[i].Clone());
 				}
@@ -516,8 +516,8 @@ namespace Lotus
 			public virtual TResult DublicateListPeriod<TResult>(DateTime start_date, DateTime end_data)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				Int32 start_index = GetIndexFromDate(start_date);
-				Int32 end_index = GetIndexFromDate(end_data);
+				var start_index = GetIndexFromDate(start_date);
+				var end_index = GetIndexFromDate(end_data);
 
 				return (DublicateListPeriod<TResult>(start_index, end_index));
 			}
@@ -599,7 +599,7 @@ namespace Lotus
 										list = new TResult();
 										list.TimeInterval = TTimeInterval.Weekly;
 
-										for (Int32 i = 0; i < mCount; i++)
+										for (var i = 0; i < mCount; i++)
 										{
 											if (mArrayOfItems[i].Date.DayOfWeek == DayOfWeek.Monday)
 											{
@@ -613,7 +613,7 @@ namespace Lotus
 										list = new TResult();
 										list.TimeInterval = TTimeInterval.Monthly;
 
-										for (Int32 i = 0; i < mCount; i++)
+										for (var i = 0; i < mCount; i++)
 										{
 											if (mArrayOfItems[i].Date.Day == 1)
 											{
@@ -649,7 +649,7 @@ namespace Lotus
 										list = new TResult();
 										list.TimeInterval = TTimeInterval.Monthly;
 
-										for (Int32 i = 0; i < mCount; i++)
+										for (var i = 0; i < mCount; i++)
 										{
 											if (mArrayOfItems[i].Date.Day == 1)
 											{
@@ -690,15 +690,15 @@ namespace Lotus
 			public virtual TResult GetConvertedListPeriodAndInterval<TResult>(TTimeInterval time_interval, DateTime start_date, DateTime end_data)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				Int32 index_from = GetIndexFromDate(start_date);
-				Int32 index_to = GetIndexFromDate(end_data);
+				var index_from = GetIndexFromDate(start_date);
+				var index_to = GetIndexFromDate(end_data);
 
 				return (GetConvertedListPeriodAndInterval<TResult>(time_interval, index_from, index_to));
 			}
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

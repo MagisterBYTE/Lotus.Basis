@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreCollections
-		/*@{*/
+		/** \addtogroup CoreCollections
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
@@ -179,7 +179,7 @@ namespace Lotus
 
 				if(mCount >= mMaxCount)
 				{
-					mMaxCount = mMaxCount << 1;
+					mMaxCount <<= 1;
 					Array.Resize(ref mDenseItems, mMaxCount);
 					Array.Resize(ref mSparseItems, mMaxCount);
 				}
@@ -205,9 +205,9 @@ namespace Lotus
 					Array.Resize(ref mSparseItems, mMaxCount);
 				}
 
-				for (Int32 i = 0; i < values.Length; i++)
+				for (var i = 0; i < values.Length; i++)
 				{
-					Int32 value = values[i];
+					var value = values[i];
 
 					if (value >= mMaxCount)
 					{
@@ -255,9 +255,9 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public void RemoveValues(params Int32[] values)
 			{
-				for (Int32 i = 0; i < values.Length; i++)
+				for (var i = 0; i < values.Length; i++)
 				{
-					Int32 value = values[i];
+					var value = values[i];
 					if (Contains(value))
 					{
 						// put the value at the end of the dense array into the slot of the removed value
@@ -470,7 +470,7 @@ namespace Lotus
 
 				if (mCount >= mMaxCount)
 				{
-					mMaxCount = mMaxCount << 1;
+					mMaxCount <<= 1;
 					Array.Resize(ref mDenseItems, mMaxCount);
 					Array.Resize(ref mSparseItems, mMaxCount);
 					Array.Resize(ref mItems, mMaxCount);
@@ -513,9 +513,9 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public void RemoveValues(params Int32[] indexes)
 			{
-				for (Int32 i = 0; i < indexes.Length; i++)
+				for (var i = 0; i < indexes.Length; i++)
 				{
-					Int32 index = indexes[i];
+					var index = indexes[i];
 					if (Contains(index))
 					{
 						// put the value at the end of the dense array into the slot of the removed value
@@ -619,7 +619,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

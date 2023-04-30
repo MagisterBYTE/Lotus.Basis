@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreFileSystem
-		/*@{*/
+		/** \addtogroup CoreFileSystem
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы для работы с расширениями файлов
@@ -105,7 +105,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsTextFileName(String file_name)
 			{
-				String exe = Path.GetExtension(file_name).ToLower();
+				var exe = Path.GetExtension(file_name).ToLower();
 				if(exe == TXT_D)
 				{
 					return (true);
@@ -123,7 +123,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsBinaryFileName(String file_name)
 			{
-				String exe = Path.GetExtension(file_name).ToLower();
+				var exe = Path.GetExtension(file_name).ToLower();
 				if (exe == BIN_D || exe == BYTES_D)
 				{
 					return (true);
@@ -141,7 +141,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsXmlFileName(String file_name)
 			{
-				String exe = Path.GetExtension(file_name).ToLower();
+				var exe = Path.GetExtension(file_name).ToLower();
 				if (exe == XML_D)
 				{
 					return (true);
@@ -159,7 +159,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsJSONFileName(String file_name)
 			{
-				String exe = Path.GetExtension(file_name).ToLower();
+				var exe = Path.GetExtension(file_name).ToLower();
 				if (exe == JSON_D)
 				{
 					return (true);
@@ -198,7 +198,7 @@ namespace Lotus
 				file_name = file_name.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
 #endif
 
-				String result = "";
+				var result = "";
 				if(file_name.IndexOf(Path.DirectorySeparatorChar) > -1 || file_name.IndexOf(Path.AltDirectorySeparatorChar) > -1)
 				{
 #if UNITY_2017_1_OR_NEWER
@@ -250,10 +250,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetPathForRenameFile(String path, String new_file_name)
 			{
-				String dir = Path.GetDirectoryName(path);
-				String exe = Path.GetExtension(path);
+				var dir = Path.GetDirectoryName(path);
+				var exe = Path.GetExtension(path);
 
-				String result = "";
+				var result = "";
 				if (Path.HasExtension(new_file_name))
 				{
 					result = Path.Combine(dir, new_file_name);
@@ -299,7 +299,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

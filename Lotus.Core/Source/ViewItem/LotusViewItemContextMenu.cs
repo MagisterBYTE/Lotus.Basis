@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -25,8 +25,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreViewItem
-		/*@{*/
+		/** \addtogroup CoreViewItem
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Класс инкапсулирующий элемент контекстного меню
@@ -130,7 +130,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CUIContextMenuItem Duplicate(CParameters parameters = null)
 			{
-				CUIContextMenuItem item = new CUIContextMenuItem();
+				var item = new CUIContextMenuItem();
 				item.ViewItem = ViewItem;
 				item.OnAction = OnAction;
 				item.OnAfterAction = OnAfterAction;
@@ -194,7 +194,7 @@ namespace Lotus
 			{
 				if (view_item != null && view_item.DataContext != null)
 				{
-					String file_name = XFileDialog.Open();
+					var file_name = XFileDialog.Open();
 					if (file_name.IsExists())
 					{
 						// Уведомляем о начале загрузки
@@ -227,7 +227,7 @@ namespace Lotus
 			{
 				if (view_item != null && view_item.DataContext != null)
 				{
-					String file_name = XFileDialog.Save();
+					var file_name = XFileDialog.Save();
 					if (file_name.IsExists())
 					{
 						// Уведомляем о начале сохранения 
@@ -302,7 +302,7 @@ namespace Lotus
 			{
 				if (view_item != null && view_item.IOwner is IList list)
 				{
-					Int32 index = list.IndexOf(view_item);
+					var index = list.IndexOf(view_item);
 					if(index > 0)
 					{
 						list.MoveObjectUp(index);
@@ -320,7 +320,7 @@ namespace Lotus
 			{
 				if (view_item != null && view_item.IOwner is IList list)
 				{
-					Int32 index = list.IndexOf(view_item);
+					var index = list.IndexOf(view_item);
 					if (index > -1 && index < list.Count - 1)
 					{
 						list.MoveObjectDown(index);
@@ -442,7 +442,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreCommonTypes
-		/*@{*/
+		/** \addtogroup CoreCommonTypes
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Определение допустимых типов значений
@@ -151,7 +151,7 @@ namespace Lotus
 				//
 				// TODO
 				// 
-				CVariant variant = new CVariant();
+				var variant = new CVariant();
 				return variant;
 			}
 			#endregion
@@ -627,7 +627,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(CVariant other)
 			{
-				Int32 result = 0;
+				var result = 0;
  				switch (mValueType)
 				{
 					case TValueType.Void:
@@ -728,7 +728,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				String result = "";
+				var result = "";
 				switch (mValueType)
 				{
 					case TValueType.Void:
@@ -813,7 +813,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String ToString(String format)
 			{
-				String result = "";
+				var result = "";
 				switch (mValueType)
 				{
 					case TValueType.Void:
@@ -926,7 +926,7 @@ namespace Lotus
 				{
 					case nameof(Boolean):
 						{
-							Boolean v = (Boolean)value;
+							var v = (Boolean)value;
 #if UNITY_2017_1_OR_NEWER
 							if (v)
 							{
@@ -975,7 +975,7 @@ namespace Lotus
 						break;
 					case nameof(DateTime):
 						{
-							DateTime v = (DateTime)value;
+							var v = (DateTime)value;
 							mStringData = v.ToString();
 							mValueType = TValueType.DateTime;
 							if (mOwner != null) mOwner.OnNotifyUpdated(this, DateTimeValue, nameof(DateTimeValue));
@@ -1435,7 +1435,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -11,7 +11,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreCommonTypes
-		/*@{*/
+		/** \addtogroup CoreCommonTypes
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Класс реализующий поверхность как двухмерный массив данных
@@ -108,7 +108,7 @@ namespace Lotus
 			public SurfaceData(TType[] data)
 			{
 				mData = new TType[data.Length];
-				for (Int32 i = 0; i < mData.Length; i++)
+				for (var i = 0; i < mData.Length; i++)
 				{
 					mData[i] = data[i];
 				}
@@ -169,13 +169,13 @@ namespace Lotus
 			{
 				if (save_old_data)
 				{
-					TType[] data = new TType[count];
-					Int32 count_copy = count;
+					var data = new TType[count];
+					var count_copy = count;
 					if (count > Count)
 					{
 						count_copy = Count;
 					}
-					for (Int32 i = 0; i < count_copy; i++)
+					for (var i = 0; i < count_copy; i++)
 					{
 						data[i] = mData[i];
 					}
@@ -197,7 +197,7 @@ namespace Lotus
 			public void SetFromData(TType[] data)
 			{
 				mData = new TType[data.Length];
-				for (Int32 i = 0; i < mData.Length; i++)
+				for (var i = 0; i < mData.Length; i++)
 				{
 					mData[i] = data[i];
 				}
@@ -212,17 +212,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Resize(Int32 new_width, Int32 new_height)
 			{
-				TType[] temp_data = new TType[new_width * new_height];
+				var temp_data = new TType[new_width * new_height];
 
-				Double factor_x = mWidth / (Double)new_width;
-				Double factor_y = mHeight / (Double)new_height;
+				var factor_x = mWidth / (Double)new_width;
+				var factor_y = mHeight / (Double)new_height;
 
-				for (Int32 x = 0; x < new_width; ++x)
+				for (var x = 0; x < new_width; ++x)
 				{
-					for (Int32 y = 0; y < new_height; ++y)
+					for (var y = 0; y < new_height; ++y)
 					{
-						Int32 gx = (Int32)Math.Floor(x * factor_x);
-						Int32 gy = (Int32)Math.Floor(y * factor_y);
+						var gx = (Int32)Math.Floor(x * factor_x);
+						var gy = (Int32)Math.Floor(y * factor_y);
 						TType val = this[gx, gy];
 						temp_data[x + (y * new_width)] = val;
 					}
@@ -278,10 +278,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Resize(Int32 new_width, Int32 new_height, Boolean use_bilinear)
 			{
-				Int32[] temp_data = new Int32[new_width * new_height];
+				var temp_data = new Int32[new_width * new_height];
 
-				Double factor_x = mWidth / (Double)new_width;
-				Double factor_y = mHeight / (Double)new_height;
+				var factor_x = mWidth / (Double)new_width;
+				var factor_y = mHeight / (Double)new_height;
 
 				if (use_bilinear)
 				{
@@ -290,9 +290,9 @@ namespace Lotus
 					Int32 c1, c2, c3, c4;
 					Int32 b1, b2;
 
-					for (Int32 x = 0; x < new_width; ++x)
+					for (var x = 0; x < new_width; ++x)
 					{
-						for (Int32 y = 0; y < new_height; ++y)
+						for (var y = 0; y < new_height; ++y)
 						{
 							// Setup
 							floor_x = (Int32)Math.Floor(x * factor_x);
@@ -322,7 +322,7 @@ namespace Lotus
 
 							b1 = (Int32)((one_minus_x * c1) + (fraction_x * c2));
 							b2 = (Int32)((one_minus_x * c3) + (fraction_x * c4));
-							Int32 val = (Int32)((one_minus_y * b1) + (fraction_y * b2));
+							var val = (Int32)((one_minus_y * b1) + (fraction_y * b2));
 
 
 							temp_data[x + (y * new_width)] = val;
@@ -331,13 +331,13 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 x = 0; x < new_width; ++x)
+					for (var x = 0; x < new_width; ++x)
 					{
-						for (Int32 y = 0; y < new_height; ++y)
+						for (var y = 0; y < new_height; ++y)
 						{
-							Int32 gx = (Int32)Math.Floor(x * factor_x);
-							Int32 gy = (Int32)Math.Floor(y * factor_y);
-							Int32 val = this[gx, gy];
+							var gx = (Int32)Math.Floor(x * factor_x);
+							var gy = (Int32)Math.Floor(y * factor_y);
+							var val = this[gx, gy];
 							temp_data[x + (y * new_width)] = val;
 						}
 					}
@@ -467,10 +467,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Resize(Int32 new_width, Int32 new_height, Boolean use_bilinear)
 			{
-				TColor[] temp_data = new TColor[new_width * new_height];
+				var temp_data = new TColor[new_width * new_height];
 
-				Single factor_x = mWidth / (Single)new_width;
-				Single factor_y = mHeight / (Single)new_height;
+				var factor_x = mWidth / (Single)new_width;
+				var factor_y = mHeight / (Single)new_height;
 
 				if (use_bilinear)
 				{
@@ -479,9 +479,9 @@ namespace Lotus
 					TColor c1, c2, c3, c4;
 					TColor b1, b2;
 
-					for (Int32 x = 0; x < new_width; ++x)
+					for (var x = 0; x < new_width; ++x)
 					{
-						for (Int32 y = 0; y < new_height; ++y)
+						for (var y = 0; y < new_height; ++y)
 						{
 							// Setup
 							floor_x = (Int32)Math.Floor(x * factor_x);
@@ -511,7 +511,7 @@ namespace Lotus
 
 							b1 = TColor.Add(TColor.Scale(c1, one_minus_x), TColor.Scale(c2, fraction_x));
 							b2 = TColor.Add(TColor.Scale(c3, one_minus_x), TColor.Scale(c4, fraction_x));
-							TColor val = TColor.Add(TColor.Scale(b1, one_minus_y), TColor.Scale(b2, fraction_y));
+							var val = TColor.Add(TColor.Scale(b1, one_minus_y), TColor.Scale(b2, fraction_y));
 
 							temp_data[x + (y * new_width)] = val;
 						}
@@ -519,12 +519,12 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 x = 0; x < new_width; ++x)
+					for (var x = 0; x < new_width; ++x)
 					{
-						for (Int32 y = 0; y < new_height; ++y)
+						for (var y = 0; y < new_height; ++y)
 						{
-							Int32 gx = (Int32)Math.Floor(x * factor_x);
-							Int32 gy = (Int32)Math.Floor(y * factor_y);
+							var gx = (Int32)Math.Floor(x * factor_x);
+							var gy = (Int32)Math.Floor(y * factor_y);
 							TColor val = this[gx, gy];
 							temp_data[x + (y * new_width)] = val;
 						}
@@ -539,7 +539,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

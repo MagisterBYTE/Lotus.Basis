@@ -221,6 +221,15 @@ csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental
 csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental = true:silent
 csharp_style_prefer_readonly_struct = true:suggestion
 
+# S3261: Namespaces should not be empty
+dotnet_diagnostic.S3261.severity = none
+
+# S1210: "Equals" and the comparison operators should be overridden when implementing "IComparable"
+dotnet_diagnostic.S1210.severity = none
+
+# S1125: Boolean literals should not be redundant
+dotnet_diagnostic.S1125.severity = none
+
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4

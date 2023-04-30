@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreExtension
-		/*@{*/
+		/** \addtogroup CoreExtension
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы расширения для бинарного потока
@@ -70,7 +70,7 @@ namespace Lotus
 				// Записываем данные по порядку
 				if (integers != null && integers.Count > 0)
 				{
-					for (Int32 i = 0; i < integers.Count; i++)
+					for (var i = 0; i < integers.Count; i++)
 					{
 						writer.Write(integers[i]);
 					}
@@ -89,7 +89,7 @@ namespace Lotus
 				// Записываем данные по порядку
 				if (floats != null && floats.Count > 0)
 				{
-					for (Int32 i = 0; i < floats.Count; i++)
+					for (var i = 0; i < floats.Count; i++)
 					{
 						writer.Write(floats[i]);
 					}
@@ -108,7 +108,7 @@ namespace Lotus
 				// Записываем данные по порядку
 				if (doubles != null && doubles.Count > 0)
 				{
-					for (Int32 i = 0; i < doubles.Count; i++)
+					for (var i = 0; i < doubles.Count; i++)
 					{
 						writer.Write(doubles[i]);
 					}
@@ -132,7 +132,7 @@ namespace Lotus
 					if (type_item.IsEnum)
 					{
 						// Записываем данные по порядку
-						for (Int32 i = 0; i < primitives.Count; i++)
+						for (var i = 0; i < primitives.Count; i++)
 						{
 							writer.Write((Int32)(System.Object)primitives[i]);
 						}
@@ -151,7 +151,7 @@ namespace Lotus
 							case TypeCode.Boolean:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Boolean)(System.Object)primitives[i]);
 									}
@@ -160,7 +160,7 @@ namespace Lotus
 							case TypeCode.Char:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Char)(System.Object)primitives[i]);
 									}
@@ -169,7 +169,7 @@ namespace Lotus
 							case TypeCode.SByte:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((SByte)(System.Object)primitives[i]);
 									}
@@ -178,7 +178,7 @@ namespace Lotus
 							case TypeCode.Byte:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Byte)(System.Object)primitives[i]);
 									}
@@ -187,7 +187,7 @@ namespace Lotus
 							case TypeCode.Int16:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Int16)(System.Object)primitives[i]);
 									}
@@ -196,7 +196,7 @@ namespace Lotus
 							case TypeCode.UInt16:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((UInt16)(System.Object)primitives[i]);
 									}
@@ -205,7 +205,7 @@ namespace Lotus
 							case TypeCode.Int32:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Int32)(System.Object)primitives[i]);
 									}
@@ -214,7 +214,7 @@ namespace Lotus
 							case TypeCode.UInt32:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((UInt32)(System.Object)primitives[i]);
 									}
@@ -223,7 +223,7 @@ namespace Lotus
 							case TypeCode.Int64:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Int64)(System.Object)primitives[i]);
 									}
@@ -232,7 +232,7 @@ namespace Lotus
 							case TypeCode.UInt64:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((UInt64)(System.Object)primitives[i]);
 									}
@@ -241,7 +241,7 @@ namespace Lotus
 							case TypeCode.Single:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Single)(System.Object)primitives[i]);
 									}
@@ -250,7 +250,7 @@ namespace Lotus
 							case TypeCode.Double:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Double)(System.Object)primitives[i]);
 									}
@@ -259,7 +259,7 @@ namespace Lotus
 							case TypeCode.Decimal:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((Decimal)(System.Object)primitives[i]);
 									}
@@ -268,7 +268,7 @@ namespace Lotus
 							case TypeCode.DateTime:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((DateTime)(System.Object)primitives[i]);
 									}
@@ -277,7 +277,7 @@ namespace Lotus
 							case TypeCode.String:
 								{
 									// Записываем данные по порядку
-									for (Int32 i = 0; i < primitives.Count; i++)
+									for (var i = 0; i < primitives.Count; i++)
 									{
 										writer.Write((String)(System.Object)primitives[i]);
 									}
@@ -315,10 +315,10 @@ namespace Lotus
 			public static Int32[] ReadIntegers(this BinaryReader reader, Int32 count)
 			{
 				// Создаем массив
-				Int32[] integers = new Int32[count];
+				var integers = new Int32[count];
 
 				// Читаем данные по порядку
-				for (Int32 i = 0; i < count; i++)
+				for (var i = 0; i < count; i++)
 				{
 					integers[i] = reader.ReadInt32();
 				}
@@ -337,10 +337,10 @@ namespace Lotus
 			public static Single[] ReadFloats(this BinaryReader reader, Int32 count)
 			{
 				// Создаем массив
-				Single[] floats = new Single[count];
+				var floats = new Single[count];
 
 				// Читаем данные по порядку
-				for (Int32 i = 0; i < count; i++)
+				for (var i = 0; i < count; i++)
 				{
 					floats[i] = reader.ReadSingle();
 				}
@@ -359,10 +359,10 @@ namespace Lotus
 			public static Double[] ReadDoubles(this BinaryReader reader, Int32 count)
 			{
 				// Создаем массив
-				Double[] doubles = new Double[count];
+				var doubles = new Double[count];
 
 				// Читаем данные по порядку
-				for (Int32 i = 0; i < count; i++)
+				for (var i = 0; i < count; i++)
 				{
 					doubles[i] = reader.ReadDouble();
 				}
@@ -386,13 +386,13 @@ namespace Lotus
 				Type type_item = typeof(TPrimitive);
 
 				// Создаем массив
-				TPrimitive[] primitives = new TPrimitive[count];
+				var primitives = new TPrimitive[count];
 
 				// Перечисление
 				if (type_item.IsEnum)
 				{
 					// Читаем данные по порядку
-					for (Int32 i = 0; i < count; i++)
+					for (var i = 0; i < count; i++)
 					{
 						primitives[i] = (TPrimitive)(System.Object)XConverter.ToEnumOfType(type_item, reader.ReadInt32());
 					}
@@ -410,85 +410,85 @@ namespace Lotus
 							break;
 						case TypeCode.Boolean:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(Boolean));
+								var bytes = reader.ReadBytes(count * sizeof(Boolean));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.Char:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(Char));
+								var bytes = reader.ReadBytes(count * sizeof(Char));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.SByte:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(SByte));
+								var bytes = reader.ReadBytes(count * sizeof(SByte));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.Byte:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(Byte));
+								var bytes = reader.ReadBytes(count * sizeof(Byte));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.Int16:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(Int16));
+								var bytes = reader.ReadBytes(count * sizeof(Int16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.UInt16:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(UInt16));
+								var bytes = reader.ReadBytes(count * sizeof(UInt16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.Int32:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(UInt16));
+								var bytes = reader.ReadBytes(count * sizeof(UInt16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.UInt32:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(UInt16));
+								var bytes = reader.ReadBytes(count * sizeof(UInt16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.Int64:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(UInt16));
+								var bytes = reader.ReadBytes(count * sizeof(UInt16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.UInt64:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(UInt16));
+								var bytes = reader.ReadBytes(count * sizeof(UInt16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.Single:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(UInt16));
+								var bytes = reader.ReadBytes(count * sizeof(UInt16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.Double:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(UInt16));
+								var bytes = reader.ReadBytes(count * sizeof(UInt16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.Decimal:
 							{
-								Byte[] bytes = reader.ReadBytes(count * sizeof(UInt16));
+								var bytes = reader.ReadBytes(count * sizeof(UInt16));
 								Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
 							}
 							break;
 						case TypeCode.DateTime:
 							{
-								for (Int32 i = 0; i < count; i++)
+								for (var i = 0; i < count; i++)
 								{
 									primitives[i] = (TPrimitive)(System.Object)reader.ReadDateTime();
 								}
@@ -496,7 +496,7 @@ namespace Lotus
 							break;
 						case TypeCode.String:
 							{
-								for (Int32 i = 0; i < count; i++)
+								for (var i = 0; i < count; i++)
 								{
 									primitives[i] = (TPrimitive)(System.Object)reader.ReadString();
 								}
@@ -527,7 +527,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

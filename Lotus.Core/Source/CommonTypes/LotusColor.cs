@@ -10,30 +10,31 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 //=====================================================================================================================
 namespace Lotus
 {
 	namespace Core
 	{
-		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup CoreCommonTypes Подсистема общих типов
-		//! Подсистема общих типов реализует общие кроссплатформенные типы данных.
-		//! \ingroup Core
-		/*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Класс для представления цвета
-		/// </summary>
-		/// <remarks>
-		/// Применяется для кроссплатформенной реализации концепции цвета
-		/// </remarks>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
+        //-------------------------------------------------------------------------------------------------------------
+        /** 
+         * \defgroup CoreCommonTypes Подсистема общих типов
+         * \ingroup Core
+         * \brief Подсистема общих типов реализует общие кроссплатформенные типы данных.
+         * @{
+         */
+        //-------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Класс для представления цвета
+        /// </summary>
+        /// <remarks>
+        /// Применяется для кроссплатформенной реализации концепции цвета
+        /// </remarks>
+        //-------------------------------------------------------------------------------------------------------------
+        [Serializable]
 		[StructLayout(LayoutKind.Sequential, Size = 4)]
 		public struct TColor : IComparable<TColor>, IEquatable<TColor>, ICloneable
 		{
@@ -947,19 +948,19 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Clamp(ref TColor value, ref TColor min, ref TColor max, out TColor result)
 			{
-				Byte alpha = value.A;
+				var alpha = value.A;
 				alpha = alpha > max.A ? max.A : alpha;
 				alpha = alpha < min.A ? min.A : alpha;
 
-				Byte red = value.R;
+				var red = value.R;
 				red = red > max.R ? max.R : red;
 				red = red < min.R ? min.R : red;
 
-				Byte green = value.G;
+				var green = value.G;
 				green = green > max.G ? max.G : green;
 				green = green < min.G ? min.G : green;
 
-				Byte blue = value.B;
+				var blue = value.B;
 				blue = blue > max.B ? max.B : blue;
 				blue = blue < min.B ? min.B : blue;
 
@@ -1025,9 +1026,9 @@ namespace Lotus
 			public static void AdjustContrast(ref TColor value, Single contrast, out TColor result)
 			{
 				result.A = value.A;
-				result.R = ToByte(((0.5f + (contrast * ((value.R / 255.0f) - 0.5f)))));
-				result.G = ToByte(((0.5f + (contrast * ((value.G / 255.0f) - 0.5f)))));
-				result.B = ToByte(((0.5f + (contrast * ((value.B / 255.0f) - 0.5f)))));
+				result.R = ToByte(0.5f + (contrast * ((value.R / 255.0f) - 0.5f)));
+				result.G = ToByte(0.5f + (contrast * ((value.G / 255.0f) - 0.5f)));
+				result.B = ToByte(0.5f + (contrast * ((value.B / 255.0f) - 0.5f)));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1041,9 +1042,9 @@ namespace Lotus
 			public static TColor AdjustContrast(TColor value, Single contrast)
 			{
 				return new TColor(
-					ToByte(((0.5f + (contrast * ((value.R / 255.0f) - 0.5f))))),
-					ToByte(((0.5f + (contrast * ((value.G / 255.0f) - 0.5f))))),
-					ToByte(((0.5f + (contrast * ((value.B / 255.0f) - 0.5f))))),
+					ToByte(0.5f + (contrast * ((value.R / 255.0f) - 0.5f))),
+					ToByte(0.5f + (contrast * ((value.G / 255.0f) - 0.5f))),
+					ToByte(0.5f + (contrast * ((value.B / 255.0f) - 0.5f))),
 					value.A);
 			}
 
@@ -1057,12 +1058,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void AdjustSaturation(ref TColor value, Single saturation, out TColor result)
 			{
-				Single grey = (value.R / 255.0f * 0.2125f) + (value.G / 255.0f * 0.7154f) + (value.B / 255.0f * 0.0721f);
+				var grey = (value.R / 255.0f * 0.2125f) + (value.G / 255.0f * 0.7154f) + (value.B / 255.0f * 0.0721f);
 
 				result.A = value.A;
-				result.R = ToByte(((grey + (saturation * ((value.R / 255.0f) - grey)))));
-				result.G = ToByte(((grey + (saturation * ((value.G / 255.0f) - grey)))));
-				result.B = ToByte(((grey + (saturation * ((value.B / 255.0f) - grey)))));
+				result.R = ToByte(grey + (saturation * ((value.R / 255.0f) - grey)));
+				result.G = ToByte(grey + (saturation * ((value.G / 255.0f) - grey)));
+				result.B = ToByte(grey + (saturation * ((value.B / 255.0f) - grey)));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1075,12 +1076,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TColor AdjustSaturation(TColor value, Single saturation)
 			{
-				Single grey = (value.R / 255.0f * 0.2125f) + (value.G / 255.0f * 0.7154f) + (value.B / 255.0f * 0.0721f);
+				var grey = (value.R / 255.0f * 0.2125f) + (value.G / 255.0f * 0.7154f) + (value.B / 255.0f * 0.0721f);
 
 				return new TColor(
-					ToByte(((grey + (saturation * ((value.R / 255.0f) - grey))))),
-					ToByte(((grey + (saturation * ((value.G / 255.0f) - grey))))),
-					ToByte(((grey + (saturation * ((value.B / 255.0f) - grey))))),
+					ToByte(grey + (saturation * ((value.R / 255.0f) - grey))),
+					ToByte(grey + (saturation * ((value.G / 255.0f) - grey))),
+					ToByte(grey + (saturation * ((value.B / 255.0f) - grey))),
 					value.A);
 			}
 
@@ -1109,8 +1110,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TColor DeserializeFromString(String data)
 			{
-				TColor color = new TColor();
-				String[] color_data = data.Split(',');
+				var color = new TColor();
+				var color_data = data.Split(',');
 				color.R = Byte.Parse(color_data[0]);
 				color.G = Byte.Parse(color_data[1]);
 				color.B = Byte.Parse(color_data[2]);
@@ -1219,10 +1220,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TColor(Single red, Single green, Single blue, Single alpha = 1.0f)
 			{
-				R = ToByte(((red)));
-				G = ToByte(((green)));
-				B = ToByte(((blue)));
-				A = ToByte(((alpha)));
+				R = ToByte(red);
+				G = ToByte(green);
+				B = ToByte(blue);
+				A = ToByte(alpha);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1238,7 +1239,7 @@ namespace Lotus
 				G = (Byte)((rgba >> 8) & 255);
 				R = (Byte)(rgba & 255);
 			}
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -1329,7 +1330,7 @@ namespace Lotus
 				{
 					if (typeof(TColor) == obj.GetType())
 					{
-						TColor color = (TColor)obj;
+						var color = (TColor)obj;
 						return Equals(color);
 					}
 				}
@@ -1447,7 +1448,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Color32">
@@ -1602,9 +1603,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single GetBrightness()
 			{
-				Single r = R / 255.0f;
-				Single g = G / 255.0f;
-				Single b = B / 255.0f;
+				var r = R / 255.0f;
+				var g = G / 255.0f;
+				var b = B / 255.0f;
 
 				Single max, min;
 
@@ -1632,13 +1633,13 @@ namespace Lotus
 					return 0; // 0 makes as good an UNDEFINED value as any
 				}
 
-				Single r = R / 255.0f;
-				Single g = G / 255.0f;
-				Single b = B / 255.0f;
+				var r = R / 255.0f;
+				var g = G / 255.0f;
+				var b = B / 255.0f;
 
 				Single max, min;
 				Single delta;
-				Single hue = 0.0f;
+				var hue = 0.0f;
 
 				max = r; min = r;
 
@@ -1680,9 +1681,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single GetSaturation()
 			{
-				Single r = R / 255.0f;
-				Single g = G / 255.0f;
-				Single b = B / 255.0f;
+				var r = R / 255.0f;
+				var g = G / 255.0f;
+				var b = B / 255.0f;
 
 				Single max, min;
 				Single l, s = 0;
@@ -1759,715 +1760,715 @@ namespace Lotus
 			/// <summary>
 			/// Нулевой цвет
 			/// </summary>
-			public const UInt32 Zero = (0x00000000);
+			public const UInt32 Zero = 0x00000000;
 
 			/// <summary>
 			/// Прозрачный цвет
 			/// </summary>
-			public const UInt32 Transparent = (0x00000000);
+			public const UInt32 Transparent = 0x00000000;
 
 			/// <summary>
 			/// Цвет - AliceBlue
 			/// </summary>
-			public const UInt32 AliceBlue = (0xFFF0F8FF);
+			public const UInt32 AliceBlue = 0xFFF0F8FF;
 
 			/// <summary>
 			/// Цвет - AntiqueWhite
 			/// </summary>
-			public const UInt32 AntiqueWhite = (0xFFFAEBD7);
+			public const UInt32 AntiqueWhite = 0xFFFAEBD7;
 
 			/// <summary>
 			/// Цвет - Aqua
 			/// </summary>
-			public const UInt32 Aqua = (0xFF00FFFF);
+			public const UInt32 Aqua = 0xFF00FFFF;
 
 			/// <summary>
 			/// Цвет - Aquamarine
 			/// </summary>
-			public const UInt32 Aquamarine = (0xFF7FFFD4);
+			public const UInt32 Aquamarine = 0xFF7FFFD4;
 
 			/// <summary>
 			/// Цвет - Azure
 			/// </summary>
-			public const UInt32 Azure = (0xFFF0FFFF);
+			public const UInt32 Azure = 0xFFF0FFFF;
 
 			/// <summary>
 			/// Цвет - Beige
 			/// </summary>
-			public const UInt32 Beige = (0xFFF5F5DC);
+			public const UInt32 Beige = 0xFFF5F5DC;
 
 			/// <summary>
 			/// Цвет - Bisque
 			/// </summary>
-			public const UInt32 Bisque = (0xFFFFE4C4);
+			public const UInt32 Bisque = 0xFFFFE4C4;
 
 			/// <summary>
 			/// Цвет - Black
 			/// </summary>
-			public const UInt32 Black = (0xFF000000);
+			public const UInt32 Black = 0xFF000000;
 
 			/// <summary>
 			/// Цвет - BlanchedAlmond
 			/// </summary>
-			public const UInt32 BlanchedAlmond = (0xFFFFEBCD);
+			public const UInt32 BlanchedAlmond = 0xFFFFEBCD;
 
 			/// <summary>
 			/// Цвет - Blue
 			/// </summary>
-			public const UInt32 Blue = (0xFF0000FF);
+			public const UInt32 Blue = 0xFF0000FF;
 
 			/// <summary>
 			/// Цвет - BlueViolet
 			/// </summary>
-			public const UInt32 BlueViolet = (0xFF8A2BE2);
+			public const UInt32 BlueViolet = 0xFF8A2BE2;
 
 			/// <summary>
 			/// Цвет - Brown
 			/// </summary>
-			public const UInt32 Brown = (0xFFA52A2A);
+			public const UInt32 Brown = 0xFFA52A2A;
 
 			/// <summary>
 			/// Цвет - BurlyWood
 			/// </summary>
-			public const UInt32 BurlyWood = (0xFFDEB887);
+			public const UInt32 BurlyWood = 0xFFDEB887;
 
 			/// <summary>
 			/// Цвет - CadetBlue
 			/// </summary>
-			public const UInt32 CadetBlue = (0xFF5F9EA0);
+			public const UInt32 CadetBlue = 0xFF5F9EA0;
 
 			/// <summary>
 			/// Цвет - Chartreuse
 			/// </summary>
-			public const UInt32 Chartreuse = (0xFF7FFF00);
+			public const UInt32 Chartreuse = 0xFF7FFF00;
 
 			/// <summary>
 			/// Цвет - Chocolate
 			/// </summary>
-			public const UInt32 Chocolate = (0xFFD2691E);
+			public const UInt32 Chocolate = 0xFFD2691E;
 
 			/// <summary>
 			/// Цвет - Coral
 			/// </summary>
-			public const UInt32 Coral = (0xFFFF7F50);
+			public const UInt32 Coral = 0xFFFF7F50;
 
 			/// <summary>
 			/// Цвет - CornflowerBlue
 			/// </summary>
-			public const UInt32 CornflowerBlue = (0xFF6495ED);
+			public const UInt32 CornflowerBlue = 0xFF6495ED;
 
 			/// <summary>
 			/// Цвет - Cornsilk
 			/// </summary>
-			public const UInt32 Cornsilk = (0xFFFFF8DC);
+			public const UInt32 Cornsilk = 0xFFFFF8DC;
 
 			/// <summary>
 			/// Цвет - Crimson
 			/// </summary>
-			public const UInt32 Crimson = (0xFFDC143C);
+			public const UInt32 Crimson = 0xFFDC143C;
 
 			/// <summary>
 			/// Цвет - Cyan
 			/// </summary>
-			public const UInt32 Cyan = (0xFF00FFFF);
+			public const UInt32 Cyan = 0xFF00FFFF;
 
 			/// <summary>
 			/// Цвет - DarkBlue
 			/// </summary>
-			public const UInt32 DarkBlue = (0xFF00008B);
+			public const UInt32 DarkBlue = 0xFF00008B;
 
 			/// <summary>
 			/// Цвет - DarkCyan
 			/// </summary>
-			public const UInt32 DarkCyan = (0xFF008B8B);
+			public const UInt32 DarkCyan = 0xFF008B8B;
 
 			/// <summary>
 			/// Цвет - DarkGoldenrod
 			/// </summary>
-			public const UInt32 DarkGoldenrod = (0xFFB8860B);
+			public const UInt32 DarkGoldenrod = 0xFFB8860B;
 
 			/// <summary>
 			/// Цвет - DarkGray
 			/// </summary>
-			public const UInt32 DarkGray = (0xFFA9A9A9);
+			public const UInt32 DarkGray = 0xFFA9A9A9;
 
 			/// <summary>
 			/// Цвет - DarkGreen
 			/// </summary>
-			public const UInt32 DarkGreen = (0xFF006400);
+			public const UInt32 DarkGreen = 0xFF006400;
 
 			/// <summary>
 			/// Цвет - DarkKhaki
 			/// </summary>
-			public const UInt32 DarkKhaki = (0xFFBDB76B);
+			public const UInt32 DarkKhaki = 0xFFBDB76B;
 
 			/// <summary>
 			/// Цвет - DarkMagenta
 			/// </summary>
-			public const UInt32 DarkMagenta = (0xFF8B008B);
+			public const UInt32 DarkMagenta = 0xFF8B008B;
 
 			/// <summary>
 			/// Цвет - DarkOliveGreen
 			/// </summary>
-			public const UInt32 DarkOliveGreen = (0xFF556B2F);
+			public const UInt32 DarkOliveGreen = 0xFF556B2F;
 
 			/// <summary>
 			/// Цвет - DarkOrange
 			/// </summary>
-			public const UInt32 DarkOrange = (0xFFFF8C00);
+			public const UInt32 DarkOrange = 0xFFFF8C00;
 
 			/// <summary>
 			/// Цвет - DarkOrchid
 			/// </summary>
-			public const UInt32 DarkOrchid = (0xFF9932CC);
+			public const UInt32 DarkOrchid = 0xFF9932CC;
 
 			/// <summary>
 			/// Цвет - DarkRed
 			/// </summary>
-			public const UInt32 DarkRed = (0xFF8B0000);
+			public const UInt32 DarkRed = 0xFF8B0000;
 
 			/// <summary>
 			/// Цвет - DarkSalmon
 			/// </summary>
-			public const UInt32 DarkSalmon = (0xFFE9967A);
+			public const UInt32 DarkSalmon = 0xFFE9967A;
 
 			/// <summary>
 			/// Цвет - DarkSeaGreen
 			/// </summary>
-			public const UInt32 DarkSeaGreen = (0xFF8FBC8B);
+			public const UInt32 DarkSeaGreen = 0xFF8FBC8B;
 
 			/// <summary>
 			/// Цвет - DarkSlateBlue
 			/// </summary>
-			public const UInt32 DarkSlateBlue = (0xFF483D8B);
+			public const UInt32 DarkSlateBlue = 0xFF483D8B;
 
 			/// <summary>
 			/// Цвет - DarkSlateGray
 			/// </summary>
-			public const UInt32 DarkSlateGray = (0xFF2F4F4F);
+			public const UInt32 DarkSlateGray = 0xFF2F4F4F;
 
 			/// <summary>
 			/// Цвет - DarkTurquoise
 			/// </summary>
-			public const UInt32 DarkTurquoise = (0xFF00CED1);
+			public const UInt32 DarkTurquoise = 0xFF00CED1;
 
 			/// <summary>
 			/// Цвет - DarkViolet
 			/// </summary>
-			public const UInt32 DarkViolet = (0xFF9400D3);
+			public const UInt32 DarkViolet = 0xFF9400D3;
 
 			/// <summary>
 			/// Цвет - DeepPink
 			/// </summary>
-			public const UInt32 DeepPink = (0xFFFF1493);
+			public const UInt32 DeepPink = 0xFFFF1493;
 
 			/// <summary>
 			/// Цвет - DeepSkyBlue
 			/// </summary>
-			public const UInt32 DeepSkyBlue = (0xFF00BFFF);
+			public const UInt32 DeepSkyBlue = 0xFF00BFFF;
 
 			/// <summary>
 			/// Цвет - DimGray
 			/// </summary>
-			public const UInt32 DimGray = (0xFF696969);
+			public const UInt32 DimGray = 0xFF696969;
 
 			/// <summary>
 			/// Цвет - DodgerBlue
 			/// </summary>
-			public const UInt32 DodgerBlue = (0xFF1E90FF);
+			public const UInt32 DodgerBlue = 0xFF1E90FF;
 
 			/// <summary>
 			/// Цвет - Firebrick
 			/// </summary>
-			public const UInt32 Firebrick = (0xFFB22222);
+			public const UInt32 Firebrick = 0xFFB22222;
 
 			/// <summary>
 			/// Цвет - FloralWhite
 			/// </summary>
-			public const UInt32 FloralWhite = (0xFFFFFAF0);
+			public const UInt32 FloralWhite = 0xFFFFFAF0;
 
 			/// <summary>
 			/// Цвет - ForestGreen
 			/// </summary>
-			public const UInt32 ForestGreen = (0xFF228B22);
+			public const UInt32 ForestGreen = 0xFF228B22;
 
 			/// <summary>
 			/// Цвет - Fuchsia
 			/// </summary>
-			public const UInt32 Fuchsia = (0xFFFF00FF);
+			public const UInt32 Fuchsia = 0xFFFF00FF;
 
 			/// <summary>
 			/// Цвет - Gainsboro
 			/// </summary>
-			public const UInt32 Gainsboro = (0xFFDCDCDC);
+			public const UInt32 Gainsboro = 0xFFDCDCDC;
 
 			/// <summary>
 			/// Цвет - GhostWhite
 			/// </summary>
-			public const UInt32 GhostWhite = (0xFFF8F8FF);
+			public const UInt32 GhostWhite = 0xFFF8F8FF;
 
 			/// <summary>
 			/// Цвет - Gold
 			/// </summary>
-			public const UInt32 Gold = (0xFFFFD700);
+			public const UInt32 Gold = 0xFFFFD700;
 
 			/// <summary>
 			/// Цвет - Goldenrod
 			/// </summary>
-			public const UInt32 Goldenrod = (0xFFDAA520);
+			public const UInt32 Goldenrod = 0xFFDAA520;
 
 			/// <summary>
 			/// Цвет - Gray
 			/// </summary>
-			public const UInt32 Gray = (0xFF808080);
+			public const UInt32 Gray = 0xFF808080;
 
 			/// <summary>
 			/// Цвет - Green
 			/// </summary>
-			public const UInt32 Green = (0xFF008000);
+			public const UInt32 Green = 0xFF008000;
 
 			/// <summary>
 			/// Цвет - GreenYellow
 			/// </summary>
-			public const UInt32 GreenYellow = (0xFFADFF2F);
+			public const UInt32 GreenYellow = 0xFFADFF2F;
 
 			/// <summary>
 			/// Цвет - Honeydew
 			/// </summary>
-			public const UInt32 Honeydew = (0xFFF0FFF0);
+			public const UInt32 Honeydew = 0xFFF0FFF0;
 
 			/// <summary>
 			/// Цвет - HotPink
 			/// </summary>
-			public const UInt32 HotPink = (0xFFFF69B4);
+			public const UInt32 HotPink = 0xFFFF69B4;
 
 			/// <summary>
 			/// Цвет - IndianRed
 			/// </summary>
-			public const UInt32 IndianRed = (0xFFCD5C5C);
+			public const UInt32 IndianRed = 0xFFCD5C5C;
 
 			/// <summary>
 			/// Цвет - Indigo
 			/// </summary>
-			public const UInt32 Indigo = (0xFF4B0082);
+			public const UInt32 Indigo = 0xFF4B0082;
 
 			/// <summary>
 			/// Цвет - Ivory
 			/// </summary>
-			public const UInt32 Ivory = (0xFFFFFFF0);
+			public const UInt32 Ivory = 0xFFFFFFF0;
 
 			/// <summary>
 			/// Цвет - Khaki
 			/// </summary>
-			public const UInt32 Khaki = (0xFFF0E68C);
+			public const UInt32 Khaki = 0xFFF0E68C;
 
 			/// <summary>
 			/// Цвет - Lavender
 			/// </summary>
-			public const UInt32 Lavender = (0xFFE6E6FA);
+			public const UInt32 Lavender = 0xFFE6E6FA;
 
 			/// <summary>
 			/// Цвет - LavenderBlush
 			/// </summary>
-			public const UInt32 LavenderBlush = (0xFFFFF0F5);
+			public const UInt32 LavenderBlush = 0xFFFFF0F5;
 
 			/// <summary>
 			/// Цвет - LawnGreen
 			/// </summary>
-			public const UInt32 LawnGreen = (0xFF7CFC00);
+			public const UInt32 LawnGreen = 0xFF7CFC00;
 
 			/// <summary>
 			/// Цвет - LemonChiffon
 			/// </summary>
-			public const UInt32 LemonChiffon = (0xFFFFFACD);
+			public const UInt32 LemonChiffon = 0xFFFFFACD;
 
 			/// <summary>
 			/// Цвет - LightBlue
 			/// </summary>
-			public const UInt32 LightBlue = (0xFFADD8E6);
+			public const UInt32 LightBlue = 0xFFADD8E6;
 
 			/// <summary>
 			/// Цвет - LightCoral
 			/// </summary>
-			public const UInt32 LightCoral = (0xFFF08080);
+			public const UInt32 LightCoral = 0xFFF08080;
 
 			/// <summary>
 			/// Цвет - LightCyan
 			/// </summary>
-			public const UInt32 LightCyan = (0xFFE0FFFF);
+			public const UInt32 LightCyan = 0xFFE0FFFF;
 
 			/// <summary>
 			/// Цвет - LightGoldenrodYellow
 			/// </summary>
-			public const UInt32 LightGoldenrodYellow = (0xFFFAFAD2);
+			public const UInt32 LightGoldenrodYellow = 0xFFFAFAD2;
 
 			/// <summary>
 			/// Цвет - LightGray
 			/// </summary>
-			public const UInt32 LightGray = (0xFFD3D3D3);
+			public const UInt32 LightGray = 0xFFD3D3D3;
 
 			/// <summary>
 			/// Цвет - LightGreen
 			/// </summary>
-			public const UInt32 LightGreen = (0xFF90EE90);
+			public const UInt32 LightGreen = 0xFF90EE90;
 
 			/// <summary>
 			/// Цвет - LightPink
 			/// </summary>
-			public const UInt32 LightPink = (0xFFFFB6C1);
+			public const UInt32 LightPink = 0xFFFFB6C1;
 
 			/// <summary>
 			/// Цвет - LightSalmon
 			/// </summary>
-			public const UInt32 LightSalmon = (0xFFFFA07A);
+			public const UInt32 LightSalmon = 0xFFFFA07A;
 
 			/// <summary>
 			/// Цвет - LightSeaGreen
 			/// </summary>
-			public const UInt32 LightSeaGreen = (0xFF20B2AA);
+			public const UInt32 LightSeaGreen = 0xFF20B2AA;
 
 			/// <summary>
 			/// Цвет - LightSkyBlue
 			/// </summary>
-			public const UInt32 LightSkyBlue = (0xFF87CEFA);
+			public const UInt32 LightSkyBlue = 0xFF87CEFA;
 
 			/// <summary>
 			/// Цвет - LightSlateGray
 			/// </summary>
-			public const UInt32 LightSlateGray = (0xFF778899);
+			public const UInt32 LightSlateGray = 0xFF778899;
 
 			/// <summary>
 			/// Цвет - LightSteelBlue
 			/// </summary>
-			public const UInt32 LightSteelBlue = (0xFFB0C4DE);
+			public const UInt32 LightSteelBlue = 0xFFB0C4DE;
 
 			/// <summary>
 			/// Цвет - LightYellow
 			/// </summary>
-			public const UInt32 LightYellow = (0xFFFFFFE0);
+			public const UInt32 LightYellow = 0xFFFFFFE0;
 
 			/// <summary>
 			/// Цвет - Lime
 			/// </summary>
-			public const UInt32 Lime = (0xFF00FF00);
+			public const UInt32 Lime = 0xFF00FF00;
 
 			/// <summary>
 			/// Цвет - LimeGreen
 			/// </summary>
-			public const UInt32 LimeGreen = (0xFF32CD32);
+			public const UInt32 LimeGreen = 0xFF32CD32;
 
 			/// <summary>
 			/// Цвет - Linen
 			/// </summary>
-			public const UInt32 Linen = (0xFFFAF0E6);
+			public const UInt32 Linen = 0xFFFAF0E6;
 
 			/// <summary>
 			/// Цвет - Magenta
 			/// </summary>
-			public const UInt32 Magenta = (0xFFFF00FF);
+			public const UInt32 Magenta = 0xFFFF00FF;
 
 			/// <summary>
 			/// Цвет - Maroon
 			/// </summary>
-			public const UInt32 Maroon = (0xFF800000);
+			public const UInt32 Maroon = 0xFF800000;
 
 			/// <summary>
 			/// Цвет - MediumAquamarine
 			/// </summary>
-			public const UInt32 MediumAquamarine = (0xFF66CDAA);
+			public const UInt32 MediumAquamarine = 0xFF66CDAA;
 
 			/// <summary>
 			/// Цвет - MediumBlue
 			/// </summary>
-			public const UInt32 MediumBlue = (0xFF0000CD);
+			public const UInt32 MediumBlue = 0xFF0000CD;
 
 			/// <summary>
 			/// Цвет - MediumOrchid
 			/// </summary>
-			public const UInt32 MediumOrchid = (0xFFBA55D3);
+			public const UInt32 MediumOrchid = 0xFFBA55D3;
 
 			/// <summary>
 			/// Цвет - MediumPurple
 			/// </summary>
-			public const UInt32 MediumPurple = (0xFF9370DB);
+			public const UInt32 MediumPurple = 0xFF9370DB;
 
 			/// <summary>
 			/// Цвет - MediumSeaGreen
 			/// </summary>
-			public const UInt32 MediumSeaGreen = (0xFF3CB371);
+			public const UInt32 MediumSeaGreen = 0xFF3CB371;
 
 			/// <summary>
 			/// Цвет - MediumSlateBlue
 			/// </summary>
-			public const UInt32 MediumSlateBlue = (0xFF7B68EE);
+			public const UInt32 MediumSlateBlue = 0xFF7B68EE;
 
 			/// <summary>
 			/// Цвет - MediumSpringGreen
 			/// </summary>
-			public const UInt32 MediumSpringGreen = (0xFF00FA9A);
+			public const UInt32 MediumSpringGreen = 0xFF00FA9A;
 
 			/// <summary>
 			/// Цвет - MediumTurquoise
 			/// </summary>
-			public const UInt32 MediumTurquoise = (0xFF48D1CC);
+			public const UInt32 MediumTurquoise = 0xFF48D1CC;
 
 			/// <summary>
 			/// Цвет - MediumVioletRed
 			/// </summary>
-			public const UInt32 MediumVioletRed = (0xFFC71585);
+			public const UInt32 MediumVioletRed = 0xFFC71585;
 
 			/// <summary>
 			/// Цвет - MidnightBlue
 			/// </summary>
-			public const UInt32 MidnightBlue = (0xFF191970);
+			public const UInt32 MidnightBlue = 0xFF191970;
 
 			/// <summary>
 			/// Цвет - MintCream
 			/// </summary>
-			public const UInt32 MintCream = (0xFFF5FFFA);
+			public const UInt32 MintCream = 0xFFF5FFFA;
 
 			/// <summary>
 			/// Цвет - MistyRose
 			/// </summary>
-			public const UInt32 MistyRose = (0xFFFFE4E1);
+			public const UInt32 MistyRose = 0xFFFFE4E1;
 
 			/// <summary>
 			/// Цвет - Moccasin
 			/// </summary>
-			public const UInt32 Moccasin = (0xFFFFE4B5);
+			public const UInt32 Moccasin = 0xFFFFE4B5;
 
 			/// <summary>
 			/// Цвет - NavajoWhite
 			/// </summary>
-			public const UInt32 NavajoWhite = (0xFFFFDEAD);
+			public const UInt32 NavajoWhite = 0xFFFFDEAD;
 
 			/// <summary>
 			/// Цвет - Navy
 			/// </summary>
-			public const UInt32 Navy = (0xFF000080);
+			public const UInt32 Navy = 0xFF000080;
 
 			/// <summary>
 			/// Цвет - OldLace
 			/// </summary>
-			public const UInt32 OldLace = (0xFFFDF5E6);
+			public const UInt32 OldLace = 0xFFFDF5E6;
 
 			/// <summary>
 			/// Цвет - Olive
 			/// </summary>
-			public const UInt32 Olive = (0xFF808000);
+			public const UInt32 Olive = 0xFF808000;
 
 			/// <summary>
 			/// Цвет - OliveDrab
 			/// </summary>
-			public const UInt32 OliveDrab = (0xFF6B8E23);
+			public const UInt32 OliveDrab = 0xFF6B8E23;
 
 			/// <summary>
 			/// Цвет - Orange
 			/// </summary>
-			public const UInt32 Orange = (0xFFFFA500);
+			public const UInt32 Orange = 0xFFFFA500;
 
 			/// <summary>
 			/// Цвет - OrangeRed
 			/// </summary>
-			public const UInt32 OrangeRed = (0xFFFF4500);
+			public const UInt32 OrangeRed = 0xFFFF4500;
 
 			/// <summary>
 			/// Цвет - Orchid
 			/// </summary>
-			public const UInt32 Orchid = (0xFFDA70D6);
+			public const UInt32 Orchid = 0xFFDA70D6;
 
 			/// <summary>
 			/// Цвет - PaleGoldenrod
 			/// </summary>
-			public const UInt32 PaleGoldenrod = (0xFFEEE8AA);
+			public const UInt32 PaleGoldenrod = 0xFFEEE8AA;
 
 			/// <summary>
 			/// Цвет - PaleGreen
 			/// </summary>
-			public const UInt32 PaleGreen = (0xFF98FB98);
+			public const UInt32 PaleGreen = 0xFF98FB98;
 
 			/// <summary>
 			/// Цвет - PaleTurquoise
 			/// </summary>
-			public const UInt32 PaleTurquoise = (0xFFAFEEEE);
+			public const UInt32 PaleTurquoise = 0xFFAFEEEE;
 
 			/// <summary>
 			/// Цвет - PaleVioletRed
 			/// </summary>
-			public const UInt32 PaleVioletRed = (0xFFDB7093);
+			public const UInt32 PaleVioletRed = 0xFFDB7093;
 
 			/// <summary>
 			/// Цвет - PapayaWhip
 			/// </summary>
-			public const UInt32 PapayaWhip = (0xFFFFEFD5);
+			public const UInt32 PapayaWhip = 0xFFFFEFD5;
 
 			/// <summary>
 			/// Цвет - PeachPuff
 			/// </summary>
-			public const UInt32 PeachPuff = (0xFFFFDAB9);
+			public const UInt32 PeachPuff = 0xFFFFDAB9;
 
 			/// <summary>
 			/// Цвет - Peru
 			/// </summary>
-			public const UInt32 Peru = (0xFFCD853F);
+			public const UInt32 Peru = 0xFFCD853F;
 
 			/// <summary>
 			/// Цвет - Pink
 			/// </summary>
-			public const UInt32 Pink = (0xFFFFC0CB);
+			public const UInt32 Pink = 0xFFFFC0CB;
 
 			/// <summary>
 			/// Цвет - Plum
 			/// </summary>
-			public const UInt32 Plum = (0xFFDDA0DD);
+			public const UInt32 Plum = 0xFFDDA0DD;
 
 			/// <summary>
 			/// Цвет - PowderBlue
 			/// </summary>
-			public const UInt32 PowderBlue = (0xFFB0E0E6);
+			public const UInt32 PowderBlue = 0xFFB0E0E6;
 
 			/// <summary>
 			/// Цвет - Purple
 			/// </summary>
-			public const UInt32 Purple = (0xFF800080);
+			public const UInt32 Purple = 0xFF800080;
 
 			/// <summary>
 			/// Цвет - Red
 			/// </summary>
-			public const UInt32 Red = (0xFFFF0000);
+			public const UInt32 Red = 0xFFFF0000;
 
 			/// <summary>
 			/// Цвет - RosyBrown
 			/// </summary>
-			public const UInt32 RosyBrown = (0xFFBC8F8F);
+			public const UInt32 RosyBrown = 0xFFBC8F8F;
 
 			/// <summary>
 			/// Цвет - RoyalBlue
 			/// </summary>
-			public const UInt32 RoyalBlue = (0xFF4169E1);
+			public const UInt32 RoyalBlue = 0xFF4169E1;
 
 			/// <summary>
 			/// Цвет - SaddleBrown
 			/// </summary>
-			public const UInt32 SaddleBrown = (0xFF8B4513);
+			public const UInt32 SaddleBrown = 0xFF8B4513;
 
 			/// <summary>
 			/// Цвет - Salmon
 			/// </summary>
-			public const UInt32 Salmon = (0xFFFA8072);
+			public const UInt32 Salmon = 0xFFFA8072;
 
 			/// <summary>
 			/// Цвет - SandyBrown
 			/// </summary>
-			public const UInt32 SandyBrown = (0xFFF4A460);
+			public const UInt32 SandyBrown = 0xFFF4A460;
 
 			/// <summary>
 			/// Цвет - SeaGreen
 			/// </summary>
-			public const UInt32 SeaGreen = (0xFF2E8B57);
+			public const UInt32 SeaGreen = 0xFF2E8B57;
 
 			/// <summary>
 			/// Цвет - SeaShell
 			/// </summary>
-			public const UInt32 SeaShell = (0xFFFFF5EE);
+			public const UInt32 SeaShell = 0xFFFFF5EE;
 
 			/// <summary>
 			/// Цвет - Sienna
 			/// </summary>
-			public const UInt32 Sienna = (0xFFA0522D);
+			public const UInt32 Sienna = 0xFFA0522D;
 
 			/// <summary>
 			/// Цвет - Silver
 			/// </summary>
-			public const UInt32 Silver = (0xFFC0C0C0);
+			public const UInt32 Silver = 0xFFC0C0C0;
 
 			/// <summary>
 			/// Цвет - SkyBlue
 			/// </summary>
-			public const UInt32 SkyBlue = (0xFF87CEEB);
+			public const UInt32 SkyBlue = 0xFF87CEEB;
 
 			/// <summary>
 			/// Цвет - SlateBlue
 			/// </summary>
-			public const UInt32 SlateBlue = (0xFF6A5ACD);
+			public const UInt32 SlateBlue = 0xFF6A5ACD;
 
 			/// <summary>
 			/// Цвет - SlateGray
 			/// </summary>
-			public const UInt32 SlateGray = (0xFF708090);
+			public const UInt32 SlateGray = 0xFF708090;
 
 			/// <summary>
 			/// Цвет - Snow
 			/// </summary>
-			public const UInt32 Snow = (0xFFFFFAFA);
+			public const UInt32 Snow = 0xFFFFFAFA;
 
 			/// <summary>
 			/// Цвет - SpringGreen
 			/// </summary>
-			public const UInt32 SpringGreen = (0xFF00FF7F);
+			public const UInt32 SpringGreen = 0xFF00FF7F;
 
 			/// <summary>
 			/// Цвет - SteelBlue
 			/// </summary>
-			public const UInt32 SteelBlue = (0xFF4682B4);
+			public const UInt32 SteelBlue = 0xFF4682B4;
 
 			/// <summary>
 			/// Цвет - Tan
 			/// </summary>
-			public const UInt32 Tan = (0xFFD2B48C);
+			public const UInt32 Tan = 0xFFD2B48C;
 
 			/// <summary>
 			/// Цвет - Teal
 			/// </summary>
-			public const UInt32 Teal = (0xFF008080);
+			public const UInt32 Teal = 0xFF008080;
 
 			/// <summary>
 			/// Цвет - Thistle
 			/// </summary>
-			public const UInt32 Thistle = (0xFFD8BFD8);
+			public const UInt32 Thistle = 0xFFD8BFD8;
 
 			/// <summary>
 			/// Цвет - Tomato
 			/// </summary>
-			public const UInt32 Tomato = (0xFFFF6347);
+			public const UInt32 Tomato = 0xFFFF6347;
 
 			/// <summary>
 			/// Цвет - Turquoise
 			/// </summary>
-			public const UInt32 Turquoise = (0xFF40E0D0);
+			public const UInt32 Turquoise = 0xFF40E0D0;
 
 			/// <summary>
 			/// Цвет - Violet
 			/// </summary>
-			public const UInt32 Violet = (0xFFEE82EE);
+			public const UInt32 Violet = 0xFFEE82EE;
 
 			/// <summary>
 			/// Цвет - Wheat
 			/// </summary>
-			public const UInt32 Wheat = (0xFFF5DEB3);
+			public const UInt32 Wheat = 0xFFF5DEB3;
 
 			/// <summary>
 			/// Цвет - White
 			/// </summary>
-			public const UInt32 White = (0xFFFFFFFF);
+			public const UInt32 White = 0xFFFFFFFF;
 
 			/// <summary>
 			/// Цвет - WhiteSmoke
 			/// </summary>
-			public const UInt32 WhiteSmoke = (0xFFF5F5F5);
+			public const UInt32 WhiteSmoke = 0xFFF5F5F5;
 
 			/// <summary>
 			/// Цвет - Yellow
 			/// </summary>
-			public const UInt32 Yellow = (0xFFFFFF00);
+			public const UInt32 Yellow = 0xFFFFFF00;
 
 			/// <summary>
 			/// Цвет - YellowGreen
 			/// </summary>
-			public const UInt32 YellowGreen = (0xFF9ACD32);
+			public const UInt32 YellowGreen = 0xFF9ACD32;
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //---------------------------------------------------------------------------------------------------------------------
@@ -20,12 +20,14 @@ namespace Lotus
 	namespace Algorithm
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup AlgorithmSnap Алгоритмы привязки пространственных данных
-		//! Подсистема алгоритмов для привязки пространственных данных. Алгоритмы привязки пространственных данных 
-		//! обеспечивают привязку объекта к определенному узлу, то есть позволяют найти ближайший соответствующий объект 
-		//! в зависимости от различных критериев.
-		//! \ingroup Algorithm
-		/*@{*/
+		/**
+         * \defgroup AlgorithmSnap Алгоритмы привязки пространственных данных
+         * \ingroup Algorithm
+         * \brief Подсистема алгоритмов для привязки пространственных данных.
+		 * \details Алгоритмы привязки пространственных данных обеспечивают привязку объекта к определенному узлу, 
+			то есть позволяют найти ближайший соответствующий объект в зависимости от различных критериев.
+         * @{
+         */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Точка привязки в двухмерном пространстве
@@ -127,7 +129,7 @@ namespace Lotus
 				{
 					if (typeof(TSnapPoint2D) == obj.GetType())
 					{
-						TSnapPoint2D snap_point = (TSnapPoint2D)obj;
+						var snap_point = (TSnapPoint2D)obj;
 						return Equals(snap_point);
 					}
 				}
@@ -523,7 +525,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ComputeDistance(Vector2Df point)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].ComputeDistance(ref point);
 				}
@@ -554,8 +556,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single GetMinimumDistance()
 			{
-				Single minimum = Single.MaxValue;
-				for (Int32 i = 0; i < mCount; i++)
+				var minimum = Single.MaxValue;
+				for (var i = 0; i < mCount; i++)
 				{
 					if(mArrayOfItems[i].Distance < minimum)
 					{
@@ -574,9 +576,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 GetMinimumDistanceIndex()
 			{
-				Single minimum = Single.MaxValue;
-				Int32 index = 0;
-				for (Int32 i = 0; i < mCount; i++)
+				var minimum = Single.MaxValue;
+				var index = 0;
+				for (var i = 0; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].Distance < minimum)
 					{
@@ -601,7 +603,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromPosition(Vector2Df point, Single delta_x, Single delta_y)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if(mArrayOfItems[i].ApproximatelyPoint(ref point, delta_x, delta_y))
 					{
@@ -646,7 +648,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromPositionX(Single x, Single epsilon)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].ApproximatelyPointX(x, epsilon))
 					{
@@ -667,7 +669,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromPositionY(Single y, Single epsilon)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].ApproximatelyPointY(y, epsilon))
 					{
@@ -688,7 +690,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromDistance(Single distance, Single epsilon)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].ApproximatelyDistance(distance, epsilon))
 					{
@@ -701,7 +703,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

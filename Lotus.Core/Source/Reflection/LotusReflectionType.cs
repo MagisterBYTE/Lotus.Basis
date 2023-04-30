@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreReflection
-		/*@{*/
+		/** \addtogroup CoreReflection
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Класс содержащий тип и его кэшированные данные рефлексии
@@ -303,7 +303,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public List<FieldInfo> GetFieldsFromType<TType>()
 			{
-				List<FieldInfo> fields = new List<FieldInfo>();
+				var fields = new List<FieldInfo>();
 
 				if (mFields == null) GetFields();
 				foreach (var field_info in mFields.Values)
@@ -326,7 +326,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public List<FieldInfo> GetFieldsHasAttribute<TAttribute>() where TAttribute : Attribute
 			{
-				List<FieldInfo> fields = new List<FieldInfo>();
+				var fields = new List<FieldInfo>();
 
 				if (mFields == null) GetFields();
 				foreach (var field_info in mFields.Values)
@@ -449,18 +449,18 @@ namespace Lotus
 					{
 						if (collection is IList)
 						{
-							IList list = collection as IList;
+							var list = collection as IList;
 							return (list[index]);
 						}
 						else
 						{
 							if (collection is IEnumerable)
 							{
-								IEnumerable enumerable = collection as IEnumerable;
+								var enumerable = collection as IEnumerable;
 
 								var enumeration = enumerable.GetEnumerator();
 
-								for (Int32 i = 0; i <= index; i++)
+								for (var i = 0; i <= index; i++)
 								{
 									if (!enumeration.MoveNext())
 									{
@@ -507,18 +507,18 @@ namespace Lotus
 					{
 						if (collection is IList)
 						{
-							IList list = collection as IList;
+							var list = collection as IList;
 							return (list[index]);
 						}
 						else
 						{
 							if (collection is IEnumerable)
 							{
-								IEnumerable enumerable = collection as IEnumerable;
+								var enumerable = collection as IEnumerable;
 
 								var enumeration = enumerable.GetEnumerator();
 
-								for (Int32 i = 0; i <= index; i++)
+								for (var i = 0; i <= index; i++)
 								{
 									if (!enumeration.MoveNext())
 									{
@@ -701,7 +701,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public List<PropertyInfo> GetPropertiesFromType<TType>()
 			{
-				List<PropertyInfo> properties = new List<PropertyInfo>();
+				var properties = new List<PropertyInfo>();
 				if (mProperties == null) GetProperties();
 
 				foreach (var property_info in mProperties.Values)
@@ -725,7 +725,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public List<PropertyInfo> GetPropertiesHasAttribute<TAttribute>() where TAttribute : Attribute
 			{
-				List<PropertyInfo> properties = new List<PropertyInfo>();
+				var properties = new List<PropertyInfo>();
 
 				if (mProperties == null) GetProperties();
 				foreach (var property_info in mProperties.Values)
@@ -797,24 +797,24 @@ namespace Lotus
 				PropertyInfo property_info;
 				if (mProperties.TryGetValue(property_name, out property_info))
 				{
-					System.Object collection = property_info.GetValue(instance);
+					var collection = property_info.GetValue(instance);
 
 					if (collection != null)
 					{
 						if (collection is IList)
 						{
-							IList list = collection as IList;
+							var list = collection as IList;
 							return (list[index]);
 						}
 						else
 						{
 							if (collection is IEnumerable)
 							{
-								IEnumerable enumerable = collection as IEnumerable;
+								var enumerable = collection as IEnumerable;
 
 								var enumeration = enumerable.GetEnumerator();
 
-								for (Int32 i = 0; i <= index; i++)
+								for (var i = 0; i <= index; i++)
 								{
 									if (!enumeration.MoveNext())
 									{
@@ -869,7 +869,7 @@ namespace Lotus
 				PropertyInfo property_info;
 				if (mProperties.TryGetValue(property_name, out property_info))
 				{
-					IList list = property_info.GetValue(instance) as IList;
+					var list = property_info.GetValue(instance) as IList;
 					if (list != null)
 					{
 						list[index] = value;
@@ -979,7 +979,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public List<MethodInfo> GetMethodsHasAttribute<TAttribute>() where TAttribute : Attribute
 			{
-				List<MethodInfo> methods = new List<MethodInfo>();
+				var methods = new List<MethodInfo>();
 
 				if (mMethods == null) GetMethods();
 				foreach (var method_info in mMethods.Values)
@@ -1140,7 +1140,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

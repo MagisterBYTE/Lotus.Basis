@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.ComponentModel;
@@ -18,11 +18,13 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup CoreDateTime Подсистема работы с датой и временем
-		//! Подсистема работы с датой и временем обеспечивает дополнительные функциональные возможности для работы
-		//! с временным интервалом и временным периодом.
-		//! \ingroup Core
-		/*@{*/
+		/**
+         * \defgroup CoreDateTime Подсистема работы с датой и временем
+         * \ingroup Core
+         * \brief Подсистема работы с датой и временем обеспечивает дополнительные функциональные возможности для работы
+			с временным интервалом и временным периодом. 
+         * @{
+         */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий дополнительные методы для работы с типом <see cref="DateTime"/>
@@ -106,14 +108,14 @@ namespace Lotus
 					var endDate = endCheck.GetValueOrDefault();
 
 					// Целиком в диапазоне
-					Boolean all = CheckDateInRange(beginCheck, beginRange, endRange) &&
+					var all = CheckDateInRange(beginCheck, beginRange, endRange) &&
 						CheckDateInRange(endDate, beginRange, endRange);
 
 					// Пересечение начальной даты
-					Boolean begin = beginCheck <= beginRange && CheckDateInRange(endDate, beginRange, endRange);
+					var begin = beginCheck <= beginRange && CheckDateInRange(endDate, beginRange, endRange);
 
 					// Пересечение конечной даты
-					Boolean end = CheckDateInRange(beginCheck, beginRange, endRange) && endDate >= endRange;
+					var end = CheckDateInRange(beginCheck, beginRange, endRange) && endDate >= endRange;
 
 					return all || begin || end;
 				}
@@ -187,7 +189,7 @@ namespace Lotus
 			DateTime Date { get; set; }
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Globalization;
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry3D
-		/*@{*/
+		/** \addtogroup MathGeometry3D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Плоскость в 3D пространстве
@@ -149,7 +149,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Double inv_length = XMath.InvSqrt((Normal.X * Normal.X) + (Normal.Y * Normal.Y) + (Normal.Z * Normal.Z));
+				var inv_length = XMath.InvSqrt((Normal.X * Normal.X) + (Normal.Y * Normal.Y) + (Normal.Z * Normal.Z));
 				Normal.X *= inv_length;
 				Normal.Y *= inv_length;
 				Normal.Z *= inv_length;
@@ -470,7 +470,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Single inv_length = XMath.InvSqrt((Normal.X * Normal.X) + (Normal.Y * Normal.Y) + (Normal.Z * Normal.Z));
+				var inv_length = XMath.InvSqrt((Normal.X * Normal.X) + (Normal.Y * Normal.Y) + (Normal.Z * Normal.Z));
 				Normal.X *= inv_length;
 				Normal.Y *= inv_length;
 				Normal.Z *= inv_length;
@@ -479,7 +479,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -17,8 +17,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreExtension
-		/*@{*/
+		/** \addtogroup CoreExtension
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы расширения для типа <see cref="System.Enum"/>
@@ -36,8 +36,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsFlagSet(this Enum value, Enum flag)
 			{
-				long lValue = Convert.ToInt64(value);
-				long lFlag = Convert.ToInt64(flag);
+				var lValue = Convert.ToInt64(value);
+				var lFlag = Convert.ToInt64(flag);
 				return (lValue & lFlag) != 0;
 			}
 
@@ -52,8 +52,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Enum SetFlags(this Enum value, Enum flags, Boolean on)
 			{
-				long lValue = Convert.ToInt64(value);
-				long lFlag = Convert.ToInt64(flags);
+				var lValue = Convert.ToInt64(value);
+				var lFlag = Convert.ToInt64(flags);
 				if (on)
 				{
 					lValue |= lFlag;
@@ -63,7 +63,7 @@ namespace Lotus
 					lValue &= ~lFlag;
 				}
 
-				Enum result = (Enum)Enum.ToObject(value.GetType(), lValue);
+				var result = (Enum)Enum.ToObject(value.GetType(), lValue);
 				return (result);
 			}
 
@@ -136,7 +136,7 @@ namespace Lotus
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathRandom
-		/*@{*/
+		/** \addtogroup MathRandom
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Генератор получения гарантированных вероятностных значений в указанном интервале
@@ -130,24 +130,24 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Reset()
 			{
-				for (Int32 i = 0; i < mProbability.Count; i++)
+				for (var i = 0; i < mProbability.Count; i++)
 				{
 					mData[i] = mProbability[i];
 				}
 
-				for (Int32 ir = mProbability.Count; ir < mCapacity; ir++)
+				for (var ir = mProbability.Count; ir < mCapacity; ir++)
 				{
 					mData[ir] = -1;
 				}
 
-				Random rnd = new Random();
-				Int32 n = mData.Length;
+				var rnd = new Random();
+				var n = mData.Length;
 				while (n > 1)
 				{
 					n--;
-					Int32 k = rnd.Next(n + 1);
+					var k = rnd.Next(n + 1);
 
-					Int32 old = mData[n];
+					var old = mData[n];
 					mData[n] = mData[k];
 					mData[k] = old;
 				}
@@ -184,8 +184,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddProbability(Int32 index, Int32 probability)
 			{
-				Int32 count = probability * mCapacity / 100;
-				for (Int32 i = 0; i < count; i++)
+				var count = probability * mCapacity / 100;
+				for (var i = 0; i < count; i++)
 				{
 					mProbability.Add(index);
 				}
@@ -204,10 +204,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddProbabilityList(params Int32[] probability)
 			{
-				for (Int32 index = 0; index < probability.Length; index++)
+				for (var index = 0; index < probability.Length; index++)
 				{
-					Int32 count = probability[index] * mCapacity / 100;
-					for (Int32 i = 0; i < count; i++)
+					var count = probability[index] * mCapacity / 100;
+					for (var i = 0; i < count; i++)
 					{
 						mProbability.Add(index);
 					}
@@ -296,9 +296,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public IList<String> GetDataStrings()
 			{
-				String[] lines = new String[mData.Length];
+				var lines = new String[mData.Length];
 
-				for (Int32 i = 0; i < mData.Length; i++)
+				for (var i = 0; i < mData.Length; i++)
 				{
 					lines[i] = "i = " + i.ToString() + ", value = " + Data[i].ToString();
 				}
@@ -308,7 +308,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

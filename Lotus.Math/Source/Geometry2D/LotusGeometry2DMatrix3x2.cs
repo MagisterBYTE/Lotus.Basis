@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Globalization;
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry2D
-		/*@{*/
+		/** \addtogroup MathGeometry2D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Двухмерная матрица размерностью 3х2
@@ -186,7 +186,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Divide(in Matrix3Dx2f left, Single right, out Matrix3Dx2f result)
 			{
-				Single inv = 1.0f / right;
+				var inv = 1.0f / right;
 
 				result.M11 = left.M11 * inv;
 				result.M12 = left.M12 * inv;
@@ -447,8 +447,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Rotation(Single angle, out Matrix3Dx2f result)
 			{
-				Single cos = (Single)Math.Cos(angle);
-				Single sin = (Single)Math.Sin(angle);
+				var cos = (Single)Math.Cos(angle);
+				var sin = (Single)Math.Sin(angle);
 
 				result = Matrix3Dx2f.Identity;
 				result.M11 = cos;
@@ -690,7 +690,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Invert(in Matrix3Dx2f value, out Matrix3Dx2f result)
 			{
-				Single determinant = value.Determinant();
+				var determinant = value.Determinant();
 
 				if (XMath.IsZero(determinant))
 				{
@@ -698,9 +698,9 @@ namespace Lotus
 					return;
 				}
 
-				Single invdet = 1.0f / determinant;
-				Single offset_x = value.M31;
-				Single offset_y = value.M32;
+				var invdet = 1.0f / determinant;
+				var offset_x = value.M31;
+				var offset_y = value.M32;
 
 				result = new Matrix3Dx2f(
 					value.M22 * invdet,
@@ -1318,7 +1318,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry3D
-		/*@{*/
+		/** \addtogroup MathGeometry3D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Четырехмерная матрицы размерностью 4х4
@@ -213,8 +213,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationX(Double angle, ref Matrix4Dx4 result)
 			{
-				Double ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				Double st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
 
 				result.M11 = 1;
 				result.M21 = 0;
@@ -238,8 +238,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationY(Double angle, ref Matrix4Dx4 result)
 			{
-				Double ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				Double st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
 
 				result.M11 = ct;
 				result.M21 = 0;
@@ -263,8 +263,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationZ(Double angle, ref Matrix4Dx4 result)
 			{
-				Double ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				Double st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
 
 				result.M11 = ct;
 				result.M21 = -st;
@@ -289,15 +289,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationFromAxis(Double angle, in Vector3D axis, ref Matrix4Dx4 result)
 			{
-				Double ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				Double st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
 
-				Double xx = axis.X * axis.X;
-				Double yy = axis.Y * axis.Y;
-				Double zz = axis.Z * axis.Z;
-				Double xy = axis.X * axis.Y;
-				Double xz = axis.X * axis.Z;
-				Double yz = axis.Y * axis.Z;
+				var xx = axis.X * axis.X;
+				var yy = axis.Y * axis.Y;
+				var zz = axis.Z * axis.Z;
+				var xy = axis.X * axis.Y;
+				var xz = axis.X * axis.Z;
+				var yz = axis.Y * axis.Z;
 
 				result.M11 = xx + (ct * (1 - xx));
 				result.M21 = xy + (ct * -xy) + (st * -axis.Z);
@@ -323,7 +323,7 @@ namespace Lotus
 			{
 				Double wx, wy, wz, xx, yy, yz, xy, xz, zz, x2, y2, z2;
 
-				Double sc = 2.0 / quaternion.Length;
+				var sc = 2.0 / quaternion.Length;
 
 				x2 = quaternion.X * sc; y2 = quaternion.Y * sc; z2 = quaternion.Z * sc;
 				xx = quaternion.X * x2; xy = quaternion.X * y2; xz = quaternion.X * z2;
@@ -513,7 +513,7 @@ namespace Lotus
 				{
 					if (typeof(Matrix4Dx4) == obj.GetType())
 					{
-						Matrix4Dx4 matrix = (Matrix4Dx4)obj;
+						var matrix = (Matrix4Dx4)obj;
 						return Equals(matrix);
 					}
 				}
@@ -780,7 +780,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Quaternion3D ToQuaternion3D()
 			{
-				Double tr = M11 + M22 + M33;
+				var tr = M11 + M22 + M33;
 				if (tr > 0.0)
 				{
 					return new Quaternion3D(M23 - M32, M31 - M13, M12 - M21, tr + 1.0);
@@ -813,7 +813,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Quaternion3Df ToQuaternion3Df()
 			{
-				Single tr = (Single)(M11 + M22 + M33);
+				var tr = (Single)(M11 + M22 + M33);
 				if (tr > 0.0)
 				{
 					return new Quaternion3Df((Single)(M23 - M32), (Single)(M31 - M13), (Single)(M12 - M21), tr + 1.0f);
@@ -1033,8 +1033,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationX(Single angle, ref Matrix4Dx4f result)
 			{
-				Single ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
-				Single st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
 
 				result.M11 = 1;
 				result.M21 = 0;
@@ -1058,8 +1058,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationY(Single angle, ref Matrix4Dx4f result)
 			{
-				Single ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
-				Single st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
 
 				result.M11 = ct;
 				result.M21 = 0;
@@ -1083,8 +1083,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationZ(Single angle, ref Matrix4Dx4f result)
 			{
-				Single ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
-				Single st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
 
 				result.M11 = ct;
 				result.M21 = -st;
@@ -1109,15 +1109,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationFromAxis(Single angle, in Vector3Df axis, ref Matrix4Dx4f result)
 			{
-				Single ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
-				Single st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
 
-				Single xx = axis.X * axis.X;
-				Single yy = axis.Y * axis.Y;
-				Single zz = axis.Z * axis.Z;
-				Single xy = axis.X * axis.Y;
-				Single xz = axis.X * axis.Z;
-				Single yz = axis.Y * axis.Z;
+				var xx = axis.X * axis.X;
+				var yy = axis.Y * axis.Y;
+				var zz = axis.Z * axis.Z;
+				var xy = axis.X * axis.Y;
+				var xz = axis.X * axis.Z;
+				var yz = axis.Y * axis.Z;
 
 				result.M11 = xx + (ct * (1 - xx));
 				result.M21 = xy + (ct * -xy) + (st * -axis.Z);
@@ -1143,7 +1143,7 @@ namespace Lotus
 			{
 				Single wx, wy, wz, xx, yy, yz, xy, xz, zz, x2, y2, z2;
 
-				Single sc = 2.0f / quaternion.Length;
+				var sc = 2.0f / quaternion.Length;
 
 				x2 = quaternion.X * sc; y2 = quaternion.Y * sc; z2 = quaternion.Z * sc;
 				xx = quaternion.X * x2; xy = quaternion.X * y2; xz = quaternion.X * z2;
@@ -1333,7 +1333,7 @@ namespace Lotus
 				{
 					if (typeof(Matrix4Dx4f) == obj.GetType())
 					{
-						Matrix4Dx4f matrix = (Matrix4Dx4f)obj;
+						var matrix = (Matrix4Dx4f)obj;
 						return Equals(matrix);
 					}
 				}
@@ -1600,7 +1600,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Quaternion3Df ToQuaternion3Df()
 			{
-				Single tr = M11 + M22 + M33;
+				var tr = M11 + M22 + M33;
 				if (tr > 0.0)
 				{
 					return new Quaternion3Df(M23 - M32, M31 - M13, M12 - M21, tr + 1.0f);
@@ -1627,7 +1627,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

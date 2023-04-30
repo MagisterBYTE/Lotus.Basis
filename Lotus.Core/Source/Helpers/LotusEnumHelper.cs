@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.ComponentModel;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreHelpers
-		/*@{*/
+		/** \addtogroup CoreHelpers
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий дополнительные методы для работы с типом <see cref="Enum"/>
@@ -43,10 +43,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static List<String> GetDescriptions(Type enum_type)
 			{
-				List<String> values = new List<String>();
+				var values = new List<String>();
 				foreach (FieldInfo fi in enum_type.GetFields())
 				{
-					DescriptionAttribute dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+					var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 
 					if (dna != null)
 					{
@@ -75,7 +75,7 @@ namespace Lotus
 			public static String GetDescriptionOrName(Type enum_type, Enum enum_value)
 			{
 				FieldInfo fi = enum_type.GetField(Enum.GetName(enum_type, enum_value));
-				DescriptionAttribute dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+				var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 				if (dna != null)
 				{
 					return (dna.Description);
@@ -97,7 +97,7 @@ namespace Lotus
 			public static String GetAbbreviationOrName(Type enum_type, Enum enum_value)
 			{
 				FieldInfo fi = enum_type.GetField(Enum.GetName(enum_type, enum_value));
-				LotusAbbreviationAttribute abbr = (LotusAbbreviationAttribute)Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute));
+				var abbr = (LotusAbbreviationAttribute)Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute));
 				if (abbr != null)
 				{
 					return (abbr.Name);
@@ -120,7 +120,7 @@ namespace Lotus
 			{
 				foreach (FieldInfo fi in enum_type.GetFields())
 				{
-					DescriptionAttribute dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+					var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 
 					if ((dna != null) && (value == dna.Description))
 					{
@@ -143,7 +143,7 @@ namespace Lotus
 			{
 				foreach (FieldInfo fi in enum_type.GetFields())
 				{
-					LotusAbbreviationAttribute abbr = (LotusAbbreviationAttribute)Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute));
+					var abbr = (LotusAbbreviationAttribute)Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute));
 
 					if ((abbr != null) && (value == abbr.Name))
 					{
@@ -172,7 +172,7 @@ namespace Lotus
 
 				try
 				{
-					TEnum result = (TEnum)Enum.Parse(typeof(TEnum), value, true);
+					var result = (TEnum)Enum.Parse(typeof(TEnum), value, true);
 					return result;
 				}
 				catch
@@ -370,7 +370,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

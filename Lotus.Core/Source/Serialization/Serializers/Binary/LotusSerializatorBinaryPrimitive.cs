@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.IO;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreSerialization
-		/*@{*/
+		/** \addtogroup CoreSerialization
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий сериализацию примитивных данных в бинарный поток
@@ -129,23 +129,21 @@ namespace Lotus
 							writer.Write(((Uri)instance).ToString());
 						}
 						break;
-					//
-					//
-					//
+
 					case nameof(TColor):
 						{
-							TColor color = (TColor)instance;
+							var color = (TColor)instance;
 							writer.Write(color.ToRGBA());
 						}
 						break;
 					case nameof(CVariant):
 						{
-							CVariant variant = (CVariant)instance;
+							var variant = (CVariant)instance;
 							writer.Write(variant.SerializeToString());
 						}
 						break;
 					//
-					//
+					// UnityEngine
 					//
 #if (UNITY_2017_1_OR_NEWER)
 					case nameof(UnityEngine.Vector2):
@@ -266,7 +264,7 @@ namespace Lotus
 									BindingFlags.Public | BindingFlags.Instance);
 								if (method_info != null)
 								{
-									String data = method_info.Invoke(instance, null).ToString();
+									var data = method_info.Invoke(instance, null).ToString();
 									writer.Write(data);
 								}
 							}
@@ -276,7 +274,7 @@ namespace Lotus
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.IO;
@@ -18,20 +18,22 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup CoreLogger Подсистема логирования
-		//! Подсистема логирования представляет собой подсистему, предназначенную для трассировки, диагностики, отладки 
-		//! и логирования процесса работы приложения.
-		//!
-		//! ## Описание
-		//! Центральный диспетчер подсистемы логирования \ref Lotus.Core.XLogger применяется для трассировки, диагностики, 
-		//! отладки и логирования процесса работы приложения и обеспечивает хранение и регистрацию как всех 
-		//! системных/межплатформенных сообщений, так и всех сообщений от бизнес-логики приложения.
-		//!
-		//! ## Использование
-		//! 1. Реализовать интерфейс(логгер) \ref Lotus.Core.ILoggerView для вывода и отображения сообщений
-		//! 2. Присоединить объект-логгер к свойству \ref Lotus.Core.XLogger.Logger
-		//! \ingroup Core
-		/*@{*/
+		/**
+         * \defgroup CoreLogger Подсистема логирования
+         * \ingroup Core
+         * \brief Подсистема логирования представляет собой подсистему, предназначенную для трассировки, диагностики, отладки 
+			и логирования процесса работы приложения.
+		 * \details
+			## Описание
+		    Центральный диспетчер подсистемы логирования \ref Lotus.Core.XLogger применяется для трассировки, диагностики, 
+			отладки и логирования процесса работы приложения и обеспечивает хранение и регистрацию как всех 
+			системных/межплатформенных сообщений, так и всех сообщений от бизнес-логики приложения.
+
+			## Использование
+			1. Реализовать интерфейс(логгер) \ref Lotus.Core.ILoggerView для вывода и отображения сообщений
+			2. Присоединить объект-логгер к свойству \ref Lotus.Core.XLogger.Logger
+         * @{
+         */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Тип сообщения
@@ -172,24 +174,24 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ParseTrace(String trace)
 			{
-				String[] items = trace.Split(XChar.SeparatorNewCarriageLine);
+				var items = trace.Split(XChar.SeparatorNewCarriageLine);
 				if(items.Length > 0)
 				{
 					Text = items[0];
 
 					if(items.Length > 1)
 					{
-						String data = items[1];
+						var data = items[1];
 
 						// Находим имя файла
-						Int32 index_file = data.IndexOf("(at");
+						var index_file = data.IndexOf("(at");
 						if(index_file > -1)
 						{
 							// Формируем имя метода
 							MemberName = data.Remove(index_file);
 
 							// Находим последнюю точку
-							Int32 index_dot = MemberName.LastIndexOf('.');
+							var index_dot = MemberName.LastIndexOf('.');
 							if(index_dot > -1)
 							{
 								// Удаляем названия пространства имен
@@ -205,7 +207,7 @@ namespace Lotus
 							FilePath = FilePath.Remove(0, 3);
 
 							// Находим двоеточие и удаляем до него
-							Int32 index_colon = FilePath.LastIndexOf(':');
+							var index_colon = FilePath.LastIndexOf(':');
 							if(index_colon > -1)
 							{
 								FilePath = FilePath.Remove(index_colon);
@@ -227,16 +229,16 @@ namespace Lotus
 			public void ParseStackTrace(String trace)
 			{
 				// Получаем список строк трассировки
-				String[] items = trace.Split(XChar.SeparatorNewCarriageLine, StringSplitOptions.RemoveEmptyEntries);
+				var items = trace.Split(XChar.SeparatorNewCarriageLine, StringSplitOptions.RemoveEmptyEntries);
 
 				if (items.Length > 1)
 				{
 					// Делаем обратный порядок чтобы получить правильную последовательность
 					Array.Reverse(items);
 
-					for (Int32 i = 0; i < items.Length - 1; i++)
+					for (var i = 0; i < items.Length - 1; i++)
 					{
-						String line_trace = items[i];
+						var line_trace = items[i];
 
 						if (i == 0)
 						{
@@ -262,14 +264,14 @@ namespace Lotus
 			public String ExtractMemberName(String line_trace)
 			{
 				// Находим имя файла
-				Int32 index_file = line_trace.LastIndexOf('(');
+				var index_file = line_trace.LastIndexOf('(');
 				if (index_file > -1)
 				{
 					// Формируем имя метода
-					String member_name = line_trace.Remove(index_file);
+					var member_name = line_trace.Remove(index_file);
 
 					// Находим последнюю точку
-					Int32 index_dot = member_name.LastIndexOf('.');
+					var index_dot = member_name.LastIndexOf('.');
 					if (index_dot > -1)
 					{
 						// Удаляем названия пространства имен
@@ -277,8 +279,8 @@ namespace Lotus
 					}
 
 					// Удаляем все аргументы
-					Int32 start = member_name.IndexOf('(');
-					Int32 end = member_name.IndexOf(')');
+					var start = member_name.IndexOf('(');
+					var end = member_name.IndexOf(')');
 					if(end - start > 1)
 					{
 						member_name = member_name.Remove(start + 1, (end - start));
@@ -300,14 +302,14 @@ namespace Lotus
 			public String ExtractFileName(String line_trace)
 			{
 				// Находим имя файла
-				Int32 index_file = line_trace.LastIndexOf('(');
+				var index_file = line_trace.LastIndexOf('(');
 				if (index_file > -1)
 				{
 					// Формируем имя файла
-					String file_path = line_trace.Remove(0, index_file);
+					var file_path = line_trace.Remove(0, index_file);
 
 					// Находим двоеточие и удаляем до него
-					Int32 index_colon = file_path.LastIndexOf(':');
+					var index_colon = file_path.LastIndexOf(':');
 					if (index_colon > -1)
 					{
 						file_path = file_path.Remove(index_colon);
@@ -324,7 +326,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

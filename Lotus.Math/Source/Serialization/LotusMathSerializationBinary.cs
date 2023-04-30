@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathSerialization
-		/*@{*/
+		/** \addtogroup MathSerialization
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы расширения для сериализации математических типов в бинарный поток
@@ -96,7 +96,7 @@ namespace Lotus
 					writer.Write(vectors.Count);
 
 					// Записываем данные по порядку
-					for (Int32 i = 0; i < vectors.Count; i++)
+					for (var i = 0; i < vectors.Count; i++)
 					{
 						writer.Write(vectors[i].X);
 						writer.Write(vectors[i].Y);
@@ -154,7 +154,7 @@ namespace Lotus
 					writer.Write(rects.Count);
 
 					// Записываем данные по порядку
-					for (Int32 i = 0; i < rects.Count; i++)
+					for (var i = 0; i < rects.Count; i++)
 					{
 						writer.Write(rects[i].X);
 						writer.Write(rects[i].Y);
@@ -188,7 +188,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2D ReadMathVector2D(this BinaryReader reader)
 			{
-				Vector2D vector = new Vector2D(reader.ReadDouble(), reader.ReadDouble());
+				var vector = new Vector2D(reader.ReadDouble(), reader.ReadDouble());
 				return vector;
 			}
 
@@ -202,7 +202,7 @@ namespace Lotus
 			public static Vector2D[] ReadMathVectors2D(this BinaryReader reader)
 			{
 				// Чтение количество элементов массива
-				Int32 count = reader.ReadInt32();
+				var count = reader.ReadInt32();
 
 				// Проверка нулевых данных
 				if (count == ZERO_DATA)
@@ -212,10 +212,10 @@ namespace Lotus
 				else
 				{
 					// Создаем массив
-					Vector2D[] vectors = new Vector2D[count];
+					var vectors = new Vector2D[count];
 
 					// Читаем данные по порядку
-					for (Int32 i = 0; i < count; i++)
+					for (var i = 0; i < count; i++)
 					{
 						vectors[i].X = reader.ReadDouble();
 						vectors[i].Y = reader.ReadDouble();
@@ -249,7 +249,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Rect2D ReadMathRect2D(this BinaryReader reader)
 			{
-				Rect2D rect = new Rect2D(reader.ReadDouble(),
+				var rect = new Rect2D(reader.ReadDouble(),
 									 reader.ReadDouble(),
 									 reader.ReadDouble(),
 									 reader.ReadDouble());
@@ -266,7 +266,7 @@ namespace Lotus
 			public static Rect2D[] ReadMathRects2D(this BinaryReader reader)
 			{
 				// Чтение количество элементов массива
-				Int32 count = reader.ReadInt32();
+				var count = reader.ReadInt32();
 
 				// Проверка нулевых данных
 				if (count == ZERO_DATA)
@@ -276,10 +276,10 @@ namespace Lotus
 				else
 				{
 					// Создаем массив
-					Rect2D[] rects = new Rect2D[count];
+					var rects = new Rect2D[count];
 
 					// Читаем данные по порядку
-					for (Int32 i = 0; i < count; i++)
+					for (var i = 0; i < count; i++)
 					{
 						rects[i].X = reader.ReadDouble();
 						rects[i].Y = reader.ReadDouble();
@@ -293,7 +293,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

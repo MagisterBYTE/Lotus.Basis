@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.IO;
@@ -18,8 +18,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreDocument
-		/*@{*/
+		/** \addtogroup CoreDocument
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс для реализации функциональности интерфейса <see cref="ILotusDocument"/>
@@ -38,7 +38,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TDocument LoadDocument<TDocument>(String title = null, ILotusSerializer serializer = null) where TDocument : ILotusDocument
 			{
-				String file_name = XFileDialog.Open(title != null ? title : "Открыть документ", "", null);
+				var file_name = XFileDialog.Open(title != null ? title : "Открыть документ", "", null);
 				if (file_name.IsExists())
 				{
 					TDocument document = default;
@@ -96,7 +96,7 @@ namespace Lotus
 			{
 				if(document != null)
 				{
-					String file_name = XFileDialog.Open(title != null ? title : "Открыть документ", "", document.GetFileExtension());
+					var file_name = XFileDialog.Open(title != null ? title : "Открыть документ", "", document.GetFileExtension());
 					if (file_name.IsExists())
 					{
 						// Получаем путь и имя файла
@@ -168,7 +168,7 @@ namespace Lotus
 			{
 				if (document != null)
 				{
-					String file_name = Path.Combine(document.PathFile, document.FileName);
+					var file_name = Path.Combine(document.PathFile, document.FileName);
 					if (File.Exists(file_name))
 					{
 						// Если документ поддерживает коллекцию то очищаем её
@@ -232,7 +232,7 @@ namespace Lotus
 					// Если не существует путь или имя файла
 					if (document.PathFile.IsExists() == false || document.FileName.IsExists() == false)
 					{
-						String doc_name = "Документ";
+						var doc_name = "Документ";
 
 						// Получаем имя
 						if (document is ILotusNameable nameable)
@@ -243,7 +243,7 @@ namespace Lotus
 							}
 						}
 
-						String file_name = XFileDialog.Save(title != null ? title : "Сохранить документ", document.PathFile, doc_name, document.GetFileExtension());
+						var file_name = XFileDialog.Save(title != null ? title : "Сохранить документ", document.PathFile, doc_name, document.GetFileExtension());
 						if (file_name.IsExists())
 						{
 							// Сохраняем документ
@@ -272,7 +272,7 @@ namespace Lotus
 					else
 					{
 						// Проверяем путь
-						String file_name = Path.Combine(document.PathFile, document.FileName);
+						var file_name = Path.Combine(document.PathFile, document.FileName);
 						if (File.Exists(file_name))
 						{
 							// Сохраняем документ
@@ -310,7 +310,7 @@ namespace Lotus
 			{
 				if (document != null)
 				{
-					String doc_name = "Документ";
+					var doc_name = "Документ";
 
 					// Получаем имя
 					if (document is ILotusNameable nameable)
@@ -321,7 +321,7 @@ namespace Lotus
 						}
 					}
 
-					String file_name = XFileDialog.Save(title != null ? title : "Сохранить документ как", document.PathFile, doc_name, document.GetFileExtension());
+					var file_name = XFileDialog.Save(title != null ? title : "Сохранить документ как", document.PathFile, doc_name, document.GetFileExtension());
 					if (file_name.IsExists())
 					{
 						// Сохраняем документ
@@ -356,7 +356,7 @@ namespace Lotus
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

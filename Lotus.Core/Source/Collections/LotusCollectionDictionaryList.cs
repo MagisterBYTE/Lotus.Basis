@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Linq;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreCollections
-		/*@{*/
+		/** \addtogroup CoreCollections
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Словарь содержащий в качестве значений список определенного типа
@@ -73,7 +73,7 @@ namespace Lotus
 				}
 				else
 				{
-					ListArray<TValue> list = new ListArray<TValue>();
+					var list = new ListArray<TValue>();
 					list.Add(item);
 					Add(key, list);
 				}
@@ -88,7 +88,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsValue(in TValue item)
 			{
-				Boolean result = false;
+				var result = false;
 
 				foreach (var list in Values)
 				{
@@ -110,11 +110,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean RemoveValue(in TValue item)
 			{
-				Boolean result = false;
+				var result = false;
 
 				foreach (var list in Values)
 				{
-					Int32 index = list.IndexOf(item);
+					var index = list.IndexOf(item);
 					if(index > -1)
 					{
 						list.RemoveAt(index);
@@ -143,11 +143,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean RemoveValue(in TKey key, in TValue item)
 			{
-				Boolean result = false;
+				var result = false;
 
 				foreach (var list in Values)
 				{
-					Int32 index = list.IndexOf(item);
+					var index = list.IndexOf(item);
 					if (index > -1)
 					{
 						list.RemoveAt(index);

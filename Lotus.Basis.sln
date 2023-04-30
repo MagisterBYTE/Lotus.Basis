@@ -17,11 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.UnitMeasurement", "Lo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{A9ED8896-2DCE-47CC-AD9E-7E48B0B38710}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Object3D", "Lotus.Object3D\Lotus.Object3D.csproj", "{804039DD-E3BA-42D1-A736-01A048DAC94C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Repository", "Lotus.Repository\Lotus.Repository.csproj", "{02DBD9E2-35E0-4798-9CE1-B045DE866634}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +75,12 @@ Global
 		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Publish|Any CPU.Build.0 = Publish|Any CPU
 		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
+		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Publish|Any CPU.Build.0 = Debug|Any CPU
+		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

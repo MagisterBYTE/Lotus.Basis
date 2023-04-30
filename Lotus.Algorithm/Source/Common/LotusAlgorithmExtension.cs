@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,10 +20,12 @@ namespace Lotus
 	namespace Algorithm
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup AlgorithmCommon Общая подсистема
-		//! Общая подсистема содержит общие данные по алгоритмам
-		//! \ingroup Algorithm
-		/*@{*/
+		/**
+         * \defgroup AlgorithmCommon Подсистема интерфейсов
+         * \ingroup Algorithm
+         * \brief Общая подсистема содержит общие данные по алгоритмам.
+         * @{
+         */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс для расширения функциональности базовых классов и структурных типов применительно к алгоритмам
@@ -71,8 +73,8 @@ namespace Lotus
 				if (massive == null) throw new ArgumentNullException(nameof(massive));
 				if (visitorDelegate == null) throw new ArgumentNullException(nameof(visitorDelegate));
 
-				Int32 length_x = massive.GetLength(0);
-				Int32 length_y = massive.GetLength(1);
+				var length_x = massive.GetLength(0);
+				var length_y = massive.GetLength(1);
 
 				if (start_x < 0 || start_x >= length_x) throw new ArgumentOutOfRangeException("startX");
 				if (start_y < 0 || start_y >= length_y) throw new ArgumentOutOfRangeException("startY");
@@ -82,7 +84,7 @@ namespace Lotus
 					comparer = EqualityComparer<TType>.Default;
 				}
 
-				Boolean[,] processed = new Boolean[length_x, length_y];
+				var processed = new Boolean[length_x, length_y];
 				TType value = massive[start_x, start_y];
 
 				var queue = new Queue<Vector2Di>();
@@ -167,8 +169,8 @@ namespace Lotus
 				if (massive == null) throw new ArgumentNullException(nameof(massive));
 				if (visitorDelegate == null) throw new ArgumentNullException(nameof(visitorDelegate));
 
-				Int32 length_x = massive.GetLength(0);
-				Int32 length_y = massive.GetLength(1);
+				var length_x = massive.GetLength(0);
+				var length_y = massive.GetLength(1);
 
 				if (start_x < 0 || start_x >= length_x) throw new ArgumentOutOfRangeException("startX");
 				if (start_y < 0 || start_y >= length_y) throw new ArgumentOutOfRangeException("startY");
@@ -178,7 +180,7 @@ namespace Lotus
 					comparer = EqualityComparer<TType>.Default;
 				}
 
-				Boolean[,] processed = new Boolean[length_x, length_y];
+				var processed = new Boolean[length_x, length_y];
 				TType value = massive[start_x, start_y];
 
 				var queue = new Queue<Vector2Di>();
@@ -201,11 +203,11 @@ namespace Lotus
 				{
 					Vector2Di cell = queue.Dequeue();
 
-					Boolean xGreaterThanZero = cell.X > 0;
-					Boolean xLessThanWidth = cell.X + 1 < length_x;
+					var xGreaterThanZero = cell.X > 0;
+					var xLessThanWidth = cell.X + 1 < length_x;
 
-					Boolean yGreaterThanZero = cell.Y > 0;
-					Boolean yLessThanHeight = cell.Y + 1 < length_y;
+					var yGreaterThanZero = cell.Y > 0;
+					var yLessThanHeight = cell.Y + 1 < length_y;
 
 					if (yGreaterThanZero)
 					{
@@ -365,11 +367,11 @@ namespace Lotus
 				if (massive == null) throw new ArgumentNullException(nameof(massive));
 				if (visitorDelegate == null) throw new ArgumentNullException(nameof(visitorDelegate));
 
-				Boolean xGreaterThanZero = x > 0;
-				Boolean xLessThanWidth = x + 1 < massive.GetLength(0);
+				var xGreaterThanZero = x > 0;
+				var xLessThanWidth = x + 1 < massive.GetLength(0);
 
-				Boolean yGreaterThanZero = y > 0;
-				Boolean yLessThanHeight = y + 1 < massive.GetLength(1);
+				var yGreaterThanZero = y > 0;
+				var yLessThanHeight = y + 1 < massive.GetLength(1);
 
 				if (yGreaterThanZero)
 				{
@@ -442,7 +444,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

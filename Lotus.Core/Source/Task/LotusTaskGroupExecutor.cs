@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Text;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreTask
-		/*@{*/
+		/** \addtogroup CoreTask
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Исполнитель группы задачи
@@ -132,7 +132,7 @@ namespace Lotus
 			public void OnUpdate()
 			{
 				// Выполняем отдельные группы задачи каждый кадр
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					CGroupTask group_task = mGroupTasks[i];
 
@@ -158,9 +158,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String GetStatus()
 			{
-				StringBuilder str = new StringBuilder(200);
+				var str = new StringBuilder(200);
 				str.AppendLine("Всего групп задач: " + mGroupTasks.Count.ToString());
-				for (Int32 ig = 0; ig < mGroupTasks.Count; ig++)
+				for (var ig = 0; ig < mGroupTasks.Count; ig++)
 				{
 					str.AppendLine("Группа: " + mGroupTasks[ig].Name + "(задач: " +
 						mGroupTasks[ig].Tasks.Count.ToString() + ")");
@@ -180,7 +180,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask GetGroupTask(String group_name)
 			{
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -270,7 +270,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask AddGroupTask(String group_name, TTaskExecuteMode execute_mode, TTaskMethod method, params ILotusTask[] list)
 			{
-				CGroupTask task = new CGroupTask(group_name, method, this, list);
+				var task = new CGroupTask(group_name, method, this, list);
 				task.ExecuteMode = execute_mode;
 				mGroupTasks.Add(task);
 				return task;
@@ -303,7 +303,7 @@ namespace Lotus
 			{
 				CGroupTask group_task = null;
 
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -363,7 +363,7 @@ namespace Lotus
 			{
 				CGroupTask group_task = null;
 
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -409,7 +409,7 @@ namespace Lotus
 			{
 				CGroupTask group_task = null;
 
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -473,7 +473,7 @@ namespace Lotus
 			{
 				CGroupTask group_task = null;
 
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -521,7 +521,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveGroupTask(String group_name)
 			{
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -540,7 +540,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ClearGroupTask(String group_name)
 			{
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -641,7 +641,7 @@ namespace Lotus
 			public virtual CGroupTask RunGroupTask(String group_name, Single delay_start, Action on_completed)
 			{
 				CGroupTask group_task = null;
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -684,7 +684,7 @@ namespace Lotus
 			public virtual CGroupTask RunGroupTask(String group_name, TTaskExecuteMode execute_mode, Single delay_start, Action on_completed)
 			{
 				CGroupTask group_task = null;
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -729,7 +729,7 @@ namespace Lotus
 			public virtual CGroupTask RunGroupTask(String group_name, TTaskExecuteMode execute_mode, TTaskMethod method, Single delay_start, Action on_completed)
 			{
 				CGroupTask group_task = null;
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -771,7 +771,7 @@ namespace Lotus
 			public virtual void PauseGroupTask(String group_name, Boolean pause)
 			{
 				CGroupTask group_task = null;
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -795,7 +795,7 @@ namespace Lotus
 			public virtual void StopGroupTask(String group_name)
 			{
 				CGroupTask group_task = null;
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -818,7 +818,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ResetGroupTask(String group_name)
 			{
-				for (Int32 i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
 					if (mGroupTasks[i].Name == group_name)
 					{
@@ -830,7 +830,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

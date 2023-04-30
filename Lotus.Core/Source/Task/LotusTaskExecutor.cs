@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Text;
@@ -21,8 +21,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreTask
-		/*@{*/
+		/** \addtogroup CoreTask
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		///  Определение интерфейса исполнителя задачи
@@ -133,7 +133,7 @@ namespace Lotus
 			public void OnUpdate()
 			{
 				// Выполняем отдельные задачи каждый кадр
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (!mTasks[i].IsTaskCompleted)
 					{
@@ -150,9 +150,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String GetStatus()
 			{
-				StringBuilder str = new StringBuilder(200);
+				var str = new StringBuilder(200);
 				str.AppendLine("Всего задач: " + mTasks.Count.ToString());
-				for (Int32 it = 0; it < mTasks.Count; it++)
+				for (var it = 0; it < mTasks.Count; it++)
 				{
 					str.AppendLine("Задача: " + mTasks[it].Name);
 				}
@@ -171,7 +171,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CTaskHolder GetTask(String task_name)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Name == task_name)
 					{
@@ -222,7 +222,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveTask(ILotusTask task)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Task == task)
 					{
@@ -245,7 +245,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveTask(String task_name)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Name == task_name)
 					{
@@ -293,7 +293,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RunTask(String task_name, Single delay_start, Action on_completed)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Name == task_name)
 					{
@@ -325,7 +325,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RunTask(ILotusTask task, Single delay_start)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Task == task)
 					{
@@ -345,7 +345,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void PauseTask(String task_name, Boolean pause)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Name == task_name)
 					{
@@ -363,7 +363,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void StopTask(String task_name)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Name == task_name)
 					{
@@ -381,7 +381,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ResetTask(String task_name)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Name == task_name)
 					{
@@ -393,7 +393,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreViewItem
-		/*@{*/
+		/** \addtogroup CoreViewItem
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Интерфейса элемента отображения который поддерживает иерархические отношения
@@ -193,7 +193,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static ViewItemHierarchy<TData> Build(TData data, ILotusViewItemHierarchy parent, ILotusCollectionViewHierarchy owner)
 			{
-				ViewItemHierarchy<TData> node_root_view = new ViewItemHierarchy<TData>();
+				var node_root_view = new ViewItemHierarchy<TData>();
 				node_root_view.DataContext = data;
 				node_root_view.IParent = parent;
 				node_root_view.IOwner = owner;
@@ -212,10 +212,10 @@ namespace Lotus
 				// Если есть поддержка интерфеса для построения используем его
 				if (data is ILotusViewItemBuilder view_builder)
 				{
-					Int32 count_child = view_builder.GetCountChildrenNode();
-					for (Int32 i = 0; i < count_child; i++)
+					var count_child = view_builder.GetCountChildrenNode();
+					for (var i = 0; i < count_child; i++)
 					{
-						TData node_data = (TData)view_builder.GetChildrenNode(i);
+						var node_data = (TData)view_builder.GetChildrenNode(i);
 						if (node_data != null)
 						{
 							Build(node_data, node_root_view, owner);
@@ -227,8 +227,8 @@ namespace Lotus
 					// 2) Проверяем на обобщенный список
 					if (data is IList list)
 					{
-						Int32 count_child = list.Count;
-						for (Int32 i = 0; i < count_child; i++)
+						var count_child = list.Count;
+						for (var i = 0; i < count_child; i++)
 						{
 							if (list[i] is TData node_data)
 							{
@@ -283,7 +283,7 @@ namespace Lotus
 			public static ViewItemHierarchy<TData> BuildFilter(TData data, ILotusViewItemHierarchy parent,
 				Predicate<TData> filter, ILotusCollectionViewHierarchy owner)
 			{
-				ViewItemHierarchy<TData> node_root_view = new ViewItemHierarchy<TData>();
+				var node_root_view = new ViewItemHierarchy<TData>();
 				node_root_view.DataContext = data;
 				node_root_view.IParent = parent;
 				node_root_view.IOwner = owner;
@@ -306,10 +306,10 @@ namespace Lotus
 						// Если есть поддержка интерфеса для построения используем его
 						if (data is ILotusViewItemBuilder view_builder)
 						{
-							Int32 count_child = view_builder.GetCountChildrenNode();
-							for (Int32 i = 0; i < count_child; i++)
+							var count_child = view_builder.GetCountChildrenNode();
+							for (var i = 0; i < count_child; i++)
 							{
-								TData node_data = (TData)view_builder.GetChildrenNode(i);
+								var node_data = (TData)view_builder.GetChildrenNode(i);
 								if (node_data != null)
 								{
 									BuildFilter(node_data, node_root_view, filter, owner);
@@ -321,8 +321,8 @@ namespace Lotus
 							// 2) Проверяем на обобщенный список
 							if (data is IList list)
 							{
-								Int32 count_child = list.Count;
-								for (Int32 i = 0; i < count_child; i++)
+								var count_child = list.Count;
+								for (var i = 0; i < count_child; i++)
 								{
 									if (list[i] is TData node_data)
 									{
@@ -335,7 +335,7 @@ namespace Lotus
 								// 3) Проверяем на обобщенное перечисление
 								if (data is IEnumerable enumerable)
 								{
-									foreach (Object item in enumerable)
+									foreach (var item in enumerable)
 									{
 										if (item is TData node_data)
 										{
@@ -570,7 +570,7 @@ namespace Lotus
 
 						if(mIsChecked.HasValue)
 						{
-							for (Int32 i = 0; i < mCount; i++)
+							for (var i = 0; i < mCount; i++)
 							{
 								mArrayOfItems[i].IsChecked = value;
 							}
@@ -873,7 +873,7 @@ namespace Lotus
 					if (remove)
 					{
 						// Ищем его
-						Int32 index = IndexOf(view_item);
+						var index = IndexOf(view_item);
 						if (index != -1)
 						{
 							// Удаляем
@@ -890,7 +890,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void UpdateOwnedObjects()
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].IParent = this;
 					mArrayOfItems[i].UpdateOwnedObjects();
@@ -961,7 +961,7 @@ namespace Lotus
 			public virtual void Expanded()
 			{
 				IsExpanded = true;
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Expanded();
 				}
@@ -975,7 +975,7 @@ namespace Lotus
 			public virtual void Collapsed()
 			{
 				IsExpanded = false;
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Collapsed();
 				}
@@ -1014,7 +1014,7 @@ namespace Lotus
 			{
 				if (exclude != null)
 				{
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						if (Object.ReferenceEquals(mArrayOfItems[i], exclude) == false)
 						{
@@ -1025,7 +1025,7 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].IsSelected = false;
 						mArrayOfItems[i].UnsetAllSelected(exclude);
@@ -1046,7 +1046,7 @@ namespace Lotus
 				{
 					if (parameters == null)
 					{
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							if (Object.ReferenceEquals(mArrayOfItems[i], exclude) == false)
 							{
@@ -1069,7 +1069,7 @@ namespace Lotus
 					if (parameters == null)
 					{
 						// Выключаем все элемента отображения
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							mArrayOfItems[i].IsPresented = false;
 							mArrayOfItems[i].UnsetAllPresent(exclude, parameters);
@@ -1096,7 +1096,7 @@ namespace Lotus
 			{
 				if (match(this))
 				{
-					for (Int32 i = 0; i < mCount; ++i)
+					for (var i = 0; i < mCount; ++i)
 					{
 						(mArrayOfItems[i]).Visit(match);
 					}
@@ -1187,11 +1187,11 @@ namespace Lotus
 							IList new_objects = args.NewItems;
 							if(new_objects != null && new_objects.Count > 0)
 							{
-								for (Int32 i = 0; i < new_objects.Count; i++)
+								for (var i = 0; i < new_objects.Count; i++)
 								{
 									// Проверяем на дубликаты
-									Boolean is_dublicate = false;
-									for (Int32 j = 0; j < Count; j++)
+									var is_dublicate = false;
+									for (var j = 0; j < Count; j++)
 									{
 										if(mArrayOfItems[j].DataContext == new_objects[i])
 										{
@@ -1206,7 +1206,7 @@ namespace Lotus
 										view_item.IOwner = this.IOwner;
 										view_item.IParent = this;
 
-										TData data = (TData)new_objects[i];
+										var data = (TData)new_objects[i];
 										view_item.DataContext = data;
 
 										if (data is ILotusViewItemOwner view_item_owner)
@@ -1225,9 +1225,9 @@ namespace Lotus
 							IList old_items = args.OldItems;
 							if(old_items != null && old_items.Count > 0)
 							{
-								for (Int32 i = 0; i < old_items.Count; i++)
+								for (var i = 0; i < old_items.Count; i++)
 								{
-									TData data_context = (TData)old_items[i];
+									var data_context = (TData)old_items[i];
 
 									// Находим элемент с данным контекстом
 									ILotusViewItemHierarchy view_item = this.Search((item) =>
@@ -1258,8 +1258,8 @@ namespace Lotus
 						break;
 					case NotifyCollectionChangedAction.Move:
 						{
-							Int32 old_index = args.OldStartingIndex;
-							Int32 new_index = args.NewStartingIndex;
+							var old_index = args.OldStartingIndex;
+							var new_index = args.NewStartingIndex;
 							Move(old_index, new_index);
 						}
 						break;
@@ -1367,7 +1367,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

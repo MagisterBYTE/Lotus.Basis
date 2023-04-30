@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.ComponentModel;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreHelpers
-		/*@{*/
+		/** \addtogroup CoreHelpers
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Опции поиска в строке другой подстроки
@@ -304,26 +304,26 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static List<KeyValuePair<String, String>> ConvertLinesToGroupLines(String[] lines, String delimiters)
 			{
-				List<KeyValuePair<String, String>> result = new List<KeyValuePair<String, String>>(30);
+				var result = new List<KeyValuePair<String, String>>(30);
 
 				if (lines != null && lines.Length > 1)
 				{
 					// Проходим все строки в файле
-					for (Int32 i = 0; i < lines.Length; i++)
+					for (var i = 0; i < lines.Length; i++)
 					{
 						// Подготавливаем для анализа токен
-						String token = lines[i].Trim(XChar.NewLine, XChar.CarriageReturn, XChar.Space);
+						var token = lines[i].Trim(XChar.NewLine, XChar.CarriageReturn, XChar.Space);
 
 						// Если нашли разделитель (должен быть в начале)
 						if (token.IndexOf(delimiters) == 0)
 						{
 							// В ключ записываем данные разделения
-							String key = token;
+							var key = token;
 
-							String current_value = "";
+							var current_value = "";
 
 							// Читаем данные (со следующей строк)
-							for (Int32 j = i + 1; j < lines.Length; j++)
+							for (var j = i + 1; j < lines.Length; j++)
 							{
 								// Пустые пропускаем
 								if (String.IsNullOrEmpty(lines[j]))
@@ -382,15 +382,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static List<KeyValuePair<String, String>> ConvertLinesToGroupLinesIgnoringComments(String[] lines, String delimiters)
 			{
-				List<KeyValuePair<String, String>> result = new List<KeyValuePair<String, String>>(30);
+				var result = new List<KeyValuePair<String, String>>(30);
 
 				if (lines != null && lines.Length > 1)
 				{
 					// Проходим все строки
-					for (Int32 i = 0; i < lines.Length; i++)
+					for (var i = 0; i < lines.Length; i++)
 					{
 						// Подготавливаем для анализа токен
-						String token = lines[i].Trim(XChar.NewLine, XChar.CarriageReturn, XChar.Space);
+						var token = lines[i].Trim(XChar.NewLine, XChar.CarriageReturn, XChar.Space);
 
 						// Игнорируем комментарий 
 						if (token.IndexOf("//") == 0) continue;
@@ -399,12 +399,12 @@ namespace Lotus
 						if (token.IndexOf(delimiters) == 0)
 						{
 							// В ключ записываем данные разделения
-							String key = token;
+							var key = token;
 
-							String current_value = "";
+							var current_value = "";
 
 							// Читаем данные (со следующей строк)
-							for (Int32 j = i + 1; j < lines.Length; j++)
+							for (var j = i + 1; j < lines.Length; j++)
 							{
 								// Игнорируем комментарий 
 								if (lines[j].IndexOf("//") == 0) continue;
@@ -632,7 +632,7 @@ namespace Lotus
 			public static readonly Char[] SeparatorSentences = new Char[] { '.', '!', '?' };
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

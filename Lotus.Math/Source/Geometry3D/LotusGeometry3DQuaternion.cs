@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry3D
-		/*@{*/
+		/** \addtogroup MathGeometry3D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Кватернион
@@ -54,8 +54,8 @@ namespace Lotus
 			{
 				Vector3D v = axis.Normalized;
 
-				Double half_angle = angle * 0.5;
-				Double sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var half_angle = angle * 0.5;
+				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
 
 				result.X = v.X * sin_a;
 				result.Y = v.Y * sin_a;
@@ -117,16 +117,16 @@ namespace Lotus
 				// Step 1. Setup basis vectors describing the rotation given the
 				// input vector and assuming an initial up direction of (0, 1, 0)
 				// The perpendicular vector to Up and Direction
-				Vector3D right = Vector3D.Cross(in up, in direction);
+				var right = Vector3D.Cross(in up, in direction);
 
 				// The actual up vector given the direction and the right vector
-				Vector3D upCalc = Vector3D.Cross(in direction, in right);
+				var upCalc = Vector3D.Cross(in direction, in right);
 
 
 				// Step 2. Put the three vectors into the matrix to bulid a basis rotation matrix
 				// This step isnt necessary, but im adding it because often you would want to convert from matricies to quaternions instead of vectors to quaternions
 				// If you want to skip this step, you can use the vector values directly in the quaternion setup below
-				Matrix4Dx4 basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
+				var basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
 												  upCalc.X, upCalc.Y, upCalc.Z, 0.0,
 												  direction.X, direction.Y, direction.Z, 0.0,
 												  0.0, 0.0, 0.0, 1.0);
@@ -165,8 +165,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Quaternion3D DeserializeFromString(String data)
 			{
-				Quaternion3D quaternion = new Quaternion3D();
-				String[] quaternion_data = data.Split(';');
+				var quaternion = new Quaternion3D();
+				var quaternion_data = data.Split(';');
 				quaternion.X = XMath.ParseDouble(quaternion_data[0]);
 				quaternion.Y = XMath.ParseDouble(quaternion_data[1]);
 				quaternion.Z = XMath.ParseDouble(quaternion_data[2]);
@@ -221,7 +221,7 @@ namespace Lotus
 			{
 				get
 				{
-					Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
 					return new Quaternion3D(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh, W * inv_lentgh);
 				}
 			}
@@ -244,7 +244,7 @@ namespace Lotus
 			{
 				get
 				{
-					Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
 					return new Quaternion3D(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh, W * inv_lentgh * -1.0);
 				}
 			}
@@ -293,8 +293,8 @@ namespace Lotus
 			{
 				Vector3D v = axis.Normalized;
 
-				Double half_angle = angle * 0.5;
-				Double sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var half_angle = angle * 0.5;
+				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
 
 				X = v.X * sin_a;
 				Y = v.Y * sin_a;
@@ -317,7 +317,7 @@ namespace Lotus
 				{
 					if (typeof(Quaternion3D) == obj.GetType())
 					{
-						Quaternion3D quaternion = (Quaternion3D)obj;
+						var quaternion = (Quaternion3D)obj;
 						return Equals(quaternion);
 					}
 				}
@@ -567,7 +567,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Double inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+				var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
 				X *= inv_lentgh;
 				Y *= inv_lentgh;
 				Z *= inv_lentgh;
@@ -593,7 +593,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Inverse()
 			{
-				Double inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+				var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
 				X *= inv_length;
 				Y *= inv_length;
 				Z *= inv_length;
@@ -628,8 +628,8 @@ namespace Lotus
 			{
 				Vector3D v = axis.Normalized;
 
-				Double half_angle = angle * 0.5;
-				Double sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var half_angle = angle * 0.5;
+				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
 
 				X = v.X * sin_a;
 				Y = v.Y * sin_a;
@@ -686,16 +686,16 @@ namespace Lotus
 				// Step 1. Setup basis vectors describing the rotation given the
 				// input vector and assuming an initial up direction of (0, 1, 0)
 				// The perpendicular vector to Up and Direction
-				Vector3D right = Vector3D.Cross(in up, in direction);
+				var right = Vector3D.Cross(in up, in direction);
 
 				// The actual up vector given the direction and the right vector
-				Vector3D compUp = Vector3D.Cross(in direction, in right);
+				var compUp = Vector3D.Cross(in direction, in right);
 
 
 				// Step 2. Put the three vectors into the matrix to bulid a basis rotation matrix
 				// This step isnt necessary, but im adding it because often you would want to convert from matricies to quaternions instead of vectors to quaternions
 				// If you want to skip this step, you can use the vector values directly in the quaternion setup below
-				Matrix4Dx4 basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
+				var basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
 												  compUp.X, compUp.Y, compUp.Z, 0.0,
 											      direction.X, direction.Y, direction.Z, 0.0,
 											      0.0, 0.0, 0.0, 1.0);
@@ -765,8 +765,8 @@ namespace Lotus
 			{
 				Vector3Df v = axis.Normalized;
 
-				Single half_angle = angle * 0.5f;
-				Single sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var half_angle = angle * 0.5f;
+				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
 
 				result.X = v.X * sin_a;
 				result.Y = v.Y * sin_a;
@@ -828,16 +828,16 @@ namespace Lotus
 				// Step 1. Setup basis vectors describing the rotation given the
 				// input vector and assuming an initial up direction of (0, 1, 0)
 				// The perpendicular vector to Up and Direction
-				Vector3Df right = Vector3Df.Cross(in up, in direction);
+				var right = Vector3Df.Cross(in up, in direction);
 
 				// The actual up vector given the direction and the right vector
-				Vector3Df compUp = Vector3Df.Cross(in direction, in right);
+				var compUp = Vector3Df.Cross(in direction, in right);
 
 
 				// Step 2. Put the three vectors into the matrix to build a basis rotation matrix
 				// This step isnt necessary, but im adding it because often you would want to convert from matricies to quaternions instead of vectors to quaternions
 				// If you want to skip this step, you can use the vector values directly in the quaternion setup below
-				Matrix4Dx4 basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
+				var basis = new Matrix4Dx4(right.X, right.Y, right.Z, 0.0,
 												  compUp.X, compUp.Y, compUp.Z, 0.0,
 												  direction.X, direction.Y, direction.Z, 0.0,
 												  0.0, 0.0, 0.0, 1.0);
@@ -859,7 +859,7 @@ namespace Lotus
 			{
 				Single sqrt;
 				Single half;
-				Single scale = matrix.M11 + matrix.M22 + matrix.M33;
+				var scale = matrix.M11 + matrix.M22 + matrix.M33;
 
 				if (scale > 0.0f)
 				{
@@ -914,16 +914,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationYawPitchRoll(Single yaw, Single pitch, Single roll, out Quaternion3Df result)
 			{
-				Single half_roll = roll * 0.5f;
-				Single half_pitch = pitch * 0.5f;
-				Single half_yaw = yaw * 0.5f;
+				var half_roll = roll * 0.5f;
+				var half_pitch = pitch * 0.5f;
+				var half_yaw = yaw * 0.5f;
 
-				Single sin_roll = (Single)Math.Sin(half_roll);
-				Single cos_roll = (Single)Math.Cos(half_roll);
-				Single sin_pitch = (Single)Math.Sin(half_pitch);
-				Single cos_pitch = (Single)Math.Cos(half_pitch);
-				Single sin_yaw = (Single)Math.Sin(half_yaw);
-				Single cos_yaw = (Single)Math.Cos(half_yaw);
+				var sin_roll = (Single)Math.Sin(half_roll);
+				var cos_roll = (Single)Math.Cos(half_roll);
+				var sin_pitch = (Single)Math.Sin(half_pitch);
+				var cos_pitch = (Single)Math.Cos(half_pitch);
+				var sin_yaw = (Single)Math.Sin(half_yaw);
+				var cos_yaw = (Single)Math.Cos(half_yaw);
 
 				result.X = (cos_yaw * sin_pitch * cos_roll) + (sin_yaw * cos_pitch * sin_roll);
 				result.Y = (sin_yaw * cos_pitch * cos_roll) - (cos_yaw * sin_pitch * sin_roll);
@@ -975,8 +975,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Quaternion3Df DeserializeFromString(String data)
 			{
-				Quaternion3Df quaternion = new Quaternion3Df();
-				String[] quaternion_data = data.Split(';');
+				var quaternion = new Quaternion3Df();
+				var quaternion_data = data.Split(';');
 				quaternion.X = XMath.ParseSingle(quaternion_data[0]);
 				quaternion.Y = XMath.ParseSingle(quaternion_data[1]);
 				quaternion.Z = XMath.ParseSingle(quaternion_data[2]);
@@ -1031,7 +1031,7 @@ namespace Lotus
 			{
 				get
 				{
-					Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
 					return new Quaternion3Df(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh, W * inv_lentgh);
 				}
 			}
@@ -1054,7 +1054,7 @@ namespace Lotus
 			{
 				get
 				{
-					Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+					var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
 					return new Quaternion3Df(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh, W * inv_lentgh * -1.0f);
 				}
 			}
@@ -1103,8 +1103,8 @@ namespace Lotus
 			{
 				Vector3Df v = axis.Normalized;
 
-				Single half_angle = angle * 0.5f;
-				Single sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var half_angle = angle * 0.5f;
+				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
 
 				X = v.X * sin_a;
 				Y = v.Y * sin_a;
@@ -1127,7 +1127,7 @@ namespace Lotus
 				{
 					if (typeof(Quaternion3Df) == obj.GetType())
 					{
-						Quaternion3Df quaternion = (Quaternion3Df)obj;
+						var quaternion = (Quaternion3Df)obj;
 						return Equals(quaternion);
 					}
 				}
@@ -1377,7 +1377,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Normalize()
 			{
-				Single inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+				var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
 				X *= inv_lentgh;
 				Y *= inv_lentgh;
 				Z *= inv_lentgh;
@@ -1403,7 +1403,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Inverse()
 			{
-				Single inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+				var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
 				X *= inv_length;
 				Y *= inv_length;
 				Z *= inv_length;
@@ -1438,8 +1438,8 @@ namespace Lotus
 			{
 				Vector3Df v = axis.Normalized;
 
-				Single half_angle = angle * 0.5f;
-				Single sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var half_angle = angle * 0.5f;
+				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
 
 				X = v.X * sin_a;
 				Y = v.Y * sin_a;
@@ -1498,7 +1498,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

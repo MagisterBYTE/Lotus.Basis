@@ -11,7 +11,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreTask
-		/*@{*/
+		/** \addtogroup CoreTask
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Класс для реализации группы задач
@@ -263,7 +263,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetMethodMode(TTaskMethod method_mode)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					mTasks[i].MethodMode = method_mode;
 				}
@@ -278,7 +278,7 @@ namespace Lotus
 			public void Add(ILotusTask task)
 			{
 				// Проверка против дублирования
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Task == task)
 					{
@@ -305,7 +305,7 @@ namespace Lotus
 			public void Add(ILotusTask task, TTaskMethod method)
 			{
 				// Проверка против дублирования
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Task == task)
 					{
@@ -332,7 +332,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddList(params ILotusTask[] list)
 			{
-				for (Int32 i = 0; i < list.Length; i++)
+				for (var i = 0; i < list.Length; i++)
 				{
 					Add(list[i]);
 				}
@@ -347,7 +347,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddList(TTaskMethod method, params ILotusTask[] list)
 			{
-				for (Int32 i = 0; i < list.Length; i++)
+				for (var i = 0; i < list.Length; i++)
 				{
 					Add(list[i], method);
 				}
@@ -361,7 +361,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Remove(ILotusTask task)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Task == task)
 					{
@@ -384,7 +384,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Remove(String task_name)
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Name == task_name)
 					{
@@ -419,7 +419,7 @@ namespace Lotus
 				{
 					if (mExecuteMode == TTaskExecuteMode.Parallel)
 					{
-						for (Int32 i = 0; i < mTasks.Count; i++)
+						for (var i = 0; i < mTasks.Count; i++)
 						{
 							mTasks[i].RunTask();
 						}
@@ -441,7 +441,7 @@ namespace Lotus
 				mIsRunning = false;
 				mIsCompleted = true;
 				mIsPause = false;
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					mTasks[i].StopTask();
 				}
@@ -457,7 +457,7 @@ namespace Lotus
 				mIsRunning = false;
 				mIsCompleted = true;
 				mIsPause = false;
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					mTasks[i].ResetTask();
 				}
@@ -477,7 +477,7 @@ namespace Lotus
 #endif
 					if (mStartTaskTime > mDelayStart)
 					{
-						for (Int32 i = 0; i < mTasks.Count; i++)
+						for (var i = 0; i < mTasks.Count; i++)
 						{
 							mTasks[i].RunTask();
 						}
@@ -488,10 +488,10 @@ namespace Lotus
 				else
 				{
 					// Если
-					Boolean is_completed = true;
-					Boolean is_all_completed = true;
+					var is_completed = true;
+					var is_all_completed = true;
 
-					for (Int32 i = 0; i < mTasks.Count; i++)
+					for (var i = 0; i < mTasks.Count; i++)
 					{
 						// Проверка на исполнение задачи
 						is_completed = mTasks[i].IsTaskCompleted;
@@ -613,7 +613,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Clear()
 			{
-				for (Int32 i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < mTasks.Count; i++)
 				{
 					// 1) Возвращаем в пул
 					CTaskHolder task_holder = mTasks[i];
@@ -625,7 +625,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreCollections
-		/*@{*/
+		/** \addtogroup CoreCollections
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Двусторонняя очередь на основе массива
@@ -119,8 +119,8 @@ namespace Lotus
 				// Если текущие количество элементов равно максимально возможному
 				if (mCount == mMaxCount)
 				{
-					mMaxCount = mMaxCount * 2;
-					TItem[] items = new TItem[mMaxCount];
+					mMaxCount *= 2;
+					var items = new TItem[mMaxCount];
 					Array.Copy(mArrayOfItems, items, mCount);
 					mArrayOfItems = items;
 				}
@@ -128,8 +128,8 @@ namespace Lotus
 				// Нет возможности добавить в начало очереди
 				if (mStartOffset == 0)
 				{
-					mMaxCount = mMaxCount * 2;
-					TItem[] items = new TItem[mMaxCount];
+					mMaxCount *= 2;
+					var items = new TItem[mMaxCount];
 					mStartOffset = mMaxCount / 2;
 					Array.Copy(mArrayOfItems, 0, items, mStartOffset, mCount);
 					mArrayOfItems = items;
@@ -152,8 +152,8 @@ namespace Lotus
 				// Если текущие количество элементов равно максимально возможному
 				if (mCount == mMaxCount)
 				{
-					mMaxCount = mMaxCount * 2;
-					TItem[] items = new TItem[mMaxCount];
+					mMaxCount *= 2;
+					var items = new TItem[mMaxCount];
 					Array.Copy(mArrayOfItems, items, mCount);
 					mArrayOfItems = items;
 				}
@@ -173,7 +173,7 @@ namespace Lotus
 				if (mCount > 0)
 				{
 					TItem item = mArrayOfItems[mStartOffset];
-					mArrayOfItems[mStartOffset] = default(TItem);
+					mArrayOfItems[mStartOffset] = default;
 					mStartOffset++;
 					mCount--;
 					return item;
@@ -185,7 +185,7 @@ namespace Lotus
 #else
 					XLogger.LogError("Not element in deque!!!");
 #endif
-					return default(TItem);
+					return default;
 				}
 			}
 
@@ -201,7 +201,7 @@ namespace Lotus
 				{
 					mCount--;
 					TItem item = mArrayOfItems[mCount];
-					mArrayOfItems[mCount] = default(TItem);
+					mArrayOfItems[mCount] = default;
 
 					return item;
 				}
@@ -212,7 +212,7 @@ namespace Lotus
 #else
 					XLogger.LogError("Not element in deque!!!");
 #endif
-					return default(TItem);
+					return default;
 				}
 			}
 
@@ -235,7 +235,7 @@ namespace Lotus
 #else
 					XLogger.LogError("Not element in deque!!!");
 #endif
-					return default(TItem);
+					return default;
 				}
 
 			}
@@ -259,7 +259,7 @@ namespace Lotus
 #else
 					XLogger.LogError("Not element in deque!!!");
 #endif
-					return default(TItem);
+					return default;
 				}
 
 			}
@@ -273,8 +273,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public new Boolean Contains(in TItem item)
 			{
-				Int32 index = mStartOffset;
-				Int32 count = mCount;
+				var index = mStartOffset;
+				var count = mCount;
 
 				while (count-- > 0)
 				{
@@ -302,7 +302,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

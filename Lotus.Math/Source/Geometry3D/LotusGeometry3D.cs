@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -20,12 +20,14 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup MathGeometry3D Подсистема 3D геометрии
-		//! Подсистема 3D геометрии реализует работу с геометрическими данными в 3D пространстве.
-		//! Сюда входит математические структуры данных для работы в 3D пространстве, алгоритмы поиска и нахождения
-		//! ближайших точек проекции, пересечения и вычисления дистанции для основных геометрических тел/примитивов.
-		//! \ingroup Math
-		/*@{*/
+		/**
+         * \defgroup MathGeometry3D Подсистема 3D геометрии
+         * \ingroup Math
+         * \brief Подсистема 3D геометрии реализует работу с геометрическими данными в 3D пространстве.
+		 * \details Сюда входит математические структуры данных для работы в 3D пространстве, алгоритмы поиска и нахождения
+			ближайших точек проекции, пересечения и вычисления дистанции для основных геометрических тел/примитивов.
+         * @{
+         */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий вспомогательные методы для работы с 3D пространством
@@ -191,11 +193,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df GetPointOnCircleXZ(Single radius, Single angle)
 			{
-				Single angle_in_radians = angle * XMath.DegreeToRadian_f;
-				Single x = radius * XMath.Cos(angle_in_radians);
-				Single y = radius * XMath.Sin(angle_in_radians);
+				var angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var x = radius * XMath.Cos(angle_in_radians);
+				var y = radius * XMath.Sin(angle_in_radians);
 
-				Vector3Df result = new Vector3Df(x, 0, y);
+				var result = new Vector3Df(x, 0, y);
 
 				return (result);
 			}
@@ -216,10 +218,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df GetPointOnCircleZY(Single radius, Single angle)
 			{
-				Single angle_in_radians = angle * XMath.DegreeToRadian_f;
-				Single x = radius * XMath.Cos(angle_in_radians);
-				Single y = radius * XMath.Sin(angle_in_radians);
-				Vector3Df result = new Vector3Df(0, y, x);
+				var angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var x = radius * XMath.Cos(angle_in_radians);
+				var y = radius * XMath.Sin(angle_in_radians);
+				var result = new Vector3Df(0, y, x);
 
 				return (result);
 			}
@@ -240,11 +242,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df GetPointOnCircleXY(Single radius, Single angle)
 			{
-				Single angle_in_radians = angle * XMath.DegreeToRadian_f;
-				Single x = radius * XMath.Cos(angle_in_radians);
-				Single y = radius * XMath.Sin(angle_in_radians);
+				var angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var x = radius * XMath.Cos(angle_in_radians);
+				var y = radius * XMath.Sin(angle_in_radians);
 
-				Vector3Df result = new Vector3Df(x, y, 0);
+				var result = new Vector3Df(x, y, 0);
 
 				return (result);
 			}
@@ -260,8 +262,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static List<Vector3Df> GeneratePointsOnCircleXZ(Single radius, Int32 segments, Single start_angle = 0)
 			{
-				Single segment_angle = 360f / segments;
-				Single current_angle = start_angle;
+				var segment_angle = 360f / segments;
+				var current_angle = start_angle;
 				var ring = new List<Vector3Df>(segments);
 				for (var i = 0; i < segments; i++)
 				{
@@ -282,8 +284,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static List<Vector3Df> GeneratePointsOnCircleZY(Single radius, Int32 segments, Single start_angle = 0)
 			{
-				Single segment_angle = 360f / segments;
-				Single current_angle = start_angle;
+				var segment_angle = 360f / segments;
+				var current_angle = start_angle;
 				var ring = new List<Vector3Df>(segments);
 				for (var i = 0; i < segments; i++)
 				{
@@ -304,8 +306,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static List<Vector3Df> GeneratePointsOnCircleXY(Single radius, Int32 segments, Single start_angle = 0)
 			{
-				Single segment_angle = 360f / segments;
-				Single current_angle = start_angle;
+				var segment_angle = 360f / segments;
+				var current_angle = start_angle;
 				var ring = new List<Vector3Df>(segments);
 				for (var i = 0; i < segments; i++)
 				{
@@ -346,9 +348,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df PointOnSpheroid(Single radius, Single height, Single horizontal_angle, Single vertical_angle)
 			{
-				Single horizontal_radians = horizontal_angle * XMath.DegreeToRadian_f;
-				Single vertical_radians = vertical_angle * XMath.DegreeToRadian_f;
-				Single cos_vertical = XMath.Cos(vertical_radians);
+				var horizontal_radians = horizontal_angle * XMath.DegreeToRadian_f;
+				var vertical_radians = vertical_angle * XMath.DegreeToRadian_f;
+				var cos_vertical = XMath.Cos(vertical_radians);
 
 				return new Vector3Df(
 					x: radius * XMath.Sin(horizontal_radians) * cos_vertical,
@@ -368,10 +370,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df PointOnTeardrop(Single radius, Single height, Single horizontal_angle, Single vertical_angle)
 			{
-				Single horizontal_radians = horizontal_angle * XMath.DegreeToRadian_f;
-				Single vertical_radians = vertical_angle * XMath.DegreeToRadian_f;
-				Single sin_vertical = XMath.Sin(vertical_radians);
-				Single teardrop = (1 - sin_vertical) * XMath.Cos(vertical_radians) / 2;
+				var horizontal_radians = horizontal_angle * XMath.DegreeToRadian_f;
+				var vertical_radians = vertical_angle * XMath.DegreeToRadian_f;
+				var sin_vertical = XMath.Sin(vertical_radians);
+				var teardrop = (1 - sin_vertical) * XMath.Cos(vertical_radians) / 2;
 
 				return new Vector3Df(
 					x: radius * XMath.Sin(horizontal_radians) * teardrop,
@@ -390,7 +392,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df GetMapUVOnCircle(Single angle)
 			{
-				Single angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var angle_in_radians = angle * XMath.DegreeToRadian_f;
 				return new Vector2Df((0.5f * XMath.Sin(angle_in_radians)) + 0.5f,
 					(0.5f * XMath.Cos(angle_in_radians)) + 0.5f);
 			}
@@ -405,8 +407,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static List<Vector2Df> GetMapUVsOnCircle(Int32 segments, Single start_angle = 0)
 			{
-				Single segment_angle = 360f / segments;
-				Single current_angle = start_angle;
+				var segment_angle = 360f / segments;
+				var current_angle = start_angle;
 				var ring = new List<Vector2Df>(segments);
 				for (var i = 0; i < segments; i++)
 				{
@@ -426,14 +428,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df GetMapUVFromSpherical(Single theta, Single phi)
 			{
-				Single u = phi / 360;
-				Single v = theta / 180;
+				var u = phi / 360;
+				var v = theta / 180;
 				return (new Vector2Df(u, v));
 			}
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

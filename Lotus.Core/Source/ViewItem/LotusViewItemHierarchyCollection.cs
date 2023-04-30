@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreViewItem
-		/*@{*/
+		/** \addtogroup CoreViewItem
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Интерфейс для определения коллекции элементов отображения для иерархических данных
@@ -73,7 +73,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TViewItemHierarchy Build(TData data, ILotusViewItemHierarchy parent, ILotusCollectionViewHierarchy owner)
 			{
-				TViewItemHierarchy node_view = new TViewItemHierarchy();
+				var node_view = new TViewItemHierarchy();
 				node_view.DataContext = data;
 				node_view.IParent = parent;
 				node_view.IOwner = owner;
@@ -94,10 +94,10 @@ namespace Lotus
 				// Если есть поддержка интерфеса для построения используем его
 				if (data is ILotusViewItemBuilder view_builder)
 				{
-					Int32 count_child = view_builder.GetCountChildrenNode();
-					for (Int32 i = 0; i < count_child; i++)
+					var count_child = view_builder.GetCountChildrenNode();
+					for (var i = 0; i < count_child; i++)
 					{
-						TData node_data = (TData)view_builder.GetChildrenNode(i);
+						var node_data = (TData)view_builder.GetChildrenNode(i);
 						if (node_data != null)
 						{
 							Build(node_data, node_view, owner);
@@ -109,8 +109,8 @@ namespace Lotus
 					// 2) Проверяем на обобщенный список
 					if (data is IList list)
 					{
-						Int32 count_child = list.Count;
-						for (Int32 i = 0; i < count_child; i++)
+						var count_child = list.Count;
+						for (var i = 0; i < count_child; i++)
 						{
 							if (list[i] is TData node_data)
 							{
@@ -149,16 +149,16 @@ namespace Lotus
 				if(parent != null)
 				{
 					// Получаем данные
-					System.Object data = parent.DataContext;
+					var data = parent.DataContext;
 
 					// 1) Проверяем в порядке приоритета
 					// Если есть поддержка интерфеса для построения используем его
 					if (data is ILotusViewItemBuilder view_builder)
 					{
-						Int32 count_child = view_builder.GetCountChildrenNode();
-						for (Int32 i = 0; i < count_child; i++)
+						var count_child = view_builder.GetCountChildrenNode();
+						for (var i = 0; i < count_child; i++)
 						{
-							TData node_data = (TData)view_builder.GetChildrenNode(i);
+							var node_data = (TData)view_builder.GetChildrenNode(i);
 							if (node_data != null)
 							{
 								Build(node_data, parent, owner);
@@ -170,8 +170,8 @@ namespace Lotus
 						// 2) Проверяем на обобщенный список
 						if (data is IList list)
 						{
-							Int32 count_child = list.Count;
-							for (Int32 i = 0; i < count_child; i++)
+							var count_child = list.Count;
+							for (var i = 0; i < count_child; i++)
 							{
 								if (list[i] is TData node_data)
 								{
@@ -225,7 +225,7 @@ namespace Lotus
 			public static TViewItemHierarchy BuildFilter(TData data, ILotusViewItemHierarchy parent, 
 				Predicate<TData> filter, ILotusCollectionViewHierarchy owner)
 			{
-				TViewItemHierarchy node_root_view = new TViewItemHierarchy();
+				var node_root_view = new TViewItemHierarchy();
 				node_root_view.DataContext = data;
 				node_root_view.IParent = parent;
 				node_root_view.IOwner = owner;
@@ -249,10 +249,10 @@ namespace Lotus
 						// Если есть поддержка интерфеса для построения используем его
 						if (data is ILotusViewItemBuilder view_builder)
 						{
-							Int32 count_child = view_builder.GetCountChildrenNode();
-							for (Int32 i = 0; i < count_child; i++)
+							var count_child = view_builder.GetCountChildrenNode();
+							for (var i = 0; i < count_child; i++)
 							{
-								TData node_data = (TData)view_builder.GetChildrenNode(i);
+								var node_data = (TData)view_builder.GetChildrenNode(i);
 								if (node_data != null)
 								{
 									BuildFilter(node_data, node_root_view, filter, owner);
@@ -264,8 +264,8 @@ namespace Lotus
 							// 2) Проверяем на обобщенный список
 							if (data is IList list)
 							{
-								Int32 count_child = list.Count;
-								for (Int32 i = 0; i < count_child; i++)
+								var count_child = list.Count;
+								for (var i = 0; i < count_child; i++)
 								{
 									if (list[i] is TData node_data)
 									{
@@ -278,7 +278,7 @@ namespace Lotus
 								// 3) Проверяем на обобщенное перечисление
 								if (data is IEnumerable enumerable)
 								{
-									foreach (Object item in enumerable)
+									foreach (var item in enumerable)
 									{
 										if (item is TData node_data)
 										{
@@ -340,10 +340,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object Clone()
 			{
-				CollectionViewHierarchy<TViewItemHierarchy, TData> clone = new CollectionViewHierarchy<TViewItemHierarchy, TData>();
+				var clone = new CollectionViewHierarchy<TViewItemHierarchy, TData>();
 				clone.Name = mName;
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					clone.Add(mArrayOfItems.Clone());
 				}
@@ -371,7 +371,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Expanded()
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Expanded();
 				}
@@ -384,7 +384,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Collapsed()
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Collapsed();
 				}
@@ -411,7 +411,7 @@ namespace Lotus
 			{
 				if (exclude != null)
 				{
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						if (Object.ReferenceEquals(mArrayOfItems[i], exclude) == false)
 						{
@@ -424,7 +424,7 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].IsSelected = false;
 						mArrayOfItems[i].UnsetAllSelected(exclude as ILotusViewItemHierarchy);
@@ -445,7 +445,7 @@ namespace Lotus
 			{
 				if (exclude != null)
 				{
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						if (Object.ReferenceEquals(mArrayOfItems[i], exclude) == false)
 						{
@@ -459,7 +459,7 @@ namespace Lotus
 				else
 				{
 					// Выключаем все элемента отображения
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].IsPresented = false;
 						mArrayOfItems[i].UnsetAllPresent(exclude as ILotusViewItemHierarchy, parameters);
@@ -477,7 +477,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Visit(Predicate<ILotusViewItemHierarchy> match)
 			{
-				for (Int32 i = 0; i < mCount; ++i)
+				for (var i = 0; i < mCount; ++i)
 				{
 					(mArrayOfItems[i]).Visit(match);
 				}
@@ -492,7 +492,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void UpdateOwnedObjects()
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].IOwner = this;
 					mArrayOfItems[i].UpdateOwnedObjects();
@@ -557,7 +557,7 @@ namespace Lotus
 				{
 					if (Source is IList<TData> list_data)
 					{
-						for (Int32 i = 0; i < list_data.Count; i++)
+						for (var i = 0; i < list_data.Count; i++)
 						{
 							TViewItemHierarchy view_item_hierarchy = Build(list_data[i], this);
 							Add(view_item_hierarchy);
@@ -639,7 +639,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

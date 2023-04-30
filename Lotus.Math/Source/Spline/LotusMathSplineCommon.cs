@@ -10,7 +10,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections;
@@ -21,12 +21,14 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup MathSpline Подсистема для работы со сплайнами
-		//! Подсистема представления и визуализации различных сплайнов. Реализация алгоритмов которые представляют различные
-		//! виды сплайнов и позволяют производить базовые действия со сплайнами, их аппроксимацию для отображения, 
-		//! перемещение по сплайну.
-		//! \ingroup Math
-		/*@{*/
+		/**
+         * \defgroup MathSpline Подсистема для работы со сплайнами
+         * \ingroup Math
+         * \brief Подсистема представления и визуализации различных сплайнов.
+		 * \details Реализация алгоритмов которые представляют различные виды сплайнов и позволяют производить базовые 
+			действия со сплайнами, их аппроксимацию для отображения, перемещение по сплайну.
+         * @{
+         */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Структура для хранения сегмента пути
@@ -367,9 +369,9 @@ namespace Lotus
 				mDrawingPoints.Clear();
 				Vector2Df prev = mControlPoints[0];
 				mDrawingPoints.Add(prev);
-				for (Int32 i = 1; i < mSegmentsSpline; i++)
+				for (var i = 1; i < mSegmentsSpline; i++)
 				{
-					Single time = (Single)i / mSegmentsSpline;
+					var time = (Single)i / mSegmentsSpline;
 					Vector2Df point = CalculatePoint(time);
 					
 					// Добавляем если длина больше
@@ -402,11 +404,11 @@ namespace Lotus
 			{
 				mLength = 0;
 				mSegmentsPath.Clear();
-				for (Int32 i = 1; i < mDrawingPoints.Count; i++)
+				for (var i = 1; i < mDrawingPoints.Count; i++)
 				{
-					Single length = (mDrawingPoints[i] - mDrawingPoints[i - 1]).Length;
+					var length = (mDrawingPoints[i] - mDrawingPoints[i - 1]).Length;
 					mLength += length;
-					TMoveSegment segment = new TMoveSegment(length, mLength);
+					var segment = new TMoveSegment(length, mLength);
 					mSegmentsPath.Add(segment);
 				}
 			}
@@ -424,7 +426,7 @@ namespace Lotus
 			{
 				Single x_min = StartPoint.X, x_max = EndPoint.X, y_min = StartPoint.Y, y_max = EndPoint.Y;
 
-				for (Int32 i = 0; i < mDrawingPoints.Count; i++)
+				for (var i = 0; i < mDrawingPoints.Count; i++)
 				{
 					Vector2Df point = mDrawingPoints[i];
 					if (point.X < x_min) x_min = point.X;
@@ -433,7 +435,7 @@ namespace Lotus
 					if (point.Y > y_max) y_max = point.Y;
 				}
 
-				Rect2Df rect_area = new Rect2Df();
+				var rect_area = new Rect2Df();
 				rect_area.X = x_min;
 				rect_area.Width = x_max - x_min;
 				rect_area.Y = y_min;
@@ -464,8 +466,8 @@ namespace Lotus
 				}
 
 				// Находим в какой отрезок попадает эта позиция
-				Int32 index = 0;
-				for (Int32 i = 0; i < mSegmentsPath.Count; i++)
+				var index = 0;
+				for (var i = 0; i < mSegmentsPath.Count; i++)
 				{
 					// Если позиция меньше значит она попала в отрезок
 					if (position < mSegmentsPath[i].Summa)
@@ -529,12 +531,12 @@ namespace Lotus
 			public Single GetMoveTime(Vector2Df position, Single epsilon = 0.01f)
 			{
 				// Просматриваем все отрезки и находим нужное положение
-				for (Int32 i = 1; i < mDrawingPoints.Count; i++)
+				for (var i = 1; i < mDrawingPoints.Count; i++)
 				{
 					Vector2Df p1 = mDrawingPoints[i] - mDrawingPoints[i - 1];
 					Vector2Df p2 = position - mDrawingPoints[i - 1];
 
-					Single angle = Vector2Df.Dot(p2, p1) / Vector2Df.Dot(p2, p1);
+					var angle = Vector2Df.Dot(p2, p1) / Vector2Df.Dot(p2, p1);
 					if (angle + epsilon > 0 && angle - epsilon < 1)
 					{
 						// TODO: Найти точное положение на всей кривой
@@ -749,7 +751,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveControlPoint(Vector2Df point, Boolean update_spline = false)
 			{
-				for (Int32 i = 0; i < mControlPoints.Length; i++)
+				for (var i = 0; i < mControlPoints.Length; i++)
 				{
 					if (mControlPoints[i].Approximately(point))
 					{
@@ -961,9 +963,9 @@ namespace Lotus
 				mDrawingPoints.Clear();
 				Vector3Df prev = mControlPoints[0];
 				mDrawingPoints.Add(prev);
-				for (Int32 i = 1; i < mSegmentsSpline; i++)
+				for (var i = 1; i < mSegmentsSpline; i++)
 				{
-					Single time = (Single)i / mSegmentsSpline;
+					var time = (Single)i / mSegmentsSpline;
 					Vector3Df point = CalculatePoint(time);
 
 					// Добавляем если длина больше
@@ -996,11 +998,11 @@ namespace Lotus
 			{
 				mLength = 0;
 				mSegmentsPath.Clear();
-				for (Int32 i = 1; i < mDrawingPoints.Count; i++)
+				for (var i = 1; i < mDrawingPoints.Count; i++)
 				{
-					Single length = (mDrawingPoints[i] - mDrawingPoints[i - 1]).Length;
+					var length = (mDrawingPoints[i] - mDrawingPoints[i - 1]).Length;
 					mLength += length;
-					TMoveSegment segment = new TMoveSegment(length, mLength);
+					var segment = new TMoveSegment(length, mLength);
 					mSegmentsPath.Add(segment);
 				}
 			}
@@ -1018,7 +1020,7 @@ namespace Lotus
 			{
 				Single x_min = StartPoint.X, x_max = EndPoint.X, y_min = StartPoint.Y, y_max = EndPoint.Y;
 
-				for (Int32 i = 0; i < mDrawingPoints.Count; i++)
+				for (var i = 0; i < mDrawingPoints.Count; i++)
 				{
 					Vector3Df point = mDrawingPoints[i];
 					if (point.X < x_min) x_min = point.X;
@@ -1027,7 +1029,7 @@ namespace Lotus
 					if (point.Y > y_max) y_max = point.Y;
 				}
 
-				Rect2Df rect_area = new Rect2Df();
+				var rect_area = new Rect2Df();
 				rect_area.X = x_min;
 				rect_area.Width = x_max - x_min;
 				rect_area.Y = y_min;
@@ -1058,8 +1060,8 @@ namespace Lotus
 				}
 
 				// Находим в какой отрезок попадает эта позиция
-				Int32 index = 0;
-				for (Int32 i = 0; i < mSegmentsPath.Count; i++)
+				var index = 0;
+				for (var i = 0; i < mSegmentsPath.Count; i++)
 				{
 					// Если позиция меньше значит она попала в отрезок
 					if (position < mSegmentsPath[i].Summa)
@@ -1123,12 +1125,12 @@ namespace Lotus
 			public Single GetMoveTime(Vector3Df position, Single epsilon = 0.01f)
 			{
 				// Просматриваем все отрезки и находим нужное положение
-				for (Int32 i = 1; i < mDrawingPoints.Count; i++)
+				for (var i = 1; i < mDrawingPoints.Count; i++)
 				{
 					Vector3Df p1 = mDrawingPoints[i] - mDrawingPoints[i - 1];
 					Vector3Df p2 = position - mDrawingPoints[i - 1];
 
-					Single angle = Vector3Df.Dot(p2, p1) / Vector3Df.Dot(p2, p1);
+					var angle = Vector3Df.Dot(p2, p1) / Vector3Df.Dot(p2, p1);
 					if (angle + epsilon > 0 && angle - epsilon < 1)
 					{
 						// TODO: Найти точное положение на всей кривой
@@ -1296,7 +1298,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveControlPoint(Vector3Df point, Boolean update_spline = false)
 			{
-				for (Int32 i = 0; i < mControlPoints.Length; i++)
+				for (var i = 0; i < mControlPoints.Length; i++)
 				{
 					if (mControlPoints[i].Approximately(point))
 					{
@@ -1322,7 +1324,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

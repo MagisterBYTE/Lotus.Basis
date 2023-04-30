@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.ComponentModel;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreFileSystem
-		/*@{*/
+		/** \addtogroup CoreFileSystem
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Элемент файловой системы представляющий собой директорию
@@ -57,8 +57,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CFileSystemDirectory Build(String path)
 			{
-				DirectoryInfo dir_info = new DirectoryInfo(path);
-				CFileSystemDirectory dir_model = new CFileSystemDirectory(dir_info);
+				var dir_info = new DirectoryInfo(path);
+				var dir_model = new CFileSystemDirectory(dir_info);
 				dir_model.RecursiveFileSystemInfo();
 				return (dir_model);
 			}
@@ -243,7 +243,7 @@ namespace Lotus
 				mEntities.IsNotify = true;
 				if(mInfo != null)
 				{
-					String path = Path.Combine(mInfo.FullName, "Info.json");
+					var path = Path.Combine(mInfo.FullName, "Info.json");
 					if(File.Exists(path))
 					{
 						mParameters = new CParameters();
@@ -268,7 +268,7 @@ namespace Lotus
 
 				if (mInfo != null)
 				{
-					String path = Path.Combine(mInfo.FullName, "Info.json");
+					var path = Path.Combine(mInfo.FullName, "Info.json");
 					if (File.Exists(path))
 					{
 						mParameters = new CParameters();
@@ -383,7 +383,7 @@ namespace Lotus
 				}
 				else
 				{
-					for (Int32 i = 0; i < mEntities.Count; i++)
+					for (var i = 0; i < mEntities.Count; i++)
 					{
 						if(mEntities[i].CheckOne(match))
 						{
@@ -408,7 +408,7 @@ namespace Lotus
 			{
 				if (expanded)
 				{
-					for (Int32 i = 0; i < mEntities.Count; i++)
+					for (var i = 0; i < mEntities.Count; i++)
 					{
 						if (mEntities[i] is CFileSystemDirectory directory)
 						{
@@ -421,14 +421,14 @@ namespace Lotus
 								if(dirs_info.Length > 0 || files_info.Length > 0)
 								{
 									// Сначала директории
-									for (Int32 id = 0; id < dirs_info.Length; id++)
+									for (var id = 0; id < dirs_info.Length; id++)
 									{
 										DirectoryInfo dir_info = dirs_info[id];
 										directory.AddDirectory(dir_info);
 									}
 
 									// Теперь файлы
-									for (Int32 ifi = 0; ifi < files_info.Length; ifi++)
+									for (var ifi = 0; ifi < files_info.Length; ifi++)
 									{
 										FileInfo file_info = files_info[ifi];
 										directory.AddFile(file_info);
@@ -472,7 +472,7 @@ namespace Lotus
 				if (directory_info.Name.Contains(".vs")) return (null);
 
 				// Создаем директорию
-				CFileSystemDirectory directory = new CFileSystemDirectory(directory_info);
+				var directory = new CFileSystemDirectory(directory_info);
 
 				// Добавляем
 				this.mEntities.Add(directory);
@@ -493,7 +493,7 @@ namespace Lotus
 				if (file_info.Extension == ".meta") return (null);
 
 				// Создаем файл
-				CFileSystemFile file = new CFileSystemFile(file_info);
+				var file = new CFileSystemFile(file_info);
 
 				// Добавляем
 				this.mEntities.Add(file);
@@ -514,14 +514,14 @@ namespace Lotus
 				FileInfo[] files_info = Info.GetFiles();
 
 				// Сначала директории
-				for (Int32 i = 0; i < dirs_info.Length; i++)
+				for (var i = 0; i < dirs_info.Length; i++)
 				{
 					DirectoryInfo dir_info = dirs_info[i];
 					AddDirectory(dir_info);
 				}
 
 				// Теперь файлы
-				for (Int32 i = 0; i < files_info.Length; i++)
+				for (var i = 0; i < files_info.Length; i++)
 				{
 					FileInfo file_info = files_info[i];
 					AddFile(file_info);
@@ -541,7 +541,7 @@ namespace Lotus
 				FileInfo[] files_info = Info.GetFiles();
 
 				// Сначала директории
-				for (Int32 i = 0; i < dirs_info.Length; i++)
+				for (var i = 0; i < dirs_info.Length; i++)
 				{
 					DirectoryInfo dir_info = dirs_info[i];
 					CFileSystemDirectory directory = AddDirectory(dir_info);
@@ -552,7 +552,7 @@ namespace Lotus
 				}
 
 				// Теперь файлы
-				for (Int32 i = 0; i < files_info.Length; i++)
+				for (var i = 0; i < files_info.Length; i++)
 				{
 					FileInfo file_info = files_info[i];
 					AddFile(file_info);
@@ -567,8 +567,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean AddFileSystemItemsTwoLevel()
 			{
-				Boolean status = false;
-				for (Int32 i = 0; i < mEntities.Count; i++)
+				var status = false;
+				for (var i = 0; i < mEntities.Count; i++)
 				{
 					if (mEntities[i] is CFileSystemDirectory directory)
 					{
@@ -618,7 +618,7 @@ namespace Lotus
 				FileInfo[] files_info = Info.GetFiles();
 
 				// Сначала директории
-				for (Int32 i = 0; i < dirs_info.Length; i++)
+				for (var i = 0; i < dirs_info.Length; i++)
 				{
 					DirectoryInfo dir_info = dirs_info[i];
 					CFileSystemDirectory sub_directory = AddDirectory(dir_info);
@@ -643,7 +643,7 @@ namespace Lotus
 				}
 
 				// Теперь файлы
-				for (Int32 i = 0; i < files_info.Length; i++)
+				for (var i = 0; i < files_info.Length; i++)
 				{
 					FileInfo file_info = files_info[i];
 					AddFile(file_info);
@@ -662,9 +662,9 @@ namespace Lotus
 				FileInfo[] files = parent_directory_node.Info.GetFiles();
 
 				// Сначала директории
-				for (Int32 i = 0; i < sub_directories.Length; i++)
+				for (var i = 0; i < sub_directories.Length; i++)
 				{
-					CFileSystemDirectory sub_directory_node = new CFileSystemDirectory(sub_directories[i]);
+					var sub_directory_node = new CFileSystemDirectory(sub_directories[i]);
 
 					if (sub_directory_node.Name.Contains(".git")) continue;
 					if (sub_directory_node.Name.Contains(".vs")) continue;
@@ -675,13 +675,13 @@ namespace Lotus
 				}
 
 				// Теперь файлы
-				for (Int32 i = 0; i < files.Length; i++)
+				for (var i = 0; i < files.Length; i++)
 				{
 					FileInfo file_info = files[i];
 
 					if (file_info.Extension == ".meta") continue;
 
-					CFileSystemFile file_node = new CFileSystemFile(file_info);
+					var file_node = new CFileSystemFile(file_info);
 					this.mEntities.Add(file_node);
 				}
 			}
@@ -695,9 +695,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ExistInChildren(DirectoryInfo dir_info)
 			{
-				for (Int32 i = 0; i < mEntities.Count; i++)
+				for (var i = 0; i < mEntities.Count; i++)
 				{
-					CFileSystemDirectory dir_node = mEntities[i] as CFileSystemDirectory;
+					var dir_node = mEntities[i] as CFileSystemDirectory;
 					if (dir_node != null)
 					{
 						if (dir_node.Info.Name == dir_info.Name)
@@ -719,9 +719,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ExistInChildren(FileInfo file_info)
 			{
-				for (Int32 i = 0; i < mEntities.Count; i++)
+				for (var i = 0; i < mEntities.Count; i++)
 				{
-					CFileSystemFile file_node = mEntities[i] as CFileSystemFile;
+					var file_node = mEntities[i] as CFileSystemFile;
 					if (file_node != null)
 					{
 						if (file_node.Info.Name == file_info.Name)
@@ -743,9 +743,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CFileSystemDirectory GetDirectoryNodeFromChildren(DirectoryInfo dir_info)
 			{
-				for (Int32 i = 0; i < mEntities.Count; i++)
+				for (var i = 0; i < mEntities.Count; i++)
 				{
-					CFileSystemDirectory dir_node = mEntities[i] as CFileSystemDirectory;
+					var dir_node = mEntities[i] as CFileSystemDirectory;
 					if (dir_node != null)
 					{
 						if (dir_node.Info.Name == dir_info.Name)
@@ -767,9 +767,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CFileSystemFile GetFileNodeFromChildren(FileInfo file_info)
 			{
-				for (Int32 i = 0; i < mEntities.Count; i++)
+				for (var i = 0; i < mEntities.Count; i++)
 				{
-					CFileSystemFile file_node = mEntities[i] as CFileSystemFile;
+					var file_node = mEntities[i] as CFileSystemFile;
 					if (file_node != null)
 					{
 						if (file_node.Info.Name == file_info.Name)
@@ -793,16 +793,16 @@ namespace Lotus
 			{
 				if(is_directory_name)
 				{
-					String dest_path_dir = Path.Combine(path, Info.Name);
+					var dest_path_dir = Path.Combine(path, Info.Name);
 					if (Directory.Exists(dest_path_dir) == false)
 					{
 						Directory.CreateDirectory(dest_path_dir);
 					}
 				}
 
-				for (Int32 i = 0; i < mEntities.Count; i++)
+				for (var i = 0; i < mEntities.Count; i++)
 				{
-					CFileSystemFile file_node = mEntities[i] as CFileSystemFile;
+					var file_node = mEntities[i] as CFileSystemFile;
 					if (file_node != null)
 					{
 						if(file_node.OwnerViewItem != null)
@@ -811,12 +811,12 @@ namespace Lotus
 							{
 								if (is_directory_name)
 								{
-									String dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
+									var dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
 									File.Copy(file_node.Info.FullName, dest_path);
 								}
 								else
 								{
-									String dest_path = Path.Combine(path, file_node.Info.Name);
+									var dest_path = Path.Combine(path, file_node.Info.Name);
 									File.Copy(file_node.Info.FullName, dest_path);
 								}
 							}
@@ -825,12 +825,12 @@ namespace Lotus
 						{
 							if (is_directory_name)
 							{
-								String dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
+								var dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
 								File.Copy(file_node.Info.FullName, dest_path);
 							}
 							else
 							{
-								String dest_path = Path.Combine(path, file_node.Info.Name);
+								var dest_path = Path.Combine(path, file_node.Info.Name);
 								File.Copy(file_node.Info.FullName, dest_path);
 							}
 						}
@@ -840,7 +840,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

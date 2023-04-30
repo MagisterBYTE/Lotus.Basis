@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 //=====================================================================================================================
@@ -17,12 +17,14 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \defgroup CoreText Подсистема текстовых данных
-		//! Подсистема текстовых данных реализуется базовый механизм для автоматической генерации текстовых данных, 
-		//! их семантического и синтаксического редактирования, включая кодогенерацию и расширенное редактирование 
-		//! текстовых файлов.
-		//! \ingroup Core
-		/*@{*/
+		/**
+         * \defgroup CoreText Подсистема текстовых данных
+         * \ingroup Core
+         * \brief Подсистема текстовых данных реализуется базовый механизм для автоматической генерации текстовых данных, 
+			их семантического и синтаксического редактирования, включая кодогенерацию и расширенное редактирование 
+			текстовых файлов.
+         * @{
+         */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Класс оболочка на стандартной строкой
@@ -55,7 +57,7 @@ namespace Lotus
 				}
 				set
 				{
-					Int32 count = GetTabsStart();
+					var count = GetTabsStart();
 					if (value > count)
 					{
 						mRawString = mRawString.Insert(count, new String(XChar.Tab, value - count));
@@ -98,7 +100,7 @@ namespace Lotus
 			{
 				get
 				{
-					Int32 tabs = GetTabsStart();
+					var tabs = GetTabsStart();
 					return ((mRawString.Length - tabs) + tabs * 4);
 				}
 			}
@@ -134,7 +136,7 @@ namespace Lotus
 				get { return (mRawString[0]); }
 				set
 				{
-					Char[] massive = mRawString.ToCharArray();
+					var massive = mRawString.ToCharArray();
 					massive[0] = value;
 					mRawString = new String(massive);
 				}
@@ -148,7 +150,7 @@ namespace Lotus
 				get { return (mRawString[1]); }
 				set
 				{
-					Char[] massive = mRawString.ToCharArray();
+					var massive = mRawString.ToCharArray();
 					massive[1] = value;
 					mRawString = new String(massive);
 				}
@@ -162,7 +164,7 @@ namespace Lotus
 				get { return (mRawString[mRawString.Length - 2]); }
 				set
 				{
-					Char[] massive = mRawString.ToCharArray();
+					var massive = mRawString.ToCharArray();
 					massive[mRawString.Length - 2] = value;
 					mRawString = new String(massive);
 				}
@@ -176,7 +178,7 @@ namespace Lotus
 				get { return (mRawString[mRawString.Length - 1]); }
 				set
 				{
-					Char[] massive = mRawString.ToCharArray();
+					var massive = mRawString.ToCharArray();
 					massive[mRawString.Length - 1] = value;
 					mRawString = new String(massive);
 				}
@@ -219,7 +221,7 @@ namespace Lotus
 				{
 					if (obj is CTextStr)
 					{
-						CTextStr text_str = (CTextStr)obj;
+						var text_str = (CTextStr)obj;
 						return (mRawString == text_str.mRawString);
 					}
 				}
@@ -377,7 +379,7 @@ namespace Lotus
 				get { return (mRawString[index]); }
 				set
 				{
-					Char[] massive = mRawString.ToCharArray();
+					var massive = mRawString.ToCharArray();
 					massive[index] = value;
 					mRawString = new String(massive);
 				}
@@ -393,9 +395,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 GetTabsStart()
 			{
-				Int32 count = 0;
-				Boolean find = false;
-				for (Int32 i = 0; i < mRawString.Length; i++)
+				var count = 0;
+				var find = false;
+				for (var i = 0; i < mRawString.Length; i++)
 				{
 					if (mRawString[i] != XChar.Tab)
 					{
@@ -431,7 +433,7 @@ namespace Lotus
 				{
 					if (mRawString.Length < length)
 					{
-						Int32 count = length - mRawString.Length;
+						var count = length - mRawString.Length;
 						mRawString += new String(CharLast, count);
 					}
 				}
@@ -457,7 +459,7 @@ namespace Lotus
 				{
 					if (mRawString.Length < length)
 					{
-						Int32 count = length - mRawString.Length;
+						var count = length - mRawString.Length;
 						mRawString += new String(symbol, count);
 					}
 				}
@@ -492,7 +494,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthWithTabs(Int32 length, Int32 tabs_equiv = 4)
 			{
-				Int32 count_tabs = GetTabsStart();
+				var count_tabs = GetTabsStart();
 				if(count_tabs > 0)
 				{
 					// Меняем табы на пробелы
@@ -524,7 +526,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthWithTabs(Int32 length, Char symbol, Int32 tabs_equiv = 4)
 			{
-				Int32 count_tabs = GetTabsStart();
+				var count_tabs = GetTabsStart();
 				if (count_tabs > 0)
 				{
 					// Меняем табы на пробелы
@@ -545,7 +547,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

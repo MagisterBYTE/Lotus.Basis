@@ -9,7 +9,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
@@ -22,8 +22,8 @@ namespace Lotus
 	namespace Maths
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup MathGeometry3D
-		/*@{*/
+		/** \addtogroup MathGeometry3D
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Трехмерная матрицы размерностью 3x3
@@ -79,15 +79,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SetRotation(Double angle, in Vector3D axis, out Matrix3Dx3 result)
 			{
-				Double ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				Double st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
 
-				Double xx = axis.X * axis.X;
-				Double yy = axis.Y * axis.Y;
-				Double zz = axis.Z * axis.Z;
-				Double xy = axis.X * axis.Y;
-				Double xz = axis.X * axis.Z;
-				Double yz = axis.Y * axis.Z;
+				var xx = axis.X * axis.X;
+				var yy = axis.Y * axis.Y;
+				var zz = axis.Z * axis.Z;
+				var xy = axis.X * axis.Y;
+				var xz = axis.X * axis.Z;
+				var yz = axis.Y * axis.Z;
 
 				result.M11 = xx + (ct * (1 - xx));
 				result.M21 = xy + (ct * -xy) + (st * -axis.Z);
@@ -195,7 +195,7 @@ namespace Lotus
 				{
 					if (typeof(Matrix3Dx3) == obj.GetType())
 					{
-						Matrix3Dx3 matrix = (Matrix3Dx3)obj;
+						var matrix = (Matrix3Dx3)obj;
 						return Equals(matrix);
 					}
 				}
@@ -326,15 +326,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SetRotation(Single angle, in Vector3Df axis, out Matrix3Dx3 result)
 			{
-				Single ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_f);
-				Single st = (Single)Math.Sin(angle * XMath.DegreeToRadian_f);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_f);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_f);
 
-				Single xx = axis.X * axis.X;
-				Single yy = axis.Y * axis.Y;
-				Single zz = axis.Z * axis.Z;
-				Single xy = axis.X * axis.Y;
-				Single xz = axis.X * axis.Z;
-				Single yz = axis.Y * axis.Z;
+				var xx = axis.X * axis.X;
+				var yy = axis.Y * axis.Y;
+				var zz = axis.Z * axis.Z;
+				var xy = axis.X * axis.Y;
+				var xz = axis.X * axis.Z;
+				var yz = axis.Y * axis.Z;
 
 				result.M11 = xx + (ct * (1 - xx));
 				result.M21 = xy + (ct * -xy) + (st * -axis.Z);
@@ -505,7 +505,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Multiply(in Matrix3Dx3f left, in Matrix3Dx3f right, out Matrix3Dx3f result)
 			{
-				Matrix3Dx3f temp = new Matrix3Dx3f();
+				var temp = new Matrix3Dx3f();
 				temp.M11 = (left.M11 * right.M11) + (left.M12 * right.M21) + (left.M13 * right.M31);
 				temp.M12 = (left.M11 * right.M12) + (left.M12 * right.M22) + (left.M13 * right.M32);
 				temp.M13 = (left.M11 * right.M13) + (left.M12 * right.M23) + (left.M13 * right.M33);
@@ -543,7 +543,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Divide(in Matrix3Dx3f left, Single right, out Matrix3Dx3f result)
 			{
-				Single inv = 1.0f / right;
+				var inv = 1.0f / right;
 
 				result.M11 = left.M11 * inv;
 				result.M12 = left.M12 * inv;
@@ -784,7 +784,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Transpose(in Matrix3Dx3f value, out Matrix3Dx3f result)
 			{
-				Matrix3Dx3f temp = new Matrix3Dx3f();
+				var temp = new Matrix3Dx3f();
 				temp.M11 = value.M11;
 				temp.M12 = value.M21;
 				temp.M13 = value.M31;
@@ -841,11 +841,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void Invert(in Matrix3Dx3f value, out Matrix3Dx3f result)
 			{
-				Single d11 = (value.M22 * value.M33) + (value.M23 * -value.M32);
-				Single d12 = (value.M21 * value.M33) + (value.M23 * -value.M31);
-				Single d13 = (value.M21 * value.M32) + (value.M22 * -value.M31);
+				var d11 = (value.M22 * value.M33) + (value.M23 * -value.M32);
+				var d12 = (value.M21 * value.M33) + (value.M23 * -value.M31);
+				var d13 = (value.M21 * value.M32) + (value.M22 * -value.M31);
 
-				Single det = (value.M11 * d11) - (value.M12 * d12) + (value.M13 * d13);
+				var det = (value.M11 * d11) - (value.M12 * d12) + (value.M13 * d13);
 				if (Math.Abs(det) == 0.0f)
 				{
 					result = Matrix3Dx3f.Zero;
@@ -854,13 +854,13 @@ namespace Lotus
 
 				det = 1f / det;
 
-				Single d21 = (value.M12 * value.M33) + (value.M13 * -value.M32);
-				Single d22 = (value.M11 * value.M33) + (value.M13 * -value.M31);
-				Single d23 = (value.M11 * value.M32) + (value.M12 * -value.M31);
+				var d21 = (value.M12 * value.M33) + (value.M13 * -value.M32);
+				var d22 = (value.M11 * value.M33) + (value.M13 * -value.M31);
+				var d23 = (value.M11 * value.M32) + (value.M12 * -value.M31);
 
-				Single d31 = (value.M12 * value.M23) - (value.M13 * value.M22);
-				Single d32 = (value.M11 * value.M23) - (value.M13 * value.M21);
-				Single d33 = (value.M11 * value.M22) - (value.M12 * value.M21);
+				var d31 = (value.M12 * value.M23) - (value.M13 * value.M22);
+				var d32 = (value.M11 * value.M23) - (value.M13 * value.M21);
+				var d33 = (value.M11 * value.M22) - (value.M12 * value.M21);
 
 				result.M11 = +d11 * det; result.M12 = -d21 * det; result.M13 = +d31 * det;
 				result.M21 = -d12 * det; result.M22 = +d22 * det; result.M23 = -d32 * det;
@@ -1030,16 +1030,16 @@ namespace Lotus
 			{
 				//Adapted from the row echelon code.
 				result = value;
-				Int32 lead = 0;
-				Int32 rowcount = 3;
-				Int32 columncount = 3;
+				var lead = 0;
+				var rowcount = 3;
+				var columncount = 3;
 
-				for (Int32 r = 0; r < rowcount; ++r)
+				for (var r = 0; r < rowcount; ++r)
 				{
 					if (columncount <= lead)
 						return;
 
-					Int32 i = r;
+					var i = r;
 
 					while (XMath.IsZero(result[i, lead]))
 					{
@@ -1060,7 +1060,7 @@ namespace Lotus
 						result.ExchangeRows(i, r);
 					}
 
-					Single multiplier = 1f / result[r, lead];
+					var multiplier = 1f / result[r, lead];
 
 					for (; i < rowcount; ++i)
 					{
@@ -1115,16 +1115,16 @@ namespace Lotus
 				Matrix3Dx3f temp = value;
 				Matrix3Dx3f.Transpose(in temp, out result);
 
-				Int32 lead = 0;
-				Int32 rowcount = 3;
-				Int32 columncount = 3;
+				var lead = 0;
+				var rowcount = 3;
+				var columncount = 3;
 
-				for (Int32 r = 0; r < rowcount; ++r)
+				for (var r = 0; r < rowcount; ++r)
 				{
 					if (columncount <= lead)
 						return;
 
-					Int32 i = r;
+					var i = r;
 
 					while (XMath.IsZero(result[i, lead]))
 					{
@@ -1145,7 +1145,7 @@ namespace Lotus
 						result.ExchangeRows(i, r);
 					}
 
-					Single multiplier = 1f / result[r, lead];
+					var multiplier = 1f / result[r, lead];
 
 					for (; i < rowcount; ++i)
 					{
@@ -1196,16 +1196,16 @@ namespace Lotus
 				//Reference: http://en.wikipedia.org/wiki/Row_echelon_form#Pseudocode
 
 				result = value;
-				Int32 lead = 0;
-				Int32 rowcount = 3;
-				Int32 columncount = 3;
+				var lead = 0;
+				var rowcount = 3;
+				var columncount = 3;
 
-				for (Int32 r = 0; r < rowcount; ++r)
+				for (var r = 0; r < rowcount; ++r)
 				{
 					if (columncount <= lead)
 						return;
 
-					Int32 i = r;
+					var i = r;
 
 					while (XMath.IsZero(result[i, lead]))
 					{
@@ -1226,7 +1226,7 @@ namespace Lotus
 						result.ExchangeRows(i, r);
 					}
 
-					Single multiplier = 1f / result[r, lead];
+					var multiplier = 1f / result[r, lead];
 					result[r, 0] *= multiplier;
 					result[r, 1] *= multiplier;
 					result[r, 2] *= multiplier;
@@ -1275,7 +1275,7 @@ namespace Lotus
 				Vector3Df final;
 				Vector3Df difference = camera_position - object_position;
 
-				Single lengthSq = difference.SqrLength;
+				var lengthSq = difference.SqrLength;
 				if (XMath.IsZero(lengthSq))
 					difference = -cameraForwardVector;
 				else
@@ -1331,7 +1331,7 @@ namespace Lotus
 				Vector3Df final;
 				Vector3Df difference = object_position - camera_position;
 
-				Single lengthSq = difference.SqrLength;
+				var lengthSq = difference.SqrLength;
 				if (XMath.IsZero(lengthSq))
 					difference = -cameraForwardVector;
 				else
@@ -1542,8 +1542,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationX(Single angle, out Matrix3Dx3f result)
 			{
-				Single cos = (Single)Math.Cos(angle);
-				Single sin = (Single)Math.Sin(angle);
+				var cos = (Single)Math.Cos(angle);
+				var sin = (Single)Math.Sin(angle);
 
 				result = Matrix3Dx3f.Identity;
 				result.M22 = cos;
@@ -1577,8 +1577,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationY(Single angle, out Matrix3Dx3f result)
 			{
-				Single cos = (Single)Math.Cos(angle);
-				Single sin = (Single)Math.Sin(angle);
+				var cos = (Single)Math.Cos(angle);
+				var sin = (Single)Math.Sin(angle);
 
 				result = Matrix3Dx3f.Identity;
 				result.M11 = cos;
@@ -1612,8 +1612,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationZ(Single angle, out Matrix3Dx3f result)
 			{
-				Single cos = (Single)Math.Cos(angle);
-				Single sin = (Single)Math.Sin(angle);
+				var cos = (Single)Math.Cos(angle);
+				var sin = (Single)Math.Sin(angle);
 
 				result = Matrix3Dx3f.Identity;
 				result.M11 = cos;
@@ -1648,17 +1648,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationAxis(in Vector3Df axis, Single angle, out Matrix3Dx3f result)
 			{
-				Single x = axis.X;
-				Single y = axis.Y;
-				Single z = axis.Z;
-				Single cos = (Single)Math.Cos(angle);
-				Single sin = (Single)Math.Sin(angle);
-				Single xx = x * x;
-				Single yy = y * y;
-				Single zz = z * z;
-				Single xy = x * y;
-				Single xz = x * z;
-				Single yz = y * z;
+				var x = axis.X;
+				var y = axis.Y;
+				var z = axis.Z;
+				var cos = (Single)Math.Cos(angle);
+				var sin = (Single)Math.Sin(angle);
+				var xx = x * x;
+				var yy = y * y;
+				var zz = z * z;
+				var xy = x * y;
+				var xz = x * z;
+				var yz = y * z;
 
 				result = Matrix3Dx3f.Identity;
 				result.M11 = xx + (cos * (1.0f - xx));
@@ -1697,15 +1697,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationQuaternion(in Quaternion3Df rotation, out Matrix3Dx3f result)
 			{
-				Single xx = rotation.X * rotation.X;
-				Single yy = rotation.Y * rotation.Y;
-				Single zz = rotation.Z * rotation.Z;
-				Single xy = rotation.X * rotation.Y;
-				Single zw = rotation.Z * rotation.W;
-				Single zx = rotation.Z * rotation.X;
-				Single yw = rotation.Y * rotation.W;
-				Single yz = rotation.Y * rotation.Z;
-				Single xw = rotation.X * rotation.W;
+				var xx = rotation.X * rotation.X;
+				var yy = rotation.Y * rotation.Y;
+				var zz = rotation.Z * rotation.Z;
+				var xy = rotation.X * rotation.Y;
+				var zw = rotation.Z * rotation.W;
+				var zx = rotation.Z * rotation.X;
+				var yw = rotation.Y * rotation.W;
+				var yz = rotation.Y * rotation.Z;
+				var xw = rotation.X * rotation.W;
 
 				result = Matrix3Dx3f.Identity;
 				result.M11 = 1.0f - (2.0f * (yy + zz));
@@ -2521,7 +2521,7 @@ namespace Lotus
 				}
 
 				//The rotation is the left over Matrix3Dx3f after dividing out the scaling.
-				Matrix3Dx3f rotationMatrix3x3 = new Matrix3Dx3f();
+				var rotationMatrix3x3 = new Matrix3Dx3f();
 				rotationMatrix3x3.M11 = M11 / scale.X;
 				rotationMatrix3x3.M12 = M12 / scale.X;
 				rotationMatrix3x3.M13 = M13 / scale.X;
@@ -2564,7 +2564,7 @@ namespace Lotus
 				}
 
 				//The rotation is the left over matrix after dividing out the scaling.
-				Matrix3Dx3f rotationmatrix = new Matrix3Dx3f();
+				var rotationmatrix = new Matrix3Dx3f();
 				rotationmatrix.M11 = M11 * inv_scale;
 				rotationmatrix.M12 = M12 * inv_scale;
 				rotationmatrix.M13 = M13 * inv_scale;
@@ -2594,9 +2594,9 @@ namespace Lotus
 				if (first_row == second_row)
 					return;
 
-				Single temp0 = this[second_row, 0];
-				Single temp1 = this[second_row, 1];
-				Single temp2 = this[second_row, 2];
+				var temp0 = this[second_row, 0];
+				var temp1 = this[second_row, 1];
+				var temp2 = this[second_row, 2];
 
 				this[second_row, 0] = this[first_row, 0];
 				this[second_row, 1] = this[first_row, 1];
@@ -2619,9 +2619,9 @@ namespace Lotus
 				if (first_column == second_column)
 					return;
 
-				Single temp0 = this[0, second_column];
-				Single temp1 = this[1, second_column];
-				Single temp2 = this[2, second_column];
+				var temp0 = this[0, second_column];
+				var temp1 = this[1, second_column];
+				var temp2 = this[2, second_column];
 
 				this[0, second_column] = this[0, first_column];
 				this[1, second_column] = this[1, first_column];
@@ -2645,7 +2645,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

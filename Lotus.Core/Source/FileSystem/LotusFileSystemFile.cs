@@ -8,7 +8,7 @@
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
-// Последнее изменение от 27.03.2022
+// Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
 using System.IO;
@@ -19,8 +19,8 @@ namespace Lotus
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		//! \addtogroup CoreFileSystem
-		/*@{*/
+		/** \addtogroup CoreFileSystem
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Элемент файловой системы представляющий собой файл
@@ -70,7 +70,7 @@ namespace Lotus
 					{
 						if(mInfo != null)
 						{
-							String new_file_path = XFilePath.GetPathForRenameFile(mInfo.FullName, value);
+							var new_file_path = XFilePath.GetPathForRenameFile(mInfo.FullName, value);
 							File.Move(mInfo.FullName, new_file_path);
 							mName = value;
 							NotifyPropertyChanged(PropertyArgsName);
@@ -248,12 +248,12 @@ namespace Lotus
 			{
 				if (mInfo != null)
 				{
-					String file_name = mInfo.Name.RemoveExtension();
+					var file_name = mInfo.Name.RemoveExtension();
 					switch (search_option)
 					{
 						case TStringSearchOption.Start:
 							{
-								Int32 index = file_name.IndexOf(check);
+								var index = file_name.IndexOf(check);
 								if (index > -1)
 								{
 #if UNITY_EDITOR
@@ -269,7 +269,7 @@ namespace Lotus
 							break;
 						case TStringSearchOption.End:
 							{
-								Int32 index = file_name.LastIndexOf(check);
+								var index = file_name.LastIndexOf(check);
 								if (index > -1)
 								{
 #if UNITY_EDITOR
@@ -305,12 +305,12 @@ namespace Lotus
 			{
 				if (mInfo != null)
 				{
-					String file_name = mInfo.Name.RemoveExtension();
+					var file_name = mInfo.Name.RemoveExtension();
 					switch (search_option)
 					{
 						case TStringSearchOption.Start:
 							{
-								Int32 index = file_name.IndexOf(source);
+								var index = file_name.IndexOf(source);
 								if (index > -1)
 								{
 #if UNITY_EDITOR
@@ -334,7 +334,7 @@ namespace Lotus
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
-		/*@}*/
+		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------
 	}
 }

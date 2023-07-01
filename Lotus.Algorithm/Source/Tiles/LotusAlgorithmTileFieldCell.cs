@@ -129,7 +129,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusField OwnerField 
 			{ 
-				get { return (mOwnerField); }
+				get { return mOwnerField; }
 				set { mOwnerField = value; } 
 			}
 
@@ -138,7 +138,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CellLayer
 			{
-				get { return (mCellLayer); }
+				get { return mCellLayer; }
 				set { mCellLayer = value; }
 			}
 
@@ -147,7 +147,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CellCoordinateX
 			{
-				get { return (mCellCoordinateX); }
+				get { return mCellCoordinateX; }
 				set { mCellCoordinateX = value; }
 			}
 
@@ -156,7 +156,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CellCoordinateY
 			{
-				get { return (mCellCoordinateY); }
+				get { return mCellCoordinateY; }
 				set { mCellCoordinateY = value; }
 			}
 
@@ -165,7 +165,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsCellBorderLeft
 			{
-				get { return (mIsCellBorderLeft); }
+				get { return mIsCellBorderLeft; }
 				set { mIsCellBorderLeft = value; }
 			}
 
@@ -174,7 +174,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsCellBorderRight
 			{
-				get { return (mIsCellBorderRight); }
+				get { return mIsCellBorderRight; }
 				set { mIsCellBorderRight = value; }
 			}
 
@@ -183,7 +183,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsCellBorderUp
 			{
-				get { return (mIsCellBorderUp); }
+				get { return mIsCellBorderUp; }
 				set { mIsCellBorderUp = value; }
 			}
 
@@ -192,7 +192,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsCellBorderDown
 			{
-				get { return (mIsCellBorderDown); }
+				get { return mIsCellBorderDown; }
 				set { mIsCellBorderDown = value; }
 			}
 
@@ -201,7 +201,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CellStatus
 			{
-				get { return (mCellStatus); }
+				get { return mCellStatus; }
 				set { mCellStatus = value; }
 			}
 
@@ -210,7 +210,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusFieldCell CellLeft
 			{
-				get { return (mCellLeft); }
+				get { return mCellLeft; }
 			}
 
 			/// <summary>
@@ -218,7 +218,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusFieldCell CellRight
 			{
-				get { return (mCellRight); }
+				get { return mCellRight; }
 			}
 
 			/// <summary>
@@ -226,7 +226,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusFieldCell CellTop
 			{
-				get { return (mCellTop); }
+				get { return mCellTop; }
 			}
 
 			/// <summary>
@@ -234,7 +234,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusFieldCell CellBottom
 			{
-				get { return (mCellBottom); }
+				get { return mCellBottom; }
 			}
 
 			/// <summary>
@@ -242,7 +242,7 @@ namespace Lotus
 			/// </summary>
 			public System.Object VisualElement
 			{
-				get { return (mVisualElement); }
+				get { return mVisualElement; }
 				set { mVisualElement = value; }
 			}
 			#endregion
@@ -269,15 +269,15 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="cell_coordinate_x">Координата ячейки по X</param>
-			/// <param name="cell_coordinate_y">Координата ячейки по Y</param>
-			/// <param name="owner_field">Владелец - поле которому принадлежат ячейка</param>
+			/// <param name="cellCoordinateX">Координата ячейки по X</param>
+			/// <param name="cellCoordinateY">Координата ячейки по Y</param>
+			/// <param name="ownerField">Владелец - поле которому принадлежат ячейка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CFieldCellBase(Int32 cell_coordinate_x, Int32 cell_coordinate_y, ILotusField owner_field)
+			public CFieldCellBase(Int32 cellCoordinateX, Int32 cellCoordinateY, ILotusField ownerField)
 			{
-				mCellCoordinateX = cell_coordinate_x;
-				mCellCoordinateY = cell_coordinate_y;
-				mOwnerField = owner_field;
+				mCellCoordinateX = cellCoordinateX;
+				mCellCoordinateY = cellCoordinateY;
+				mOwnerField = ownerField;
 				//mCellLeft = mOwnerField.GetCell(mCellCoordinateX - 1, mCellCoordinateY);
 				//mCellRight = mOwnerField.GetCell(mCellCoordinateX + 1, mCellCoordinateY);
 				//mCellTop = mOwnerField.GetCell(mCellCoordinateX, mCellCoordinateY + 1);

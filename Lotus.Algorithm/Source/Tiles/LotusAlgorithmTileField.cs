@@ -80,7 +80,7 @@ namespace Lotus
 			/// </summary>
 			public IList<ILotusFieldCell> ICells
 			{
-				get { return ((IList<ILotusFieldCell>)mCells); }
+				get { return (IList<ILotusFieldCell>)mCells; }
 			}
 
 			/// <summary>
@@ -88,7 +88,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<TCell> Cells
 			{
-				get { return (mCells); }
+				get { return mCells; }
 			}
 
 			/// <summary>
@@ -149,11 +149,11 @@ namespace Lotus
 				{
 					if(mCells[i].CellCoordinateX == x && mCells[i].CellCoordinateY == y)
 					{
-						return (mCells[i]);
+						return mCells[i];
 					}
 				}
 
-				return (null);
+				return null;
 			}
 			#endregion
 		}
@@ -175,22 +175,22 @@ namespace Lotus
 			/// 0,1,2,3,4
 			/// 5,6,7,8,9
 			/// </remarks>
-			/// <param name="count_x">Размер поля по X</param>
-			/// <param name="count_y">Размер поля по Y</param>
+			/// <param name="countX">Размер поля по X</param>
+			/// <param name="countY">Размер поля по Y</param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CFieldBase CreateSquare(Int32 count_x, Int32 count_y)
+			public static CFieldBase CreateSquare(Int32 countX, Int32 countY)
 			{
-				var fieldBase = new CFieldBase(count_x * count_y);
-				for (var y = 0; y < count_y; y++)
+				var fieldBase = new CFieldBase(countX * countY);
+				for (var y = 0; y < countY; y++)
 				{
-					for (var x = 0; x < count_x; x++)
+					for (var x = 0; x < countX; x++)
 					{
 						fieldBase.Cells.Add(new CFieldCellBase(x, y, fieldBase));
 					}
 				}
 
-				return (fieldBase);
+				return fieldBase;
 			}
 			#endregion
 

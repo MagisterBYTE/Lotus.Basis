@@ -321,13 +321,13 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="map_width">Ширина карты</param>
-			/// <param name="map_height">Высота карты</param>
+			/// <param name="mapWidth">Ширина карты</param>
+			/// <param name="mapHeight">Высота карты</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMap2D(Int32 map_width, Int32 map_height)
+			public CMap2D(Int32 mapWidth, Int32 mapHeight)
 			{
-				mMapWidth = map_width;
-				mMapHeight = map_height;
+				mMapWidth = mapWidth;
+				mMapHeight = mapHeight;
 				mMap = new Int32[mMapWidth, mMapHeight];
 			}
 			#endregion
@@ -598,15 +598,15 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="map_width">Ширина карты</param>
-			/// <param name="map_height">Высота карты</param>
+			/// <param name="mapWidth">Ширина карты</param>
+			/// <param name="mapHeight">Высота карты</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMap2DView(Int32 map_width, Int32 map_height)
-				: base(map_width, map_height)
+			public CMap2DView(Int32 mapWidth, Int32 mapHeight)
+				: base(mapWidth, mapHeight)
 			{
 				mStart = TMapPoint.Undef;
 				mTarget = TMapPoint.Undef;
-				mWave = new Int32[map_width, map_height];
+				mWave = new Int32[mapWidth, mapHeight];
 			}
 			#endregion
 

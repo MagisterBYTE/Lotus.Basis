@@ -62,13 +62,13 @@ namespace Lotus
 			/// </remarks>
 			/// <typeparam name="TType">Тип элемента массива</typeparam>
 			/// <param name="massive">Массив</param>
-			/// <param name="start_x">Координата начальной точки по X</param>
-			/// <param name="start_y">Координата начальной точки по Y</param>
+			/// <param name="startX">Координата начальной точки по X</param>
+			/// <param name="startY">Координата начальной точки по Y</param>
 			/// <param name="visitorDelegate">Делегат вызываемый при посещении точки</param>
 			/// <param name="comparer">Компаратор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void FloodVisit4<TType>(this TType[,] massive, Int32 start_x, Int32 start_y, Action<Int32, Int32> visitorDelegate,
-				IEqualityComparer<TType> comparer = null)
+			public static void FloodVisit4<TType>(this TType[,] massive, Int32 startX, Int32 startY, Action<Int32, Int32> visitorDelegate,
+				IEqualityComparer<TType>? comparer = null)
 			{
 				if (massive == null) throw new ArgumentNullException(nameof(massive));
 				if (visitorDelegate == null) throw new ArgumentNullException(nameof(visitorDelegate));
@@ -76,8 +76,8 @@ namespace Lotus
 				var length_x = massive.GetLength(0);
 				var length_y = massive.GetLength(1);
 
-				if (start_x < 0 || start_x >= length_x) throw new ArgumentOutOfRangeException("startX");
-				if (start_y < 0 || start_y >= length_y) throw new ArgumentOutOfRangeException("startY");
+				if (startX < 0 || startX >= length_x) throw new ArgumentOutOfRangeException(nameof(startX));
+				if (startY < 0 || startY >= length_y) throw new ArgumentOutOfRangeException(nameof(startY));
 
 				if (comparer == null)
 				{
@@ -85,11 +85,11 @@ namespace Lotus
 				}
 
 				var processed = new Boolean[length_x, length_y];
-				TType value = massive[start_x, start_y];
+				TType value = massive[startX, startY];
 
 				var queue = new Queue<Vector2Di>();
-				queue.Enqueue(new Vector2Di(start_x, start_y));
-				processed[start_x, start_y] = true;
+				queue.Enqueue(new Vector2Di(startX, startY));
+				processed[startX, startY] = true;
 
 				Action<Int32, Int32> process = (x, y) =>
 				{
@@ -144,7 +144,7 @@ namespace Lotus
 			/// <param name="comparer">Компаратор</param>
 			//---------------------------------------------------------------------------------------------------------
 			public static void FloodVisit8<TType>(this TType[,] massive, Vector2Di start, Action<Int32, Int32> visitorDelegate,
-				IEqualityComparer<TType> comparer = null)
+				IEqualityComparer<TType>? comparer = null)
 			{
 				FloodVisit4(massive, start.X, start.Y, visitorDelegate, comparer);
 			}
@@ -158,13 +158,13 @@ namespace Lotus
 			/// </remarks>
 			/// <typeparam name="TType">Тип элемента массива</typeparam>
 			/// <param name="massive">Массив</param>
-			/// <param name="start_x">Координата начальной точки по X</param>
-			/// <param name="start_y">Координата начальной точки по Y</param>
+			/// <param name="startX">Координата начальной точки по X</param>
+			/// <param name="startY">Координата начальной точки по Y</param>
 			/// <param name="visitorDelegate">Делегат вызываемый при посещении точки</param>
 			/// <param name="comparer">Компаратор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void FloodVisit8<TType>(this TType[,] massive, Int32 start_x, Int32 start_y, Action<Int32, Int32> visitorDelegate,
-				IEqualityComparer<TType> comparer = null)
+			public static void FloodVisit8<TType>(this TType[,] massive, Int32 startX, Int32 startY, Action<Int32, Int32> visitorDelegate,
+				IEqualityComparer<TType>? comparer = null)
 			{
 				if (massive == null) throw new ArgumentNullException(nameof(massive));
 				if (visitorDelegate == null) throw new ArgumentNullException(nameof(visitorDelegate));
@@ -172,8 +172,8 @@ namespace Lotus
 				var length_x = massive.GetLength(0);
 				var length_y = massive.GetLength(1);
 
-				if (start_x < 0 || start_x >= length_x) throw new ArgumentOutOfRangeException("startX");
-				if (start_y < 0 || start_y >= length_y) throw new ArgumentOutOfRangeException("startY");
+				if (startX < 0 || startX >= length_x) throw new ArgumentOutOfRangeException(nameof(startX));
+				if (startY < 0 || startY >= length_y) throw new ArgumentOutOfRangeException(nameof(startY));
 
 				if (comparer == null)
 				{
@@ -181,11 +181,11 @@ namespace Lotus
 				}
 
 				var processed = new Boolean[length_x, length_y];
-				TType value = massive[start_x, start_y];
+				TType value = massive[startX, startY];
 
 				var queue = new Queue<Vector2Di>();
-				queue.Enqueue(new Vector2Di(start_x, start_y));
-				processed[start_x, start_y] = true;
+				queue.Enqueue(new Vector2Di(startX, startY));
+				processed[startX, startY] = true;
 
 				Action<Int32, Int32> process = (x, y) =>
 				{

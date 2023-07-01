@@ -159,13 +159,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="x">Позиция точки пути по X</param>
 			/// <param name="y">Позиция точки пути по Y</param>
-			/// <param name="length_from_start">Длина пути от старта (Параметр G)</param>
+			/// <param name="lengthFromStart">Длина пути от старта (Параметр G)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public TPathPoint(Int32 x, Int32 y, Int32 length_from_start)
+			public TPathPoint(Int32 x, Int32 y, Int32 lengthFromStart)
 			{
 				X = x;
 				Y = y;
-				LengthFromStart = length_from_start;
+				LengthFromStart = lengthFromStart;
 			}
 			#endregion
 
@@ -485,11 +485,11 @@ namespace Lotus
 			/// </summary>
 			/// <param name="x">Позиция точки пути по X</param>
 			/// <param name="y">Позиция точки пути по Y</param>
-			/// <param name="length_from_start">Длина пути от старта (Параметр G)</param>
+			/// <param name="lengthFromStart">Длина пути от старта (Параметр G)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void AddPathPoint(Int32 x, Int32 y, Int32 length_from_start)
+			public void AddPathPoint(Int32 x, Int32 y, Int32 lengthFromStart)
 			{
-				Add(new TPathPoint(x, y, length_from_start));
+				Add(new TPathPoint(x, y, lengthFromStart));
 			}
 
 			//-------------------------------------------------------------------------------------------------------------
@@ -497,10 +497,10 @@ namespace Lotus
 			///Проверка на пересечение путей
 			/// </summary>
 			/// <param name="path">Проверяемый путь</param>
-			/// <param name="point_intersect">Точка пересечения</param>
+			/// <param name="pointIntersect">Точка пересечения</param>
 			/// <returns>Статус пересечения путей</returns>
 			//-------------------------------------------------------------------------------------------------------------
-			public Boolean Intersect(CPath path, out TPathPoint point_intersect)
+			public Boolean Intersect(CPath path, out TPathPoint pointIntersect)
 			{
 				for (var i = 0; i < Count; i++)
 				{
@@ -509,13 +509,13 @@ namespace Lotus
 					{
 						if(p.X == path[j].X && p.Y == path[j].Y)
 						{
-							point_intersect = p;
+							pointIntersect = p;
 							return true;
 						}
 					}
 				}
 
-				point_intersect = new TPathPoint(0, 0);
+				pointIntersect = new TPathPoint(0, 0);
 				return false;
 			}
 			#endregion

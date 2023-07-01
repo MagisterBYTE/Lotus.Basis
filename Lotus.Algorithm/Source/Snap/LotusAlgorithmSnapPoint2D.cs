@@ -145,7 +145,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(TSnapPoint2D other)
 			{
-				return (Point == other.Point);
+				return Point == other.Point;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(TSnapPoint2D other)
 			{
-				return (Distance.CompareTo(other.Distance));
+				return Distance.CompareTo(other.Distance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String ToString(String format)
 			{
-				return ("X = " + Point.X.ToString(format) + "; Y = " + Point.Y.ToString(format));
+				return "X = " + Point.X.ToString(format) + "; Y = " + Point.Y.ToString(format);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -342,13 +342,13 @@ namespace Lotus
 			/// Аппроксимация равенства значений точки
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="delta_x">Допуск по координате X</param>
-			/// <param name="delta_y">Допуск по координате Y</param>
+			/// <param name="deltaX">Допуск по координате X</param>
+			/// <param name="deltaY">Допуск по координате Y</param>
 			/// <returns>Статус равенства значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean ApproximatelyPoint(ref Vector2Df point, Single delta_x, Single delta_y)
+			public Boolean ApproximatelyPoint(ref Vector2Df point, Single deltaX, Single deltaY)
 			{
-				if (Math.Abs(Point.X - point.X) < delta_x && Math.Abs(Point.Y - point.Y) < delta_y)
+				if (Math.Abs(Point.X - point.X) < deltaX && Math.Abs(Point.Y - point.Y) < deltaY)
 				{
 					return true;
 				}
@@ -565,7 +565,7 @@ namespace Lotus
 					}
 				}
 
-				return (minimum);
+				return minimum;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -587,7 +587,7 @@ namespace Lotus
 					}
 				}
 
-				return (index);
+				return index;
 			}
 			#endregion
 
@@ -597,21 +597,21 @@ namespace Lotus
 			/// Поиск индекса ближайшей точки на основании позиции
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="delta_x">Допуск по координате X</param>
-			/// <param name="delta_y">Допуск по координате Y</param>
+			/// <param name="deltaX">Допуск по координате X</param>
+			/// <param name="deltaY">Допуск по координате Y</param>
 			/// <returns>Найденный индекс или -1</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 FindIndexNearestFromPosition(Vector2Df point, Single delta_x, Single delta_y)
+			public Int32 FindIndexNearestFromPosition(Vector2Df point, Single deltaX, Single deltaY)
 			{
 				for (var i = 0; i < mCount; i++)
 				{
-					if(mArrayOfItems[i].ApproximatelyPoint(ref point, delta_x, delta_y))
+					if(mArrayOfItems[i].ApproximatelyPoint(ref point, deltaX, deltaY))
 					{
-						return (i);
+						return i;
 					}
 				}
 
-				return (-1);
+				return -1;
 			}
 
 #if UNITY_2017_1_OR_NEWER
@@ -652,11 +652,11 @@ namespace Lotus
 				{
 					if (mArrayOfItems[i].ApproximatelyPointX(x, epsilon))
 					{
-						return (i);
+						return i;
 					}
 				}
 
-				return (-1);
+				return -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -673,11 +673,11 @@ namespace Lotus
 				{
 					if (mArrayOfItems[i].ApproximatelyPointY(y, epsilon))
 					{
-						return (i);
+						return i;
 					}
 				}
 
-				return (-1);
+				return -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -694,11 +694,11 @@ namespace Lotus
 				{
 					if (mArrayOfItems[i].ApproximatelyDistance(distance, epsilon))
 					{
-						return (i);
+						return i;
 					}
 				}
 
-				return (-1);
+				return -1;
 			}
 			#endregion
 		}

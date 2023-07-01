@@ -76,10 +76,10 @@ namespace Lotus
 						}
 					}
 
-					return (document);
+					return document;
 				}
 
-				return (default);
+				return default;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -145,15 +145,15 @@ namespace Lotus
 							}
 						}
 
-						return (true);
+						return true;
 					}
 				}
 				else
 				{
-					return (false);
+					return false;
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -205,15 +205,15 @@ namespace Lotus
 							}
 						}
 
-						return (true);
+						return true;
 					}
 				}
 				else
 				{
-					return (false);
+					return false;
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ namespace Lotus
 								}
 							}
 
-							return (true);
+							return true;
 						}
 					}
 					else
@@ -285,16 +285,16 @@ namespace Lotus
 								XSerializationDispatcher.SaveTo(file_name, document);
 							}
 
-							return (true);
+							return true;
 						}
 					}
 				}
 				else
 				{
-					return (false);
+					return false;
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -344,15 +344,15 @@ namespace Lotus
 							}
 						}
 
-						return (true);
+						return true;
 					}
 				}
 				else
 				{
-					return (false);
+					return false;
 				}
 
-				return (false);
+				return false;
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

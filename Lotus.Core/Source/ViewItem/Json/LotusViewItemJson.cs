@@ -71,10 +71,10 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="dataContext">Данные</param>
-			/// <param name="parent_item">Родительский узел</param>
+			/// <param name="parentItem">Родительский узел</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CViewItemJson(JObject dataContext, ILotusViewItemHierarchy parent_item)
-				: base(dataContext, parent_item)
+			public CViewItemJson(JObject dataContext, ILotusViewItemHierarchy parentItem)
+				: base(dataContext, parentItem)
 			{
 			}
 			#endregion
@@ -88,7 +88,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override ILotusViewItem CreateViewItem()
 			{
-				return (new CViewItemJson());
+				return new CViewItemJson();
 			}
 			#endregion
 
@@ -101,7 +101,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override ILotusViewItemHierarchy CreateViewItemHierarchy()
 			{
-				return (new CViewItemJson());
+				return new CViewItemJson();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

@@ -118,12 +118,12 @@ namespace Lotus
 
 				public override String ToString()
 				{
-					return (Vilage + "=" + Programm + "=" + Price.ToString());
+					return Vilage + "=" + Programm + "=" + Price.ToString();
 				}
 
 				public Int32 CompareTo(CActivity other)
 				{
-					return (Price.CompareTo(other.Price));
+					return Price.CompareTo(other.Price);
 				}
 			}
 
@@ -135,7 +135,7 @@ namespace Lotus
 			[Test]
 			public static void TestView()
 			{
-				ViewItem<CActivity> view_item = new ViewItem<CActivity>(new CActivity()
+				var view_item = new ViewItem<CActivity>(new CActivity()
 				{
 					Vilage = "Бреды",
 					Programm = "Академия",
@@ -159,7 +159,7 @@ namespace Lotus
 			[Test]
 			public static void TestCollectionView()
 			{
-				CollectionView<ViewItem<CActivity>, CActivity> viewItems = new CollectionView<ViewItem<CActivity>, CActivity>();
+				var viewItems = new CollectionView<ViewItem<CActivity>, CActivity>();
 				viewItems.Source = CActivity.Activities;
 				
 				// Общие данные
@@ -169,20 +169,20 @@ namespace Lotus
 				Assert.AreEqual(viewItems.IsFixedSize, true);
 
 				// Проверка имени 
-				for (Int32 i = 0; i < CActivity.Activities.Length; i++)
+				for (var i = 0; i < CActivity.Activities.Length; i++)
 				{
 					Assert.AreEqual(viewItems[i].ToString(), CActivity.Activities[i].ToString());
 				}
 
 				// Сортировка
 				viewItems.SortAscending();
-				for (Int32 i = 0; i < CActivity.Activities.Length; i++)
+				for (var i = 0; i < CActivity.Activities.Length; i++)
 				{
 					Assert.AreEqual(viewItems[i].DataContext.Price, CActivity.Activities[i].Price);
 				}
 
 				viewItems.SortDescending();
-				for (Int32 i = 0; i < CActivity.Activities.Length; i++)
+				for (var i = 0; i < CActivity.Activities.Length; i++)
 				{
 					Assert.AreEqual(viewItems[i].DataContext.Price, CActivity.Activities[9 - i].Price);
 				}
@@ -191,7 +191,7 @@ namespace Lotus
 				viewItems.IsFiltered = true;
 				viewItems.Filter = (CActivity activity) =>
 				{
-					return (activity.Price > 5);
+					return activity.Price > 5;
 				};
 				Assert.AreEqual(viewItems.Count, 5);
 				viewItems.SortDescending();

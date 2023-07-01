@@ -223,7 +223,7 @@ namespace Lotus
 					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData.x == 1, nameof(BooleanValue));
 				}
 #else
-				get { return (mNumberData.X == 1); }
+				get { return mNumberData.X == 1; }
 				set
 				{
 					if (value)
@@ -236,7 +236,7 @@ namespace Lotus
 					}
 
 					mValueType = TValueType.Boolean;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, (mNumberData.X == 1), nameof(BooleanValue));
+					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData.X == 1, nameof(BooleanValue));
 				}
 #endif
 			}
@@ -255,7 +255,7 @@ namespace Lotus
 					if (mOwner != null) mOwner.OnNotifyUpdated(this, (Int32)mNumberData.x, nameof(IntegerValue));
 				}
 #else
-				get { return ((Int32)mNumberData.X); }
+				get { return (Int32)mNumberData.X; }
 				set
 				{
 					mNumberData.X = value;
@@ -310,7 +310,7 @@ namespace Lotus
 					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData.x, nameof(FloatValue));
 				}
 #else
-				get { return ((Single)mNumberData.X); }
+				get { return (Single)mNumberData.X; }
 				set
 				{
 					mNumberData.X = value;
@@ -413,7 +413,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2 Vector2DValue
 			{
-				get { return (new Vector2(mNumberData.X, mNumberData.Y)); }
+				get { return new Vector2(mNumberData.X, mNumberData.Y); }
 				set
 				{
 					mNumberData.X = value.X;
@@ -428,7 +428,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3 Vector3DValue
 			{
-				get { return (new Vector3(mNumberData.X, mNumberData.Y, mNumberData.Z)); }
+				get { return new Vector3(mNumberData.X, mNumberData.Y, mNumberData.Z); }
 				set
 				{
 					mNumberData.X = value.X;
@@ -444,7 +444,7 @@ namespace Lotus
 			/// </summary>
 			public Vector4 Vector4DValue
 			{
-				get { return (mNumberData); }
+				get { return mNumberData; }
 				set
 				{
 					mNumberData = value;
@@ -458,7 +458,7 @@ namespace Lotus
 			/// </summary>
 			public TColor ColorValue
 			{
-				get { return (new TColor((Byte)mNumberData.X, (Byte)mNumberData.Y, (Byte)mNumberData.Z, (Byte)mNumberData.W)); }
+				get { return new TColor((Byte)mNumberData.X, (Byte)mNumberData.Y, (Byte)mNumberData.Z, (Byte)mNumberData.W); }
 				set
 				{
 					mNumberData.X = value.R;
@@ -1217,7 +1217,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 							return mNumberData.x == 1;
 #else
-							return (mNumberData.X == 1);
+							return mNumberData.X == 1;
 #endif
 						}
 					case TValueType.Integer:
@@ -1225,7 +1225,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 							return (Int32)mNumberData.x;
 #else
-							return ((Int32)mNumberData.X);
+							return (Int32)mNumberData.X;
 #endif
 						}
 					case TValueType.Enum:
@@ -1237,7 +1237,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 							return mNumberData.x;
 #else
-							return (mNumberData.X);
+							return mNumberData.X;
 #endif
 						}
 					case TValueType.DateTime:
@@ -1343,7 +1343,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 							return mNumberData.x.ToString();
 #else
-							return (mNumberData.X).ToString();
+							return mNumberData.X.ToString();
 #endif
 						}
 					case TValueType.DateTime:

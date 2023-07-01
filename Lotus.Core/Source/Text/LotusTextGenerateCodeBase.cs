@@ -112,9 +112,9 @@ namespace Lotus
 			/// <summary>
 			/// Добавление открытие пространства имени
 			/// </summary>
-			/// <param name="space_name">Имя пространства имён</param>
+			/// <param name="spaceName">Имя пространства имён</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddNamespaceOpen(String space_name)
+			public virtual void AddNamespaceOpen(String spaceName)
 			{
 
 			}
@@ -135,15 +135,15 @@ namespace Lotus
 			/// <summary>
 			/// Добавление стандартного заголовка для файлов кода проекта Lotus
 			/// </summary>
-			/// <param name="module_name"></param>
-			/// <param name="subsystem_name"></param>
+			/// <param name="moduleName"></param>
+			/// <param name="subsystemName"></param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddFileHeader(String module_name, String subsystem_name)
+			public virtual void AddFileHeader(String moduleName, String subsystemName)
 			{
 				AddDelimetrPart();
 				Add("// Проект: LotusPlatform");
-				Add("// Раздел: " + module_name);
-				Add("// Подраздел: " + subsystem_name);
+				Add("// Раздел: " + moduleName);
+				Add("// Подраздел: " + subsystemName);
 				Add("// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>");
 				AddDelimetrSection();
 			}
@@ -152,13 +152,13 @@ namespace Lotus
 			/// <summary>
 			/// Добавление имени файла и краткое описание
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
-			/// <param name="brief_desc">Краткое описание</param>
+			/// <param name="fileName">Имя файла</param>
+			/// <param name="briefDesc">Краткое описание</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddFileBriefDesc(String file_name, String brief_desc)
+			public virtual void AddFileBriefDesc(String fileName, String briefDesc)
 			{
-				Add("/** \\file " + file_name);
-				Add("*\t\t" + brief_desc);
+				Add("/** \\file " + fileName);
+				Add("*\t\t" + briefDesc);
 				Add("*/");
 				AddDelimetrSection();
 			}
@@ -183,9 +183,9 @@ namespace Lotus
 			/// <summary>
 			/// Добавление декларации статического публичного класса
 			/// </summary>
-			/// <param name="class_name">Имя класса</param>
+			/// <param name="className">Имя класса</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddClassStaticPublic(String class_name)
+			public virtual void AddClassStaticPublic(String className)
 			{
 
 			}
@@ -206,11 +206,11 @@ namespace Lotus
 			/// <summary>
 			/// Добавление декларации константного публичного поля
 			/// </summary>
-			/// <param name="type_name">Имя типа</param>
-			/// <param name="field_name">Имя поля</param>
+			/// <param name="typeName">Имя типа</param>
+			/// <param name="fieldName">Имя поля</param>
 			/// <param name="value">Значения поля</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddFieldConstPublic(String type_name, String field_name, String value)
+			public virtual void AddFieldConstPublic(String typeName, String fieldName, String value)
 			{
 			}
 
@@ -218,10 +218,10 @@ namespace Lotus
 			/// <summary>
 			/// Добавление декларации константного публичного поля типа String
 			/// </summary>
-			/// <param name="field_name">Имя поля</param>
+			/// <param name="fieldName">Имя поля</param>
 			/// <param name="value">Значения поля</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddFieldConstPublicString(String field_name, String value)
+			public virtual void AddFieldConstPublicString(String fieldName, String value)
 			{
 			}
 
@@ -229,11 +229,11 @@ namespace Lotus
 			/// <summary>
 			/// Добавление декларации статического поля только для чтения
 			/// </summary>
-			/// <param name="type_name">Имя типа</param>
-			/// <param name="field_name">Имя поля</param>
+			/// <param name="typeName">Имя типа</param>
+			/// <param name="fieldName">Имя поля</param>
 			/// <param name="value">Значения поля</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddFieldStaticReadonlyPublic(String type_name, String field_name, String value)
+			public virtual void AddFieldStaticReadonlyPublic(String typeName, String fieldName, String value)
 			{
 
 			}
@@ -272,11 +272,11 @@ namespace Lotus
 			/// <summary>
 			/// Добавление стандартного краткого комментария
 			/// </summary>
-			/// <param name="delimetr_section_before">Статус добавления разделителя секции перед комментарием</param>
+			/// <param name="delimetrSectionBefore">Статус добавления разделителя секции перед комментарием</param>
 			/// <param name="text">Текст комментария</param>
-			/// <param name="delimetr_section_after">Статус добавления разделителя секции после комментария </param>
+			/// <param name="delimetrSectionAfter">Статус добавления разделителя секции после комментария </param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddCommentSummary(Boolean delimetr_section_before, String text, Boolean delimetr_section_after)
+			public virtual void AddCommentSummary(Boolean delimetrSectionBefore, String text, Boolean delimetrSectionAfter)
 			{
 
 			}
@@ -307,12 +307,12 @@ namespace Lotus
 			/// <summary>
 			/// Добавление команды Doxygen - добавить в группу
 			/// </summary>
-			/// <param name="group_name">Имя группы</param>
+			/// <param name="groupName">Имя группы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddDoxygenAddToGroup(String group_name)
+			public virtual void AddDoxygenAddToGroup(String groupName)
 			{
 				AddDelimetrSection();
-				Add("//! \\addtogroup " + group_name);
+				Add("//! \\addtogroup " + groupName);
 				Add("*@{*/");
 			}
 

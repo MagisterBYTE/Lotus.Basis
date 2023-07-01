@@ -55,7 +55,7 @@ namespace Lotus
 			/// </remarks>
 			public TTimeInterval TimeInterval
 			{
-				get { return (mTimeInterval); }
+				get { return mTimeInterval; }
 				set { mTimeInterval = value; }
 			}
 
@@ -64,7 +64,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountMinutes
 			{
-				get { return ((DateLast - DateFirst).Minutes); }
+				get { return (DateLast - DateFirst).Minutes; }
 			}
 
 			/// <summary>
@@ -72,7 +72,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountHours
 			{
-				get { return ((DateLast - DateFirst).Hours); }
+				get { return (DateLast - DateFirst).Hours; }
 			}
 
 			/// <summary>
@@ -80,7 +80,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountDay
 			{
-				get { return ((DateLast - DateFirst).Days); }
+				get { return (DateLast - DateFirst).Days; }
 			}
 
 			/// <summary>
@@ -91,7 +91,7 @@ namespace Lotus
 				get
 				{
 					Double count_days = (DateLast - DateFirst).Days;
-					return ((Int32)Math.Ceiling(count_days / 7.0));
+					return (Int32)Math.Ceiling(count_days / 7.0);
 				}
 			}
 
@@ -103,7 +103,7 @@ namespace Lotus
 			/// </summary>
 			public DateTime DateFirst
 			{
-				get { return (ItemFirst.Date); }
+				get { return ItemFirst.Date; }
 			}
 
 			/// <summary>
@@ -111,7 +111,7 @@ namespace Lotus
 			/// </summary>
 			public DateTime DatePenultimate
 			{
-				get { return (ItemPenultimate.Date); }
+				get { return ItemPenultimate.Date; }
 			}
 
 			/// <summary>
@@ -119,7 +119,7 @@ namespace Lotus
 			/// </summary>
 			public DateTime DateLast
 			{
-				get { return (ItemLast.Date); }
+				get { return ItemLast.Date; }
 			}
 			#endregion
 
@@ -151,29 +151,29 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="time_interval">Временной интервал</param>
+			/// <param name="timeInterval">Временной интервал</param>
 			/// <param name="capacity">Начальная максимальная емкость списка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ListTimeInterval(TTimeInterval time_interval, Int32 capacity = 120)
+			public ListTimeInterval(TTimeInterval timeInterval, Int32 capacity = 120)
 				: base(capacity)
 			{
-				mTimeInterval = time_interval;
+				mTimeInterval = timeInterval;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="time_interval">Временной интервал</param>
-			/// <param name="start_data">Дата начала периода</param>
-			/// <param name="end_data">Дата окончания периода</param>
+			/// <param name="timeInterval">Временной интервал</param>
+			/// <param name="startData">Дата начала периода</param>
+			/// <param name="endData">Дата окончания периода</param>
 			/// <param name="capacity">Начальная максимальная емкость списка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ListTimeInterval(TTimeInterval time_interval, DateTime start_data, DateTime end_data, Int32 capacity = 120)
+			public ListTimeInterval(TTimeInterval timeInterval, DateTime startData, DateTime endData, Int32 capacity = 120)
 				: base(capacity)
 			{
-				mTimeInterval = time_interval;
-				AssingTimePeriod(start_data, end_data);
+				mTimeInterval = timeInterval;
+				AssingTimePeriod(startData, endData);
 			}
 			#endregion
 
@@ -182,26 +182,26 @@ namespace Lotus
 			/// <summary>
 			/// Присвоение указанного временного периода
 			/// </summary>
-			/// <param name="start_data">Дата начала периода</param>
-			/// <param name="end_data">Дата окончания периода</param>
+			/// <param name="startData">Дата начала периода</param>
+			/// <param name="endData">Дата окончания периода</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void AssingTimePeriod(DateTime start_data, DateTime end_data)
+			public void AssingTimePeriod(DateTime startData, DateTime endData)
 			{
 				Clear();
 
-				DateTime current = start_data;
+				DateTime current = startData;
 				TItemTimeable first_item = Activator.CreateInstance<TItemTimeable>();
-				first_item.Date = start_data;
+				first_item.Date = startData;
 				Add(first_item);
 				switch (mTimeInterval)
 				{
 					case TTimeInterval.Minutely:
 						{
-							while (current < end_data)
+							while (current < endData)
 							{
 								current += TimeSpan.FromMinutes(1);
 
-								if (current <= end_data)
+								if (current <= endData)
 								{
 									TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
 									current_item.Date = current;
@@ -212,11 +212,11 @@ namespace Lotus
 						break;
 					case TTimeInterval.Hourly:
 						{
-							while (current < end_data)
+							while (current < endData)
 							{
 								current += TimeSpan.FromHours(1);
 
-								if (current <= end_data)
+								if (current <= endData)
 								{
 									TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
 									current_item.Date = current;
@@ -227,11 +227,11 @@ namespace Lotus
 						break;
 					case TTimeInterval.Daily:
 						{
-							while (current < end_data)
+							while (current < endData)
 							{
 								current += TimeSpan.FromDays(1);
 
-								if (current <= end_data)
+								if (current <= endData)
 								{
 									TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
 									current_item.Date = current;
@@ -242,11 +242,11 @@ namespace Lotus
 						break;
 					case TTimeInterval.Weekly:
 						{
-							while (current < end_data)
+							while (current < endData)
 							{
 								current += TimeSpan.FromDays(1);
 
-								if (current <= end_data && current.DayOfWeek == DayOfWeek.Monday)
+								if (current <= endData && current.DayOfWeek == DayOfWeek.Monday)
 								{
 									TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
 									current_item.Date = current;
@@ -257,11 +257,11 @@ namespace Lotus
 						break;
 					case TTimeInterval.Monthly:
 						{
-							while (current < end_data)
+							while (current < endData)
 							{
 								current += TimeSpan.FromDays(1);
 
-								if (current <= end_data && current.Day == 1)
+								if (current <= endData && current.Day == 1)
 								{
 									TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
 									current_item.Date = current;
@@ -272,11 +272,11 @@ namespace Lotus
 						break;
 					case TTimeInterval.Yearly:
 						{
-							while (current < end_data)
+							while (current < endData)
 							{
 								current += TimeSpan.FromDays(1);
 
-								if (current <= end_data && current.DayOfYear == 1)
+								if (current <= endData && current.DayOfYear == 1)
 								{
 									TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
 									current_item.Date = current;
@@ -301,7 +301,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 GetIndexFromDate(Int32 year, Int32 month, Int32 day)
 			{
-				return (GetIndexFromDate(new DateTime(year, month, day)));
+				return GetIndexFromDate(new DateTime(year, month, day));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -315,29 +315,29 @@ namespace Lotus
 			{
 				if (date <= DateFirst)
 				{
-					return (0);
+					return 0;
 				}
 				if (date >= DateLast)
 				{
-					return (LastIndex);
+					return LastIndex;
 				}
 
 				for (var i = 1; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].Date == date)
 					{
-						return (i);
+						return i;
 					}
 					else
 					{
 						if (mArrayOfItems[i].Date > date)
 						{
-							return (i - 1);
+							return i - 1;
 						}
 					}
 				}
 
-				return (LastIndex);
+				return LastIndex;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -355,11 +355,11 @@ namespace Lotus
 					var end_index = (Int32)Math.Ceiling(index);
 					var delta = index - start_index;
 
-					return (mArrayOfItems[start_index].Date.GetInterpolatedDate(mArrayOfItems[end_index].Date, delta));
+					return mArrayOfItems[start_index].Date.GetInterpolatedDate(mArrayOfItems[end_index].Date, delta);
 				}
 				else
 				{
-					return (DateFirst);
+					return DateFirst;
 				}
 			}
 
@@ -382,7 +382,7 @@ namespace Lotus
 					}
 				}
 
-				return (count);
+				return count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -397,15 +397,15 @@ namespace Lotus
 				{
 					if (item.Date.DayOfWeek == DayOfWeek.Sunday || item.Date.DayOfWeek == DayOfWeek.Saturday)
 					{
-						return (true);
+						return true;
 					}
 					else
 					{
-						return (false);
+						return false;
 					}
 				});
 
-				return (count);
+				return count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -419,7 +419,7 @@ namespace Lotus
 			public Int32 TrimStart(DateTime date, Boolean included = true)
 			{
 				mDummyItem.Date = date;
-				return (TrimClosestStart(mDummyItem, included));
+				return TrimClosestStart(mDummyItem, included);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -433,7 +433,7 @@ namespace Lotus
 			public Int32 TrimEnd(DateTime date, Boolean included = true)
 			{
 				mDummyItem.Date = date;
-				return (TrimClosestEnd(mDummyItem, included));
+				return TrimClosestEnd(mDummyItem, included);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -441,24 +441,24 @@ namespace Lotus
 			/// Получение списка с указанным периодом
 			/// </summary>
 			/// <typeparam name="TResult">Тип списка</typeparam>
-			/// <param name="start_index">Начальный индекс периода</param>
-			/// <param name="end_index">Конечный индекс периода</param>
+			/// <param name="startIndex">Начальный индекс периода</param>
+			/// <param name="endIndex">Конечный индекс периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult GetListPeriod<TResult>(Int32 start_index, Int32 end_index)
+			public virtual TResult GetListPeriod<TResult>(Int32 startIndex, Int32 endIndex)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				var list = new TResult();
 				list.TimeInterval = mTimeInterval;
 
 				// Это не количество, а индекс поэтому и равно
-				for (var i = start_index; i <= end_index; i++)
+				for (var i = startIndex; i <= endIndex; i++)
 				{
 					list.Add(mArrayOfItems[i]);
 				}
 
 				list.SetIndexElement();
-				return (list);
+				return list;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -466,17 +466,17 @@ namespace Lotus
 			/// Получение списка с указанным периодом
 			/// </summary>
 			/// <typeparam name="TResult">Тип списка</typeparam>
-			/// <param name="start_date">Дата начала периода</param>
-			/// <param name="end_data">Дата окончания периода</param>
+			/// <param name="startDate">Дата начала периода</param>
+			/// <param name="endData">Дата окончания периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult GetListPeriod<TResult>(DateTime start_date, DateTime end_data)
+			public virtual TResult GetListPeriod<TResult>(DateTime startDate, DateTime endData)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				var start_index = GetIndexFromDate(start_date);
-				var end_index = GetIndexFromDate(end_data);
+				var start_index = GetIndexFromDate(startDate);
+				var end_index = GetIndexFromDate(endData);
 
-				return (GetListPeriod<TResult>(start_index, end_index));
+				return GetListPeriod<TResult>(start_index, end_index);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -484,24 +484,24 @@ namespace Lotus
 			/// Дублирование списка с указанным периодом
 			/// </summary>
 			/// <typeparam name="TResult">Тип списка</typeparam>
-			/// <param name="start_index">Начальный индекс периода</param>
-			/// <param name="end_index">Конечный индекс периода</param>
+			/// <param name="startIndex">Начальный индекс периода</param>
+			/// <param name="endIndex">Конечный индекс периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult DublicateListPeriod<TResult>(Int32 start_index, Int32 end_index)
+			public virtual TResult DublicateListPeriod<TResult>(Int32 startIndex, Int32 endIndex)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				var list = new TResult();
 				list.TimeInterval = mTimeInterval;
 
 				//Это не количество, а индекс поэтому и равно
-				for (var i = start_index; i <= end_index; i++)
+				for (var i = startIndex; i <= endIndex; i++)
 				{
 					list.Add((TItemTimeable)mArrayOfItems[i].Clone());
 				}
 
 				list.SetIndexElement();
-				return (list);
+				return list;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -509,17 +509,17 @@ namespace Lotus
 			/// Дублирование списка с указанным периодом
 			/// </summary>
 			/// <typeparam name="TResult">Тип списка</typeparam>
-			/// <param name="start_date">Дата начала периода</param>
-			/// <param name="end_data">Дата окончания периода</param>
+			/// <param name="startDate">Дата начала периода</param>
+			/// <param name="endData">Дата окончания периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult DublicateListPeriod<TResult>(DateTime start_date, DateTime end_data)
+			public virtual TResult DublicateListPeriod<TResult>(DateTime startDate, DateTime endData)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				var start_index = GetIndexFromDate(start_date);
-				var end_index = GetIndexFromDate(end_data);
+				var start_index = GetIndexFromDate(startDate);
+				var end_index = GetIndexFromDate(endData);
 
-				return (DublicateListPeriod<TResult>(start_index, end_index));
+				return DublicateListPeriod<TResult>(start_index, end_index);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -527,13 +527,13 @@ namespace Lotus
 			/// Получение списка с указанным временным интервалом
 			/// </summary>
 			/// <typeparam name="TResult">Тип списка</typeparam>
-			/// <param name="time_interval">Временной интервал</param>
+			/// <param name="timeInterval">Временной интервал</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult GetConvertedListInterval<TResult>(TTimeInterval time_interval)
+			public virtual TResult GetConvertedListInterval<TResult>(TTimeInterval timeInterval)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				return (GetConvertedListPeriodAndInterval<TResult>(time_interval, 0, LastIndex));
+				return GetConvertedListPeriodAndInterval<TResult>(timeInterval, 0, LastIndex);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -541,12 +541,12 @@ namespace Lotus
 			/// Получение списка с указанным временным интервалом и указанным временным периодом
 			/// </summary>
 			/// <typeparam name="TResult">Тип списка</typeparam>
-			/// <param name="time_interval">Временной интервал</param>
-			/// <param name="start_index">Начальный индекс периода</param>
-			/// <param name="end_index">Конечный индекс периода</param>
+			/// <param name="timeInterval">Временной интервал</param>
+			/// <param name="startIndex">Начальный индекс периода</param>
+			/// <param name="endIndex">Конечный индекс периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult GetConvertedListPeriodAndInterval<TResult>(TTimeInterval time_interval, Int32 start_index, Int32 end_index)
+			public virtual TResult GetConvertedListPeriodAndInterval<TResult>(TTimeInterval timeInterval, Int32 startIndex, Int32 endIndex)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				TResult list = null;
@@ -556,13 +556,13 @@ namespace Lotus
 						break;
 					case TTimeInterval.Hourly:
 						{
-							switch (time_interval)
+							switch (timeInterval)
 							{
 								case TTimeInterval.Minutely:
 									break;
 								case TTimeInterval.Hourly:
 									{
-										list = GetListPeriod<TResult>(start_index, end_index);
+										list = GetListPeriod<TResult>(startIndex, endIndex);
 									}
 									break;
 								case TTimeInterval.Daily:
@@ -583,7 +583,7 @@ namespace Lotus
 						break;
 					case TTimeInterval.Daily:
 						{
-							switch (time_interval)
+							switch (timeInterval)
 							{
 								case TTimeInterval.Minutely:
 									break;
@@ -591,7 +591,7 @@ namespace Lotus
 									break;
 								case TTimeInterval.Daily:
 									{
-										list = GetListPeriod<TResult>(start_index, end_index);
+										list = GetListPeriod<TResult>(startIndex, endIndex);
 									}
 									break;
 								case TTimeInterval.Weekly:
@@ -631,7 +631,7 @@ namespace Lotus
 						break;
 					case TTimeInterval.Weekly:
 						{
-							switch (time_interval)
+							switch (timeInterval)
 							{
 								case TTimeInterval.Minutely:
 									break;
@@ -641,7 +641,7 @@ namespace Lotus
 									break;
 								case TTimeInterval.Weekly:
 									{
-										list = GetListPeriod<TResult>(start_index, end_index);
+										list = GetListPeriod<TResult>(startIndex, endIndex);
 									}
 									break;
 								case TTimeInterval.Monthly:
@@ -674,7 +674,7 @@ namespace Lotus
 				}
 
 				list.SetIndexElement();
-				return (list);
+				return list;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -682,18 +682,18 @@ namespace Lotus
 			/// Получение списка с указанным временным интервалом и указанным временным периодом
 			/// </summary>
 			/// <typeparam name="TResult">Тип списка</typeparam>
-			/// <param name="time_interval">Временной интервал</param>
-			/// <param name="start_date">Дата начала периода</param>
-			/// <param name="end_data">Дата окончания периода</param>
+			/// <param name="timeInterval">Временной интервал</param>
+			/// <param name="startDate">Дата начала периода</param>
+			/// <param name="endData">Дата окончания периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult GetConvertedListPeriodAndInterval<TResult>(TTimeInterval time_interval, DateTime start_date, DateTime end_data)
+			public virtual TResult GetConvertedListPeriodAndInterval<TResult>(TTimeInterval timeInterval, DateTime startDate, DateTime endData)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				var index_from = GetIndexFromDate(start_date);
-				var index_to = GetIndexFromDate(end_data);
+				var index_from = GetIndexFromDate(startDate);
+				var index_to = GetIndexFromDate(endData);
 
-				return (GetConvertedListPeriodAndInterval<TResult>(time_interval, index_from, index_to));
+				return GetConvertedListPeriodAndInterval<TResult>(timeInterval, index_from, index_to);
 			}
 			#endregion
 		}

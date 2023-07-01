@@ -97,7 +97,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<ILotusMementoState> HistoryStates 
 			{
-				get { return (mHistoryStates); } 
+				get { return mHistoryStates; } 
 			}
 
 			/// <summary>
@@ -110,10 +110,10 @@ namespace Lotus
 					// If the NextUndo pointer is -1, no commands to undo
 					if (mNextUndo < 0 || mNextUndo > mHistoryStates.Count - 1) // precaution
 					{
-						return (false);
+						return false;
 					}
 
-					return (true);
+					return true;
 				}
 			}
 
@@ -127,10 +127,10 @@ namespace Lotus
 					// If the NextUndo pointer points to the last item, no commands to redo
 					if (mNextUndo == mHistoryStates.Count - 1)
 					{
-						return (false);
+						return false;
 					}
 
-					return (true);
+					return true;
 				}
 			}
 
@@ -141,7 +141,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mIsEnabled);
+					return mIsEnabled;
 				}
 				set
 				{

@@ -126,28 +126,28 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="human_name">Удобочитаемое имя метода</param>
-			/// <param name="button_mode">Режим вызова метода</param>
+			/// <param name="humanName">Удобочитаемое имя метода</param>
+			/// <param name="buttonMode">Режим вызова метода</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMethodCallAttribute(String human_name, TMethodCallMode button_mode = TMethodCallMode.Always)
+			public LotusMethodCallAttribute(String humanName, TMethodCallMode buttonMode = TMethodCallMode.Always)
 			{
-				mDisplayName = human_name;
-				mMode = button_mode;
+				mDisplayName = humanName;
+				mMode = buttonMode;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="human_name">Удобочитаемое имя метода</param>
-			/// <param name="draw_order">Порядок отрисовки кнопки</param>
-			/// <param name="button_mode">Режим вызова метода</param>
+			/// <param name="humanName">Удобочитаемое имя метода</param>
+			/// <param name="drawOrder">Порядок отрисовки кнопки</param>
+			/// <param name="buttonMode">Режим вызова метода</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMethodCallAttribute(String human_name, Int32 draw_order, TMethodCallMode button_mode = TMethodCallMode.Always)
+			public LotusMethodCallAttribute(String humanName, Int32 drawOrder, TMethodCallMode buttonMode = TMethodCallMode.Always)
 			{
-				mDisplayName = human_name;
-				mDrawOrder = draw_order;
-				mMode = button_mode;
+				mDisplayName = humanName;
+				mDrawOrder = drawOrder;
+				mMode = buttonMode;
 			}
 			#endregion
 		}

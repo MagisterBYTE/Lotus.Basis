@@ -48,7 +48,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsObjectNull<TType>(this TType @this) where TType : class
 			{
-				return (@this is null || @this.Equals(null));
+				return @this is null || @this.Equals(null);
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

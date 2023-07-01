@@ -44,7 +44,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CurrentIndent
 			{
-				get { return (mCurrentIndent); }
+				get { return mCurrentIndent; }
 				set
 				{
 					mCurrentIndent = value;
@@ -189,13 +189,13 @@ namespace Lotus
 			/// Если длина больше требуемой то строка заполняется последним символом
 			/// </remarks>
 			/// <param name="length">Длина строки</param>
-			/// <param name="tabs_equiv">Размер одного символа табуляции</param>
+			/// <param name="tabsEquiv">Размер одного символа табуляции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetLengthWithTabs(Int32 length, Int32 tabs_equiv = 4)
+			public void SetLengthWithTabs(Int32 length, Int32 tabsEquiv = 4)
 			{
 				for (var i = 0; i < mLines.Count; i++)
 				{
-					mLines[i].SetLengthWithTabs(length, tabs_equiv);
+					mLines[i].SetLengthWithTabs(length, tabsEquiv);
 				}
 			}
 
@@ -208,13 +208,13 @@ namespace Lotus
 			/// </remarks>
 			/// <param name="length">Длина строки</param>
 			/// <param name="symbol">Символ</param>
-			/// <param name="tabs_equiv">Размер одного символа табуляции</param>
+			/// <param name="tabsEquiv">Размер одного символа табуляции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetLengthWithTabs(Int32 length, Char symbol, Int32 tabs_equiv = 4)
+			public void SetLengthWithTabs(Int32 length, Char symbol, Int32 tabsEquiv = 4)
 			{
 				for (var i = 0; i < mLines.Count; i++)
 				{
-					mLines[i].SetLengthWithTabs(length, symbol, tabs_equiv);
+					mLines[i].SetLengthWithTabs(length, symbol, tabsEquiv);
 				}
 			}
 
@@ -226,19 +226,19 @@ namespace Lotus
 			/// Если длина больше требуемой то строка заполняется последним символом
 			/// </remarks>
 			/// <param name="length">Длина строки</param>
-			/// <param name="tabs_equiv">Размер одного символа табуляции</param>
+			/// <param name="tabsEquiv">Размер одного символа табуляции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetLengthWithTabsOnlyDelimetrs(Int32 length, Int32 tabs_equiv = 4)
+			public void SetLengthWithTabsOnlyDelimetrs(Int32 length, Int32 tabsEquiv = 4)
 			{
 				for (var i = 0; i < mLines.Count; i++)
 				{
 					if(mLines[i].RawString.Contains("//---------"))
 					{
-						mLines[i].SetLengthWithTabs(length, tabs_equiv);
+						mLines[i].SetLengthWithTabs(length, tabsEquiv);
 					}
 					if (mLines[i].RawString.Contains("//========"))
 					{
-						mLines[i].SetLengthWithTabs(length, tabs_equiv);
+						mLines[i].SetLengthWithTabs(length, tabsEquiv);
 					}
 
 				}
@@ -250,15 +250,15 @@ namespace Lotus
 			/// <summary>
 			/// Сохранения списка строк текстовых данных в файл
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void Save(String file_name)
+			public virtual void Save(String fileName)
 			{
 				// Формируем правильный путь
 #if UNITY_2017_1_OR_NEWER
 				String path = XFilePath.GetFileName(XCoreSettings.ASSETS_PATH, file_name, ".cs");
 #else
-				var path = XFilePath.GetFileName(Environment.CurrentDirectory, file_name, ".cs");
+				var path = XFilePath.GetFileName(Environment.CurrentDirectory, fileName, ".cs");
 #endif
 				// Создаем поток для записи
 				var stream_writer = new StreamWriter(path);

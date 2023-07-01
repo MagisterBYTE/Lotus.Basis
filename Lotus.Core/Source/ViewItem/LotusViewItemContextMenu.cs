@@ -54,10 +54,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(ILotusViewItem view_item)
-				: this(view_item, String.Empty, null, null)
+			public CUIContextMenuItem(ILotusViewItem viewItem)
+				: this(viewItem, String.Empty, null, null)
 			{
 			}
 
@@ -65,11 +65,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <param name="name">Имя элемента меню</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(ILotusViewItem view_item, String name)
-				: this(view_item, name, null, null)
+			public CUIContextMenuItem(ILotusViewItem viewItem, String name)
+				: this(viewItem, name, null, null)
 			{
 			}
 
@@ -78,10 +78,10 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="name">Имя элемента меню</param>
-			/// <param name="on_action">Обработчик событие основного действия</param>
+			/// <param name="onAction">Обработчик событие основного действия</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(String name, Action<ILotusViewItem> on_action)
-				: this(null, name, on_action, null)
+			public CUIContextMenuItem(String name, Action<ILotusViewItem> onAction)
+				: this(null, name, onAction, null)
 			{
 			}
 
@@ -89,12 +89,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <param name="name">Имя элемента меню</param>
-			/// <param name="on_action">Обработчик событие основного действия</param>
+			/// <param name="onAction">Обработчик событие основного действия</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(ILotusViewItem view_item, String name, Action<ILotusViewItem> on_action)
-				: this(view_item, name, on_action, null)
+			public CUIContextMenuItem(ILotusViewItem viewItem, String name, Action<ILotusViewItem> onAction)
+				: this(viewItem, name, onAction, null)
 			{
 			}
 
@@ -102,17 +102,17 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <param name="name">Имя элемента меню</param>
-			/// <param name="on_action">Обработчик событие основного действия</param>
-			/// <param name="on_after_action">Дополнительный обработчик события после основного действия</param>
+			/// <param name="onAction">Обработчик событие основного действия</param>
+			/// <param name="onAfterAction">Дополнительный обработчик события после основного действия</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(ILotusViewItem view_item, String name, Action<ILotusViewItem> on_action, 
-				Action<ILotusViewItem> on_after_action)
+			public CUIContextMenuItem(ILotusViewItem viewItem, String name, Action<ILotusViewItem> onAction, 
+				Action<ILotusViewItem> onAfterAction)
 			{
-				ViewItem = view_item;
-				OnAction = on_action;
-				OnAfterAction = on_after_action;
+				ViewItem = viewItem;
+				OnAction = onAction;
+				OnAfterAction = onAfterAction;
 
 #if USE_WINDOWS
 				CreateMenuItem(name, null);
@@ -134,7 +134,7 @@ namespace Lotus
 				item.ViewItem = ViewItem;
 				item.OnAction = OnAction;
 				item.OnAfterAction = OnAfterAction;
-				return (item);
+				return item;
 			}
 			#endregion
 		}
@@ -188,28 +188,28 @@ namespace Lotus
 			/// <summary>
 			/// Обработка события загрузка объекта из файла
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected static void OnLoadItemClick(ILotusViewItem view_item)
+			protected static void OnLoadItemClick(ILotusViewItem viewItem)
 			{
-				if (view_item != null && view_item.DataContext != null)
+				if (viewItem != null && viewItem.DataContext != null)
 				{
 					var file_name = XFileDialog.Open();
 					if (file_name.IsExists())
 					{
 						// Уведомляем о начале загрузки
-						if (view_item.DataContext is ILotusBeforeLoad before_load)
+						if (viewItem.DataContext is ILotusBeforeLoad before_load)
 						{
 							before_load.OnBeforeLoad(null);
 						}
 
-						if (view_item.DataContext is ILotusOwnerObject owner_object)
+						if (viewItem.DataContext is ILotusOwnerObject owner_object)
 						{
 							owner_object.UpdateOwnedObjects();
 						}
 
 						// Уведомляем об окончании загрузки
-						if (view_item.DataContext is ILotusAfterLoad after_load)
+						if (viewItem.DataContext is ILotusAfterLoad after_load)
 						{
 							after_load.OnAfterLoad(null);
 						}
@@ -221,17 +221,17 @@ namespace Lotus
 			/// <summary>
 			/// Обработка события сохранения объекта в файл
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected static void OnSaveItemClick(ILotusViewItem view_item)
+			protected static void OnSaveItemClick(ILotusViewItem viewItem)
 			{
-				if (view_item != null && view_item.DataContext != null)
+				if (viewItem != null && viewItem.DataContext != null)
 				{
 					var file_name = XFileDialog.Save();
 					if (file_name.IsExists())
 					{
 						// Уведомляем о начале сохранения 
-						if (view_item.DataContext is ILotusBeforeSave before_save)
+						if (viewItem.DataContext is ILotusBeforeSave before_save)
 						{
 							before_save.OnBeforeSave(null);
 						}
@@ -239,7 +239,7 @@ namespace Lotus
 						//XSerializationDispatcher.SaveTo(file_name, view_item.DataContext);
 
 						// Уведомляем об окончании сохранения 
-						if (view_item.DataContext is ILotusAfterSave after_save)
+						if (viewItem.DataContext is ILotusAfterSave after_save)
 						{
 							after_save.OnAfterSave(null);
 						}
@@ -251,27 +251,27 @@ namespace Lotus
 			/// <summary>
 			/// Обработка события удаления объекта
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected static void OnRemoveItemClick(ILotusViewItem view_item)
+			protected static void OnRemoveItemClick(ILotusViewItem viewItem)
 			{
 				// Удаляем с отображения
-				if(view_item.IOwner is ILotusOwnerObject owner)
+				if(viewItem.IOwner is ILotusOwnerObject owner)
 				{
-					owner.DetachOwnedObject(view_item, true);
+					owner.DetachOwnedObject(viewItem, true);
 				}
-				if (view_item.IOwner is IList list)
+				if (viewItem.IOwner is IList list)
 				{
-					if(list.IndexOf(view_item) != -1)
+					if(list.IndexOf(viewItem) != -1)
 					{
-						list.Remove(view_item);
+						list.Remove(viewItem);
 					}
 				}
 
 				// Удаляем реальные данные
-				if (view_item.DataContext is ILotusOwnerObject owner_data_context)
+				if (viewItem.DataContext is ILotusOwnerObject owner_data_context)
 				{
-					owner_data_context.DetachOwnedObject(view_item.DataContext as ILotusOwnedObject, true);
+					owner_data_context.DetachOwnedObject(viewItem.DataContext as ILotusOwnedObject, true);
 				}
 				else
 				{
@@ -286,9 +286,9 @@ namespace Lotus
 			/// <summary>
 			/// Обработка события дублирование объекта
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected static void OnDuplicateItemClick(ILotusViewItem view_item)
+			protected static void OnDuplicateItemClick(ILotusViewItem viewItem)
 			{
 			}
 
@@ -296,13 +296,13 @@ namespace Lotus
 			/// <summary>
 			/// Обработка события перемещение объекта вверх
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected static void OnMoveUpItemClick(ILotusViewItem view_item)
+			protected static void OnMoveUpItemClick(ILotusViewItem viewItem)
 			{
-				if (view_item != null && view_item.IOwner is IList list)
+				if (viewItem != null && viewItem.IOwner is IList list)
 				{
-					var index = list.IndexOf(view_item);
+					var index = list.IndexOf(viewItem);
 					if(index > 0)
 					{
 						list.MoveObjectUp(index);
@@ -314,13 +314,13 @@ namespace Lotus
 			/// <summary>
 			/// Обработка события перемещение объекта вниз
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected static void OnMoveDownItemClick(ILotusViewItem view_item)
+			protected static void OnMoveDownItemClick(ILotusViewItem viewItem)
 			{
-				if (view_item != null && view_item.IOwner is IList list)
+				if (viewItem != null && viewItem.IOwner is IList list)
 				{
-					var index = list.IndexOf(view_item);
+					var index = list.IndexOf(viewItem);
 					if (index > -1 && index < list.Count - 1)
 					{
 						list.MoveObjectDown(index);
@@ -332,11 +332,11 @@ namespace Lotus
 			/// <summary>
 			/// Обработка события смены статуса объекта для учитывания в расчетах
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected static void OnNotCalculationItemClick(ILotusViewItem view_item)
+			protected static void OnNotCalculationItemClick(ILotusViewItem viewItem)
 			{
-				if (view_item != null && view_item.DataContext is ILotusNotCalculation calculation)
+				if (viewItem != null && viewItem.DataContext is ILotusNotCalculation calculation)
 				{
 					calculation.NotCalculation = !calculation.NotCalculation;
 				}
@@ -364,10 +364,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenu(ILotusViewItem view_item)
-				: this(view_item, null)
+			public CUIContextMenu(ILotusViewItem viewItem)
+				: this(viewItem, null)
 			{
 			}
 
@@ -375,12 +375,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <param name="items">Набор элементов меню</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenu(ILotusViewItem view_item, params CUIContextMenuItem[] items)
+			public CUIContextMenu(ILotusViewItem viewItem, params CUIContextMenuItem[] items)
 			{
-				ViewItem = view_item;
+				ViewItem = viewItem;
 				if (items != null && items.Length > 0)
 				{
 					Items = new List<CUIContextMenuItem>(items);
@@ -397,11 +397,11 @@ namespace Lotus
 			/// <summary>
 			/// Добавление элемента меню
 			/// </summary>
-			/// <param name="menu_item">Элемент меню</param>
+			/// <param name="menuItem">Элемент меню</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void AddItem(CUIContextMenuItem menu_item)
+			public void AddItem(CUIContextMenuItem menuItem)
 			{
-				Items.Add(menu_item);
+				Items.Add(menuItem);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -420,11 +420,11 @@ namespace Lotus
 			/// Добавление элемента меню
 			/// </summary>
 			/// <param name="name">Имя элемента меню</param>
-			/// <param name="on_action">Обработчик событие основного действия</param>
+			/// <param name="onAction">Обработчик событие основного действия</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddItem(String name, Action<ILotusViewItem> on_action)
+			public virtual void AddItem(String name, Action<ILotusViewItem> onAction)
 			{
-				Items.Add(new CUIContextMenuItem(name, on_action));
+				Items.Add(new CUIContextMenuItem(name, onAction));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -432,12 +432,12 @@ namespace Lotus
 			/// Добавление элемента меню
 			/// </summary>
 			/// <param name="name">Имя элемента меню</param>
-			/// <param name="on_action">Обработчик событие основного действия</param>
-			/// <param name="on_after_action">Дополнительный обработчик события после основного действия</param>
+			/// <param name="onAction">Обработчик событие основного действия</param>
+			/// <param name="onAfterAction">Дополнительный обработчик события после основного действия</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddItem(String name, Action<ILotusViewItem> on_action, Action<ILotusViewItem> on_after_action)
+			public virtual void AddItem(String name, Action<ILotusViewItem> onAction, Action<ILotusViewItem> onAfterAction)
 			{
-				Items.Add(new CUIContextMenuItem(null, name, on_action, on_after_action));
+				Items.Add(new CUIContextMenuItem(null, name, onAction, onAfterAction));
 			}
 			#endregion
 		}

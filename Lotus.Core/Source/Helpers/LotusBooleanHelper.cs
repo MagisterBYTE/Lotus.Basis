@@ -52,7 +52,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean Parse(String text)
 			{
-				return (Array.IndexOf(TrueValues, text) > -1);
+				return Array.IndexOf(TrueValues, text) > -1;
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

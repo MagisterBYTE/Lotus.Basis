@@ -33,17 +33,17 @@ namespace Lotus
 			/// <summary>
 			/// Регистрация подписки на обработку сообщений
 			/// </summary>
-			/// <param name="message_handler">Интерфейс для обработки сообщений</param>
+			/// <param name="messageHandler">Интерфейс для обработки сообщений</param>
 			//---------------------------------------------------------------------------------------------------------
-			void RegisterMessageHandler(ILotusMessageHandler message_handler);
+			void RegisterMessageHandler(ILotusMessageHandler messageHandler);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Отмена регистрации подписки на обработку сообщений
 			/// </summary>
-			/// <param name="message_handler">Интерфейс для обработки сообщений</param>
+			/// <param name="messageHandler">Интерфейс для обработки сообщений</param>
 			//---------------------------------------------------------------------------------------------------------
-			void UnRegisterMessageHandler(ILotusMessageHandler message_handler);
+			void UnRegisterMessageHandler(ILotusMessageHandler messageHandler);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set { mName = value; }
 			}
 
@@ -93,7 +93,7 @@ namespace Lotus
 			/// </summary>
 			public PoolManager<CMessageArgs> MessageArgsPools
 			{
-				get { return (mMessageArgsPools); }
+				get { return mMessageArgsPools; }
 			}
 
 			/// <summary>
@@ -101,7 +101,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<ILotusMessageHandler> MessageHandlers
 			{
-				get { return (mMessageHandlers); }
+				get { return mMessageHandlers; }
 			}
 
 			/// <summary>
@@ -109,7 +109,7 @@ namespace Lotus
 			/// </summary>
 			public QueueArray<CMessageArgs> QueueMessages
 			{
-				get { return (mQueueMessages); }
+				get { return mQueueMessages; }
 			}
 			#endregion
 
@@ -188,7 +188,7 @@ namespace Lotus
 							var code = mMessageHandlers[i].OnMessageHandler(message);
 
 							// Сообщение почему-то обработано с отрицательным результатом 
-							if (code == XMessageHandlerResultCode.NEGATIVE_RESULT)
+							if (code == XMessageHandlerResultCode.NEGATIVERESULT)
 							{
 #if UNITY_2017_1_OR_NEWER
 								UnityEngine.Debug.LogWarning(message.ToString());

@@ -68,24 +68,24 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="max_value">Максимальное значение величины</param>
+			/// <param name="maxValue">Максимальное значение величины</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMaxValueAttribute(System.Object max_value)
+			public LotusMaxValueAttribute(System.Object maxValue)
 			{
-				mMaxValue = max_value;
+				mMaxValue = maxValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="member_name">Имя члена объекта содержащие максимальное значение</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта содержащие максимальное значение</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMaxValueAttribute(String member_name, TInspectorMemberType member_type = TInspectorMemberType.Method)
+			public LotusMaxValueAttribute(String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -93,14 +93,14 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="type">Тип содержащие максимальное значение</param>
-			/// <param name="member_name">Имя члена типа содержащие максимальное значение</param>
-			/// <param name="member_type">Тип члена типа</param>
+			/// <param name="memberName">Имя члена типа содержащие максимальное значение</param>
+			/// <param name="memberType">Тип члена типа</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMaxValueAttribute(Type type, String member_name, TInspectorMemberType member_type = TInspectorMemberType.Method)
+			public LotusMaxValueAttribute(Type type, String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
 				mMaxValue = type;
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 			#endregion
 		}

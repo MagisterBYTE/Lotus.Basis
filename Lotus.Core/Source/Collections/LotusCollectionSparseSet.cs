@@ -33,7 +33,7 @@ namespace Lotus
 			/// <summary>
 			/// Максимальное количество элементов на начальном этапе
 			/// </summary>
-			public const Int32 INIT_MAX_COUNT = 16;
+			public const Int32 INITMAXCOUNT = 16;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
@@ -112,7 +112,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public SparseSet()
-				: this(INIT_MAX_COUNT)
+				: this(INITMAXCOUNT)
 			{
 			}
 
@@ -124,7 +124,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public SparseSet(Int32 capacity)
 			{
-				mMaxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
+				mMaxCount = capacity > INITMAXCOUNT ? capacity : INITMAXCOUNT;
 				mCount = 0;
 				mDenseItems = new Int32[mMaxCount];
 				mSparseItems = new Int32[mMaxCount];
@@ -320,7 +320,7 @@ namespace Lotus
 			/// <summary>
 			/// Максимальное количество элементов на начальном этапе
 			/// </summary>
-			public const Int32 INIT_MAX_COUNT = 16;
+			public const Int32 INITMAXCOUNT = 16;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
@@ -400,7 +400,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public SparseSet()
-				: this(INIT_MAX_COUNT)
+				: this(INITMAXCOUNT)
 			{
 			}
 
@@ -412,7 +412,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public SparseSet(Int32 capacity)
 			{
-				mMaxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
+				mMaxCount = capacity > INITMAXCOUNT ? capacity : INITMAXCOUNT;
 				mCount = 0;
 				mDenseItems = new Int32[mMaxCount];
 				mSparseItems = new Int32[mMaxCount];
@@ -563,7 +563,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public Boolean Contains(in TItem item)
 			{
-				return (Array.IndexOf(mItems, item) > -1);
+				return Array.IndexOf(mItems, item) > -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -601,7 +601,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public Int32[] GetIndexes()
 			{
-				return (mDenseItems);
+				return mDenseItems;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

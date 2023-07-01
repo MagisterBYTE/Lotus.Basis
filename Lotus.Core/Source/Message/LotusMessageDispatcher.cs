@@ -56,7 +56,7 @@ namespace Lotus
 					{
 						OnInit();
 					}
-					return (mPublishers);
+					return mPublishers;
 				}
 			}
 
@@ -67,7 +67,7 @@ namespace Lotus
 			{
 				get 
 				{
-					return (Publishers[0]); 
+					return Publishers[0]; 
 				}
 			}
 			#endregion
@@ -115,22 +115,22 @@ namespace Lotus
 			/// <summary>
 			/// Регистрация подписки на обработку сообщений
 			/// </summary>
-			/// <param name="message_handler">Интерфейс для обработки сообщений</param>
+			/// <param name="messageHandler">Интерфейс для обработки сообщений</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RegisterMessageHandler(ILotusMessageHandler message_handler)
+			public static void RegisterMessageHandler(ILotusMessageHandler messageHandler)
 			{
-				Default.RegisterMessageHandler(message_handler);
+				Default.RegisterMessageHandler(messageHandler);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Отмена регистрации подписки на обработку сообщений
 			/// </summary>
-			/// <param name="message_handler">Интерфейс для обработки сообщений</param>
+			/// <param name="messageHandler">Интерфейс для обработки сообщений</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void UnRegisterMessageHandler(ILotusMessageHandler message_handler)
+			public static void UnRegisterMessageHandler(ILotusMessageHandler messageHandler)
 			{
-				Default.UnRegisterMessageHandler(message_handler);
+				Default.UnRegisterMessageHandler(messageHandler);
 			}
 			#endregion
 

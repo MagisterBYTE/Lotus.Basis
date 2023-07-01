@@ -65,11 +65,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="color_bgra">Цвет в формате BGRA</param>
+			/// <param name="colorBgra">Цвет в формате BGRA</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusForegroundAttribute(UInt32 color_bgra)
+			public LotusForegroundAttribute(UInt32 colorBgra)
 			{
-				mForeground = TColor.FromBGRA(color_bgra);
+				mForeground = TColor.FromBGRA(colorBgra);
 			}
 			#endregion
 		}

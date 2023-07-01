@@ -39,7 +39,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public StackArray()
-				: base(INIT_MAX_COUNT)
+				: base(INITMAXCOUNT)
 			{
 			}
 
@@ -47,10 +47,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует данные стека указанными данными
 			/// </summary>
-			/// <param name="max_count">Максимальное количество элементов</param>
+			/// <param name="maxCount">Максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public StackArray(Int32 max_count)
-				: base(max_count)
+			public StackArray(Int32 maxCount)
+				: base(maxCount)
 			{
 			}
 			#endregion
@@ -85,7 +85,7 @@ namespace Lotus
 				}
 				else
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError("Not element in stack!!!");
 #else
 					XLogger.LogError("Not element in stack!!!");
@@ -108,7 +108,7 @@ namespace Lotus
 				}
 				else
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError("Not element in stack!!!");
 #else
 					XLogger.LogError("Not element in stack!!!");

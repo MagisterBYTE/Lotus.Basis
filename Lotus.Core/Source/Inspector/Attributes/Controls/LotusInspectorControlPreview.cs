@@ -65,11 +65,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="preview_height">Высота области предпросмотра</param>
+			/// <param name="previewHeight">Высота области предпросмотра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusPreviewAttribute(Single preview_height)
+			public LotusPreviewAttribute(Single previewHeight)
 			{
-				mPreviewHeight = preview_height;
+				mPreviewHeight = previewHeight;
 			}
 			#endregion
 		}

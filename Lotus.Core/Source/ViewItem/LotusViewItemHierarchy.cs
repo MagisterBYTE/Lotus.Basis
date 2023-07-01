@@ -96,10 +96,10 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на поддержку элемента отображения
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <returns>Статус поддрежки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			Boolean IsSupportViewItem(ILotusViewItemHierarchy view_item);
+			Boolean IsSupportViewItem(ILotusViewItemHierarchy viewItem);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -179,7 +179,7 @@ namespace Lotus
 			public static ViewItemHierarchy<TData> Build(TData root, ILotusCollectionViewHierarchy owner)
 			{
 				ViewItemHierarchy<TData> node_root_view = Build(root, null, owner);
-				return (node_root_view);
+				return node_root_view;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -252,7 +252,7 @@ namespace Lotus
 					}
 				}
 
-				return (node_root_view);
+				return node_root_view;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -267,7 +267,7 @@ namespace Lotus
 			public static ViewItemHierarchy<TData> BuildFilter(TData root, Predicate<TData> filter, ILotusCollectionViewHierarchy owner)
 			{
 				ViewItemHierarchy<TData> node_root_view = BuildFilter(root, null, filter, owner);
-				return (node_root_view);
+				return node_root_view;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -348,7 +348,7 @@ namespace Lotus
 					}
 				}
 
-				return (node_root_view);
+				return node_root_view;
 			}
 			#endregion
 
@@ -381,7 +381,7 @@ namespace Lotus
 			/// </summary>
 			public virtual String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set
 				{
 					mName = value;
@@ -395,7 +395,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner
 			{
-				get { return (mOwner); }
+				get { return mOwner; }
 				set { mOwner = value as ILotusCollectionViewHierarchy; }
 			}
 
@@ -407,7 +407,7 @@ namespace Lotus
 			/// </remarks>
 			Object ILotusViewItem.DataContext
 			{
-				get { return (mDataContext); }
+				get { return mDataContext; }
 				set
 				{
 					if (mDataContext != null && mDataContext != value)
@@ -430,7 +430,7 @@ namespace Lotus
 			/// </remarks>
 			public TData DataContext
 			{
-				get { return (mDataContext); }
+				get { return mDataContext; }
 				set
 				{
 					if (mDataContext != null && mDataContext != value)
@@ -453,7 +453,7 @@ namespace Lotus
 			/// </remarks>
 			public Int32 Level
 			{
-				get { return (mLevel); }
+				get { return mLevel; }
 				set
 				{
 					mLevel = value;
@@ -465,7 +465,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsRoot
 			{
-				get { return (mParent == null); }
+				get { return mParent == null; }
 			}
 
 			/// <summary>
@@ -473,7 +473,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsLeaf
 			{
-				get { return (Count == 0); }
+				get { return Count == 0; }
 			}
 
 			/// <summary>
@@ -481,7 +481,7 @@ namespace Lotus
 			/// </summary>
 			public virtual Boolean IsExpanded
 			{
-				get { return (mIsExpanded); }
+				get { return mIsExpanded; }
 				set
 				{
 					if (mIsExpanded != value)
@@ -502,7 +502,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsSelected
 			{
-				get { return (mIsSelected); }
+				get { return mIsSelected; }
 				set
 				{
 					if (mIsSelected != value)
@@ -532,7 +532,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsEnabled
 			{
-				get { return (mIsEnabled); }
+				get { return mIsEnabled; }
 				set
 				{
 					if (mIsEnabled != value)
@@ -559,7 +559,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean? IsChecked
 			{
-				get { return (mIsChecked); }
+				get { return mIsChecked; }
 				set
 				{
 					if (mIsChecked != value)
@@ -584,7 +584,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsPresented
 			{
-				get { return (mIsPresented); }
+				get { return mIsPresented; }
 				set
 				{
 					if (mIsPresented != value)
@@ -611,7 +611,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsEditMode
 			{
-				get { return (mIsEditMode); }
+				get { return mIsEditMode; }
 				set
 				{
 					if (mIsEditMode != value)
@@ -627,7 +627,7 @@ namespace Lotus
 			/// </summary>
 			public IList IViewItems
 			{
-				get { return (this); }
+				get { return this; }
 			}
 
 			/// <summary>
@@ -635,7 +635,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountViewItems
 			{
-				get { return (mCount); }
+				get { return mCount; }
 			}
 
 			/// <summary>
@@ -643,7 +643,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusViewItemHierarchy IParent
 			{
-				get { return (mParent); }
+				get { return mParent; }
 				set { mParent = value; }
 			}
 
@@ -652,7 +652,7 @@ namespace Lotus
 			/// </summary>
 			public System.Object UIElement
 			{
-				get { return (mUIElement); }
+				get { return mUIElement; }
 				set
 				{
 					mUIElement = value;
@@ -665,7 +665,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CUIContextMenu UIContextMenu
 			{
-				get { return (mUIContextMenu); }
+				get { return mUIContextMenu; }
 			}
 
 			/// <summary>
@@ -674,7 +674,7 @@ namespace Lotus
 			[Browsable(false)]
 			public virtual Boolean UIDraggableStatus
 			{
-				get { return (false); }
+				get { return false; }
 			}
 			#endregion
 
@@ -705,11 +705,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="data_context">Данные</param>
+			/// <param name="dataContext">Данные</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ViewItemHierarchy(TData data_context)
+			public ViewItemHierarchy(TData dataContext)
 			{
-				mDataContext = data_context;
+				mDataContext = dataContext;
 				SetDataContext();
 			}
 
@@ -717,13 +717,13 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="data_context">Данные</param>
-			/// <param name="parent_item">Родительский узел</param>
+			/// <param name="dataContext">Данные</param>
+			/// <param name="parentItem">Родительский узел</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ViewItemHierarchy(TData data_context, ILotusViewItemHierarchy parent_item)
+			public ViewItemHierarchy(TData dataContext, ILotusViewItemHierarchy parentItem)
 			{
-				mParent = parent_item;
-				mDataContext = data_context;
+				mParent = parentItem;
+				mDataContext = dataContext;
 				SetDataContext();
 			}
 			#endregion
@@ -737,7 +737,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (mName);
+				return mName;
 			}
 			#endregion
 
@@ -908,7 +908,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject owned_object, System.Object data, String data_name)
 			{
-				return (true);
+				return true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -948,7 +948,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual ILotusViewItem CreateViewItem()
 			{
-				return (new ViewItemHierarchy<TData>());
+				return new ViewItemHierarchy<TData>();
 			}
 			#endregion
 
@@ -989,7 +989,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Int32 GetCountChecked()
 			{
-				return (0);
+				return 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1001,7 +1001,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Boolean IsSupportViewItem(ILotusViewItemHierarchy view_item)
 			{
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1098,7 +1098,7 @@ namespace Lotus
 				{
 					for (var i = 0; i < mCount; ++i)
 					{
-						(mArrayOfItems[i]).Visit(match);
+						mArrayOfItems[i].Visit(match);
 					}
 				}
 			}
@@ -1111,7 +1111,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual ILotusViewItemHierarchy CreateViewItemHierarchy()
 			{
-				return (new ViewItemHierarchy<TData>());
+				return new ViewItemHierarchy<TData>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1234,11 +1234,11 @@ namespace Lotus
 									{
 										if(Object.ReferenceEquals(item.DataContext, data_context))
 										{
-											return (true);
+											return true;
 										}
 										else
 										{
-											return (false);
+											return false;
 										}
 									});
 
@@ -1310,10 +1310,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="data_context">Данные</param>
+			/// <param name="dataContext">Данные</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CViewItemHierarchyObject(System.Object data_context)
-				: base(data_context)
+			public CViewItemHierarchyObject(System.Object dataContext)
+				: base(dataContext)
 			{
 			}
 
@@ -1321,11 +1321,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="data_context">Данные</param>
-			/// <param name="parent_item">Родительский узел</param>
+			/// <param name="dataContext">Данные</param>
+			/// <param name="parentItem">Родительский узел</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CViewItemHierarchyObject(System.Object data_context, ILotusViewItemHierarchy parent_item)
-				: base(data_context, parent_item)
+			public CViewItemHierarchyObject(System.Object dataContext, ILotusViewItemHierarchy parentItem)
+				: base(dataContext, parentItem)
 			{
 			}
 			#endregion
@@ -1339,7 +1339,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override ILotusViewItem CreateViewItem()
 			{
-				return (new CViewItemHierarchyObject());
+				return new CViewItemHierarchyObject();
 			}
 			#endregion
 
@@ -1352,7 +1352,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override ILotusViewItemHierarchy CreateViewItemHierarchy()
 			{
-				return (new CViewItemHierarchyObject());
+				return new CViewItemHierarchyObject();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

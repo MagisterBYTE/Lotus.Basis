@@ -34,10 +34,10 @@ namespace Lotus
 			/// <summary>
 			/// Копирование параметров с указанного объекта
 			/// </summary>
-			/// <param name="source_object">Объект-источник с которого будут скопированы параметры</param>
+			/// <param name="sourceObject">Объект-источник с которого будут скопированы параметры</param>
 			/// <param name="parameters">Параметры контекста копирования параметров</param>
 			//---------------------------------------------------------------------------------------------------------
-			void CopyParameters(System.Object source_object, CParameters parameters);
+			void CopyParameters(System.Object sourceObject, CParameters parameters);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------

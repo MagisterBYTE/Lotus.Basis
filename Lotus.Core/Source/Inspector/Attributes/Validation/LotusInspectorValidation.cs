@@ -80,28 +80,28 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="validation_method">Имя метода который осуществляет проверку на валидацию данных</param>
-			/// <param name="message_type">Тип сообщения</param>
+			/// <param name="validationMethod">Имя метода который осуществляет проверку на валидацию данных</param>
+			/// <param name="messageType">Тип сообщения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusValidationAttribute(String validation_method, TLogType message_type = TLogType.Error)
+			public LotusValidationAttribute(String validationMethod, TLogType messageType = TLogType.Error)
 			{
-				mValidationMethodName = validation_method;
-				mMessageType = message_type;
+				mValidationMethodName = validationMethod;
+				mMessageType = messageType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="validation_method">Имя метода который осуществляет проверку на валидацию данных</param>
+			/// <param name="validationMethod">Имя метода который осуществляет проверку на валидацию данных</param>
 			/// <param name="message">Сообщение которое отображается если данные не прошли валидацию</param>
-			/// <param name="message_type">Тип сообщения</param>
+			/// <param name="messageType">Тип сообщения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusValidationAttribute(String validation_method, String message, TLogType message_type = TLogType.Error)
+			public LotusValidationAttribute(String validationMethod, String message, TLogType messageType = TLogType.Error)
 			{
-				mValidationMethodName = validation_method;
+				mValidationMethodName = validationMethod;
 				mMessage = message;
-				mMessageType = message_type;
+				mMessageType = messageType;
 			}
 			#endregion
 

@@ -33,7 +33,7 @@ namespace Lotus
 			/// <summary>
 			/// Маска для шифрования/декодирование
 			/// </summary>
-			public const UInt64 XOR_MASK = 0XAAAAAAAAAAAAAAAA;
+			public const UInt64 XORMASK = 0XAAAAAAAAAAAAAAAA;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
@@ -55,7 +55,7 @@ namespace Lotus
 					// Обходное решение для конструктора структуры по умолчанию
 					if (mConvertValue == 0 && mEncryptValue == 0)
 					{
-						mConvertValue = XOR_MASK;
+						mConvertValue = XORMASK;
 					}
 
 					return mEncryptValue;
@@ -73,9 +73,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator Int64(TProtectionLong value)
 			{
-				value.mConvertValue ^= XOR_MASK;
+				value.mConvertValue ^= XORMASK;
 				var original = value.mEncryptValue;
-				value.mConvertValue ^= XOR_MASK;
+				value.mConvertValue ^= XORMASK;
 				return original;
 			}
 
@@ -90,7 +90,7 @@ namespace Lotus
 			{
 				var protection = new TProtectionLong();
 				protection.mEncryptValue = value;
-				protection.mConvertValue ^= XOR_MASK;
+				protection.mConvertValue ^= XORMASK;
 				return protection;
 			}
 			#endregion

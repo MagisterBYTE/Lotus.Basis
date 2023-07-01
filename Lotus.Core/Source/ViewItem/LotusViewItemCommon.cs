@@ -46,10 +46,10 @@ namespace Lotus
 			/// <summary>
 			/// Установка статуса выбора объекта
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <param name="selected">Статус выбора объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			void SetViewSelected(ILotusViewItem view_item, Boolean selected);
+			void SetViewSelected(ILotusViewItem viewItem, Boolean selected);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -58,10 +58,10 @@ namespace Lotus
 			/// <remarks>
 			/// Имеется виду возможность выбора объекта в данный момент
 			/// </remarks>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <returns>Возможность выбора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			Boolean CanViewSelected(ILotusViewItem view_item);
+			Boolean CanViewSelected(ILotusViewItem viewItem);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -86,10 +86,10 @@ namespace Lotus
 			/// <summary>
 			/// Установка статуса недоступности объекта
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <param name="enabled">Статус недоступности</param>
 			//---------------------------------------------------------------------------------------------------------
-			void SetViewEnabled(ILotusViewItem view_item, Boolean enabled);
+			void SetViewEnabled(ILotusViewItem viewItem, Boolean enabled);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -114,10 +114,10 @@ namespace Lotus
 			/// <summary>
 			/// Установка статуса представления объекта
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <param name="presented">Статус представления объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			void SetViewPresented(ILotusViewItem view_item, Boolean presented);
+			void SetViewPresented(ILotusViewItem viewItem, Boolean presented);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -136,10 +136,10 @@ namespace Lotus
 			/// <summary>
 			/// Установка статуса раскрытия объекта
 			/// </summary>
-			/// <param name="view_item">Элемент отображения</param>
+			/// <param name="viewItem">Элемент отображения</param>
 			/// <param name="expanded">Статус раскрытия объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			void SetViewExpanded(ILotusViewItemHierarchy view_item, Boolean expanded);
+			void SetViewExpanded(ILotusViewItemHierarchy viewItem, Boolean expanded);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------

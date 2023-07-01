@@ -405,8 +405,8 @@ namespace Lotus
 			/// <param name="data">Дополнительные данные</param>
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ResultHttp(Int32 code, String message, TData data, Boolean status)
-				:base(code, message, data, status)
+			public ResultHttp(Int32 code, String message, TData? data, Boolean status)
+				: base(code, message, data, status)
 			{
 				HttpCode = status ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
 			}
@@ -421,7 +421,7 @@ namespace Lotus
 			/// <param name="data">Дополнительные данные</param>
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ResultHttp(HttpStatusCode httpCode, Int32 code, String message, TData data, Boolean status)
+			public ResultHttp(HttpStatusCode httpCode, Int32 code, String message, TData? data, Boolean status)
 				: base(code, message, data, status)
 			{
 				HttpCode = httpCode;

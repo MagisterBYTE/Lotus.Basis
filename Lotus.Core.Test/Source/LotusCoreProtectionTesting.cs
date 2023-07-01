@@ -42,7 +42,7 @@ namespace Lotus
 			public static void TestProtection()
 			{
 				TProtectionInt protect_ind = 6566;
-				Int32 encrypted_value = protect_ind.EncryptedValue;
+				var encrypted_value = protect_ind.EncryptedValue;
 				Int32 decrypted_value = protect_ind;
 				Assert.AreEqual(6566, decrypted_value);
 			}

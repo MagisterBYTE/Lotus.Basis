@@ -259,13 +259,13 @@ namespace Lotus
 			/// <summary>
 			/// Установка способа выполнения всех задач в группе
 			/// </summary>
-			/// <param name="method_mode">Способ выполнения задачи</param>
+			/// <param name="methodMode">Способ выполнения задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetMethodMode(TTaskMethod method_mode)
+			public void SetMethodMode(TTaskMethod methodMode)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
-					mTasks[i].MethodMode = method_mode;
+					mTasks[i].MethodMode = methodMode;
 				}
 			}
 
@@ -380,13 +380,13 @@ namespace Lotus
 			/// <summary>
 			/// Удаление задачи
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
+			/// <param name="taskName">Имя задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Remove(String task_name)
+			public void Remove(String taskName)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
-					if (mTasks[i].Name == task_name)
+					if (mTasks[i].Name == taskName)
 					{
 						// 1) Возвращаем в пул
 						CTaskHolder task_holder = mTasks[i];
@@ -472,7 +472,7 @@ namespace Lotus
 			{
 				if (mIsDelayStart)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					mStartTaskTime += UnityEngine.Time.deltaTime;
 #endif
 					if (mStartTaskTime > mDelayStart)
@@ -548,7 +548,7 @@ namespace Lotus
 			{
 				if (mIsDelayStart)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					mStartTaskTime += UnityEngine.Time.deltaTime;
 #endif
 					if (mStartTaskTime > mDelayStart)

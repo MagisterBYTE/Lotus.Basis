@@ -36,11 +36,11 @@ namespace Lotus
 			/// <remarks>
 			/// Под файлом может пониматься как собственно физический файл на диске так и любая иная концепция
 			/// </remarks>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <param name="parameters">Параметры сохранения</param>
 			//---------------------------------------------------------------------------------------------------------
-			void SaveTo(String file_name, System.Object instance, CParameters parameters = null);
+			void SaveTo(String fileName, System.Object instance, CParameters parameters = null);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -49,11 +49,11 @@ namespace Lotus
 			/// <remarks>
 			/// Под файлом может пониматься как собственно физический файл на диске так и любая иная концепция
 			/// </remarks>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object LoadFrom(String file_name, CParameters parameters = null);
+			public System.Object LoadFrom(String fileName, CParameters parameters = null);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -63,11 +63,11 @@ namespace Lotus
 			/// Под файлом может пониматься как собственно физический файл на диске так и любая иная концепция
 			/// </remarks>
 			/// <typeparam name="TResultType">Тип объекта</typeparam>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			TResultType LoadFrom<TResultType>(String file_name, CParameters parameters = null);
+			TResultType LoadFrom<TResultType>(String fileName, CParameters parameters = null);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -77,10 +77,10 @@ namespace Lotus
 			/// Под файлом может пониматься как собственно физический файл на диске так и любая иная концепция
 			/// </remarks>
 			/// <param name="instance">Экземпляр объекта</param>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="parameters">Параметры обновления</param>
 			//---------------------------------------------------------------------------------------------------------
-			void UpdateFrom(System.Object instance, String file_name, CParameters parameters = null);
+			void UpdateFrom(System.Object instance, String fileName, CParameters parameters = null);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set { mName = value; }
 			}
 
@@ -120,7 +120,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mConstructor);
+					return mConstructor;
 				}
 				set
 				{
@@ -135,7 +135,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mSerializableObjects);
+					return mSerializableObjects;
 				}
 			}
 
@@ -211,7 +211,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual System.Object LoadFrom(String file_name, CParameters parameters = null)
 			{
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -228,7 +228,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual TResultType LoadFrom<TResultType>(String file_name, CParameters parameters = null)
 			{
-				return (default);
+				return default;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

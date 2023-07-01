@@ -32,17 +32,17 @@ namespace Lotus
 			/// <summary>
 			/// Нулевые данные по значению в контексте записи/чтения ссылочных объектов бинарного потока
 			/// </summary>
-			public const Int32 ZERO_DATA = -1;
+			public const Int32 ZERODATA = -1;
 
 			/// <summary>
 			/// Существующие данные по значению в контексте записи/чтения ссылочных объектов бинарного потока
 			/// </summary>
-			public const Int32 EXISTING_DATA = 1;
+			public const Int32 EXISTINGDATA = 1;
 
 			/// <summary>
 			/// Метка успешности
 			/// </summary>
-			public const Int32 SUCCESS_LABEL = 198418;
+			public const Int32 SUCCESSLABEL = 198418;
 			#endregion
 
 			#region ======================================= ЗАПИСЬ ДАННЫХ =============================================
@@ -51,11 +51,11 @@ namespace Lotus
 			/// Запись структуры DateTime
 			/// </summary>
 			/// <param name="writer">Средство записи данных в бинарном формате</param>
-			/// <param name="date_time">Список целых значений</param>
+			/// <param name="dateTime">Список целых значений</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Write(this BinaryWriter writer, DateTime date_time)
+			public static void Write(this BinaryWriter writer, DateTime dateTime)
 			{
-				writer.Write(date_time.Ticks);
+				writer.Write(dateTime.Ticks);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -508,7 +508,7 @@ namespace Lotus
 				}
 
 
-				return (primitives);
+				return primitives;
 			}
 			#endregion
 		}

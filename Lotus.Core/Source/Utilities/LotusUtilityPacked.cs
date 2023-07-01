@@ -37,14 +37,14 @@ namespace Lotus
 			/// Упаковка значения типа <see cref="System.Int32"/> в битовое поле
 			/// </summary>
 			/// <param name="pack">Переменная куда будут упаковываться данные</param>
-			/// <param name="bit_start">Стартовый бит с которого записываются данные</param>
-			/// <param name="bit_count">Количество бит для записи</param>
+			/// <param name="bitStart">Стартовый бит с которого записываются данные</param>
+			/// <param name="bitCount">Количество бит для записи</param>
 			/// <param name="value">Значение для упаковки (будет записано только указанное количество бит)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void PackInteger(ref Int32 pack, Int32 bit_start, Int32 bit_count, Int32 value)
+			public static void PackInteger(ref Int32 pack, Int32 bitStart, Int32 bitCount, Int32 value)
 			{
-				var mask = (1 << bit_count) - 1;
-				pack = (pack & ~(mask << bit_start)) | ((value & mask) << bit_start);
+				var mask = (1 << bitCount) - 1;
+				pack = (pack & ~(mask << bitStart)) | ((value & mask) << bitStart);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -52,14 +52,14 @@ namespace Lotus
 			/// Упаковка значения типа <see cref="System.Int64"/> в битовое поле
 			/// </summary>
 			/// <param name="pack">Переменная куда будут упаковываться данные</param>
-			/// <param name="bit_start">Стартовый бит с которого записываются данные</param>
-			/// <param name="bit_count">Количество бит для записи</param>
+			/// <param name="bitStart">Стартовый бит с которого записываются данные</param>
+			/// <param name="bitCount">Количество бит для записи</param>
 			/// <param name="value">Значение для упаковки (будет записано только указанное количество бит)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void PackLong(ref Int64 pack, Int32 bit_start, Int32 bit_count, Int64 value)
+			public static void PackLong(ref Int64 pack, Int32 bitStart, Int32 bitCount, Int64 value)
 			{
-				var mask = (1L << bit_count) - 1L;
-				pack = (pack & ~(mask << bit_start)) | ((value & mask) << bit_start);
+				var mask = (1L << bitCount) - 1L;
+				pack = (pack & ~(mask << bitStart)) | ((value & mask) << bitStart);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -67,19 +67,19 @@ namespace Lotus
 			/// Упаковка значения типа <see cref="System.Boolean"/> в битовое поле
 			/// </summary>
 			/// <param name="pack">Переменная куда будут упаковываться данные</param>
-			/// <param name="bit_start">Стартовый бит с которого записываются данные</param>
+			/// <param name="bitStart">Стартовый бит с которого записываются данные</param>
 			/// <param name="value">Значение для упаковки (будет записан только 1 бит)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void PackBoolean(ref Int32 pack, Int32 bit_start, Boolean value)
+			public static void PackBoolean(ref Int32 pack, Int32 bitStart, Boolean value)
 			{
 				var mask = (1 << 1) - 1;
 				if (value)
 				{
-					pack = (pack & ~(mask << bit_start)) | ((1 & mask) << bit_start);
+					pack = (pack & ~(mask << bitStart)) | ((1 & mask) << bitStart);
 				}
 				else
 				{
-					pack = (pack & ~(mask << bit_start)) | ((0 & mask) << bit_start);
+					pack = (pack & ~(mask << bitStart)) | ((0 & mask) << bitStart);
 				}
 			}
 
@@ -88,14 +88,14 @@ namespace Lotus
 			/// Распаковка значения типа <see cref="System.Int32"/> из битового поля
 			/// </summary>
 			/// <param name="pack">Упакованные данные</param>
-			/// <param name="bit_start">Стартовый бит с которого начинается распаковка</param>
-			/// <param name="bit_count">Количество бит для чтения</param>
+			/// <param name="bitStart">Стартовый бит с которого начинается распаковка</param>
+			/// <param name="bitCount">Количество бит для чтения</param>
 			/// <returns>Распакованное значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 UnpackInteger(Int32 pack, Int32 bit_start, Int32 bit_count)
+			public static Int32 UnpackInteger(Int32 pack, Int32 bitStart, Int32 bitCount)
 			{
-				var mask = (1 << bit_count) - 1;
-				return (pack >> bit_start) & mask;
+				var mask = (1 << bitCount) - 1;
+				return (pack >> bitStart) & mask;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -103,14 +103,14 @@ namespace Lotus
 			/// Распаковка значения типа <see cref="System.Int64"/> из битового поля
 			/// </summary>
 			/// <param name="pack">Упакованные данные</param>
-			/// <param name="bit_start">Стартовый бит с которого начинается распаковка</param>
-			/// <param name="bit_count">Количество бит для чтения</param>
+			/// <param name="bitStart">Стартовый бит с которого начинается распаковка</param>
+			/// <param name="bitCount">Количество бит для чтения</param>
 			/// <returns>Распакованное значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int64 UnpackLong(Int64 pack, Int32 bit_start, Int32 bit_count)
+			public static Int64 UnpackLong(Int64 pack, Int32 bitStart, Int32 bitCount)
 			{
-				var mask = (1L << bit_count) - 1L;
-				return (pack >> bit_start) & mask;
+				var mask = (1L << bitCount) - 1L;
+				return (pack >> bitStart) & mask;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -118,13 +118,13 @@ namespace Lotus
 			/// Распаковка значения типа <see cref="System.Boolean"/> из битового поля
 			/// </summary>
 			/// <param name="pack">Упакованные данные</param>
-			/// <param name="bit_start">Стартовый бит с которого начинается распаковка</param>
+			/// <param name="bitStart">Стартовый бит с которого начинается распаковка</param>
 			/// <returns>Распакованное значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean UnpackBoolean(Int32 pack, Int32 bit_start)
+			public static Boolean UnpackBoolean(Int32 pack, Int32 bitStart)
 			{
 				var mask = (1 << 1) - 1;
-				var data = (pack >> bit_start) & mask;
+				var data = (pack >> bitStart) & mask;
 				if (data == 0)
 				{
 					return false;

@@ -27,8 +27,8 @@ namespace Lotus
 		/// <remarks>
 		/// В контексте текстового потока данных это означает что он может быт записан в одну строку (в формат атрибута XML)
 		/// Тип помеченный данным атрибутом должен обязательно реализовать статический метод 
-		/// с именем <see cref="LotusSerializeAsPrimitiveAttribute.DESERIALIZE_FROM_STRING"/> и обычный метод с именем
-		/// <see cref="LotusSerializeAsPrimitiveAttribute.SERIALIZE_TO_STRING"/>
+		/// с именем <see cref="LotusSerializeAsPrimitiveAttribute.DESERIALIZEFROMSTRING"/> и обычный метод с именем
+		/// <see cref="LotusSerializeAsPrimitiveAttribute.SERIALIZETOSTRING"/>
 		/// </remarks>
 		//-------------------------------------------------------------------------------------------------------------
 		[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = false)]
@@ -38,12 +38,12 @@ namespace Lotus
 			/// <summary>
 			/// Имя статического метода типа который создает объект из переданной строки
 			/// </summary>
-			public const String DESERIALIZE_FROM_STRING = "DeserializeFromString";
+			public const String DESERIALIZEFROMSTRING = "DeserializeFromString";
 
 			/// <summary>
 			/// Имя метода типа который сериализует объект в строку и возвращает её
 			/// </summary>
-			public const String SERIALIZE_TO_STRING = "SerializeToString";
+			public const String SERIALIZETOSTRING = "SerializeToString";
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------

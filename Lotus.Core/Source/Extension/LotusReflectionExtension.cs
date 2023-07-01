@@ -36,17 +36,55 @@ namespace Lotus
 			//
 			// ИМЯ ТИПОВ ШАБЛОННЫХ КОНТЙНЕРОВ
 			//
-			public const String COLLECTION_1 = "Collection`1";
-			public const String LIST_1 = "List`1";
-			public const String LIST_ARRAY_1 = "ListArray`1";
-			public const String OBSERVABLE_COLLECTION_1 = "ObservableCollection`1";
+			/// <summary>
+			/// Интерфейс <see cref="ICollection{T}"/>
+			/// </summary>
+			public const String ICOLLECTION1 = "ICollection`1";
+
+			/// <summary>
+			/// Интерфейс <see cref="IList{T}"/>
+			/// </summary>
+			public const String ILIST1 = "List`1";
+
+			/// <summary>
+			/// Класс <see cref="Collection{T}"/>
+			/// </summary>
+			public const String COLLECTION1 = "Collection`1";
+
+			/// <summary>
+			/// Класс <see cref="List{T}"/>
+			/// </summary>
+			public const String LIST1 = "List`1";
+
+			/// <summary>
+			/// Класс <see cref="ListArray{T}"/>
+			/// </summary>
+			public const String LISTARRAY1 = "ListArray`1";
+
+			/// <summary>
+			/// Класс <see cref="ObservableCollection{T}"/>
+			/// </summary>
+			public const String OBSERVABLECOLLECTION1 = "ObservableCollection`1";
+
+			/// <summary>
+			/// Список имен шаблонных коллекций
+			/// </summary>
+			public static readonly string[] COLLECTIONTEMPLATIONNAMES = new String[]
+			{
+				ICOLLECTION1,
+				ILIST1,
+				COLLECTION1,
+				LIST1,
+				LISTARRAY1,
+				OBSERVABLECOLLECTION1
+			};
 
 			/// <summary>
 			/// Префикс имени для модулей и сборок платформы Lotus
 			/// </summary>
-			public const String LOTUS_PREFIX = "Lotus";
+			public const String LOTUSPREFIXNAME = "Lotus";
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			/// <summary>
 			/// Префикс имени для модулей и сборок Unity
 			/// </summary>
@@ -64,7 +102,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsPrimitiveType(this Type @this)
 			{
-				return (@this.IsPrimitive || @this.IsEnum || @this == typeof(String));
+				return @this.IsPrimitive || @this.IsEnum || @this == typeof(String);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -105,7 +143,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsStructType(this Type @this)
 			{
-				return (@this.IsValueType && !IsPrimitiveType(@this) && !@this.IsGenericType);
+				return @this.IsValueType && !IsPrimitiveType(@this) && !@this.IsGenericType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -117,7 +155,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsStaticType(this Type @this)
 			{
-				return (@this.IsClass && @this.IsAbstract && @this.IsSealed);
+				return @this.IsClass && @this.IsAbstract && @this.IsSealed;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -129,11 +167,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsClassType(this Type @this)
 			{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				return @this.IsClass && !@this.IsArray && !@this.IsGenericType &&
 					   @this.Name != nameof(UnityEngine.Object) && !@this.IsSubclassOf(typeof(UnityEngine.Object));
 #else
-				return (@this.IsClass && !@this.IsArray && !@this.IsGenericType && @this.Name != nameof(System.Object));
+				return @this.IsClass && !@this.IsArray && !@this.IsGenericType && @this.Name != nameof(System.Object);
 #endif
 			}
 
@@ -146,7 +184,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsLotusPlatformType(this Type @this)
 			{
-				return (@this.FullName.Contains(LOTUS_PREFIX));
+				return @this.FullName.Contains(LOTUSPREFIXNAME);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -159,7 +197,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsSupportInterface<TInterface>(this Type @this) where TInterface : class
 			{
-				return (typeof(TInterface).IsAssignableFrom(@this));
+				return typeof(TInterface).IsAssignableFrom(@this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -171,7 +209,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private static Boolean IsGenericCollectionType(Type type)
 			{
-				return (type.IsGenericType && (type.Name == LIST_1 || type.Name == LIST_ARRAY_1 || type.Name == COLLECTION_1));
+				return type.IsGenericType && COLLECTIONTEMPLATIONNAMES.Contains(type.Name);
 			}
 			#endregion
 
@@ -181,21 +219,22 @@ namespace Lotus
 			/// Проверка на тип коллекции
 			/// </summary>
 			/// <remarks>
-			/// Под типом коллекции понимается коллекция производная от <see cref="Collection{T}"/>, не более 4 уровня
+			/// Под типом коллекции понимается коллекция производная от <see cref="ICollection{T}"/> или 
+			/// <see cref="Collection{T}"/>, не более 4 уровня
 			/// </remarks>
 			/// <param name="this">Тип</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsCollectionType(this Type @this)
 			{
-				var status = (@this.IsGenericType && @this.Name == COLLECTION_1);
+				var status = @this.IsGenericType && (@this.Name == ICOLLECTION1 || @this.Name == COLLECTION1);
 				if (status == false)
 				{
 					// Пробуем проверить базовый тип
 					Type base_type = @this.BaseType;
 					if (base_type != null)
 					{
-						status = (base_type.IsGenericType && base_type.Name == COLLECTION_1);
+						status = base_type.IsGenericType && (base_type.Name == ICOLLECTION1 || base_type.Name == COLLECTION1);
 					}
 
 					// И еще последний уровень
@@ -204,7 +243,7 @@ namespace Lotus
 						base_type = @this.BaseType.BaseType;
 						if (base_type != null)
 						{
-							status = (base_type.IsGenericType && base_type.Name == COLLECTION_1);
+							status = base_type.IsGenericType && (base_type.Name == ICOLLECTION1 || base_type.Name == COLLECTION1);
 						}
 					}
 
@@ -214,12 +253,12 @@ namespace Lotus
 						base_type = @this.BaseType.BaseType.BaseType;
 						if (base_type != null)
 						{
-							status = (base_type.IsGenericType && base_type.Name == COLLECTION_1);
+							status = base_type.IsGenericType && (base_type.Name == ICOLLECTION1 || base_type.Name == COLLECTION1);
 						}
 					}
 
 				}
-				return (status);
+				return status;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -227,21 +266,22 @@ namespace Lotus
 			/// Проверка на тип списка
 			/// </summary>
 			/// <remarks>
-			/// Под типом списка понимается список производный от <see cref="List{T}"/>, не более 4 уровня
+			/// Под типом списка понимается список производный от <see cref="IList{T}"/> или <see cref="List{T}"/>, 
+			/// не более 4 уровня
 			/// </remarks>
 			/// <param name="this">Тип</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsListType(this Type @this)
 			{
-				var status = (@this.IsGenericType && @this.Name == LIST_1);
+				var status = @this.IsGenericType && (@this.Name == ILIST1 || @this.Name == LIST1);
 				if (status == false)
 				{
 					// Пробуем проверить базовый тип
 					Type base_type = @this.BaseType;
 					if (base_type != null)
 					{
-						status = (base_type.IsGenericType && base_type.Name == LIST_1);
+						status = base_type.IsGenericType && (base_type.Name == ILIST1 || base_type.Name == LIST1);
 					}
 
 					// И еще последний уровень
@@ -250,7 +290,7 @@ namespace Lotus
 						base_type = @this.BaseType.BaseType;
 						if (base_type != null)
 						{
-							status = (base_type.IsGenericType && base_type.Name == LIST_1);
+							status = base_type.IsGenericType && (base_type.Name == ILIST1 || base_type.Name == LIST1);
 						}
 					}
 
@@ -260,12 +300,12 @@ namespace Lotus
 						base_type = @this.BaseType.BaseType.BaseType;
 						if (base_type != null)
 						{
-							status = (base_type.IsGenericType && base_type.Name == LIST_1);
+							status = base_type.IsGenericType && (base_type.Name == ILIST1 || base_type.Name == LIST1);
 						}
 					}
 
 				}
-				return (status);
+				return status;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -273,21 +313,21 @@ namespace Lotus
 			/// Проверка на тип списка
 			/// </summary>
 			/// <remarks>
-			/// Под типом списка понимается список производный от <see cref="ListArray{TItem}"/>, не более 4 уровня
+			/// Под типом списка понимается список производный от <see cref="ListArray{T}"/>, не более 4 уровня
 			/// </remarks>
 			/// <param name="this">Тип</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsListLotusType(this Type @this)
 			{
-				var status = (@this.IsGenericType && @this.Name == LIST_ARRAY_1);
+				var status = @this.IsGenericType && @this.Name == LISTARRAY1;
 				if (status == false)
 				{
 					// Пробуем проверить базовый тип
 					Type base_type = @this.BaseType;
 					if (base_type != null)
 					{
-						status = (base_type.IsGenericType && base_type.Name == LIST_ARRAY_1);
+						status = base_type.IsGenericType && base_type.Name == LISTARRAY1;
 					}
 
 					// И еще последний уровень
@@ -296,7 +336,7 @@ namespace Lotus
 						base_type = @this.BaseType.BaseType;
 						if (base_type != null)
 						{
-							status = (base_type.IsGenericType && base_type.Name == LIST_ARRAY_1);
+							status = base_type.IsGenericType && base_type.Name == LISTARRAY1;
 						}
 					}
 
@@ -306,21 +346,69 @@ namespace Lotus
 						base_type = @this.BaseType.BaseType.BaseType;
 						if (base_type != null)
 						{
-							status = (base_type.IsGenericType && base_type.Name == LIST_ARRAY_1);
+							status = base_type.IsGenericType && base_type.Name == LISTARRAY1;
 						}
 					}
 
 				}
-				return (status);
+				return status;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Проверка на классический тип коллекции
+			/// Проверка на специальный тип наблюдаемой коллекции <see cref="ObservableCollection{T}"/>, не более 4 уровня
+			/// </summary>
+			/// <param name="this">Тип</param>
+			/// <returns>Статус проверки</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static Boolean IsObservableCollectionType(this Type @this)
+			{
+				var status = @this.IsGenericType && @this.Name == OBSERVABLECOLLECTION1;
+				if (status == false)
+				{
+					// Пробуем проверить базовый тип
+					Type base_type = @this.BaseType;
+					if (base_type != null)
+					{
+						status = base_type.IsGenericType && base_type.Name == OBSERVABLECOLLECTION1;
+					}
+
+					// И еще последний уровень
+					if (status == false && base_type != null)
+					{
+						base_type = @this.BaseType.BaseType;
+						if (base_type != null)
+						{
+							status = base_type.IsGenericType && base_type.Name == OBSERVABLECOLLECTION1;
+						}
+					}
+
+					// И еще один последний уровень
+					if (status == false && base_type != null)
+					{
+						base_type = @this.BaseType.BaseType.BaseType;
+						if (base_type != null)
+						{
+							status = base_type.IsGenericType && base_type.Name == OBSERVABLECOLLECTION1;
+						}
+					}
+
+				}
+				return status;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Проверка на классический тип коллекции не более 4 уровня
 			/// </summary>
 			/// <remarks>
-			/// Под классическим типом коллекции понимается массив, коллекции производны от <see cref="Collection{T}"/>,
-			/// коллекции производны от <see cref="List{T}"/>, а также производные от <see cref="ListArray{TItem}"/> 
+			/// Под классическим типом коллекции понимается массив и коллекции производны от:
+			/// 1 - <see cref="ICollection{T}"/>,
+			/// 2 - <see cref="IList{T}"/>,
+			/// 3 - <see cref="Collection{T}"/>,
+			/// 4 - <see cref="List{T}"/>
+			/// 5 - <see cref="ListArray{T}"/> 
+			/// 6 - <see cref="ObservableCollection{T}"/> 
 			/// </remarks>
 			/// <param name="this">Тип</param>
 			/// <returns>Статус проверки</returns>
@@ -363,49 +451,6 @@ namespace Lotus
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Проверка на специальный тип наблюдаемой коллекции
-			/// </summary>
-			/// <param name="this">Тип</param>
-			/// <returns>Статус проверки</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean IsObservableCollectionType(this Type @this)
-			{
-				var status = (@this.IsGenericType && @this.Name == OBSERVABLE_COLLECTION_1);
-				if (status == false)
-				{
-					// Пробуем проверить базовый тип
-					Type base_type = @this.BaseType;
-					if (base_type != null)
-					{
-						status = (base_type.IsGenericType && base_type.Name == OBSERVABLE_COLLECTION_1);
-					}
-
-					// И еще последний уровень
-					if (status == false && base_type != null)
-					{
-						base_type = @this.BaseType.BaseType;
-						if (base_type != null)
-						{
-							status = (base_type.IsGenericType && base_type.Name == OBSERVABLE_COLLECTION_1);
-						}
-					}
-
-					// И еще один последний уровень
-					if (status == false && base_type != null)
-					{
-						base_type = @this.BaseType.BaseType.BaseType;
-						if (base_type != null)
-						{
-							status = (base_type.IsGenericType && base_type.Name == OBSERVABLE_COLLECTION_1);
-						}
-					}
-
-				}
-				return (status);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
 			/// Проверка на тип словаря
 			/// </summary>
 			/// <param name="this">Тип</param>
@@ -413,19 +458,24 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsDictionaryType(this Type @this)
 			{
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Получение типа элемента классической коллекции
+			/// Получение типа элемента классической коллекции не более 4 уровня
 			/// </summary>
 			/// <remarks>
-			/// Под классическим типом коллекции понимается массив, коллекции производны от <see cref="Collection{T}"/>,
-			/// коллекции производны от <see cref="List{T}"/>, а также производные от <see cref="ListArray{TItem}"/> 
+			/// Под классическим типом коллекции понимается массив и коллекции производны от:
+			/// 1 - <see cref="ICollection{T}"/>,
+			/// 2 - <see cref="IList{T}"/>,
+			/// 3 - <see cref="Collection{T}"/>,
+			/// 4 - <see cref="List{T}"/>
+			/// 5 - <see cref="ListArray{T}"/> 
+			/// 6 - <see cref="ObservableCollection{T}"/> 
 			/// </remarks>
 			/// <param name="this">Тип</param>
-			/// <returns>Тип элемента коллекции</returns>
+			/// <returns>Тип элемента коллекции или null</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static Type GetClassicCollectionItemType(this Type @this)
 			{
@@ -477,12 +527,57 @@ namespace Lotus
 					}
 				}
 
-				return (null);
+				return null;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получение типа элемента классической коллекции не более 2 уровня или возврат текущего типа
+			/// </summary>
+			/// <remarks>
+			/// Под классическим типом коллекции понимается массив и коллекции производны от:
+			/// 1 - <see cref="ICollection{T}"/>,
+			/// 2 - <see cref="IList{T}"/>,
+			/// 3 - <see cref="Collection{T}"/>,
+			/// 4 - <see cref="List{T}"/>
+			/// 5 - <see cref="ListArray{T}"/> 
+			/// 6 - <see cref="ObservableCollection{T}"/> 
+			/// </remarks>
+			/// <param name="this">Тип</param>
+			/// <returns>Тип элемента коллекции или или возврат текущего типа</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static Type GetClassicCollectionItemTypeOrThisType(this Type @this)
+			{
+				if (@this.IsArray)
+				{
+					return @this.GetElementType();
+				}
+				else
+				{
+					if (IsGenericCollectionType(@this))
+					{
+						return @this.GetGenericArguments()[0];
+					}
+					else
+					{
+						// Пробуем проверить базовый тип
+						Type base_type = @this.BaseType;
+						if (base_type != null)
+						{
+							if (IsGenericCollectionType(base_type))
+							{
+								return base_type.GetGenericArguments()[0];
+							}
+						}
+					}
+				}
+
+				return @this;
 			}
 			#endregion
 
 			#region ======================================= МЕТОДЫ ДЛЯ РАБОТЫ С UNITY =================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на принадлежность типа к модулю Unity
@@ -590,12 +685,12 @@ namespace Lotus
 			/// Получение метаданных публичного статического поля по указанному имени
 			/// </summary>
 			/// <param name="this">Тип</param>
-			/// <param name="field_name">Имя поля</param>
+			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Метаданные поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static FieldInfo GetStaticField(this Type @this, String field_name)
+			public static FieldInfo GetStaticField(this Type @this, String fieldName)
 			{
-				return (@this.GetField(field_name, BindingFlags.Public | BindingFlags.Static));
+				return @this.GetField(fieldName, BindingFlags.Public | BindingFlags.Static);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -604,18 +699,18 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TValue">Тип значения поля</typeparam>
 			/// <param name="this">Тип</param>
-			/// <param name="field_name">Имя поля</param>
+			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TValue GetStaticFieldValue<TValue>(this Type @this, String field_name)
+			public static TValue GetStaticFieldValue<TValue>(this Type @this, String fieldName)
 			{
-				FieldInfo field_info = @this.GetField(field_name, BindingFlags.Public | BindingFlags.Static);
+				FieldInfo field_info = @this.GetField(fieldName, BindingFlags.Public | BindingFlags.Static);
 				if(field_info != null)
 				{
-					return((TValue)field_info.GetValue(null));
+					return(TValue)field_info.GetValue(null);
 				}
 
-				return (default(TValue));
+				return default(TValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -623,12 +718,12 @@ namespace Lotus
 			/// Получение метаданных публичного статического свойства по указанному имени
 			/// </summary>
 			/// <param name="this">Тип</param>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Метаданные свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static PropertyInfo GetStaticProperty(this Type @this, String property_name)
+			public static PropertyInfo GetStaticProperty(this Type @this, String propertyName)
 			{
-				return (@this.GetProperty(property_name, BindingFlags.Public | BindingFlags.Static));
+				return @this.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -637,18 +732,18 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TValue">Тип значения свойства</typeparam>
 			/// <param name="this">Тип</param>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TValue GetStaticPropertyValue<TValue>(this Type @this, String property_name)
+			public static TValue GetStaticPropertyValue<TValue>(this Type @this, String propertyName)
 			{
-				PropertyInfo property_info = @this.GetProperty(property_name, BindingFlags.Public | BindingFlags.Static);
+				PropertyInfo property_info = @this.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static);
 				if (property_info != null)
 				{
-					return ((TValue)property_info.GetValue(null, null));
+					return (TValue)property_info.GetValue(null, null);
 				}
 
-				return (default(TValue));
+				return default(TValue);
 			}
 			#endregion
 
@@ -663,7 +758,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean HasAttribute<TAttribute>(this Type @this) where TAttribute : Attribute
 			{
-				return (Attribute.IsDefined(@this, typeof(TAttribute)));
+				return Attribute.IsDefined(@this, typeof(TAttribute));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -678,10 +773,10 @@ namespace Lotus
 			{
 				if(Attribute.IsDefined(@this, typeof(TAttribute)))
 				{
-					return (Attribute.GetCustomAttribute(@this, typeof(TAttribute)) as TAttribute);
+					return Attribute.GetCustomAttribute(@this, typeof(TAttribute)) as TAttribute;
 				}
 
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -696,9 +791,9 @@ namespace Lotus
 			{
 				if (Attribute.IsDefined(@this, typeof(TAttribute), true))
 				{
-					return (Attribute.GetCustomAttributes(@this, typeof(TAttribute), true) as TAttribute[]);
+					return Attribute.GetCustomAttributes(@this, typeof(TAttribute), true) as TAttribute[];
 				}
-				return (null);
+				return null;
 			}
 			#endregion
 		}
@@ -800,7 +895,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsObsolete(this MemberInfo @this)
 			{
-				return (Attribute.IsDefined(@this, typeof(ObsoleteAttribute)));
+				return Attribute.IsDefined(@this, typeof(ObsoleteAttribute));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -863,11 +958,11 @@ namespace Lotus
 						result.IsSubclassOf(typeof(MulticastDelegate)) || 
 						result == typeof(Delegate))
 					{
-						return (true);
+						return true;
 					}
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 
@@ -886,17 +981,17 @@ namespace Lotus
 				{
 					if (@this.DeclaringType.DeclaringType.DeclaringType != null)
 					{
-						return (@this.DeclaringType.DeclaringType.DeclaringType.Name + '.' +
-							@this.DeclaringType.DeclaringType.Name + '.' + base_path);
+						return @this.DeclaringType.DeclaringType.DeclaringType.Name + '.' +
+							@this.DeclaringType.DeclaringType.Name + '.' + base_path;
 					}
 					else
 					{
-						return (@this.DeclaringType.DeclaringType.Name + '.' + base_path);
+						return @this.DeclaringType.DeclaringType.Name + '.' + base_path;
 					}
 				}
 				else
 				{
-					return (base_path);
+					return base_path;
 				}
 			}
 
@@ -1175,7 +1270,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean HasAttribute<TAttribute>(this MemberInfo @this) where TAttribute : Attribute
 			{
-				return (Attribute.IsDefined(@this, typeof(TAttribute)));
+				return Attribute.IsDefined(@this, typeof(TAttribute));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1190,9 +1285,9 @@ namespace Lotus
 			{
 				if (Attribute.IsDefined(@this, typeof(TAttribute)))
 				{
-					return (Attribute.GetCustomAttribute(@this, typeof(TAttribute)) as TAttribute);
+					return Attribute.GetCustomAttribute(@this, typeof(TAttribute)) as TAttribute;
 				}
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1207,9 +1302,9 @@ namespace Lotus
 			{
 				if (Attribute.IsDefined(@this, typeof(TAttribute), true))
 				{
-					return (Attribute.GetCustomAttributes(@this, typeof(TAttribute), true) as TAttribute[]);
+					return Attribute.GetCustomAttributes(@this, typeof(TAttribute), true) as TAttribute[];
 				}
-				return (null);
+				return null;
 			}
 			#endregion
 		}
@@ -1231,7 +1326,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsStatic(this PropertyInfo @this)
 			{
-				return (@this.GetGetMethod().IsStatic || @this.GetSetMethod().IsStatic);
+				return @this.GetGetMethod().IsStatic || @this.GetSetMethod().IsStatic;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1246,10 +1341,10 @@ namespace Lotus
 				ParameterInfo[] pia = @this.GetIndexParameters();
 				if (pia != null && pia.Length > 0)
 				{
-					return (true);
+					return true;
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 		}
@@ -1275,7 +1370,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TFunction MakeFunction<TFunction>(this MethodInfo @this) where TFunction : class
 			{
-				return (Delegate.CreateDelegate(typeof(TFunction), @this) as TFunction);
+				return Delegate.CreateDelegate(typeof(TFunction), @this) as TFunction;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1291,7 +1386,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TFunction MakeStaticFunction<TFunction>(this MethodInfo @this) where TFunction : class
 			{
-				return (Delegate.CreateDelegate(typeof(TFunction), null, @this) as TFunction);
+				return Delegate.CreateDelegate(typeof(TFunction), null, @this) as TFunction;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

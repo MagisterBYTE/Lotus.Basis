@@ -121,7 +121,7 @@ namespace Lotus
 			{ 
 				get 
 				{
-					return (mId);
+					return mId;
 				}
 			}
 
@@ -135,7 +135,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mIsEnabled);
+					return mIsEnabled;
 				}
 				set
 				{
@@ -153,7 +153,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mLayer);
+					return mLayer;
 				}
 				set
 				{
@@ -171,7 +171,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mTag);
+					return mTag;
 				}
 				set
 				{
@@ -189,7 +189,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mGroup);
+					return mGroup;
 				}
 				set
 				{
@@ -207,7 +207,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mMarked);
+					return mMarked;
 				}
 				set
 				{
@@ -222,7 +222,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mComponentCount);
+					return mComponentCount;
 				}
 			}
 
@@ -233,7 +233,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mIsDestroyed);
+					return mIsDestroyed;
 				}
 				set
 				{
@@ -293,7 +293,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(TEcsEntity other)
 			{
-				return (mId == other.Id);
+				return mId == other.Id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -305,7 +305,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(TEcsEntity other)
 			{
-				return (mId.CompareTo(other.Id));
+				return mId.CompareTo(other.Id);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -342,7 +342,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean operator ==(TEcsEntity left, TEcsEntity right)
 			{
-				return (left.Id == right.Id);
+				return left.Id == right.Id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -355,7 +355,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean operator !=(TEcsEntity left, TEcsEntity right)
 			{
-				return (left.Id != right.Id);
+				return left.Id != right.Id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -368,7 +368,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean operator <(TEcsEntity left, TEcsEntity right)
 			{
-				return (left.Id < right.Id);
+				return left.Id < right.Id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -381,7 +381,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean operator >(TEcsEntity left, TEcsEntity right)
 			{
-				return (left.Id > right.Id);
+				return left.Id > right.Id;
 			}
 			#endregion
 		}

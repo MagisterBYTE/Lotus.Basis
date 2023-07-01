@@ -113,9 +113,9 @@ namespace Lotus
 			/// <summary>
 			/// Открытие контекстного меню
 			/// </summary>
-			/// <param name="context_menu">Контекстное меню</param>
+			/// <param name="contextMenu">Контекстное меню</param>
 			//---------------------------------------------------------------------------------------------------------
-			void OpenContextMenu(System.Object context_menu);
+			void OpenContextMenu(System.Object contextMenu);
 			#endregion
 		}
 
@@ -202,7 +202,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner
 			{
-				get { return (mOwner); }
+				get { return mOwner; }
 				set { mOwner = value; }
 			}
 
@@ -214,7 +214,7 @@ namespace Lotus
 			/// </remarks>
 			Object ILotusViewItem.DataContext
 			{
-				get { return (mDataContext); }
+				get { return mDataContext; }
 				set
 				{
 					if(mDataContext != null && mDataContext != value)
@@ -237,7 +237,7 @@ namespace Lotus
 			/// </remarks>
 			public TData DataContext 
 			{
-				get { return (mDataContext); }
+				get { return mDataContext; }
 				set
 				{
 					if (mDataContext != null && mDataContext != value)
@@ -257,7 +257,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsSelected
 			{
-				get { return (mIsSelected); }
+				get { return mIsSelected; }
 				set
 				{
 					if (mIsSelected != value)
@@ -287,7 +287,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsEnabled
 			{
-				get { return (mIsEnabled); }
+				get { return mIsEnabled; }
 				set
 				{
 					if (mIsEnabled != value)
@@ -314,7 +314,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean? IsChecked
 			{
-				get { return (mIsChecked); }
+				get { return mIsChecked; }
 				set
 				{
 					if (mIsChecked != value)
@@ -331,7 +331,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsPresented
 			{
-				get { return (mIsPresented); }
+				get { return mIsPresented; }
 				set
 				{
 					if (mIsPresented != value)
@@ -358,7 +358,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsEditMode
 			{
-				get { return (mIsEditMode); }
+				get { return mIsEditMode; }
 				set
 				{
 					if (mIsEditMode != value)
@@ -374,7 +374,7 @@ namespace Lotus
 			/// </summary>
 			public System.Object UIElement 
 			{
-				get { return (mUIElement); } 
+				get { return mUIElement; } 
 				set 
 				{ 
 					mUIElement = value;
@@ -386,7 +386,7 @@ namespace Lotus
 			/// </summary>
 			public CUIContextMenu UIContextMenu
 			{
-				get { return (mUIContextMenu); }
+				get { return mUIContextMenu; }
 			}
 
 			/// <summary>
@@ -394,7 +394,7 @@ namespace Lotus
 			/// </summary>
 			public virtual Boolean UIDraggableStatus
 			{
-				get { return (false); }
+				get { return false; }
 			}
 			#endregion
 
@@ -425,11 +425,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="data_context">Данные</param>
+			/// <param name="dataContext">Данные</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ViewItem(TData data_context)
+			public ViewItem(TData dataContext)
 			{
-				mDataContext = data_context;
+				mDataContext = dataContext;
 				SetDataContext();
 			}
 			#endregion
@@ -443,7 +443,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (mName);
+				return mName;
 			}
 			#endregion
 
@@ -528,7 +528,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual ILotusViewItem CreateViewItem()
 			{
-				return (new ViewItem<TData>());
+				return new ViewItem<TData>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -616,10 +616,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="data_context">Данные</param>
+			/// <param name="dataContext">Данные</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CViewItem(System.Object data_context)
-				: base(data_context)
+			public CViewItem(System.Object dataContext)
+				: base(dataContext)
 			{
 			}
 			#endregion
@@ -634,7 +634,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(CViewItem other)
 			{
-				return (mName.CompareTo(other.Name));
+				return mName.CompareTo(other.Name);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -647,7 +647,7 @@ namespace Lotus
 			{
 				var clone = new CViewItem();
 				clone.Name = mName;
-				return (clone);
+				return clone;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -658,7 +658,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (mName);
+				return mName;
 			}
 			#endregion
 
@@ -671,7 +671,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override ILotusViewItem CreateViewItem()
 			{
-				return (new CViewItem());
+				return new CViewItem();
 			}
 			#endregion
 		}

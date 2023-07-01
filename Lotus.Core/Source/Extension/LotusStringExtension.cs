@@ -149,7 +149,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsNull(this String @this)
 			{
-				return (@this == null);
+				return @this == null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsExists(this String @this)
 			{
-				return (String.IsNullOrEmpty(@this) == false);
+				return String.IsNullOrEmpty(@this) == false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -243,7 +243,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean Equal(this String @this, String str)
 			{
-				return (String.Compare(@this, str, false) == 0);
+				return String.Compare(@this, str, false) == 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -256,7 +256,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean EqualIgnoreCase(this String @this, String str)
 			{
-				return (String.Compare(@this, str, true) == 0);
+				return String.Compare(@this, str, true) == 0;
 			}
 			#endregion
 
@@ -332,7 +332,7 @@ namespace Lotus
 				return sign * (ret_val1 + ret_val2);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конвертация строки в цвет. Формат строки "RRGGBB"
@@ -605,34 +605,34 @@ namespace Lotus
 			/// </summary>
 			/// <param name="this">Строка</param>
 			/// <param name="check">Искомая строка</param>
-			/// <param name="search_option">Опции поиска строки</param>
+			/// <param name="searchOption">Опции поиска строки</param>
 			/// <returns>Статус вхождение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean FindFromSearchOption(this String @this, String check, TStringSearchOption search_option)
+			public static Boolean FindFromSearchOption(this String @this, String check, TStringSearchOption searchOption)
 			{
-				switch (search_option)
+				switch (searchOption)
 				{
 					case TStringSearchOption.Start:
 						{
-							return (@this.StartsWith(check));
+							return @this.StartsWith(check);
 						}
 					case TStringSearchOption.End:
 						{
-							return (@this.EndsWith(check));
+							return @this.EndsWith(check);
 						}
 					case TStringSearchOption.Contains:
 						{
-							return (@this.IndexOf(check) > -1);
+							return @this.IndexOf(check) > -1;
 						}
 					case TStringSearchOption.Equal:
 						{
-							return (String.CompareOrdinal(@this, check) == 0);
+							return String.CompareOrdinal(@this, check) == 0;
 						}
 					default:
 						break;
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -641,34 +641,34 @@ namespace Lotus
 			/// </summary>
 			/// <param name="this">Строка</param>
 			/// <param name="check">Искомая строка</param>
-			/// <param name="search_option">Опции поиска строки</param>
+			/// <param name="searchOption">Опции поиска строки</param>
 			/// <returns>Статус вхождение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean FindFromSearchOptionIgnoreCase(this String @this, String check, TStringSearchOption search_option)
+			public static Boolean FindFromSearchOptionIgnoreCase(this String @this, String check, TStringSearchOption searchOption)
 			{
-				switch (search_option)
+				switch (searchOption)
 				{
 					case TStringSearchOption.Start:
 						{
-							return (@this.StartsWith(check, true, CultureInfo.CurrentCulture));
+							return @this.StartsWith(check, true, CultureInfo.CurrentCulture);
 						}
 					case TStringSearchOption.End:
 						{
-							return (@this.EndsWith(check, true, CultureInfo.CurrentCulture));
+							return @this.EndsWith(check, true, CultureInfo.CurrentCulture);
 						}
 					case TStringSearchOption.Contains:
 						{
-							return (@this.IndexOf(check, 0, StringComparison.CurrentCultureIgnoreCase) > -1);
+							return @this.IndexOf(check, 0, StringComparison.CurrentCultureIgnoreCase) > -1;
 						}
 					case TStringSearchOption.Equal:
 						{
-							return (String.Compare(@this, check, true) == 0);
+							return String.Compare(@this, check, true) == 0;
 						}
 					default:
 						break;
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 
@@ -838,7 +838,7 @@ namespace Lotus
 					}
 				}
 
-				return (builder.ToString());
+				return builder.ToString();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -880,7 +880,7 @@ namespace Lotus
 					}
 				}
 
-				return (builder.ToString());
+				return builder.ToString();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -889,18 +889,18 @@ namespace Lotus
 			/// </summary>
 			/// <param name="this">Строка</param>
 			/// <param name="check">Искомая строка</param>
-			/// <param name="search_option">Опции поиска строки</param>
+			/// <param name="searchOption">Опции поиска строки</param>
 			/// <returns>Модифицированная строка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String RemoveFromSearchOption(this String @this, String check, TStringSearchOption search_option)
+			public static String RemoveFromSearchOption(this String @this, String check, TStringSearchOption searchOption)
 			{
-				switch (search_option)
+				switch (searchOption)
 				{
 					case TStringSearchOption.Start:
 						{
 							if(@this.StartsWith(check))
 							{
-								return (@this.Remove(0, check.Length));
+								return @this.Remove(0, check.Length);
 							}
 						}
 						break;
@@ -908,7 +908,7 @@ namespace Lotus
 						{
 							if(@this.EndsWith(check))
 							{
-								return (@this.Remove(@this.Length - check.Length));
+								return @this.Remove(@this.Length - check.Length);
 							}
 						}
 						break;
@@ -917,7 +917,7 @@ namespace Lotus
 							var index = @this.IndexOf(check);
 							if(index > -1)
 							{
-								return (@this.Remove(index, check.Length));
+								return @this.Remove(index, check.Length);
 							}
 						}
 						break;
@@ -929,7 +929,7 @@ namespace Lotus
 						break;
 				}
 
-				return (@this);
+				return @this;
 			}
 			#endregion
 
@@ -1153,7 +1153,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ToVarName(this String @this)
 			{
-				return (@this.Replace(" ", String.Empty));
+				return @this.Replace(" ", String.Empty);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1207,7 +1207,7 @@ namespace Lotus
 					{
 						if(i > 0)
 						{
-							if((Char.IsLower(@this[i - 1])) || (@this[i - 1] == XChar.Space))
+							if(Char.IsLower(@this[i - 1]) || (@this[i - 1] == XChar.Space))
 							{
 								builder.Append('_');
 								builder.Append(current);

@@ -58,24 +58,24 @@ namespace Lotus
 			{
 				if (typeof(TType).IsValueType)
 				{
-					return (left.Equals(right));
+					return left.Equals(right);
 				}
 				else
 				{
 					if (left != null)
 					{
-						return (left.Equals(right));
+						return left.Equals(right);
 					}
 					else
 					{
 						if (right != null)
 						{
-							return (right.Equals(left));
+							return right.Equals(left);
 						}
 					}
 				}
 
-				return (true);
+				return true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -90,17 +90,17 @@ namespace Lotus
 			{
 				if (left != null)
 				{
-					return (left.Equals(right));
+					return left.Equals(right);
 				}
 				else
 				{
 					if (right != null)
 					{
-						return (right.Equals(left));
+						return right.Equals(left);
 					}
 				}
 
-				return (true);
+				return true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -117,34 +117,34 @@ namespace Lotus
 				{
 					if (right == null)
 					{
-						return (0);
+						return 0;
 					}
 					else
 					{
-						return (1);
+						return 1;
 					}
 				}
 				else
 				{
 					if (right == null)
 					{
-						return (-1);
+						return -1;
 					}
 					else
 					{
 						if (left is IComparable<TType> left_comparable)
 						{
-							return (left_comparable.CompareTo(right));
+							return left_comparable.CompareTo(right);
 						}
 						else
 						{
 							if (left is IComparable left_comparable_generic)
 							{
-								return (left_comparable_generic.CompareTo(right));
+								return left_comparable_generic.CompareTo(right);
 							}
 							else
 							{
-								return (0);
+								return 0;
 							}
 						}
 					}
@@ -164,17 +164,17 @@ namespace Lotus
 				var result = ComprareOfAscending(left, right);
 				if (result == 1)
 				{
-					return (-1);
+					return -1;
 				}
 				else
 				{
 					if (result == -1)
 					{
-						return (1);
+						return 1;
 					}
 					else
 					{
-						return (0);
+						return 0;
 					}
 				}
 			}

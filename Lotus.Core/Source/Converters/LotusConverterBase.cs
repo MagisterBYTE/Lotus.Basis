@@ -46,7 +46,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean ToBoolean(String text)
 			{
-				return (XBoolean.Parse(text));
+				return XBoolean.Parse(text);
 			}
 			#endregion
 
@@ -56,12 +56,12 @@ namespace Lotus
 			/// Преобразование текста в целочисленное значение
 			/// </summary>
 			/// <param name="text">Текстовое значение</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 ToInt(String text, Int32 default_value = 0)
+			public static Int32 ToInt(String text, Int32 defaultValue = 0)
 			{
-				return (XNumbers.ParseInt(text, default_value));
+				return XNumbers.ParseInt(text, defaultValue);
 			}
 			#endregion
 
@@ -71,12 +71,12 @@ namespace Lotus
 			/// Преобразование текста в вещественное значение одинарной точности
 			/// </summary>
 			/// <param name="text">Текстовое значение</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single ToSingle(String text, Single default_value = 0)
+			public static Single ToSingle(String text, Single defaultValue = 0)
 			{
-				return (XNumbers.ParseSingle(text, default_value));
+				return XNumbers.ParseSingle(text, defaultValue);
 			}
 			#endregion
 
@@ -86,12 +86,12 @@ namespace Lotus
 			/// Преобразование текста в вещественное значение двойной точности
 			/// </summary>
 			/// <param name="text">Текстовое значение</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double ToDouble(String text, Double default_value = 0)
+			public static Double ToDouble(String text, Double defaultValue = 0)
 			{
-				return (XNumbers.ParseDouble(text, default_value));
+				return XNumbers.ParseDouble(text, defaultValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -99,12 +99,12 @@ namespace Lotus
 			/// Преобразование форматированного текста в вещественное значение двойной точности
 			/// </summary>
 			/// <param name="text">Текстовое значение</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double ToDoubleFormat(String text, Double default_value = 0)
+			public static Double ToDoubleFormat(String text, Double defaultValue = 0)
 			{
-				return (XNumbers.ParseDoubleFormat(text, default_value));
+				return XNumbers.ParseDoubleFormat(text, defaultValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean ToDoubleFormat(String text, out Double result)
 			{
-				return (XNumbers.ParseDoubleFormat(text, out result));
+				return XNumbers.ParseDoubleFormat(text, out result);
 			}
 			#endregion
 
@@ -127,12 +127,12 @@ namespace Lotus
 			/// Преобразование текста в десятичное число с плавающей запятой
 			/// </summary>
 			/// <param name="text">Текстовое значение</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Decimal ParseDecimal(String text, Decimal default_value = 0)
+			public static Decimal ParseDecimal(String text, Decimal defaultValue = 0)
 			{
-				return (XNumbers.ParseDecimal(text, default_value));
+				return XNumbers.ParseDecimal(text, defaultValue);
 			}
 			#endregion
 
@@ -141,124 +141,124 @@ namespace Lotus
 			/// <summary>
 			/// Преобразование вещественного значения двойной точности в числовой тип указанного типа
 			/// </summary>
-			/// <param name="target_type">Целевой числовой тип</param>
+			/// <param name="targetType">Целевой числовой тип</param>
 			/// <param name="value">Значение</param>
 			/// <returns>Числовое значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object ToNumber(Type target_type, Double value)
+			public static System.Object ToNumber(Type targetType, Double value)
 			{
-				var type_name = target_type.Name;
+				var type_name = targetType.Name;
 				switch (type_name)
 				{
 					case nameof(Byte):
 						{
-							return (Convert.ToByte(value));
+							return Convert.ToByte(value);
 						}
 					case nameof(SByte):
 						{
-							return (Convert.ToSByte(value));
+							return Convert.ToSByte(value);
 						}
 					case nameof(Char):
 						{
-							return (Convert.ToChar(value));
+							return Convert.ToChar(value);
 						}
 					case nameof(Int16):
 						{
-							return (Convert.ToInt16(value));
+							return Convert.ToInt16(value);
 						}
 					case nameof(UInt16):
 						{
-							return (Convert.ToUInt16(value));
+							return Convert.ToUInt16(value);
 						}
 					case nameof(Int32):
 						{
-							return (Convert.ToInt32(value));
+							return Convert.ToInt32(value);
 						}
 					case nameof(UInt32):
 						{
-							return (Convert.ToUInt32(value));
+							return Convert.ToUInt32(value);
 						}
 					case nameof(Int64):
 						{
-							return (Convert.ToInt64(value));
+							return Convert.ToInt64(value);
 						}
 					case nameof(UInt64):
 						{
-							return (Convert.ToUInt64(value));
+							return Convert.ToUInt64(value);
 						}
 					case nameof(Single):
 						{
-							return (Convert.ToSingle(value));
+							return Convert.ToSingle(value);
 						}
 					case nameof(Decimal):
 						{
-							return (Convert.ToDecimal(value));
+							return Convert.ToDecimal(value);
 						}
 				}
 
-				return (value);
+				return value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Преобразование десятичного числа с плавающей запятой в числовой тип указанного типа
 			/// </summary>
-			/// <param name="target_type">Целевой числовой тип</param>
+			/// <param name="targetType">Целевой числовой тип</param>
 			/// <param name="value">Значение</param>
 			/// <returns>Числовое значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object ToNumber(Type target_type, Decimal value)
+			public static System.Object ToNumber(Type targetType, Decimal value)
 			{
-				var type_name = target_type.Name;
+				var type_name = targetType.Name;
 				switch (type_name)
 				{
 					case nameof(Byte):
 						{
-							return (Convert.ToByte(value));
+							return Convert.ToByte(value);
 						}
 					case nameof(SByte):
 						{
-							return (Convert.ToSByte(value));
+							return Convert.ToSByte(value);
 						}
 					case nameof(Char):
 						{
-							return (Convert.ToChar(value));
+							return Convert.ToChar(value);
 						}
 					case nameof(Int16):
 						{
-							return (Convert.ToInt16(value));
+							return Convert.ToInt16(value);
 						}
 					case nameof(UInt16):
 						{
-							return (Convert.ToUInt16(value));
+							return Convert.ToUInt16(value);
 						}
 					case nameof(Int32):
 						{
-							return (Convert.ToInt32(value));
+							return Convert.ToInt32(value);
 						}
 					case nameof(UInt32):
 						{
-							return (Convert.ToUInt32(value));
+							return Convert.ToUInt32(value);
 						}
 					case nameof(Int64):
 						{
-							return (Convert.ToInt64(value));
+							return Convert.ToInt64(value);
 						}
 					case nameof(UInt64):
 						{
-							return (Convert.ToUInt64(value));
+							return Convert.ToUInt64(value);
 						}
 					case nameof(Single):
 						{
-							return (Convert.ToSingle(value));
+							return Convert.ToSingle(value);
 						}
 					case nameof(Double):
 						{
-							return (Convert.ToDouble(value));
+							return Convert.ToDouble(value);
 						}
 				}
 
-				return (value);
+				return value;
 			}
 			#endregion
 
@@ -269,12 +269,12 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TEnum">Тип перечисления</typeparam>
 			/// <param name="text">Текстовое значение</param>
-			/// <param name="default_value">Значение по умолчанию</param>
+			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ToEnum<TEnum>(String text, TEnum default_value = default(TEnum)) where TEnum : Enum
+			public static TEnum ToEnum<TEnum>(String text, TEnum defaultValue = default(TEnum)) where TEnum : Enum
 			{
-				return (XEnum.ToEnum<TEnum>(text, default_value));
+				return XEnum.ToEnum<TEnum>(text, defaultValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -283,12 +283,12 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TEnum">Тип перечисления</typeparam>
 			/// <param name="value">Значение</param>
-			/// <param name="default_value">Значение по умолчанию</param>
+			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ToEnum<TEnum>(Int32 value, TEnum default_value = default(TEnum)) where TEnum : Enum
+			public static TEnum ToEnum<TEnum>(Int32 value, TEnum defaultValue = default(TEnum)) where TEnum : Enum
 			{
-				return (XEnum.ToEnum<TEnum>(value, default_value));
+				return XEnum.ToEnum<TEnum>(value, defaultValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -297,25 +297,25 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TEnum">Тип перечисления</typeparam>
 			/// <param name="value">Значение</param>
-			/// <param name="default_value">Значение по умолчанию</param>
+			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ToEnum<TEnum>(Object value, TEnum default_value) where TEnum : Enum
+			public static TEnum ToEnum<TEnum>(Object value, TEnum defaultValue) where TEnum : Enum
 			{
-				return (ToEnum<TEnum>(Convert.ToString(value), default_value));
+				return ToEnum<TEnum>(Convert.ToString(value), defaultValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Преобразование в объект перечисления обобщенного значения
 			/// </summary>
-			/// <param name="enum_type">Тип перечисления</param>
+			/// <param name="enumType">Тип перечисления</param>
 			/// <param name="value">Значение</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Enum ToEnumOfType(Type enum_type, System.Object value)
+			public static Enum ToEnumOfType(Type enumType, System.Object value)
 			{
-				return (XEnum.ToEnumOfType(enum_type, value));
+				return XEnum.ToEnumOfType(enumType, value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -329,7 +329,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean TryToEnum<TEnum>(Object value, out TEnum result) where TEnum : Enum
 			{
-				return (XEnum.TryToEnum<TEnum>(value, out result));
+				return XEnum.TryToEnum<TEnum>(value, out result);
 			}
 			#endregion
 
@@ -341,13 +341,13 @@ namespace Lotus
 			/// <remarks>
 			/// К примитивными данным относятся все числовые типы, строковой тип, логический тип и перечисление
 			/// </remarks>
-			/// <param name="type_code">Код типа</param>
+			/// <param name="typeCode">Код типа</param>
 			/// <param name="value">Значение</param>
 			/// <returns>Значение примитивного типа</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TPrimitive ToPrimitive<TPrimitive>(TypeCode type_code, System.Object value)
+			public static TPrimitive ToPrimitive<TPrimitive>(TypeCode typeCode, System.Object value)
 			{
-				return (default);
+				return default;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -357,15 +357,15 @@ namespace Lotus
 			/// <remarks>
 			/// К примитивными данным относятся все числовые типы, строковой тип, логический тип и перечисление
 			/// </remarks>
-			/// <param name="type_code">Код типа</param>
+			/// <param name="typeCode">Код типа</param>
 			/// <param name="text">Текстовое значение</param>
 			/// <returns>Значение примитивного типа</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TPrimitive ToPrimitive<TPrimitive>(TypeCode type_code, String text)
+			public static TPrimitive ToPrimitive<TPrimitive>(TypeCode typeCode, String text)
 			{
 				System.Object result = default;
 
-				switch (type_code)
+				switch (typeCode)
 				{
 					case TypeCode.Empty:
 						{
@@ -458,7 +458,7 @@ namespace Lotus
 						break;
 				}
 
-				return ((TPrimitive)result);
+				return (TPrimitive)result;
 			}
 			#endregion
 		}

@@ -142,12 +142,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="name">Имя сообщения</param>
-			/// <param name="is_pool">Статус размещения объекта в пуле</param>
+			/// <param name="isPool">Статус размещения объекта в пуле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMessageArgs(String name, Boolean is_pool = false)
+			public CMessageArgs(String name, Boolean isPool = false)
 			{
 				mName = name;
-				mIsPoolObject = is_pool;
+				mIsPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -155,12 +155,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="id">Уникальный идентификатор сообщения</param>
-			/// <param name="is_pool">Статус размещения объекта в пуле</param>
+			/// <param name="isPool">Статус размещения объекта в пуле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMessageArgs(Int32 id, Boolean is_pool = false)
+			public CMessageArgs(Int32 id, Boolean isPool = false)
 			{
 				mId = id;
-				mIsPoolObject = is_pool;
+				mIsPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -169,13 +169,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="name">Имя сообщения</param>
 			/// <param name="id">Уникальный идентификатор сообщения</param>
-			/// <param name="is_pool">Статус размещения объекта в пуле</param>
+			/// <param name="isPool">Статус размещения объекта в пуле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMessageArgs(String name, Int32 id, Boolean is_pool = false)
+			public CMessageArgs(String name, Int32 id, Boolean isPool = false)
 			{
 				mName = name;
 				mId = id;
-				mIsPoolObject = is_pool;
+				mIsPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -184,13 +184,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="name">Имя сообщения</param>
 			/// <param name="sender">Компонент - источник события</param>
-			/// <param name="is_pool">Статус размещения объекта в пуле</param>
+			/// <param name="isPool">Статус размещения объекта в пуле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMessageArgs(String name, System.Object sender, Boolean is_pool = false)
+			public CMessageArgs(String name, System.Object sender, Boolean isPool = false)
 			{
 				mName = name;
 				mSender = sender;
-				mIsPoolObject = is_pool;
+				mIsPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -199,13 +199,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="id">Уникальный идентификатор сообщения</param>
 			/// <param name="sender">Источник события</param>
-			/// <param name="is_pool">Статус размещения объекта в пуле</param>
+			/// <param name="isPool">Статус размещения объекта в пуле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMessageArgs(Int32 id, System.Object sender, Boolean is_pool = false)
+			public CMessageArgs(Int32 id, System.Object sender, Boolean isPool = false)
 			{
 				mId = id;
 				mSender = sender;
-				mIsPoolObject = is_pool;
+				mIsPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -215,24 +215,24 @@ namespace Lotus
 			/// <param name="name">Имя сообщения</param>
 			/// <param name="id">Уникальный идентификатор сообщения</param>
 			/// <param name="sender">Компонент - источник события</param>
-			/// <param name="is_pool">Статус размещения объекта в пуле</param>
+			/// <param name="isPool">Статус размещения объекта в пуле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMessageArgs(String name, Int32 id, System.Object sender, Boolean is_pool = false)
+			public CMessageArgs(String name, Int32 id, System.Object sender, Boolean isPool = false)
 			{
 				mName = name;
 				mSender = sender;
-				mIsPoolObject = is_pool;
+				mIsPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="is_pool">Статус размещения объекта в пуле</param>
+			/// <param name="isPool">Статус размещения объекта в пуле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMessageArgs(Boolean is_pool)
+			public CMessageArgs(Boolean isPool)
 			{
-				mIsPoolObject = is_pool;
+				mIsPoolObject = isPool;
 			}
 			#endregion
 
@@ -245,7 +245,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return("Name <" + mName + "> Value[" + mData?.ToString() + "]");
+				return"Name <" + mName + "> Value[" + mData?.ToString() + "]";
 			}
 			#endregion
 

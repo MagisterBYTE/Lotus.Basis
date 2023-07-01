@@ -57,11 +57,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="value">Значения параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterObject(String parameter_name, System.Object value)
-				: base(parameter_name)
+			public CParameterObject(String parameterName, System.Object value)
+				: base(parameterName)
 			{
 				mValue = value;
 			}

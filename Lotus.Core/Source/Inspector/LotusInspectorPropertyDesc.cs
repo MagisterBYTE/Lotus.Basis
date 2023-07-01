@@ -52,26 +52,26 @@ namespace Lotus
 			/// Создание/переопределение отображаемого имя свойства и его описания
 			/// </summary>
 			/// <typeparam name="TType">Тип</typeparam>
-			/// <param name="property_name">Имя свойства</param>
-			/// <param name="display_name">Отображаемое имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
+			/// <param name="displayName">Отображаемое имя свойства</param>
 			/// <param name="description">Описание свойства</param>
 			/// <returns>Описатель свойств</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CPropertyDesc OverrideDisplayNameAndDescription<TType>(String property_name, String display_name, String description = null)
+			public static CPropertyDesc OverrideDisplayNameAndDescription<TType>(String propertyName, String displayName, String description = null)
 			{
 				var property_desc = new CPropertyDesc();
 
 				// Проверяем
-				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
+				if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
 				{
-					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", property_name, typeof(TType).Name);
+					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
 				}
 
-				property_desc.PropertyName = property_name;
-				property_desc.DisplayName = display_name;
+				property_desc.PropertyName = propertyName;
+				property_desc.DisplayName = displayName;
 				property_desc.Description = description;
 
-				return (property_desc);
+				return property_desc;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -79,24 +79,24 @@ namespace Lotus
 			/// Создание/переопределение категории свойства
 			/// </summary>
 			/// <typeparam name="TType">Тип</typeparam>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			/// <param name="category">Категория</param>
 			/// <returns>Описатель свойств</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CPropertyDesc OverrideCategory<TType>(String property_name, String category)
+			public static CPropertyDesc OverrideCategory<TType>(String propertyName, String category)
 			{
 				var property_desc = new CPropertyDesc();
 
 				// Проверяем
-				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
+				if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
 				{
-					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", property_name, typeof(TType).Name);
+					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
 				}
 
-				property_desc.PropertyName = property_name;
+				property_desc.PropertyName = propertyName;
 				property_desc.Category = category;
 
-				return (property_desc);
+				return property_desc;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -104,23 +104,23 @@ namespace Lotus
 			/// Создание/переопределение скрытия свойства
 			/// </summary>
 			/// <typeparam name="TType">Тип</typeparam>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Описатель свойств</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CPropertyDesc OverrideHide<TType>(String property_name)
+			public static CPropertyDesc OverrideHide<TType>(String propertyName)
 			{
 				var property_desc = new CPropertyDesc();
 
 				// Проверяем
-				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
+				if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
 				{
-					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", property_name, typeof(TType).Name);
+					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
 				}
 
-				property_desc.PropertyName = property_name;
+				property_desc.PropertyName = propertyName;
 				property_desc.IsHideInspector = true;
 
-				return (property_desc);
+				return property_desc;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -128,24 +128,24 @@ namespace Lotus
 			/// Создание/переопределение порядка отображения свойства
 			/// </summary>
 			/// <typeparam name="TType">Тип</typeparam>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			/// <param name="order">Порядковый номер отображения свойства в группе</param>
 			/// <returns>Описатель свойств</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CPropertyDesc OverrideOrder<TType>(String property_name, Int32 order)
+			public static CPropertyDesc OverrideOrder<TType>(String propertyName, Int32 order)
 			{
 				var property_desc = new CPropertyDesc();
 
 				// Проверяем
-				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
+				if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
 				{
-					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", property_name, typeof(TType).Name);
+					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
 				}
 
-				property_desc.PropertyName = property_name;
+				property_desc.PropertyName = propertyName;
 				property_desc.PropertyOrder = order;
 
-				return (property_desc);
+				return property_desc;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -153,24 +153,24 @@ namespace Lotus
 			/// Создание/переопределение значения по умолчанию свойства 
 			/// </summary>
 			/// <typeparam name="TType">Тип</typeparam>
-			/// <param name="property_name">Имя свойства</param>
-			/// <param name="default_value">Значение свойства по умолчанию</param>
+			/// <param name="propertyName">Имя свойства</param>
+			/// <param name="defaultValue">Значение свойства по умолчанию</param>
 			/// <returns>Описатель свойств</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CPropertyDesc OverrideDefaultValue<TType>(String property_name, System.Object default_value)
+			public static CPropertyDesc OverrideDefaultValue<TType>(String propertyName, System.Object defaultValue)
 			{
 				var property_desc = new CPropertyDesc();
 
 				// Проверяем
-				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
+				if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
 				{
-					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", property_name, typeof(TType).Name);
+					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
 				}
 
-				property_desc.PropertyName = property_name;
-				property_desc.DefaultValue = default_value;
+				property_desc.PropertyName = propertyName;
+				property_desc.DefaultValue = defaultValue;
 
-				return (property_desc);
+				return property_desc;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -178,24 +178,24 @@ namespace Lotus
 			/// Создание/переопределение значения списка допустимых значений свойства 
 			/// </summary>
 			/// <typeparam name="TType">Тип</typeparam>
-			/// <param name="property_name">Имя свойства</param>
-			/// <param name="list_values">Список допустимых значений свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
+			/// <param name="listValues">Список допустимых значений свойства</param>
 			/// <returns>Описатель свойств</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CPropertyDesc OverrideListValues<TType>(String property_name, System.Object list_values)
+			public static CPropertyDesc OverrideListValues<TType>(String propertyName, System.Object listValues)
 			{
 				var property_desc = new CPropertyDesc();
 
 				// Проверяем
-				if (typeof(TType).GetProperty(property_name, BindingFlags.Instance | BindingFlags.Public) == null)
+				if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
 				{
-					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", property_name, typeof(TType).Name);
+					XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
 				}
 
-				property_desc.PropertyName = property_name;
-				property_desc.ListValues = list_values;
+				property_desc.PropertyName = propertyName;
+				property_desc.ListValues = listValues;
 
-				return (property_desc);
+				return property_desc;
 			}
 			#endregion
 
@@ -217,36 +217,36 @@ namespace Lotus
 			/// Данный метод анализирует все доступные формы задания декларированное значении и получает конкретное значение
 			/// </para>
 			/// </remarks>
-			/// <param name="declare_value">Декларированное значение</param>
-			/// <param name="member_name">Имя члена объекта/типа</param>
-			/// <param name="member_type">Тип члена объект/типа</param>
+			/// <param name="declareValue">Декларированное значение</param>
+			/// <param name="memberName">Имя члена объекта/типа</param>
+			/// <param name="memberType">Тип члена объект/типа</param>
 			/// <param name="instance"></param>
 			/// <returns>Экземпляр объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetValue(System.Object declare_value, String member_name, TInspectorMemberType member_type, 
+			public static System.Object GetValue(System.Object declareValue, String memberName, TInspectorMemberType memberType, 
 				System.Object instance = null)
 			{
 				System.Object result = null;
 
 				// Проверяем непосредственного значение
-				if (declare_value != null)
+				if (declareValue != null)
 				{
 					// 1) Задан как статические данные
-					if(declare_value is Type && member_name.IsExists())
+					if(declareValue is Type && memberName.IsExists())
 					{
 						// Получаем тип
-						var type = declare_value as Type;
-						switch (member_type)
+						var type = declareValue as Type;
+						switch (memberType)
 						{
 							case TInspectorMemberType.Field:
 								{
-									result = type.GetStaticFieldValue<System.Object>(member_name);
-									return (result);
+									result = type.GetStaticFieldValue<System.Object>(memberName);
+									return result;
 								}
 							case TInspectorMemberType.Property:
 								{
-									result = type.GetStaticPropertyValue<System.Object>(member_name);
-									return (result);
+									result = type.GetStaticPropertyValue<System.Object>(memberName);
+									return result;
 								}
 							case TInspectorMemberType.Method:
 								break;
@@ -257,9 +257,9 @@ namespace Lotus
 					else
 					{
 						// 2) Это может быть метаданные поля 
-						if (declare_value is FieldInfo)
+						if (declareValue is FieldInfo)
 						{
-							var field_info = declare_value as FieldInfo;
+							var field_info = declareValue as FieldInfo;
 							if(field_info.IsStatic)
 							{
 								result = field_info.GetValue(null);
@@ -269,13 +269,13 @@ namespace Lotus
 								result = field_info.GetValue(instance);
 							}
 
-							return (result);
+							return result;
 						}
 
 						// 3) Это может быть метаданные свойства
-						if (declare_value is PropertyInfo)
+						if (declareValue is PropertyInfo)
 						{
-							var property_info = declare_value as PropertyInfo;
+							var property_info = declareValue as PropertyInfo;
 							if (property_info.IsStatic())
 							{
 								result = property_info.GetValue(null, null);
@@ -285,41 +285,41 @@ namespace Lotus
 								result = property_info.GetValue(instance, null);
 							}
 
-							return (result);
+							return result;
 						}
 
 						// 4) Декларированное значение и есть значение
-						result = declare_value;
-						return (result);
+						result = declareValue;
+						return result;
 					}
 				}
 				else
 				{
 					// У нас есть только строковые данные
 					// Если задана в строки имя типа и его член данных
-					if (member_name.IndexOf(XChar.Dot) > -1)
+					if (memberName.IndexOf(XChar.Dot) > -1)
 					{
-						result = XReflection.GetStaticDataFromType(member_name);
-						return (result);
+						result = XReflection.GetStaticDataFromType(memberName);
+						return result;
 					}
 					else
 					{
 						// Задано только имя члена данных, используем экземпляр объекта
-						switch (member_type)
+						switch (memberType)
 						{
 							case TInspectorMemberType.Field:
 								{
-									result = XReflection.GetFieldValue(instance, member_name);
+									result = XReflection.GetFieldValue(instance, memberName);
 								}
 								break;
 							case TInspectorMemberType.Property:
 								{
-									result = XReflection.GetPropertyValue(instance, member_name);
+									result = XReflection.GetPropertyValue(instance, memberName);
 								}
 								break;
 							case TInspectorMemberType.Method:
 								{
-									result = XReflection.InvokeMethod(instance, member_name);
+									result = XReflection.InvokeMethod(instance, memberName);
 								}
 								break;
 							default:
@@ -328,7 +328,7 @@ namespace Lotus
 					}
 
 				}
-				return (result);
+				return result;
 			}
 			#endregion
 
@@ -361,7 +361,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mPropertyName);
+					return mPropertyName;
 				}
 				set
 				{
@@ -379,7 +379,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mDisplayName);
+					return mDisplayName;
 				}
 				set
 				{
@@ -392,7 +392,7 @@ namespace Lotus
 			/// </summary>
 			public String Description
 			{
-				get { return (mDescription); }
+				get { return mDescription; }
 				set
 				{
 					mDescription = value;
@@ -404,7 +404,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 PropertyOrder
 			{
-				get { return (mPropertyOrder); }
+				get { return mPropertyOrder; }
 				set
 				{
 					mPropertyOrder = value;
@@ -416,7 +416,7 @@ namespace Lotus
 			/// </summary>
 			public String Category
 			{
-				get { return (mCategory); }
+				get { return mCategory; }
 				set
 				{
 					mCategory = value;
@@ -428,7 +428,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CategoryOrder
 			{
-				get { return (mCategoryOrder); }
+				get { return mCategoryOrder; }
 				set
 				{
 					mCategoryOrder = value;
@@ -443,7 +443,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsReadOnly
 			{
-				get { return (mIsReadOnly); }
+				get { return mIsReadOnly; }
 				set
 				{
 					mIsReadOnly = value;
@@ -455,7 +455,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsHideInspector
 			{
-				get { return (mIsHideInspector); }
+				get { return mIsHideInspector; }
 				set
 				{
 					mIsHideInspector = value;
@@ -467,7 +467,7 @@ namespace Lotus
 			/// </summary>
 			public Object DefaultValue
 			{
-				get { return (mDefaultValue); }
+				get { return mDefaultValue; }
 				set
 				{
 					mDefaultValue = value;
@@ -479,7 +479,7 @@ namespace Lotus
 			/// </summary>
 			public Object ListValues
 			{
-				get { return (mListValues); }
+				get { return mListValues; }
 				set
 				{
 					mListValues = value;
@@ -508,7 +508,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(CPropertyDesc other)
 			{
-				return (DisplayName.CompareTo(other.DisplayName));
+				return DisplayName.CompareTo(other.DisplayName);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -521,11 +521,11 @@ namespace Lotus
 			{
 				if (String.IsNullOrEmpty(mCategory))
 				{
-					return (DisplayName);
+					return DisplayName;
 				}
 				else
 				{
-					return (mCategory + "=" + DisplayName);
+					return mCategory + "=" + DisplayName;
 				}
 			}
 			#endregion

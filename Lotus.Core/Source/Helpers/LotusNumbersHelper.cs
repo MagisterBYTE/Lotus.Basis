@@ -83,17 +83,17 @@ namespace Lotus
 			/// Преобразование текста в число
 			/// </summary>
 			/// <param name="text">Текст</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 ParseInt(String text, Int32 default_value = 0)
+			public static Int32 ParseInt(String text, Int32 defaultValue = 0)
 			{
-				if (Int32.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out default_value))
+				if (Int32.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out defaultValue))
 				{
 
 				}
 
-				return default_value;
+				return defaultValue;
 			}
 			#endregion
 
@@ -103,17 +103,17 @@ namespace Lotus
 			/// Преобразование текста в число
 			/// </summary>
 			/// <param name="text">Текст</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int64 ParseLong(String text, Int64 default_value = 0)
+			public static Int64 ParseLong(String text, Int64 defaultValue = 0)
 			{
-				if (Int64.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out default_value))
+				if (Int64.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out defaultValue))
 				{
 
 				}
 
-				return default_value;
+				return defaultValue;
 			}
 			#endregion
 
@@ -123,22 +123,22 @@ namespace Lotus
 			/// Преобразование текста в число
 			/// </summary>
 			/// <param name="text">Текст</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single ParseSingle(String text, Single default_value = 0)
+			public static Single ParseSingle(String text, Single defaultValue = 0)
 			{
 				if (text.IndexOf(',') > -1)
 				{
 					text = text.Replace(',', XChar.Dot);
 				}
 
-				if (Single.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out default_value))
+				if (Single.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out defaultValue))
 				{
 
 				}
 
-				return default_value;
+				return defaultValue;
 			}
 			#endregion
 
@@ -148,22 +148,22 @@ namespace Lotus
 			/// Преобразование текста в число
 			/// </summary>
 			/// <param name="text">Текст</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double ParseDouble(String text, Double default_value = 0)
+			public static Double ParseDouble(String text, Double defaultValue = 0)
 			{
 				if (text.IndexOf(',') > -1)
 				{
 					text = text.Replace(',', XChar.Dot);
 				}
 
-				if (Double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out default_value))
+				if (Double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out defaultValue))
 				{
 
 				}
 
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -171,10 +171,10 @@ namespace Lotus
 			/// Преобразование форматированного текста в число
 			/// </summary>
 			/// <param name="text">Текст</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double ParseDoubleFormat(String text, Double default_value = 0)
+			public static Double ParseDoubleFormat(String text, Double defaultValue = 0)
 			{
 				var number = new StringBuilder(text.Length);
 
@@ -205,12 +205,12 @@ namespace Lotus
 
 				}
 
-				if (Double.TryParse(number.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out default_value))
+				if (Double.TryParse(number.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out defaultValue))
 				{
 
 				}
 
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -254,10 +254,10 @@ namespace Lotus
 
 				if (Double.TryParse(number.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out result))
 				{
-					return (true);
+					return true;
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 
@@ -267,22 +267,22 @@ namespace Lotus
 			/// Преобразование текста в число
 			/// </summary>
 			/// <param name="text">Текст</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Decimal ParseDecimal(String text, Decimal default_value = 0)
+			public static Decimal ParseDecimal(String text, Decimal defaultValue = 0)
 			{
 				if (text.IndexOf(',') > -1)
 				{
 					text = text.Replace(',', XChar.Dot);
 				}
 
-				if (Decimal.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out default_value))
+				if (Decimal.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out defaultValue))
 				{
 
 				}
 
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -290,22 +290,22 @@ namespace Lotus
 			/// Преобразование текста, представленного как отображение валюты, в число
 			/// </summary>
 			/// <param name="text">Текст</param>
-			/// <param name="default_value">Значение по умолчанию если преобразовать не удалось</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Decimal ParseCurrency(String text, Decimal default_value = 0)
+			public static Decimal ParseCurrency(String text, Decimal defaultValue = 0)
 			{
 				if (text.IndexOf(',') > -1)
 				{
 					text = text.Replace(',', XChar.Dot);
 				}
 
-				if (Decimal.TryParse(text, NumberStyles.Currency, CultureInfo.InvariantCulture, out default_value))
+				if (Decimal.TryParse(text, NumberStyles.Currency, CultureInfo.InvariantCulture, out defaultValue))
 				{
 
 				}
 
-				return default_value;
+				return defaultValue;
 			}
 			#endregion
 		}

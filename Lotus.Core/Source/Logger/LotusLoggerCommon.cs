@@ -122,7 +122,7 @@ namespace Lotus
 			/// </summary>
 			public String TraceShort 
 			{
-				get { return (MemberName + " [" + Path.GetFileNameWithoutExtension(FilePath) + ":" + LineNumber.ToString() + "]"); } 
+				get { return MemberName + " [" + Path.GetFileNameWithoutExtension(FilePath) + ":" + LineNumber.ToString() + "]"; } 
 			}
 			#endregion
 
@@ -258,17 +258,17 @@ namespace Lotus
 			/// <summary>
 			/// Извлечь имя метода из строки трассировки
 			/// </summary>
-			/// <param name="line_trace">Строка трассировки</param>
+			/// <param name="lineTrace">Строка трассировки</param>
 			/// <returns>Имя метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ExtractMemberName(String line_trace)
+			public String ExtractMemberName(String lineTrace)
 			{
 				// Находим имя файла
-				var index_file = line_trace.LastIndexOf('(');
+				var index_file = lineTrace.LastIndexOf('(');
 				if (index_file > -1)
 				{
 					// Формируем имя метода
-					var member_name = line_trace.Remove(index_file);
+					var member_name = lineTrace.Remove(index_file);
 
 					// Находим последнюю точку
 					var index_dot = member_name.LastIndexOf('.');
@@ -283,30 +283,30 @@ namespace Lotus
 					var end = member_name.IndexOf(')');
 					if(end - start > 1)
 					{
-						member_name = member_name.Remove(start + 1, (end - start));
+						member_name = member_name.Remove(start + 1, end - start);
 					}
 
-					return (member_name.Trim('\n', ' '));
+					return member_name.Trim('\n', ' ');
 				}
 
-				return ("");
+				return "";
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Извлечь имя метода из строки трассировки
 			/// </summary>
-			/// <param name="line_trace">Строка трассировки</param>
+			/// <param name="lineTrace">Строка трассировки</param>
 			/// <returns>Имя метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ExtractFileName(String line_trace)
+			public String ExtractFileName(String lineTrace)
 			{
 				// Находим имя файла
-				var index_file = line_trace.LastIndexOf('(');
+				var index_file = lineTrace.LastIndexOf('(');
 				if (index_file > -1)
 				{
 					// Формируем имя файла
-					var file_path = line_trace.Remove(0, index_file);
+					var file_path = lineTrace.Remove(0, index_file);
 
 					// Находим двоеточие и удаляем до него
 					var index_colon = file_path.LastIndexOf(':');
@@ -318,10 +318,10 @@ namespace Lotus
 
 					file_path = file_path.Trim('\n', ' ', '(', ')');
 
-					return (file_path);
+					return file_path;
 				}
 
-				return ("");
+				return "";
 			}
 			#endregion
 		}

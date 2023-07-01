@@ -119,13 +119,13 @@ namespace Lotus
 					{
 						mCurrent = mList.mArrayOfItems[mIndex];
 						mIndex++;
-						return (true);
+						return true;
 					}
 					else
 					{
 						mIndex = mList.Count + 1;
 						mCurrent = default;
-						return (false);
+						return false;
 					}
 				}
 
@@ -167,7 +167,7 @@ namespace Lotus
 			/// <summary>
 			/// Максимальное количество элементов на начальном этапе
 			/// </summary>
-			public const Int32 INIT_MAX_COUNT = 8;
+			public const Int32 INITMAXCOUNT = 8;
 
 			/// <summary>
 			/// Статус ссылочного типа элемента коллекции
@@ -205,24 +205,24 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal TItem[] mArrayOfItems;
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.HideInInspector]
 			[UnityEngine.SerializeField]
 #endif
 			protected internal Int32 mCount;
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.HideInInspector]
 			[UnityEngine.SerializeField]
 #endif
 			protected internal Int32 mMaxCount;
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.HideInInspector]
 			[UnityEngine.SerializeField]
 #endif
@@ -275,7 +275,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsNotify
 			{
-				get { return (mIsNotify); }
+				get { return mIsNotify; }
 				set
 				{
 					mIsNotify = value;
@@ -287,7 +287,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 LastIndex
 			{
-				get { return (mCount - 1); }
+				get { return mCount - 1; }
 			}
 
 			/// <summary>
@@ -299,7 +299,7 @@ namespace Lotus
 				get 
 				{
 					TrimExcess();
-					return (mArrayOfItems); 
+					return mArrayOfItems; 
 				}
 				set
 				{
@@ -318,7 +318,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mArrayOfItems[0]);
+					return mArrayOfItems[0];
 				}
 				set
 				{
@@ -334,7 +334,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mArrayOfItems[0]);
+					return mArrayOfItems[0];
 				}
 				set
 				{
@@ -350,7 +350,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mArrayOfItems[mCount - 2]);
+					return mArrayOfItems[mCount - 2];
 				}
 				set
 				{
@@ -366,7 +366,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mArrayOfItems[mCount - 1]);
+					return mArrayOfItems[mCount - 1];
 				}
 				set
 				{
@@ -400,7 +400,7 @@ namespace Lotus
 			{
 				get 
 				{ 
-					return (mIsFixedSize);
+					return mIsFixedSize;
 				}
 				set
 				{
@@ -435,7 +435,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mArrayOfItems[index]);
+					return mArrayOfItems[index];
 				}
 				set
 				{
@@ -468,7 +468,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray()
-				: this(INIT_MAX_COUNT)
+				: this(INITMAXCOUNT)
 			{
 			}
 
@@ -480,7 +480,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray(Int32 capacity)
 			{
-				mMaxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
+				mMaxCount = capacity > INITMAXCOUNT ? capacity : INITMAXCOUNT;
 				mCount = 0;
 				mArrayOfItems = new TItem[mMaxCount];
 			}
@@ -506,7 +506,7 @@ namespace Lotus
 				}
 				else
 				{
-					mMaxCount = INIT_MAX_COUNT;
+					mMaxCount = INITMAXCOUNT;
 					mCount = 0;
 					mArrayOfItems = new TItem[mMaxCount];
 				}
@@ -551,7 +551,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public IEnumerator<TItem> GetEnumerator()
 			{
-				return (new ListArrayEnumerator(this));
+				return new ListArrayEnumerator(this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -562,7 +562,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			IEnumerator IEnumerable.GetEnumerator()
 			{
-				return (new ListArrayEnumerator(this));
+				return new ListArrayEnumerator(this);
 			}
 			#endregion
 
@@ -583,7 +583,7 @@ namespace Lotus
 				}
 				catch (Exception exc)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogException(exc);
 #else
 					XLogger.LogException(exc);
@@ -602,7 +602,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Contains(System.Object item)
 			{
-				return (Array.IndexOf(mArrayOfItems, item, 0, mCount) > -1);
+				return Array.IndexOf(mArrayOfItems, item, 0, mCount) > -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -614,7 +614,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 IndexOf(System.Object item)
 			{
-				return (Array.IndexOf(mArrayOfItems, item, 0, mCount));
+				return Array.IndexOf(mArrayOfItems, item, 0, mCount);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -680,7 +680,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Contains(TItem item)
 			{
-				return (Contains(in item));
+				return Contains(in item);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -692,7 +692,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 IndexOf(TItem item)
 			{
-				return (Array.IndexOf(mArrayOfItems, item, 0, mCount));
+				return Array.IndexOf(mArrayOfItems, item, 0, mCount);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -716,7 +716,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Remove(TItem item)
 			{
-				return(Remove(in item));
+				return Remove(in item);
 			}
 			#endregion
 
@@ -812,14 +812,14 @@ namespace Lotus
 			/// <summary>
 			/// Изменение максимального количества элементов которая может вместить коллекция
 			/// </summary>
-			/// <param name="new_max_count">Новое максимальное количество элементов</param>
+			/// <param name="newMaxCount">Новое максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Resize(Int32 new_max_count)
+			public void Resize(Int32 newMaxCount)
 			{
 				// Если мы увеличиваем емкость массива
-				if (new_max_count > mMaxCount)
+				if (newMaxCount > mMaxCount)
 				{
-					mMaxCount = new_max_count;
+					mMaxCount = newMaxCount;
 					var items = new TItem[mMaxCount];
 					Array.Copy(mArrayOfItems, items, mCount);
 					mArrayOfItems = items;
@@ -828,18 +828,18 @@ namespace Lotus
 				{
 					// Максимальное количество элементов меньше текущего
 					// Все ссылочные элементы в данном случае нам надо удалить
-					if (new_max_count < mCount)
+					if (newMaxCount < mCount)
 					{
 						if (IsNullable)
 						{
-							for (var i = new_max_count; i < mCount; i++)
+							for (var i = newMaxCount; i < mCount; i++)
 							{
 								mArrayOfItems[i] = default;
 							}
 						}
 
-						mCount = new_max_count;
-						mMaxCount = new_max_count;
+						mCount = newMaxCount;
+						mMaxCount = newMaxCount;
 						var items = new TItem[mMaxCount];
 						Array.Copy(mArrayOfItems, items, mCount);
 						mArrayOfItems = items;
@@ -847,7 +847,7 @@ namespace Lotus
 					else
 					{
 						// Простое уменьшение размера массива
-						mMaxCount = new_max_count;
+						mMaxCount = newMaxCount;
 						var items = new TItem[mMaxCount];
 						Array.Copy(mArrayOfItems, items, mCount);
 						mArrayOfItems = items;
@@ -872,12 +872,12 @@ namespace Lotus
 			/// <summary>
 			/// Копирование элементов в указанный массив
 			/// </summary>
-			/// <param name="array_dest">Целевой массив</param>
-			/// <param name="array_index">Позиция начала копирования</param>
+			/// <param name="array">Целевой массив</param>
+			/// <param name="arrayIndex">Позиция начала копирования</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CopyTo(TItem[] array_dest, Int32 array_index)
+			public void CopyTo(TItem[] array, Int32 arrayIndex)
 			{
-				Array.Copy(mArrayOfItems, 0, array_dest, array_index, mCount);
+				Array.Copy(mArrayOfItems, 0, array, arrayIndex, mCount);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -902,7 +902,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem[] GetData()
 			{
-				return (mArrayOfItems);
+				return mArrayOfItems;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1332,7 +1332,7 @@ namespace Lotus
 			{
 				if (index < 0)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogErrorFormat("Index is less than zero: <{0}> (Return)", index);
 					index = 0;
 #else
@@ -1343,7 +1343,7 @@ namespace Lotus
 
 				if (count < 1)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogErrorFormat("Count is less than one: <{0}> (Return)", count);
 					count = 1;
 #else
@@ -1354,7 +1354,7 @@ namespace Lotus
 
 				if (mCount - index < count)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogErrorFormat("The index <{0}> + count <{1}> is greater than the number of elements: <2> (Return)", index, count, mCount);
 					return;
 #else
@@ -1394,7 +1394,7 @@ namespace Lotus
 			{
 				if (index < 0)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogErrorFormat("Index is less than zero: <{0}> (Return)", index);
 					return;
 #else
@@ -1405,7 +1405,7 @@ namespace Lotus
 
 				if (index > LastIndex)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogErrorFormat("The index is greater than the number of elements: <{0}> (Return)", index);
 					return;
 #else
@@ -1561,11 +1561,11 @@ namespace Lotus
 						{
 							// Удаляем первый элемент
 							RemoveFirst();
-							return (1);
+							return 1;
 						}
 						else
 						{
-							return (0);
+							return 0;
 						}
 					}
 					else
@@ -1577,14 +1577,14 @@ namespace Lotus
 							{
 								var count = mCount;
 								Clear();
-								return (count);
+								return count;
 							}
 							else
 							{
 								// Удаляем элементы до последнего
 								var count = mCount - 1;
 								RemoveRange(0, count);
-								return (count);
+								return count;
 							}
 						}
 						else
@@ -1592,18 +1592,18 @@ namespace Lotus
 							if (included)
 							{
 								RemoveRange(0, index + 1);
-								return (index + 1);
+								return index + 1;
 							}
 							else
 							{
 								RemoveRange(0, index);
-								return (index);
+								return index;
 							}
 						}
 					}
 				}
 
-				return (-1);
+				return -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1626,14 +1626,14 @@ namespace Lotus
 						{
 							var count = mCount;
 							Clear();
-							return (count);
+							return count;
 						}
 						else
 						{
 							// Удаляем элементы до первого
 							var count = mCount - 1;
 							RemoveRange(1, count);
-							return (count);
+							return count;
 						}
 					}
 					else
@@ -1644,11 +1644,11 @@ namespace Lotus
 							if (included)
 							{
 								RemoveLast();
-								return (1);
+								return 1;
 							}
 							else
 							{
-								return (0);
+								return 0;
 							}
 						}
 						else
@@ -1657,19 +1657,19 @@ namespace Lotus
 							{
 								var count = mCount - index;
 								RemoveRange(index, count);
-								return (count);
+								return count;
 							}
 							else
 							{
 								var count = mCount - index - 1;
 								RemoveRange(index + 1, count);
-								return (count);
+								return count;
 							}
 						}
 					}
 				}
 
-				return (-1);
+				return -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1797,7 +1797,7 @@ namespace Lotus
 					}
 				}
 
-				return (difference);
+				return difference;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1826,13 +1826,13 @@ namespace Lotus
 
 				for (var i = 0; i < mCount; i++)
 				{
-					if (items.Contains(mArrayOfItems[i]) == false)
+					if (items.ContainsElement(mArrayOfItems[i]) == false)
 					{
 						difference.Add(mArrayOfItems[i]);
 					}
 				}
 
-				return (difference);
+				return difference;
 			}
 			#endregion
 
@@ -1918,7 +1918,7 @@ namespace Lotus
 			{
 				for (var i = 0; i < mCount; i++)
 				{
-					if (match(mArrayOfItems[i])) { return (mArrayOfItems[i]); }
+					if (match(mArrayOfItems[i])) { return mArrayOfItems[i]; }
 				}
 
 				return default;
@@ -1935,7 +1935,7 @@ namespace Lotus
 			{
 				for (var i = LastIndex; i >= 0; i--)
 				{
-					if (match(mArrayOfItems[i])) { return (mArrayOfItems[i]); }
+					if (match(mArrayOfItems[i])) { return mArrayOfItems[i]; }
 				}
 
 				return default;
@@ -1964,7 +1964,7 @@ namespace Lotus
 						break;
 					}
 				}
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1988,7 +1988,7 @@ namespace Lotus
 						break;
 					}
 				}
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2011,19 +2011,19 @@ namespace Lotus
 			/// <summary>
 			/// Обмен местами элементов списка
 			/// </summary>
-			/// <param name="old_index">Старая позиция</param>
-			/// <param name="new_index">Новая позиция</param>
+			/// <param name="oldIndex">Старая позиция</param>
+			/// <param name="newIndex">Новая позиция</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Swap(Int32 old_index, Int32 new_index)
+			public void Swap(Int32 oldIndex, Int32 newIndex)
 			{
-				TItem temp = mArrayOfItems[old_index];
-				mArrayOfItems[old_index] = mArrayOfItems[new_index];
-				mArrayOfItems[new_index] = temp;
+				TItem temp = mArrayOfItems[oldIndex];
+				mArrayOfItems[oldIndex] = mArrayOfItems[newIndex];
+				mArrayOfItems[newIndex] = temp;
 
 				if (mIsNotify)
 				{
 					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
-					NotifyCollectionChanged(NotifyCollectionChangedAction.Move, temp, new_index, old_index);
+					NotifyCollectionChanged(NotifyCollectionChangedAction.Move, temp, newIndex, oldIndex);
 				}
 			}
 
@@ -2031,19 +2031,19 @@ namespace Lotus
 			/// <summary>
 			/// Перемещение элемента в новую позицию
 			/// </summary>
-			/// <param name="old_index">Старая позиция</param>
-			/// <param name="new_index">Новая позиция</param>
+			/// <param name="oldIndex">Старая позиция</param>
+			/// <param name="newIndex">Новая позиция</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Move(Int32 old_index, Int32 new_index)
+			public void Move(Int32 oldIndex, Int32 newIndex)
 			{
-				TItem temp = mArrayOfItems[old_index];
-				RemoveAt(old_index);
-				Insert(new_index, temp);
+				TItem temp = mArrayOfItems[oldIndex];
+				RemoveAt(oldIndex);
+				Insert(newIndex, temp);
 
 				if (mIsNotify)
 				{
 					PropertyChanged?.Invoke(this, PropertyArgsIndexer);
-					NotifyCollectionChanged(NotifyCollectionChangedAction.Move, temp, new_index, old_index);
+					NotifyCollectionChanged(NotifyCollectionChangedAction.Move, temp, newIndex, oldIndex);
 				}
 			}
 
@@ -2054,12 +2054,12 @@ namespace Lotus
 			/// <remarks>
 			/// При перемещении вниз индекс элемент увеличивается
 			/// </remarks>
-			/// <param name="element_index">Индекс перемещаемого элемента</param>
+			/// <param name="elementIndex">Индекс перемещаемого элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void MoveDown(Int32 element_index)
+			public void MoveDown(Int32 elementIndex)
 			{
-				var next = (element_index + 1) % mCount;
-				Swap(element_index, next);
+				var next = (elementIndex + 1) % mCount;
+				Swap(elementIndex, next);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2069,13 +2069,13 @@ namespace Lotus
 			/// <remarks>
 			/// При перемещении вниз индекс элемент уменьшается
 			/// </remarks>
-			/// <param name="element_index">Индекс перемещаемого элемента</param>
+			/// <param name="elementIndex">Индекс перемещаемого элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void MoveUp(Int32 element_index)
+			public void MoveUp(Int32 elementIndex)
 			{
-				var previous = element_index - 1;
+				var previous = elementIndex - 1;
 				if (previous < 0) previous = LastIndex;
-				Swap(element_index, previous);
+				Swap(elementIndex, previous);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2216,13 +2216,13 @@ namespace Lotus
 				// Если элемент равен или меньше первого возвращаем нулевой индекс
 				if (ComparerDefault.Compare(item, ItemFirst) <= 0)
 				{
-					return (0);
+					return 0;
 				}
 
 				// Если элемент равен или больше последнего возвращаем последний индекс
 				if (ComparerDefault.Compare(item, ItemLast) >= 0)
 				{
-					return (LastIndex);
+					return LastIndex;
 				}
 
 				for (var i = 1; i < mCount; i++)
@@ -2233,19 +2233,19 @@ namespace Lotus
 					// Если элемент равен возвращаем данный индекс
 					if (status == 0)
 					{
-						return (i);
+						return i;
 					}
 					else
 					{
 						// Если он меньше предыдущего то возвращаем предыдущий индекс
 						if (status == -1)
 						{
-							return (i - 1);
+							return i - 1;
 						}
 					}
 				}
 
-				return (LastIndex);
+				return LastIndex;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2272,11 +2272,11 @@ namespace Lotus
 					if (comprare_first == 0 && included)
 					{
 						RemoveFirst();
-						return (1);
+						return 1;
 					}
 					else
 					{
-						return (0);
+						return 0;
 					}
 				}
 
@@ -2289,14 +2289,14 @@ namespace Lotus
 						// Удаляем элементы до последнего
 						var count = Count - 1;
 						RemoveRange(0, count);
-						return (count);
+						return count;
 					}
 					else
 					{
 						// Удаляем все элементы
 						var count = mCount;
 						Clear();
-						return (count);
+						return count;
 					}
 				}
 
@@ -2312,12 +2312,12 @@ namespace Lotus
 						if (included)
 						{
 							RemoveRange(0, i + 1);
-							return (i + 1);
+							return i + 1;
 						}
 						else
 						{
 							RemoveRange(0, i);
-							return (i);
+							return i;
 						}
 					}
 					else
@@ -2326,12 +2326,12 @@ namespace Lotus
 						if (status == -1)
 						{
 							RemoveRange(0, i);
-							return (i);
+							return i;
 						}
 					}
 				}
 
-				return (0);
+				return 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2359,14 +2359,14 @@ namespace Lotus
 					{
 						var count = Count - 1;
 						RemoveRange(1, count);
-						return (count);
+						return count;
 					}
 					else
 					{
 						// Удаляем все элементы
 						var count = Count;
 						Clear();
-						return (count);
+						return count;
 					}
 				}
 
@@ -2378,11 +2378,11 @@ namespace Lotus
 					{
 						// Удаляем последний элемент
 						RemoveLast();
-						return (1);
+						return 1;
 					}
 					else
 					{
-						return (0);
+						return 0;
 					}
 				}
 
@@ -2398,13 +2398,13 @@ namespace Lotus
 						{
 							var count = mCount;
 							RemoveItemsEnd(i);
-							return (count - i);
+							return count - i;
 						}
 						else
 						{
 							var count = mCount;
 							RemoveItemsEnd(i + 1);
-							return (count - i - 1);
+							return count - i - 1;
 						}
 					}
 					else
@@ -2414,12 +2414,12 @@ namespace Lotus
 						{
 							var count = mCount;
 							RemoveItemsEnd(i + 1);
-							return (count - i - 1);
+							return count - i - 1;
 						}
 					}
 				}
 
-				return (0);
+				return 0;
 			}
 			#endregion
 
@@ -2428,10 +2428,10 @@ namespace Lotus
 			/// <summary>
 			/// Получение списка групп элементов сгруппированных по указанному свойству
 			/// </summary>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Список групп элементов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual ListArray<ListArray<TItem>> GetGroupedByProperty(String property_name)
+			public virtual ListArray<ListArray<TItem>> GetGroupedByProperty(String propertyName)
 			{
 				// Список групп
 				var groups = new ListArray<ListArray<TItem>>();
@@ -2445,7 +2445,7 @@ namespace Lotus
 					for (var i = 0; i < mCount; i++)
 					{
 						// Получем свойство
-						PropertyInfo property_info = mArrayOfItems[i].GetType().GetProperty(property_name, BindingFlags.Public | BindingFlags.Instance);
+						PropertyInfo property_info = mArrayOfItems[i].GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
 						if (property_info != null)
 						{
@@ -2453,7 +2453,7 @@ namespace Lotus
 							var find_index = unique_list.Find((System.Object value) =>
 							{
 								var property_value = property_info.GetValue(mArrayOfItems[i], null);
-								return (value.Equals(property_value));
+								return value.Equals(property_value);
 							});
 
 							// Совпадение не нашли значит это уникальный элемент
@@ -2486,7 +2486,7 @@ namespace Lotus
 				else
 				{
 					// Получаем свойство 1 раз
-					PropertyInfo property_info = typeof(TItem).GetType().GetProperty(property_name, BindingFlags.Public | BindingFlags.Instance);
+					PropertyInfo property_info = typeof(TItem).GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 					if (property_info != null)
 					{
 						for (var i = 0; i < mCount; i++)
@@ -2494,7 +2494,7 @@ namespace Lotus
 							// Ищем совпадение в существующем списке
 							var find_index = unique_list.Find((System.Object value) =>
 							{
-								return (value.Equals(property_info.GetValue(mArrayOfItems[i], null)));
+								return value.Equals(property_info.GetValue(mArrayOfItems[i], null));
 							});
 
 							// Совпадение не нашли значит это уникальный элемент
@@ -2523,7 +2523,7 @@ namespace Lotus
 					}
 				}
 
-				return (groups);
+				return groups;
 			}
 			#endregion
 
@@ -2539,7 +2539,7 @@ namespace Lotus
 				var items = new ListArray<TItem>(MaxCount);
 				Array.Copy(mArrayOfItems, 0, items.mArrayOfItems, 0, mCount);
 				items.mCount = Count;
-				return (items);
+				return items;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2557,7 +2557,7 @@ namespace Lotus
 					// Ищем совпадение в существующем списке
 					var find_index = unique_list.Find((TItem value) =>
 					{
-						return (value.Equals(mArrayOfItems[i]));
+						return value.Equals(mArrayOfItems[i]);
 					});
 
 					// Совпадение не нашли значит это уникальный элемент
@@ -2568,7 +2568,7 @@ namespace Lotus
 					}
 				}
 
-				return (unique_list);
+				return unique_list;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2578,10 +2578,10 @@ namespace Lotus
 			/// <remarks>
 			/// Используется рефлексия
 			/// </remarks>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Список уникальных свойств</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ListArray<System.Object> GetDistinctValueFromPropertyName(String property_name)
+			public ListArray<System.Object> GetDistinctValueFromPropertyName(String propertyName)
 			{
 				var unique_list = new ListArray<System.Object>();
 
@@ -2591,14 +2591,14 @@ namespace Lotus
 					for (var i = 0; i < mCount; i++)
 					{
 						// Получем свойство
-						PropertyInfo property_info = mArrayOfItems[i].GetType().GetProperty(property_name, BindingFlags.Public | BindingFlags.Instance);
+						PropertyInfo property_info = mArrayOfItems[i].GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
 						if (property_info != null)
 						{
 							// Ищем совпадение в существующем списке
 							var find_index = unique_list.Find((System.Object value) =>
 							{
-								return (value.Equals(property_info.GetValue(mArrayOfItems[i], null)));
+								return value.Equals(property_info.GetValue(mArrayOfItems[i], null));
 							});
 
 							// Совпадение не нашли значит это уникальный элемент
@@ -2613,7 +2613,7 @@ namespace Lotus
 				else
 				{
 					// Получаем свойство 1 раз
-					PropertyInfo property_info = typeof(TItem).GetType().GetProperty(property_name, BindingFlags.Public | BindingFlags.Instance);
+					PropertyInfo property_info = typeof(TItem).GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 					if (property_info != null)
 					{
 						for (var i = 0; i < mCount; i++)
@@ -2621,7 +2621,7 @@ namespace Lotus
 							// Ищем совпадение в существующем списке
 							var find_index = unique_list.Find((System.Object value) =>
 							{
-								return (value.Equals(property_info.GetValue(mArrayOfItems[i], null)));
+								return value.Equals(property_info.GetValue(mArrayOfItems[i], null));
 							});
 
 							// Совпадение не нашли значит это уникальный элемент
@@ -2635,7 +2635,7 @@ namespace Lotus
 					}
 				}
 
-				return (unique_list);
+				return unique_list;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2657,7 +2657,7 @@ namespace Lotus
 					}
 				}
 
-				return (result);
+				return result;
 			}
 			#endregion
 
@@ -2671,11 +2671,11 @@ namespace Lotus
 			/// <summary>
 			/// Вспомогательный метод для нотификации изменений свойства
 			/// </summary>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void NotifyPropertyChanged(String property_name = "")
+			public void NotifyPropertyChanged(String propertyName = "")
 			{
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property_name));
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2716,11 +2716,11 @@ namespace Lotus
 			/// <param name="action">Действие с коллекцией</param>
 			/// <param name="item">Элемент коллекции</param>
 			/// <param name="index">Индекс элемента</param>
-			/// <param name="old_index">Предыдущий индекс элемента</param>
+			/// <param name="oldIndex">Предыдущий индекс элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object item, Int32 index, Int32 old_index)
+			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object item, Int32 index, Int32 oldIndex)
 			{
-				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item, index, old_index));
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item, index, oldIndex));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2728,13 +2728,13 @@ namespace Lotus
 			/// Вспомогательный метод для нотификации изменений коллекции
 			/// </summary>
 			/// <param name="action">Действие с коллекцией</param>
-			/// <param name="old_item">Элемент коллекции</param>
-			/// <param name="new_item">Элемент коллекции</param>
+			/// <param name="oldItem">Элемент коллекции</param>
+			/// <param name="newItem">Элемент коллекции</param>
 			/// <param name="index">Индекс элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object old_item, System.Object new_item, Int32 index)
+			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object oldItem, System.Object newItem, Int32 index)
 			{
-				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, new_item, old_item, index));
+				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
 			}
 			#endregion
 		}

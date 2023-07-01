@@ -47,7 +47,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal Boolean mValue;
@@ -100,12 +100,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="on_changed">Обработчик события изменения значения</param>
+			/// <param name="onChanged">Обработчик события изменения значения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public BoolObserved(Boolean value, Action<Boolean> on_changed)
+			public BoolObserved(Boolean value, Action<Boolean> onChanged)
 			{
 				mValue = value;
-				mOnChanged = on_changed;
+				mOnChanged = onChanged;
 			}
 			#endregion
 
@@ -272,7 +272,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String SerializeToString()
 			{
-				return (mValue.ToString());
+				return mValue.ToString();
 			}
 			#endregion
 		}
@@ -302,7 +302,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal Int32 mValue;
@@ -355,12 +355,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="on_changed">Обработчик события изменения значения</param>
+			/// <param name="onChanged">Обработчик события изменения значения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public IntObserved(Int32 value, Action<Int32> on_changed)
+			public IntObserved(Int32 value, Action<Int32> onChanged)
 			{
 				mValue = value;
-				mOnChanged = on_changed;
+				mOnChanged = onChanged;
 			}
 			#endregion
 
@@ -527,7 +527,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String SerializeToString()
 			{
-				return (mValue.ToString());
+				return mValue.ToString();
 			}
 			#endregion
 		}
@@ -557,7 +557,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal Single mValue;
@@ -610,12 +610,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="on_changed">Обработчик события изменения значения</param>
+			/// <param name="onChanged">Обработчик события изменения значения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public SingleObserved(Single value, Action<Single> on_changed)
+			public SingleObserved(Single value, Action<Single> onChanged)
 			{
 				mValue = value;
-				mOnChanged = on_changed;
+				mOnChanged = onChanged;
 			}
 			#endregion
 
@@ -782,7 +782,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String SerializeToString()
 			{
-				return (mValue.ToString());
+				return mValue.ToString();
 			}
 			#endregion
 		}
@@ -811,7 +811,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal String mValue;
@@ -864,12 +864,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="on_changed">Обработчик события изменения значения</param>
+			/// <param name="onChanged">Обработчик события изменения значения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public StringObserved(String value, Action<String> on_changed)
+			public StringObserved(String value, Action<String> onChanged)
 			{
 				mValue = value;
-				mOnChanged = on_changed;
+				mOnChanged = onChanged;
 			}
 			#endregion
 
@@ -915,7 +915,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(StringObserved other)
 			{
-				return (String.CompareOrdinal(mValue, other.mValue));
+				return String.CompareOrdinal(mValue, other.mValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1036,7 +1036,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String SerializeToString()
 			{
-				return (mValue);
+				return mValue;
 			}
 			#endregion
 		}

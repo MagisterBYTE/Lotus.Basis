@@ -53,36 +53,36 @@ namespace Lotus
 			/// <remarks>
 			/// Формат записи определяется исходя из расширения файла
 			/// </remarks>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="instance">Экземпляр объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SaveTo(String file_name, System.Object instance)
+			public static void SaveTo(String fileName, System.Object instance)
 			{
-				var ext = Path.GetExtension(file_name).ToLower();
+				var ext = Path.GetExtension(fileName).ToLower();
 				switch (ext)
 				{
-					case XFileExtension.XML_D:
+					case XFileExtension.XMLD:
 						{
 							if(SerializerXml == null)
 							{
 								SerializerXml = new CSerializerXml();
 							}
 
-							SerializerXml.SaveTo(file_name, instance);
+							SerializerXml.SaveTo(fileName, instance);
 						}
 						break;
-					case XFileExtension.JSON_D:
+					case XFileExtension.JSOND:
 						{
 							if (SerializerJson == null)
 							{
 								SerializerJson = new CSerializerJson();
 							}
 
-							SerializerJson.SaveTo(file_name, instance);
+							SerializerJson.SaveTo(fileName, instance);
 						}
 						break;
-					case XFileExtension.BIN_D:
-					case XFileExtension.BYTES_D:
+					case XFileExtension.BIND:
+					case XFileExtension.BYTESD:
 						{
 						}
 						break;
@@ -100,37 +100,37 @@ namespace Lotus
 			/// <remarks>
 			/// Формат чтения определяется исходя из расширения файла
 			/// </remarks>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object LoadFrom(String file_name)
+			public static System.Object LoadFrom(String fileName)
 			{
-				var ext = Path.GetExtension(file_name).ToLower();
+				var ext = Path.GetExtension(fileName).ToLower();
 				System.Object result = null;
 				switch (ext)
 				{
-					case XFileExtension.XML_D:
+					case XFileExtension.XMLD:
 						{
 							if (SerializerXml == null)
 							{
 								SerializerXml = new CSerializerXml();
 							}
 
-							result = SerializerXml.LoadFrom(file_name);
+							result = SerializerXml.LoadFrom(fileName);
 						}
 						break;
-					case XFileExtension.JSON_D:
+					case XFileExtension.JSOND:
 						{
 							if (SerializerJson == null)
 							{
 								SerializerJson = new CSerializerJson();
 							}
 
-							result = SerializerJson.LoadFrom(file_name);
+							result = SerializerJson.LoadFrom(fileName);
 						}
 						break;
-					case XFileExtension.BIN_D:
-					case XFileExtension.BYTES_D:
+					case XFileExtension.BIND:
+					case XFileExtension.BYTESD:
 						{
 						}
 						break;
@@ -138,7 +138,7 @@ namespace Lotus
 						break;
 				}
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -149,37 +149,37 @@ namespace Lotus
 			/// Формат чтения определяется исходя из расширения файла
 			/// </remarks>
 			/// <typeparam name="TResultType">Тип объекта</typeparam>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TResultType LoadFrom<TResultType>(String file_name)
+			public static TResultType LoadFrom<TResultType>(String fileName)
 			{
-				var ext = Path.GetExtension(file_name).ToLower();
+				var ext = Path.GetExtension(fileName).ToLower();
 				TResultType result = default;
 				switch (ext)
 				{
-					case XFileExtension.XML_D:
+					case XFileExtension.XMLD:
 						{
 							if (SerializerXml == null)
 							{
 								SerializerXml = new CSerializerXml();
 							}
 
-							result = SerializerXml.LoadFrom<TResultType>(file_name);
+							result = SerializerXml.LoadFrom<TResultType>(fileName);
 						}
 						break;
-					case XFileExtension.JSON_D:
+					case XFileExtension.JSOND:
 						{
 							if (SerializerJson == null)
 							{
 								SerializerJson = new CSerializerJson();
 							}
 
-							result = SerializerJson.LoadFrom<TResultType>(file_name);
+							result = SerializerJson.LoadFrom<TResultType>(fileName);
 						}
 						break;
-					case XFileExtension.BIN_D:
-					case XFileExtension.BYTES_D:
+					case XFileExtension.BIND:
+					case XFileExtension.BYTESD:
 						{
 						}
 						break;
@@ -187,7 +187,7 @@ namespace Lotus
 						break;
 				}
 
-				return (result);
+				return result;
 			}
 			#endregion
 
@@ -200,35 +200,35 @@ namespace Lotus
 			/// Формат чтения определяется исходя из расширения файла
 			/// </remarks>
 			/// <param name="instance">Экземпляр объекта</param>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void UpdateFrom(System.Object instance, String file_name)
+			public static void UpdateFrom(System.Object instance, String fileName)
 			{
-				var ext = Path.GetExtension(file_name).ToLower();
+				var ext = Path.GetExtension(fileName).ToLower();
 				switch (ext)
 				{
-					case XFileExtension.XML_D:
+					case XFileExtension.XMLD:
 						{
 							if (SerializerXml == null)
 							{
 								SerializerXml = new CSerializerXml();
 							}
 
-							SerializerXml.UpdateFrom(instance, file_name);
+							SerializerXml.UpdateFrom(instance, fileName);
 						}
 						break;
-					case XFileExtension.JSON_D:
+					case XFileExtension.JSOND:
 						{
 							if (SerializerJson == null)
 							{
 								SerializerJson = new CSerializerJson();
 							}
 
-							SerializerJson.UpdateFrom(instance, file_name);
+							SerializerJson.UpdateFrom(instance, fileName);
 						}
 						break;
-					case XFileExtension.BIN_D:
-					case XFileExtension.BYTES_D:
+					case XFileExtension.BIND:
+					case XFileExtension.BYTESD:
 						{
 						}
 						break;

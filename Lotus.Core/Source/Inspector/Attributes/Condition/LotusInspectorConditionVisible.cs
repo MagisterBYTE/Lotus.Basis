@@ -72,14 +72,14 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="managing_member_name">Имя члена объекта от которого определяется видимость</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="managingMemberName">Имя члена объекта от которого определяется видимость</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			/// <param name="value">Целевое значение поля/свойства при котором существует видимость</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusVisibleEqualityAttribute(String managing_member_name, TInspectorMemberType member_type, Boolean value)
+			public LotusVisibleEqualityAttribute(String managingMemberName, TInspectorMemberType memberType, Boolean value)
 			{
-				mManagingMemberName = managing_member_name;
-				mMemberType = member_type;
+				mManagingMemberName = managingMemberName;
+				mMemberType = memberType;
 				mValue = value;
 			}
 			#endregion

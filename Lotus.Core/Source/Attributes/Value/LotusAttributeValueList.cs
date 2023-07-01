@@ -85,24 +85,24 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="list_values">Набор значений величины</param>
+			/// <param name="listValues">Набор значений величины</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusListValuesAttribute(params System.Object[] list_values)
+			public LotusListValuesAttribute(params System.Object[] listValues)
 			{
-				mListValues = list_values;
+				mListValues = listValues;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="member_name">Имя члена объекта содержащий набор значений величины</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта содержащий набор значений величины</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusListValuesAttribute(String member_name, TInspectorMemberType member_type)
+			public LotusListValuesAttribute(String memberName, TInspectorMemberType memberType)
 			{
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -110,14 +110,14 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="type">Тип содержащий набор значений величины</param>
-			/// <param name="member_name">Имя члена объекта содержащий набор значений величины</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта содержащий набор значений величины</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusListValuesAttribute(Type type, String member_name, TInspectorMemberType member_type)
+			public LotusListValuesAttribute(Type type, String memberName, TInspectorMemberType memberType)
 			{
 				mListValues = type;
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 			#endregion
 		}

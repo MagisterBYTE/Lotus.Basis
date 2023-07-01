@@ -41,9 +41,9 @@ namespace Lotus
 			[Test]
 			public static void TestParameters()
 			{
-				CParameters parameter_inner = new CParameters(223, new CParameterString("Имя", "Эра"));
+				var parameter_inner = new CParameters(223, new CParameterString("Имя", "Эра"));
 
-				CParameters parameterObject = new CParameters("Программа",
+				var parameterObject = new CParameters("Программа",
 					new CParameterString("Имя", "Эра"), parameter_inner);
 
 				Assert.AreEqual(parameterObject.Value[0].Name, "Имя");

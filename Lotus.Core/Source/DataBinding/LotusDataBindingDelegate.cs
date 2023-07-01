@@ -94,23 +94,23 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public BindingDelegate()
 			{
-				mIsStringView = (typeof(TTypeView) == typeof(String));
+				mIsStringView = typeof(TTypeView) == typeof(String);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
-			/// <param name="model_member_name">Имя члена объекта модели</param>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
-			/// <param name="view_member_name">Имя члена объекта представления</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
+			/// <param name="modelMemberName">Имя члена объекта модели</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
+			/// <param name="viewMemberName">Имя члена объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public BindingDelegate(System.Object model_instance, String model_member_name, System.Object view_instance, 
-				String view_member_name)
+			public BindingDelegate(System.Object modelInstance, String modelMemberName, System.Object viewInstance, 
+				String viewMemberName)
 			{
-				SetModel(model_instance, model_member_name);
-				SetView(view_instance, view_member_name);
+				SetModel(modelInstance, modelMemberName);
+				SetView(viewInstance, viewMemberName);
 			}
 			#endregion
 
@@ -140,7 +140,7 @@ namespace Lotus
 					}
 					catch (Exception exc)
 					{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 						UnityEngine.Debug.LogException(exc);
 #else
 						XLogger.LogException(exc);
@@ -176,7 +176,7 @@ namespace Lotus
 						}
 						catch (Exception exc)
 						{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 							UnityEngine.Debug.LogException(exc);
 #else
 							XLogger.LogException(exc);
@@ -201,12 +201,12 @@ namespace Lotus
 				// Проверяем сначала свойство 
 				if (XReflection.ContainsProperty(mModelInstance, mModelMemberName))
 				{
-					return (XReflection.GetPropertyValue(mModelInstance, mModelMemberName));
+					return XReflection.GetPropertyValue(mModelInstance, mModelMemberName);
 				}
 				else
 				{
 					// Теперь поле
-					return (XReflection.GetFieldValue(mModelInstance, mModelMemberName));
+					return XReflection.GetFieldValue(mModelInstance, mModelMemberName);
 				}
 			}
 
@@ -275,7 +275,7 @@ namespace Lotus
 					}
 					catch (Exception exc)
 					{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 						UnityEngine.Debug.LogException(exc);
 #else
 						XLogger.LogException(exc);
@@ -293,7 +293,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void SetView(System.Object view_instance, String member_name)
 			{
-				mIsStringView = (typeof(TTypeView) == typeof(String));
+				mIsStringView = typeof(TTypeView) == typeof(String);
 				ResetView(view_instance);
 				if (SetMemberType(view_instance, member_name, ref mViewMemberType) != null)
 				{
@@ -311,7 +311,7 @@ namespace Lotus
 						}
 						catch (Exception exc)
 						{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 							UnityEngine.Debug.LogException(exc);
 #else
 							XLogger.LogException(exc);
@@ -336,12 +336,12 @@ namespace Lotus
 				// Проверяем сначала свойство 
 				if (XReflection.ContainsProperty(mViewInstance, mViewMemberName))
 				{
-					return (XReflection.GetPropertyValue(mViewInstance, mViewMemberName));
+					return XReflection.GetPropertyValue(mViewInstance, mViewMemberName);
 				}
 				else
 				{
 					// Теперь поле
-					return (XReflection.GetFieldValue(mViewInstance, mViewMemberName));
+					return XReflection.GetFieldValue(mViewInstance, mViewMemberName);
 				}
 			}
 

@@ -50,7 +50,7 @@ namespace Lotus
 						mBindings = new List<CBindingBase>();
 					}
 
-					return (mBindings);
+					return mBindings;
 				}
 			}
 			#endregion
@@ -62,16 +62,16 @@ namespace Lotus
 			/// </summary>
 			/// <param name="name">Имя привязки данных</param>
 			/// <param name="model">Объект модели</param>
-			/// <param name="model_name">Имя члена объекта модели</param>
+			/// <param name="modelName">Имя члена объекта модели</param>
 			/// <param name="view">Объект представления</param>
-			/// <param name="view_name">Имя члена объекта представления</param>
+			/// <param name="viewName">Имя члена объекта представления</param>
 			/// <param name="mode">Режим связывания данных между объектом модели и объектом представления</param>
 			/// <returns>Экземпляр связывания данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CBindingReflection CreateReflection(String name, System.Object model, String model_name, System.Object view, 
-				String view_name, TBindingMode mode = TBindingMode.ViewData)
+			public static CBindingReflection CreateReflection(String name, System.Object model, String modelName, System.Object view, 
+				String viewName, TBindingMode mode = TBindingMode.ViewData)
 			{
-				var binding = new CBindingReflection(model, model_name, view, view_name);
+				var binding = new CBindingReflection(model, modelName, view, viewName);
 				binding.Name = name;
 				binding.Mode = mode;
 				Bindings.Add(binding);
@@ -84,20 +84,20 @@ namespace Lotus
 			/// </summary>
 			/// <param name="name">Имя привязки данных</param>
 			/// <param name="model">Объект модели</param>
-			/// <param name="model_name">Имя члена объекта модели</param>
+			/// <param name="modelName">Имя члена объекта модели</param>
 			/// <param name="view">Объект представления</param>
-			/// <param name="view_name">Имя члена объекта представления</param>
+			/// <param name="viewName">Имя члена объекта представления</param>
 			/// <param name="mode">Режим связывания данных между объектом модели и объектом представления</param>
-			/// <param name="on_convert_to_view">Делегат для преобразования объекта модели в объект представления</param>
+			/// <param name="onConvertToView">Делегат для преобразования объекта модели в объект представления</param>
 			/// <returns>Экземпляр связывания данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CBindingReflection CreateReflection(String name, System.Object model, String model_name, System.Object view,
-				String view_name, TBindingMode mode, Func<System.Object, System.Object> on_convert_to_view)
+			public static CBindingReflection CreateReflection(String name, System.Object model, String modelName, System.Object view,
+				String viewName, TBindingMode mode, Func<System.Object, System.Object> onConvertToView)
 			{
-				var binding = new CBindingReflection(model, model_name, view, view_name);
+				var binding = new CBindingReflection(model, modelName, view, viewName);
 				binding.Name = name;
 				binding.Mode = mode;
-				binding.OnConvertToView = on_convert_to_view;
+				binding.OnConvertToView = onConvertToView;
 				Bindings.Add(binding);
 				return binding;
 			}
@@ -108,23 +108,23 @@ namespace Lotus
 			/// </summary>
 			/// <param name="name">Имя привязки данных</param>
 			/// <param name="model">Объект модели</param>
-			/// <param name="model_name">Имя члена объекта модели</param>
+			/// <param name="modelName">Имя члена объекта модели</param>
 			/// <param name="view">Объект представления</param>
-			/// <param name="view_name">Имя члена объекта представления</param>
+			/// <param name="viewName">Имя члена объекта представления</param>
 			/// <param name="mode">Режим связывания данных между объектом модели и объектом представления</param>
-			/// <param name="on_convert_to_view">Делегат для преобразования объекта модели в объект представления</param>
-			/// <param name="on_convert_to_model">Делегат для преобразования объекта представления в объект модели</param>
+			/// <param name="onConvertToView">Делегат для преобразования объекта модели в объект представления</param>
+			/// <param name="onConvertToModel">Делегат для преобразования объекта представления в объект модели</param>
 			/// <returns>Экземпляр связывания данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CBindingReflection CreateReflection(String name, System.Object model, String model_name, System.Object view,
-				String view_name, TBindingMode mode, Func<System.Object, System.Object> on_convert_to_view,
-				Func<System.Object, System.Object> on_convert_to_model)
+			public static CBindingReflection CreateReflection(String name, System.Object model, String modelName, System.Object view,
+				String viewName, TBindingMode mode, Func<System.Object, System.Object> onConvertToView,
+				Func<System.Object, System.Object> onConvertToModel)
 			{
-				var binding = new CBindingReflection(model, model_name, view, view_name);
+				var binding = new CBindingReflection(model, modelName, view, viewName);
 				binding.Name = name;
 				binding.Mode = mode;
-				binding.OnConvertToView = on_convert_to_view;
-				binding.OnConvertToModel = on_convert_to_model;
+				binding.OnConvertToView = onConvertToView;
+				binding.OnConvertToModel = onConvertToModel;
 				Bindings.Add(binding);
 				return binding;
 			}
@@ -137,16 +137,16 @@ namespace Lotus
 			/// <typeparam name="TTypeView">Тип члена объекта представления</typeparam>
 			/// <param name="name">Имя привязки данных</param>
 			/// <param name="model">Объект модели</param>
-			/// <param name="model_name">Имя члена объекта модели</param>
+			/// <param name="modelName">Имя члена объекта модели</param>
 			/// <param name="view">Объект представления</param>
-			/// <param name="view_name">Имя члена объекта представления</param>
+			/// <param name="viewName">Имя члена объекта представления</param>
 			/// <param name="mode">Режим связывания данных между объектом модели и объектом представления</param>
 			/// <returns>Экземпляр связывания данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String model_name, System.Object view,
-				String view_name, TBindingMode mode = TBindingMode.ViewData)
+			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String modelName, System.Object view,
+				String viewName, TBindingMode mode = TBindingMode.ViewData)
 			{
-				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
+				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName);
 				binding.Name = name;
 				binding.Mode = mode;
 				Bindings.Add(binding);
@@ -161,20 +161,20 @@ namespace Lotus
 			/// <typeparam name="TTypeView">Тип члена объекта представления</typeparam>
 			/// <param name="name">Имя привязки данных</param>
 			/// <param name="model">Объект модели</param>
-			/// <param name="model_name">Имя члена объекта модели</param>
+			/// <param name="modelName">Имя члена объекта модели</param>
 			/// <param name="view">Объект представления</param>
-			/// <param name="view_name">Имя члена объекта представления</param>
+			/// <param name="viewName">Имя члена объекта представления</param>
 			/// <param name="mode">Режим связывания данных между объектом модели и объектом представления</param>
-			/// <param name="on_convert_to_view">Делегат для преобразования объекта модели в объект представления</param>
+			/// <param name="onConvertToView">Делегат для преобразования объекта модели в объект представления</param>
 			/// <returns>Экземпляр связывания данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String model_name, System.Object view,
-				String view_name, TBindingMode mode, Func<TTypeModel, TTypeView> on_convert_to_view)
+			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String modelName, System.Object view,
+				String viewName, TBindingMode mode, Func<TTypeModel, TTypeView> onConvertToView)
 			{
-				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
+				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName);
 				binding.Name = name;
 				binding.Mode = mode;
-				binding.OnConvertToView = on_convert_to_view;
+				binding.OnConvertToView = onConvertToView;
 				Bindings.Add(binding);
 				return binding;
 			}
@@ -187,23 +187,23 @@ namespace Lotus
 			/// <typeparam name="TTypeView">Тип члена объекта представления</typeparam>
 			/// <param name="name">Имя привязки данных</param>
 			/// <param name="model">Объект модели</param>
-			/// <param name="model_name">Имя члена объекта модели</param>
+			/// <param name="modelName">Имя члена объекта модели</param>
 			/// <param name="view">Объект представления</param>
-			/// <param name="view_name">Имя члена объекта представления</param>
+			/// <param name="viewName">Имя члена объекта представления</param>
 			/// <param name="mode">Режим связывания данных между объектом модели и объектом представления</param>
-			/// <param name="on_convert_to_view">Делегат для преобразования объекта модели в объект представления</param>
-			/// <param name="on_convert_to_model">Делегат для преобразования объекта представления в объект модели</param>
+			/// <param name="onConvertToView">Делегат для преобразования объекта модели в объект представления</param>
+			/// <param name="onConvertToModel">Делегат для преобразования объекта представления в объект модели</param>
 			/// <returns>Экземпляр связывания данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String model_name, System.Object view,
-				String view_name, TBindingMode mode, Func<TTypeModel, TTypeView> on_convert_to_view, 
-				Func<TTypeView, TTypeModel> on_convert_to_model)
+			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String modelName, System.Object view,
+				String viewName, TBindingMode mode, Func<TTypeModel, TTypeView> onConvertToView, 
+				Func<TTypeView, TTypeModel> onConvertToModel)
 			{
-				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, model_name, view, view_name);
+				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName);
 				binding.Name = name;
 				binding.Mode = mode;
-				binding.OnConvertToView = on_convert_to_view;
-				binding.OnConvertToModel = on_convert_to_model;
+				binding.OnConvertToView = onConvertToView;
+				binding.OnConvertToModel = onConvertToModel;
 				Bindings.Add(binding);
 				return binding;
 			}
@@ -274,15 +274,15 @@ namespace Lotus
 			/// Включение/отключение привязки данных
 			/// </summary>
 			/// <param name="name">Имя привязки данных</param>
-			/// <param name="is_enabled">Статус включения/отключения</param>
+			/// <param name="isEnabled">Статус включения/отключения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SetBindingEnabled(String name, Boolean is_enabled)
+			public static void SetBindingEnabled(String name, Boolean isEnabled)
 			{
 				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
-						Bindings[i].IsEnabled = is_enabled;
+						Bindings[i].IsEnabled = isEnabled;
 						break;
 					}
 				}
@@ -293,15 +293,15 @@ namespace Lotus
 			/// Установка объекта модели привязки данных
 			/// </summary>
 			/// <param name="name">Имя привязки данных</param>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SetBindingModel(String name, System.Object model_instance)
+			public static void SetBindingModel(String name, System.Object modelInstance)
 			{
 				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
-						Bindings[i].SetModel(model_instance);
+						Bindings[i].SetModel(modelInstance);
 						break;
 					}
 				}
@@ -312,15 +312,15 @@ namespace Lotus
 			/// Установка объекта представления привязки данных
 			/// </summary>
 			/// <param name="name">Имя привязки данных</param>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SetBindingView(String name, System.Object view_instance)
+			public static void SetBindingView(String name, System.Object viewInstance)
 			{
 				for (var i = 0; i < Bindings.Count; i++)
 				{
 					if (Bindings[i].Name == name)
 					{
-						Bindings[i].SetView(view_instance);
+						Bindings[i].SetView(viewInstance);
 						break;
 					}
 				}

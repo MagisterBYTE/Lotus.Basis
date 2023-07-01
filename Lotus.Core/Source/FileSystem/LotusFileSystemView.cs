@@ -55,10 +55,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="data_context">Данные</param>
+			/// <param name="dataContext">Данные</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CViewItemHierarchyFileSystem(ILotusFileSystemEntity data_context)
-				: base(data_context)
+			public CViewItemHierarchyFileSystem(ILotusFileSystemEntity dataContext)
+				: base(dataContext)
 			{
 				SetContextMenu();
 				mIsNotify = true;
@@ -68,11 +68,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="data_context">Данные</param>
-			/// <param name="parent_item">Родительский узел</param>
+			/// <param name="dataContext">Данные</param>
+			/// <param name="parentItem">Родительский узел</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CViewItemHierarchyFileSystem(ILotusFileSystemEntity data_context, ILotusViewItemHierarchy parent_item)
-				: base(data_context, parent_item)
+			public CViewItemHierarchyFileSystem(ILotusFileSystemEntity dataContext, ILotusViewItemHierarchy parentItem)
+				: base(dataContext, parentItem)
 			{
 				SetContextMenu();
 				mIsNotify = true;

@@ -92,24 +92,24 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="step_value">Шаг приращения</param>
+			/// <param name="stepValue">Шаг приращения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusStepValueAttribute(System.Object step_value)
+			public LotusStepValueAttribute(System.Object stepValue)
 			{
-				mStepValue = step_value;
+				mStepValue = stepValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="member_name">Имя члена объекта представляющий шаг приращения значения</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта представляющий шаг приращения значения</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusStepValueAttribute(String member_name, TInspectorMemberType member_type = TInspectorMemberType.Method)
+			public LotusStepValueAttribute(String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -117,14 +117,14 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="type">Тип представляющий шаг приращения значения</param>
-			/// <param name="member_name">Имя члена типа представляющий шаг приращения значения</param>
-			/// <param name="member_type">Тип члена типа</param>
+			/// <param name="memberName">Имя члена типа представляющий шаг приращения значения</param>
+			/// <param name="memberType">Тип члена типа</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusStepValueAttribute(Type type, String member_name, TInspectorMemberType member_type = TInspectorMemberType.Method)
+			public LotusStepValueAttribute(Type type, String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
 				mStepValue = type;
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 			#endregion
 		}

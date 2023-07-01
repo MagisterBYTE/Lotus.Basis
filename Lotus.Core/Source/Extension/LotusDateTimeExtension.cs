@@ -35,7 +35,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static DateTime TwoDaysAgo(this DateTime @this)
 			{
-				return (@this - TimeSpan.FromDays(2));
+				return @this - TimeSpan.FromDays(2);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static DateTime Yesterday(this DateTime @this)
 			{
-				return (@this - TimeSpan.FromDays(1));
+				return @this - TimeSpan.FromDays(1);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static DateTime Tomorrow(this DateTime @this)
 			{
-				return (@this + TimeSpan.FromDays(1));
+				return @this + TimeSpan.FromDays(1);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static DateTime DayAfterTomorrow(this DateTime @this)
 			{
-				return (@this + TimeSpan.FromDays(2));
+				return @this + TimeSpan.FromDays(2);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -79,16 +79,16 @@ namespace Lotus
 			/// Получение интерполированное значение даты
 			/// </summary>
 			/// <param name="this">Дата/время</param>
-			/// <param name="end_date">Конечная дата/время</param>
+			/// <param name="endDate">Конечная дата/время</param>
 			/// <param name="time">Фактор интерполяции от 0 до 1</param>
 			/// <returns>Дата</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static DateTime GetInterpolatedDate(this DateTime @this, DateTime end_date, Single time)
+			public static DateTime GetInterpolatedDate(this DateTime @this, DateTime endDate, Single time)
 			{
-				var total_second = (end_date - @this).TotalSeconds;
+				var total_second = (endDate - @this).TotalSeconds;
 				DateTime result = @this + TimeSpan.FromSeconds(total_second * time);
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ToStrDateUTC(this DateTime @this)
 			{
-				return (@this.ToString("yyyy-MM-dd"));
+				return @this.ToString("yyyy-MM-dd");
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ namespace Lotus
 				result = String.Format("{0}y_{1}m_{2}d_{3}h_{4}m_{5}", @this.Year, @this.Month.ToString("D2"), 
 					@this.Day.ToString("D2"), @this.Hour.ToString("D2"), @this.Minute.ToString("D2"), @this.Second.ToString("D2"));
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ namespace Lotus
 					@this.Month.ToString("D2"), @this.Day.ToString("D2"), @this.Hour.ToString("D2"),
 					@this.Minute.ToString("D2"), @this.Second.ToString("D2"));
 
-				return (result);
+				return result;
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

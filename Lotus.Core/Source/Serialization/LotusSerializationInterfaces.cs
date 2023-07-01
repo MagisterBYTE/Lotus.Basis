@@ -50,17 +50,17 @@ namespace Lotus
 			/// <remarks>
 			/// Здесь должна быть реализована запись только данных элемента
 			/// </remarks>
-			/// <param name="xml_writer">Средство записи данных в формат XML</param>
+			/// <param name="xmlWriter">Средство записи данных в формат XML</param>
 			//---------------------------------------------------------------------------------------------------------
-			void WriteToXml(XmlWriter xml_writer);
+			void WriteToXml(XmlWriter xmlWriter);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Чтение данных объекта из данных в формате XML
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			//---------------------------------------------------------------------------------------------------------
-			void ReadFromXml(XmlReader xml_reader);
+			void ReadFromXml(XmlReader xmlReader);
 			#endregion
 		}
 

@@ -83,9 +83,9 @@ namespace Lotus
 			/// <remarks>
 			/// Это максимально общая и универсальная реализация
 			/// </remarks>
-			/// <param name="pool_object">Объект</param>
+			/// <param name="poolObject">Объект</param>
 			//---------------------------------------------------------------------------------------------------------
-			void ReleaseObjectToPool(System.Object pool_object);
+			void ReleaseObjectToPool(System.Object poolObject);
 			#endregion
 		}
 
@@ -155,11 +155,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="max_instance">Максимальное количество объектов для пула</param>
+			/// <param name="maxInstance">Максимальное количество объектов для пула</param>
 			//---------------------------------------------------------------------------------------------------------
-			public PoolManagerBase(Int32 max_instance)
+			public PoolManagerBase(Int32 maxInstance)
 			{
-				mMaxInstances = max_instance;
+				mMaxInstances = maxInstance;
 				mPoolObjects = new StackArray<TPoolObject>(mMaxInstances);
 			}
 
@@ -167,12 +167,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="max_instance">Максимальное количество объектов для пула</param>
+			/// <param name="maxInstance">Максимальное количество объектов для пула</param>
 			/// <param name="constructor">Конструктор для создания начального количества объектов пула </param>
 			//---------------------------------------------------------------------------------------------------------
-			public PoolManagerBase(Int32 max_instance, Func<TPoolObject> constructor)
+			public PoolManagerBase(Int32 maxInstance, Func<TPoolObject> constructor)
 			{
-				mMaxInstances = max_instance;
+				mMaxInstances = maxInstance;
 				mConstructor = constructor;
 				mPoolObjects = new StackArray<TPoolObject>(mMaxInstances);
 
@@ -249,11 +249,11 @@ namespace Lotus
 			/// <remarks>
 			/// Применяется когда объект не нужен
 			/// </remarks>
-			/// <param name="pool_object">Объект</param>
+			/// <param name="poolObject">Объект</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void Release(TPoolObject pool_object)
+			public virtual void Release(TPoolObject poolObject)
 			{
-				mPoolObjects.Push(pool_object);
+				mPoolObjects.Push(poolObject);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -297,10 +297,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="max_instance">Максимальное количество объектов для пула</param>
+			/// <param name="maxInstance">Максимальное количество объектов для пула</param>
 			//---------------------------------------------------------------------------------------------------------
-			public PoolManager(Int32 max_instance)
-				: base(max_instance)
+			public PoolManager(Int32 maxInstance)
+				: base(maxInstance)
 			{
 			}
 
@@ -308,11 +308,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="max_instance">Максимальное количество объектов для пула</param>
+			/// <param name="maxInstance">Максимальное количество объектов для пула</param>
 			/// <param name="constructor">Конструктор для создания начального количества объектов пула </param>
 			//---------------------------------------------------------------------------------------------------------
-			public PoolManager(Int32 max_instance, Func<TPoolObject> constructor)
-				: base(max_instance, constructor)
+			public PoolManager(Int32 maxInstance, Func<TPoolObject> constructor)
+				: base(maxInstance, constructor)
 			{
 			}
 			#endregion

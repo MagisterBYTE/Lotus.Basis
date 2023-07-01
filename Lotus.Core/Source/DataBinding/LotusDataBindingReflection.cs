@@ -97,16 +97,16 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
-			/// <param name="model_member_name">Имя члена объекта модели</param>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
-			/// <param name="view_member_name">Имя члена объекта представления</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
+			/// <param name="modelMemberName">Имя члена объекта модели</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
+			/// <param name="viewMemberName">Имя члена объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CBindingReflection(System.Object model_instance, String model_member_name, System.Object view_instance, 
-				String view_member_name)
+			public CBindingReflection(System.Object modelInstance, String modelMemberName, System.Object viewInstance, 
+				String viewMemberName)
 			{
-				SetModel(model_instance, model_member_name);
-				SetView(view_instance, view_member_name);
+				SetModel(modelInstance, modelMemberName);
+				SetView(viewInstance, viewMemberName);
 			}
 			#endregion
 

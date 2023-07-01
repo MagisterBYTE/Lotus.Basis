@@ -176,7 +176,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<CEcsWorld> Worlds
 			{
-				get { return (mWorlds); }
+				get { return mWorlds; }
 			}
 
 			/// <summary>
@@ -184,7 +184,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsLotusPreInitSystem> PreInitSystems
 			{
-				get { return (mPreInitSystems); }
+				get { return mPreInitSystems; }
 			}
 
 			/// <summary>
@@ -192,7 +192,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsLotusInitSystem> InitSystems
 			{
-				get { return (mInitSystems); }
+				get { return mInitSystems; }
 			}
 
 			/// <summary>
@@ -200,7 +200,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsLotusUpdateSystem> UpdateSystems
 			{
-				get { return (mUpdateSystems); }
+				get { return mUpdateSystems; }
 			}
 
 			/// <summary>
@@ -208,7 +208,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsLotusLateUpdateSystem> LateUpdateSystems
 			{
-				get { return (mLateUpdateSystems); }
+				get { return mLateUpdateSystems; }
 			}
 
 			/// <summary>
@@ -216,7 +216,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsLotusFixedUpdateSystem> FixedUpdateSystems
 			{
-				get { return (mFixedUpdateSystems); }
+				get { return mFixedUpdateSystems; }
 			}
 
 			/// <summary>
@@ -224,7 +224,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsDestroySystem> DestroySystems
 			{
-				get { return (mDestroySystems); }
+				get { return mDestroySystems; }
 			}
 
 			/// <summary>
@@ -232,7 +232,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsPostDestroySystem> PostDestroySystems
 			{
-				get { return (mPostDestroySystems); }
+				get { return mPostDestroySystems; }
 			}
 			#endregion
 

@@ -58,11 +58,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="items">Список элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterList(String parameter_name, params TType[] items)
-				: base(parameter_name)
+			public CParameterList(String parameterName, params TType[] items)
+				: base(parameterName)
 			{
 				mValue = new ListArray<TType>(items);
 			}

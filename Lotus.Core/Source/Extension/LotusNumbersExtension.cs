@@ -51,7 +51,7 @@ namespace Lotus
 				}
 				if (@this >= 1000000000)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					return String.Format("{0}mB", UnityEngine.Mathf.Floor(@this / 10000000f) / 10f);
 #else
 					return String.Format("{0}mB", Math.Floor(@this / 10000000f) / 10f);
@@ -59,7 +59,7 @@ namespace Lotus
 				}
 				if (@this >= 1000000)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					return String.Format("{0}kB", UnityEngine.Mathf.Floor(@this / 100000f) / 10f);
 #else
 					return String.Format("{0}kB", Math.Floor(@this / 100000f) / 10f);
@@ -67,7 +67,7 @@ namespace Lotus
 				}
 				if (@this >= 1000)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					return String.Format("{0}B", UnityEngine.Mathf.Floor(@this / 100f) / 10f);
 #else
 					return String.Format("{0}B", Math.Floor(@this / 100f) / 10f);
@@ -88,10 +88,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean Between(this Int32 @this, Int32 from, Int32 to)
 			{
-				return (@this >= from && @this <= to);
+				return @this >= from && @this <= to;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Преобразование к 32-битному цветовому значению
@@ -132,7 +132,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= UInt32 ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Преобразование к 32-битному цветовому значению
@@ -327,7 +327,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean Between(this Single @this, Single from, Single to)
 			{
-				return (@this >= from && @this <= to);
+				return @this >= from && @this <= to;
 			}
 			#endregion
 		}

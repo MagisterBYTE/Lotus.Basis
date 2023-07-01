@@ -50,11 +50,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="format_value">Формат отображения значения числовой величины</param>
+			/// <param name="formatValue">Формат отображения значения числовой величины</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusNumberFormatAttribute(String format_value)
+			public LotusNumberFormatAttribute(String formatValue)
 			{
-				mFormatValue = format_value;
+				mFormatValue = formatValue;
 			}
 			#endregion
 		}

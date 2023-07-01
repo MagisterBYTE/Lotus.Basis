@@ -37,19 +37,19 @@ namespace Lotus
 			/// <summary>
 			/// Присоединение указанного зависимого объекта
 			/// </summary>
-			/// <param name="owned_object">Объект</param>
+			/// <param name="ownedObject">Объект</param>
 			/// <param name="add">Статус добавления в коллекцию</param>
 			//---------------------------------------------------------------------------------------------------------
-			void AttachOwnedObject(ILotusOwnedObject owned_object, Boolean add);
+			void AttachOwnedObject(ILotusOwnedObject ownedObject, Boolean add);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Отсоединение указанного зависимого объекта
 			/// </summary>
-			/// <param name="owned_object">Объект</param>
+			/// <param name="ownedObject">Объект</param>
 			/// <param name="remove">Статус удаления из коллекции</param>
 			//---------------------------------------------------------------------------------------------------------
-			void DetachOwnedObject(ILotusOwnedObject owned_object, Boolean remove);
+			void DetachOwnedObject(ILotusOwnedObject ownedObject, Boolean remove);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -62,22 +62,22 @@ namespace Lotus
 			/// <summary>
 			/// Информирование данного объекта о начале изменения данных указанного зависимого объекта
 			/// </summary>
-			/// <param name="owned_object">Зависимый объект</param>
+			/// <param name="ownedObject">Зависимый объект</param>
 			/// <param name="data">Объект, данные которого будут меняться</param>
-			/// <param name="data_name">Имя данных</param>
+			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			Boolean OnNotifyUpdating(ILotusOwnedObject owned_object, System.Object data, String data_name);
+			Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Информирование данного объекта об окончании изменении данных указанного объекта
 			/// </summary>
-			/// <param name="owned_object">Зависимый объект</param>
+			/// <param name="ownedObject">Зависимый объект</param>
 			/// <param name="data">Объект, данные которого изменились</param>
-			/// <param name="data_name">Имя данных</param>
+			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			void OnNotifyUpdated(ILotusOwnedObject owned_object, System.Object data, String data_name);
+			void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject owned_object, System.Object data, String data_name)
 			{
-				return (true);
+				return true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -197,7 +197,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner 
 			{
-				get { return (mOwner); } 
+				get { return mOwner; } 
 				set
 				{
 					mOwner = value;
@@ -264,7 +264,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner
 			{
-				get { return (mOwner); }
+				get { return mOwner; }
 				set
 				{
 					mOwner = (TOwner)value;
@@ -277,7 +277,7 @@ namespace Lotus
 			/// </summary>
 			public TOwner Owner
 			{
-				get { return (mOwner); }
+				get { return mOwner; }
 				set
 				{
 					mOwner = value;

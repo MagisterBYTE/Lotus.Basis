@@ -37,7 +37,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 			[LotusDisplayName(nameof(Name))]
 #endif
@@ -50,7 +50,7 @@ namespace Lotus
 			/// </summary>
 			public virtual String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set
 				{
 					mName = value;
@@ -94,7 +94,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(ILotusNameable other)
 			{
-				return (mName.CompareTo(other.Name));
+				return mName.CompareTo(other.Name);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(CNameable other)
 			{
-				return (mName.CompareTo(other.Name));
+				return mName.CompareTo(other.Name);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (mName);
+				return mName;
 			}
 			#endregion
 
@@ -153,12 +153,12 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 			[LotusDisplayName(nameof(Name))]
 #endif
 			protected internal String mName = "";
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 			[UnityEngine.HideInInspector]
 #endif
@@ -171,7 +171,7 @@ namespace Lotus
 			/// </summary>
 			public virtual String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set
 				{
 					mName = value;
@@ -186,7 +186,7 @@ namespace Lotus
 			[Browsable(false)]
 			public virtual Int64 Id
 			{
-				get { return (mId); }
+				get { return mId; }
 				set
 				{
 					mId = value;
@@ -201,7 +201,7 @@ namespace Lotus
 			/// </summary>
 			public virtual String InspectorTypeName
 			{
-				get { return (nameof(CNameableId)); }
+				get { return nameof(CNameableId); }
 			}
 
 			/// <summary>
@@ -213,11 +213,11 @@ namespace Lotus
 				{
 					if (String.IsNullOrEmpty(mName))
 					{
-						return ("<Без имени>");
+						return "<Без имени>";
 					}
 					else
 					{
-						return (mName);
+						return mName;
 					}
 				}
 			}
@@ -268,7 +268,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(ILotusNameable other)
 			{
-				return (mName.CompareTo(other.Name));
+				return mName.CompareTo(other.Name);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -280,7 +280,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(CNameableId other)
 			{
-				return (mName.CompareTo(other.Name));
+				return mName.CompareTo(other.Name);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (mName);
+				return mName;
 			}
 			#endregion
 

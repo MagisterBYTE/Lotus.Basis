@@ -59,7 +59,7 @@ namespace Lotus
 			public static TViewItemHierarchy Build(TData root, ILotusCollectionViewHierarchy owner)
 			{
 				TViewItemHierarchy node_root_view = Build(root, null, owner);
-				return (node_root_view);
+				return node_root_view;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ namespace Lotus
 					}
 				}
 
-				return (node_view);
+				return node_view;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -209,7 +209,7 @@ namespace Lotus
 			public static TViewItemHierarchy BuildFilter(TData root, Predicate<TData> filter, ILotusCollectionViewHierarchy owner)
 			{
 				TViewItemHierarchy node_root_view = BuildFilter(root, null, filter, owner);
-				return (node_root_view);
+				return node_root_view;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ namespace Lotus
 					}
 				}
 
-				return (node_root_view);
+				return node_root_view;
 			}
 			#endregion
 
@@ -348,7 +348,7 @@ namespace Lotus
 					clone.Add(mArrayOfItems.Clone());
 				}
 
-				return (clone);
+				return clone;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -359,7 +359,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (mName);
+				return mName;
 			}
 			#endregion
 
@@ -398,7 +398,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Int32 GetCountChecked()
 			{
-				return (0);
+				return 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -479,7 +479,7 @@ namespace Lotus
 			{
 				for (var i = 0; i < mCount; ++i)
 				{
-					(mArrayOfItems[i]).Visit(match);
+					mArrayOfItems[i].Visit(match);
 				}
 			}
 			#endregion
@@ -510,7 +510,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Boolean OnNotifyUpdating(ILotusOwnedObject owned_object, System.Object data, String data_name)
 			{
-				return (true);
+				return true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

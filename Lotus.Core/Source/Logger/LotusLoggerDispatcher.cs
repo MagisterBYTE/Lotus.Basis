@@ -47,7 +47,7 @@ namespace Lotus
 			/// </summary>
 			public static ILoggerView Logger
 			{
-				get { return (mLogger); }
+				get { return mLogger; }
 				set { mLogger = value; }
 			}
 
@@ -63,7 +63,7 @@ namespace Lotus
 						mMessages = new ListArray<TLogMessage>();
 						mMessages.IsNotify = true;
 					}
-					return (mMessages);
+					return mMessages;
 				}
 			}
 			#endregion
@@ -88,13 +88,13 @@ namespace Lotus
 			/// <summary>
 			/// Сохраннее сообщений текстовый файл
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SaveToText(String file_name)
+			public static void SaveToText(String fileName)
 			{
 				if (mMessages != null)
 				{
-					var file_stream = new FileStream(file_name, FileMode.Create, FileAccess.Write);
+					var file_stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 					var stream_writer = new StreamWriter(file_stream);
 
 					for (var i = 0; i < mMessages.Count; i++)
@@ -114,23 +114,23 @@ namespace Lotus
 			/// Оповещение о простой информации
 			/// </summary>
 			/// <param name="info">Объект информации</param>
-			/// <param name="member_name">Имя метода (заполняется автоматически)</param>
-			/// <param name="file_path">Полный путь к файлу (заполняется автоматически)</param>
-			/// <param name="line_number">Номер строки в файле (заполняется автоматически)</param>
+			/// <param name="memberName">Имя метода (заполняется автоматически)</param>
+			/// <param name="filePath">Полный путь к файлу (заполняется автоматически)</param>
+			/// <param name="lineNumber">Номер строки в файле (заполняется автоматически)</param>
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogInfo(System.Object info,
-				[CallerMemberName] String member_name = "",
-				[CallerFilePath] String file_path = "",
-				[CallerLineNumber] Int32 line_number = 0)
+				[CallerMemberName] String memberName = "",
+				[CallerFilePath] String filePath = "",
+				[CallerLineNumber] Int32 lineNumber = 0)
 			{
 				if (info != null)
 				{
 					var text = info.ToString();
 
 					var message = new TLogMessage(text, TLogType.Info);
-					message.MemberName = member_name;
-					message.FilePath = file_path;
-					message.LineNumber = line_number;
+					message.MemberName = memberName;
+					message.FilePath = filePath;
+					message.LineNumber = lineNumber;
 
 					Messages.Add(message);
 					if (mLogger != null) mLogger.Log(message);
@@ -141,25 +141,25 @@ namespace Lotus
 			/// <summary>
 			/// Оповещение о простой информации
 			/// </summary>
-			/// <param name="module_name">Имя модуля/подсистемы</param>
+			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="info">Объект информации</param>
-			/// <param name="member_name">Имя метода (заполняется автоматически)</param>
-			/// <param name="file_path">Полный путь к файлу (заполняется автоматически)</param>
-			/// <param name="line_number">Номер строки в файле (заполняется автоматически)</param>
+			/// <param name="memberName">Имя метода (заполняется автоматически)</param>
+			/// <param name="filePath">Полный путь к файлу (заполняется автоматически)</param>
+			/// <param name="lineNumber">Номер строки в файле (заполняется автоматически)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LogInfoModule(String module_name, System.Object info,
-				[CallerMemberName] String member_name = "",
-				[CallerFilePath] String file_path = "",
-				[CallerLineNumber] Int32 line_number = 0)
+			public static void LogInfoModule(String moduleName, System.Object info,
+				[CallerMemberName] String memberName = "",
+				[CallerFilePath] String filePath = "",
+				[CallerLineNumber] Int32 lineNumber = 0)
 			{
 				if (info != null)
 				{
 					var text = info.ToString();
 
-					var message = new TLogMessage(module_name, text, TLogType.Info);
-					message.MemberName = member_name;
-					message.FilePath = file_path;
-					message.LineNumber = line_number;
+					var message = new TLogMessage(moduleName, text, TLogType.Info);
+					message.MemberName = memberName;
+					message.FilePath = filePath;
+					message.LineNumber = lineNumber;
 
 					Messages.Add(message);
 
@@ -188,18 +188,18 @@ namespace Lotus
 			/// <summary>
 			/// Оповещение о простой информации с форматированием данных
 			/// </summary>
-			/// <param name="module_name">Имя модуля/подсистемы</param>
+			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="format">Строка с форматом данных</param>
 			/// <param name="args">Список аргументов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LogInfoFormatModule(String module_name, String format, params Object[] args)
+			public static void LogInfoFormatModule(String moduleName, String format, params Object[] args)
 			{
 				var text = String.Format(format, args);
 
-				var message = new TLogMessage(module_name, text, TLogType.Info);
+				var message = new TLogMessage(moduleName, text, TLogType.Info);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.LogModule(module_name, text, TLogType.Info);
+				if (mLogger != null) mLogger.LogModule(moduleName, text, TLogType.Info);
 			}
 			#endregion
 
@@ -209,23 +209,23 @@ namespace Lotus
 			/// Оповещение о предупреждении
 			/// </summary>
 			/// <param name="warning">Объект предупреждения</param>
-			/// <param name="member_name">Имя метода (заполняется автоматически)</param>
-			/// <param name="file_path">Полный путь к файлу (заполняется автоматически)</param>
-			/// <param name="line_number">Номер строки в файле (заполняется автоматически)</param>
+			/// <param name="memberName">Имя метода (заполняется автоматически)</param>
+			/// <param name="filePath">Полный путь к файлу (заполняется автоматически)</param>
+			/// <param name="lineNumber">Номер строки в файле (заполняется автоматически)</param>
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogWarning(System.Object warning,
-				[CallerMemberName] String member_name = "",
-				[CallerFilePath] String file_path = "",
-				[CallerLineNumber] Int32 line_number = 0)
+				[CallerMemberName] String memberName = "",
+				[CallerFilePath] String filePath = "",
+				[CallerLineNumber] Int32 lineNumber = 0)
 			{
 				if (warning != null)
 				{
 					var text = warning.ToString();
 
 					var message = new TLogMessage(text, TLogType.Warning);
-					message.MemberName = member_name;
-					message.FilePath = file_path;
-					message.LineNumber = line_number;
+					message.MemberName = memberName;
+					message.FilePath = filePath;
+					message.LineNumber = lineNumber;
 
 					Messages.Add(message);
 
@@ -237,25 +237,25 @@ namespace Lotus
 			/// <summary>
 			/// Оповещение о предупреждении
 			/// </summary>
-			/// <param name="module_name">Имя модуля/подсистемы</param>
+			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="warning">Объект предупреждения</param>
-			/// <param name="member_name">Имя метода (заполняется автоматически)</param>
-			/// <param name="file_path">Полный путь к файлу (заполняется автоматически)</param>
-			/// <param name="line_number">Номер строки в файле (заполняется автоматически)</param>
+			/// <param name="memberName">Имя метода (заполняется автоматически)</param>
+			/// <param name="filePath">Полный путь к файлу (заполняется автоматически)</param>
+			/// <param name="lineNumber">Номер строки в файле (заполняется автоматически)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LogWarningModule(String module_name, System.Object warning,
-				[CallerMemberName] String member_name = "",
-				[CallerFilePath] String file_path = "",
-				[CallerLineNumber] Int32 line_number = 0)
+			public static void LogWarningModule(String moduleName, System.Object warning,
+				[CallerMemberName] String memberName = "",
+				[CallerFilePath] String filePath = "",
+				[CallerLineNumber] Int32 lineNumber = 0)
 			{
 				if (warning != null)
 				{
 					var text = warning.ToString();
 
-					var message = new TLogMessage(module_name, text, TLogType.Warning);
-					message.MemberName = member_name;
-					message.FilePath = file_path;
-					message.LineNumber = line_number;
+					var message = new TLogMessage(moduleName, text, TLogType.Warning);
+					message.MemberName = memberName;
+					message.FilePath = filePath;
+					message.LineNumber = lineNumber;
 
 					Messages.Add(message);
 
@@ -284,18 +284,18 @@ namespace Lotus
 			/// <summary>
 			/// Оповещение о предупреждении с форматированием данных
 			/// </summary>
-			/// <param name="module_name">Имя модуля/подсистемы</param>
+			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="format">Строка с форматом данных</param>
 			/// <param name="args">Список аргументов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LogWarningFormatModule(String module_name, String format, params Object[] args)
+			public static void LogWarningFormatModule(String moduleName, String format, params Object[] args)
 			{
 				var text = String.Format(format, args);
 
-				var message = new TLogMessage(module_name, text, TLogType.Warning);
+				var message = new TLogMessage(moduleName, text, TLogType.Warning);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.LogModule(module_name, text, TLogType.Warning);
+				if (mLogger != null) mLogger.LogModule(moduleName, text, TLogType.Warning);
 			}
 			#endregion
 
@@ -305,23 +305,23 @@ namespace Lotus
 			/// Оповещение об ошибке
 			/// </summary>
 			/// <param name="error">Объект ошибки</param>
-			/// <param name="member_name">Имя метода (заполняется автоматически)</param>
-			/// <param name="file_path">Полный путь к файлу (заполняется автоматически)</param>
-			/// <param name="line_number">Номер строки в файле (заполняется автоматически)</param>
+			/// <param name="memberName">Имя метода (заполняется автоматически)</param>
+			/// <param name="filePath">Полный путь к файлу (заполняется автоматически)</param>
+			/// <param name="lineNumber">Номер строки в файле (заполняется автоматически)</param>
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogError(System.Object error,
-				[CallerMemberName] String member_name = "",
-				[CallerFilePath] String file_path = "",
-				[CallerLineNumber] Int32 line_number = 0)
+				[CallerMemberName] String memberName = "",
+				[CallerFilePath] String filePath = "",
+				[CallerLineNumber] Int32 lineNumber = 0)
 			{
 				if (error != null)
 				{
 					var text = error.ToString();
 
 					var message = new TLogMessage(text, TLogType.Error);
-					message.MemberName = member_name;
-					message.FilePath = file_path;
-					message.LineNumber = line_number;
+					message.MemberName = memberName;
+					message.FilePath = filePath;
+					message.LineNumber = lineNumber;
 
 					Messages.Add(message);
 
@@ -333,25 +333,25 @@ namespace Lotus
 			/// <summary>
 			/// Оповещение об ошибке
 			/// </summary>
-			/// <param name="module_name">Имя модуля/подсистемы</param>
+			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="error">Объект ошибки</param>
-			/// <param name="member_name">Имя метода (заполняется автоматически)</param>
-			/// <param name="file_path">Полный путь к файлу (заполняется автоматически)</param>
-			/// <param name="line_number">Номер строки в файле (заполняется автоматически)</param>
+			/// <param name="memberName">Имя метода (заполняется автоматически)</param>
+			/// <param name="filePath">Полный путь к файлу (заполняется автоматически)</param>
+			/// <param name="lineNumber">Номер строки в файле (заполняется автоматически)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LogErrorModule(String module_name, System.Object error,
-				[CallerMemberName] String member_name = "",
-				[CallerFilePath] String file_path = "",
-				[CallerLineNumber] Int32 line_number = 0)
+			public static void LogErrorModule(String moduleName, System.Object error,
+				[CallerMemberName] String memberName = "",
+				[CallerFilePath] String filePath = "",
+				[CallerLineNumber] Int32 lineNumber = 0)
 			{
 				if (error != null)
 				{
 					var text = error.ToString();
 
-					var message = new TLogMessage(module_name, text, TLogType.Error);
-					message.MemberName = member_name;
-					message.FilePath = file_path;
-					message.LineNumber = line_number;
+					var message = new TLogMessage(moduleName, text, TLogType.Error);
+					message.MemberName = memberName;
+					message.FilePath = filePath;
+					message.LineNumber = lineNumber;
 
 					Messages.Add(message);
 
@@ -380,18 +380,18 @@ namespace Lotus
 			/// <summary>
 			/// Оповещение об ошибке с форматированием данных
 			/// </summary>
-			/// <param name="module_name">Имя модуля/подсистемы</param>
+			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="format">Строка с форматом данных</param>
 			/// <param name="args">Список аргументов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LogErrorFormatModule(String module_name, String format, params Object[] args)
+			public static void LogErrorFormatModule(String moduleName, String format, params Object[] args)
 			{
 				var text = String.Format(format, args);
 
-				var message = new TLogMessage(module_name, text, TLogType.Error);
+				var message = new TLogMessage(moduleName, text, TLogType.Error);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.LogModule(module_name, text, TLogType.Error);
+				if (mLogger != null) mLogger.LogModule(moduleName, text, TLogType.Error);
 			}
 			#endregion
 
@@ -401,19 +401,19 @@ namespace Lotus
 			/// Оповещение об исключении
 			/// </summary>
 			/// <param name="exc">Исключение</param>
-			/// <param name="member_name">Имя метода (заполняется автоматически)</param>
-			/// <param name="file_path">Полный путь к файлу (заполняется автоматически)</param>
-			/// <param name="line_number">Номер строки в файле (заполняется автоматически)</param>
+			/// <param name="memberName">Имя метода (заполняется автоматически)</param>
+			/// <param name="filePath">Полный путь к файлу (заполняется автоматически)</param>
+			/// <param name="lineNumber">Номер строки в файле (заполняется автоматически)</param>
 			//---------------------------------------------------------------------------------------------------------
 			public static void LogException(Exception exc,
-				[CallerMemberName] String member_name = "",
-				[CallerFilePath] String file_path = "",
-				[CallerLineNumber] Int32 line_number = 0)
+				[CallerMemberName] String memberName = "",
+				[CallerFilePath] String filePath = "",
+				[CallerLineNumber] Int32 lineNumber = 0)
 			{
 				var message = new TLogMessage(exc.Message, TLogType.Exception);
-				message.MemberName = member_name;
-				message.FilePath = file_path;
-				message.LineNumber = line_number;
+				message.MemberName = memberName;
+				message.FilePath = filePath;
+				message.LineNumber = lineNumber;
 
 				Messages.Add(message);
 
@@ -424,21 +424,21 @@ namespace Lotus
 			/// <summary>
 			/// Оповещение об исключении
 			/// </summary>
-			/// <param name="module_name">Имя модуля/подсистемы</param>
+			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="exc">Исключение</param>
-			/// <param name="member_name">Имя метода (заполняется автоматически)</param>
-			/// <param name="file_path">Полный путь к файлу (заполняется автоматически)</param>
-			/// <param name="line_number">Номер строки в файле (заполняется автоматически)</param>
+			/// <param name="memberName">Имя метода (заполняется автоматически)</param>
+			/// <param name="filePath">Полный путь к файлу (заполняется автоматически)</param>
+			/// <param name="lineNumber">Номер строки в файле (заполняется автоматически)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LogExceptionModule(String module_name, Exception exc,
-				[CallerMemberName] String member_name = "",
-				[CallerFilePath] String file_path = "",
-				[CallerLineNumber] Int32 line_number = 0)
+			public static void LogExceptionModule(String moduleName, Exception exc,
+				[CallerMemberName] String memberName = "",
+				[CallerFilePath] String filePath = "",
+				[CallerLineNumber] Int32 lineNumber = 0)
 			{
-				var message = new TLogMessage(module_name, exc.Message, TLogType.Exception);
-				message.MemberName = member_name;
-				message.FilePath = file_path;
-				message.LineNumber = line_number;
+				var message = new TLogMessage(moduleName, exc.Message, TLogType.Exception);
+				message.MemberName = memberName;
+				message.FilePath = filePath;
+				message.LineNumber = lineNumber;
 
 				Messages.Add(message);
 

@@ -253,7 +253,7 @@ namespace Lotus
 			[XmlIgnore]
 			System.Object IParameterItem.Value
 			{
-				get { return (mValue); }
+				get { return mValue; }
 				set 
 				{
 					mValue = (TValue)value;
@@ -268,7 +268,7 @@ namespace Lotus
 			[XmlElement]
 			public TValue Value
 			{
-				get { return (mValue); }
+				get { return mValue; }
 				set
 				{
 					mValue = value;
@@ -283,7 +283,7 @@ namespace Lotus
 			[XmlAttribute]
 			public Int64 Id
 			{
-				get { return (mId); }
+				get { return mId; }
 				set
 				{
 					mId = value;
@@ -301,7 +301,7 @@ namespace Lotus
 			[XmlAttribute]
 			public Boolean IsActive
 			{
-				get { return (mIsActive); }
+				get { return mIsActive; }
 				set 
 				{
 					mIsActive = value;
@@ -367,11 +367,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected ParameterItem(String parameter_name)
+			protected ParameterItem(String parameterName)
 			{
-				mName = parameter_name;
+				mName = parameterName;
 				mId = XGenerateId.Generate(this);
 			}
 
@@ -398,7 +398,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(ParameterItem<TValue> other)
 			{
-				return (String.CompareOrdinal(Name, other.Name));
+				return String.CompareOrdinal(Name, other.Name);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -409,7 +409,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Object Clone()
 			{
-				return (MemberwiseClone());
+				return MemberwiseClone();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -421,7 +421,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ParameterItem<TValue> Duplicate(CParameters parameters = null)
 			{
-				return (MemberwiseClone() as ParameterItem<TValue>);
+				return MemberwiseClone() as ParameterItem<TValue>;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -433,7 +433,7 @@ namespace Lotus
 			public override String ToString()
 			{
 				var result = String.Format("{0} = {1}", mName, base.ToString());
-				return (result);
+				return result;
 			}
 			#endregion
 

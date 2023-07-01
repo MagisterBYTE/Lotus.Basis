@@ -112,11 +112,11 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="extension">Расширение файла</param>
-			/// <param name="default_name">Имя файла по умолчанию</param>
-			/// <param name="default_path">Путь файла по умолчанию</param>
+			/// <param name="defaultName">Имя файла по умолчанию</param>
+			/// <param name="defaultPath">Путь файла по умолчанию</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMethodArgFileAttribute(String extension, String default_name = "File", 
-				String default_path =
+			public LotusMethodArgFileAttribute(String extension, String defaultName = "File", 
+				String defaultPath =
 #if UNITY_2017_1_OR_NEWER
 				XCoreSettings.ASSETS_PATH)
 #else
@@ -124,7 +124,7 @@ namespace Lotus
 #endif
 			{
 				mExtension = extension;
-				mDefaultPath = default_path;
+				mDefaultPath = defaultPath;
 			}
 			#endregion
 		}

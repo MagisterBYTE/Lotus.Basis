@@ -72,24 +72,24 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="default_value">Значение по умолчанию</param>
+			/// <param name="defaultValue">Значение по умолчанию</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusDefaultValueAttribute(System.Object default_value)
+			public LotusDefaultValueAttribute(System.Object defaultValue)
 			{
-				mDefaultValue = default_value;
+				mDefaultValue = defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="member_name">Имя члена объекта содержащий значение по умолчанию</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта содержащий значение по умолчанию</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusDefaultValueAttribute(String member_name, TInspectorMemberType member_type)
+			public LotusDefaultValueAttribute(String memberName, TInspectorMemberType memberType)
 			{
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -97,14 +97,14 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="type">Тип представляющий шаг содержащий значение по умолчанию</param>
-			/// <param name="member_name">Имя члена типа содержащий значение по умолчанию</param>
-			/// <param name="member_type">Тип члена типа</param>
+			/// <param name="memberName">Имя члена типа содержащий значение по умолчанию</param>
+			/// <param name="memberType">Тип члена типа</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusDefaultValueAttribute(Type type, String member_name, TInspectorMemberType member_type)
+			public LotusDefaultValueAttribute(Type type, String memberName, TInspectorMemberType memberType)
 			{
 				mDefaultValue = type;
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 			#endregion
 		}

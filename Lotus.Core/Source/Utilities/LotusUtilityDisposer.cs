@@ -39,18 +39,18 @@ namespace Lotus
 			/// Установка нового значения свойства типа значения
 			/// </summary>
 			/// <typeparam name="TType">Тип объекта</typeparam>
-			/// <param name="current_value">Текущие значение</param>
-			/// <param name="new_value">Новое значение</param>
+			/// <param name="currentValue">Текущие значение</param>
+			/// <param name="newValue">Новое значение</param>
 			/// <returns>Статус установки нового значения свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SetStruct<TType>(ref TType current_value, in TType new_value) where TType : struct
+			public static Boolean SetStruct<TType>(ref TType currentValue, in TType newValue) where TType : struct
 			{
-				if (current_value.Equals(new_value))
+				if (currentValue.Equals(newValue))
 				{
 					return false;
 				}
 
-				current_value = new_value;
+				currentValue = newValue;
 				return true;
 			}
 
@@ -60,18 +60,18 @@ namespace Lotus
 			/// Установка нового значения свойства ссылочного типа
 			/// </summary>
 			/// <typeparam name="TType">Тип объекта</typeparam>
-			/// <param name="current_value">Текущие значение</param>
-			/// <param name="new_value">Новое значение</param>
+			/// <param name="currentValue">Текущие значение</param>
+			/// <param name="newValue">Новое значение</param>
 			/// <returns>Статус установки нового значения свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SetClass<TType>(ref TType current_value, in TType new_value) where TType : class
+			public static Boolean SetClass<TType>(ref TType currentValue, in TType newValue) where TType : class
 			{
-				if ((current_value == null && new_value == null) || (current_value != null && current_value.Equals(new_value)))
+				if ((currentValue == null && newValue == null) || (currentValue != null && currentValue.Equals(newValue)))
 				{
 					return false;
 				}
 
-				current_value = new_value;
+				currentValue = newValue;
 				return true;
 			}
 		}

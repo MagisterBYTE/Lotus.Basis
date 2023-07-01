@@ -54,7 +54,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner
 			{
-				get { return (mOwner); }
+				get { return mOwner; }
 				set { }
 			}
 
@@ -63,7 +63,7 @@ namespace Lotus
 			/// </summary>
 			public override String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set
 				{
 					try
@@ -99,11 +99,11 @@ namespace Lotus
 				{
 					if(mInfo != null)
 					{
-						return (mInfo.FullName);
+						return mInfo.FullName;
 					}
 					else
 					{
-						return (mName);
+						return mName;
 					}
 				}
 			}
@@ -113,7 +113,7 @@ namespace Lotus
 			/// </summary>
 			public FileInfo Info
 			{
-				get { return (mInfo); }
+				get { return mInfo; }
 				set { mInfo = value; }
 			}
 			#endregion
@@ -124,7 +124,7 @@ namespace Lotus
 			/// </summary>
 			public String InspectorTypeName
 			{
-				get { return ("ФАЙЛ"); }
+				get { return "ФАЙЛ"; }
 			}
 
 			/// <summary>
@@ -136,11 +136,11 @@ namespace Lotus
 				{
 					if (mInfo != null)
 					{
-						return (mInfo.Name);
+						return mInfo.Name;
 					}
 					else
 					{
-						return ("");
+						return "";
 					}
 				}
 			}
@@ -158,12 +158,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="file_info">Данные о файле</param>
+			/// <param name="fileInfo">Данные о файле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CFileSystemFile(FileInfo file_info)
-				: base(file_info.Name)
+			public CFileSystemFile(FileInfo fileInfo)
+				: base(fileInfo.Name)
 			{
-				mInfo = file_info;
+				mInfo = fileInfo;
 			}
 			#endregion
 
@@ -176,7 +176,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 GetCountChildrenNode()
 			{
-				return (0);
+				return 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object GetChildrenNode(Int32 index)
 			{
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean CheckOne(Predicate<ILotusFileSystemEntity> match)
 			{
-				return (match(this));
+				return match(this);
 			}
 			#endregion
 
@@ -216,7 +216,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CPropertyDesc[] GetPropertiesDesc()
 			{
-				return (FileSystemFilePropertiesDesc);
+				return FileSystemFilePropertiesDesc;
 			}
 			#endregion
 
@@ -225,9 +225,9 @@ namespace Lotus
 			/// <summary>
 			/// Переименовать файл
 			/// </summary>
-			/// <param name="new_file_name">Новое имя файла</param>
+			/// <param name="newFileName">Новое имя файла</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Rename(String new_file_name)
+			public void Rename(String newFileName)
 			{
 				//if(mInfo != null)
 				//{
@@ -241,15 +241,15 @@ namespace Lotus
 			/// <summary>
 			/// Модификация имени файла путем удаления его определённой части
 			/// </summary>
-			/// <param name="search_option">Опции поиска</param>
+			/// <param name="searchOption">Опции поиска</param>
 			/// <param name="check">Проверяемая строка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void ModifyNameOfRemove(TStringSearchOption search_option, String check)
+			public void ModifyNameOfRemove(TStringSearchOption searchOption, String check)
 			{
 				if (mInfo != null)
 				{
 					var file_name = mInfo.Name.RemoveExtension();
-					switch (search_option)
+					switch (searchOption)
 					{
 						case TStringSearchOption.Start:
 							{
@@ -297,16 +297,16 @@ namespace Lotus
 			/// <summary>
 			/// Модификация имени файла путем замены его определённой части
 			/// </summary>
-			/// <param name="search_option">Опции поиска</param>
+			/// <param name="searchOption">Опции поиска</param>
 			/// <param name="source">Искомая строка</param>
 			/// <param name="target">Целевая строка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void ModifyNameOfReplace(TStringSearchOption search_option, String source, String target)
+			public void ModifyNameOfReplace(TStringSearchOption searchOption, String source, String target)
 			{
 				if (mInfo != null)
 				{
 					var file_name = mInfo.Name.RemoveExtension();
-					switch (search_option)
+					switch (searchOption)
 					{
 						case TStringSearchOption.Start:
 							{

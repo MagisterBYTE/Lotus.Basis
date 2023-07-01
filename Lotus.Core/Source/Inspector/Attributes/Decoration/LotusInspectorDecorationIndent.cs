@@ -60,13 +60,13 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="indent_level">Уровень смещения</param>
-			/// <param name="is_absolute">Статус абсолютного смещения</param>
+			/// <param name="indentLevel">Уровень смещения</param>
+			/// <param name="isAbsolute">Статус абсолютного смещения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusIndentLevelAttribute(Int32 indent_level, Boolean is_absolute = true)
+			public LotusIndentLevelAttribute(Int32 indentLevel, Boolean isAbsolute = true)
 			{
-				mIndentLevel = indent_level;
-				mIsAbsolute = is_absolute;
+				mIndentLevel = indentLevel;
+				mIsAbsolute = isAbsolute;
 			}
 			#endregion
 		}

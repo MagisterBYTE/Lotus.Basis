@@ -41,7 +41,7 @@ namespace Lotus
 			[Test]
 			public static void TestListArray()
 			{
-				ListArray<Int32> sample = new ListArray<Int32>(20);
+				var sample = new ListArray<Int32>(20);
 
 				// Добавление
 				sample.Add(2000);
@@ -107,9 +107,9 @@ namespace Lotus
 				Assert.AreEqual(sample[7], 842); // Будет удалено в следующем тесте
 
 				// Удаление по условию
-				Int32 count = sample.RemoveAll((Int32 x) =>
+				var count = sample.RemoveAll((Int32 x) =>
 				{
-					return (x % 2 == 0);
+					return x % 2 == 0;
 				});
 				Assert.AreEqual(sample.Count, 5);
 				Assert.AreEqual(count, 3);
@@ -133,7 +133,7 @@ namespace Lotus
 				Assert.AreEqual(sample[8], 4587); // Duplicate 4587
 
 				// Удаление дубликатов
-				Int32 count_dublicate = sample.RemoveDuplicates();
+				var count_dublicate = sample.RemoveDuplicates();
 				Assert.AreEqual(count_dublicate, 2);
 				Assert.AreEqual(sample.Count, 7);
 				Assert.AreEqual(sample[0], 23);
@@ -551,7 +551,7 @@ namespace Lotus
 				//
 				// Еще один пример
 				//
-				ListArray<String> list = new ListArray<String>();
+				var list = new ListArray<String>();
 				list.Add("00");
 				list.Add("01"); //
 				list.Add("02"); //
@@ -633,7 +633,7 @@ namespace Lotus
 				//
 				// Операции множеств
 				//
-				ListArray<Int32> deferencs_source = new ListArray<int>();
+				var deferencs_source = new ListArray<int>();
 				deferencs_source.AddItems(0, 2, 4, 7, 5);
 
 				ListArray<Int32> deferencs = deferencs_source.DifferenceItems(0, 4, 7, 12, 15, 7);
@@ -650,7 +650,7 @@ namespace Lotus
 			[Test]
 			public static void TestQueueArray()
 			{
-				QueueArray<Int32> queue = new QueueArray<Int32>();
+				var queue = new QueueArray<Int32>();
 				queue.Enqueue(100);
 				queue.Enqueue(90);
 				queue.Enqueue(80);
@@ -677,7 +677,7 @@ namespace Lotus
 			[Test]
 			public static void TestDequeArray()
 			{
-				DequeArray<Int32> deque = new DequeArray<int>();
+				var deque = new DequeArray<int>();
 
 				deque.AddFront(4);
 				deque.AddFront(3);
@@ -766,7 +766,7 @@ namespace Lotus
 			[Test]
 			public static void TestPriorityQueue()
 			{
-				PriorityQueue<Int32> priority_queue = new PriorityQueue<int>();
+				var priority_queue = new PriorityQueue<int>();
 
 				priority_queue.Push(3);
 				priority_queue.Push(2);
@@ -805,7 +805,7 @@ namespace Lotus
 			[Test]
 			public static void TestSparseSet()
 			{
-				SparseSet sparse_set = new SparseSet(1024);
+				var sparse_set = new SparseSet(1024);
 				sparse_set.Add(15); // 0
 				sparse_set.Add(20); // 1
 				sparse_set.Add(25); // 2

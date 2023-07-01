@@ -79,7 +79,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mWorld);
+					return mWorld;
 				}
 				set
 				{
@@ -92,7 +92,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Count
 			{
-				get { return (mComponents.Count); }
+				get { return mComponents.Count; }
 			}
 
 			/// <summary>
@@ -102,7 +102,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mComponents);
+					return mComponents;
 				}
 				set
 				{
@@ -184,7 +184,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean HasEntity(Int32 entityId)
 			{
-				return (mComponents.Contains(entityId));
+				return mComponents.Contains(entityId);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32[] GetEntities()
 			{
-				return (mComponents.GetIndexes());
+				return mComponents.GetIndexes();
 			}
 			#endregion
 		}

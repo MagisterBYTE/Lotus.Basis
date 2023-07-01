@@ -49,31 +49,31 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal String mName;
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal Boolean mIsEnabled = true;
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal TBindingMode mMode;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal TBindingModeChanged mModeChanged;
 
 			// Объект модели
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal String mModelMemberName;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal TBindingMemberType mModelMemberType;
@@ -81,11 +81,11 @@ namespace Lotus
 			protected internal INotifyPropertyChanged mModelPropertyChanged;
 
 			// Объект представления
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal String mViewMemberName;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal TBindingMemberType mViewMemberType;
@@ -364,28 +364,28 @@ namespace Lotus
 			/// Установка типа члена объекта
 			/// </summary>
 			/// <param name="instance">Экземпляр объекта</param>
-			/// <param name="member_name">Имя члена объекта</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			/// <returns>Член данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			protected MemberInfo SetMemberType(System.Object instance, String member_name, ref TBindingMemberType member_type)
+			protected MemberInfo SetMemberType(System.Object instance, String memberName, ref TBindingMemberType memberType)
 			{
-				MemberInfo member = instance.GetType().GetMember(member_name)[0];
+				MemberInfo member = instance.GetType().GetMember(memberName)[0];
 				if (member != null)
 				{
 					if (member.MemberType == MemberTypes.Property)
 					{
-						member_type = TBindingMemberType.Property;
+						memberType = TBindingMemberType.Property;
 					}
 					else
 					{
 						if (member.MemberType == MemberTypes.Field)
 						{
-							member_type = TBindingMemberType.Field;
+							memberType = TBindingMemberType.Field;
 						}
 						else
 						{
-							member_type = TBindingMemberType.Method;
+							memberType = TBindingMemberType.Method;
 						}
 					}
 				}
@@ -399,17 +399,17 @@ namespace Lotus
 			/// <summary>
 			/// Переустановка объекта модели
 			/// </summary>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void ResetModel(System.Object model_instance)
+			protected void ResetModel(System.Object modelInstance)
 			{
 				if (mModelPropertyChanged != null)
 				{
 					mModelPropertyChanged.PropertyChanged -= UpdateModelProperty;
 				}
 
-				mModelInstance = model_instance;
-				mModelPropertyChanged = model_instance as INotifyPropertyChanged;
+				mModelInstance = modelInstance;
+				mModelPropertyChanged = modelInstance as INotifyPropertyChanged;
 				if (mModelPropertyChanged != null)
 				{
 					mModelPropertyChanged.PropertyChanged += UpdateModelProperty;
@@ -435,9 +435,9 @@ namespace Lotus
 			/// <remarks>
 			/// Предполагается что остальные параметры привязки со стороны объекта модели уже корректно настроены
 			/// </remarks>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void SetModel(System.Object model_instance)
+			public virtual void SetModel(System.Object modelInstance)
 			{
 
 			}
@@ -446,10 +446,10 @@ namespace Lotus
 			/// <summary>
 			/// Установка объекта модели
 			/// </summary>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
-			/// <param name="member_name">Имя члена объекта модели</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
+			/// <param name="memberName">Имя члена объекта модели</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void SetModel(System.Object model_instance, String member_name)
+			public virtual void SetModel(System.Object modelInstance, String memberName)
 			{
 
 			}
@@ -475,17 +475,17 @@ namespace Lotus
 			/// <summary>
 			/// Переустановка объекта представления
 			/// </summary>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void ResetView(System.Object view_instance)
+			protected void ResetView(System.Object viewInstance)
 			{
 				if (mViewPropertyChanged != null)
 				{
 					mViewPropertyChanged.PropertyChanged -= UpdateViewProperty;
 				}
 
-				mViewInstance = view_instance;
-				mViewPropertyChanged = view_instance as INotifyPropertyChanged;
+				mViewInstance = viewInstance;
+				mViewPropertyChanged = viewInstance as INotifyPropertyChanged;
 				if (mViewPropertyChanged != null)
 				{
 					mViewPropertyChanged.PropertyChanged += UpdateViewProperty;
@@ -510,9 +510,9 @@ namespace Lotus
 			/// <remarks>
 			/// Предполагается что остальные параметры привязки со стороны объекта представления уже корректно настроены
 			/// </remarks>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void SetView(System.Object view_instance)
+			public virtual void SetView(System.Object viewInstance)
 			{
 			}
 
@@ -520,10 +520,10 @@ namespace Lotus
 			/// <summary>
 			/// Установка объекта представления
 			/// </summary>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
-			/// <param name="member_name">Имя члена объекта представления</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
+			/// <param name="memberName">Имя члена объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void SetView(System.Object view_instance, String member_name)
+			public virtual void SetView(System.Object viewInstance, String memberName)
 			{
 			}
 

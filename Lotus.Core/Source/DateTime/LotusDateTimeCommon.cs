@@ -40,7 +40,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetStrDateUTC()
 			{
-				return (DateTime.Now.ToStrDateUTC());
+				return DateTime.Now.ToStrDateUTC();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetStrDateTime()
 			{
-				return (DateTime.Now.ToStrDateTime());
+				return DateTime.Now.ToStrDateTime();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetStrDateTimeShort()
 			{
-				return (DateTime.Now.ToStrDateTimeShort());
+				return DateTime.Now.ToStrDateTimeShort();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

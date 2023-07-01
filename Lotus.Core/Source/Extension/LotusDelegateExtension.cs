@@ -37,7 +37,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean HasHandler(this Action @this, Action delegat)
 			{
-				return @this.GetInvocationList().Contains(delegat);
+				return @this.GetInvocationList().ContainsElement(delegat);
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

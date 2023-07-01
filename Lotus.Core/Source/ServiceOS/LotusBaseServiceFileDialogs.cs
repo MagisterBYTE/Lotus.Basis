@@ -43,11 +43,11 @@ namespace Lotus
 			/// </summary>
 			/// <param name="title">Заголовок диалога</param>
 			/// <param name="directory">Директория для сохранения файла</param>
-			/// <param name="default_name">Имя файла по умолчанию</param>
+			/// <param name="defaultName">Имя файла по умолчанию</param>
 			/// <param name="extension">Расширение файла без точки</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			String Save(String title, String directory, String default_name, String extension);
+			String Save(String title, String directory, String defaultName, String extension);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -61,69 +61,69 @@ namespace Lotus
 			/// <summary>
 			/// Файл был успешно сохранен
 			/// </summary>
-			public const String FILE_SAVE_SUCCESSFULLY = "The file has been successfully saved";
+			public const String FILESAVESUCCESSFULLY = "The file has been successfully saved";
 
 			/// <summary>
 			/// Файл был успешно загружен
 			/// </summary>
-			public const String FILE_LOAD_SUCCESSFULLY = "The file has been successfully loaded";
+			public const String FILELOADSUCCESSFULLY = "The file has been successfully loaded";
 
 			/// <summary>
 			/// Фильтр для текстовых файлов
 			/// </summary>
-			public const String TXT_FILTER = "Text files (*.txt)|*.txt";
+			public const String TXTFILTER = "Text files (*.txt)|*.txt";
 
 			/// <summary>
 			/// Фильтр для XML файлов
 			/// </summary>
-			public const String XML_FILTER = "XML files (*.xml)|*.xml";
+			public const String XMLFILTER = "XML files (*.xml)|*.xml";
 
 			/// <summary>
 			/// Фильтр для JSON файлов
 			/// </summary>
-			public const String JSON_FILTER = "JSON files (*.json)|*.json";
+			public const String JSONFILTER = "JSON files (*.json)|*.json";
 
 			/// <summary>
 			/// Фильтр для файлов Lua скриптов
 			/// </summary>
-			public const String LUA_FILTER = "LUA files (*.lua)|*.lua";
+			public const String LUAFILTER = "LUA files (*.lua)|*.lua";
 
 			/// <summary>
 			/// Фильтр для стандартного расширения файлов с бинарными данными
 			/// </summary>
-			public const String BIN_FILTER = "Binary files (*.bin)|*.bin";
+			public const String BINFILTER = "Binary files (*.bin)|*.bin";
 
 			/// <summary>
 			/// Фильтр для расширения файлов с бинарными данными для TextAsset
 			/// </summary>
-			public const String BYTES_FILTER = "Binary files (*.bytes)|*.bytes";
+			public const String BYTESFILTER = "Binary files (*.bytes)|*.bytes";
 
 			/// <summary>
 			/// Фильтр для расширения файлов формата Wavefront
 			/// </summary>
-			public const String D3_OBJ_FILTER = "Wavefront file (*.obj)|*.obj";
+			public const String D3OBJFILTER = "Wavefront file (*.obj)|*.obj";
 
 			/// <summary>
 			/// Фильтр для расширения файлов формата COLLADA
 			/// </summary>
-			public const String D3_DAE_FILTER = "COLLADA file (*.dae)|*.dae";
+			public const String D3DAEFILTER = "COLLADA file (*.dae)|*.dae";
 
 			/// <summary>
 			/// Фильтр для расширения файлов формата Autodesk 3ds Max 3D
 			/// </summary>
-			public const String D3_3DS_FILTER = " Autodesk 3ds Max 3D file (*.3ds)|*.3ds";
+			public const String D33DSFILTER = " Autodesk 3ds Max 3D file (*.3ds)|*.3ds";
 
 			/// <summary>
 			/// Фильтр для расширения файлов формата Stereolithography file
 			/// </summary>
-			public const String D3_STL_FILTER = "Stereolithography file (*.stl)|*.stl";
+			public const String D3STLFILTER = "Stereolithography file (*.stl)|*.stl";
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
 			//
 			// БАЗОВЫЕ ПУТИ
 			//
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 #if UNITY_EDITOR
 			/// <summary>
 			/// Путь по умолчанию для сохранения файлов
@@ -174,7 +174,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String Open()
 			{
-				return (FileDialogs.Open("Открыть файл", DefaultPath, DefaultExt));
+				return FileDialogs.Open("Открыть файл", DefaultPath, DefaultExt);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String Open(String title)
 			{
-				return (FileDialogs.Open(title, DefaultPath, DefaultExt));
+				return FileDialogs.Open(title, DefaultPath, DefaultExt);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String Open(String title, String directory)
 			{
-				return (FileDialogs.Open(title, directory, DefaultExt));
+				return FileDialogs.Open(title, directory, DefaultExt);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String Open(String title, String directory, String extension)
 			{
-				return (FileDialogs.Open(title, directory, extension));
+				return FileDialogs.Open(title, directory, extension);
 			}
 			#endregion
 
@@ -226,7 +226,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String Save()
 			{
-				return (FileDialogs.Save("Сохранить файл", DefaultPath, "Новый файл", DefaultExt));
+				return FileDialogs.Save("Сохранить файл", DefaultPath, "Новый файл", DefaultExt);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -238,7 +238,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String Save(String title)
 			{
-				return (FileDialogs.Save(title, DefaultPath, "Новый файл", DefaultExt));
+				return FileDialogs.Save(title, DefaultPath, "Новый файл", DefaultExt);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -251,7 +251,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String Save(String title, String directory)
 			{
-				return (FileDialogs.Save(title, directory, "Новый файл", DefaultExt));
+				return FileDialogs.Save(title, directory, "Новый файл", DefaultExt);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -260,12 +260,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="title">Заголовок диалога</param>
 			/// <param name="directory">Директория для сохранения файла</param>
-			/// <param name="default_name">Имя файла по умолчанию</param>
+			/// <param name="defaultName">Имя файла по умолчанию</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Save(String title, String directory, String default_name)
+			public static String Save(String title, String directory, String defaultName)
 			{
-				return (FileDialogs.Save(title, directory, default_name, DefaultExt));
+				return FileDialogs.Save(title, directory, defaultName, DefaultExt);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -274,13 +274,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="title">Заголовок диалога</param>
 			/// <param name="directory">Директория для сохранения файла</param>
-			/// <param name="default_name">Имя файла по умолчанию</param>
+			/// <param name="defaultName">Имя файла по умолчанию</param>
 			/// <param name="extension">Расширение файла без точки</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Save(String title, String directory, String default_name, String extension)
+			public static String Save(String title, String directory, String defaultName, String extension)
 			{
-				return (FileDialogs.Save(title, directory, default_name, extension));
+				return FileDialogs.Save(title, directory, defaultName, extension);
 			}
 			#endregion
 		}

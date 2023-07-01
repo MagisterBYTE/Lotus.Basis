@@ -68,24 +68,24 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="min_value">Минимальное значение величины</param>
+			/// <param name="minValue">Минимальное значение величины</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMinValueAttribute(System.Object min_value)
+			public LotusMinValueAttribute(System.Object minValue)
 			{
-				mMinValue = min_value;
+				mMinValue = minValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="member_name">Имя члена объекта содержащие минимальное значение</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта содержащие минимальное значение</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMinValueAttribute(String member_name, TInspectorMemberType member_type = TInspectorMemberType.Method)
+			public LotusMinValueAttribute(String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -93,14 +93,14 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="type">Тип содержащие минимальное значение</param>
-			/// <param name="member_name">Имя члена типа содержащие минимальное значение</param>
-			/// <param name="member_type">Тип члена типа</param>
+			/// <param name="memberName">Имя члена типа содержащие минимальное значение</param>
+			/// <param name="memberType">Тип члена типа</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMinValueAttribute(Type type, String member_name, TInspectorMemberType member_type = TInspectorMemberType.Method)
+			public LotusMinValueAttribute(Type type, String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
 				mMinValue = type;
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 			#endregion
 		}

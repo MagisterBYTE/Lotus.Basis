@@ -66,7 +66,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public QueueArray()
-				: base(INIT_MAX_COUNT)
+				: base(INITMAXCOUNT)
 			{
 				mHead = 0;
 				mTail = -1;
@@ -76,10 +76,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует данные очереди указанными данными
 			/// </summary>
-			/// <param name="max_count">Максимальное количество элементов</param>
+			/// <param name="maxCount">Максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public QueueArray(Int32 max_count)
-				: base(max_count)
+			public QueueArray(Int32 maxCount)
+				: base(maxCount)
 			{
 				mHead = 0;
 				mTail = -1;
@@ -157,7 +157,7 @@ namespace Lotus
 				}
 				else
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError("Not element in queue!!!");
 #else
 					XLogger.LogError("Not element in queue!!!");
@@ -181,7 +181,7 @@ namespace Lotus
 				}
 				else
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError("Not element in queue!!!");
 #else
 					XLogger.LogError("Not element in queue!!!");

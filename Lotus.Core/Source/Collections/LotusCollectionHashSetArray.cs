@@ -1334,7 +1334,7 @@ namespace Lotus
 				var hashCode = InternalGetHashCode(item);
 				for (var i = mBuckets[hashCode % mBuckets.Length] - 1; i >= 0; i = mSlots[i].next)
 				{
-					if ((mSlots[i].hashCode) == hashCode && mComparer.Equals(mSlots[i].value, item))
+					if (mSlots[i].hashCode == hashCode && mComparer.Equals(mSlots[i].value, item))
 					{
 						return i;
 					}
@@ -1446,7 +1446,7 @@ namespace Lotus
 				// handle null cases first
 				if (set1 == null)
 				{
-					return (set2 == null);
+					return set2 == null;
 				}
 				else if (set2 == null)
 				{

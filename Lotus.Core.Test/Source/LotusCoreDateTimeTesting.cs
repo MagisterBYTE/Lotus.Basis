@@ -47,19 +47,19 @@ namespace Lotus
 
 				}
 
-				public TestTimePeriod(DateTime date_time)
+				public TestTimePeriod(DateTime dateTime)
 				{
-					Date = date_time;
+					Date = dateTime;
 				}
 
 				public int CompareTo(TestTimePeriod other)
 				{
-					return (Date.CompareTo(other.Date));
+					return Date.CompareTo(other.Date);
 				}
 
 				public object Clone()
 				{
-					return (this.MemberwiseClone());
+					return this.MemberwiseClone();
 				}
 			}
 
@@ -71,13 +71,13 @@ namespace Lotus
 			[Test]
 			public static void TestDateTime()
 			{
-				DateTime from = new DateTime(2014, 1, 2, 12, 17, 0);
+				var from = new DateTime(2014, 1, 2, 12, 17, 0);
 
 				// Проверка минут
 				{
-					Int32 count_minut = 35;
-					DateTime to_minut = new DateTime(2014, 1, 2, 12, count_minut, 0);
-					ListTimeInterval<TestTimePeriod> list_minutes = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Minutely, 30);
+					var count_minut = 35;
+					var to_minut = new DateTime(2014, 1, 2, 12, count_minut, 0);
+					var list_minutes = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Minutely, 30);
 					list_minutes.AssingTimePeriod(from, to_minut);
 
 					Assert.AreEqual(list_minutes.Count, count_minut + 1 - 17);
@@ -86,9 +86,9 @@ namespace Lotus
 
 				// Проверка часов
 				{
-					Int32 count_hour = 22;
-					DateTime to_hour = new DateTime(2014, 1, 2, count_hour, 22, 0);
-					ListTimeInterval<TestTimePeriod> list_houres = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Hourly, 30);
+					var count_hour = 22;
+					var to_hour = new DateTime(2014, 1, 2, count_hour, 22, 0);
+					var list_houres = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Hourly, 30);
 					list_houres.AssingTimePeriod(from, to_hour);
 
 					Assert.AreEqual(list_houres.Count, count_hour + 1 - 12);
@@ -97,17 +97,17 @@ namespace Lotus
 
 				// Проверка дней
 				{
-					Int32 count_day = 17;
-					DateTime to_day = new DateTime(2014, 1, count_day, 12, 17, 0);
-					ListTimeInterval<TestTimePeriod> list_days = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
+					var count_day = 17;
+					var to_day = new DateTime(2014, 1, count_day, 12, 17, 0);
+					var list_days = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
 					list_days.AssingTimePeriod(from, to_day);
 
 					Assert.AreEqual(list_days.Count, count_day + 1 - 2);
 					Assert.AreEqual(list_days.CountDay, count_day - 2);
 
 					// Проверка недель
-					DateTime to_week = new DateTime(2016, 1, 6, 12, 17, 0);
-					ListTimeInterval<TestTimePeriod> list_week = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Weekly, 30);
+					var to_week = new DateTime(2016, 1, 6, 12, 17, 0);
+					var list_week = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Weekly, 30);
 					list_week.AssingTimePeriod(from, to_week);
 
 					Assert.AreEqual(list_week.Count, list_week.CountWeek + 1);
@@ -117,15 +117,15 @@ namespace Lotus
 				// Поиск индекса по дате
 				//
 				{
-					DateTime from_index = new DateTime(2012, 1, 6, 12, 17, 0);
-					DateTime to_index = new DateTime(2019, 1, 6, 12, 17, 0);
-					ListTimeInterval<TestTimePeriod> list_index = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
+					var from_index = new DateTime(2012, 1, 6, 12, 17, 0);
+					var to_index = new DateTime(2019, 1, 6, 12, 17, 0);
+					var list_index = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
 					list_index.AssingTimePeriod(from_index, to_index);
 
-					Int32 weekends = list_index.CountWeekends();
+					var weekends = list_index.CountWeekends();
 					Assert.AreEqual(weekends, list_index.RemoveWeekends());
 
-					Int32 index = list_index.GetIndexFromDate(new DateTime(2015, 8, 2));
+					var index = list_index.GetIndexFromDate(new DateTime(2015, 8, 2));
 					DateTime find_date = list_index[index].Date;
 					Assert.AreEqual(find_date.Year, 2015);
 					Assert.AreEqual(find_date.Month, 7);
@@ -139,15 +139,15 @@ namespace Lotus
 				// Получение интерполированной даты
 				//
 				{
-					DateTime from_index = new DateTime(2012, 1, 6);
-					DateTime to_index = new DateTime(2012, 1, 26);
+					var from_index = new DateTime(2012, 1, 6);
+					var to_index = new DateTime(2012, 1, 26);
 
 					Assert.AreEqual(from_index.GetInterpolatedDate(to_index, 0).Day, 6);
 					Assert.AreEqual(from_index.GetInterpolatedDate(to_index, 0.1f).Day, 8);
 					Assert.AreEqual(from_index.GetInterpolatedDate(to_index, 0.5f).Day, 16);
 					Assert.AreEqual(from_index.GetInterpolatedDate(to_index, 1).Day, 26);
 
-					ListTimeInterval<TestTimePeriod> list = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
+					var list = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
 
 					list.Add(new TestTimePeriod(from_index));
 					list.Add(new TestTimePeriod(to_index));
@@ -163,12 +163,12 @@ namespace Lotus
 				// Обрезать список сначала
 				//
 				{
-					DateTime start_date = new DateTime(2019, 1, 6);
-					DateTime end_date = new DateTime(2019, 6, 18);
-					ListTimeInterval<TestTimePeriod> list = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, start_date, end_date, 30);
+					var start_date = new DateTime(2019, 1, 6);
+					var end_date = new DateTime(2019, 6, 18);
+					var list = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, start_date, end_date, 30);
 
 					// Удаляем до конечной даты
-					Int32 count = list.Count;
+					var count = list.Count;
 					Assert.AreEqual(list.TrimStart(end_date, true), count);
 					Assert.AreEqual(list.Count, 0);
 
@@ -232,12 +232,12 @@ namespace Lotus
 				// Обрезать список с конца
 				//
 				{
-					DateTime start_date = new DateTime(2020, 1, 1);
-					DateTime end_date = new DateTime(2020, 2, 29);
-					ListTimeInterval<TestTimePeriod> list = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, start_date, end_date, 30);
+					var start_date = new DateTime(2020, 1, 1);
+					var end_date = new DateTime(2020, 2, 29);
+					var list = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, start_date, end_date, 30);
 
 					// Удаляем все
-					Int32 count = list.Count;
+					var count = list.Count;
 					Assert.AreEqual(list.TrimEnd(start_date, true), count);
 
 					// Удаляем все за исключением первого элемента

@@ -32,53 +32,53 @@ namespace Lotus
 			/// <summary>
 			/// Добавить сущность к фильтру
 			/// </summary>
-			/// <param name="entity_id">Индентификатор сущности</param>
+			/// <param name="entityId">Индентификатор сущности</param>
 			//---------------------------------------------------------------------------------------------------------
-			void AddEntity(Int32 entity_id);
+			void AddEntity(Int32 entityId);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка наличия сущности в фильтре
 			/// </summary>
-			/// <param name="entity_id">Индентификатор сущности</param>
+			/// <param name="entityId">Индентификатор сущности</param>
 			/// <returns>Статус наличия сущности</returns>
 			//---------------------------------------------------------------------------------------------------------
-			Boolean HasEntity(Int32 entity_id);
+			Boolean HasEntity(Int32 entityId);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Удалить сущность из фильтра
 			/// </summary>
-			/// <param name="entity_id">Индентификатор сущности</param>
+			/// <param name="entityId">Индентификатор сущности</param>
 			//---------------------------------------------------------------------------------------------------------
-			void RemoveEntity(Int32 entity_id);
+			void RemoveEntity(Int32 entityId);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Включить сущности с указанным типом компонента в фильтр
 			/// </summary>
-			/// <param name="component_type">Тип компонента</param>
+			/// <param name="componentType">Тип компонента</param>
 			/// <returns>Фильтр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			ILotusEcsFilterComponent Include(Type component_type);
+			ILotusEcsFilterComponent Include(Type componentType);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на наличие компонента в фильтре
 			/// </summary>
-			/// <param name="component_type">Тип компонента</param>
+			/// <param name="componentType">Тип компонента</param>
 			/// <returns>Статус наличия</returns>
 			//---------------------------------------------------------------------------------------------------------
-			Boolean Exsist(Type component_type);
+			Boolean Exsist(Type componentType);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Исключить сущности с указанным типом компонента из фильтра
 			/// </summary>
-			/// <param name="component_type">Тип компонента</param>
+			/// <param name="componentType">Тип компонента</param>
 			/// <returns>Фильтр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			ILotusEcsFilterComponent Exclude(Type component_type);
+			ILotusEcsFilterComponent Exclude(Type componentType);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -118,7 +118,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mWorld);
+					return mWorld;
 				}
 				set
 				{
@@ -131,7 +131,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountEntities
 			{
-				get { return (mEntities.Count); }
+				get { return mEntities.Count; }
 			}
 
 			/// <summary>
@@ -141,7 +141,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mIncludedComponents);
+					return mIncludedComponents;
 				}
 			}
 
@@ -152,7 +152,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mExcludedComponents);
+					return mExcludedComponents;
 				}
 			}
 			#endregion
@@ -194,7 +194,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public Boolean HasEntity(Int32 entity_id)
 			{
-				return(mEntities.Contains(entity_id));
+				return mEntities.Contains(entity_id);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -249,7 +249,7 @@ namespace Lotus
 			public Boolean Exsist<TComponent>() where TComponent : struct
 			{
 				Type component_type = typeof(TComponent);
-				return (mIncludedComponents.Contains(component_type) || mExcludedComponents.Contains(component_type));
+				return mIncludedComponents.Contains(component_type) || mExcludedComponents.Contains(component_type);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public Boolean Exsist(Type component_type)
 			{
-				return (mIncludedComponents.Contains(component_type) || mExcludedComponents.Contains(component_type));
+				return mIncludedComponents.Contains(component_type) || mExcludedComponents.Contains(component_type);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -364,7 +364,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32[] GetEntities()
 			{
-				return (mEntities.mDenseItems);
+				return mEntities.mDenseItems;
 			}
 			#endregion
 		}

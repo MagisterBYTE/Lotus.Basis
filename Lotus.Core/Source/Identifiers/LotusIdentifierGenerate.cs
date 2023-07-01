@@ -49,7 +49,7 @@ namespace Lotus
 			{
 				if (obj == null)
 				{
-					return (-1);
+					return -1;
 				}
 				else
 				{
@@ -65,7 +65,7 @@ namespace Lotus
 					// Пакуем дату
 					XPacked.PackLong(ref result, 28, 36, elapsed_millisecond);
 
-					return (result);
+					return result;
 				}
 			}
 
@@ -78,7 +78,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 UnpackIdToHashCode(Int64 id)
 			{
-				return ((Int32)XPacked.UnpackLong(id, 0, 28) * 16);
+				return (Int32)XPacked.UnpackLong(id, 0, 28) * 16;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ namespace Lotus
 				var elapsed_millisecond = XPacked.UnpackLong(id, 28, 36);
 				var elapsed_ticks = elapsed_millisecond * 100000;
 				var result = new DateTime(StartDate.Ticks + elapsed_ticks);
-				return (result);
+				return result;
 			}
 			#endregion
 		}

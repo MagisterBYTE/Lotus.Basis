@@ -70,7 +70,7 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set { mName = value; }
 			}
 
@@ -79,7 +79,7 @@ namespace Lotus
 			/// </summary>
 			public PoolManager<CTaskHolder> TaskHolderPools
 			{
-				get { return (mTaskHolderPools); }
+				get { return mTaskHolderPools; }
 			}
 
 			/// <summary>
@@ -87,7 +87,7 @@ namespace Lotus
 			/// </summary>
 			public List<CTaskHolder> Tasks
 			{
-				get { return (mTasks); }
+				get { return mTasks; }
 			}
 
 			/// <summary>
@@ -95,7 +95,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, Action> TaskHandlersCompleted
 			{
-				get { return (mTaskHandlersCompleted); }
+				get { return mTaskHandlersCompleted; }
 			}
 			#endregion
 
@@ -166,14 +166,14 @@ namespace Lotus
 			/// <summary>
 			/// Получение задачи по имени
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
+			/// <param name="taskName">Имя задачи</param>
 			/// <returns>Найденная задача или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CTaskHolder GetTask(String task_name)
+			public virtual CTaskHolder GetTask(String taskName)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
-					if (mTasks[i].Name == task_name)
+					if (mTasks[i].Name == taskName)
 					{
 						return mTasks[i];
 					}
@@ -202,13 +202,13 @@ namespace Lotus
 			/// Добавление новой задачи
 			/// </summary>
 			/// <param name="task">Задача</param>
-			/// <param name="task_name">Имя задачи</param>
+			/// <param name="taskName">Имя задачи</param>
 			/// <param name="method">Способ выполнения задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddTask(ILotusTask task, String task_name, TTaskMethod method)
+			public virtual void AddTask(ILotusTask task, String taskName, TTaskMethod method)
 			{
 				CTaskHolder task_holder = mTaskHolderPools.Take();
-				task_holder.Name = task_name;
+				task_holder.Name = taskName;
 				task_holder.Task = task;
 				task_holder.MethodMode = method;
 				mTasks.Add(task_holder);
@@ -241,13 +241,13 @@ namespace Lotus
 			/// <summary>
 			/// Удаление задачи
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
+			/// <param name="taskName">Имя задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RemoveTask(String task_name)
+			public virtual void RemoveTask(String taskName)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
-					if (mTasks[i].Name == task_name)
+					if (mTasks[i].Name == taskName)
 					{
 						// 1) Возвращаем в пул
 						CTaskHolder task_holder = mTasks[i];
@@ -264,52 +264,52 @@ namespace Lotus
 			/// <summary>
 			/// Запуск выполнения задачи
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
+			/// <param name="taskName">Имя задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RunTask(String task_name)
+			public virtual void RunTask(String taskName)
 			{
-				RunTask(task_name, 0.0f, null);
+				RunTask(taskName, 0.0f, null);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запуск выполнения задачи
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
-			/// <param name="delay_start">Время задержки запуска выполнения задачи</param>
+			/// <param name="taskName">Имя задачи</param>
+			/// <param name="delayStart">Время задержки запуска выполнения задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RunTask(String task_name, Single delay_start)
+			public virtual void RunTask(String taskName, Single delayStart)
 			{
-				RunTask(task_name, delay_start, null);
+				RunTask(taskName, delayStart, null);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запуск выполнения задачи
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
-			/// <param name="delay_start">Время задержки запуска выполнения задачи</param>
-			/// <param name="on_completed">Обработчик события окончания выполнения задачи</param>
+			/// <param name="taskName">Имя задачи</param>
+			/// <param name="delayStart">Время задержки запуска выполнения задачи</param>
+			/// <param name="onCompleted">Обработчик события окончания выполнения задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RunTask(String task_name, Single delay_start, Action on_completed)
+			public virtual void RunTask(String taskName, Single delayStart, Action onCompleted)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
-					if (mTasks[i].Name == task_name)
+					if (mTasks[i].Name == taskName)
 					{
-						if (on_completed != null)
+						if (onCompleted != null)
 						{
-							if (mTaskHandlersCompleted.ContainsKey(task_name))
+							if (mTaskHandlersCompleted.ContainsKey(taskName))
 							{
-								mTaskHandlersCompleted[task_name] = on_completed;
+								mTaskHandlersCompleted[taskName] = onCompleted;
 							}
 							else
 							{
-								mTaskHandlersCompleted.Add(task_name, on_completed);
+								mTaskHandlersCompleted.Add(taskName, onCompleted);
 							}
 						}
 
-						mTasks[i].DelayStart = delay_start;
+						mTasks[i].DelayStart = delayStart;
 						mTasks[i].RunTask();
 						return;
 					}
@@ -321,15 +321,15 @@ namespace Lotus
 			/// Запуск выполнения задачи
 			/// </summary>
 			/// <param name="task">Задача</param>
-			/// <param name="delay_start">Время задержки запуска выполнения задачи</param>
+			/// <param name="delayStart">Время задержки запуска выполнения задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RunTask(ILotusTask task, Single delay_start)
+			public virtual void RunTask(ILotusTask task, Single delayStart)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
 					if (mTasks[i].Task == task)
 					{
-						mTasks[i].DelayStart = delay_start;
+						mTasks[i].DelayStart = delayStart;
 						mTasks[i].RunTask();
 						return;
 					}
@@ -340,14 +340,14 @@ namespace Lotus
 			/// <summary>
 			/// Пауза выполнения задачи
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
+			/// <param name="taskName">Имя задачи</param>
 			/// <param name="pause">Статус паузы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void PauseTask(String task_name, Boolean pause)
+			public virtual void PauseTask(String taskName, Boolean pause)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
-					if (mTasks[i].Name == task_name)
+					if (mTasks[i].Name == taskName)
 					{
 						mTasks[i].IsPause = pause;
 						return;
@@ -359,13 +359,13 @@ namespace Lotus
 			/// <summary>
 			/// Принудительная остановка выполнения задачи
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
+			/// <param name="taskName">Имя задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void StopTask(String task_name)
+			public virtual void StopTask(String taskName)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
-					if (mTasks[i].Name == task_name)
+					if (mTasks[i].Name == taskName)
 					{
 						mTasks[i].StopTask();
 						return;
@@ -377,13 +377,13 @@ namespace Lotus
 			/// <summary>
 			/// Переустановка данных задачи
 			/// </summary>
-			/// <param name="task_name">Имя задачи</param>
+			/// <param name="taskName">Имя задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void ResetTask(String task_name)
+			public virtual void ResetTask(String taskName)
 			{
 				for (var i = 0; i < mTasks.Count; i++)
 				{
-					if (mTasks[i].Name == task_name)
+					if (mTasks[i].Name == taskName)
 					{
 						mTasks[i].ResetTask();
 						return;

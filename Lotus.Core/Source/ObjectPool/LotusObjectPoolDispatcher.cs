@@ -55,7 +55,7 @@ namespace Lotus
 					{
 						OnInit();
 					}
-					return (mPoolManagers);
+					return mPoolManagers;
 				}
 			}
 			#endregion
@@ -107,7 +107,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean UnRegisterManager(ILotusPoolManager manager)
 			{
-				return(PoolManagers.Remove(in manager));
+				return PoolManagers.Remove(in manager);
 			}
 			#endregion
 
@@ -116,12 +116,12 @@ namespace Lotus
 			/// <summary>
 			/// Взять готовый объект из пула
 			/// </summary>
-			/// <param name="manager_name">Имя менеджер</param>
+			/// <param name="managerName">Имя менеджер</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TPoolObject Take<TPoolObject>(String manager_name)
+			public static TPoolObject Take<TPoolObject>(String managerName)
 			{
-				ILotusPoolManager result = PoolManagers.Search(x => x.Name == manager_name);
+				ILotusPoolManager result = PoolManagers.Search(x => x.Name == managerName);
 				if(result != null)
 				{
 					return (TPoolObject)result.TakeObjectFromPool();
@@ -134,16 +134,16 @@ namespace Lotus
 			/// <summary>
 			/// Освободить объект и положить его назад в пул
 			/// </summary>
-			/// <param name="manager_name">Имя менеджер</param>
-			/// <param name="pool_object">Объект</param>
+			/// <param name="managerName">Имя менеджер</param>
+			/// <param name="poolObject">Объект</param>
 			/// <returns>Статус успешности добавления объекта в пул</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean Release<TPoolObject>(String manager_name, TPoolObject pool_object)
+			public static Boolean Release<TPoolObject>(String managerName, TPoolObject poolObject)
 			{
-				ILotusPoolManager result = PoolManagers.Search(x => x.Name == manager_name);
+				ILotusPoolManager result = PoolManagers.Search(x => x.Name == managerName);
 				if (result != null)
 				{
-					result.ReleaseObjectToPool(pool_object);
+					result.ReleaseObjectToPool(poolObject);
 					return true;
 				}
 

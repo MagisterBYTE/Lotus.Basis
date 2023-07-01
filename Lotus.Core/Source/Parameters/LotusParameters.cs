@@ -81,10 +81,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameters(String parameter_name)
-				: base(parameter_name)
+			public CParameters(String parameterName)
+				: base(parameterName)
 			{
 				mValue = new ListArray<IParameterItem>();
 			}
@@ -93,11 +93,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="parameters">Список параметров</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameters(String parameter_name, params IParameterItem[] parameters)
-				: base(parameter_name)
+			public CParameters(String parameterName, params IParameterItem[] parameters)
+				: base(parameterName)
 			{
 				if(parameters != null && parameters.Length > 0)
 				{
@@ -184,7 +184,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject owned_object, System.Object data, String data_name)
 			{
-				return (true);
+				return true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -207,20 +207,20 @@ namespace Lotus
 			/// Получение первого параметра имеющего указанный тип или значение по умолчанию
 			/// </summary>
 			/// <typeparam name="TType">Тип значения</typeparam>
-			/// <param name="default_value">Значение по умолчанию если элемент не найден</param>
+			/// <param name="defaultValue">Значение по умолчанию если элемент не найден</param>
 			/// <returns>Первый найденный параметрам с указанным типов или значение по умолчанию</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TType GetValueOfType<TType>(TType default_value = default)
+			public TType GetValueOfType<TType>(TType defaultValue = default)
 			{
 				for (var i = 0; i < Value.Count; i++)
 				{
 					if (Value[i].Value is TType result)
 					{
-						return (result);
+						return result;
 					}
 				}
 
-				return (default_value);
+				return defaultValue;
 			}
 			#endregion
 
@@ -229,56 +229,56 @@ namespace Lotus
 			/// <summary>
 			/// Добавить логический параметр
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value">Значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValue">Значение параметра</param>
 			/// <returns>Текущий список параметров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameters AddBool(String parameter_name, Boolean parameter_value)
+			public CParameters AddBool(String parameterName, Boolean parameterValue)
 			{
-				mValue.Add(new CParameterBool(parameter_name, parameter_value));
-				return (this);
+				mValue.Add(new CParameterBool(parameterName, parameterValue));
+				return this;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавить целочисленный параметр
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value">Значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValue">Значение параметра</param>
 			/// <returns>Текущий список параметров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameters AddInteger(String parameter_name, Int32 parameter_value)
+			public CParameters AddInteger(String parameterName, Int32 parameterValue)
 			{
-				mValue.Add(new CParameterInteger(parameter_name, parameter_value));
-				return (this);
+				mValue.Add(new CParameterInteger(parameterName, parameterValue));
+				return this;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавить вещественный параметр
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value">Значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValue">Значение параметра</param>
 			/// <returns>Текущий список параметров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameters AddReal(String parameter_name, Double parameter_value)
+			public CParameters AddReal(String parameterName, Double parameterValue)
 			{
-				mValue.Add(new CParameterReal(parameter_name, parameter_value));
-				return (this);
+				mValue.Add(new CParameterReal(parameterName, parameterValue));
+				return this;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавить строковый параметр
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value">Значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValue">Значение параметра</param>
 			/// <returns>Текущий список параметров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameters AddString(String parameter_name, String parameter_value)
+			public CParameters AddString(String parameterName, String parameterValue)
 			{
-				mValue.Add(new CParameterString(parameter_name, parameter_value));
-				return (this);
+				mValue.Add(new CParameterString(parameterName, parameterValue));
+				return this;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -286,30 +286,30 @@ namespace Lotus
 			/// Добавить параметр перечисление
 			/// </summary>
 			/// <typeparam name="TEnum">Тип перечисления</typeparam>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value">Значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValue">Значение параметра</param>
 			/// <returns>Текущий список параметров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameters AddEnum<TEnum>(String parameter_name, TEnum parameter_value) where TEnum : Enum
+			public CParameters AddEnum<TEnum>(String parameterName, TEnum parameterValue) where TEnum : Enum
 			{
-				mValue.Add(new CParameterEnum<TEnum>(parameter_name, parameter_value));
-				return (this);
+				mValue.Add(new CParameterEnum<TEnum>(parameterName, parameterValue));
+				return this;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавить параметр имеющий тип значания базового объекта
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value">Значение параметра</param>
-			/// <param name="allow_duplicates">Разрешить дубликаты объектов</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValue">Значение параметра</param>
+			/// <param name="allowDuplicates">Разрешить дубликаты объектов</param>
 			/// <returns>Текущий список параметров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameters AddObject(String parameter_name, System.Object parameter_value, Boolean allow_duplicates)
+			public CParameters AddObject(String parameterName, System.Object parameterValue, Boolean allowDuplicates)
 			{
-				if (allow_duplicates)
+				if (allowDuplicates)
 				{
-					mValue.Add(new CParameterObject(parameter_name, parameter_value));
+					mValue.Add(new CParameterObject(parameterName, parameterValue));
 				}
 				else
 				{
@@ -317,17 +317,17 @@ namespace Lotus
 					for (var i = 0; i < Value.Count; i++)
 					{
 						if(Value[i].ValueType == TParameterValueType.Object &&
-							Value[i].Value == parameter_value &&
-							Value[i].Name == parameter_name)
+							Value[i].Value == parameterValue &&
+							Value[i].Name == parameterName)
 						{
-							return (this);
+							return this;
 						}
 					}
 
 					// Если нет то добавялем
-					mValue.Add(new CParameterObject(parameter_name, parameter_value));
+					mValue.Add(new CParameterObject(parameterName, parameterValue));
 				}
-				return (this);
+				return this;
 			}
 			#endregion
 
@@ -336,164 +336,164 @@ namespace Lotus
 			/// <summary>
 			/// Получение логического параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <returns>Параметр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterBool GetBool(String parameter_name)
+			public CParameterBool GetBool(String parameterName)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if(String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterBool parameter)
+					if(String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterBool parameter)
 					{
-						return (parameter);
+						return parameter;
 					}
 				}
 
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение значения логического параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value_default">Значение параметра по умолчанию</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValueDefault">Значение параметра по умолчанию</param>
 			/// <returns>Значение параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean GetBoolValue(String parameter_name, Boolean parameter_value_default = false)
+			public Boolean GetBoolValue(String parameterName, Boolean parameterValueDefault = false)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterBool parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterBool parameter)
 					{
-						return (parameter.Value);
+						return parameter.Value;
 					}
 				}
 
-				return (parameter_value_default);
+				return parameterValueDefault;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение целочисленного параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <returns>Параметр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterInteger GetInteger(String parameter_name)
+			public CParameterInteger GetInteger(String parameterName)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterInteger parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterInteger parameter)
 					{
-						return (parameter);
+						return parameter;
 					}
 				}
 
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение значения целочисленного параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value_default">Значение параметра по умолчанию</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValueDefault">Значение параметра по умолчанию</param>
 			/// <returns>Значение параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 GetIntegerValue(String parameter_name, Int32 parameter_value_default = -1)
+			public Int32 GetIntegerValue(String parameterName, Int32 parameterValueDefault = -1)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterInteger parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterInteger parameter)
 					{
-						return (parameter.Value);
+						return parameter.Value;
 					}
 				}
 
-				return (parameter_value_default);
+				return parameterValueDefault;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение вещественного параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <returns>Параметр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterReal GetReal(String parameter_name)
+			public CParameterReal GetReal(String parameterName)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterReal parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterReal parameter)
 					{
-						return (parameter);
+						return parameter;
 					}
 				}
 
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение значения вещественного параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value_default">Значение параметра по умолчанию</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValueDefault">Значение параметра по умолчанию</param>
 			/// <returns>Значение параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double GetRealValue(String parameter_name, Double parameter_value_default = -1)
+			public Double GetRealValue(String parameterName, Double parameterValueDefault = -1)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterReal parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterReal parameter)
 					{
-						return (parameter.Value);
+						return parameter.Value;
 					}
 				}
 
-				return (parameter_value_default);
+				return parameterValueDefault;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение строкового параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <returns>Параметр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterString GetString(String parameter_name)
+			public CParameterString GetString(String parameterName)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterString parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterString parameter)
 					{
-						return (parameter);
+						return parameter;
 					}
 				}
 
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение значения строкового параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="parameter_value_default">Значение параметра по умолчанию</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="parameterValueDefault">Значение параметра по умолчанию</param>
 			/// <returns>Значение параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String GetStringValue(String parameter_name, String parameter_value_default = "")
+			public String GetStringValue(String parameterName, String parameterValueDefault = "")
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterString parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterString parameter)
 					{
-						return (parameter.Value);
+						return parameter.Value;
 					}
 				}
 
-				return (parameter_value_default);
+				return parameterValueDefault;
 			}
 			#endregion
 
@@ -502,88 +502,88 @@ namespace Lotus
 			/// <summary>
 			/// Обновление значения логического параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="new_value">Новое значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="newValue">Новое значение параметра</param>
 			/// <returns>Статус обновления значения параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean UpdateBoolValue(String parameter_name, Boolean new_value)
+			public Boolean UpdateBoolValue(String parameterName, Boolean newValue)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterBool parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterBool parameter)
 					{
-						parameter.Value = new_value;
-						return (true);
+						parameter.Value = newValue;
+						return true;
 					}
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Обновление значения целочисленного параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="new_value">Новое значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="newValue">Новое значение параметра</param>
 			/// <returns>Статус обновления значения параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean UpdateIntegerValue(String parameter_name, Int32 new_value)
+			public Boolean UpdateIntegerValue(String parameterName, Int32 newValue)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterInteger parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterInteger parameter)
 					{
-						parameter.Value = new_value;
-						return (true);
+						parameter.Value = newValue;
+						return true;
 					}
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Обновление значения вещественного параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="new_value">Новое значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="newValue">Новое значение параметра</param>
 			/// <returns>Статус обновления значения параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean UpdateRealValue(String parameter_name, Double new_value)
+			public Boolean UpdateRealValue(String parameterName, Double newValue)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterReal parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterReal parameter)
 					{
-						parameter.Value = new_value;
-						return (true);
+						parameter.Value = newValue;
+						return true;
 					}
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Обновление значения строкового параметра с указанным именем
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
-			/// <param name="new_value">Новое значение параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <param name="newValue">Новое значение параметра</param>
 			/// <returns>Статус обновления значения параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean UpdateStringValue(String parameter_name, String new_value)
+			public Boolean UpdateStringValue(String parameterName, String newValue)
 			{
 				for (var i = 0; i < mValue.Count; i++)
 				{
-					if (String.Compare(parameter_name, mValue[i].Name) == 0 && mValue[i] is CParameterString parameter)
+					if (String.Compare(parameterName, mValue[i].Name) == 0 && mValue[i] is CParameterString parameter)
 					{
-						parameter.Value = new_value;
-						return (true);
+						parameter.Value = newValue;
+						return true;
 					}
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 
@@ -592,9 +592,9 @@ namespace Lotus
 			/// <summary>
 			/// Загрузка параметров из файла
 			/// </summary>
-			/// <param name="file_name">Полное имя файла</param>
+			/// <param name="fileName">Полное имя файла</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Load(String file_name)
+			public void Load(String fileName)
 			{
 				//FileStream file_stream = new FileStream(file_name, FileMode.Open);
     //            JsonDocument json_doc = JsonDocument.Parse(file_stream);
@@ -655,11 +655,11 @@ namespace Lotus
 			/// <summary>
 			/// Сохранения параметров в файл в формате Json
 			/// </summary>
-			/// <param name="file_name">Полное имя файла</param>
+			/// <param name="fileName">Полное имя файла</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SaveToJson(String file_name)
+			public void SaveToJson(String fileName)
 			{
-				var file_stream = new FileStream(file_name, FileMode.Create);
+				var file_stream = new FileStream(fileName, FileMode.Create);
 				var stream_writer = new StreamWriter(file_stream, System.Text.Encoding.UTF8);
 				stream_writer.Write('{');
 

@@ -64,7 +64,7 @@ namespace Lotus
 				}
 
 				var result = (Enum)Enum.ToObject(value.GetType(), lValue);
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -98,13 +98,13 @@ namespace Lotus
 			/// Получение атрибута перечисления
 			/// </summary>
 			/// <typeparam name="TType">Тип атрибута</typeparam>
-			/// <param name="enum_value">Экземпляр перечисления</param>
+			/// <param name="enumValue">Экземпляр перечисления</param>
 			/// <returns>Найденный атрибут</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType GetAttributeOfType<TType>(this Enum enum_value) where TType : Attribute
+			public static TType GetAttributeOfType<TType>(this Enum enumValue) where TType : Attribute
 			{
-				var type = enum_value.GetType();
-				var member_info = type.GetMember(enum_value.ToString());
+				var type = enumValue.GetType();
+				var member_info = type.GetMember(enumValue.ToString());
 				var attributes = member_info[0].GetCustomAttributes(typeof(TType), false);
 				return attributes.Length > 0 ? (TType)attributes[0] : null;
 			}
@@ -113,26 +113,26 @@ namespace Lotus
 			/// <summary>
 			/// Получение описания либо имени указанного перечисления
 			/// </summary>
-			/// <param name="enum_value">Экземпляр перечисления</param>
+			/// <param name="enumValue">Экземпляр перечисления</param>
 			/// <returns>Описание либо имя перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetDescriptionOrName(this Enum enum_value)
+			public static String GetDescriptionOrName(this Enum enumValue)
 			{
-				Type type_enum = enum_value.GetType();
-				return (XEnum.GetDescriptionOrName(type_enum, enum_value));
+				Type type_enum = enumValue.GetType();
+				return XEnum.GetDescriptionOrName(type_enum, enumValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение аббревиатуры либо имени указанного перечисления
 			/// </summary>
-			/// <param name="enum_value">Экземпляр перечисления</param>
+			/// <param name="enumValue">Экземпляр перечисления</param>
 			/// <returns>Аббревиатура либо имя перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetAbbreviationOrName(this Enum enum_value)
+			public static String GetAbbreviationOrName(this Enum enumValue)
 			{
-				Type type_enum = enum_value.GetType();
-				return (XEnum.GetAbbreviationOrName(type_enum, enum_value));
+				Type type_enum = enumValue.GetType();
+				return XEnum.GetAbbreviationOrName(type_enum, enumValue);
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

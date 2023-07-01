@@ -75,7 +75,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (base.ToString());
+				return base.ToString();
 			}
 			#endregion
 		}
@@ -121,7 +121,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (base.ToString());
+				return base.ToString();
 			}
 			#endregion
 
@@ -135,13 +135,13 @@ namespace Lotus
 			/// <summary>
 			/// Вспомогательный метод для нотификации изменений свойства
 			/// </summary>
-			/// <param name="property_name">Имя свойства</param>
+			/// <param name="propertyName">Имя свойства</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void NotifyPropertyChanged(String property_name = "")
+			public void NotifyPropertyChanged(String propertyName = "")
 			{
 				if (PropertyChanged != null)
 				{
-					PropertyChanged(this, new PropertyChangedEventArgs(property_name));
+					PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 				}
 			}
 
@@ -213,7 +213,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (Name);
+				return Name;
 			}
 			#endregion
 		}

@@ -92,11 +92,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="group_name">Имя группы</param>
+			/// <param name="groupName">Имя группы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusGroupingAttribute(String group_name)
+			public LotusGroupingAttribute(String groupName)
 			{
-				mGroupName = group_name;
+				mGroupName = groupName;
 				mBackground = TColor.White;
 				mHeaderColor = TColor.White;
 			}
@@ -105,29 +105,29 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="group_name">Имя группы</param>
-			/// <param name="header_color_bgra">Цвет надписи в формате BGRA</param>
+			/// <param name="groupName">Имя группы</param>
+			/// <param name="headerColorBgra">Цвет надписи в формате BGRA</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusGroupingAttribute(String group_name, UInt32 header_color_bgra)
+			public LotusGroupingAttribute(String groupName, UInt32 headerColorBgra)
 			{
-				mGroupName = group_name;
+				mGroupName = groupName;
 				mBackground = TColor.White;
-				mHeaderColor = TColor.FromBGRA(header_color_bgra);
+				mHeaderColor = TColor.FromBGRA(headerColorBgra);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="group_name">Имя группы</param>
-			/// <param name="header_color_bgra">Цвет надписи в формате BGRA</param>
-			/// <param name="background_bgra">Фоновый цвет в формате BGRA</param>
+			/// <param name="groupName">Имя группы</param>
+			/// <param name="headerColorBgra">Цвет надписи в формате BGRA</param>
+			/// <param name="backgroundBgra">Фоновый цвет в формате BGRA</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusGroupingAttribute(String group_name, UInt32 header_color_bgra, UInt32 background_bgra)
+			public LotusGroupingAttribute(String groupName, UInt32 headerColorBgra, UInt32 backgroundBgra)
 			{
-				mGroupName = group_name;
-				mBackground = TColor.FromBGRA(background_bgra);
-				mHeaderColor = TColor.FromBGRA(header_color_bgra);
+				mGroupName = groupName;
+				mBackground = TColor.FromBGRA(backgroundBgra);
+				mHeaderColor = TColor.FromBGRA(headerColorBgra);
 			}
 			#endregion
 		}

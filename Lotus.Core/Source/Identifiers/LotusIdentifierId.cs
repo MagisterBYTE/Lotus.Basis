@@ -43,7 +43,7 @@ namespace Lotus
 		public class IdentifierId<TKey> : PropertyChangedBase, ILotusIdentifierId<TKey> where TKey : IEquatable<TKey>
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 			[UnityEngine.HideInInspector]
 #endif
@@ -60,7 +60,7 @@ namespace Lotus
 			[Browsable(false)]
 			public virtual TKey Id
 			{
-				get { return (mId); }
+				get { return mId; }
 				set
 				{
 					mId = value;
@@ -100,7 +100,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (Id.ToString());
+				return Id.ToString();
 			}
 			#endregion
 		}

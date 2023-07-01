@@ -59,21 +59,21 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public DequeArray()
-				: base(INIT_MAX_COUNT)
+				: base(INITMAXCOUNT)
 			{
-				mStartOffset = INIT_MAX_COUNT / 2;
+				mStartOffset = INITMAXCOUNT / 2;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует данные двусторонней очереди указанными данными
 			/// </summary>
-			/// <param name="max_count">Максимальное количество элементов</param>
+			/// <param name="maxCount">Максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public DequeArray(Int32 max_count)
-				: base(max_count)
+			public DequeArray(Int32 maxCount)
+				: base(maxCount)
 			{
-				mStartOffset = max_count / 2;
+				mStartOffset = maxCount / 2;
 			}
 			#endregion
 
@@ -180,7 +180,7 @@ namespace Lotus
 				}
 				else
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError("Not element in deque!!!");
 #else
 					XLogger.LogError("Not element in deque!!!");
@@ -207,7 +207,7 @@ namespace Lotus
 				}
 				else
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError("Not element in deque!!!");
 #else
 					XLogger.LogError("Not element in deque!!!");
@@ -230,7 +230,7 @@ namespace Lotus
 				}
 				else
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError("Not element in deque!!!");
 #else
 					XLogger.LogError("Not element in deque!!!");
@@ -254,7 +254,7 @@ namespace Lotus
 				}
 				else
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					UnityEngine.Debug.LogError("Not element in deque!!!");
 #else
 					XLogger.LogError("Not element in deque!!!");

@@ -54,11 +54,11 @@ namespace Lotus
 			/// <summary>
 			/// Оповещение определённого модуля/подсистемы
 			/// </summary>
-			/// <param name="module_name">Имя модуля/подсистемы</param>
+			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="text">Имя сообщения</param>
 			/// <param name="type">Тип сообщения</param>
 			//---------------------------------------------------------------------------------------------------------
-			void LogModule(String module_name, String text, TLogType type);
+			void LogModule(String moduleName, String text, TLogType type);
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------

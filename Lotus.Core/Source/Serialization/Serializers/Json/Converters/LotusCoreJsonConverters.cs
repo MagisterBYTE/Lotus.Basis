@@ -47,7 +47,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 
@@ -58,7 +58,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 			#endregion
@@ -82,16 +82,16 @@ namespace Lotus
 			/// Чтение свойства
 			/// </summary>
 			/// <param name="reader">Читатель Json</param>
-			/// <param name="object_type">Тип объекта</param>
-			/// <param name="existing_value">Статус существования значение</param>
-			/// <param name="has_existing_value">Статус существования значение</param>
+			/// <param name="objectType">Тип объекта</param>
+			/// <param name="existingValue">Статус существования значение</param>
+			/// <param name="hasExistingValue">Статус существования значение</param>
 			/// <param name="serializer">Сериализатор Json</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override TColor ReadJson(JsonReader reader, Type object_type, TColor existing_value,
-				Boolean has_existing_value, JsonSerializer serializer)
+			public override TColor ReadJson(JsonReader reader, Type objectType, TColor existingValue,
+				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return (TColor.DeserializeFromString((String)reader.Value));
+				return TColor.DeserializeFromString((String)reader.Value);
 			}
 			#endregion
 		}

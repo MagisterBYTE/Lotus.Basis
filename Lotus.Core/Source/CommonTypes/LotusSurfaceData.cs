@@ -163,11 +163,11 @@ namespace Lotus
 			/// Установка данных
 			/// </summary>
 			/// <param name="count">Количество элементов</param>
-			/// <param name="save_old_data">Сохранять ли старые данные</param>
+			/// <param name="saveOldData">Сохранять ли старые данные</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Set(Int32 count, Boolean save_old_data)
+			public void Set(Int32 count, Boolean saveOldData)
 			{
-				if (save_old_data)
+				if (saveOldData)
 				{
 					var data = new TType[count];
 					var count_copy = count;
@@ -207,30 +207,30 @@ namespace Lotus
 			/// <summary>
 			/// Линейная интерполяция значений поверхности
 			/// </summary>
-			/// <param name="new_width">Новая ширина</param>
-			/// <param name="new_height">Новая высота</param>
+			/// <param name="newWidth">Новая ширина</param>
+			/// <param name="newHeight">Новая высота</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Resize(Int32 new_width, Int32 new_height)
+			public void Resize(Int32 newWidth, Int32 newHeight)
 			{
-				var temp_data = new TType[new_width * new_height];
+				var temp_data = new TType[newWidth * newHeight];
 
-				var factor_x = mWidth / (Double)new_width;
-				var factor_y = mHeight / (Double)new_height;
+				var factor_x = mWidth / (Double)newWidth;
+				var factor_y = mHeight / (Double)newHeight;
 
-				for (var x = 0; x < new_width; ++x)
+				for (var x = 0; x < newWidth; ++x)
 				{
-					for (var y = 0; y < new_height; ++y)
+					for (var y = 0; y < newHeight; ++y)
 					{
 						var gx = (Int32)Math.Floor(x * factor_x);
 						var gy = (Int32)Math.Floor(y * factor_y);
 						TType val = this[gx, gy];
-						temp_data[x + (y * new_width)] = val;
+						temp_data[x + (y * newWidth)] = val;
 					}
 				}
 
 				mData = temp_data;
-				mWidth = new_width;
-				mHeight = new_height;
+				mWidth = newWidth;
+				mHeight = newHeight;
 				mRank = 2;
 			}
 			#endregion
@@ -272,27 +272,27 @@ namespace Lotus
 			/// <summary>
 			/// Линейная интерполяция значений поверхности
 			/// </summary>
-			/// <param name="new_width">Новая ширина</param>
-			/// <param name="new_height">Новая высота</param>
-			/// <param name="use_bilinear">Использовать билинейную интерполяцию</param>
+			/// <param name="newWidth">Новая ширина</param>
+			/// <param name="newHeight">Новая высота</param>
+			/// <param name="useBilinear">Использовать билинейную интерполяцию</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Resize(Int32 new_width, Int32 new_height, Boolean use_bilinear)
+			public void Resize(Int32 newWidth, Int32 newHeight, Boolean useBilinear)
 			{
-				var temp_data = new Int32[new_width * new_height];
+				var temp_data = new Int32[newWidth * newHeight];
 
-				var factor_x = mWidth / (Double)new_width;
-				var factor_y = mHeight / (Double)new_height;
+				var factor_x = mWidth / (Double)newWidth;
+				var factor_y = mHeight / (Double)newHeight;
 
-				if (use_bilinear)
+				if (useBilinear)
 				{
 					Double fraction_x, fraction_y, one_minus_x, one_minus_y;
 					Int32 ceil_x, ceil_y, floor_x, floor_y;
 					Int32 c1, c2, c3, c4;
 					Int32 b1, b2;
 
-					for (var x = 0; x < new_width; ++x)
+					for (var x = 0; x < newWidth; ++x)
 					{
-						for (var y = 0; y < new_height; ++y)
+						for (var y = 0; y < newHeight; ++y)
 						{
 							// Setup
 							floor_x = (Int32)Math.Floor(x * factor_x);
@@ -325,27 +325,27 @@ namespace Lotus
 							var val = (Int32)((one_minus_y * b1) + (fraction_y * b2));
 
 
-							temp_data[x + (y * new_width)] = val;
+							temp_data[x + (y * newWidth)] = val;
 						}
 					}
 				}
 				else
 				{
-					for (var x = 0; x < new_width; ++x)
+					for (var x = 0; x < newWidth; ++x)
 					{
-						for (var y = 0; y < new_height; ++y)
+						for (var y = 0; y < newHeight; ++y)
 						{
 							var gx = (Int32)Math.Floor(x * factor_x);
 							var gy = (Int32)Math.Floor(y * factor_y);
 							var val = this[gx, gy];
-							temp_data[x + (y * new_width)] = val;
+							temp_data[x + (y * newWidth)] = val;
 						}
 					}
 				}
 
 				mData = temp_data;
-				mWidth = new_width;
-				mHeight = new_height;
+				mWidth = newWidth;
+				mHeight = newHeight;
 				mRank = 2;
 			}
 			#endregion
@@ -381,7 +381,7 @@ namespace Lotus
 				mRank = 1;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует данные поверхности указанными значениями
@@ -421,7 +421,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка данных из источника
@@ -461,27 +461,27 @@ namespace Lotus
 			/// <summary>
 			/// Линейная интерполяция значений поверхности
 			/// </summary>
-			/// <param name="new_width">Новая ширина</param>
-			/// <param name="new_height">Новая высота</param>
-			/// <param name="use_bilinear">Использовать билинейную интерполяцию</param>
+			/// <param name="newWidth">Новая ширина</param>
+			/// <param name="newHeight">Новая высота</param>
+			/// <param name="useBilinear">Использовать билинейную интерполяцию</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Resize(Int32 new_width, Int32 new_height, Boolean use_bilinear)
+			public void Resize(Int32 newWidth, Int32 newHeight, Boolean useBilinear)
 			{
-				var temp_data = new TColor[new_width * new_height];
+				var temp_data = new TColor[newWidth * newHeight];
 
-				var factor_x = mWidth / (Single)new_width;
-				var factor_y = mHeight / (Single)new_height;
+				var factor_x = mWidth / (Single)newWidth;
+				var factor_y = mHeight / (Single)newHeight;
 
-				if (use_bilinear)
+				if (useBilinear)
 				{
 					Single fraction_x, fraction_y, one_minus_x, one_minus_y;
 					Int32 ceil_x, ceil_y, floor_x, floor_y;
 					TColor c1, c2, c3, c4;
 					TColor b1, b2;
 
-					for (var x = 0; x < new_width; ++x)
+					for (var x = 0; x < newWidth; ++x)
 					{
-						for (var y = 0; y < new_height; ++y)
+						for (var y = 0; y < newHeight; ++y)
 						{
 							// Setup
 							floor_x = (Int32)Math.Floor(x * factor_x);
@@ -513,27 +513,27 @@ namespace Lotus
 							b2 = TColor.Add(TColor.Scale(c3, one_minus_x), TColor.Scale(c4, fraction_x));
 							var val = TColor.Add(TColor.Scale(b1, one_minus_y), TColor.Scale(b2, fraction_y));
 
-							temp_data[x + (y * new_width)] = val;
+							temp_data[x + (y * newWidth)] = val;
 						}
 					}
 				}
 				else
 				{
-					for (var x = 0; x < new_width; ++x)
+					for (var x = 0; x < newWidth; ++x)
 					{
-						for (var y = 0; y < new_height; ++y)
+						for (var y = 0; y < newHeight; ++y)
 						{
 							var gx = (Int32)Math.Floor(x * factor_x);
 							var gy = (Int32)Math.Floor(y * factor_y);
 							TColor val = this[gx, gy];
-							temp_data[x + (y * new_width)] = val;
+							temp_data[x + (y * newWidth)] = val;
 						}
 					}
 				}
 
 				mData = temp_data;
-				mWidth = new_width;
-				mHeight = new_height;
+				mWidth = newWidth;
+				mHeight = newHeight;
 				mRank = 2;
 			}
 			#endregion

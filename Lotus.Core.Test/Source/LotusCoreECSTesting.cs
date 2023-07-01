@@ -81,7 +81,7 @@ namespace Lotus
 			[Test]
 			public static void TestECS()
 			{
-				CEcsWorld world = new CEcsWorld();
+				var world = new CEcsWorld();
 
 				var pety = world.NewEntity();
 				var sany = world.NewEntity();
@@ -102,7 +102,7 @@ namespace Lotus
 
 				var filter_entities = filter_health.GetEntities();
 				Assert.AreEqual(filter_health.CountEntities, 2);
-				for (Int32 i = 0; i < filter_health.CountEntities; i++)
+				for (var i = 0; i < filter_health.CountEntities; i++)
                 {
 					ref var health = ref world.GetComponent<THealth>(filter_entities[i]);
 					health.Live = 325;
@@ -114,7 +114,7 @@ namespace Lotus
 				filter_health.Include<TDeadStatus>();
 				filter_entities = filter_health.GetEntities();
 				Assert.AreEqual(filter_health.CountEntities, 0);
-				for (Int32 i = 0; i < filter_health.CountEntities; i++)
+				for (var i = 0; i < filter_health.CountEntities; i++)
 				{
 					ref var health = ref world.GetComponent<THealth>(filter_entities[i]);
 					health.Live = 325;

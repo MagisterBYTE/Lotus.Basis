@@ -46,11 +46,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="editor_type">Тип редактора для свойства</param>
+			/// <param name="editorType">Тип редактора для свойства</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusInspectorTypeEditor(Type editor_type)
+			public LotusInspectorTypeEditor(Type editorType)
 			{
-				mEditorType = editor_type;
+				mEditorType = editorType;
 			}
 			#endregion
 		}

@@ -38,7 +38,7 @@ namespace Lotus
 			/// </summary>
 			public Single Percent
 			{
-				get { return (mPercent); }
+				get { return mPercent; }
 			}
 			#endregion
 

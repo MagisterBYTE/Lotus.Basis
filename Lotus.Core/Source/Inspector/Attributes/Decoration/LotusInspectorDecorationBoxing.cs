@@ -91,18 +91,18 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="offset_left">Красная компонента цвета</param>
-			/// <param name="offset_top">Зеленая компонента цвета</param>
-			/// <param name="offset_right">Синяя компонента цвета</param>
-			/// <param name="offset_bottom">Альфа компонента цвета</param>
+			/// <param name="offsetLeft">Красная компонента цвета</param>
+			/// <param name="offsetTop">Зеленая компонента цвета</param>
+			/// <param name="offsetRight">Синяя компонента цвета</param>
+			/// <param name="offsetBottom">Альфа компонента цвета</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusBoxingAttribute(Int32 offset_left, Int32 offset_top = 0, Int32 offset_right = 0, 
-				Int32 offset_bottom = 0)
+			public LotusBoxingAttribute(Int32 offsetLeft, Int32 offsetTop = 0, Int32 offsetRight = 0, 
+				Int32 offsetBottom = 0)
 			{
-				mOffsetLeft = offset_left;
-				mOffsetTop = offset_top;
-				mOffsetRight = offset_right;
-				mOffsetBottom = offset_bottom;
+				mOffsetLeft = offsetLeft;
+				mOffsetTop = offsetTop;
+				mOffsetRight = offsetRight;
+				mOffsetBottom = offsetBottom;
 			}
 			#endregion
 		}

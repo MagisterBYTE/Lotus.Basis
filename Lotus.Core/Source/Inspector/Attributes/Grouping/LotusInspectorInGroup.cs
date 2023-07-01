@@ -51,11 +51,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="group_name">Имя группы которой принадлежит данный элемент</param>
+			/// <param name="groupName">Имя группы которой принадлежит данный элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusInGroupAttribute(String group_name)
+			public LotusInGroupAttribute(String groupName)
 			{
-				mGroupName = group_name;
+				mGroupName = groupName;
 			}
 			#endregion
 		}

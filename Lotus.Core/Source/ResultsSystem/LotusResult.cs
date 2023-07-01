@@ -140,7 +140,7 @@ namespace Lotus
 			/// <summary>
 			/// Дополнительные данные
 			/// </summary>
-			public System.Object Data { get; set; }
+			public System.Object? Data { get; set; }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -202,7 +202,7 @@ namespace Lotus
 			/// <param name="data">Дополнительные данные</param>
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Result(String message, System.Object data, Boolean status)
+			public Result(String message, System.Object? data, Boolean status)
 			{
 				Message = message;
 				Data = data;
@@ -304,7 +304,7 @@ namespace Lotus
 			/// <param name="data">Дополнительные данные</param>
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Result(Int32 code, TData data, Boolean status)
+			public Result(Int32 code, TData? data, Boolean status)
 				: base(code, data, status)
 			{
 				Data = data;
@@ -332,7 +332,7 @@ namespace Lotus
 			/// <param name="data">Дополнительные данные</param>
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Result(String message, TData data, Boolean status)
+			public Result(String message, TData? data, Boolean status)
 				: base(message, data, status)
 			{
 				Data = data;
@@ -347,7 +347,7 @@ namespace Lotus
 			/// <param name="data">Дополнительные данные</param>
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Result(Int32 code, String message, TData data, Boolean status)
+			public Result(Int32 code, String message, TData? data, Boolean status)
 				:base(code, message, data, status)
 			{
 				Data = data;

@@ -186,13 +186,13 @@ namespace Lotus
 				/// <summary>
 				/// Сравнение элементов отображения по возрастанию
 				/// </summary>
-				/// <param name="left">Первый объект</param>
-				/// <param name="right">Второй объект</param>
+				/// <param name="x">Первый объект</param>
+				/// <param name="y">Второй объект</param>
 				/// <returns>Статус сравнения</returns>
 				//-----------------------------------------------------------------------------------------------------
-				public Int32 Compare(TViewItem left, TViewItem right)
+				public Int32 Compare(TViewItem x, TViewItem y)
 				{
-					return (ComprareOfAscending(left, right));
+					return ComprareOfAscending(x, y);
 				}
 			}
 
@@ -212,26 +212,26 @@ namespace Lotus
 				/// <summary>
 				/// Сравнение элементов отображения по убыванию
 				/// </summary>
-				/// <param name="left">Первый объект</param>
-				/// <param name="right">Второй объект</param>
+				/// <param name="x">Первый объект</param>
+				/// <param name="y">Второй объект</param>
 				/// <returns>Статус сравнения</returns>
 				//-----------------------------------------------------------------------------------------------------
-				public Int32 Compare(TViewItem left, TViewItem right)
+				public Int32 Compare(TViewItem x, TViewItem y)
 				{
-					var result = ComprareOfAscending(left, right);
+					var result = ComprareOfAscending(x, y);
 					if(result == 1)
 					{
-						return (-1);
+						return -1;
 					}
 					else
 					{
 						if (result == -1)
 						{
-							return (1);
+							return 1;
 						}
 						else
 						{
-							return (0);
+							return 0;
 						}
 					}
 				}
@@ -288,18 +288,18 @@ namespace Lotus
 				{
 					if (right == null)
 					{
-						return (0);
+						return 0;
 					}
 					else
 					{
-						return (1);
+						return 1;
 					}
 				}
 				else
 				{
 					if (right == null)
 					{
-						return (-1);
+						return -1;
 					}
 					else
 					{
@@ -307,22 +307,22 @@ namespace Lotus
 						{
 							if (left.DataContext is IComparable<TData> left_comparable)
 							{
-								return (left_comparable.CompareTo((TData)right.DataContext));
+								return left_comparable.CompareTo((TData)right.DataContext);
 							}
 							else
 							{
-								return (0);
+								return 0;
 							}
 						}
 						else
 						{
 							if (left is IComparable left_comparable)
 							{
-								return (left_comparable.CompareTo(right));
+								return left_comparable.CompareTo(right);
 							}
 							else
 							{
-								return (0);
+								return 0;
 							}
 						}
 					}
@@ -374,7 +374,7 @@ namespace Lotus
 			/// </summary>
 			public virtual String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set
 				{
 					mName = value;
@@ -388,7 +388,7 @@ namespace Lotus
 			/// </summary>
 			public System.Object Source
 			{
-				get { return (mSource); }
+				get { return mSource; }
 				set
 				{
 					mSource = value;
@@ -401,7 +401,7 @@ namespace Lotus
 			/// </summary>
 			public IList IViewItems 
 			{
-				get { return (this); }
+				get { return this; }
 			}
 
 			/// <summary>
@@ -409,7 +409,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountViewItems 
 			{
-				get { return (mCount); }
+				get { return mCount; }
 			}
 
 			//
@@ -423,7 +423,7 @@ namespace Lotus
 			/// </remarks>
 			public Int32 SelectedIndex
 			{
-				get { return (mSelectedIndex); }
+				get { return mSelectedIndex; }
 				set
 				{
 					this.SetSelectedItem(value);
@@ -435,7 +435,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 PrevSelectedIndex
 			{
-				get { return (mPrevSelectedIndex); }
+				get { return mPrevSelectedIndex; }
 			}
 
 			/// <summary>
@@ -443,7 +443,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusViewItem ISelectedViewItem
 			{
-				get { return (mSelectedViewItem); }
+				get { return mSelectedViewItem; }
 				set
 				{
 					SelectedViewItem = (TViewItem)value;
@@ -457,7 +457,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mSelectedViewItem);
+					return mSelectedViewItem;
 				}
 				set
 				{
@@ -474,7 +474,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusViewItem IPresentedViewItem
 			{
-				get { return (mPresentedViewItem); }
+				get { return mPresentedViewItem; }
 				set
 				{
 					PresentedViewItem = (TViewItem)value;
@@ -488,7 +488,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mPresentedViewItem);
+					return mPresentedViewItem;
 				}
 				set
 				{
@@ -508,7 +508,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsFiltered 
 			{
-				get { return (mIsFiltered); }
+				get { return mIsFiltered; }
 				set
 				{
 					mIsFiltered = value;
@@ -524,7 +524,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mFilter);
+					return mFilter;
 				}
 				set
 				{
@@ -555,7 +555,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsSorted 
 			{
-				get { return (mIsSorted); }
+				get { return mIsSorted; }
 				set
 				{
 					mIsSorted = value;
@@ -568,7 +568,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsAscendingSorted
 			{
-				get { return (mIsAscendingSorted); }
+				get { return mIsAscendingSorted; }
 				set
 				{
 					mIsAscendingSorted = value;
@@ -584,7 +584,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsMultiSelected
 			{
-				get { return (mIsMultiSelected); }
+				get { return mIsMultiSelected; }
 				set
 				{
 					mIsMultiSelected = value;
@@ -596,7 +596,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean ModeSelectAddRemove
 			{
-				get { return (mModeSelectAddRemove); }
+				get { return mModeSelectAddRemove; }
 				set
 				{
 					mModeSelectAddRemove = value;
@@ -608,7 +608,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean AlwaysSelectedItem
 			{
-				get { return (mAlwaysSelectedItem); }
+				get { return mAlwaysSelectedItem; }
 				set
 				{
 					mAlwaysSelectedItem = value;
@@ -624,7 +624,7 @@ namespace Lotus
 			/// </remarks>
 			public Boolean IsEnabledUnselectingItem
 			{
-				get { return (mIsEnabledUnselectingItem); }
+				get { return mIsEnabledUnselectingItem; }
 				set
 				{
 					mIsEnabledUnselectingItem = value;
@@ -750,7 +750,7 @@ namespace Lotus
 					clone.Add(mArrayOfItems.Clone());
 				}
 
-				return (clone);
+				return clone;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -761,7 +761,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (mName);
+				return mName;
 			}
 			#endregion
 
@@ -995,7 +995,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject owned_object, System.Object data, String data_name)
 			{
-				return (true);
+				return true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1471,11 +1471,11 @@ namespace Lotus
 									{
 										if (Object.ReferenceEquals(item.DataContext, data_context))
 										{
-											return (true);
+											return true;
 										}
 										else
 										{
-											return (false);
+											return false;
 										}
 									});
 

@@ -40,12 +40,12 @@ namespace Lotus
 			public static CIntCalculated DeserializeFromString(String data)
 			{
 				var int_value = XNumbers.ParseInt(data, 0);
-				return (new CIntCalculated(int_value));
+				return new CIntCalculated(int_value);
 			}
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			protected internal Int32 mValue;
@@ -63,7 +63,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mValue);
+					return mValue;
 				}
 				set
 				{
@@ -86,7 +86,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mSupplement);
+					return mSupplement;
 				}
 				set
 				{
@@ -111,11 +111,11 @@ namespace Lotus
 				{
 					if (mNotCalculation)
 					{
-						return (0);
+						return 0;
 					}
 					else
 					{
-						return (mValue + mSupplement);
+						return mValue + mSupplement;
 					}
 				}
 				set
@@ -125,7 +125,7 @@ namespace Lotus
 						mValue = value - mSupplement;
 						if (mOwner != null)
 						{
-							mOwner.OnNotifyUpdated(this, (mValue + mSupplement), nameof(CalculatedValue));
+							mOwner.OnNotifyUpdated(this, mValue + mSupplement, nameof(CalculatedValue));
 						}
 
 						NotifyPropertyChanged(nameof(Value));
@@ -152,7 +152,7 @@ namespace Lotus
 			[XmlAttribute]
 			public Boolean NotCalculation
 			{
-				get { return (mNotCalculation); }
+				get { return mNotCalculation; }
 				set
 				{
 					mNotCalculation = value;
@@ -185,12 +185,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="owner_object">Владелец значения</param>
+			/// <param name="ownerObject">Владелец значения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CIntCalculated(Int32 value, ILotusOwnerObject owner_object)
+			public CIntCalculated(Int32 value, ILotusOwnerObject ownerObject)
 			{
 				mValue = value;
-				mOwner = owner_object;
+				mOwner = ownerObject;
 			}
 			#endregion
 
@@ -214,7 +214,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (CalculatedValue.ToString());
+				return CalculatedValue.ToString();
 			}
 			#endregion
 		}

@@ -145,7 +145,7 @@ namespace Lotus
 					//
 					// UnityEngine
 					//
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					case nameof(UnityEngine.Vector2):
 						{
 							UnityEngine.Vector2 vector = (UnityEngine.Vector2)instance;
@@ -260,7 +260,7 @@ namespace Lotus
 							if (type.HasAttribute<LotusSerializeAsPrimitiveAttribute>())
 							{
 								MethodInfo method_info = type.GetMethod(
-									LotusSerializeAsPrimitiveAttribute.SERIALIZE_TO_STRING, 
+									LotusSerializeAsPrimitiveAttribute.SERIALIZETOSTRING, 
 									BindingFlags.Public | BindingFlags.Instance);
 								if (method_info != null)
 								{

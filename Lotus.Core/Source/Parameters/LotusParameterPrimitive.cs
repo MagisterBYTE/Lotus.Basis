@@ -57,11 +57,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="value">Значения параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterBool(String parameter_name, Boolean value)
-				: base(parameter_name)
+			public CParameterBool(String parameterName, Boolean value)
+				: base(parameterName)
 			{
 				mValue = value;
 			}
@@ -117,11 +117,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="value">Значения параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterInteger(String parameter_name, Int32 value)
-				: base(parameter_name)
+			public CParameterInteger(String parameterName, Int32 value)
+				: base(parameterName)
 			{
 				mValue = value;
 			}
@@ -177,11 +177,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="value">Значения параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterReal(String parameter_name, Double value)
-				: base(parameter_name)
+			public CParameterReal(String parameterName, Double value)
+				: base(parameterName)
 			{
 				mValue = value;
 			}
@@ -238,11 +238,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="value">Значения параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterDatetime(String parameter_name, DateTime value)
-				: base(parameter_name)
+			public CParameterDatetime(String parameterName, DateTime value)
+				: base(parameterName)
 			{
 				mValue = value;
 			}
@@ -298,11 +298,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="value">Значения параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterString(String parameter_name, String value)
-				: base(parameter_name)
+			public CParameterString(String parameterName, String value)
+				: base(parameterName)
 			{
 				mValue = value;
 			}
@@ -359,11 +359,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameter_name">Имя параметра</param>
+			/// <param name="parameterName">Имя параметра</param>
 			/// <param name="value">Значения параметра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterEnum(String parameter_name, TEnum value)
-				: base(parameter_name)
+			public CParameterEnum(String parameterName, TEnum value)
+				: base(parameterName)
 			{
 				mValue = value;
 			}

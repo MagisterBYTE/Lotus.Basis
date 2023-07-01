@@ -38,7 +38,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public PriorityQueue()
-				: base(INIT_MAX_COUNT)
+				: base(INITMAXCOUNT)
 			{
 
 			}
@@ -47,10 +47,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует данные очереди указанными данными
 			/// </summary>
-			/// <param name="max_count">Максимальное количество элементов</param>
+			/// <param name="maxCount">Максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public PriorityQueue(Int32 max_count)
-				: base(max_count)
+			public PriorityQueue(Int32 maxCount)
+				: base(maxCount)
 			{
 
 			}

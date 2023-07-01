@@ -57,19 +57,19 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TType">Тип элемента массива</typeparam>
 			/// <param name="array">Массив</param>
-			/// <param name="current_count">Текущие количество элементов</param>
+			/// <param name="currentCount">Текущие количество элементов</param>
 			/// <param name="item">Элемент</param>
 			/// <returns>Массив</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType[] Add<TType>(TType[] array, ref Int32 current_count, in TType item)
+			public static TType[] Add<TType>(TType[] array, ref Int32 currentCount, in TType item)
 			{
-				if(current_count == array.Length)
+				if(currentCount == array.Length)
 				{
-					Array.Resize(ref array, current_count << 1);
+					Array.Resize(ref array, currentCount << 1);
 				}
 
-				array[current_count] = item;
-				current_count++;
+				array[currentCount] = item;
+				currentCount++;
 				return array;
 			}
 
@@ -79,22 +79,22 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TType">Тип элемента массива</typeparam>
 			/// <param name="array">Массив</param>
-			/// <param name="current_count">Текущие количество элементов</param>
+			/// <param name="currentCount">Текущие количество элементов</param>
 			/// <param name="items">Список элементов</param>
 			/// <returns>Массив</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType[] AddRange<TType>(TType[] array, ref Int32 current_count, params TType[] items)
+			public static TType[] AddRange<TType>(TType[] array, ref Int32 currentCount, params TType[] items)
 			{
-				if(array.Length < current_count + items.Length)
+				if(array.Length < currentCount + items.Length)
 				{
-					var max_size = current_count + items.Length;
+					var max_size = currentCount + items.Length;
 					var new_arary = new TType[max_size];
-					Array.Copy(array, new_arary, current_count);
+					Array.Copy(array, new_arary, currentCount);
 					array = items;
 				}
 
-				Array.Copy(items, 0, array, current_count, items.Length);
-				current_count += items.Length;
+				Array.Copy(items, 0, array, currentCount, items.Length);
+				currentCount += items.Length;
 				return array;
 			}
 
@@ -311,26 +311,26 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TType">Тип элемента массива</typeparam>
 			/// <param name="array">Массив</param>
-			/// <param name="start_index">Индекс элемент с которого начитается смещение</param>
+			/// <param name="startIndex">Индекс элемент с которого начитается смещение</param>
 			/// <param name="offset">Количество смещения</param>
 			/// <param name="count">Количество смещаемых элементов</param>
 			/// <returns>Массив</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType[] Shift<TType>(TType[] array, Int32 start_index, Int32 offset, Int32 count)
+			public static TType[] Shift<TType>(TType[] array, Int32 startIndex, Int32 offset, Int32 count)
 			{
 				var result = (TType[])array.Clone();
 
-				start_index = start_index < 0 ? 0 : (start_index >= result.Length ? result.Length - 1 : start_index);
-				count = count < 0 ? 0 : (start_index + count >= result.Length ? result.Length - start_index - 1 : count);
-				offset = start_index + offset < 0 ? -start_index : (start_index + count + offset >= result.Length ? result.Length - start_index - count : offset);
+				startIndex = startIndex < 0 ? 0 : (startIndex >= result.Length ? result.Length - 1 : startIndex);
+				count = count < 0 ? 0 : (startIndex + count >= result.Length ? result.Length - startIndex - 1 : count);
+				offset = startIndex + offset < 0 ? -startIndex : (startIndex + count + offset >= result.Length ? result.Length - startIndex - count : offset);
 
 				var abs_offset = Math.Abs(offset);
 				var items = new TType[count]; // What we want to move
 				var dec = new TType[abs_offset]; // What is going to replace the thing we move
-				Array.Copy(array, start_index, items, 0, count);
-				Array.Copy(array, start_index + (offset >= 0 ? count : offset), dec, 0, abs_offset);
-				Array.Copy(dec, 0, result, start_index + (offset >= 0 ? 0 : offset + count), abs_offset);
-				Array.Copy(items, 0, result, start_index + offset, count);
+				Array.Copy(array, startIndex, items, 0, count);
+				Array.Copy(array, startIndex + (offset >= 0 ? count : offset), dec, 0, abs_offset);
+				Array.Copy(dec, 0, result, startIndex + (offset >= 0 ? 0 : offset + count), abs_offset);
+				Array.Copy(items, 0, result, startIndex + offset, count);
 
 				return result;
 			}
@@ -341,12 +341,12 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TType">Тип элемента массива</typeparam>
 			/// <param name="array">Массив</param>
-			/// <param name="start_index">Индекс элемент с которого начитается смещение</param>
+			/// <param name="startIndex">Индекс элемент с которого начитается смещение</param>
 			/// <returns>Массив</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType[] ShiftRight<TType>(TType[] array, Int32 start_index)
+			public static TType[] ShiftRight<TType>(TType[] array, Int32 startIndex)
 			{
-				return Shift(array, start_index, 1, 1);
+				return Shift(array, startIndex, 1, 1);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -355,12 +355,12 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TType">Тип элемента массива</typeparam>
 			/// <param name="array">Массив</param>
-			/// <param name="start_index">Индекс элемент с которого начитается смещение</param>
+			/// <param name="startIndex">Индекс элемент с которого начитается смещение</param>
 			/// <returns>Массив</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType[] ShiftLeft<TType>(TType[] array, Int32 start_index)
+			public static TType[] ShiftLeft<TType>(TType[] array, Int32 startIndex)
 			{
-				return Shift(array, start_index, -1, 1);
+				return Shift(array, startIndex, -1, 1);
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

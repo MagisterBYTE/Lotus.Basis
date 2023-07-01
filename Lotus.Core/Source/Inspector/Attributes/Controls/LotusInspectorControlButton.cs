@@ -74,12 +74,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="method_name">Имя метода</param>
+			/// <param name="methodName">Имя метода</param>
 			/// <param name="label">Надпись на кнопке</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusButtonAttribute(String method_name, String label = "D")
+			public LotusButtonAttribute(String methodName, String label = "D")
 			{
-				mMethodName = method_name;
+				mMethodName = methodName;
 			}
 			#endregion
 		}

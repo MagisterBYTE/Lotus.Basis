@@ -36,7 +36,7 @@ namespace Lotus
 			//
 			// БАЗОВЫЕ ПУТИ
 			//
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 #if UNITY_EDITOR
 			/// <summary>
 			/// Путь по умолчанию для сохранения/загрузки файлов
@@ -61,7 +61,7 @@ namespace Lotus
 			/// <summary>
 			/// Расширение файла по умолчанию
 			/// </summary>
-			public static String DefaultExt = XFileExtension.JSON_D;
+			public static String DefaultExt = XFileExtension.JSOND;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
@@ -76,7 +76,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mSerializer);
+					return mSerializer;
 				}
 			}
 			#endregion
@@ -168,7 +168,7 @@ namespace Lotus
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <param name="parameters">Параметры сохранения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SaveTo(String file_name, System.Object instance, CParameters parameters = null)
+			public override void SaveTo(String file_name, System.Object instance, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
 				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
@@ -193,7 +193,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры сохранения</param>
 			/// <returns>Строка в формате Json</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SaveTo(System.Object instance, CParameters parameters = null)
+			public String SaveTo(System.Object instance, CParameters? parameters = null)
 			{
 				var file_data = new StringBuilder(200);
 
@@ -202,18 +202,18 @@ namespace Lotus
 				SaveTo(string_writer, instance, parameters);
 				string_writer.Close();
 
-				return (file_data.ToString());
+				return file_data.ToString();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Сохранения объекта в поток данных в формате Json
 			/// </summary>
-			/// <param name="text_writer">Средство для записи в поток строковых данных</param>
+			/// <param name="textWriter">Средство для записи в поток строковых данных</param>
 			/// <param name="parameters">Параметры сохранения</param>
 			/// <param name="instance">Экземпляр объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SaveTo(TextWriter text_writer, System.Object instance, CParameters parameters = null)
+			public void SaveTo(TextWriter textWriter, System.Object instance, CParameters? parameters = null)
 			{
 				// Добавляем себя в качестве параметра
 				if (parameters == null) parameters = new CParameters("SerializerJson");
@@ -224,7 +224,7 @@ namespace Lotus
 					before_save.OnBeforeSave(parameters);
 				}
 
-				mSerializer.Serialize(text_writer, instance);
+				mSerializer.Serialize(textWriter, instance);
 
 				if (instance is ILotusAfterSave after_save)
 				{
@@ -242,7 +242,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override System.Object LoadFrom(String file_name, CParameters parameters = null)
+			public override System.Object LoadFrom(String file_name, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
 				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
@@ -253,7 +253,7 @@ namespace Lotus
 				// Читаем объект
 				var result = LoadFromString(string_json, parameters);
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -265,7 +265,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override TResultType LoadFrom<TResultType>(String file_name, CParameters parameters = null)
+			public override TResultType LoadFrom<TResultType>(String file_name, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
 				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
@@ -280,21 +280,21 @@ namespace Lotus
 				TResultType result = LoadFrom<TResultType>(string_reader, parameters);
 				string_reader.Close();
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Загрузка объекта из строки в формате Json
 			/// </summary>
-			/// <param name="string_json">Строка с данными в формате Json</param>
+			/// <param name="stringJson">Строка с данными в формате Json</param>
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object LoadFromString(String string_json, CParameters parameters = null)
+			public System.Object LoadFromString(String stringJson, CParameters? parameters = null)
 			{
 				// Читаем объект
-				var result = JsonConvert.DeserializeObject(string_json);
+				var result = JsonConvert.DeserializeObject(stringJson);
 
 				if (result is ILotusAfterLoad after_load)
 				{
@@ -305,22 +305,22 @@ namespace Lotus
 					after_load.OnAfterLoad(parameters);
 				}
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Загрузка объекта из потока данных
 			/// </summary>
-			/// <param name="text_reader">Средство для чтения из потока строковых данных</param>
+			/// <param name="textReader">Средство для чтения из потока строковых данных</param>
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TResultType LoadFrom<TResultType>(TextReader text_reader, CParameters parameters = null)
+			public TResultType LoadFrom<TResultType>(TextReader textReader, CParameters? parameters = null)
 			{
 				TResultType result = default;
 
-				using (JsonReader reader = new JsonTextReader(text_reader))
+				using (JsonReader reader = new JsonTextReader(textReader))
 				{
 					result = mSerializer.Deserialize<TResultType>(reader);
 				}
@@ -347,7 +347,7 @@ namespace Lotus
 			/// <param name="file_name">Имя файла</param>
 			/// <param name="parameters">Параметры обновления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void UpdateFrom(System.Object instance, String file_name, CParameters parameters = null)
+			public override void UpdateFrom(System.Object instance, String file_name, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
 				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
@@ -364,10 +364,10 @@ namespace Lotus
 			/// Обновление объекта из строки в формате Json
 			/// </summary>
 			/// <param name="instance">Экземпляр объекта</param>
-			/// <param name="string_json">Строка с данными в формате Json</param>
+			/// <param name="stringJson">Строка с данными в формате Json</param>
 			/// <param name="parameters">Параметры обновления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void UpdateFromString(System.Object instance, String string_json, CParameters parameters = null)
+			public void UpdateFromString(System.Object instance, String stringJson, CParameters? parameters = null)
 			{
 				// Добавляем себя в качестве параметра
 				if (parameters == null) parameters = new CParameters("SerializerJson");
@@ -379,7 +379,7 @@ namespace Lotus
 				}
 
 				// Обновляем объект
-				JsonConvert.PopulateObject(string_json, instance);
+				JsonConvert.PopulateObject(stringJson, instance);
 
 				if (instance is ILotusAfterLoad after_load)
 				{
@@ -392,10 +392,10 @@ namespace Lotus
 			/// Обновление объект из потока данных в формате Json
 			/// </summary>
 			/// <param name="instance">Экземпляр объекта</param>
-			/// <param name="text_reader">Средство для чтения из потока строковых данных</param>
+			/// <param name="textReader">Средство для чтения из потока строковых данных</param>
 			/// <param name="parameters">Параметры обновления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void UpdateFrom(System.Object instance, TextReader text_reader, CParameters parameters = null)
+			public void UpdateFrom(System.Object instance, TextReader textReader, CParameters? parameters = null)
 			{
 
 			}

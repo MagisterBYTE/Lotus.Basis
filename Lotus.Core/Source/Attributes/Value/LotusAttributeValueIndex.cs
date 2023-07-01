@@ -69,13 +69,13 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="member_name">Имя члена объекта осуществляющего конвертацию из строки в числовое значение</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта осуществляющего конвертацию из строки в числовое значение</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusIndexToStringAttribute(String member_name, TInspectorMemberType member_type)
+			public LotusIndexToStringAttribute(String memberName, TInspectorMemberType memberType)
 			{
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -83,14 +83,14 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="type">Тип объекта</param>
-			/// <param name="member_name">Имя члена объекта осуществляющего конвертацию из строки в числовое значение</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта осуществляющего конвертацию из строки в числовое значение</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusIndexToStringAttribute(Type type, String member_name, TInspectorMemberType member_type)
+			public LotusIndexToStringAttribute(Type type, String memberName, TInspectorMemberType memberType)
 			{
 				mSourceType = type;
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 			#endregion
 		}

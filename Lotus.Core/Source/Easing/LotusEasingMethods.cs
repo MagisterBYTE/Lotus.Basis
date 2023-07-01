@@ -98,13 +98,13 @@ namespace Lotus
 			/// <param name="start">Начальное значение</param>
 			/// <param name="end">Конечное значение</param>
 			/// <param name="time">Время от 0 до 1</param>
-			/// <param name="easing_type">Тип функции скорости</param>
+			/// <param name="easingType">Тип функции скорости</param>
 			/// <returns>Текущие значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Interpolation(Double start, Double end, Double time, TEasingType easing_type)
+			public static Double Interpolation(Double start, Double end, Double time, TEasingType easingType)
 			{
 				Double value = 0;
-				switch (easing_type)
+				switch (easingType)
 				{
 					case TEasingType.Linear:
 						{
@@ -215,13 +215,13 @@ namespace Lotus
 			/// <param name="start">Начальное значение</param>
 			/// <param name="end">Конечное значение</param>
 			/// <param name="time">Время от 0 до 1</param>
-			/// <param name="easing_type">Тип функции скорости</param>
+			/// <param name="easingType">Тип функции скорости</param>
 			/// <returns>Текущие значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Interpolation(Single start, Single end, Single time, TEasingType easing_type)
+			public static Single Interpolation(Single start, Single end, Single time, TEasingType easingType)
 			{
 				Single value = 0;
-				switch (easing_type)
+				switch (easingType)
 				{
 					case TEasingType.Linear:
 						{
@@ -325,7 +325,7 @@ namespace Lotus
 				return value;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Интерполяция значения по указанной функции изменения скорости
@@ -827,7 +827,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Линейная интерполяция значения
@@ -917,7 +917,7 @@ namespace Lotus
 				return start + ((end - start) * (time * time));
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Квадратическая интерполяция значения в начале
@@ -1020,7 +1020,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Квадратическая интерполяция значения в конце
@@ -1146,7 +1146,7 @@ namespace Lotus
 
 				return start + ((end - start) * time);
 			}
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Квадратическая интерполяция значения в начале и в конце
@@ -1294,7 +1294,7 @@ namespace Lotus
 				return start + ((end - start) * (time * time * time));
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Кубическая интерполяция значения в начале
@@ -1398,7 +1398,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Кубическая интерполяция значения в конце
@@ -1526,7 +1526,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Кубическая интерполяция значения в начале и в конце
@@ -1677,7 +1677,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Кратковременное изменение на противоположенное и интерполяция значения в начале
@@ -1784,7 +1784,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Кратковременное изменение на противоположенное и интерполяция значения в конце
@@ -1919,7 +1919,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Кратковременное изменение на противоположенное и интерполяция значения в начале и в конце
@@ -2065,7 +2065,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single ExpoIn(Single start, Single end, Single time)
 			{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				time = UnityEngine.Mathf.Pow(CoefficientExpoBasis, CoefficientExpo * (time - 1));
 #else
 				time = (Single)Math.Pow(CoefficientExpoBasis, CoefficientExpo * (time - 1));
@@ -2073,7 +2073,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Экспоненциальная интерполяция значения в начале
@@ -2172,15 +2172,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single ExpoOut(Single start, Single end, Single time)
 			{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 #else
-				time = (Single)(-Math.Pow(CoefficientExpoBasis, -CoefficientExpo * (time)) + 1);
+				time = (Single)(-Math.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1);
 #endif
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Экспоненциальная интерполяция значения в конце
@@ -2296,7 +2296,7 @@ namespace Lotus
 				time /= .5f;
 				if (time < 1)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					time = 0.5f * UnityEngine.Mathf.Pow(CoefficientExpoBasis, CoefficientExpo * (time - 1));
 #else
 					time = (Single)(0.5f * Math.Pow(CoefficientExpoBasis, CoefficientExpo * (time - 1)));
@@ -2306,7 +2306,7 @@ namespace Lotus
 				else
 				{
 					time--;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					time = 0.5f * (-UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 2);
 #else
 					time = (Single)(0.5f * (-Math.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 2));
@@ -2316,7 +2316,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Экспоненциальная интерполяция значения в начале и в конце
@@ -2462,7 +2462,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single SineIn(Single start, Single end, Single time)
 			{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				time = -UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI / 2 * time) + 1.0f;
 #else
 				time = -(Single)Math.Cos(Math.PI / 2 * time) + 1.0f;
@@ -2470,7 +2470,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Синусоидальная интерполяция значения в начале
@@ -2569,7 +2569,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single SineOut(Single start, Single end, Single time)
 			{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 #else
 				time = (Single)Math.Sin(Math.PI / 2 * time);
@@ -2577,7 +2577,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Синусоидальная интерполяция значения в конце
@@ -2681,14 +2681,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single SineInOut(Single start, Single end, Single time)
 			{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 #else
 				time = -(Single)Math.Cos(Math.PI * time) / 2 + 0.5f;
 #endif
 				return start + ((end - start) * time);
 			}
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Синусоидальная интерполяция значения в начале и в конце
@@ -2801,7 +2801,7 @@ namespace Lotus
 			public static Single ElasticIn(Single start, Single end, Single time)
 			{
 				time = 1 - time;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 #else
 				time = (Single)(Math.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * Math.Sin((time - 0.075f) * (2 * Math.PI) / 0.3f) + 1);
@@ -2810,7 +2810,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Колебательная форма интерполяции значения в начале
@@ -2917,7 +2917,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single ElasticOut(Single start, Single end, Single time)
 			{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 #else
 				time = (Single)(Math.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * Math.Sin((time - 0.075f) * (2 * Math.PI) / 0.3f) + 1);
@@ -2925,7 +2925,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Колебательная форма интерполяции значения в конце
@@ -3045,7 +3045,7 @@ namespace Lotus
 				{
 					time = time * 2;
 					time = 1 - time;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 #else
 					time = (Single)(Math.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * Math.Sin((time - 0.075f) * (2 * Math.PI) / 0.3f) + 1);
@@ -3055,7 +3055,7 @@ namespace Lotus
 				else
 				{
 					time = (time * 2) - 1;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 #else
 					time = (Single)(Math.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * Math.Sin((time - 0.075f) * (2 * Math.PI) / 0.3f) + 1);
@@ -3066,7 +3066,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Колебательная форма интерполяции значения в начале и в конце
@@ -3270,7 +3270,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Форма отскока значения в начале
@@ -3491,7 +3491,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Форма отскока значения в конце
@@ -3776,7 +3776,7 @@ namespace Lotus
 				return start + ((end - start) * time);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Форма отскока значения в начале и в конце

@@ -49,11 +49,11 @@ namespace Lotus
 					return default(TItem);
 				}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				return @this.ElementAt(UnityEngine.Random.Range(0, count));
 #else
 				var rand = new Random(System.Environment.TickCount);
-				return (@this.ElementAt(rand.Next(0, count)));
+				return @this.ElementAt(rand.Next(0, count));
 #endif
 			}
 
@@ -175,12 +175,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="this">Список строк</param>
 			/// <param name="separator">Разделитель</param>
-			/// <param name="use_space">Использовать ли дополнительный пробел между элементами</param>
+			/// <param name="useSpace">Использовать ли дополнительный пробел между элементами</param>
 			/// <returns>Строка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String ToTextString(this ICollection<String> @this, Char separator, Boolean use_space)
+			public static String ToTextString(this ICollection<String> @this, Char separator, Boolean useSpace)
 			{
-				return (ToTextString(@this, String.Empty, separator, use_space));
+				return ToTextString(@this, String.Empty, separator, useSpace);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -188,21 +188,21 @@ namespace Lotus
 			/// Преобразование списка строк в одну строку текста с указанным разделителем
 			/// </summary>
 			/// <param name="this">Список строк</param>
-			/// <param name="default_text">Текст если список пустой</param>
+			/// <param name="defaultText">Текст если список пустой</param>
 			/// <param name="separator">Разделитель</param>
-			/// <param name="use_space">Использовать ли дополнительный пробел между элементами</param>
+			/// <param name="useSpace">Использовать ли дополнительный пробел между элементами</param>
 			/// <returns>Строка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String ToTextString(this ICollection<String> @this, String default_text, Char separator, Boolean use_space)
+			public static String ToTextString(this ICollection<String> @this, String defaultText, Char separator, Boolean useSpace)
 			{
 				if (@this == null || @this.Count == 0)
 				{
-					return (default_text);
+					return defaultText;
 				}
 
 				if (@this.Count == 1)
 				{
-					return (@this.First());
+					return @this.First();
 				}
 				else
 				{
@@ -216,7 +216,7 @@ namespace Lotus
 						if (i < @this.Count - 1)
 						{
 							builder.Append(separator);
-							if (use_space)
+							if (useSpace)
 							{
 								builder.Append(XChar.Space);
 							}
@@ -225,7 +225,7 @@ namespace Lotus
 						i++;
 					}
 
-					return (builder.ToString());
+					return builder.ToString();
 				}
 			}
 			#endregion
@@ -307,7 +307,7 @@ namespace Lotus
 				{
 					index %= @this.Count;
 				}
-				return (@this[index]);
+				return @this[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -336,12 +336,12 @@ namespace Lotus
 			/// Перемещение элемента списка вниз
 			/// </summary>
 			/// <param name="this">Список</param>
-			/// <param name="element_index">Индекс перемещаемого элемента</param>
+			/// <param name="elementIndex">Индекс перемещаемого элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void MoveObjectDown(this IList @this, Int32 element_index)
+			public static void MoveObjectDown(this IList @this, Int32 elementIndex)
 			{
-				var next = (element_index + 1) % @this.Count;
-				SwapObject(@this, element_index, next);
+				var next = (elementIndex + 1) % @this.Count;
+				SwapObject(@this, elementIndex, next);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -349,13 +349,13 @@ namespace Lotus
 			/// Перемещение элемента списка вверх
 			/// </summary>
 			/// <param name="this">Список</param>
-			/// <param name="element_index">Индекс перемещаемого элемента</param>
+			/// <param name="elementIndex">Индекс перемещаемого элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void MoveObjectUp(this IList @this, Int32 element_index)
+			public static void MoveObjectUp(this IList @this, Int32 elementIndex)
 			{
-				var previous = element_index - 1;
+				var previous = elementIndex - 1;
 				if (previous < 0) previous = @this.Count - 1;
-				SwapObject(@this, element_index, previous);
+				SwapObject(@this, elementIndex, previous);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -363,15 +363,15 @@ namespace Lotus
 			/// Обмен местами элементов списка
 			/// </summary>
 			/// <param name="this">Список</param>
-			/// <param name="old_index">Старая позиция</param>
-			/// <param name="new_index">Новая позиция</param>
+			/// <param name="oldIndex">Старая позиция</param>
+			/// <param name="newIndex">Новая позиция</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static IList SwapObject(this IList @this, Int32 old_index, Int32 new_index)
+			public static IList SwapObject(this IList @this, Int32 oldIndex, Int32 newIndex)
 			{
-				var temp = @this[old_index];
-				@this[old_index] = @this[new_index];
-				@this[new_index] = temp;
+				var temp = @this[oldIndex];
+				@this[oldIndex] = @this[newIndex];
+				@this[newIndex] = temp;
 				return @this;
 			}
 			#endregion
@@ -396,7 +396,7 @@ namespace Lotus
 				{
 					index %= @this.Count;
 				}
-				return (@this[index]);
+				return @this[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -427,12 +427,12 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TItem">Тип элемента списка</typeparam>
 			/// <param name="this">Список</param>
-			/// <param name="element_index">Индекс перемещаемого элемента</param>
+			/// <param name="elementIndex">Индекс перемещаемого элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void MoveElementDown<TItem>(this IList<TItem> @this, Int32 element_index)
+			public static void MoveElementDown<TItem>(this IList<TItem> @this, Int32 elementIndex)
 			{
-				var next = (element_index + 1) % @this.Count;
-				Swap(@this, element_index, next);
+				var next = (elementIndex + 1) % @this.Count;
+				Swap(@this, elementIndex, next);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -441,13 +441,13 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TItem">Тип элемента списка</typeparam>
 			/// <param name="this">Список</param>
-			/// <param name="element_index">Индекс перемещаемого элемента</param>
+			/// <param name="elementIndex">Индекс перемещаемого элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void MoveElementUp<TItem>(this IList<TItem> @this, Int32 element_index)
+			public static void MoveElementUp<TItem>(this IList<TItem> @this, Int32 elementIndex)
 			{
-				var previous = element_index - 1;
+				var previous = elementIndex - 1;
 				if (previous < 0) previous = @this.Count - 1;
-				Swap(@this, element_index, previous);
+				Swap(@this, elementIndex, previous);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -467,10 +467,10 @@ namespace Lotus
 					{
 						if (@this[i].Equals(element))
 						{
-							return (i);
+							return i;
 						}
 					}
-					return (-1);
+					return -1;
 				}
 				else
 				{
@@ -478,11 +478,11 @@ namespace Lotus
 					{
 						if (XObject.ObjectEquals(@this[i], element))
 						{
-							return (i);
+							return i;
 						}
 					}
 
-					return (-1);
+					return -1;
 				}
 			}
 
@@ -504,7 +504,7 @@ namespace Lotus
 						{
 							if (@this[i].Equals(@this[j]))
 							{
-								return (false);
+								return false;
 							}
 						}
 					}
@@ -517,7 +517,7 @@ namespace Lotus
 						{
 							if (XObject.ObjectEquals(@this[i], @this[j]))
 							{
-								return (false);
+								return false;
 							}
 						}
 					}
@@ -543,7 +543,7 @@ namespace Lotus
 					{
 						if (@this[i].Equals(element))
 						{
-							return (i);
+							return i;
 						}
 					}
 				}
@@ -553,11 +553,11 @@ namespace Lotus
 					{
 						if (XObject.ObjectEquals(@this[i], element))
 						{
-							return (i);
+							return i;
 						}
 					}
 				}
-				return (0);
+				return 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -638,15 +638,15 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TItem">Тип элемента списка</typeparam>
 			/// <param name="this">Список</param>
-			/// <param name="old_index">Старая позиция</param>
-			/// <param name="new_index">Новая позиция</param>
+			/// <param name="oldIndex">Старая позиция</param>
+			/// <param name="newIndex">Новая позиция</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static IList<TItem> Swap<TItem>(this IList<TItem> @this, Int32 old_index, Int32 new_index)
+			public static IList<TItem> Swap<TItem>(this IList<TItem> @this, Int32 oldIndex, Int32 newIndex)
 			{
-				TItem temp = @this[old_index];
-				@this[old_index] = @this[new_index];
-				@this[new_index] = temp;
+				TItem temp = @this[oldIndex];
+				@this[oldIndex] = @this[newIndex];
+				@this[newIndex] = temp;
 				return @this;
 			}
 
@@ -717,11 +717,11 @@ namespace Lotus
 			{
 				if(value <= @this[0])
 				{
-					return (0);
+					return 0;
 				}
 				if (value >= @this[@this.Count - 1])
 				{
-					return (@this.Count - 1);
+					return @this.Count - 1;
 				}
 
 				for (var i = 0; i < @this.Count; i++)
@@ -732,16 +732,16 @@ namespace Lotus
 						var curr_delta = Math.Abs(@this[i] - value);
 						if(prev_delta < curr_delta)
 						{
-							return (i - 1);
+							return i - 1;
 						}
 						else
 						{
-							return (i);
+							return i;
 						}
 					}
 				}
 
-				return (0);
+				return 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -754,7 +754,25 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single GetNearestValue(this IList<Single> @this, Single value)
 			{
-				return (@this[@this.GetNearestIndex(value)]);
+				return @this[@this.GetNearestIndex(value)];
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Конвертация списка значений вещественных типов в массив вещественных значений двойной точности
+			/// </summary>
+			/// <param name="this">Список вещественных значений одинарной точности</param>
+			/// <returns>Массив вещественных значений двойной точности</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static Double[] ToDoubleArray(this IList<Single> @this)
+			{
+				var massive = new Double[@this.Count];
+				for (var i = 0; i < @this.Count; i++)
+				{
+					massive[i] = @this[i];
+				}
+
+				return massive;
 			}
 			#endregion
 
@@ -771,11 +789,11 @@ namespace Lotus
 			{
 				if (value <= @this[0])
 				{
-					return (0);
+					return 0;
 				}
 				if (value >= @this[@this.Count - 1])
 				{
-					return (@this.Count - 1);
+					return @this.Count - 1;
 				}
 
 				for (var i = 0; i < @this.Count; i++)
@@ -786,16 +804,16 @@ namespace Lotus
 						var curr_delta = Math.Abs(@this[i] - value);
 						if (prev_delta < curr_delta)
 						{
-							return (i - 1);
+							return i - 1;
 						}
 						else
 						{
-							return (i);
+							return i;
 						}
 					}
 				}
 
-				return (0);
+				return 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -808,7 +826,84 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double GetNearestValue(this IList<Double> @this, Double value)
 			{
-				return (@this[@this.GetNearestIndex(value)]);
+				return @this[@this.GetNearestIndex(value)];
+			}
+			#endregion
+
+			#region ======================================= IList<String> =============================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Конвертация списка значений строкового типа в массив целочисленных значений
+			/// </summary>
+			/// <param name="this">Список значений строкового типа</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
+			/// <returns>Массив целочисленных значений</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static Int32[] ToIntArray(this IList<String> @this, Int32 defaultValue = 0)
+			{
+				var massive = new Int32[@this.Count];
+				for (var i = 0; i < @this.Count; i++)
+				{
+					massive[i] = XNumbers.ParseInt(@this[i], defaultValue);
+				}
+
+				return massive;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Конвертация списка значений строкового типа в массив вещественных значений одинарной точности
+			/// </summary>
+			/// <param name="this">Список значений строкового типа</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
+			/// <returns>Массив вещественных значений одинарной точности</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static Single[] ToFloatArray(this IList<String> @this, Single defaultValue = 0)
+			{
+				var massive = new Single[@this.Count];
+				for (var i = 0; i < @this.Count; i++)
+				{
+					massive[i] = XNumbers.ParseSingle(@this[i], defaultValue);
+				}
+
+				return massive;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Конвертация списка значений строкового типа в массив вещественных значений двойной точности
+			/// </summary>
+			/// <param name="this">Список значений строкового типа</param>
+			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
+			/// <returns>Массив вещественных значений двойной точности</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static Double[] ToDoubleArray(this IList<String> @this, Double defaultValue = 0)
+			{
+				var massive = new Double[@this.Count];
+				for (var i = 0; i < @this.Count; i++)
+				{
+					massive[i] = XNumbers.ParseDouble(@this[i], defaultValue);
+				}
+
+				return massive;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Конвертация списка значений строкового типа в массив значений Guid
+			/// </summary>
+			/// <param name="this">Список значений строкового типа</param>
+			/// <returns>Массив значений Guid</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static Guid[] ToGuidArray(this IList<String> @this)
+			{
+				var massive = new Guid[@this.Count];
+				for (var i = 0; i < @this.Count; i++)
+				{
+					massive[i] = Guid.Parse(@this[i]);
+				}
+
+				return massive;
 			}
 			#endregion
 
@@ -877,9 +972,9 @@ namespace Lotus
 			/// <param name="element">Элемент</param>
 			/// <returns>Статус нахождения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean Contains<TItem>(this TItem[] @this, TItem element)
+			public static Boolean ContainsElement<TItem>(this TItem[] @this, TItem element)
 			{
-				return (Array.IndexOf(@this, element) >= 0);
+				return Array.IndexOf(@this, element) >= 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -888,22 +983,22 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TItem">Тип элемента массива</typeparam>
 			/// <param name="this">Массив</param>
-			/// <param name="current_element">Текущий элемент</param>
+			/// <param name="currentElement">Текущий элемент</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TItem NextElement<TItem>(this TItem[] @this, TItem current_element)
+			public static TItem NextElement<TItem>(this TItem[] @this, TItem currentElement)
 			{
 				if (@this == null || @this.Length == 0)
 				{
-					return (current_element);
+					return currentElement;
 				}
 
-				if (current_element == null)
+				if (currentElement == null)
 				{
-					return (@this[0]);
+					return @this[0];
 				}
 
-				var index = Array.IndexOf(@this, current_element);
+				var index = Array.IndexOf(@this, currentElement);
 
 				index++;
 
@@ -912,7 +1007,7 @@ namespace Lotus
 					index = 0;
 				}
 
-				return (@this[index]);
+				return @this[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -921,22 +1016,22 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TItem">Тип элемента массива</typeparam>
 			/// <param name="this">Массив</param>
-			/// <param name="current_element">Текущий элемент</param>
+			/// <param name="currentElement">Текущий элемент</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TItem BackElement<TItem>(this TItem[] @this, TItem current_element)
+			public static TItem BackElement<TItem>(this TItem[] @this, TItem currentElement)
 			{
 				if (@this == null || @this.Length == 0)
 				{
-					return (current_element);
+					return currentElement;
 				}
 
-				if (current_element == null)
+				if (currentElement == null)
 				{
 					return @this[0];
 				}
 
-				var index = Array.IndexOf(@this, current_element);
+				var index = Array.IndexOf(@this, currentElement);
 
 				index--;
 
@@ -945,7 +1040,7 @@ namespace Lotus
 					index = @this.Length - 1;
 				}
 
-				return (@this[index]);
+				return @this[index];
 			}
 			#endregion
 
@@ -1043,7 +1138,7 @@ namespace Lotus
 				// Элемент находиться за пределами списка
 				if (comprare_first <= 0)
 				{
-					return (0);
+					return 0;
 				}
 				else
 				{
@@ -1052,7 +1147,7 @@ namespace Lotus
 					{
 						var count = @this.Count;
 						@this.Clear();
-						return (count);
+						return count;
 					}
 					else
 					{
@@ -1063,13 +1158,13 @@ namespace Lotus
 							{
 								var count = @this.Count;
 								@this.Clear();
-								return (count);
+								return count;
 							}
 							else
 							{
 								var count = @this.Count - 1;
 								@this.RemoveRange(0, count);
-								return (count);
+								return count;
 							}
 						}
 						else
@@ -1082,12 +1177,12 @@ namespace Lotus
 									if (included)
 									{
 										@this.RemoveRange(0, i + 1);
-										return (i + 1);
+										return i + 1;
 									}
 									else
 									{
 										@this.RemoveRange(0, i);
-										return (i);
+										return i;
 									}
 								}
 								else
@@ -1095,7 +1190,7 @@ namespace Lotus
 									if (@this[i].CompareTo(item) > 0)
 									{
 										@this.RemoveRange(0, i - 1);
-										return (i - 1);
+										return i - 1;
 									}
 								}
 							}
@@ -1103,7 +1198,7 @@ namespace Lotus
 					}
 				}
 
-				return (0);
+				return 0;
 			}
 			#endregion
 
@@ -1116,17 +1211,17 @@ namespace Lotus
 			/// <typeparam name="TValue">Тип значения</typeparam>
 			/// <param name="this">Словарь</param>
 			/// <param name="key">Ключ</param>
-			/// <param name="default_value">Значение по умолчанию</param>
+			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> @this, in TKey key, TValue default_value) where TValue : struct
+			public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> @this, in TKey key, TValue defaultValue) where TValue : struct
 			{
 				TValue result;
 				if (!@this.TryGetValue(key, out result))
 				{
-					@this[key] = result = default_value;
+					@this[key] = result = defaultValue;
 				}
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1146,7 +1241,7 @@ namespace Lotus
 				{
 					@this[key] = result = new TValue();
 				}
-				return (result);
+				return result;
 			}
 			#endregion
 		}

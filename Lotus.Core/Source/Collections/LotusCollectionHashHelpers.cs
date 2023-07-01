@@ -164,13 +164,13 @@ namespace Lotus
 			/// <summary>
 			/// Увеличение простого числа
 			/// </summary>
-			/// <param name="old_size">Предыдущий размер</param>
+			/// <param name="oldSize">Предыдущий размер</param>
 			/// <returns>Большее простое число</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 ExpandPrime(Int32 old_size)
+			public static Int32 ExpandPrime(Int32 oldSize)
 			{
-				var num = 2 * old_size;
-				if (num > 2146435069 && 2146435069 > old_size)
+				var num = 2 * oldSize;
+				if (num > 2146435069 && 2146435069 > oldSize)
 				{
 					return 2146435069;
 				}

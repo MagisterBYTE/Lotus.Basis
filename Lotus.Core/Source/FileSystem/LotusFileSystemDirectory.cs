@@ -30,7 +30,7 @@ namespace Lotus
 		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity, ILotusViewExpanded
 		{
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
-			public const String IM_Property_Missing = "Свойство отсутствует";
+			public const String IMPropertyMissing = "Свойство отсутствует";
 			#endregion
 
 			#region ======================================= СТАТИЧЕСКИЕ ДАННЫЕ ========================================
@@ -60,7 +60,7 @@ namespace Lotus
 				var dir_info = new DirectoryInfo(path);
 				var dir_model = new CFileSystemDirectory(dir_info);
 				dir_model.RecursiveFileSystemInfo();
-				return (dir_model);
+				return dir_model;
 			}
 			#endregion
 
@@ -76,7 +76,7 @@ namespace Lotus
 			/// </summary>
 			public override String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set
 				{
 					mName = value;
@@ -90,7 +90,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<ILotusFileSystemEntity> Entities
 			{
-				get { return (mEntities); }
+				get { return mEntities; }
 			}
 
 			/// <summary>
@@ -102,11 +102,11 @@ namespace Lotus
 				{
 					if (mInfo != null)
 					{
-						return (mInfo.FullName);
+						return mInfo.FullName;
 					}
 					else
 					{
-						return (mName);
+						return mName;
 					}
 				}
 			}
@@ -116,7 +116,7 @@ namespace Lotus
 			/// </summary>
 			public DirectoryInfo Info
 			{
-				get { return (mInfo); }
+				get { return mInfo; }
 				set { mInfo = value; }
 			}
 
@@ -143,11 +143,11 @@ namespace Lotus
 				{
 					if (mParameters != null)
 					{
-						return (mParameters.GetStringValue(nameof(Label), IM_Property_Missing));
+						return mParameters.GetStringValue(nameof(Label), IMPropertyMissing);
 					}
 					else
 					{
-						return (IM_Property_Missing);
+						return IMPropertyMissing;
 					}
 				}
 				set
@@ -172,11 +172,11 @@ namespace Lotus
 				{
 					if (mParameters != null)
 					{
-						return (mParameters.GetStringValue(nameof(Desc), IM_Property_Missing));
+						return mParameters.GetStringValue(nameof(Desc), IMPropertyMissing);
 					}
 					else
 					{
-						return (IM_Property_Missing);
+						return IMPropertyMissing;
 					}
 				}
 				set
@@ -195,7 +195,7 @@ namespace Lotus
 			/// </summary>
 			public String InspectorTypeName
 			{
-				get { return ("ДИРЕКТОРИЯ"); }
+				get { return "ДИРЕКТОРИЯ"; }
 			}
 
 			/// <summary>
@@ -207,11 +207,11 @@ namespace Lotus
 				{
 					if (mInfo != null)
 					{
-						return (mInfo.Name);
+						return mInfo.Name;
 					}
 					else
 					{
-						return ("");
+						return "";
 					}
 				}
 			}
@@ -222,10 +222,10 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="directory_info">Информация о директории</param>
+			/// <param name="directoryInfo">Информация о директории</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CFileSystemDirectory(DirectoryInfo directory_info)
-				: this(directory_info.Name, directory_info)
+			public CFileSystemDirectory(DirectoryInfo directoryInfo)
+				: this(directoryInfo.Name, directoryInfo)
 			{
 			}
 
@@ -233,11 +233,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="full_path">Полный путь к директории</param>
+			/// <param name="fullPath">Полный путь к директории</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CFileSystemDirectory(String full_path)
+			public CFileSystemDirectory(String fullPath)
 			{
-				mInfo = new DirectoryInfo(full_path);
+				mInfo = new DirectoryInfo(fullPath);
 				mName = mInfo.Name;
 				mEntities = new ListArray<ILotusFileSystemEntity>();
 				mEntities.IsNotify = true;
@@ -256,13 +256,13 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="display_name">Название узла</param>
-			/// <param name="directory_info">Информация о директории</param>
+			/// <param name="displayName">Название узла</param>
+			/// <param name="directoryInfo">Информация о директории</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CFileSystemDirectory(String display_name, DirectoryInfo directory_info)
-				: base(display_name)
+			public CFileSystemDirectory(String displayName, DirectoryInfo directoryInfo)
+				: base(displayName)
 			{
-				mInfo = directory_info;
+				mInfo = directoryInfo;
 				mEntities = new ListArray<ILotusFileSystemEntity>();
 				mEntities.IsNotify = true;
 
@@ -324,7 +324,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean OnNotifyUpdating(ILotusOwnedObject owned_object, System.Object data, String data_name)
 			{
-				return (true);
+				return true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -350,7 +350,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 GetCountChildrenNode()
 			{
-				return (mEntities.Count);
+				return mEntities.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -362,7 +362,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object GetChildrenNode(Int32 index)
 			{
-				return (mEntities[index]);
+				return mEntities[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -379,7 +379,7 @@ namespace Lotus
 			{
 				if (match(this))
 				{
-					return (true);
+					return true;
 				}
 				else
 				{
@@ -387,12 +387,12 @@ namespace Lotus
 					{
 						if(mEntities[i].CheckOne(match))
 						{
-							return (true);
+							return true;
 						}
 					}
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 
@@ -453,7 +453,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CPropertyDesc[] GetPropertiesDesc()
 			{
-				return (FileSystemDirectoryPropertiesDesc);
+				return FileSystemDirectoryPropertiesDesc;
 			}
 			#endregion
 
@@ -462,43 +462,43 @@ namespace Lotus
 			/// <summary>
 			/// Добавление директории
 			/// </summary>
-			/// <param name="directory_info">Информация о директории</param>
+			/// <param name="directoryInfo">Информация о директории</param>
 			/// <returns>Элемент файловой системы представляющий собой директорию</returns>
 			//---------------------------------------------------------------------------------------------------------
-			protected CFileSystemDirectory AddDirectory(DirectoryInfo directory_info)
+			protected CFileSystemDirectory AddDirectory(DirectoryInfo directoryInfo)
 			{
 				// Не создаем не нежные директории
-				if (directory_info.Name.Contains(".git")) return (null);
-				if (directory_info.Name.Contains(".vs")) return (null);
+				if (directoryInfo.Name.Contains(".git")) return null;
+				if (directoryInfo.Name.Contains(".vs")) return null;
 
 				// Создаем директорию
-				var directory = new CFileSystemDirectory(directory_info);
+				var directory = new CFileSystemDirectory(directoryInfo);
 
 				// Добавляем
 				this.mEntities.Add(directory);
 
-				return (directory);
+				return directory;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление директории
 			/// </summary>
-			/// <param name="file_info">Информация о файле</param>
+			/// <param name="fileInfo">Информация о файле</param>
 			/// <returns>Элемент файловой системы представляющий собой файл</returns>
 			//---------------------------------------------------------------------------------------------------------
-			protected CFileSystemFile AddFile(FileInfo file_info)
+			protected CFileSystemFile AddFile(FileInfo fileInfo)
 			{
 				// Не создаем не нежные файлы
-				if (file_info.Extension == ".meta") return (null);
+				if (fileInfo.Extension == ".meta") return null;
 
 				// Создаем файл
-				var file = new CFileSystemFile(file_info);
+				var file = new CFileSystemFile(fileInfo);
 
 				// Добавляем
 				this.mEntities.Add(file);
 
-				return (file);
+				return file;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -580,7 +580,7 @@ namespace Lotus
 					}
 				}
 
-				return (status);
+				return status;
 			}
 
 
@@ -589,9 +589,9 @@ namespace Lotus
 			/// <summary>
 			/// Переименовать директорию
 			/// </summary>
-			/// <param name="new_directory_name">Новое имя директории</param>
+			/// <param name="newDirectoryName">Новое имя директории</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Rename(String new_directory_name)
+			public void Rename(String newDirectoryName)
 			{
 
 			}
@@ -654,12 +654,12 @@ namespace Lotus
 			/// <summary>
 			/// Рекурсивная обработка объектов файловой системы
 			/// </summary>
-			/// <param name="parent_directory_node">Родительский узел директории</param>
+			/// <param name="parentDirectoryNode">Родительский узел директории</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void RecursiveFileSystemInfo(CFileSystemDirectory parent_directory_node)
+			protected void RecursiveFileSystemInfo(CFileSystemDirectory parentDirectoryNode)
 			{
-				DirectoryInfo[] sub_directories = parent_directory_node.Info.GetDirectories();
-				FileInfo[] files = parent_directory_node.Info.GetFiles();
+				DirectoryInfo[] sub_directories = parentDirectoryNode.Info.GetDirectories();
+				FileInfo[] files = parentDirectoryNode.Info.GetFiles();
 
 				// Сначала директории
 				for (var i = 0; i < sub_directories.Length; i++)
@@ -690,96 +690,96 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на существовании директории среди дочерних объектов
 			/// </summary>
-			/// <param name="dir_info">Информация о директории</param>
+			/// <param name="dirInfo">Информация о директории</param>
 			/// <returns>Статус существования</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean ExistInChildren(DirectoryInfo dir_info)
+			public Boolean ExistInChildren(DirectoryInfo dirInfo)
 			{
 				for (var i = 0; i < mEntities.Count; i++)
 				{
 					var dir_node = mEntities[i] as CFileSystemDirectory;
 					if (dir_node != null)
 					{
-						if (dir_node.Info.Name == dir_info.Name)
+						if (dir_node.Info.Name == dirInfo.Name)
 						{
-							return (true);
+							return true;
 						}
 					}
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на существовании файла среди дочерних объектов
 			/// </summary>
-			/// <param name="file_info">Информация о файле</param>
+			/// <param name="fileInfo">Информация о файле</param>
 			/// <returns>Статус существования</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean ExistInChildren(FileInfo file_info)
+			public Boolean ExistInChildren(FileInfo fileInfo)
 			{
 				for (var i = 0; i < mEntities.Count; i++)
 				{
 					var file_node = mEntities[i] as CFileSystemFile;
 					if (file_node != null)
 					{
-						if (file_node.Info.Name == file_info.Name)
+						if (file_node.Info.Name == fileInfo.Name)
 						{
-							return (true);
+							return true;
 						}
 					}
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Поиск и получение узла директории среди дочерних объектов
 			/// </summary>
-			/// <param name="dir_info">Информация о директории</param>
+			/// <param name="dirInfo">Информация о директории</param>
 			/// <returns>Узел директории</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CFileSystemDirectory GetDirectoryNodeFromChildren(DirectoryInfo dir_info)
+			public CFileSystemDirectory GetDirectoryNodeFromChildren(DirectoryInfo dirInfo)
 			{
 				for (var i = 0; i < mEntities.Count; i++)
 				{
 					var dir_node = mEntities[i] as CFileSystemDirectory;
 					if (dir_node != null)
 					{
-						if (dir_node.Info.Name == dir_info.Name)
+						if (dir_node.Info.Name == dirInfo.Name)
 						{
-							return (dir_node);
+							return dir_node;
 						}
 					}
 				}
 
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Поиск и получение узла файла среди дочерних объектов
 			/// </summary>
-			/// <param name="file_info">Информация о файле</param>
+			/// <param name="fileInfo">Информация о файле</param>
 			/// <returns>Узел файла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CFileSystemFile GetFileNodeFromChildren(FileInfo file_info)
+			public CFileSystemFile GetFileNodeFromChildren(FileInfo fileInfo)
 			{
 				for (var i = 0; i < mEntities.Count; i++)
 				{
 					var file_node = mEntities[i] as CFileSystemFile;
 					if (file_node != null)
 					{
-						if (file_node.Info.Name == file_info.Name)
+						if (file_node.Info.Name == fileInfo.Name)
 						{
-							return (file_node);
+							return file_node;
 						}
 					}
 				}
 
-				return (null);
+				return null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -787,11 +787,11 @@ namespace Lotus
 			/// Копирование файлов и указанную директорию
 			/// </summary>
 			/// <param name="path">Имя директории</param>
-			/// <param name="is_directory_name">С учетом данной директории</param>
+			/// <param name="isDirectoryName">С учетом данной директории</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Copy(String path, Boolean is_directory_name)
+			public void Copy(String path, Boolean isDirectoryName)
 			{
-				if(is_directory_name)
+				if(isDirectoryName)
 				{
 					var dest_path_dir = Path.Combine(path, Info.Name);
 					if (Directory.Exists(dest_path_dir) == false)
@@ -809,7 +809,7 @@ namespace Lotus
 						{
 							if (file_node.OwnerViewItem.IsChecked.HasValue && file_node.OwnerViewItem.IsChecked.Value)
 							{
-								if (is_directory_name)
+								if (isDirectoryName)
 								{
 									var dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
 									File.Copy(file_node.Info.FullName, dest_path);
@@ -823,7 +823,7 @@ namespace Lotus
 						}
 						else
 						{
-							if (is_directory_name)
+							if (isDirectoryName)
 							{
 								var dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
 								File.Copy(file_node.Info.FullName, dest_path);

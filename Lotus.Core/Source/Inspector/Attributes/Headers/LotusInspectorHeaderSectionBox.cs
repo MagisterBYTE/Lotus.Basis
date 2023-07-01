@@ -98,13 +98,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="name">Имя заголовка</param>
 			/// <param name="colorBGRA">Цвет текста заголовка</param>
-			/// <param name="text_alignment">Выравнивание текста заголовка</param>
+			/// <param name="textAlignment">Выравнивание текста заголовка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusHeaderSectionBoxAttribute(String name, UInt32 colorBGRA, String text_alignment = "MiddleLeft")
+			public LotusHeaderSectionBoxAttribute(String name, UInt32 colorBGRA, String textAlignment = "MiddleLeft")
 			{
 				mName = name;
 				mTextColor = TColor.FromBGRA(colorBGRA);
-				mTextAlignment = text_alignment;
+				mTextAlignment = textAlignment;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -114,13 +114,13 @@ namespace Lotus
 			/// <param name="name">Имя заголовка</param>
 			/// <param name="colorBGRA">Цвет текста заголовка</param>
 			/// <param name="ord">Порядок отображения свойства</param>
-			/// <param name="text_alignment">Выравнивание текста заголовка</param>
+			/// <param name="textAlignment">Выравнивание текста заголовка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusHeaderSectionBoxAttribute(String name, UInt32 colorBGRA, Int32 ord, String text_alignment = "MiddleLeft")
+			public LotusHeaderSectionBoxAttribute(String name, UInt32 colorBGRA, Int32 ord, String textAlignment = "MiddleLeft")
 			{
 				mName = name;
 				mTextColor = TColor.FromBGRA(colorBGRA);
-				mTextAlignment = text_alignment;
+				mTextAlignment = textAlignment;
 #if UNITY_2017_1_OR_NEWER
 				order = ord;
 #endif

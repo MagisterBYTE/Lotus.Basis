@@ -42,7 +42,7 @@ namespace Lotus
 			/// <summary>
 			/// Расширение текстового файла
 			/// </summary>
-			public const String TXT_D = ".txt";
+			public const String TXTD = ".txt";
 
 			/// <summary>
 			/// Расширение XML файла
@@ -52,7 +52,7 @@ namespace Lotus
 			/// <summary>
 			/// Расширение XML файла
 			/// </summary>
-			public const String XML_D = ".xml";
+			public const String XMLD = ".xml";
 
 			/// <summary>
 			/// Расширение JSON файла
@@ -62,7 +62,7 @@ namespace Lotus
 			/// <summary>
 			/// Расширение JSON файла
 			/// </summary>
-			public const String JSON_D = ".json";
+			public const String JSOND = ".json";
 
 			/// <summary>
 			/// Расширение файла Lua скрипта
@@ -72,7 +72,7 @@ namespace Lotus
 			/// <summary>
 			/// Расширение файла Lua скрипта
 			/// </summary>
-			public const String LUA_D = ".lua";
+			public const String LUAD = ".lua";
 
 			/// <summary>
 			/// Стандартное расширение файла с бинарными данными
@@ -82,7 +82,7 @@ namespace Lotus
 			/// <summary>
 			/// Стандартное расширение файла с бинарными данными
 			/// </summary>
-			public const String BIN_D = ".bin";
+			public const String BIND = ".bin";
 
 			/// <summary>
 			/// Расширение файла с бинарными данными для TextAsset
@@ -92,7 +92,7 @@ namespace Lotus
 			/// <summary>
 			/// Расширение файла с бинарными данными для TextAsset
 			/// </summary>
-			public const String BYTES_D = ".bytes";
+			public const String BYTESD = ".bytes";
 			#endregion
 
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
@@ -100,72 +100,72 @@ namespace Lotus
 			/// <summary>
 			/// Проверка расширения имени файла на принадлежность к текстовым данным
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean IsTextFileName(String file_name)
+			public static Boolean IsTextFileName(String fileName)
 			{
-				var exe = Path.GetExtension(file_name).ToLower();
-				if(exe == TXT_D)
+				var exe = Path.GetExtension(fileName).ToLower();
+				if(exe == TXTD)
 				{
-					return (true);
+					return true;
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка расширения имени файла на принадлежность к бинарным данным
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean IsBinaryFileName(String file_name)
+			public static Boolean IsBinaryFileName(String fileName)
 			{
-				var exe = Path.GetExtension(file_name).ToLower();
-				if (exe == BIN_D || exe == BYTES_D)
+				var exe = Path.GetExtension(fileName).ToLower();
+				if (exe == BIND || exe == BYTESD)
 				{
-					return (true);
+					return true;
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка расширения имени файла на принадлежность к формату XML
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean IsXmlFileName(String file_name)
+			public static Boolean IsXmlFileName(String fileName)
 			{
-				var exe = Path.GetExtension(file_name).ToLower();
-				if (exe == XML_D)
+				var exe = Path.GetExtension(fileName).ToLower();
+				if (exe == XMLD)
 				{
-					return (true);
+					return true;
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка расширения имени файла на принадлежность к формату JSON
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean IsJSONFileName(String file_name)
+			public static Boolean IsJSONFileName(String fileName)
 			{
-				var exe = Path.GetExtension(file_name).ToLower();
-				if (exe == JSON_D)
+				var exe = Path.GetExtension(fileName).ToLower();
+				if (exe == JSOND)
 				{
-					return (true);
+					return true;
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 		}
@@ -186,20 +186,20 @@ namespace Lotus
 			/// Метод анализирует имя файла и при необходимости добавляет путь и расширение
 			/// </remarks>
 			/// <param name="path">Путь</param>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="ext">Расширение файла</param>
 			/// <returns>Имя файла доступного для загрузки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetFileName(String path, String file_name, String ext)
+			public static String GetFileName(String path, String fileName, String ext)
 			{
 #if UNITY_2017_1_OR_NEWER
 				file_name = file_name.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 #else
-				file_name = file_name.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+				fileName = fileName.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
 #endif
 
 				var result = "";
-				if(file_name.IndexOf(Path.DirectorySeparatorChar) > -1 || file_name.IndexOf(Path.AltDirectorySeparatorChar) > -1)
+				if(fileName.IndexOf(Path.DirectorySeparatorChar) > -1 || fileName.IndexOf(Path.AltDirectorySeparatorChar) > -1)
 				{
 #if UNITY_2017_1_OR_NEWER
 					if(file_name.Contains(XCoreSettings.ASSETS_PATH))
@@ -211,12 +211,12 @@ namespace Lotus
 						result = Path.Combine(path, file_name);
 					}
 #else
-					result = file_name;
+					result = fileName;
 #endif
 				}
 				else
 				{
-					result = Path.Combine(path, file_name);
+					result = Path.Combine(path, fileName);
 				}
 
 				if(Path.HasExtension(result) == false)
@@ -245,22 +245,22 @@ namespace Lotus
 			/// Получение полного пути файла с новым именем
 			/// </summary>
 			/// <param name="path">Путь</param>
-			/// <param name="new_file_name">Новое имя файла</param>
+			/// <param name="newFileName">Новое имя файла</param>
 			/// <returns>Путь с новым именем файла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetPathForRenameFile(String path, String new_file_name)
+			public static String GetPathForRenameFile(String path, String newFileName)
 			{
 				var dir = Path.GetDirectoryName(path);
 				var exe = Path.GetExtension(path);
 
 				var result = "";
-				if (Path.HasExtension(new_file_name))
+				if (Path.HasExtension(newFileName))
 				{
-					result = Path.Combine(dir, new_file_name);
+					result = Path.Combine(dir, newFileName);
 				}
 				else
 				{
-					result = Path.Combine(dir, new_file_name + exe);
+					result = Path.Combine(dir, newFileName + exe);
 				}
 
 #if UNITY_2017_1_OR_NEWER
@@ -269,7 +269,7 @@ namespace Lotus
 				result = result.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
 #endif
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -279,19 +279,19 @@ namespace Lotus
 			/// <remarks>
 			/// Имя файла корректно, если оно не пустое, длиной меньше 240 символов и не содержит запрещающих символов
 			/// </remarks>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <returns>Статус корректности имени файла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean CheckCorrectFileName(String file_name)
+			public static Boolean CheckCorrectFileName(String fileName)
 			{
-				if(String.IsNullOrEmpty(file_name))
+				if(String.IsNullOrEmpty(fileName))
 				{
-					return (false);
+					return false;
 				}
 
-				if (file_name.Length > 240)
+				if (fileName.Length > 240)
 				{
-					return (false);
+					return false;
 				}
 
 				return true;

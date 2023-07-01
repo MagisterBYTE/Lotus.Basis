@@ -55,11 +55,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="event_method_name">Имя метода который будет вызван при изменении значения</param>
+			/// <param name="eventMethodName">Имя метода который будет вызван при изменении значения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusEventValueChangedAttribute(String event_method_name)
+			public LotusEventValueChangedAttribute(String eventMethodName)
 			{
-				mEventMethodName = event_method_name;
+				mEventMethodName = eventMethodName;
 			}
 			#endregion
 		}

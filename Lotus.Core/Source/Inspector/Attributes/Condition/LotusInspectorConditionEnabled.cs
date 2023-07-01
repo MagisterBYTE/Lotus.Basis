@@ -76,14 +76,14 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="managing_member_name">Имя члена объекта от которого зависит доступность свойства для редактирования</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="managingMemberName">Имя члена объекта от которого зависит доступность свойства для редактирования</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			/// <param name="value">Целевое значение поля/свойства при котором доступно редактирование</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusEnabledEqualityAttribute(String managing_member_name, TInspectorMemberType member_type, Boolean value)
+			public LotusEnabledEqualityAttribute(String managingMemberName, TInspectorMemberType memberType, Boolean value)
 			{
-				mManagingMemberName = managing_member_name;
-				mMemberType = member_type;
+				mManagingMemberName = managingMemberName;
+				mMemberType = memberType;
 				mValue = value;
 			}
 			#endregion

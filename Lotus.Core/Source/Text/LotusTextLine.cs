@@ -47,7 +47,7 @@ namespace Lotus
 			/// </remarks>
 			public String Label
 			{
-				get { return (mLabel); }
+				get { return mLabel; }
 				set
 				{
 					mLabel = value;
@@ -59,7 +59,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Index
 			{
-				get { return (mIndex); }
+				get { return mIndex; }
 				set
 				{
 					mIndex = value;
@@ -71,7 +71,7 @@ namespace Lotus
 			/// </summary>
 			public CTextList Owned
 			{
-				get { return (mOwned); }
+				get { return mOwned; }
 				set
 				{
 					mOwned = value;
@@ -106,11 +106,11 @@ namespace Lotus
 			/// </summary>
 			/// <param name="prefix">Начальный префикс строки</param>
 			/// <param name="symbol">Символ для заполнения</param>
-			/// <param name="total_length">Общая требуемая длина строки</param>
+			/// <param name="totalLength">Общая требуемая длина строки</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CTextLine(String prefix, Char symbol, Int32 total_length)
+			public CTextLine(String prefix, Char symbol, Int32 totalLength)
 			{
-				mRawString = prefix + new String(symbol, total_length - prefix.Length);
+				mRawString = prefix + new String(symbol, totalLength - prefix.Length);
 			}
 			#endregion
 
@@ -124,7 +124,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(CTextLine other)
 			{
-				return (mRawString.CompareTo(other.mRawString));
+				return mRawString.CompareTo(other.mRawString);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextLine Duplicate(CParameters parameters = null)
 			{
-				return (new CTextLine(this.RawString));
+				return new CTextLine(this.RawString);
 			}
 			#endregion
 
@@ -165,7 +165,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator String(CTextLine text_line)
 			{
-				return (text_line.RawString);
+				return text_line.RawString;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator CTextLine(String str)
 			{
-				return (new CTextLine(str));
+				return new CTextLine(str);
 			}
 			#endregion
 

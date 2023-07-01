@@ -60,7 +60,7 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return (mName); }
+				get { return mName; }
 				set { mName = value; }
 			}
 
@@ -69,7 +69,7 @@ namespace Lotus
 			/// </summary>
 			public PoolManager<CTaskHolder> TaskHolderPools
 			{
-				get { return (mTaskHolderPools); }
+				get { return mTaskHolderPools; }
 			}
 
 			/// <summary>
@@ -77,7 +77,7 @@ namespace Lotus
 			/// </summary>
 			public List<CGroupTask> GroupTasks
 			{
-				get { return (mGroupTasks); }
+				get { return mGroupTasks; }
 			}
 
 			/// <summary>
@@ -85,7 +85,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, Action> GroupTaskHandlersCompleted
 			{
-				get { return (mGroupTaskHandlersCompleted); }
+				get { return mGroupTaskHandlersCompleted; }
 			}
 
 			/// <summary>
@@ -93,7 +93,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, Action<ILotusTask>> GroupTaskHandlersEachTaskCompleted
 			{
-				get { return (mGroupTaskHandlersEachTaskCompleted); }
+				get { return mGroupTaskHandlersEachTaskCompleted; }
 			}
 			#endregion
 
@@ -175,14 +175,14 @@ namespace Lotus
 			/// <summary>
 			/// Получение группы задачи по имени
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			/// <returns>Найденная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask GetGroupTask(String group_name)
+			public virtual CGroupTask GetGroupTask(String groupName)
 			{
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						return mGroupTasks[i];
 					}
@@ -195,83 +195,83 @@ namespace Lotus
 			/// <summary>
 			/// Добавление(существующей) группы задачи
 			/// </summary>
-			/// <param name="group_task">Группа задач</param>
+			/// <param name="groupTask">Группа задач</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTask(CGroupTask group_task)
+			public virtual CGroupTask AddGroupTask(CGroupTask groupTask)
 			{
-				mGroupTasks.Add(group_task);
-				return group_task;
+				mGroupTasks.Add(groupTask);
+				return groupTask;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление(существующей) группы задачи
 			/// </summary>
-			/// <param name="group_task">Группа задач</param>
-			/// <param name="on_completed_each_task">Обработчик завершения каждой задачи группы</param>
+			/// <param name="groupTask">Группа задач</param>
+			/// <param name="onCompletedEachTask">Обработчик завершения каждой задачи группы</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTask(CGroupTask group_task, Action<ILotusTask> on_completed_each_task)
+			public virtual CGroupTask AddGroupTask(CGroupTask groupTask, Action<ILotusTask> onCompletedEachTask)
 			{
-				mGroupTasks.Add(group_task);
+				mGroupTasks.Add(groupTask);
 
-				if (on_completed_each_task != null)
+				if (onCompletedEachTask != null)
 				{
-					if (mGroupTaskHandlersEachTaskCompleted.ContainsKey(group_task.Name))
+					if (mGroupTaskHandlersEachTaskCompleted.ContainsKey(groupTask.Name))
 					{
-						mGroupTaskHandlersEachTaskCompleted[group_task.Name] = on_completed_each_task;
+						mGroupTaskHandlersEachTaskCompleted[groupTask.Name] = onCompletedEachTask;
 					}
 					else
 					{
-						mGroupTaskHandlersEachTaskCompleted.Add(group_task.Name, on_completed_each_task);
+						mGroupTaskHandlersEachTaskCompleted.Add(groupTask.Name, onCompletedEachTask);
 					}
 				}
 
-				return group_task;
+				return groupTask;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление(создание) группы задачи выполняемых параллельно каждый кадр
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			/// <param name="list">Список задач группы</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTask(String group_name, params ILotusTask[] list)
+			public virtual CGroupTask AddGroupTask(String groupName, params ILotusTask[] list)
 			{
-				return AddGroupTask(group_name, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, list);
+				return AddGroupTask(groupName, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, list);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление(создание) группы задачи выполняемых параллельно
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			/// <param name="method">Способ выполнения задач группы</param>
 			/// <param name="list">Список задач группы</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTask(String group_name, TTaskMethod method, params ILotusTask[] list)
+			public virtual CGroupTask AddGroupTask(String groupName, TTaskMethod method, params ILotusTask[] list)
 			{
-				return AddGroupTask(group_name, TTaskExecuteMode.Parallel, method, list);
+				return AddGroupTask(groupName, TTaskExecuteMode.Parallel, method, list);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление(создание) группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <param name="method">Способ выполнения задач группы</param>
 			/// <param name="list">Список задач группы</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTask(String group_name, TTaskExecuteMode execute_mode, TTaskMethod method, params ILotusTask[] list)
+			public virtual CGroupTask AddGroupTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, params ILotusTask[] list)
 			{
-				var task = new CGroupTask(group_name, method, this, list);
-				task.ExecuteMode = execute_mode;
+				var task = new CGroupTask(groupName, method, this, list);
+				task.ExecuteMode = executeMode;
 				mGroupTasks.Add(task);
 				return task;
 			}
@@ -280,32 +280,32 @@ namespace Lotus
 			/// <summary>
 			/// Получение существующей группы задач или создание новой группы задач с указанными задачами и параметрами
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
+			/// <param name="groupName">Имя задачи</param>
 			/// <param name="task">Задача</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask GetGroupTaskExistsTask(String group_name, ILotusTask task)
+			public virtual CGroupTask GetGroupTaskExistsTask(String groupName, ILotusTask task)
 			{
-				return GetGroupTaskExistsTask(group_name, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, task);
+				return GetGroupTaskExistsTask(groupName, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, task);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение существующей группы задач или создание новой группы задач с указанными задачами и параметрами
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя задачи</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <param name="method">Способ выполнения группы задач</param>
 			/// <param name="task">Задача</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask GetGroupTaskExistsTask(String group_name, TTaskExecuteMode execute_mode, TTaskMethod method, ILotusTask task)
+			public virtual CGroupTask GetGroupTaskExistsTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, ILotusTask task)
 			{
 				CGroupTask group_task = null;
 
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -314,8 +314,8 @@ namespace Lotus
 
 				if (group_task == null)
 				{
-					group_task = new CGroupTask(group_name, method, this, task);
-					group_task.ExecuteMode = execute_mode;
+					group_task = new CGroupTask(groupName, method, this, task);
+					group_task.ExecuteMode = executeMode;
 					mGroupTasks.Add(group_task);
 				}
 
@@ -326,46 +326,46 @@ namespace Lotus
 			/// <summary>
 			/// Получение существующей группы задач или создание новой группы задач с указанными задачами и параметрами
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
+			/// <param name="groupName">Имя задачи</param>
 			/// <param name="tasks">Задачи</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask GetGroupTaskExistsTasks(String group_name, params ILotusTask[] tasks)
+			public virtual CGroupTask GetGroupTaskExistsTasks(String groupName, params ILotusTask[] tasks)
 			{
-				return GetGroupTaskExistsTasks(group_name, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, tasks);
+				return GetGroupTaskExistsTasks(groupName, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, tasks);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение существующей группы задач или создание новой группы задач с указанными задачами и параметрами
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя задачи</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <param name="tasks">Задачи</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask GetGroupTaskExistsTasks(String group_name, TTaskExecuteMode execute_mode, params ILotusTask[] tasks)
+			public virtual CGroupTask GetGroupTaskExistsTasks(String groupName, TTaskExecuteMode executeMode, params ILotusTask[] tasks)
 			{
-				return GetGroupTaskExistsTasks(group_name, execute_mode, TTaskMethod.EachFrame, tasks);
+				return GetGroupTaskExistsTasks(groupName, executeMode, TTaskMethod.EachFrame, tasks);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение существующей группы задач или создание новой группы задач с указанными задачами и параметрами
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя задачи</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <param name="method">Способ выполнения группы задач</param>
 			/// <param name="tasks">Задачи</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask GetGroupTaskExistsTasks(String group_name, TTaskExecuteMode execute_mode, TTaskMethod method, params ILotusTask[] tasks)
+			public virtual CGroupTask GetGroupTaskExistsTasks(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, params ILotusTask[] tasks)
 			{
 				CGroupTask group_task = null;
 
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -374,8 +374,8 @@ namespace Lotus
 
 				if (group_task == null)
 				{
-					group_task = new CGroupTask(group_name, method, this, tasks);
-					group_task.ExecuteMode = execute_mode;
+					group_task = new CGroupTask(groupName, method, this, tasks);
+					group_task.ExecuteMode = executeMode;
 					mGroupTasks.Add(group_task);
 				}
 
@@ -386,32 +386,32 @@ namespace Lotus
 			/// <summary>
 			/// Добавление в существующую группу задач дополнительной задачи или создание новой группы задач
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
+			/// <param name="groupName">Имя задачи</param>
 			/// <param name="task">Задача</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTaskExistsTask(String group_name, ILotusTask task)
+			public virtual CGroupTask AddGroupTaskExistsTask(String groupName, ILotusTask task)
 			{
-				return AddGroupTaskExistsTask(group_name, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, task);
+				return AddGroupTaskExistsTask(groupName, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, task);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление в существующую группу задач дополнительной задачи или создание новой группы задач
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя задачи</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <param name="method">Способ выполнения группы задач</param>
 			/// <param name="task">Задача</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTaskExistsTask(String group_name, TTaskExecuteMode execute_mode, TTaskMethod method, ILotusTask task)
+			public virtual CGroupTask AddGroupTaskExistsTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, ILotusTask task)
 			{
 				CGroupTask group_task = null;
 
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -420,8 +420,8 @@ namespace Lotus
 
 				if (group_task == null)
 				{
-					group_task = new CGroupTask(group_name, method, this, task);
-					group_task.ExecuteMode = execute_mode;
+					group_task = new CGroupTask(groupName, method, this, task);
+					group_task.ExecuteMode = executeMode;
 					mGroupTasks.Add(group_task);
 				}
 				else
@@ -436,46 +436,46 @@ namespace Lotus
 			/// <summary>
 			/// Добавление в существующую группу задач дополнительной задачи или создание новой группы задач
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
+			/// <param name="groupName">Имя задачи</param>
 			/// <param name="tasks">Задачи</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTaskExistsTasks(String group_name, params ILotusTask[] tasks)
+			public virtual CGroupTask AddGroupTaskExistsTasks(String groupName, params ILotusTask[] tasks)
 			{
-				return AddGroupTaskExistsTasks(group_name, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, tasks);
+				return AddGroupTaskExistsTasks(groupName, TTaskExecuteMode.Parallel, TTaskMethod.EachFrame, tasks);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление в существующую группу задач дополнительной задачи или создание новой группы задач
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя задачи</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <param name="tasks">Задачи</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTaskExistsTasks(String group_name, TTaskExecuteMode execute_mode, params ILotusTask[] tasks)
+			public virtual CGroupTask AddGroupTaskExistsTasks(String groupName, TTaskExecuteMode executeMode, params ILotusTask[] tasks)
 			{
-				return AddGroupTaskExistsTasks(group_name, execute_mode, TTaskMethod.EachFrame, tasks);
+				return AddGroupTaskExistsTasks(groupName, executeMode, TTaskMethod.EachFrame, tasks);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление в существующую группу задач дополнительной задачи или создание новой группы задач
 			/// </summary>
-			/// <param name="group_name">Имя задачи</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя задачи</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <param name="method">Способ выполнения группы задач</param>
 			/// <param name="tasks">Задачи</param>
 			/// <returns>Группа задач</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask AddGroupTaskExistsTasks(String group_name, TTaskExecuteMode execute_mode, TTaskMethod method, params ILotusTask[] tasks)
+			public virtual CGroupTask AddGroupTaskExistsTasks(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, params ILotusTask[] tasks)
 			{
 				CGroupTask group_task = null;
 
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -484,14 +484,14 @@ namespace Lotus
 
 				if (group_task == null)
 				{
-					group_task = new CGroupTask(group_name, method, this, tasks);
-					group_task.ExecuteMode = execute_mode;
+					group_task = new CGroupTask(groupName, method, this, tasks);
+					group_task.ExecuteMode = executeMode;
 					mGroupTasks.Add(group_task);
 				}
 				else
 				{
 					group_task.AddList(tasks);
-					group_task.ExecuteMode = execute_mode;
+					group_task.ExecuteMode = executeMode;
 					group_task.SetMethodMode(method);
 				}
 
@@ -502,14 +502,14 @@ namespace Lotus
 			/// <summary>
 			/// Удаление группы задачи
 			/// </summary>
-			/// <param name="group_task">Группа задач</param>
+			/// <param name="groupTask">Группа задач</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RemoveGroupTask(CGroupTask group_task)
+			public virtual void RemoveGroupTask(CGroupTask groupTask)
 			{
-				if (mGroupTasks.Remove(group_task))
+				if (mGroupTasks.Remove(groupTask))
 				{
 					// Удаляем все связанные задачи
-					group_task.Clear();
+					groupTask.Clear();
 				}
 			}
 
@@ -517,13 +517,13 @@ namespace Lotus
 			/// <summary>
 			/// Удаление группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RemoveGroupTask(String group_name)
+			public virtual void RemoveGroupTask(String groupName)
 			{
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						mGroupTasks[i].Clear();
 						mGroupTasks.RemoveAt(i);
@@ -536,13 +536,13 @@ namespace Lotus
 			/// <summary>
 			/// Очистка группы от задач
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void ClearGroupTask(String group_name)
+			public virtual void ClearGroupTask(String groupName)
 			{
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						mGroupTasks[i].Clear();
 						return;
@@ -554,96 +554,96 @@ namespace Lotus
 			/// <summary>
 			/// Запуск выполнения группы задачи параллельно
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name)
+			public virtual CGroupTask RunGroupTask(String groupName)
 			{
-				return RunGroupTask(group_name, 0.0f, null);
+				return RunGroupTask(groupName, 0.0f, null);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запуск выполнения группы задачи параллельно
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name, TTaskExecuteMode execute_mode)
+			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode)
 			{
-				return RunGroupTask(group_name, execute_mode, 0.0f, null);
+				return RunGroupTask(groupName, executeMode, 0.0f, null);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запуск выполнения группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="delay_start">Задержка в секундах начало выполнения задач группы</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="delayStart">Задержка в секундах начало выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name, Single delay_start)
+			public virtual CGroupTask RunGroupTask(String groupName, Single delayStart)
 			{
-				return RunGroupTask(group_name, delay_start, null);
+				return RunGroupTask(groupName, delayStart, null);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запуск выполнения группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
-			/// <param name="delay_start">Задержка в секундах начало выполнения задач группы</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
+			/// <param name="delayStart">Задержка в секундах начало выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name, TTaskExecuteMode execute_mode, Single delay_start)
+			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, Single delayStart)
 			{
-				return RunGroupTask(group_name, execute_mode, delay_start, null);
+				return RunGroupTask(groupName, executeMode, delayStart, null);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запуск выполнения группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="on_completed">Обработчик события окончания выполнения задач группы</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="onCompleted">Обработчик события окончания выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name, Action on_completed)
+			public virtual CGroupTask RunGroupTask(String groupName, Action onCompleted)
 			{
-				return RunGroupTask(group_name, 0.0f, on_completed);
+				return RunGroupTask(groupName, 0.0f, onCompleted);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запуск выполнения группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
-			/// <param name="on_completed">Обработчик события окончания выполнения задач группы</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
+			/// <param name="onCompleted">Обработчик события окончания выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name, TTaskExecuteMode execute_mode, Action on_completed)
+			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, Action onCompleted)
 			{
-				return RunGroupTask(group_name, execute_mode, 0.0f, on_completed);
+				return RunGroupTask(groupName, executeMode, 0.0f, onCompleted);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запуск выполнения группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="delay_start">Задержка в секундах начало выполнения задач группы</param>
-			/// <param name="on_completed">Обработчик события окончания выполнения задач группы</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="delayStart">Задержка в секундах начало выполнения задач группы</param>
+			/// <param name="onCompleted">Обработчик события окончания выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name, Single delay_start, Action on_completed)
+			public virtual CGroupTask RunGroupTask(String groupName, Single delayStart, Action onCompleted)
 			{
 				CGroupTask group_task = null;
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -652,19 +652,19 @@ namespace Lotus
 
 				if(group_task != null)
 				{
-					if (on_completed != null)
+					if (onCompleted != null)
 					{
 						if (mGroupTaskHandlersCompleted.ContainsKey(group_task.Name))
 						{
-							mGroupTaskHandlersCompleted[group_task.Name] = on_completed;
+							mGroupTaskHandlersCompleted[group_task.Name] = onCompleted;
 						}
 						else
 						{
-							mGroupTaskHandlersCompleted.Add(group_task.Name, on_completed);
+							mGroupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
 						}
 					}
 
-					group_task.DelayStart = delay_start;
+					group_task.DelayStart = delayStart;
 					group_task.Run();
 				}
 
@@ -675,18 +675,18 @@ namespace Lotus
 			/// <summary>
 			/// Запуск выполнения группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
-			/// <param name="delay_start">Задержка в секундах начало выполнения задач группы</param>
-			/// <param name="on_completed">Обработчик события окончания выполнения задач группы</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
+			/// <param name="delayStart">Задержка в секундах начало выполнения задач группы</param>
+			/// <param name="onCompleted">Обработчик события окончания выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name, TTaskExecuteMode execute_mode, Single delay_start, Action on_completed)
+			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, Single delayStart, Action onCompleted)
 			{
 				CGroupTask group_task = null;
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -695,20 +695,20 @@ namespace Lotus
 
 				if (group_task != null)
 				{
-					if (on_completed != null)
+					if (onCompleted != null)
 					{
 						if (mGroupTaskHandlersCompleted.ContainsKey(group_task.Name))
 						{
-							mGroupTaskHandlersCompleted[group_task.Name] = on_completed;
+							mGroupTaskHandlersCompleted[group_task.Name] = onCompleted;
 						}
 						else
 						{
-							mGroupTaskHandlersCompleted.Add(group_task.Name, on_completed);
+							mGroupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
 						}
 					}
 
-					group_task.ExecuteMode = execute_mode;
-					group_task.DelayStart = delay_start;
+					group_task.ExecuteMode = executeMode;
+					group_task.DelayStart = delayStart;
 					group_task.Run();
 				}
 
@@ -719,19 +719,19 @@ namespace Lotus
 			/// <summary>
 			/// Запуск выполнения группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
-			/// <param name="execute_mode">Режим выполнения группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
+			/// <param name="executeMode">Режим выполнения группы задач</param>
 			/// <param name="method">Способ выполнения группы задач</param>
-			/// <param name="delay_start">Задержка в секундах начало выполнения задач группы</param>
-			/// <param name="on_completed">Обработчик события окончания выполнения задач группы</param>
+			/// <param name="delayStart">Задержка в секундах начало выполнения задач группы</param>
+			/// <param name="onCompleted">Обработчик события окончания выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String group_name, TTaskExecuteMode execute_mode, TTaskMethod method, Single delay_start, Action on_completed)
+			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, Single delayStart, Action onCompleted)
 			{
 				CGroupTask group_task = null;
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -740,21 +740,21 @@ namespace Lotus
 
 				if (group_task != null)
 				{
-					if (on_completed != null)
+					if (onCompleted != null)
 					{
 						if (mGroupTaskHandlersCompleted.ContainsKey(group_task.Name))
 						{
-							mGroupTaskHandlersCompleted[group_task.Name] = on_completed;
+							mGroupTaskHandlersCompleted[group_task.Name] = onCompleted;
 						}
 						else
 						{
-							mGroupTaskHandlersCompleted.Add(group_task.Name, on_completed);
+							mGroupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
 						}
 					}
 
 					group_task.SetMethodMode(method);
-					group_task.ExecuteMode = execute_mode;
-					group_task.DelayStart = delay_start;
+					group_task.ExecuteMode = executeMode;
+					group_task.DelayStart = delayStart;
 					group_task.Run();
 				}
 
@@ -765,15 +765,15 @@ namespace Lotus
 			/// <summary>
 			/// Пауза выполнения группы задачи
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			/// <param name="pause">Статус паузы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void PauseGroupTask(String group_name, Boolean pause)
+			public virtual void PauseGroupTask(String groupName, Boolean pause)
 			{
 				CGroupTask group_task = null;
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -790,14 +790,14 @@ namespace Lotus
 			/// <summary>
 			/// Принудительная остановка выполнения всех задач группы
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void StopGroupTask(String group_name)
+			public virtual void StopGroupTask(String groupName)
 			{
 				CGroupTask group_task = null;
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						group_task = mGroupTasks[i];
 						break;
@@ -814,13 +814,13 @@ namespace Lotus
 			/// <summary>
 			/// Переустановка данных всех задач группы
 			/// </summary>
-			/// <param name="group_name">Имя группы задач</param>
+			/// <param name="groupName">Имя группы задач</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void ResetGroupTask(String group_name)
+			public virtual void ResetGroupTask(String groupName)
 			{
 				for (var i = 0; i < mGroupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == group_name)
+					if (mGroupTasks[i].Name == groupName)
 					{
 						mGroupTasks[i].Reset();
 						break;

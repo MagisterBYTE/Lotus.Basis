@@ -76,7 +76,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusMementoOriginator MementoOriginator 
 			{
-				get { return (mOriginator); }
+				get { return mOriginator; }
 				set { mOriginator = value; }
 			}
 			#endregion
@@ -96,12 +96,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="originator">Объект</param>
-			/// <param name="name_state">Наименование состояния объекта</param>
+			/// <param name="nameState">Наименование состояния объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMementoCaretaker(ILotusMementoOriginator originator, String name_state)
+			public CMementoCaretaker(ILotusMementoOriginator originator, String nameState)
 			{
 				mOriginator = originator;
-				mState = originator.GetMemento(name_state);
+				mState = originator.GetMemento(nameState);
 			}
 			#endregion
 
@@ -151,7 +151,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusMementoOriginator MementoOriginator
 			{
-				get { return (mOriginator); }
+				get { return mOriginator; }
 				set { mOriginator = value; }
 			}
 			#endregion
@@ -174,13 +174,13 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="originator">Объект</param>
-			/// <param name="name_state">Наименование состояния объекта</param>
+			/// <param name="nameState">Наименование состояния объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMementoCaretakerChanged(ILotusMementoOriginator originator, String name_state)
+			public CMementoCaretakerChanged(ILotusMementoOriginator originator, String nameState)
 			{
 				mOriginator = originator;
-				mBeforeState = originator.GetMemento(name_state);
-				mNameState = name_state;
+				mBeforeState = originator.GetMemento(nameState);
+				mNameState = nameState;
 			}
 			#endregion
 

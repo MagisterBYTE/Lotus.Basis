@@ -343,7 +343,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mIsCompleted);
+					return mIsCompleted;
 				}
 			}
 			#endregion
@@ -364,13 +364,13 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="is_pool_object">Статус объекта созданного в пуле</param>
+			/// <param name="isPoolObject">Статус объекта созданного в пуле</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CTaskHolder(Boolean is_pool_object)
+			public CTaskHolder(Boolean isPoolObject)
 			{
 				mId = -1;
 				mMethodFrame = 10;
-				mIsPoolObject = is_pool_object;
+				mIsPoolObject = isPoolObject;
 			}
 			#endregion
 
@@ -442,7 +442,7 @@ namespace Lotus
 			{
 				if (mIsDelayStart)
 				{
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 					mStartTaskTime += UnityEngine.Time.deltaTime;
 #endif
 					if (mStartTaskTime > mDelayStart)

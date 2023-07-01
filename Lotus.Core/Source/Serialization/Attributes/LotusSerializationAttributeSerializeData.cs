@@ -26,7 +26,7 @@ namespace Lotus
 		/// </summary>
 		/// <remarks>
 		/// Тип помеченный данным атрибутом должен обязательно реализовать статический метод
-		/// с именем <see cref="LotusSerializeDataAttribute.GET_SERIALIZE_DATA"/> который возвращает данные сериализации
+		/// с именем <see cref="LotusSerializeDataAttribute.GETSERIALIZEDATA"/> который возвращает данные сериализации
 		/// </remarks>
 		//-------------------------------------------------------------------------------------------------------------
 		[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = false)]
@@ -36,7 +36,7 @@ namespace Lotus
 			/// <summary>
 			/// Имя статического метода типа который представляет данные для сериализации
 			/// </summary>
-			public const String GET_SERIALIZE_DATA = "GetSerializeData";
+			public const String GETSERIALIZEDATA = "GetSerializeData";
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------

@@ -77,26 +77,26 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="min_value">Минимальное значение величины</param>
-			/// <param name="max_value">Максимальное значение величины</param>
+			/// <param name="minValue">Минимальное значение величины</param>
+			/// <param name="maxValue">Максимальное значение величины</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusRandomValueAttribute(System.Object min_value, System.Object max_value)
+			public LotusRandomValueAttribute(System.Object minValue, System.Object maxValue)
 			{
-				mMinValue = min_value;
-				mMaxValue = max_value;
+				mMinValue = minValue;
+				mMaxValue = maxValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="member_name">Имя члена объекта представляющую случайное значение</param>
-			/// <param name="member_type">Тип члена объекта</param>
+			/// <param name="memberName">Имя члена объекта представляющую случайное значение</param>
+			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusRandomValueAttribute(String member_name, TInspectorMemberType member_type = TInspectorMemberType.Method)
+			public LotusRandomValueAttribute(String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
-				mMemberName = member_name;
-				mMemberType = member_type;
+				mMemberName = memberName;
+				mMemberType = memberType;
 			}
 			#endregion
 		}

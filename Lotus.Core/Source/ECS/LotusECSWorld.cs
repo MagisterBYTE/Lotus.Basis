@@ -64,7 +64,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountEntity
 			{
-				get { return (mCountEntity); }
+				get { return mCountEntity; }
 			}
 
 			/// <summary>
@@ -72,7 +72,7 @@ namespace Lotus
 			/// </summary>
 			public TEcsEntity[] Entities
 			{
-				get { return (mDenseEntities); }
+				get { return mDenseEntities; }
 			}
 
 			/// <summary>
@@ -80,7 +80,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<Type, ILotusEcsComponentData> ComponentsData
 			{
-				get { return (mComponentsData); }
+				get { return mComponentsData; }
 			}
 
 			/// <summary>
@@ -88,7 +88,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<CEcsFilterComponent> FilterComponents
 			{
-				get { return (mFilterComponents); }
+				get { return mFilterComponents; }
 			}
 			#endregion
 
@@ -168,7 +168,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsEntity(Int32 id)
 			{
-				return (mSparseEntities[id] < mCountEntity && mDenseEntities[mSparseEntities[id]].Id == id);
+				return mSparseEntities[id] < mCountEntity && mDenseEntities[mSparseEntities[id]].Id == id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -219,10 +219,10 @@ namespace Lotus
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					return (component_data.GetEntities());
+					return component_data.GetEntities();
 				}
 
-				return (null);
+				return null;
 			}
 			#endregion
 
@@ -232,10 +232,10 @@ namespace Lotus
 			/// Добавление к указанной сущности компонента указанного типа
 			/// </summary>
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
-			/// <param name="entity_id">Идентификатор сущности</param>
+			/// <param name="entityId">Идентификатор сущности</param>
 			/// <returns>Ссылка на добавленный компонент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ref TComponent AddComponent<TComponent>(Int32 entity_id) where TComponent : struct
+			public ref TComponent AddComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
@@ -243,16 +243,16 @@ namespace Lotus
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 
-					if (component_data_exist.HasEntity(entity_id) == false)
+					if (component_data_exist.HasEntity(entityId) == false)
 					{
 						UpdateFilterComponentsForAdd(component_type);
 
-						ref TComponent value = ref component_data_exist.AddEntity(entity_id);
+						ref TComponent value = ref component_data_exist.AddEntity(entityId);
 						return ref value;
 					}
 					else
 					{
-						throw new Exception($"Component <{typeof(TComponent).Name}> already attached to entity <{entity_id}>");
+						throw new Exception($"Component <{typeof(TComponent).Name}> already attached to entity <{entityId}>");
 					}
 				}
 				else
@@ -260,7 +260,7 @@ namespace Lotus
 					var component_data_new = new CEcsComponentData<TComponent>();
 					component_data_new.World = this;
 					mComponentsData.Add(component_type, component_data_new);
-					ref TComponent value = ref component_data_new.AddEntity(entity_id);
+					ref TComponent value = ref component_data_new.AddEntity(entityId);
 					return ref value;
 				}
 			}
@@ -270,10 +270,10 @@ namespace Lotus
 			/// Получение от указанной сущности компонента указанного типа
 			/// </summary>
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
-			/// <param name="entity_id">Идентификатор сущности</param>
+			/// <param name="entityId">Идентификатор сущности</param>
 			/// <returns>Ссылка на существующий/добавленный компонент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ref TComponent GetOrAddComponent<TComponent>(Int32 entity_id) where TComponent : struct
+			public ref TComponent GetOrAddComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
@@ -281,16 +281,16 @@ namespace Lotus
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 
-					if (component_data_exist.HasEntity(entity_id) == false)
+					if (component_data_exist.HasEntity(entityId) == false)
 					{
 						UpdateFilterComponentsForAdd(component_type);
 
-						ref TComponent value = ref component_data_exist.AddEntity(entity_id);
+						ref TComponent value = ref component_data_exist.AddEntity(entityId);
 						return ref value;
 					}
 					else
 					{
-						ref TComponent value = ref component_data_exist.GetValue(entity_id);
+						ref TComponent value = ref component_data_exist.GetValue(entityId);
 						return ref value;
 					}
 				}
@@ -298,7 +298,7 @@ namespace Lotus
 				{
 					var component_data_new = new CEcsComponentData<TComponent>();
 					mComponentsData.Add(component_type, component_data_new);
-					ref TComponent value = ref component_data_new.AddEntity(entity_id);
+					ref TComponent value = ref component_data_new.AddEntity(entityId);
 					return ref value;
 				}
 			}
@@ -308,19 +308,19 @@ namespace Lotus
 			/// Проверка на наличие компонента определённого типа у указанной сущности
 			/// </summary>
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
-			/// <param name="entity_id">Идентификатор сущности</param>
+			/// <param name="entityId">Идентификатор сущности</param>
 			/// <returns>Статус наличия компонента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean HasComponent<TComponent>(Int32 entity_id) where TComponent : struct
+			public Boolean HasComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
-					return (component_data.HasEntity(entity_id));
+					return component_data.HasEntity(entityId);
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -328,21 +328,21 @@ namespace Lotus
 			/// Получение от указанной сущности компонента указанного типа
 			/// </summary>
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
-			/// <param name="entity_id">Идентификатор сущности</param>
+			/// <param name="entityId">Идентификатор сущности</param>
 			/// <returns>Ссылка на существующий компонент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ref TComponent GetComponent<TComponent>(Int32 entity_id) where TComponent : struct
+			public ref TComponent GetComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
-					ref TComponent value = ref component_data_exist.GetValue(entity_id);
+					ref TComponent value = ref component_data_exist.GetValue(entityId);
 					return ref value;
 				}
 				
-				throw new Exception($"Component <{typeof(TComponent).Name}> not attached to entity <{entity_id}>");
+				throw new Exception($"Component <{typeof(TComponent).Name}> not attached to entity <{entityId}>");
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -350,17 +350,17 @@ namespace Lotus
 			/// Обновление значение компонента у указанной сущности
 			/// </summary>
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
-			/// <param name="entity_id">Идентификатор сущности</param>
+			/// <param name="entityId">Идентификатор сущности</param>
 			/// <param name="value">Компонент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void UpdateComponent<TComponent>(Int32 entity_id, in TComponent value) where TComponent : struct
+			public void UpdateComponent<TComponent>(Int32 entityId, in TComponent value) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
-					component_data_exist.SetValue(entity_id, in value);
+					component_data_exist.SetValue(entityId, in value);
 				}
 			}
 
@@ -369,16 +369,16 @@ namespace Lotus
 			/// Удаление у указанной сущности компонента определённого типа
 			/// </summary>
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
-			/// <param name="entity_id">Идентификатор сущности</param>
+			/// <param name="entityId">Идентификатор сущности</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RemoveComponent<TComponent>(Int32 entity_id) where TComponent : struct
+			public void RemoveComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
 				if (mComponentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
-					component_data_exist.RemoveEntity(entity_id);
+					component_data_exist.RemoveEntity(entityId);
 				}
 			}
 
@@ -435,20 +435,20 @@ namespace Lotus
 				var filter_сomponent = new CEcsFilterComponent();
 				filter_сomponent.World = this;
 				mFilterComponents.Add(filter_сomponent);
-				return (filter_сomponent);
+				return filter_сomponent;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Обновление списка фильтров компонентов для случая добавление нового компонента
 			/// </summary>
-			/// <param name="component_type">Тип компонента</param>
+			/// <param name="componentType">Тип компонента</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void UpdateFilterComponentsForAdd(Type component_type)
+			public void UpdateFilterComponentsForAdd(Type componentType)
 			{
 				for (var i = 0; i < mFilterComponents.Count; i++)
 				{
-					if (mFilterComponents[i].IncludedComponents.Contains(component_type))
+					if (mFilterComponents[i].IncludedComponents.Contains(componentType))
 					{
 						mFilterComponents[i].UpdateFilter();
 					}

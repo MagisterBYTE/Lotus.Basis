@@ -30,12 +30,12 @@ namespace Lotus
 			/// <summary>
 			/// Получение соответствующего типа измерения от указанного единицы измерения
 			/// </summary>
-			/// <param name="unit_type">Единица измерения</param>
+			/// <param name="unitType">Единица измерения</param>
 			/// <returns>Тип измерения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TMeasurementType GetMeasurementType(Enum unit_type)
+			public static TMeasurementType GetMeasurementType(Enum unitType)
 			{
-				Type type = unit_type.GetType();
+				Type type = unitType.GetType();
 				TMeasurementType measurement_type = TMeasurementType.Undefined;
 				switch (type.Name)
 				{
@@ -58,7 +58,7 @@ namespace Lotus
 						break;
 				}
 
-				return (measurement_type);
+				return measurement_type;
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

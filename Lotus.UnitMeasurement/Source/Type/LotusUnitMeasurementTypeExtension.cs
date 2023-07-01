@@ -37,20 +37,20 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TMeasurementType Parse(String value)
 			{
-				return ((TMeasurementType)Enum.Parse(typeof(TMeasurementType), value));
+				return (TMeasurementType)Enum.Parse(typeof(TMeasurementType), value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение типа соответствующей единицы измерения для указанного типа измерения
 			/// </summary>
-			/// <param name="measurement_type">Тип измерения</param>
+			/// <param name="measurementType">Тип измерения</param>
 			/// <returns>Тип единицы измерения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Type GetUnitType(this TMeasurementType measurement_type)
+			public static Type GetUnitType(this TMeasurementType measurementType)
 			{
 				Type type = default;
-				switch (measurement_type)
+				switch (measurementType)
 				{
 					case TMeasurementType.Undefined:
 						{
@@ -76,20 +76,20 @@ namespace Lotus
 						break;
 				}
 
-				return (type);
+				return type;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение значения единицы измерения по умолчанию для указанного типа измерения
 			/// </summary>
-			/// <param name="measurement_type">Тип измерения</param>
+			/// <param name="measurementType">Тип измерения</param>
 			/// <returns>Единица измерения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Enum GetUnitValueDefault(this TMeasurementType measurement_type)
+			public static Enum GetUnitValueDefault(this TMeasurementType measurementType)
 			{
 				Enum value = default;
-				switch (measurement_type)
+				switch (measurementType)
 				{
 					case TMeasurementType.Undefined:
 						{
@@ -115,21 +115,21 @@ namespace Lotus
 						break;
 				}
 
-				return (value);
+				return value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение значения единицы измерения для указанного типа измерения и указанной строки единицы измерения
 			/// </summary>
-			/// <param name="measurement_type">Тип измерения</param>
-			/// <param name="unit_value">Строка единицы измерения</param>
+			/// <param name="measurementType">Тип измерения</param>
+			/// <param name="unitValue">Строка единицы измерения</param>
 			/// <returns>Единица измерения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Enum GetUnitValueFromString(this TMeasurementType measurement_type, String unit_value)
+			public static Enum GetUnitValueFromString(this TMeasurementType measurementType, String unitValue)
 			{
 				Enum value = default;
-				switch (measurement_type)
+				switch (measurementType)
 				{
 					case TMeasurementType.Undefined:
 						{
@@ -138,24 +138,24 @@ namespace Lotus
 						break;
 					case TMeasurementType.Thing:
 						{
-							value = (Enum)Enum.Parse(typeof(TUnitThing), unit_value);
+							value = (Enum)Enum.Parse(typeof(TUnitThing), unitValue);
 						}
 						break;
 					case TMeasurementType.Length:
 						{
-							value = (Enum)Enum.Parse(typeof(TUnitLength), unit_value);
+							value = (Enum)Enum.Parse(typeof(TUnitLength), unitValue);
 						}
 						break;
 					case TMeasurementType.Area:
 						{
-							value = (Enum)Enum.Parse(typeof(TUnitArea), unit_value);
+							value = (Enum)Enum.Parse(typeof(TUnitArea), unitValue);
 						}
 						break;
 					default:
 						break;
 				}
 
-				return (value);
+				return value;
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

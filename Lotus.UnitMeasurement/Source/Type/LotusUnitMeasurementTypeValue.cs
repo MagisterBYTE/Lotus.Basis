@@ -45,12 +45,12 @@ namespace Lotus
 			/// Создание величины для измерения вещей
 			/// </summary>
 			/// <param name="value">Количество</param>
-			/// <param name="unit_thing">Единица измерения вещей</param>
+			/// <param name="unitThing">Единица измерения вещей</param>
 			/// <returns>Величина для измерения вещей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TMeasurementValue CreateThing(Int32 value, TUnitThing unit_thing = TUnitThing.Thing)
+			public static TMeasurementValue CreateThing(Int32 value, TUnitThing unitThing = TUnitThing.Thing)
 			{
-				return (new TMeasurementValue(value, TMeasurementType.Thing, unit_thing));
+				return new TMeasurementValue(value, TMeasurementType.Thing, unitThing);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -58,12 +58,12 @@ namespace Lotus
 			/// Создание величины для измерения длины
 			/// </summary>
 			/// <param name="value">Количество</param>
-			/// <param name="unit_length">Единица измерения длины</param>
+			/// <param name="unitLength">Единица измерения длины</param>
 			/// <returns>Величина для измерения длины</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TMeasurementValue CreateLength(Double value, TUnitLength unit_length = TUnitLength.Meter)
+			public static TMeasurementValue CreateLength(Double value, TUnitLength unitLength = TUnitLength.Meter)
 			{
-				return (new TMeasurementValue(value, TMeasurementType.Length, unit_length));
+				return new TMeasurementValue(value, TMeasurementType.Length, unitLength);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -71,12 +71,12 @@ namespace Lotus
 			/// Создание величины для измерения площади
 			/// </summary>
 			/// <param name="value">Количество</param>
-			/// <param name="unit_area">Единица измерения площади</param>
+			/// <param name="unitArea">Единица измерения площади</param>
 			/// <returns>Величина для измерения площади</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TMeasurementValue CreateArea(Double value, TUnitArea unit_area = TUnitArea.SquareMeter)
+			public static TMeasurementValue CreateArea(Double value, TUnitArea unitArea = TUnitArea.SquareMeter)
 			{
-				return (new TMeasurementValue(value, TMeasurementType.Area, unit_area));
+				return new TMeasurementValue(value, TMeasurementType.Area, unitArea);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -97,23 +97,23 @@ namespace Lotus
 				//Enum unit = measurement.GetUnitValueFromString(unit_str);
 
 				//TMeasurementValue value = new TMeasurementValue(XNumbers.ParseDouble(number), measurement, unit);
-				TMeasurementValue value = new TMeasurementValue();
+				var value = new TMeasurementValue();
 				return value;
 			}
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal Double mValue;
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal TMeasurementType mMeasurementType;
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal Enum mUnitType;
@@ -125,7 +125,7 @@ namespace Lotus
 			/// </summary>
 			public Double Value
 			{
-				get { return (mValue); }
+				get { return mValue; }
 				set
 				{
 					mValue = value;
@@ -155,12 +155,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="measurement_type">Тип измерения</param>
+			/// <param name="measurementType">Тип измерения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public TMeasurementValue(Double value, TMeasurementType measurement_type)
+			public TMeasurementValue(Double value, TMeasurementType measurementType)
 			{
 				mValue = value;
-				mMeasurementType = measurement_type;
+				mMeasurementType = measurementType;
 				mUnitType = mMeasurementType.GetUnitValueDefault();
 			}
 
@@ -169,14 +169,14 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="measurement_type">Тип измерения</param>
-			/// <param name="unit_type">Единица измерения</param>
+			/// <param name="measurementType">Тип измерения</param>
+			/// <param name="unitType">Единица измерения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public TMeasurementValue(Double value, TMeasurementType measurement_type, Enum unit_type)
+			public TMeasurementValue(Double value, TMeasurementType measurementType, Enum unitType)
 			{
 				mValue = value;
-				mMeasurementType = measurement_type;
-				mUnitType = unit_type;
+				mMeasurementType = measurementType;
+				mUnitType = unitType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -184,13 +184,13 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="unit_type">Единица измерения</param>
+			/// <param name="unitType">Единица измерения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public TMeasurementValue(Double value, Enum unit_type)
+			public TMeasurementValue(Double value, Enum unitType)
 			{
 				mValue = value;
-				mUnitType = unit_type;
-				mMeasurementType = XUnitType.GetMeasurementType(unit_type);
+				mUnitType = unitType;
+				mMeasurementType = XUnitType.GetMeasurementType(unitType);
 			}
 			#endregion
 
@@ -208,7 +208,7 @@ namespace Lotus
 				{
 					if (typeof(TMeasurementValue) == obj.GetType())
 					{
-						TMeasurementValue value = (TMeasurementValue)obj;
+						var value = (TMeasurementValue)obj;
 						return Equals(value);
 					}
 				}
@@ -224,7 +224,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(TMeasurementValue other)
 			{
-				return (mValue == other.mValue && mUnitType == other.mUnitType);
+				return mValue == other.mValue && mUnitType == other.mUnitType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -389,38 +389,38 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TMeasurementValue Clone(Double value)
 			{
-				return (new TMeasurementValue(value, mMeasurementType, mUnitType));
+				return new TMeasurementValue(value, mMeasurementType, mUnitType);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение копии объекта с новыми параметрами
 			/// </summary>
-			/// <param name="unit_type">Новая единица измерения</param>
+			/// <param name="unitType">Новая единица измерения</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TMeasurementValue Clone(Enum unit_type)
+			public TMeasurementValue Clone(Enum unitType)
 			{
-				return (new TMeasurementValue(mValue, unit_type));
+				return new TMeasurementValue(mValue, unitType);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка типа измерения и единицы измерения
 			/// </summary>
-			/// <param name="measurement_type">Тип измерения</param>
-			/// <param name="unit_type">Единица измерения</param>
+			/// <param name="measurementType">Тип измерения</param>
+			/// <param name="unitType">Единица измерения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetQuantityAndUnit(TMeasurementType measurement_type, Enum unit_type)
+			public void SetQuantityAndUnit(TMeasurementType measurementType, Enum unitType)
 			{
-				mMeasurementType = measurement_type;
-				if(unit_type != null)
+				mMeasurementType = measurementType;
+				if(unitType != null)
 				{
-					mUnitType = unit_type;
+					mUnitType = unitType;
 				}
 				else
 				{
-					mUnitType = measurement_type.GetUnitValueDefault();
+					mUnitType = measurementType.GetUnitValueDefault();
 				}
 			}
 
@@ -435,11 +435,11 @@ namespace Lotus
 				if(mUnitType != null)
 				{
 					//return (mUnitType.GetAbbreviationOrName());
-					return (mUnitType.ToString());
+					return mUnitType.ToString();
 				}
 				else
 				{
-					return ("нп");
+					return "нп";
 				}
 			}
 
@@ -453,11 +453,11 @@ namespace Lotus
 			{
 				if (mUnitType == null)
 				{
-					return (mValue.ToString() + "{" + mMeasurementType.ToString() + "}[TUnitThing.Undefined]");
+					return mValue.ToString() + "{" + mMeasurementType.ToString() + "}[TUnitThing.Undefined]";
 				}
 				else
 				{
-					return (mValue.ToString() + "{" + mMeasurementType.ToString() + "}[" + mUnitType.ToString() + "]");
+					return mValue.ToString() + "{" + mMeasurementType.ToString() + "}[" + mUnitType.ToString() + "]";
 				}
 			}
 			#endregion

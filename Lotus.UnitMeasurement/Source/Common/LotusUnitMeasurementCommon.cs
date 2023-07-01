@@ -81,17 +81,17 @@ namespace Lotus
 				{
 				}
 
-				TUnitValue<TUnit> value = new TUnitValue<TUnit>(result);
+				var value = new TUnitValue<TUnit>(result);
 				return value;
 			}
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal Double mValue;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
 			internal TUnit mUnitType;
@@ -103,7 +103,7 @@ namespace Lotus
 			/// </summary>
 			public Double Value
 			{
-				get { return (mValue); }
+				get { return mValue; }
 				set
 				{
 					mValue = value;
@@ -125,7 +125,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mUnitType);
+					return mUnitType;
 				}
 			}
 			#endregion
@@ -148,12 +148,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="value">Значение</param>
-			/// <param name="unit_type">Единица измерения</param>
+			/// <param name="unitType">Единица измерения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public TUnitValue(Double value, TUnit unit_type)
+			public TUnitValue(Double value, TUnit unitType)
 			{
 				mValue = value;
-				mUnitType = unit_type;
+				mUnitType = unitType;
 			}
 			#endregion
 
@@ -171,7 +171,7 @@ namespace Lotus
 				{
 					if (typeof(TUnitValue<TUnit>) == obj.GetType())
 					{
-						TUnitValue<TUnit> value = (TUnitValue<TUnit>)obj;
+						var value = (TUnitValue<TUnit>)obj;
 						return Equals(value);
 					}
 				}
@@ -299,7 +299,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String SerializeToString()
 			{
-				return (mValue.ToString());
+				return mValue.ToString();
 			}
 			#endregion
 		}

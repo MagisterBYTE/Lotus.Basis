@@ -213,8 +213,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationX(Double angle, ref Matrix4Dx4 result)
 			{
-				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				result.M11 = 1;
 				result.M21 = 0;
@@ -238,8 +238,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationY(Double angle, ref Matrix4Dx4 result)
 			{
-				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				result.M11 = ct;
 				result.M21 = 0;
@@ -263,8 +263,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationZ(Double angle, ref Matrix4Dx4 result)
 			{
-				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				result.M11 = ct;
 				result.M21 = -st;
@@ -289,8 +289,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationFromAxis(Double angle, in Vector3D axis, ref Matrix4Dx4 result)
 			{
-				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				var xx = axis.X * axis.X;
 				var yy = axis.Y * axis.Y;
@@ -1033,8 +1033,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationX(Single angle, ref Matrix4Dx4f result)
 			{
-				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				result.M11 = 1;
 				result.M21 = 0;
@@ -1058,8 +1058,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationY(Single angle, ref Matrix4Dx4f result)
 			{
-				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				result.M11 = ct;
 				result.M21 = 0;
@@ -1083,8 +1083,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationZ(Single angle, ref Matrix4Dx4f result)
 			{
-				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				result.M11 = ct;
 				result.M21 = -st;
@@ -1109,8 +1109,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void RotationFromAxis(Single angle, in Vector3Df axis, ref Matrix4Dx4f result)
 			{
-				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				var xx = axis.X * axis.X;
 				var yy = axis.Y * axis.Y;

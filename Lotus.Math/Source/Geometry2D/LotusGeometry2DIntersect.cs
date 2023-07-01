@@ -69,7 +69,7 @@ namespace Lotus
 			{
 				var hit = new TIntersectHit2D();
 				hit.IntersectType = TIntersectType2D.None;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ namespace Lotus
 			{
 				var hit = new TIntersectHit2D();
 				hit.IntersectType = TIntersectType2D.Parallel;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ namespace Lotus
 				var hit = new TIntersectHit2D();
 				hit.IntersectType = TIntersectType2D.Point;
 				hit.Point1 = point;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -114,24 +114,24 @@ namespace Lotus
 				hit.IntersectType = TIntersectType2D.Point;
 				hit.Point1 = point;
 				hit.Distance1 = distance;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Пересечения представляет собой отрезок
 			/// </summary>
-			/// <param name="point_1">Первая точка пересечения</param>
-			/// <param name="point_2">Вторая точка пересечения</param>
+			/// <param name="point1">Первая точка пересечения</param>
+			/// <param name="point2">Вторая точка пересечения</param>
 			/// <returns>Информация о пересечении</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TIntersectHit2D Segment(in Vector2D point_1, in Vector2D point_2)
+			public static TIntersectHit2D Segment(in Vector2D point1, in Vector2D point2)
 			{
 				var hit = new TIntersectHit2D();
 				hit.IntersectType = TIntersectType2D.Segment;
-				hit.Point1 = point_1;
-				hit.Point2 = point_2;
-				return (hit);
+				hit.Point1 = point1;
+				hit.Point2 = point2;
+				return hit;
 			}
 			#endregion
 
@@ -181,7 +181,7 @@ namespace Lotus
 			{
 				var hit = new TIntersectHit2Df();
 				hit.IntersectType = TIntersectType2D.None;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -194,7 +194,7 @@ namespace Lotus
 			{
 				var hit = new TIntersectHit2Df();
 				hit.IntersectType = TIntersectType2D.Parallel;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -209,7 +209,7 @@ namespace Lotus
 				var hit = new TIntersectHit2Df();
 				hit.IntersectType = TIntersectType2D.Point;
 				hit.Point1 = point;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -226,24 +226,24 @@ namespace Lotus
 				hit.IntersectType = TIntersectType2D.Point;
 				hit.Point1 = point;
 				hit.Distance1 = distance;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Пересечения представляет собой отрезок
 			/// </summary>
-			/// <param name="point_1">Первая точка пересечения</param>
-			/// <param name="point_2">Вторая точка пересечения</param>
+			/// <param name="point1">Первая точка пересечения</param>
+			/// <param name="point2">Вторая точка пересечения</param>
 			/// <returns>Информация о пересечении</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TIntersectHit2Df Segment(in Vector2Df point_1, in Vector2Df point_2)
+			public static TIntersectHit2Df Segment(in Vector2Df point1, in Vector2Df point2)
 			{
 				var hit = new TIntersectHit2Df();
 				hit.IntersectType = TIntersectType2D.Segment;
-				hit.Point1 = point_1;
-				hit.Point2 = point_2;
-				return (hit);
+				hit.Point1 = point1;
+				hit.Point2 = point2;
+				return hit;
 			}
 			#endregion
 
@@ -332,14 +332,14 @@ namespace Lotus
 			/// Проверка нахождения точки на линии
 			/// </summary>
 			/// <param name="point">Проверяемая точка</param>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
 			/// <returns>Статус нахождения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean PointLine(in Vector2Df point, in Vector2Df line_pos, in Vector2Df line_dir)
+			public static Boolean PointLine(in Vector2Df point, in Vector2Df linePos, in Vector2Df lineDir)
 			{
-				var perp_dot = Vector2Df.DotPerp(point - line_pos, in line_dir);
-				return (-XGeometry2D.Eplsilon_f < perp_dot && perp_dot < XGeometry2D.Eplsilon_f);
+				var perp_dot = Vector2Df.DotPerp(point - linePos, in lineDir);
+				return -XGeometry2D.Eplsilon_f < perp_dot && perp_dot < XGeometry2D.Eplsilon_f;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -347,15 +347,15 @@ namespace Lotus
 			/// Проверка нахождения точки на линии
 			/// </summary>
 			/// <param name="point">Проверяемая точка</param>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
 			/// <param name="side">С какой стороны луча располагается точки</param>
 			/// <returns>Статус нахождения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean PointLine(in Vector2Df point, in Vector2Df line_pos, 
-				in Vector2Df line_dir, out Int32 side)
+			public static Boolean PointLine(in Vector2Df point, in Vector2Df linePos, 
+				in Vector2Df lineDir, out Int32 side)
 			{
-				var perp_dot = Vector2Df.DotPerp(point - line_pos, in line_dir);
+				var perp_dot = Vector2Df.DotPerp(point - linePos, in lineDir);
 				if (perp_dot < -XGeometry2D.Eplsilon_f)
 				{
 					side = -1;
@@ -404,29 +404,29 @@ namespace Lotus
 			/// Проверка на нахождение точки на луче
 			/// </summary>
 			/// <param name="point">Проверяемая точка</param>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <returns>Статус нахождения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean PointRay(in Vector2Df point, in Vector2Df ray_pos, in Vector2Df ray_dir)
+			public static Boolean PointRay(in Vector2Df point, in Vector2Df rayPos, in Vector2Df rayDir)
 			{
 				// Считаем вектор на точку
-				Vector2Df to_point = point - ray_pos;
+				Vector2Df to_point = point - rayPos;
 
 				// Считаем скалярное произвдение между векторам
 				// Чем ближе оно к нулю тем соответственно точки ближе прилегает к лучу
-				var perp_dot = Vector2Df.DotPerp(in to_point, in ray_dir);
+				var perp_dot = Vector2Df.DotPerp(in to_point, in rayDir);
 
 				if(XMath.Approximately(perp_dot, XGeometry2D.Eplsilon_f))
 				{
 					// Если она прилегает
-					if(Vector2Df.Dot(in ray_dir, in to_point) > -XGeometry2D.Eplsilon_f)
+					if(Vector2Df.Dot(in rayDir, in to_point) > -XGeometry2D.Eplsilon_f)
 					{
-						return (true);
+						return true;
 					}
 				}
 
-				return (false);
+				return false;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -434,19 +434,19 @@ namespace Lotus
 			/// Проверка на нахождение точки на луче
 			/// </summary>
 			/// <param name="point">Проверяемая точка</param>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <param name="side">С какой стороны луча располагается точки</param>
 			/// <returns>Статус нахождения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean PointRay(in Vector2Df point, in Vector2Df ray_pos, in Vector2Df ray_dir, out Int32 side)
+			public static Boolean PointRay(in Vector2Df point, in Vector2Df rayPos, in Vector2Df rayDir, out Int32 side)
 			{
 				// Считаем вектор на точку
-				Vector2Df to_point = point - ray_pos;
+				Vector2Df to_point = point - rayPos;
 
 				// Считаем скалярное произвдение между векторам
 				// Чем ближе оно к нулю тем соответственно точки ближе прилегает к лучу
-				var perp_dot = Vector2Df.DotPerp(in to_point, in ray_dir);
+				var perp_dot = Vector2Df.DotPerp(in to_point, in rayDir);
 
 				if (perp_dot < -XGeometry2D.Eplsilon_f)
 				{
@@ -460,7 +460,7 @@ namespace Lotus
 				}
 				side = 0;
 
-				return (Vector2Df.Dot(in ray_dir, in to_point) > -XGeometry2D.Eplsilon_f);
+				return Vector2Df.Dot(in rayDir, in to_point) > -XGeometry2D.Eplsilon_f;
 			}
 			#endregion
 
@@ -535,7 +535,7 @@ namespace Lotus
 				return Math.Abs(point.X - x) < epsilon || Math.Abs(point.Y - y) < epsilon;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка нахождения точки на линии
@@ -623,7 +623,7 @@ namespace Lotus
 				return false;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка нахождения точки на границах прямоугольника
@@ -857,14 +857,14 @@ namespace Lotus
 			/// Проверка на попадание точки в область окружности
 			/// </summary>
 			/// <param name="point">Проверяемая точка</param>
-			/// <param name="circle_сenter">Центр окружности</param>
-			/// <param name="circle_radius">Радиус окружности</param>
+			/// <param name="circleСenter">Центр окружности</param>
+			/// <param name="circleRadius">Радиус окружности</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean PointCircle(in Vector2Df point, in Vector2Df circle_сenter, Single circle_radius)
+			public static Boolean PointCircle(in Vector2Df point, in Vector2Df circleСenter, Single circleRadius)
 			{
 				// For points on the circle's edge Length is more stable than SqrLength
-				return (point - circle_сenter).Length < circle_radius + XGeometry2D.Eplsilon_f;
+				return (point - circleСenter).Length < circleRadius + XGeometry2D.Eplsilon_f;
 			}
 			#endregion Point-Circle
 
@@ -873,67 +873,67 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="line_a">Первая линия</param>
-			/// <param name="line_b">Вторая линия</param>
+			/// <param name="lineA">Первая линия</param>
+			/// <param name="lineB">Вторая линия</param>
 			/// <returns>Статус пересечения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineLine(in Line2Df line_a, in Line2Df line_b)
+			public static Boolean LineLine(in Line2Df lineA, in Line2Df lineB)
 			{
-				return LineLine(in line_a.Position, in line_a.Direction, in line_b.Position, in line_b.Direction, out _);
+				return LineLine(in lineA.Position, in lineA.Direction, in lineB.Position, in lineB.Direction, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="line_a">Первая линия</param>
-			/// <param name="line_b">Вторая линия</param>
+			/// <param name="lineA">Первая линия</param>
+			/// <param name="lineB">Вторая линия</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineLine(in Line2Df line_a, in Line2Df line_b, out TIntersectHit2Df hit)
+			public static Boolean LineLine(in Line2Df lineA, in Line2Df lineB, out TIntersectHit2Df hit)
 			{
-				return LineLine(in line_a.Position, in line_a.Direction, in line_b.Position, in line_b.Direction, out hit);
+				return LineLine(in lineA.Position, in lineA.Direction, in lineB.Position, in lineB.Direction, out hit);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="pos_a">Позиция первой линии</param>
-			/// <param name="dir_a">Направление первой линии</param>
-			/// <param name="pos_b">Позиция второй линии</param>
-			/// <param name="dir_b">Направление второй линии</param>
+			/// <param name="posA">Позиция первой линии</param>
+			/// <param name="dirA">Направление первой линии</param>
+			/// <param name="posB">Позиция второй линии</param>
+			/// <param name="dirB">Направление второй линии</param>
 			/// <returns>Статус пересечения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineLine(in Vector2Df pos_a, in Vector2Df dir_a, in Vector2Df pos_b, 
-				Vector2Df dir_b)
+			public static Boolean LineLine(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB, 
+				Vector2Df dirB)
 			{
-				return LineLine(in pos_a, in dir_a, in pos_b, in dir_b, out _);
+				return LineLine(in posA, in dirA, in posB, in dirB, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="pos_a">Позиция первой линии</param>
-			/// <param name="dir_a">Направление первой линии</param>
-			/// <param name="pos_b">Позиция второй линии</param>
-			/// <param name="dir_b">Направление второй линии</param>
+			/// <param name="posA">Позиция первой линии</param>
+			/// <param name="dirA">Направление первой линии</param>
+			/// <param name="posB">Позиция второй линии</param>
+			/// <param name="dirB">Направление второй линии</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineLine(in Vector2Df pos_a, in Vector2Df dir_a, in Vector2Df pos_b,
-				in Vector2Df dir_b, out TIntersectHit2Df hit)
+			public static Boolean LineLine(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB,
+				in Vector2Df dirB, out TIntersectHit2Df hit)
 			{
-				Vector2Df pos_b_to_a = pos_a - pos_b;
-				var denominator = Vector2Df.DotPerp(in dir_a, in dir_b);
-				var perp_dot_b = Vector2Df.DotPerp(in dir_b, in pos_b_to_a);
+				Vector2Df pos_b_to_a = posA - posB;
+				var denominator = Vector2Df.DotPerp(in dirA, in dirB);
+				var perp_dot_b = Vector2Df.DotPerp(in dirB, in pos_b_to_a);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
 					// Parallel
-					var perp_dot_a = Vector2Df.DotPerp(in dir_a, in pos_b_to_a);
+					var perp_dot_a = Vector2Df.DotPerp(in dirA, in pos_b_to_a);
 					if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
 					{
 						// Not collinear
@@ -947,7 +947,7 @@ namespace Lotus
 				}
 
 				// Not parallel
-				hit = TIntersectHit2Df.Point(pos_a + (dir_a * (perp_dot_b / denominator)));
+				hit = TIntersectHit2Df.Point(posA + (dirA * (perp_dot_b / denominator)));
 				return true;
 			}
 
@@ -955,36 +955,36 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="line_a">Первая линия</param>
-			/// <param name="line_b">Вторая линия</param>
-			/// <param name="dist_a">Расстояние от первой линии</param>
-			/// <param name="dist_b">Расстояние от второй линии</param>
+			/// <param name="lineA">Первая линия</param>
+			/// <param name="lineB">Вторая линия</param>
+			/// <param name="distA">Расстояние от первой линии</param>
+			/// <param name="distB">Расстояние от второй линии</param>
 			/// <returns>Тип пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TIntersectType2D LineLine(in Line2Df line_a, in Line2Df line_b, out Single dist_a, out Single dist_b)
+			public static TIntersectType2D LineLine(in Line2Df lineA, in Line2Df lineB, out Single distA, out Single distB)
 			{
-				return LineLine(in line_a.Position, in line_a.Direction, in  line_b.Position, in line_b.Direction, out dist_a, out dist_b);
+				return LineLine(in lineA.Position, in lineA.Direction, in  lineB.Position, in lineB.Direction, out distA, out distB);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="pos_a">Позиция первой линии</param>
-			/// <param name="dir_a">Направление первой линии</param>
-			/// <param name="pos_b">Позиция второй линии</param>
-			/// <param name="dir_b">Направление второй линии</param>
-			/// <param name="dist_a">Расстояние от первой линии</param>
-			/// <param name="dist_b">Расстояние от второй линии</param>
+			/// <param name="posA">Позиция первой линии</param>
+			/// <param name="dirA">Направление первой линии</param>
+			/// <param name="posB">Позиция второй линии</param>
+			/// <param name="dirB">Направление второй линии</param>
+			/// <param name="distA">Расстояние от первой линии</param>
+			/// <param name="distB">Расстояние от второй линии</param>
 			/// <returns>Тип пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TIntersectType2D LineLine(in Vector2Df pos_a, in Vector2Df dir_a, in Vector2Df pos_b,
-				in Vector2Df dir_b, out Single dist_a, out Single dist_b)
+			public static TIntersectType2D LineLine(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB,
+				in Vector2Df dirB, out Single distA, out Single distB)
 			{
-				Vector2Df pos_b_to_a = pos_a - pos_b;
-				var denominator = Vector2Df.DotPerp(in dir_a, in dir_b);
-				var perp_dot_a = Vector2Df.DotPerp(in dir_a, in pos_b_to_a);
-				var perp_bot_b = Vector2Df.DotPerp(in dir_b, in pos_b_to_a);
+				Vector2Df pos_b_to_a = posA - posB;
+				var denominator = Vector2Df.DotPerp(in dirA, in dirB);
+				var perp_dot_a = Vector2Df.DotPerp(in dirA, in pos_b_to_a);
+				var perp_bot_b = Vector2Df.DotPerp(in dirB, in pos_b_to_a);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
@@ -992,19 +992,19 @@ namespace Lotus
 					if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_bot_b) > XGeometry2D.Eplsilon_f)
 					{
 						// Not collinear
-						dist_a = 0;
-						dist_b = Vector2Df.Dot(in dir_b, in pos_b_to_a);
+						distA = 0;
+						distB = Vector2Df.Dot(in dirB, in pos_b_to_a);
 						return TIntersectType2D.None;
 					}
 					// Collinear
-					dist_a = 0;
-					dist_b = Vector2Df.Dot(in dir_b, in pos_b_to_a);
+					distA = 0;
+					distB = Vector2Df.Dot(in dirB, in pos_b_to_a);
 					return TIntersectType2D.Parallel;
 				}
 
 				// Not parallel
-				dist_a = perp_bot_b / denominator;
-				dist_b = perp_dot_a / denominator;
+				distA = perp_bot_b / denominator;
+				distB = perp_dot_a / denominator;
 				return TIntersectType2D.Point;
 			}
 			#endregion Line-Line
@@ -1041,40 +1041,40 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечения линии и луча
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineRay(in Vector2Df line_pos, in Vector2Df line_dir,
-				in Vector2Df ray_pos, in Vector2Df ray_dir)
+			public static Boolean LineRay(in Vector2Df linePos, in Vector2Df lineDir,
+				in Vector2Df rayPos, in Vector2Df rayDir)
 			{
-				return LineRay(in line_pos, in line_dir, in ray_pos, in ray_dir, out _);
+				return LineRay(in linePos, in lineDir, in rayPos, in rayDir, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения линии и луча
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineRay(in Vector2Df line_pos, in Vector2Df line_dir,
-				in Vector2Df ray_pos, in Vector2Df ray_dir, out TIntersectHit2Df hit)
+			public static Boolean LineRay(in Vector2Df linePos, in Vector2Df lineDir,
+				in Vector2Df rayPos, in Vector2Df rayDir, out TIntersectHit2Df hit)
 			{
-				Vector2Df ray_pos_to_line_pos = line_pos - ray_pos;
-				var denominator = Vector2Df.DotPerp(in line_dir, in ray_dir);
-				var perp_dot_a = Vector2Df.DotPerp(in line_dir, in ray_pos_to_line_pos);
+				Vector2Df ray_pos_to_line_pos = linePos - rayPos;
+				var denominator = Vector2Df.DotPerp(in lineDir, in rayDir);
+				var perp_dot_a = Vector2Df.DotPerp(in lineDir, in ray_pos_to_line_pos);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
 					// Parallel
-					var perp_dot_b = Vector2Df.DotPerp(in ray_dir, in ray_pos_to_line_pos);
+					var perp_dot_b = Vector2Df.DotPerp(in rayDir, in ray_pos_to_line_pos);
 					if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
 					{
 						// Not collinear
@@ -1091,7 +1091,7 @@ namespace Lotus
 				var ray_distance = perp_dot_a / denominator;
 				if (ray_distance > -XGeometry2D.Eplsilon_f)
 				{
-					hit = TIntersectHit2Df.Point(ray_pos + (ray_dir * ray_distance), ray_distance);
+					hit = TIntersectHit2Df.Point(rayPos + (rayDir * ray_distance), ray_distance);
 					return true;
 				}
 
@@ -1132,36 +1132,36 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечения линии и отрезка
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineSegment(in Vector2Df line_pos, in Vector2Df line_dir,
+			public static Boolean LineSegment(in Vector2Df linePos, in Vector2Df lineDir,
 				in Vector2Df start, in Vector2Df end)
 			{
-				return LineSegment(in line_pos, in line_dir, in start, in end, out _);
+				return LineSegment(in linePos, in lineDir, in start, in end, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения линии и отрезка
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineSegment(in Vector2Df line_pos, in Vector2Df line_dir,
+			public static Boolean LineSegment(in Vector2Df linePos, in Vector2Df lineDir,
 				in Vector2Df start, in Vector2Df end, out TIntersectHit2Df hit)
 			{
-				Vector2Df start_to_pos = line_pos - start;
+				Vector2Df start_to_pos = linePos - start;
 				Vector2Df segment_direction = end - start;
-				var denominator = Vector2Df.DotPerp(in line_dir, in segment_direction);
-				var perp_dot_start = Vector2Df.DotPerp(in line_dir, in start_to_pos);
+				var denominator = Vector2Df.DotPerp(in lineDir, in segment_direction);
+				var perp_dot_start = Vector2Df.DotPerp(in lineDir, in start_to_pos);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
@@ -1182,7 +1182,7 @@ namespace Lotus
 						return true;
 					}
 
-					var codirected = Vector2Df.Dot(in line_dir, in segment_direction) > 0;
+					var codirected = Vector2Df.Dot(in lineDir, in segment_direction) > 0;
 					if (codirected)
 					{
 						hit = TIntersectHit2Df.Segment(in start, in end);
@@ -1238,37 +1238,37 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечения линии и окружности
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
-			/// <param name="circle_center">Центр окружности</param>
-			/// <param name="circle_radius">Радиус окружности</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
+			/// <param name="circleCenter">Центр окружности</param>
+			/// <param name="circleRadius">Радиус окружности</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineCircle(in Vector2Df line_pos, in Vector2Df line_dir,
-				in Vector2Df circle_center, Single circle_radius)
+			public static Boolean LineCircle(in Vector2Df linePos, in Vector2Df lineDir,
+				in Vector2Df circleCenter, Single circleRadius)
 			{
-				return LineCircle(in line_pos, in line_dir, in circle_center, circle_radius, out _);
+				return LineCircle(in linePos, in lineDir, in circleCenter, circleRadius, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения линии и окружности
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
-			/// <param name="circle_center">Центр окружности</param>
-			/// <param name="circle_radius">Радиус окружности</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
+			/// <param name="circleCenter">Центр окружности</param>
+			/// <param name="circleRadius">Радиус окружности</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineCircle(in Vector2Df line_pos, in Vector2Df line_dir,
-				in Vector2Df circle_center, Single circle_radius, out TIntersectHit2Df hit)
+			public static Boolean LineCircle(in Vector2Df linePos, in Vector2Df lineDir,
+				in Vector2Df circleCenter, Single circleRadius, out TIntersectHit2Df hit)
 			{
-				Vector2Df pos_to_center = circle_center - line_pos;
-				var center_projection = Vector2Df.Dot(in line_dir, in pos_to_center);
+				Vector2Df pos_to_center = circleCenter - linePos;
+				var center_projection = Vector2Df.Dot(in lineDir, in pos_to_center);
 				var sqr_dist_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
 
-				var sqr_dist_to_intersection = (circle_radius * circle_radius) - sqr_dist_to_line;
+				var sqr_dist_to_intersection = (circleRadius * circleRadius) - sqr_dist_to_line;
 				if (sqr_dist_to_intersection < -XGeometry2D.Eplsilon_f)
 				{
 					hit = TIntersectHit2Df.None();
@@ -1276,7 +1276,7 @@ namespace Lotus
 				}
 				if (sqr_dist_to_intersection < XGeometry2D.Eplsilon_f)
 				{
-					hit = TIntersectHit2Df.Point(line_pos + (line_dir * center_projection));
+					hit = TIntersectHit2Df.Point(linePos + (lineDir * center_projection));
 					return true;
 				}
 
@@ -1284,8 +1284,8 @@ namespace Lotus
 				var dist_a = center_projection - distance_to_intersection;
 				var dist_b = center_projection + distance_to_intersection;
 
-				Vector2Df point_a = line_pos + (line_dir * dist_a);
-				Vector2Df point_b = line_pos + (line_dir * dist_b);
+				Vector2Df point_a = linePos + (lineDir * dist_a);
+				Vector2Df point_b = linePos + (lineDir * dist_b);
 				hit = TIntersectHit2Df.Segment(in point_a, in point_b);
 				return true;
 			}
@@ -1297,33 +1297,33 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух лучей
 			/// </summary>
-			/// <param name="ray_pos_1">Позиция первого луча</param>
-			/// <param name="ray_dir_1">Направление первого луча</param>
-			/// <param name="ray_pos_2">Позиция второго луча</param>
-			/// <param name="ray_dir_2">Направление второго луча</param>
+			/// <param name="rayPos1">Позиция первого луча</param>
+			/// <param name="rayDir1">Направление первого луча</param>
+			/// <param name="rayPos2">Позиция второго луча</param>
+			/// <param name="rayDir2">Направление второго луча</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Тип пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TIntersectType2D RayToRay(in Vector2D ray_pos_1, in Vector2D ray_dir_1, in Vector2D ray_pos_2,
-				in Vector2D ray_dir_2, out TIntersectHit2D hit)
+			public static TIntersectType2D RayToRay(in Vector2D rayPos1, in Vector2D rayDir1, in Vector2D rayPos2,
+				in Vector2D rayDir2, out TIntersectHit2D hit)
 			{
 				var result = new TIntersectHit2D();
 
-				Vector2D diff = ray_pos_2 - ray_pos_1;
+				Vector2D diff = rayPos2 - rayPos1;
 
-				var dot_perp_d1_d2 = ray_dir_1.DotPerp(in ray_dir_2);
+				var dot_perp_d1_d2 = rayDir1.DotPerp(in rayDir2);
 
 				if (Math.Abs(dot_perp_d1_d2) > XGeometry2D.Eplsilon_d)
 				{
 					// Segments intersect in a single point.
 					var inv_dot_perp_d1_d2 = 1 / dot_perp_d1_d2;
 
-					var diff_dot_perp_d1 = diff.DotPerp(ray_dir_1);
-					var diff_dot_perp_d2 = diff.DotPerp(ray_dir_2);
+					var diff_dot_perp_d1 = diff.DotPerp(rayDir1);
+					var diff_dot_perp_d2 = diff.DotPerp(rayDir2);
 
 					result.Distance1 = (Single)(diff_dot_perp_d2 * inv_dot_perp_d1_d2);
 					result.Distance2 = (Single)(diff_dot_perp_d1 * inv_dot_perp_d1_d2);
-					result.Point1 = ray_pos_1 + (ray_dir_1 * result.Distance1);
+					result.Point1 = rayPos1 + (rayDir1 * result.Distance1);
 					if (result.Distance1 > 0 && result.Distance2 > 0)
 					{
 						hit = result;
@@ -1339,7 +1339,7 @@ namespace Lotus
 
 				// Segments are parallel
 				diff.Normalize();
-				var diff_dot_perp_dir2 = diff.DotPerp(ray_dir_2);
+				var diff_dot_perp_dir2 = diff.DotPerp(rayDir2);
 				if (Math.Abs(diff_dot_perp_dir2) <= XGeometry2D.Eplsilon_d)
 				{
 					// Segments are colinear
@@ -1355,33 +1355,33 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух лучей
 			/// </summary>
-			/// <param name="ray_pos_1">Позиция первого луча</param>
-			/// <param name="ray_dir_1">Направление первого луча</param>
-			/// <param name="ray_pos_2">Позиция второго луча</param>
-			/// <param name="ray_dir_2">Направление второго луча</param>
+			/// <param name="rayPos1">Позиция первого луча</param>
+			/// <param name="rayDir1">Направление первого луча</param>
+			/// <param name="rayPos2">Позиция второго луча</param>
+			/// <param name="rayDir2">Направление второго луча</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Тип пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TIntersectType2D RayToRay(in Vector2Df ray_pos_1, in Vector2Df ray_dir_1, in Vector2Df ray_pos_2,
-				in Vector2Df ray_dir_2, out TIntersectHit2Df hit)
+			public static TIntersectType2D RayToRay(in Vector2Df rayPos1, in Vector2Df rayDir1, in Vector2Df rayPos2,
+				in Vector2Df rayDir2, out TIntersectHit2Df hit)
 			{
 				var result = new TIntersectHit2Df();
 
-				Vector2Df diff = ray_pos_2 - ray_pos_1;
+				Vector2Df diff = rayPos2 - rayPos1;
 
-				var dot_perp_d1_d2 = ray_dir_1.DotPerp(in ray_dir_2);
+				var dot_perp_d1_d2 = rayDir1.DotPerp(in rayDir2);
 
 				if (Math.Abs(dot_perp_d1_d2) > XGeometry2D.Eplsilon_d)
 				{
 					// Segments intersect in a single point.
 					Double inv_dot_perp_d1_d2 = 1 / dot_perp_d1_d2;
 
-					Double diff_dot_perp_d1 = diff.DotPerp(ray_dir_1);
-					Double diff_dot_perp_d2 = diff.DotPerp(ray_dir_2);
+					Double diff_dot_perp_d1 = diff.DotPerp(rayDir1);
+					Double diff_dot_perp_d2 = diff.DotPerp(rayDir2);
 
 					result.Distance1 = (Single)(diff_dot_perp_d2 * inv_dot_perp_d1_d2);
 					result.Distance2 = (Single)(diff_dot_perp_d1 * inv_dot_perp_d1_d2);
-					result.Point1 = ray_pos_1 + (ray_dir_1 * result.Distance1);
+					result.Point1 = rayPos1 + (rayDir1 * result.Distance1);
 					if (result.Distance1 > 0 && result.Distance2 > 0)
 					{
 						hit = result;
@@ -1397,7 +1397,7 @@ namespace Lotus
 
 				// Segments are parallel
 				diff.Normalize();
-				var diff_dot_perp_dir2 = diff.DotPerp(ray_dir_2);
+				var diff_dot_perp_dir2 = diff.DotPerp(rayDir2);
 				if (Math.Abs(diff_dot_perp_dir2) <= XGeometry2D.Eplsilon_d)
 				{
 					// Segments are colinear
@@ -1413,62 +1413,62 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух лучей
 			/// </summary>
-			/// <param name="ray_a">Первый луч</param>
-			/// <param name="ray_b">Второй луч</param>
+			/// <param name="rayA">Первый луч</param>
+			/// <param name="rayB">Второй луч</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RayRay(in Ray2Df ray_a, in Ray2Df ray_b)
+			public static Boolean RayRay(in Ray2Df rayA, in Ray2Df rayB)
 			{
-				return RayRay(in ray_a.Position, in ray_a.Direction, in ray_b.Position, in ray_b.Direction, out _);
+				return RayRay(in rayA.Position, in rayA.Direction, in rayB.Position, in rayB.Direction, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух лучей
 			/// </summary>
-			/// <param name="ray_a">Первый луч</param>
-			/// <param name="ray_b">Второй луч</param>
+			/// <param name="rayA">Первый луч</param>
+			/// <param name="rayB">Второй луч</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RayRay(in Ray2Df ray_a, in Ray2Df ray_b, out TIntersectHit2Df hit)
+			public static Boolean RayRay(in Ray2Df rayA, in Ray2Df rayB, out TIntersectHit2Df hit)
 			{
-				return RayRay(ray_a.Position, ray_a.Direction, ray_b.Position, ray_b.Direction, out hit);
+				return RayRay(rayA.Position, rayA.Direction, rayB.Position, rayB.Direction, out hit);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух лучей
 			/// </summary>
-			/// <param name="pos_a">Позиция первого луча</param>
-			/// <param name="dir_a">Направление первого луча</param>
-			/// <param name="pos_b">Позиция второго луча</param>
-			/// <param name="dir_b">Направление второго луча</param>
+			/// <param name="posA">Позиция первого луча</param>
+			/// <param name="dirA">Направление первого луча</param>
+			/// <param name="posB">Позиция второго луча</param>
+			/// <param name="dirB">Направление второго луча</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RayRay(in Vector2Df pos_a, in Vector2Df dir_a, in Vector2Df pos_b, in Vector2Df dir_b)
+			public static Boolean RayRay(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB, in Vector2Df dirB)
 			{
-				return RayRay(pos_a, dir_a, pos_b, dir_b, out _);
+				return RayRay(posA, dirA, posB, dirB, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух лучей
 			/// </summary>
-			/// <param name="pos_a">Позиция первого луча</param>
-			/// <param name="dir_a">Направление первого луча</param>
-			/// <param name="pos_b">Позиция второго луча</param>
-			/// <param name="dir_b">Направление второго луча</param>
+			/// <param name="posA">Позиция первого луча</param>
+			/// <param name="dirA">Направление первого луча</param>
+			/// <param name="posB">Позиция второго луча</param>
+			/// <param name="dirB">Направление второго луча</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RayRay(in Vector2Df pos_a, in Vector2Df dir_a, in Vector2Df pos_b,
-				in Vector2Df dir_b, out TIntersectHit2Df hit)
+			public static Boolean RayRay(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB,
+				in Vector2Df dirB, out TIntersectHit2Df hit)
 			{
-				Vector2Df position_b_to_a = pos_a - pos_b;
-				var denominator = Vector2Df.DotPerp(in dir_a, in dir_b);
-				var perp_dot_a = Vector2Df.DotPerp(in dir_a, in position_b_to_a);
-				var perp_dot_b = Vector2Df.DotPerp(in dir_b, in position_b_to_a);
+				Vector2Df position_b_to_a = posA - posB;
+				var denominator = Vector2Df.DotPerp(in dirA, in dirB);
+				var perp_dot_a = Vector2Df.DotPerp(in dirA, in position_b_to_a);
+				var perp_dot_b = Vector2Df.DotPerp(in dirB, in position_b_to_a);
 
 				if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
 				{
@@ -1481,8 +1481,8 @@ namespace Lotus
 					}
 
 					// Collinear
-					var codirected = Vector2Df.Dot(in dir_a, in dir_b) > 0;
-					var position_b_projection = -Vector2Df.Dot(in dir_a, in position_b_to_a);
+					var codirected = Vector2Df.Dot(in dirA, in dirB) > 0;
+					var position_b_projection = -Vector2Df.Dot(in dirA, in position_b_to_a);
 					if (codirected)
 					{
 						hit = TIntersectHit2Df.Parallel();
@@ -1497,10 +1497,10 @@ namespace Lotus
 						}
 						if (position_b_projection < XGeometry2D.Eplsilon_f)
 						{
-							hit = TIntersectHit2Df.Point(pos_a);
+							hit = TIntersectHit2Df.Point(posA);
 							return true;
 						}
-						hit = TIntersectHit2Df.Segment(pos_a, pos_b);
+						hit = TIntersectHit2Df.Segment(posA, posB);
 						return true;
 					}
 				}
@@ -1520,11 +1520,11 @@ namespace Lotus
 					return false;
 				}
 
-				hit = TIntersectHit2Df.Point(pos_a + (dir_a * dist_a));
+				hit = TIntersectHit2Df.Point(posA + (dirA * dist_a));
 				return true;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух лучей
@@ -1682,37 +1682,37 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечения луча и отрезка
 			/// </summary>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RaySegment(in Vector2Df ray_pos, in Vector2Df ray_dir, in Vector2Df start,
+			public static Boolean RaySegment(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df start,
 				in Vector2Df end)
 			{
-				return RaySegment(ray_pos, ray_dir, start, end, out _);
+				return RaySegment(rayPos, rayDir, start, end, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения луча и отрезка
 			/// </summary>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RaySegment(in Vector2Df ray_pos, in Vector2Df ray_dir, in Vector2Df start,
+			public static Boolean RaySegment(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df start,
 				in Vector2Df end, out TIntersectHit2Df hit)
 			{
-				Vector2Df segment_start_to_pos = ray_pos - start;
+				Vector2Df segment_start_to_pos = rayPos - start;
 				Vector2Df segment_dir = end - start;
 
-				var denominator = Vector2Df.DotPerp(in ray_dir, in segment_dir);
-				var perp_dot_start = Vector2Df.DotPerp(in ray_dir, in segment_start_to_pos);
+				var denominator = Vector2Df.DotPerp(in rayDir, in segment_dir);
+				var perp_dot_start = Vector2Df.DotPerp(in rayDir, in segment_start_to_pos);
 
 				// Normalized direction gives more stable results 
 				var perp_dot_end = Vector2Df.DotPerp(segment_dir.Normalized, segment_start_to_pos);
@@ -1729,7 +1729,7 @@ namespace Lotus
 					// Collinear
 
 					var segment_is_start_point = segment_dir.SqrLength < XGeometry2D.Eplsilon_f;
-					var start_projection = Vector2Df.Dot(ray_dir, start - ray_pos);
+					var start_projection = Vector2Df.Dot(rayDir, start - rayPos);
 					if (segment_is_start_point)
 					{
 						if (start_projection > -XGeometry2D.Eplsilon_f)
@@ -1741,7 +1741,7 @@ namespace Lotus
 						return false;
 					}
 
-					var endProjection = Vector2Df.Dot(ray_dir, end - ray_pos);
+					var endProjection = Vector2Df.Dot(rayDir, end - rayPos);
 					if (start_projection > -XGeometry2D.Eplsilon_f)
 					{
 						if (endProjection > -XGeometry2D.Eplsilon_f)
@@ -1759,11 +1759,11 @@ namespace Lotus
 						{
 							if (start_projection > XGeometry2D.Eplsilon_f)
 							{
-								hit = TIntersectHit2Df.Segment(in ray_pos, in start);
+								hit = TIntersectHit2Df.Segment(in rayPos, in start);
 							}
 							else
 							{
-								hit = TIntersectHit2Df.Point(in ray_pos);
+								hit = TIntersectHit2Df.Point(in rayPos);
 							}
 						}
 						return true;
@@ -1772,11 +1772,11 @@ namespace Lotus
 					{
 						if (endProjection > XGeometry2D.Eplsilon_f)
 						{
-							hit = TIntersectHit2Df.Segment(in ray_pos, in end);
+							hit = TIntersectHit2Df.Segment(in rayPos, in end);
 						}
 						else
 						{
-							hit = TIntersectHit2Df.Point(in ray_pos);
+							hit = TIntersectHit2Df.Point(in rayPos);
 						}
 						return true;
 					}
@@ -1830,42 +1830,42 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечения луча и окружности
 			/// </summary>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
-			/// <param name="circle_center">Центр окружности</param>
-			/// <param name="circle_radius">Радиус окружности</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
+			/// <param name="circleCenter">Центр окружности</param>
+			/// <param name="circleRadius">Радиус окружности</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RayCircle(in Vector2Df ray_pos, in Vector2Df ray_dir, in Vector2Df circle_center, 
-				Single circle_radius)
+			public static Boolean RayCircle(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df circleCenter, 
+				Single circleRadius)
 			{
-				return RayCircle(in ray_pos, in ray_dir, in circle_center, circle_radius, out _);
+				return RayCircle(in rayPos, in rayDir, in circleCenter, circleRadius, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения луча и окружности
 			/// </summary>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
-			/// <param name="circle_center">Центр окружности</param>
-			/// <param name="circle_radius">Радиус окружности</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
+			/// <param name="circleCenter">Центр окружности</param>
+			/// <param name="circleRadius">Радиус окружности</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RayCircle(in Vector2Df ray_pos, in Vector2Df ray_dir, in Vector2Df circle_center, 
-				Single circle_radius, out TIntersectHit2Df hit)
+			public static Boolean RayCircle(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df circleCenter, 
+				Single circleRadius, out TIntersectHit2Df hit)
 			{
-				Vector2Df position_to_center = circle_center - ray_pos;
-				var center_projection = Vector2Df.Dot(in ray_dir, in position_to_center);
-				if (center_projection + circle_radius < -XGeometry2D.Eplsilon_f)
+				Vector2Df position_to_center = circleCenter - rayPos;
+				var center_projection = Vector2Df.Dot(in rayDir, in position_to_center);
+				if (center_projection + circleRadius < -XGeometry2D.Eplsilon_f)
 				{
 					hit = TIntersectHit2Df.None();
 					return false;
 				}
 
 				var sqr_distance_to_line = position_to_center.SqrLength - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (circle_radius * circle_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (circleRadius * circleRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry2D.Eplsilon_f)
 				{
 					hit = TIntersectHit2Df.None();
@@ -1878,7 +1878,7 @@ namespace Lotus
 						hit = TIntersectHit2Df.None();
 						return false;
 					}
-					hit = TIntersectHit2Df.Point(ray_pos + (ray_dir * center_projection));
+					hit = TIntersectHit2Df.Point(rayPos + (rayDir * center_projection));
 					return true;
 				}
 
@@ -1894,12 +1894,12 @@ namespace Lotus
 						hit = TIntersectHit2Df.None();
 						return false;
 					}
-					hit = TIntersectHit2Df.Point(ray_pos + (ray_dir * dist_b));
+					hit = TIntersectHit2Df.Point(rayPos + (rayDir * dist_b));
 					return true;
 				}
 
-				Vector2Df point_a = ray_pos + (ray_dir * dist_a);
-				Vector2Df point_b = ray_pos + (ray_dir * dist_b);
+				Vector2Df point_a = rayPos + (rayDir * dist_a);
+				Vector2Df point_b = rayPos + (rayDir * dist_b);
 				hit = TIntersectHit2Df.Segment(in point_a, in point_b);
 				return true;
 			}
@@ -1947,26 +1947,26 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух отрезков
 			/// </summary>
-			/// <param name="start_1">Начало первого отрезка</param>
-			/// <param name="end_1">Конец первого отрезка</param>
-			/// <param name="start_2">Начало второго отрезка</param>
-			/// <param name="end_2">Конец второго отрезка</param>
+			/// <param name="start1">Начало первого отрезка</param>
+			/// <param name="end1">Конец первого отрезка</param>
+			/// <param name="start2">Начало второго отрезка</param>
+			/// <param name="end2">Конец второго отрезка</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SegmentToSegment(in Vector2D start_1, in Vector2D end_1, in Vector2D start_2,
-				in Vector2D end_2)
+			public static Boolean SegmentToSegment(in Vector2D start1, in Vector2D end1, in Vector2D start2,
+				in Vector2D end2)
 			{
-				var x1 = start_1.X;
-				var y1 = start_1.Y;
+				var x1 = start1.X;
+				var y1 = start1.Y;
 
-				var x2 = end_1.X;
-				var y2 = end_1.Y;
+				var x2 = end1.X;
+				var y2 = end1.Y;
 
-				var x3 = start_2.X;
-				var y3 = start_2.Y;
+				var x3 = start2.X;
+				var y3 = start2.Y;
 
-				var x4 = end_2.X;
-				var y4 = end_2.Y;
+				var x4 = end2.X;
+				var y4 = end2.Y;
 
 				// Проверяем параллельность
 				var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
@@ -2009,26 +2009,26 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух отрезков
 			/// </summary>
-			/// <param name="start_1">Начало первого отрезка</param>
-			/// <param name="end_1">Конец первого отрезка</param>
-			/// <param name="start_2">Начало второго отрезка</param>
-			/// <param name="end_2">Конец второго отрезка</param>
+			/// <param name="start1">Начало первого отрезка</param>
+			/// <param name="end1">Конец первого отрезка</param>
+			/// <param name="start2">Начало второго отрезка</param>
+			/// <param name="end2">Конец второго отрезка</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SegmentToSegment(in Vector2Df start_1, in Vector2Df end_1, in Vector2Df start_2,
-				in Vector2Df end_2)
+			public static Boolean SegmentToSegment(in Vector2Df start1, in Vector2Df end1, in Vector2Df start2,
+				in Vector2Df end2)
 			{
-				var x1 = start_1.X;
-				var y1 = start_1.Y;
+				var x1 = start1.X;
+				var y1 = start1.Y;
 
-				var x2 = end_1.X;
-				var y2 = end_1.Y;
+				var x2 = end1.X;
+				var y2 = end1.Y;
 
-				var x3 = start_2.X;
-				var y3 = start_2.Y;
+				var x3 = start2.X;
+				var y3 = start2.Y;
 
-				var x4 = end_2.X;
-				var y4 = end_2.Y;
+				var x4 = end2.X;
+				var y4 = end2.Y;
 
 				// Проверяем параллельность
 				var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
@@ -2067,7 +2067,7 @@ namespace Lotus
 				return true;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух отрезков
@@ -2243,35 +2243,35 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух отрезков
 			/// </summary>
-			/// <param name="start_1">Начало первого отрезка</param>
-			/// <param name="end_1">Конец первого отрезка</param>
-			/// <param name="start_2">Начало второго отрезка</param>
-			/// <param name="end_2">Конец второго отрезка</param>
+			/// <param name="start1">Начало первого отрезка</param>
+			/// <param name="end1">Конец первого отрезка</param>
+			/// <param name="start2">Начало второго отрезка</param>
+			/// <param name="end2">Конец второго отрезка</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SegmentSegment(in Vector2Df start_1, in Vector2Df end_1, in Vector2Df start_2,
-				in Vector2Df end_2)
+			public static Boolean SegmentSegment(in Vector2Df start1, in Vector2Df end1, in Vector2Df start2,
+				in Vector2Df end2)
 			{
-				return SegmentSegment(start_1, end_1, start_2, end_2, out _);
+				return SegmentSegment(start1, end1, start2, end2, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух отрезков
 			/// </summary>
-			/// <param name="start_1">Начало первого отрезка</param>
-			/// <param name="end_1">Конец первого отрезка</param>
-			/// <param name="start_2">Начало второго отрезка</param>
-			/// <param name="end_2">Конец второго отрезка</param>
+			/// <param name="start1">Начало первого отрезка</param>
+			/// <param name="end1">Конец первого отрезка</param>
+			/// <param name="start2">Начало второго отрезка</param>
+			/// <param name="end2">Конец второго отрезка</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SegmentSegment(in Vector2Df start_1, in Vector2Df end_1, in Vector2Df start_2,
-				in Vector2Df end_2, out TIntersectHit2Df hit)
+			public static Boolean SegmentSegment(in Vector2Df start1, in Vector2Df end1, in Vector2Df start2,
+				in Vector2Df end2, out TIntersectHit2Df hit)
 			{
-				Vector2Df from_2_start_to_1_start = start_1 - start_2;
-				Vector2Df direction1 = end_1 - start_1;
-				Vector2Df direction2 = end_2 - start_2;
+				Vector2Df from_2_start_to_1_start = start1 - start2;
+				Vector2Df direction1 = end1 - start1;
+				Vector2Df direction2 = end2 - start2;
 
 				var sqr_segment_1_length = direction1.SqrLength;
 				var sqr_segment_2_length = direction2.SqrLength;
@@ -2279,9 +2279,9 @@ namespace Lotus
 				var segment_2_is_point = sqr_segment_2_length < XGeometry2D.Eplsilon_f;
 				if (segment_1_is_point && segment_2_is_point)
 				{
-					if (start_1 == start_2)
+					if (start1 == start2)
 					{
-						hit = TIntersectHit2Df.Point(in start_1);
+						hit = TIntersectHit2Df.Point(in start1);
 						return true;
 					}
 					hit = TIntersectHit2Df.None();
@@ -2289,9 +2289,9 @@ namespace Lotus
 				}
 				if (segment_1_is_point)
 				{
-					if (PointSegment(in start_1, in start_2, in direction2, sqr_segment_2_length))
+					if (PointSegment(in start1, in start2, in direction2, sqr_segment_2_length))
 					{
-						hit = TIntersectHit2Df.Point(in start_1);
+						hit = TIntersectHit2Df.Point(in start1);
 						return true;
 					}
 					hit = TIntersectHit2Df.None();
@@ -2299,9 +2299,9 @@ namespace Lotus
 				}
 				if (segment_2_is_point)
 				{
-					if (PointSegment(in start_2, in start_1, in direction1, sqr_segment_1_length))
+					if (PointSegment(in start2, in start1, in direction1, sqr_segment_1_length))
 					{
-						hit = TIntersectHit2Df.Point(start_2);
+						hit = TIntersectHit2Df.Point(start2);
 						return true;
 					}
 					hit = TIntersectHit2Df.None();
@@ -2332,30 +2332,30 @@ namespace Lotus
 						{
 							// 1A------1B
 							//     2A------2B
-							return SegmentSegmentCollinear(in start_1, in end_1, sqr_segment_1_length, in start_2, in end_2, out hit);
+							return SegmentSegmentCollinear(in start1, in end1, sqr_segment_1_length, in start2, in end2, out hit);
 						}
 						else
 						{
 							//     1A------1B
 							// 2A------2B
-							return SegmentSegmentCollinear(in start_2, in end_2, sqr_segment_2_length, in start_1, in end_1, out hit);
+							return SegmentSegmentCollinear(in start2, in end2, sqr_segment_2_length, in start1, in end1, out hit);
 						}
 					}
 					else
 					{
 						// Contradirected
-						var segment2BProjection = Vector2Df.Dot(direction1, end_2 - start_1);
+						var segment2BProjection = Vector2Df.Dot(direction1, end2 - start1);
 						if (segment2BProjection > -XGeometry2D.Eplsilon_f)
 						{
 							// 1A------1B
 							//     2B------2A
-							return SegmentSegmentCollinear(in start_1, in end_1, sqr_segment_1_length, in end_2, in start_2, out hit);
+							return SegmentSegmentCollinear(in start1, in end1, sqr_segment_1_length, in end2, in start2, out hit);
 						}
 						else
 						{
 							//     1A------1B
 							// 2B------2A
-							return SegmentSegmentCollinear(in end_2, in start_2, sqr_segment_2_length, in start_1, in end_1, out hit);
+							return SegmentSegmentCollinear(in end2, in start2, sqr_segment_2_length, in start1, in end1, out hit);
 						}
 					}
 				}
@@ -2375,7 +2375,7 @@ namespace Lotus
 					return false;
 				}
 
-				hit = TIntersectHit2Df.Point(start_1 + (direction1 * distance1));
+				hit = TIntersectHit2Df.Point(start1 + (direction1 * distance1));
 				return true;
 			}
 
@@ -2466,14 +2466,14 @@ namespace Lotus
 			/// </summary>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
-			/// <param name="circle_center">Центр окружности</param>
-			/// <param name="circle_radius">Радиус окружности</param>
+			/// <param name="circleCenter">Центр окружности</param>
+			/// <param name="circleRadius">Радиус окружности</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SegmentCircle(in Vector2Df start, in Vector2Df end, in Vector2Df circle_center, 
-				Single circle_radius)
+			public static Boolean SegmentCircle(in Vector2Df start, in Vector2Df end, in Vector2Df circleCenter, 
+				Single circleRadius)
 			{
-				return SegmentCircle(in start, in end, in circle_center, circle_radius, out _);
+				return SegmentCircle(in start, in end, in circleCenter, circleRadius, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2482,23 +2482,23 @@ namespace Lotus
 			/// </summary>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
-			/// <param name="circle_center">Центр окружности</param>
-			/// <param name="circle_radius">Радиус окружности</param>
+			/// <param name="circleCenter">Центр окружности</param>
+			/// <param name="circleRadius">Радиус окружности</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SegmentCircle(in Vector2Df start, in Vector2Df end, in Vector2Df circle_center, 
-				Single circle_radius, out TIntersectHit2Df hit)
+			public static Boolean SegmentCircle(in Vector2Df start, in Vector2Df end, in Vector2Df circleCenter, 
+				Single circleRadius, out TIntersectHit2Df hit)
 			{
-				Vector2Df segment_start_to_center = circle_center - start;
+				Vector2Df segment_start_to_center = circleCenter - start;
 				Vector2Df from_start_to_end = end - start;
 				var segment_length = from_start_to_end.Length;
 				if (segment_length < XGeometry2D.Eplsilon_f)
 				{
 					var distance_to_point = segment_start_to_center.Length;
-					if (distance_to_point < circle_radius + XGeometry2D.Eplsilon_f)
+					if (distance_to_point < circleRadius + XGeometry2D.Eplsilon_f)
 					{
-						if (distance_to_point > circle_radius - XGeometry2D.Eplsilon_f)
+						if (distance_to_point > circleRadius - XGeometry2D.Eplsilon_f)
 						{
 							hit = TIntersectHit2Df.Point(start);
 							return true;
@@ -2512,15 +2512,15 @@ namespace Lotus
 
 				Vector2Df segment_direction = from_start_to_end.Normalized;
 				var center_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_center);
-				if (center_projection + circle_radius < -XGeometry2D.Eplsilon_f ||
-					center_projection - circle_radius > segment_length + XGeometry2D.Eplsilon_f)
+				if (center_projection + circleRadius < -XGeometry2D.Eplsilon_f ||
+					center_projection - circleRadius > segment_length + XGeometry2D.Eplsilon_f)
 				{
 					hit = TIntersectHit2Df.None();
 					return false;
 				}
 
 				var sqr_distance_to_line = segment_start_to_center.SqrLength - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (circle_radius * circle_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (circleRadius * circleRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry2D.Eplsilon_f)
 				{
 					hit = TIntersectHit2Df.None();
@@ -2586,64 +2586,64 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечения двух окружностей
 			/// </summary>
-			/// <param name="circle_a">Первая окружность</param>
-			/// <param name="circle_b">Вторая окружность</param>
+			/// <param name="circleA">Первая окружность</param>
+			/// <param name="circleB">Вторая окружность</param>
 			/// <returns>Статус пересечения окружностей (в том числе когда одна окружность содержится в другой)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean CircleCircle(in Circle2Df circle_a, in Circle2Df circle_b)
+			public static Boolean CircleCircle(in Circle2Df circleA, in Circle2Df circleB)
 			{
-				return CircleCircle(circle_a.Center, circle_a.Radius, circle_b.Center, circle_b.Radius, out _);
+				return CircleCircle(circleA.Center, circleA.Radius, circleB.Center, circleB.Radius, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения двух окружностей
 			/// </summary>
-			/// <param name="circle_a">Первая окружность</param>
-			/// <param name="circle_b">Вторая окружность</param>
+			/// <param name="circleA">Первая окружность</param>
+			/// <param name="circleB">Вторая окружность</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения окружностей (в том числе когда одна окружность содержится в другой)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean CircleCircle(in Circle2Df circle_a, in Circle2Df circle_b, out TIntersectHit2Df hit)
+			public static Boolean CircleCircle(in Circle2Df circleA, in Circle2Df circleB, out TIntersectHit2Df hit)
 			{
-				return CircleCircle(in circle_a.Center, circle_a.Radius, in circle_b.Center, circle_b.Radius, out hit);
+				return CircleCircle(in circleA.Center, circleA.Radius, in circleB.Center, circleB.Radius, out hit);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения двух окружностей
 			/// </summary>
-			/// <param name="center_a">Центр первой окружности</param>
-			/// <param name="radius_a">Радиус первой окружности</param>
-			/// <param name="center_b">Центр второй окружности</param>
-			/// <param name="radius_b">Радиус второй окружности</param>
+			/// <param name="centerA">Центр первой окружности</param>
+			/// <param name="radiusA">Радиус первой окружности</param>
+			/// <param name="centerB">Центр второй окружности</param>
+			/// <param name="radiusB">Радиус второй окружности</param>
 			/// <returns>Статус пересечения окружностей (в том числе когда одна окружность содержится в другой)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean CircleCircle(in Vector2Df center_a, in Single radius_a, in Vector2Df center_b, 
-				Single radius_b)
+			public static Boolean CircleCircle(in Vector2Df centerA, in Single radiusA, in Vector2Df centerB, 
+				Single radiusB)
 			{
-				return CircleCircle(in center_a, radius_a, in center_b, radius_b, out _);
+				return CircleCircle(in centerA, radiusA, in centerB, radiusB, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения двух окружностей
 			/// </summary>
-			/// <param name="center_a">Центр первой окружности</param>
-			/// <param name="radius_a">Радиус первой окружности</param>
-			/// <param name="center_b">Центр второй окружности</param>
-			/// <param name="radius_b">Радиус второй окружности</param>
+			/// <param name="centerA">Центр первой окружности</param>
+			/// <param name="radiusA">Радиус первой окружности</param>
+			/// <param name="centerB">Центр второй окружности</param>
+			/// <param name="radiusB">Радиус второй окружности</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения окружностей (в том числе когда одна окружность содержится в другой)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean CircleCircle(in Vector2Df center_a, Single radius_a, in Vector2Df center_b, 
-				Single radius_b, out TIntersectHit2Df hit)
+			public static Boolean CircleCircle(in Vector2Df centerA, Single radiusA, in Vector2Df centerB, 
+				Single radiusB, out TIntersectHit2Df hit)
 			{
-				Vector2Df from_b_to_a = center_a - center_b;
+				Vector2Df from_b_to_a = centerA - centerB;
 				var distance_from_b_to_a_sqr = from_b_to_a.SqrLength;
 				if (distance_from_b_to_a_sqr < XGeometry2D.Eplsilon_f)
 				{
-					if (Math.Abs(radius_a - radius_b) < XGeometry2D.Eplsilon_f)
+					if (Math.Abs(radiusA - radiusB) < XGeometry2D.Eplsilon_f)
 					{
 						// Circles are coincident
 						hit = TIntersectHit2Df.Parallel();
@@ -2657,11 +2657,11 @@ namespace Lotus
 				// For intersections on the circle's edge Length is more stable than SqrLength
 				var distance_from_b_to_a = XMath.Sqrt(distance_from_b_to_a_sqr);
 
-				var sum_of_radii = radius_a + radius_b;
+				var sum_of_radii = radiusA + radiusB;
 				if (Math.Abs(distance_from_b_to_a - sum_of_radii) < XGeometry2D.Eplsilon_f)
 				{
 					// One hit outside
-					hit = TIntersectHit2Df.Point(center_b + (from_b_to_a * (radius_b / sum_of_radii)));
+					hit = TIntersectHit2Df.Point(centerB + (from_b_to_a * (radiusB / sum_of_radii)));
 					return true;
 				}
 				if (distance_from_b_to_a > sum_of_radii)
@@ -2671,12 +2671,12 @@ namespace Lotus
 					return false;
 				}
 
-				var difference_of_radii = radius_a - radius_b;
+				var difference_of_radii = radiusA - radiusB;
 				var difference_of_radii_abs = Math.Abs(difference_of_radii);
 				if (Math.Abs(distance_from_b_to_a - difference_of_radii_abs) < XGeometry2D.Eplsilon_f)
 				{
 					// One hit inside
-					hit = TIntersectHit2Df.Point(center_b - (from_b_to_a * (radius_b / difference_of_radii)));
+					hit = TIntersectHit2Df.Point(centerB - (from_b_to_a * (radiusB / difference_of_radii)));
 					return true;
 				}
 				if (distance_from_b_to_a < difference_of_radii_abs)
@@ -2687,9 +2687,9 @@ namespace Lotus
 				}
 
 				// Two intersections
-				var radius_a_sqr = radius_a * radius_a;
-				var distanceToMiddle = (0.5f * (radius_a_sqr - (radius_b * radius_b)) / distance_from_b_to_a_sqr) + 0.5f;
-				Vector2Df middle = center_a - (from_b_to_a * distanceToMiddle);
+				var radius_a_sqr = radiusA * radiusA;
+				var distanceToMiddle = (0.5f * (radius_a_sqr - (radiusB * radiusB)) / distance_from_b_to_a_sqr) + 0.5f;
+				Vector2Df middle = centerA - (from_b_to_a * distanceToMiddle);
 
 				var discriminant = (radius_a_sqr / distance_from_b_to_a_sqr) - (distanceToMiddle * distanceToMiddle);
 				Vector2Df offset = from_b_to_a.PerpToCCW() * XMath.Sqrt(discriminant);

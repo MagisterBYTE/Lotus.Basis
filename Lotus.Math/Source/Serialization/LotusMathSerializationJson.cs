@@ -46,7 +46,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 
@@ -57,7 +57,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 			#endregion
@@ -81,16 +81,16 @@ namespace Lotus
 			/// Чтение свойства
 			/// </summary>
 			/// <param name="reader">Читатель Json</param>
-			/// <param name="object_type">Тип объекта</param>
-			/// <param name="existing_value">Статус существования значение</param>
-			/// <param name="has_existing_value">Статус существования значение</param>
+			/// <param name="objectType">Тип объекта</param>
+			/// <param name="existingValue">Статус существования значение</param>
+			/// <param name="hasExistingValue">Статус существования значение</param>
 			/// <param name="serializer">Сериализатор Json</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Vector2Df ReadJson(JsonReader reader, Type object_type, Vector2Df existing_value, 
-				Boolean has_existing_value, JsonSerializer serializer)
+			public override Vector2Df ReadJson(JsonReader reader, Type objectType, Vector2Df existingValue, 
+				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return (Vector2Df.DeserializeFromString((String)reader.Value));
+				return Vector2Df.DeserializeFromString((String)reader.Value);
 			}
 			#endregion
 		}
@@ -117,7 +117,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 
@@ -128,7 +128,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 			#endregion
@@ -152,16 +152,16 @@ namespace Lotus
 			/// Чтение свойства
 			/// </summary>
 			/// <param name="reader">Читатель Json</param>
-			/// <param name="object_type">Тип объекта</param>
-			/// <param name="existing_value">Статус существования значение</param>
-			/// <param name="has_existing_value">Статус существования значение</param>
+			/// <param name="objectType">Тип объекта</param>
+			/// <param name="existingValue">Статус существования значение</param>
+			/// <param name="hasExistingValue">Статус существования значение</param>
 			/// <param name="serializer">Сериализатор Json</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Vector2D ReadJson(JsonReader reader, Type object_type, Vector2D existing_value,
-				Boolean has_existing_value, JsonSerializer serializer)
+			public override Vector2D ReadJson(JsonReader reader, Type objectType, Vector2D existingValue,
+				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return (Vector2D.DeserializeFromString((String)reader.Value));
+				return Vector2D.DeserializeFromString((String)reader.Value);
 			}
 			#endregion
 		}
@@ -188,7 +188,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 
@@ -199,7 +199,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 			#endregion
@@ -223,16 +223,16 @@ namespace Lotus
 			/// Чтение свойства
 			/// </summary>
 			/// <param name="reader">Читатель Json</param>
-			/// <param name="object_type">Тип объекта</param>
-			/// <param name="existing_value">Статус существования значение</param>
-			/// <param name="has_existing_value">Статус существования значение</param>
+			/// <param name="objectType">Тип объекта</param>
+			/// <param name="existingValue">Статус существования значение</param>
+			/// <param name="hasExistingValue">Статус существования значение</param>
 			/// <param name="serializer">Сериализатор Json</param>
 			/// <returns>Значение свойства</returns>
 			//-------------------------------------------------------------------------------------------------------
-			public override Vector2Di ReadJson(JsonReader reader, Type object_type, Vector2Di existing_value,
-				Boolean has_existing_value, JsonSerializer serializer)
+			public override Vector2Di ReadJson(JsonReader reader, Type objectType, Vector2Di existingValue,
+				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return (Vector2Di.DeserializeFromString((String)reader.Value));
+				return Vector2Di.DeserializeFromString((String)reader.Value);
 			}
 			#endregion
 		}
@@ -259,7 +259,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 
@@ -270,7 +270,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 			#endregion
@@ -294,16 +294,16 @@ namespace Lotus
 			/// Чтение свойства
 			/// </summary>
 			/// <param name="reader">Читатель Json</param>
-			/// <param name="object_type">Тип объекта</param>
-			/// <param name="existing_value">Статус существования значение</param>
-			/// <param name="has_existing_value">Статус существования значение</param>
+			/// <param name="objectType">Тип объекта</param>
+			/// <param name="existingValue">Статус существования значение</param>
+			/// <param name="hasExistingValue">Статус существования значение</param>
 			/// <param name="serializer">Сериализатор Json</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Vector3Df ReadJson(JsonReader reader, Type object_type, Vector3Df existing_value,
-				Boolean has_existing_value, JsonSerializer serializer)
+			public override Vector3Df ReadJson(JsonReader reader, Type objectType, Vector3Df existingValue,
+				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return (Vector3Df.DeserializeFromString((String)reader.Value));
+				return Vector3Df.DeserializeFromString((String)reader.Value);
 			}
 			#endregion
 		}
@@ -330,7 +330,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 
@@ -341,7 +341,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (true);
+					return true;
 				}
 			}
 			#endregion
@@ -365,16 +365,16 @@ namespace Lotus
 			/// Чтение свойства
 			/// </summary>
 			/// <param name="reader">Читатель Json</param>
-			/// <param name="object_type">Тип объекта</param>
-			/// <param name="existing_value">Статус существования значение</param>
-			/// <param name="has_existing_value">Статус существования значение</param>
+			/// <param name="objectType">Тип объекта</param>
+			/// <param name="existingValue">Статус существования значение</param>
+			/// <param name="hasExistingValue">Статус существования значение</param>
 			/// <param name="serializer">Сериализатор Json</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Vector3D ReadJson(JsonReader reader, Type object_type, Vector3D existing_value,
-				Boolean has_existing_value, JsonSerializer serializer)
+			public override Vector3D ReadJson(JsonReader reader, Type objectType, Vector3D existingValue,
+				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return (Vector3D.DeserializeFromString((String)reader.Value));
+				return Vector3D.DeserializeFromString((String)reader.Value);
 			}
 			#endregion
 		}

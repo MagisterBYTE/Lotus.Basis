@@ -45,105 +45,105 @@ namespace Lotus
 			/// <summary>
 			/// Запись данных прямоугольника в формат атрибутов
 			/// </summary>
-			/// <param name="xml_writer">Средство записи данных в формат XML</param>
+			/// <param name="xmlWriter">Средство записи данных в формат XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <param name="rect">Прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void WriteRect2DToAttribute(this XmlWriter xml_writer, String name, Rect2Df rect)
+			public static void WriteRect2DToAttribute(this XmlWriter xmlWriter, String name, Rect2Df rect)
 			{
-				xml_writer.WriteStartAttribute(name);
-				xml_writer.WriteValue(rect.SerializeToString());
-				xml_writer.WriteEndAttribute();
+				xmlWriter.WriteStartAttribute(name);
+				xmlWriter.WriteValue(rect.SerializeToString());
+				xmlWriter.WriteEndAttribute();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запись данных прямоугольника в формат атрибутов
 			/// </summary>
-			/// <param name="xml_writer">Средство записи данных в формат XML</param>
+			/// <param name="xmlWriter">Средство записи данных в формат XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <param name="rect">Прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void WriteRect2DToAttribute(this XmlWriter xml_writer, String name, Rect2D rect)
+			public static void WriteRect2DToAttribute(this XmlWriter xmlWriter, String name, Rect2D rect)
 			{
-				xml_writer.WriteStartAttribute(name);
-				xml_writer.WriteValue(rect.SerializeToString());
-				xml_writer.WriteEndAttribute();
+				xmlWriter.WriteStartAttribute(name);
+				xmlWriter.WriteValue(rect.SerializeToString());
+				xmlWriter.WriteEndAttribute();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запись данных двухмерного вектора в формат атрибутов
 			/// </summary>
-			/// <param name="xml_writer">Средство записи данных в формат XML</param>
+			/// <param name="xmlWriter">Средство записи данных в формат XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <param name="vector">Двухмерный вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void WriteVector2DToAttribute(this XmlWriter xml_writer, String name, Vector2D vector)
+			public static void WriteVector2DToAttribute(this XmlWriter xmlWriter, String name, Vector2D vector)
 			{
-				xml_writer.WriteStartAttribute(name);
-				xml_writer.WriteValue(vector.SerializeToString());
-				xml_writer.WriteEndAttribute();
+				xmlWriter.WriteStartAttribute(name);
+				xmlWriter.WriteValue(vector.SerializeToString());
+				xmlWriter.WriteEndAttribute();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запись данных двухмерного вектора в формат атрибутов
 			/// </summary>
-			/// <param name="xml_writer">Средство записи данных в формат XML</param>
+			/// <param name="xmlWriter">Средство записи данных в формат XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <param name="vector">Двухмерный вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void WriteVector2DToAttribute(this XmlWriter xml_writer, String name, Vector2Df vector)
+			public static void WriteVector2DToAttribute(this XmlWriter xmlWriter, String name, Vector2Df vector)
 			{
-				xml_writer.WriteStartAttribute(name);
-				xml_writer.WriteValue(vector.SerializeToString());
-				xml_writer.WriteEndAttribute();
+				xmlWriter.WriteStartAttribute(name);
+				xmlWriter.WriteValue(vector.SerializeToString());
+				xmlWriter.WriteEndAttribute();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запись данных двухмерного вектора в формат атрибутов
 			/// </summary>
-			/// <param name="xml_writer">Средство записи данных в формат XML</param>
+			/// <param name="xmlWriter">Средство записи данных в формат XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <param name="vector">Двухмерный вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void WriteVector2DToAttribute(this XmlWriter xml_writer, String name, Vector2Di vector)
+			public static void WriteVector2DToAttribute(this XmlWriter xmlWriter, String name, Vector2Di vector)
 			{
-				xml_writer.WriteStartAttribute(name);
-				xml_writer.WriteValue(vector.SerializeToString());
-				xml_writer.WriteEndAttribute();
+				xmlWriter.WriteStartAttribute(name);
+				xmlWriter.WriteValue(vector.SerializeToString());
+				xmlWriter.WriteEndAttribute();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запись данных трехмерного вектора в формат атрибутов
 			/// </summary>
-			/// <param name="xml_writer">Средство записи данных в формат XML</param>
+			/// <param name="xmlWriter">Средство записи данных в формат XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <param name="vector">Двухмерный вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void WriteVector3DToAttribute(this XmlWriter xml_writer, String name, Vector3D vector)
+			public static void WriteVector3DToAttribute(this XmlWriter xmlWriter, String name, Vector3D vector)
 			{
-				xml_writer.WriteStartAttribute(name);
-				xml_writer.WriteValue(vector.SerializeToString());
-				xml_writer.WriteEndAttribute();
+				xmlWriter.WriteStartAttribute(name);
+				xmlWriter.WriteValue(vector.SerializeToString());
+				xmlWriter.WriteEndAttribute();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Запись данных трехмерного вектора в формат атрибутов
 			/// </summary>
-			/// <param name="xml_writer">Средство записи данных в формат XML</param>
+			/// <param name="xmlWriter">Средство записи данных в формат XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <param name="vector">Двухмерный вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void WriteVector3DToAttribute(this XmlWriter xml_writer, String name, Vector3Df vector)
+			public static void WriteVector3DToAttribute(this XmlWriter xmlWriter, String name, Vector3Df vector)
 			{
-				xml_writer.WriteStartAttribute(name);
-				xml_writer.WriteValue(vector.SerializeToString());
-				xml_writer.WriteEndAttribute();
+				xmlWriter.WriteStartAttribute(name);
+				xmlWriter.WriteValue(vector.SerializeToString());
+				xmlWriter.WriteEndAttribute();
 			}
 			#endregion
 
@@ -152,14 +152,14 @@ namespace Lotus
 			/// <summary>
 			/// Чтение данных прямоугольника из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Прямоугольник</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2D ReadMathRect2DFromAttribute(this XmlReader xml_reader, String name)
+			public static Rect2D ReadMathRect2DFromAttribute(this XmlReader xmlReader, String name)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Rect2D.DeserializeFromString(value);
 				}
@@ -170,33 +170,33 @@ namespace Lotus
 			/// <summary>
 			/// Чтение данных прямоугольника из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
-			/// <param name="default_value">Значение по умолчанию в случает отсутствия атрибута</param>
+			/// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута</param>
 			/// <returns>Прямоугольник</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2D ReadMathRect2DFromAttribute(this XmlReader xml_reader, String name, Rect2D default_value)
+			public static Rect2D ReadMathRect2DFromAttribute(this XmlReader xmlReader, String name, Rect2D defaultValue)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Rect2D.DeserializeFromString(value);
 				}
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Чтение данных прямоугольника из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Прямоугольник</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2Df ReadMathRect2DfFromAttribute(this XmlReader xml_reader, String name)
+			public static Rect2Df ReadMathRect2DfFromAttribute(this XmlReader xmlReader, String name)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Rect2Df.DeserializeFromString(value);
 				}
@@ -207,33 +207,33 @@ namespace Lotus
 			/// <summary>
 			/// Чтение данных прямоугольника из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
-			/// <param name="default_value">Значение по умолчанию в случает отсутствия атрибута</param>
+			/// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута</param>
 			/// <returns>Прямоугольник</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2Df ReadMathRect2DfFromAttribute(this XmlReader xml_reader, String name, Rect2Df default_value)
+			public static Rect2Df ReadMathRect2DfFromAttribute(this XmlReader xmlReader, String name, Rect2Df defaultValue)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Rect2Df.DeserializeFromString(value);
 				}
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Чтение данных двухмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Двухмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2D ReadMathVector2DFromAttribute(this XmlReader xml_reader, String name)
+			public static Vector2D ReadMathVector2DFromAttribute(this XmlReader xmlReader, String name)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2D.DeserializeFromString(value);
 				}
@@ -244,33 +244,33 @@ namespace Lotus
 			/// <summary>
 			/// Чтение данных двухмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
-			/// <param name="default_value">Значение по умолчанию в случает отсутствия атрибута</param>
+			/// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута</param>
 			/// <returns>Двухмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2D ReadMathVector2DFromAttribute(this XmlReader xml_reader, String name, Vector2D default_value)
+			public static Vector2D ReadMathVector2DFromAttribute(this XmlReader xmlReader, String name, Vector2D defaultValue)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2D.DeserializeFromString(value);
 				}
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Чтение данных двухмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Двухмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df ReadMathVector2DfFromAttribute(this XmlReader xml_reader, String name)
+			public static Vector2Df ReadMathVector2DfFromAttribute(this XmlReader xmlReader, String name)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2Df.DeserializeFromString(value);
 				}
@@ -281,33 +281,33 @@ namespace Lotus
 			/// <summary>
 			/// Чтение данных двухмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
-			/// <param name="default_value">Значение по умолчанию в случает отсутствия атрибута</param>
+			/// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута</param>
 			/// <returns>Двухмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df ReadMathVector2DfFromAttribute(this XmlReader xml_reader, String name, Vector2Df default_value)
+			public static Vector2Df ReadMathVector2DfFromAttribute(this XmlReader xmlReader, String name, Vector2Df defaultValue)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2Df.DeserializeFromString(value);
 				}
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Чтение данных двухмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Двухмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Di ReadMathVector2DiFromAttribute(this XmlReader xml_reader, String name)
+			public static Vector2Di ReadMathVector2DiFromAttribute(this XmlReader xmlReader, String name)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2Di.DeserializeFromString(value);
 				}
@@ -318,33 +318,33 @@ namespace Lotus
 			/// <summary>
 			/// Чтение данных двухмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
-			/// <param name="default_value">Значение по умолчанию в случает отсутствия атрибута</param>
+			/// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута</param>
 			/// <returns>Двухмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Di ReadMathVector2DiFromAttribute(this XmlReader xml_reader, String name, Vector2Di default_value)
+			public static Vector2Di ReadMathVector2DiFromAttribute(this XmlReader xmlReader, String name, Vector2Di defaultValue)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2Di.DeserializeFromString(value);
 				}
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Чтение данных трехмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Трехмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3D ReadMathVector3DFromAttribute(this XmlReader xml_reader, String name)
+			public static Vector3D ReadMathVector3DFromAttribute(this XmlReader xmlReader, String name)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector3D.DeserializeFromString(value);
 				}
@@ -355,33 +355,33 @@ namespace Lotus
 			/// <summary>
 			/// Чтение данных трехмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
-			/// <param name="default_value">Значение по умолчанию в случает отсутствия атрибута</param>
+			/// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута</param>
 			/// <returns>Трехмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3D ReadMathVector3DFromAttribute(this XmlReader xml_reader, String name, Vector3D default_value)
+			public static Vector3D ReadMathVector3DFromAttribute(this XmlReader xmlReader, String name, Vector3D defaultValue)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector3D.DeserializeFromString(value);
 				}
-				return default_value;
+				return defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Чтение данных трехмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Трехмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df ReadMathVector3DfFromAttribute(this XmlReader xml_reader, String name)
+			public static Vector3Df ReadMathVector3DfFromAttribute(this XmlReader xmlReader, String name)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector3Df.DeserializeFromString(value);
 				}
@@ -392,15 +392,15 @@ namespace Lotus
 			/// <summary>
 			/// Чтение данных трехмерного вектора из формата атрибутов
 			/// </summary>
-			/// <param name="xml_reader">Средство чтения данных формата XML</param>
+			/// <param name="xmlReader">Средство чтения данных формата XML</param>
 			/// <param name="name">Имя атрибута</param>
-			/// <param name="default_value">Значение по умолчанию в случает отсутствия атрибута</param>
+			/// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута</param>
 			/// <returns>Трехмерный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df ReadMathVector3DfFromAttribute(this XmlReader xml_reader, String name, Vector3Df default_value)
+			public static Vector3Df ReadMathVector3DfFromAttribute(this XmlReader xmlReader, String name, Vector3Df defaultValue)
 			{
 				String value;
-				if ((value = xml_reader.GetAttribute(name)) != null)
+				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector3Df.DeserializeFromString(value);
 				}

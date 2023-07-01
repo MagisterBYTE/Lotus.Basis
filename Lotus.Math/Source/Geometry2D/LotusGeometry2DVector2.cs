@@ -109,7 +109,7 @@ namespace Lotus
 				var dot = (from.X * to.X) + (from.Y * to.Y);
 				var ll = from.Length * to.Length;
 				var csv = dot / ll;
-				return Math.Acos(csv) * XMath.RadianToDegree_d;
+				return Math.Acos(csv) * XMath.RadianToDegree_D;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -500,7 +500,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String ToString(String format)
 			{
-				return ("X = " + X.ToString(format) + "; Y = " + Y.ToString(format));
+				return "X = " + X.ToString(format) + "; Y = " + Y.ToString(format);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -700,7 +700,7 @@ namespace Lotus
 				return new Vector2Df((Single)vector.X, (Single)vector.Y);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа UnityEngine.Vector2
@@ -1097,7 +1097,7 @@ namespace Lotus
 				var dot = (from.X * to.X) + (from.Y * to.Y);
 				var ll = from.Length * to.Length;
 				var csv = dot / ll;
-				return (Single)(Math.Acos(csv) * XMath.RadianToDegree_d);
+				return (Single)(Math.Acos(csv) * XMath.RadianToDegree_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1705,7 +1705,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Vector2"/> 
@@ -2216,7 +2216,7 @@ namespace Lotus
 				Single dot = (from.X * to.X) + (from.Y * to.Y);
 				var ll = from.Length * to.Length;
 				var csv = dot / ll;
-				return (Int32)(Math.Acos(csv) * XMath.RadianToDegree_d);
+				return (Int32)(Math.Acos(csv) * XMath.RadianToDegree_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2410,15 +2410,15 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует вектор указанным вектором
 			/// </summary>
-			/// <param name="source_vector">Вектор</param>
+			/// <param name="sourceVector">Вектор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Di(Vector2Di source_vector)
+			public Vector2Di(Vector2Di sourceVector)
 			{
-				X = source_vector.X;
-				Y = source_vector.Y;
+				X = sourceVector.X;
+				Y = sourceVector.Y;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует вектор указанным вектором
@@ -2764,7 +2764,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа UnityEngine.Vector2

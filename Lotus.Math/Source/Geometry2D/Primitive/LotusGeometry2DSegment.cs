@@ -59,7 +59,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df Location
 			{
-				get { return ((Start + End) / 2); }
+				get { return (Start + End) / 2; }
 			}
 
 			/// <summary>
@@ -67,7 +67,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df Direction
 			{
-				get { return ((End - Start)); }
+				get { return End - Start; }
 			}
 
 			/// <summary>
@@ -75,7 +75,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df DirectionUnit
 			{
-				get { return ((End - Start).Normalized); }
+				get { return (End - Start).Normalized; }
 			}
 			#endregion
 
@@ -105,7 +105,7 @@ namespace Lotus
 				End = source.End;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует сегмент указанными параметрами
@@ -201,7 +201,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetHashCode()
 			{
-				return (Start.GetHashCode() ^ End.GetHashCode());
+				return Start.GetHashCode() ^ End.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -268,7 +268,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Ray2D"/> 
@@ -294,7 +294,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Contains(in Vector2Df point, Single epsilon = 0.01f)
 			{
-				return(XIntersect2D.PointOnSegment(in Start, in End, in point, epsilon));
+				return XIntersect2D.PointOnSegment(in Start, in End, in point, epsilon);
 			}
 			#endregion
 		}

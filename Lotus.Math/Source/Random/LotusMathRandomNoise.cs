@@ -39,12 +39,12 @@ namespace Lotus
 			/// <summary>
 			/// Целочисленная шумовая функция в одномерном пространстве
 			/// </summary>
-			public static Func<Int32, Int32> NoiseInteger1D = NoiseInteger1D_v1;
+			public static Func<Int32, Int32> NoiseInteger1D = NoiseInteger1DV1;
 
 			/// <summary>
 			/// Целочисленная шумовая функция в двухмерном пространстве
 			/// </summary>
-			public static Func<Int32, Int32, Int32> NoiseInteger2D = NoiseInteger2D_v1;
+			public static Func<Int32, Int32, Int32> NoiseInteger2D = NoiseInteger2DV1;
 
 			/// <summary>
 			/// Целочисленная шумовая функция в трехмерном пространстве
@@ -59,7 +59,7 @@ namespace Lotus
 			/// <summary>
 			/// Вещественная шумовая функция в двухмерном пространстве
 			/// </summary>
-			public static Func<Single, Single, Single> NoiseSingle2D = NoiseSingle2D_v1;
+			public static Func<Single, Single, Single> NoiseSingle2D = NoiseSingle2DV1;
 
 			/// <summary>
 			/// Вещественная шумовая функция в трехмерном пространстве
@@ -138,7 +138,7 @@ namespace Lotus
 			/// <param name="value">Значение</param>
 			/// <returns>Случайная зависимая величина</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 NoiseInteger1D_v1(Int32 value)
+			public static Int32 NoiseInteger1DV1(Int32 value)
 			{
 				var m = value;
 				m = (m >> 13) ^ m;
@@ -157,7 +157,7 @@ namespace Lotus
 			/// <param name="value">Значение</param>
 			/// <returns>Случайная зависимая величина</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 NoiseInteger1D_v2(Int32 value)
+			public static Int32 NoiseInteger1DV2(Int32 value)
 			{
 				var state = (UInt64)value;
 				state = state * state;
@@ -182,7 +182,7 @@ namespace Lotus
 			/// <param name="y">Координата Y</param>
 			/// <returns>Случайная зависимая величина</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 NoiseInteger2D_v1(Int32 x, Int32 y)
+			public static Int32 NoiseInteger2DV1(Int32 x, Int32 y)
 			{
 				var m_w = 43;//x * 7 + y * 17 + x * y + 1; //x * 43 + 1;    /* must not be zero, nor 0x464fffff */
 				var m_z = ((x * y * 57) + y) ^ (2 + (x * 7) + 1);    /* must not be zero, nor 0x9068ffff */
@@ -203,7 +203,7 @@ namespace Lotus
 			/// <param name="y">Координата Y</param>
 			/// <returns>Случайная зависимая величина</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 NoiseInteger2D_v2(Int32 x, Int32 y)
+			public static Int32 NoiseInteger2DV2(Int32 x, Int32 y)
 			{
 				const Int32 generator_noise_x = 1619;
 				const Int32 generator_noise_y = 31337;
@@ -220,9 +220,9 @@ namespace Lotus
 			/// <param name="y">Координата Y</param>
 			/// <returns>Случайная зависимая величина</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single NoiseSingle2D_v1(Single x, Single y)
+			public static Single NoiseSingle2DV1(Single x, Single y)
 			{
-				var u = (UInt32)NoiseInteger2D_v1((Int32)x, (Int32)y);
+				var u = (UInt32)NoiseInteger2DV1((Int32)x, (Int32)y);
 				return (u + 1.0f) * 2.328306435454494e-10f;
 			}
 
@@ -234,9 +234,9 @@ namespace Lotus
 			/// <param name="y">Координата Y</param>
 			/// <returns>Случайная зависимая величина</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single NoiseSingle2D_v2(Int32 x, Int32 y)
+			public static Single NoiseSingle2DV2(Int32 x, Int32 y)
 			{
-				return (1.0f - (NoiseInteger2D_v2(x, y) / 1073741824.0f));
+				return 1.0f - (NoiseInteger2DV2(x, y) / 1073741824.0f);
 			}
 			#endregion
 

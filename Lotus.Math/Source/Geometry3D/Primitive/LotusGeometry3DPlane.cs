@@ -252,19 +252,19 @@ namespace Lotus
 			/// <summary>
 			/// Determines whether the specified <see cref="System.Object"/> is equal to this instance
 			/// </summary>
-			/// <param name="value">The <see cref="System.Object"/> to compare with this instance</param>
+			/// <param name="obj">The <see cref="System.Object"/> to compare with this instance</param>
 			/// <returns>
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object value)
+			public override Boolean Equals(Object obj)
 			{
-				if (!(value is Plane3Df))
+				if (!(obj is Plane3Df))
 				{
 					return false;
 				}
 
-				var plane = (Plane3Df)value;
+				var plane = (Plane3Df)obj;
 				return Equals(in plane);
 			}
 
@@ -272,14 +272,14 @@ namespace Lotus
 			/// <summary>
 			/// Determines whether the specified <see cref="Plane3Df"/> is equal to this instance
 			/// </summary>
-			/// <param name="value">The <see cref="Plane3Df"/> to compare with this instance</param>
+			/// <param name="other">The <see cref="Plane3Df"/> to compare with this instance</param>
 			/// <returns>
 			/// <c>true</c> if the specified <see cref="Plane3Df"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Plane3Df value)
+			public Boolean Equals(Plane3Df other)
 			{
-				return Equals(in value);
+				return Equals(in other);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -346,14 +346,14 @@ namespace Lotus
 			/// <summary>
 			/// Преобразование к текстовому представлению
 			/// </summary>
-			/// <param name="format_provider">Интерфейс провайдера формата значения компонента</param>
+			/// <param name="formatProvider">Интерфейс провайдера формата значения компонента</param>
 			/// <returns>
 			/// Текстовое представление плоскости с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(IFormatProvider format_provider)
+			public String ToString(IFormatProvider formatProvider)
 			{
-				return String.Format(format_provider, "A:{0} B:{1} C:{2} D:{3}", Normal.X, Normal.Y, Normal.Z, Distance);
+				return String.Format(formatProvider, "A:{0} B:{1} C:{2} D:{3}", Normal.X, Normal.Y, Normal.Z, Distance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -361,16 +361,16 @@ namespace Lotus
 			/// Преобразование к текстовому представлению
 			/// </summary>
 			/// <param name="format">Формат отображения значения компонента</param>
-			/// <param name="format_provider">Интерфейс провайдера формата значения компонента</param>
+			/// <param name="formatProvider">Интерфейс провайдера формата значения компонента</param>
 			/// <returns>
 			/// Текстовое представление плоскости с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format, IFormatProvider format_provider)
+			public String ToString(String format, IFormatProvider formatProvider)
 			{
-				return String.Format(format_provider, "A:{0} B:{1} C:{2} D:{3}", Normal.X.ToString(format, format_provider),
-					Normal.Y.ToString(format, format_provider), Normal.Z.ToString(format, format_provider),
-					Distance.ToString(format, format_provider));
+				return String.Format(formatProvider, "A:{0} B:{1} C:{2} D:{3}", Normal.X.ToString(format, formatProvider),
+					Normal.Y.ToString(format, formatProvider), Normal.Z.ToString(format, formatProvider),
+					Distance.ToString(format, formatProvider));
 			}
 			#endregion
 

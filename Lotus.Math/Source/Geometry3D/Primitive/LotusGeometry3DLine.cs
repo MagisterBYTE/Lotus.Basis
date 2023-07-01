@@ -43,17 +43,17 @@ namespace Lotus
 			/// <summary>
 			/// Ось по X
 			/// </summary>
-			public readonly static Line3Df X_Axis = new Line3Df(Vector3Df.Zero, Vector3Df.Right);
+			public readonly static Line3Df XAxis = new Line3Df(Vector3Df.Zero, Vector3Df.Right);
 
 			/// <summary>
 			/// Ось по Y
 			/// </summary>
-			public readonly static Line3Df Y_Axis = new Line3Df(Vector3Df.Zero, Vector3Df.Up);
+			public readonly static Line3Df YAxis = new Line3Df(Vector3Df.Zero, Vector3Df.Up);
 
 			/// <summary>
 			/// Ось по Z
 			/// </summary>
-			public readonly static Line3Df Z_Axis = new Line3Df(Vector3Df.Zero, Vector3Df.Forward);
+			public readonly static Line3Df ZAxis = new Line3Df(Vector3Df.Zero, Vector3Df.Forward);
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
@@ -94,7 +94,7 @@ namespace Lotus
 				Direction = source.Direction;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует линию указанными параметрами
@@ -189,7 +189,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetHashCode()
 			{
-				return (Position.GetHashCode() ^ Direction.GetHashCode());
+				return Position.GetHashCode() ^ Direction.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -257,7 +257,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Ray"/>
@@ -289,13 +289,13 @@ namespace Lotus
 			/// <summary>
 			/// Установка параметров линии
 			/// </summary>
-			/// <param name="start_point">Начальная точка</param>
-			/// <param name="end_point">Конечная точка</param>
+			/// <param name="startPoint">Начальная точка</param>
+			/// <param name="endPoint">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromPoint(in Vector3Df start_point, in Vector3Df end_point)
+			public void SetFromPoint(in Vector3Df startPoint, in Vector3Df endPoint)
 			{
-				Position = start_point;
-				Direction = (end_point - start_point).Normalized;
+				Position = startPoint;
+				Direction = (endPoint - startPoint).Normalized;
 			}
 			#endregion
 		}

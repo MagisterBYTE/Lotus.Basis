@@ -149,7 +149,7 @@ namespace Lotus
 				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
 				var ll = from.Length * to.Length;
 				var csv = dot / ll;
-				return XMathAngle.NormalizationFull(Math.Acos(csv) * XMath.RadianToDegree_d);
+				return XMathAngle.NormalizationFull(Math.Acos(csv) * XMath.RadianToDegree_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -678,7 +678,7 @@ namespace Lotus
 				return new Vector3Df((Single)vector.X, (Single)vector.Y, (Single)vector.Z);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Vector3"/> 
@@ -1085,7 +1085,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df Scale(Vector3Df vector, Vector3Df scale)
 			{
-				return (new Vector3Df(vector.X * scale.X, vector.Y * scale.Y, vector.Z * scale.Z));
+				return new Vector3Df(vector.X * scale.X, vector.Y * scale.Y, vector.Z * scale.Z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1116,7 +1116,7 @@ namespace Lotus
 				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
 				var ll = from.Length * to.Length;
 				var csv = dot / ll;
-				return (Single)XMathAngle.NormalizationFull(Math.Acos(csv) * XMath.RadianToDegree_d);
+				return (Single)XMathAngle.NormalizationFull(Math.Acos(csv) * XMath.RadianToDegree_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1253,14 +1253,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df FromSpherical(Single radius, Single theta, Single phi)
 			{
-				var radian_theta = theta * XMath.DegreeToRadian_f;
-				var radian_phi = phi * XMath.DegreeToRadian_f;
+				var radian_theta = theta * XMath.DegreeToRadian_F;
+				var radian_phi = phi * XMath.DegreeToRadian_F;
 				
 				var z = (Single)(Math.Sin(radian_theta) * Math.Cos(radian_phi)) * radius;
 				var x = (Single)(Math.Sin(radian_theta) * Math.Sin(radian_phi)) * radius;
-				var y = (Single)(Math.Cos(radian_theta)) * radius;
+				var y = (Single)Math.Cos(radian_theta) * radius;
 
-				return (new Vector3Df(x, y, z));
+				return new Vector3Df(x, y, z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1289,38 +1289,38 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df FromGeographicCoordSystem(Single radius, Single latitude, Single longitude)
 			{
-				var theta = latitude * XMath.DegreeToRadian_f;
-				var phi = longitude * XMath.DegreeToRadian_f;
+				var theta = latitude * XMath.DegreeToRadian_F;
+				var phi = longitude * XMath.DegreeToRadian_F;
 
 				var z = (Single)(Math.Sin(theta) * Math.Cos(phi)) * radius;
 				var x = (Single)(Math.Sin(theta) * Math.Sin(phi)) * radius;
-				var y = (Single)(Math.Cos(theta)) * radius;
+				var y = (Single)Math.Cos(theta) * radius;
 
-				return (new Vector3Df(x, y, z));
+				return new Vector3Df(x, y, z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение вектора перпендикулярного указанной плоскости
 			/// </summary>
-			/// <param name="plane_type">Плоскость</param>
+			/// <param name="planeType">Плоскость</param>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df GetPerpendicularPlane(TDimensionPlane plane_type)
+			public static Vector3Df GetPerpendicularPlane(TDimensionPlane planeType)
 			{
-				if(plane_type == TDimensionPlane.XZ)
+				if(planeType == TDimensionPlane.XZ)
 				{
-					return (Vector3Df.Up);
+					return Vector3Df.Up;
 				}
 				else
 				{
-					if (plane_type == TDimensionPlane.ZY)
+					if (planeType == TDimensionPlane.ZY)
 					{
-						return (Vector3Df.Right);
+						return Vector3Df.Right;
 					}
 					else
 					{
-						return (Vector3Df.Forward);
+						return Vector3Df.Forward;
 					}
 				}
 			}
@@ -1740,7 +1740,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Vector3"/> 

@@ -49,7 +49,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Pivot
 			{
-				get { return (mPivot); }
+				get { return mPivot; }
 				set 
 				{
 					mPivot = value;
@@ -61,7 +61,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Offset
 			{
-				get { return (mOffset); }
+				get { return mOffset; }
 				set
 				{
 					mOffset = value;
@@ -73,7 +73,7 @@ namespace Lotus
 			/// </summary>
 			public Quaternion3Df Rotation
 			{
-				get { return (mRotation); }
+				get { return mRotation; }
 				set { mRotation = value; }
 			}
 
@@ -82,7 +82,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Forward
 			{
-				get { return (mForward); }
+				get { return mForward; }
 				set
 				{
 
@@ -94,7 +94,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Right
 			{
-				get { return (mRight); }
+				get { return mRight; }
 				set
 				{
 
@@ -106,7 +106,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Up
 			{
-				get { return (mUp); }
+				get { return mUp; }
 				set
 				{
 
@@ -147,7 +147,7 @@ namespace Lotus
 					//transform.M43 = z;
 					//transform.M44 = 1.0;
 
-					return (transform);
+					return transform;
 				}
 			}
 			#endregion

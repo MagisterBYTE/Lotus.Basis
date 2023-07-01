@@ -60,47 +60,47 @@ namespace Lotus
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_TopLeft = new Vector2Df(0, 1);
+			public static readonly Vector2Df MapUVTopLeft = new Vector2Df(0, 1);
 
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_TopCenter = new Vector2Df(0.5f, 1);
+			public static readonly Vector2Df MapUVTopCenter = new Vector2Df(0.5f, 1);
 
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_TopRight = new Vector2Df(1, 1);
+			public static readonly Vector2Df MapUVTopRight = new Vector2Df(1, 1);
 
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_MiddleLeft = new Vector2Df(0, 0.5f);
+			public static readonly Vector2Df MapUVMiddleLeft = new Vector2Df(0, 0.5f);
 
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_MiddleCenter = new Vector2Df(0.5f, 0.5f);
+			public static readonly Vector2Df MapUVMiddleCenter = new Vector2Df(0.5f, 0.5f);
 
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_MiddleRight = new Vector2Df(1, 0.5f);
+			public static readonly Vector2Df MapUVMiddleRight = new Vector2Df(1, 0.5f);
 
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_BottomLeft = new Vector2Df(0, 0);
+			public static readonly Vector2Df MapUVBottomLeft = new Vector2Df(0, 0);
 
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_BottomCenter = new Vector2Df(0.5f, 0);
+			public static readonly Vector2Df MapUVBottomCenter = new Vector2Df(0.5f, 0);
 
 			/// <summary>
 			/// Текстурные координаты
 			/// </summary>
-			public static readonly Vector2Df MapUV_BottomRight = new Vector2Df(1, 0);
+			public static readonly Vector2Df MapUVBottomRight = new Vector2Df(1, 0);
 #pragma warning restore 0414
 			#endregion
 
@@ -115,7 +115,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df PointOnCircle(Single radius, Single angle)
 			{
-				var angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var angle_in_radians = angle * XMath.DegreeToRadian_F;
 				return new Vector2Df(radius * XMath.Sin(angle_in_radians), radius * XMath.Cos(angle_in_radians));
 			}
 

@@ -503,34 +503,34 @@ namespace Lotus
 			/// <summary>
 			/// Creates a transformation matrix
 			/// </summary>
-			/// <param name="x_scale">Scaling factor that is applied along the x-axis</param>
-			/// <param name="y_scale">Scaling factor that is applied along the y-axis</param>
+			/// <param name="xScale">Scaling factor that is applied along the x-axis</param>
+			/// <param name="yScale">Scaling factor that is applied along the y-axis</param>
 			/// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis</param>
-			/// <param name="x_offset">X-coordinate offset</param>
-			/// <param name="y_offset">Y-coordinate offset</param>
+			/// <param name="xOffset">X-coordinate offset</param>
+			/// <param name="yOffset">Y-coordinate offset</param>
 			/// <param name="result">When the method completes, contains the created transformation matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Transformation(Single x_scale, Single y_scale, Single angle, Single x_offset, 
-				Single y_offset, out Matrix3Dx2f result)
+			public static void Transformation(Single xScale, Single yScale, Single angle, Single xOffset, 
+				Single yOffset, out Matrix3Dx2f result)
 			{
-				result = Scaling(x_scale, y_scale) * Rotation(angle) * Translation(x_offset, y_offset);
+				result = Scaling(xScale, yScale) * Rotation(angle) * Translation(xOffset, yOffset);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Creates a transformation matrix
 			/// </summary>
-			/// <param name="x_scale">Scaling factor that is applied along the x-axis</param>
-			/// <param name="y_scale">Scaling factor that is applied along the y-axis</param>
+			/// <param name="xScale">Scaling factor that is applied along the x-axis</param>
+			/// <param name="yScale">Scaling factor that is applied along the y-axis</param>
 			/// <param name="angle">Angle of rotation in radians</param>
-			/// <param name="x_offset">X-coordinate offset</param>
-			/// <param name="y_offset">Y-coordinate offset</param>
+			/// <param name="xOffset">X-coordinate offset</param>
+			/// <param name="yOffset">Y-coordinate offset</param>
 			/// <returns>The created transformation matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Transformation(Single x_scale, Single y_scale, Single angle, Single x_offset, Single y_offset)
+			public static Matrix3Dx2f Transformation(Single xScale, Single yScale, Single angle, Single xOffset, Single yOffset)
 			{
 				Matrix3Dx2f result;
-				Transformation(x_scale, y_scale, angle, x_offset, y_offset, out result);
+				Transformation(xScale, yScale, angle, xOffset, yOffset, out result);
 				return result;
 			}
 
@@ -641,14 +641,14 @@ namespace Lotus
 			/// <summary>
 			/// Creates a skew matrix
 			/// </summary>
-			/// <param name="angle_x">Angle of skew along the X-axis in radians</param>
-			/// <param name="angle_y">Angle of skew along the Y-axis in radians</param>
+			/// <param name="angleX">Angle of skew along the X-axis in radians</param>
+			/// <param name="angleY">Angle of skew along the Y-axis in radians</param>
 			/// <returns>The created skew matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Matrix3Dx2f Skew(Single angle_x, Single angle_y)
+			public static Matrix3Dx2f Skew(Single angleX, Single angleY)
 			{
 				Matrix3Dx2f result;
-				Skew(angle_x, angle_y, out result);
+				Skew(angleX, angleY, out result);
 				return result;
 			}
 
@@ -656,15 +656,15 @@ namespace Lotus
 			/// <summary>
 			/// Creates a skew matrix
 			/// </summary>
-			/// <param name="angle_x">Angle of skew along the X-axis in radians</param>
-			/// <param name="angle_y">Angle of skew along the Y-axis in radians</param>
+			/// <param name="angleX">Angle of skew along the X-axis in radians</param>
+			/// <param name="angleY">Angle of skew along the Y-axis in radians</param>
 			/// <param name="result">When the method completes, contains the created skew matrix</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Skew(Single angle_x, Single angle_y, out Matrix3Dx2f result)
+			public static void Skew(Single angleX, Single angleY, out Matrix3Dx2f result)
 			{
 				result = Matrix3Dx2f.Identity;
-				result.M12 = (Single)Math.Tan(angle_x);
-				result.M21 = (Single)Math.Tan(angle_y);
+				result.M12 = (Single)Math.Tan(angleX);
+				result.M21 = (Single)Math.Tan(angleY);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -876,19 +876,19 @@ namespace Lotus
 			/// <summary>
 			/// Determines whether the specified <see cref="System.Object"/> is equal to this instance
 			/// </summary>
-			/// <param name="value">The <see cref="System.Object"/> to compare with this instance</param>
+			/// <param name="obj">The <see cref="System.Object"/> to compare with this instance</param>
 			/// <returns>
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object value)
+			public override Boolean Equals(System.Object obj)
 			{
-				if (!(value is Matrix3Dx2f))
+				if (!(obj is Matrix3Dx2f))
 				{
 					return false;
 				}
 
-				var matrix = (Matrix3Dx2f)value;
+				var matrix = (Matrix3Dx2f)obj;
 				return Equals(in matrix);
 			}
 
@@ -917,12 +917,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(in Matrix3Dx2f other)
 			{
-				return (XMath.Approximately(other.M11, M11) &&
+				return XMath.Approximately(other.M11, M11) &&
 					XMath.Approximately(other.M12, M12) &&
 					XMath.Approximately(other.M21, M21) &&
 					XMath.Approximately(other.M22, M22) &&
 					XMath.Approximately(other.M31, M31) &&
-					XMath.Approximately(other.M32, M32));
+					XMath.Approximately(other.M32, M32);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -987,17 +987,17 @@ namespace Lotus
 			/// <summary>
 			/// Преобразование к текстовому представлению
 			/// </summary>
-			/// <param name="format_provider">Интерфейс провайдера формата значения компонента</param>
+			/// <param name="formatProvider">Интерфейс провайдера формата значения компонента</param>
 			/// <returns>
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public String ToString(IFormatProvider format_provider)
+			public String ToString(IFormatProvider formatProvider)
 			{
-				return String.Format(format_provider, "[M11:{0} M12:{1}] [M21:{2} M22:{3}] [M31:{4} M32:{5}]",
-					M11.ToString(format_provider), M12.ToString(format_provider),
-					M21.ToString(format_provider), M22.ToString(format_provider),
-					M31.ToString(format_provider), M32.ToString(format_provider));
+				return String.Format(formatProvider, "[M11:{0} M12:{1}] [M21:{2} M22:{3}] [M31:{4} M32:{5}]",
+					M11.ToString(formatProvider), M12.ToString(formatProvider),
+					M21.ToString(formatProvider), M22.ToString(formatProvider),
+					M31.ToString(formatProvider), M32.ToString(formatProvider));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1005,22 +1005,22 @@ namespace Lotus
 			/// Преобразование к текстовому представлению
 			/// </summary>
 			/// <param name="format">Формат отображения значения компонента</param>
-			/// <param name="format_provider">Интерфейс провайдера формата значения компонента</param>
+			/// <param name="formatProvider">Интерфейс провайдера формата значения компонента</param>
 			/// <returns>
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public String ToString(String format, IFormatProvider format_provider)
+			public String ToString(String format, IFormatProvider formatProvider)
 			{
 				if (format == null)
 				{
-					return ToString(format_provider);
+					return ToString(formatProvider);
 				}
 
-				return String.Format(format, format_provider, "[M11:{0} M12:{1}] [M21:{2} M22:{3}] [M31:{4} M32:{5}]",
-					M11.ToString(format, format_provider), M12.ToString(format, format_provider),
-					M21.ToString(format, format_provider), M22.ToString(format, format_provider),
-					M31.ToString(format, format_provider), M32.ToString(format, format_provider));
+				return String.Format(format, formatProvider, "[M11:{0} M12:{1}] [M21:{2} M22:{3}] [M31:{4} M32:{5}]",
+					M11.ToString(format, formatProvider), M12.ToString(format, formatProvider),
+					M21.ToString(format, formatProvider), M22.ToString(format, formatProvider),
+					M31.ToString(format, formatProvider), M32.ToString(format, formatProvider));
 			}
 			#endregion
 

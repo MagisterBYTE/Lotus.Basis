@@ -55,48 +55,48 @@ namespace Lotus
 				Vector3D v = axis.Normalized;
 
 				var half_angle = angle * 0.5;
-				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
 
 				result.X = v.X * sin_a;
 				result.Y = v.Y * sin_a;
 				result.Z = v.Z * sin_a;
-				result.W = Math.Cos(half_angle * XMath.DegreeToRadian_d);
+				result.W = Math.Cos(half_angle * XMath.DegreeToRadian_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка кватерниона поворота от одного направления до другого по кратчайшей дуге
 			/// </summary>
-			/// <param name="from_direction">Начальное направление</param>
-			/// <param name="to_direction">Требуемое направление</param>
+			/// <param name="fromDirection">Начальное направление</param>
+			/// <param name="toDirection">Требуемое направление</param>
 			/// <param name="result">Результирующий кватернион</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void FromToRotation(in Vector3D from_direction, in Vector3D to_direction, out Quaternion3D result)
+			public static void FromToRotation(in Vector3D fromDirection, in Vector3D toDirection, out Quaternion3D result)
 			{
 				// Получаем ось вращения
-				Vector3D axis = from_direction ^ to_direction;
+				Vector3D axis = fromDirection ^ toDirection;
 
 				result.X = axis.X;
 				result.Y = axis.Y;
 				result.Z = axis.Z;
-				result.W = from_direction * to_direction;
+				result.W = fromDirection * toDirection;
 				result.Normalize();
 
 				// reducing angle to halfangle
 				result.W += 1.0;
 
 				// angle close to PI
-				if (result.W <= XMath.Eplsilon_d)
+				if (result.W <= XMath.Eplsilon_D)
 				{
-					if (from_direction.Z * from_direction.Z > from_direction.X * from_direction.X)
+					if (fromDirection.Z * fromDirection.Z > fromDirection.X * fromDirection.X)
 					{
 						// from * vector3(1,0,0) 
-						result.Set(0, from_direction.Z, -from_direction.Y, result.W);
+						result.Set(0, fromDirection.Z, -fromDirection.Y, result.W);
 					}
 					else
 					{
 						//from * vector3(0,0,1) 
-						result.Set(from_direction.Y, -from_direction.X, 0, result.W);
+						result.Set(fromDirection.Y, -fromDirection.X, 0, result.W);
 					}
 				}
 
@@ -203,7 +203,7 @@ namespace Lotus
 			/// </summary>
 			public Double SqrLength
 			{
-				get { return ((X * X) + (Y * Y) + (Z * Z) + (W * W)); }
+				get { return (X * X) + (Y * Y) + (Z * Z) + (W * W); }
 			}
 
 			/// <summary>
@@ -294,12 +294,12 @@ namespace Lotus
 				Vector3D v = axis.Normalized;
 
 				var half_angle = angle * 0.5;
-				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
 
 				X = v.X * sin_a;
 				Y = v.Y * sin_a;
 				Z = v.Z * sin_a;
-				W = Math.Cos(half_angle * XMath.DegreeToRadian_d);
+				W = Math.Cos(half_angle * XMath.DegreeToRadian_D);
 			}
 			#endregion
 
@@ -629,44 +629,44 @@ namespace Lotus
 				Vector3D v = axis.Normalized;
 
 				var half_angle = angle * 0.5;
-				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
 
 				X = v.X * sin_a;
 				Y = v.Y * sin_a;
 				Z = v.Z * sin_a;
-				W = Math.Cos(half_angle * XMath.DegreeToRadian_d);
+				W = Math.Cos(half_angle * XMath.DegreeToRadian_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка кватерниона поворота от одного направления до другого по кратчайшей дуге
 			/// </summary>
-			/// <param name="from_direction">Начальное направление</param>
-			/// <param name="to_direction">Требуемое направление</param>
+			/// <param name="fromDirection">Начальное направление</param>
+			/// <param name="toDirection">Требуемое направление</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromToRotation(in Vector3D from_direction, in Vector3D to_direction)
+			public void SetFromToRotation(in Vector3D fromDirection, in Vector3D toDirection)
 			{
 				// Получаем ось вращения
-				Vector3D axis = from_direction ^ to_direction;
+				Vector3D axis = fromDirection ^ toDirection;
 
-				Set(axis.X, axis.Y, axis.Z, from_direction * to_direction);
+				Set(axis.X, axis.Y, axis.Z, fromDirection * toDirection);
 				Normalize();
 
 				// reducing angle to halfangle
 				W += 1.0;
 
 				// angle close to PI
-				if (W <= XMath.Eplsilon_d)
+				if (W <= XMath.Eplsilon_D)
 				{
-					if (from_direction.Z * from_direction.Z > from_direction.X * from_direction.X)
+					if (fromDirection.Z * fromDirection.Z > fromDirection.X * fromDirection.X)
 					{
 						// from * vector3(1,0,0) 
-						Set(0, from_direction.Z, -from_direction.Y, W);
+						Set(0, fromDirection.Z, -fromDirection.Y, W);
 					}
 					else
 					{
 						//from * vector3(0,0,1) 
-						Set(from_direction.Y, -from_direction.X, 0, W);
+						Set(fromDirection.Y, -fromDirection.X, 0, W);
 					}
 				}
 
@@ -766,48 +766,48 @@ namespace Lotus
 				Vector3Df v = axis.Normalized;
 
 				var half_angle = angle * 0.5f;
-				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_D);
 
 				result.X = v.X * sin_a;
 				result.Y = v.Y * sin_a;
 				result.Z = v.Z * sin_a;
-				result.W = (Single)Math.Cos(half_angle * XMath.DegreeToRadian_d);
+				result.W = (Single)Math.Cos(half_angle * XMath.DegreeToRadian_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка кватерниона поворота от одного направления до другого по кратчайшей дуге
 			/// </summary>
-			/// <param name="from_direction">Начальное направление</param>
-			/// <param name="to_direction">Требуемое направление</param>
+			/// <param name="fromDirection">Начальное направление</param>
+			/// <param name="toDirection">Требуемое направление</param>
 			/// <param name="result">Результирующий кватернион</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SetFromToRotation(in Vector3Df from_direction, in Vector3Df to_direction, out Quaternion3Df result)
+			public static void SetFromToRotation(in Vector3Df fromDirection, in Vector3Df toDirection, out Quaternion3Df result)
 			{
 				// Получаем ось вращения
-				Vector3Df axis = from_direction ^ to_direction;
+				Vector3Df axis = fromDirection ^ toDirection;
 
 				result.X = axis.X;
 				result.Y = axis.Y;
 				result.Z = axis.Z;
-				result.W = from_direction * to_direction;
+				result.W = fromDirection * toDirection;
 				result.Normalize();
 
 				// reducing angle to halfangle
 				result.W += 1.0f;
 
 				// angle close to PI
-				if (result.W <= XMath.Eplsilon_d)
+				if (result.W <= XMath.Eplsilon_D)
 				{
-					if (from_direction.Z * from_direction.Z > from_direction.X * from_direction.X)
+					if (fromDirection.Z * fromDirection.Z > fromDirection.X * fromDirection.X)
 					{
 						// from * vector3(1,0,0) 
-						result.Set(0, from_direction.Z, -from_direction.Y, result.W);
+						result.Set(0, fromDirection.Z, -fromDirection.Y, result.W);
 					}
 					else
 					{
 						//from * vector3(0,0,1) 
-						result.Set(from_direction.Y, -from_direction.X, 0, result.W);
+						result.Set(fromDirection.Y, -fromDirection.X, 0, result.W);
 					}
 				}
 
@@ -1104,12 +1104,12 @@ namespace Lotus
 				Vector3Df v = axis.Normalized;
 
 				var half_angle = angle * 0.5f;
-				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_D);
 
 				X = v.X * sin_a;
 				Y = v.Y * sin_a;
 				Z = v.Z * sin_a;
-				W = (Single)Math.Cos(half_angle * XMath.DegreeToRadian_d);
+				W = (Single)Math.Cos(half_angle * XMath.DegreeToRadian_D);
 			}
 			#endregion
 
@@ -1439,24 +1439,24 @@ namespace Lotus
 				Vector3Df v = axis.Normalized;
 
 				var half_angle = angle * 0.5f;
-				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_d);
+				var sin_a = (Single)Math.Sin(half_angle * XMath.DegreeToRadian_D);
 
 				X = v.X * sin_a;
 				Y = v.Y * sin_a;
 				Z = v.Z * sin_a;
-				W = (Single)Math.Cos(half_angle * XMath.DegreeToRadian_d);
+				W = (Single)Math.Cos(half_angle * XMath.DegreeToRadian_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка кватерниона поворота от одного направления до другого по кратчайшей дуге
 			/// </summary>
-			/// <param name="from_direction">Начальное направление</param>
-			/// <param name="to_direction">Требуемое направление</param>
+			/// <param name="fromDirection">Начальное направление</param>
+			/// <param name="toDirection">Требуемое направление</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromToRotation(in Vector3Df from_direction, in Vector3Df to_direction)
+			public void SetFromToRotation(in Vector3Df fromDirection, in Vector3Df toDirection)
 			{
-				SetFromToRotation(in from_direction, in to_direction, out this);
+				SetFromToRotation(in fromDirection, in toDirection, out this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------

@@ -201,7 +201,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double RevolutionsToRadians(Double revolution)
 			{
-				return revolution * XMath.PI2d;
+				return revolution * XMath.PI2_D;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single RevolutionsToRadians(Single revolution)
 			{
-				return revolution * XMath.PI2f;
+				return revolution * XMath.PI2_F;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

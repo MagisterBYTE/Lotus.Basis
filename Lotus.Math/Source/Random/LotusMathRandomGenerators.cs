@@ -234,12 +234,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="init_key">Начальное значение генератора</param>
+			/// <param name="initKey">Начальное значение генератора</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CRandomMersenneTwister(UInt32[] init_key)
+			public CRandomMersenneTwister(UInt32[] initKey)
 			{
 				mMti = SIZE + 1;
-				InitFromArray(init_key);
+				InitFromArray(initKey);
 			}
 			#endregion
 

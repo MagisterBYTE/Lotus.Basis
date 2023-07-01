@@ -125,7 +125,7 @@ namespace Lotus
 			{
 				var hit = new TIntersectHit3Df();
 				hit.IntersectType = TIntersectType3D.None;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ namespace Lotus
 				var hit = new TIntersectHit3Df();
 				hit.IntersectType = TIntersectType3D.Point;
 				hit.Point1 = point;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -157,24 +157,24 @@ namespace Lotus
 				hit.IntersectType = TIntersectType3D.Point;
 				hit.Point1 = point;
 				hit.Distance = distance;
-				return (hit);
+				return hit;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Пересечения представляет собой отрезок
 			/// </summary>
-			/// <param name="point_1">Первая точка пересечения</param>
-			/// <param name="point_2">Вторая точка пересечения</param>
+			/// <param name="point1">Первая точка пересечения</param>
+			/// <param name="point2">Вторая точка пересечения</param>
 			/// <returns>Информация о пересечении</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TIntersectHit3Df Segment(in Vector3Df point_1, in Vector3Df point_2)
+			public static TIntersectHit3Df Segment(in Vector3Df point1, in Vector3Df point2)
 			{
 				var hit = new TIntersectHit3Df();
 				hit.IntersectType = TIntersectType3D.Segment;
-				hit.Point1 = point_1;
-				hit.Point2 = point_2;
-				return (hit);
+				hit.Point1 = point1;
+				hit.Point2 = point2;
+				return hit;
 			}
 			#endregion
 
@@ -232,13 +232,13 @@ namespace Lotus
 			/// Проверка нахождения точки на линии
 			/// </summary>
 			/// <param name="point">Проверяемая точка</param>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
 			/// <returns>Статус нахождения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean PointLine(Vector3Df point, Vector3Df line_pos, Vector3Df line_dir)
+			public static Boolean PointLine(Vector3Df point, Vector3Df linePos, Vector3Df lineDir)
 			{
-				return XDistance3D.PointLine(point, line_pos, line_dir) < XGeometry3D.Eplsilon_f;
+				return XDistance3D.PointLine(point, linePos, lineDir) < XGeometry3D.Eplsilon_f;
 			}
 			#endregion
 
@@ -289,13 +289,13 @@ namespace Lotus
 			/// Проверка на нахождение точки на луче
 			/// </summary>
 			/// <param name="point">Проверяемая точка</param>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <returns>Статус нахождения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean PointRay(Vector3Df point, Vector3Df ray_pos, Vector3Df ray_dir)
+			public static Boolean PointRay(Vector3Df point, Vector3Df rayPos, Vector3Df rayDir)
 			{
-				return XDistance3D.PointRay(point, ray_pos, ray_dir) < XGeometry3D.Eplsilon_f;
+				return XDistance3D.PointRay(point, rayPos, rayDir) < XGeometry3D.Eplsilon_f;
 			}
 			#endregion
 
@@ -347,14 +347,14 @@ namespace Lotus
 			/// Проверка на попадание точки в область сферы
 			/// </summary>
 			/// <param name="point">Проверяемая точка</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean PointSphere(in Vector3Df point, in Vector3Df sphere_center, Single sphere_radius)
+			public static Boolean PointSphere(in Vector3Df point, in Vector3Df sphereCenter, Single sphereRadius)
 			{
 				// For points on the sphere's surface magnitude is more stable than SqrLength
-				return (point - sphere_center).Length < (sphere_radius * sphere_radius) + XGeometry3D.Eplsilon_f;
+				return (point - sphereCenter).Length < (sphereRadius * sphereRadius) + XGeometry3D.Eplsilon_f;
 			}
 			#endregion
 
@@ -363,66 +363,66 @@ namespace Lotus
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="line_a">Первая линия</param>
-			/// <param name="line_b">Вторая линия</param>
+			/// <param name="lineA">Первая линия</param>
+			/// <param name="lineB">Вторая линия</param>
 			/// <returns>Статус пересечения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineLine(in Line3Df line_a, in Line3Df line_b)
+			public static Boolean LineLine(in Line3Df lineA, in Line3Df lineB)
 			{
-				return LineLine(in line_a.Position, in line_a.Direction, in line_b.Position, in line_b.Direction, out _);
+				return LineLine(in lineA.Position, in lineA.Direction, in lineB.Position, in lineB.Direction, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="line_a">Первая линия</param>
-			/// <param name="line_b">Вторая линия</param>
+			/// <param name="lineA">Первая линия</param>
+			/// <param name="lineB">Вторая линия</param>
 			/// <param name="hit">Точка пересечения линий если они пересекаются</param>
 			/// <returns>Статус пересечения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineLine(in Line3Df line_a, in Line3Df line_b, out Vector3Df hit)
+			public static Boolean LineLine(in Line3Df lineA, in Line3Df lineB, out Vector3Df hit)
 			{
-				return LineLine(in line_a.Position, in line_a.Direction, in line_b.Position, in line_b.Direction, out hit);
+				return LineLine(in lineA.Position, in lineA.Direction, in lineB.Position, in lineB.Direction, out hit);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="pos_a">Позиция первой линии</param>
-			/// <param name="dir_a">Направление первой линии</param>
-			/// <param name="pos_b">Позиция второй линии</param>
-			/// <param name="dir_b">Направление второй линии</param>
+			/// <param name="posA">Позиция первой линии</param>
+			/// <param name="dirA">Направление первой линии</param>
+			/// <param name="posB">Позиция второй линии</param>
+			/// <param name="dirB">Направление второй линии</param>
 			/// <returns>Статус пересечения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineLine(in Vector3Df pos_a, in Vector3Df dir_a, in Vector3Df pos_b, in Vector3Df dir_b)
+			public static Boolean LineLine(in Vector3Df posA, in Vector3Df dirA, in Vector3Df posB, in Vector3Df dirB)
 			{
-				return LineLine(in pos_a, in dir_a, in pos_b, in dir_b, out _);
+				return LineLine(in posA, in dirA, in posB, in dirB, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка пересечения двух линий
 			/// </summary>
-			/// <param name="pos_a">Позиция первой линии</param>
-			/// <param name="dir_a">Направление первой линии</param>
-			/// <param name="pos_b">Позиция второй линии</param>
-			/// <param name="dir_b">Направление второй линии</param>
+			/// <param name="posA">Позиция первой линии</param>
+			/// <param name="dirA">Направление первой линии</param>
+			/// <param name="posB">Позиция второй линии</param>
+			/// <param name="dirB">Направление второй линии</param>
 			/// <param name="hit">Точка пересечения линий если они пересекаются</param>
 			/// <returns>Статус пересечения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineLine(in Vector3Df pos_a, in Vector3Df dir_a, in Vector3Df pos_b, in Vector3Df dir_b,
+			public static Boolean LineLine(in Vector3Df posA, in Vector3Df dirA, in Vector3Df posB, in Vector3Df dirB,
 				out Vector3Df hit)
 			{
-				var sqr_length_a = dir_a.SqrLength;
-				var sqr_length_b = dir_b.SqrLength;
-				var dot_a_b = Vector3Df.Dot(in dir_a, in dir_b);
+				var sqr_length_a = dirA.SqrLength;
+				var sqr_length_b = dirB.SqrLength;
+				var dot_a_b = Vector3Df.Dot(in dirA, in dirB);
 
 				var denominator = (sqr_length_a * sqr_length_b) - (dot_a_b * dot_a_b);
-				Vector3Df pos_b_to_a = pos_a - pos_b;
-				var a = Vector3Df.Dot(in dir_a, in pos_b_to_a);
-				var b = Vector3Df.Dot(in dir_b, in pos_b_to_a);
+				Vector3Df pos_b_to_a = posA - posB;
+				var a = Vector3Df.Dot(in dirA, in pos_b_to_a);
+				var b = Vector3Df.Dot(in dirB, in pos_b_to_a);
 
 				Vector3Df closest_point_a;
 				Vector3Df closest_point_b;
@@ -431,8 +431,8 @@ namespace Lotus
 					// Parallel
 					var distance_b = dot_a_b > sqr_length_b ? a / dot_a_b : b / sqr_length_b;
 
-					closest_point_a = pos_a;
-					closest_point_b = pos_b + (dir_b * distance_b);
+					closest_point_a = posA;
+					closest_point_b = posB + (dirB * distance_b);
 				}
 				else
 				{
@@ -440,8 +440,8 @@ namespace Lotus
 					var distance_a = ((sqr_length_a * b) - (dot_a_b * a)) / denominator;
 					var distance_b = ((dot_a_b * b) - (sqr_length_b * a)) / denominator;
 
-					closest_point_a = pos_a + (dir_a * distance_a);
-					closest_point_b = pos_b + (dir_b * distance_b);
+					closest_point_a = posA + (dirA * distance_a);
+					closest_point_b = posB + (dirB * distance_b);
 				}
 
 				if ((closest_point_b - closest_point_a).SqrLength < XGeometry3D.Eplsilon_f)
@@ -486,36 +486,36 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечения линии и сферы
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineSphere(in Vector3Df line_pos, in Vector3Df line_dir, in Vector3Df sphere_center, Single sphere_radius)
+			public static Boolean LineSphere(in Vector3Df linePos, in Vector3Df lineDir, in Vector3Df sphereCenter, Single sphereRadius)
 			{
-				return LineSphere(in line_pos, in line_dir, in sphere_center, sphere_radius, out _);
+				return LineSphere(in linePos, in lineDir, in sphereCenter, sphereRadius, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения линии и сферы
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LineSphere(in Vector3Df line_pos, in Vector3Df line_dir, in Vector3Df sphere_center, Single sphere_radius,
+			public static Boolean LineSphere(in Vector3Df linePos, in Vector3Df lineDir, in Vector3Df sphereCenter, Single sphereRadius,
 				out TIntersectHit3Df hit)
 			{
-				Vector3Df pos_to_center = sphere_center - line_pos;
-				var center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
+				Vector3Df pos_to_center = sphereCenter - linePos;
+				var center_projection = Vector3Df.Dot(in lineDir, in pos_to_center);
 				var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
 
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();
@@ -523,7 +523,7 @@ namespace Lotus
 				}
 				if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
 				{
-					hit = TIntersectHit3Df.Point(line_pos + (line_dir * center_projection));
+					hit = TIntersectHit3Df.Point(linePos + (lineDir * center_projection));
 					return true;
 				}
 
@@ -531,8 +531,8 @@ namespace Lotus
 				var distance_a = center_projection - distance_to_intersection;
 				var distance_b = center_projection + distance_to_intersection;
 
-				Vector3Df point_a = line_pos + (line_dir * distance_a);
-				Vector3Df point_b = line_pos + (line_dir * distance_b);
+				Vector3Df point_a = linePos + (lineDir * distance_a);
+				Vector3Df point_b = linePos + (lineDir * distance_b);
 				hit = TIntersectHit3Df.Segment(point_a, point_b);
 				return true;
 			}
@@ -543,12 +543,12 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечении/совпадения лучей
 			/// </summary>
-			/// <param name="ray_1">Первый луч</param>
-			/// <param name="ray_2">Второй луч</param>
+			/// <param name="ray1">Первый луч</param>
+			/// <param name="ray2">Второй луч</param>
 			/// <param name="point">Точка пересечения лучей, если они пересекаются</param>
 			/// <returns>Тип пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TIntersectType3D RayToRay(in Ray3D ray_1, in Ray3D ray_2, out Vector3D point)
+			public static TIntersectType3D RayToRay(in Ray3D ray1, in Ray3D ray2, out Vector3D point)
 			{
 				point = Vector3D.Zero;
 				return TIntersectType3D.None;
@@ -708,41 +708,41 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на пересечения луча и сферы
 			/// </summary>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RaySphere(in Vector3Df ray_pos, in Vector3Df ray_dir, in Vector3Df sphere_center, Single sphere_radius)
+			public static Boolean RaySphere(in Vector3Df rayPos, in Vector3Df rayDir, in Vector3Df sphereCenter, Single sphereRadius)
 			{
-				return RaySphere(in ray_pos, in ray_dir, in sphere_center, sphere_radius, out _);
+				return RaySphere(in rayPos, in rayDir, in sphereCenter, sphereRadius, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка на пересечения луча и сферы
 			/// </summary>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RaySphere(in Vector3Df ray_pos, in Vector3Df ray_dir, in Vector3Df sphere_center, Single sphere_radius,
+			public static Boolean RaySphere(in Vector3Df rayPos, in Vector3Df rayDir, in Vector3Df sphereCenter, Single sphereRadius,
 				out TIntersectHit3Df hit)
 			{
-				Vector3Df pos_to_center = sphere_center - ray_pos;
-				var center_projection = Vector3Df.Dot(in ray_dir, in pos_to_center);
-				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f)
+				Vector3Df pos_to_center = sphereCenter - rayPos;
+				var center_projection = Vector3Df.Dot(in rayDir, in pos_to_center);
+				if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();
 					return false;
 				}
 
 				var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();
@@ -755,7 +755,7 @@ namespace Lotus
 						hit = TIntersectHit3Df.None();
 						return false;
 					}
-					hit = TIntersectHit3Df.Point(ray_pos + (ray_dir * center_projection));
+					hit = TIntersectHit3Df.Point(rayPos + (rayDir * center_projection));
 					return true;
 				}
 
@@ -771,12 +771,12 @@ namespace Lotus
 						hit = TIntersectHit3Df.None();
 						return false;
 					}
-					hit = TIntersectHit3Df.Point(ray_pos + (ray_dir * distance_b));
+					hit = TIntersectHit3Df.Point(rayPos + (rayDir * distance_b));
 					return true;
 				}
 
-				Vector3Df point_a = ray_pos + (ray_dir * distance_a);
-				Vector3Df point_b = ray_pos + (ray_dir * distance_b);
+				Vector3Df point_a = rayPos + (rayDir * distance_a);
+				Vector3Df point_b = rayPos + (rayDir * distance_b);
 				hit = TIntersectHit3Df.Segment(point_a, point_b);
 				return true;
 			}
@@ -791,13 +791,13 @@ namespace Lotus
 			/// <param name="p1">Первая вершина треугольника</param>
 			/// <param name="p2">Вторая вершина треугольника</param>
 			/// <param name="p3">Третья вершина треугольника</param>
-			/// <param name="ray_hit">Информация о пересечении</param>
+			/// <param name="rayHit">Информация о пересечении</param>
 			/// <returns>Тип пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectType3D RayToTriangle(in Ray3D ray, in Vector3D p1, in Vector3D p2, Vector3D p3,
-				out TIntersectHit3D ray_hit)
+				out TIntersectHit3D rayHit)
 			{
-				ray_hit = new TIntersectHit3D();
+				rayHit = new TIntersectHit3D();
 
 				// Find vectors for two edges sharing vert0
 				Vector3D edge1 = p2 - p1;
@@ -850,10 +850,10 @@ namespace Lotus
 				v *= invert_t;
 
 				// Сохраняем данные
-				ray_hit.IntersectType = TIntersectType3D.Point;
-				ray_hit.Distance = t;
-				ray_hit.BarycentricCoordinate = new Vector3D(u, v, 0.0);
-				ray_hit.Point1 = ray.GetPoint(t);
+				rayHit.IntersectType = TIntersectType3D.Point;
+				rayHit.Distance = t;
+				rayHit.BarycentricCoordinate = new Vector3D(u, v, 0.0);
+				rayHit.Point1 = ray.GetPoint(t);
 
 				return TIntersectType3D.Point;
 			}
@@ -893,13 +893,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphere_center, Single sphere_radius)
+			public static Boolean SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphereCenter, Single sphereRadius)
 			{
-				return SegmentSphere(in start, in end, in sphere_center, sphere_radius, out _);
+				return SegmentSphere(in start, in end, in sphereCenter, sphereRadius, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -908,23 +908,23 @@ namespace Lotus
 			/// </summary>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <param name="hit">Информация о пересечении</param>
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphere_center, Single sphere_radius,
+			public static Boolean SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphereCenter, Single sphereRadius,
 				out TIntersectHit3Df hit)
 			{
-				Vector3Df segment_start_to_center = sphere_center - start;
+				Vector3Df segment_start_to_center = sphereCenter - start;
 				Vector3Df from_start_to_end = end - start;
 				var segment_length = from_start_to_end.Length;
 				if (segment_length < XGeometry3D.Eplsilon_f)
 				{
 					var distanceToPoint = segment_start_to_center.Length;
-					if (distanceToPoint < sphere_radius + XGeometry3D.Eplsilon_f)
+					if (distanceToPoint < sphereRadius + XGeometry3D.Eplsilon_f)
 					{
-						if (distanceToPoint > sphere_radius - XGeometry3D.Eplsilon_f)
+						if (distanceToPoint > sphereRadius - XGeometry3D.Eplsilon_f)
 						{
 							hit = TIntersectHit3Df.Point(start);
 							return true;
@@ -938,15 +938,15 @@ namespace Lotus
 
 				Vector3Df segment_direction = from_start_to_end.Normalized;
 				var center_projection = Vector3Df.Dot(segment_direction, segment_start_to_center);
-				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f ||
-					center_projection - sphere_radius > segment_length + XGeometry3D.Eplsilon_f)
+				if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f ||
+					center_projection - sphereRadius > segment_length + XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();
 					return false;
 				}
 
 				var sqr_distance_to_line = segment_start_to_center.SqrLength - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					hit = TIntersectHit3Df.None();

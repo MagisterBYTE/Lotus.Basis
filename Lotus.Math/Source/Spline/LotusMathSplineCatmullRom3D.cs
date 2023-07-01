@@ -200,16 +200,16 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="start_point">Начальная точка</param>
-			/// <param name="end_point">Конечная точка</param>
+			/// <param name="startPoint">Начальная точка</param>
+			/// <param name="endPoint">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CCatmullRomSpline3D(Vector3Df start_point, Vector3Df end_point)
+			public CCatmullRomSpline3D(Vector3Df startPoint, Vector3Df endPoint)
 				: base(4)
 			{
-				mControlPoints[0] = start_point;
-				mControlPoints[1] = (start_point + end_point) / 3;
-				mControlPoints[2] = (start_point + end_point) / 3 * 2;
-				mControlPoints[3] = end_point;
+				mControlPoints[0] = startPoint;
+				mControlPoints[1] = (startPoint + endPoint) / 3;
+				mControlPoints[2] = (startPoint + endPoint) / 3 * 2;
+				mControlPoints[3] = endPoint;
 			}
 			#endregion
 
@@ -375,18 +375,18 @@ namespace Lotus
 			/// </summary>
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
-			/// <param name="index_p0">Индекс первой точки</param>
-			/// <param name="index_p1">Индекс второй точки</param>
-			/// <param name="index_p2">Индекс третьей точки</param>
-			/// <param name="index_p3">Индекс четвертой точки</param>
+			/// <param name="indexP0">Индекс первой точки</param>
+			/// <param name="indexP1">Индекс второй точки</param>
+			/// <param name="indexP2">Индекс третьей точки</param>
+			/// <param name="indexP3">Индекс четвертой точки</param>
 			/// <returns>Позиция точки на сплайне CatmullRom</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df CalculatePoint(Single time, Int32 index_p0, Int32 index_p1, Int32 index_p2, Int32 index_p3)
+			public Vector3Df CalculatePoint(Single time, Int32 indexP0, Int32 indexP1, Int32 indexP2, Int32 indexP3)
 			{
-				Vector3Df a = 2f * mControlPoints[index_p1];
-				Vector3Df b = mControlPoints[index_p2] - mControlPoints[index_p0];
-				Vector3Df c = (2f * mControlPoints[index_p0]) - (5f * mControlPoints[index_p1]) + (4f * mControlPoints[index_p2]) - mControlPoints[index_p3];
-				Vector3Df d = -mControlPoints[index_p0] + (3f * mControlPoints[index_p1]) - (3f * mControlPoints[index_p2]) + mControlPoints[index_p3];
+				Vector3Df a = 2f * mControlPoints[indexP1];
+				Vector3Df b = mControlPoints[indexP2] - mControlPoints[indexP0];
+				Vector3Df c = (2f * mControlPoints[indexP0]) - (5f * mControlPoints[indexP1]) + (4f * mControlPoints[indexP2]) - mControlPoints[indexP3];
+				Vector3Df d = -mControlPoints[indexP0] + (3f * mControlPoints[indexP1]) - (3f * mControlPoints[indexP2]) + mControlPoints[indexP3];
 
 				//The cubic polynomial: a + b * t + c * t^2 + d * t^3
 				Vector3Df pos = 0.5f * (a + (b * time) + (c * time * time) + (d * time * time * time));

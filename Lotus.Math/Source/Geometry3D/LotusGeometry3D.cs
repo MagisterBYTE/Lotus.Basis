@@ -68,17 +68,17 @@ namespace Lotus
 			/// <summary>
 			/// Проекция угла между двумя векторами на выбранную ось
 			/// </summary>
-			/// <param name="dir_a">Вектор А</param>
-			/// <param name="dir_b">Вектор B</param>
+			/// <param name="dirA">Вектор А</param>
+			/// <param name="dirB">Вектор B</param>
 			/// <param name="axis">Ось проекции</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double AngleAroundAxis(in Vector3D dir_a, in Vector3D dir_b, in Vector3D axis)
+			public static Double AngleAroundAxis(in Vector3D dirA, in Vector3D dirB, in Vector3D axis)
 			{
 				return 0;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проекция угла между двумя векторами на выбранную ось
@@ -193,13 +193,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df GetPointOnCircleXZ(Single radius, Single angle)
 			{
-				var angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var angle_in_radians = angle * XMath.DegreeToRadian_F;
 				var x = radius * XMath.Cos(angle_in_radians);
 				var y = radius * XMath.Sin(angle_in_radians);
 
 				var result = new Vector3Df(x, 0, y);
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -218,12 +218,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df GetPointOnCircleZY(Single radius, Single angle)
 			{
-				var angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var angle_in_radians = angle * XMath.DegreeToRadian_F;
 				var x = radius * XMath.Cos(angle_in_radians);
 				var y = radius * XMath.Sin(angle_in_radians);
 				var result = new Vector3Df(0, y, x);
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -242,13 +242,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df GetPointOnCircleXY(Single radius, Single angle)
 			{
-				var angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var angle_in_radians = angle * XMath.DegreeToRadian_F;
 				var x = radius * XMath.Cos(angle_in_radians);
 				var y = radius * XMath.Sin(angle_in_radians);
 
 				var result = new Vector3Df(x, y, 0);
 
-				return (result);
+				return result;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -257,13 +257,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="radius">Радиус окружности</param>
 			/// <param name="segments">Количество сегментов окружности</param>
-			/// <param name="start_angle">Начальный угол (в градусах) для генерации точек</param>
+			/// <param name="startAngle">Начальный угол (в градусах) для генерации точек</param>
 			/// <returns>Список точек</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static List<Vector3Df> GeneratePointsOnCircleXZ(Single radius, Int32 segments, Single start_angle = 0)
+			public static List<Vector3Df> GeneratePointsOnCircleXZ(Single radius, Int32 segments, Single startAngle = 0)
 			{
 				var segment_angle = 360f / segments;
-				var current_angle = start_angle;
+				var current_angle = startAngle;
 				var ring = new List<Vector3Df>(segments);
 				for (var i = 0; i < segments; i++)
 				{
@@ -279,13 +279,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="radius">Радиус окружности</param>
 			/// <param name="segments">Количество сегментов окружности</param>
-			/// <param name="start_angle">Начальный угол (в градусах) для генерации точек</param>
+			/// <param name="startAngle">Начальный угол (в градусах) для генерации точек</param>
 			/// <returns>Список точек</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static List<Vector3Df> GeneratePointsOnCircleZY(Single radius, Int32 segments, Single start_angle = 0)
+			public static List<Vector3Df> GeneratePointsOnCircleZY(Single radius, Int32 segments, Single startAngle = 0)
 			{
 				var segment_angle = 360f / segments;
-				var current_angle = start_angle;
+				var current_angle = startAngle;
 				var ring = new List<Vector3Df>(segments);
 				for (var i = 0; i < segments; i++)
 				{
@@ -301,13 +301,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="radius">Радиус окружности</param>
 			/// <param name="segments">Количество сегментов окружности</param>
-			/// <param name="start_angle">Начальный угол (в градусах) для генерации точек</param>
+			/// <param name="startAngle">Начальный угол (в градусах) для генерации точек</param>
 			/// <returns>Список точек</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static List<Vector3Df> GeneratePointsOnCircleXY(Single radius, Int32 segments, Single start_angle = 0)
+			public static List<Vector3Df> GeneratePointsOnCircleXY(Single radius, Int32 segments, Single startAngle = 0)
 			{
 				var segment_angle = 360f / segments;
-				var current_angle = start_angle;
+				var current_angle = startAngle;
 				var ring = new List<Vector3Df>(segments);
 				for (var i = 0; i < segments; i++)
 				{
@@ -327,13 +327,13 @@ namespace Lotus
 			/// Экватор расположен в плоскости XZ, высота по координате Y
 			/// </para>
 			/// <param name="radius">Радиус сферы</param>
-			/// <param name="horizontal_angle">Горизонтальный угол в градусах в пределах [0, 359]</param>
-			/// <param name="vertical_angle">Вертикальный угол в градусах в пределах[-90, 90]</param>
+			/// <param name="horizontalAngle">Горизонтальный угол в градусах в пределах [0, 359]</param>
+			/// <param name="verticalAngle">Вертикальный угол в градусах в пределах[-90, 90]</param>
 			/// <returns>Сгенерированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df GetPointOnSphere(Single radius, Single horizontal_angle, Single vertical_angle)
+			public static Vector3Df GetPointOnSphere(Single radius, Single horizontalAngle, Single verticalAngle)
 			{
-				return (Vector3Df.FromSpherical(radius, horizontal_angle, vertical_angle));
+				return Vector3Df.FromSpherical(radius, horizontalAngle, verticalAngle);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -342,14 +342,14 @@ namespace Lotus
 			/// </summary>
 			/// <param name="radius">Радиус сфероида</param>
 			/// <param name="height">Высота сфероида</param>
-			/// <param name="horizontal_angle">Горизонтальный угол в градусах [0, 360]</param>
-			/// <param name="vertical_angle">Вертикальный угол в градусах [-90, 90]</param>
+			/// <param name="horizontalAngle">Горизонтальный угол в градусах [0, 360]</param>
+			/// <param name="verticalAngle">Вертикальный угол в градусах [-90, 90]</param>
 			/// <returns>Сгенерированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointOnSpheroid(Single radius, Single height, Single horizontal_angle, Single vertical_angle)
+			public static Vector3Df PointOnSpheroid(Single radius, Single height, Single horizontalAngle, Single verticalAngle)
 			{
-				var horizontal_radians = horizontal_angle * XMath.DegreeToRadian_f;
-				var vertical_radians = vertical_angle * XMath.DegreeToRadian_f;
+				var horizontal_radians = horizontalAngle * XMath.DegreeToRadian_F;
+				var vertical_radians = verticalAngle * XMath.DegreeToRadian_F;
 				var cos_vertical = XMath.Cos(vertical_radians);
 
 				return new Vector3Df(
@@ -364,14 +364,14 @@ namespace Lotus
 			/// </summary>
 			/// <param name="radius">Радиус</param>
 			/// <param name="height">Высота</param>
-			/// <param name="horizontal_angle">Горизонтальный угол в градусах [0, 360]</param>
-			/// <param name="vertical_angle">Вертикальный угол в градусах [-90, 90]</param>
+			/// <param name="horizontalAngle">Горизонтальный угол в градусах [0, 360]</param>
+			/// <param name="verticalAngle">Вертикальный угол в градусах [-90, 90]</param>
 			/// <returns>Сгенерированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointOnTeardrop(Single radius, Single height, Single horizontal_angle, Single vertical_angle)
+			public static Vector3Df PointOnTeardrop(Single radius, Single height, Single horizontalAngle, Single verticalAngle)
 			{
-				var horizontal_radians = horizontal_angle * XMath.DegreeToRadian_f;
-				var vertical_radians = vertical_angle * XMath.DegreeToRadian_f;
+				var horizontal_radians = horizontalAngle * XMath.DegreeToRadian_F;
+				var vertical_radians = verticalAngle * XMath.DegreeToRadian_F;
 				var sin_vertical = XMath.Sin(vertical_radians);
 				var teardrop = (1 - sin_vertical) * XMath.Cos(vertical_radians) / 2;
 
@@ -392,7 +392,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df GetMapUVOnCircle(Single angle)
 			{
-				var angle_in_radians = angle * XMath.DegreeToRadian_f;
+				var angle_in_radians = angle * XMath.DegreeToRadian_F;
 				return new Vector2Df((0.5f * XMath.Sin(angle_in_radians)) + 0.5f,
 					(0.5f * XMath.Cos(angle_in_radians)) + 0.5f);
 			}
@@ -402,13 +402,13 @@ namespace Lotus
 			/// Получение списка координат текстурной развертки на окружности
 			/// </summary>
 			/// <param name="segments">Количество сегментов окружности</param>
-			/// <param name="start_angle">Начальный угол (в градусах) для генерации точек</param>
+			/// <param name="startAngle">Начальный угол (в градусах) для генерации точек</param>
 			/// <returns>Список текстурных координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static List<Vector2Df> GetMapUVsOnCircle(Int32 segments, Single start_angle = 0)
+			public static List<Vector2Df> GetMapUVsOnCircle(Int32 segments, Single startAngle = 0)
 			{
 				var segment_angle = 360f / segments;
-				var current_angle = start_angle;
+				var current_angle = startAngle;
 				var ring = new List<Vector2Df>(segments);
 				for (var i = 0; i < segments; i++)
 				{
@@ -430,7 +430,7 @@ namespace Lotus
 			{
 				var u = phi / 360;
 				var v = theta / 180;
-				return (new Vector2Df(u, v));
+				return new Vector2Df(u, v);
 			}
 			#endregion
 		}

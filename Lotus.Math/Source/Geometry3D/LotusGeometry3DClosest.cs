@@ -60,13 +60,13 @@ namespace Lotus
 			/// Проекция точки на линию
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointLine(in Vector3Df point, in Vector3Df line_pos, in Vector3Df line_dir)
+			public static Vector3Df PointLine(in Vector3Df point, in Vector3Df linePos, in Vector3Df lineDir)
 			{
-				return PointLine(in point, in line_pos, in line_dir, out _);
+				return PointLine(in point, in linePos, in lineDir, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -74,16 +74,16 @@ namespace Lotus
 			/// Проекция точки на линию
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
 			/// <param name="distance">Расстояние от начала линии до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointLine(in Vector3Df point, in Vector3Df line_pos, in Vector3Df line_dir, out Single distance)
+			public static Vector3Df PointLine(in Vector3Df point, in Vector3Df linePos, in Vector3Df lineDir, out Single distance)
 			{
 				// In theory, SqrLength should be 1, but in practice this division helps with numerical stability
-				distance = Vector3Df.Dot(line_dir, point - line_pos) / line_dir.SqrLength;
-				return line_pos + (line_dir * distance);
+				distance = Vector3Df.Dot(lineDir, point - linePos) / lineDir.SqrLength;
+				return linePos + (lineDir * distance);
 			}
 			#endregion
 
@@ -120,13 +120,13 @@ namespace Lotus
 			/// Проекция точки на луч
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointRay(in Vector3Df point, in Vector3Df ray_pos, in Vector3Df ray_dir)
+			public static Vector3Df PointRay(in Vector3Df point, in Vector3Df rayPos, in Vector3Df rayDir)
 			{
-				return PointRay(in point, in ray_pos, in ray_dir, out _);
+				return PointRay(in point, in rayPos, in rayDir, out _);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -134,24 +134,24 @@ namespace Lotus
 			/// Проекция точки на луч
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <param name="distance">Расстояние от начала луча до спроецированной точки</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointRay(in Vector3Df point, in Vector3Df ray_pos, in Vector3Df ray_dir, out Single distance)
+			public static Vector3Df PointRay(in Vector3Df point, in Vector3Df rayPos, in Vector3Df rayDir, out Single distance)
 			{
-				Vector3Df to_point = point - ray_pos;
-				var point_projection = Vector3Df.Dot(in ray_dir, in to_point);
+				Vector3Df to_point = point - rayPos;
+				var point_projection = Vector3Df.Dot(in rayDir, in to_point);
 				if (point_projection <= 0)
 				{
 					distance = 0;
-					return ray_pos;
+					return rayPos;
 				}
 
 				// In theory, SqrLength should be 1, but in practice this division helps with numerical stability
-				distance = point_projection / ray_dir.SqrLength;
-				return ray_pos + (ray_dir * distance);
+				distance = point_projection / rayDir.SqrLength;
+				return rayPos + (rayDir * distance);
 			}
 			#endregion
 
@@ -175,12 +175,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="point">Точка</param>
 			/// <param name="segment">Отрезок</param>
-			/// <param name="normalize_distance">Нормализованная позиция проецируемой точки от начала отрезка</param>
+			/// <param name="normalizeDistance">Нормализованная позиция проецируемой точки от начала отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointSegment(in Vector3Df point, in Segment3Df segment, out Single normalize_distance)
+			public static Vector3Df PointSegment(in Vector3Df point, in Segment3Df segment, out Single normalizeDistance)
 			{
-				return PointSegment(in point, in segment.Start, in segment.End, out normalize_distance);
+				return PointSegment(in point, in segment.Start, in segment.End, out normalizeDistance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -204,35 +204,35 @@ namespace Lotus
 			/// <param name="point">Точка</param>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
-			/// <param name="normalize_distance">Нормализованная позиция проецируемой точки от начала отрезка</param>
+			/// <param name="normalizeDistance">Нормализованная позиция проецируемой точки от начала отрезка</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df PointSegment(in Vector3Df point, in Vector3Df start, in Vector3Df end, 
-				out Single normalize_distance)
+				out Single normalizeDistance)
 			{
 				Vector3Df segment_direction = end - start;
 				var sqr_segment_length = segment_direction.SqrLength;
 				if (sqr_segment_length < XGeometry3D.Eplsilon_f)
 				{
 					// The segment is a point
-					normalize_distance = 0;
+					normalizeDistance = 0;
 					return start;
 				}
 
 				var point_projection = Vector3Df.Dot(in segment_direction, point - start);
 				if (point_projection <= 0)
 				{
-					normalize_distance = 0;
+					normalizeDistance = 0;
 					return start;
 				}
 				if (point_projection >= sqr_segment_length)
 				{
-					normalize_distance = 1;
+					normalizeDistance = 1;
 					return end;
 				}
 
-				normalize_distance = point_projection / sqr_segment_length;
-				return start + (segment_direction * normalize_distance);
+				normalizeDistance = point_projection / sqr_segment_length;
+				return start + (segment_direction * normalizeDistance);
 			}
 			#endregion
 
@@ -255,13 +255,13 @@ namespace Lotus
 			/// Проекция точки на сферу
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Спроецированная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df PointSphere(in Vector3Df point, in Vector3Df sphere_center, Single sphere_radius)
+			public static Vector3Df PointSphere(in Vector3Df point, in Vector3Df sphereCenter, Single sphereRadius)
 			{
-				return sphere_center + ((point - sphere_center).Normalized * sphere_radius);
+				return sphereCenter + ((point - sphereCenter).Normalized * sphereRadius);
 			}
 			#endregion
 
@@ -272,50 +272,50 @@ namespace Lotus
 			/// </summary>
 			/// <param name="line">Линия</param>
 			/// <param name="sphere">Сфера</param>
-			/// <param name="line_point">Точка проекции на линии</param>
-			/// <param name="sphere_point">Точка проекции на сфере</param>
+			/// <param name="linePoint">Точка проекции на линии</param>
+			/// <param name="spherePoint">Точка проекции на сфере</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineSphere(in Line3Df line, in Sphere3Df sphere, out Vector3Df line_point, out Vector3Df sphere_point)
+			public static void LineSphere(in Line3Df line, in Sphere3Df sphere, out Vector3Df linePoint, out Vector3Df spherePoint)
 			{
-				LineSphere(line.Position, line.Direction, sphere.Center, sphere.Radius, out line_point, out sphere_point);
+				LineSphere(line.Position, line.Direction, sphere.Center, sphere.Radius, out linePoint, out spherePoint);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Поиск ближайших точек проекции линии и сферы
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
-			/// <param name="line_point">Точка проекции на линии</param>
-			/// <param name="sphere_point">Точка проекции на сфере</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
+			/// <param name="linePoint">Точка проекции на линии</param>
+			/// <param name="spherePoint">Точка проекции на сфере</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void LineSphere(in Vector3Df line_pos, in Vector3Df line_dir, in Vector3Df sphere_center, Single sphere_radius,
-				out Vector3Df line_point, out Vector3Df sphere_point)
+			public static void LineSphere(in Vector3Df linePos, in Vector3Df lineDir, in Vector3Df sphereCenter, Single sphereRadius,
+				out Vector3Df linePoint, out Vector3Df spherePoint)
 			{
-				Vector3Df pos_to_center = sphere_center - line_pos;
-				var center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
+				Vector3Df pos_to_center = sphereCenter - linePos;
+				var center_projection = Vector3Df.Dot(in lineDir, in pos_to_center);
 				var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
-					line_point = line_pos + (line_dir * center_projection);
-					sphere_point = sphere_center + ((line_point - sphere_center).Normalized * sphere_radius);
+					linePoint = linePos + (lineDir * center_projection);
+					spherePoint = sphereCenter + ((linePoint - sphereCenter).Normalized * sphereRadius);
 					return;
 				}
 				if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
 				{
 					// Point intersection
-					line_point = sphere_point = line_pos + (line_dir * center_projection);
+					linePoint = spherePoint = linePos + (lineDir * center_projection);
 					return;
 				}
 
 				// Two points intersection
 				var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
 				var distance_a = center_projection - distance_to_intersection;
-				line_point = sphere_point = line_pos + (line_dir * distance_a);
+				linePoint = spherePoint = linePos + (lineDir * distance_a);
 			}
 			#endregion
 
@@ -326,51 +326,51 @@ namespace Lotus
 			/// </summary>
 			/// <param name="ray">Луч</param>
 			/// <param name="sphere">Сфера</param>
-			/// <param name="ray_point">Точка проекции на луче</param>
-			/// <param name="sphere_point">Точка проекции на сферы</param>
+			/// <param name="rayPoint">Точка проекции на луче</param>
+			/// <param name="spherePoint">Точка проекции на сферы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RaySphere(in Ray3Df ray, in Sphere3Df sphere, out Vector3Df ray_point, out Vector3Df sphere_point)
+			public static void RaySphere(in Ray3Df ray, in Sphere3Df sphere, out Vector3Df rayPoint, out Vector3Df spherePoint)
 			{
-				RaySphere(in ray.Position, in ray.Direction, in sphere.Center, sphere.Radius, out ray_point, out sphere_point);
+				RaySphere(in ray.Position, in ray.Direction, in sphere.Center, sphere.Radius, out rayPoint, out spherePoint);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Поиск ближайших точек проекции луча и сферы
 			/// </summary>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
-			/// <param name="ray_point">Точка проекции на луче</param>
-			/// <param name="sphere_point">Точка проекции на сферы</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
+			/// <param name="rayPoint">Точка проекции на луче</param>
+			/// <param name="spherePoint">Точка проекции на сферы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void RaySphere(in Vector3Df ray_pos, in Vector3Df ray_dir, in Vector3Df sphere_center, Single sphere_radius,
-				out Vector3Df ray_point, out Vector3Df sphere_point)
+			public static void RaySphere(in Vector3Df rayPos, in Vector3Df rayDir, in Vector3Df sphereCenter, Single sphereRadius,
+				out Vector3Df rayPoint, out Vector3Df spherePoint)
 			{
-				Vector3Df pos_to_center = sphere_center - ray_pos;
-				var center_projection = Vector3Df.Dot(ray_dir, pos_to_center);
-				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f)
+				Vector3Df pos_to_center = sphereCenter - rayPos;
+				var center_projection = Vector3Df.Dot(rayDir, pos_to_center);
+				if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
-					ray_point = ray_pos;
-					sphere_point = sphere_center - (pos_to_center.Normalized * sphere_radius);
+					rayPoint = rayPos;
+					spherePoint = sphereCenter - (pos_to_center.Normalized * sphereRadius);
 					return;
 				}
 
 				var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
 					if (center_projection < -XGeometry3D.Eplsilon_f)
 					{
-						ray_point = ray_pos;
-						sphere_point = sphere_center - (pos_to_center.Normalized * sphere_radius);
+						rayPoint = rayPos;
+						spherePoint = sphereCenter - (pos_to_center.Normalized * sphereRadius);
 						return;
 					}
-					ray_point = ray_pos + (ray_dir * center_projection);
-					sphere_point = sphere_center + ((ray_point - sphere_center).Normalized * sphere_radius);
+					rayPoint = rayPos + (rayDir * center_projection);
+					spherePoint = sphereCenter + ((rayPoint - sphereCenter).Normalized * sphereRadius);
 					return;
 				}
 				if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
@@ -378,12 +378,12 @@ namespace Lotus
 					if (center_projection < -XGeometry3D.Eplsilon_f)
 					{
 						// No intersection
-						ray_point = ray_pos;
-						sphere_point = sphere_center - (pos_to_center.Normalized * sphere_radius);
+						rayPoint = rayPos;
+						spherePoint = sphereCenter - (pos_to_center.Normalized * sphereRadius);
 						return;
 					}
 					// Point intersection
-					ray_point = sphere_point = ray_pos + (ray_dir * center_projection);
+					rayPoint = spherePoint = rayPos + (rayDir * center_projection);
 					return;
 				}
 
@@ -397,18 +397,18 @@ namespace Lotus
 					if (distance_b < -XGeometry3D.Eplsilon_f)
 					{
 						// No intersection
-						ray_point = ray_pos;
-						sphere_point = sphere_center - (pos_to_center.Normalized * sphere_radius);
+						rayPoint = rayPos;
+						spherePoint = sphereCenter - (pos_to_center.Normalized * sphereRadius);
 						return;
 					}
 
 					// Point intersection
-					ray_point = sphere_point = ray_pos + (ray_dir * distance_b);
+					rayPoint = spherePoint = rayPos + (rayDir * distance_b);
 					return;
 				}
 
 				// Two points intersection
-				ray_point = sphere_point = ray_pos + (ray_dir * distance_a);
+				rayPoint = spherePoint = rayPos + (rayDir * distance_a);
 			}
 			#endregion
 
@@ -419,12 +419,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="segment">Отрезок</param>
 			/// <param name="sphere">Сфера</param>
-			/// <param name="segment_point">Точка проекции на отрезки</param>
-			/// <param name="sphere_point">Точка проекции на сферы</param>
+			/// <param name="segmentPoint">Точка проекции на отрезки</param>
+			/// <param name="spherePoint">Точка проекции на сферы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SegmentSphere(in Segment3Df segment, in Sphere3Df sphere, out Vector3Df segment_point, out Vector3Df sphere_point)
+			public static void SegmentSphere(in Segment3Df segment, in Sphere3Df sphere, out Vector3Df segmentPoint, out Vector3Df spherePoint)
 			{
-				SegmentSphere(in segment.Start, in segment.End, in sphere.Center, sphere.Radius, out segment_point, out sphere_point);
+				SegmentSphere(in segment.Start, in segment.End, in sphere.Center, sphere.Radius, out segmentPoint, out spherePoint);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -433,75 +433,75 @@ namespace Lotus
 			/// </summary>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
-			/// <param name="segment_point">Точка проекции на отрезки</param>
-			/// <param name="sphere_point">Точка проекции на сферы</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
+			/// <param name="segmentPoint">Точка проекции на отрезки</param>
+			/// <param name="spherePoint">Точка проекции на сферы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphere_center, Single sphere_radius,
-				out Vector3Df segment_point, out Vector3Df sphere_point)
+			public static void SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphereCenter, Single sphereRadius,
+				out Vector3Df segmentPoint, out Vector3Df spherePoint)
 			{
-				Vector3Df segment_start_to_center = sphere_center - start;
+				Vector3Df segment_start_to_center = sphereCenter - start;
 				Vector3Df from_start_to_end = end - start;
 				var segment_length = from_start_to_end.Length;
 				if (segment_length < XGeometry3D.Eplsilon_f)
 				{
-					segment_point = start;
+					segmentPoint = start;
 					var distanceToPoint = segment_start_to_center.Length;
-					if (distanceToPoint < sphere_radius + XGeometry3D.Eplsilon_f)
+					if (distanceToPoint < sphereRadius + XGeometry3D.Eplsilon_f)
 					{
-						if (distanceToPoint > sphere_radius - XGeometry3D.Eplsilon_f)
+						if (distanceToPoint > sphereRadius - XGeometry3D.Eplsilon_f)
 						{
-							sphere_point = segment_point;
+							spherePoint = segmentPoint;
 							return;
 						}
 						if (distanceToPoint < XGeometry3D.Eplsilon_f)
 						{
-							sphere_point = segment_point;
+							spherePoint = segmentPoint;
 							return;
 						}
 					}
 					Vector3Df to_point = -segment_start_to_center / distanceToPoint;
-					sphere_point = sphere_center + (to_point * sphere_radius);
+					spherePoint = sphereCenter + (to_point * sphereRadius);
 					return;
 				}
 
 				Vector3Df segment_direction = from_start_to_end.Normalized;
 				var center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
-				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f ||
-					center_projection - sphere_radius > segment_length + XGeometry3D.Eplsilon_f)
+				if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f ||
+					center_projection - sphereRadius > segment_length + XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
 					if (center_projection < 0)
 					{
-						segment_point = start;
-						sphere_point = sphere_center - (segment_start_to_center.Normalized * sphere_radius);
+						segmentPoint = start;
+						spherePoint = sphereCenter - (segment_start_to_center.Normalized * sphereRadius);
 						return;
 					}
-					segment_point = end;
-					sphere_point = sphere_center - ((sphere_center - end).Normalized * sphere_radius);
+					segmentPoint = end;
+					spherePoint = sphereCenter - ((sphereCenter - end).Normalized * sphereRadius);
 					return;
 				}
 
 				var sqr_distance_to_line = segment_start_to_center.SqrLength - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
 					if (center_projection < -XGeometry3D.Eplsilon_f)
 					{
-						segment_point = start;
-						sphere_point = sphere_center - (segment_start_to_center.Normalized * sphere_radius);
+						segmentPoint = start;
+						spherePoint = sphereCenter - (segment_start_to_center.Normalized * sphereRadius);
 						return;
 					}
 					if (center_projection > segment_length + XGeometry3D.Eplsilon_f)
 					{
-						segment_point = end;
-						sphere_point = sphere_center - ((sphere_center - end).Normalized * sphere_radius);
+						segmentPoint = end;
+						spherePoint = sphereCenter - ((sphereCenter - end).Normalized * sphereRadius);
 						return;
 					}
-					segment_point = start + (segment_direction * center_projection);
-					sphere_point = sphere_center + ((segment_point - sphere_center).Normalized * sphere_radius);
+					segmentPoint = start + (segment_direction * center_projection);
+					spherePoint = sphereCenter + ((segmentPoint - sphereCenter).Normalized * sphereRadius);
 					return;
 				}
 
@@ -510,19 +510,19 @@ namespace Lotus
 					if (center_projection < -XGeometry3D.Eplsilon_f)
 					{
 						// No intersection
-						segment_point = start;
-						sphere_point = sphere_center - (segment_start_to_center.Normalized * sphere_radius);
+						segmentPoint = start;
+						spherePoint = sphereCenter - (segment_start_to_center.Normalized * sphereRadius);
 						return;
 					}
 					if (center_projection > segment_length + XGeometry3D.Eplsilon_f)
 					{
 						// No intersection
-						segment_point = end;
-						sphere_point = sphere_center - ((sphere_center - end).Normalized * sphere_radius);
+						segmentPoint = end;
+						spherePoint = sphereCenter - ((sphereCenter - end).Normalized * sphereRadius);
 						return;
 					}
 					// Point intersection
-					segment_point = sphere_point = start + (segment_direction * center_projection);
+					segmentPoint = spherePoint = start + (segment_direction * center_projection);
 					return;
 				}
 
@@ -536,7 +536,7 @@ namespace Lotus
 
 				if (point_a_is_after_segment_start && point_b_is_before_segment_end)
 				{
-					segment_point = sphere_point = start + (segment_direction * distance_a);
+					segmentPoint = spherePoint = start + (segment_direction * distance_a);
 					return;
 				}
 				if (!point_a_is_after_segment_start && !point_b_is_before_segment_end)
@@ -544,12 +544,12 @@ namespace Lotus
 					// The segment is inside, but no intersection
 					if (distance_a > -(distance_b - segment_length))
 					{
-						segment_point = start;
-						sphere_point = start + (segment_direction * distance_a);
+						segmentPoint = start;
+						spherePoint = start + (segment_direction * distance_a);
 						return;
 					}
-					segment_point = end;
-					sphere_point = start + (segment_direction * distance_b);
+					segmentPoint = end;
+					spherePoint = start + (segment_direction * distance_b);
 					return;
 				}
 
@@ -557,26 +557,26 @@ namespace Lotus
 				if (point_a_is_after_segment_start && point_a_is_before_segment_end)
 				{
 					// Point A intersection
-					segment_point = sphere_point = start + (segment_direction * distance_a);
+					segmentPoint = spherePoint = start + (segment_direction * distance_a);
 					return;
 				}
 				var point_b_is_after_segment_start = distance_b > -XGeometry3D.Eplsilon_f;
 				if (point_b_is_after_segment_start && point_b_is_before_segment_end)
 				{
 					// Point B intersection
-					segment_point = sphere_point = start + (segment_direction * distance_b);
+					segmentPoint = spherePoint = start + (segment_direction * distance_b);
 					return;
 				}
 
 				// No intersection
 				if (center_projection < 0)
 				{
-					segment_point = start;
-					sphere_point = sphere_center - (segment_start_to_center.Normalized * sphere_radius);
+					segmentPoint = start;
+					spherePoint = sphereCenter - (segment_start_to_center.Normalized * sphereRadius);
 					return;
 				}
-				segment_point = end;
-				sphere_point = sphere_center - ((sphere_center - end).Normalized * sphere_radius);
+				segmentPoint = end;
+				spherePoint = sphereCenter - ((sphereCenter - end).Normalized * sphereRadius);
 			}
 			#endregion
 
@@ -585,33 +585,33 @@ namespace Lotus
 			/// <summary>
 			/// Поиск ближайших точек проекции двух окружностей
 			/// </summary>
-			/// <param name="sphere_a">Первая окружность</param>
-			/// <param name="sphere_b">Вторая окружность</param>
-			/// <param name="point_a">Точка проекции на первую окружность</param>
-			/// <param name="point_b">Точка проекции на вторую окружность</param>
+			/// <param name="sphereA">Первая окружность</param>
+			/// <param name="sphereB">Вторая окружность</param>
+			/// <param name="pointA">Точка проекции на первую окружность</param>
+			/// <param name="pointB">Точка проекции на вторую окружность</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SphereSphere(in Sphere3Df sphere_a, in Sphere3Df sphere_b, out Vector3Df point_a, out Vector3Df point_b)
+			public static void SphereSphere(in Sphere3Df sphereA, in Sphere3Df sphereB, out Vector3Df pointA, out Vector3Df pointB)
 			{
-				SphereSphere(in sphere_a.Center, sphere_a.Radius, in sphere_b.Center, sphere_b.Radius, out point_a, out point_b);
+				SphereSphere(in sphereA.Center, sphereA.Radius, in sphereB.Center, sphereB.Radius, out pointA, out pointB);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Поиск ближайших точек проекции двух окружностей
 			/// </summary>
-			/// <param name="center_a">Центр первой сферы</param>
-			/// <param name="radius_a">Радиус первой сферы</param>
-			/// <param name="center_b">Центр второй сферы</param>
-			/// <param name="radius_b">Радиус второй сферы</param>
-			/// <param name="point_a">Точка проекции на первую окружность</param>
-			/// <param name="point_b">Точка проекции на вторую окружность</param>
+			/// <param name="centerA">Центр первой сферы</param>
+			/// <param name="radiusA">Радиус первой сферы</param>
+			/// <param name="centerB">Центр второй сферы</param>
+			/// <param name="radiusB">Радиус второй сферы</param>
+			/// <param name="pointA">Точка проекции на первую окружность</param>
+			/// <param name="pointB">Точка проекции на вторую окружность</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SphereSphere(in Vector3Df center_a, Single radius_a, in Vector3Df center_b, Single radius_b,
-				out Vector3Df point_a, out Vector3Df point_b)
+			public static void SphereSphere(in Vector3Df centerA, Single radiusA, in Vector3Df centerB, Single radiusB,
+				out Vector3Df pointA, out Vector3Df pointB)
 			{
-				Vector3Df from_b_to_a = (center_a - center_b).Normalized;
-				point_a = center_a - (from_b_to_a * radius_a);
-				point_b = center_b + (from_b_to_a * radius_b);
+				Vector3Df from_b_to_a = (centerA - centerB).Normalized;
+				pointA = centerA - (from_b_to_a * radiusA);
+				pointB = centerB + (from_b_to_a * radiusB);
 			}
 			#endregion
 		}

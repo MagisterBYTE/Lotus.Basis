@@ -56,10 +56,10 @@ namespace Lotus
 			/// </summary>
 			public Single Circumference
 			{
-				get { return (Radius * XMath.PI_2f); }
+				get { return Radius * XMath.PI_2_F; }
 				set
 				{
-					Radius = value / XMath.PI_2f;
+					Radius = value / XMath.PI_2_F;
 				}
 			}
 
@@ -77,8 +77,8 @@ namespace Lotus
 			/// </summary>
 			public Single Area
 			{
-				get { return XMath.PI_f * Radius * Radius; }
-				set { Radius = XMath.Sqrt(value / XMath.PI_f); }
+				get { return XMath.PI_F * Radius * Radius; }
+				set { Radius = XMath.Sqrt(value / XMath.PI_F); }
 			}
 			#endregion
 
@@ -108,7 +108,7 @@ namespace Lotus
 				Radius = source.Radius;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует окружность указанными параметрами
@@ -191,7 +191,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetHashCode()
 			{
-				return (Center.GetHashCode() ^ Radius.GetHashCode());
+				return Center.GetHashCode() ^ Radius.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -268,7 +268,7 @@ namespace Lotus
 			public Boolean Contains(in Vector2Df point)
 			{
 				var d = Vector2Df.Distance(in Center, in point);
-				return (Math.Abs(d - Radius) < XGeometry2D.Eplsilon_f);
+				return Math.Abs(d - Radius) < XGeometry2D.Eplsilon_f;
 			}
 			#endregion
 		}

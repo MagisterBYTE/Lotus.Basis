@@ -95,7 +95,7 @@ namespace Lotus
 				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
 				var ll = from.Length * to.Length;
 				var csv = dot / ll;
-				return Math.Acos(csv) * XMath.RadianToDegree_d;
+				return Math.Acos(csv) * XMath.RadianToDegree_D;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -543,7 +543,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Vector3"/>
@@ -815,7 +815,7 @@ namespace Lotus
 				var dot = (from.X * to.X) + (from.Y * to.Y) + (from.Z * to.Z);
 				var ll = from.Length * to.Length;
 				var csv = dot / ll;
-				return (Single)(Math.Acos(csv) * XMath.RadianToDegree_d);
+				return (Single)(Math.Acos(csv) * XMath.RadianToDegree_D);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1263,7 +1263,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Vector3"/>

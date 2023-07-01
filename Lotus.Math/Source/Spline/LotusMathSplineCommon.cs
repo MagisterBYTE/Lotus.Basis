@@ -315,15 +315,15 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="start_point">Начальная точка</param>
-			/// <param name="end_point">Конечная точка</param>
+			/// <param name="startPoint">Начальная точка</param>
+			/// <param name="endPoint">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CSplineBase2D(Vector2Df start_point, Vector2Df end_point)
+			public CSplineBase2D(Vector2Df startPoint, Vector2Df endPoint)
 			{
 				mControlPoints = new Vector2Df[3];
-				mControlPoints[0] = start_point;
-				mControlPoints[1] = (start_point + end_point) / 2;
-				mControlPoints[2] = end_point;
+				mControlPoints[0] = startPoint;
+				mControlPoints[1] = (startPoint + endPoint) / 2;
+				mControlPoints[2] = endPoint;
 				mDrawingPoints = new List<Vector2Df>();
 				mSegmentsPath = new List<TMoveSegment>();
 			}
@@ -332,12 +332,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="control_points">Набор контрольных точек сплайна</param>
+			/// <param name="controlPoints">Набор контрольных точек сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CSplineBase2D(params Vector2Df[] control_points)
+			public CSplineBase2D(params Vector2Df[] controlPoints)
 			{
-				mControlPoints = new Vector2Df[control_points.Length];
-				Array.Copy(control_points, mControlPoints, control_points.Length);
+				mControlPoints = new Vector2Df[controlPoints.Length];
+				Array.Copy(controlPoints, mControlPoints, controlPoints.Length);
 				mDrawingPoints = new List<Vector2Df>();
 				mSegmentsPath = new List<TMoveSegment>();
 			}
@@ -681,12 +681,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="index">Позиция(индекс) точки</param>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void SetControlPoint(Int32 index, Vector2Df point, Boolean update_spline = false)
+			public virtual void SetControlPoint(Int32 index, Vector2Df point, Boolean updateSpline = false)
 			{
 				mControlPoints[index] = point;
-				if (update_spline)
+				if (updateSpline)
 				{
 					this.OnUpdateSpline();
 				}
@@ -697,13 +697,13 @@ namespace Lotus
 			/// Добавление контрольной точки к сплайну в локальных координатах
 			/// </summary>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddControlPoint(Vector2Df point, Boolean update_spline = false)
+			public virtual void AddControlPoint(Vector2Df point, Boolean updateSpline = false)
 			{
 				Array.Resize(ref mControlPoints, mControlPoints.Length + 1);
 				mControlPoints[mControlPoints.Length - 1] = point;
-				if (update_spline)
+				if (updateSpline)
 				{
 					this.OnUpdateSpline();
 				}
@@ -715,12 +715,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="index">Позиция(индекс) вставки точки</param>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void InsertControlPoint(Int32 index, Vector2Df point, Boolean update_spline = false)
+			public virtual void InsertControlPoint(Int32 index, Vector2Df point, Boolean updateSpline = false)
 			{
 				mControlPoints = XArray.InsertAt(mControlPoints, point, index);
-				if (update_spline)
+				if (updateSpline)
 				{
 					this.OnUpdateSpline();
 				}
@@ -731,12 +731,12 @@ namespace Lotus
 			/// Удаление контрольной точки в локальных координатах
 			/// </summary>
 			/// <param name="index">Позиция(индекс) удаляемой точки</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RemoveControlPoint(Int32 index, Boolean update_spline = false)
+			public virtual void RemoveControlPoint(Int32 index, Boolean updateSpline = false)
 			{
 				mControlPoints = XArray.RemoveAt(mControlPoints, index);
-				if (update_spline)
+				if (updateSpline)
 				{
 					this.OnUpdateSpline();
 				}
@@ -747,16 +747,16 @@ namespace Lotus
 			/// Удаление контрольной точки в локальных координатах
 			/// </summary>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RemoveControlPoint(Vector2Df point, Boolean update_spline = false)
+			public virtual void RemoveControlPoint(Vector2Df point, Boolean updateSpline = false)
 			{
 				for (var i = 0; i < mControlPoints.Length; i++)
 				{
 					if (mControlPoints[i].Approximately(point))
 					{
 						mControlPoints = XArray.RemoveAt(mControlPoints, i);
-						if (update_spline)
+						if (updateSpline)
 						{
 							this.OnUpdateSpline();
 						}
@@ -909,15 +909,15 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="start_point">Начальная точка</param>
-			/// <param name="end_point">Конечная точка</param>
+			/// <param name="startPoint">Начальная точка</param>
+			/// <param name="endPoint">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CSplineBase3D(Vector3Df start_point, Vector3Df end_point)
+			public CSplineBase3D(Vector3Df startPoint, Vector3Df endPoint)
 			{
 				mControlPoints = new Vector3Df[3];
-				mControlPoints[0] = start_point;
-				mControlPoints[1] = (start_point + end_point) / 2;
-				mControlPoints[2] = end_point;
+				mControlPoints[0] = startPoint;
+				mControlPoints[1] = (startPoint + endPoint) / 2;
+				mControlPoints[2] = endPoint;
 				mDrawingPoints = new List<Vector3Df>();
 				mSegmentsPath = new List<TMoveSegment>();
 			}
@@ -926,12 +926,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="control_points">Набор контрольных точек сплайна</param>
+			/// <param name="controlPoints">Набор контрольных точек сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CSplineBase3D(params Vector3Df[] control_points)
+			public CSplineBase3D(params Vector3Df[] controlPoints)
 			{
-				mControlPoints = new Vector3Df[control_points.Length];
-				Array.Copy(control_points, mControlPoints, control_points.Length);
+				mControlPoints = new Vector3Df[controlPoints.Length];
+				Array.Copy(controlPoints, mControlPoints, controlPoints.Length);
 				mDrawingPoints = new List<Vector3Df>();
 				mSegmentsPath = new List<TMoveSegment>();
 			}
@@ -1228,12 +1228,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="index">Позиция(индекс) точки</param>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void SetControlPoint(Int32 index, Vector3Df point, Boolean update_spline = false)
+			public virtual void SetControlPoint(Int32 index, Vector3Df point, Boolean updateSpline = false)
 			{
 				mControlPoints[index] = point;
-				if (update_spline)
+				if (updateSpline)
 				{
 					this.OnUpdateSpline();
 				}
@@ -1244,13 +1244,13 @@ namespace Lotus
 			/// Добавление контрольной точки к сплайну в локальных координатах
 			/// </summary>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AddControlPoint(Vector3Df point, Boolean update_spline = false)
+			public virtual void AddControlPoint(Vector3Df point, Boolean updateSpline = false)
 			{
 				Array.Resize(ref mControlPoints, mControlPoints.Length + 1);
 				mControlPoints[mControlPoints.Length - 1] = point;
-				if (update_spline)
+				if (updateSpline)
 				{
 					this.OnUpdateSpline();
 				}
@@ -1262,12 +1262,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="index">Позиция(индекс) вставки точки</param>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void InsertControlPoint(Int32 index, Vector3Df point, Boolean update_spline = false)
+			public virtual void InsertControlPoint(Int32 index, Vector3Df point, Boolean updateSpline = false)
 			{
 				mControlPoints = XArray.InsertAt(mControlPoints, point, index);
-				if (update_spline)
+				if (updateSpline)
 				{
 					this.OnUpdateSpline();
 				}
@@ -1278,12 +1278,12 @@ namespace Lotus
 			/// Удаление контрольной точки в локальных координатах
 			/// </summary>
 			/// <param name="index">Позиция(индекс) удаляемой точки</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RemoveControlPoint(Int32 index, Boolean update_spline = false)
+			public virtual void RemoveControlPoint(Int32 index, Boolean updateSpline = false)
 			{
 				mControlPoints = XArray.RemoveAt(mControlPoints, index);
-				if (update_spline)
+				if (updateSpline)
 				{
 					this.OnUpdateSpline();
 				}
@@ -1294,16 +1294,16 @@ namespace Lotus
 			/// Удаление контрольной точки в локальных координатах
 			/// </summary>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RemoveControlPoint(Vector3Df point, Boolean update_spline = false)
+			public virtual void RemoveControlPoint(Vector3Df point, Boolean updateSpline = false)
 			{
 				for (var i = 0; i < mControlPoints.Length; i++)
 				{
 					if (mControlPoints[i].Approximately(point))
 					{
 						mControlPoints = XArray.RemoveAt(mControlPoints, i);
-						if (update_spline)
+						if (updateSpline)
 						{
 							this.OnUpdateSpline();
 						}

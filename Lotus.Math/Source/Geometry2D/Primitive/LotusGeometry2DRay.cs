@@ -79,7 +79,7 @@ namespace Lotus
 				Direction = source.Direction;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует луч указанными параметрами
@@ -253,7 +253,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа <see cref="UnityEngine.Ray2D"/>
@@ -285,13 +285,13 @@ namespace Lotus
 			/// <summary>
 			/// Установка параметров луча
 			/// </summary>
-			/// <param name="start_point">Начальная точка</param>
-			/// <param name="end_point">Конечная точка</param>
+			/// <param name="startPoint">Начальная точка</param>
+			/// <param name="endPoint">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetFromPoint(in Vector2Df start_point, in Vector2Df end_point)
+			public void SetFromPoint(in Vector2Df startPoint, in Vector2Df endPoint)
 			{
-				Position = start_point;
-				Direction = (end_point - start_point).Normalized;
+				Position = startPoint;
+				Direction = (endPoint - startPoint).Normalized;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

@@ -958,7 +958,7 @@ namespace Lotus
 				return new Vector2Df(size.Width, size.Height);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Неявное преобразование в объект типа UnityEngine.Vector2

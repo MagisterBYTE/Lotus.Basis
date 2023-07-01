@@ -117,7 +117,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Sinerp(Double start, Double end, Double time)
 			{
-				return Lerp(start, end, Math.Sin(time * XMath.PI_2d));
+				return Lerp(start, end, Math.Sin(time * XMath.PI_2_D));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -132,7 +132,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Sinerp(Single start, Single end, Single time)
 			{
-				return Lerp(start, end, (Single)Math.Sin(time * XMath.PI_2d));
+				return Lerp(start, end, (Single)Math.Sin(time * XMath.PI_2_D));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double Coserp(Double start, Double end, Double time)
 			{
-				return Lerp(start, end, 1.0 - Math.Cos(time * XMath.PI_2d));
+				return Lerp(start, end, 1.0 - Math.Cos(time * XMath.PI_2_D));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Coserp(Single start, Single end, Single time)
 			{
-				return Lerp(start, end, 1.0f - (Single)Math.Cos(time * XMath.PI_2d));
+				return Lerp(start, end, 1.0f - (Single)Math.Cos(time * XMath.PI_2_D));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -247,20 +247,20 @@ namespace Lotus
 			/// <param name="amplitude">Curve amplitude</param>
 			/// <param name="x">Position X</param>
 			/// <param name="y">Position Y</param>
-			/// <param name="center_x">Center X</param>
-			/// <param name="center_y">Center Y</param>
-			/// <param name="sigma_x">Curve sigma X</param>
-			/// <param name="sigma_y">Curve sigma Y</param>
+			/// <param name="centerX">Center X</param>
+			/// <param name="centerY">Center Y</param>
+			/// <param name="sigmaX">Curve sigma X</param>
+			/// <param name="sigmaY">Curve sigma Y</param>
 			/// <returns>The result of Gaussian function</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double Gauss(Double amplitude, Double x, Double y, Double center_x, Double center_y, 
-				Double sigma_x, Double sigma_y)
+			public static Double Gauss(Double amplitude, Double x, Double y, Double centerX, Double centerY, 
+				Double sigmaX, Double sigmaY)
 			{
-				var cx = x - center_x;
-				var cy = y - center_y;
+				var cx = x - centerX;
+				var cy = y - centerY;
 
-				var component_x = cx * cx / (2 * sigma_x * sigma_x);
-				var component_y = cy * cy / (2 * sigma_y * sigma_y);
+				var component_x = cx * cx / (2 * sigmaX * sigmaX);
+				var component_y = cy * cy / (2 * sigmaY * sigmaY);
 
 				return amplitude * Math.Exp(-(component_x + component_y));
 			}
@@ -275,20 +275,20 @@ namespace Lotus
 			/// <param name="amplitude">Curve amplitude</param>
 			/// <param name="x">Position X</param>
 			/// <param name="y">Position Y</param>
-			/// <param name="center_x">Center X</param>
-			/// <param name="center_y">Center Y</param>
-			/// <param name="sigma_x">Curve sigma X</param>
-			/// <param name="sigma_y">Curve sigma Y</param>
+			/// <param name="centerX">Center X</param>
+			/// <param name="centerY">Center Y</param>
+			/// <param name="sigmaX">Curve sigma X</param>
+			/// <param name="sigmaY">Curve sigma Y</param>
 			/// <returns>The result of Gaussian function</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single Gauss(Single amplitude, Single x, Single y, Single center_x, Single center_y,
-				Single sigma_x, Single sigma_y)
+			public static Single Gauss(Single amplitude, Single x, Single y, Single centerX, Single centerY,
+				Single sigmaX, Single sigmaY)
 			{
-				var cx = x - center_x;
-				var cy = y - center_y;
+				var cx = x - centerX;
+				var cy = y - centerY;
 
-				var component_x = cx * cx / (2 * sigma_x * sigma_x);
-				var component_y = cy * cy / (2 * sigma_y * sigma_y);
+				var component_x = cx * cx / (2 * sigmaX * sigmaX);
+				var component_y = cy * cy / (2 * sigmaY * sigmaY);
 
 				return amplitude * (Single)Math.Exp(-(component_x + component_y));
 			}

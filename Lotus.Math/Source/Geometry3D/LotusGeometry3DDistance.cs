@@ -47,13 +47,13 @@ namespace Lotus
 			/// Вычисление расстояния между линией и ближайшей точки
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointLine(in Vector3Df point, in Vector3Df line_pos, in Vector3Df line_dir)
+			public static Single PointLine(in Vector3Df point, in Vector3Df linePos, in Vector3Df lineDir)
 			{
-				return Vector3Df.Distance(in point, XClosest3D.PointLine(in point, in line_pos, in line_dir));
+				return Vector3Df.Distance(in point, XClosest3D.PointLine(in point, in linePos, in lineDir));
 			}
 			#endregion
 
@@ -76,13 +76,13 @@ namespace Lotus
 			/// Вычисление расстояние до самой близкой точки на луче
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointRay(in Vector3Df point, in Vector3Df ray_pos, in Vector3Df ray_dir)
+			public static Single PointRay(in Vector3Df point, in Vector3Df rayPos, in Vector3Df rayDir)
 			{
-				return Vector3Df.Distance(in point, XClosest3D.PointRay(in point, in ray_pos, in ray_dir));
+				return Vector3Df.Distance(in point, XClosest3D.PointRay(in point, in rayPos, in rayDir));
 			}
 			#endregion
 
@@ -134,13 +134,13 @@ namespace Lotus
 			/// Вычисление расстояние до самой близкой точки на сферы
 			/// </summary>
 			/// <param name="point">Точка</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single PointSphere(in Vector3Df point, in Vector3Df sphere_center, Single sphere_radius)
+			public static Single PointSphere(in Vector3Df point, in Vector3Df sphereCenter, Single sphereRadius)
 			{
-				return (sphere_center - point).Length - sphere_radius;
+				return (sphereCenter - point).Length - sphereRadius;
 			}
 			#endregion
 
@@ -162,22 +162,22 @@ namespace Lotus
 			/// <summary>
 			/// Вычисление расстояние между самыми близкими точками на линии и сферы
 			/// </summary>
-			/// <param name="line_pos">Позиция линии</param>
-			/// <param name="line_dir">Направление линии</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="linePos">Позиция линии</param>
+			/// <param name="lineDir">Направление линии</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single LineSphere(in Vector3Df line_pos, in Vector3Df line_dir, in Vector3Df sphere_center, Single sphere_radius)
+			public static Single LineSphere(in Vector3Df linePos, in Vector3Df lineDir, in Vector3Df sphereCenter, Single sphereRadius)
 			{
-				Vector3Df pos_to_center = sphere_center - line_pos;
-				var center_projection = Vector3Df.Dot(in line_dir, in pos_to_center);
+				Vector3Df pos_to_center = sphereCenter - linePos;
+				var center_projection = Vector3Df.Dot(in lineDir, in pos_to_center);
 				var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
-					return XMath.Sqrt(sqr_distance_to_line) - sphere_radius;
+					return XMath.Sqrt(sqr_distance_to_line) - sphereRadius;
 				}
 				return 0;
 			}
@@ -201,40 +201,40 @@ namespace Lotus
 			/// <summary>
 			/// Вычисление расстояние между самыми близкими точками на луче и сферы
 			/// </summary>
-			/// <param name="ray_pos">Позиция луча</param>
-			/// <param name="ray_dir">Направление луча</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="rayPos">Позиция луча</param>
+			/// <param name="rayDir">Направление луча</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single RaySphere(in Vector3Df ray_pos, in Vector3Df ray_dir, in Vector3Df sphere_center, Single sphere_radius)
+			public static Single RaySphere(in Vector3Df rayPos, in Vector3Df rayDir, in Vector3Df sphereCenter, Single sphereRadius)
 			{
-				Vector3Df pos_to_center = sphere_center - ray_pos;
-				var center_projection = Vector3Df.Dot(in ray_dir, in pos_to_center);
-				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f)
+				Vector3Df pos_to_center = sphereCenter - rayPos;
+				var center_projection = Vector3Df.Dot(in rayDir, in pos_to_center);
+				if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
-					return XMath.Sqrt(pos_to_center.SqrLength) - sphere_radius;
+					return XMath.Sqrt(pos_to_center.SqrLength) - sphereRadius;
 				}
 
 				var sqr_distance_to_pos = pos_to_center.SqrLength;
 				var sqr_distance_to_line = sqr_distance_to_pos - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
 					if (center_projection < -XGeometry3D.Eplsilon_f)
 					{
-						return XMath.Sqrt(sqr_distance_to_pos) - sphere_radius;
+						return XMath.Sqrt(sqr_distance_to_pos) - sphereRadius;
 					}
-					return XMath.Sqrt(sqr_distance_to_line) - sphere_radius;
+					return XMath.Sqrt(sqr_distance_to_line) - sphereRadius;
 				}
 				if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
 				{
 					if (center_projection < -XGeometry3D.Eplsilon_f)
 					{
 						// No intersection
-						return XMath.Sqrt(sqr_distance_to_pos) - sphere_radius;
+						return XMath.Sqrt(sqr_distance_to_pos) - sphereRadius;
 					}
 					// Point intersection
 					return 0;
@@ -250,7 +250,7 @@ namespace Lotus
 					if (distance_b < -XGeometry3D.Eplsilon_f)
 					{
 						// No intersection
-						return XMath.Sqrt(sqr_distance_to_pos) - sphere_radius;
+						return XMath.Sqrt(sqr_distance_to_pos) - sphereRadius;
 					}
 
 					// Point intersection;
@@ -282,48 +282,48 @@ namespace Lotus
 			/// </summary>
 			/// <param name="start">Начало отрезка</param>
 			/// <param name="end">Конец отрезка</param>
-			/// <param name="sphere_center">Центр сферы</param>
-			/// <param name="sphere_radius">Радиус сферы</param>
+			/// <param name="sphereCenter">Центр сферы</param>
+			/// <param name="sphereRadius">Радиус сферы</param>
 			/// <returns>Расстояние</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphere_center, Single sphere_radius)
+			public static Single SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphereCenter, Single sphereRadius)
 			{
-				Vector3Df segment_start_to_center = sphere_center - start;
+				Vector3Df segment_start_to_center = sphereCenter - start;
 				Vector3Df from_start_to_end = end - start;
 				var segment_length = from_start_to_end.Length;
 				if (segment_length < XGeometry3D.Eplsilon_f)
 				{
-					return segment_start_to_center.Length - sphere_radius;
+					return segment_start_to_center.Length - sphereRadius;
 				}
 
 				Vector3Df segment_direction = from_start_to_end.Normalized;
 				var center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
-				if (center_projection + sphere_radius < -XGeometry3D.Eplsilon_f ||
-					center_projection - sphere_radius > segment_length + XGeometry3D.Eplsilon_f)
+				if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f ||
+					center_projection - sphereRadius > segment_length + XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
 					if (center_projection < 0)
 					{
-						return XMath.Sqrt(segment_start_to_center.SqrLength) - sphere_radius;
+						return XMath.Sqrt(segment_start_to_center.SqrLength) - sphereRadius;
 					}
-					return (sphere_center - end).Length - sphere_radius;
+					return (sphereCenter - end).Length - sphereRadius;
 				}
 
 				var sqr_distance_to_a = segment_start_to_center.SqrLength;
 				var sqr_distance_to_line = sqr_distance_to_a - (center_projection * center_projection);
-				var sqr_distance_to_intersection = (sphere_radius * sphere_radius) - sqr_distance_to_line;
+				var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
 				if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
 				{
 					// No intersection
 					if (center_projection < -XGeometry3D.Eplsilon_f)
 					{
-						return XMath.Sqrt(sqr_distance_to_a) - sphere_radius;
+						return XMath.Sqrt(sqr_distance_to_a) - sphereRadius;
 					}
 					if (center_projection > segment_length + XGeometry3D.Eplsilon_f)
 					{
-						return (sphere_center - end).Length - sphere_radius;
+						return (sphereCenter - end).Length - sphereRadius;
 					}
-					return XMath.Sqrt(sqr_distance_to_line) - sphere_radius;
+					return XMath.Sqrt(sqr_distance_to_line) - sphereRadius;
 				}
 
 				if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
@@ -331,12 +331,12 @@ namespace Lotus
 					if (center_projection < -XGeometry3D.Eplsilon_f)
 					{
 						// No intersection
-						return XMath.Sqrt(sqr_distance_to_a) - sphere_radius;
+						return XMath.Sqrt(sqr_distance_to_a) - sphereRadius;
 					}
 					if (center_projection > segment_length + XGeometry3D.Eplsilon_f)
 					{
 						// No intersection
-						return (sphere_center - end).Length - sphere_radius;
+						return (sphereCenter - end).Length - sphereRadius;
 					}
 					// Point intersection
 					return 0;
@@ -378,9 +378,9 @@ namespace Lotus
 				// No intersection
 				if (center_projection < 0)
 				{
-					return XMath.Sqrt(sqr_distance_to_a) - sphere_radius;
+					return XMath.Sqrt(sqr_distance_to_a) - sphereRadius;
 				}
-				return (sphere_center - end).Length - sphere_radius;
+				return (sphereCenter - end).Length - sphereRadius;
 			}
 			#endregion
 
@@ -389,34 +389,34 @@ namespace Lotus
 			/// <summary>
 			/// Вычисление расстояние между самыми близкими точками на сферах
 			/// </summary>
-			/// <param name="sphere_a">Первая сфера</param>
-			/// <param name="sphere_b">Вторая сфера</param>
+			/// <param name="sphereA">Первая сфера</param>
+			/// <param name="sphereB">Вторая сфера</param>
 			/// <returns>
 			/// Положительное значение, если сферы не пересекаются, отрицательное иначе
 			/// Отрицательная величина может быть интерпретирована как глубина проникновения
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single SphereSphere(in Sphere3Df sphere_a, in Sphere3Df sphere_b)
+			public static Single SphereSphere(in Sphere3Df sphereA, in Sphere3Df sphereB)
 			{
-				return SphereSphere(in sphere_a.Center, sphere_a.Radius, in sphere_b.Center, sphere_b.Radius);
+				return SphereSphere(in sphereA.Center, sphereA.Radius, in sphereB.Center, sphereB.Radius);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Вычисление расстояние между самыми близкими точками на сферах
 			/// </summary>
-			/// <param name="center_a">Центр первой сферы</param>
-			/// <param name="radius_a">Радиус первой сферы</param>
-			/// <param name="center_b">Центр второй сферы</param>
-			/// <param name="radius_b">Радиус второй сферы</param>
+			/// <param name="centerA">Центр первой сферы</param>
+			/// <param name="radiusA">Радиус первой сферы</param>
+			/// <param name="centerB">Центр второй сферы</param>
+			/// <param name="radiusB">Радиус второй сферы</param>
 			/// <returns>
 			/// Положительное значение, если сферы не пересекаются, отрицательное иначе
 			/// Отрицательная величина может быть интерпретирована как глубина проникновения
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single SphereSphere(in Vector3Df center_a, Single radius_a, in Vector3Df center_b, Single radius_b)
+			public static Single SphereSphere(in Vector3Df centerA, Single radiusA, in Vector3Df centerB, Single radiusB)
 			{
-				return Vector3Df.Distance(in center_a, in center_b) - radius_a - radius_b;
+				return Vector3Df.Distance(in centerA, in centerB) - radiusA - radiusB;
 			}
 
 			#endregion

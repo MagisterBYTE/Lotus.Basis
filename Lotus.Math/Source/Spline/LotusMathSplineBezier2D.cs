@@ -42,17 +42,17 @@ namespace Lotus
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
 			/// <param name="start">Начальная точка</param>
-			/// <param name="handle_point">Контрольная точка</param>
+			/// <param name="handlePoint">Контрольная точка</param>
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Позиция точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df CalculatePoint(Single time, Vector2Df start, Vector2Df handle_point, Vector2Df end)
+			public static Vector2Df CalculatePoint(Single time, Vector2Df start, Vector2Df handlePoint, Vector2Df end)
 			{
 				var u = 1 - time;
 				var tt = time * time;
 				var uu = u * u;
 
-				return (uu * start) + (2 * time * u * handle_point) + (tt * end);
+				return (uu * start) + (2 * time * u * handlePoint) + (tt * end);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -62,17 +62,17 @@ namespace Lotus
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
 			/// <param name="start">Начальная точка</param>
-			/// <param name="handle_point">Контрольная точка</param>
+			/// <param name="handlePoint">Контрольная точка</param>
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Позиция точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df CalculatePoint(Single time, ref Vector2Df start, ref Vector2Df handle_point, ref Vector2Df end)
+			public static Vector2Df CalculatePoint(Single time, ref Vector2Df start, ref Vector2Df handlePoint, ref Vector2Df end)
 			{
 				var u = 1 - time;
 				var tt = time * time;
 				var uu = u * u;
 
-				return (uu * start) + (2 * time * u * handle_point) + (tt * end);
+				return (uu * start) + (2 * time * u * handlePoint) + (tt * end);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -86,13 +86,13 @@ namespace Lotus
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
 			/// <param name="start">Начальная точка</param>
-			/// <param name="handle_point">Контрольная точка</param>
+			/// <param name="handlePoint">Контрольная точка</param>
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Первая производная точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df CalculateFirstDerivative(Single time, Vector2Df start, Vector2Df handle_point, Vector2Df end)
+			public static Vector2Df CalculateFirstDerivative(Single time, Vector2Df start, Vector2Df handlePoint, Vector2Df end)
 			{
-				return((2f * (1f - time) * (handle_point - start)) + (2f * time * (end - handle_point)));
+				return(2f * (1f - time) * (handlePoint - start)) + (2f * time * (end - handlePoint));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -106,13 +106,13 @@ namespace Lotus
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
 			/// <param name="start">Начальная точка</param>
-			/// <param name="handle_point">Контрольная точка</param>
+			/// <param name="handlePoint">Контрольная точка</param>
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Первая производная точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df CalculateFirstDerivative(Single time, ref Vector2Df start, ref Vector2Df handle_point, ref Vector2Df end)
+			public static Vector2Df CalculateFirstDerivative(Single time, ref Vector2Df start, ref Vector2Df handlePoint, ref Vector2Df end)
 			{
-				return (2f * (1f - time) * (handle_point - start)) + (2f * time * (end - handle_point));
+				return (2f * (1f - time) * (handlePoint - start)) + (2f * time * (end - handlePoint));
 			}
 			#endregion
 
@@ -145,11 +145,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="start_point">Начальная точка</param>
-			/// <param name="end_point">Конечная точка</param>
+			/// <param name="startPoint">Начальная точка</param>
+			/// <param name="endPoint">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CBezierQuadratic2D(Vector2Df start_point, Vector2Df end_point)
-				: base(start_point, end_point)
+			public CBezierQuadratic2D(Vector2Df startPoint, Vector2Df endPoint)
+				: base(startPoint, endPoint)
 			{
 			}
 			#endregion
@@ -225,12 +225,12 @@ namespace Lotus
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
 			/// <param name="start">Начальная точка</param>
-			/// <param name="handle_point1">Первая управляющая точка</param>
-			/// <param name="handle_point2">Вторая управляющая точка</param>
+			/// <param name="handlePoint1">Первая управляющая точка</param>
+			/// <param name="handlePoint2">Вторая управляющая точка</param>
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Позиция точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df CalculatePoint(Single time, Vector2Df start, Vector2Df handle_point1, Vector2Df handle_point2, Vector2Df end)
+			public static Vector2Df CalculatePoint(Single time, Vector2Df start, Vector2Df handlePoint1, Vector2Df handlePoint2, Vector2Df end)
 			{
 				var u = 1 - time;
 				var tt = time * time;
@@ -240,8 +240,8 @@ namespace Lotus
 
 				Vector2Df point = uuu * start;
 
-				point += 3 * uu * time * handle_point1;
-				point += 3 * u * tt * handle_point2;
+				point += 3 * uu * time * handlePoint1;
+				point += 3 * u * tt * handlePoint2;
 				point += ttt * end;
 
 				return point;
@@ -254,13 +254,13 @@ namespace Lotus
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
 			/// <param name="start">Начальная точка</param>
-			/// <param name="handle_point1">Первая управляющая точка</param>
-			/// <param name="handle_point2">Вторая управляющая точка</param>
+			/// <param name="handlePoint1">Первая управляющая точка</param>
+			/// <param name="handlePoint2">Вторая управляющая точка</param>
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Позиция точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df CalculatePoint(Single time, ref Vector2Df start, ref Vector2Df handle_point1,
-				ref Vector2Df handle_point2, ref Vector2Df end)
+			public static Vector2Df CalculatePoint(Single time, ref Vector2Df start, ref Vector2Df handlePoint1,
+				ref Vector2Df handlePoint2, ref Vector2Df end)
 			{
 				var u = 1 - time;
 				var tt = time * time;
@@ -270,8 +270,8 @@ namespace Lotus
 
 				Vector2Df point = uuu * start;
 
-				point += 3 * uu * time * handle_point1;
-				point += 3 * u * tt * handle_point2;
+				point += 3 * uu * time * handlePoint1;
+				point += 3 * u * tt * handlePoint2;
 				point += ttt * end;
 
 				return point;
@@ -288,17 +288,17 @@ namespace Lotus
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
 			/// <param name="start">Начальная точка</param>
-			/// <param name="handle_point1">Первая управляющая точка</param>
-			/// <param name="handle_point2">Вторая управляющая точка</param>
+			/// <param name="handlePoint1">Первая управляющая точка</param>
+			/// <param name="handlePoint2">Вторая управляющая точка</param>
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Первая производная точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df CalculateFirstDerivative(Single time, Vector2Df start, Vector2Df handle_point1, Vector2Df handle_point2, Vector2Df end)
+			public static Vector2Df CalculateFirstDerivative(Single time, Vector2Df start, Vector2Df handlePoint1, Vector2Df handlePoint2, Vector2Df end)
 			{
 				var u = 1 - time;
-				return (3f * u * u * (handle_point1 - start)) +
-				       (6f * u * time * (handle_point2 - handle_point1)) +
-				       (3f * time * time * (end - handle_point2));
+				return (3f * u * u * (handlePoint1 - start)) +
+				       (6f * u * time * (handlePoint2 - handlePoint1)) +
+				       (3f * time * time * (end - handlePoint2));
 
 			}
 
@@ -313,18 +313,18 @@ namespace Lotus
 			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
 			/// "правой" конечной точки кривой</param>
 			/// <param name="start">Начальная точка</param>
-			/// <param name="handle_point1">Первая управляющая точка</param>
-			/// <param name="handle_point2">Вторая управляющая точка</param>
+			/// <param name="handlePoint1">Первая управляющая точка</param>
+			/// <param name="handlePoint2">Вторая управляющая точка</param>
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Первая производная точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2Df CalculateFirstDerivative(Single time, ref Vector2Df start, ref Vector2Df handle_point1,
-				ref Vector2Df handle_point2, ref Vector2Df end)
+			public static Vector2Df CalculateFirstDerivative(Single time, ref Vector2Df start, ref Vector2Df handlePoint1,
+				ref Vector2Df handlePoint2, ref Vector2Df end)
 			{
 				var u = 1 - time;
-				return (3f * u * u * (handle_point1 - start)) +
-				       (6f * u * time * (handle_point2 - handle_point1)) +
-				       (3f * time * time * (end - handle_point2));
+				return (3f * u * u * (handlePoint1 - start)) +
+				       (6f * u * time * (handlePoint2 - handlePoint1)) +
+				       (3f * time * time * (end - handlePoint2));
 			}
 			#endregion
 
@@ -366,16 +366,16 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="start_point">Начальная точка</param>
-			/// <param name="end_point">Конечная точка</param>
+			/// <param name="startPoint">Начальная точка</param>
+			/// <param name="endPoint">Конечная точка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CBezierCubic2D(Vector2Df start_point, Vector2Df end_point)
+			public CBezierCubic2D(Vector2Df startPoint, Vector2Df endPoint)
 								: base(4)
 			{
-				mControlPoints[0] = start_point;
-				mControlPoints[1] = (start_point + end_point) / 3;
-				mControlPoints[2] = (start_point + end_point) / 3 * 2;
-				mControlPoints[3] = end_point;
+				mControlPoints[0] = startPoint;
+				mControlPoints[1] = (startPoint + endPoint) / 3;
+				mControlPoints[2] = (startPoint + endPoint) / 3 * 2;
+				mControlPoints[3] = endPoint;
 			}
 			#endregion
 
@@ -559,13 +559,13 @@ namespace Lotus
 			/// <remarks>
 			/// Промежуточные управляющие точки генерируется автоматически
 			/// </remarks>
-			/// <param name="pivot_points">Опорные точки пути</param>
+			/// <param name="pivotPoints">Опорные точки пути</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CBezierPath2D(params Vector2Df[] pivot_points)
-				:base(pivot_points)
+			public CBezierPath2D(params Vector2Df[] pivotPoints)
+				:base(pivotPoints)
 			{
 				mHandleModes = new TBezierHandleMode[4];
-				CreateFromPivotPoints(pivot_points);
+				CreateFromPivotPoints(pivotPoints);
 			}
 			#endregion
 
@@ -705,24 +705,24 @@ namespace Lotus
 			/// <remarks>
 			/// Промежуточные управляющие точки генерируется автоматически
 			/// </remarks>
-			/// <param name="pivot_points">Опорные точки пути</param>
+			/// <param name="pivotPoints">Опорные точки пути</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CreateFromPivotPoints(params Vector2Df[] pivot_points)
+			public void CreateFromPivotPoints(params Vector2Df[] pivotPoints)
 			{
 				// Если точек меньше двух выходим
-				if (pivot_points.Length < 2)
+				if (pivotPoints.Length < 2)
 				{
 					return;
 				}
 
 				var points = new List<Vector2Df>();
-				for (var i = 0; i < pivot_points.Length; i++)
+				for (var i = 0; i < pivotPoints.Length; i++)
 				{
 					// Первая точка
 					if (i == 0)
 					{
-						Vector2Df p1 = pivot_points[i];
-						Vector2Df p2 = pivot_points[i + 1];
+						Vector2Df p1 = pivotPoints[i];
+						Vector2Df p2 = pivotPoints[i + 1];
 
 						// Расстояние
 						var distance = (p2 - p1).Length;
@@ -731,10 +731,10 @@ namespace Lotus
 						points.Add(p1);
 						points.Add(q1);
 					}
-					else if (i == pivot_points.Length - 1) //last
+					else if (i == pivotPoints.Length - 1) //last
 					{
-						Vector2Df p0 = pivot_points[i - 1];
-						Vector2Df p1 = pivot_points[i];
+						Vector2Df p0 = pivotPoints[i - 1];
+						Vector2Df p1 = pivotPoints[i];
 
 						// Расстояние
 						var distance = (p0 - p1).Length;
@@ -745,9 +745,9 @@ namespace Lotus
 					}
 					else
 					{
-						Vector2Df p0 = pivot_points[i - 1];
-						Vector2Df p1 = pivot_points[i];
-						Vector2Df p2 = pivot_points[i + 1];
+						Vector2Df p0 = pivotPoints[i - 1];
+						Vector2Df p1 = pivotPoints[i];
+						Vector2Df p2 = pivotPoints[i + 1];
 
 						// Расстояние
 						var distance1 = (p1 - p0).Length;
@@ -890,13 +890,13 @@ namespace Lotus
 			/// <summary>
 			/// Вычисление точки на отдельной кривой Безье
 			/// </summary>
-			/// <param name="curve_index">Индекс кривой</param>
+			/// <param name="curveIndex">Индекс кривой</param>
 			/// <param name="time">Время</param>
 			/// <returns>Точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Df CalculateCurvePoint(Int32 curve_index, Single time)
+			public Vector2Df CalculateCurvePoint(Int32 curveIndex, Single time)
 			{
-				var node_index = curve_index * 3;
+				var node_index = curveIndex * 3;
 
 				return CBezierCubic2D.CalculatePoint(time,
 					ref mControlPoints[node_index],
@@ -909,28 +909,28 @@ namespace Lotus
 			/// <summary>
 			/// Получение контрольной точки на отдельной кривой Безье
 			/// </summary>
-			/// <param name="curve_index">Индекс кривой</param>
-			/// <param name="point_index">Индекс контрольной точки</param>
+			/// <param name="curveIndex">Индекс кривой</param>
+			/// <param name="pointIndex">Индекс контрольной точки</param>
 			/// <returns>Контрольная точка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Df GetCurveControlPoint(Int32 curve_index, Int32 point_index)
+			public Vector2Df GetCurveControlPoint(Int32 curveIndex, Int32 pointIndex)
 			{
-				curve_index = curve_index * 3;
-				return mControlPoints[curve_index + point_index];
+				curveIndex = curveIndex * 3;
+				return mControlPoints[curveIndex + pointIndex];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка позиции контрольной точки на отдельной кривой Безье
 			/// </summary>
-			/// <param name="curve_index">Индекс кривой</param>
-			/// <param name="point_index">Индекс точки</param>
+			/// <param name="curveIndex">Индекс кривой</param>
+			/// <param name="pointIndex">Индекс точки</param>
 			/// <param name="position">Позиция контрольной точки</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetCurveControlPoint(Int32 curve_index, Int32 point_index, Vector2Df position)
+			public void SetCurveControlPoint(Int32 curveIndex, Int32 pointIndex, Vector2Df position)
 			{
-				curve_index = curve_index * 3;
-				mControlPoints[curve_index + point_index] = position;
+				curveIndex = curveIndex * 3;
+				mControlPoints[curveIndex + pointIndex] = position;
 			}
 			#endregion
 

@@ -79,8 +79,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SetRotation(Double angle, in Vector3D axis, out Matrix3Dx3 result)
 			{
-				var ct = Math.Cos(angle * XMath.DegreeToRadian_d);
-				var st = Math.Sin(angle * XMath.DegreeToRadian_d);
+				var ct = Math.Cos(angle * XMath.DegreeToRadian_D);
+				var st = Math.Sin(angle * XMath.DegreeToRadian_D);
 
 				var xx = axis.X * axis.X;
 				var yy = axis.Y * axis.Y;
@@ -326,8 +326,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SetRotation(Single angle, in Vector3Df axis, out Matrix3Dx3 result)
 			{
-				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_f);
-				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_f);
+				var ct = (Single)Math.Cos(angle * XMath.DegreeToRadian_F);
+				var st = (Single)Math.Sin(angle * XMath.DegreeToRadian_F);
 
 				var xx = axis.X * axis.X;
 				var yy = axis.Y * axis.Y;
@@ -372,7 +372,7 @@ namespace Lotus
 				       UnityEngine.Mathf.Approximately(a.M32, b.M32) &&
 				       UnityEngine.Mathf.Approximately(a.M33, b.M33);
 #else
-				return (XMath.Approximately(a.M11, b.M11) &&
+				return XMath.Approximately(a.M11, b.M11) &&
 						XMath.Approximately(a.M12, b.M12) &&
 						XMath.Approximately(a.M13, b.M13) &&
 
@@ -382,7 +382,7 @@ namespace Lotus
 
 						XMath.Approximately(a.M31, b.M31) &&
 						XMath.Approximately(a.M32, b.M32) &&
-						XMath.Approximately(a.M33, b.M33));
+						XMath.Approximately(a.M33, b.M33);
 #endif
 
 			}
@@ -1263,17 +1263,17 @@ namespace Lotus
 			/// <summary>
 			/// Creates a left-handed spherical billboard that rotates around a specified object position
 			/// </summary>
-			/// <param name="object_position">The position of the object around which the billboard will rotate</param>
-			/// <param name="camera_position">The position of the camera</param>
+			/// <param name="objectPosition">The position of the object around which the billboard will rotate</param>
+			/// <param name="cameraPosition">The position of the camera</param>
 			/// <param name="cameraUpVector">The up vector of the camera</param>
 			/// <param name="cameraForwardVector">The forward vector of the camera</param>
 			/// <param name="result">When the method completes, contains the created billboard Matrix3Dx3f</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void BillboardLH(in Vector3Df object_position, in Vector3Df camera_position, in Vector3Df cameraUpVector, in Vector3Df cameraForwardVector, out Matrix3Dx3f result)
+			public static void BillboardLH(in Vector3Df objectPosition, in Vector3Df cameraPosition, in Vector3Df cameraUpVector, in Vector3Df cameraForwardVector, out Matrix3Dx3f result)
 			{
 				Vector3Df crossed;
 				Vector3Df final;
-				Vector3Df difference = camera_position - object_position;
+				Vector3Df difference = cameraPosition - objectPosition;
 
 				var lengthSq = difference.SqrLength;
 				if (XMath.IsZero(lengthSq))
@@ -1318,18 +1318,18 @@ namespace Lotus
 			/// <summary>
 			/// Creates a right-handed spherical billboard that rotates around a specified object position
 			/// </summary>
-			/// <param name="object_position">The position of the object around which the billboard will rotate</param>
-			/// <param name="camera_position">The position of the camera</param>
+			/// <param name="objectPosition">The position of the object around which the billboard will rotate</param>
+			/// <param name="cameraPosition">The position of the camera</param>
 			/// <param name="cameraUpVector">The up vector of the camera</param>
 			/// <param name="cameraForwardVector">The forward vector of the camera</param>
 			/// <param name="result">When the method completes, contains the created billboard Matrix3Dx3f</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void BillboardRH(in Vector3Df object_position, in Vector3Df camera_position, in Vector3Df cameraUpVector, 
+			public static void BillboardRH(in Vector3Df objectPosition, in Vector3Df cameraPosition, in Vector3Df cameraUpVector, 
 				in Vector3Df cameraForwardVector, out Matrix3Dx3f result)
 			{
 				Vector3Df crossed;
 				Vector3Df final;
-				Vector3Df difference = object_position - camera_position;
+				Vector3Df difference = objectPosition - cameraPosition;
 
 				var lengthSq = difference.SqrLength;
 				if (XMath.IsZero(lengthSq))
@@ -1954,19 +1954,19 @@ namespace Lotus
 			/// <summary>
 			/// Determines whether the specified <see cref="System.Object"/> is equal to this instance
 			/// </summary>
-			/// <param name="value">The <see cref="System.Object"/> to compare with this instance</param>
+			/// <param name="obj">The <see cref="System.Object"/> to compare with this instance</param>
 			/// <returns>
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object value)
+			public override Boolean Equals(System.Object obj)
 			{
-				if (!(value is Matrix3Dx3f))
+				if (!(obj is Matrix3Dx3f))
 				{
 					return false;
 				}
 
-				var matrix = (Matrix3Dx3f)value;
+				var matrix = (Matrix3Dx3f)obj;
 				return Equals(in matrix);
 			}
 
@@ -1995,7 +1995,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(in Matrix3Dx3f other)
 			{
-				return (XMath.Approximately(other.M11, M11) &&
+				return XMath.Approximately(other.M11, M11) &&
 					XMath.Approximately(other.M12, M12) &&
 					XMath.Approximately(other.M13, M13) &&
 					XMath.Approximately(other.M21, M21) &&
@@ -2003,7 +2003,7 @@ namespace Lotus
 					XMath.Approximately(other.M23, M23) &&
 					XMath.Approximately(other.M31, M31) &&
 					XMath.Approximately(other.M32, M32) &&
-					XMath.Approximately(other.M33, M33));
+					XMath.Approximately(other.M33, M33);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2071,17 +2071,17 @@ namespace Lotus
 			/// <summary>
 			/// Преобразование к текстовому представлению
 			/// </summary>
-			/// <param name="format_provider">Интерфейс провайдера формата значения компонента</param>
+			/// <param name="formatProvider">Интерфейс провайдера формата значения компонента</param>
 			/// <returns>
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public String ToString(IFormatProvider format_provider)
+			public String ToString(IFormatProvider formatProvider)
 			{
-				return String.Format(format_provider, "[M11:{0} M12:{1} M13:{2}] [M21:{3} M22:{4} M23:{5}] [M31:{6} M32:{7} M33:{8}]",
-					M11.ToString(format_provider), M12.ToString(format_provider), M13.ToString(format_provider),
-					M21.ToString(format_provider), M22.ToString(format_provider), M23.ToString(format_provider),
-					M31.ToString(format_provider), M32.ToString(format_provider), M33.ToString(format_provider));
+				return String.Format(formatProvider, "[M11:{0} M12:{1} M13:{2}] [M21:{3} M22:{4} M23:{5}] [M31:{6} M32:{7} M33:{8}]",
+					M11.ToString(formatProvider), M12.ToString(formatProvider), M13.ToString(formatProvider),
+					M21.ToString(formatProvider), M22.ToString(formatProvider), M23.ToString(formatProvider),
+					M31.ToString(formatProvider), M32.ToString(formatProvider), M33.ToString(formatProvider));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -2089,22 +2089,22 @@ namespace Lotus
 			/// Преобразование к текстовому представлению
 			/// </summary>
 			/// <param name="format">Формат отображения значения компонента</param>
-			/// <param name="format_provider">Интерфейс провайдера формата значения компонента</param>
+			/// <param name="formatProvider">Интерфейс провайдера формата значения компонента</param>
 			/// <returns>
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public String ToString(String format, IFormatProvider format_provider)
+			public String ToString(String format, IFormatProvider formatProvider)
 			{
 				if (format == null)
 				{
-					return ToString(format_provider);
+					return ToString(formatProvider);
 				}
 
-				return String.Format(format, format_provider, "[M11:{0} M12:{1} M13:{2}] [M21:{3} M22:{4} M23:{5}] [M31:{6} M32:{7} M33:{8}]",
-					M11.ToString(format, format_provider), M12.ToString(format, format_provider), M13.ToString(format, format_provider),
-					M21.ToString(format, format_provider), M22.ToString(format, format_provider), M23.ToString(format, format_provider),
-					M31.ToString(format, format_provider), M32.ToString(format, format_provider), M33.ToString(format, format_provider));
+				return String.Format(format, formatProvider, "[M11:{0} M12:{1} M13:{2}] [M21:{3} M22:{4} M23:{5}] [M31:{6} M32:{7} M33:{8}]",
+					M11.ToString(format, formatProvider), M12.ToString(format, formatProvider), M13.ToString(format, formatProvider),
+					M21.ToString(format, formatProvider), M22.ToString(format, formatProvider), M23.ToString(format, formatProvider),
+					M31.ToString(format, formatProvider), M32.ToString(format, formatProvider), M33.ToString(format, formatProvider));
 			}
 			#endregion
 
@@ -2557,7 +2557,7 @@ namespace Lotus
 				var inv_scale = 1f / scale;
 
 				//If any of the scaling factors are zero, then the rotation matrix can not exist.
-				if (Math.Abs(scale) < XMath.ZeroTolerance_f)
+				if (Math.Abs(scale) < XMath.ZeroTolerance_F)
 				{
 					rotation = Quaternion3Df.Identity;
 					return false;
@@ -2586,50 +2586,50 @@ namespace Lotus
 			/// <summary>
 			/// Exchanges two rows in the matrix
 			/// </summary>
-			/// <param name="first_row">The first row to exchange. This is an index of the row starting at zero</param>
-			/// <param name="second_row">The second row to exchange. This is an index of the row starting at zero</param>
+			/// <param name="firstRow">The first row to exchange. This is an index of the row starting at zero</param>
+			/// <param name="secondRow">The second row to exchange. This is an index of the row starting at zero</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void ExchangeRows(Int32 first_row, Int32 second_row)
+			public void ExchangeRows(Int32 firstRow, Int32 secondRow)
 			{
-				if (first_row == second_row)
+				if (firstRow == secondRow)
 					return;
 
-				var temp0 = this[second_row, 0];
-				var temp1 = this[second_row, 1];
-				var temp2 = this[second_row, 2];
+				var temp0 = this[secondRow, 0];
+				var temp1 = this[secondRow, 1];
+				var temp2 = this[secondRow, 2];
 
-				this[second_row, 0] = this[first_row, 0];
-				this[second_row, 1] = this[first_row, 1];
-				this[second_row, 2] = this[first_row, 2];
+				this[secondRow, 0] = this[firstRow, 0];
+				this[secondRow, 1] = this[firstRow, 1];
+				this[secondRow, 2] = this[firstRow, 2];
 
-				this[first_row, 0] = temp0;
-				this[first_row, 1] = temp1;
-				this[first_row, 2] = temp2;
+				this[firstRow, 0] = temp0;
+				this[firstRow, 1] = temp1;
+				this[firstRow, 2] = temp2;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Exchanges two columns in the matrix
 			/// </summary>
-			/// <param name="first_column">The first column to exchange. This is an index of the column starting at zero</param>
-			/// <param name="second_column">The second column to exchange. This is an index of the column starting at zero</param>
+			/// <param name="firstColumn">The first column to exchange. This is an index of the column starting at zero</param>
+			/// <param name="secondColumn">The second column to exchange. This is an index of the column starting at zero</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void ExchangeColumns(Int32 first_column, Int32 second_column)
+			public void ExchangeColumns(Int32 firstColumn, Int32 secondColumn)
 			{
-				if (first_column == second_column)
+				if (firstColumn == secondColumn)
 					return;
 
-				var temp0 = this[0, second_column];
-				var temp1 = this[1, second_column];
-				var temp2 = this[2, second_column];
+				var temp0 = this[0, secondColumn];
+				var temp1 = this[1, secondColumn];
+				var temp2 = this[2, secondColumn];
 
-				this[0, second_column] = this[0, first_column];
-				this[1, second_column] = this[1, first_column];
-				this[2, second_column] = this[2, first_column];
+				this[0, secondColumn] = this[0, firstColumn];
+				this[1, secondColumn] = this[1, firstColumn];
+				this[2, secondColumn] = this[2, firstColumn];
 
-				this[0, first_column] = temp0;
-				this[1, first_column] = temp1;
-				this[2, first_column] = temp2;
+				this[0, firstColumn] = temp0;
+				this[1, firstColumn] = temp1;
+				this[2, firstColumn] = temp2;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

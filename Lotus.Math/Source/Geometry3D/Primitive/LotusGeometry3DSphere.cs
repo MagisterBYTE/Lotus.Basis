@@ -79,7 +79,7 @@ namespace Lotus
 				Radius = source.Radius;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует сфера указанными параметрами
@@ -162,7 +162,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetHashCode()
 			{
-				return (Center.GetHashCode() ^ Radius.GetHashCode());
+				return Center.GetHashCode() ^ Radius.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -239,7 +239,7 @@ namespace Lotus
 			public Boolean Contains(in Vector3Df point)
 			{
 				var d = Vector3Df.Distance(in Center, in point);
-				return (Math.Abs(d - Radius) < XGeometry3D.Eplsilon_f);
+				return Math.Abs(d - Radius) < XGeometry3D.Eplsilon_f;
 			}
 			#endregion
 		}

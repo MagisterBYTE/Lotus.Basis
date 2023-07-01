@@ -13,7 +13,7 @@
 //=====================================================================================================================
 using System;
 using System.Runtime.InteropServices;
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 using UnityEngine;
 #endif
 //=====================================================================================================================
@@ -76,7 +76,7 @@ namespace Lotus
 			/// <summary>
 			/// Точность заполнения таблиц синуса и косинуса
 			/// </summary>
-			private static Single mSinCosIndexFactor = mSinCosCacheSize / XMath.PI_2f;
+			private static Single mSinCosIndexFactor = mSinCosCacheSize / XMath.PI_2_F;
 
 			/// <summary>
 			/// Размер таблицы для арктангенса
@@ -154,15 +154,15 @@ namespace Lotus
 				Int32 i;
 				for (i = 0; i < mSinCosCacheSize; i++)
 				{
-					mSinTableCache[i] = (Single)System.Math.Sin((i + 0.5f) / mSinCosCacheSize * XMath.PI_2f);
-					mCosTableCache[i] = (Single)System.Math.Cos((i + 0.5f) / mSinCosCacheSize * XMath.PI_2f);
+					mSinTableCache[i] = (Single)System.Math.Sin((i + 0.5f) / mSinCosCacheSize * XMath.PI_2_F);
+					mCosTableCache[i] = (Single)System.Math.Cos((i + 0.5f) / mSinCosCacheSize * XMath.PI_2_F);
 				}
 
 				var factor = mSinCosCacheSize / 360f;
 				for (i = 0; i < 360; i += 90)
 				{
-					mSinTableCache[(Int32)(i * factor) & mSinCosIndexMask] = (Single)System.Math.Sin(i * XMath.PI_f / 180f);
-					mCosTableCache[(Int32)(i * factor) & mSinCosIndexMask] = (Single)System.Math.Cos(i * XMath.PI_f / 180f);
+					mSinTableCache[(Int32)(i * factor) & mSinCosIndexMask] = (Single)System.Math.Sin(i * XMath.PI_F / 180f);
+					mCosTableCache[(Int32)(i * factor) & mSinCosIndexMask] = (Single)System.Math.Cos(i * XMath.PI_F / 180f);
 				}
 
 				// Atan2
@@ -170,13 +170,13 @@ namespace Lotus
 				for (i = 0; i <= Atan2Size; i++)
 				{
 					mAtan2CachePPY[i] = (Single)System.Math.Atan(i * invAtan2Size);
-					mAtan2CachePPX[i] = XMath.PI_2f - mAtan2CachePPY[i];
+					mAtan2CachePPX[i] = XMath.PI_2_F - mAtan2CachePPY[i];
 					mAtan2CachePNY[i] = -mAtan2CachePPY[i];
-					mAtan2CachePNX[i] = mAtan2CachePPY[i] - XMath.PI_2f;
-					mAtan2CacheNPY[i] = XMath.PI_f - mAtan2CachePPY[i];
-					mAtan2CacheNPX[i] = mAtan2CachePPY[i] + XMath.PI_2f;
-					mAtan2CacheNNY[i] = mAtan2CachePPY[i] - XMath.PI_f;
-					mAtan2CacheNNX[i] = -XMath.PI_2f - mAtan2CachePPY[i];
+					mAtan2CachePNX[i] = mAtan2CachePPY[i] - XMath.PI_2_F;
+					mAtan2CacheNPY[i] = XMath.PI_F - mAtan2CachePPY[i];
+					mAtan2CacheNPX[i] = mAtan2CachePPY[i] + XMath.PI_2_F;
+					mAtan2CacheNNY[i] = mAtan2CachePPY[i] - XMath.PI_F;
+					mAtan2CacheNNX[i] = -XMath.PI_2_F - mAtan2CachePPY[i];
 				}
 			}
 
@@ -210,7 +210,7 @@ namespace Lotus
 				return wrapper.Float;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Быстрая нормализация вектора с точностью 0.001
@@ -352,7 +352,7 @@ namespace Lotus
 			public static Single Atan2Angle(Single y, Single x)
 			{
 				var radian = Atan2(y, x);
-				var angle = XMath.RadianToDegree_f * radian;
+				var angle = XMath.RadianToDegree_F * radian;
 				return XMathAngle.NormalizationFull(angle);
 			}
 			#endregion

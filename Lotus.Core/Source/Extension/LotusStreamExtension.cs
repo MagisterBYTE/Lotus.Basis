@@ -32,17 +32,17 @@ namespace Lotus
 			/// <summary>
 			/// Нулевые данные по значению в контексте записи/чтения ссылочных объектов бинарного потока
 			/// </summary>
-			public const Int32 ZERODATA = -1;
+			public const Int32 ZERO_DATA = -1;
 
 			/// <summary>
 			/// Существующие данные по значению в контексте записи/чтения ссылочных объектов бинарного потока
 			/// </summary>
-			public const Int32 EXISTINGDATA = 1;
+			public const Int32 EXIST_DATA = 1;
 
 			/// <summary>
 			/// Метка успешности
 			/// </summary>
-			public const Int32 SUCCESSLABEL = 198418;
+			public const Int32 SUCCESS_LABEL = 198418;
 			#endregion
 
 			#region ======================================= ЗАПИСЬ ДАННЫХ =============================================

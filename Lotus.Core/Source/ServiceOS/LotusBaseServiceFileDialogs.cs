@@ -61,62 +61,62 @@ namespace Lotus
 			/// <summary>
 			/// Файл был успешно сохранен
 			/// </summary>
-			public const String FILESAVESUCCESSFULLY = "The file has been successfully saved";
+			public const String FILE_SAVE_SUCCESSFULLY = "The file has been successfully saved";
 
 			/// <summary>
 			/// Файл был успешно загружен
 			/// </summary>
-			public const String FILELOADSUCCESSFULLY = "The file has been successfully loaded";
+			public const String FILE_LOAD_SUCCESSFULLY = "The file has been successfully loaded";
 
 			/// <summary>
 			/// Фильтр для текстовых файлов
 			/// </summary>
-			public const String TXTFILTER = "Text files (*.txt)|*.txt";
+			public const String TXT_FILTER = "Text files (*.txt)|*.txt";
 
 			/// <summary>
 			/// Фильтр для XML файлов
 			/// </summary>
-			public const String XMLFILTER = "XML files (*.xml)|*.xml";
+			public const String XML_FILTER = "XML files (*.xml)|*.xml";
 
 			/// <summary>
 			/// Фильтр для JSON файлов
 			/// </summary>
-			public const String JSONFILTER = "JSON files (*.json)|*.json";
+			public const String JSON_FILTER = "JSON files (*.json)|*.json";
 
 			/// <summary>
 			/// Фильтр для файлов Lua скриптов
 			/// </summary>
-			public const String LUAFILTER = "LUA files (*.lua)|*.lua";
+			public const String LUA_FILTER = "LUA files (*.lua)|*.lua";
 
 			/// <summary>
 			/// Фильтр для стандартного расширения файлов с бинарными данными
 			/// </summary>
-			public const String BINFILTER = "Binary files (*.bin)|*.bin";
+			public const String BIN_FILTER = "Binary files (*.bin)|*.bin";
 
 			/// <summary>
 			/// Фильтр для расширения файлов с бинарными данными для TextAsset
 			/// </summary>
-			public const String BYTESFILTER = "Binary files (*.bytes)|*.bytes";
+			public const String BYTES_FILTER = "Binary files (*.bytes)|*.bytes";
 
 			/// <summary>
 			/// Фильтр для расширения файлов формата Wavefront
 			/// </summary>
-			public const String D3OBJFILTER = "Wavefront file (*.obj)|*.obj";
+			public const String D3_OBJ_FILTER = "Wavefront file (*.obj)|*.obj";
 
 			/// <summary>
 			/// Фильтр для расширения файлов формата COLLADA
 			/// </summary>
-			public const String D3DAEFILTER = "COLLADA file (*.dae)|*.dae";
+			public const String D3_DAE_FILTER = "COLLADA file (*.dae)|*.dae";
 
 			/// <summary>
 			/// Фильтр для расширения файлов формата Autodesk 3ds Max 3D
 			/// </summary>
-			public const String D33DSFILTER = " Autodesk 3ds Max 3D file (*.3ds)|*.3ds";
+			public const String D3_3DS_FILTER = " Autodesk 3ds Max 3D file (*.3ds)|*.3ds";
 
 			/// <summary>
 			/// Фильтр для расширения файлов формата Stereolithography file
 			/// </summary>
-			public const String D3STLFILTER = "Stereolithography file (*.stl)|*.stl";
+			public const String D3_STL_FILTER = "Stereolithography file (*.stl)|*.stl";
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================

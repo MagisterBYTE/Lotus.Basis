@@ -754,9 +754,9 @@ namespace Lotus
 			/// </summary>
 			/// <param name="index">Позиция(индекс) точки</param>
 			/// <param name="point">Контрольная точка сплайна в локальных координатах</param>
-			/// <param name="update_spline">Статус обновления сплайна</param>
+			/// <param name="updateSpline">Статус обновления сплайна</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetControlPoint(Int32 index, Vector3Df point, Boolean update_spline = false)
+			public override void SetControlPoint(Int32 index, Vector3Df point, Boolean updateSpline = false)
 			{
 				if (index % 3 == 0)
 				{
@@ -796,7 +796,7 @@ namespace Lotus
 				mControlPoints[index] = point;
 				SetHandleMode(index);
 
-				if (update_spline)
+				if (updateSpline)
 				{
 					OnUpdateSpline();
 				}

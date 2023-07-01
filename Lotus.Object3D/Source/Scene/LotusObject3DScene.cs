@@ -33,7 +33,7 @@ using HelixToolkit.SharpDX.Core;
 using HelixToolkit.SharpDX.Core.Model.Scene;
 #endif
 //---------------------------------------------------------------------------------------------------------------------
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 using UnityEngine;
 using UnityEditor;
 #endif
@@ -162,7 +162,7 @@ namespace Lotus
 #if USE_HELIX
 			internal SceneNode mHelixScene;
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			internal GameObject mUnityScene;
 #endif
 #if UNITY_EDITOR
@@ -180,7 +180,7 @@ namespace Lotus
 			[Browsable(false)]
 			public String FileName
 			{
-				get { return (mFileName); }
+				get { return mFileName; }
 				set
 				{
 					mFileName = value;
@@ -196,7 +196,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CNode3D RootNode
 			{
-				get { return (mRootNode); }
+				get { return mRootNode; }
 			}
 
 			/// <summary>
@@ -205,7 +205,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CMeshSet MeshSet
 			{
-				get { return (mMeshSet); }
+				get { return mMeshSet; }
 			}
 
 			/// <summary>
@@ -214,7 +214,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CMaterialSet MaterialSet
 			{
-				get { return (mMaterialSet); }
+				get { return mMaterialSet; }
 			}
 
 			/// <summary>
@@ -235,7 +235,7 @@ namespace Lotus
 						mAllEntities.Add(mRootNode);
 					}
 
-					return (mAllEntities);
+					return mAllEntities;
 				}
 			}
 
@@ -250,7 +250,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Vector3Df CenterPosition
 			{
-				get { return (mCenterPosition); }
+				get { return mCenterPosition; }
 			}
 
 			/// <summary>
@@ -261,7 +261,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeX
 			{
-				get { return (mMaxPosition.X - mMinPosition.X); }
+				get { return mMaxPosition.X - mMinPosition.X; }
 			}
 
 			/// <summary>
@@ -272,7 +272,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeY
 			{
-				get { return (mMaxPosition.Y - mMinPosition.Y); }
+				get { return mMaxPosition.Y - mMinPosition.Y; }
 			}
 
 			/// <summary>
@@ -283,7 +283,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeZ
 			{
-				get { return (mMaxPosition.Z - mMinPosition.Z); }
+				get { return mMaxPosition.Z - mMinPosition.Z; }
 			}
 
 			//
@@ -299,7 +299,7 @@ namespace Lotus
 				get { return (mHelixScene); }
 			}
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			/// <summary>
 			/// Сцена Unity
 			/// </summary>
@@ -382,7 +382,7 @@ namespace Lotus
 				ComputeBoundingBox();
 			}
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -424,7 +424,7 @@ namespace Lotus
 			{
 				get
 				{
-					return(this);
+					return this;
 				}
 			}
 
@@ -437,7 +437,7 @@ namespace Lotus
 			public Boolean MoveNext()
 			{
 				mEnumeratorIndex++;
-				return (mEnumeratorIndex == 1);
+				return mEnumeratorIndex == 1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -460,7 +460,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			IEnumerator IEnumerable.GetEnumerator()
 			{
-				return (this);
+				return this;
 			}
 			#endregion
 
@@ -473,7 +473,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetCountChildrenNode()
 			{
-				return (AllEntities.Count);
+				return AllEntities.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -485,7 +485,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetChildrenNode(Int32 index)
 			{
-				return (AllEntities[index]);
+				return AllEntities[index];
 			}
 			#endregion
 
@@ -499,7 +499,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMesh3Df GetMeshFromIndex(Int32 index)
 			{
-				return (mMeshSet.Meshes[index]);
+				return mMeshSet.Meshes[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -511,7 +511,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMaterial GetMaterialFromIndex(Int32 index)
 			{
-				return (mMaterialSet.Materials[index]);
+				return mMaterialSet.Materials[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -537,7 +537,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= МЕТОДЫ ПЛАТФОРМЫ UNITY ====================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Создание сцены из игрового объекта Unity

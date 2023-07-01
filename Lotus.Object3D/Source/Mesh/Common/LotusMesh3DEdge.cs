@@ -89,7 +89,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return (TMeshElement.Edge); } }
+			public TMeshElement MeshElement { get { return TMeshElement.Edge; } }
 
 			/// <summary>
 			/// Статус простого ребра
@@ -101,7 +101,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (IndexTriangle1 != -1 && IndexTriangle2 != -1 && IsEqualsIndex());
+					return IndexTriangle1 != -1 && IndexTriangle2 != -1 && IsEqualsIndex();
 				}
 			}
 
@@ -115,7 +115,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (IndexTriangle1 != -1 && IndexTriangle2 != -1 && !IsEqualsIndex());
+					return IndexTriangle1 != -1 && IndexTriangle2 != -1 && !IsEqualsIndex();
 				}
 			}
 
@@ -129,7 +129,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (IndexTriangle2 == -1);
+					return IndexTriangle2 == -1;
 				}
 			}
 			#endregion
@@ -141,17 +141,17 @@ namespace Lotus
 			/// </summary>
 			/// <param name="iv1">Индекс первой вершины</param>
 			/// <param name="iv2">Индекс второй вершины</param>
-			/// <param name="index_triangle1">Индекс первого треугольника которому принадлежит ребро</param>
-			/// <param name="index_triangle2">Индекс второго треугольника которому принадлежит ребро</param>
+			/// <param name="indexTriangle1">Индекс первого треугольника которому принадлежит ребро</param>
+			/// <param name="indexTriangle2">Индекс второго треугольника которому принадлежит ребро</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CEdge3Df(Int32 iv1, Int32 iv2, Int32 index_triangle1 = -1, Int32 index_triangle2 = -1)
+			public CEdge3Df(Int32 iv1, Int32 iv2, Int32 indexTriangle1 = -1, Int32 indexTriangle2 = -1)
 			{
 				IndexVertex10 = iv1;
 				IndexVertex11 = iv2;
 				IndexVertex20 = -1;
 				IndexVertex21 = -1;
-				IndexTriangle1 = index_triangle1;
-				IndexTriangle2 = index_triangle2;
+				IndexTriangle1 = indexTriangle1;
+				IndexTriangle2 = indexTriangle2;
 			}
 			#endregion
 
@@ -169,7 +169,7 @@ namespace Lotus
 				{
 					if (GetType() == obj.GetType())
 					{
-						CEdge3Df edge = (CEdge3Df)obj;
+						var edge = (CEdge3Df)obj;
 						return Equals(edge);
 					}
 				}
@@ -188,8 +188,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(CEdge3Df other)
 			{
-				return ((IndexVertex10 == other.IndexVertex10 && IndexVertex11 == other.IndexVertex11) ||
-					(IndexVertex11 == other.IndexVertex10 && IndexVertex10 == other.IndexVertex11));
+				return (IndexVertex10 == other.IndexVertex10 && IndexVertex11 == other.IndexVertex11) ||
+					(IndexVertex11 == other.IndexVertex10 && IndexVertex10 == other.IndexVertex11);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -260,7 +260,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (String.Format(ToStringFormat, IndexVertex10, IndexVertex11));
+				return String.Format(ToStringFormat, IndexVertex10, IndexVertex11);
 			}
 			#endregion
 
@@ -281,9 +281,9 @@ namespace Lotus
 				if((IndexVertex10 == IndexVertex20 && IndexVertex11 == IndexVertex21) ||
 					(IndexVertex11 == IndexVertex20 && IndexVertex10 == IndexVertex21))
 				{
-					return (true);
+					return true;
 				}
-				return (false);
+				return false;
 			}
 			#endregion
 
@@ -296,8 +296,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CEdge3Df Duplicate()
 			{
-				CEdge3Df copy = (CEdge3Df)MemberwiseClone();
-				return (copy);
+				var copy = (CEdge3Df)MemberwiseClone();
+				return copy;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -324,7 +324,7 @@ namespace Lotus
 						Vector3Df.Approximately(in pe2, in p2))
 					{
 						// Совпадает первая пара
-						return (true);
+						return true;
 					}
 					else
 					{
@@ -332,7 +332,7 @@ namespace Lotus
 							Vector3Df.Approximately(in pe2, in p1))
 						{
 							// Совпадает первая пара (обратный порядок)
-							return (true);
+							return true;
 						}
 					}
 				}
@@ -347,7 +347,7 @@ namespace Lotus
 						Vector3Df.Approximately(in pe2, in p2))
 					{
 						// Совпадает вторая пара
-						return (true);
+						return true;
 					}
 					else
 					{
@@ -355,12 +355,12 @@ namespace Lotus
 							Vector3Df.Approximately(in pe2, in p1))
 						{
 							// Совпадает вторая пара (обратный порядок)
-							return (true);
+							return true;
 						}
 					}
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 		}
@@ -384,7 +384,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return (TMeshElement.Edge); } }
+			public TMeshElement MeshElement { get { return TMeshElement.Edge; } }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -418,7 +418,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Move(Vector3Df offset)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					Vertices.Vertices[mArrayOfItems[i].IndexVertex10].Position += offset;
 					Vertices.Vertices[mArrayOfItems[i].IndexVertex11].Position += offset;
@@ -510,15 +510,15 @@ namespace Lotus
 				Vector3Df p1 = Vertices[iv1].Position;
 				Vector3Df p2 = Vertices[iv2].Position;
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].CheckFromPosition(Vertices, in p1, in p2))
 					{
-						return (i);
+						return i;
 					}
 				}
 
-				return (-1);
+				return -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -532,9 +532,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CListEdge3D GetOuterEdge()
 			{
-				CListEdge3D outer_edges = new CListEdge3D();
+				var outer_edges = new CListEdge3D();
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].IndexTriangle2 == -1)
 					{
@@ -542,7 +542,7 @@ namespace Lotus
 					}
 				}
 
-				return (outer_edges);
+				return outer_edges;
 			}
 			#endregion
 		}

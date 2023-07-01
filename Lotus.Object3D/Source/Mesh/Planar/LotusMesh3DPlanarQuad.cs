@@ -66,8 +66,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CMeshPlanarQuad3Df CreateOfPoint(Vector3Df p1, Vector3Df p2, Vector3Df p3, Vector3Df p4)
 			{
-				CMeshPlanarQuad3Df mesh = new CMeshPlanarQuad3Df(p1, p2, p3, p4);
-				return (mesh);
+				var mesh = new CMeshPlanarQuad3Df(p1, p2, p3, p4);
+				return mesh;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -85,9 +85,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CMeshPlanarQuad3Df CreateXZ(Vector3Df pivot, Single width, Single height)
 			{
-				CMeshPlanarQuad3Df mesh = new CMeshPlanarQuad3Df();
+				var mesh = new CMeshPlanarQuad3Df();
 				mesh.CreateQuadXZ(pivot, width, height);
-				return (mesh);
+				return mesh;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -105,9 +105,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CMeshPlanarQuad3Df CreateZY(Vector3Df pivot, Single width, Single height)
 			{
-				CMeshPlanarQuad3Df mesh = new CMeshPlanarQuad3Df();
+				var mesh = new CMeshPlanarQuad3Df();
 				mesh.CreateQuadZY(pivot, width, height);
-				return (mesh);
+				return mesh;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -125,9 +125,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CMeshPlanarQuad3Df CreateXY(Vector3Df pivot, Single width, Single height)
 			{
-				CMeshPlanarQuad3Df mesh = new CMeshPlanarQuad3Df();
+				var mesh = new CMeshPlanarQuad3Df();
 				mesh.CreateQuadXY(pivot, width, height);
-				return (mesh);
+				return mesh;
 			}
 			#endregion
 
@@ -142,7 +142,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (Vector3Df.Distance(in mVertices.Vertices[1].Position, in mVertices.Vertices[0].Position));
+					return Vector3Df.Distance(in mVertices.Vertices[1].Position, in mVertices.Vertices[0].Position);
 				}
 
 				set
@@ -169,7 +169,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (Vector3Df.Distance(in mVertices.Vertices[2].Position, in mVertices.Vertices[0].Position));
+					return Vector3Df.Distance(in mVertices.Vertices[2].Position, in mVertices.Vertices[0].Position);
 				}
 
 				set
@@ -362,10 +362,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeUVMap(Int32 channel = 0)
 			{
-				mVertices.Vertices[0].UV = XGeometry2D.MapUV_BottomLeft;
-				mVertices.Vertices[1].UV = XGeometry2D.MapUV_BottomRight;
-				mVertices.Vertices[2].UV = XGeometry2D.MapUV_TopLeft;
-				mVertices.Vertices[3].UV = XGeometry2D.MapUV_TopRight;
+				mVertices.Vertices[0].UV = XGeometry2D.MapUVBottomLeft;
+				mVertices.Vertices[1].UV = XGeometry2D.MapUVBottomRight;
+				mVertices.Vertices[2].UV = XGeometry2D.MapUVTopLeft;
+				mVertices.Vertices[3].UV = XGeometry2D.MapUVTopRight;
 			}
 			#endregion
 		}

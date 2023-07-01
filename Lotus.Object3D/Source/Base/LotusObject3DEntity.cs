@@ -45,7 +45,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusViewItem OwnerViewItem
 			{
-				get { return (mOwnerViewItem); }
+				get { return mOwnerViewItem; }
 				set
 				{
 					mOwnerViewItem = value;
@@ -60,7 +60,7 @@ namespace Lotus
 			[Browsable(false)]
 			public override String InspectorTypeName
 			{
-				get { return ("Entity"); }
+				get { return "Entity"; }
 			}
 
 			/// <summary>
@@ -71,7 +71,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mName); 
+					return mName; 
 				}
 			}
 			#endregion
@@ -110,7 +110,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (mName);
+				return mName;
 			}
 			#endregion
 
@@ -123,7 +123,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Int32 GetCountChildrenNode()
 			{
-				return (0);
+				return 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual System.Object GetChildrenNode(Int32 index)
 			{
-				return (null);
+				return null;
 			}
 			#endregion
 		}

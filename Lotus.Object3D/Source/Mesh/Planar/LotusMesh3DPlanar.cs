@@ -99,17 +99,17 @@ namespace Lotus
 			{
 				if (mPlaneType == Maths.TDimensionPlane.XZ)
 				{
-					return (Vector3Df.Up);
+					return Vector3Df.Up;
 				}
 				else
 				{
 					if (mPlaneType == Maths.TDimensionPlane.ZY)
 					{
-						return (Vector3Df.Right);
+						return Vector3Df.Right;
 					}
 					else
 					{
-						return (-Vector3Df.Forward);
+						return -Vector3Df.Forward;
 					}
 				}
 			}
@@ -126,17 +126,17 @@ namespace Lotus
 			{
 				if (mPlaneType == Maths.TDimensionPlane.XZ)
 				{
-					return (new Vector3Df(x, 0, y));
+					return new Vector3Df(x, 0, y);
 				}
 				else
 				{
 					if (mPlaneType == Maths.TDimensionPlane.ZY)
 					{
-						return (new Vector3Df(0, y, x));
+						return new Vector3Df(0, y, x);
 					}
 					else
 					{
-						return (new Vector3Df(x, y, 0));
+						return new Vector3Df(x, y, 0);
 					}
 				}
 			}
@@ -147,24 +147,24 @@ namespace Lotus
 			/// </summary>
 			/// <param name="x">Координта по X</param>
 			/// <param name="y">Координта по Y</param>
-			/// <param name="vector_save">Вектор для сохранения значимой координаты</param>
+			/// <param name="vectorSave">Вектор для сохранения значимой координаты</param>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df GetPlaneVector(Single x, Single y, Vector3Df vector_save)
+			public Vector3Df GetPlaneVector(Single x, Single y, Vector3Df vectorSave)
 			{
 				if (mPlaneType == Maths.TDimensionPlane.XZ)
 				{
-					return (new Vector3Df(x, vector_save.Y, y));
+					return new Vector3Df(x, vectorSave.Y, y);
 				}
 				else
 				{
 					if (mPlaneType == Maths.TDimensionPlane.ZY)
 					{
-						return (new Vector3Df(vector_save.X, y, x));
+						return new Vector3Df(vectorSave.X, y, x);
 					}
 					else
 					{
-						return (new Vector3Df(x, y, vector_save.Z));
+						return new Vector3Df(x, y, vectorSave.Z);
 					}
 				}
 			}

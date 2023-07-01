@@ -51,7 +51,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mRadius);
+					return mRadius;
 				}
 
 				set
@@ -68,7 +68,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mNumberVerticalSegment);
+					return mNumberVerticalSegment;
 				}
 
 				set
@@ -85,7 +85,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mNumberHorizontalSegment);
+					return mNumberHorizontalSegment;
 				}
 
 				set
@@ -114,15 +114,15 @@ namespace Lotus
 			/// </summary>
 			/// <param name="pivot">Опорная точка сферы(центр сферы)</param>
 			/// <param name="radius">Радиус сферы</param>
-			/// <param name="start_angle">Начальный угол(в градусах) генерации сферы</param>
-			/// <param name="number_vertical_segment">Количество вертикальных сегментов</param>
-			/// <param name="number_horizontal_segment">Количество горизонтальных сегментов</param>
+			/// <param name="startAngle">Начальный угол(в градусах) генерации сферы</param>
+			/// <param name="numberVerticalSegment">Количество вертикальных сегментов</param>
+			/// <param name="numberHorizontalSegment">Количество горизонтальных сегментов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMeshPrimitiveSphere3Df(Vector3Df pivot, Single radius, Single start_angle, Int32 number_vertical_segment,
-				 Int32 number_horizontal_segment): base()
+			public CMeshPrimitiveSphere3Df(Vector3Df pivot, Single radius, Single startAngle, Int32 numberVerticalSegment,
+				 Int32 numberHorizontalSegment): base()
 			{
 				mName = "Sphere3D";
-				Create(pivot, radius, start_angle, number_vertical_segment, number_horizontal_segment);
+				Create(pivot, radius, startAngle, numberVerticalSegment, numberHorizontalSegment);
 			}
 			#endregion
 
@@ -145,40 +145,40 @@ namespace Lotus
 			/// </summary>
 			/// <param name="pivot">Опорная точка сферы(центр сферы)</param>
 			/// <param name="radius">Радиус сферы</param>
-			/// <param name="start_angle">Начальный угол(в градусах) генерации сферы</param>
-			/// <param name="number_vertical_segment">Количество вертикальных сегментов</param>
-			/// <param name="number_horizontal_segment">Количество горизонтальных сегментов</param>
+			/// <param name="startAngle">Начальный угол(в градусах) генерации сферы</param>
+			/// <param name="numberVerticalSegment">Количество вертикальных сегментов</param>
+			/// <param name="numberHorizontalSegment">Количество горизонтальных сегментов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Create(Vector3Df pivot, Single radius, Single start_angle, Int32 number_vertical_segment,
-				 Int32 number_horizontal_segment)
+			public void Create(Vector3Df pivot, Single radius, Single startAngle, Int32 numberVerticalSegment,
+				 Int32 numberHorizontalSegment)
 			{
 				// Сохраняем данные
-				mNumberVerticalSegment = number_vertical_segment;
-				mNumberHorizontalSegment = number_horizontal_segment;
+				mNumberVerticalSegment = numberVerticalSegment;
+				mNumberHorizontalSegment = numberHorizontalSegment;
 
 				// Количество строк - есть количество горизонтальных сегментов
-				Int32 row_count = number_horizontal_segment;
+				var row_count = numberHorizontalSegment;
 
 				// Количество столбов - есть количество вертикальных сегментов
-				Int32 column_count = number_vertical_segment;
+				var column_count = numberVerticalSegment;
 
 				mVertices.Clear();
 
 				// Дельта углов для плоскостей
-				Single horizont_delta = 360.0f / column_count;
-				Single vertical_delta = 180.0f / row_count;
+				var horizont_delta = 360.0f / column_count;
+				var vertical_delta = 180.0f / row_count;
 
-				for (Int32 ir = 0; ir < row_count + 1; ir++)
+				for (var ir = 0; ir < row_count + 1; ir++)
 				{
-					for (Int32 ic = 0; ic < column_count; ic++)
+					for (var ic = 0; ic < column_count; ic++)
 					{
 						// Широта в градусах - угол в вертикальной плоскости в пределах [0, 180]
-						Single latitude_degree = ir * vertical_delta;
+						var latitude_degree = ir * vertical_delta;
 
 						// Долгота в градусах - угол в горизонтальной плоскости между в пределах [0, 359]
-						Single longitude_degree = ic * horizont_delta;
+						var longitude_degree = ic * horizont_delta;
 
-						Vector3Df positon = Vector3Df.FromSpherical(radius, latitude_degree, longitude_degree);
+						var positon = Vector3Df.FromSpherical(radius, latitude_degree, longitude_degree);
 						Vector2Df uv = XGeometry3D.GetMapUVFromSpherical(latitude_degree, longitude_degree);
 
 						mVertices.AddVertex(positon + pivot, positon.Normalized, uv);
@@ -211,13 +211,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeUVMap(Int32 channel = 0)
 			{
-				Int32 index = 0;
-				for (Int32 ir = 0; ir <= mNumberHorizontalSegment; ir++)
+				var index = 0;
+				for (var ir = 0; ir <= mNumberHorizontalSegment; ir++)
 				{
-					for (Int32 ic = 0; ic <= mNumberVerticalSegment; ic++)
+					for (var ic = 0; ic <= mNumberVerticalSegment; ic++)
 					{
-						Single u = ic / (Single)mNumberVerticalSegment;
-						Single v = ir / (Single)mNumberHorizontalSegment;
+						var u = ic / (Single)mNumberVerticalSegment;
+						var v = ir / (Single)mNumberHorizontalSegment;
 
 						mVertices.Vertices[index].UV = new Vector2Df(v, u);
 						index++;

@@ -67,8 +67,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CMeshPlanarTriangle3Df CreateOfPoint(Vector3Df p1, Vector3Df p2, Vector3Df p3)
 			{
-				CMeshPlanarTriangle3Df mesh = new CMeshPlanarTriangle3Df(p1, p2, p3);
-				return (mesh);
+				var mesh = new CMeshPlanarTriangle3Df(p1, p2, p3);
+				return mesh;
 			}
 			#endregion
 
@@ -154,9 +154,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeNormals()
 			{
-				Int32 iv0 = mVertices.Count - 3;
-				Int32 iv1 = mVertices.Count - 2;
-				Int32 iv2 = mVertices.Count - 1;
+				var iv0 = mVertices.Count - 3;
+				var iv1 = mVertices.Count - 2;
+				var iv2 = mVertices.Count - 1;
 
 				Vector3Df down = mVertices.Vertices[iv1].Position - mVertices.Vertices[iv0].Position;
 				Vector3Df right = mVertices.Vertices[iv2].Position - mVertices.Vertices[iv0].Position;
@@ -176,9 +176,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeUVMap(Int32 channel = 0)
 			{
-				mVertices.Vertices[0].UV = XGeometry2D.MapUV_BottomLeft;
-				mVertices.Vertices[1].UV = XGeometry2D.MapUV_TopLeft;
-				mVertices.Vertices[2].UV = XGeometry2D.MapUV_TopRight;
+				mVertices.Vertices[0].UV = XGeometry2D.MapUVBottomLeft;
+				mVertices.Vertices[1].UV = XGeometry2D.MapUVTopLeft;
+				mVertices.Vertices[2].UV = XGeometry2D.MapUVTopRight;
 			}
 			#endregion
 		}

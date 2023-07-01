@@ -70,7 +70,7 @@ namespace Lotus
 #if USE_ASSIMP
 			internal Assimp.Material mAssimpMaterial;
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			internal UnityEngine.Material mUnityMaterial;
 #endif
 #if UNITY_EDITOR
@@ -91,7 +91,7 @@ namespace Lotus
 			[LotusPropertyOrder(0)]
 			public TColor AmbientColor
 			{
-				get { return (mAmbientColor); }
+				get { return mAmbientColor; }
 				set
 				{
 					if (mAmbientColor != value)
@@ -112,7 +112,7 @@ namespace Lotus
 			[LotusPropertyOrder(1)]
 			public TColor DiffuseColor
 			{
-				get { return (mDiffuseColor); }
+				get { return mDiffuseColor; }
 				set
 				{
 					if (mDiffuseColor != value)
@@ -130,7 +130,7 @@ namespace Lotus
 			[Browsable(false)]
 			public ListArray<CTextureSlot> TextureSlots
 			{
-				get { return (mTextureSlots); }
+				get { return mTextureSlots; }
 			}
 
 			/// <summary>
@@ -139,7 +139,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CScene3D OwnerScene
 			{
-				get { return (mOwnerScene); }
+				get { return mOwnerScene; }
 				set
 				{
 					mOwnerScene = value;
@@ -152,11 +152,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
+			/// <param name="ownerScene">Сцена</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMaterial(CScene3D owner_scene)
+			public CMaterial(CScene3D ownerScene)
 			{
-				mOwnerScene = owner_scene;
+				mOwnerScene = ownerScene;
 				mTextureSlots = new ListArray<CTextureSlot>
 				{
 					IsNotify = true
@@ -209,7 +209,7 @@ namespace Lotus
 			}
 #endif
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -263,7 +263,7 @@ namespace Lotus
 					//mHelixMaterial.AmbientColor = mAmbientColor.ToShColor4();
 				}
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				if (mUnityMaterial != null)
 				{
 					mUnityMaterial.SetColor("Ambient", mAmbientColor);
@@ -288,7 +288,7 @@ namespace Lotus
 					//mHelixMaterial.DiffuseColor = mDiffuseColor.ToShColor4();
 				}
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				if (mUnityMaterial != null)
 				{
 					mUnityMaterial.SetColor("Diffuse", mAmbientColor);
@@ -360,7 +360,7 @@ namespace Lotus
 			[Browsable(false)]
 			public ListArray<CMaterial> Materials
 			{
-				get { return (mMaterials); }
+				get { return mMaterials; }
 			}
 			#endregion
 
@@ -369,11 +369,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
+			/// <param name="ownerScene">Сцена</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMaterialSet(CScene3D owner_scene)
+			public CMaterialSet(CScene3D ownerScene)
 			{
-				mOwnerScene = owner_scene;
+				mOwnerScene = ownerScene;
 				mName = "Материалы";
 				mMaterials = new ListArray<CMaterial>
 				{
@@ -414,7 +414,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetCountChildrenNode()
 			{
-				return (mMaterials.Count);
+				return mMaterials.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -426,7 +426,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetChildrenNode(Int32 index)
 			{
-				return (mMaterials[index]);
+				return mMaterials[index];
 			}
 			#endregion
 

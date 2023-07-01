@@ -109,7 +109,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return (TMeshElement.Vertex); } }
+			public TMeshElement MeshElement { get { return TMeshElement.Vertex; } }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -210,7 +210,7 @@ namespace Lotus
 				IsUnique = true;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -287,7 +287,7 @@ namespace Lotus
 				{
 					if (GetType() == obj.GetType())
 					{
-						CVertex3Df vertex = (CVertex3Df)obj;
+						var vertex = (CVertex3Df)obj;
 						return Equals(vertex);
 					}
 				}
@@ -380,7 +380,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (String.Format(ToStringFormat, Index, Position.X, Position.Y, Position.Z));
+				return String.Format(ToStringFormat, Index, Position.X, Position.Y, Position.Z);
 			}
 			#endregion
 
@@ -502,9 +502,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CVertex3Df Duplicate()
 			{
-				CVertex3Df copy = (CVertex3Df)MemberwiseClone();
+				var copy = (CVertex3Df)MemberwiseClone();
 				copy.Index = - 1;
-				return (copy);
+				return copy;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -529,7 +529,7 @@ namespace Lotus
 			{
 				CVertex3Df copy = Duplicate();
 				copy.Position = Position + Normal * offset;
-				return (copy);
+				return copy;
 			}
 			#endregion
 		}
@@ -546,12 +546,12 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return (TMeshElement.Vertex); } }
+			public TMeshElement MeshElement { get { return TMeshElement.Vertex; } }
 
 			/// <summary>
 			/// Список вершин для прямого доступа
 			/// </summary>
-			public CVertex3Df[] Vertices { get { return (mArrayOfItems); } }
+			public CVertex3Df[] Vertices { get { return mArrayOfItems; } }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -572,7 +572,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CListVertex3D(params Vector3Df[] list)
 			{
-				for (Int32 i = 0; i < list.Length; i++)
+				for (var i = 0; i < list.Length; i++)
 				{
 					AddVertex(list[i]);
 				}
@@ -588,7 +588,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Move(Vector3Df offset)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Position += offset;
 				}
@@ -602,7 +602,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Rotate(Quaternion3Df rotation)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Position = rotation.TransformVector(in mArrayOfItems[i].Position);
 					mArrayOfItems[i].Normal = rotation.TransformVector(in mArrayOfItems[i].Normal);
@@ -614,16 +614,16 @@ namespace Lotus
 			/// Врашение вершин вокруг оси X
 			/// </summary>
 			/// <param name="angle">Угол в градусах</param>
-			/// <param name="is_center">Относительно геометрического центра</param>
+			/// <param name="isCenter">Относительно геометрического центра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateFromX(Single angle, Boolean is_center)
+			public void RotateFromX(Single angle, Boolean isCenter)
 			{
-				if (is_center)
+				if (isCenter)
 				{
 					Vector3Df offset = GetCentredPosition();
 					Matrix4Dx4 rotation = Matrix4Dx4.Identity;
 					Matrix4Dx4.RotationX(angle, ref rotation);
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].Position -= offset;
 						mArrayOfItems[i].Position.TransformAsPoint(in rotation);
@@ -635,7 +635,7 @@ namespace Lotus
 				{
 					Matrix4Dx4 rotation = Matrix4Dx4.Identity;
 					Matrix4Dx4.RotationX(angle, ref rotation);
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].Position.TransformAsPoint(in rotation);
 						mArrayOfItems[i].Normal.TransformAsVector(in rotation);
@@ -648,16 +648,16 @@ namespace Lotus
 			/// Врашение вершин вокруг оси Y
 			/// </summary>
 			/// <param name="angle">Угол в градусах</param>
-			/// <param name="is_center">Относительно геометрического центра</param>
+			/// <param name="isCenter">Относительно геометрического центра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateFromY(Single angle, Boolean is_center)
+			public void RotateFromY(Single angle, Boolean isCenter)
 			{
-				if (is_center)
+				if (isCenter)
 				{
 					Vector3Df offset = GetCentredPosition();
 					Matrix4Dx4 rotation = Matrix4Dx4.Identity;
 					Matrix4Dx4.RotationY(angle, ref rotation);
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].Position -= offset;
 						mArrayOfItems[i].Position.TransformAsPoint(in rotation);
@@ -669,7 +669,7 @@ namespace Lotus
 				{
 					Matrix4Dx4 rotation = Matrix4Dx4.Identity;
 					Matrix4Dx4.RotationY(angle, ref rotation);
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].Position.TransformAsPoint(in rotation);
 						mArrayOfItems[i].Normal.TransformAsVector(in rotation);
@@ -682,16 +682,16 @@ namespace Lotus
 			/// Врашение вершин вокруг оси Z
 			/// </summary>
 			/// <param name="angle">Угол в градусах</param>
-			/// <param name="is_center">Относительно геометрического центра</param>
+			/// <param name="isCenter">Относительно геометрического центра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateFromZ(Single angle, Boolean is_center)
+			public void RotateFromZ(Single angle, Boolean isCenter)
 			{
-				if (is_center)
+				if (isCenter)
 				{
 					Vector3Df offset = GetCentredPosition();
 					Matrix4Dx4 rotation = Matrix4Dx4.Identity;
 					Matrix4Dx4.RotationZ(angle, ref rotation);
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].Position -= offset;
 						mArrayOfItems[i].Position.TransformAsPoint(in rotation);
@@ -703,7 +703,7 @@ namespace Lotus
 				{
 					Matrix4Dx4 rotation = Matrix4Dx4.Identity;
 					Matrix4Dx4.RotationZ(angle, ref rotation);
-					for (Int32 i = 0; i < mCount; i++)
+					for (var i = 0; i < mCount; i++)
 					{
 						mArrayOfItems[i].Position.TransformAsPoint(in rotation);
 						mArrayOfItems[i].Normal.TransformAsVector(in rotation);
@@ -719,7 +719,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Scale(Single scale)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Position *= scale;
 				}
@@ -733,7 +733,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Scale(Vector3Df scale)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Position = Vector3Df.Scale(mArrayOfItems[i].Position, scale);
 					mArrayOfItems[i].Normal = Vector3Df.Scale(mArrayOfItems[i].Normal, scale).Normalized;
@@ -747,7 +747,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void FlipNormals()
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Normal = -mArrayOfItems[i].Normal;
 				}
@@ -764,19 +764,19 @@ namespace Lotus
 				switch (channel)
 				{
 					case 0:
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							mArrayOfItems[i].UV = new Vector2Df(1.0f - mArrayOfItems[i].UV.X, mArrayOfItems[i].UV.Y);
 						}
 						break;
 					case 1:
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							mArrayOfItems[i].UV2 = new Vector2Df(1.0f - mArrayOfItems[i].UV2.X, mArrayOfItems[i].UV2.Y);
 						}
 						break;
 					case 2:
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							mArrayOfItems[i].UV3 = new Vector2Df(1.0f - mArrayOfItems[i].UV3.X, mArrayOfItems[i].UV3.Y);
 						}
@@ -797,19 +797,19 @@ namespace Lotus
 				switch (channel)
 				{
 					case 0:
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							mArrayOfItems[i].UV = new Vector2Df(mArrayOfItems[i].UV.X, 1.0f - mArrayOfItems[i].UV.Y);
 						}
 						break;
 					case 1:
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							mArrayOfItems[i].UV2 = new Vector2Df(mArrayOfItems[i].UV2.X, 1.0f - mArrayOfItems[i].UV2.Y);
 						}
 						break;
 					case 2:
-						for (Int32 i = 0; i < mCount; i++)
+						for (var i = 0; i < mCount; i++)
 						{
 							mArrayOfItems[i].UV3 = new Vector2Df(mArrayOfItems[i].UV3.X, 1.0f - mArrayOfItems[i].UV3.Y);
 						}
@@ -829,12 +829,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CListVertex3D Duplicate()
 			{
-				CListVertex3D list_vertex = new CListVertex3D();
-				for (Int32 i = 0; i < mCount; i++)
+				var list_vertex = new CListVertex3D();
+				for (var i = 0; i < mCount; i++)
 				{
 					list_vertex.Add(mArrayOfItems[i]);
 				}
-				return (list_vertex);
+				return list_vertex;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -845,7 +845,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OffsetFromNormal(Single offset)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Position = mArrayOfItems[i].Position + mArrayOfItems[i].Normal * offset;
 				}
@@ -860,12 +860,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CListVertex3D GetListVertexOffsetFromNormal(Single offset)
 			{
-				CListVertex3D list_vertex = new CListVertex3D();
-				for (Int32 i = 0; i < mCount; i++)
+				var list_vertex = new CListVertex3D();
+				for (var i = 0; i < mCount; i++)
 				{
 					list_vertex.Add(mArrayOfItems[i].Position + mArrayOfItems[i].Normal * offset);
 				}
-				return (list_vertex);
+				return list_vertex;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -878,18 +878,18 @@ namespace Lotus
 			{
 				Single size = 20000;
 
-				Single max_x = -size;
-				Single max_y = -size;
-				Single max_z = -size;
+				var max_x = -size;
+				var max_y = -size;
+				var max_z = -size;
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].Position.X > max_x) max_x = mArrayOfItems[i].Position.X;
 					if (mArrayOfItems[i].Position.Y > max_y) max_y = mArrayOfItems[i].Position.Y;
 					if (mArrayOfItems[i].Position.Z > max_z) max_z = mArrayOfItems[i].Position.Z;
 				}
 
-				return (new Vector3Df(max_x, max_y, max_z));
+				return new Vector3Df(max_x, max_y, max_z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -902,18 +902,18 @@ namespace Lotus
 			{
 				Single size = 20000;
 
-				Single min_x = size;
-				Single min_y = size;
-				Single min_z = size;
+				var min_x = size;
+				var min_y = size;
+				var min_z = size;
 
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					if (mArrayOfItems[i].Position.X < min_x) min_x = mArrayOfItems[i].Position.X;
 					if (mArrayOfItems[i].Position.Y < min_y) min_y = mArrayOfItems[i].Position.Y;
 					if (mArrayOfItems[i].Position.Z < min_z) min_z = mArrayOfItems[i].Position.Z;
 				}
 
-				return (new Vector3Df(min_x, min_y, min_z));
+				return new Vector3Df(min_x, min_y, min_z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -927,7 +927,7 @@ namespace Lotus
 				Vector3Df max = GetMaximizedPosition();
 				Vector3Df min = GetMinimizedPosition();
 
-				return ((max + min) / 2);
+				return (max + min) / 2;
 			}
 			#endregion
 
@@ -940,7 +940,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddVertex(Vector3Df position)
 			{
-				CVertex3Df vertex = new CVertex3Df(position);
+				var vertex = new CVertex3Df(position);
 				vertex.Index = mCount;
 				Add(vertex);
 			}
@@ -954,7 +954,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddVertex(Vector3Df position, Vector2Df uv)
 			{
-				CVertex3Df vertex = new CVertex3Df(position, uv);
+				var vertex = new CVertex3Df(position, uv);
 				vertex.Index = mCount;
 				Add(vertex);
 			}
@@ -968,7 +968,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddVertex(Vector3Df position, Vector3Df normal)
 			{
-				CVertex3Df vertex = new CVertex3Df(position, normal);
+				var vertex = new CVertex3Df(position, normal);
 				vertex.Index = mCount;
 				Add(vertex);
 			}
@@ -983,7 +983,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddVertex(Vector3Df position, Vector3Df normal, Vector2Df uv)
 			{
-				CVertex3Df vertex = new CVertex3Df(position, normal, uv);
+				var vertex = new CVertex3Df(position, normal, uv);
 				vertex.Index = mCount;
 				Add(vertex);
 			}
@@ -999,12 +999,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddVertex(Vector3Df position, Vector3Df normal, Vector2Df uv, Vector2Df uv2)
 			{
-				CVertex3Df vertex = new CVertex3Df(position, normal, uv, uv2);
+				var vertex = new CVertex3Df(position, normal, uv, uv2);
 				vertex.Index = mCount;
 				Add(vertex);
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление вершины
@@ -1059,9 +1059,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddVertexes(IList<Vector3Df> positions)
 			{
-				for (Int32 i = 0; i < positions.Count; i++)
+				for (var i = 0; i < positions.Count; i++)
 				{
-					CVertex3Df vertex = new CVertex3Df(positions[i]);
+					var vertex = new CVertex3Df(positions[i]);
 					vertex.Index = mCount;
 					Add(vertex);
 				}
@@ -1085,9 +1085,9 @@ namespace Lotus
 #endif
 				}
 
-				for (Int32 i = 0; i < positions.Count; i++)
+				for (var i = 0; i < positions.Count; i++)
 				{
-					CVertex3Df vertex = new CVertex3Df(positions[i], uvs[i]);
+					var vertex = new CVertex3Df(positions[i], uvs[i]);
 					vertex.Index = mCount;
 					Add(vertex);
 				}
@@ -1112,9 +1112,9 @@ namespace Lotus
 #endif
 				}
 
-				for (Int32 i = 0; i < positions.Count; i++)
+				for (var i = 0; i < positions.Count; i++)
 				{
-					CVertex3Df vertex = new CVertex3Df(positions[i], normal, uvs[i]);
+					var vertex = new CVertex3Df(positions[i], normal, uvs[i]);
 					vertex.Index = mCount;
 					Add(vertex);
 				}

@@ -74,7 +74,7 @@ namespace Lotus
 #if USE_HELIX
 			internal MeshNode mHelixModel;
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			internal UnityEngine.MeshFilter mUnityModel;
 #endif
 #if UNITY_EDITOR
@@ -97,7 +97,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mIsVisible);
+					return mIsVisible;
 				}
 				set
 				{
@@ -118,7 +118,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mMesh);
+					return mMesh;
 				}
 				set
 				{
@@ -139,7 +139,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mMaterial);
+					return mMaterial;
 				}
 				set
 				{
@@ -160,7 +160,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Vector3Df Location
 			{
-				get { return (mLocation); }
+				get { return mLocation; }
 			}
 
 			/// <summary>
@@ -171,7 +171,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeX
 			{
-				get { return (mMaxPosition.X - mMinPosition.X); }
+				get { return mMaxPosition.X - mMinPosition.X; }
 			}
 
 			/// <summary>
@@ -182,7 +182,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeY
 			{
-				get { return (mMaxPosition.Y - mMinPosition.Y); }
+				get { return mMaxPosition.Y - mMinPosition.Y; }
 			}
 
 			/// <summary>
@@ -193,7 +193,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeZ
 			{
-				get { return (mMaxPosition.Z - mMinPosition.Z); }
+				get { return mMaxPosition.Z - mMinPosition.Z; }
 			}
 
 			//
@@ -216,33 +216,33 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
-			/// <param name="parent_node">Родительский узел</param>
+			/// <param name="ownerScene">Сцена</param>
+			/// <param name="parentNode">Родительский узел</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CModel3D(CScene3D owner_scene, CNode3D parent_node)
-				: base(owner_scene)
+			public CModel3D(CScene3D ownerScene, CNode3D parentNode)
+				: base(ownerScene)
 			{
-				mOwnerScene = owner_scene;
-				mParentNode = parent_node;
+				mOwnerScene = ownerScene;
+				mParentNode = parentNode;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
-			/// <param name="parent_node">Родительский узел</param>
+			/// <param name="ownerScene">Сцена</param>
+			/// <param name="parentNode">Родительский узел</param>
 			/// <param name="mesh">Меш</param>
 			/// <param name="material">Материал</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CModel3D(CScene3D owner_scene, CNode3D parent_node, CMesh3Df mesh, CMaterial material)
-				: this(owner_scene, parent_node)
+			public CModel3D(CScene3D ownerScene, CNode3D parentNode, CMesh3Df mesh, CMaterial material)
+				: this(ownerScene, parentNode)
 			{
 				mMesh = mesh;
 				mMaterial = material;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -419,7 +419,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= МЕТОДЫ ПЛАТФОРМЫ UNITY ====================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 #endif
 			#endregion
 		}

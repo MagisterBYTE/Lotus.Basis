@@ -140,15 +140,15 @@ namespace Lotus
 				Vector3Df pivot = mVertices[0].Position;
 				mVertices.Clear();
 
-				Single segment_angle = 360f / mNumberSegment;
-				Single current_angle = mStartAngle;
+				var segment_angle = 360f / mNumberSegment;
+				var current_angle = mStartAngle;
 
 				Vector3Df normal = GetPerpendicularVector();
-				mVertices.AddVertex(pivot, normal, XGeometry2D.MapUV_MiddleCenter);
+				mVertices.AddVertex(pivot, normal, XGeometry2D.MapUVMiddleCenter);
 
 				for (var i = 0; i < mNumberSegment; i++)
 				{
-					Single angle_in_radians = current_angle * XMath.DegreeToRadian_f;
+					var angle_in_radians = current_angle * XMath.DegreeToRadian_F;
 					Vector3Df pos = Vector3Df.Zero;
 					switch (mPlaneType)
 					{
@@ -174,7 +174,7 @@ namespace Lotus
 							break;
 					}
 
-					Vector2Df uv = new Vector2Df(0.5f * XMath.Cos(angle_in_radians) + 0.5f, 0.5f * XMath.Sin(angle_in_radians) + 0.5f);
+					var uv = new Vector2Df(0.5f * XMath.Cos(angle_in_radians) + 0.5f, 0.5f * XMath.Sin(angle_in_radians) + 0.5f);
 
 					mVertices.AddVertex(pivot + pos, normal, uv);
 
@@ -192,18 +192,18 @@ namespace Lotus
 			/// Создание эллипса в плоскости XZ (Top - вид сверху)
 			/// </summary>
 			/// <param name="pivot">Опорная точка эллипса (его центр)</param>
-			/// <param name="radius_x">Радиус эллипса по X</param>
-			/// <param name="radius_z">Радиус эллипса по Z</param>
-			/// <param name="start_angle">Начальный угол(в градусах) генерации эллипса</param>
-			/// <param name="number_segment">Количество сегментов эллипса</param>
+			/// <param name="radiusX">Радиус эллипса по X</param>
+			/// <param name="radiusZ">Радиус эллипса по Z</param>
+			/// <param name="startAngle">Начальный угол(в градусах) генерации эллипса</param>
+			/// <param name="numberSegment">Количество сегментов эллипса</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CreateEllipseXZ(Vector3Df pivot, Single radius_x, Single radius_z, Single start_angle, Int32 number_segment)
+			public void CreateEllipseXZ(Vector3Df pivot, Single radiusX, Single radiusZ, Single startAngle, Int32 numberSegment)
 			{
 				mPlaneType = Maths.TDimensionPlane.XZ;
-				mRadiusX = radius_x;
-				mRadiusY = radius_z;
-				mStartAngle = start_angle;
-				mNumberSegment = number_segment;
+				mRadiusX = radiusX;
+				mRadiusY = radiusZ;
+				mStartAngle = startAngle;
+				mNumberSegment = numberSegment;
 
 				mVertices.Clear();
 				mVertices.AddVertex(pivot);
@@ -216,18 +216,18 @@ namespace Lotus
 			/// Создание эллипса в плоскости ZY (Right - вид справа)
 			/// </summary>
 			/// <param name="pivot">Опорная точка эллипса (его центр)</param>
-			/// <param name="radius_z">Радиус эллипса по Z</param>
-			/// <param name="radius_y">Радиус эллипса по Y</param>
-			/// <param name="start_angle">Начальный угол(в градусах) генерации эллипса</param>
-			/// <param name="number_segment">Количество сегментов эллипса</param>
+			/// <param name="radiusZ">Радиус эллипса по Z</param>
+			/// <param name="radiusY">Радиус эллипса по Y</param>
+			/// <param name="startAngle">Начальный угол(в градусах) генерации эллипса</param>
+			/// <param name="numberSegment">Количество сегментов эллипса</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CreateEllipseZY(Vector3Df pivot, Single radius_z, Single radius_y, Single start_angle, Int32 number_segment)
+			public void CreateEllipseZY(Vector3Df pivot, Single radiusZ, Single radiusY, Single startAngle, Int32 numberSegment)
 			{
 				mPlaneType = Maths.TDimensionPlane.ZY;
-				mRadiusX = radius_z;
-				mRadiusY = radius_y;
-				mStartAngle = start_angle;
-				mNumberSegment = number_segment;
+				mRadiusX = radiusZ;
+				mRadiusY = radiusY;
+				mStartAngle = startAngle;
+				mNumberSegment = numberSegment;
 
 				mVertices.Clear();
 				mVertices.AddVertex(pivot);
@@ -240,18 +240,18 @@ namespace Lotus
 			/// Создание эллипса в плоскости XY (Back - вид с сзади)
 			/// </summary>
 			/// <param name="pivot">Опорная точка эллипса (его центр)</param>
-			/// <param name="radius_x">Радиус эллипса по X</param>
-			/// <param name="radius_y">Радиус эллипса по Y</param>
-			/// <param name="start_angle">Начальный угол(в градусах) генерации эллипса</param>
-			/// <param name="number_segment">Количество сегментов эллипса</param>
+			/// <param name="radiusX">Радиус эллипса по X</param>
+			/// <param name="radiusY">Радиус эллипса по Y</param>
+			/// <param name="startAngle">Начальный угол(в градусах) генерации эллипса</param>
+			/// <param name="numberSegment">Количество сегментов эллипса</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CreateEllipseXY(Vector3Df pivot, Single radius_x, Single radius_y, Single start_angle, Int32 number_segment)
+			public void CreateEllipseXY(Vector3Df pivot, Single radiusX, Single radiusY, Single startAngle, Int32 numberSegment)
 			{
 				mPlaneType = Maths.TDimensionPlane.XY;
-				mRadiusX = radius_x;
-				mRadiusY = radius_y;
-				mStartAngle = start_angle;
-				mNumberSegment = number_segment;
+				mRadiusX = radiusX;
+				mRadiusY = radiusY;
+				mStartAngle = startAngle;
+				mNumberSegment = numberSegment;
 
 				mVertices.Clear();
 				mVertices.AddVertex(pivot);

@@ -67,7 +67,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return (TMeshElement.Triangle); } }
+			public TMeshElement MeshElement { get { return TMeshElement.Triangle; } }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -101,7 +101,7 @@ namespace Lotus
 				{
 					if (GetType() == obj.GetType())
 					{
-						CTriangle3Df triangle = (CTriangle3Df)obj;
+						var triangle = (CTriangle3Df)obj;
 						return Equals(triangle);
 					}
 				}
@@ -120,9 +120,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Equals(CTriangle3Df other)
 			{
-				return (IndexVertex0 == other.IndexVertex0 &&
+				return IndexVertex0 == other.IndexVertex0 &&
 					IndexVertex1 == other.IndexVertex1 &&
-					IndexVertex2 == other.IndexVertex2);
+					IndexVertex2 == other.IndexVertex2;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return (String.Format(ToStringFormat, IndexVertex0, IndexVertex1, IndexVertex2));
+				return String.Format(ToStringFormat, IndexVertex0, IndexVertex1, IndexVertex2);
 			}
 			#endregion
 
@@ -219,8 +219,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTriangle3Df Duplicate()
 			{
-				CTriangle3Df copy = (CTriangle3Df)MemberwiseClone();
-				return (copy);
+				var copy = (CTriangle3Df)MemberwiseClone();
+				return copy;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -230,13 +230,13 @@ namespace Lotus
 			/// <remarks>
 			/// Применяется при соединении/разъединение мешей
 			/// </remarks>
-			/// <param name="count_vertex">Количество вершин на величину которых смещаются индексы</param>
+			/// <param name="countVertex">Количество вершин на величину которых смещаются индексы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Offset(Int32 count_vertex)
+			public void Offset(Int32 countVertex)
 			{
-				IndexVertex0 += count_vertex;
-				IndexVertex1 += count_vertex;
-				IndexVertex2 += count_vertex;
+				IndexVertex0 += countVertex;
+				IndexVertex1 += countVertex;
+				IndexVertex2 += countVertex;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -246,37 +246,37 @@ namespace Lotus
 			/// <remarks>
 			/// Применяется при соединении/разъединение мешей
 			/// </remarks>
-			/// <param name="count_vertex">Количество вершин на величину которых смещаются индексы</param>
+			/// <param name="countVertex">Количество вершин на величину которых смещаются индексы</param>
 			/// <returns>Треугольник трехмерной сетки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CTriangle3Df GetTriangleOffset(Int32 count_vertex)
+			public CTriangle3Df GetTriangleOffset(Int32 countVertex)
 			{
-				return (new CTriangle3Df(IndexVertex0 + count_vertex, IndexVertex1 + count_vertex, IndexVertex2 + count_vertex));
+				return new CTriangle3Df(IndexVertex0 + countVertex, IndexVertex1 + countVertex, IndexVertex2 + countVertex);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение ребра(стороны) треугольника
 			/// </summary>
-			/// <param name="index_edge">Индекс ребра(стороны) треугольника</param>
-			/// <param name="index_triangle">Индекс данного треугольника</param>
+			/// <param name="indexEdge">Индекс ребра(стороны) треугольника</param>
+			/// <param name="indexTriangle">Индекс данного треугольника</param>
 			/// <returns>Ребро(сторона) треугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CEdge3Df GetEdge(Int32 index_edge, Int32 index_triangle)
+			public CEdge3Df GetEdge(Int32 indexEdge, Int32 indexTriangle)
 			{
-				switch (index_edge)
+				switch (indexEdge)
 				{
 					case 0:
 						{
-							return (new CEdge3Df(IndexVertex0, IndexVertex1, index_triangle));
+							return new CEdge3Df(IndexVertex0, IndexVertex1, indexTriangle);
 						}
 					case 1:
 						{
-							return (new CEdge3Df(IndexVertex1, IndexVertex2, index_triangle));
+							return new CEdge3Df(IndexVertex1, IndexVertex2, indexTriangle);
 						}
 					default:
 						{
-							return (new CEdge3Df(IndexVertex2, IndexVertex0, index_triangle));
+							return new CEdge3Df(IndexVertex2, IndexVertex0, indexTriangle);
 						}
 				}
 			}
@@ -297,34 +297,34 @@ namespace Lotus
 			/// <summary>
 			/// Получение нормали треугольника по индексу вершины
 			/// </summary>
-			/// <param name="index_vertex">Индекс вершины относительно которой считается нормаль</param>
-			/// <param name="list_vertex">Список вершин</param>
+			/// <param name="indexVertex">Индекс вершины относительно которой считается нормаль</param>
+			/// <param name="listVertex">Список вершин</param>
 			/// <returns>Нормаль</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df GetNormal(Int32 index_vertex, CListVertex3D list_vertex)
+			public Vector3Df GetNormal(Int32 indexVertex, CListVertex3D listVertex)
 			{
-				if (index_vertex == IndexVertex0)
+				if (indexVertex == IndexVertex0)
 				{
-					Vector3Df one = list_vertex[IndexVertex1].Position - list_vertex[IndexVertex0].Position;
-					Vector3Df two = list_vertex[IndexVertex2].Position - list_vertex[IndexVertex0].Position;
-					Vector3Df normal = Vector3Df.Cross(in one, in two);
-					return (normal);
+					Vector3Df one = listVertex[IndexVertex1].Position - listVertex[IndexVertex0].Position;
+					Vector3Df two = listVertex[IndexVertex2].Position - listVertex[IndexVertex0].Position;
+					var normal = Vector3Df.Cross(in one, in two);
+					return normal;
 				}
 				else
 				{
-					if (index_vertex == IndexVertex1)
+					if (indexVertex == IndexVertex1)
 					{
-						Vector3Df one = list_vertex[IndexVertex2].Position - list_vertex[IndexVertex1].Position;
-						Vector3Df two = list_vertex[IndexVertex0].Position - list_vertex[IndexVertex1].Position;
-						Vector3Df normal = Vector3Df.Cross(in one, in two);
-						return (normal);
+						Vector3Df one = listVertex[IndexVertex2].Position - listVertex[IndexVertex1].Position;
+						Vector3Df two = listVertex[IndexVertex0].Position - listVertex[IndexVertex1].Position;
+						var normal = Vector3Df.Cross(in one, in two);
+						return normal;
 					}
 					else
 					{
-						Vector3Df one = list_vertex[IndexVertex0].Position - list_vertex[IndexVertex2].Position;
-						Vector3Df two = list_vertex[IndexVertex1].Position - list_vertex[IndexVertex2].Position;
-						Vector3Df normal = Vector3Df.Cross(in one, in two);
-						return (normal);
+						Vector3Df one = listVertex[IndexVertex0].Position - listVertex[IndexVertex2].Position;
+						Vector3Df two = listVertex[IndexVertex1].Position - listVertex[IndexVertex2].Position;
+						var normal = Vector3Df.Cross(in one, in two);
+						return normal;
 					}
 				}
 			}
@@ -350,7 +350,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return (TMeshElement.Triangle); } }
+			public TMeshElement MeshElement { get { return TMeshElement.Triangle; } }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -384,7 +384,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Move(Vector3Df offset)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					Vertices.Vertices[mArrayOfItems[i].IndexVertex0].Position += offset;
 					Vertices.Vertices[mArrayOfItems[i].IndexVertex1].Position += offset;
@@ -467,12 +467,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CListTriangle3D Duplicate()
 			{
-				CListTriangle3D list_triangle = new CListTriangle3D(Vertices);
-				for (Int32 i = 0; i < mCount; i++)
+				var list_triangle = new CListTriangle3D(Vertices);
+				for (var i = 0; i < mCount; i++)
 				{
 					list_triangle.Add(mArrayOfItems[i]);
 				}
-				return (list_triangle);
+				return list_triangle;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -482,13 +482,13 @@ namespace Lotus
 			/// <remarks>
 			/// Применяется при соединении/разъединение мешей
 			/// </remarks>
-			/// <param name="count_vertex">Количество вершин на величину которых смещаются индексы</param>
+			/// <param name="countVertex">Количество вершин на величину которых смещаются индексы</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Offset(Int32 count_vertex)
+			public void Offset(Int32 countVertex)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
-					mArrayOfItems[i].Offset(count_vertex);
+					mArrayOfItems[i].Offset(countVertex);
 				}
 			}
 
@@ -499,40 +499,40 @@ namespace Lotus
 			/// <remarks>
 			/// Применяется при соединении/разъединение мешей
 			/// </remarks>
-			/// <param name="count_vertex">Количество вершин на величину которых смещаются индексы</param>
+			/// <param name="countVertex">Количество вершин на величину которых смещаются индексы</param>
 			/// <returns>Список треугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CListTriangle3D GetTrianglesOffset(Int32 count_vertex)
+			public CListTriangle3D GetTrianglesOffset(Int32 countVertex)
 			{
-				CListTriangle3D list_triangle = new CListTriangle3D(Vertices);
-				for (Int32 i = 0; i < mCount; i++)
+				var list_triangle = new CListTriangle3D(Vertices);
+				for (var i = 0; i < mCount; i++)
 				{
-					list_triangle.Add(mArrayOfItems[i].GetTriangleOffset(count_vertex));
+					list_triangle.Add(mArrayOfItems[i].GetTriangleOffset(countVertex));
 				}
-				return (list_triangle);
+				return list_triangle;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение списка треугольников имеющий хотя бы одну вершину совпадающей с указанной
 			/// </summary>
-			/// <param name="index_vertex">Индекс вершины</param>
+			/// <param name="indexVertex">Индекс вершины</param>
 			/// <returns>Список треугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public List<CTriangle3Df> GetTrianglesOfIndexVertex(Int32 index_vertex)
+			public List<CTriangle3Df> GetTrianglesOfIndexVertex(Int32 indexVertex)
 			{
-				List<CTriangle3Df> triangles = new List<CTriangle3Df>(3);
-				for (Int32 i = 0; i < Count; i++)
+				var triangles = new List<CTriangle3Df>(3);
+				for (var i = 0; i < Count; i++)
 				{
-					if (mArrayOfItems[i].IndexVertex0 == index_vertex ||
-						mArrayOfItems[i].IndexVertex1 == index_vertex ||
-						mArrayOfItems[i].IndexVertex2 == index_vertex)
+					if (mArrayOfItems[i].IndexVertex0 == indexVertex ||
+						mArrayOfItems[i].IndexVertex1 == indexVertex ||
+						mArrayOfItems[i].IndexVertex2 == indexVertex)
 					{
 						triangles.Add(mArrayOfItems[i]);
 					}
 				}
 
-				return (triangles);
+				return triangles;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -542,7 +542,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Flip()
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (var i = 0; i < mCount; i++)
 				{
 					mArrayOfItems[i].Flip();
 				}
@@ -571,10 +571,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddTriangle()
 			{
-				Int32 iv1 = Vertices.Count - 3;
-				Int32 iv2 = Vertices.Count - 2;
-				Int32 iv3 = Vertices.Count - 1;
-				CTriangle3Df triangle = new CTriangle3Df(iv1, iv2, iv3);
+				var iv1 = Vertices.Count - 3;
+				var iv2 = Vertices.Count - 2;
+				var iv3 = Vertices.Count - 1;
+				var triangle = new CTriangle3Df(iv1, iv2, iv3);
 				Add(triangle);
 			}
 
@@ -602,7 +602,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddTriangle(Int32 iv0, Int32 iv1, Int32 iv2)
 			{
-				CTriangle3Df triangle = new CTriangle3Df(iv0, iv1, iv2);
+				var triangle = new CTriangle3Df(iv0, iv1, iv2);
 				Add(triangle);
 			}
 
@@ -628,10 +628,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddTriangleQuad()
 			{
-				Int32 iv0 = Vertices.Count - 4;
-				Int32 iv1 = Vertices.Count - 3;
-				Int32 iv2 = Vertices.Count - 2;
-				Int32 iv3 = Vertices.Count - 1;
+				var iv0 = Vertices.Count - 4;
+				var iv1 = Vertices.Count - 3;
+				var iv2 = Vertices.Count - 2;
+				var iv3 = Vertices.Count - 1;
 				Add(new CTriangle3Df(iv0, iv2, iv3));
 				Add(new CTriangle3Df(iv0, iv3, iv1));
 			}
@@ -697,46 +697,46 @@ namespace Lotus
 			/// 0)--------1)--------2)
 			/// </para>
 			/// </remarks>
-			/// <param name="start_index_vertex">Индекс начальной вершины</param>
-			/// <param name="column_count">Количество столбцов</param>
-			/// <param name="row_count">Количество строк</param>
-			/// <param name="is_closed_column">Статус соединения последнего столбца с первым (т.е. по ширине сетки)</param>
+			/// <param name="startIndexVertex">Индекс начальной вершины</param>
+			/// <param name="columnCount">Количество столбцов</param>
+			/// <param name="rowCount">Количество строк</param>
+			/// <param name="isClosedColumn">Статус соединения последнего столбца с первым (т.е. по ширине сетки)</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void AddTriangleRegularGrid(Int32 start_index_vertex, Int32 column_count, Int32 row_count, Boolean is_closed_column = false)
+			public void AddTriangleRegularGrid(Int32 startIndexVertex, Int32 columnCount, Int32 rowCount, Boolean isClosedColumn = false)
 			{
-				for (Int32 ir = 0; ir < row_count; ir++)
+				for (var ir = 0; ir < rowCount; ir++)
 				{
-					for (Int32 ic = 0; ic < column_count; ic++)
+					for (var ic = 0; ic < columnCount; ic++)
 					{
 						// Нижняя левая вершина
-						Int32 left_bottom = ic + ir * (column_count + 1) + start_index_vertex;
+						var left_bottom = ic + ir * (columnCount + 1) + startIndexVertex;
 
 						// Нижняя правая вершина
-						Int32 right_bottom = left_bottom + 1 + start_index_vertex;
+						var right_bottom = left_bottom + 1 + startIndexVertex;
 
 						// Верхняя левая вершина
-						Int32 left_top = ic + (ir + 1) * (column_count + 1) + start_index_vertex;
+						var left_top = ic + (ir + 1) * (columnCount + 1) + startIndexVertex;
 
 						// Верхняя правая вершина
-						Int32 right_top = left_top + 1;
+						var right_top = left_top + 1;
 
 						Add(new CTriangle3Df(left_bottom, left_top, right_top));
 						Add(new CTriangle3Df(left_bottom, right_top, right_bottom));
 
 						// Если это последний в строке квадрат и включен режим замыкания
-						if (is_closed_column && ic == column_count - 1)
+						if (isClosedColumn && ic == columnCount - 1)
 						{
 							// Нижняя левая вершина
-							Int32 left_bottom_last = right_bottom;
+							var left_bottom_last = right_bottom;
 
 							// Верхняя левая вершина
-							Int32 left_top_last = right_top;
+							var left_top_last = right_top;
 
 							// Нижняя правая вершина
-							Int32 right_bottom_last = left_bottom_last - column_count;
+							var right_bottom_last = left_bottom_last - columnCount;
 
 							// Верхняя правая вершина
-							Int32 right_top_last = left_top_last - column_count;
+							var right_top_last = left_top_last - columnCount;
 
 							Add(new CTriangle3Df(left_bottom_last, left_top_last, right_top_last));
 							Add(new CTriangle3Df(left_bottom_last, right_top_last, right_bottom_last));
@@ -763,13 +763,13 @@ namespace Lotus
 			/// 0)--------1)
 			/// </para>
 			/// </remarks>
-			/// <param name="index_center_vertex">Индекс вершины центра(общей вершины)</param>
-			/// <param name="count_triangle">Количество треугольников для генерации</param>
-			/// <param name="is_closed">Статус замыкания</param>
+			/// <param name="indexCenterVertex">Индекс вершины центра(общей вершины)</param>
+			/// <param name="countTriangle">Количество треугольников для генерации</param>
+			/// <param name="isClosed">Статус замыкания</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void AddTriangleFan(Int32 index_center_vertex, Int32 count_triangle, Boolean is_closed)
+			public void AddTriangleFan(Int32 indexCenterVertex, Int32 countTriangle, Boolean isClosed)
 			{
-				if (count_triangle + 2 > Vertices.Count - index_center_vertex)
+				if (countTriangle + 2 > Vertices.Count - indexCenterVertex)
 				{
 #if UNITY_2017_1_OR_NEWER
 
@@ -777,16 +777,16 @@ namespace Lotus
 						count_triangle + 2, Vertices.Count - index_center_vertex);
 #else
 					XLogger.LogError(String.Format("Not enough vertices: Current: {0}, Dest: {1}",
-						count_triangle + 2, Vertices.Count - index_center_vertex));
+						countTriangle + 2, Vertices.Count - indexCenterVertex));
 #endif
 					return;
 				}
 
-				Int32 iv0 = index_center_vertex;
-				Int32 iv1 = iv0 + 1;
-				Int32 iv2 = iv0 + 2;
+				var iv0 = indexCenterVertex;
+				var iv1 = iv0 + 1;
+				var iv2 = iv0 + 2;
 
-				for (Int32 i = 0; i < count_triangle; i++)
+				for (var i = 0; i < countTriangle; i++)
 				{
 					//Add(new CTriangle3Df(iv0, iv1, iv2));
 					Add(new CTriangle3Df(iv0, iv2, iv1));
@@ -795,7 +795,7 @@ namespace Lotus
 					iv2++;
 				}
 
-				if (is_closed)
+				if (isClosed)
 				{
 					//Add(new CTriangle3Df(iv0, iv1, iv0 + 1));
 					Add(new CTriangle3Df(iv0, iv0 + 1, iv1));

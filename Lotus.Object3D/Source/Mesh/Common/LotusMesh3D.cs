@@ -74,7 +74,7 @@ namespace Lotus
 #if USE_HELIX
 			internal MeshGeometry3D mHelixMesh;
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			internal UnityEngine.Mesh mUnityMesh;
 #endif
 #if UNITY_EDITOR
@@ -96,7 +96,7 @@ namespace Lotus
 			[LotusPropertyOrder(0)]
 			public Int32 Index
 			{
-				get { return (mIndex); }
+				get { return mIndex; }
 				set
 				{
 					mIndex = value;
@@ -108,7 +108,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Order
 			{
-				get { return (mOrder); }
+				get { return mOrder; }
 				set { mOrder = value; }
 			}
 
@@ -120,7 +120,7 @@ namespace Lotus
 			/// </summary>
 			public CListVertex3D Vertices
 			{
-				get { return (mVertices); }
+				get { return mVertices; }
 			}
 
 			/// <summary>
@@ -128,7 +128,7 @@ namespace Lotus
 			/// </summary>
 			public CListTriangle3D Triangles
 			{
-				get { return (mTriangles); }
+				get { return mTriangles; }
 			}
 
 			/// <summary>
@@ -136,7 +136,7 @@ namespace Lotus
 			/// </summary>
 			public CListEdge3D Edges
 			{
-				get { return (mEdges); }
+				get { return mEdges; }
 			}
 
 			/// <summary>
@@ -148,7 +148,7 @@ namespace Lotus
 			[LotusPropertyOrder(2)]
 			public Int32 CountVertices
 			{
-				get { return (Vertices.Count); }
+				get { return Vertices.Count; }
 			}
 
 			/// <summary>
@@ -160,7 +160,7 @@ namespace Lotus
 			[LotusPropertyOrder(3)]
 			public Int32 CountFaces
 			{
-				get { return (Triangles.Count); }
+				get { return Triangles.Count; }
 			}
 
 			//
@@ -171,7 +171,7 @@ namespace Lotus
 			/// </summary>
 			public virtual CVertex3Df Pivot
 			{
-				get { return (mVertices[0]); }
+				get { return mVertices[0]; }
 				set
 				{
 					mVertices.Vertices[0] = value;
@@ -187,7 +187,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Vector3Df Location
 			{
-				get { return (mLocation); }
+				get { return mLocation; }
 			}
 
 			/// <summary>
@@ -198,7 +198,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeX
 			{
-				get { return (mMaxPosition.X - mMinPosition.X); }
+				get { return mMaxPosition.X - mMinPosition.X; }
 			}
 
 			/// <summary>
@@ -209,7 +209,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeY
 			{
-				get { return (mMaxPosition.Y - mMinPosition.Y); }
+				get { return mMaxPosition.Y - mMinPosition.Y; }
 			}
 
 			/// <summary>
@@ -220,13 +220,13 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeZ
 			{
-				get { return (mMaxPosition.Z - mMinPosition.Z); }
+				get { return mMaxPosition.Z - mMinPosition.Z; }
 			}
 
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return (TMeshElement.Mesh); } }
+			public TMeshElement MeshElement { get { return TMeshElement.Mesh; } }
 
 
 			/// <summary>
@@ -241,7 +241,7 @@ namespace Lotus
 #if USE_ASSIMP
 				get { return (mAssimpMesh.MaterialIndex); }
 #else
-				get { return (0); }
+				get { return 0; }
 #endif
 			}
 			#endregion
@@ -278,7 +278,7 @@ namespace Lotus
 			}
 #endif
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -294,7 +294,7 @@ namespace Lotus
 				CreateFromUnityMesh(unity_mesh);
 			}
 #endif
-#if (UNITY_EDITOR)
+#if UNITY_EDITOR
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -396,11 +396,11 @@ namespace Lotus
 			/// Врашение вершин меша вокруг оси X
 			/// </summary>
 			/// <param name="angle">Угол в градусах</param>
-			/// <param name="is_center">Относительно геометрического центра</param>
+			/// <param name="isCenter">Относительно геометрического центра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateFromX(Single angle, Boolean is_center)
+			public void RotateFromX(Single angle, Boolean isCenter)
 			{
-				mVertices.RotateFromX(angle, is_center);
+				mVertices.RotateFromX(angle, isCenter);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -408,11 +408,11 @@ namespace Lotus
 			/// Врашение вершин меша вокруг оси Y
 			/// </summary>
 			/// <param name="angle">Угол в градусах</param>
-			/// <param name="is_center">Относительно геометрического центра</param>
+			/// <param name="isCenter">Относительно геометрического центра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateFromY(Single angle, Boolean is_center)
+			public void RotateFromY(Single angle, Boolean isCenter)
 			{
-				mVertices.RotateFromY(angle, is_center);
+				mVertices.RotateFromY(angle, isCenter);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -420,11 +420,11 @@ namespace Lotus
 			/// Врашение вершин меша вокруг оси Z
 			/// </summary>
 			/// <param name="angle">Угол в градусах</param>
-			/// <param name="is_center">Относительно геометрического центра</param>
+			/// <param name="isCenter">Относительно геометрического центра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateFromZ(Single angle, Boolean is_center)
+			public void RotateFromZ(Single angle, Boolean isCenter)
 			{
-				mVertices.RotateFromZ(angle, is_center);
+				mVertices.RotateFromZ(angle, isCenter);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -491,7 +491,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Add(CMesh3Df mesh)
 			{
-				for (Int32 i = 0; i < mesh.Triangles.Count; i++)
+				for (var i = 0; i < mesh.Triangles.Count; i++)
 				{
 					mTriangles.Add(mesh.mTriangles[i].GetTriangleOffset(mVertices.Count));
 				}
@@ -507,7 +507,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CMesh3Df Duplicate()
 			{
-				CMesh3Df mesh = new CMesh3Df();
+				var mesh = new CMesh3Df();
 				mesh.Name = mName + "(Copy)";
 				mesh.Order = mOrder;
 				mesh.mVertices.Add(mVertices);
@@ -546,7 +546,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void FlipTriangles()
 			{
-				for (Int32 i = 0; i < mTriangles.Count; i += 3)
+				for (var i = 0; i < mTriangles.Count; i += 3)
 				{
 					//mTriangles.Vertices[i].F();
 				}
@@ -603,7 +603,7 @@ namespace Lotus
 				mMinPosition = new Vector3Df(1e10f, 1e10f, 1e10f);
 				mMaxPosition = new Vector3Df(-1e10f, -1e10f, -1e10f);
 
-				for (Int32 i = 0; i < mVertices.Count; i++)
+				for (var i = 0; i < mVertices.Count; i++)
 				{
 					Vector3Df tmp = mVertices[i].Position;
 
@@ -641,25 +641,25 @@ namespace Lotus
 			/// <summary>
 			/// Получение средней(сглаженной) нормали к указанной вершине
 			/// </summary>
-			/// <param name="index_vertex">Индекс вершины</param>
+			/// <param name="indexVertex">Индекс вершины</param>
 			/// <returns>Сглаженная нормаль</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df GetSmoothNormal(Int32 index_vertex)
+			public Vector3Df GetSmoothNormal(Int32 indexVertex)
 			{
 				// Получаем список треугольников к указанной вершине
-				List<CTriangle3Df> triangles = mTriangles.GetTrianglesOfIndexVertex(index_vertex);
+				List<CTriangle3Df> triangles = mTriangles.GetTrianglesOfIndexVertex(indexVertex);
 
 				// Суммируем нормали
 				Vector3Df normal = Vector3Df.Zero;
-				for (Int32 i = 0; i < triangles.Count; i++)
+				for (var i = 0; i < triangles.Count; i++)
 				{
-					normal += (triangles[i].GetNormal(index_vertex, mVertices));
+					normal += triangles[i].GetNormal(indexVertex, mVertices);
 				}
 
 				// Усредняем
 				normal /= triangles.Count;
 				normal.Normalize();
-				return (normal);
+				return normal;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -669,7 +669,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SmoothNormals()
 			{
-				for (Int32 i = 0; i < mVertices.Count; i++)
+				for (var i = 0; i < mVertices.Count; i++)
 				{
 					mVertices.Vertices[i].Normal = GetSmoothNormal(i);
 				}
@@ -739,7 +739,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= МЕТОДЫ ПЛАТФОРМЫ UNITY ====================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Согласование меша из меша Unity
@@ -1059,7 +1059,7 @@ namespace Lotus
 			[Browsable(false)]
 			public ListArray<CMesh3Df> Meshes
 			{
-				get { return (mMeshes); }
+				get { return mMeshes; }
 			}
 			#endregion
 
@@ -1068,11 +1068,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
+			/// <param name="ownerScene">Сцена</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMeshSet(CScene3D owner_scene)
+			public CMeshSet(CScene3D ownerScene)
 			{
-				mOwnerScene = owner_scene;
+				mOwnerScene = ownerScene;
 				mName = "Сетки";
 				mMeshes = new ListArray<CMesh3Df>();
 				mMeshes.IsNotify = true;
@@ -1109,7 +1109,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetCountChildrenNode()
 			{
-				return (mMeshes.Count);
+				return mMeshes.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1121,7 +1121,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetChildrenNode(Int32 index)
 			{
-				return (mMeshes[index]);
+				return mMeshes[index];
 			}
 			#endregion
 

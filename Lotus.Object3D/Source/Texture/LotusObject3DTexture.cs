@@ -165,12 +165,12 @@ namespace Lotus
 			/// <summary>
 			/// Загрузка тексутры в память по полному пути
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <returns>Объект <see cref="MemoryStream"/></returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static MemoryStream LoadTextureToMemory(String file_name)
+			public static MemoryStream LoadTextureToMemory(String fileName)
 			{
-				using (var file = new FileStream(file_name, FileMode.Open))
+				using (var file = new FileStream(fileName, FileMode.Open))
 				{
 					var memory = new MemoryStream();
 					file.CopyTo(memory);
@@ -189,7 +189,7 @@ namespace Lotus
 			protected internal TTextureFormatColor mFormatColor;
 			protected internal CMaterial mOwnerMaterial;
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			internal UnityEngine.Texture2D mUnityTexture;
 #endif
 			#endregion
@@ -208,7 +208,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mFileName);
+					return mFileName;
 				}
 				set
 				{
@@ -228,7 +228,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mDestination);
+					return mDestination;
 				}
 				set
 				{
@@ -248,7 +248,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mWidth);
+					return mWidth;
 				}
 				set
 				{
@@ -268,7 +268,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mHeight);
+					return mHeight;
 				}
 				set
 				{
@@ -288,7 +288,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mAlphaIsTransparency);
+					return mAlphaIsTransparency;
 				}
 				set
 				{
@@ -308,7 +308,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mFormatColor);
+					return mFormatColor;
 				}
 				set
 				{
@@ -324,7 +324,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CMaterial OwnerMaterial
 			{
-				get { return (mOwnerMaterial); }
+				get { return mOwnerMaterial; }
 				set
 				{
 					mOwnerMaterial = value;
@@ -346,14 +346,14 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_material">Материал</param>
+			/// <param name="ownerMaterial">Материал</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CTexture(CMaterial owner_material)
+			public CTexture(CMaterial ownerMaterial)
 			{
-				mOwnerMaterial = owner_material;
+				mOwnerMaterial = ownerMaterial;
 			}
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -385,7 +385,7 @@ namespace Lotus
 #if USE_WINDOWS
 
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 
 #endif
 			}
@@ -401,7 +401,7 @@ namespace Lotus
 #if USE_WINDOWS
 
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 
 #endif
 			}
@@ -417,7 +417,7 @@ namespace Lotus
 #if USE_WINDOWS
 
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 
 #endif
 			}
@@ -433,7 +433,7 @@ namespace Lotus
 #if USE_WINDOWS
 
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 
 #endif
 			}
@@ -449,7 +449,7 @@ namespace Lotus
 #if USE_WINDOWS
 
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 
 #endif
 			}
@@ -465,7 +465,7 @@ namespace Lotus
 #if USE_WINDOWS
 
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 
 #endif
 			}
@@ -498,7 +498,7 @@ namespace Lotus
 			[Browsable(false)]
 			public ListArray<CTexture> Textures
 			{
-				get { return (mTextures); }
+				get { return mTextures; }
 			}
 			#endregion
 
@@ -507,11 +507,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
+			/// <param name="ownerScene">Сцена</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CTextureSet(CScene3D owner_scene)
+			public CTextureSet(CScene3D ownerScene)
 			{
-				mOwnerScene = owner_scene;
+				mOwnerScene = ownerScene;
 				mName = "Тексутры";
 				mTextures = new ListArray<CTexture>
 				{
@@ -529,7 +529,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetCountChildrenNode()
 			{
-				return (mTextures.Count);
+				return mTextures.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -541,7 +541,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetChildrenNode(Int32 index)
 			{
-				return (mTextures[index]);
+				return mTextures[index];
 			}
 			#endregion
 

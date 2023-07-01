@@ -210,7 +210,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CTexture Texture
 			{
-				get { return (mTexture); }
+				get { return mTexture; }
 				set
 				{
 					mTexture = value;
@@ -225,7 +225,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Params)]
 			public TTextureMapping Mapping
 			{
-				get { return (mMapping); }
+				get { return mMapping; }
 				set
 				{
 					mMapping = value;
@@ -240,7 +240,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Params)]
 			public Int32 UVIndex
 			{
-				get { return (mUVIndex); }
+				get { return mUVIndex; }
 				set
 				{
 					mUVIndex = value;
@@ -255,7 +255,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Params)]
 			public Single BlendFactor
 			{
-				get { return (mBlendFactor); }
+				get { return mBlendFactor; }
 				set
 				{
 					mBlendFactor = value;
@@ -270,7 +270,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Params)]
 			public TTextureOperation Operation
 			{
-				get { return (mOperation); }
+				get { return mOperation; }
 				set
 				{
 					mOperation = value;
@@ -285,7 +285,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Params)]
 			public TTextureWrapMode WrapModeU
 			{
-				get { return (mWrapModeU); }
+				get { return mWrapModeU; }
 				set
 				{
 					mWrapModeU = value;
@@ -300,7 +300,7 @@ namespace Lotus
 			[Category(XInspectorGroupDesc.Params)]
 			public TTextureWrapMode WrapModeV
 			{
-				get { return (mWrapModeV); }
+				get { return mWrapModeV; }
 				set
 				{
 					mWrapModeV = value;
@@ -313,7 +313,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CMaterial OwnerMaterial
 			{
-				get { return (mOwnerMaterial); }
+				get { return mOwnerMaterial; }
 				set
 				{
 					mOwnerMaterial = value;
@@ -335,11 +335,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_material">Материал</param>
+			/// <param name="ownerMaterial">Материал</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CTextureSlot(CMaterial owner_material)
+			public CTextureSlot(CMaterial ownerMaterial)
 			{
-				mOwnerMaterial = owner_material;
+				mOwnerMaterial = ownerMaterial;
 			}
 
 #if USE_ASSIMP

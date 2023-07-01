@@ -54,7 +54,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mRadius);
+					return mRadius;
 				}
 
 				set
@@ -71,7 +71,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mHeight);
+					return mHeight;
 				}
 
 				set
@@ -88,7 +88,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mNumberVerticalSegment);
+					return mNumberVerticalSegment;
 				}
 
 				set
@@ -105,7 +105,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mNumberHorizontalSegment);
+					return mNumberHorizontalSegment;
 				}
 
 				set
@@ -149,30 +149,30 @@ namespace Lotus
 			/// <param name="pivot">Опорная точка (центр ниженого основания)</param>
 			/// <param name="radius">Радиус цилиндра</param>
 			/// <param name="height">Высота цилиндра</param>
-			/// <param name="start_angle">Начальный угол(в градусах) генерации сферы</param>
-			/// <param name="number_vertical_segment">Количество вертикальных сегментов</param>
-			/// <param name="number_horizontal_segment">Количество горизонтальных сегментов</param>
+			/// <param name="startAngle">Начальный угол(в градусах) генерации сферы</param>
+			/// <param name="numberVerticalSegment">Количество вертикальных сегментов</param>
+			/// <param name="numberHorizontalSegment">Количество горизонтальных сегментов</param>
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateCylinderXZ(Vector3Df pivot, Single radius, Single height,
-				Single start_angle, Int32 number_vertical_segment, Int32 number_horizontal_segment)
+				Single startAngle, Int32 numberVerticalSegment, Int32 numberHorizontalSegment)
 			{
-				CMeshPlanarEllipse3Df up_cap = new CMeshPlanarEllipse3Df();
-				up_cap.CreateEllipseXZ(pivot + Vector3Df.Up * height,radius, radius, start_angle, number_vertical_segment);
+				var up_cap = new CMeshPlanarEllipse3Df();
+				up_cap.CreateEllipseXZ(pivot + Vector3Df.Up * height,radius, radius, startAngle, numberVerticalSegment);
 
-				CMeshPlanarEllipse3Df down_cap = new CMeshPlanarEllipse3Df();
-				down_cap.CreateEllipseXZ(pivot, radius, radius, start_angle, number_vertical_segment);
+				var down_cap = new CMeshPlanarEllipse3Df();
+				down_cap.CreateEllipseXZ(pivot, radius, radius, startAngle, numberVerticalSegment);
 				down_cap.RotateFromX(180, true);
 
-				CMeshPlanarGrid3Df surface = new CMeshPlanarGrid3Df();
-				List<Vector3Df> points = XGeometry3D.GeneratePointsOnCircleXZ(radius, number_vertical_segment, start_angle);
+				var surface = new CMeshPlanarGrid3Df();
+				List<Vector3Df> points = XGeometry3D.GeneratePointsOnCircleXZ(radius, numberVerticalSegment, startAngle);
 				//points.Reverse();
 
-				for (Int32 i = 0; i < points.Count; i++)
+				for (var i = 0; i < points.Count; i++)
 				{
 					points[i] += pivot;
 				}
 
-				surface.CreateFromPointListXZ(points, number_horizontal_segment, height / number_horizontal_segment, true);
+				surface.CreateFromPointListXZ(points, numberHorizontalSegment, height / numberHorizontalSegment, true);
 
 				//surface.MinimizeToCylinder(radius);
 

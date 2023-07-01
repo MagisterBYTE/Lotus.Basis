@@ -74,7 +74,7 @@ namespace Lotus
 #if USE_ASSIMP
 			internal Assimp.Node mAssimpNode;
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			internal UnityEngine.Transform mUnityNode;
 #endif
 #if UNITY_EDITOR
@@ -92,7 +92,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CNode3D ParentNode
 			{
-				get { return (mParentNode); }
+				get { return mParentNode; }
 				set
 				{
 					mParentNode = value;
@@ -105,7 +105,7 @@ namespace Lotus
 			[Browsable(false)]
 			public List<CNode3D> Children
 			{
-				get { return (mChildren); }
+				get { return mChildren; }
 				set
 				{
 					mChildren = value;
@@ -125,7 +125,7 @@ namespace Lotus
 			[LotusPropertyOrder(0)]
 			public Vector3Df Offset
 			{
-				get { return (mOffset); }
+				get { return mOffset; }
 				set
 				{
 					mOffset = value;
@@ -143,7 +143,7 @@ namespace Lotus
 			[LotusPropertyOrder(2)]
 			public Quaternion3Df Rotation
 			{
-				get { return (mRotation); }
+				get { return mRotation; }
 				set
 				{
 					mRotation = value;
@@ -162,7 +162,7 @@ namespace Lotus
 			[LotusPropertyOrder(1)]
 			public Vector3Df Scale
 			{
-				get { return (mScale); }
+				get { return mScale; }
 				set
 				{
 					mScale = value;
@@ -182,13 +182,13 @@ namespace Lotus
 					if (mAllEntities == null)
 					{
 						mAllEntities = new ListArray<CEntity3D>();
-						for (Int32 i = 0; i < Children.Count; i++)
+						for (var i = 0; i < Children.Count; i++)
 						{
 							mAllEntities.Add(Children[i]);
 						}
 					}
 
-					return (mAllEntities);
+					return mAllEntities;
 				}
 			}
 
@@ -198,7 +198,7 @@ namespace Lotus
 			[Browsable(false)]
 			public CScene3D OwnerScene
 			{
-				get { return (mOwnerScene); }
+				get { return mOwnerScene; }
 				set
 				{
 					mOwnerScene = value;
@@ -211,11 +211,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
+			/// <param name="ownerScene">Сцена</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CNode3D(CScene3D owner_scene)
+			public CNode3D(CScene3D ownerScene)
 			{
-				mOwnerScene = owner_scene;
+				mOwnerScene = ownerScene;
 				mChildren = new List<CNode3D>();
 			}
 
@@ -223,24 +223,24 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
-			/// <param name="parent_node">Родительский узел</param>
+			/// <param name="ownerScene">Сцена</param>
+			/// <param name="parentNode">Родительский узел</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CNode3D(CScene3D owner_scene, CNode3D parent_node)
-				: this(owner_scene)
+			public CNode3D(CScene3D ownerScene, CNode3D parentNode)
+				: this(ownerScene)
 			{
-				mParentNode = parent_node;
+				mParentNode = parentNode;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
+			/// <param name="ownerScene">Сцена</param>
 			/// <param name="name">Имя узла</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CNode3D(CScene3D owner_scene, String name) 
-				: this(owner_scene)
+			public CNode3D(CScene3D ownerScene, String name) 
+				: this(ownerScene)
 			{
 				mName = name;
 			}
@@ -292,7 +292,7 @@ namespace Lotus
 			}
 #endif
 
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
@@ -362,7 +362,7 @@ namespace Lotus
 					mTranslateTransform.OffsetZ = mOffset.Z;
 				}
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				if(mUnityNode != null)
 				{
 					mUnityNode.localPosition = mOffset;
@@ -386,7 +386,7 @@ namespace Lotus
 					//mRotateTransform.OffsetZ = mOffset.Z;
 				}
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				if (mUnityNode != null)
 				{
 					mUnityNode.localRotation = new UnityEngine.Quaternion(mRotation.X, mRotation.Y,
@@ -411,7 +411,7 @@ namespace Lotus
 					mScaleTransform.ScaleZ = mScale.Z;
 				}
 #endif
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 				if (mUnityNode != null)
 				{
 					mUnityNode.localScale = mScale;
@@ -429,7 +429,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetCountChildrenNode()
 			{
-				return (AllEntities.Count);
+				return AllEntities.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -441,7 +441,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetChildrenNode(Int32 index)
 			{
-				return (AllEntities[index]);
+				return AllEntities[index];
 			}
 			#endregion
 
@@ -547,7 +547,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= МЕТОДЫ ПЛАТФОРМЫ UNITY ====================================
-#if (UNITY_2017_1_OR_NEWER)
+#if UNITY_2017_1_OR_NEWER
 #endif
 			#endregion
 		}

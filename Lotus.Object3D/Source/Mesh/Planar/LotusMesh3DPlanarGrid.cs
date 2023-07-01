@@ -74,19 +74,19 @@ namespace Lotus
 			/// Высота по оси Z
 			/// </remarks>
 			/// <param name="pivot">Опорная точка сетки (нижний-левый угол)</param>
-			/// <param name="column_count">Количество столбцов</param>
-			/// <param name="row_count">Количество строк</param>
-			/// <param name="column_width">Ширина столбца</param>
-			/// <param name="row_height">Высота строки</param>
-			/// <param name="is_closed_column">Статус замыкания по ширине</param>
+			/// <param name="columnCount">Количество столбцов</param>
+			/// <param name="rowCount">Количество строк</param>
+			/// <param name="columnWidth">Ширина столбца</param>
+			/// <param name="rowHeight">Высота строки</param>
+			/// <param name="isClosedColumn">Статус замыкания по ширине</param>
 			/// <returns>Регулярная сетка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CMeshPlanarGrid3Df CreateXZ(Vector3Df pivot, Int32 column_count, Int32 row_count, Single column_width,
-				Single row_height, Boolean is_closed_column = false)
+			public static CMeshPlanarGrid3Df CreateXZ(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth,
+				Single rowHeight, Boolean isClosedColumn = false)
 			{
-				CMeshPlanarGrid3Df planar_grid = new CMeshPlanarGrid3Df();
-				planar_grid.CreateGridXZ(pivot, column_count, row_count, column_width, row_height, is_closed_column);
-				return (planar_grid);
+				var planar_grid = new CMeshPlanarGrid3Df();
+				planar_grid.CreateGridXZ(pivot, columnCount, rowCount, columnWidth, rowHeight, isClosedColumn);
+				return planar_grid;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -98,19 +98,19 @@ namespace Lotus
 			/// Высота по оси Y
 			/// </remarks>
 			/// <param name="pivot">Опорная точка сетки (нижний-левый угол)</param>
-			/// <param name="column_count">Количество столбцов</param>
-			/// <param name="row_count">Количество строк</param>
-			/// <param name="column_width">Ширина столбца</param>
-			/// <param name="row_height">Высота строки</param>
-			/// <param name="is_closed_column">Статус замыкания по ширине</param>
+			/// <param name="columnCount">Количество столбцов</param>
+			/// <param name="rowCount">Количество строк</param>
+			/// <param name="columnWidth">Ширина столбца</param>
+			/// <param name="rowHeight">Высота строки</param>
+			/// <param name="isClosedColumn">Статус замыкания по ширине</param>
 			/// <returns>Регулярная сетка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CMeshPlanarGrid3Df CreateZY(Vector3Df pivot, Int32 column_count, Int32 row_count, Single column_width,
-				Single row_height, Boolean is_closed_column = false)
+			public static CMeshPlanarGrid3Df CreateZY(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth,
+				Single rowHeight, Boolean isClosedColumn = false)
 			{
-				CMeshPlanarGrid3Df planar_grid = new CMeshPlanarGrid3Df();
-				planar_grid.CreateGridZY(pivot, column_count, row_count, column_width, row_height, is_closed_column);
-				return (planar_grid);
+				var planar_grid = new CMeshPlanarGrid3Df();
+				planar_grid.CreateGridZY(pivot, columnCount, rowCount, columnWidth, rowHeight, isClosedColumn);
+				return planar_grid;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -122,19 +122,19 @@ namespace Lotus
 			/// Высота по оси Y
 			/// </remarks>
 			/// <param name="pivot">Опорная точка сетки (нижний-левый угол)</param>
-			/// <param name="column_count">Количество столбцов</param>
-			/// <param name="row_count">Количество строк</param>
-			/// <param name="column_width">Ширина столбца</param>
-			/// <param name="row_height">Высота строки</param>
-			/// <param name="is_closed_column">Статус замыкания по ширине</param>
+			/// <param name="columnCount">Количество столбцов</param>
+			/// <param name="rowCount">Количество строк</param>
+			/// <param name="columnWidth">Ширина столбца</param>
+			/// <param name="rowHeight">Высота строки</param>
+			/// <param name="isClosedColumn">Статус замыкания по ширине</param>
 			/// <returns>Регулярная сетка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CMeshPlanarGrid3Df CreateXY(Vector3Df pivot, Int32 column_count, Int32 row_count, Single column_width,
-				Single row_height, Boolean is_closed_column = false)
+			public static CMeshPlanarGrid3Df CreateXY(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth,
+				Single rowHeight, Boolean isClosedColumn = false)
 			{
-				CMeshPlanarGrid3Df planar_grid = new CMeshPlanarGrid3Df();
-				planar_grid.CreateGridXY(pivot, column_count, row_count, column_width, row_height, is_closed_column);
-				return (planar_grid);
+				var planar_grid = new CMeshPlanarGrid3Df();
+				planar_grid.CreateGridXY(pivot, columnCount, rowCount, columnWidth, rowHeight, isClosedColumn);
+				return planar_grid;
 			}
 			#endregion
 
@@ -155,7 +155,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mColumnCount);
+					return mColumnCount;
 				}
 
 				set
@@ -172,7 +172,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mRowCount);
+					return mRowCount;
 				}
 
 				set
@@ -189,7 +189,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mColumnWidth);
+					return mColumnWidth;
 				}
 
 				set
@@ -206,7 +206,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mRowHeight);
+					return mRowHeight;
 				}
 
 				set
@@ -223,7 +223,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mIsClosedColumn);
+					return mIsClosedColumn;
 				}
 
 				set
@@ -263,9 +263,9 @@ namespace Lotus
 
 				// Заполняем вершины
 				mVertices.Clear();
-				for (Int32 ir = 0; ir < mRowCount + 1; ir++)
+				for (var ir = 0; ir < mRowCount + 1; ir++)
 				{
-					for (Int32 ic = 0; ic < mColumnCount + 1; ic++)
+					for (var ic = 0; ic < mColumnCount + 1; ic++)
 					{
 						Vector3Df next_point = pivot + GetPlaneVector(ic * mColumnWidth, ir * mRowHeight);
 						mVertices.AddVertex(next_point);
@@ -291,21 +291,21 @@ namespace Lotus
 			/// Высота по оси Z
 			/// </remarks>
 			/// <param name="pivot">Опорная точка сетки (нижний-левый угол)</param>
-			/// <param name="column_count">Количество столбцов</param>
-			/// <param name="row_count">Количество строк</param>
-			/// <param name="column_width">Ширина столбца</param>
-			/// <param name="row_height">Высота строки</param>
-			/// <param name="is_closed_column">Статус замыкания по ширине</param>
+			/// <param name="columnCount">Количество столбцов</param>
+			/// <param name="rowCount">Количество строк</param>
+			/// <param name="columnWidth">Ширина столбца</param>
+			/// <param name="rowHeight">Высота строки</param>
+			/// <param name="isClosedColumn">Статус замыкания по ширине</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CreateGridXZ(Vector3Df pivot, Int32 column_count, Int32 row_count, Single column_width, 
-				Single row_height, Boolean is_closed_column = false)
+			public void CreateGridXZ(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth, 
+				Single rowHeight, Boolean isClosedColumn = false)
 			{
 				mPlaneType = Maths.TDimensionPlane.XZ;
-				mRowCount = row_count;
-				mColumnCount = column_count;
-				mColumnWidth = column_width;
-				mRowHeight = row_height;
-				mIsClosedColumn = is_closed_column;
+				mRowCount = rowCount;
+				mColumnCount = columnCount;
+				mColumnWidth = columnWidth;
+				mRowHeight = rowHeight;
+				mIsClosedColumn = isClosedColumn;
 
 				mVertices.Clear();
 				mVertices.AddVertex(pivot);
@@ -322,21 +322,21 @@ namespace Lotus
 			/// Высота по оси Y
 			/// </remarks>
 			/// <param name="pivot">Опорная точка сетки (нижний-левый угол)</param>
-			/// <param name="column_count">Количество столбцов</param>
-			/// <param name="row_count">Количество строк</param>
-			/// <param name="column_width">Ширина столбца</param>
-			/// <param name="row_height">Высота строки</param>
-			/// <param name="is_closed_column">Статус замыкания по ширине</param>
+			/// <param name="columnCount">Количество столбцов</param>
+			/// <param name="rowCount">Количество строк</param>
+			/// <param name="columnWidth">Ширина столбца</param>
+			/// <param name="rowHeight">Высота строки</param>
+			/// <param name="isClosedColumn">Статус замыкания по ширине</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CreateGridZY(Vector3Df pivot, Int32 column_count, Int32 row_count, Single column_width,
-				Single row_height, Boolean is_closed_column = false)
+			public void CreateGridZY(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth,
+				Single rowHeight, Boolean isClosedColumn = false)
 			{
 				mPlaneType = Maths.TDimensionPlane.ZY;
-				mRowCount = row_count;
-				mColumnCount = column_count;
-				mColumnWidth = column_width;
-				mRowHeight = row_height;
-				mIsClosedColumn = is_closed_column;
+				mRowCount = rowCount;
+				mColumnCount = columnCount;
+				mColumnWidth = columnWidth;
+				mRowHeight = rowHeight;
+				mIsClosedColumn = isClosedColumn;
 
 				mVertices.Clear();
 				mVertices.AddVertex(pivot);
@@ -353,21 +353,21 @@ namespace Lotus
 			/// Высота по оси Y
 			/// </remarks>
 			/// <param name="pivot">Опорная точка сетки (нижний-левый угол)</param>
-			/// <param name="column_count">Количество столбцов</param>
-			/// <param name="row_count">Количество строк</param>
-			/// <param name="column_width">Ширина столбца</param>
-			/// <param name="row_height">Высота строки</param>
-			/// <param name="is_closed_column">Статус замыкания по ширине</param>
+			/// <param name="columnCount">Количество столбцов</param>
+			/// <param name="rowCount">Количество строк</param>
+			/// <param name="columnWidth">Ширина столбца</param>
+			/// <param name="rowHeight">Высота строки</param>
+			/// <param name="isClosedColumn">Статус замыкания по ширине</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CreateGridXY(Vector3Df pivot, Int32 column_count, Int32 row_count, Single column_width,
-				Single row_height, Boolean is_closed_column = false)
+			public void CreateGridXY(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth,
+				Single rowHeight, Boolean isClosedColumn = false)
 			{
 				mPlaneType = Maths.TDimensionPlane.XY;
-				mRowCount = row_count;
-				mColumnCount = column_count;
-				mColumnWidth = column_width;
-				mRowHeight = row_height;
-				mIsClosedColumn = is_closed_column;
+				mRowCount = rowCount;
+				mColumnCount = columnCount;
+				mColumnWidth = columnWidth;
+				mRowHeight = rowHeight;
+				mIsClosedColumn = isClosedColumn;
 
 				mVertices.Clear();
 				mVertices.AddVertex(pivot);
@@ -379,30 +379,30 @@ namespace Lotus
 			/// <summary>
 			/// 
 			/// </summary>
-			/// <param name="point_list"></param>
-			/// <param name="row_count"></param>
-			/// <param name="row_height"></param>
-			/// <param name="is_closed_column"></param>
+			/// <param name="pointList"></param>
+			/// <param name="rowCount"></param>
+			/// <param name="rowHeight"></param>
+			/// <param name="isClosedColumn"></param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CreateFromPointListXZ(IList<Vector3Df> point_list, Int32 row_count, Single row_height, Boolean is_closed_column = false)
+			public void CreateFromPointListXZ(IList<Vector3Df> pointList, Int32 rowCount, Single rowHeight, Boolean isClosedColumn = false)
 			{
 				mPlaneType = Maths.TDimensionPlane.XZ;
 
-				mColumnCount = point_list.Count - 1;
-				mRowCount = row_count;
-				mRowHeight = row_height;
-				mIsClosedColumn = is_closed_column;
+				mColumnCount = pointList.Count - 1;
+				mRowCount = rowCount;
+				mRowHeight = rowHeight;
+				mIsClosedColumn = isClosedColumn;
 
 				// Считаем необходимое количество вершин 
 				// Int32 count = ((mColumnCount + 1) * (mRowCount + 1));
 
 				// Заполняем вершины
 				mVertices.Clear();
-				for (Int32 ir = 0; ir < mRowCount + 1; ir++)
+				for (var ir = 0; ir < mRowCount + 1; ir++)
 				{
-					for (Int32 ic = 0; ic < mColumnCount + 1; ic++)
+					for (var ic = 0; ic < mColumnCount + 1; ic++)
 					{
-						Vector3Df next_point = point_list[ic] + GetPerpendicularVector() * row_height * ir;
+						Vector3Df next_point = pointList[ic] + GetPerpendicularVector() * rowHeight * ir;
 						mVertices.AddVertex(next_point);
 					}
 				}
@@ -425,18 +425,18 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void MinimizeToCylinder()
 			{
-				Single radius = mColumnCount * mColumnWidth / XMath.PI2f;
-				Single horizont_delta = 360.0f / mColumnCount;
+				var radius = mColumnCount * mColumnWidth / XMath.PI2_F;
+				var horizont_delta = 360.0f / mColumnCount;
 
-				Int32 index = 0;
-				for (Int32 ir = 0; ir < mRowCount + 1; ir++)
+				var index = 0;
+				for (var ir = 0; ir < mRowCount + 1; ir++)
 				{
-					for (Int32 ic = 0; ic < mColumnCount + 1; ic++)
+					for (var ic = 0; ic < mColumnCount + 1; ic++)
 					{
-						Single angle_in_radians = 360 - ic * horizont_delta;
+						var angle_in_radians = 360 - ic * horizont_delta;
 
-						Single x = radius * XMath.Cos(angle_in_radians);
-						Single y = radius * XMath.Sin(angle_in_radians);
+						var x = radius * XMath.Cos(angle_in_radians);
+						var y = radius * XMath.Sin(angle_in_radians);
 
 						mVertices.Vertices[index].Position = GetPlaneVector(x, y, mVertices.Vertices[index].Position);
 						mVertices.Vertices[index].Normal = mVertices.Vertices[index].Position.Normalized;
@@ -456,10 +456,10 @@ namespace Lotus
 				//Single horizont_delta = 360.0f / mColumnCount;
 				//Single vertical_delta = 180.0f / mRowCount;
 
-				Int32 index = 0;
-				for (Int32 ir = 0; ir < mRowCount + 1; ir++)
+				var index = 0;
+				for (var ir = 0; ir < mRowCount + 1; ir++)
 				{
-					for (Int32 ic = 0; ic < mColumnCount + 1; ic++)
+					for (var ic = 0; ic < mColumnCount + 1; ic++)
 					{
 						// Single angle_horizontal = 360 - ic * horizont_delta;
 						// Single angle_vertical = ir * vertical_delta - 90;
@@ -481,14 +481,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeNormals()
 			{
-				for (Int32 ir = 0; ir < mRowCount; ir++)
+				for (var ir = 0; ir < mRowCount; ir++)
 				{
-					for (Int32 ic = 0; ic < mColumnCount; ic++)
+					for (var ic = 0; ic < mColumnCount; ic++)
 					{
-						Int32 iv0 = ic + (mColumnCount + 1) * ir;
-						Int32 iv1 = iv0 + 1;
-						Int32 iv2 = iv0 + mColumnCount + 1;
-						Int32 iv3 = iv2 + 1;
+						var iv0 = ic + (mColumnCount + 1) * ir;
+						var iv1 = iv0 + 1;
+						var iv2 = iv0 + mColumnCount + 1;
+						var iv3 = iv2 + 1;
 
 						Vector3Df down = mVertices.Vertices[iv2].Position - mVertices.Vertices[iv0].Position;
 						Vector3Df right = mVertices.Vertices[iv1].Position - mVertices.Vertices[iv0].Position;
@@ -511,13 +511,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeUVMap(Int32 channel = 0)
 			{
-				Int32 index = 0;
-				for (Int32 ir = 0; ir <= mRowCount; ir++)
+				var index = 0;
+				for (var ir = 0; ir <= mRowCount; ir++)
 				{
-					for (Int32 ic = 0; ic <= mColumnCount; ic++)
+					for (var ic = 0; ic <= mColumnCount; ic++)
 					{
-						Single u = ic / (Single)mColumnCount;
-						Single v = ir / (Single)mRowCount;
+						var u = ic / (Single)mColumnCount;
+						var v = ir / (Single)mRowCount;
 
 						mVertices.Vertices[index].UV = new Vector2Df(u, v);
 						index++;

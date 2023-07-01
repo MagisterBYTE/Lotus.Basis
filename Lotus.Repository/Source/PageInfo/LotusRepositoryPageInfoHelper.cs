@@ -1,65 +1,75 @@
 ﻿//=====================================================================================================================
 // Проект: Модуль репозитория
-// Раздел: Подсистема фильтрации
+// Раздел: Подсистема постраничного разделения
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusRepositoryFilterQueryable.cs
-*		Методы расширения работы с интерфейсом IQueryable для фильтрации данных.
+/** \file LotusRepositoryPageInfoHelper.cs
+*		Определение типов постраничного запроса/получения данных.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Linq;
+using System.Collections.Generic;
+using Lotus.Core;
 //=====================================================================================================================
 namespace Lotus
 {
 	namespace Repository
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup RepositoryFilter
+		/** \addtogroup RepositoryCPageInfoRequest
 		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
-		/// Статический класс реализующий методы расширений для работы с интерфейсом <see cref="IQueryable"/> 
+		/// Статический класс, реализующий вспомогательные методы для постраничного запроса данных
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public static class XQueryableExtensionFilter
+		public static class XPageInfoHelpers
 		{
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Фильтрация данных запроса по указанным параметрам
+			/// Получение массива постраничного запроса данных 
 			/// </summary>
-			/// <typeparam name="TEntity">Тип сущности</typeparam>
-			/// <param name="query">Запрос</param>
-			/// <param name="properties">Параметры фильтрации свойств</param>
-			/// <returns>Запрос</returns>
+			/// <param name="totalSize">Общее количество данных</param>
+			/// <param name="pageSize">Размер страницы</param>
+			/// <returns>Массив для постраничного запроса данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static IQueryable<TEntity> Filter<TEntity>(this IQueryable<TEntity> query, 
-				params CFilterProperty[] properties)
+			public static CPageInfoRequest[] ToPageInfo(Int32 totalSize, Int32 pageSize)
 			{
-				if(properties == null || properties.Length == 0)
+				if (totalSize <= pageSize)
 				{
-					return query;
+					return new[] { new CPageInfoRequest { PageNumber = 0, PageSize = totalSize, } };
 				}
 
-				foreach(var property in properties) 
+				var PageSize = totalSize / pageSize;
+				var residue = totalSize % pageSize;
+
+				var CPageInfoRequests = new List<CPageInfoRequest>();
+
+				for (var i = 0; i < PageSize; i++)
 				{
-					if ((property.Function == TFilterFunction.IncludeAny
-						|| property.Function == TFilterFunction.IncludeAll
-						|| property.Function == TFilterFunction.IncludeEquals
-						|| property.Function == TFilterFunction.IncludeNone)
-						&& (property.Values == null || property.Values.Length == 0))
+					var CPageInfoRequest = new CPageInfoRequest()
 					{
-						continue;
-					}
-
-					var filter = XExpressionFilters.GetFilter<TEntity>(property);
-					query = query.Where(filter);
+						PageNumber = i * pageSize,
+						PageSize = pageSize,
+					};
+					CPageInfoRequests.Add(CPageInfoRequest);
 				}
 
-				return query;
+				if (residue > 0)
+				{
+					var CPageInfoRequest = new CPageInfoRequest()
+					{
+						PageNumber = PageSize * pageSize,
+						PageSize = residue,
+					};
+
+					CPageInfoRequests.Add(CPageInfoRequest);
+				}
+
+				return CPageInfoRequests.ToArray();
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

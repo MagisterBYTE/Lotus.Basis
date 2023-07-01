@@ -10,9 +10,9 @@
     <Authors>MagistrBYTE aka DanielDem</Authors>
     <Company>LotusPlatform</Company>
     <Copyright>MagistrBYTE aka DanielDem</Copyright>
-    <AssemblyVersion>1.8.0.0</AssemblyVersion>
-    <FileVersion>1.8.0.0</FileVersion>
-    <Version>1.8.0</Version>
+    <AssemblyVersion>1.9.0.0</AssemblyVersion>
+    <FileVersion>1.9.0.0</FileVersion>
+    <Version>1.9.0</Version>
     <Title>Lotus.Repository</Title>
     <PackageTags></PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Publish'">
-    <PackageReference Include="Lotus.Core" Version="1.8.0" />
+    <PackageReference Include="Lotus.Core" Version="1.9.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' != 'Publish'">
@@ -42,8 +42,8 @@
 
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.3.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.19" />
   </ItemGroup>
 
 </Project>

@@ -125,7 +125,7 @@ namespace Lotus
 					var exp = Expression.Lambda(prop, parameter);
 
 					// Based on the sorting direction, get the right method
-					string method = String.Empty;
+					var method = String.Empty;
 					if (firstTime)
 					{
 						method = (property.IsDesc == false) ? OrderBy : OrderByDescending;
@@ -139,7 +139,7 @@ namespace Lotus
 					// itemType is the type of the TEntity
 					// exp.Body.Type is the type of the property. Again, for Cassette, it's
 					//     a String. For SlotNumber, it's a Double.
-					Type[] types = new Type[] { itemType, exp.Body.Type };
+					var types = new Type[] { itemType, exp.Body.Type };
 
 					// Build the call expression
 					// It will look something like:

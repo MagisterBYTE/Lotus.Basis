@@ -10,13 +10,19 @@
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
-using Lotus.Core;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.WebSockets;
 using System.Reflection;
+using System.Reflection.Metadata;
+using System.Security;
 using System.Xml.Linq;
+//---------------------------------------------------------------------------------------------------------------------
+using Lotus.Core;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -33,7 +39,7 @@ namespace Lotus
 		public interface ILotusFilterProperty
 		{
 			/// <summary>
-			/// Свойство/поле по которому идет фильтрация 
+			/// Имя свойства/поля по которому осуществляется фильтрация 
 			/// </summary>
 			String PropertyName { get; set; }
 
@@ -83,9 +89,16 @@ namespace Lotus
 		//-------------------------------------------------------------------------------------------------------------
 		public class CFilterProperty : ILotusFilterProperty
 		{
+			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
+			/// <summary>
+			/// Суффикс, сигнализирующий о том, что свойство относиться к массиву идентификаторов
+			/// </summary>
+			public const String SuffixIds = "Ids";
+			#endregion
+
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
-			/// Свойство/поле по которому идет фильтрация 
+			/// Имя свойства/поля по которому осуществляется фильтрация 
 			/// </summary>
 			public String PropertyName { get; set; } = default!;
 
@@ -100,7 +113,7 @@ namespace Lotus
 			public TEntityPropertyType PropertyType { get; set; }
 
 			/// <summary>
-			/// Статус типа свойства массив
+			/// Статус типа свойства - массив
 			/// </summary>
 			public Boolean? IsArray { get; set; }
 
@@ -154,8 +167,22 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public PropertyInfo GetPropertyInfo<TItem>()
 			{
-				var propertyInfo = typeof(TItem).GetProperties().First(property => property.Name == PropertyName);
-				return propertyInfo;
+				if (PropertyName.Contains(SuffixIds))
+				{
+					// Удаляем суффикс
+					var correctName = PropertyName.RemoveLastOccurrence(SuffixIds);
+
+					// Добавляем окончание множественности
+					correctName += "s";
+
+					var propertyInfo = typeof(TItem).GetProperties().First(property => property.Name == correctName);
+					return propertyInfo;
+				}
+				else
+				{
+					var propertyInfo = typeof(TItem).GetProperties().First(property => property.Name == PropertyName);
+					return propertyInfo;
+				}
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -163,11 +190,11 @@ namespace Lotus
 			/// Получить константу дерева выражения для искомого значения
 			/// </summary>
 			/// <param name="index">Индекс искомого значения. -1 значения по умолчанию</param>
-			/// <returns>Константа</returns>
+			/// <returns>Константа выражения</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public ConstantExpression GetConstantExpression(Int32 index = -1)
 			{
-				string value = index == -1 ? Value! : Values![index];
+				var value = index == -1 ? Value! : Values![index];
 
 				ConstantExpression constantExpression = null;
 				switch (PropertyType) 
@@ -205,6 +232,91 @@ namespace Lotus
 				}
 
 				return constantExpression;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получить константу массива дерева выражения для искомого значения
+			/// </summary>
+			/// <returns>Константа массива выражения</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public NewArrayExpression GetArrayExpression()
+			{
+				var constants = new List<Expression>();
+
+				if (PropertyType == TEntityPropertyType.Integer)
+				{
+					var values = Values!.ToIntArray();
+					foreach (var value in values)
+					{
+						var constant = Expression.Constant(value);
+						constants.Add(constant);
+					}
+
+					NewArrayExpression massive = Expression.NewArrayInit(typeof(Int32), constants);
+					return massive;
+				}
+				else
+				{
+					foreach (var value in Values!)
+					{
+						var constant = Expression.Constant(value);
+						constants.Add(constant);
+					}
+
+					NewArrayExpression massive = Expression.NewArrayInit(typeof(String), constants);
+					return massive;
+				}
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получить лямбду выражения [o => ids.Contains(p.Id)] для искомого значения 
+			/// </summary>
+			/// <param name="propertyType">Тип свойства p</param>
+			/// <returns>Лямбда выражения</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public LambdaExpression GetContainsExpression(Type propertyType)
+			{
+				var parameter = Expression.Parameter(propertyType, "o");
+
+				var property = Expression.Property(parameter, $"Id");
+
+				var containsMethod = XExpressionFilters.GetEnumerableContainsMethod(PropertyType);
+
+				var constantIds = GetArrayExpression();
+
+				var containsCall = Expression.Call(null, containsMethod, constantIds, property);
+
+				var lambda = Expression.Lambda(containsCall, parameter);
+
+				return lambda;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получить лямбду выражения [o => !(ids.Contains(p.Id))] для искомого значения 
+			/// </summary>
+			/// <param name="propertyType">Тип свойства p</param>
+			/// <returns>Лямбда выражения</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public LambdaExpression GetNotContainsExpression(Type propertyType)
+			{
+				var parameter = Expression.Parameter(propertyType, "o");
+
+				var property = Expression.Property(parameter, $"Id");
+
+				var containsMethod = XExpressionFilters.GetEnumerableContainsMethod(PropertyType);
+
+				var constantIds = GetArrayExpression();
+
+				var containsCall = Expression.Call(null, containsMethod, constantIds, property);
+
+				var containsNot = Expression.Not(containsCall);
+
+				var lambda = Expression.Lambda(containsNot, parameter);
+
+				return lambda;
 			}
 			#endregion
 		}

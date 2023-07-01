@@ -32,7 +32,7 @@ namespace Lotus
 		public interface ILotusSortProperty
 		{
 			/// <summary>
-			/// Свойство/поле по которому идет сортировка 
+			/// Имя свойства/поля по которому идет сортировка 
 			/// </summary>
 			String PropertyName { get; set; }
 
@@ -53,7 +53,7 @@ namespace Lotus
 		public class CSortProperty : ILotusSortProperty 
 		{
 			/// <summary>
-			/// Свойство/поле по которому идет сортировка 
+			/// Имя свойства/поля по которому идет сортировка 
 			/// </summary>
 			public String PropertyName { get; set; } = default!;
 

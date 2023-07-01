@@ -108,7 +108,7 @@ namespace Lotus
 					.ProjectToType<TResponse>()
 					.ToArrayAsync(token);
 
-				CPageInfoResponse pageInfo = new CPageInfoResponse()
+				var pageInfo = new CPageInfoResponse()
 				{
 					PageNumber = page,
 					PageSize = pageSize,

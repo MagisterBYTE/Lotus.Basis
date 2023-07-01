@@ -10,7 +10,9 @@
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
+using Lotus.Core;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -29,36 +31,115 @@ namespace Lotus
 		//-------------------------------------------------------------------------------------------------------------
 		public static class XExpressionFilters
 		{
-			#region ======================================= СТАТИЧЕСКИЕ ДАННЫЕ ========================================
-			/// <summary>
-			/// Тип <see cref="String"/>
-			/// </summary>
-			private static readonly Type StringType = typeof(String);
-
-			/// <summary>
-			/// Мета информация о методе String.Contains
-			/// </summary>
-			private static readonly MethodInfo StringContainsMethod = StringType.GetMethods()
-																.Where(method => method.Name == nameof(String.Contains))
-																.Where(method => method.GetParameters().Length == 1)
-																.Single(method => method.GetParameters()[0].GetType() == StringType);
-			/// <summary>
-			/// Мета информация о методе String.StartsWith
-			/// </summary>
-			private static readonly MethodInfo StringStartsWithMethod = StringType.GetMethods()
-																.Where(method => method.Name == nameof(String.StartsWith))
-																.Where(method => method.GetParameters().Length == 1)
-																.Single(method => method.GetParameters()[0].GetType() == StringType);
-			/// <summary>
-			/// Мета информация о методе String.EndsWith
-			/// </summary>
-			private static readonly MethodInfo StringEndsWithMethod = StringType.GetMethods()
-																.Where(method => method.Name == nameof(String.EndsWith))
-																.Where(method => method.GetParameters().Length == 1)
-																.Single(method => method.GetParameters()[0].GetType() == StringType);
-			#endregion
-
 			#region ======================================= МЕТОДЫ ====================================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получить типизированную версию метода <see cref="Enumerable.Contains{TSource}(IEnumerable{TSource}, TSource)"/>
+			/// </summary>
+			/// <param name="propertyType">Тип свойства</param>
+			/// <returns>Типизированная версия метода</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static MethodInfo GetEnumerableContainsMethod(TEntityPropertyType propertyType)
+			{
+				switch (propertyType)
+				{
+					case TEntityPropertyType.Boolean:
+						break;
+					case TEntityPropertyType.Integer:
+						{
+							return XReflection.GetEnumerableContainsMethod(typeof(Int32));
+						}
+					case TEntityPropertyType.Enum:
+						break;
+					case TEntityPropertyType.Float:
+						{
+							return XReflection.GetEnumerableContainsMethod(typeof(Single));
+						}
+					case TEntityPropertyType.DateTime:
+						{
+							return XReflection.GetEnumerableContainsMethod(typeof(DateTime));
+						}
+					case TEntityPropertyType.String:
+						{
+							return XReflection.GetEnumerableContainsMethod(typeof(String));
+						}
+				}
+
+				return XReflection.GetEnumerableContainsMethod(typeof(System.Byte));
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получить типизированную версию метода <see cref="Enumerable.Any{TSource}(IEnumerable{TSource}, Func{TSource, bool})"/>
+			/// </summary>
+			/// <param name="propertyType">Тип свойства</param>
+			/// <returns>Типизированная версия метода</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static MethodInfo GetEnumerableAnyMethod(TEntityPropertyType propertyType)
+			{
+				switch (propertyType)
+				{
+					case TEntityPropertyType.Boolean:
+						break;
+					case TEntityPropertyType.Integer:
+						{
+							return XReflection.GetEnumerableAnyMethod(typeof(Int32));
+						}
+					case TEntityPropertyType.Enum:
+						break;
+					case TEntityPropertyType.Float:
+						{
+							return XReflection.GetEnumerableAnyMethod(typeof(Single));
+						}
+					case TEntityPropertyType.DateTime:
+						{
+							return XReflection.GetEnumerableAnyMethod(typeof(DateTime));
+						}
+					case TEntityPropertyType.String:
+						{
+							return XReflection.GetEnumerableAnyMethod(typeof(String));
+						}
+				}
+
+				return XReflection.GetEnumerableAnyMethod(typeof(System.Byte));
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получить типизированную версию метода <see cref="Enumerable.All{TSource}(IEnumerable{TSource}, Func{TSource, bool})"/>
+			/// </summary>
+			/// <param name="propertyType">Тип свойства</param>
+			/// <returns>Типизированная версия метода</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static MethodInfo GetEnumerableAllMethod(TEntityPropertyType propertyType)
+			{
+				switch (propertyType)
+				{
+					case TEntityPropertyType.Boolean:
+						break;
+					case TEntityPropertyType.Integer:
+						{
+							return XReflection.GetEnumerableAllMethod(typeof(Int32));
+						}
+					case TEntityPropertyType.Enum:
+						break;
+					case TEntityPropertyType.Float:
+						{
+							return XReflection.GetEnumerableAllMethod(typeof(Single));
+						}
+					case TEntityPropertyType.DateTime:
+						{
+							return XReflection.GetEnumerableAllMethod(typeof(DateTime));
+						}
+					case TEntityPropertyType.String:
+						{
+							return XReflection.GetEnumerableAllMethod(typeof(String));
+						}
+				}
+
+				return XReflection.GetEnumerableAllMethod(typeof(System.Byte));
+			}
+
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получить выражение фильтра по данным фильтрации по свойству
@@ -70,13 +151,13 @@ namespace Lotus
 			public static Expression<Func<TItem, Boolean>> GetFilter<TItem>(CFilterProperty filterProperty)
 			{
 				// Создаем параметр дерева выражений
-				var type = Expression.Parameter(typeof(TItem));
+				var parameter = Expression.Parameter(typeof(TItem), "x");
 
 				// Получаем информацию о свойстве по которому будем фильтровать
 				var propertyInfo = filterProperty.GetPropertyInfo<TItem>();
 
 				// Создаем свойство дерева выражений
-				var property = Expression.Property(type, propertyInfo);
+				var property = Expression.Property(parameter, propertyInfo);
 
 				Expression body = null;
 
@@ -121,17 +202,17 @@ namespace Lotus
 						break;
 					case TFilterFunction.Contains:
 						{
-							body = Expression.Call(property, StringContainsMethod, filterProperty.GetConstantExpression());
+							body = Expression.Call(property, XReflection.StringContainsMethod, filterProperty.GetConstantExpression());
 						}
 						break;
 					case TFilterFunction.StartsWith:
 						{
-							body = Expression.Call(property, StringStartsWithMethod, filterProperty.GetConstantExpression());
+							body = Expression.Call(property, XReflection.StringStartsWithMethod, filterProperty.GetConstantExpression());
 						}
 						break;
 					case TFilterFunction.EndsWith:
 						{
-							body = Expression.Call(property, StringEndsWithMethod, filterProperty.GetConstantExpression());
+							body = Expression.Call(property, XReflection.StringEndsWithMethod, filterProperty.GetConstantExpression());
 						}
 						break;
 					case TFilterFunction.NotEmpty:
@@ -142,17 +223,45 @@ namespace Lotus
 						}
 						break;
 					case TFilterFunction.IncludeAny:
-						break;
 					case TFilterFunction.IncludeAll:
+						{
+							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
+
+							var lambdaContains = filterProperty.GetContainsExpression(propertyType);
+
+							var anyMethod = XReflection.GetEnumerableAnyMethod(propertyType);
+
+							body = Expression.Call(null, anyMethod, property, lambdaContains);
+						}
+						break;
+					case TFilterFunction.IncludeEquals:
+						{
+							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
+
+							var lambdaContains = filterProperty.GetContainsExpression(propertyType);
+
+							var allMethod = XReflection.GetEnumerableAllMethod(propertyType);
+
+							body = Expression.Call(null, allMethod, property, lambdaContains);
+						}
 						break;
 					case TFilterFunction.IncludeNone:
+						{
+							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
+
+							var lambdaNotContains = filterProperty.GetNotContainsExpression(propertyType);
+
+							var allMethod = XReflection.GetEnumerableAllMethod(propertyType);
+
+							body = Expression.Call(null, allMethod, property, lambdaNotContains);
+						}
 						break;
 					default:
 						break;
 				}
 
 				// Получаем итоговую лямбду
-				var result = Expression.Lambda<Func<TItem, Boolean>>(body, type);
+				var result = Expression.Lambda<Func<TItem, Boolean>>(body, parameter);
 
 				return result;
 			}

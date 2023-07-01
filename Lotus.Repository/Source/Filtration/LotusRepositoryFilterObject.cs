@@ -41,6 +41,15 @@ namespace Lotus
 			/// Фильтры по свойствам
 			/// </summary>
 			public CFilterProperty[] Filters { get; set; } = default!;
+
+			public CFilterObject() 
+			{ 
+			}
+
+			public CFilterObject(params CFilterProperty[] filters)
+			{
+				Filters = filters;
+			}
 		}
 		//-------------------------------------------------------------------------------------------------------------
 		/**@}*/

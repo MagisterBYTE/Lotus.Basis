@@ -239,7 +239,7 @@ namespace Lotus
 			public Int32 MaterialIndex
 			{
 #if USE_ASSIMP
-				get { return (mAssimpMesh.MaterialIndex); }
+				get { return mAssimpMesh.MaterialIndex; }
 #else
 				get { return 0; }
 #endif
@@ -689,14 +689,14 @@ namespace Lotus
 
                 // Вершины
                 mHelixMesh.Positions = new Vector3Collection(mAssimpMesh.VertexCount);
-                for (Int32 i = 0; i < mAssimpMesh.VertexCount; i++)
+                for (var i = 0; i < mAssimpMesh.VertexCount; i++)
                 {
                     mHelixMesh.Positions.Add(mAssimpMesh.Vertices[i].ToShVector3D());
                 }
 
                 // Нормали
                 mHelixMesh.Normals = new Vector3Collection(mAssimpMesh.Normals.Count);
-                for (Int32 i = 0; i < mAssimpMesh.Normals.Count; i++)
+                for (var i = 0; i < mAssimpMesh.Normals.Count; i++)
                 {
                     mHelixMesh.Normals.Add(mAssimpMesh.Normals[i].ToShVector3D());
                 }
@@ -706,7 +706,7 @@ namespace Lotus
                 {
                     List<Assimp.Vector3D> tex_coord_1 = mAssimpMesh.TextureCoordinateChannels[0];
                     mHelixMesh.TextureCoordinates = new Vector2Collection(tex_coord_1.Count);
-                    for (Int32 i = 0; i < tex_coord_1.Count; i++)
+                    for (var i = 0; i < tex_coord_1.Count; i++)
                     {
                         mHelixMesh.TextureCoordinates.Add(tex_coord_1[i].ToShVector2D());
                     }
@@ -714,17 +714,17 @@ namespace Lotus
 
                 // Индексы
                 // Общее количество индексов
-                Int32 total_index = 0;
-                for (Int32 i = 0; i < mAssimpMesh.FaceCount; i++)
+                var total_index = 0;
+                for (var i = 0; i < mAssimpMesh.FaceCount; i++)
                 {
                     total_index += mAssimpMesh.Faces[i].Indices.Count;
                 }
 
                 mHelixMesh.TriangleIndices = new IntCollection(total_index);
-                for (Int32 i = 0; i < mAssimpMesh.FaceCount; i++)
+                for (var i = 0; i < mAssimpMesh.FaceCount; i++)
                 {
                     List<Int32> indices = mAssimpMesh.Faces[i].Indices;
-                    for (Int32 j = 0; j < indices.Count; j++)
+                    for (var j = 0; j < indices.Count; j++)
                     {
                         mHelixMesh.TriangleIndices.Add(indices[j]);
                     }
@@ -1091,7 +1091,7 @@ namespace Lotus
 				mMeshes = new ListArray<CMesh3Df>();
 
 				// Устанавливаем меши
-				for (Int32 i = 0; i < assimp_scene.MeshCount; i++)
+				for (var i = 0; i < assimp_scene.MeshCount; i++)
 				{
 					Assimp.Mesh mesh = assimp_scene.Meshes[i];
 					mMeshes.Add(new CMesh3Df("Mesh_" + i.ToString(), mesh));
@@ -1134,7 +1134,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateHelixMeshes()
 			{
-				for (Int32 i = 0; i < mMeshes.Count; i++)
+				for (var i = 0; i < mMeshes.Count; i++)
 				{
 					//mMeshes[i].CreateHelixMesh();
 				}

@@ -395,10 +395,10 @@ namespace Lotus
 				mMaterials = new ListArray<CMaterial>();
 
 				// Устанавливаем материалы
-				for (Int32 i = 0; i < assimp_scene.MaterialCount; i++)
+				for (var i = 0; i < assimp_scene.MaterialCount; i++)
 				{
 					Assimp.Material assimp_material = assimp_scene.Materials[i];
-					CMaterial material = new CMaterial(owner_scene, assimp_material);
+					var material = new CMaterial(owner_scene, assimp_material);
 					mMaterials.Add(material);
 				}
 			}
@@ -439,7 +439,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateHelixMaterials()
 			{
-				for (Int32 i = 0; i < mMaterials.Count; i++)
+				for (var i = 0; i < mMaterials.Count; i++)
 				{
 					mMaterials[i].CreateHelixMaterial();
 				}

@@ -54,10 +54,10 @@ namespace Lotus
 					&& (Math.Abs(@this.Y - other.Y) < epsilon)
 					&& (Math.Abs(@this.Z - other.Z) < epsilon))
 				{
-					return (true);
+					return true;
 				}
 
-				return (false);
+				return false;
 			}
 			#endregion
 
@@ -71,7 +71,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Maths.Vector3D ToVector3D(this Assimp.Vector3D @this)
 			{
-				return (new Maths.Vector3D(@this.X, @this.Y, @this.Z));
+				return new Maths.Vector3D(@this.X, @this.Y, @this.Z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Maths.Quaternion3D ToQuaternion3D(this Assimp.Quaternion @this)
 			{
-				return (new Maths.Quaternion3D(@this.X, @this.Y, @this.Z));
+				return new Maths.Quaternion3D(@this.X, @this.Y, @this.Z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Maths.Quaternion3Df ToQuaternion3Df(this Assimp.Quaternion @this)
 			{
-				return (new Maths.Quaternion3Df(@this.X, @this.Y, @this.Z));
+				return new Maths.Quaternion3Df(@this.X, @this.Y, @this.Z);
 			}
 			#endregion
 
@@ -109,7 +109,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Media3D.Vector3D ToWinVector3D(this Assimp.Vector3D @this)
 			{
-				return (new Media3D.Vector3D(@this.X, @this.Y, @this.Z));
+				return new Media3D.Vector3D(@this.X, @this.Y, @this.Z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Media3D.Point3D ToWinPoint3D(this Assimp.Vector3D @this)
 			{
-				return (new Media3D.Point3D(@this.X, @this.Y, @this.Z));
+				return new Media3D.Point3D(@this.X, @this.Y, @this.Z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Point ToWinPoint(this Assimp.Vector3D @this)
 			{
-				return (new Point(@this.X, @this.Y));
+				return new Point(@this.X, @this.Y);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -145,7 +145,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector ToWinVector(this Assimp.Vector2D @this)
 			{
-				return (new Vector(@this.X, @this.Y));
+				return new Vector(@this.X, @this.Y);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Point ToWinPoint(this Assimp.Vector2D @this)
 			{
-				return (new Point(@this.X, @this.Y));
+				return new Point(@this.X, @this.Y);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -169,8 +169,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Media3D.Rect3D ToWinRect3D(this SharpDX.BoundingBox @this)
 			{
-				return (new Media3D.Rect3D(@this.Center.X, @this.Center.Y, @this.Center.Z,
-					@this.Size.X, @this.Size.Y, @this.Size.Z));
+				return new Media3D.Rect3D(@this.Center.X, @this.Center.Y, @this.Center.Z,
+					@this.Size.X, @this.Size.Y, @this.Size.Z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static SharpDX.Vector3 ToShVector3D(this Assimp.Vector3D @this)
 			{
-				return (new SharpDX.Vector3(@this.X, @this.Y, @this.Z));
+				return new SharpDX.Vector3(@this.X, @this.Y, @this.Z);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -211,7 +211,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static SharpDX.Vector2 ToShVector2D(this Assimp.Vector3D @this)
 			{
-				return (new SharpDX.Vector2(@this.X, @this.Y));
+				return new SharpDX.Vector2(@this.X, @this.Y);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -223,7 +223,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static SharpDX.Vector2 ToShVector2D(this Assimp.Vector2D @this)
 			{
-				return (new SharpDX.Vector2(@this.X, @this.Y));
+				return new SharpDX.Vector2(@this.X, @this.Y);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -235,7 +235,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static SharpDX.Color4 ToShColor4(this Color @this)
 			{
-				return (new SharpDX.Color4(@this.ScR, @this.ScG, @this.ScB, @this.ScA));
+				return new SharpDX.Color4(@this.ScR, @this.ScG, @this.ScB, @this.ScA);
 			}
 			#endregion
 #endif

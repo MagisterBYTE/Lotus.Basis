@@ -76,13 +76,13 @@ namespace Lotus
 			public static String[] GetSupportedExportFormats()
 			{
 				var items = AssimpContextDefault.GetSupportedExportFormats();
-				String[] formats = new String[items.Length];
-				for (Int32 i = 0; i < items.Length; i++)
+				var formats = new String[items.Length];
+				for (var i = 0; i < items.Length; i++)
 				{
 					formats[i] = items[i].FormatId;
 				}
 
-				return (formats);
+				return formats;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String[] GetSupportedImportFormats()
 			{
-				return (AssimpContextDefault.GetSupportedImportFormats());
+				return AssimpContextDefault.GetSupportedImportFormats();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -121,9 +121,9 @@ namespace Lotus
 					Assimp.Scene assimp_scene = AssimpContextDefault.ImportFile(file_name, step);
 					if(assimp_scene != null)
 					{
-						CScene3D scene = new CScene3D(Path.GetFileNameWithoutExtension(file_name), assimp_scene);
+						var scene = new CScene3D(Path.GetFileNameWithoutExtension(file_name), assimp_scene);
 						scene.FileName = file_name;
-						return (scene);
+						return scene;
 					}
 				}
 				catch (Exception exc)
@@ -131,7 +131,7 @@ namespace Lotus
 					XLogger.LogExceptionModule(nameof(CScene3D), exc);
 				}
 
-				return (null);
+				return null;
 			}
 #endif
 			#endregion
@@ -296,7 +296,7 @@ namespace Lotus
 			[Browsable(false)]
 			public SceneNode HelixScene
 			{
-				get { return (mHelixScene); }
+				get { return mHelixScene; }
 			}
 #endif
 #if UNITY_2017_1_OR_NEWER

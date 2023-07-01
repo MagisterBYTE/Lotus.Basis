@@ -206,7 +206,7 @@ namespace Lotus
 			[Browsable(false)]
 			public MeshNode HelixModel
 			{
-				get { return (mHelixModel); }
+				get { return mHelixModel; }
 			}
 #endif
 			#endregion
@@ -357,7 +357,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Media3D.Rect3D GetBoundsRect()
 			{
-				return (Media3D.Rect3D.Empty);
+				return Media3D.Rect3D.Empty;
 				//return (mHelix3DModel.BoundsWithTransform.ToWinRect3D());
 			}
 #endif

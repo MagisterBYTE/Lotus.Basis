@@ -261,7 +261,7 @@ namespace Lotus
 
 				if (mAssimpNode.HasChildren)
 				{
-					for (Int32 i = 0; i < mAssimpNode.ChildCount; i++)
+					for (var i = 0; i < mAssimpNode.ChildCount; i++)
 					{
 						mChildren.Add(new CNode3D(owner_scene, this, mAssimpNode.Children[i]));
 					}
@@ -284,7 +284,7 @@ namespace Lotus
 
 				if (mAssimpNode.HasChildren)
 				{
-					for (Int32 i = 0; i < mAssimpNode.ChildCount; i++)
+					for (var i = 0; i < mAssimpNode.ChildCount; i++)
 					{
 						mChildren.Add(new CNode3D(owner_scene, this, mAssimpNode.Children[i]));
 					}

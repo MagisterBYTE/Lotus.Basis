@@ -176,37 +176,37 @@ namespace Lotus
 			/// <summary>
 			/// Добавить сущность к фильтру
 			/// </summary>
-			/// <param name="entity_id">Индентификатор сущности</param>
+			/// <param name="entityId">Индентификатор сущности</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void AddEntity(Int32 entity_id)
+			public void AddEntity(Int32 entityId)
 			{
-				mEntities.Add(entity_id);
+				mEntities.Add(entityId);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка наличия сущности в фильтре
 			/// </summary>
-			/// <param name="entity_id">Индентификатор сущности</param>
+			/// <param name="entityId">Индентификатор сущности</param>
 			/// <returns>Статус наличия сущности</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public Boolean HasEntity(Int32 entity_id)
+			public Boolean HasEntity(Int32 entityId)
 			{
-				return mEntities.Contains(entity_id);
+				return mEntities.Contains(entityId);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Удалить сущность из фильтра
 			/// </summary>
-			/// <param name="entity_id">Индентификатор сущности</param>
+			/// <param name="entityId">Индентификатор сущности</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void RemoveEntity(Int32 entity_id)
+			public void RemoveEntity(Int32 entityId)
 			{
-				mEntities.Remove(entity_id);
+				mEntities.Remove(entityId);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -227,13 +227,13 @@ namespace Lotus
 			/// <summary>
 			/// Включить сущности с указанным типом компонента в фильтр
 			/// </summary>
-			/// <param name="component_type">Тип компонента</param>
+			/// <param name="componentType">Тип компонента</param>
 			/// <returns>Фильтр</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public ILotusEcsFilterComponent Include(Type component_type)
+			public ILotusEcsFilterComponent Include(Type componentType)
 			{
-				mIncludedComponents.AddIfNotContains(component_type);
+				mIncludedComponents.AddIfNotContains(componentType);
 				UpdateFilter();
 				return this;
 			}
@@ -256,13 +256,13 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на наличие компонента в фильтре
 			/// </summary>
-			/// <param name="component_type">Тип компонента</param>
+			/// <param name="componentType">Тип компонента</param>
 			/// <returns>Статус наличия</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public Boolean Exsist(Type component_type)
+			public Boolean Exsist(Type componentType)
 			{
-				return mIncludedComponents.Contains(component_type) || mExcludedComponents.Contains(component_type);
+				return mIncludedComponents.Contains(componentType) || mExcludedComponents.Contains(componentType);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -283,15 +283,15 @@ namespace Lotus
 			/// <summary>
 			/// Исключить сущности с указанным типом компонента из фильтра
 			/// </summary>
-			/// <param name="component_type">Тип компонента</param>
+			/// <param name="componentType">Тип компонента</param>
 			/// <returns>Фильтр</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public ILotusEcsFilterComponent Exclude(Type component_type)
+			public ILotusEcsFilterComponent Exclude(Type componentType)
 			{
-				mExcludedComponents.AddIfNotContains(component_type);
+				mExcludedComponents.AddIfNotContains(componentType);
 				ILotusEcsComponentData component_data;
-				if (mWorld.mComponentsData.TryGetValue(component_type, out component_data))
+				if (mWorld.mComponentsData.TryGetValue(componentType, out component_data))
 				{
 					var exclude_entities = component_data.GetEntities();
 					mEntities.RemoveValues(exclude_entities);

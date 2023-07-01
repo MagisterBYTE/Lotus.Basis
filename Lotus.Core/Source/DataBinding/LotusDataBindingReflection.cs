@@ -118,28 +118,28 @@ namespace Lotus
 			/// <remarks>
 			/// Предполагается что остальные параметры привязки со стороны объекта модели уже корректно настроены
 			/// </remarks>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetModel(System.Object model_instance)
+			public override void SetModel(System.Object modelInstance)
 			{
-				ResetModel(model_instance);
+				ResetModel(modelInstance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка объекта модели
 			/// </summary>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
-			/// <param name="member_name">Имя члена объекта модели</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
+			/// <param name="memberName">Имя члена объекта модели</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetModel(System.Object model_instance, String member_name)
+			public override void SetModel(System.Object modelInstance, String memberName)
 			{
-				ResetModel(model_instance);
+				ResetModel(modelInstance);
 
-				mModelMember = SetMemberType(model_instance, member_name, ref mModelMemberType);
+				mModelMember = SetMemberType(modelInstance, memberName, ref mModelMemberType);
 				if (mModelMember != null)
 				{
-					mModelMemberName = member_name;
+					mModelMemberName = memberName;
 				}
 			}
 
@@ -207,27 +207,27 @@ namespace Lotus
 			/// <remarks>
 			/// Предполагается что остальные параметры привязки со стороны объекта представления уже корректно настроены
 			/// </remarks>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetView(System.Object view_instance)
+			public override void SetView(System.Object viewInstance)
 			{
-				ResetView(view_instance);
+				ResetView(viewInstance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Установка объекта представления
 			/// </summary>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
-			/// <param name="member_name">Имя члена типа объекта представления</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
+			/// <param name="memberName">Имя члена типа объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetView(System.Object view_instance, String member_name)
+			public override void SetView(System.Object viewInstance, String memberName)
 			{
-				ResetView(view_instance);
-				mViewMember = SetMemberType(view_instance, member_name, ref mViewMemberType);
+				ResetView(viewInstance);
+				mViewMember = SetMemberType(viewInstance, memberName, ref mViewMemberType);
 				if (mViewMember != null)
 				{
-					mViewMemberName = member_name;
+					mViewMemberName = memberName;
 				}
 				if(mViewMember.GetMemberType() == typeof(String))
 				{

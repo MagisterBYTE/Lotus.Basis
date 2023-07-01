@@ -108,10 +108,10 @@ namespace Lotus
 			/// <summary>
 			/// Присоединение указанного зависимого объекта
 			/// </summary>
-			/// <param name="owned_object">Объект</param>
+			/// <param name="ownedObject">Объект</param>
 			/// <param name="add">Статус добавления в коллекцию</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void AttachOwnedObject(ILotusOwnedObject owned_object, Boolean add)
+			public virtual void AttachOwnedObject(ILotusOwnedObject ownedObject, Boolean add)
 			{
 
 			}
@@ -120,10 +120,10 @@ namespace Lotus
 			/// <summary>
 			/// Отсоединение указанного зависимого объекта
 			/// </summary>
-			/// <param name="owned_object">Объект</param>
+			/// <param name="ownedObject">Объект</param>
 			/// <param name="remove">Статус удаления из коллекции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void DetachOwnedObject(ILotusOwnedObject owned_object, Boolean remove)
+			public virtual void DetachOwnedObject(ILotusOwnedObject ownedObject, Boolean remove)
 			{
 
 			}
@@ -142,12 +142,12 @@ namespace Lotus
 			/// <summary>
 			/// Информирование данного объекта о начале изменения данных указанного зависимого объекта
 			/// </summary>
-			/// <param name="owned_object">Зависимый объект</param>
+			/// <param name="ownedObject">Зависимый объект</param>
 			/// <param name="data">Объект, данные которого будут меняться</param>
-			/// <param name="data_name">Имя данных</param>
+			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject owned_object, System.Object data, String data_name)
+			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName)
 			{
 				return true;
 			}
@@ -156,11 +156,11 @@ namespace Lotus
 			/// <summary>
 			/// Информирование данного объекта об окончании изменении данных указанного объекта
 			/// </summary>
-			/// <param name="owned_object">Зависимый объект</param>
+			/// <param name="ownedObject">Зависимый объект</param>
 			/// <param name="data">Объект, данные которого изменились</param>
-			/// <param name="data_name">Имя данных</param>
+			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void OnNotifyUpdated(ILotusOwnedObject owned_object, System.Object data, String data_name)
+			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName)
 			{
 
 			}

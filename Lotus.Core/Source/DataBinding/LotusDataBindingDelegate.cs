@@ -122,11 +122,11 @@ namespace Lotus
 			/// <remarks>
 			/// Предполагается что остальные параметры привязки со стороны объекта модели уже корректно настроены
 			/// </remarks>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetModel(System.Object model_instance)
+			public override void SetModel(System.Object modelInstance)
 			{
-				ResetModel(model_instance);
+				ResetModel(modelInstance);
 				if (mMode != TBindingMode.ViewData)
 				{
 					var member_name_model = mModelMemberName;
@@ -136,7 +136,7 @@ namespace Lotus
 					}
 					try
 					{
-						mActionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), model_instance, member_name_model);
+						mActionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, member_name_model);
 					}
 					catch (Exception exc)
 					{
@@ -153,16 +153,16 @@ namespace Lotus
 			/// <summary>
 			/// Установка объекта модели
 			/// </summary>
-			/// <param name="model_instance">Экземпляр объекта модели</param>
-			/// <param name="member_name">Имя члена объекта модели</param>
+			/// <param name="modelInstance">Экземпляр объекта модели</param>
+			/// <param name="memberName">Имя члена объекта модели</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetModel(System.Object model_instance, String member_name)
+			public override void SetModel(System.Object modelInstance, String memberName)
 			{
-				ResetModel(model_instance);
+				ResetModel(modelInstance);
 
-				if (SetMemberType(model_instance, member_name, ref mModelMemberType) != null)
+				if (SetMemberType(modelInstance, memberName, ref mModelMemberType) != null)
 				{
-					mModelMemberName = member_name;
+					mModelMemberName = memberName;
 					if (mMode != TBindingMode.ViewData)
 					{
 						var member_name_model = mModelMemberName;
@@ -172,7 +172,7 @@ namespace Lotus
 						}
 						try
 						{
-							mActionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), model_instance, member_name_model);
+							mActionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, member_name_model);
 						}
 						catch (Exception exc)
 						{
@@ -257,11 +257,11 @@ namespace Lotus
 			/// <remarks>
 			/// Предполагается что остальные параметры привязки со стороны объекта представления уже корректно настроены
 			/// </remarks>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetView(System.Object view_instance)
+			public override void SetView(System.Object viewInstance)
 			{
-				ResetView(view_instance);
+				ResetView(viewInstance);
 				if (mMode != TBindingMode.DataManager)
 				{
 					var member_name_view = mViewMemberName;
@@ -271,7 +271,7 @@ namespace Lotus
 					}
 					try
 					{
-						mActionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), view_instance, member_name_view);
+						mActionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, member_name_view);
 					}
 					catch (Exception exc)
 					{
@@ -288,16 +288,16 @@ namespace Lotus
 			/// <summary>
 			/// Установка объекта представления
 			/// </summary>
-			/// <param name="view_instance">Экземпляр объекта представления</param>
-			/// <param name="member_name">Имя члена объекта представления</param>
+			/// <param name="viewInstance">Экземпляр объекта представления</param>
+			/// <param name="memberName">Имя члена объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SetView(System.Object view_instance, String member_name)
+			public override void SetView(System.Object viewInstance, String memberName)
 			{
 				mIsStringView = typeof(TTypeView) == typeof(String);
-				ResetView(view_instance);
-				if (SetMemberType(view_instance, member_name, ref mViewMemberType) != null)
+				ResetView(viewInstance);
+				if (SetMemberType(viewInstance, memberName, ref mViewMemberType) != null)
 				{
-					mViewMemberName = member_name;
+					mViewMemberName = memberName;
 					if (mMode != TBindingMode.DataManager)
 					{
 						var member_name_view = mViewMemberName;
@@ -307,7 +307,7 @@ namespace Lotus
 						}
 						try
 						{
-							mActionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), view_instance, member_name_view);
+							mActionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, member_name_view);
 						}
 						catch (Exception exc)
 						{

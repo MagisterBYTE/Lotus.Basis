@@ -1995,13 +1995,13 @@ namespace Lotus
 			/// <summary>
 			/// Посещение элементов списка указанным посетителем
 			/// </summary>
-			/// <param name="on_visitor">Делегат посетителя</param>
+			/// <param name="onVisitor">Делегат посетителя</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void Visit(Action<TItem> on_visitor)
+			public virtual void Visit(Action<TItem> onVisitor)
 			{
 				for (var i = 0; i < mCount; i++)
 				{
-					on_visitor(mArrayOfItems[i]);
+					onVisitor(mArrayOfItems[i]);
 				}
 			}
 			#endregion

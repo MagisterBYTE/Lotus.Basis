@@ -202,11 +202,11 @@ namespace Lotus
 			/// <remarks>
 			/// Применяется когда объект не нужен
 			/// </remarks>
-			/// <param name="pool_object">Объект</param>
+			/// <param name="poolObject">Объект</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void ReleaseObjectToPool(System.Object pool_object)
+			public void ReleaseObjectToPool(System.Object poolObject)
 			{
-				Release((TPoolObject)pool_object);
+				Release((TPoolObject)poolObject);
 			}
 			#endregion
 
@@ -343,12 +343,12 @@ namespace Lotus
 			/// <remarks>
 			/// Применяется когда объект не нужен
 			/// </remarks>
-			/// <param name="pool_object">Объект</param>
+			/// <param name="poolObject">Объект</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void Release(TPoolObject pool_object)
+			public override void Release(TPoolObject poolObject)
 			{
-				pool_object.OnPoolRelease();
-				mPoolObjects.Push(pool_object);
+				poolObject.OnPoolRelease();
+				mPoolObjects.Push(poolObject);
 			}
 			#endregion
 		}

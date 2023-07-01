@@ -124,11 +124,11 @@ namespace Lotus
 			/// <summary>
 			/// Добавление открытие пространства имени
 			/// </summary>
-			/// <param name="space_name">Имя пространства имён</param>
+			/// <param name="spaceName">Имя пространства имён</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void AddNamespaceOpen(String space_name)
+			public override void AddNamespaceOpen(String spaceName)
 			{
-				Add("namespace " + space_name);
+				Add("namespace " + spaceName);
 				Add("{");
 			}
 
@@ -151,11 +151,11 @@ namespace Lotus
 			/// <summary>
 			/// Добавление декларации статического публичного класса
 			/// </summary>
-			/// <param name="class_name">Имя класса</param>
+			/// <param name="className">Имя класса</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void AddClassStaticPublic(String class_name)
+			public override void AddClassStaticPublic(String className)
 			{
-				Add("public static class " + class_name);
+				Add("public static class " + className);
 				Add("{");
 			}
 
@@ -175,38 +175,38 @@ namespace Lotus
 			/// <summary>
 			/// Добавление декларации константного публичного поля
 			/// </summary>
-			/// <param name="type_name">Имя типа</param>
-			/// <param name="field_name">Имя поля</param>
+			/// <param name="typeName">Имя типа</param>
+			/// <param name="fieldName">Имя поля</param>
 			/// <param name="value">Значения поля</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void AddFieldConstPublic(String type_name, String field_name, String value)
+			public override void AddFieldConstPublic(String typeName, String fieldName, String value)
 			{
-				Add("public const " + type_name + " " + field_name + " = " + value + ";");
+				Add("public const " + typeName + " " + fieldName + " = " + value + ";");
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление декларации константного публичного поля типа String
 			/// </summary>
-			/// <param name="field_name">Имя поля</param>
+			/// <param name="fieldName">Имя поля</param>
 			/// <param name="value">Значения поля</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void AddFieldConstPublicString(String field_name, String value)
+			public override void AddFieldConstPublicString(String fieldName, String value)
 			{
-				Add("public const String " + field_name + " = \"" + value + "\";");
+				Add("public const String " + fieldName + " = \"" + value + "\";");
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Добавление декларации статического поля только для чтения
 			/// </summary>
-			/// <param name="type_name">Имя типа</param>
-			/// <param name="field_name">Имя поля</param>
+			/// <param name="typeName">Имя типа</param>
+			/// <param name="fieldName">Имя поля</param>
 			/// <param name="value">Значения поля</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void AddFieldStaticReadonlyPublic(String type_name, String field_name, String value)
+			public override void AddFieldStaticReadonlyPublic(String typeName, String fieldName, String value)
 			{
-				Add("public static readonly " + type_name + " " + field_name + " = " + value + ";");
+				Add("public static readonly " + typeName + " " + fieldName + " = " + value + ";");
 			}
 			#endregion
 
@@ -259,20 +259,20 @@ namespace Lotus
 			/// <summary>
 			/// Добавление стандартного краткого комментария XML
 			/// </summary>
-			/// <param name="delimetr_section_before">Статус добавления разделителя секции перед комментарием</param>
+			/// <param name="delimetrSectionBefore">Статус добавления разделителя секции перед комментарием</param>
 			/// <param name="text">Текст комментария</param>
-			/// <param name="delimetr_section_after">Статус добавления разделителя секции после комментария </param>
+			/// <param name="delimetrSectionAfter">Статус добавления разделителя секции после комментария </param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void AddCommentSummary(Boolean delimetr_section_before, String text, Boolean delimetr_section_after)
+			public override void AddCommentSummary(Boolean delimetrSectionBefore, String text, Boolean delimetrSectionAfter)
 			{
-				if (delimetr_section_before)
+				if (delimetrSectionBefore)
 				{
 					AddDelimetrSection();
 				}
 				Add("/// <summary>");
 				Add("/// " + text);
 				Add("/// </summary>");
-				if (delimetr_section_after)
+				if (delimetrSectionAfter)
 				{
 					AddDelimetrSection();
 				}

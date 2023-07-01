@@ -535,9 +535,9 @@ namespace Lotus
 			/// <summary>
 			/// Открытие контекстного меню
 			/// </summary>
-			/// <param name="context_menu">Контекстное меню</param>
+			/// <param name="contextMenu">Контекстное меню</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void OpenContextMenu(System.Object context_menu)
+			public virtual void OpenContextMenu(System.Object contextMenu)
 			{
 
 			}

@@ -144,13 +144,13 @@ namespace Lotus
 			/// <summary>
 			/// Регистрация подписки на обработку сообщений
 			/// </summary>
-			/// <param name="message_handler">Интерфейс для обработки сообщений</param>
+			/// <param name="messageHandler">Интерфейс для обработки сообщений</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RegisterMessageHandler(ILotusMessageHandler message_handler)
+			public virtual void RegisterMessageHandler(ILotusMessageHandler messageHandler)
 			{
-				if(mMessageHandlers.Contains(message_handler) == false)
+				if(mMessageHandlers.Contains(messageHandler) == false)
 				{
-					mMessageHandlers.Add(in message_handler);
+					mMessageHandlers.Add(in messageHandler);
 				}
 			}
 
@@ -158,11 +158,11 @@ namespace Lotus
 			/// <summary>
 			/// Отмена регистрации подписки на обработку сообщений
 			/// </summary>
-			/// <param name="message_handler">Интерфейс для обработки сообщений</param>
+			/// <param name="messageHandler">Интерфейс для обработки сообщений</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void UnRegisterMessageHandler(ILotusMessageHandler message_handler)
+			public virtual void UnRegisterMessageHandler(ILotusMessageHandler messageHandler)
 			{
-				mMessageHandlers.Remove(in message_handler);
+				mMessageHandlers.Remove(in messageHandler);
 			}
 			#endregion
 

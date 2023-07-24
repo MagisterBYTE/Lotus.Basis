@@ -423,7 +423,7 @@ namespace Lotus
 			/// <summary>
 			/// Инверсная матрица
 			/// </summary>
-			public Matrix4Dx4 Inversed
+			public readonly Matrix4Dx4 Inversed
 			{
 				get
 				{
@@ -438,7 +438,7 @@ namespace Lotus
 			/// <summary>
 			/// Транспонированная матрица
 			/// </summary>
-			public Matrix4Dx4 Transposed
+			public readonly Matrix4Dx4 Transposed
 			{
 				get
 				{
@@ -507,13 +507,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемая матрица</param>
 			/// <returns>Статус идентичности матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Matrix4Dx4) == obj.GetType())
+					if (obj is Matrix4Dx4 matrix)
 					{
-						var matrix = (Matrix4Dx4)obj;
 						return Equals(matrix);
 					}
 				}
@@ -527,7 +526,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая матрица</param>
 			/// <returns>Статус идентичности матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Matrix4Dx4 other)
+			public readonly Boolean Equals(Matrix4Dx4 other)
 			{
 				return false;
 			}
@@ -538,7 +537,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код матрицы</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return M11.GetHashCode() ^ M22.GetHashCode() ^ M33.GetHashCode();
 			}
@@ -550,7 +549,7 @@ namespace Lotus
 			/// <param name="other">Матрица</param>
 			/// <returns>Статус сравнения матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Matrix4Dx4 other)
+			public readonly Int32 CompareTo(Matrix4Dx4 other)
 			{
 				return 0;
 			}
@@ -561,7 +560,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия матрицы</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -572,7 +571,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление матрицы с указанием значений компонент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return "M11 = " + M11.ToString("F3") + "; M22 = " + M22.ToString("F3") +
 					   "; M33 = " + M33.ToString("F3");
@@ -716,7 +715,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Vector4D this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -778,7 +777,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Кватернион</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Quaternion3D ToQuaternion3D()
+			public readonly Quaternion3D ToQuaternion3D()
 			{
 				var tr = M11 + M22 + M33;
 				if (tr > 0.0)
@@ -811,7 +810,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Кватернион</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Quaternion3Df ToQuaternion3Df()
+			public readonly Quaternion3Df ToQuaternion3Df()
 			{
 				var tr = (Single)(M11 + M22 + M33);
 				if (tr > 0.0)
@@ -1243,7 +1242,7 @@ namespace Lotus
 			/// <summary>
 			/// Инверсная матрица
 			/// </summary>
-			public Matrix4Dx4f Inversed
+			public readonly Matrix4Dx4f Inversed
 			{
 				get
 				{
@@ -1258,7 +1257,7 @@ namespace Lotus
 			/// <summary>
 			/// Транспонированная матрица
 			/// </summary>
-			public Matrix4Dx4f Transposed
+			public readonly Matrix4Dx4f Transposed
 			{
 				get
 				{
@@ -1327,13 +1326,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемая матрица</param>
 			/// <returns>Статус идентичности матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Matrix4Dx4f) == obj.GetType())
+					if (obj is Matrix4Dx4f matrix)
 					{
-						var matrix = (Matrix4Dx4f)obj;
 						return Equals(matrix);
 					}
 				}
@@ -1347,7 +1345,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая матрица</param>
 			/// <returns>Статус идентичности матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Matrix4Dx4f other)
+			public readonly Boolean Equals(Matrix4Dx4f other)
 			{
 				return false;
 			}
@@ -1358,7 +1356,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код матрицы</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return M11.GetHashCode() ^ M22.GetHashCode() ^ M33.GetHashCode();
 			}
@@ -1370,7 +1368,7 @@ namespace Lotus
 			/// <param name="other">Матрица</param>
 			/// <returns>Статус сравнения матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Matrix4Dx4f other)
+			public readonly Int32 CompareTo(Matrix4Dx4f other)
 			{
 				return 0;
 			}
@@ -1381,7 +1379,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия матрицы</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -1392,7 +1390,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление матрицы с указанием значений компонент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return "M11 = " + M11.ToString("F3") + "; M22 = " + M22.ToString("F3") +
 					   "; M33 = " + M33.ToString("F3");
@@ -1536,7 +1534,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Vector4Df this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -1598,7 +1596,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Кватернион</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Quaternion3Df ToQuaternion3Df()
+			public readonly Quaternion3Df ToQuaternion3Df()
 			{
 				var tr = M11 + M22 + M33;
 				if (tr > 0.0)

@@ -446,7 +446,7 @@ namespace Lotus
 				if(type == typeof(UnityEngine.GameObject))
 				{
 					// Создаем игровой объект
-					UnityEngine.GameObject game_object = new UnityEngine.GameObject("create_from_instance");
+					var game_object = new UnityEngine.GameObject("create_from_instance");
 					return game_object;
 				}
 				else

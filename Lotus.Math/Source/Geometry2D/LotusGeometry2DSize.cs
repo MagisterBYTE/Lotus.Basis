@@ -102,7 +102,7 @@ namespace Lotus
 			/// <summary>
 			/// Статус пустого размера
 			/// </summary>
-			public Boolean IsEmpty
+			public readonly Boolean IsEmpty
 			{
 				get { return Width == 0 && Height == 0; }
 			}
@@ -110,7 +110,7 @@ namespace Lotus
 			/// <summary>
 			/// Площадь
 			/// </summary>
-			public Double Area
+			public readonly Double Area
 			{
 				get { return Width * Height; }
 			}
@@ -118,7 +118,7 @@ namespace Lotus
 			/// <summary>
 			/// Диагональ
 			/// </summary>
-			public Double Diagonal
+			public readonly Double Diagonal
 			{
 				get { return Math.Sqrt((Width * Width) + (Height * Height)); }
 			}
@@ -210,13 +210,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Size2D) == obj.GetType())
+					if (obj is Size2D size)
 					{
-						var size = (Size2D)obj;
 						return Equals(size);
 					}
 				}
@@ -230,7 +229,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый размер</param>
 			/// <returns>Статус равенства размеров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Size2D other)
+			public readonly Boolean Equals(Size2D other)
 			{
 				return this == other;
 			}
@@ -242,7 +241,7 @@ namespace Lotus
 			/// <param name="other">Размер</param>
 			/// <returns>Статус сравнения размеров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Size2D other)
+			public readonly Int32 CompareTo(Size2D other)
 			{
 				if (Width > other.Width)
 				{
@@ -267,7 +266,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код размера</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Width.GetHashCode() ^ Height.GetHashCode();
 			}
@@ -278,7 +277,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия размера</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -289,7 +288,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление размера с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Width, Height);
 			}
@@ -301,7 +300,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление размера с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Width = " + Width.ToString(format) + "; Height = " + Height.ToString(format);
 			}
@@ -477,7 +476,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -535,7 +534,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1}", Width, Height);
 			}
@@ -621,7 +620,7 @@ namespace Lotus
 			/// <summary>
 			/// Статус пустого размера
 			/// </summary>
-			public Boolean IsEmpty
+			public readonly Boolean IsEmpty
 			{
 				get { return Width == 0 && Height == 0; }
 			}
@@ -629,7 +628,7 @@ namespace Lotus
 			/// <summary>
 			/// Площадь
 			/// </summary>
-			public Single Area
+			public readonly Single Area
 			{
 				get { return Width * Height; }
 			}
@@ -637,7 +636,7 @@ namespace Lotus
 			/// <summary>
 			/// Диагональ
 			/// </summary>
-			public Single Diagonal
+			public readonly Single Diagonal
 			{
 				get { return (Single)Math.Sqrt((Width * Width) + (Height * Height)); }
 			}
@@ -729,13 +728,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Size2Df) == obj.GetType())
+					if (obj is Size2Df size)
 					{
-						var size = (Size2Df)obj;
 						return Equals(size);
 					}
 				}
@@ -749,7 +747,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый размер</param>
 			/// <returns>Статус равенства размеров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Size2Df other)
+			public readonly Boolean Equals(Size2Df other)
 			{
 				return this == other;
 			}
@@ -761,7 +759,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый размер</param>
 			/// <returns>Статус сравнения размеров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Size2Df other)
+			public readonly Int32 CompareTo(Size2Df other)
 			{
 				if (Width > other.Width)
 				{
@@ -786,7 +784,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код размера</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Width.GetHashCode() ^ Height.GetHashCode();
 			}
@@ -797,7 +795,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия размера</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -808,7 +806,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление размера с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Width, Height);
 			}
@@ -820,7 +818,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление размера с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Width = " + Width.ToString(format) + "; Height = " + Height.ToString(format);
 			}
@@ -1034,7 +1032,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -1092,7 +1090,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1}", Width, Height);
 			}

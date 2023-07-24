@@ -85,7 +85,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Di Location
 			{
-				get { return new Vector2Di(X, Y); }
+				readonly get { return new Vector2Di(X, Y); }
 				set
 				{
 					X = value.X;
@@ -129,11 +129,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(TMapPoint) == obj.GetType())
+					if (obj is TMapPoint)
 					{
 						var map_point = (TMapPoint)obj;
 						return Equals(map_point);
@@ -149,7 +149,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая точка карты</param>
 			/// <returns>Статус равенства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(TMapPoint other)
+			public readonly Boolean Equals(TMapPoint other)
 			{
 				return X == other.X && Y == other.Y;
 			}
@@ -161,7 +161,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая точка карты</param>
 			/// <returns>Статус сравнения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(TMapPoint other)
+			public readonly Int32 CompareTo(TMapPoint other)
 			{
 				if (X > other.X)
 				{
@@ -193,7 +193,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код точки карты</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode();
 			}
@@ -204,7 +204,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия точки карты</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object Clone()
+			public readonly System.Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -215,7 +215,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return "X = " + X.ToString() + "; Y = " + Y.ToString();
 			}

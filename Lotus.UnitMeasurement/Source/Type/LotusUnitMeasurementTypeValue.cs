@@ -125,7 +125,7 @@ namespace Lotus
 			/// </summary>
 			public Double Value
 			{
-				get { return mValue; }
+				readonly get { return mValue; }
 				set
 				{
 					mValue = value;
@@ -135,7 +135,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип измерения
 			/// </summary>
-			public TMeasurementType QuantityType
+			public readonly TMeasurementType QuantityType
 			{
 				get { return mMeasurementType; }
 			}
@@ -143,7 +143,7 @@ namespace Lotus
 			/// <summary>
 			/// Единица измерения
 			/// </summary>
-			public Enum UnitType
+			public readonly Enum UnitType
 			{
 				get { return mUnitType; }
 			}
@@ -202,11 +202,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(TMeasurementValue) == obj.GetType())
+					if (obj is TMeasurementValue)
 					{
 						var value = (TMeasurementValue)obj;
 						return Equals(value);
@@ -222,7 +222,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(TMeasurementValue other)
+			public readonly Boolean Equals(TMeasurementValue other)
 			{
 				return mValue == other.mValue && mUnitType == other.mUnitType;
 			}
@@ -234,7 +234,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус сравнения объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(TMeasurementValue other)
+			public readonly Int32 CompareTo(TMeasurementValue other)
 			{
 				return mValue.CompareTo(other.mValue);
 			}
@@ -245,7 +245,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return mValue.GetHashCode() ^ base.GetHashCode();
 			}
@@ -256,7 +256,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object Clone()
+			public readonly System.Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -267,7 +267,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return mValue.ToString() + " " + GetAbbreviationUnit();
 			}
@@ -387,7 +387,7 @@ namespace Lotus
 			/// <param name="value">Новое значение</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TMeasurementValue Clone(Double value)
+			public readonly TMeasurementValue Clone(Double value)
 			{
 				return new TMeasurementValue(value, mMeasurementType, mUnitType);
 			}
@@ -399,7 +399,7 @@ namespace Lotus
 			/// <param name="unitType">Новая единица измерения</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TMeasurementValue Clone(Enum unitType)
+			public readonly TMeasurementValue Clone(Enum unitType)
 			{
 				return new TMeasurementValue(mValue, unitType);
 			}
@@ -430,7 +430,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Аббревиатура единицы измерения </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String GetAbbreviationUnit()
+			public readonly String GetAbbreviationUnit()
 			{
 				if(mUnitType != null)
 				{
@@ -449,7 +449,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				if (mUnitType == null)
 				{

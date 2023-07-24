@@ -148,14 +148,14 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 					case nameof(UnityEngine.Vector2):
 						{
-							UnityEngine.Vector2 vector = (UnityEngine.Vector2)instance;
+							var vector = (UnityEngine.Vector2)instance;
 							writer.Write(vector.x);
 							writer.Write(vector.y);
 						}
 						break;
 					case nameof(UnityEngine.Vector3):
 						{
-							UnityEngine.Vector3 vector = (UnityEngine.Vector3)instance;
+							var vector = (UnityEngine.Vector3)instance;
 							writer.Write(vector.x);
 							writer.Write(vector.y);
 							writer.Write(vector.z);
@@ -163,7 +163,7 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.Vector4):
 						{
-							UnityEngine.Vector4 vector = (UnityEngine.Vector4)instance;
+							var vector = (UnityEngine.Vector4)instance;
 							writer.Write(vector.x);
 							writer.Write(vector.y);
 							writer.Write(vector.z);
@@ -172,14 +172,14 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.Vector2Int):
 						{
-							UnityEngine.Vector2Int vector = (UnityEngine.Vector2Int)instance;
+							var vector = (UnityEngine.Vector2Int)instance;
 							writer.Write(vector.x);
 							writer.Write(vector.y);
 						}
 						break;
 					case nameof(UnityEngine.Vector3Int):
 						{
-							UnityEngine.Vector3Int vector = (UnityEngine.Vector3Int)instance;
+							var vector = (UnityEngine.Vector3Int)instance;
 							writer.Write(vector.x);
 							writer.Write(vector.y);
 							writer.Write(vector.z);
@@ -187,7 +187,7 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.Quaternion):
 						{
-							UnityEngine.Quaternion quaternion = (UnityEngine.Quaternion)instance;
+							var quaternion = (UnityEngine.Quaternion)instance;
 							writer.Write(quaternion.x);
 							writer.Write(quaternion.y);
 							writer.Write(quaternion.z);
@@ -196,19 +196,19 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.Color):
 						{
-							UnityEngine.Color color = (UnityEngine.Color)instance;
+							var color = (UnityEngine.Color)instance;
 							writer.Write(color.ToRGBA());
 						}
 						break;
 					case nameof(UnityEngine.Color32):
 						{
-							UnityEngine.Color32 color = (UnityEngine.Color32)instance;
+							var color = (UnityEngine.Color32)instance;
 							writer.Write(color.ToRGBA());
 						}
 						break;
 					case nameof(UnityEngine.Rect):
 						{
-							UnityEngine.Rect rect = (UnityEngine.Rect)instance;
+							var rect = (UnityEngine.Rect)instance;
 							writer.Write(rect.x);
 							writer.Write(rect.y);
 							writer.Write(rect.width);
@@ -217,7 +217,7 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.RectInt):
 						{
-							UnityEngine.RectInt rect = (UnityEngine.RectInt)instance;
+							var rect = (UnityEngine.RectInt)instance;
 							writer.Write(rect.x);
 							writer.Write(rect.y);
 							writer.Write(rect.width);
@@ -226,7 +226,7 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.Bounds):
 						{
-							UnityEngine.Bounds bounds = (UnityEngine.Bounds)instance;
+							var bounds = (UnityEngine.Bounds)instance;
 							writer.Write(bounds.min.x);
 							writer.Write(bounds.min.y);
 							writer.Write(bounds.min.z);
@@ -237,7 +237,7 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.BoundsInt):
 						{
-							UnityEngine.BoundsInt bounds = (UnityEngine.BoundsInt)instance;
+							var bounds = (UnityEngine.BoundsInt)instance;
 							writer.Write(bounds.min.x);
 							writer.Write(bounds.min.y);
 							writer.Write(bounds.min.z);

@@ -49,7 +49,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Pivot
 			{
-				get { return mPivot; }
+				readonly get { return mPivot; }
 				set 
 				{
 					mPivot = value;
@@ -61,7 +61,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Offset
 			{
-				get { return mOffset; }
+				readonly get { return mOffset; }
 				set
 				{
 					mOffset = value;
@@ -73,16 +73,17 @@ namespace Lotus
 			/// </summary>
 			public Quaternion3Df Rotation
 			{
-				get { return mRotation; }
+				readonly get { return mRotation; }
 				set { mRotation = value; }
 			}
 
 			/// <summary>
 			/// Вектор "вперед"
 			/// </summary>
-			public Vector3Df Forward
+			public readonly Vector3Df Forward
 			{
 				get { return mForward; }
+
 				set
 				{
 
@@ -92,9 +93,10 @@ namespace Lotus
 			/// <summary>
 			/// Вектор "вправо"
 			/// </summary>
-			public Vector3Df Right
+			public readonly Vector3Df Right
 			{
 				get { return mRight; }
+
 				set
 				{
 
@@ -104,9 +106,10 @@ namespace Lotus
 			/// <summary>
 			/// Вектор вверх
 			/// </summary>
-			public Vector3Df Up
+			public readonly Vector3Df Up
 			{
 				get { return mUp; }
+
 				set
 				{
 
@@ -116,7 +119,7 @@ namespace Lotus
 			/// <summary>
 			/// Матрица трансформации объекта
 			/// </summary>
-			public Matrix4Dx4 MatrixTransform
+			public readonly Matrix4Dx4 MatrixTransform
 			{
 				get
 				{
@@ -198,7 +201,7 @@ namespace Lotus
 			/// <param name="axis">Ось вращения</param>
 			/// <param name="angle">Угол приращения, задается в градусах</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Rotate(in Vector3Df axis, Single angle)
+			public readonly void Rotate(in Vector3Df axis, Single angle)
 			{
 				//// Локальное вращение
 				//mAngleAxisPivot += angle;
@@ -219,7 +222,7 @@ namespace Lotus
 			/// <param name="axis">Ось вращения</param>
 			/// <param name="angle">Угол вращения, задается в градусах</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetRotateAround(in Vector3Df center, in Vector3Df axis, Single angle)
+			public readonly void SetRotateAround(in Vector3Df center, in Vector3Df axis, Single angle)
 			{
 				// Глобальное вращение
 				//Quaternion3D rotation = new Quaternion3D(axis, angle + 180);
@@ -237,7 +240,7 @@ namespace Lotus
 			/// <param name="angle">Угол вращения, задается в градусах</param>
 			/// <param name="parent">Родительская трансформация</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetRotateAround(in Vector3Df center, in Vector3Df axis, Single angle, Transform3Df parent)
+			public readonly void SetRotateAround(in Vector3Df center, in Vector3Df axis, Single angle, Transform3Df parent)
 			{
 				// Глобальное вращение
 				//Vector3Df axis_d = new Vector3Df(axis);
@@ -255,7 +258,7 @@ namespace Lotus
 			/// <param name="axis">Ось вращения</param>
 			/// <param name="angle">Угол приращения, задается в градусах</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateAround(in Vector3Df center, in Vector3Df axis, Single angle)
+			public readonly void RotateAround(in Vector3Df center, in Vector3Df axis, Single angle)
 			{
 				// Глобальное вращение
 				//mAngleAxisGlobal += angle;
@@ -273,7 +276,7 @@ namespace Lotus
 			/// <param name="angle">Угол приращения, задается в градусах</param>
 			/// <param name="parent">Родительская трансформация</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void RotateAround(in Vector3Df center, in Vector3Df axis, Single angle, Transform3Df parent)
+			public readonly void RotateAround(in Vector3Df center, in Vector3Df axis, Single angle, Transform3Df parent)
 			{
 				//// Глобальное вращение
 				//Vector3Df axis_d = new Vector3Df(axis);

@@ -171,9 +171,8 @@ namespace Lotus
 				}
 				else
 				{
-					if (args.UserState is TLogMessage)
+					if (args.UserState is TLogMessage message)
 					{
-						var message = (TLogMessage)args.UserState;
 						XLogger.Log(message);
 					}
 				}

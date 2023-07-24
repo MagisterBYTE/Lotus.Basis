@@ -221,7 +221,7 @@ namespace Lotus
 			public static Vector2 NormalizedFast(ref Vector2 vector)
 			{
 				var wrapper = new TFloatInt();
-				wrapper.Float = vector.x * vector.x + vector.y * vector.y;
+				wrapper.Float = (vector.x * vector.x) + (vector.y * vector.y);
 				wrapper.Int = 0x5f3759df - (wrapper.Int >> 1);
 				vector.x *= wrapper.Float;
 				vector.y *= wrapper.Float;
@@ -238,7 +238,7 @@ namespace Lotus
 			public static Vector3 NormalizedFast(ref Vector3 vector)
 			{
 				var wrapper = new TFloatInt();
-				wrapper.Float = vector.x * vector.x + vector.y * vector.y + vector.z * vector.z;
+				wrapper.Float = (vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z);
 				wrapper.Int = 0x5f3759df - (wrapper.Int >> 1);
 				vector.x *= wrapper.Float;
 				vector.y *= wrapper.Float;

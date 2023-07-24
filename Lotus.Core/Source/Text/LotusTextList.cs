@@ -256,7 +256,7 @@ namespace Lotus
 			{
 				// Формируем правильный путь
 #if UNITY_2017_1_OR_NEWER
-				String path = XFilePath.GetFileName(XCoreSettings.ASSETS_PATH, file_name, ".cs");
+				var path = XFilePath.GetFileName(XCoreSettings.ASSETS_PATH, fileName, ".cs");
 #else
 				var path = XFilePath.GetFileName(Environment.CurrentDirectory, fileName, ".cs");
 #endif

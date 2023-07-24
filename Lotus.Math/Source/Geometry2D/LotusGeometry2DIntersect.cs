@@ -294,7 +294,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private static Single DotPerp(this UnityEngine.Vector2 @this, in UnityEngine.Vector2 vector)
 			{
-				return @this.x * vector.y - @this.y * vector.x;
+				return (@this.x * vector.y) - (@this.y * vector.x);
 			}
 #endif
 			#endregion
@@ -582,8 +582,8 @@ namespace Lotus
 					return Math.Abs(start.y - point.y) < epsilon || Math.Abs(end.y - point.y) < epsilon;
 				}
 
-				Single x = start.x + (point.y - start.y) * (end.x - start.x) / (end.y - start.y);
-				Single y = start.y + (point.x - start.x) * (end.y - start.y) / (end.x - start.x);
+				var x = start.x + ((point.y - start.y) * (end.x - start.x) / (end.y - start.y));
+				var y = start.y + ((point.x - start.x) * (end.y - start.y) / (end.x - start.x));
 
 				return Math.Abs(point.x - x) < epsilon || Math.Abs(point.y - y) < epsilon;
 			}
@@ -649,22 +649,22 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean PointOnRectBorder(in UnityEngine.Rect rect, in UnityEngine.Vector2 point, Single epsilon = 0.1f)
 			{
-				Boolean status1 = PointOnSegment(new UnityEngine.Vector2(rect.x, rect.y), new UnityEngine.Vector2(rect.xMax, rect.y), point, epsilon);
+				var status1 = PointOnSegment(new UnityEngine.Vector2(rect.x, rect.y), new UnityEngine.Vector2(rect.xMax, rect.y), point, epsilon);
 				if (status1)
 				{
 					return true;
 				}
-				Boolean status2 = PointOnSegment(new UnityEngine.Vector2(rect.x, rect.y), new UnityEngine.Vector2(rect.x, rect.yMax), point, epsilon);
+				var status2 = PointOnSegment(new UnityEngine.Vector2(rect.x, rect.y), new UnityEngine.Vector2(rect.x, rect.yMax), point, epsilon);
 				if (status2)
 				{
 					return true;
 				}
-				Boolean status3 = PointOnSegment(new UnityEngine.Vector2(rect.xMax, rect.y), new UnityEngine.Vector2(rect.xMax, rect.yMax), point, epsilon);
+				var status3 = PointOnSegment(new UnityEngine.Vector2(rect.xMax, rect.y), new UnityEngine.Vector2(rect.xMax, rect.yMax), point, epsilon);
 				if (status3)
 				{
 					return true;
 				}
-				Boolean status4 = PointOnSegment(new UnityEngine.Vector2(rect.x, rect.yMax), new UnityEngine.Vector2(rect.xMax, rect.yMax), point, epsilon);
+				var status4 = PointOnSegment(new UnityEngine.Vector2(rect.x, rect.yMax), new UnityEngine.Vector2(rect.xMax, rect.yMax), point, epsilon);
 				if (status4)
 				{
 					return true;
@@ -1537,9 +1537,9 @@ namespace Lotus
 			/// <returns>Тип пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectType2D RayToRay(UnityEngine.Vector2 ray_pos_1, UnityEngine.Vector2 ray_dir_1,
-				UnityEngine.Vector2 ray_pos_2, UnityEngine.Vector2 ray_dir_2, out TIntersectHit2Df hit)
+				UnityEngine.Vector2 ray_pos_2, UnityEngine.Vector2 ray_dir_2, ref TIntersectHit2Df hit)
 			{
-				return RayToRay(in ray_pos_1, in ray_dir_1, in ray_pos_2, in ray_dir_2, out hit);
+				return RayToRay(in ray_pos_1, in ray_dir_1, in ray_pos_2, in ray_dir_2, ref hit);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1554,23 +1554,23 @@ namespace Lotus
 			/// <returns>Тип пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectType2D RayToRay(in UnityEngine.Vector2 ray_pos_1, in UnityEngine.Vector2 ray_dir_1,
-				in UnityEngine.Vector2 ray_pos_2, in UnityEngine.Vector2 ray_dir_2, in TIntersectHit2Df hit)
+				in UnityEngine.Vector2 ray_pos_2, in UnityEngine.Vector2 ray_dir_2, ref TIntersectHit2Df hit)
 			{
 				UnityEngine.Vector2 diff = ray_pos_2 - ray_pos_1;
 
-				Single dot_perp_d1_d2 = ray_dir_1.DotPerp(in ray_dir_2);
+				var dot_perp_d1_d2 = ray_dir_1.DotPerp(in ray_dir_2);
 
 				if (Math.Abs(dot_perp_d1_d2) > XGeometry2D.Eplsilon_f)
 				{
 					// Segments intersect in a single point.
-					Single inv_dot_perp_d1_d2 = 1 / dot_perp_d1_d2;
+					var inv_dot_perp_d1_d2 = 1 / dot_perp_d1_d2;
 
-					Single diff_dot_perp_d1 = diff.DotPerp(in ray_dir_1);
-					Single diff_dot_perp_d2 = diff.DotPerp(in ray_dir_2);
+					var diff_dot_perp_d1 = diff.DotPerp(in ray_dir_1);
+					var diff_dot_perp_d2 = diff.DotPerp(in ray_dir_2);
 
 					hit.Distance1 = diff_dot_perp_d2 * inv_dot_perp_d1_d2;
 					hit.Distance2 = diff_dot_perp_d1 * inv_dot_perp_d1_d2;
-					UnityEngine.Vector2 p1 = ray_pos_1 + ray_dir_1 * hit.Distance1;
+					UnityEngine.Vector2 p1 = ray_pos_1 + (ray_dir_1 * hit.Distance1);
 					hit.Point1 = new Vector2Df(p1.x, p1.y);
 					if (hit.Distance1 > 0 && hit.Distance2 > 0)
 					{
@@ -1585,7 +1585,7 @@ namespace Lotus
 
 				// Segments are parallel
 				diff.Normalize();
-				Single diff_dot_perp_dir2 = diff.DotPerp(in ray_dir_2);
+				var diff_dot_perp_dir2 = diff.DotPerp(in ray_dir_2);
 				if (Math.Abs(diff_dot_perp_dir2) <= XGeometry2D.Eplsilon_f)
 				{
 					// Segments are colinear
@@ -1627,18 +1627,18 @@ namespace Lotus
 				in UnityEngine.Vector2 ray_pos_2, in UnityEngine.Vector2 ray_dir_2)
 			{
 				UnityEngine.Vector2 diff = ray_pos_2 - ray_pos_1;
-				Single dot_perp_d1_d2 = ray_dir_1.DotPerp(in ray_dir_2);
+				var dot_perp_d1_d2 = ray_dir_1.DotPerp(in ray_dir_2);
 
 				if (Math.Abs(dot_perp_d1_d2) > XGeometry2D.Eplsilon_f)
 				{
 					// Segments intersect in a single point.
-					Single inv_dot_perp_d1_d2 = 1.0f / dot_perp_d1_d2;
+					var inv_dot_perp_d1_d2 = 1.0f / dot_perp_d1_d2;
 
-					Single diff_dot_perp_d1 = diff.DotPerp(in ray_dir_1);
-					Single diff_dot_perp_d2 = diff.DotPerp(in ray_dir_2);
+					var diff_dot_perp_d1 = diff.DotPerp(in ray_dir_1);
+					var diff_dot_perp_d2 = diff.DotPerp(in ray_dir_2);
 
-					Single distance1 = diff_dot_perp_d2 * inv_dot_perp_d1_d2;
-					Single distance2 = diff_dot_perp_d1 * inv_dot_perp_d1_d2;
+					var distance1 = diff_dot_perp_d2 * inv_dot_perp_d1_d2;
+					var distance2 = diff_dot_perp_d1 * inv_dot_perp_d1_d2;
 					if (distance1 > 0 && distance2 > 0)
 					{
 						return true;
@@ -2097,41 +2097,41 @@ namespace Lotus
 			public static Boolean SegmentToSegment(in UnityEngine.Vector2 start_1, in UnityEngine.Vector2 end_1,
 				in UnityEngine.Vector2 start_2, in UnityEngine.Vector2 end_2)
 			{
-				Single x1 = start_1.x;
-				Single y1 = start_1.y;
+				var x1 = start_1.x;
+				var y1 = start_1.y;
 
-				Single x2 = end_1.x;
-				Single y2 = end_1.y;
+				var x2 = end_1.x;
+				var y2 = end_1.y;
 
-				Single x3 = start_2.x;
-				Single y3 = start_2.y;
+				var x3 = start_2.x;
+				var y3 = start_2.y;
 
-				Single x4 = end_2.x;
-				Single y4 = end_2.y;
+				var x4 = end_2.x;
+				var y4 = end_2.y;
 
 				// Проверяем параллельность
-				Single d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+				var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
 				if (XMath.Approximately(d, 0, XGeometry2D.Eplsilon_f))
 				{
 					return false;
 				}
 
-				Single qx = (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4);
-				Single qy = (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4);
+				var qx = (((x1 * y2) - (y1 * x2)) * (x3 - x4)) - ((x1 - x2) * ((x3 * y4) - (y3 * x4)));
+				var qy = (((x1 * y2) - (y1 * x2)) * (y3 - y4)) - ((y1 - y2) * ((x3 * y4) - (y3 * x4)));
 
-				Single point_x = qx / d;
-				Single point_y = qy / d;
+				var point_x = qx / d;
+				var point_y = qy / d;
 
 				// Проверяем что бы эта точка попала в области отрезков
-				Single ddx = x2 - x1;
-				Single tx = 0.5f;
+				var ddx = x2 - x1;
+				var tx = 0.5f;
 				if (!UnityEngine.Mathf.Approximately(ddx, 0))
 				{
 					tx = (point_x - x1) / ddx;
 				}
 
-				Single ty = 0.5f;
-				Single ddy = y2 - y1;
+				var ty = 0.5f;
+				var ddy = y2 - y1;
 				if (!UnityEngine.Mathf.Approximately(ddy, 0))
 				{
 					ty = (point_y - y1) / ddy;
@@ -2158,43 +2158,43 @@ namespace Lotus
 			/// <returns>Статус пересечения</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static TIntersectType2D SegmentToSegment(in UnityEngine.Vector2 start_1, in UnityEngine.Vector2 end_1,
-				in UnityEngine.Vector2 start_2, in UnityEngine.Vector2 end_2, in TIntersectHit2Df hit)
+				in UnityEngine.Vector2 start_2, in UnityEngine.Vector2 end_2, ref TIntersectHit2Df hit)
 			{
-				Single x1 = start_1.x;
-				Single y1 = start_1.y;
+				var x1 = start_1.x;
+				var y1 = start_1.y;
 
-				Single x2 = end_1.x;
-				Single y2 = end_1.y;
+				var x2 = end_1.x;
+				var y2 = end_1.y;
 
-				Single x3 = start_2.x;
-				Single y3 = start_2.y;
+				var x3 = start_2.x;
+				var y3 = start_2.y;
 
-				Single x4 = end_2.x;
-				Single y4 = end_2.y;
+				var x4 = end_2.x;
+				var y4 = end_2.y;
 
 				// Проверяем параллельность
-				Single d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+				var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
 				if (XMath.Approximately(d, 0, XGeometry2D.Eplsilon_f))
 				{
 					return TIntersectType2D.Parallel;
 				}
 
-				Single qx = (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4);
-				Single qy = (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4);
+				var qx = (((x1 * y2) - (y1 * x2)) * (x3 - x4)) - ((x1 - x2) * ((x3 * y4) - (y3 * x4)));
+				var qy = (((x1 * y2) - (y1 * x2)) * (y3 - y4)) - ((y1 - y2) * ((x3 * y4) - (y3 * x4)));
 
-				Single point_x = qx / d;
-				Single point_y = qy / d;
+				var point_x = qx / d;
+				var point_y = qy / d;
 
 				// Проверяем что бы эта точка попала в области отрезков
-				Single ddx = x2 - x1;
-				Single tx = 0.5f;
+				var ddx = x2 - x1;
+				var tx = 0.5f;
 				if (!UnityEngine.Mathf.Approximately(ddx, 0))
 				{
 					tx = (point_x - x1) / ddx;
 				}
 
-				Single ty = 0.5f;
-				Single ddy = y2 - y1;
+				var ty = 0.5f;
+				var ddy = y2 - y1;
 				if (!UnityEngine.Mathf.Approximately(ddy, 0))
 				{
 					ty = (point_y - y1) / ddy;

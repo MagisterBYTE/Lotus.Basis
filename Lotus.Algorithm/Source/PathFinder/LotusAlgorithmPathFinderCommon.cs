@@ -116,7 +116,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Di Location
 			{
-				get { return new Vector2Di(X, Y); }
+				readonly get { return new Vector2Di(X, Y); }
 				set
 				{
 					X = value.X;
@@ -177,11 +177,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(TPathPoint) == obj.GetType())
+					if (obj is TPathPoint)
 					{
 						var path_point = (TPathPoint)obj;
 						return Equals(path_point);
@@ -197,7 +197,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая точка пути</param>
 			/// <returns>Статус равенства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(TPathPoint other)
+			public readonly Boolean Equals(TPathPoint other)
 			{
 				return X == other.X && Y == other.Y;
 			}
@@ -209,7 +209,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая точка пути</param>
 			/// <returns>Статус сравнения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(TPathPoint other)
+			public readonly Int32 CompareTo(TPathPoint other)
 			{
 				if (X > other.X)
 				{
@@ -241,7 +241,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код точки пути</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode();
 			}
@@ -252,7 +252,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия точки пути</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object Clone()
+			public readonly System.Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -263,7 +263,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return "X = " + X.ToString() + "; Y = " + Y.ToString();
 			}
@@ -357,7 +357,7 @@ namespace Lotus
 			/// <param name="next">Следующая точка пути</param>
 			/// <returns>Направления движения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TPathMoveDirection GetMoveDirection(TPathPoint next)
+			public readonly TPathMoveDirection GetMoveDirection(TPathPoint next)
 			{
 				// Вверх-вниз
 				if (X == next.X)

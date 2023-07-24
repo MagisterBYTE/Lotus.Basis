@@ -12,9 +12,7 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 //=====================================================================================================================
 namespace Lotus
@@ -32,7 +30,6 @@ namespace Lotus
 		[Serializable]
 		[StructLayout(LayoutKind.Sequential)]
 		public struct Matrix3Dx3 : IEquatable<Matrix3Dx3>, IComparable<Matrix3Dx3>, ICloneable
-			
 		{
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			/// <summary>
@@ -189,13 +186,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Matrix3Dx3) == obj.GetType())
+					if (obj is Matrix3Dx3 matrix)
 					{
-						var matrix = (Matrix3Dx3)obj;
 						return Equals(matrix);
 					}
 				}
@@ -209,7 +205,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая матрица</param>
 			/// <returns>Статус равенства матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Matrix3Dx3 other)
+			public readonly Boolean Equals(Matrix3Dx3 other)
 			{
 				return false;
 			}
@@ -221,7 +217,7 @@ namespace Lotus
 			/// <param name="other">Матрица</param>
 			/// <returns>Статус сравнения матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Matrix3Dx3 other)
+			public readonly Int32 CompareTo(Matrix3Dx3 other)
 			{
 				return 0;
 			}
@@ -232,7 +228,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код матрицы</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return M11.GetHashCode() ^ M22.GetHashCode() ^ M33.GetHashCode();
 			}
@@ -243,7 +239,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия матрицы</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -254,7 +250,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление матрицы с указанием значений компонент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return "M11 = " + M11.ToString("F3") + "; M22 = " + M22.ToString("F3") +
 				       "; M33 = " + M33.ToString("F3");
@@ -1820,7 +1816,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Row1
 			{
-				get { return new Vector3Df(M11, M12, M13); }
+				readonly get { return new Vector3Df(M11, M12, M13); }
 				set { M11 = value.X; M12 = value.Y; M13 = value.Z; }
 			}
 
@@ -1829,7 +1825,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Row2
 			{
-				get { return new Vector3Df(M21, M22, M23); }
+				readonly get { return new Vector3Df(M21, M22, M23); }
 				set { M21 = value.X; M22 = value.Y; M23 = value.Z; }
 			}
 
@@ -1838,7 +1834,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Row3
 			{
-				get { return new Vector3Df(M31, M32, M33); }
+				readonly get { return new Vector3Df(M31, M32, M33); }
 				set { M31 = value.X; M32 = value.Y; M33 = value.Z; }
 			}
 
@@ -1847,7 +1843,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Column1
 			{
-				get { return new Vector3Df(M11, M21, M31); }
+				readonly get { return new Vector3Df(M11, M21, M31); }
 				set { M11 = value.X; M21 = value.Y; M31 = value.Z; }
 			}
 
@@ -1856,7 +1852,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Column2
 			{
-				get { return new Vector3Df(M12, M22, M32); }
+				readonly get { return new Vector3Df(M12, M22, M32); }
 				set { M12 = value.X; M22 = value.Y; M32 = value.Z; }
 			}
 
@@ -1865,7 +1861,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Column3
 			{
-				get { return new Vector3Df(M13, M23, M33); }
+				readonly get { return new Vector3Df(M13, M23, M33); }
 				set { M13 = value.X; M23 = value.Y; M33 = value.Z; }
 			}
 
@@ -1874,7 +1870,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df ScaleVector
 			{
-				get { return new Vector3Df(M11, M22, M33); }
+				readonly get { return new Vector3Df(M11, M22, M33); }
 				set { M11 = value.X; M22 = value.Y; M33 = value.Z; }
 			}
 
@@ -1959,7 +1955,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object obj)
 			{
 				if (!(obj is Matrix3Dx3f))
 				{
@@ -1979,7 +1975,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="Matrix3Dx3f"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Matrix3Dx3f other)
+			public readonly Boolean Equals(Matrix3Dx3f other)
 			{
 				return Equals(in other);
 			}
@@ -1993,7 +1989,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="Matrix3Dx3f"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(in Matrix3Dx3f other)
+			public readonly Boolean Equals(in Matrix3Dx3f other)
 			{
 				return XMath.Approximately(other.M11, M11) &&
 					XMath.Approximately(other.M12, M12) &&
@@ -2014,7 +2010,7 @@ namespace Lotus
 			/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				unchecked
 				{
@@ -2039,7 +2035,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(CultureInfo.CurrentCulture, "[M11:{0} M12:{1} M13:{2}] [M21:{3} M22:{4} M23:{5}] [M31:{6} M32:{7} M33:{8}]",
 					M11, M12, M13, M21, M22, M23, M31, M32, M33);
@@ -2054,7 +2050,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				if (format == null)
 				{
@@ -2076,7 +2072,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public String ToString(IFormatProvider formatProvider)
+			public readonly String ToString(IFormatProvider formatProvider)
 			{
 				return String.Format(formatProvider, "[M11:{0} M12:{1} M13:{2}] [M21:{3} M22:{4} M23:{5}] [M31:{6} M32:{7} M33:{8}]",
 					M11.ToString(formatProvider), M12.ToString(formatProvider), M13.ToString(formatProvider),
@@ -2094,7 +2090,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public String ToString(String format, IFormatProvider formatProvider)
+			public readonly String ToString(String format, IFormatProvider formatProvider)
 			{
 				if (format == null)
 				{
@@ -2305,7 +2301,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -2351,7 +2347,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 row, Int32 column]
 			{
-				get
+				readonly get
 				{
 					return this[(row * 3) + column];
 				}
@@ -2370,7 +2366,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>The determinant of the matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Determinant()
+			public readonly Single Determinant()
 			{
 				return (M11 * M22 * M33) + (M12 * M23 * M31) + (M13 * M21 * M32) - (M13 * M22 * M31) - (M12 * M21 * M33) - (M11 * M23 * M32);
 			}
@@ -2450,7 +2446,7 @@ namespace Lotus
 			/// <param name="Q">When the method completes, contains the orthonormalized Matrix3Dx3f of the decomposition</param>
 			/// <param name="R">When the method completes, contains the right triangular Matrix3Dx3f of the decomposition</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void DecomposeQR(out Matrix3Dx3f Q, out Matrix3Dx3f R)
+			public readonly void DecomposeQR(out Matrix3Dx3f Q, out Matrix3Dx3f R)
 			{
 				Matrix3Dx3f temp = this;
 				temp.Transpose();
@@ -2475,7 +2471,7 @@ namespace Lotus
 			/// <param name="L">When the method completes, contains the lower triangular Matrix3Dx3f of the decomposition</param>
 			/// <param name="Q">When the method completes, contains the orthonormalized Matrix3Dx3f of the decomposition</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void DecomposeLQ(out Matrix3Dx3f L, out Matrix3Dx3f Q)
+			public readonly void DecomposeLQ(out Matrix3Dx3f L, out Matrix3Dx3f Q)
 			{
 				Orthonormalize(in this, out Q);
 
@@ -2501,7 +2497,7 @@ namespace Lotus
 			/// <param name="rotation">When the method completes, contains the rotation component of the decomposed matrix</param>
 			/// <returns>Статус успешности</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Decompose(out Vector3Df scale, out Quaternion3Df rotation)
+			public readonly Boolean Decompose(out Vector3Df scale, out Quaternion3Df rotation)
 			{
 				//Source: Unknown
 				//References: http://www.gamedev.net/community/forums/topic.asp?topic_id=441695
@@ -2550,7 +2546,7 @@ namespace Lotus
 			/// <param name="rotation">When the method completes, contains the rotation component of the decomposed matrix</param>
 			/// <returns>Статус успешности</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean DecomposeUniformScale(out Single scale, out Quaternion3Df rotation)
+			public readonly Boolean DecomposeUniformScale(out Single scale, out Quaternion3Df rotation)
 			{
 				//Scaling is the length of the rows. ( just take one row since this is a uniform matrix)
 				scale = (Single)Math.Sqrt((M11 * M11) + (M12 * M12) + (M13 * M13));
@@ -2638,7 +2634,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>A 9-element array containing the components of the matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single[] ToArray()
+			public readonly Single[] ToArray()
 			{
 				return new[] { M11, M12, M13, M21, M22, M23, M31, M32, M33 };
 			}

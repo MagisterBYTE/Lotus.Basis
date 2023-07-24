@@ -15,9 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 //---------------------------------------------------------------------------------------------------------------------
 #if USE_HELIX
 using HelixToolkit.SharpDX.Core;

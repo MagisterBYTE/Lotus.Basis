@@ -117,7 +117,7 @@ namespace Lotus
 			/// <remarks>
 			/// Является уникальным в пределах одного мира
 			/// </remarks>
-			public Int32 Id 
+			public readonly Int32 Id 
 			{ 
 				get 
 				{
@@ -133,7 +133,7 @@ namespace Lotus
 			/// </remarks>
 			public Boolean IsEnabled
 			{
-				get
+				readonly get
 				{
 					return mIsEnabled;
 				}
@@ -151,7 +151,7 @@ namespace Lotus
 			/// </remarks>
 			public Byte Layer
 			{
-				get
+				readonly get
 				{
 					return mLayer;
 				}
@@ -169,7 +169,7 @@ namespace Lotus
 			/// </remarks>
 			public Byte Tag
 			{
-				get
+				readonly get
 				{
 					return mTag;
 				}
@@ -187,7 +187,7 @@ namespace Lotus
 			/// </remarks>
 			public Byte Group
 			{
-				get
+				readonly get
 				{
 					return mGroup;
 				}
@@ -205,7 +205,7 @@ namespace Lotus
 			/// </remarks>
 			public Byte Marked
 			{
-				get
+				readonly get
 				{
 					return mMarked;
 				}
@@ -218,7 +218,7 @@ namespace Lotus
 			/// <summary>
 			/// Количество компонентов 
 			/// </summary>
-			public Int32 ComponentCount
+			public readonly Int32 ComponentCount
 			{
 				get
 				{
@@ -231,7 +231,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsDestroyed
 			{
-				get
+				readonly get
 				{
 					return mIsDestroyed;
 				}
@@ -271,13 +271,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(TEcsEntity) == obj.GetType())
+					if (obj is TEcsEntity entity)
 					{
-						var entity = (TEcsEntity)obj;
 						return Equals(entity);
 					}
 				}
@@ -291,7 +290,7 @@ namespace Lotus
 			/// <param name="other">Сущность</param>
 			/// <returns>Статус равенства сущностей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(TEcsEntity other)
+			public readonly Boolean Equals(TEcsEntity other)
 			{
 				return mId == other.Id;
 			}
@@ -303,7 +302,7 @@ namespace Lotus
 			/// <param name="other">Сущность</param>
 			/// <returns>Статус сравнения сущностей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(TEcsEntity other)
+			public readonly Int32 CompareTo(TEcsEntity other)
 			{
 				return mId.CompareTo(other.Id);
 			}
@@ -314,7 +313,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код сущности</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return mId;
 			}
@@ -325,7 +324,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление сущности с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return mId.ToString();
 			}

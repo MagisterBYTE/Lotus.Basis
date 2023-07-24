@@ -123,11 +123,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(TSnapPoint2D) == obj.GetType())
+					if (obj is TSnapPoint2D)
 					{
 						var snap_point = (TSnapPoint2D)obj;
 						return Equals(snap_point);
@@ -143,7 +143,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая точка привязки</param>
 			/// <returns>Статус равенства точек привязок</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(TSnapPoint2D other)
+			public readonly Boolean Equals(TSnapPoint2D other)
 			{
 				return Point == other.Point;
 			}
@@ -155,7 +155,7 @@ namespace Lotus
 			/// <param name="other">Точка привязки</param>
 			/// <returns>Статус сравнения точек привязок</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(TSnapPoint2D other)
+			public readonly Int32 CompareTo(TSnapPoint2D other)
 			{
 				return Distance.CompareTo(other.Distance);
 			}
@@ -177,7 +177,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия точки привязки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -188,7 +188,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление точки привязки с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Point.X, Point.Y);
 			}
@@ -200,7 +200,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление точки привязки с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "X = " + Point.X.ToString(format) + "; Y = " + Point.Y.ToString(format);
 			}
@@ -211,7 +211,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление точки привязки с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToStringValue()
+			public readonly String ToStringValue()
 			{
 				return String.Format(ToStringFormatValue, Point.X, Point.Y);
 			}
@@ -223,7 +223,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения компонентов точки привязки</param>
 			/// <returns>Текстовое представление точки привязки с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToStringValue(String format)
+			public readonly String ToStringValue(String format)
 			{
 				return String.Format(ToStringFormatValue.Replace("0.00", format), Point.X, Point.Y);
 			}
@@ -346,7 +346,7 @@ namespace Lotus
 			/// <param name="deltaY">Допуск по координате Y</param>
 			/// <returns>Статус равенства значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean ApproximatelyPoint(ref Vector2Df point, Single deltaX, Single deltaY)
+			public readonly Boolean ApproximatelyPoint(ref Vector2Df point, Single deltaX, Single deltaY)
 			{
 				if (Math.Abs(Point.X - point.X) < deltaX && Math.Abs(Point.Y - point.Y) < deltaY)
 				{
@@ -385,7 +385,7 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус равенства значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean ApproximatelyPointX(Single x, Single epsilon)
+			public readonly Boolean ApproximatelyPointX(Single x, Single epsilon)
 			{
 				if (Math.Abs(Point.X - x) < epsilon)
 				{
@@ -403,7 +403,7 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус равенства значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean ApproximatelyPointY(Single y, Single epsilon)
+			public readonly Boolean ApproximatelyPointY(Single y, Single epsilon)
 			{
 				if (Math.Abs(Point.Y - y) < epsilon)
 				{
@@ -421,7 +421,7 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус равенства значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean ApproximatelyDistance(Single distance, Single epsilon)
+			public readonly Boolean ApproximatelyDistance(Single distance, Single epsilon)
 			{
 				if (Math.Abs(Distance - distance) < epsilon)
 				{

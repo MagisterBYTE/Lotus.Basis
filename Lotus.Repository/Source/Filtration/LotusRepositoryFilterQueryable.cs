@@ -37,7 +37,7 @@ namespace Lotus
 			/// <returns>Запрос</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static IQueryable<TEntity> Filter<TEntity>(this IQueryable<TEntity> query, 
-				params CFilterProperty[] properties)
+				params CFilterProperty[]? properties)
 			{
 				if(properties == null || properties.Length == 0)
 				{

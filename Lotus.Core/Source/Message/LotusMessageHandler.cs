@@ -32,12 +32,12 @@ namespace Lotus
 			/// <summary>
 			/// Сообщение выполнено с отрицательным результатом
 			/// </summary>
-			public const Int32 NEGATIVERESULT = -1;
+			public const Int32 NEGATIVE_RESULT = -1;
 
 			/// <summary>
 			/// Сообщение не обработано
 			/// </summary>
-			public const Int32 NOTPROCESSED = 0;
+			public const Int32 NOT_PROCESSED = 0;
 
 			/// <summary>
 			/// Сообщение обработано

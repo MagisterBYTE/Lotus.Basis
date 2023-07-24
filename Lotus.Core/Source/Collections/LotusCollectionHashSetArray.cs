@@ -49,7 +49,7 @@ namespace Lotus
 				/// <summary>
 				/// Текущий элемент
 				/// </summary>
-				public TItem Current
+				public readonly TItem Current
 				{
 					get
 					{
@@ -60,7 +60,7 @@ namespace Lotus
 				/// <summary>
 				/// Текущий элемент
 				/// </summary>
-				Object IEnumerator.Current
+				readonly Object IEnumerator.Current
 				{
 					get
 					{
@@ -91,7 +91,7 @@ namespace Lotus
 				/// Освобождение управляемых ресурсов
 				/// </summary>
 				//-----------------------------------------------------------------------------------------------------
-				public void Dispose()
+				public readonly void Dispose()
 				{
 				}
 

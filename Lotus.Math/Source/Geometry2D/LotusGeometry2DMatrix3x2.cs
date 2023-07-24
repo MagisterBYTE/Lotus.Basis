@@ -750,7 +750,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df Row1
 			{
-				get { return new Vector2Df(M11, M12); }
+				readonly get { return new Vector2Df(M11, M12); }
 				set { M11 = value.X; M12 = value.Y; }
 			}
 
@@ -759,7 +759,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df Row2
 			{
-				get { return new Vector2Df(M21, M22); }
+				readonly get { return new Vector2Df(M21, M22); }
 				set { M21 = value.X; M22 = value.Y; }
 			}
 
@@ -768,7 +768,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df Row3
 			{
-				get { return new Vector2Df(M31, M32); }
+				readonly get { return new Vector2Df(M31, M32); }
 				set { M31 = value.X; M32 = value.Y; }
 			}
 
@@ -777,7 +777,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Column1
 			{
-				get { return new Vector3Df(M11, M21, M31); }
+				readonly get { return new Vector3Df(M11, M21, M31); }
 				set { M11 = value.X; M21 = value.Y; M31 = value.Z; }
 			}
 
@@ -786,7 +786,7 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Column2
 			{
-				get { return new Vector3Df(M12, M22, M32); }
+				readonly get { return new Vector3Df(M12, M22, M32); }
 				set { M12 = value.X; M22 = value.Y; M32 = value.Z; }
 			}
 
@@ -795,7 +795,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df TranslationVector
 			{
-				get { return new Vector2Df(M31, M32); }
+				readonly get { return new Vector2Df(M31, M32); }
 				set { M31 = value.X; M32 = value.Y; }
 			}
 
@@ -804,7 +804,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df ScaleVector
 			{
-				get { return new Vector2Df(M11, M22); }
+				readonly get { return new Vector2Df(M11, M22); }
 				set { M11 = value.X; M22 = value.Y; }
 			}
 
@@ -881,7 +881,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object obj)
 			{
 				if (!(obj is Matrix3Dx2f))
 				{
@@ -901,7 +901,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="Matrix3Dx2f"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Matrix3Dx2f other)
+			public readonly Boolean Equals(Matrix3Dx2f other)
 			{
 				return Equals(in other);
 			}
@@ -915,7 +915,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="Matrix3Dx2f"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(in Matrix3Dx2f other)
+			public readonly Boolean Equals(in Matrix3Dx2f other)
 			{
 				return XMath.Approximately(other.M11, M11) &&
 					XMath.Approximately(other.M12, M12) &&
@@ -933,7 +933,7 @@ namespace Lotus
 			/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				unchecked
 				{
@@ -955,7 +955,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(CultureInfo.CurrentCulture, "[M11:{0} M12:{1}] [M21:{2} M22:{3}] [M31:{4} M32:{5}]",
 					M11, M12, M21, M22, M31, M32);
@@ -970,7 +970,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				if (format == null)
 				{
@@ -992,7 +992,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public String ToString(IFormatProvider formatProvider)
+			public readonly String ToString(IFormatProvider formatProvider)
 			{
 				return String.Format(formatProvider, "[M11:{0} M12:{1}] [M21:{2} M22:{3}] [M31:{4} M32:{5}]",
 					M11.ToString(formatProvider), M12.ToString(formatProvider),
@@ -1010,7 +1010,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public String ToString(String format, IFormatProvider formatProvider)
+			public readonly String ToString(String format, IFormatProvider formatProvider)
 			{
 				if (format == null)
 				{
@@ -1232,7 +1232,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -1271,7 +1271,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 row, Int32 column]
 			{
-				get
+				readonly get
 				{
 					return this[(row * 2) + column];
 				}
@@ -1290,7 +1290,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>A sixteen-element array containing the components of the matrix</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single[] ToArray()
+			public readonly Single[] ToArray()
 			{
 				return new[] { M11, M12, M21, M22, M31, M32 };
 			}
@@ -1301,7 +1301,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Result of the determinant</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Determinant()
+			public readonly Single Determinant()
 			{
 				return (M11 * M22) - (M12 * M21);
 			}

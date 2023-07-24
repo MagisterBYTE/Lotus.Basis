@@ -57,7 +57,7 @@ namespace Lotus
 			/// <summary>
 			/// Центр сегмента
 			/// </summary>
-			public Vector3Df Location
+			public readonly Vector3Df Location
 			{
 				get { return (Start + End) / 2; }
 			}
@@ -65,7 +65,7 @@ namespace Lotus
 			/// <summary>
 			/// Направление сегмента
 			/// </summary>
-			public Vector3Df Direction
+			public readonly Vector3Df Direction
 			{
 				get { return End - Start; }
 			}
@@ -73,7 +73,7 @@ namespace Lotus
 			/// <summary>
 			/// Единичное направление сегмента
 			/// </summary>
-			public Vector3Df DirectionUnit
+			public readonly Vector3Df DirectionUnit
 			{
 				get { return (End - Start).Normalized; }
 			}
@@ -129,9 +129,9 @@ namespace Lotus
 			public Segment3Df(UnityEngine.Ray ray, Single length)
 			{
 				Start = new Vector3Df(ray.origin.x, ray.origin.y, ray.origin.z);
-				End = new Vector3Df(ray.origin.x + ray.direction.x * length, 
-					ray.origin.y + ray.direction.y * length,
-					ray.origin.z + ray.direction.z * length);
+				End = new Vector3Df(ray.origin.x + (ray.direction.x * length), 
+					ray.origin.y + (ray.direction.y * length),
+					ray.origin.z + (ray.direction.z * length));
 			}
 #endif
 			#endregion
@@ -144,13 +144,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Segment3Df) == obj.GetType())
+					if (obj is Segment3Df segment)
 					{
-						var segment = (Segment3Df)obj;
 						return Equals(segment);
 					}
 				}
@@ -164,7 +163,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый сегмент</param>
 			/// <returns>Статус равенства сегментов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Segment3Df other)
+			public readonly Boolean Equals(Segment3Df other)
 			{
 				return this == other;
 			}
@@ -176,7 +175,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый сегмент</param>
 			/// <returns>Статус сравнения сегментов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Segment3Df other)
+			public readonly Int32 CompareTo(Segment3Df other)
 			{
 				if (Start > other.Start)
 				{
@@ -201,7 +200,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код сегмента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Start.GetHashCode() ^ End.GetHashCode();
 			}
@@ -212,7 +211,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия сегмента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -223,7 +222,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление сегмента с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Start.X, Start.Y, Start.Z, End.X, End.Y, End.Z);
 			}
@@ -235,7 +234,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление сегмента с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Start = " + Start.ToString(format) + "; End = " + End.ToString(format);
 			}
@@ -293,7 +292,7 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(in Vector3Df point)
+			public readonly Boolean Contains(in Vector3Df point)
 			{
 				return XIntersect3D.PointSegment(in point, in Start, in End);
 			}

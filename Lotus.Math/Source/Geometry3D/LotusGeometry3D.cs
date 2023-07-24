@@ -88,14 +88,14 @@ namespace Lotus
 			/// <param name="axis">Ось проекции</param>
 			/// <returns>Угол в градусах</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single AngleAroundAxis(in UnityEngine.Vector3 dir_a, in UnityEngine.Vector3 dir_b, in UnityEngine.Vector3 axis)
+			public static Single AngleAroundAxis(UnityEngine.Vector3 dir_a, UnityEngine.Vector3 dir_b, in UnityEngine.Vector3 axis)
 			{
 				// TODO Project A and B onto the plane orthogonal target axis
 				dir_a = dir_a - UnityEngine.Vector3.Project(dir_a, axis);
 				dir_b = dir_b - UnityEngine.Vector3.Project(dir_b, axis);
 
 				// Find (positive) angle between A and B
-				Single angle = UnityEngine.Vector3.Angle(dir_a, dir_b);
+				var angle = UnityEngine.Vector3.Angle(dir_a, dir_b);
 
 				// Return angle multiplied with 1 or -1
 				return angle * (UnityEngine.Vector3.Dot(axis, UnityEngine.Vector3.Cross(dir_a, dir_b)) < 0 ? -1 : 1);
@@ -117,10 +117,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static UnityEngine.Vector3 RotationVectorXZ(Single radius, Single angle)
 			{
-				Single angle_in_radians = angle * XMath.DegreeToRadian_f;
-				Single x = radius * XMath.Cos(angle_in_radians);
-				Single y = radius * XMath.Sin(angle_in_radians);
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(x, 0, y);
+				Single angle_in_radians = angle * XMath.DegreeToRadian_F;
+				var x = radius * XMath.Cos(angle_in_radians);
+				var y = radius * XMath.Sin(angle_in_radians);
+				var result = new UnityEngine.Vector3(x, 0, y);
 
 				return (result);
 			}
@@ -141,10 +141,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static UnityEngine.Vector3 RotationVectorZY(Single radius, Single angle)
 			{
-				Single angle_in_radians = angle * XMath.DegreeToRadian_f;
-				Single x = radius * XMath.Cos(angle_in_radians);
-				Single y = radius * XMath.Sin(angle_in_radians);
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(0, y, x);
+				Single angle_in_radians = angle * XMath.DegreeToRadian_F;
+				var x = radius * XMath.Cos(angle_in_radians);
+				var y = radius * XMath.Sin(angle_in_radians);
+				var result = new UnityEngine.Vector3(0, y, x);
 
 				return (result);
 			}
@@ -165,11 +165,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static UnityEngine.Vector3 RotationVectorXY(Single radius, Single angle)
 			{
-				Single angle_in_radians = angle * XMath.DegreeToRadian_f;
-				Single x = radius * XMath.Cos(angle_in_radians);
-				Single y = radius * XMath.Sin(angle_in_radians);
+				Single angle_in_radians = angle * XMath.DegreeToRadian_F;
+				var x = radius * XMath.Cos(angle_in_radians);
+				var y = radius * XMath.Sin(angle_in_radians);
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(x, y, 0);
+				var result = new UnityEngine.Vector3(x, y, 0);
 
 				return (result);
 			}

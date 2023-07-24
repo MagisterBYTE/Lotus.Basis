@@ -59,9 +59,9 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public DequeArray()
-				: base(INITMAXCOUNT)
+				: base(INIT_MAX_COUNT)
 			{
-				mStartOffset = INITMAXCOUNT / 2;
+				mStartOffset = INIT_MAX_COUNT / 2;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

@@ -140,7 +140,7 @@ namespace Lotus
 			/// </summary>
 			public Double Right
 			{
-				get { return X + Width; }
+				readonly get { return X + Width; }
 				set
 				{
 					if (value > X)
@@ -155,7 +155,7 @@ namespace Lotus
 			/// </summary>
 			public Double Bottom
 			{
-				get { return Y + Height; }
+				readonly get { return Y + Height; }
 				set
 				{
 					if (value > Y)
@@ -168,7 +168,7 @@ namespace Lotus
 			/// <summary>
 			/// Статус пустого прямоугольника
 			/// </summary>
-			public Boolean IsEmpty
+			public readonly Boolean IsEmpty
 			{
 				get { return Width == 0 && Height == 0; }
 			}
@@ -176,7 +176,7 @@ namespace Lotus
 			/// <summary>
 			/// Площадь
 			/// </summary>
-			public Double Area
+			public readonly Double Area
 			{
 				get { return Width * Height; }
 			}
@@ -184,7 +184,7 @@ namespace Lotus
 			/// <summary>
 			/// Диагональ
 			/// </summary>
-			public Double Diagonal
+			public readonly Double Diagonal
 			{
 				get { return Math.Sqrt((Width * Width) + (Height * Height)); }
 			}
@@ -192,7 +192,7 @@ namespace Lotus
 			/// <summary>
 			/// Верхняя левая точка прямоугольника
 			/// </summary>
-			public Vector2D PointTopLeft
+			public readonly Vector2D PointTopLeft
 			{
 				get { return new Vector2D(X, Y); }
 			}
@@ -200,7 +200,7 @@ namespace Lotus
 			/// <summary>
 			/// Верхняя правая точка прямоугольника
 			/// </summary>
-			public Vector2D PointTopRight
+			public readonly Vector2D PointTopRight
 			{
 				get { return new Vector2D(X + Width, Y); }
 			}
@@ -208,7 +208,7 @@ namespace Lotus
 			/// <summary>
 			/// Нижняя левая точка прямоугольника
 			/// </summary>
-			public Vector2D PointBottomLeft
+			public readonly Vector2D PointBottomLeft
 			{
 				get { return new Vector2D(X, Y + Height); }
 			}
@@ -216,7 +216,7 @@ namespace Lotus
 			/// <summary>
 			/// Нижняя правая точка прямоугольника
 			/// </summary>
-			public Vector2D PointBottomRight
+			public readonly Vector2D PointBottomRight
 			{
 				get { return new Vector2D(X + Width, Y + Height); }
 			}
@@ -308,13 +308,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Rect2D) == obj.GetType())
+					if (obj is Rect2D rect)
 					{
-						var rect = (Rect2D)obj;
 						return Equals(rect);
 					}
 				}
@@ -328,7 +327,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый прямоугольник</param>
 			/// <returns>Статус равенства прямоугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Rect2D other)
+			public readonly Boolean Equals(Rect2D other)
 			{
 				return this == other;
 			}
@@ -340,7 +339,7 @@ namespace Lotus
 			/// <param name="other">Прямоугольник</param>
 			/// <returns>Статус сравнения прямоугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Rect2D other)
+			public readonly Int32 CompareTo(Rect2D other)
 			{
 				if (X > other.X)
 				{
@@ -365,7 +364,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код прямоугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode();
 			}
@@ -376,7 +375,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия прямоугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -387,7 +386,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление прямоугольника с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, X, Y, Width, Height);
 			}
@@ -399,7 +398,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление прямоугольника с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "X = " + X.ToString(format) + "; Y = " + Y.ToString(format);
 			}
@@ -535,7 +534,7 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(in Vector2D point)
+			public readonly Boolean Contains(in Vector2D point)
 			{
 				return X <= point.X && X + Width >= point.X && Y <= point.Y && Y + Height >= point.Y;
 			}
@@ -658,7 +657,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1};{2};{3}", X, Y, Width, Height);
 			}
@@ -818,7 +817,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df Center
 			{
-				get { return new Vector2Df(X + (Width / 2), Y + (Height / 2)); }
+				readonly get { return new Vector2Df(X + (Width / 2), Y + (Height / 2)); }
 				set
 				{
 					X = value.X - (Width / 2);
@@ -831,7 +830,7 @@ namespace Lotus
 			/// </summary>
 			public Single Right
 			{
-				get { return X + Width; }
+				readonly get { return X + Width; }
 				set
 				{
 					if (value > X)
@@ -846,7 +845,7 @@ namespace Lotus
 			/// </summary>
 			public Single Bottom
 			{
-				get { return Y + Height; }
+				readonly get { return Y + Height; }
 				set
 				{
 					if (value > Y)
@@ -859,7 +858,7 @@ namespace Lotus
 			/// <summary>
 			/// Статус пустого прямоугольника
 			/// </summary>
-			public Boolean IsEmpty
+			public readonly Boolean IsEmpty
 			{
 				get { return Width == 0 && Height == 0; }
 			}
@@ -867,7 +866,7 @@ namespace Lotus
 			/// <summary>
 			/// Площадь прямоугольника
 			/// </summary>
-			public Single Area
+			public readonly Single Area
 			{
 				get { return Width * Height; }
 			}
@@ -875,7 +874,7 @@ namespace Lotus
 			/// <summary>
 			/// Диагональ прямоугольника
 			/// </summary>
-			public Single Diagonal
+			public readonly Single Diagonal
 			{
 				get { return (Single)Math.Sqrt((Width * Width) + (Height * Height)); }
 			}
@@ -885,7 +884,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df PointTopLeft
 			{
-				get { return new Vector2Df(X, Y); }
+				readonly get { return new Vector2Df(X, Y); }
 				set
 				{
 					X = value.X;
@@ -898,7 +897,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df PointTopRight
 			{
-				get { return new Vector2Df(X + Width, Y); }
+				readonly get { return new Vector2Df(X + Width, Y); }
 				set
 				{
 					Width = value.X - X;
@@ -911,7 +910,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df PointBottomLeft
 			{
-				get { return new Vector2Df(X, Y + Height); }
+				readonly get { return new Vector2Df(X, Y + Height); }
 				set
 				{
 					X = value.X;
@@ -924,7 +923,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df PointBottomRight
 			{
-				get { return new Vector2Df(X + Width, Y + Height); }
+				readonly get { return new Vector2Df(X + Width, Y + Height); }
 				set
 				{
 					Width = value.X - X;
@@ -935,7 +934,7 @@ namespace Lotus
 			/// <summary>
 			/// Верхняя левая точка прямоугольника
 			/// </summary>
-			public Vector2Df PointTopLeftRightMiddle
+			public readonly Vector2Df PointTopLeftRightMiddle
 			{
 				get { return new Vector2Df(X + (Width / 2), Y); }
 			}
@@ -943,7 +942,7 @@ namespace Lotus
 			/// <summary>
 			/// Верхняя левая точка прямоугольника
 			/// </summary>
-			public Vector2Df PointBottomLeftRightMiddle
+			public readonly Vector2Df PointBottomLeftRightMiddle
 			{
 				get { return new Vector2Df(X + (Width / 2), Y + Height); }
 			}
@@ -951,7 +950,7 @@ namespace Lotus
 			/// <summary>
 			/// Верхняя левая точка прямоугольника
 			/// </summary>
-			public Vector2Df PointLeftTopBottomMiddle
+			public readonly Vector2Df PointLeftTopBottomMiddle
 			{
 				get { return new Vector2Df(X, Y + (Height / 2)); }
 			}
@@ -959,7 +958,7 @@ namespace Lotus
 			/// <summary>
 			/// Верхняя левая точка прямоугольника
 			/// </summary>
-			public Vector2Df PointRightTopBottomMiddle
+			public readonly Vector2Df PointRightTopBottomMiddle
 			{
 				get { return new Vector2Df(X + Width, Y + (Height / 2)); }
 			}
@@ -1096,13 +1095,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Rect2Df) == obj.GetType())
+					if (obj is Rect2Df rect)
 					{
-						var rect = (Rect2Df)obj;
 						return Equals(rect);
 					}
 				}
@@ -1116,7 +1114,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый прямоугольник</param>
 			/// <returns>Статус равенства прямоугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Rect2Df other)
+			public readonly Boolean Equals(Rect2Df other)
 			{
 				return this == other;
 			}
@@ -1128,7 +1126,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый прямоугольник</param>
 			/// <returns>Статус сравнения прямоугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Rect2Df other)
+			public readonly Int32 CompareTo(Rect2Df other)
 			{
 				if (X > other.X)
 				{
@@ -1153,7 +1151,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код прямоугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode();
 			}
@@ -1164,7 +1162,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия прямоугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -1175,7 +1173,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление прямоугольника с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, X, Y, Width, Height);
 			}
@@ -1187,7 +1185,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление прямоугольника с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "X = " + X.ToString(format) + "; Y = " + Y.ToString(format);
 			}
@@ -1360,7 +1358,7 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(in Vector2Df point)
+			public readonly Boolean Contains(in Vector2Df point)
 			{
 				return X <= point.X && X + Width >= point.X && Y <= point.Y && Y + Height >= point.Y;
 			}
@@ -1448,7 +1446,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="rect">Прямоугольник</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SetBoundsRect(Rect2Df rect)
+			public readonly void SetBoundsRect(Rect2Df rect)
 			{
 				//UnionRect(in this, in rect, out this);
 			}
@@ -1507,7 +1505,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1};{2};{3}", X, Y, Width, Height);
 			}

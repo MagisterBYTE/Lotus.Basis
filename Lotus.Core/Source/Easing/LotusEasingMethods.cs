@@ -1034,7 +1034,7 @@ namespace Lotus
 			{
 				time = 1.0f - ((1 - time) * (1 - time));
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -1052,7 +1052,7 @@ namespace Lotus
 			{
 				time = 1.0f - ((1 - time) * (1 - time));
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -1070,7 +1070,7 @@ namespace Lotus
 			{
 				time = 1.0f - ((1 - time) * (1 - time));
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -1089,7 +1089,7 @@ namespace Lotus
 			{
 				time = 1.0f - ((1 - time) * (1 - time));
 
-				UnityEngine.Vector3 result =  new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result =  new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -1169,7 +1169,7 @@ namespace Lotus
 					time = ((1.0f - ((1 - time) * (1 - time))) / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -1197,7 +1197,7 @@ namespace Lotus
 					time = ((1.0f - ((1 - time) * (1 - time))) / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -1225,7 +1225,7 @@ namespace Lotus
 					time = ((1.0f - ((1 - time) * (1 - time))) / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -1254,7 +1254,7 @@ namespace Lotus
 					time = ((1.0f - ((1 - time) * (1 - time))) / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -1412,7 +1412,7 @@ namespace Lotus
 			{
 				time = 1.0f - ((1 - time) * (1 - time) * (1 - time));
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -1430,7 +1430,7 @@ namespace Lotus
 			{
 				time = 1.0f - ((1 - time) * (1 - time) * (1 - time));
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -1448,7 +1448,7 @@ namespace Lotus
 			{
 				time = 1.0f - ((1 - time) * (1 - time) * (1 - time));
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -1467,7 +1467,7 @@ namespace Lotus
 			{
 				time = 1.0f - ((1 - time) * (1 - time) * (1 - time));
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -1549,7 +1549,7 @@ namespace Lotus
 					time = ((1.0f - ((1 - time) * (1 - time) * (1 - time))) / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -1577,7 +1577,7 @@ namespace Lotus
 					time = ((1.0f - ((1 - time) * (1 - time) * (1 - time))) / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -1605,7 +1605,7 @@ namespace Lotus
 					time = ((1.0f - ((1 - time) * (1 - time) * (1 - time))) / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -1634,7 +1634,7 @@ namespace Lotus
 					time = ((1.0f - ((1 - time) * (1 - time) * (1 - time))) / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -1800,7 +1800,7 @@ namespace Lotus
 				time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
 				time = 1.0f - time;
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -1820,7 +1820,7 @@ namespace Lotus
 				time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
 				time = 1.0f - time;
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -1840,7 +1840,7 @@ namespace Lotus
 				time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
 				time = 1.0f - time;
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -1861,7 +1861,7 @@ namespace Lotus
 				time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
 				time = 1.0f - time;
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -1942,7 +1942,7 @@ namespace Lotus
 					time = 0.5f * ((time * time * (((CoefficientBack1 + 1) * time) + CoefficientBack1)) + 2);
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -1970,7 +1970,7 @@ namespace Lotus
 					time = 0.5f * ((time * time * (((CoefficientBack1 + 1) * time) + CoefficientBack1)) + 2);
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -1998,7 +1998,7 @@ namespace Lotus
 					time = 0.5f * ((time * time * (((CoefficientBack1 + 1) * time) + CoefficientBack1)) + 2);
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -2027,7 +2027,7 @@ namespace Lotus
 					time = 0.5f * ((time * time * (((CoefficientBack1 + 1) * time) + CoefficientBack1)) + 2);
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -2194,7 +2194,7 @@ namespace Lotus
 			{
 				time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -2212,7 +2212,7 @@ namespace Lotus
 			{
 				time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -2230,7 +2230,7 @@ namespace Lotus
 			{
 				time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -2249,7 +2249,7 @@ namespace Lotus
 			{
 				time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -2339,7 +2339,7 @@ namespace Lotus
 					time = 0.5f * (-UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 2);
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -2367,7 +2367,7 @@ namespace Lotus
 					time = 0.5f * (-UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 2);
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -2395,7 +2395,7 @@ namespace Lotus
 					time = 0.5f * (-UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 2);
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -2424,7 +2424,7 @@ namespace Lotus
 					time = 0.5f * (-UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 2);
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -2591,7 +2591,7 @@ namespace Lotus
 			{
 				time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -2609,7 +2609,7 @@ namespace Lotus
 			{
 				time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -2627,7 +2627,7 @@ namespace Lotus
 			{
 				time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -2646,7 +2646,7 @@ namespace Lotus
 			{
 				time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -2702,7 +2702,7 @@ namespace Lotus
 			{
 				time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -2721,7 +2721,7 @@ namespace Lotus
 			{
 				time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -2740,7 +2740,7 @@ namespace Lotus
 			{
 				time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -2760,7 +2760,7 @@ namespace Lotus
 			{
 				time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -2939,7 +2939,7 @@ namespace Lotus
 			{
 				time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -2957,7 +2957,7 @@ namespace Lotus
 			{
 				time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -2975,7 +2975,7 @@ namespace Lotus
 			{
 				time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -2994,7 +2994,7 @@ namespace Lotus
 			{
 				time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -3092,7 +3092,7 @@ namespace Lotus
 					time = (time / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -3123,7 +3123,7 @@ namespace Lotus
 					time = (time / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -3154,7 +3154,7 @@ namespace Lotus
 					time = (time / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -3186,7 +3186,7 @@ namespace Lotus
 					time = (time / 2) + 0.5f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -3523,7 +3523,7 @@ namespace Lotus
 					time = (7.5625f * time * time) + .984375f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -3559,7 +3559,7 @@ namespace Lotus
 					time = (7.5625f * time * time) + .984375f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 				return result;
 			}
@@ -3595,7 +3595,7 @@ namespace Lotus
 					time = (7.5625f * time * time) + .984375f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -3632,7 +3632,7 @@ namespace Lotus
 					time = (7.5625f * time * time) + .984375f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 				return result;
@@ -3842,7 +3842,7 @@ namespace Lotus
 					time = time + 0.5f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -3913,7 +3913,7 @@ namespace Lotus
 					time = time + 0.5f;
 				}
 
-				UnityEngine.Vector2 result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector2(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time));
 
 				return result;
@@ -3984,7 +3984,7 @@ namespace Lotus
 					time = time + 0.5f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 
@@ -4056,7 +4056,7 @@ namespace Lotus
 					time = time + 0.5f;
 				}
 
-				UnityEngine.Vector3 result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
+				var result = new UnityEngine.Vector3(start.x + ((end.x - start.x) * time),
 											start.y + ((end.y - start.y) * time),
 											start.z + ((end.z - start.z) * time));
 

@@ -991,7 +991,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 					case nameof(UnityEngine.Color):
 						{
-							UnityEngine.Color v = (UnityEngine.Color)value;
+							var v = (UnityEngine.Color)value;
 							mNumberData.x = v.r;
 							mNumberData.y = v.g;
 							mNumberData.z = v.b;
@@ -1002,7 +1002,7 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.Vector2):
 						{
-							UnityEngine.Vector2 v = (UnityEngine.Vector2)value;
+							var v = (UnityEngine.Vector2)value;
 							mNumberData = v;
 							mValueType = TValueType.Vector2D;
 							if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
@@ -1010,7 +1010,7 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.Vector3):
 						{
-							UnityEngine.Vector3 v = (UnityEngine.Vector3)value;
+							var v = (UnityEngine.Vector3)value;
 							mNumberData = v;
 							mValueType = TValueType.Vector3D;
 							if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector3DValue, nameof(Vector3DValue));
@@ -1018,7 +1018,7 @@ namespace Lotus
 						break;
 					case nameof(UnityEngine.Vector4):
 						{
-							UnityEngine.Vector4 v = (UnityEngine.Vector4)value;
+							var v = (UnityEngine.Vector4)value;
 							mNumberData = v;
 							mValueType = TValueType.Vector4D;
 							if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector4DValue, nameof(Vector4DValue));
@@ -1040,7 +1040,7 @@ namespace Lotus
 							// Проверка на тип Unity
 							if (type == typeof(UnityEngine.GameObject))
 							{
-								UnityEngine.GameObject game_object = value as UnityEngine.GameObject;
+								var game_object = value as UnityEngine.GameObject;
 								mUnityData = value as UnityEngine.GameObject;
 								if (game_object.scene.name == null)
 								{

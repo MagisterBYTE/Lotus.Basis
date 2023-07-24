@@ -230,37 +230,8 @@ namespace Lotus
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Позиция точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df CalculatePoint(Single time, Vector3Df start, Vector3Df handlePoint1, Vector3Df handlePoint2, Vector3Df end)
-			{
-				var u = 1 - time;
-				var tt = time * time;
-				var uu = u * u;
-				var uuu = uu * u;
-				var ttt = tt * time;
-
-				Vector3Df point = uuu * start;
-
-				point += 3 * uu * time * handlePoint1;
-				point += 3 * u * tt * handlePoint2;
-				point += ttt * end;
-
-				return point;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Вычисление точки на кривой Безье представленной с помощью четырех контрольных точек
-			/// </summary>
-			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
-			/// "правой" конечной точки кривой</param>
-			/// <param name="start">Начальная точка</param>
-			/// <param name="handlePoint1">Первая управляющая точка</param>
-			/// <param name="handlePoint2">Вторая управляющая точка</param>
-			/// <param name="end">Конечная точка</param>
-			/// <returns>Позиция точки на кривой Безье</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df CalculatePoint(Single time, ref Vector3Df start, ref Vector3Df handlePoint1,
-				ref Vector3Df handlePoint2, ref Vector3Df end)
+			public static Vector3Df CalculatePoint(Single time, in Vector3Df start, in Vector3Df handlePoint1, 
+				in Vector3Df handlePoint2, in Vector3Df end)
 			{
 				var u = 1 - time;
 				var tt = time * time;
@@ -293,38 +264,14 @@ namespace Lotus
 			/// <param name="end">Конечная точка</param>
 			/// <returns>Первая производная точки на кривой Безье</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df CalculateFirstDerivative(Single time, Vector3Df start, Vector3Df handlePoint1, Vector3Df handlePoint2, Vector3Df end)
+			public static Vector3Df CalculateFirstDerivative(Single time, in Vector3Df start, in Vector3Df handlePoint1, 
+				in Vector3Df handlePoint2, in Vector3Df end)
 			{
 				var u = 1 - time;
 				return (3f * u * u * (handlePoint1 - start)) +
 				       (6f * u * time * (handlePoint2 - handlePoint1)) +
 				       (3f * time * time * (end - handlePoint2));
 
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Вычисление первой производной точки на кривой Безье представленной с помощью четырех контрольных точек
-			/// </summary>
-			/// <remarks>
-			/// Первая производная показывает скорость изменения функции в данной точки.
-			/// Физическим смысл производной - скорость в данной точке 
-			/// </remarks>
-			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
-			/// "правой" конечной точки кривой</param>
-			/// <param name="start">Начальная точка</param>
-			/// <param name="handlePoint1">Первая управляющая точка</param>
-			/// <param name="handlePoint2">Вторая управляющая точка</param>
-			/// <param name="end">Конечная точка</param>
-			/// <returns>Первая производная точки на кривой Безье</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df CalculateFirstDerivative(Single time, ref Vector3Df start, ref Vector3Df handlePoint1,
-				ref Vector3Df handlePoint2, ref Vector3Df end)
-			{
-				var u = 1 - time;
-				return (3f * u * u * (handlePoint1 - start)) +
-				       (6f * u * time * (handlePoint2 - handlePoint1)) +
-				       (3f * time * time * (end - handlePoint2));
 			}
 			#endregion
 
@@ -573,10 +520,10 @@ namespace Lotus
 				}
 
 				Vector3Df point = CBezierCubic3D.CalculatePoint(time,
-					ref mControlPoints[index_curve],
-					ref mControlPoints[index_curve + 1],
-					ref mControlPoints[index_curve + 2],
-					ref mControlPoints[index_curve + 3]);
+					in mControlPoints[index_curve],
+					in mControlPoints[index_curve + 1],
+					in mControlPoints[index_curve + 2],
+					in mControlPoints[index_curve + 3]);
 
 				return point;
 			}
@@ -870,10 +817,10 @@ namespace Lotus
 				var node_index = curveIndex * 3;
 
 				return CBezierCubic3D.CalculatePoint(time,
-					ref mControlPoints[node_index],
-					ref mControlPoints[node_index + 1],
-					ref mControlPoints[node_index + 2],
-					ref mControlPoints[node_index + 3]);
+					in mControlPoints[node_index],
+					in mControlPoints[node_index + 1],
+					in mControlPoints[node_index + 2],
+					in mControlPoints[node_index + 3]);
 			}
 
 			//---------------------------------------------------------------------------------------------------------

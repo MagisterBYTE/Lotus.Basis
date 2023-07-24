@@ -39,7 +39,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public StackArray()
-				: base(INITMAXCOUNT)
+				: base(INIT_MAX_COUNT)
 			{
 			}
 

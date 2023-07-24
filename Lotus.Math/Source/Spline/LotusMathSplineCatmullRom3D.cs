@@ -44,33 +44,7 @@ namespace Lotus
 			/// <param name="p3">Четвертая контрольная точка</param>
 			/// <returns>Позиция точки на сплайне Catmull-Rom</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df CalculatePoint(Single time, Vector3Df p0, Vector3Df p1, Vector3Df p2, Vector3Df p3)
-			{
-				//The coefficients of the cubic polynomial (except the 0.5f * which I added later for performance)
-				Vector3Df a = 2f * p1;
-				Vector3Df b = p2 - p0;
-				Vector3Df c = (2f * p0) - (5f * p1) + (4f * p2) - p3;
-				Vector3Df d = -p0 + (3f * p1) - (3f * p2) + p3;
-
-				//The cubic polynomial: a + b * t + c * t^2 + d * t^3
-				Vector3Df point = 0.5f * (a + (b * time) + (c * time * time) + (d * time * time * time));
-
-				return point;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Вычисление точки на сплайне Catmull-Rom представленной с помощью четырех контрольных точек
-			/// </summary>
-			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
-			/// "правой" конечной точки кривой</param>
-			/// <param name="p0">Первая контрольная точка</param>
-			/// <param name="p1">Вторая контрольная точка</param>
-			/// <param name="p2">Третья контрольная точка</param>
-			/// <param name="p3">Четвертая контрольная точка</param>
-			/// <returns>Позиция точки на сплайне Catmull-Rom</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df CalculatePoint(Single time, ref Vector3Df p0, ref Vector3Df p1, ref Vector3Df p2, ref Vector3Df p3)
+			public static Vector3Df CalculatePoint(Single time, in Vector3Df p0, in Vector3Df p1, in Vector3Df p2, in Vector3Df p3)
 			{
 				//The coefficients of the cubic polynomial (except the 0.5f * which I added later for performance)
 				Vector3Df a = 2f * p1;
@@ -100,31 +74,7 @@ namespace Lotus
 			/// <param name="p3">Четвертая контрольная точка</param>
 			/// <returns>Первая производная  на сплайне Catmull-Rom</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df CalculateFirstDerivative(Single time, Vector3Df p0, Vector3Df p1, Vector3Df p2, Vector3Df p3)
-			{
-				Vector3Df a = ((p1 - p2) * 1.5f) + ((p3 - p0) * 0.5f);
-				Vector3Df b = (p2 * 2.0f) - (p1 * 2.5f) - (p3 * 0.5f) + p0;
-				Vector3Df c = (p2 - p0) * 0.5f;
-				return (3 * a * time) + (2 * b * time) + c;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Вычисление первой производной точки на сплайне Catmull-Rom представленной с помощью четырех контрольных точек
-			/// </summary>
-			/// <remarks>
-			/// Первая производная показывает скорость изменения функции в данной точки.
-			/// Физическим смысл производной - скорость в данной точке 
-			/// </remarks>
-			/// <param name="time">Положение точки от 0 до 1, где 0 соответствует крайней "левой" точки, 1 соответствует крайне
-			/// "правой" конечной точки кривой</param>
-			/// <param name="p0">Первая контрольная точка</param>
-			/// <param name="p1">Вторая контрольная точка</param>
-			/// <param name="p2">Третья контрольная точка</param>
-			/// <param name="p3">Четвертая контрольная точка</param>
-			/// <returns>Первая производная  на сплайне Catmull-Rom</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Vector3Df CalculateFirstDerivative(Single time, ref Vector3Df p0, ref Vector3Df p1, ref Vector3Df p2, ref Vector3Df p3)
+			public static Vector3Df CalculateFirstDerivative(Single time, in Vector3Df p0, in Vector3Df p1, in Vector3Df p2, in Vector3Df p3)
 			{
 				Vector3Df a = ((p1 - p2) * 1.5f) + ((p3 - p0) * 0.5f);
 				Vector3Df b = (p2 * 2.0f) - (p1 * 2.5f) - (p3 * 0.5f) + p0;
@@ -245,11 +195,11 @@ namespace Lotus
 					var ip_2 = ClampPosition(index_curve + 1);
 					var ip_3 = ClampPosition(index_curve + 2);
 
-					Vector3Df point = CalculatePoint(time, 
-						ref mControlPoints[ip_0],
-						ref mControlPoints[ip_1], 
-						ref mControlPoints[ip_2], 
-						ref mControlPoints[ip_3]);
+					Vector3Df point = CalculatePoint(time,
+						in mControlPoints[ip_0],
+						in mControlPoints[ip_1],
+						in mControlPoints[ip_2],
+						in mControlPoints[ip_3]);
 
 					return point;
 				}
@@ -261,11 +211,11 @@ namespace Lotus
 					var ip_2 = index_curve + 1 > mControlPoints.Length - 1 ? mControlPoints.Length - 1 : index_curve + 1;
 					var ip_3 = index_curve + 2 > mControlPoints.Length - 1 ? mControlPoints.Length - 1 : index_curve + 2;
 
-					Vector3Df point = CalculatePoint(time, 
-						ref mControlPoints[ip_0],
-						ref mControlPoints[ip_1], 
-						ref mControlPoints[ip_2], 
-						ref mControlPoints[ip_3]);
+					Vector3Df point = CalculatePoint(time,
+						in mControlPoints[ip_0],
+						in mControlPoints[ip_1],
+						in mControlPoints[ip_2],
+						in mControlPoints[ip_3]);
 
 					return point;
 				}

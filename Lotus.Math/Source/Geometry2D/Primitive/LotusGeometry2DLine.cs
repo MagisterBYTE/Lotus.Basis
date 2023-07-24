@@ -125,13 +125,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Line2Df) == obj.GetType())
+					if (obj is Line2Df line)
 					{
-						var line = (Line2Df)obj;
 						return Equals(line);
 					}
 				}
@@ -145,7 +144,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая линия</param>
 			/// <returns>Статус равенства линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Line2Df other)
+			public readonly Boolean Equals(Line2Df other)
 			{
 				return this == other;
 			}
@@ -157,7 +156,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый линия</param>
 			/// <returns>Статус сравнения линий</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Line2Df other)
+			public readonly Int32 CompareTo(Line2Df other)
 			{
 				if (Position > other.Position)
 				{
@@ -182,7 +181,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код линии</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Position.GetHashCode() ^ Direction.GetHashCode();
 			}
@@ -193,7 +192,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия линии</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -204,7 +203,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление линии с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Position.X, Position.Y, Direction.X, Direction.Y);
 			}
@@ -216,7 +215,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление линии с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Pos = " + Position.ToString(format) + "; Dir = " + Direction.ToString(format);
 			}
@@ -274,7 +273,7 @@ namespace Lotus
 			/// <param name="position">Позиция точки от начала линии</param>
 			/// <returns>Точка на линии</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Df GetPoint(Single position)
+			public readonly Vector2Df GetPoint(Single position)
 			{
 				return Position + (Direction * position);
 			}

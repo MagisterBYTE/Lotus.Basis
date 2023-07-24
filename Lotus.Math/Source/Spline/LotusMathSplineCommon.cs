@@ -15,6 +15,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_2017_1_OR_NEWER
+using UnityEngine;
+#endif
 //=====================================================================================================================
 namespace Lotus
 {
@@ -604,24 +607,24 @@ namespace Lotus
 				}
 				GL.Begin(GL.LINES);
 				{
-					for (Int32 i = 1; i < mDrawingPoints.Count; i++)
+					for (var i = 1; i < mDrawingPoints.Count; i++)
 					{
-						Vector2Df p1 = new Vector2Df(mDrawingPoints[i - 1].x, Screen.height - mDrawingPoints[i - 1].y);
-						Vector2Df p2 = new Vector2Df(mDrawingPoints[i].x, Screen.height - mDrawingPoints[i].y);
+						var p1 = new Vector2Df(mDrawingPoints[i - 1].X, Screen.height - mDrawingPoints[i - 1].Y);
+						var p2 = new Vector2Df(mDrawingPoints[i].X, Screen.height - mDrawingPoints[i].Y);
 
 						if (is_alternative)
 						{
 							if (i % 2 == 0)
 							{
 								GL.Color(color);
-								GL.Vertex(p1);
-								GL.Vertex(p2);
+								GL.Vertex(p1.ToVector3XY());
+								GL.Vertex(p2.ToVector3XY());
 							}
 							else
 							{
 								GL.Color(alternative);
-								GL.Vertex(p1);
-								GL.Vertex(p2);
+								GL.Vertex(p1.ToVector3XY());
+								GL.Vertex(p2.ToVector3XY());
 							}
 						}
 					}

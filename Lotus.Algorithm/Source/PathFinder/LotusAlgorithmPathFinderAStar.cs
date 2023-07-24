@@ -94,7 +94,7 @@ namespace Lotus
 			/// </summary>
 			public Vector2Di Location
 			{
-				get { return new Vector2Di(X, Y); }
+				readonly get { return new Vector2Di(X, Y); }
 				set
 				{
 					X = value.X;
@@ -110,7 +110,7 @@ namespace Lotus
 			/// </remarks>
 			public Vector2Di ParentLocation
 			{
-				get { return new Vector2Di(ParentX, ParentY); }
+				readonly get { return new Vector2Di(ParentX, ParentY); }
 				set
 				{
 					ParentX = value.X;
@@ -164,7 +164,7 @@ namespace Lotus
 			/// <param name="other">Точка пути</param>
 			/// <returns>Статус сравнения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(TPathPointStar other)
+			public readonly Int32 CompareTo(TPathPointStar other)
 			{
 				if (EstimateFullPathLength > other.EstimateFullPathLength)
 				{
@@ -189,7 +189,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return "X = " + X.ToString() + "; Y = " + Y.ToString();
 			}

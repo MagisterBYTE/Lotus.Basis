@@ -103,13 +103,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Sphere3Df) == obj.GetType())
+					if (obj is Sphere3Df sphere)
 					{
-						var sphere = (Sphere3Df)obj;
 						return Equals(sphere);
 					}
 				}
@@ -123,7 +122,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая сфера</param>
 			/// <returns>Статус равенства сфер</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Sphere3Df other)
+			public readonly Boolean Equals(Sphere3Df other)
 			{
 				return this == other;
 			}
@@ -135,7 +134,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый сфера</param>
 			/// <returns>Статус сравнения сфер</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Sphere3Df other)
+			public readonly Int32 CompareTo(Sphere3Df other)
 			{
 				if (Center > other.Center)
 				{
@@ -160,7 +159,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код сферы</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Center.GetHashCode() ^ Radius.GetHashCode();
 			}
@@ -171,7 +170,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия сферы</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -182,7 +181,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление сферы с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Center.X, Center.Y, Radius);
 			}
@@ -194,7 +193,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление сферы с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Center = " + Center.ToString(format) + "; Radius = " + Radius.ToString(format);
 			}
@@ -236,7 +235,7 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(in Vector3Df point)
+			public readonly Boolean Contains(in Vector3Df point)
 			{
 				var d = Vector3Df.Distance(in Center, in point);
 				return Math.Abs(d - Radius) < XGeometry3D.Eplsilon_f;

@@ -48,7 +48,7 @@ namespace Lotus
 			/// <param name="pageSize">Размер страницы</param>
 			/// <returns>Запрос</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static IQueryable<TEntity> Paging<TEntity>(this IQueryable<TEntity> query, Int32 pageNumber, Int32 pageSize)
+			public static IQueryable<TEntity> Paging<TEntity>(this IOrderedQueryable<TEntity> query, Int32 pageNumber, Int32 pageSize)
 			{
 				query = query ?? throw new ArgumentNullException(nameof(query));
 
@@ -82,7 +82,7 @@ namespace Lotus
 			/// <returns>Ответ</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static async Task<ResponsePage<TResponse>> ToResponsePageAsync<TEntity, TResponse>(
-				this IQueryable<TEntity> query, Request request, CancellationToken token = default)
+				this IOrderedQueryable<TEntity> query, Request request, CancellationToken token = default)
 			{
 				return await query.ToResponsePageAsync<TEntity, TResponse>(request.PageInfo.PageNumber, 
 					request.PageInfo.PageSize, token);
@@ -101,7 +101,7 @@ namespace Lotus
 			/// <returns>Ответ</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static async Task<ResponsePage<TResponse>> ToResponsePageAsync<TEntity, TResponse>(
-				this IQueryable<TEntity> query, Int32 page, Int32 pageSize, CancellationToken token = default)
+				this IOrderedQueryable<TEntity> query, Int32 page, Int32 pageSize, CancellationToken token = default)
 			{
 				var totalCount = await query.CountAsync(token);
 				var data = await query.Paging(page, pageSize)

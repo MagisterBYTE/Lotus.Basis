@@ -76,7 +76,7 @@ namespace Lotus
 					rects[0].y = 0;
 					rects[0].width = index_width;
 					rects[0].height = 18;
-					for (Int32 i = 0; i < percents.Length; i++)
+					for (var i = 0; i < percents.Length; i++)
 					{
 						rects[0].x = 0;
 					}

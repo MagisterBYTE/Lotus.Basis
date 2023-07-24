@@ -18,6 +18,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Globalization;
+using Lotus.Core;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -96,7 +97,7 @@ namespace Lotus
 			/// <returns>Запрос</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static IQueryable<TEntity> Sort<TEntity>(this IQueryable<TEntity> query, 
-				params CSortProperty[] properties)
+				params CSortProperty[]? properties)
 			{
 				if (properties == null || properties.Length == 0)
 				{
@@ -152,6 +153,29 @@ namespace Lotus
 				}
 
 				return query;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Сортировка данных запроса по указанным параметрам
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <typeparam name="TKey">Ключ для сортировки по умолчанию</typeparam>
+			/// <param name="query">Запрос</param>
+			/// <param name="properties">Параметры сортировки</param>
+			/// <param name="keySelector">Выражение для ключа</param>
+			/// <returns>Запрос с поддержкой сортировки</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static IOrderedQueryable<TEntity> Sort<TEntity, TKey>(this IQueryable<TEntity> query,
+				CSortProperty[]? properties, Expression<Func<TEntity, TKey>> keySelector)
+			{
+				if (properties == null || properties.Length == 0)
+				{
+					return query.OrderBy(keySelector);
+				}
+
+				var queryOrder = Sort(query, properties) as IOrderedQueryable<TEntity>;
+				return queryOrder;
 			}
 		}
 		//-------------------------------------------------------------------------------------------------------------

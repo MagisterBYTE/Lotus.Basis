@@ -112,13 +112,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Ray3D) == obj.GetType())
+					if (obj is Ray3D ray)
 					{
-						var ray = (Ray3D)obj;
 						return Equals(ray);
 					}
 				}
@@ -132,7 +131,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый луч</param>
 			/// <returns>Статус равенства лучей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Ray3D other)
+			public readonly Boolean Equals(Ray3D other)
 			{
 				return this == other;
 			}
@@ -144,7 +143,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый луч</param>
 			/// <returns>Статус сравнения лучей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Ray3D other)
+			public readonly Int32 CompareTo(Ray3D other)
 			{
 				if (Position > other.Position)
 				{
@@ -169,7 +168,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код луча</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Position.GetHashCode() ^ Direction.GetHashCode();
 			}
@@ -180,7 +179,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия луча</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -191,7 +190,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление луча с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Position.X, Position.Y, Position.Z, 
 					Direction.X, Direction.Y, Direction.Z);
@@ -204,7 +203,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление луча с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Pos = " + Position.ToString(format) + "; Dir = " + Direction.ToString(format);
 			}
@@ -275,7 +274,7 @@ namespace Lotus
 			/// <param name="distance">Дистанция от начала луча</param>
 			/// <returns>Точка на луче</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D GetPoint(Double distance)
+			public readonly Vector3D GetPoint(Double distance)
 			{
 				return Position + (Direction * distance);
 			}
@@ -372,13 +371,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Ray3Df) == obj.GetType())
+					if (obj is Ray3Df ray)
 					{
-						var ray = (Ray3Df)obj;
 						return Equals(ray);
 					}
 				}
@@ -392,7 +390,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый луч</param>
 			/// <returns>Статус равенства лучей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Ray3Df other)
+			public readonly Boolean Equals(Ray3Df other)
 			{
 				return this == other;
 			}
@@ -404,7 +402,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый луч</param>
 			/// <returns>Статус сравнения лучей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Ray3Df other)
+			public readonly Int32 CompareTo(Ray3Df other)
 			{
 				if (Position > other.Position)
 				{
@@ -429,7 +427,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код луча</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Position.GetHashCode() ^ Direction.GetHashCode();
 			}
@@ -440,7 +438,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия луча</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -451,7 +449,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление луча с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Position.X, Position.Y, Position.Z,
 					Direction.X, Direction.Y, Direction.Z);
@@ -464,7 +462,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление луча с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Pos = " + Position.ToString(format) + "; Dir = " + Direction.ToString(format);
 			}
@@ -534,7 +532,7 @@ namespace Lotus
 			/// <param name="distance">Дистанция от начала луча</param>
 			/// <returns>Точка на луче</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df GetPoint(Single distance)
+			public readonly Vector3Df GetPoint(Single distance)
 			{
 				return Position + (Direction * distance);
 			}

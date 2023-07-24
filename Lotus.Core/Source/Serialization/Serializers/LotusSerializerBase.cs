@@ -348,7 +348,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void LinkSerializeReferences()
 			{
-				for (Int32 i = 0; i < mSerializeReferences.Count; i++)
+				for (var i = 0; i < mSerializeReferences.Count; i++)
 				{
 					mSerializeReferences[i].Link();
 				}

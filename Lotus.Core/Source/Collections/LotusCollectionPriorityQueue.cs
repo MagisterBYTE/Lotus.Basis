@@ -38,7 +38,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public PriorityQueue()
-				: base(INITMAXCOUNT)
+				: base(INIT_MAX_COUNT)
 			{
 
 			}
@@ -125,8 +125,8 @@ namespace Lotus
 				do
 				{
 					pn = p;
-					p1 = 2 * p + 1;
-					p2 = 2 * p + 2;
+					p1 = (2 * p) + 1;
+					p2 = (2 * p) + 2;
 					if (Count > p1 && ComparerDefault.Compare(mArrayOfItems[p], mArrayOfItems[p1]) > 0)
 					{
 						p = p1;
@@ -200,8 +200,8 @@ namespace Lotus
 				do
 				{
 					pn = p;
-					p1 = 2 * p + 1;
-					p2 = 2 * p + 2;
+					p1 = (2 * p) + 1;
+					p2 = (2 * p) + 2;
 					if (Count > p1 && ComparerDefault.Compare(mArrayOfItems[p], mArrayOfItems[p1]) > 0)
 					{
 						p = p1;

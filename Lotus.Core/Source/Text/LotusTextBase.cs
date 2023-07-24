@@ -101,7 +101,7 @@ namespace Lotus
 				get
 				{
 					var tabs = GetTabsStart();
-					return mRawString.Length - tabs + tabs * 4;
+					return mRawString.Length - tabs + (tabs * 4);
 				}
 			}
 
@@ -219,9 +219,8 @@ namespace Lotus
 			{
 				if (obj != null)
 				{
-					if (obj is CTextStr)
+					if (obj is CTextStr text_str)
 					{
-						var text_str = (CTextStr)obj;
 						return mRawString == text_str.mRawString;
 					}
 				}

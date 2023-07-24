@@ -103,7 +103,7 @@ namespace Lotus
 			/// </summary>
 			public Double Value
 			{
-				get { return mValue; }
+				readonly get { return mValue; }
 				set
 				{
 					mValue = value;
@@ -113,7 +113,7 @@ namespace Lotus
 			/// <summary>
 			/// Единица измерения
 			/// </summary>
-			public TUnit UnitType
+			public readonly TUnit UnitType
 			{
 				get { return mUnitType; }
 			}
@@ -121,7 +121,7 @@ namespace Lotus
 			/// <summary>
 			/// Единица измерения
 			/// </summary>
-			Enum ILotusUnitValue.UnitType
+			readonly Enum ILotusUnitValue.UnitType
 			{
 				get
 				{
@@ -165,11 +165,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(TUnitValue<TUnit>) == obj.GetType())
+					if (obj is TUnitValue<TUnit>)
 					{
 						var value = (TUnitValue<TUnit>)obj;
 						return Equals(value);
@@ -185,7 +185,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(TUnitValue<TUnit> other)
+			public readonly Boolean Equals(TUnitValue<TUnit> other)
 			{
 				return mValue == other.mValue;
 			}
@@ -197,7 +197,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус сравнения объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(TUnitValue<TUnit> other)
+			public readonly Int32 CompareTo(TUnitValue<TUnit> other)
 			{
 				return mValue.CompareTo(other.mValue);
 			}
@@ -208,7 +208,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return mValue.GetHashCode() ^ base.GetHashCode();
 			}
@@ -219,7 +219,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object Clone()
+			public readonly System.Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -230,7 +230,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return mValue.ToString();
 			}
@@ -297,7 +297,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return mValue.ToString();
 			}

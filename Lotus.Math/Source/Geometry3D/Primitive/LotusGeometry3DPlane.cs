@@ -105,7 +105,7 @@ namespace Lotus
 			/// <param name="point">Точка в пространстве</param>
 			/// <returns>Расстояние до точки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double GetDistanceToPoint(in Vector3D point)
+			public readonly Double GetDistanceToPoint(in Vector3D point)
 			{
 				return (Normal.X * point.X) + (Normal.Y * point.Y) + (Normal.Z * point.Z) + Distance;
 			}
@@ -121,7 +121,7 @@ namespace Lotus
 			/// Если n * p меньше 0, то вектор p находится за плоскостью в отрицательном полупространстве плоскости
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double ComputeVector(in Vector3D vector)
+			public readonly Double ComputeVector(in Vector3D vector)
 			{
 				return (Normal.X * vector.X) + (Normal.Y * vector.Y) + (Normal.Z * vector.Z);
 			}
@@ -137,7 +137,7 @@ namespace Lotus
 			/// Если n * p + d меньше 0, то точка p находится за плоскостью в отрицательном полупространстве плоскости
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double ComputePoint(in Vector3D point)
+			public readonly Double ComputePoint(in Vector3D point)
 			{
 				return (Normal.X * point.X) + (Normal.Y * point.Y) + (Normal.Z * point.Z) + Distance;
 			}
@@ -257,7 +257,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (!(obj is Plane3Df))
 				{
@@ -277,7 +277,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="Plane3Df"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Plane3Df other)
+			public readonly Boolean Equals(Plane3Df other)
 			{
 				return Equals(in other);
 			}
@@ -291,7 +291,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="Plane3Df"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(in Plane3Df value)
+			public readonly Boolean Equals(in Plane3Df value)
 			{
 				return Normal == value.Normal && Distance == value.Distance;
 			}
@@ -304,7 +304,7 @@ namespace Lotus
 			/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				unchecked
 				{
@@ -320,7 +320,7 @@ namespace Lotus
 			/// Текстовое представление плоскости с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(CultureInfo.CurrentCulture, "A:{0} B:{1} C:{2} D:{3}",
 					Normal.X, Normal.Y, Normal.Z, Distance);
@@ -335,7 +335,7 @@ namespace Lotus
 			/// Текстовое представление плоскости с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return String.Format(CultureInfo.CurrentCulture, "A:{0} B:{1} C:{2} D:{3}", Normal.X.ToString(format,
 					CultureInfo.CurrentCulture), Normal.Y.ToString(format, CultureInfo.CurrentCulture),
@@ -351,7 +351,7 @@ namespace Lotus
 			/// Текстовое представление плоскости с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(IFormatProvider formatProvider)
+			public readonly String ToString(IFormatProvider formatProvider)
 			{
 				return String.Format(formatProvider, "A:{0} B:{1} C:{2} D:{3}", Normal.X, Normal.Y, Normal.Z, Distance);
 			}
@@ -366,7 +366,7 @@ namespace Lotus
 			/// Текстовое представление плоскости с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format, IFormatProvider formatProvider)
+			public readonly String ToString(String format, IFormatProvider formatProvider)
 			{
 				return String.Format(formatProvider, "A:{0} B:{1} C:{2} D:{3}", Normal.X.ToString(format, formatProvider),
 					Normal.Y.ToString(format, formatProvider), Normal.Z.ToString(format, formatProvider),
@@ -392,7 +392,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -426,7 +426,7 @@ namespace Lotus
 			/// <param name="point">Точка в пространстве</param>
 			/// <returns>Расстояние до точки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single GetDistanceToPoint(in Vector3Df point)
+			public readonly Single GetDistanceToPoint(in Vector3Df point)
 			{
 				return (Normal.X * point.X) + (Normal.Y * point.Y) + (Normal.Z * point.Z) + Distance;
 			}
@@ -442,7 +442,7 @@ namespace Lotus
 			/// Если n * p меньше 0, то вектор p находится за плоскостью в отрицательном полупространстве плоскости
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single ComputeVector(in Vector3Df vector)
+			public readonly Single ComputeVector(in Vector3Df vector)
 			{
 				return (Normal.X * vector.X) + (Normal.Y * vector.Y) + (Normal.Z * vector.Z);
 			}
@@ -458,7 +458,7 @@ namespace Lotus
 			/// Если n * p + d меньше 0, то точка p находится за плоскостью в отрицательном полупространстве плоскости
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single ComputePoint(in Vector3Df point)
+			public readonly Single ComputePoint(in Vector3Df point)
 			{
 				return (Normal.X * point.X) + (Normal.Y * point.Y) + (Normal.Z * point.Z) + Distance;
 			}

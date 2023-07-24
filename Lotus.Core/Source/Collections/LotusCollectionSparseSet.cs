@@ -33,7 +33,7 @@ namespace Lotus
 			/// <summary>
 			/// Максимальное количество элементов на начальном этапе
 			/// </summary>
-			public const Int32 INITMAXCOUNT = 16;
+			public const Int32 INIT_MAX_COUNT = 16;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
@@ -112,7 +112,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public SparseSet()
-				: this(INITMAXCOUNT)
+				: this(INIT_MAX_COUNT)
 			{
 			}
 
@@ -124,7 +124,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public SparseSet(Int32 capacity)
 			{
-				mMaxCount = capacity > INITMAXCOUNT ? capacity : INITMAXCOUNT;
+				mMaxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
 				mCount = 0;
 				mDenseItems = new Int32[mMaxCount];
 				mSparseItems = new Int32[mMaxCount];

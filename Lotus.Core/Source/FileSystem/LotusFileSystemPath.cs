@@ -193,7 +193,7 @@ namespace Lotus
 			public static String GetFileName(String path, String fileName, String ext)
 			{
 #if UNITY_2017_1_OR_NEWER
-				file_name = file_name.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+				fileName = fileName.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 #else
 				fileName = fileName.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
 #endif
@@ -202,13 +202,13 @@ namespace Lotus
 				if(fileName.IndexOf(Path.DirectorySeparatorChar) > -1 || fileName.IndexOf(Path.AltDirectorySeparatorChar) > -1)
 				{
 #if UNITY_2017_1_OR_NEWER
-					if(file_name.Contains(XCoreSettings.ASSETS_PATH))
+					if(fileName.Contains(XCoreSettings.ASSETS_PATH))
 					{
-						result = file_name;
+						result = fileName;
 					}
 					else
 					{
-						result = Path.Combine(path, file_name);
+						result = Path.Combine(path, fileName);
 					}
 #else
 					result = fileName;

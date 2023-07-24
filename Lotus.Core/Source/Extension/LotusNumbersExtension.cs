@@ -101,7 +101,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static UnityEngine.Color32 ToColor32(this Int32 @this)
 			{
-				UnityEngine.Color32 color_value = new UnityEngine.Color32();
+				var color_value = new UnityEngine.Color32();
 				color_value.r = (Byte)(@this >> 24);
 				color_value.g = (Byte)(@this >> 16);
 				color_value.b = (Byte)(@this >> 8);
@@ -120,7 +120,7 @@ namespace Lotus
 			public static UnityEngine.Color ToColor(this Int32 @this)
 			{
 				const Single factor = 1.0f / 255.0f;
-				UnityEngine.Color color_value = new UnityEngine.Color();
+				var color_value = new UnityEngine.Color();
 				color_value.r = factor * (Byte)(@this >> 24);
 				color_value.g = factor * (Byte)(@this >> 16);
 				color_value.b = factor * (Byte)(@this >> 8);
@@ -142,7 +142,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static UnityEngine.Color32 ToColor32(this UInt32 @this)
 			{
-				UnityEngine.Color32 color_value = new UnityEngine.Color32();
+				var color_value = new UnityEngine.Color32();
 				color_value.r = (Byte)(@this >> 24);
 				color_value.g = (Byte)(@this >> 16);
 				color_value.b = (Byte)(@this >> 8);
@@ -161,7 +161,7 @@ namespace Lotus
 			public static UnityEngine.Color ToColor(this UInt32 @this)
 			{
 				const Single factor = 1.0f / 255.0f;
-				UnityEngine.Color color_value = new UnityEngine.Color();
+				var color_value = new UnityEngine.Color();
 				color_value.r = factor * (Byte)(@this >> 24);
 				color_value.g = factor * (Byte)(@this >> 16);
 				color_value.b = factor * (Byte)(@this >> 8);
@@ -226,7 +226,7 @@ namespace Lotus
 						do
 						{
 							count--;
-							FloatToStringBuffer.Append((char)(v1 % 10 + '0'));
+							FloatToStringBuffer.Append((char)((v1 % 10) + '0'));
 							v1 /= 10;
 						}
 						while (v1 > 0);
@@ -239,7 +239,7 @@ namespace Lotus
 					}
 					do
 					{
-						FloatToStringBuffer.Append((char)(v0 % 10 + '0'));
+						FloatToStringBuffer.Append((char)((v0 % 10) + '0'));
 						v0 /= 10;
 					}
 					while (v0 > 0);
@@ -287,7 +287,7 @@ namespace Lotus
 							{
 								var hour = (Int32)(@this / 3600);
 								var secs = (Int32)(@this % 60);
-								var mins = (Int32)(@this / 60) - hour * 60;
+								var mins = (Int32)(@this / 60) - (hour * 60);
 								return String.Format("{0:00}:{1:00}:{2:00}", hour, mins, secs);
 							}
 							else

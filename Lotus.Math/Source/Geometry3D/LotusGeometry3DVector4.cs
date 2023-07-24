@@ -192,7 +192,7 @@ namespace Lotus
 			/// <summary>
 			/// Квадрат длины вектора
 			/// </summary>
-			public Double SqrLength
+			public readonly Double SqrLength
 			{
 				get { return (X * X) + (Y * Y) + (Z * Z); }
 			}
@@ -200,7 +200,7 @@ namespace Lotus
 			/// <summary>
 			/// Длина вектора
 			/// </summary>
-			public Double Length
+			public readonly Double Length
 			{
 				get { return Math.Sqrt((X * X) + (Y * Y) + (Z * Z)); }
 			}
@@ -208,7 +208,7 @@ namespace Lotus
 			/// <summary>
 			/// Нормализованный вектор
 			/// </summary>
-			public Vector4D Normalized
+			public readonly Vector4D Normalized
 			{
 				get
 				{
@@ -259,13 +259,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Vector4D) == obj.GetType())
+					if (obj is Vector4D vector)
 					{
-						var vector = (Vector4D)obj;
 						return Equals(vector);
 					}
 				}
@@ -279,7 +278,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый вектор</param>
 			/// <returns>Статус равенства векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Vector4D other)
+			public readonly Boolean Equals(Vector4D other)
 			{
 				return this == other;
 			}
@@ -291,7 +290,7 @@ namespace Lotus
 			/// <param name="other">Вектор</param>
 			/// <returns>Статус сравнения векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Vector4D other)
+			public readonly Int32 CompareTo(Vector4D other)
 			{
 				if (X > other.X)
 				{
@@ -323,7 +322,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
 			}
@@ -334,7 +333,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -346,7 +345,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения компонентов вектора</param>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return String.Format(ToStringFormat.Replace("0.00", format), X, Y, Z);
 			}
@@ -357,7 +356,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, X, Y, Z);
 			}
@@ -581,7 +580,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -637,7 +636,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double Distance(in Vector4D vector)
+			public readonly Double Distance(in Vector4D vector)
 			{
 				var x = vector.X - X;
 				var y = vector.Y - Y;
@@ -653,7 +652,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double Dot(in Vector4D vector)
+			public readonly Double Dot(in Vector4D vector)
 			{
 				return (X * vector.X) + (Y * vector.Y) + (Z * vector.Z);
 			}
@@ -736,7 +735,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1};{2};{3}", X, Y, Z, W);
 			}
@@ -912,7 +911,7 @@ namespace Lotus
 			/// <summary>
 			/// Квадрат длины вектора
 			/// </summary>
-			public Single SqrLength
+			public readonly Single SqrLength
 			{
 				get { return (X * X) + (Y * Y) + (Z * Z); }
 			}
@@ -920,7 +919,7 @@ namespace Lotus
 			/// <summary>
 			/// Длина вектора
 			/// </summary>
-			public Single Length
+			public readonly Single Length
 			{
 				get { return (Single)Math.Sqrt((X * X) + (Y * Y) + (Z * Z)); }
 			}
@@ -928,7 +927,7 @@ namespace Lotus
 			/// <summary>
 			/// Нормализованный вектор
 			/// </summary>
-			public Vector4Df Normalized
+			public readonly Vector4Df Normalized
 			{
 				get
 				{
@@ -979,13 +978,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Vector4Df) == obj.GetType())
+					if (obj is Vector4Df vector)
 					{
-						var vector = (Vector4Df)obj;
 						return Equals(vector);
 					}
 				}
@@ -999,7 +997,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый вектор</param>
 			/// <returns>Статус равенства векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Vector4Df other)
+			public readonly Boolean Equals(Vector4Df other)
 			{
 				return this == other;
 			}
@@ -1011,7 +1009,7 @@ namespace Lotus
 			/// <param name="other">Вектор</param>
 			/// <returns>Статус сравнения векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Vector4Df other)
+			public readonly Int32 CompareTo(Vector4Df other)
 			{
 				if (X > other.X)
 				{
@@ -1043,7 +1041,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
 			}
@@ -1054,7 +1052,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -1066,7 +1064,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения компонентов вектора</param>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return String.Format(ToStringFormat.Replace("0.00", format), X, Y, Z);
 			}
@@ -1077,7 +1075,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, X, Y, Z);
 			}
@@ -1301,7 +1299,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -1357,7 +1355,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Distance(in Vector4Df vector)
+			public readonly Single Distance(in Vector4Df vector)
 			{
 				var x = vector.X - X;
 				var y = vector.Y - Y;
@@ -1373,7 +1371,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Dot(in Vector4Df vector)
+			public readonly Single Dot(in Vector4Df vector)
 			{
 				return (X * vector.X) + (Y * vector.Y) + (Z * vector.Z);
 			}
@@ -1456,7 +1454,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1};{2};{3}", X, Y, Z, W);
 			}

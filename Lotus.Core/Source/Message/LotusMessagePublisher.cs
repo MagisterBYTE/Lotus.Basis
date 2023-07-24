@@ -188,7 +188,7 @@ namespace Lotus
 							var code = mMessageHandlers[i].OnMessageHandler(message);
 
 							// Сообщение почему-то обработано с отрицательным результатом 
-							if (code == XMessageHandlerResultCode.NEGATIVERESULT)
+							if (code == XMessageHandlerResultCode.NEGATIVE_RESULT)
 							{
 #if UNITY_2017_1_OR_NEWER
 								UnityEngine.Debug.LogWarning(message.ToString());

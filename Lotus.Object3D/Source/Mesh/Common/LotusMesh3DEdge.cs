@@ -89,7 +89,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return TMeshElement.Edge; } }
+			public readonly TMeshElement MeshElement { get { return TMeshElement.Edge; } }
 
 			/// <summary>
 			/// Статус простого ребра
@@ -97,7 +97,7 @@ namespace Lotus
 			/// <remarks>
 			/// Простое ребро принадлежит двум треугольника и при этом индексы вершин ссылаются на одни и те же вершины
 			/// </remarks>
-			public Boolean IsSimple
+			public readonly Boolean IsSimple
 			{
 				get
 				{
@@ -111,7 +111,7 @@ namespace Lotus
 			/// <remarks>
 			/// Обще ребро принадлежит двум треугольника и при этом индексы вершин ссылаются на разные вершины
 			/// </remarks>
-			public Boolean IsCommon
+			public readonly Boolean IsCommon
 			{
 				get
 				{
@@ -125,7 +125,7 @@ namespace Lotus
 			/// <remarks>
 			/// Только для плоских трехмерных тел ребро также может принадлежать только одному треугольнику
 			/// </remarks>
-			public Boolean IsOuter
+			public readonly Boolean IsOuter
 			{
 				get
 				{
@@ -163,7 +163,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
@@ -186,7 +186,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемое ребро</param>
 			/// <returns>Статус равенства ребер</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(CEdge3Df other)
+			public readonly Boolean Equals(CEdge3Df other)
 			{
 				return (IndexVertex10 == other.IndexVertex10 && IndexVertex11 == other.IndexVertex11) ||
 					(IndexVertex11 == other.IndexVertex10 && IndexVertex10 == other.IndexVertex11);
@@ -199,7 +199,7 @@ namespace Lotus
 			/// <param name="other">Ребро</param>
 			/// <returns>Статус сравнения ребер</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CEdge3Df other)
+			public readonly Int32 CompareTo(CEdge3Df other)
 			{
 				if (IndexVertex10 > other.IndexVertex10)
 				{
@@ -224,7 +224,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код ребра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return IndexVertex10.GetHashCode() ^ IndexVertex11.GetHashCode();
 			}
@@ -236,7 +236,7 @@ namespace Lotus
 			/// <param name="obj">Ребро</param>
 			/// <returns>Хеш-код ребра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 GetHashCode(CEdge3Df obj)
+			public readonly Int32 GetHashCode(CEdge3Df obj)
 			{
 				return obj.GetHashCode();
 			}
@@ -247,7 +247,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия ребра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -258,7 +258,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Индексы вершин ребра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, IndexVertex10, IndexVertex11);
 			}
@@ -275,7 +275,7 @@ namespace Lotus
 			/// </remarks>
 			/// <returns>Статус равенства индексов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean IsEqualsIndex()
+			public readonly Boolean IsEqualsIndex()
 			{
 				// 1) Вариант
 				if((IndexVertex10 == IndexVertex20 && IndexVertex11 == IndexVertex21) ||
@@ -294,7 +294,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Дубликат ребра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CEdge3Df Duplicate()
+			public readonly CEdge3Df Duplicate()
 			{
 				var copy = (CEdge3Df)MemberwiseClone();
 				return copy;
@@ -312,7 +312,7 @@ namespace Lotus
 			/// <param name="p2">Вторая позиция</param>
 			/// <returns>Статус совпадения (равенства)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean CheckFromPosition(CListVertex3D vertices, in Vector3Df p1, in Vector3Df p2)
+			public readonly Boolean CheckFromPosition(CListVertex3D vertices, in Vector3Df p1, in Vector3Df p2)
 			{
 				// Проверяем первую пару
 				if (IndexVertex10 != -1 && IndexVertex11 != -1)

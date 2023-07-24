@@ -201,7 +201,7 @@ namespace Lotus
 			/// <summary>
 			/// Квадрат длины кватерниона
 			/// </summary>
-			public Double SqrLength
+			public readonly Double SqrLength
 			{
 				get { return (X * X) + (Y * Y) + (Z * Z) + (W * W); }
 			}
@@ -209,7 +209,7 @@ namespace Lotus
 			/// <summary>
 			/// Длина кватерниона
 			/// </summary>
-			public Double Length
+			public readonly Double Length
 			{
 				get { return Math.Sqrt((X * X) + (Y * Y) + (Z * Z) + (W * W)); }
 			}
@@ -217,7 +217,7 @@ namespace Lotus
 			/// <summary>
 			/// Нормализированный кватернион
 			/// </summary>
-			public Quaternion3D Normalized
+			public readonly Quaternion3D Normalized
 			{
 				get
 				{
@@ -229,7 +229,7 @@ namespace Lotus
 			/// <summary>
 			/// Сопряженный кватернион
 			/// </summary>
-			public Quaternion3D Conjugated
+			public readonly Quaternion3D Conjugated
 			{
 				get
 				{
@@ -240,7 +240,7 @@ namespace Lotus
 			/// <summary>
 			/// Инверсный кватернион
 			/// </summary>
-			public Quaternion3D Inversed
+			public readonly Quaternion3D Inversed
 			{
 				get
 				{
@@ -311,13 +311,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Quaternion3D) == obj.GetType())
+					if (obj is Quaternion3D quaternion)
 					{
-						var quaternion = (Quaternion3D)obj;
 						return Equals(quaternion);
 					}
 				}
@@ -332,7 +331,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый кватернион</param>
 			/// <returns>Статус равенства кватернионов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Quaternion3D other)
+			public readonly Boolean Equals(Quaternion3D other)
 			{
 				return this == other;
 			}
@@ -344,7 +343,7 @@ namespace Lotus
 			/// <param name="other">Кватернион</param>
 			/// <returns>Статус сравнения кватернионов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Quaternion3D other)
+			public readonly Int32 CompareTo(Quaternion3D other)
 			{
 				if (X > other.X)
 				{
@@ -376,7 +375,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код кватерниона</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode() ^ W.GetHashCode();
 			}
@@ -387,7 +386,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия кватерниона</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -398,7 +397,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление кватерниона с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return "X = " + X.ToString("F3") + "; Y = " + Y.ToString("F3") + "; Z = "
 				       + Z.ToString("F3") + "; W = " + W.ToString("F3");
@@ -524,7 +523,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -713,7 +712,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Трансформированный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D TransformVector(in Vector3D vector)
+			public readonly Vector3D TransformVector(in Vector3D vector)
 			{
 				// Быстрая трансформация
 				Quaternion3D r = this * new Quaternion3D(vector.X, vector.Y, vector.Z, 0) * Conjugated;
@@ -726,7 +725,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1};{2};{3}", X, Y, Z, W);
 			}
@@ -1011,7 +1010,7 @@ namespace Lotus
 			/// <summary>
 			/// Квадрат длины кватерниона
 			/// </summary>
-			public Single SqrLength
+			public readonly Single SqrLength
 			{
 				get { return (X * X) + (Y * Y) + (Z * Z) + (W * W); }
 			}
@@ -1019,7 +1018,7 @@ namespace Lotus
 			/// <summary>
 			/// Длина кватерниона
 			/// </summary>
-			public Single Length
+			public readonly Single Length
 			{
 				get { return (Single)Math.Sqrt((X * X) + (Y * Y) + (Z * Z) + (W * W)); }
 			}
@@ -1027,7 +1026,7 @@ namespace Lotus
 			/// <summary>
 			/// Нормализованный кватернион
 			/// </summary>
-			public Quaternion3Df Normalized
+			public readonly Quaternion3Df Normalized
 			{
 				get
 				{
@@ -1039,7 +1038,7 @@ namespace Lotus
 			/// <summary>
 			/// Сопряженный кватернион
 			/// </summary>
-			public Quaternion3Df Conjugated
+			public readonly Quaternion3Df Conjugated
 			{
 				get
 				{
@@ -1050,7 +1049,7 @@ namespace Lotus
 			/// <summary>
 			/// Инверсный кватернион
 			/// </summary>
-			public Quaternion3Df Inversed
+			public readonly Quaternion3Df Inversed
 			{
 				get
 				{
@@ -1121,13 +1120,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Quaternion3Df) == obj.GetType())
+					if (obj is Quaternion3Df quaternion)
 					{
-						var quaternion = (Quaternion3Df)obj;
 						return Equals(quaternion);
 					}
 				}
@@ -1142,7 +1140,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый кватернион</param>
 			/// <returns>Статус равенства кватернионов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Quaternion3Df other)
+			public readonly Boolean Equals(Quaternion3Df other)
 			{
 				return this == other;
 			}
@@ -1154,7 +1152,7 @@ namespace Lotus
 			/// <param name="other">Кватернион</param>
 			/// <returns>Статус сравнения кватернионов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Quaternion3Df other)
+			public readonly Int32 CompareTo(Quaternion3Df other)
 			{
 				if (X > other.X)
 				{
@@ -1186,7 +1184,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код кватерниона</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode() ^ W.GetHashCode();
 			}
@@ -1197,7 +1195,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия кватерниона</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -1208,7 +1206,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление кватерниона с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return "X = " + X.ToString("F3") + "; Y = " + Y.ToString("F3") + "; Z = "
 				       + Z.ToString("F3") + "; W = " + W.ToString("F3");
@@ -1334,7 +1332,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -1478,7 +1476,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Трансформированный вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df TransformVector(in Vector3Df vector)
+			public readonly Vector3Df TransformVector(in Vector3Df vector)
 			{
 				// Быстрая трансформация
 				Quaternion3Df r = this * new Quaternion3Df(vector.X, vector.Y, vector.Z, 0) * Conjugated;
@@ -1491,7 +1489,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1};{2};{3}", X, Y, Z, W);
 			}

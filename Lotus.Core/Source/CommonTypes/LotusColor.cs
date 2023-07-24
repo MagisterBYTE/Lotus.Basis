@@ -13,6 +13,7 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 //=====================================================================================================================
 namespace Lotus
@@ -1148,7 +1149,7 @@ namespace Lotus
 			/// </summary>
 			public Single RedComponent
 			{
-				get { return R / 255.0f; }
+				readonly get { return R / 255.0f; }
 				set { R = ToByte(value); }
 			}
 
@@ -1157,7 +1158,7 @@ namespace Lotus
 			/// </summary>
 			public Single GreenComponent
 			{
-				get { return G / 255.0f; }
+				readonly get { return G / 255.0f; }
 				set { G = ToByte(value); }
 			}
 
@@ -1166,7 +1167,7 @@ namespace Lotus
 			/// </summary>
 			public Single BlueComponent
 			{
-				get { return B / 255.0f; }
+				readonly get { return B / 255.0f; }
 				set { B = ToByte(value); }
 			}
 
@@ -1175,7 +1176,7 @@ namespace Lotus
 			/// </summary>
 			public Single AlphaComponent
 			{
-				get { return A / 255.0f; }
+				readonly get { return A / 255.0f; }
 				set { A = ToByte(value); }
 			}
 			#endregion
@@ -1324,13 +1325,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(TColor) == obj.GetType())
+					if (obj is TColor color)
 					{
-						var color = (TColor)obj;
 						return Equals(color);
 					}
 				}
@@ -1347,7 +1347,7 @@ namespace Lotus
 #if NET45 || UNITY_2017_1_OR_NEWER
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-			public Boolean Equals(TColor other)
+			public readonly Boolean Equals(TColor other)
 			{
 				return R == other.R && G == other.G && B == other.B && A == other.A;
 			}
@@ -1359,7 +1359,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый цвет</param>
 			/// <returns>Статус сравнения цветов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(TColor other)
+			public readonly Int32 CompareTo(TColor other)
 			{
 				if (R > other.R)
 				{
@@ -1384,7 +1384,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код цвета</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				unchecked
 				{
@@ -1402,7 +1402,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия цвета</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -1413,7 +1413,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление цвета с указанием значений компонентов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, A, R, G, B);
 			}
@@ -1570,7 +1570,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Byte this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -1601,7 +1601,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Яркость цвета в модели(HSB)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single GetBrightness()
+			public readonly Single GetBrightness()
 			{
 				var r = R / 255.0f;
 				var g = G / 255.0f;
@@ -1626,7 +1626,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Оттенок цвета в модели(HSB)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single GetHue()
+			public readonly Single GetHue()
 			{
 				if (R == G && G == B)
 				{
@@ -1679,7 +1679,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Насыщенность цвета в модели(HSB)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single GetSaturation()
+			public readonly Single GetSaturation()
 			{
 				var r = R / 255.0f;
 				var g = G / 255.0f;
@@ -1721,7 +1721,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0},{1},{2},{3}", R, G, B, A);
 			}
@@ -1732,7 +1732,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Цвет в формате RGBA</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 ToRGBA()
+			public readonly Int32 ToRGBA()
 			{
 				return (R << 24) | (G << 16) | (B << 8) | A;
 			}
@@ -1743,7 +1743,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление цвета</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToStringHEX()
+			public readonly String ToStringHEX()
 			{
 				return String.Format("{0:x2}{1:x2}{2:x2}{3:x2}", R, G, B, A);
 			}

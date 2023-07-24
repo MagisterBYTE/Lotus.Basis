@@ -254,7 +254,7 @@ namespace Lotus
 			/// <summary>
 			/// Квадрат длины вектора
 			/// </summary>
-			public Double SqrLength
+			public readonly Double SqrLength
 			{
 				get { return (X * X) + (Y * Y) + (Z * Z); }
 			}
@@ -262,7 +262,7 @@ namespace Lotus
 			/// <summary>
 			/// Длина вектора
 			/// </summary>
-			public Double Length
+			public readonly Double Length
 			{
 				get { return Math.Sqrt((X * X) + (Y * Y) + (Z * Z)); }
 			}
@@ -270,7 +270,7 @@ namespace Lotus
 			/// <summary>
 			/// Нормализованный вектор
 			/// </summary>
-			public Vector3D Normalized
+			public readonly Vector3D Normalized
 			{
 				get
 				{
@@ -359,13 +359,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Vector3D) == obj.GetType())
+					if (obj is Vector3D vector)
 					{
-						var vector = (Vector3D)obj;
 						return Equals(vector);
 					}
 				}
@@ -379,7 +378,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый вектор</param>
 			/// <returns>Статус равенства векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Vector3D other)
+			public readonly Boolean Equals(Vector3D other)
 			{
 				return this == other;
 			}
@@ -391,7 +390,7 @@ namespace Lotus
 			/// <param name="other">Вектор</param>
 			/// <returns>Статус сравнения векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Vector3D other)
+			public readonly Int32 CompareTo(Vector3D other)
 			{
 				if (X > other.X)
 				{
@@ -423,7 +422,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
 			}
@@ -434,7 +433,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -445,7 +444,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, X, Y, Z);
 			}
@@ -457,7 +456,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения компонентов вектора</param>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return String.Format(ToStringFormat.Replace("0.00", format), X, Y, Z);
 			}
@@ -468,7 +467,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToStringValue()
+			public readonly String ToStringValue()
 			{
 				return String.Format(ToStringFormatValue, X, Y, Z);
 			}
@@ -480,7 +479,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения компонентов вектора</param>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToStringValue(String format)
+			public readonly String ToStringValue(String format)
 			{
 				return String.Format(ToStringFormatValue.Replace("0.00", format), X, Y, Z);
 			}
@@ -703,7 +702,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -754,7 +753,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double Distance(in Vector3D vector)
+			public readonly Double Distance(in Vector3D vector)
 			{
 				var x = vector.X - X;
 				var y = vector.Y - Y;
@@ -770,7 +769,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Double Dot(in Vector3D vector)
+			public readonly Double Dot(in Vector3D vector)
 			{
 				return (X * vector.X) + (Y * vector.Y) + (Z * vector.Z);
 			}
@@ -853,7 +852,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1};{2}", X, Y, Z);
 			}
@@ -866,7 +865,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2D ToVector2X()
+			public readonly Vector2D ToVector2X()
 			{
 				return new Vector2D(X, 0);
 			}
@@ -877,7 +876,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2D ToVector2Y()
+			public readonly Vector2D ToVector2Y()
 			{
 				return new Vector2D(0, Y);
 			}
@@ -888,7 +887,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2D ToVector2XY()
+			public readonly Vector2D ToVector2XY()
 			{
 				return new Vector2D(X, Y);
 			}
@@ -899,7 +898,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2D ToVector2XZ()
+			public readonly Vector2D ToVector2XZ()
 			{
 				return new Vector2D(X, Z);
 			}
@@ -910,7 +909,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2D ToVector2YZ()
+			public readonly Vector2D ToVector2YZ()
 			{
 				return new Vector2D(Y, Z);
 			}
@@ -921,7 +920,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D ToVector3X()
+			public readonly Vector3D ToVector3X()
 			{
 				return new Vector3D(X, 0, 0);
 			}
@@ -932,7 +931,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D ToVector3Y()
+			public readonly Vector3D ToVector3Y()
 			{
 				return new Vector3D(0, Y, 0);
 			}
@@ -943,7 +942,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D ToVector3Z()
+			public readonly Vector3D ToVector3Z()
 			{
 				return new Vector3D(0, 0, Z);
 			}
@@ -954,7 +953,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D ToVector3XY()
+			public readonly Vector3D ToVector3XY()
 			{
 				return new Vector3D(X, Y, 0);
 			}
@@ -965,7 +964,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D ToVector3XZ()
+			public readonly Vector3D ToVector3XZ()
 			{
 				return new Vector3D(X, 0, Z);
 			}
@@ -976,7 +975,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3D ToVector3YZ()
+			public readonly Vector3D ToVector3YZ()
 			{
 				return new Vector3D(0, Y, Z);
 			}
@@ -1364,7 +1363,7 @@ namespace Lotus
 			/// <summary>
 			/// Квадрат длины вектора
 			/// </summary>
-			public Single SqrLength
+			public readonly Single SqrLength
 			{
 				get { return (X * X) + (Y * Y) + (Z * Z); }
 			}
@@ -1372,7 +1371,7 @@ namespace Lotus
 			/// <summary>
 			/// Длина вектора
 			/// </summary>
-			public Single Length
+			public readonly Single Length
 			{
 				get { return (Single)Math.Sqrt((X * X) + (Y * Y) + (Z * Z)); }
 			}
@@ -1380,7 +1379,7 @@ namespace Lotus
 			/// <summary>
 			/// Нормализованный вектор
 			/// </summary>
-			public Vector3Df Normalized
+			public readonly Vector3Df Normalized
 			{
 				get
 				{
@@ -1428,13 +1427,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Vector3Df) == obj.GetType())
+					if (obj is Vector3Df vector)
 					{
-						var vector = (Vector3Df)obj;
 						return Equals(vector);
 					}
 				}
@@ -1448,7 +1446,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый вектор</param>
 			/// <returns>Статус равенства векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Vector3Df other)
+			public readonly Boolean Equals(Vector3Df other)
 			{
 				return this == other;
 			}
@@ -1460,7 +1458,7 @@ namespace Lotus
 			/// <param name="other">Вектор</param>
 			/// <returns>Статус сравнения векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Vector3Df other)
+			public readonly Int32 CompareTo(Vector3Df other)
 			{
 				if (X > other.X)
 				{
@@ -1492,7 +1490,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
 			}
@@ -1503,7 +1501,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -1514,7 +1512,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, X, Y, Z);
 			}
@@ -1526,7 +1524,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения компонентов вектора</param>
 			/// <returns>Текстовое представление вектора с указанием значений координат</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return String.Format(format, X, Y, Z);
 			}
@@ -1765,7 +1763,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Single this[Int32 index]
 			{
-				get
+				readonly get
 				{
 					switch (index)
 					{
@@ -1816,7 +1814,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Расстояние до вектора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Distance(in Vector3Df vector)
+			public readonly Single Distance(in Vector3Df vector)
 			{
 				var x = vector.X - X;
 				var y = vector.Y - Y;
@@ -1832,7 +1830,7 @@ namespace Lotus
 			/// <param name="vector">Вектор</param>
 			/// <returns>Скалярное произведение векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Single Dot(in Vector3Df vector)
+			public readonly Single Dot(in Vector3Df vector)
 			{
 				return (X * vector.X) + (Y * vector.Y) + (Z * vector.Z);
 			}
@@ -1923,7 +1921,7 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус равенства значений векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Approximately(in Vector3Df other, Single epsilon = 0.01f)
+			public readonly Boolean Approximately(in Vector3Df other, Single epsilon = 0.01f)
 			{
 				if (Math.Abs(X - other.X) < epsilon &&
 					Math.Abs(Y - other.Y) < epsilon &&
@@ -1941,7 +1939,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Строка данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String SerializeToString()
+			public readonly String SerializeToString()
 			{
 				return String.Format("{0};{1};{2}", X, Y, Z);
 			}
@@ -1954,7 +1952,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Df ToVector2X()
+			public readonly Vector2Df ToVector2X()
 			{
 				return new Vector2Df(X, 0);
 			}
@@ -1965,7 +1963,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Df ToVector2Y()
+			public readonly Vector2Df ToVector2Y()
 			{
 				return new Vector2Df(0, Y);
 			}
@@ -1976,7 +1974,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Df ToVector2XY()
+			public readonly Vector2Df ToVector2XY()
 			{
 				return new Vector2Df(X, Y);
 			}
@@ -1987,7 +1985,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Df ToVector2XZ()
+			public readonly Vector2Df ToVector2XZ()
 			{
 				return new Vector2Df(X,Z);
 			}
@@ -1998,7 +1996,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector2Df ToVector2YZ()
+			public readonly Vector2Df ToVector2YZ()
 			{
 				return new Vector2Df(Y, Z);
 			}
@@ -2009,7 +2007,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df ToVector3X()
+			public readonly Vector3Df ToVector3X()
 			{
 				return new Vector3Df(X, 0, 0);
 			}
@@ -2020,7 +2018,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df ToVector3Y()
+			public readonly Vector3Df ToVector3Y()
 			{
 				return new Vector3Df(0, Y, 0);
 			}
@@ -2031,7 +2029,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df ToVector3Z()
+			public readonly Vector3Df ToVector3Z()
 			{
 				return new Vector3Df(0, 0, Z);
 			}
@@ -2042,7 +2040,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df ToVector3XY()
+			public readonly Vector3Df ToVector3XY()
 			{
 				return new Vector3Df(X, Y, 0);
 			}
@@ -2053,7 +2051,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df ToVector3XZ()
+			public readonly Vector3Df ToVector3XZ()
 			{
 				return new Vector3Df(X, 0, Z);
 			}
@@ -2064,7 +2062,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Вектор</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df ToVector3YZ()
+			public readonly Vector3Df ToVector3YZ()
 			{
 				return new Vector3Df(0, Y, Z);
 			}

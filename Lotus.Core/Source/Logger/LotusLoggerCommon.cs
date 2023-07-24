@@ -120,7 +120,7 @@ namespace Lotus
 			/// <summary>
 			/// Краткая трассировка сообщения с указанием файла, строки и метода
 			/// </summary>
-			public String TraceShort 
+			public readonly String TraceShort 
 			{
 				get { return MemberName + " [" + Path.GetFileNameWithoutExtension(FilePath) + ":" + LineNumber.ToString() + "]"; } 
 			}
@@ -261,7 +261,7 @@ namespace Lotus
 			/// <param name="lineTrace">Строка трассировки</param>
 			/// <returns>Имя метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ExtractMemberName(String lineTrace)
+			public readonly String ExtractMemberName(String lineTrace)
 			{
 				// Находим имя файла
 				var index_file = lineTrace.LastIndexOf('(');
@@ -299,7 +299,7 @@ namespace Lotus
 			/// <param name="lineTrace">Строка трассировки</param>
 			/// <returns>Имя метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ExtractFileName(String lineTrace)
+			public readonly String ExtractFileName(String lineTrace)
 			{
 				// Находим имя файла
 				var index_file = lineTrace.LastIndexOf('(');

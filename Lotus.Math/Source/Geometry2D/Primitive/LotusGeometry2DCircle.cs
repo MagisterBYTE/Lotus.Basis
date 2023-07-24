@@ -56,7 +56,7 @@ namespace Lotus
 			/// </summary>
 			public Single Circumference
 			{
-				get { return Radius * XMath.PI_2_F; }
+				readonly get { return Radius * XMath.PI_2_F; }
 				set
 				{
 					Radius = value / XMath.PI_2_F;
@@ -68,7 +68,7 @@ namespace Lotus
 			/// </summary>
 			public Single Diameter
 			{
-				get { return 2 * Radius; }
+				readonly get { return 2 * Radius; }
 				set { Radius = value / 2; }
 			}
 
@@ -77,7 +77,7 @@ namespace Lotus
 			/// </summary>
 			public Single Area
 			{
-				get { return XMath.PI_F * Radius * Radius; }
+				readonly get { return XMath.PI_F * Radius * Radius; }
 				set { Radius = XMath.Sqrt(value / XMath.PI_F); }
 			}
 			#endregion
@@ -132,13 +132,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Circle2Df) == obj.GetType())
+					if (obj is Circle2Df circle)
 					{
-						var circle = (Circle2Df)obj;
 						return Equals(circle);
 					}
 				}
@@ -152,7 +151,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая окружность</param>
 			/// <returns>Статус равенства окружностей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Circle2Df other)
+			public readonly Boolean Equals(Circle2Df other)
 			{
 				return this == other;
 			}
@@ -164,7 +163,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый окружность</param>
 			/// <returns>Статус сравнения окружностей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Circle2Df other)
+			public readonly Int32 CompareTo(Circle2Df other)
 			{
 				if (Center > other.Center)
 				{
@@ -189,7 +188,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код окружности</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Center.GetHashCode() ^ Radius.GetHashCode();
 			}
@@ -200,7 +199,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия окружности</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -211,7 +210,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление окружности с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Center.X, Center.Y, Radius);
 			}
@@ -223,7 +222,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление окружности с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Center = " + Center.ToString(format) + "; Radius = " + Radius.ToString(format);
 			}
@@ -265,7 +264,7 @@ namespace Lotus
 			/// <param name="point">Проверяемая точка</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(in Vector2Df point)
+			public readonly Boolean Contains(in Vector2Df point)
 			{
 				var d = Vector2Df.Distance(in Center, in point);
 				return Math.Abs(d - Radius) < XGeometry2D.Eplsilon_f;

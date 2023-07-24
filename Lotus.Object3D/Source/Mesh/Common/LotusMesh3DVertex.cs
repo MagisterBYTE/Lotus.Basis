@@ -109,7 +109,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return TMeshElement.Vertex; } }
+			public readonly TMeshElement MeshElement { get { return TMeshElement.Vertex; } }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -281,7 +281,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
@@ -304,7 +304,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемая вершина</param>
 			/// <returns>Статус равенства вершин</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(CVertex3Df other)
+			public readonly Boolean Equals(CVertex3Df other)
 			{
 				return Vector3Df.Approximately(in Position, in other.Position, XMeshSetting.Eplsilon_f);
 			}
@@ -319,7 +319,7 @@ namespace Lotus
 			/// <param name="other">Вершина</param>
 			/// <returns>Статус сравнения вершин</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CVertex3Df other)
+			public readonly Int32 CompareTo(CVertex3Df other)
 			{
 				if (Index > other.Index)
 				{
@@ -344,7 +344,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код вершины</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Position.X.GetHashCode() ^ Position.Y.GetHashCode() ^ Position.Z.GetHashCode();
 			}
@@ -356,7 +356,7 @@ namespace Lotus
 			/// <param name="obj">Вершина</param>
 			/// <returns>Хеш-код вершины</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 GetHashCode(CVertex3Df obj)
+			public readonly Int32 GetHashCode(CVertex3Df obj)
 			{
 				return obj.GetHashCode();
 			}
@@ -367,7 +367,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия вершины</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -378,7 +378,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Позиция вершины</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Index, Position.X, Position.Y, Position.Z);
 			}
@@ -500,7 +500,7 @@ namespace Lotus
 			/// </remarks>
 			/// <returns>Дубликат вершины</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CVertex3Df Duplicate()
+			public readonly CVertex3Df Duplicate()
 			{
 				var copy = (CVertex3Df)MemberwiseClone();
 				copy.Index = - 1;
@@ -525,7 +525,7 @@ namespace Lotus
 			/// <param name="offset">Размер смещения</param>
 			/// <returns>Смещенная вершина</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CVertex3Df GetVertexOffsetFromNormal(Single offset)
+			public readonly CVertex3Df GetVertexOffsetFromNormal(Single offset)
 			{
 				CVertex3Df copy = Duplicate();
 				copy.Position = Position + Normal * offset;

@@ -431,7 +431,7 @@ namespace Lotus
 			public void SetFromData(UnityEngine.Color32[] data)
 			{
 				mData = new TColor[data.Length];
-				for (Int32 i = 0; i < mData.Length; i++)
+				for (var i = 0; i < mData.Length; i++)
 				{
 					mData[i].A = data[i].a;
 					mData[i].R = data[i].r;

@@ -67,7 +67,7 @@ namespace Lotus
 			/// <summary>
 			/// Тип структурного элемента меша
 			/// </summary>
-			public TMeshElement MeshElement { get { return TMeshElement.Triangle; } }
+			public readonly TMeshElement MeshElement { get { return TMeshElement.Triangle; } }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -95,7 +95,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
@@ -118,7 +118,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый треугольник</param>
 			/// <returns>Статус равенства треугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(CTriangle3Df other)
+			public readonly Boolean Equals(CTriangle3Df other)
 			{
 				return IndexVertex0 == other.IndexVertex0 &&
 					IndexVertex1 == other.IndexVertex1 &&
@@ -133,7 +133,7 @@ namespace Lotus
 			/// <param name="y">Второй треугольник</param>
 			/// <returns>Статус сравнения треугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 Compare(CTriangle3Df x, CTriangle3Df y)
+			public readonly Int32 Compare(CTriangle3Df x, CTriangle3Df y)
 			{
 				return x.CompareTo(y);
 			}
@@ -145,7 +145,7 @@ namespace Lotus
 			/// <param name="other">Треугольник</param>
 			/// <returns>Статус сравнения треугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CTriangle3Df other)
+			public readonly Int32 CompareTo(CTriangle3Df other)
 			{
 				if (IndexVertex0 > other.IndexVertex0)
 				{
@@ -170,7 +170,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код треугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return IndexVertex0.GetHashCode() ^ IndexVertex1.GetHashCode() ^ IndexVertex2.GetHashCode();
 			}
@@ -182,7 +182,7 @@ namespace Lotus
 			/// <param name="obj">Треугольник</param>
 			/// <returns>Хеш-код треугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 GetHashCode(CTriangle3Df obj)
+			public readonly Int32 GetHashCode(CTriangle3Df obj)
 			{
 				return obj.GetHashCode();
 			}
@@ -193,7 +193,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия треугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -204,7 +204,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Индексы вершин треугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, IndexVertex0, IndexVertex1, IndexVertex2);
 			}
@@ -217,7 +217,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Дубликат треугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CTriangle3Df Duplicate()
+			public readonly CTriangle3Df Duplicate()
 			{
 				var copy = (CTriangle3Df)MemberwiseClone();
 				return copy;
@@ -249,7 +249,7 @@ namespace Lotus
 			/// <param name="countVertex">Количество вершин на величину которых смещаются индексы</param>
 			/// <returns>Треугольник трехмерной сетки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CTriangle3Df GetTriangleOffset(Int32 countVertex)
+			public readonly CTriangle3Df GetTriangleOffset(Int32 countVertex)
 			{
 				return new CTriangle3Df(IndexVertex0 + countVertex, IndexVertex1 + countVertex, IndexVertex2 + countVertex);
 			}
@@ -262,7 +262,7 @@ namespace Lotus
 			/// <param name="indexTriangle">Индекс данного треугольника</param>
 			/// <returns>Ребро(сторона) треугольника</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CEdge3Df GetEdge(Int32 indexEdge, Int32 indexTriangle)
+			public readonly CEdge3Df GetEdge(Int32 indexEdge, Int32 indexTriangle)
 			{
 				switch (indexEdge)
 				{
@@ -301,7 +301,7 @@ namespace Lotus
 			/// <param name="listVertex">Список вершин</param>
 			/// <returns>Нормаль</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Vector3Df GetNormal(Int32 indexVertex, CListVertex3D listVertex)
+			public readonly Vector3Df GetNormal(Int32 indexVertex, CListVertex3D listVertex)
 			{
 				if (indexVertex == IndexVertex0)
 				{
@@ -774,7 +774,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 
 					UnityEngine.Debug.LogErrorFormat("Not enough vertices: Current: {0}, Dest: {1}",
-						count_triangle + 2, Vertices.Count - index_center_vertex);
+						countTriangle + 2, Vertices.Count - indexCenterVertex);
 #else
 					XLogger.LogError(String.Format("Not enough vertices: Current: {0}, Dest: {1}",
 						countTriangle + 2, Vertices.Count - indexCenterVertex));

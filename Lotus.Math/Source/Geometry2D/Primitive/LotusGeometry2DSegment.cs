@@ -57,7 +57,7 @@ namespace Lotus
 			/// <summary>
 			/// Центр сегмента
 			/// </summary>
-			public Vector2Df Location
+			public readonly Vector2Df Location
 			{
 				get { return (Start + End) / 2; }
 			}
@@ -65,7 +65,7 @@ namespace Lotus
 			/// <summary>
 			/// Направление сегмента
 			/// </summary>
-			public Vector2Df Direction
+			public readonly Vector2Df Direction
 			{
 				get { return End - Start; }
 			}
@@ -73,7 +73,7 @@ namespace Lotus
 			/// <summary>
 			/// Единичное направление сегмента
 			/// </summary>
-			public Vector2Df DirectionUnit
+			public readonly Vector2Df DirectionUnit
 			{
 				get { return (End - Start).Normalized; }
 			}
@@ -129,7 +129,7 @@ namespace Lotus
 			public Segment2Df(UnityEngine.Ray2D ray, Single length)
 			{
 				Start = new Vector2Df(ray.origin.x, ray.origin.y);
-				End = new Vector2Df(ray.origin.x + ray.direction.x * length, ray.origin.y + ray.direction.y * length);
+				End = new Vector2Df(ray.origin.x + (ray.direction.x * length), ray.origin.y + (ray.direction.y * length));
 			}
 #endif
 			#endregion
@@ -142,13 +142,12 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object obj)
 			{
 				if (obj != null)
 				{
-					if (typeof(Segment2Df) == obj.GetType())
+					if (obj is Segment2Df segment)
 					{
-						var segment = (Segment2Df)obj;
 						return Equals(segment);
 					}
 				}
@@ -162,7 +161,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый сегмент</param>
 			/// <returns>Статус равенства сегментов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(Segment2Df other)
+			public readonly Boolean Equals(Segment2Df other)
 			{
 				return this == other;
 			}
@@ -174,7 +173,7 @@ namespace Lotus
 			/// <param name="other">Сравниваемый сегмент</param>
 			/// <returns>Статус сравнения сегментов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(Segment2Df other)
+			public readonly Int32 CompareTo(Segment2Df other)
 			{
 				if (Start > other.Start)
 				{
@@ -199,7 +198,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Хеш-код сегмента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
+			public override readonly Int32 GetHashCode()
 			{
 				return Start.GetHashCode() ^ End.GetHashCode();
 			}
@@ -210,7 +209,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Копия сегмента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Object Clone()
+			public readonly Object Clone()
 			{
 				return MemberwiseClone();
 			}
@@ -221,7 +220,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление сегмента с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override readonly String ToString()
 			{
 				return String.Format(ToStringFormat, Start.X, Start.Y, End.X, End.Y);
 			}
@@ -233,7 +232,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление сегмента с указанием значений</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public readonly String ToString(String format)
 			{
 				return "Start = " + Start.ToString(format) + "; End = " + End.ToString(format);
 			}
@@ -292,7 +291,7 @@ namespace Lotus
 			/// <param name="epsilon">Погрешность</param>
 			/// <returns>Статус попадания</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(in Vector2Df point, Single epsilon = 0.01f)
+			public readonly Boolean Contains(in Vector2Df point, Single epsilon = 0.01f)
 			{
 				return XIntersect2D.PointOnSegment(in Start, in End, in point, epsilon);
 			}

@@ -258,7 +258,7 @@ namespace Lotus
 								{
 #if UNITY_EDITOR
 									file_name = file_name.Remove(index, check.Length);
-                                    String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
+                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
                                     mInfo = new FileInfo(new_path);
                                     mName = mInfo.Name;
 #else
@@ -274,7 +274,7 @@ namespace Lotus
 								{
 #if UNITY_EDITOR
 									file_name = file_name.Remove(index, check.Length);
-                                    String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
+                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
                                     mInfo = new FileInfo(new_path);
                                     mName = mInfo.Name;
 #else
@@ -315,7 +315,7 @@ namespace Lotus
 								{
 #if UNITY_EDITOR
 									file_name = file_name.Replace(source, target);
-                                    String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
+                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
                                     mInfo = new FileInfo(new_path);
                                     mName = mInfo.Name;
 #else

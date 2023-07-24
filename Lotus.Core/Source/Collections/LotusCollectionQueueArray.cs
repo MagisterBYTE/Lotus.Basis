@@ -66,7 +66,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public QueueArray()
-				: base(INITMAXCOUNT)
+				: base(INIT_MAX_COUNT)
 			{
 				mHead = 0;
 				mTail = -1;

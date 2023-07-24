@@ -50,7 +50,7 @@ namespace Lotus
 			/// Тип реализующий перечислителя по списку
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public struct ListArrayEnumerator : IEnumerator<TItem>, IEnumerator
+			public struct ListArrayEnumerator : IEnumerator<TItem>
 			{
 				#region ======================================= ДАННЫЕ ================================================
 				private ListArray<TItem> mList;
@@ -62,7 +62,7 @@ namespace Lotus
 				/// <summary>
 				/// Текущий элемент
 				/// </summary>
-				public TItem Current
+				public readonly TItem Current
 				{
 					get
 					{
@@ -73,7 +73,7 @@ namespace Lotus
 				/// <summary>
 				/// Текущий элемент
 				/// </summary>
-				Object IEnumerator.Current
+				readonly Object IEnumerator.Current
 				{
 					get
 					{
@@ -103,7 +103,7 @@ namespace Lotus
 				/// Освобождение управляемых ресурсов
 				/// </summary>
 				//-----------------------------------------------------------------------------------------------------
-				public void Dispose()
+				public readonly void Dispose()
 				{
 				}
 
@@ -167,7 +167,7 @@ namespace Lotus
 			/// <summary>
 			/// Максимальное количество элементов на начальном этапе
 			/// </summary>
-			public const Int32 INITMAXCOUNT = 8;
+			public const Int32 INIT_MAX_COUNT = 8;
 
 			/// <summary>
 			/// Статус ссылочного типа элемента коллекции
@@ -468,7 +468,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray()
-				: this(INITMAXCOUNT)
+				: this(INIT_MAX_COUNT)
 			{
 			}
 
@@ -480,7 +480,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ListArray(Int32 capacity)
 			{
-				mMaxCount = capacity > INITMAXCOUNT ? capacity : INITMAXCOUNT;
+				mMaxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
 				mCount = 0;
 				mArrayOfItems = new TItem[mMaxCount];
 			}
@@ -506,7 +506,7 @@ namespace Lotus
 				}
 				else
 				{
-					mMaxCount = INITMAXCOUNT;
+					mMaxCount = INIT_MAX_COUNT;
 					mCount = 0;
 					mArrayOfItems = new TItem[mMaxCount];
 				}

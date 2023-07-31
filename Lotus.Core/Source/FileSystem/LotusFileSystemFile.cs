@@ -75,6 +75,7 @@ namespace Lotus
 							mName = value;
 							NotifyPropertyChanged(PropertyArgsName);
 							RaiseNameChanged();
+
 						}
 						else
 						{
@@ -227,14 +228,16 @@ namespace Lotus
 			/// </summary>
 			/// <param name="newFileName">Новое имя файла</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Rename(String newFileName)
+			public void RenameAssets(String newFileName)
 			{
-				//if(mInfo != null)
-				//{
-				//	String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, new_file_name);
-				//	mInfo = new FileInfo(new_path);
-				//	mName = mInfo.Name;
-				//}
+				if (mInfo != null)
+				{
+					String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, newFileName);
+					mInfo = new FileInfo(new_path);
+					mName = mInfo.Name;
+					NotifyPropertyChanged(PropertyArgsName);
+					RaiseNameChanged();
+				}
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -330,6 +333,24 @@ namespace Lotus
 							break;
 					}
 				}
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Удаление файла
+			/// </summary>
+			//---------------------------------------------------------------------------------------------------------
+			public void Delete()
+			{
+				File.Delete(mInfo.FullName);
+
+				var metaFile = mInfo.FullName + ".meta";
+				if (File.Exists(metaFile))
+				{
+					File.Delete(metaFile);
+				}
+
+				mInfo = null;
 			}
 			#endregion
 		}

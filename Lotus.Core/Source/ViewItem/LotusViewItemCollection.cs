@@ -1322,7 +1322,7 @@ namespace Lotus
 			/// Дублирование текущего элемента и добавление элемента в список элементов
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public void DublicateSelectedItem()
+			public virtual void DublicateSelectedItem()
 			{
 				if (mSelectedIndex != -1)
 				{
@@ -1334,7 +1334,7 @@ namespace Lotus
 			/// Удаление текущего элемента из списка (удаляется объект)
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public void DeleteSelectedItem()
+			public virtual void DeleteSelectedItem()
 			{
 				if (mSelectedIndex != -1)
 				{
@@ -1348,7 +1348,7 @@ namespace Lotus
 			/// Перемещение текущего элемента назад
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public void MoveSelectedBackward()
+			public virtual void MoveSelectedBackward()
 			{
 				// Корректируем индекс
 				if (SelectedViewItem != null && mSelectedIndex > 0)
@@ -1365,7 +1365,7 @@ namespace Lotus
 			/// Перемещение текущего элемента вперед
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public void MoveSelectedForward()
+			public virtual void MoveSelectedForward()
 			{
 				// Корректируем индекс
 				if (SelectedViewItem != null && mSelectedIndex < Count - 1)

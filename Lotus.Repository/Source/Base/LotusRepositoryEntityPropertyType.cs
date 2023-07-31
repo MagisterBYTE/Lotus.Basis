@@ -42,14 +42,19 @@ namespace Lotus
 			Integer,
 
 			/// <summary>
-			/// Перечисление
-			/// </summary>
-			Enum,
-
-			/// <summary>
 			/// Вещественный тип
 			/// </summary>
 			Float,
+
+			/// <summary>
+			/// Строковый тип
+			/// </summary>
+			String,
+
+			/// <summary>
+			/// Перечисление
+			/// </summary>
+			Enum,
 
 			/// <summary>
 			/// Тип даты-времени
@@ -57,9 +62,14 @@ namespace Lotus
 			DateTime,
 
 			/// <summary>
-			/// Строковый тип
+			/// Глобальный идентификатор в формате UUID
 			/// </summary>
-			String
+			Guid,
+
+			/// <summary>
+			/// Объект
+			/// </summary>
+			Object
 		}
 		//-------------------------------------------------------------------------------------------------------------
 		/**@}*/

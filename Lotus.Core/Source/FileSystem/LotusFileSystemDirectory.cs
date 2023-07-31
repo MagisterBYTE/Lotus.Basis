@@ -27,7 +27,8 @@ namespace Lotus
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
 		[Serializable]
-		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity, ILotusViewExpanded
+		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity, ILotusViewItemOwner,
+			ILotusViewExpanded
 		{
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			public const String IMPropertyMissing = "Свойство отсутствует";
@@ -457,6 +458,13 @@ namespace Lotus
 			}
 			#endregion
 
+			#region ======================================= СВОЙСТВА ILotusViewItemOwner ==============================
+			/// <summary>
+			/// Элемент отображения
+			/// </summary>
+			public ILotusViewItem OwnerViewItem { get; set; }
+			#endregion
+
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -482,7 +490,7 @@ namespace Lotus
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Добавление директории
+			/// Добавление файла
 			/// </summary>
 			/// <param name="fileInfo">Информация о файле</param>
 			/// <returns>Элемент файловой системы представляющий собой файл</returns>
@@ -582,8 +590,6 @@ namespace Lotus
 
 				return status;
 			}
-
-
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -836,6 +842,51 @@ namespace Lotus
 						}
 					}
 				}
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Вставить указанную директорию и все ее содержимое
+			/// </summary>
+			/// <param name="directory">Директория</param>
+			//---------------------------------------------------------------------------------------------------------
+			public void PasteFrom(DirectoryInfo directory)
+			{
+				//Now Create all of the directories
+				var sourcePath = directory.FullName;
+				var targetPath = Path.Combine(mInfo.FullName, directory.Name);
+
+				if (!Directory.Exists(targetPath))
+				{
+					Directory.CreateDirectory(targetPath);
+				}
+
+				foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+				{
+					Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+				}
+
+				//Copy all the files & Replaces any files with the same name
+				foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+				{
+					File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+				}
+
+				RecursiveFileSystemInfo();
+
+				if(OwnerViewItem is ILotusViewItemHierarchy itemHierarchy) 
+				{
+					itemHierarchy.BuildFromDataContext();
+				}
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Удаление директории
+			/// </summary>
+			//---------------------------------------------------------------------------------------------------------
+			public void Delete()
+			{
 			}
 			#endregion
 		}

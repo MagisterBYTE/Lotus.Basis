@@ -39,6 +39,7 @@ jobs:
         for project in ${{ steps.check-changes.outputs.changed-projects }}; do
         cd $project
         dotnet restore
+        done
 
     - name: Build and publish changed projects
       run: |
@@ -47,3 +48,4 @@ jobs:
         dotnet pack --include-source --output ./packages
         cd ..
         dotnet nuget push $project/packages/*.nupkg --source $project
+        done

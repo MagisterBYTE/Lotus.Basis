@@ -21,7 +21,7 @@ jobs:
       
     - name: Check changed projects
       run: |
-       changedProjects=$(git diff-tree -r --no-commit-id --name-only --diff-filter=AM HEAD -- "**/*.cs")
+       changedProjects=$('Lotus.Core')
        echo "Changed projects: $changedProjects"
        
     - name: Setup .NET

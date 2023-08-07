@@ -9,9 +9,9 @@
     <Authors>MagistrBYTE aka DanielDem</Authors>
     <Company>LotusPlatform</Company>
     <Copyright>MagistrBYTE aka DanielDem</Copyright>
-    <AssemblyVersion>1.9.0.0</AssemblyVersion>
-    <FileVersion>1.9.0.0</FileVersion>
-    <Version>1.9.0</Version>
+    <AssemblyVersion>1.9.1.0</AssemblyVersion>
+    <FileVersion>1.9.1.0</FileVersion>
+    <Version>1.9.1</Version>
     <Title>Lotus.Object3D</Title>
     <PackageTags></PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -30,10 +30,14 @@
     </Content>
     <None Include="Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Publish|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
   
   <ItemGroup Condition="'$(Configuration)' == 'Publish'">
-    <PackageReference Include="Lotus.Core" Version="1.9.0" />
-    <PackageReference Include="Lotus.Math" Version="1.9.0" />
+    <PackageReference Include="Lotus.Core" Version="1.9.1" />
+    <PackageReference Include="Lotus.Math" Version="1.9.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' != 'Publish'">

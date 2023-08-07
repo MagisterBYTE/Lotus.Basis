@@ -230,6 +230,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RenameAssets(String newFileName)
 			{
+#if UNITY_EDITOR
 				if (mInfo != null)
 				{
 					String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, newFileName);
@@ -238,6 +239,9 @@ namespace Lotus
 					NotifyPropertyChanged(PropertyArgsName);
 					RaiseNameChanged();
 				}
+#else
+
+#endif
 			}
 
 			//---------------------------------------------------------------------------------------------------------

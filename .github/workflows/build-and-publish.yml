@@ -18,29 +18,14 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      
-    - name: Check changed projects
-      run: |
-       changedProjects=$('Lotus.Core')
-       echo "Changed projects: $changedProjects"
-       
+            
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
         
     - name: Restore dependencies
-      run: |
-        for project in ${{ steps.check-changes.outputs.changed-projects }}; do
-        cd $project
-        dotnet restore
-        done
+      run: dotnet restore **/*.csproj
 
-    - name: Build and publish changed projects
-      run: |
-        for project in ${{ steps.check-changes.outputs.changed-projects }}; do
-        cd $project
-        dotnet pack --include-source --output ./packages
-        cd ..
-        dotnet nuget push $project/packages/*.nupkg --source $project
-        done
+    - name: Build  projects
+      run: dotnet build --configuration Release **/*.csproj

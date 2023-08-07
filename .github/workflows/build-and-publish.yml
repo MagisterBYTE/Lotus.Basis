@@ -16,24 +16,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Клонирование репозитория в рабочую директорию:
     - name: Checkout repository
-    - uses: actions/checkout@v3
-
-    # Проверка изменений в проектах с помощью сценария, который сравнивает коммиты с предыдущими коммитами
+      uses: actions/checkout@v3
+      
     - name: Check changed projects
       run: |
        changedProjects=$(git diff --name-only HEAD~..HEAD | awk -F '/' '{print $1}' | uniq)
        echo "Changed projects: $changedProjects"
        echo "::set-output name=changed-projects::$changedProjects"
        
-    # Установка среды .NET
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-
-    # Восстановление зависимостей проектов
+        
     - name: Restore dependencies
       run: |
         for project in ${{ steps.check-changes.outputs.changed-projects }}; do

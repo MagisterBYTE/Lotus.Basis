@@ -23,7 +23,7 @@ jobs:
       run: |
        changedProjects=$(git diff-tree -r --no-commit-id --name-only --diff-filter=AM HEAD -- "**/*.cs")
        echo "Changed projects: $changedProjects"
-       echo "::set-output name=changed-projects::$changedProjects"
+       echo "::save-state name=changed-projects::$changedProjects"
        
     - name: Setup .NET
       uses: actions/setup-dotnet@v3

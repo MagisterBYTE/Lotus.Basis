@@ -25,7 +25,7 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TKey">Тип ключа идентификатора</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public abstract class SoftDeletableEntityBase<TKey> : EntityBase<TKey>, ILotusSoftDeletable 
+		public abstract class SoftDeletableEntityBase<TKey> : RepositoryEntityBase<TKey>, ILotusRepositorySoftDeletable 
 			where TKey : struct, IEquatable<TKey>
 		{
 			/// <summary>

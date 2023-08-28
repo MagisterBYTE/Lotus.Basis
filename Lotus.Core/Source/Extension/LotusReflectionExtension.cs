@@ -102,7 +102,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean IsPrimitiveType(this Type @this)
 			{
-				return @this.IsPrimitive || @this.IsEnum || @this == typeof(String);
+				return @this.IsPrimitive || @this.IsEnum || @this == typeof(String) || @this == typeof(Guid);
 			}
 
 			//---------------------------------------------------------------------------------------------------------

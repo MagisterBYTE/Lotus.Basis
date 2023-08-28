@@ -25,7 +25,7 @@ namespace Lotus
 		/// Интерфейс для определения мягкого удаления
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public interface ILotusSoftDeletable
+		public interface ILotusRepositorySoftDeletable
 		{
 			/// <summary>
 			/// Дата удаления сущности

@@ -123,7 +123,7 @@ namespace Lotus
 		/// Определение интерфейса для представления параметра - объекта который содержит данные в формате имя=значения
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public interface IParameterItem : ICloneable, ILotusNameable, ILotusIdentifierId, ILotusOwnedObject
+		public interface IParameterItem : ICloneable, ILotusNameable, ILotusIdentifierLong, ILotusOwnedObject
 		{
 			#region ======================================= СВОЙСТВА ==================================================
 			//

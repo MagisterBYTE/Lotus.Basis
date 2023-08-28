@@ -154,9 +154,14 @@ namespace Lotus
 			public static readonly Boolean IsSupportNameable = typeof(TData).IsSupportInterface<ILotusNameable>();
 
 			/// <summary>
-			/// Статус реализации типом интерейса <see cref="ILotusIdentifierId"/>
+			/// Статус реализации типом интерейса <see cref="ILotusIdentifierInt"/>
 			/// </summary>
-			public static readonly Boolean IsSupportIdentifierId = typeof(TData).IsSupportInterface<ILotusIdentifierId>();
+			public static readonly Boolean IsSupportIdentifierInt = typeof(TData).IsSupportInterface<ILotusIdentifierInt>();
+
+			/// <summary>
+			/// Статус реализации типом интерейса <see cref="ILotusIdentifierLong"/>
+			/// </summary>
+			public static readonly Boolean IsSupportIdentifierLong = typeof(TData).IsSupportInterface<ILotusIdentifierLong>();
 
 			/// <summary>
 			/// Статус реализации типом интерейса <see cref="ILotusViewSelected"/>

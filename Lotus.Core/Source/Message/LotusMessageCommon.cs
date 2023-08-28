@@ -59,7 +59,7 @@ namespace Lotus
 		/// Таким образом фактически происходит циркуляция сообщений в системе без существенных накладных затрат
 		/// </remarks>
 		//-------------------------------------------------------------------------------------------------------------
-		public class CMessageArgs : ILotusPoolObject, ILotusIdentifierId<Int32>
+		public class CMessageArgs : ILotusPoolObject, ILotusIdentifierIdTemplate<Int32>
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры

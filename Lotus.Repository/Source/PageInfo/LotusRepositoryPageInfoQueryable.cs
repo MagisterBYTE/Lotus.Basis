@@ -48,7 +48,8 @@ namespace Lotus
 			/// <param name="pageSize">Размер страницы</param>
 			/// <returns>Запрос</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static IQueryable<TEntity> Paging<TEntity>(this IOrderedQueryable<TEntity> query, Int32 pageNumber, Int32 pageSize)
+			public static IQueryable<TEntity> Paging<TEntity>(this IOrderedQueryable<TEntity> query, Int32 pageNumber, 
+				Int32 pageSize)
 			{
 				query = query ?? throw new ArgumentNullException(nameof(query));
 
@@ -84,13 +85,20 @@ namespace Lotus
 			public static async Task<ResponsePage<TResponse>> ToResponsePageAsync<TEntity, TResponse>(
 				this IOrderedQueryable<TEntity> query, Request request, CancellationToken token = default)
 			{
-				return await query.ToResponsePageAsync<TEntity, TResponse>(request.PageInfo.PageNumber, 
-					request.PageInfo.PageSize, token);
+				if (request.PageInfo is null)
+				{
+					return await query.ToResponsePageAsync<TEntity, TResponse>(token);
+				}
+				else
+				{
+					return await query.ToResponsePageAsync<TEntity, TResponse>(request.PageInfo.PageNumber,
+						request.PageInfo.PageSize, token);
+				}
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Получение постраничничных данных
+			/// Получение постраничных данных
 			/// </summary>
 			/// <typeparam name="TEntity">Тип сущности</typeparam>
 			/// <typeparam name="TResponse">Тип данных ответа</typeparam>
@@ -112,6 +120,40 @@ namespace Lotus
 				{
 					PageNumber = page,
 					PageSize = pageSize,
+					CurrentPageSize = data.Length,
+					TotalCount = totalCount,
+				};
+
+				var paging = new ResponsePage<TResponse>
+				{
+					PageInfo = pageInfo,
+					Payload = data
+				};
+
+				return paging;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получение постраничных данных
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <typeparam name="TResponse">Тип данных ответа</typeparam>
+			/// <param name="query">Запрос</param>
+			/// <param name="token">Токен отмены</param>
+			/// <returns>Ответ</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static async Task<ResponsePage<TResponse>> ToResponsePageAsync<TEntity, TResponse>(
+				this IOrderedQueryable<TEntity> query, CancellationToken token = default)
+			{
+				var totalCount = await query.CountAsync(token);
+				var data = await query.ProjectToType<TResponse>()
+					.ToArrayAsync(token);
+
+				var pageInfo = new CPageInfoResponse()
+				{
+					PageNumber = 0,
+					PageSize = totalCount,
 					CurrentPageSize = data.Length,
 					TotalCount = totalCount,
 				};

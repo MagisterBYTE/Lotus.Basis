@@ -10,19 +10,13 @@
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Common;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Net.WebSockets;
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Security;
-using System.Xml.Linq;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -55,7 +49,7 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TPropertyType">Тип свойства</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public class Filter<TPropertyType> : ILotusFilterProperty where TPropertyType : IComparable<TPropertyType> 
+		public class Filter<TPropertyType> : ILotusFilterProperty where TPropertyType : IComparable<TPropertyType>
 		{
 			/// <summary>
 			/// Свойство/поле по которому идет фильтрация 
@@ -197,7 +191,7 @@ namespace Lotus
 				var value = index == -1 ? Value! : Values![index];
 
 				ConstantExpression constantExpression = null;
-				switch (PropertyType) 
+				switch (PropertyType)
 				{
 					case TEntityPropertyType.Boolean:
 						{
@@ -276,7 +270,7 @@ namespace Lotus
 			/// <param name="propertyType">Тип свойства p</param>
 			/// <returns>Лямбда выражения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public LambdaExpression GetContainsExpression(Type propertyType)
+			public LambdaExpression GetContainsInPropertyExpression(Type propertyType)
 			{
 				var parameter = Expression.Parameter(propertyType, "o");
 
@@ -300,7 +294,7 @@ namespace Lotus
 			/// <param name="propertyType">Тип свойства p</param>
 			/// <returns>Лямбда выражения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public LambdaExpression GetNotContainsExpression(Type propertyType)
+			public LambdaExpression GetNotContainsInPropertyExpression(Type propertyType)
 			{
 				var parameter = Expression.Parameter(propertyType, "o");
 
@@ -317,6 +311,44 @@ namespace Lotus
 				var lambda = Expression.Lambda(containsNot, parameter);
 
 				return lambda;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получить выражение [o => ids.Contains(p)] для искомого значения 
+			/// </summary>
+			/// <param name="propertyExpression">Выражение для объекта p</param>
+			/// <returns>Выражение</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public Expression GetContainsInObjectExpression(MemberExpression propertyExpression)
+			{
+				var containsMethod = XExpressionFilters.GetEnumerableContainsMethod(PropertyType);
+
+				var constantIds = GetArrayExpression();
+
+				var containsCall = Expression.Call(null, containsMethod, constantIds, propertyExpression);
+
+				return containsCall;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получить выражение [o => !(ids.Contains(p))] для искомого значения 
+			/// </summary>
+			/// <param name="propertyExpression">Выражение для объекта p</param>
+			/// <returns>Выражение</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public Expression GetNotContainsInObjectExpression(MemberExpression propertyExpression)
+			{
+				var containsMethod = XExpressionFilters.GetEnumerableContainsMethod(PropertyType);
+
+				var constantIds = GetArrayExpression();
+
+				var containsCall = Expression.Call(null, containsMethod, constantIds, propertyExpression);
+
+				var containsNot = Expression.Not(containsCall);
+
+				return containsNot;
 			}
 			#endregion
 		}

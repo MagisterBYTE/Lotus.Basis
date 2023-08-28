@@ -49,19 +49,23 @@ namespace Lotus
 						{
 							return XReflection.GetEnumerableContainsMethod(typeof(Int32));
 						}
-					case TEntityPropertyType.Enum:
-						break;
 					case TEntityPropertyType.Float:
 						{
 							return XReflection.GetEnumerableContainsMethod(typeof(Single));
 						}
+					case TEntityPropertyType.String:
+						{
+							return XReflection.GetEnumerableContainsMethod(typeof(String));
+						}
+					case TEntityPropertyType.Enum:
+						break;
 					case TEntityPropertyType.DateTime:
 						{
 							return XReflection.GetEnumerableContainsMethod(typeof(DateTime));
 						}
-					case TEntityPropertyType.String:
+					case TEntityPropertyType.Guid:
 						{
-							return XReflection.GetEnumerableContainsMethod(typeof(String));
+							return XReflection.GetEnumerableContainsMethod(typeof(Guid));
 						}
 				}
 
@@ -85,19 +89,23 @@ namespace Lotus
 						{
 							return XReflection.GetEnumerableAnyMethod(typeof(Int32));
 						}
-					case TEntityPropertyType.Enum:
-						break;
 					case TEntityPropertyType.Float:
 						{
 							return XReflection.GetEnumerableAnyMethod(typeof(Single));
 						}
+					case TEntityPropertyType.String:
+						{
+							return XReflection.GetEnumerableAnyMethod(typeof(String));
+						}
+					case TEntityPropertyType.Enum:
+						break;
 					case TEntityPropertyType.DateTime:
 						{
 							return XReflection.GetEnumerableAnyMethod(typeof(DateTime));
 						}
-					case TEntityPropertyType.String:
+					case TEntityPropertyType.Guid:
 						{
-							return XReflection.GetEnumerableAnyMethod(typeof(String));
+							return XReflection.GetEnumerableAnyMethod(typeof(Guid));
 						}
 				}
 
@@ -121,20 +129,25 @@ namespace Lotus
 						{
 							return XReflection.GetEnumerableAllMethod(typeof(Int32));
 						}
-					case TEntityPropertyType.Enum:
-						break;
 					case TEntityPropertyType.Float:
 						{
 							return XReflection.GetEnumerableAllMethod(typeof(Single));
-						}
-					case TEntityPropertyType.DateTime:
-						{
-							return XReflection.GetEnumerableAllMethod(typeof(DateTime));
 						}
 					case TEntityPropertyType.String:
 						{
 							return XReflection.GetEnumerableAllMethod(typeof(String));
 						}
+					case TEntityPropertyType.Enum:
+						break;
+					case TEntityPropertyType.DateTime:
+						{
+							return XReflection.GetEnumerableAllMethod(typeof(DateTime));
+						}
+					case TEntityPropertyType.Guid:
+						{
+							return XReflection.GetEnumerableAllMethod(typeof(Guid));
+						}
+
 				}
 
 				return XReflection.GetEnumerableAllMethod(typeof(System.Byte));
@@ -159,7 +172,7 @@ namespace Lotus
 				// Создаем свойство дерева выражений
 				var property = Expression.Property(parameter, propertyInfo);
 
-				Expression body = null;
+				Expression? body = null;
 
 				switch (filterProperty.Function)
 				{
@@ -226,34 +239,54 @@ namespace Lotus
 					case TFilterFunction.IncludeAll:
 						{
 							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
+							if (propertyType.IsPrimitiveType() == false)
+							{
+								var lambdaContains = filterProperty.GetContainsInPropertyExpression(propertyType);
 
-							var lambdaContains = filterProperty.GetContainsExpression(propertyType);
+								var anyMethod = XReflection.GetEnumerableAnyMethod(propertyType);
 
-							var anyMethod = XReflection.GetEnumerableAnyMethod(propertyType);
-
-							body = Expression.Call(null, anyMethod, property, lambdaContains);
+								body = Expression.Call(null, anyMethod, property, lambdaContains);
+							}
+							else
+							{
+								body = filterProperty.GetContainsInObjectExpression(property);
+							}
 						}
 						break;
 					case TFilterFunction.IncludeEquals:
 						{
 							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
 
-							var lambdaContains = filterProperty.GetContainsExpression(propertyType);
+							if (propertyType.IsPrimitiveType() == false)
+							{
+								var lambdaContains = filterProperty.GetContainsInPropertyExpression(propertyType);
 
-							var allMethod = XReflection.GetEnumerableAllMethod(propertyType);
+								var allMethod = XReflection.GetEnumerableAllMethod(propertyType);
 
-							body = Expression.Call(null, allMethod, property, lambdaContains);
+								body = Expression.Call(null, allMethod, property, lambdaContains);
+							}
+							else
+							{
+								body = filterProperty.GetContainsInObjectExpression(property);
+							}
 						}
 						break;
 					case TFilterFunction.IncludeNone:
 						{
 							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
 
-							var lambdaNotContains = filterProperty.GetNotContainsExpression(propertyType);
+							if (propertyType.IsPrimitiveType() == false)
+							{
+								var lambdaNotContains = filterProperty.GetNotContainsInPropertyExpression(propertyType);
 
-							var allMethod = XReflection.GetEnumerableAllMethod(propertyType);
+								var allMethod = XReflection.GetEnumerableAllMethod(propertyType);
 
-							body = Expression.Call(null, allMethod, property, lambdaNotContains);
+								body = Expression.Call(null, allMethod, property, lambdaNotContains);
+							}
+							else
+							{
+								body = filterProperty.GetNotContainsInObjectExpression(property);
+							}
 						}
 						break;
 					default:
@@ -261,7 +294,7 @@ namespace Lotus
 				}
 
 				// Получаем итоговую лямбду
-				var result = Expression.Lambda<Func<TItem, Boolean>>(body, parameter);
+				var result = Expression.Lambda<Func<TItem, Boolean>>(body!, parameter);
 
 				return result;
 			}

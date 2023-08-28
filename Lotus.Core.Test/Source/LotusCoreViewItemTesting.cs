@@ -38,7 +38,7 @@ namespace Lotus
 			/// Служебный класс для тестирования
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public class CActivity : COwnedObject, IComparable<CActivity>, ILotusIdentifierId
+			public class CActivity : COwnedObject, IComparable<CActivity>, ILotusIdentifierLong
 			{
 				public String Vilage { get; set; }
 				public String Programm { get; set; }
@@ -145,10 +145,10 @@ namespace Lotus
 				view_item.IsSelected = true;
 				view_item.IsPresented = true;
 
-				Assert.AreEqual(ViewItem<CActivity>.IsSupportIdentifierId, true);
-				Assert.AreEqual(ViewItem<CActivity>.IsSupportNameable, false);
-				Assert.AreEqual(ViewItem<CActivity>.IsSupportViewEnabled, false);
-				Assert.AreEqual(ViewItem<CActivity>.IsSupportViewSelected, false);
+				Assert.AreEqual(true, ViewItem<CActivity>.IsSupportIdentifierLong);
+				Assert.AreEqual(false, ViewItem<CActivity>.IsSupportNameable);
+				Assert.AreEqual(false, ViewItem<CActivity>.IsSupportViewEnabled);
+				Assert.AreEqual(false, ViewItem<CActivity>.IsSupportViewSelected);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -163,10 +163,10 @@ namespace Lotus
 				viewItems.Source = CActivity.Activities;
 				
 				// Общие данные
-				Assert.AreEqual(viewItems.Count, 10);
-				Assert.AreEqual(CollectionView<ViewItem<CActivity>, CActivity>.IsNullable, true);
-				Assert.AreEqual(viewItems.IsReadOnly, false);
-				Assert.AreEqual(viewItems.IsFixedSize, true);
+				Assert.AreEqual(10, viewItems.Count);
+				Assert.AreEqual(true, CollectionView<ViewItem<CActivity>, CActivity>.IsNullable);
+				Assert.AreEqual(false, viewItems.IsReadOnly);
+				Assert.AreEqual(true, viewItems.IsFixedSize);
 
 				// Проверка имени 
 				for (var i = 0; i < CActivity.Activities.Length; i++)
@@ -178,13 +178,13 @@ namespace Lotus
 				viewItems.SortAscending();
 				for (var i = 0; i < CActivity.Activities.Length; i++)
 				{
-					Assert.AreEqual(viewItems[i].DataContext.Price, CActivity.Activities[i].Price);
+					Assert.AreEqual(CActivity.Activities[i].Price, viewItems[i].DataContext.Price);
 				}
 
 				viewItems.SortDescending();
 				for (var i = 0; i < CActivity.Activities.Length; i++)
 				{
-					Assert.AreEqual(viewItems[i].DataContext.Price, CActivity.Activities[9 - i].Price);
+					Assert.AreEqual(CActivity.Activities[9 - i].Price, viewItems[i].DataContext.Price);
 				}
 
 				// Фильтрация
@@ -193,13 +193,13 @@ namespace Lotus
 				{
 					return activity.Price > 5;
 				};
-				Assert.AreEqual(viewItems.Count, 5);
+				Assert.AreEqual(5, viewItems.Count);
 				viewItems.SortDescending();
-				Assert.AreEqual(viewItems[0].DataContext.Price, 10);
-				Assert.AreEqual(viewItems[1].DataContext.Price, 9);
-				Assert.AreEqual(viewItems[2].DataContext.Price, 8);
-				Assert.AreEqual(viewItems[3].DataContext.Price, 7);
-				Assert.AreEqual(viewItems[4].DataContext.Price, 6);
+				Assert.AreEqual(10, viewItems[0].DataContext.Price);
+				Assert.AreEqual(9, viewItems[1].DataContext.Price);
+				Assert.AreEqual(8, viewItems[2].DataContext.Price);
+				Assert.AreEqual(7, viewItems[3].DataContext.Price);
+				Assert.AreEqual(6, viewItems[4].DataContext.Price);
 
 				// Удаление
 				//viewItems.RemoveAll()

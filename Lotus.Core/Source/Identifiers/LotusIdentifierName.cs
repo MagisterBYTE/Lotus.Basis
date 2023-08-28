@@ -140,8 +140,8 @@ namespace Lotus
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
 		[Serializable]
-		public class CNameableId : PropertyChangedBase, ILotusNameable, ILotusIdentifierId, IComparable<ILotusNameable>, 
-			IComparable<CNameableId>, ILotusSupportViewInspector
+		public class CNameableInt : PropertyChangedBase, ILotusNameable, ILotusIdentifierInt, IComparable<ILotusNameable>, 
+			IComparable<CNameableInt>, ILotusSupportViewInspector
 		{
 			#region ======================================= СТАТИЧЕСКИЕ ДАННЫЕ ========================================
 			//
@@ -162,7 +162,7 @@ namespace Lotus
 			[UnityEngine.SerializeField]
 			[UnityEngine.HideInInspector]
 #endif
-			protected internal Int64 mId;
+			protected internal Int32 mId;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -183,8 +183,7 @@ namespace Lotus
 			/// <summary>
 			/// Уникальный идентификатор объекта
 			/// </summary>
-			[Browsable(false)]
-			public virtual Int64 Id
+			public virtual Int32 Id
 			{
 				get { return mId; }
 				set
@@ -201,7 +200,7 @@ namespace Lotus
 			/// </summary>
 			public virtual String InspectorTypeName
 			{
-				get { return nameof(CNameableId); }
+				get { return nameof(CNameableInt); }
 			}
 
 			/// <summary>
@@ -229,7 +228,7 @@ namespace Lotus
 			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public CNameableId()
+			public CNameableInt()
 				: this(String.Empty)
 			{
 
@@ -241,7 +240,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="name">Имя объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CNameableId(String name)
+			public CNameableInt(String name)
 			{
 				mName = name;
 			}
@@ -252,7 +251,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="id">Идентификатор объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CNameableId(Int64 id)
+			public CNameableInt(Int32 id)
 			{
 				mId = id;
 			}
@@ -266,8 +265,9 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус сравнения объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(ILotusNameable other)
+			public Int32 CompareTo(ILotusNameable? other)
 			{
+				if (other == null) { return 0; }
 				return mName.CompareTo(other.Name);
 			}
 
@@ -278,8 +278,9 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус сравнения объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CNameableId other)
+			public Int32 CompareTo(CNameableInt? other)
 			{
+				if (other == null) { return 0; }
 				return mName.CompareTo(other.Name);
 			}
 

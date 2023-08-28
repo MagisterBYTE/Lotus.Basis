@@ -29,7 +29,7 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TKey">Тип ключа</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public class EntityDb<TKey> : ILotusIdentifierId<TKey> where TKey : IEquatable<TKey>
+		public class EntityDb<TKey> : ILotusIdentifierIdTemplate<TKey> where TKey : IEquatable<TKey>
 		{
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>

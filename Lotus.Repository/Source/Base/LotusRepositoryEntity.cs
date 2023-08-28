@@ -30,7 +30,7 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TKey">Тип ключа(идентификатора)</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public interface ILotusEntity<TKey> : ILotusIdentifierId<TKey> where TKey : struct, IEquatable<TKey> 
+		public interface ILotusRepositoryEntity<TKey> : ILotusIdentifierId<TKey> where TKey : struct, IEquatable<TKey> 
 		{
 			/// <summary>
 			/// Дата создания сущности
@@ -49,10 +49,10 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TKey">Тип ключа(идентификатора)</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public abstract class EntityBase<TKey> : ILotusEntity<TKey> where TKey : struct, IEquatable<TKey>
+		public abstract class RepositoryEntityBase<TKey> : ILotusRepositoryEntity<TKey> where TKey : struct, IEquatable<TKey>
 		{
 			/// <summary>
-			/// Идентификатор объекта
+			/// Идентификатор сущности
 			/// </summary>
 			public TKey Id { get; set; }
 
@@ -72,7 +72,7 @@ namespace Lotus
 		/// Определение базовой сущности репозитория с поддержкой глобального уникального идентификатора
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public abstract class CEntityBase : EntityBase<Guid>
+		public abstract class RepositoryEntity : RepositoryEntityBase<Guid>
 		{
 		}
 		//-------------------------------------------------------------------------------------------------------------

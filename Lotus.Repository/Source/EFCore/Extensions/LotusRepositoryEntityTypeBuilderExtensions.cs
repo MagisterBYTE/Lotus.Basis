@@ -46,7 +46,7 @@ namespace Lotus
 			/// <returns>Построитель сущности</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static EntityTypeBuilder<TEntity> AddKeyColumn<TEntity>(this EntityTypeBuilder<TEntity> builder)
-				where TEntity : class, ILotusEntity<Guid>
+				where TEntity : class, ILotusRepositoryEntity<Guid>
 			{
 				builder.HasKey(x => x.Id);
 				builder.Property(x => x.Id).HasColumnName("id");
@@ -64,7 +64,7 @@ namespace Lotus
 			/// <returns>Построитель сущности</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static IndexBuilder<TEntity> HasNotDeletedPartialUniqueIndex<TEntity>(this EntityTypeBuilder<TEntity> builder,
-				[NotNull] Expression<Func<TEntity, object>> indexExpression) where TEntity : class, ILotusSoftDeletable
+				[NotNull] Expression<Func<TEntity, object>> indexExpression) where TEntity : class, ILotusRepositorySoftDeletable
 			{
 				return builder
 					.HasIndex(indexExpression)
@@ -81,7 +81,7 @@ namespace Lotus
 			/// <returns>Построитель сущности</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static EntityTypeBuilder<TEntity> SetDatesPolicy<TEntity>(this EntityTypeBuilder<TEntity> builder)
-				where TEntity : class, ILotusEntity<Guid>
+				where TEntity : class, ILotusRepositoryEntity<Guid>
 			{
 				builder
 					.Property(x => x.Created)
@@ -131,7 +131,7 @@ namespace Lotus
 			/// <returns>Построитель сущности</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static EntityTypeBuilder<TEntity> SetSoftDeletePolicy<TEntity>(this EntityTypeBuilder<TEntity> builder)
-				where TEntity : class, ILotusSoftDeletable
+				where TEntity : class, ILotusRepositorySoftDeletable
 			{
 				builder.Property(x => x.Deleted).HasColumnName("deleted");
 

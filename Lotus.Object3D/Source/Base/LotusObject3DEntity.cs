@@ -33,7 +33,7 @@ namespace Lotus
 		/// Базовая сущность в подсистеме 3D объекта для формирование иерархической структуры трехмерной сцены
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public class CEntity3D : CNameableId, ILotusViewItemOwner, ILotusViewItemBuilder, ILotusSupportViewInspector
+		public class CEntity3D : CNameableInt, ILotusViewItemOwner, ILotusViewItemBuilder, ILotusSupportViewInspector
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			protected internal ILotusViewItem mOwnerViewItem;

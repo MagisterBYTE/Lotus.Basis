@@ -12,6 +12,7 @@
 //=====================================================================================================================
 using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -57,7 +58,7 @@ namespace Lotus
 			/// <summary>
 			/// Событие срабатывает ПОСЛЕ изменения свойства
 			/// </summary>
-			public event PropertyChangedEventHandler PropertyChanged;
+			public event PropertyChangedEventHandler? PropertyChanged;
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -65,7 +66,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="propertyName">Имя свойства</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void NotifyPropertyChanged(String propertyName = "")
+			public void NotifyPropertyChanged([CallerMemberName] String? propertyName = null)
 			{
 				if (PropertyChanged != null)
 				{

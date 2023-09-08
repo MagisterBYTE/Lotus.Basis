@@ -42,6 +42,8 @@ namespace Lotus
 
 			public DbSet<Role> Roles { get; set; } = default!;
 
+			public DbSet<ResourceFile> ResourceFiles { get; set; } = default!;
+
 			public DomainContext(DbContextOptions<DomainContext> options)
 				: base(options)
 			{

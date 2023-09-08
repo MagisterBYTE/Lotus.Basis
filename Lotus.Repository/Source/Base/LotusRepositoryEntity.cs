@@ -30,7 +30,8 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TKey">Тип ключа(идентификатора)</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public interface ILotusRepositoryEntity<TKey> : ILotusIdentifierId<TKey> where TKey : struct, IEquatable<TKey> 
+		public interface ILotusRepositoryEntity<TKey> : ILotusIdentifierIdTemplate<TKey> 
+			where TKey : struct, IEquatable<TKey> 
 		{
 			/// <summary>
 			/// Дата создания сущности
@@ -49,7 +50,8 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TKey">Тип ключа(идентификатора)</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public abstract class RepositoryEntityBase<TKey> : ILotusRepositoryEntity<TKey> where TKey : struct, IEquatable<TKey>
+		public abstract class RepositoryEntityBase<TKey> : ILotusRepositoryEntity<TKey> 
+			where TKey : struct, IEquatable<TKey>
 		{
 			/// <summary>
 			/// Идентификатор сущности

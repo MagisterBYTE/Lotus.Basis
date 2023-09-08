@@ -3,7 +3,7 @@
 // Проект: Модуль репозитория
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusDomainContextFixture.cs
+/** \file LotusDomainDataStorage.cs
 *		Контекст базы данных для тестирования.
 */
 //---------------------------------------------------------------------------------------------------------------------
@@ -13,6 +13,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Repository;
 //=====================================================================================================================
@@ -25,38 +27,11 @@ namespace Lotus
 		/// Контекст базы данных для тестирования
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public class DomainContextFixture
+		public class DomainDataStorage : DataStorageContextDb<DomainContext>
 		{
-			private static readonly Object _lock = new();
-			private static Boolean _databaseInitialized;
-
-			public DomainContextFixture()
+			public DomainDataStorage(DomainContext context) 
+				: base(context)
 			{
-				lock (_lock)
-				{
-					if (!_databaseInitialized)
-					{
-						using (var context = CreateContext())
-						{
-							context.Database.EnsureDeleted();
-							context.Database.EnsureCreated();
-
-							context.Initialize();
-						}
-
-						_databaseInitialized = true;
-					}
-				}
-			}
-
-			public DomainDataStorage CreateDataStorage()
-			{
-				return new DomainDataStorage(CreateContext());
-			}
-
-			public DomainContext CreateContext()
-			{
-				return DomainContext.Create(XConnection.ConnectionString);
 			}
 		}
 	}

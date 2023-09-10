@@ -14,6 +14,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
+using Microsoft.EntityFrameworkCore;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -34,6 +35,22 @@ namespace Lotus
 			/// Имя таблицы
 			/// </summary>
 			public const String TABLE_NAME = "ResourceFile";
+			#endregion
+
+			#region ======================================= МЕТОДЫ ОПРЕДЕЛЕНИЯ МОДЕЛЕЙ ================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Конфигурирование модели для типа <see cref="ResourceFile"/>
+			/// </summary>
+			/// <param name="modelBuilder">Интерфейс для построения моделей</param>
+			/// <param name="schemeName">Схема куда будет помещена таблица</param>
+			//---------------------------------------------------------------------------------------------------------
+			public static void ModelCreating(ModelBuilder modelBuilder, String schemeName)
+			{
+				// Определение для таблицы
+				var model = modelBuilder.Entity<ResourceFile>();
+				model.ToTable(TABLE_NAME, schemeName);
+			}
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================

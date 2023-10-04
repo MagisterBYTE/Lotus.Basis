@@ -155,7 +155,7 @@ namespace Lotus
 							break;
 						case TResourceFileStorage.Database:
 							{
-								using BinaryReader binaryReader = new BinaryReader(requestStream.ReadStream);
+								using var binaryReader = new BinaryReader(requestStream.ReadStream);
 								var bytes = binaryReader.ReadBytes((Int32)requestStream.ReadStream.Length);
 								entity.StorageType = TResourceFileStorage.Database;
 
@@ -266,7 +266,7 @@ namespace Lotus
 					return XResponse.Failed<FileBase64Dto>(XResourceFileErrors.NotFound);
 				}
 
-				FileBase64Dto result = entity.ToFileBase64Dto();
+				var result = entity.ToFileBase64Dto();
 
 				return XResponse.Succeed(result);
 			}
@@ -303,7 +303,7 @@ namespace Lotus
 
 				var result = await queryOrder.ToResponsePageAsync<ResourceFile>(filesRequest, token);
 
-				ResponsePage<FileBase64Dto> response = new ResponsePage<FileBase64Dto>()
+				var response = new ResponsePage<FileBase64Dto>()
 				{
 					Result = result.Result,
 					PageInfo = result.PageInfo,

@@ -144,7 +144,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public FileDto ToFileDto()
 			{
-				FileDto dto = new FileDto();
+				var dto = new FileDto();
 				dto.Name = Name;
 				dto.Id = Id;
 				dto.SizeInBytes = SizeInBytes;
@@ -159,7 +159,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public FileBase64Dto ToFileBase64Dto()
 			{
-				FileBase64Dto dto = new FileBase64Dto();
+				var dto = new FileBase64Dto();
 				dto.Name = Name;
 				dto.Id = Id;
 				dto.SizeInBytes = SizeInBytes;

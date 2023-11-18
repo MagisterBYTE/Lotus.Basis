@@ -210,21 +210,21 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Vector2Df[] mControlPoints;
+			protected internal Vector2Df[] _controlPoints;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Int32 mSegmentsSpline = 10;
+			protected internal Int32 _segmentsSpline = 10;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal List<Vector2Df> mDrawingPoints;
+			protected internal List<Vector2Df> _drawingPoints;
 			[NonSerialized]
-			internal Single mLength = 0;
+			protected internal Single _length = 0;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal List<TMoveSegment> mSegmentsPath;
+			protected internal List<TMoveSegment> _segmentsPath;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -233,8 +233,8 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df StartPoint
 			{
-				get { return mControlPoints[0]; }
-				set { mControlPoints[0] = value; }
+				get { return _controlPoints[0]; }
+				set { _controlPoints[0] = value; }
 			}
 
 			/// <summary>
@@ -242,8 +242,8 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df EndPoint
 			{
-				get { return mControlPoints[mControlPoints.Length - 1]; }
-				set { mControlPoints[mControlPoints.Length - 1] = value; }
+				get { return _controlPoints[_controlPoints.Length - 1]; }
+				set { _controlPoints[_controlPoints.Length - 1] = value; }
 			}
 
 			/// <summary>
@@ -254,12 +254,12 @@ namespace Lotus
 			/// </remarks>
 			public Int32 SegmentsSpline
 			{
-				get { return mSegmentsSpline; }
+				get { return _segmentsSpline; }
 				set
 				{
-					if (mSegmentsSpline != value)
+					if (_segmentsSpline != value)
 					{
-						mSegmentsSpline = value;
+						_segmentsSpline = value;
 						OnUpdateSpline();
 					}
 				}
@@ -272,7 +272,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountPoints
 			{
-				get { return mControlPoints.Length; }
+				get { return _controlPoints.Length; }
 			}
 
 			/// <summary>
@@ -280,7 +280,7 @@ namespace Lotus
 			/// </summary>
 			public Single Length
 			{
-				get { return mLength; }
+				get { return _length; }
 			}
 
 			/// <summary>
@@ -288,7 +288,7 @@ namespace Lotus
 			/// </summary>
 			public IList<Vector2Df> ControlPoints
 			{
-				get { return mControlPoints; }
+				get { return _controlPoints; }
 			}
 
 			/// <summary>
@@ -296,7 +296,7 @@ namespace Lotus
 			/// </summary>
 			public IList<Vector2Df> DrawingPoints
 			{
-				get { return mDrawingPoints; }
+				get { return _drawingPoints; }
 			}
 			#endregion
 
@@ -309,9 +309,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CSplineBase2D(Int32 count)
 			{
-				mControlPoints = new Vector2Df[count];
-				mDrawingPoints = new List<Vector2Df>();
-				mSegmentsPath = new List<TMoveSegment>();
+				_controlPoints = new Vector2Df[count];
+				_drawingPoints = new List<Vector2Df>();
+				_segmentsPath = new List<TMoveSegment>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -323,12 +323,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CSplineBase2D(Vector2Df startPoint, Vector2Df endPoint)
 			{
-				mControlPoints = new Vector2Df[3];
-				mControlPoints[0] = startPoint;
-				mControlPoints[1] = (startPoint + endPoint) / 2;
-				mControlPoints[2] = endPoint;
-				mDrawingPoints = new List<Vector2Df>();
-				mSegmentsPath = new List<TMoveSegment>();
+				_controlPoints = new Vector2Df[3];
+				_controlPoints[0] = startPoint;
+				_controlPoints[1] = (startPoint + endPoint) / 2;
+				_controlPoints[2] = endPoint;
+				_drawingPoints = new List<Vector2Df>();
+				_segmentsPath = new List<TMoveSegment>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -339,10 +339,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CSplineBase2D(params Vector2Df[] controlPoints)
 			{
-				mControlPoints = new Vector2Df[controlPoints.Length];
-				Array.Copy(controlPoints, mControlPoints, controlPoints.Length);
-				mDrawingPoints = new List<Vector2Df>();
-				mSegmentsPath = new List<TMoveSegment>();
+				_controlPoints = new Vector2Df[controlPoints.Length];
+				Array.Copy(controlPoints, _controlPoints, controlPoints.Length);
+				_drawingPoints = new List<Vector2Df>();
+				_segmentsPath = new List<TMoveSegment>();
 			}
 			#endregion
 
@@ -369,29 +369,29 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ComputeDrawingPoints()
 			{
-				mDrawingPoints.Clear();
-				Vector2Df prev = mControlPoints[0];
-				mDrawingPoints.Add(prev);
-				for (var i = 1; i < mSegmentsSpline; i++)
+				_drawingPoints.Clear();
+				Vector2Df prev = _controlPoints[0];
+				_drawingPoints.Add(prev);
+				for (var i = 1; i < _segmentsSpline; i++)
 				{
-					var time = (Single)i / mSegmentsSpline;
+					var time = (Single)i / _segmentsSpline;
 					Vector2Df point = CalculatePoint(time);
 					
 					// Добавляем если длина больше
 					if ((point - prev).SqrLength > MinimalSqrLine)
 					{
-						mDrawingPoints.Add(point);
+						_drawingPoints.Add(point);
 						prev = point;
 					}
 				}
 
-				mDrawingPoints.Add(EndPoint);
+				_drawingPoints.Add(EndPoint);
 
 				// Проверяем еще раз
-				if ((mDrawingPoints[mDrawingPoints.Count - 1] - mDrawingPoints[mDrawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
+				if ((_drawingPoints[_drawingPoints.Count - 1] - _drawingPoints[_drawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
 				{
-					mDrawingPoints.RemoveAt(mDrawingPoints.Count - 1);
-					mDrawingPoints[mDrawingPoints.Count - 1] = EndPoint;
+					_drawingPoints.RemoveAt(_drawingPoints.Count - 1);
+					_drawingPoints[_drawingPoints.Count - 1] = EndPoint;
 				}
 			}
 
@@ -405,14 +405,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ComputeLengthSpline()
 			{
-				mLength = 0;
-				mSegmentsPath.Clear();
-				for (var i = 1; i < mDrawingPoints.Count; i++)
+				_length = 0;
+				_segmentsPath.Clear();
+				for (var i = 1; i < _drawingPoints.Count; i++)
 				{
-					var length = (mDrawingPoints[i] - mDrawingPoints[i - 1]).Length;
-					mLength += length;
-					var segment = new TMoveSegment(length, mLength);
-					mSegmentsPath.Add(segment);
+					var length = (_drawingPoints[i] - _drawingPoints[i - 1]).Length;
+					_length += length;
+					var segment = new TMoveSegment(length, _length);
+					_segmentsPath.Add(segment);
 				}
 			}
 
@@ -429,9 +429,9 @@ namespace Lotus
 			{
 				Single x_min = StartPoint.X, x_max = EndPoint.X, y_min = StartPoint.Y, y_max = EndPoint.Y;
 
-				for (var i = 0; i < mDrawingPoints.Count; i++)
+				for (var i = 0; i < _drawingPoints.Count; i++)
 				{
-					Vector2Df point = mDrawingPoints[i];
+					Vector2Df point = _drawingPoints[i];
 					if (point.X < x_min) x_min = point.X;
 					if (point.X > x_max) x_max = point.X;
 					if (point.Y < y_min) y_min = point.Y;
@@ -470,10 +470,10 @@ namespace Lotus
 
 				// Находим в какой отрезок попадает эта позиция
 				var index = 0;
-				for (var i = 0; i < mSegmentsPath.Count; i++)
+				for (var i = 0; i < _segmentsPath.Count; i++)
 				{
 					// Если позиция меньше значит она попала в отрезок
-					if (position < mSegmentsPath[i].Summa)
+					if (position < _segmentsPath[i].Summa)
 					{
 						index = i;
 						break;
@@ -485,15 +485,15 @@ namespace Lotus
 
 				if (index == 0)
 				{
-					delta = position / mSegmentsPath[index].Length;
+					delta = position / _segmentsPath[index].Length;
 				}
 				else
 				{
-					delta = (position - mSegmentsPath[index - 1].Summa) / mSegmentsPath[index].Length;
+					delta = (position - _segmentsPath[index - 1].Summa) / _segmentsPath[index].Length;
 				}
 
 				// Интерполируем позицию
-				return Vector2Df.Lerp(mDrawingPoints[index], mDrawingPoints[index + 1], delta);
+				return Vector2Df.Lerp(_drawingPoints[index], _drawingPoints[index + 1], delta);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -534,10 +534,10 @@ namespace Lotus
 			public Single GetMoveTime(Vector2Df position, Single epsilon = 0.01f)
 			{
 				// Просматриваем все отрезки и находим нужное положение
-				for (var i = 1; i < mDrawingPoints.Count; i++)
+				for (var i = 1; i < _drawingPoints.Count; i++)
 				{
-					Vector2Df p1 = mDrawingPoints[i] - mDrawingPoints[i - 1];
-					Vector2Df p2 = position - mDrawingPoints[i - 1];
+					Vector2Df p1 = _drawingPoints[i] - _drawingPoints[i - 1];
+					Vector2Df p2 = position - _drawingPoints[i - 1];
 
 					var angle = Vector2Df.Dot(p2, p1) / Vector2Df.Dot(p2, p1);
 					if (angle + epsilon > 0 && angle - epsilon < 1)
@@ -607,10 +607,10 @@ namespace Lotus
 				}
 				GL.Begin(GL.LINES);
 				{
-					for (var i = 1; i < mDrawingPoints.Count; i++)
+					for (var i = 1; i < _drawingPoints.Count; i++)
 					{
-						var p1 = new Vector2Df(mDrawingPoints[i - 1].X, Screen.height - mDrawingPoints[i - 1].Y);
-						var p2 = new Vector2Df(mDrawingPoints[i].X, Screen.height - mDrawingPoints[i].Y);
+						var p1 = new Vector2Df(_drawingPoints[i - 1].X, Screen.height - _drawingPoints[i - 1].Y);
+						var p2 = new Vector2Df(_drawingPoints[i].X, Screen.height - _drawingPoints[i].Y);
 
 						if (is_alternative)
 						{
@@ -641,11 +641,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected virtual void CheckCorrectStartPoint()
 			{
-				mDrawingPoints[mDrawingPoints.Count - 1] = StartPoint;
-				if ((mDrawingPoints[mDrawingPoints.Count - 1] - mDrawingPoints[mDrawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
+				_drawingPoints[_drawingPoints.Count - 1] = StartPoint;
+				if ((_drawingPoints[_drawingPoints.Count - 1] - _drawingPoints[_drawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
 				{
-					mDrawingPoints.RemoveAt(mDrawingPoints.Count - 1);
-					mDrawingPoints[mDrawingPoints.Count - 1] = StartPoint;
+					_drawingPoints.RemoveAt(_drawingPoints.Count - 1);
+					_drawingPoints[_drawingPoints.Count - 1] = StartPoint;
 				}
 			}
 
@@ -656,11 +656,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected virtual void CheckCorrectEndPoint()
 			{
-				mDrawingPoints[mDrawingPoints.Count - 1] = EndPoint;
-				if ((mDrawingPoints[mDrawingPoints.Count - 1] - mDrawingPoints[mDrawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
+				_drawingPoints[_drawingPoints.Count - 1] = EndPoint;
+				if ((_drawingPoints[_drawingPoints.Count - 1] - _drawingPoints[_drawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
 				{
-					mDrawingPoints.RemoveAt(mDrawingPoints.Count - 1);
-					mDrawingPoints[mDrawingPoints.Count - 1] = EndPoint;
+					_drawingPoints.RemoveAt(_drawingPoints.Count - 1);
+					_drawingPoints[_drawingPoints.Count - 1] = EndPoint;
 				}
 			}
 			#endregion
@@ -675,7 +675,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Vector2Df GetControlPoint(Int32 index)
 			{
-				return mControlPoints[index];
+				return _controlPoints[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -688,7 +688,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void SetControlPoint(Int32 index, Vector2Df point, Boolean updateSpline = false)
 			{
-				mControlPoints[index] = point;
+				_controlPoints[index] = point;
 				if (updateSpline)
 				{
 					this.OnUpdateSpline();
@@ -704,8 +704,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void AddControlPoint(Vector2Df point, Boolean updateSpline = false)
 			{
-				Array.Resize(ref mControlPoints, mControlPoints.Length + 1);
-				mControlPoints[mControlPoints.Length - 1] = point;
+				Array.Resize(ref _controlPoints, _controlPoints.Length + 1);
+				_controlPoints[_controlPoints.Length - 1] = point;
 				if (updateSpline)
 				{
 					this.OnUpdateSpline();
@@ -722,7 +722,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void InsertControlPoint(Int32 index, Vector2Df point, Boolean updateSpline = false)
 			{
-				mControlPoints = XArray.InsertAt(mControlPoints, point, index);
+				_controlPoints = XArray.InsertAt(_controlPoints, point, index);
 				if (updateSpline)
 				{
 					this.OnUpdateSpline();
@@ -738,7 +738,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveControlPoint(Int32 index, Boolean updateSpline = false)
 			{
-				mControlPoints = XArray.RemoveAt(mControlPoints, index);
+				_controlPoints = XArray.RemoveAt(_controlPoints, index);
 				if (updateSpline)
 				{
 					this.OnUpdateSpline();
@@ -754,11 +754,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveControlPoint(Vector2Df point, Boolean updateSpline = false)
 			{
-				for (var i = 0; i < mControlPoints.Length; i++)
+				for (var i = 0; i < _controlPoints.Length; i++)
 				{
-					if (mControlPoints[i].Approximately(point))
+					if (_controlPoints[i].Approximately(point))
 					{
-						mControlPoints = XArray.RemoveAt(mControlPoints, i);
+						_controlPoints = XArray.RemoveAt(_controlPoints, i);
 						if (updateSpline)
 						{
 							this.OnUpdateSpline();
@@ -775,7 +775,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ClearControlPoints()
 			{
-				Array.Clear(mControlPoints, 0, mControlPoints.Length);
+				Array.Clear(_controlPoints, 0, _controlPoints.Length);
 			}
 			#endregion
 		}
@@ -804,21 +804,21 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Vector3Df[] mControlPoints;
+			protected internal Vector3Df[] _controlPoints;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Int32 mSegmentsSpline;
+			protected internal Int32 _segmentsSpline;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal List<Vector3Df> mDrawingPoints;
+			protected internal List<Vector3Df> _drawingPoints;
 			[NonSerialized]
-			internal Single mLength = 0;
+			protected internal Single _length = 0;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal List<TMoveSegment> mSegmentsPath;
+			protected internal List<TMoveSegment> _segmentsPath;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -827,8 +827,8 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df StartPoint
 			{
-				get { return mControlPoints[0]; }
-				set { mControlPoints[0] = value; }
+				get { return _controlPoints[0]; }
+				set { _controlPoints[0] = value; }
 			}
 
 			/// <summary>
@@ -836,8 +836,8 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df EndPoint
 			{
-				get { return mControlPoints[mControlPoints.Length - 1]; }
-				set { mControlPoints[mControlPoints.Length - 1] = value; }
+				get { return _controlPoints[_controlPoints.Length - 1]; }
+				set { _controlPoints[_controlPoints.Length - 1] = value; }
 			}
 
 			/// <summary>
@@ -848,12 +848,12 @@ namespace Lotus
 			/// </remarks>
 			public Int32 SegmentsSpline
 			{
-				get { return mSegmentsSpline; }
+				get { return _segmentsSpline; }
 				set
 				{
-					if (mSegmentsSpline != value)
+					if (_segmentsSpline != value)
 					{
-						mSegmentsSpline = value;
+						_segmentsSpline = value;
 						OnUpdateSpline();
 					}
 				}
@@ -866,7 +866,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountPoints
 			{
-				get { return mControlPoints.Length; }
+				get { return _controlPoints.Length; }
 			}
 
 			/// <summary>
@@ -874,7 +874,7 @@ namespace Lotus
 			/// </summary>
 			public Single Length
 			{
-				get { return mLength; }
+				get { return _length; }
 			}
 
 			/// <summary>
@@ -882,7 +882,7 @@ namespace Lotus
 			/// </summary>
 			public IList<Vector3Df> ControlPoints
 			{
-				get { return mControlPoints; }
+				get { return _controlPoints; }
 			}
 
 			/// <summary>
@@ -890,7 +890,7 @@ namespace Lotus
 			/// </summary>
 			public IList<Vector3Df> DrawingPoints
 			{
-				get { return mDrawingPoints; }
+				get { return _drawingPoints; }
 			}
 			#endregion
 
@@ -903,9 +903,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CSplineBase3D(Int32 count)
 			{
-				mControlPoints = new Vector3Df[count];
-				mDrawingPoints = new List<Vector3Df>();
-				mSegmentsPath = new List<TMoveSegment>();
+				_controlPoints = new Vector3Df[count];
+				_drawingPoints = new List<Vector3Df>();
+				_segmentsPath = new List<TMoveSegment>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -917,12 +917,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CSplineBase3D(Vector3Df startPoint, Vector3Df endPoint)
 			{
-				mControlPoints = new Vector3Df[3];
-				mControlPoints[0] = startPoint;
-				mControlPoints[1] = (startPoint + endPoint) / 2;
-				mControlPoints[2] = endPoint;
-				mDrawingPoints = new List<Vector3Df>();
-				mSegmentsPath = new List<TMoveSegment>();
+				_controlPoints = new Vector3Df[3];
+				_controlPoints[0] = startPoint;
+				_controlPoints[1] = (startPoint + endPoint) / 2;
+				_controlPoints[2] = endPoint;
+				_drawingPoints = new List<Vector3Df>();
+				_segmentsPath = new List<TMoveSegment>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -933,10 +933,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CSplineBase3D(params Vector3Df[] controlPoints)
 			{
-				mControlPoints = new Vector3Df[controlPoints.Length];
-				Array.Copy(controlPoints, mControlPoints, controlPoints.Length);
-				mDrawingPoints = new List<Vector3Df>();
-				mSegmentsPath = new List<TMoveSegment>();
+				_controlPoints = new Vector3Df[controlPoints.Length];
+				Array.Copy(controlPoints, _controlPoints, controlPoints.Length);
+				_drawingPoints = new List<Vector3Df>();
+				_segmentsPath = new List<TMoveSegment>();
 			}
 			#endregion
 
@@ -963,29 +963,29 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ComputeDrawingPoints()
 			{
-				mDrawingPoints.Clear();
-				Vector3Df prev = mControlPoints[0];
-				mDrawingPoints.Add(prev);
-				for (var i = 1; i < mSegmentsSpline; i++)
+				_drawingPoints.Clear();
+				Vector3Df prev = _controlPoints[0];
+				_drawingPoints.Add(prev);
+				for (var i = 1; i < _segmentsSpline; i++)
 				{
-					var time = (Single)i / mSegmentsSpline;
+					var time = (Single)i / _segmentsSpline;
 					Vector3Df point = CalculatePoint(time);
 
 					// Добавляем если длина больше
 					if ((point - prev).SqrLength > MinimalSqrLine)
 					{
-						mDrawingPoints.Add(point);
+						_drawingPoints.Add(point);
 						prev = point;
 					}
 				}
 
-				mDrawingPoints.Add(EndPoint);
+				_drawingPoints.Add(EndPoint);
 
 				// Проверяем еще раз
-				if ((mDrawingPoints[mDrawingPoints.Count - 1] - mDrawingPoints[mDrawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
+				if ((_drawingPoints[_drawingPoints.Count - 1] - _drawingPoints[_drawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
 				{
-					mDrawingPoints.RemoveAt(mDrawingPoints.Count - 1);
-					mDrawingPoints[mDrawingPoints.Count - 1] = EndPoint;
+					_drawingPoints.RemoveAt(_drawingPoints.Count - 1);
+					_drawingPoints[_drawingPoints.Count - 1] = EndPoint;
 				}
 			}
 
@@ -999,14 +999,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ComputeLengthSpline()
 			{
-				mLength = 0;
-				mSegmentsPath.Clear();
-				for (var i = 1; i < mDrawingPoints.Count; i++)
+				_length = 0;
+				_segmentsPath.Clear();
+				for (var i = 1; i < _drawingPoints.Count; i++)
 				{
-					var length = (mDrawingPoints[i] - mDrawingPoints[i - 1]).Length;
-					mLength += length;
-					var segment = new TMoveSegment(length, mLength);
-					mSegmentsPath.Add(segment);
+					var length = (_drawingPoints[i] - _drawingPoints[i - 1]).Length;
+					_length += length;
+					var segment = new TMoveSegment(length, _length);
+					_segmentsPath.Add(segment);
 				}
 			}
 
@@ -1023,9 +1023,9 @@ namespace Lotus
 			{
 				Single x_min = StartPoint.X, x_max = EndPoint.X, y_min = StartPoint.Y, y_max = EndPoint.Y;
 
-				for (var i = 0; i < mDrawingPoints.Count; i++)
+				for (var i = 0; i < _drawingPoints.Count; i++)
 				{
-					Vector3Df point = mDrawingPoints[i];
+					Vector3Df point = _drawingPoints[i];
 					if (point.X < x_min) x_min = point.X;
 					if (point.X > x_max) x_max = point.X;
 					if (point.Y < y_min) y_min = point.Y;
@@ -1064,10 +1064,10 @@ namespace Lotus
 
 				// Находим в какой отрезок попадает эта позиция
 				var index = 0;
-				for (var i = 0; i < mSegmentsPath.Count; i++)
+				for (var i = 0; i < _segmentsPath.Count; i++)
 				{
 					// Если позиция меньше значит она попала в отрезок
-					if (position < mSegmentsPath[i].Summa)
+					if (position < _segmentsPath[i].Summa)
 					{
 						index = i;
 						break;
@@ -1079,15 +1079,15 @@ namespace Lotus
 
 				if (index == 0)
 				{
-					delta = position / mSegmentsPath[index].Length;
+					delta = position / _segmentsPath[index].Length;
 				}
 				else
 				{
-					delta = (position - mSegmentsPath[index - 1].Summa) / mSegmentsPath[index].Length;
+					delta = (position - _segmentsPath[index - 1].Summa) / _segmentsPath[index].Length;
 				}
 
 				// Интерполируем позицию
-				return Vector3Df.Lerp(mDrawingPoints[index], mDrawingPoints[index + 1], delta);
+				return Vector3Df.Lerp(_drawingPoints[index], _drawingPoints[index + 1], delta);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1128,10 +1128,10 @@ namespace Lotus
 			public Single GetMoveTime(Vector3Df position, Single epsilon = 0.01f)
 			{
 				// Просматриваем все отрезки и находим нужное положение
-				for (var i = 1; i < mDrawingPoints.Count; i++)
+				for (var i = 1; i < _drawingPoints.Count; i++)
 				{
-					Vector3Df p1 = mDrawingPoints[i] - mDrawingPoints[i - 1];
-					Vector3Df p2 = position - mDrawingPoints[i - 1];
+					Vector3Df p1 = _drawingPoints[i] - _drawingPoints[i - 1];
+					Vector3Df p2 = position - _drawingPoints[i - 1];
 
 					var angle = Vector3Df.Dot(p2, p1) / Vector3Df.Dot(p2, p1);
 					if (angle + epsilon > 0 && angle - epsilon < 1)
@@ -1188,11 +1188,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected virtual void CheckCorrectStartPoint()
 			{
-				mDrawingPoints[mDrawingPoints.Count - 1] = StartPoint;
-				if ((mDrawingPoints[mDrawingPoints.Count - 1] - mDrawingPoints[mDrawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
+				_drawingPoints[_drawingPoints.Count - 1] = StartPoint;
+				if ((_drawingPoints[_drawingPoints.Count - 1] - _drawingPoints[_drawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
 				{
-					mDrawingPoints.RemoveAt(mDrawingPoints.Count - 1);
-					mDrawingPoints[mDrawingPoints.Count - 1] = StartPoint;
+					_drawingPoints.RemoveAt(_drawingPoints.Count - 1);
+					_drawingPoints[_drawingPoints.Count - 1] = StartPoint;
 				}
 			}
 
@@ -1203,11 +1203,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected virtual void CheckCorrectEndPoint()
 			{
-				mDrawingPoints[mDrawingPoints.Count - 1] = EndPoint;
-				if ((mDrawingPoints[mDrawingPoints.Count - 1] - mDrawingPoints[mDrawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
+				_drawingPoints[_drawingPoints.Count - 1] = EndPoint;
+				if ((_drawingPoints[_drawingPoints.Count - 1] - _drawingPoints[_drawingPoints.Count - 2]).SqrLength < MinimalSqrLine)
 				{
-					mDrawingPoints.RemoveAt(mDrawingPoints.Count - 1);
-					mDrawingPoints[mDrawingPoints.Count - 1] = EndPoint;
+					_drawingPoints.RemoveAt(_drawingPoints.Count - 1);
+					_drawingPoints[_drawingPoints.Count - 1] = EndPoint;
 				}
 			}
 			#endregion
@@ -1222,7 +1222,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual Vector3Df GetControlPoint(Int32 index)
 			{
-				return mControlPoints[index];
+				return _controlPoints[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1235,7 +1235,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void SetControlPoint(Int32 index, Vector3Df point, Boolean updateSpline = false)
 			{
-				mControlPoints[index] = point;
+				_controlPoints[index] = point;
 				if (updateSpline)
 				{
 					this.OnUpdateSpline();
@@ -1251,8 +1251,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void AddControlPoint(Vector3Df point, Boolean updateSpline = false)
 			{
-				Array.Resize(ref mControlPoints, mControlPoints.Length + 1);
-				mControlPoints[mControlPoints.Length - 1] = point;
+				Array.Resize(ref _controlPoints, _controlPoints.Length + 1);
+				_controlPoints[_controlPoints.Length - 1] = point;
 				if (updateSpline)
 				{
 					this.OnUpdateSpline();
@@ -1269,7 +1269,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void InsertControlPoint(Int32 index, Vector3Df point, Boolean updateSpline = false)
 			{
-				mControlPoints = XArray.InsertAt(mControlPoints, point, index);
+				_controlPoints = XArray.InsertAt(_controlPoints, point, index);
 				if (updateSpline)
 				{
 					this.OnUpdateSpline();
@@ -1285,7 +1285,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveControlPoint(Int32 index, Boolean updateSpline = false)
 			{
-				mControlPoints = XArray.RemoveAt(mControlPoints, index);
+				_controlPoints = XArray.RemoveAt(_controlPoints, index);
 				if (updateSpline)
 				{
 					this.OnUpdateSpline();
@@ -1301,11 +1301,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveControlPoint(Vector3Df point, Boolean updateSpline = false)
 			{
-				for (var i = 0; i < mControlPoints.Length; i++)
+				for (var i = 0; i < _controlPoints.Length; i++)
 				{
-					if (mControlPoints[i].Approximately(point))
+					if (_controlPoints[i].Approximately(point))
 					{
-						mControlPoints = XArray.RemoveAt(mControlPoints, i);
+						_controlPoints = XArray.RemoveAt(_controlPoints, i);
 						if (updateSpline)
 						{
 							this.OnUpdateSpline();
@@ -1322,7 +1322,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ClearControlPoints()
 			{
-				Array.Clear(mControlPoints, 0, mControlPoints.Length);
+				Array.Clear(_controlPoints, 0, _controlPoints.Length);
 			}
 			#endregion
 		}

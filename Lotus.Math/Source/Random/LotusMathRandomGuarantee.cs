@@ -48,10 +48,10 @@ namespace Lotus
 		public class CRandomGuarantee
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal Int32 mCapacity;
-			internal Int32[] mData;
-			internal List<Int32> mProbability;
-			internal Int32 mCurrentIndex;
+			internal Int32 _capacity;
+			internal Int32[] _data;
+			internal List<Int32> _probability;
+			internal Int32 _currentIndex;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -60,7 +60,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Capacity
 			{
-				get { return mCapacity; }
+				get { return _capacity; }
 			}
 
 			/// <summary>
@@ -68,7 +68,7 @@ namespace Lotus
 			/// </summary>
 			public List<Int32> Probability
 			{
-				get { return mProbability; }
+				get { return _probability; }
 			}
 
 			/// <summary>
@@ -76,7 +76,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CurrentIndex
 			{
-				get { return mCurrentIndex; }
+				get { return _currentIndex; }
 			}
 
 			/// <summary>
@@ -86,13 +86,13 @@ namespace Lotus
 			{
 				get
 				{
-					if (mCurrentIndex == -1)
+					if (_currentIndex == -1)
 					{
-						return mCurrentIndex;
+						return _currentIndex;
 					}
 					else
 					{
-						return mData[mCurrentIndex];
+						return _data[_currentIndex];
 					}
 				}
 			}
@@ -102,7 +102,7 @@ namespace Lotus
 			/// </summary>
 			public Int32[] Data
 			{
-				get { return mData; }
+				get { return _data; }
 			}
 			#endregion
 
@@ -115,10 +115,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CRandomGuarantee(Int32 capacity = 100)
 			{
-				mCapacity = capacity;
-				mData = new Int32[mCapacity];
-				mProbability = new List<Int32>();
-				mCurrentIndex = -1;
+				_capacity = capacity;
+				_data = new Int32[_capacity];
+				_probability = new List<Int32>();
+				_currentIndex = -1;
 			}
 			#endregion
 
@@ -130,29 +130,29 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Reset()
 			{
-				for (var i = 0; i < mProbability.Count; i++)
+				for (var i = 0; i < _probability.Count; i++)
 				{
-					mData[i] = mProbability[i];
+					_data[i] = _probability[i];
 				}
 
-				for (var ir = mProbability.Count; ir < mCapacity; ir++)
+				for (var ir = _probability.Count; ir < _capacity; ir++)
 				{
-					mData[ir] = -1;
+					_data[ir] = -1;
 				}
 
 				var rnd = new Random();
-				var n = mData.Length;
+				var n = _data.Length;
 				while (n > 1)
 				{
 					n--;
 					var k = rnd.Next(n + 1);
 
-					var old = mData[n];
-					mData[n] = mData[k];
-					mData[k] = old;
+					var old = _data[n];
+					_data[n] = _data[k];
+					_data[k] = old;
 				}
 
-				mCurrentIndex = -1;
+				_currentIndex = -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -166,10 +166,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ResetCapacity(Int32 capacity)
 			{
-				mCapacity = capacity;
-				mData = new Int32[mCapacity];
-				mProbability.Clear();
-				mCurrentIndex = -1;
+				_capacity = capacity;
+				_data = new Int32[_capacity];
+				_probability.Clear();
+				_currentIndex = -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -184,10 +184,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddProbability(Int32 index, Int32 probability)
 			{
-				var count = probability * mCapacity / 100;
+				var count = probability * _capacity / 100;
 				for (var i = 0; i < count; i++)
 				{
-					mProbability.Add(index);
+					_probability.Add(index);
 				}
 
 				Reset();
@@ -206,10 +206,10 @@ namespace Lotus
 			{
 				for (var index = 0; index < probability.Length; index++)
 				{
-					var count = probability[index] * mCapacity / 100;
+					var count = probability[index] * _capacity / 100;
 					for (var i = 0; i < count; i++)
 					{
-						mProbability.Add(index);
+						_probability.Add(index);
 					}
 				}
 
@@ -223,7 +223,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ClearProbability()
 			{
-				mProbability.Clear();
+				_probability.Clear();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -234,16 +234,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 NextProbability()
 			{
-				if (mCurrentIndex == mCapacity - 1)
+				if (_currentIndex == _capacity - 1)
 				{
-					mCurrentIndex = 0;
+					_currentIndex = 0;
 				}
 				else
 				{
-					mCurrentIndex++;
+					_currentIndex++;
 				}
 
-				return mData[mCurrentIndex];
+				return _data[_currentIndex];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -254,17 +254,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 NextProbabilityAndReset()
 			{
-				if (mCurrentIndex == mCapacity - 1)
+				if (_currentIndex == _capacity - 1)
 				{
 					Reset();
-					mCurrentIndex = 0;
+					_currentIndex = 0;
 				}
 				else
 				{
-					mCurrentIndex++;
+					_currentIndex++;
 				}
 
-				return mData[mCurrentIndex];
+				return _data[_currentIndex];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -276,16 +276,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean CheckProbability(Int32 index)
 			{
-				if (mCurrentIndex == mCapacity - 1)
+				if (_currentIndex == _capacity - 1)
 				{
-					mCurrentIndex = 0;
+					_currentIndex = 0;
 				}
 				else
 				{
-					mCurrentIndex++;
+					_currentIndex++;
 				}
 
-				return mData[mCurrentIndex] == index;
+				return _data[_currentIndex] == index;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -296,9 +296,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public IList<String> GetDataStrings()
 			{
-				var lines = new String[mData.Length];
+				var lines = new String[_data.Length];
 
-				for (var i = 0; i < mData.Length; i++)
+				for (var i = 0; i < _data.Length; i++)
 				{
 					lines[i] = "i = " + i.ToString() + ", value = " + Data[i].ToString();
 				}

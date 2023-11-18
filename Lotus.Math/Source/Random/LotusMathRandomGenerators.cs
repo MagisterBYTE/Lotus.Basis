@@ -184,7 +184,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			private UInt16 mMti;
+			private UInt16 _mti;
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -195,7 +195,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CRandomMersenneTwister()
 			{
-				mMti = SIZE + 1;
+				_mti = SIZE + 1;
 
 				// auto generate seed for .NET
 				var seed_key = new UInt32[6];
@@ -226,7 +226,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CRandomMersenneTwister(UInt32 seed)
 			{
-				mMti = SIZE + 1;
+				_mti = SIZE + 1;
 				InitGenrand(seed);
 			}
 
@@ -238,7 +238,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CRandomMersenneTwister(UInt32[] initKey)
 			{
-				mMti = SIZE + 1;
+				_mti = SIZE + 1;
 				InitFromArray(initKey);
 			}
 			#endregion
@@ -330,9 +330,9 @@ namespace Lotus
 			{
 				MASSIVE[0] = seed;
 
-				for (mMti = 1; mMti < SIZE; mMti++)
+				for (_mti = 1; _mti < SIZE; _mti++)
 				{
-					MASSIVE[mMti] = (1812433253 * (MASSIVE[mMti - 1] ^ (MASSIVE[mMti - 1] >> 30))) + mMti;
+					MASSIVE[_mti] = (1812433253 * (MASSIVE[_mti - 1] ^ (MASSIVE[_mti - 1] >> 30))) + _mti;
 					/* See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. */
 					/* In the previous versions, MSBs of the seed affect   */
 					/* only MSBs of the array mt[].                        */
@@ -387,12 +387,12 @@ namespace Lotus
 			{
 				UInt32 y;
 
-				if (mMti >= SIZE)
+				if (_mti >= SIZE)
 				{ 
 					/* generate N words at one time */
 					Int16 kk;
 
-					if (mMti == SIZE + 1)   /* if init_genrand() has not been called, */
+					if (_mti == SIZE + 1)   /* if init_genrand() has not been called, */
 						InitGenrand(5489); /* a default initial seed is used */
 
 					for (kk = 0; kk < SIZE - PERIOD; kk++)
@@ -408,10 +408,10 @@ namespace Lotus
 					y = ((MASSIVE[SIZE - 1] & UPPER_MASK) | (MASSIVE[0] & LOWER_MASK)) >> 1;
 					MASSIVE[SIZE - 1] = MASSIVE[PERIOD - 1] ^ MAG_01[MASSIVE[0] & 1] ^ y;
 
-					mMti = 0;
+					_mti = 0;
 				}
 
-				y = MASSIVE[mMti++];
+				y = MASSIVE[_mti++];
 
 				/* Tempering */
 				y ^= y >> 11;

@@ -138,7 +138,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Boolean mIsClosed;
+			internal Boolean _isClosed;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -150,12 +150,12 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsClosed
 			{
-				get { return mIsClosed; }
+				get { return _isClosed; }
 				set
 				{
-					if(mIsClosed != value)
+					if(_isClosed != value)
 					{
-						mIsClosed = value;
+						_isClosed = value;
 						OnUpdateSpline();
 					}
 				}
@@ -166,7 +166,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CurveCount
 			{
-				get { return mControlPoints.Length - 1; }
+				get { return _controlPoints.Length - 1; }
 			}
 			#endregion
 
@@ -179,10 +179,10 @@ namespace Lotus
 			public CCatmullRomSpline2D()
 				:base(4)
 			{
-				mControlPoints[0] = Vector2Df.Zero;
-				mControlPoints[1] = Vector2Df.Zero;
-				mControlPoints[2] = Vector2Df.Zero;
-				mControlPoints[3] = Vector2Df.Zero;
+				_controlPoints[0] = Vector2Df.Zero;
+				_controlPoints[1] = Vector2Df.Zero;
+				_controlPoints[2] = Vector2Df.Zero;
+				_controlPoints[3] = Vector2Df.Zero;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -206,10 +206,10 @@ namespace Lotus
 			public CCatmullRomSpline2D(Vector2Df startPoint, Vector2Df endPoint)
 				: base(4)
 			{
-				mControlPoints[0] = startPoint;
-				mControlPoints[1] = (startPoint + endPoint) / 3;
-				mControlPoints[2] = (startPoint + endPoint) / 3 * 2;
-				mControlPoints[3] = endPoint;
+				_controlPoints[0] = startPoint;
+				_controlPoints[1] = (startPoint + endPoint) / 3;
+				_controlPoints[2] = (startPoint + endPoint) / 3 * 2;
+				_controlPoints[3] = endPoint;
 			}
 			#endregion
 
@@ -227,7 +227,7 @@ namespace Lotus
 				if (time >= 1f)
 				{
 					time = 1f;
-					index_curve = mControlPoints.Length - 1;
+					index_curve = _controlPoints.Length - 1;
 				}
 				else
 				{
@@ -237,7 +237,7 @@ namespace Lotus
 					index_curve *= 1;
 				}
 
-				if (mIsClosed)
+				if (_isClosed)
 				{
 					// Получаем индексы точек
 					var ip_0 = ClampPosition(index_curve - 1);
@@ -245,8 +245,8 @@ namespace Lotus
 					var ip_2 = ClampPosition(index_curve + 1);
 					var ip_3 = ClampPosition(index_curve + 2);
 
-					Vector2Df point = CalculatePoint(time, mControlPoints[ip_0],
-						mControlPoints[ip_1], mControlPoints[ip_2], mControlPoints[ip_3]);
+					Vector2Df point = CalculatePoint(time, _controlPoints[ip_0],
+						_controlPoints[ip_1], _controlPoints[ip_2], _controlPoints[ip_3]);
 
 					return point;
 				}
@@ -255,14 +255,14 @@ namespace Lotus
 					// Получаем индексы точек
 					var ip_0 = index_curve - 1 < 0 ? 0 : index_curve - 1;
 					var ip_1 = index_curve;
-					var ip_2 = index_curve + 1 > mControlPoints.Length - 1 ? mControlPoints.Length - 1 : index_curve + 1;
-					var ip_3 = index_curve + 2 > mControlPoints.Length - 1 ? mControlPoints.Length - 1 : index_curve + 2;
+					var ip_2 = index_curve + 1 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : index_curve + 1;
+					var ip_3 = index_curve + 2 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : index_curve + 2;
 
 					Vector2Df point = CalculatePoint(time,
-						ref mControlPoints[ip_0],
-						ref mControlPoints[ip_1],
-						ref mControlPoints[ip_2],
-						ref mControlPoints[ip_3]);
+						ref _controlPoints[ip_0],
+						ref _controlPoints[ip_1],
+						ref _controlPoints[ip_2],
+						ref _controlPoints[ip_3]);
 
 					return point;
 				}
@@ -278,11 +278,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeDrawingPoints()
 			{
-				mDrawingPoints.Clear();
+				_drawingPoints.Clear();
 
-				if (mIsClosed)
+				if (_isClosed)
 				{
-					for (var ip = 0; ip < mControlPoints.Length; ip++)
+					for (var ip = 0; ip < _controlPoints.Length; ip++)
 					{
 						// Получаем индексы точек
 						var ip_0 = ClampPosition(ip - 1);
@@ -291,16 +291,16 @@ namespace Lotus
 						var ip_3 = ClampPosition(ip + 2);
 
 						Vector2Df prev = CalculatePoint(0, ip_0, ip_1, ip_2, ip_3);
-						mDrawingPoints.Add(prev);
-						for (var i = 1; i < mSegmentsSpline; i++)
+						_drawingPoints.Add(prev);
+						for (var i = 1; i < _segmentsSpline; i++)
 						{
-							var time = (Single)i / mSegmentsSpline;
+							var time = (Single)i / _segmentsSpline;
 							Vector2Df point = CalculatePoint(time, ip_0, ip_1, ip_2, ip_3);
 
 							// Добавляем если длина больше 1,4
 							if ((point - prev).SqrLength > 2)
 							{
-								mDrawingPoints.Add(point);
+								_drawingPoints.Add(point);
 								prev = point;
 							}
 						}
@@ -310,25 +310,25 @@ namespace Lotus
 				}
 				else
 				{
-					for (var ip = 0; ip < mControlPoints.Length - 1; ip++)
+					for (var ip = 0; ip < _controlPoints.Length - 1; ip++)
 					{
 						// Получаем индексы точек
 						var ip_0 = ip - 1 < 0 ? 0 : ip - 1;
 						var ip_1 = ip;
-						var ip_2 = ip + 1 > mControlPoints.Length - 1 ? mControlPoints.Length - 1 : ip + 1;
-						var ip_3 = ip + 2 > mControlPoints.Length - 1 ? mControlPoints.Length - 1 : ip + 2;
+						var ip_2 = ip + 1 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : ip + 1;
+						var ip_3 = ip + 2 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : ip + 2;
 
 						Vector2Df prev = CalculatePoint(0, ip_0, ip_1, ip_2, ip_3);
-						mDrawingPoints.Add(prev);
-						for (var i = 1; i < mSegmentsSpline; i++)
+						_drawingPoints.Add(prev);
+						for (var i = 1; i < _segmentsSpline; i++)
 						{
-							var time = (Single)i / mSegmentsSpline;
+							var time = (Single)i / _segmentsSpline;
 							Vector2Df point = CalculatePoint(time, ip_0, ip_1, ip_2, ip_3);
 
 							// Добавляем если длина больше 1,4
 							if ((point - prev).SqrLength > 2)
 							{
-								mDrawingPoints.Add(point);
+								_drawingPoints.Add(point);
 								prev = point;
 							}
 						}
@@ -351,14 +351,14 @@ namespace Lotus
 			{
 				if (pos < 0)
 				{
-					pos = mControlPoints.Length - 1;
+					pos = _controlPoints.Length - 1;
 				}
 
-				if (pos > mControlPoints.Length)
+				if (pos > _controlPoints.Length)
 				{
 					pos = 1;
 				}
-				else if (pos > mControlPoints.Length - 1)
+				else if (pos > _controlPoints.Length - 1)
 				{
 					pos = 0;
 				}
@@ -380,10 +380,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Vector2Df CalculatePoint(Single time, Int32 indexP0, Int32 indexP1, Int32 indexP2, Int32 indexP3)
 			{
-				Vector2Df a = 2f * mControlPoints[indexP1];
-				Vector2Df b = mControlPoints[indexP2] - mControlPoints[indexP0];
-				Vector2Df c = (2f * mControlPoints[indexP0]) - (5f * mControlPoints[indexP1]) + (4f * mControlPoints[indexP2]) - mControlPoints[indexP3];
-				Vector2Df d = -mControlPoints[indexP0] + (3f * mControlPoints[indexP1]) - (3f * mControlPoints[indexP2]) + mControlPoints[indexP3];
+				Vector2Df a = 2f * _controlPoints[indexP1];
+				Vector2Df b = _controlPoints[indexP2] - _controlPoints[indexP0];
+				Vector2Df c = (2f * _controlPoints[indexP0]) - (5f * _controlPoints[indexP1]) + (4f * _controlPoints[indexP2]) - _controlPoints[indexP3];
+				Vector2Df d = -_controlPoints[indexP0] + (3f * _controlPoints[indexP1]) - (3f * _controlPoints[indexP2]) + _controlPoints[indexP3];
 
 				//The cubic polynomial: a + b * t + c * t^2 + d * t^3
 				Vector2Df pos = 0.5f * (a + (b * time) + (c * time * time) + (d * time * time * time));

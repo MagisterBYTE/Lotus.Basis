@@ -125,8 +125,8 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df HandlePoint
 			{
-				get { return mControlPoints[1]; }
-				set { mControlPoints[1] = value; }
+				get { return _controlPoints[1]; }
+				set { _controlPoints[1] = value; }
 			}
 			#endregion
 
@@ -168,7 +168,7 @@ namespace Lotus
 				var tt = time * time;
 				var uu = u * u;
 
-				return (uu * mControlPoints[0]) + (2 * time * u * mControlPoints[1]) + (tt * mControlPoints[2]);
+				return (uu * _controlPoints[0]) + (2 * time * u * _controlPoints[1]) + (tt * _controlPoints[2]);
 			}
 			#endregion
 
@@ -337,8 +337,8 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df HandlePoint1
 			{
-				get { return mControlPoints[1]; }
-				set { mControlPoints[1] = value; }
+				get { return _controlPoints[1]; }
+				set { _controlPoints[1] = value; }
 			}
 
 			/// <summary>
@@ -346,8 +346,8 @@ namespace Lotus
 			/// </summary>
 			public Vector2Df HandlePoint2
 			{
-				get { return mControlPoints[2]; }
-				set { mControlPoints[2] = value; }
+				get { return _controlPoints[2]; }
+				set { _controlPoints[2] = value; }
 			}
 			#endregion
 
@@ -372,10 +372,10 @@ namespace Lotus
 			public CBezierCubic2D(Vector2Df startPoint, Vector2Df endPoint)
 								: base(4)
 			{
-				mControlPoints[0] = startPoint;
-				mControlPoints[1] = (startPoint + endPoint) / 3;
-				mControlPoints[2] = (startPoint + endPoint) / 3 * 2;
-				mControlPoints[3] = endPoint;
+				_controlPoints[0] = startPoint;
+				_controlPoints[1] = (startPoint + endPoint) / 3;
+				_controlPoints[2] = (startPoint + endPoint) / 3 * 2;
+				_controlPoints[3] = endPoint;
 			}
 			#endregion
 
@@ -395,11 +395,11 @@ namespace Lotus
 				var uuu = uu * u;
 				var ttt = tt * time;
 
-				Vector2Df point = uuu * mControlPoints[0];
+				Vector2Df point = uuu * _controlPoints[0];
 
-				point += 3 * uu * time * mControlPoints[1];
-				point += 3 * u * tt * mControlPoints[2];
-				point += ttt * mControlPoints[3];
+				point += 3 * uu * time * _controlPoints[1];
+				point += 3 * u * tt * _controlPoints[2];
+				point += ttt * _controlPoints[3];
 
 				return point;
 			}
@@ -417,12 +417,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateFromPivotPoint(Vector2Df start, Vector2Df point1, Vector2Df point2, Vector2Df end)
 			{
-				mControlPoints[0] = start;
-				mControlPoints[1].X = ((-5 * start.X) + (18 * point1.X) - (9 * point2.X) + (2 * end.X)) / 6;
-				mControlPoints[1].Y = ((-5 * start.Y) + (18 * point1.Y) - (9 * point2.Y) + (2 * end.Y)) / 6;
-				mControlPoints[2].X = ((2 * start.X) - (9 * point1.X) + (18 * point2.X) - (5 * end.X)) / 6;
-				mControlPoints[2].Y = ((2 * start.Y) - (9 * point1.Y) + (18 * point2.Y) - (5 * end.Y)) / 6;
-				mControlPoints[3] = end;
+				_controlPoints[0] = start;
+				_controlPoints[1].X = ((-5 * start.X) + (18 * point1.X) - (9 * point2.X) + (2 * end.X)) / 6;
+				_controlPoints[1].Y = ((-5 * start.Y) + (18 * point1.Y) - (9 * point2.Y) + (2 * end.Y)) / 6;
+				_controlPoints[2].X = ((2 * start.X) - (9 * point1.X) + (18 * point2.X) - (5 * end.X)) / 6;
+				_controlPoints[2].Y = ((2 * start.Y) - (9 * point1.Y) + (18 * point2.Y) - (5 * end.Y)) / 6;
+				_controlPoints[3] = end;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -500,11 +500,11 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Boolean mIsClosed;
+			internal Boolean _isClosed;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal TBezierHandleMode[] mHandleModes;
+			internal TBezierHandleMode[] _handleModes;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -513,17 +513,17 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsClosed
 			{
-				get { return mIsClosed; }
+				get { return _isClosed; }
 				set
 				{
-					if (mIsClosed != value)
+					if (_isClosed != value)
 					{
-						mIsClosed = value;
+						_isClosed = value;
 
-						if (mIsClosed == true)
+						if (_isClosed == true)
 						{
-							mHandleModes[mHandleModes.Length - 1] = mHandleModes[0];
-							SetControlPoint(0, mControlPoints[0]);
+							_handleModes[_handleModes.Length - 1] = _handleModes[0];
+							SetControlPoint(0, _controlPoints[0]);
 						}
 
 						OnUpdateSpline();
@@ -536,7 +536,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CurveCount
 			{
-				get { return (mControlPoints.Length - 1) / 3; }
+				get { return (_controlPoints.Length - 1) / 3; }
 			}
 			#endregion
 
@@ -549,7 +549,7 @@ namespace Lotus
 			public CBezierPath2D()
 				:base(4)
 			{
-				mHandleModes = new TBezierHandleMode[4];
+				_handleModes = new TBezierHandleMode[4];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -564,7 +564,7 @@ namespace Lotus
 			public CBezierPath2D(params Vector2Df[] pivotPoints)
 				:base(pivotPoints)
 			{
-				mHandleModes = new TBezierHandleMode[4];
+				_handleModes = new TBezierHandleMode[4];
 				CreateFromPivotPoints(pivotPoints);
 			}
 			#endregion
@@ -583,7 +583,7 @@ namespace Lotus
 				if (time >= 1f)
 				{
 					time = 1f;
-					index_curve = mControlPoints.Length - 4;
+					index_curve = _controlPoints.Length - 4;
 				}
 				else
 				{
@@ -594,10 +594,10 @@ namespace Lotus
 				}
 
 				Vector2Df point = CBezierCubic2D.CalculatePoint(time,
-					ref mControlPoints[index_curve],
-					ref mControlPoints[index_curve + 1],
-					ref mControlPoints[index_curve + 2],
-					ref mControlPoints[index_curve + 3]);
+					ref _controlPoints[index_curve],
+					ref _controlPoints[index_curve + 1],
+					ref _controlPoints[index_curve + 2],
+					ref _controlPoints[index_curve + 3]);
 
 				return point;
 			}
@@ -612,12 +612,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeDrawingPoints()
 			{
-				mDrawingPoints.Clear();
+				_drawingPoints.Clear();
 
 				for (var i = 0; i < CurveCount; i++)
 				{
 					Vector2Df prev = CalculateCurvePoint(i, 0);
-					mDrawingPoints.Add(prev);
+					_drawingPoints.Add(prev);
 					for (var ip = 1; ip < SegmentsSpline; ip++)
 					{
 						var time = (Single)ip / SegmentsSpline;
@@ -626,13 +626,13 @@ namespace Lotus
 						// Добавляем если длина больше 1,4
 						if ((point - prev).SqrLength > MinimalSqrLine)
 						{
-							mDrawingPoints.Add(point);
+							_drawingPoints.Add(point);
 							prev = point;
 						}
 					}
 				}
 
-				if (mIsClosed)
+				if (_isClosed)
 				{
 					CheckCorrectStartPoint();
 				}
@@ -653,8 +653,8 @@ namespace Lotus
 			private void SetHandleMode(Int32 index)
 			{
 				var mode_index = (index + 1) / 3;
-				TBezierHandleMode mode = mHandleModes[mode_index];
-				if (mode == TBezierHandleMode.Free || !mIsClosed && (mode_index == 0 || mode_index == mHandleModes.Length - 1))
+				TBezierHandleMode mode = _handleModes[mode_index];
+				if (mode == TBezierHandleMode.Free || !_isClosed && (mode_index == 0 || mode_index == _handleModes.Length - 1))
 				{
 					return;
 				}
@@ -666,10 +666,10 @@ namespace Lotus
 					fixed_index = middle_index - 1;
 					if (fixed_index < 0)
 					{
-						fixed_index = mControlPoints.Length - 2;
+						fixed_index = _controlPoints.Length - 2;
 					}
 					enforced_index = middle_index + 1;
-					if (enforced_index >= mControlPoints.Length)
+					if (enforced_index >= _controlPoints.Length)
 					{
 						enforced_index = 1;
 					}
@@ -677,25 +677,25 @@ namespace Lotus
 				else
 				{
 					fixed_index = middle_index + 1;
-					if (fixed_index >= mControlPoints.Length)
+					if (fixed_index >= _controlPoints.Length)
 					{
 						fixed_index = 1;
 					}
 					enforced_index = middle_index - 1;
 					if (enforced_index < 0)
 					{
-						enforced_index = mControlPoints.Length - 2;
+						enforced_index = _controlPoints.Length - 2;
 					}
 				}
 
-				Vector2Df middle = mControlPoints[middle_index];
-				Vector2Df enforced_tangent = middle - mControlPoints[fixed_index];
+				Vector2Df middle = _controlPoints[middle_index];
+				Vector2Df enforced_tangent = middle - _controlPoints[fixed_index];
 				if (mode == TBezierHandleMode.Aligned)
 				{
-					enforced_tangent = enforced_tangent.Normalized * Vector2Df.Distance(middle, mControlPoints[enforced_index]);
+					enforced_tangent = enforced_tangent.Normalized * Vector2Df.Distance(middle, _controlPoints[enforced_index]);
 				}
 
-				mControlPoints[enforced_index] = middle + enforced_tangent;
+				_controlPoints[enforced_index] = middle + enforced_tangent;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -763,15 +763,15 @@ namespace Lotus
 				}
 
 				// При необходимости изменяем размер массива
-				if (mControlPoints.Length != points.Count)
+				if (_controlPoints.Length != points.Count)
 				{
-					Array.Resize(ref mControlPoints, points.Count);
+					Array.Resize(ref _controlPoints, points.Count);
 				}
 
 				// Копируем данные
 				for (var i = 0; i < points.Count; i++)
 				{
-					mControlPoints[i] = points[i];
+					_controlPoints[i] = points[i];
 				}
 
 				OnUpdateSpline();
@@ -789,40 +789,40 @@ namespace Lotus
 			{
 				if (index % 3 == 0)
 				{
-					Vector2Df delta = point - mControlPoints[index];
-					if (mIsClosed)
+					Vector2Df delta = point - _controlPoints[index];
+					if (_isClosed)
 					{
 						if (index == 0)
 						{
-							mControlPoints[1] += delta;
-							mControlPoints[mControlPoints.Length - 2] += delta;
-							mControlPoints[mControlPoints.Length - 1] = point;
+							_controlPoints[1] += delta;
+							_controlPoints[_controlPoints.Length - 2] += delta;
+							_controlPoints[_controlPoints.Length - 1] = point;
 						}
-						else if (index == mControlPoints.Length - 1)
+						else if (index == _controlPoints.Length - 1)
 						{
-							mControlPoints[0] = point;
-							mControlPoints[1] += delta;
-							mControlPoints[index - 1] += delta;
+							_controlPoints[0] = point;
+							_controlPoints[1] += delta;
+							_controlPoints[index - 1] += delta;
 						}
 						else
 						{
-							mControlPoints[index - 1] += delta;
-							mControlPoints[index + 1] += delta;
+							_controlPoints[index - 1] += delta;
+							_controlPoints[index + 1] += delta;
 						}
 					}
 					else
 					{
 						if (index > 0)
 						{
-							mControlPoints[index - 1] += delta;
+							_controlPoints[index - 1] += delta;
 						}
-						if (index + 1 < mControlPoints.Length)
+						if (index + 1 < _controlPoints.Length)
 						{
-							mControlPoints[index + 1] += delta;
+							_controlPoints[index + 1] += delta;
 						}
 					}
 				}
-				mControlPoints[index] = point;
+				_controlPoints[index] = point;
 				SetHandleMode(index);
 
 				if (updateSpline)
@@ -840,23 +840,23 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void AddCurve()
 			{
-				Vector2Df point = mControlPoints[mControlPoints.Length - 1];
-				Array.Resize(ref mControlPoints, mControlPoints.Length + 3);
+				Vector2Df point = _controlPoints[_controlPoints.Length - 1];
+				Array.Resize(ref _controlPoints, _controlPoints.Length + 3);
 				point.X += 100f;
-				mControlPoints[mControlPoints.Length - 3] = point;
+				_controlPoints[_controlPoints.Length - 3] = point;
 				point.X += 100f;
-				mControlPoints[mControlPoints.Length - 2] = point;
+				_controlPoints[_controlPoints.Length - 2] = point;
 				point.X += 100f;
-				mControlPoints[mControlPoints.Length - 1] = point;
+				_controlPoints[_controlPoints.Length - 1] = point;
 
-				Array.Resize(ref mHandleModes, mHandleModes.Length + 1);
-				mHandleModes[mHandleModes.Length - 1] = mHandleModes[mHandleModes.Length - 2];
-				SetHandleMode(mControlPoints.Length - 4);
+				Array.Resize(ref _handleModes, _handleModes.Length + 1);
+				_handleModes[_handleModes.Length - 1] = _handleModes[_handleModes.Length - 2];
+				SetHandleMode(_controlPoints.Length - 4);
 
-				if (mIsClosed)
+				if (_isClosed)
 				{
-					mControlPoints[mControlPoints.Length - 1] = mControlPoints[0];
-					mHandleModes[mHandleModes.Length - 1] = mHandleModes[0];
+					_controlPoints[_controlPoints.Length - 1] = _controlPoints[0];
+					_handleModes[_handleModes.Length - 1] = _handleModes[0];
 					SetHandleMode(0);
 				}
 
@@ -872,13 +872,13 @@ namespace Lotus
 			{
 				if (CurveCount > 1)
 				{
-					Array.Resize(ref mControlPoints, mControlPoints.Length - 3);
-					Array.Resize(ref mHandleModes, mHandleModes.Length - 1);
-					SetHandleMode(mControlPoints.Length - 2, TBezierHandleMode.Free);
-					if (mIsClosed)
+					Array.Resize(ref _controlPoints, _controlPoints.Length - 3);
+					Array.Resize(ref _handleModes, _handleModes.Length - 1);
+					SetHandleMode(_controlPoints.Length - 2, TBezierHandleMode.Free);
+					if (_isClosed)
 					{
-						mControlPoints[mControlPoints.Length - 1] = mControlPoints[0];
-						mHandleModes[mHandleModes.Length - 1] = mHandleModes[0];
+						_controlPoints[_controlPoints.Length - 1] = _controlPoints[0];
+						_handleModes[_handleModes.Length - 1] = _handleModes[0];
 						SetHandleMode(0);
 					}
 
@@ -899,10 +899,10 @@ namespace Lotus
 				var node_index = curveIndex * 3;
 
 				return CBezierCubic2D.CalculatePoint(time,
-					ref mControlPoints[node_index],
-					ref mControlPoints[node_index + 1],
-					ref mControlPoints[node_index + 2],
-					ref mControlPoints[node_index + 3]);
+					ref _controlPoints[node_index],
+					ref _controlPoints[node_index + 1],
+					ref _controlPoints[node_index + 2],
+					ref _controlPoints[node_index + 3]);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -916,7 +916,7 @@ namespace Lotus
 			public Vector2Df GetCurveControlPoint(Int32 curveIndex, Int32 pointIndex)
 			{
 				curveIndex = curveIndex * 3;
-				return mControlPoints[curveIndex + pointIndex];
+				return _controlPoints[curveIndex + pointIndex];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -930,7 +930,7 @@ namespace Lotus
 			public void SetCurveControlPoint(Int32 curveIndex, Int32 pointIndex, Vector2Df position)
 			{
 				curveIndex = curveIndex * 3;
-				mControlPoints[curveIndex + pointIndex] = position;
+				_controlPoints[curveIndex + pointIndex] = position;
 			}
 			#endregion
 
@@ -959,7 +959,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TBezierHandleMode GetHandleMode(Int32 index)
 			{
-				return mHandleModes[(index + 1) / 3];
+				return _handleModes[(index + 1) / 3];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -972,17 +972,17 @@ namespace Lotus
 			public void SetHandleMode(Int32 index, TBezierHandleMode mode)
 			{
 				var mode_index = (index + 1) / 3;
-				mHandleModes[mode_index] = mode;
+				_handleModes[mode_index] = mode;
 
-				if (mIsClosed)
+				if (_isClosed)
 				{
 					if (mode_index == 0)
 					{
-						mHandleModes[mHandleModes.Length - 1] = mode;
+						_handleModes[_handleModes.Length - 1] = mode;
 					}
-					else if (mode_index == mHandleModes.Length - 1)
+					else if (mode_index == _handleModes.Length - 1)
 					{
-						mHandleModes[0] = mode;
+						_handleModes[0] = mode;
 					}
 				}
 

@@ -56,27 +56,27 @@ namespace Lotus
 			/// <summary>
 			/// Маска для табличных значений синуса и косинуса
 			/// </summary>
-			private const Int32 mSinCosIndexMask = ~(-1 << 12);
+			private const Int32 SinCosIndexMask = ~(-1 << 12);
 
 			/// <summary>
 			/// Размер таблиц синуса и косинуса
 			/// </summary>
-			private const Int32 mSinCosCacheSize = mSinCosIndexMask + 1;
+			private const Int32 SinCosCacheSize = SinCosIndexMask + 1;
 
 			/// <summary>
 			/// Табличные значения синуса
 			/// </summary>
-			private static Single[] mSinTableCache;
+			private static Single[] _sinTableCache;
 
 			/// <summary>
 			/// Табличные значения косинуса
 			/// </summary>
-			private static Single[] mCosTableCache;
+			private static Single[] _cosTableCache;
 
 			/// <summary>
 			/// Точность заполнения таблиц синуса и косинуса
 			/// </summary>
-			private static Single mSinCosIndexFactor = mSinCosCacheSize / XMath.PI_2_F;
+			private static Single mSinCosIndexFactor = SinCosCacheSize / XMath.PI_2_F;
 
 			/// <summary>
 			/// Размер таблицы для арктангенса
@@ -148,21 +148,21 @@ namespace Lotus
 			public static void OnInit()
 			{
 				// Sin/Cos
-				mSinTableCache = new Single[mSinCosCacheSize];
-				mCosTableCache = new Single[mSinCosCacheSize];
+				_sinTableCache = new Single[SinCosCacheSize];
+				_cosTableCache = new Single[SinCosCacheSize];
 
 				Int32 i;
-				for (i = 0; i < mSinCosCacheSize; i++)
+				for (i = 0; i < SinCosCacheSize; i++)
 				{
-					mSinTableCache[i] = (Single)System.Math.Sin((i + 0.5f) / mSinCosCacheSize * XMath.PI_2_F);
-					mCosTableCache[i] = (Single)System.Math.Cos((i + 0.5f) / mSinCosCacheSize * XMath.PI_2_F);
+					_sinTableCache[i] = (Single)System.Math.Sin((i + 0.5f) / SinCosCacheSize * XMath.PI_2_F);
+					_cosTableCache[i] = (Single)System.Math.Cos((i + 0.5f) / SinCosCacheSize * XMath.PI_2_F);
 				}
 
-				var factor = mSinCosCacheSize / 360f;
+				var factor = SinCosCacheSize / 360f;
 				for (i = 0; i < 360; i += 90)
 				{
-					mSinTableCache[(Int32)(i * factor) & mSinCosIndexMask] = (Single)System.Math.Sin(i * XMath.PI_F / 180f);
-					mCosTableCache[(Int32)(i * factor) & mSinCosIndexMask] = (Single)System.Math.Cos(i * XMath.PI_F / 180f);
+					_sinTableCache[(Int32)(i * factor) & SinCosIndexMask] = (Single)System.Math.Sin(i * XMath.PI_F / 180f);
+					_cosTableCache[(Int32)(i * factor) & SinCosIndexMask] = (Single)System.Math.Cos(i * XMath.PI_F / 180f);
 				}
 
 				// Atan2
@@ -256,7 +256,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Sin(Single radians)
 			{
-				return mSinTableCache[(Int32)(radians * mSinCosIndexFactor) & mSinCosIndexMask];
+				return _sinTableCache[(Int32)(radians * mSinCosIndexFactor) & SinCosIndexMask];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -268,7 +268,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Cos(Single radians)
 			{
-				return mCosTableCache[(Int32)(radians * mSinCosIndexFactor) & mSinCosIndexMask];
+				return _cosTableCache[(Int32)(radians * mSinCosIndexFactor) & SinCosIndexMask];
 			}
 
 			//---------------------------------------------------------------------------------------------------------

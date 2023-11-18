@@ -611,14 +611,14 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal ILotusMap2D mMap;
-			protected internal Boolean mIsAllowDiagonal;
-			protected internal Boolean mHeavyDiagonals;
-			protected internal Int32 mSearchLimit;
-			protected internal TMapPoint mStart;
-			protected internal TMapPoint mTarget;
-			protected internal Boolean mIsFoundPath;
-			protected internal CPath mPath;
+			protected internal ILotusMap2D _map;
+			protected internal Boolean _isAllowDiagonal;
+			protected internal Boolean _heavyDiagonals;
+			protected internal Int32 _searchLimit;
+			protected internal TMapPoint _start;
+			protected internal TMapPoint _target;
+			protected internal Boolean _isFoundPath;
+			protected internal CPath _path;
 
 			// События
 			protected internal Action mOnPathFound;
@@ -633,8 +633,8 @@ namespace Lotus
 			/// </summary>
 			public ILotusMap2D Map
 			{
-				get { return mMap; }
-				set { mMap = value; }
+				get { return _map; }
+				set { _map = value; }
 			}
 
 			/// <summary>
@@ -642,8 +642,8 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsAllowDiagonal
 			{
-				get { return mIsAllowDiagonal; }
-				set { mIsAllowDiagonal = value; }
+				get { return _isAllowDiagonal; }
+				set { _isAllowDiagonal = value; }
 			}
 
 			/// <summary>
@@ -651,8 +651,8 @@ namespace Lotus
 			/// </summary>
 			public Boolean HeavyDiagonals
 			{
-				get { return mHeavyDiagonals; }
-				set { mHeavyDiagonals = value; }
+				get { return _heavyDiagonals; }
+				set { _heavyDiagonals = value; }
 			}
 
 			/// <summary>
@@ -660,8 +660,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 SearchLimit
 			{
-				get { return mSearchLimit; }
-				set { mSearchLimit = value; }
+				get { return _searchLimit; }
+				set { _searchLimit = value; }
 			}
 
 			/// <summary>
@@ -669,8 +669,8 @@ namespace Lotus
 			/// </summary>
 			public TMapPoint Start
 			{
-				get { return mStart; }
-				set { mStart = value; }
+				get { return _start; }
+				set { _start = value; }
 			}
 
 			/// <summary>
@@ -678,8 +678,8 @@ namespace Lotus
 			/// </summary>
 			public TMapPoint Target
 			{
-				get { return mTarget; }
-				set { mTarget = value; }
+				get { return _target; }
+				set { _target = value; }
 			}
 
 			/// <summary>
@@ -687,7 +687,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsFoundPath
 			{
-				get { return mIsFoundPath; }
+				get { return _isFoundPath; }
 			}
 
 			/// <summary>
@@ -695,7 +695,7 @@ namespace Lotus
 			/// </summary>
 			public CPath Path
 			{
-				get { return mPath; }
+				get { return _path; }
 			}
 
 			//
@@ -719,7 +719,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected CPathFinder()
 			{
-				mPath = new CPath();
+				_path = new CPath();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -730,8 +730,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected CPathFinder(ILotusMap2D map)
 			{
-				mMap = map;
-				mPath = new CPath();
+				_map = map;
+				_path = new CPath();
 			}
 			#endregion
 
@@ -749,7 +749,7 @@ namespace Lotus
 					BuildPath();
 				}
 
-				return mIsFoundPath;
+				return _isFoundPath;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -762,8 +762,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Find(TMapPoint start, TMapPoint target)
 			{
-				mStart = start;
-				mTarget = target;
+				_start = start;
+				_target = target;
 				return Find();
 			}
 			#endregion

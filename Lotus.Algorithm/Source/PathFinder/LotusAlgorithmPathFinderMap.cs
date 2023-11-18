@@ -268,9 +268,9 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32[,] mMap;
-			protected internal Int32 mMapWidth;
-			protected internal Int32 mMapHeight;
+			protected internal Int32[,] _map;
+			protected internal Int32 _mapWidth;
+			protected internal Int32 _mapHeight;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -282,8 +282,8 @@ namespace Lotus
 			/// </summary>
 			public Int32[,] Map
 			{
-				get { return mMap; }
-				set { mMap = value; }
+				get { return _map; }
+				set { _map = value; }
 			}
 
 			/// <summary>
@@ -291,8 +291,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 MapWidth
 			{
-				get { return mMapWidth; }
-				set { mMapWidth = value; }
+				get { return _mapWidth; }
+				set { _mapWidth = value; }
 			}
 
 			/// <summary>
@@ -300,8 +300,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 MapHeight
 			{
-				get { return mMapHeight; }
-				set { mMapHeight = value; }
+				get { return _mapHeight; }
+				set { _mapHeight = value; }
 			}
 			#endregion
 
@@ -326,9 +326,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMap2D(Int32 mapWidth, Int32 mapHeight)
 			{
-				mMapWidth = mapWidth;
-				mMapHeight = mapHeight;
-				mMap = new Int32[mMapWidth, mMapHeight];
+				_mapWidth = mapWidth;
+				_mapHeight = mapHeight;
+				_map = new Int32[_mapWidth, _mapHeight];
 			}
 			#endregion
 
@@ -340,11 +340,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetEmpty()
 			{
-				for (var x = 0; x < mMapWidth; x++)
+				for (var x = 0; x < _mapWidth; x++)
 				{
-					for (var y = 0; y < mMapHeight; y++)
+					for (var y = 0; y < _mapHeight; y++)
 					{
-						mMap[x, y] = XMapCode.EMPTY;
+						_map[x, y] = XMapCode.EMPTY;
 					}
 				}
 			}
@@ -358,7 +358,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetEmpty(Int32 x, Int32 y)
 			{
-				mMap[x, y] = XMapCode.EMPTY;
+				_map[x, y] = XMapCode.EMPTY;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -368,11 +368,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetBlock()
 			{
-				for (var x = 0; x < mMapWidth; x++)
+				for (var x = 0; x < _mapWidth; x++)
 				{
-					for (var y = 0; y < mMapHeight; y++)
+					for (var y = 0; y < _mapHeight; y++)
 					{
-						mMap[x, y] = XMapCode.BLOCK;
+						_map[x, y] = XMapCode.BLOCK;
 					}
 				}
 			}
@@ -386,7 +386,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetBlock(Int32 x, Int32 y)
 			{
-				mMap[x, y] = XMapCode.BLOCK;
+				_map[x, y] = XMapCode.BLOCK;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -400,11 +400,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetPassability(Int32 passability)
 			{
-				for (var x = 0; x < mMapWidth; x++)
+				for (var x = 0; x < _mapWidth; x++)
 				{
-					for (var y = 0; y < mMapHeight; y++)
+					for (var y = 0; y < _mapHeight; y++)
 					{
-						mMap[x, y] = passability;
+						_map[x, y] = passability;
 					}
 				}
 			}
@@ -422,7 +422,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetPassability(Int32 x, Int32 y, Int32 passability)
 			{
-				mMap[x, y] = passability;
+				_map[x, y] = passability;
 			}
 			#endregion
 		}
@@ -439,10 +439,10 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal TMapPoint mStart;
-			protected internal TMapPoint mTarget;
+			protected internal TMapPoint _start;
+			protected internal TMapPoint _target;
 			protected internal Int32[,] mWave;
-			protected internal CPath mPath;
+			protected internal CPath _path;
 
 			// Параметры отображения
 			protected internal Single mOffsetX;
@@ -459,8 +459,8 @@ namespace Lotus
 			/// </summary>
 			public TMapPoint Start
 			{
-				get { return mStart; }
-				set { mStart = value; }
+				get { return _start; }
+				set { _start = value; }
 			}
 
 			/// <summary>
@@ -468,8 +468,8 @@ namespace Lotus
 			/// </summary>
 			public TMapPoint Target
 			{
-				get { return mTarget; }
-				set { mTarget = value; }
+				get { return _target; }
+				set { _target = value; }
 			}
 
 			/// <summary>
@@ -477,10 +477,10 @@ namespace Lotus
 			/// </summary>
 			public Int32 StartX
 			{
-				get { return mStart.X; }
+				get { return _start.X; }
 				set
 				{
-					mStart.X = value;
+					_start.X = value;
 				}
 			}
 
@@ -489,10 +489,10 @@ namespace Lotus
 			/// </summary>
 			public Int32 StartY
 			{
-				get { return mStart.Y; }
+				get { return _start.Y; }
 				set
 				{
-					mStart.Y = value;
+					_start.Y = value;
 				}
 			}
 
@@ -501,10 +501,10 @@ namespace Lotus
 			/// </summary>
 			public Int32 TargetX
 			{
-				get { return mTarget.X; }
+				get { return _target.X; }
 				set
 				{
-					mTarget.X = value;
+					_target.X = value;
 				}
 			}
 
@@ -513,10 +513,10 @@ namespace Lotus
 			/// </summary>
 			public Int32 TargetY
 			{
-				get { return mTarget.Y; }
+				get { return _target.Y; }
 				set
 				{
-					mTarget.Y = value;
+					_target.Y = value;
 				}
 			}
 
@@ -533,10 +533,10 @@ namespace Lotus
 			/// </summary>
 			public CPath Path
 			{
-				get { return mPath; }
+				get { return _path; }
 				set
 				{
-					mPath = value;
+					_path = value;
 				}
 			}
 
@@ -589,8 +589,8 @@ namespace Lotus
 			public CMap2DView()
 				: base(1, 1)
 			{
-				mStart = TMapPoint.Undef;
-				mTarget = TMapPoint.Undef;
+				_start = TMapPoint.Undef;
+				_target = TMapPoint.Undef;
 				mWave = new Int32[1, 1];
 			}
 
@@ -604,8 +604,8 @@ namespace Lotus
 			public CMap2DView(Int32 mapWidth, Int32 mapHeight)
 				: base(mapWidth, mapHeight)
 			{
-				mStart = TMapPoint.Undef;
-				mTarget = TMapPoint.Undef;
+				_start = TMapPoint.Undef;
+				_target = TMapPoint.Undef;
 				mWave = new Int32[mapWidth, mapHeight];
 			}
 			#endregion
@@ -618,9 +618,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ResetWave()
 			{
-				for (var ix = 0; ix < mMapWidth; ix++)
+				for (var ix = 0; ix < _mapWidth; ix++)
 				{
-					for (var iy = 0; iy < mMapHeight; iy++)
+					for (var iy = 0; iy < _mapHeight; iy++)
 					{
 						mWave[ix, iy] = 0;
 					}
@@ -637,9 +637,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void DrawGrid()
 			{
-				for (Int32 ix = 0; ix < mMapWidth; ix++)
+				for (Int32 ix = 0; ix < _mapWidth; ix++)
 				{
-					for (Int32 iy = 0; iy < mMapHeight; iy++)
+					for (Int32 iy = 0; iy < _mapHeight; iy++)
 					{
 						UnityEngine.Rect cell = new UnityEngine.Rect();
 						cell.x = mOffsetX + ix * mSizeCell;
@@ -661,14 +661,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void DrawStartPosition(UnityEngine.Color color, String text = "Str")
 			{
-				if (mStart.X > -1 && mStart.X < mMapWidth && mStart.Y > -1 && mStart.Y < mMapHeight)
+				if (_start.X > -1 && _start.X < _mapWidth && _start.Y > -1 && _start.Y < _mapHeight)
 				{
 					UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
 					UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
 
 					UnityEngine.Rect cell = new UnityEngine.Rect();
-					cell.x = mOffsetX + mStart.X * mSizeCell + 2;
-					cell.y = mOffsetY + mStart.Y * mSizeCell + 2;
+					cell.x = mOffsetX + _start.X * mSizeCell + 2;
+					cell.y = mOffsetY + _start.Y * mSizeCell + 2;
 					cell.width = mSizeCell - 4;
 					cell.height = mSizeCell - 4;
 					UnityEngine.GUI.backgroundColor = color;
@@ -687,14 +687,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void DrawEndPosition(UnityEngine.Color color, String text = "End")
 			{
-				if (mTarget.X > -1 && mTarget.X < mMapWidth && mTarget.Y > -1 && mTarget.Y < mMapHeight)
+				if (_target.X > -1 && _target.X < _mapWidth && _target.Y > -1 && _target.Y < _mapHeight)
 				{
 					UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
 					UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
 
 					UnityEngine.Rect cell = new UnityEngine.Rect();
-					cell.x = mOffsetX + mTarget.X * mSizeCell + 2;
-					cell.y = mOffsetY + mTarget.Y * mSizeCell + 2;
+					cell.x = mOffsetX + _target.X * mSizeCell + 2;
+					cell.y = mOffsetY + _target.Y * mSizeCell + 2;
 					cell.width = mSizeCell - 4;
 					cell.height = mSizeCell - 4;
 					UnityEngine.GUI.backgroundColor = color;
@@ -714,12 +714,12 @@ namespace Lotus
 			{
 				UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
 				UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
-				for (Int32 ix = 0; ix < mMapWidth; ix++)
+				for (Int32 ix = 0; ix < _mapWidth; ix++)
 				{
-					for (Int32 iy = 0; iy < mMapHeight; iy++)
+					for (Int32 iy = 0; iy < _mapHeight; iy++)
 					{
 						// Только если это препятствие
-						if (mMap[ix, iy] >= XMapCode.EMPTY)
+						if (_map[ix, iy] >= XMapCode.EMPTY)
 						{
 							UnityEngine.Rect cell = new UnityEngine.Rect();
 							cell.x = mOffsetX + ix * mSizeCell + 2;
@@ -727,7 +727,7 @@ namespace Lotus
 							cell.width = mSizeCell - 4;
 							cell.height = mSizeCell - 4;
 							UnityEngine.GUI.backgroundColor = color;
-							UnityEngine.GUI.Box(cell, mMap[ix, iy].ToString());
+							UnityEngine.GUI.Box(cell, _map[ix, iy].ToString());
 						}
 					}
 				}
@@ -744,12 +744,12 @@ namespace Lotus
 			{
 				UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
 				UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
-				for (Int32 ix = 0; ix < mMapWidth; ix++)
+				for (Int32 ix = 0; ix < _mapWidth; ix++)
 				{
-					for (Int32 iy = 0; iy < mMapHeight; iy++)
+					for (Int32 iy = 0; iy < _mapHeight; iy++)
 					{
 						// Только если это препятствие
-						if (mMap[ix, iy] == XMapCode.BLOCK)
+						if (_map[ix, iy] == XMapCode.BLOCK)
 						{
 							UnityEngine.Rect cell = new UnityEngine.Rect();
 							cell.x = mOffsetX + ix * mSizeCell + 2;
@@ -757,7 +757,7 @@ namespace Lotus
 							cell.width = mSizeCell - 4;
 							cell.height = mSizeCell - 4;
 							UnityEngine.GUI.backgroundColor = color;
-							UnityEngine.GUI.Box(cell, mMap[ix, iy].ToString());
+							UnityEngine.GUI.Box(cell, _map[ix, iy].ToString());
 						}
 					}
 				}
@@ -774,9 +774,9 @@ namespace Lotus
 			{
 				UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
 				UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
-				for (Int32 ix = 0; ix < mMapWidth; ix++)
+				for (Int32 ix = 0; ix < _mapWidth; ix++)
 				{
-					for (Int32 iy = 0; iy < mMapHeight; iy++)
+					for (Int32 iy = 0; iy < _mapHeight; iy++)
 					{
 						// Только если это препятствие
 						if (mWave[ix, iy] > 0)
@@ -802,15 +802,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void DrawPath(UnityEngine.Color color)
 			{
-				if (mPath != null)
+				if (_path != null)
 				{
 					UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
 					UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
-					for (Int32 i = 0; i < mPath.Count; i++)
+					for (Int32 i = 0; i < _path.Count; i++)
 					{
 						UnityEngine.Rect cell = new UnityEngine.Rect();
-						cell.x = mOffsetX + mPath[i].X * mSizeCell + 2;
-						cell.y = mOffsetY + mPath[i].Y * mSizeCell + 2;
+						cell.x = mOffsetX + _path[i].X * mSizeCell + 2;
+						cell.y = mOffsetY + _path[i].Y * mSizeCell + 2;
 						cell.width = mSizeCell - 4;
 						cell.height = mSizeCell - 4;
 						UnityEngine.GUI.backgroundColor = color;

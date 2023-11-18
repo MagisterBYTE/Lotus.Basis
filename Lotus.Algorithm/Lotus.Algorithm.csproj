@@ -10,9 +10,9 @@
     <Authors>MagistrBYTE aka DanielDem</Authors>
     <Company>LotusPlatform</Company>
     <Copyright>MagistrBYTE aka DanielDem</Copyright>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
-    <Version>2.0.0</Version>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <FileVersion>2.1.0.0</FileVersion>
+    <Version>2.1.0</Version>
     <Title>Lotus.Algorithm</Title>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Модуль алгоритмов реализует распространены алгоритмы по поиску пути, интерполяции данных, работу с графами, алгоритмы сортировки и упорядочивания данных, заливку областей, а также базовые алгоритмы генерации контента</Description>
@@ -36,8 +36,8 @@
   </PropertyGroup>
  
   <ItemGroup Condition="'$(Configuration)' == 'Publish'">
-    <PackageReference Include="Lotus.Core" Version="2.0.0" />
-    <PackageReference Include="Lotus.Math" Version="2.0.0" />
+    <PackageReference Include="Lotus.Core" Version="2.1.0" />
+    <PackageReference Include="Lotus.Math" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' != 'Publish'">

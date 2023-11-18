@@ -71,7 +71,7 @@ namespace Lotus
 		public class CFieldBase<TCell> : ILotusField where TCell : ILotusFieldCell
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal ListArray<TCell> mCells;
+			protected internal ListArray<TCell> _cells;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -80,7 +80,7 @@ namespace Lotus
 			/// </summary>
 			public IList<ILotusFieldCell> ICells
 			{
-				get { return (IList<ILotusFieldCell>)mCells; }
+				get { return (IList<ILotusFieldCell>)_cells; }
 			}
 
 			/// <summary>
@@ -88,7 +88,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<TCell> Cells
 			{
-				get { return mCells; }
+				get { return _cells; }
 			}
 
 			/// <summary>
@@ -115,7 +115,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CFieldBase()
 			{
-				mCells = new ListArray<TCell>();
+				_cells = new ListArray<TCell>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CFieldBase(Int32 capacity)
 			{
-				mCells = new ListArray<TCell>(capacity);
+				_cells = new ListArray<TCell>(capacity);
 			}
 			#endregion
 
@@ -145,11 +145,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ILotusFieldCell GetCell(Int32 x, Int32 y)
 			{
-				for (var i = 0; i < mCells.Count; i++)
+				for (var i = 0; i < _cells.Count; i++)
 				{
-					if(mCells[i].CellCoordinateX == x && mCells[i].CellCoordinateY == y)
+					if(_cells[i].CellCoordinateX == x && _cells[i].CellCoordinateY == y)
 					{
-						return mCells[i];
+						return _cells[i];
 					}
 				}
 

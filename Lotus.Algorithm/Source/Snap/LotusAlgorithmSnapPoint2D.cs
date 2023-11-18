@@ -525,9 +525,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ComputeDistance(Vector2Df point)
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					mArrayOfItems[i].ComputeDistance(ref point);
+					_arrayOfItems[i].ComputeDistance(ref point);
 				}
 			}
 
@@ -541,9 +541,9 @@ namespace Lotus
 			public void ComputeDistance(UnityEngine.Vector2 vector)
 			{
 				Vector2Df point = new Vector2Df(vector.x, vector.y);
-				for (Int32 i = 0; i < mCount; i++)
+				for (Int32 i = 0; i < _count; i++)
 				{
-					mArrayOfItems[i].ComputeDistance(ref point);
+					_arrayOfItems[i].ComputeDistance(ref point);
 				}
 			}
 #endif
@@ -557,11 +557,11 @@ namespace Lotus
 			public Single GetMinimumDistance()
 			{
 				var minimum = Single.MaxValue;
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					if(mArrayOfItems[i].Distance < minimum)
+					if(_arrayOfItems[i].Distance < minimum)
 					{
-						minimum = mArrayOfItems[i].Distance;
+						minimum = _arrayOfItems[i].Distance;
 					}
 				}
 
@@ -578,11 +578,11 @@ namespace Lotus
 			{
 				var minimum = Single.MaxValue;
 				var index = 0;
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					if (mArrayOfItems[i].Distance < minimum)
+					if (_arrayOfItems[i].Distance < minimum)
 					{
-						minimum = mArrayOfItems[i].Distance;
+						minimum = _arrayOfItems[i].Distance;
 						index = i;
 					}
 				}
@@ -603,9 +603,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromPosition(Vector2Df point, Single deltaX, Single deltaY)
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					if(mArrayOfItems[i].ApproximatelyPoint(ref point, deltaX, deltaY))
+					if(_arrayOfItems[i].ApproximatelyPoint(ref point, deltaX, deltaY))
 					{
 						return i;
 					}
@@ -626,9 +626,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromPosition(UnityEngine.Vector2 vector, Single delta_x, Single delta_y)
 			{
-				for (Int32 i = 0; i < mCount; i++)
+				for (Int32 i = 0; i < _count; i++)
 				{
-					if (mArrayOfItems[i].ApproximatelyPoint(ref vector, delta_x, delta_y))
+					if (_arrayOfItems[i].ApproximatelyPoint(ref vector, delta_x, delta_y))
 					{
 						return (i);
 					}
@@ -648,9 +648,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromPositionX(Single x, Single epsilon)
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					if (mArrayOfItems[i].ApproximatelyPointX(x, epsilon))
+					if (_arrayOfItems[i].ApproximatelyPointX(x, epsilon))
 					{
 						return i;
 					}
@@ -669,9 +669,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromPositionY(Single y, Single epsilon)
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					if (mArrayOfItems[i].ApproximatelyPointY(y, epsilon))
+					if (_arrayOfItems[i].ApproximatelyPointY(y, epsilon))
 					{
 						return i;
 					}
@@ -690,9 +690,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 FindIndexNearestFromDistance(Single distance, Single epsilon)
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					if (mArrayOfItems[i].ApproximatelyDistance(distance, epsilon))
+					if (_arrayOfItems[i].ApproximatelyDistance(distance, epsilon))
 					{
 						return i;
 					}

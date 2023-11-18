@@ -106,7 +106,7 @@ namespace Lotus
 			#region ======================================= ДАННЫЕ ====================================================
 			protected internal CEcsWorld mWorld;
 			protected internal SparseSet mEntities;
-			protected internal ListArray<Type> mIncludedComponents;
+			protected internal ListArray<Type> _includedComponents;
 			protected internal ListArray<Type> mExcludedComponents;
 			#endregion
 
@@ -141,7 +141,7 @@ namespace Lotus
 			{
 				get
 				{
-					return mIncludedComponents;
+					return _includedComponents;
 				}
 			}
 
@@ -166,7 +166,7 @@ namespace Lotus
 			public CEcsFilterComponent()
 			{
 				mEntities = new SparseSet(16);
-				mIncludedComponents = new ListArray<Type>(8);
+				_includedComponents = new ListArray<Type>(8);
 				mExcludedComponents = new ListArray<Type>(4);
 			}
 			#endregion
@@ -233,7 +233,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public ILotusEcsFilterComponent Include(Type componentType)
 			{
-				mIncludedComponents.AddIfNotContains(componentType);
+				_includedComponents.AddIfNotContains(componentType);
 				UpdateFilter();
 				return this;
 			}
@@ -249,7 +249,7 @@ namespace Lotus
 			public Boolean Exsist<TComponent>() where TComponent : struct
 			{
 				Type component_type = typeof(TComponent);
-				return mIncludedComponents.Contains(component_type) || mExcludedComponents.Contains(component_type);
+				return _includedComponents.Contains(component_type) || mExcludedComponents.Contains(component_type);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public Boolean Exsist(Type componentType)
 			{
-				return mIncludedComponents.Contains(componentType) || mExcludedComponents.Contains(componentType);
+				return _includedComponents.Contains(componentType) || mExcludedComponents.Contains(componentType);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ namespace Lotus
 			{
 				mExcludedComponents.AddIfNotContains(componentType);
 				ILotusEcsComponentData component_data;
-				if (mWorld.mComponentsData.TryGetValue(componentType, out component_data))
+				if (mWorld._componentsData.TryGetValue(componentType, out component_data))
 				{
 					var exclude_entities = component_data.GetEntities();
 					mEntities.RemoveValues(exclude_entities);
@@ -309,22 +309,22 @@ namespace Lotus
 			public void UpdateFilter()
 			{
 				mEntities.Clear();
-				if(mIncludedComponents.Count > 1)
+				if(_includedComponents.Count > 1)
 				{
-					Type first_type_filter = mIncludedComponents[0];
+					Type first_type_filter = _includedComponents[0];
 					ILotusEcsComponentData component_data;
-					if (mWorld.mComponentsData.TryGetValue(first_type_filter, out component_data))
+					if (mWorld._componentsData.TryGetValue(first_type_filter, out component_data))
 					{
 						var entities = component_data.GetEntities();
 						for (var i = 0; i < component_data.Count; i++)
 						{
 							var id = entities[i];
 							var find_count = 0;
-							for (var f = 1; f < mIncludedComponents.Count; f++)
+							for (var f = 1; f < _includedComponents.Count; f++)
 							{
-								Type type_filter = mIncludedComponents[f];
+								Type type_filter = _includedComponents[f];
 								ILotusEcsComponentData filter_data;
-								if (mWorld.mComponentsData.TryGetValue(type_filter, out filter_data))
+								if (mWorld._componentsData.TryGetValue(type_filter, out filter_data))
 								{
 									if(filter_data.HasEntity(id))
 									{
@@ -337,7 +337,7 @@ namespace Lotus
 								}
 							}
 
-							if(find_count == mIncludedComponents.Count - 1)
+							if(find_count == _includedComponents.Count - 1)
 							{
 								AddEntity(id);
 							}
@@ -348,7 +348,7 @@ namespace Lotus
 				for (var i = 0; i < mExcludedComponents.Count; i++)
 				{
 					ILotusEcsComponentData component_data;
-					if (mWorld.mComponentsData.TryGetValue(mExcludedComponents[i], out component_data))
+					if (mWorld._componentsData.TryGetValue(mExcludedComponents[i], out component_data))
 					{
 						var include_entities = component_data.GetEntities();
 						mEntities.RemoveValues(include_entities);

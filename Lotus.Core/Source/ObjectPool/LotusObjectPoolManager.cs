@@ -98,10 +98,10 @@ namespace Lotus
 		public class PoolManagerBase<TPoolObject> : ILotusPoolManager
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal String mName = "";
-			protected internal Int32 mMaxInstances = 20;
-			protected internal StackArray<TPoolObject> mPoolObjects;
-			protected internal Func<TPoolObject> mConstructor;
+			protected internal String _name = "";
+			protected internal Int32 _maxInstances = 20;
+			protected internal StackArray<TPoolObject> _poolObjects;
+			protected internal Func<TPoolObject> _constructor;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -110,8 +110,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -119,7 +119,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 MaxInstances
 			{
-				get { return mMaxInstances; }
+				get { return _maxInstances; }
 			}
 
 			/// <summary>
@@ -127,7 +127,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 InstanceCount
 			{
-				get { return mPoolObjects.Count; }
+				get { return _poolObjects.Count; }
 			}
 
 			/// <summary>
@@ -135,8 +135,8 @@ namespace Lotus
 			/// </summary>
 			public Func<TPoolObject> Constructor
 			{
-				get { return mConstructor; }
-				set { mConstructor = value; }
+				get { return _constructor; }
+				set { _constructor = value; }
 			}
 			#endregion
 
@@ -148,7 +148,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public PoolManagerBase()
 			{
-				mPoolObjects = new StackArray<TPoolObject>(mMaxInstances);
+				_poolObjects = new StackArray<TPoolObject>(_maxInstances);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -159,8 +159,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public PoolManagerBase(Int32 maxInstance)
 			{
-				mMaxInstances = maxInstance;
-				mPoolObjects = new StackArray<TPoolObject>(mMaxInstances);
+				_maxInstances = maxInstance;
+				_poolObjects = new StackArray<TPoolObject>(_maxInstances);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -172,13 +172,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public PoolManagerBase(Int32 maxInstance, Func<TPoolObject> constructor)
 			{
-				mMaxInstances = maxInstance;
-				mConstructor = constructor;
-				mPoolObjects = new StackArray<TPoolObject>(mMaxInstances);
+				_maxInstances = maxInstance;
+				_constructor = constructor;
+				_poolObjects = new StackArray<TPoolObject>(_maxInstances);
 
-				for (var i = 0; i < mMaxInstances; i++)
+				for (var i = 0; i < _maxInstances; i++)
 				{
-					mPoolObjects.Push(constructor());
+					_poolObjects.Push(constructor());
 				}
 			}
 			#endregion
@@ -218,10 +218,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected void ResizePool()
 			{
-				mMaxInstances = mMaxInstances * 2;
-				for (var i = 0; i < mMaxInstances; i++)
+				_maxInstances = _maxInstances * 2;
+				for (var i = 0; i < _maxInstances; i++)
 				{
-					mPoolObjects.Push(mConstructor());
+					_poolObjects.Push(_constructor());
 				}
 			}
 
@@ -233,12 +233,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual TPoolObject Take()
 			{
-				if (mPoolObjects.Count == 0 && mConstructor != null)
+				if (_poolObjects.Count == 0 && _constructor != null)
 				{
 					ResizePool();
 				}
 
-				TPoolObject pool_object = mPoolObjects.Pop();
+				TPoolObject pool_object = _poolObjects.Pop();
 				return pool_object;
 			}
 
@@ -253,7 +253,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Release(TPoolObject poolObject)
 			{
-				mPoolObjects.Push(poolObject);
+				_poolObjects.Push(poolObject);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -263,7 +263,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Clear()
 			{
-				mPoolObjects.Clear();
+				_poolObjects.Clear();
 			}
 			#endregion
 		}
@@ -326,12 +326,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override TPoolObject Take()
 			{
-				if(mPoolObjects.Count == 0 && mConstructor != null)
+				if(_poolObjects.Count == 0 && _constructor != null)
 				{
 					ResizePool();
 				}
 
-				TPoolObject pool_object = mPoolObjects.Pop();
+				TPoolObject pool_object = _poolObjects.Pop();
 				pool_object.OnPoolTake();
 				return pool_object;
 			}
@@ -348,7 +348,7 @@ namespace Lotus
 			public override void Release(TPoolObject poolObject)
 			{
 				poolObject.OnPoolRelease();
-				mPoolObjects.Push(poolObject);
+				_poolObjects.Push(poolObject);
 			}
 			#endregion
 		}

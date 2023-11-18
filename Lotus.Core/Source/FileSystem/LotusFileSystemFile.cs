@@ -27,25 +27,11 @@ namespace Lotus
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
 		[Serializable]
-		public class CFileSystemFile : CNameable, ILotusOwnedObject, ILotusFileSystemEntity, ILotusViewItemOwner
+		public class CFileSystemFile : CNameable, ILotusOwnedObject, ILotusFileSystemEntity
 		{
-			#region ======================================= СТАТИЧЕСКИЕ ДАННЫЕ ========================================
-			//
-			// Константы для информирования об изменении свойств
-			//
-			/// <summary>
-			/// Описание свойств
-			/// </summary>
-			public readonly static CPropertyDesc[] FileSystemFilePropertiesDesc = new CPropertyDesc[]
-			{
-				// Идентификация
-				CPropertyDesc.OverrideDisplayNameAndDescription<CFileSystemFile>(nameof(Name), "Имя", "Имя файла"),
-			};
-			#endregion
-
 			#region ======================================= ДАННЫЕ ====================================================
 			protected internal ILotusOwnerObject mOwner;
-			protected internal FileInfo mInfo;
+			protected internal FileInfo _info;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -63,23 +49,23 @@ namespace Lotus
 			/// </summary>
 			public override String Name
 			{
-				get { return mName; }
+				get { return _name; }
 				set
 				{
 					try
 					{
-						if(mInfo != null)
+						if(_info != null)
 						{
-							var new_file_path = XFilePath.GetPathForRenameFile(mInfo.FullName, value);
-							File.Move(mInfo.FullName, new_file_path);
-							mName = value;
+							var new_file_path = XFilePath.GetPathForRenameFile(_info.FullName, value);
+							File.Move(_info.FullName, new_file_path);
+							_name = value;
 							NotifyPropertyChanged(PropertyArgsName);
 							RaiseNameChanged();
 
 						}
 						else
 						{
-							mName = value;
+							_name = value;
 							NotifyPropertyChanged(PropertyArgsName);
 							RaiseNameChanged();
 						}
@@ -98,13 +84,13 @@ namespace Lotus
 			{
 				get 
 				{
-					if(mInfo != null)
+					if(_info != null)
 					{
-						return mInfo.FullName;
+						return _info.FullName;
 					}
 					else
 					{
-						return mName;
+						return _name;
 					}
 				}
 			}
@@ -114,44 +100,9 @@ namespace Lotus
 			/// </summary>
 			public FileInfo Info
 			{
-				get { return mInfo; }
-				set { mInfo = value; }
+				get { return _info; }
+				set { _info = value; }
 			}
-			#endregion
-
-			#region ======================================= СВОЙСТВА ILotusSupportEditInspector =======================
-			/// <summary>
-			/// Отображаемое имя типа в инспекторе свойств
-			/// </summary>
-			public String InspectorTypeName
-			{
-				get { return "ФАЙЛ"; }
-			}
-
-			/// <summary>
-			/// Отображаемое имя объекта в инспекторе свойств
-			/// </summary>
-			public String InspectorObjectName
-			{
-				get
-				{
-					if (mInfo != null)
-					{
-						return mInfo.Name;
-					}
-					else
-					{
-						return "";
-					}
-				}
-			}
-			#endregion
-
-			#region ======================================= СВОЙСТВА ILotusViewItemOwner ==============================
-			/// <summary>
-			/// Элемент отображения
-			/// </summary>
-			public ILotusViewItem OwnerViewItem { get; set; }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -164,34 +115,11 @@ namespace Lotus
 			public CFileSystemFile(FileInfo fileInfo)
 				: base(fileInfo.Name)
 			{
-				mInfo = fileInfo;
+				_info = fileInfo;
 			}
 			#endregion
 
 			#region ======================================= МЕТОДЫ ILotusFileSystemEntity =============================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получение количества дочерних узлов
-			/// </summary>
-			/// <returns>Количество дочерних узлов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Int32 GetCountChildrenNode()
-			{
-				return 0;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получение дочернего узла по индексу
-			/// </summary>
-			/// <param name="index">Индекс дочернего узла</param>
-			/// <returns>Дочерней узел</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public System.Object GetChildrenNode(Int32 index)
-			{
-				return null;
-			}
-
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Проверка объекта на удовлетворение указанного предиката
@@ -208,19 +136,6 @@ namespace Lotus
 			}
 			#endregion
 
-			#region ======================================= МЕТОДЫ ILotusSupportEditInspector =========================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получить массив описателей свойств объекта
-			/// </summary>
-			/// <returns>Массив описателей</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public CPropertyDesc[] GetPropertiesDesc()
-			{
-				return FileSystemFilePropertiesDesc;
-			}
-			#endregion
-
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -231,11 +146,11 @@ namespace Lotus
 			public void RenameAssets(String newFileName)
 			{
 #if UNITY_EDITOR
-				if (mInfo != null)
+				if (_info != null)
 				{
-					String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, newFileName);
-					mInfo = new FileInfo(new_path);
-					mName = mInfo.Name;
+					String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, newFileName);
+					_info = new FileInfo(new_path);
+					_name = _info.Name;
 					NotifyPropertyChanged(PropertyArgsName);
 					RaiseNameChanged();
 				}
@@ -253,9 +168,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ModifyNameOfRemove(TStringSearchOption searchOption, String check)
 			{
-				if (mInfo != null)
+				if (_info != null)
 				{
-					var file_name = mInfo.Name.RemoveExtension();
+					var file_name = _info.Name.RemoveExtension();
 					switch (searchOption)
 					{
 						case TStringSearchOption.Start:
@@ -265,9 +180,9 @@ namespace Lotus
 								{
 #if UNITY_EDITOR
 									file_name = file_name.Remove(index, check.Length);
-                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
-                                    mInfo = new FileInfo(new_path);
-                                    mName = mInfo.Name;
+                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, file_name);
+                                    _info = new FileInfo(new_path);
+                                    _name = _info.Name;
 #else
 
 #endif
@@ -281,9 +196,9 @@ namespace Lotus
 								{
 #if UNITY_EDITOR
 									file_name = file_name.Remove(index, check.Length);
-                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
-                                    mInfo = new FileInfo(new_path);
-                                    mName = mInfo.Name;
+                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, file_name);
+                                    _info = new FileInfo(new_path);
+                                    _name = _info.Name;
 #else
 
 #endif
@@ -310,9 +225,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ModifyNameOfReplace(TStringSearchOption searchOption, String source, String target)
 			{
-				if (mInfo != null)
+				if (_info != null)
 				{
-					var file_name = mInfo.Name.RemoveExtension();
+					var file_name = _info.Name.RemoveExtension();
 					switch (searchOption)
 					{
 						case TStringSearchOption.Start:
@@ -322,9 +237,9 @@ namespace Lotus
 								{
 #if UNITY_EDITOR
 									file_name = file_name.Replace(source, target);
-                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(mInfo.FullName, file_name);
-                                    mInfo = new FileInfo(new_path);
-                                    mName = mInfo.Name;
+                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, file_name);
+                                    _info = new FileInfo(new_path);
+                                    _name = _info.Name;
 #else
 
 #endif
@@ -346,15 +261,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Delete()
 			{
-				File.Delete(mInfo.FullName);
+				File.Delete(_info.FullName);
 
-				var metaFile = mInfo.FullName + ".meta";
+				var metaFile = _info.FullName + ".meta";
 				if (File.Exists(metaFile))
 				{
 					File.Delete(metaFile);
 				}
 
-				mInfo = null;
+				_info = null;
 			}
 			#endregion
 		}

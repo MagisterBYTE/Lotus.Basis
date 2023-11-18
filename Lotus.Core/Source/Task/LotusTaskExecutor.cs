@@ -58,10 +58,10 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal String mName;
-			protected internal PoolManager<CTaskHolder> mTaskHolderPools;
-			protected internal List<CTaskHolder> mTasks;
-			protected internal Dictionary<String, Action> mTaskHandlersCompleted;
+			protected internal String _name;
+			protected internal PoolManager<CTaskHolder> _taskHolderPools;
+			protected internal List<CTaskHolder> _tasks;
+			protected internal Dictionary<String, Action> _taskHandlersCompleted;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -70,8 +70,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -79,7 +79,7 @@ namespace Lotus
 			/// </summary>
 			public PoolManager<CTaskHolder> TaskHolderPools
 			{
-				get { return mTaskHolderPools; }
+				get { return _taskHolderPools; }
 			}
 
 			/// <summary>
@@ -87,7 +87,7 @@ namespace Lotus
 			/// </summary>
 			public List<CTaskHolder> Tasks
 			{
-				get { return mTasks; }
+				get { return _tasks; }
 			}
 
 			/// <summary>
@@ -95,7 +95,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, Action> TaskHandlersCompleted
 			{
-				get { return mTaskHandlersCompleted; }
+				get { return _taskHandlersCompleted; }
 			}
 			#endregion
 
@@ -118,9 +118,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTaskExecutor(String name)
 			{
-				mTaskHolderPools = new PoolManager<CTaskHolder>(10, ConstructorTaskHolder);
-				mTasks = new List<CTaskHolder>(10);
-				mTaskHandlersCompleted = new Dictionary<String, Action>(10);
+				_taskHolderPools = new PoolManager<CTaskHolder>(10, ConstructorTaskHolder);
+				_tasks = new List<CTaskHolder>(10);
+				_taskHandlersCompleted = new Dictionary<String, Action>(10);
 			}
 			#endregion
 
@@ -133,11 +133,11 @@ namespace Lotus
 			public void OnUpdate()
 			{
 				// Выполняем отдельные задачи каждый кадр
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (!mTasks[i].IsTaskCompleted)
+					if (!_tasks[i].IsTaskCompleted)
 					{
-						mTasks[i].ExecuteTask();
+						_tasks[i].ExecuteTask();
 					}
 				}
 			}
@@ -151,10 +151,10 @@ namespace Lotus
 			public String GetStatus()
 			{
 				var str = new StringBuilder(200);
-				str.AppendLine("Всего задач: " + mTasks.Count.ToString());
-				for (var it = 0; it < mTasks.Count; it++)
+				str.AppendLine("Всего задач: " + _tasks.Count.ToString());
+				for (var it = 0; it < _tasks.Count; it++)
 				{
-					str.AppendLine("Задача: " + mTasks[it].Name);
+					str.AppendLine("Задача: " + _tasks[it].Name);
 				}
 
 				return str.ToString();
@@ -171,11 +171,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CTaskHolder GetTask(String taskName)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Name == taskName)
+					if (_tasks[i].Name == taskName)
 					{
-						return mTasks[i];
+						return _tasks[i];
 					}
 				}
 
@@ -191,10 +191,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void AddTask(ILotusTask task, TTaskMethod method)
 			{
-				CTaskHolder task_holder = mTaskHolderPools.Take();
+				CTaskHolder task_holder = _taskHolderPools.Take();
 				task_holder.Task = task;
 				task_holder.MethodMode = method;
-				mTasks.Add(task_holder);
+				_tasks.Add(task_holder);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -207,11 +207,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void AddTask(ILotusTask task, String taskName, TTaskMethod method)
 			{
-				CTaskHolder task_holder = mTaskHolderPools.Take();
+				CTaskHolder task_holder = _taskHolderPools.Take();
 				task_holder.Name = taskName;
 				task_holder.Task = task;
 				task_holder.MethodMode = method;
-				mTasks.Add(task_holder);
+				_tasks.Add(task_holder);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -222,16 +222,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveTask(ILotusTask task)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Task == task)
+					if (_tasks[i].Task == task)
 					{
 						// 1) Возвращаем в пул
-						CTaskHolder task_holder = mTasks[i];
-						mTaskHolderPools.Release(task_holder);
+						CTaskHolder task_holder = _tasks[i];
+						_taskHolderPools.Release(task_holder);
 
 						// 2) Удаляем
-						mTasks.RemoveAt(i);
+						_tasks.RemoveAt(i);
 						break;
 					}
 				}
@@ -245,16 +245,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveTask(String taskName)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Name == taskName)
+					if (_tasks[i].Name == taskName)
 					{
 						// 1) Возвращаем в пул
-						CTaskHolder task_holder = mTasks[i];
-						mTaskHolderPools.Release(task_holder);
+						CTaskHolder task_holder = _tasks[i];
+						_taskHolderPools.Release(task_holder);
 
 						// 2) Удаляем
-						mTasks.RemoveAt(i);
+						_tasks.RemoveAt(i);
 						break;
 					}
 				}
@@ -293,24 +293,24 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RunTask(String taskName, Single delayStart, Action onCompleted)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Name == taskName)
+					if (_tasks[i].Name == taskName)
 					{
 						if (onCompleted != null)
 						{
-							if (mTaskHandlersCompleted.ContainsKey(taskName))
+							if (_taskHandlersCompleted.ContainsKey(taskName))
 							{
-								mTaskHandlersCompleted[taskName] = onCompleted;
+								_taskHandlersCompleted[taskName] = onCompleted;
 							}
 							else
 							{
-								mTaskHandlersCompleted.Add(taskName, onCompleted);
+								_taskHandlersCompleted.Add(taskName, onCompleted);
 							}
 						}
 
-						mTasks[i].DelayStart = delayStart;
-						mTasks[i].RunTask();
+						_tasks[i].DelayStart = delayStart;
+						_tasks[i].RunTask();
 						return;
 					}
 				}
@@ -325,12 +325,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RunTask(ILotusTask task, Single delayStart)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Task == task)
+					if (_tasks[i].Task == task)
 					{
-						mTasks[i].DelayStart = delayStart;
-						mTasks[i].RunTask();
+						_tasks[i].DelayStart = delayStart;
+						_tasks[i].RunTask();
 						return;
 					}
 				}
@@ -345,11 +345,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void PauseTask(String taskName, Boolean pause)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Name == taskName)
+					if (_tasks[i].Name == taskName)
 					{
-						mTasks[i].IsPause = pause;
+						_tasks[i].IsPause = pause;
 						return;
 					}
 				}
@@ -363,11 +363,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void StopTask(String taskName)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Name == taskName)
+					if (_tasks[i].Name == taskName)
 					{
-						mTasks[i].StopTask();
+						_tasks[i].StopTask();
 						return;
 					}
 				}
@@ -381,11 +381,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ResetTask(String taskName)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Name == taskName)
+					if (_tasks[i].Name == taskName)
 					{
-						mTasks[i].ResetTask();
+						_tasks[i].ResetTask();
 						return;
 					}
 				}

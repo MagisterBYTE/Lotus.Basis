@@ -52,46 +52,46 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal String mName;
+			protected internal String _name;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal Boolean mIsEnabled = true;
+			protected internal Boolean _isEnabled = true;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal TBindingMode mMode;
+			protected internal TBindingMode _mode;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal TBindingModeChanged mModeChanged;
+			protected internal TBindingModeChanged _modeChanged;
 
 			// Объект модели
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal String mModelMemberName;
+			protected internal String _modelMemberName;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal TBindingMemberType mModelMemberType;
-			protected internal System.Object mModelInstance;
-			protected internal INotifyPropertyChanged mModelPropertyChanged;
+			protected internal TBindingMemberType _modelMemberType;
+			protected internal System.Object _modelInstance;
+			protected internal INotifyPropertyChanged _modelPropertyChanged;
 
 			// Объект представления
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal String mViewMemberName;
+			protected internal String _viewMemberName;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal TBindingMemberType mViewMemberType;
-			protected internal Boolean mIsStringView;
-			protected internal System.Object mViewInstance;
-			protected internal INotifyPropertyChanged mViewPropertyChanged;
+			protected internal TBindingMemberType _viewMemberType;
+			protected internal Boolean _isStringView;
+			protected internal System.Object _viewInstance;
+			protected internal INotifyPropertyChanged _viewPropertyChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -106,8 +106,8 @@ namespace Lotus
 			/// </remarks>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -118,8 +118,8 @@ namespace Lotus
 			/// </remarks>
 			public Boolean IsEnabled
 			{
-				get { return mIsEnabled; }
-				set { mIsEnabled = value; }
+				get { return _isEnabled; }
+				set { _isEnabled = value; }
 			}
 
 			/// <summary>
@@ -127,8 +127,8 @@ namespace Lotus
 			/// </summary>
 			public TBindingMode Mode
 			{
-				get { return mMode; }
-				set { mMode = value; }
+				get { return _mode; }
+				set { _mode = value; }
 			}
 
 			/// <summary>
@@ -139,8 +139,8 @@ namespace Lotus
 			/// </remarks>
 			public TBindingModeChanged ModeChanged
 			{
-				get { return mModeChanged; }
-				set { mModeChanged = value; }
+				get { return _modeChanged; }
+				set { _modeChanged = value; }
 			}
 
 			//
@@ -151,8 +151,8 @@ namespace Lotus
 			/// </summary>
 			public String ModelMemberName
 			{
-				get { return mModelMemberName; }
-				set { mModelMemberName = value; }
+				get { return _modelMemberName; }
+				set { _modelMemberName = value; }
 			}
 
 			/// <summary>
@@ -160,8 +160,8 @@ namespace Lotus
 			/// </summary>
 			public TBindingMemberType ModelMemberType
 			{
-				get { return mModelMemberType; }
-				set { mModelMemberType = value; }
+				get { return _modelMemberType; }
+				set { _modelMemberType = value; }
 			}
 
 			/// <summary>
@@ -173,8 +173,8 @@ namespace Lotus
 			/// </remarks>
 			public System.Object ModelInstance
 			{
-				get { return mModelInstance; }
-				set { mModelInstance = value; }
+				get { return _modelInstance; }
+				set { _modelInstance = value; }
 			}
 
 			/// <summary>
@@ -182,7 +182,7 @@ namespace Lotus
 			/// </summary>
 			public INotifyPropertyChanged ModelPropertyChanged
 			{
-				get { return mModelPropertyChanged; }
+				get { return _modelPropertyChanged; }
 			}
 
 			//
@@ -193,8 +193,8 @@ namespace Lotus
 			/// </summary>
 			public String ViewMemberName
 			{
-				get { return mViewMemberName; }
-				set { mViewMemberName = value; }
+				get { return _viewMemberName; }
+				set { _viewMemberName = value; }
 			}
 
 			/// <summary>
@@ -202,8 +202,8 @@ namespace Lotus
 			/// </summary>
 			public TBindingMemberType ViewMemberType
 			{
-				get { return mViewMemberType; }
-				set { mViewMemberType = value; }
+				get { return _viewMemberType; }
+				set { _viewMemberType = value; }
 			}
 
 			/// <summary>
@@ -215,7 +215,7 @@ namespace Lotus
 			/// </remarks>
 			public Boolean IsStringView
 			{
-				get { return mIsStringView; }
+				get { return _isStringView; }
 			}
 
 			/// <summary>
@@ -227,8 +227,8 @@ namespace Lotus
 			/// </remarks>
 			public System.Object ViewInstance
 			{
-				get { return mViewInstance; }
-				set { mViewInstance = value; }
+				get { return _viewInstance; }
+				set { _viewInstance = value; }
 			}
 
 			/// <summary>
@@ -236,7 +236,7 @@ namespace Lotus
 			/// </summary>
 			public INotifyPropertyChanged ViewPropertyChanged
 			{
-				get { return mViewPropertyChanged; }
+				get { return _viewPropertyChanged; }
 			}
 			#endregion
 
@@ -273,7 +273,7 @@ namespace Lotus
 			public String ToStringShort()
 			{
 				var mode = "";
-				switch (mMode)
+				switch (_mode)
 				{
 					case TBindingMode.ViewData:
 						mode = " <= ";
@@ -300,7 +300,7 @@ namespace Lotus
 			public override String ToString()
 			{
 				var mode = "";
-				switch (mMode)
+				switch (_mode)
 				{
 					case TBindingMode.ViewData:
 						mode = "<=";
@@ -342,15 +342,15 @@ namespace Lotus
 				// Освобождаем только управляемые ресурсы
 				if (disposing)
 				{
-					if (mModelPropertyChanged != null)
+					if (_modelPropertyChanged != null)
 					{
-						mModelPropertyChanged.PropertyChanged -= UpdateModelProperty;
-						mModelPropertyChanged = null;
+						_modelPropertyChanged.PropertyChanged -= UpdateModelProperty;
+						_modelPropertyChanged = null;
 					}
-					if (mViewPropertyChanged != null)
+					if (_viewPropertyChanged != null)
 					{
-						mViewPropertyChanged.PropertyChanged -= UpdateViewProperty;
-						mViewPropertyChanged = null;
+						_viewPropertyChanged.PropertyChanged -= UpdateViewProperty;
+						_viewPropertyChanged = null;
 					}
 				}
 
@@ -403,16 +403,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected void ResetModel(System.Object modelInstance)
 			{
-				if (mModelPropertyChanged != null)
+				if (_modelPropertyChanged != null)
 				{
-					mModelPropertyChanged.PropertyChanged -= UpdateModelProperty;
+					_modelPropertyChanged.PropertyChanged -= UpdateModelProperty;
 				}
 
-				mModelInstance = modelInstance;
-				mModelPropertyChanged = modelInstance as INotifyPropertyChanged;
-				if (mModelPropertyChanged != null)
+				_modelInstance = modelInstance;
+				_modelPropertyChanged = modelInstance as INotifyPropertyChanged;
+				if (_modelPropertyChanged != null)
 				{
-					mModelPropertyChanged.PropertyChanged += UpdateModelProperty;
+					_modelPropertyChanged.PropertyChanged += UpdateModelProperty;
 				}
 			}
 
@@ -479,16 +479,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected void ResetView(System.Object viewInstance)
 			{
-				if (mViewPropertyChanged != null)
+				if (_viewPropertyChanged != null)
 				{
-					mViewPropertyChanged.PropertyChanged -= UpdateViewProperty;
+					_viewPropertyChanged.PropertyChanged -= UpdateViewProperty;
 				}
 
-				mViewInstance = viewInstance;
-				mViewPropertyChanged = viewInstance as INotifyPropertyChanged;
-				if (mViewPropertyChanged != null)
+				_viewInstance = viewInstance;
+				_viewPropertyChanged = viewInstance as INotifyPropertyChanged;
+				if (_viewPropertyChanged != null)
 				{
-					mViewPropertyChanged.PropertyChanged += UpdateViewProperty;
+					_viewPropertyChanged.PropertyChanged += UpdateViewProperty;
 				}
 			}
 

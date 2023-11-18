@@ -35,7 +35,7 @@ namespace Lotus
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
 			protected internal Int32 mHead;
-			protected internal Int32 mTail;
+			protected internal Int32 _tail;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -55,7 +55,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Tail
 			{
-				get { return mTail; }
+				get { return _tail; }
 			}
 			#endregion
 
@@ -69,7 +69,7 @@ namespace Lotus
 				: base(INIT_MAX_COUNT)
 			{
 				mHead = 0;
-				mTail = -1;
+				_tail = -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ namespace Lotus
 				: base(maxCount)
 			{
 				mHead = 0;
-				mTail = -1;
+				_tail = -1;
 			}
 			#endregion
 
@@ -96,10 +96,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			new public TItem this[Int32 index]
 			{
-				get { return mArrayOfItems[(mHead + index) % mMaxCount]; }
+				get { return _arrayOfItems[(mHead + index) % _maxCount]; }
 				set
 				{
-					mArrayOfItems[(mHead + index) % mMaxCount] = value;
+					_arrayOfItems[(mHead + index) % _maxCount] = value;
 				}
 			}
 			#endregion
@@ -114,7 +114,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem GetElement(Int32 index)
 			{
-				return mArrayOfItems[(mHead + index) % mMaxCount];
+				return _arrayOfItems[(mHead + index) % _maxCount];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -126,17 +126,17 @@ namespace Lotus
 			public void Enqueue(in TItem item)
 			{
 				// Если текущие количество элементов равно максимально возможному
-				if (mCount == mMaxCount)
+				if (_count == _maxCount)
 				{
-					mMaxCount *= 2;
-					var items = new TItem[mMaxCount];
-					Array.Copy(mArrayOfItems, items, mCount);
-					mArrayOfItems = items;
+					_maxCount *= 2;
+					var items = new TItem[_maxCount];
+					Array.Copy(_arrayOfItems, items, _count);
+					_arrayOfItems = items;
 				}
 
-				mCount++;
-				mTail = (mTail + 1) % mMaxCount;
-				mArrayOfItems[mTail] = item;
+				_count++;
+				_tail = (_tail + 1) % _maxCount;
+				_arrayOfItems[_tail] = item;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -147,12 +147,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem Dequeue()
 			{
-				if (mCount > 0)
+				if (_count > 0)
 				{
-					TItem item = mArrayOfItems[mHead];
-					mArrayOfItems[mHead] = default;
-					mHead = (mHead + 1) % mMaxCount;
-					mCount--;
+					TItem item = _arrayOfItems[mHead];
+					_arrayOfItems[mHead] = default;
+					mHead = (mHead + 1) % _maxCount;
+					_count--;
 					return item;
 				}
 				else
@@ -175,9 +175,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem Peek()
 			{
-				if (mCount > 0)
+				if (_count > 0)
 				{
-					return mArrayOfItems[mHead];
+					return _arrayOfItems[mHead];
 				}
 				else
 				{
@@ -201,15 +201,15 @@ namespace Lotus
 			public new Boolean Contains(in TItem item)
 			{
 				var index = mHead;
-				var count = mCount;
+				var count = _count;
 
 				while (count-- > 0)
 				{
-					if (mArrayOfItems[index].Equals(item))
+					if (_arrayOfItems[index].Equals(item))
 					{
 						return true;
 					}
-					index = (index + 1) % mMaxCount;
+					index = (index + 1) % _maxCount;
 				}
 
 				return false;
@@ -222,19 +222,19 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public new void Clear()
 			{
-				if (mHead < mTail)
+				if (mHead < _tail)
 				{
-					Array.Clear(mArrayOfItems, mHead, mCount);
+					Array.Clear(_arrayOfItems, mHead, _count);
 				}
 				else
 				{
-					Array.Clear(mArrayOfItems, mHead, mMaxCount - mHead);
-					Array.Clear(mArrayOfItems, 0, mTail);
+					Array.Clear(_arrayOfItems, mHead, _maxCount - mHead);
+					Array.Clear(_arrayOfItems, 0, _tail);
 				}
 
 				mHead = 0;
-				mTail = -1;
-				mCount = 0;
+				_tail = -1;
+				_count = 0;
 			}
 			#endregion
 		}

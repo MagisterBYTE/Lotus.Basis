@@ -205,10 +205,10 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal String mName;
+			protected internal String _name;
 			protected internal TValue mValue;
-			protected internal Int64 mId;
-			protected internal Boolean mIsActive;
+			protected internal Int64 _id;
+			protected internal Boolean _isActive;
 			protected internal Byte mUserTag;
 			protected internal Byte mUserData;
 
@@ -229,12 +229,12 @@ namespace Lotus
 			[XmlAttribute]
 			public String Name
 			{
-				get { return mName; }
+				get { return _name; }
 				set 
 				{
-					mName = value;
+					_name = value;
 					NotifyPropertyChanged(PropertyArgsName);
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mName, nameof(Name));
+					if (mOwner != null) mOwner.OnNotifyUpdated(this, _name, nameof(Name));
 				}
 			}
 
@@ -283,10 +283,10 @@ namespace Lotus
 			[XmlAttribute]
 			public Int64 Id
 			{
-				get { return mId; }
+				get { return _id; }
 				set
 				{
-					mId = value;
+					_id = value;
 					NotifyPropertyChanged(PropertyArgsId);
 					if (mOwner != null) mOwner.OnNotifyUpdated(this, Id, nameof(Id));
 				}
@@ -301,10 +301,10 @@ namespace Lotus
 			[XmlAttribute]
 			public Boolean IsActive
 			{
-				get { return mIsActive; }
+				get { return _isActive; }
 				set 
 				{
-					mIsActive = value;
+					_isActive = value;
 					NotifyPropertyChanged(PropertyArgsIsActive);
 					if (mOwner != null) mOwner.OnNotifyUpdated(this, IsActive, nameof(IsActive));
 				}
@@ -359,8 +359,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected ParameterItem()
 			{
-				mName = "";
-				mId = XGenerateId.Generate(this);
+				_name = "";
+				_id = XGenerateId.Generate(this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -371,8 +371,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected ParameterItem(String parameterName)
 			{
-				mName = parameterName;
-				mId = XGenerateId.Generate(this);
+				_name = parameterName;
+				_id = XGenerateId.Generate(this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -383,8 +383,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected ParameterItem(Int64 id)
 			{
-				mName = "";
-				mId = id;
+				_name = "";
+				_id = id;
 			}
 			#endregion
 			
@@ -432,7 +432,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				var result = String.Format("{0} = {1}", mName, base.ToString());
+				var result = String.Format("{0} = {1}", _name, base.ToString());
 				return result;
 			}
 			#endregion

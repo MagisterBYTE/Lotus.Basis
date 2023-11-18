@@ -27,27 +27,8 @@ namespace Lotus
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
 		[Serializable]
-		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity, ILotusViewItemOwner,
-			ILotusViewExpanded
+		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity
 		{
-			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
-			public const String IMPropertyMissing = "Свойство отсутствует";
-			#endregion
-
-			#region ======================================= СТАТИЧЕСКИЕ ДАННЫЕ ========================================
-			//
-			// Константы для информирования об изменении свойств
-			//
-			/// <summary>
-			/// Описание свойств
-			/// </summary>
-			public readonly static CPropertyDesc[] FileSystemDirectoryPropertiesDesc = new CPropertyDesc[]
-			{
-				// Идентификация
-				CPropertyDesc.OverrideDisplayNameAndDescription<CFileSystemDirectory>(nameof(Name), "Имя", "Имя директории"),
-			};
-			#endregion
-
 			#region ======================================= СТАТИЧЕСКИЕ МЕТОДЫ ========================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -60,13 +41,13 @@ namespace Lotus
 			{
 				var dir_info = new DirectoryInfo(path);
 				var dir_model = new CFileSystemDirectory(dir_info);
-				dir_model.RecursiveFileSystemInfo();
+				dir_model.RecursiveFileSyste_info();
 				return dir_model;
 			}
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal DirectoryInfo mInfo;
+			protected internal DirectoryInfo _info;
 			protected internal ListArray<ILotusFileSystemEntity> mEntities;
 			protected internal CParameters mParameters;
 			#endregion
@@ -77,10 +58,10 @@ namespace Lotus
 			/// </summary>
 			public override String Name
 			{
-				get { return mName; }
+				get { return _name; }
 				set
 				{
-					mName = value;
+					_name = value;
 					NotifyPropertyChanged(PropertyArgsName);
 					RaiseNameChanged();
 				}
@@ -101,13 +82,13 @@ namespace Lotus
 			{
 				get
 				{
-					if (mInfo != null)
+					if (_info != null)
 					{
-						return mInfo.FullName;
+						return _info.FullName;
 					}
 					else
 					{
-						return mName;
+						return _name;
 					}
 				}
 			}
@@ -117,104 +98,8 @@ namespace Lotus
 			/// </summary>
 			public DirectoryInfo Info
 			{
-				get { return mInfo; }
-				set { mInfo = value; }
-			}
-
-#if USE_WINDOWS
-			/// <summary>
-			/// Графическая иконка связанная с данным элементом файловой системы
-			/// </summary>
-			public System.Windows.Media.ImageSource IconSource { get; set; }
-#endif
-			#endregion
-
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Полное имя(полный путь) элемента файловой системы
-			/// </summary>
-			[LotusPropertyOrder(0)]
-			[DisplayName("Имя элемента")]
-			[Description("Имя элемента как информационной модели")]
-			[Category("Информационная модель")]
-			[LotusCategoryOrder(1)]
-			public String Label
-			{
-				get
-				{
-					if (mParameters != null)
-					{
-						return mParameters.GetStringValue(nameof(Label), IMPropertyMissing);
-					}
-					else
-					{
-						return IMPropertyMissing;
-					}
-				}
-				set
-				{
-					if (mParameters != null)
-					{
-						mParameters.UpdateStringValue(nameof(Label), value);
-					}
-				}
-			}
-
-			/// <summary>
-			/// Полное имя(полный путь) элемента файловой системы
-			/// </summary>
-			[LotusPropertyOrder(1)]
-			[DisplayName("Описание элемента")]
-			[Description("Описание элемента как информационной модели")]
-			[Category("Информационная модель")]
-			public String Desc
-			{
-				get
-				{
-					if (mParameters != null)
-					{
-						return mParameters.GetStringValue(nameof(Desc), IMPropertyMissing);
-					}
-					else
-					{
-						return IMPropertyMissing;
-					}
-				}
-				set
-				{
-					if (mParameters != null)
-					{
-						mParameters.UpdateStringValue(nameof(Desc), value);
-					}
-				}
-			}
-			#endregion
-
-			#region ======================================= СВОЙСТВА ILotusSupportEditInspector =======================
-			/// <summary>
-			/// Отображаемое имя типа в инспекторе свойств
-			/// </summary>
-			public String InspectorTypeName
-			{
-				get { return "ДИРЕКТОРИЯ"; }
-			}
-
-			/// <summary>
-			/// Отображаемое имя объекта в инспекторе свойств
-			/// </summary>
-			public String InspectorObjectName
-			{
-				get
-				{
-					if (mInfo != null)
-					{
-						return mInfo.Name;
-					}
-					else
-					{
-						return "";
-					}
-				}
+				get { return _info; }
+				set { _info = value; }
 			}
 			#endregion
 
@@ -238,13 +123,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CFileSystemDirectory(String fullPath)
 			{
-				mInfo = new DirectoryInfo(fullPath);
-				mName = mInfo.Name;
+				_info = new DirectoryInfo(fullPath);
+				_name = _info.Name;
 				mEntities = new ListArray<ILotusFileSystemEntity>();
 				mEntities.IsNotify = true;
-				if(mInfo != null)
+				if(_info != null)
 				{
-					var path = Path.Combine(mInfo.FullName, "Info.json");
+					var path = Path.Combine(_info.FullName, "Info.json");
 					if(File.Exists(path))
 					{
 						mParameters = new CParameters();
@@ -263,13 +148,13 @@ namespace Lotus
 			public CFileSystemDirectory(String displayName, DirectoryInfo directoryInfo)
 				: base(displayName)
 			{
-				mInfo = directoryInfo;
+				_info = directoryInfo;
 				mEntities = new ListArray<ILotusFileSystemEntity>();
 				mEntities.IsNotify = true;
 
-				if (mInfo != null)
+				if (_info != null)
 				{
-					var path = Path.Combine(mInfo.FullName, "Info.json");
+					var path = Path.Combine(_info.FullName, "Info.json");
 					if (File.Exists(path))
 					{
 						mParameters = new CParameters();
@@ -345,29 +230,6 @@ namespace Lotus
 			#region ======================================= МЕТОДЫ ILotusFileSystemEntity =============================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Получение количества дочерних узлов
-			/// </summary>
-			/// <returns>Количество дочерних узлов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Int32 GetCountChildrenNode()
-			{
-				return mEntities.Count;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получение дочернего узла по индексу
-			/// </summary>
-			/// <param name="index">Индекс дочернего узла</param>
-			/// <returns>Дочерней узел</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public System.Object GetChildrenNode(Int32 index)
-			{
-				return mEntities[index];
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
 			/// Проверка объекта на удовлетворение указанного предиката
 			/// </summary>
 			/// <remarks>
@@ -395,74 +257,6 @@ namespace Lotus
 
 				return false;
 			}
-			#endregion
-
-			#region ======================================= МЕТОДЫ ILotusViewExpanded =================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Установка статуса раскрытия объекта
-			/// </summary>
-			/// <param name="viewItem">Элемент отображения</param>
-			/// <param name="expanded">Статус раскрытия объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public virtual void SetViewExpanded(ILotusViewItemHierarchy viewItem, Boolean expanded)
-			{
-				if (expanded)
-				{
-					for (var i = 0; i < mEntities.Count; i++)
-					{
-						if (mEntities[i] is CFileSystemDirectory directory)
-						{
-							if (directory.Entities.Count == 0)
-							{
-								DirectoryInfo[] dirs_info = directory.Info.GetDirectories();
-								FileInfo[] files_info = directory.Info.GetFiles();
-								
-								// Если данные есть
-								if(dirs_info.Length > 0 || files_info.Length > 0)
-								{
-									// Сначала директории
-									for (var id = 0; id < dirs_info.Length; id++)
-									{
-										DirectoryInfo dir_info = dirs_info[id];
-										directory.AddDirectory(dir_info);
-									}
-
-									// Теперь файлы
-									for (var ifi = 0; ifi < files_info.Length; ifi++)
-									{
-										FileInfo file_info = files_info[ifi];
-										directory.AddFile(file_info);
-									}
-
-									// Теперь визуальные модели
-									viewItem.BuildFromDataContext();
-								}
-							}
-						}
-					}
-				}
-			}
-			#endregion
-
-			#region ======================================= МЕТОДЫ ILotusSupportEditInspector =========================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получить массив описателей свойств объекта
-			/// </summary>
-			/// <returns>Массив описателей</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public CPropertyDesc[] GetPropertiesDesc()
-			{
-				return FileSystemDirectoryPropertiesDesc;
-			}
-			#endregion
-
-			#region ======================================= СВОЙСТВА ILotusViewItemOwner ==============================
-			/// <summary>
-			/// Элемент отображения
-			/// </summary>
-			public ILotusViewItem OwnerViewItem { get; set; }
 			#endregion
 
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
@@ -607,10 +401,10 @@ namespace Lotus
 			/// Рекурсивное получение данных элементов файловой системы
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public void RecursiveFileSystemInfo()
+			public void RecursiveFileSyste_info()
 			{
 				mEntities.Clear();
-				RecursiveFileSystemInfo(this);
+				RecursiveFileSyste_info(this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -618,7 +412,7 @@ namespace Lotus
 			/// Рекурсивное получение данных элементов файловой системы на 2 уровня ниже
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public void RecursiveFileSystemInfoTwoLevel()
+			public void RecursiveFileSyste_infoTwoLevel()
 			{
 				DirectoryInfo[] dirs_info = Info.GetDirectories();
 				FileInfo[] files_info = Info.GetFiles();
@@ -662,7 +456,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="parentDirectoryNode">Родительский узел директории</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void RecursiveFileSystemInfo(CFileSystemDirectory parentDirectoryNode)
+			protected void RecursiveFileSyste_info(CFileSystemDirectory parentDirectoryNode)
 			{
 				DirectoryInfo[] sub_directories = parentDirectoryNode.Info.GetDirectories();
 				FileInfo[] files = parentDirectoryNode.Info.GetFiles();
@@ -677,7 +471,7 @@ namespace Lotus
 
 					this.mEntities.Add(sub_directory_node);
 
-					sub_directory_node.RecursiveFileSystemInfo(sub_directory_node);
+					sub_directory_node.RecursiveFileSyste_info(sub_directory_node);
 				}
 
 				// Теперь файлы
@@ -811,34 +605,15 @@ namespace Lotus
 					var file_node = mEntities[i] as CFileSystemFile;
 					if (file_node != null)
 					{
-						if(file_node.OwnerViewItem != null)
+						if (isDirectoryName)
 						{
-							if (file_node.OwnerViewItem.IsChecked.HasValue && file_node.OwnerViewItem.IsChecked.Value)
-							{
-								if (isDirectoryName)
-								{
-									var dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
-									File.Copy(file_node.Info.FullName, dest_path);
-								}
-								else
-								{
-									var dest_path = Path.Combine(path, file_node.Info.Name);
-									File.Copy(file_node.Info.FullName, dest_path);
-								}
-							}
+							var dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
+							File.Copy(file_node.Info.FullName, dest_path);
 						}
 						else
 						{
-							if (isDirectoryName)
-							{
-								var dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
-								File.Copy(file_node.Info.FullName, dest_path);
-							}
-							else
-							{
-								var dest_path = Path.Combine(path, file_node.Info.Name);
-								File.Copy(file_node.Info.FullName, dest_path);
-							}
+							var dest_path = Path.Combine(path, file_node.Info.Name);
+							File.Copy(file_node.Info.FullName, dest_path);
 						}
 					}
 				}
@@ -854,7 +629,7 @@ namespace Lotus
 			{
 				//Now Create all of the directories
 				var sourcePath = directory.FullName;
-				var targetPath = Path.Combine(mInfo.FullName, directory.Name);
+				var targetPath = Path.Combine(_info.FullName, directory.Name);
 
 				if (!Directory.Exists(targetPath))
 				{
@@ -872,12 +647,7 @@ namespace Lotus
 					File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
 				}
 
-				RecursiveFileSystemInfo();
-
-				if(OwnerViewItem is ILotusViewItemHierarchy itemHierarchy) 
-				{
-					itemHierarchy.BuildFromDataContext();
-				}
+				RecursiveFileSyste_info();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

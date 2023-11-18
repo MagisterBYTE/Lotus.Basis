@@ -38,10 +38,10 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal MemberInfo mModelMember;
-			protected internal MemberInfo mViewMember;
-			protected internal Func<System.Object, System.Object> mOnConvertToModel;
-			protected internal Func<System.Object, System.Object> mOnConvertToView;
+			protected internal MemberInfo _modelMember;
+			protected internal MemberInfo _viewMember;
+			protected internal Func<System.Object, System.Object> _onConvertToModel;
+			protected internal Func<System.Object, System.Object> _onConvertToView;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -53,7 +53,7 @@ namespace Lotus
 			/// </summary>
 			public MemberInfo ModelMember
 			{
-				get { return mModelMember; }
+				get { return _modelMember; }
 			}
 
 			/// <summary>
@@ -61,7 +61,7 @@ namespace Lotus
 			/// </summary>
 			public MemberInfo ViewMember
 			{
-				get { return mViewMember; }
+				get { return _viewMember; }
 			}
 
 			/// <summary>
@@ -69,8 +69,8 @@ namespace Lotus
 			/// </summary>
 			public Func<System.Object, System.Object> OnConvertToModel
 			{
-				get { return mOnConvertToModel; }
-				set { mOnConvertToModel = value; }
+				get { return _onConvertToModel; }
+				set { _onConvertToModel = value; }
 			}
 
 			/// <summary>
@@ -78,8 +78,8 @@ namespace Lotus
 			/// </summary>
 			public Func<System.Object, System.Object> OnConvertToView
 			{
-				get { return mOnConvertToView; }
-				set { mOnConvertToView = value; }
+				get { return _onConvertToView; }
+				set { _onConvertToView = value; }
 			}
 			#endregion
 
@@ -136,10 +136,10 @@ namespace Lotus
 			{
 				ResetModel(modelInstance);
 
-				mModelMember = SetMemberType(modelInstance, memberName, ref mModelMemberType);
-				if (mModelMember != null)
+				_modelMember = SetMemberType(modelInstance, memberName, ref _modelMemberType);
+				if (_modelMember != null)
 				{
-					mModelMemberName = memberName;
+					_modelMemberName = memberName;
 				}
 			}
 
@@ -155,7 +155,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetModelValue()
 			{
-				return mModelMember.GetMemberValue(mModelInstance);
+				return _modelMember.GetMemberValue(_modelInstance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -167,30 +167,30 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected override void UpdateModelProperty(Object sender, PropertyChangedEventArgs args)
 			{
-				if (mIsEnabled)
+				if (_isEnabled)
 				{
-					if (mModelMemberName == args.PropertyName)
+					if (_modelMemberName == args.PropertyName)
 					{
 						// Используется интерфейс INotifyPropertyChanged
-						if (mModelPropertyChanged != null)
+						if (_modelPropertyChanged != null)
 						{
 							// Получаем актуальное значение
 							var value = GetModelValue();
 
 							// Если есть конвертер используем его
-							if (mOnConvertToView != null)
+							if (_onConvertToView != null)
 							{
-								mViewMember.SetMemberValue(mViewInstance, mOnConvertToView(value));
+								_viewMember.SetMemberValue(_viewInstance, _onConvertToView(value));
 							}
 							else
 							{
-								if (mIsStringView)
+								if (_isStringView)
 								{
-									mViewMember.SetMemberValue(mViewInstance, value.ToString());
+									_viewMember.SetMemberValue(_viewInstance, value.ToString());
 								}
 								else
 								{
-									mViewMember.SetMemberValue(mViewInstance, value);
+									_viewMember.SetMemberValue(_viewInstance, value);
 								}
 							}
 						}
@@ -224,14 +224,14 @@ namespace Lotus
 			public override void SetView(System.Object viewInstance, String memberName)
 			{
 				ResetView(viewInstance);
-				mViewMember = SetMemberType(viewInstance, memberName, ref mViewMemberType);
-				if (mViewMember != null)
+				_viewMember = SetMemberType(viewInstance, memberName, ref _viewMemberType);
+				if (_viewMember != null)
 				{
-					mViewMemberName = memberName;
+					_viewMemberName = memberName;
 				}
-				if(mViewMember.GetMemberType() == typeof(String))
+				if(_viewMember.GetMemberType() == typeof(String))
 				{
-					mIsStringView = true;
+					_isStringView = true;
 				}
 			}
 
@@ -247,7 +247,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetViewValue()
 			{
-				return mViewMember.GetMemberValue(mViewInstance);
+				return _viewMember.GetMemberValue(_viewInstance);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -259,23 +259,23 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected override void UpdateViewProperty(Object sender, PropertyChangedEventArgs args)
 			{
-				if (mIsEnabled)
+				if (_isEnabled)
 				{
-					if (mViewMemberName == args.PropertyName)
+					if (_viewMemberName == args.PropertyName)
 					{
 						// Используется интерфейс INotifyPropertyChanged
-						if (mViewPropertyChanged != null)
+						if (_viewPropertyChanged != null)
 						{
 							// Получаем актуальное значение
 							var value = GetModelValue();
 
-							if (mOnConvertToModel != null)
+							if (_onConvertToModel != null)
 							{
-								mModelMember.SetMemberValue(mModelInstance, mOnConvertToModel(value));
+								_modelMember.SetMemberValue(_modelInstance, _onConvertToModel(value));
 							}
 							else
 							{
-								mModelMember.SetMemberValue(mModelInstance, value);
+								_modelMember.SetMemberValue(_modelInstance, value);
 							}
 						}
 					}

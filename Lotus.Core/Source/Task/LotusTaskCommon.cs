@@ -187,22 +187,22 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal ILotusTask mTask;
-			protected internal Int32 mId;
-			protected internal String mName;
-			protected internal Boolean mIsCompleted;
-			protected internal Boolean mIsRunning;
-			protected internal Boolean mIsPause;
-			protected internal Boolean mIsDelayStart;
-			protected internal Single mDelayStart;
-			protected internal Single mStartTaskTime;
-			protected internal TTaskMethod mMethodMode;
-			protected internal Int32 mMethodFrame;
-			protected internal Boolean mIsPoolObject;
+			protected internal ILotusTask _task;
+			protected internal Int32 _id;
+			protected internal String _name;
+			protected internal Boolean _isCompleted;
+			protected internal Boolean _isRunning;
+			protected internal Boolean _isPause;
+			protected internal Boolean _isDelayStart;
+			protected internal Single _delayStart;
+			protected internal Single _startTaskTime;
+			protected internal TTaskMethod _methodMode;
+			protected internal Int32 _methodFrame;
+			protected internal Boolean _isPoolObject;
 
 			// События
-			protected internal Action mOnTaskStarted;
-			protected internal Action mOnTaskCompleted;
+			protected internal Action _onTaskStarted;
+			protected internal Action _onTaskCompleted;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -214,8 +214,8 @@ namespace Lotus
 			/// </summary>
 			public ILotusTask Task
 			{
-				get { return mTask; }
-				set { mTask = value; }
+				get { return _task; }
+				set { _task = value; }
 			}
 
 			/// <summary>
@@ -223,8 +223,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 Id
 			{
-				get { return mId; }
-				set { mId = value; }
+				get { return _id; }
+				set { _id = value; }
 			}
 
 			/// <summary>
@@ -232,8 +232,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -241,7 +241,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsCompleted
 			{
-				get { return mIsCompleted; }
+				get { return _isCompleted; }
 			}
 
 			/// <summary>
@@ -253,7 +253,7 @@ namespace Lotus
 			/// </remarks>
 			public Boolean IsRunning
 			{
-				get { return mIsRunning; }
+				get { return _isRunning; }
 			}
 
 			/// <summary>
@@ -261,8 +261,8 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsPause
 			{
-				get { return mIsPause; }
-				set { mIsPause = value; }
+				get { return _isPause; }
+				set { _isPause = value; }
 			}
 
 			/// <summary>
@@ -273,8 +273,8 @@ namespace Lotus
 			/// </remarks>
 			public Single DelayStart
 			{
-				get { return mDelayStart; }
-				set { mDelayStart = value; }
+				get { return _delayStart; }
+				set { _delayStart = value; }
 			}
 
 			/// <summary>
@@ -282,8 +282,8 @@ namespace Lotus
 			/// </summary>
 			public TTaskMethod MethodMode
 			{
-				get { return mMethodMode; }
-				set { mMethodMode = value; }
+				get { return _methodMode; }
+				set { _methodMode = value; }
 			}
 
 			/// <summary>
@@ -294,8 +294,8 @@ namespace Lotus
 			/// </remarks>
 			public Int32 MethodFrame
 			{
-				get { return mMethodFrame; }
-				set { mMethodFrame = value; }
+				get { return _methodFrame; }
+				set { _methodFrame = value; }
 			}
 
 			/// <summary>
@@ -306,8 +306,8 @@ namespace Lotus
 			/// </remarks>
 			public Boolean IsPoolObject
 			{
-				get { return mIsPoolObject; }
-				set { mIsPoolObject = value; }
+				get { return _isPoolObject; }
+				set { _isPoolObject = value; }
 			}
 
 			//
@@ -318,8 +318,8 @@ namespace Lotus
 			/// </summary>
 			public Action OnTaskStarted
 			{
-				get { return mOnTaskStarted; }
-				set { mOnTaskStarted = value; }
+				get { return _onTaskStarted; }
+				set { _onTaskStarted = value; }
 			}
 
 			/// <summary>
@@ -327,8 +327,8 @@ namespace Lotus
 			/// </summary>
 			public Action OnTaskCompleted
 			{
-				get { return mOnTaskCompleted; }
-				set { mOnTaskCompleted = value; }
+				get { return _onTaskCompleted; }
+				set { _onTaskCompleted = value; }
 			}
 			#endregion
 
@@ -343,7 +343,7 @@ namespace Lotus
 			{
 				get
 				{
-					return mIsCompleted;
+					return _isCompleted;
 				}
 			}
 			#endregion
@@ -356,8 +356,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTaskHolder()
 			{
-				mId = -1;
-				mMethodFrame = 10;
+				_id = -1;
+				_methodFrame = 10;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -368,9 +368,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTaskHolder(Boolean isPoolObject)
 			{
-				mId = -1;
-				mMethodFrame = 10;
-				mIsPoolObject = isPoolObject;
+				_id = -1;
+				_methodFrame = 10;
+				_isPoolObject = isPoolObject;
 			}
 			#endregion
 
@@ -398,11 +398,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnPoolRelease()
 			{
-				mId = -1;
-				mTask = null;
-				mDelayStart = 0.0f;
-				mOnTaskStarted = null;
-				mOnTaskCompleted = null;
+				_id = -1;
+				_task = null;
+				_delayStart = 0.0f;
+				_onTaskStarted = null;
+				_onTaskCompleted = null;
 			}
 			#endregion
 
@@ -417,15 +417,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RunTask()
 			{
-				mIsRunning = true;
-				mIsPause = false;
-				mIsCompleted = false;
-				mIsDelayStart = mDelayStart > 0;
-				mStartTaskTime = 0;
+				_isRunning = true;
+				_isPause = false;
+				_isCompleted = false;
+				_isDelayStart = _delayStart > 0;
+				_startTaskTime = 0;
 
-				if (mIsDelayStart == false)
+				if (_isDelayStart == false)
 				{
-					mTask.RunTask();
+					_task.RunTask();
 				}
 			}
 
@@ -440,32 +440,32 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ExecuteTask()
 			{
-				if (mIsDelayStart)
+				if (_isDelayStart)
 				{
 #if UNITY_2017_1_OR_NEWER
-					mStartTaskTime += UnityEngine.Time.deltaTime;
+					_startTaskTime += UnityEngine.Time.deltaTime;
 #endif
-					if (mStartTaskTime > mDelayStart)
+					if (_startTaskTime > _delayStart)
 					{
-						mTask.RunTask();
-						mIsDelayStart = false;
+						_task.RunTask();
+						_isDelayStart = false;
 					}
 				}
 				else
 				{
-					if (mMethodMode == TTaskMethod.EachFrame)
+					if (_methodMode == TTaskMethod.EachFrame)
 					{
-						mTask.ExecuteTask();
-						mIsCompleted = mTask.IsTaskCompleted;
+						_task.ExecuteTask();
+						_isCompleted = _task.IsTaskCompleted;
 					}
 					else
 					{
 #if UNITY_2017_1_OR_NEWER
 
-						if (UnityEngine.Time.frameCount % mMethodFrame == 0)
+						if (UnityEngine.Time.frameCount % _methodFrame == 0)
 						{
-							mTask.ExecuteTask();
-							mIsCompleted = mTask.IsTaskCompleted;
+							_task.ExecuteTask();
+							_isCompleted = _task.IsTaskCompleted;
 						}
 #else
 #endif
@@ -483,11 +483,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void StopTask()
 			{
-				mIsRunning = false;
-				mIsPause = false;
-				mIsCompleted = false;
-				mStartTaskTime = 0;
-				mTask.StopTask();
+				_isRunning = false;
+				_isPause = false;
+				_isCompleted = false;
+				_startTaskTime = 0;
+				_task.StopTask();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -500,11 +500,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ResetTask()
 			{
-				mIsRunning = false;
-				mIsPause = false;
-				mStartTaskTime = 0;
-				mIsCompleted = false;
-				mTask.ResetTask();
+				_isRunning = false;
+				_isPause = false;
+				_startTaskTime = 0;
+				_isCompleted = false;
+				_task.ResetTask();
 			}
 			#endregion
 		}

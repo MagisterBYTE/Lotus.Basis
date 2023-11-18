@@ -75,11 +75,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem Pop()
 			{
-				if (mCount > 0)
+				if (_count > 0)
 				{
-					TItem item = mArrayOfItems[mCount - 1];
-					mCount--;
-					mArrayOfItems[mCount] = default;
+					TItem item = _arrayOfItems[_count - 1];
+					_count--;
+					_arrayOfItems[_count] = default;
 
 					return item;
 				}
@@ -102,9 +102,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem Peek()
 			{
-				if (mCount > 0)
+				if (_count > 0)
 				{
-					return mArrayOfItems[mCount - 1];
+					return _arrayOfItems[_count - 1];
 				}
 				else
 				{

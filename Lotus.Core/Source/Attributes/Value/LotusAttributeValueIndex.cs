@@ -34,8 +34,8 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			internal readonly Type mSourceType;
-			internal readonly String mMemberName;
-			internal readonly TInspectorMemberType mMemberType;
+			internal readonly String _memberName;
+			internal readonly TInspectorMemberType _memberType;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -52,7 +52,7 @@ namespace Lotus
 			/// </summary>
 			public String MemberName
 			{
-				get { return mMemberName; }
+				get { return _memberName; }
 			}
 
 			/// <summary>
@@ -60,7 +60,7 @@ namespace Lotus
 			/// </summary>
 			public TInspectorMemberType MemberType
 			{
-				get { return mMemberType; }
+				get { return _memberType; }
 			}
 			#endregion
 
@@ -74,8 +74,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusIndexToStringAttribute(String memberName, TInspectorMemberType memberType)
 			{
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -89,8 +89,8 @@ namespace Lotus
 			public LotusIndexToStringAttribute(Type type, String memberName, TInspectorMemberType memberType)
 			{
 				mSourceType = type;
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 			#endregion
 		}

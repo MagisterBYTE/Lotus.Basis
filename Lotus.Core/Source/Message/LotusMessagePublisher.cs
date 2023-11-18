@@ -72,9 +72,9 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal String mName;
-			protected internal PoolManager<CMessageArgs> mMessageArgsPools;
-			protected internal ListArray<ILotusMessageHandler> mMessageHandlers;
+			protected internal String _name;
+			protected internal PoolManager<CMessageArgs> _messageArgsPools;
+			protected internal ListArray<ILotusMessageHandler> _messageHandlers;
 			protected internal QueueArray<CMessageArgs> mQueueMessages;
 			#endregion
 
@@ -84,8 +84,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -93,7 +93,7 @@ namespace Lotus
 			/// </summary>
 			public PoolManager<CMessageArgs> MessageArgsPools
 			{
-				get { return mMessageArgsPools; }
+				get { return _messageArgsPools; }
 			}
 
 			/// <summary>
@@ -101,7 +101,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<ILotusMessageHandler> MessageHandlers
 			{
-				get { return mMessageHandlers; }
+				get { return _messageHandlers; }
 			}
 
 			/// <summary>
@@ -132,9 +132,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CPublisher(String name)
 			{
-				mName = name;
-				mMessageArgsPools = new PoolManager<CMessageArgs>(100, ConstructorMessageArgs);
-				mMessageHandlers = new ListArray<ILotusMessageHandler>(10);
+				_name = name;
+				_messageArgsPools = new PoolManager<CMessageArgs>(100, ConstructorMessageArgs);
+				_messageHandlers = new ListArray<ILotusMessageHandler>(10);
 				mQueueMessages = new QueueArray<CMessageArgs>(100);
 			}
 			#endregion
@@ -148,9 +148,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RegisterMessageHandler(ILotusMessageHandler messageHandler)
 			{
-				if(mMessageHandlers.Contains(messageHandler) == false)
+				if(_messageHandlers.Contains(messageHandler) == false)
 				{
-					mMessageHandlers.Add(in messageHandler);
+					_messageHandlers.Add(in messageHandler);
 				}
 			}
 
@@ -162,7 +162,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void UnRegisterMessageHandler(ILotusMessageHandler messageHandler)
 			{
-				mMessageHandlers.Remove(in messageHandler);
+				_messageHandlers.Remove(in messageHandler);
 			}
 			#endregion
 
@@ -175,7 +175,7 @@ namespace Lotus
 			public void OnUpdate()
 			{
 				// Если у нас есть обработчики и сообщения
-				if (mMessageHandlers.Count > 0 && mQueueMessages.Count > 0)
+				if (_messageHandlers.Count > 0 && mQueueMessages.Count > 0)
 				{
 					// Перебираем все сообщения
 					while (mQueueMessages.Count != 0)
@@ -183,9 +183,9 @@ namespace Lotus
 						// Выталкиваем сообщения
 						CMessageArgs message = mQueueMessages.Dequeue();
 
-						for (var i = 0; i < mMessageHandlers.Count; i++)
+						for (var i = 0; i < _messageHandlers.Count; i++)
 						{
-							var code = mMessageHandlers[i].OnMessageHandler(message);
+							var code = _messageHandlers[i].OnMessageHandler(message);
 
 							// Сообщение почему-то обработано с отрицательным результатом 
 							if (code == XMessageHandlerResultCode.NEGATIVE_RESULT)
@@ -201,7 +201,7 @@ namespace Lotus
 						// Если объект был из пула
 						if (message.IsPoolObject)
 						{
-							mMessageArgsPools.Release(message);
+							_messageArgsPools.Release(message);
 						}
 					}
 				}
@@ -230,7 +230,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SendMessage(String name, System.Object data, System.Object sender)
 			{
-				CMessageArgs message = mMessageArgsPools.Take();
+				CMessageArgs message = _messageArgsPools.Take();
 				message.Name = name;
 				message.Data = data;
 				message.Sender = sender;
@@ -247,7 +247,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SendMessage(Int32 id, System.Object data, System.Object sender)
 			{
-				CMessageArgs message = mMessageArgsPools.Take();
+				CMessageArgs message = _messageArgsPools.Take();
 				message.Id = id;
 				message.Data = data;
 				message.Sender = sender;

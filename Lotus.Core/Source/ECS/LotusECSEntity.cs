@@ -100,14 +100,14 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			internal Int32 mId;
-			internal Boolean mIsEnabled;
-			internal Byte mLayer;
-			internal Byte mTag;
-			internal Byte mGroup;
-			internal Byte mMarked;
-			internal Int32 mComponentCount;
-			internal Boolean mIsDestroyed;
+			internal Int32 _id;
+			internal Boolean _isEnabled;
+			internal Byte _layer;
+			internal Byte _tag;
+			internal Byte _group;
+			internal Byte _marked;
+			internal Int32 _componentCount;
+			internal Boolean _isDestroyed;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -121,7 +121,7 @@ namespace Lotus
 			{ 
 				get 
 				{
-					return mId;
+					return _id;
 				}
 			}
 
@@ -135,11 +135,11 @@ namespace Lotus
 			{
 				readonly get
 				{
-					return mIsEnabled;
+					return _isEnabled;
 				}
 				set
 				{
-					mIsEnabled = value;
+					_isEnabled = value;
 				}
 			}
 
@@ -153,11 +153,11 @@ namespace Lotus
 			{
 				readonly get
 				{
-					return mLayer;
+					return _layer;
 				}
 				set
 				{
-					mLayer = value;
+					_layer = value;
 				}
 			}
 
@@ -171,11 +171,11 @@ namespace Lotus
 			{
 				readonly get
 				{
-					return mTag;
+					return _tag;
 				}
 				set
 				{
-					mTag = value;
+					_tag = value;
 				}
 			}
 
@@ -189,11 +189,11 @@ namespace Lotus
 			{
 				readonly get
 				{
-					return mGroup;
+					return _group;
 				}
 				set
 				{
-					mGroup = value;
+					_group = value;
 				}
 			}
 
@@ -207,11 +207,11 @@ namespace Lotus
 			{
 				readonly get
 				{
-					return mMarked;
+					return _marked;
 				}
 				set
 				{
-					mMarked = value;
+					_marked = value;
 				}
 			}
 
@@ -222,7 +222,7 @@ namespace Lotus
 			{
 				get
 				{
-					return mComponentCount;
+					return _componentCount;
 				}
 			}
 
@@ -233,11 +233,11 @@ namespace Lotus
 			{
 				readonly get
 				{
-					return mIsDestroyed;
+					return _isDestroyed;
 				}
 				set
 				{
-					mIsDestroyed = value;
+					_isDestroyed = value;
 				}
 			}
 			#endregion
@@ -251,15 +251,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TEcsEntity(Int32 id)
 			{
-				mId = id;
-				mIsEnabled = true;
-				mLayer = 0;
-				mTag = 0;
-				mGroup = 0;
-				mMarked = 0;
-				mMarked = 0;
-				mComponentCount = 0;
-				mIsDestroyed = false;
+				_id = id;
+				_isEnabled = true;
+				_layer = 0;
+				_tag = 0;
+				_group = 0;
+				_marked = 0;
+				_marked = 0;
+				_componentCount = 0;
+				_isDestroyed = false;
 			}
 			#endregion
 
@@ -292,7 +292,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Boolean Equals(TEcsEntity other)
 			{
-				return mId == other.Id;
+				return _id == other.Id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Int32 CompareTo(TEcsEntity other)
 			{
-				return mId.CompareTo(other.Id);
+				return _id.CompareTo(other.Id);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -315,7 +315,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly Int32 GetHashCode()
 			{
-				return mId;
+				return _id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -326,7 +326,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly String ToString()
 			{
-				return mId.ToString();
+				return _id.ToString();
 			}
 			#endregion
 

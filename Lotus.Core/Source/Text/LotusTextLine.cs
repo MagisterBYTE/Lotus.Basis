@@ -30,8 +30,8 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal String mLabel;
-			protected internal Int32 mIndex;
+			protected internal String _label;
+			protected internal Int32 _index;
 			protected internal CTextList mOwned;
 			#endregion
 
@@ -47,10 +47,10 @@ namespace Lotus
 			/// </remarks>
 			public String Label
 			{
-				get { return mLabel; }
+				get { return _label; }
 				set
 				{
-					mLabel = value;
+					_label = value;
 				}
 			}
 
@@ -59,10 +59,10 @@ namespace Lotus
 			/// </summary>
 			public Int32 Index
 			{
-				get { return mIndex; }
+				get { return _index; }
 				set
 				{
-					mIndex = value;
+					_index = value;
 				}
 			}
 

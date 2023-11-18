@@ -47,7 +47,7 @@ namespace Lotus
 			[UnityEngine.SerializeField]
 			[UnityEngine.HideInInspector]
 #endif
-			protected internal TKey mId;
+			protected internal TKey _id;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -60,10 +60,10 @@ namespace Lotus
 			[Browsable(false)]
 			public virtual TKey Id
 			{
-				get { return mId; }
+				get { return _id; }
 				set
 				{
-					mId = value;
+					_id = value;
 				}
 			}
 			#endregion
@@ -87,7 +87,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public IdentifierId(TKey id)
 			{
-				mId = id;
+				_id = id;
 			}
 			#endregion
 

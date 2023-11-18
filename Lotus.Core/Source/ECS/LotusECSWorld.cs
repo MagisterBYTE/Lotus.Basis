@@ -42,17 +42,17 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Сущности
-			protected internal Int32 mCountEntity;
-			protected internal Int32 mMaxCountEntity;
-			protected internal Int32 mCurrentIdEntity = 1;
+			protected internal Int32 _countEntity;
+			protected internal Int32 _maxCountEntity;
+			protected internal Int32 _currentIdEntity = 1;
 			protected internal TEcsEntity[] mDenseEntities;
 			protected internal TEcsEntity mDummyEntity = new TEcsEntity(-1);
 			protected internal Int32[] mSparseEntities;
 			protected internal Int32[] mRemovedEntities;
-			protected internal Int32 mCountRemovedEntity;
+			protected internal Int32 _countRemovedEntity;
 
 			// Компоненты
-			protected internal Dictionary<Type, ILotusEcsComponentData> mComponentsData;
+			protected internal Dictionary<Type, ILotusEcsComponentData> _componentsData;
 
 			// Фильтры
 			protected internal ListArray<CEcsFilterComponent> mFilterComponents;
@@ -64,7 +64,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountEntity
 			{
-				get { return mCountEntity; }
+				get { return _countEntity; }
 			}
 
 			/// <summary>
@@ -80,7 +80,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<Type, ILotusEcsComponentData> ComponentsData
 			{
-				get { return mComponentsData; }
+				get { return _componentsData; }
 			}
 
 			/// <summary>
@@ -101,12 +101,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CEcsWorld(CEcsWorldConfigs configs = null)
 			{
-				mMaxCountEntity = configs is null ? 512 : configs.EntityCachSize;
-				mDenseEntities = new TEcsEntity[mMaxCountEntity];
-				mSparseEntities = new Int32[mMaxCountEntity];
-				mRemovedEntities = new Int32[mMaxCountEntity];
+				_maxCountEntity = configs is null ? 512 : configs.EntityCachSize;
+				mDenseEntities = new TEcsEntity[_maxCountEntity];
+				mSparseEntities = new Int32[_maxCountEntity];
+				mRemovedEntities = new Int32[_maxCountEntity];
 
-				mComponentsData = new Dictionary<Type, ILotusEcsComponentData>(configs is null ? 512 : configs.ComponentCachSize);
+				_componentsData = new Dictionary<Type, ILotusEcsComponentData>(configs is null ? 512 : configs.ComponentCachSize);
 
 				mFilterComponents = new ListArray<CEcsFilterComponent>(24);
 			}
@@ -124,37 +124,37 @@ namespace Lotus
 				Int32 current_id;
 
 				// Смотрим есть у нас освобожденный идентификатор
-				if (mCountRemovedEntity > 0)
+				if (_countRemovedEntity > 0)
 				{
-					mCountRemovedEntity--;
-					current_id = mRemovedEntities[mCountRemovedEntity];
+					_countRemovedEntity--;
+					current_id = mRemovedEntities[_countRemovedEntity];
 				}
 				else
 				{
-					current_id = mCurrentIdEntity;
-					mCurrentIdEntity++;
+					current_id = _currentIdEntity;
+					_currentIdEntity++;
 				}
 
-				if (current_id >= mMaxCountEntity)
+				if (current_id >= _maxCountEntity)
 				{
-					mMaxCountEntity = Math.Max(current_id + 1, mMaxCountEntity << 1);
-					Array.Resize(ref mDenseEntities, mMaxCountEntity);
-					Array.Resize(ref mSparseEntities, mMaxCountEntity);
-					Array.Resize(ref mRemovedEntities, mMaxCountEntity);
+					_maxCountEntity = Math.Max(current_id + 1, _maxCountEntity << 1);
+					Array.Resize(ref mDenseEntities, _maxCountEntity);
+					Array.Resize(ref mSparseEntities, _maxCountEntity);
+					Array.Resize(ref mRemovedEntities, _maxCountEntity);
 				}
 
-				if (mCountEntity >= mMaxCountEntity)
+				if (_countEntity >= _maxCountEntity)
 				{
-					mMaxCountEntity = mMaxCountEntity << 1;
-					Array.Resize(ref mDenseEntities, mMaxCountEntity);
-					Array.Resize(ref mSparseEntities, mMaxCountEntity);
-					Array.Resize(ref mRemovedEntities, mMaxCountEntity);
+					_maxCountEntity = _maxCountEntity << 1;
+					Array.Resize(ref mDenseEntities, _maxCountEntity);
+					Array.Resize(ref mSparseEntities, _maxCountEntity);
+					Array.Resize(ref mRemovedEntities, _maxCountEntity);
 				}
 
-				var current_count = mCountEntity;
+				var current_count = _countEntity;
 				mSparseEntities[current_id] = current_count;
 				mDenseEntities[current_count] = new TEcsEntity(current_id);
-				mCountEntity++;
+				_countEntity++;
 
 				return ref mDenseEntities[current_count];
 			}
@@ -168,7 +168,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsEntity(Int32 id)
 			{
-				return mSparseEntities[id] < mCountEntity && mDenseEntities[mSparseEntities[id]].Id == id;
+				return mSparseEntities[id] < _countEntity && mDenseEntities[mSparseEntities[id]].Id == id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -180,7 +180,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ref TEcsEntity GetEntity(Int32 id)
 			{
-				if(mSparseEntities[id] < mCountEntity && mDenseEntities[mSparseEntities[id]].Id == id)
+				if(mSparseEntities[id] < _countEntity && mDenseEntities[mSparseEntities[id]].Id == id)
 				{
 					return ref mDenseEntities[mSparseEntities[id]];
 				}
@@ -198,12 +198,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RemoveEntity(Int32 id)
 			{
-				mRemovedEntities[mCountRemovedEntity] = id;
-				mCountRemovedEntity++;
+				mRemovedEntities[_countRemovedEntity] = id;
+				_countRemovedEntity++;
 
-				mDenseEntities[mSparseEntities[id]] = mDenseEntities[mCountEntity - 1];
-				mSparseEntities[mDenseEntities[mCountEntity - 1].Id] = mSparseEntities[id];
-				mCountEntity--;
+				mDenseEntities[mSparseEntities[id]] = mDenseEntities[_countEntity - 1];
+				mSparseEntities[mDenseEntities[_countEntity - 1].Id] = mSparseEntities[id];
+				_countEntity--;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					return component_data.GetEntities();
 				}
@@ -239,7 +239,7 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 
@@ -259,7 +259,7 @@ namespace Lotus
 				{
 					var component_data_new = new CEcsComponentData<TComponent>();
 					component_data_new.World = this;
-					mComponentsData.Add(component_type, component_data_new);
+					_componentsData.Add(component_type, component_data_new);
 					ref TComponent value = ref component_data_new.AddEntity(entityId);
 					return ref value;
 				}
@@ -277,7 +277,7 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 
@@ -297,7 +297,7 @@ namespace Lotus
 				else
 				{
 					var component_data_new = new CEcsComponentData<TComponent>();
-					mComponentsData.Add(component_type, component_data_new);
+					_componentsData.Add(component_type, component_data_new);
 					ref TComponent value = ref component_data_new.AddEntity(entityId);
 					return ref value;
 				}
@@ -315,7 +315,7 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					return component_data.HasEntity(entityId);
 				}
@@ -335,7 +335,7 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					ref TComponent value = ref component_data_exist.GetValue(entityId);
@@ -357,7 +357,7 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					component_data_exist.SetValue(entityId, in value);
@@ -375,7 +375,7 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					component_data_exist.RemoveEntity(entityId);
@@ -393,10 +393,10 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
-					return component_data_exist.Components.mItems;
+					return component_data_exist.Components._items;
 				}
 
 				return null;
@@ -413,7 +413,7 @@ namespace Lotus
 			{
 				var component_type = typeof(TComponent);
 				ILotusEcsComponentData component_data;
-				if (mComponentsData.TryGetValue(component_type, out component_data))
+				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					var component_data_exist = component_data as CEcsComponentData<TComponent>;
 					return component_data_exist;

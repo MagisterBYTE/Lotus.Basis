@@ -80,10 +80,10 @@ namespace Lotus
 			public override void AddDelimetrPart()
 			{
 				CTextLine delimetr_part = DelimetrPart.Duplicate();
-				delimetr_part.Index = mLines.Count;
+				delimetr_part.Index = _lines.Count;
 				delimetr_part.Owned = this;
-				delimetr_part.Indent = mCurrentIndent;
-				mLines.Add(delimetr_part);
+				delimetr_part.Indent = _currentIndent;
+				_lines.Add(delimetr_part);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -94,10 +94,10 @@ namespace Lotus
 			public override void AddDelimetrSection()
 			{
 				CTextLine delimetr_section = DelimetrSection.Duplicate();
-				delimetr_section.Index = mLines.Count;
+				delimetr_section.Index = _lines.Count;
 				delimetr_section.Owned = this;
-				delimetr_section.Indent = mCurrentIndent;
-				mLines.Add(delimetr_section);
+				delimetr_section.Indent = _currentIndent;
+				_lines.Add(delimetr_section);
 			}
 			#endregion
 

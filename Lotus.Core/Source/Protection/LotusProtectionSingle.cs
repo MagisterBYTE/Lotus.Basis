@@ -41,7 +41,7 @@ namespace Lotus
 			private Single mEncryptValue;
 
 			[FieldOffset(0)]
-			private UInt32 mConvertValue;
+			private UInt32 _convertValue;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -53,9 +53,9 @@ namespace Lotus
 				get
 				{
 					// Обходное решение для конструктора структуры по умолчанию
-					if (mConvertValue == 0 && mEncryptValue == 0)
+					if (_convertValue == 0 && mEncryptValue == 0)
 					{
-						mConvertValue = XORMASK;
+						_convertValue = XORMASK;
 					}
 
 					return mEncryptValue;
@@ -73,9 +73,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator Single(TProtectionSingle value)
 			{
-				value.mConvertValue ^= XORMASK;
+				value._convertValue ^= XORMASK;
 				var original = value.mEncryptValue;
-				value.mConvertValue ^= XORMASK;
+				value._convertValue ^= XORMASK;
 				return original;
 			}
 
@@ -90,7 +90,7 @@ namespace Lotus
 			{
 				var protection = new TProtectionSingle();
 				protection.mEncryptValue = value;
-				protection.mConvertValue ^= XORMASK;
+				protection._convertValue ^= XORMASK;
 				return protection;
 			}
 			#endregion

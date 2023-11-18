@@ -32,10 +32,10 @@ namespace Lotus
 		public sealed class LotusNumberRangeAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly Double mMinValue;
-			internal readonly Double mMaxValue;
-			internal readonly String mMemberName;
-			internal readonly TInspectorMemberType mMemberType;
+			internal readonly Double _minValue;
+			internal readonly Double _maxValue;
+			internal readonly String _memberName;
+			internal readonly TInspectorMemberType _memberType;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -44,7 +44,7 @@ namespace Lotus
 			/// </summary>
 			public Double MinValue
 			{
-				get { return mMinValue; }
+				get { return _minValue; }
 			}
 
 			/// <summary>
@@ -52,7 +52,7 @@ namespace Lotus
 			/// </summary>
 			public Double MaxValue
 			{
-				get { return mMaxValue; }
+				get { return _maxValue; }
 			}
 
 			/// <summary>
@@ -60,7 +60,7 @@ namespace Lotus
 			/// </summary>
 			public String MemberName
 			{
-				get { return mMemberName; }
+				get { return _memberName; }
 			}
 
 			/// <summary>
@@ -68,7 +68,7 @@ namespace Lotus
 			/// </summary>
 			public TInspectorMemberType MemberType
 			{
-				get { return mMemberType; }
+				get { return _memberType; }
 			}
 			#endregion
 
@@ -82,8 +82,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusNumberRangeAttribute(Double minValue, Double maxValue)
 			{
-				mMinValue = minValue;
-				mMaxValue = maxValue;
+				_minValue = minValue;
+				_maxValue = maxValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -95,8 +95,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusNumberRangeAttribute(String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 			#endregion
 		}

@@ -94,8 +94,8 @@ namespace Lotus
 		public class CBaseSerializer : ILotusSerializer
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal String mName;
-			protected internal Func<String, System.Object> mConstructor;
+			protected internal String _name;
+			protected internal Func<String, System.Object> _constructor;
 			protected internal Dictionary<Int64, ILotusSerializableObject> mSerializableObjects;
 
 #if UNITY_2017_1_OR_NEWER
@@ -109,8 +109,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -120,11 +120,11 @@ namespace Lotus
 			{
 				get
 				{
-					return mConstructor;
+					return _constructor;
 				}
 				set
 				{
-					mConstructor = value;
+					_constructor = value;
 				}
 			}
 
@@ -173,7 +173,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CBaseSerializer(String name)
 			{
-				mName = name;
+				_name = name;
 				mSerializableObjects = new Dictionary<Int64, ILotusSerializableObject>(100);
 #if UNITY_2017_1_OR_NEWER
 				mSerializeReferences = new List<CSerializeReferenceUnity>();

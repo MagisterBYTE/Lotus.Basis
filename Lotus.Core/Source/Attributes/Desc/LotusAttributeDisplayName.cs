@@ -32,8 +32,8 @@ namespace Lotus
 		public sealed class LotusDisplayNameAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String mName;
-			internal readonly Int32 mIndent;
+			internal readonly String _name;
+			internal readonly Int32 _indent;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -42,7 +42,7 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
+				get { return _name; }
 			}
 
 			/// <summary>
@@ -50,7 +50,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Indent
 			{
-				get { return mIndent; }
+				get { return _indent; }
 			}
 			#endregion
 
@@ -63,7 +63,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusDisplayNameAttribute(String name)
 			{
-				mName = name;
+				_name = name;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -75,8 +75,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusDisplayNameAttribute(String name, Int32 indent)
 			{
-				mName = name;
-				mIndent = indent;
+				_name = name;
+				_indent = indent;
 			}
 			#endregion
 		}

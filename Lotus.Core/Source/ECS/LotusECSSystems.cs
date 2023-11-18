@@ -162,9 +162,9 @@ namespace Lotus
 
 			// Подсистемы логики
 			protected internal ListArray<IEcsLotusPreInitSystem> mPreInitSystems;
-			protected internal ListArray<IEcsLotusInitSystem> mInitSystems;
-			protected internal ListArray<IEcsLotusUpdateSystem> mUpdateSystems;
-			protected internal ListArray<IEcsLotusLateUpdateSystem> mLateUpdateSystems;
+			protected internal ListArray<IEcsLotusInitSystem> _initSystems;
+			protected internal ListArray<IEcsLotusUpdateSystem> _updateSystems;
+			protected internal ListArray<IEcsLotusLateUpdateSystem> _lateUpdateSystems;
 			protected internal ListArray<IEcsLotusFixedUpdateSystem> mFixedUpdateSystems;
 			protected internal ListArray<IEcsDestroySystem> mDestroySystems;
 			protected internal ListArray<IEcsPostDestroySystem> mPostDestroySystems;
@@ -192,7 +192,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsLotusInitSystem> InitSystems
 			{
-				get { return mInitSystems; }
+				get { return _initSystems; }
 			}
 
 			/// <summary>
@@ -200,7 +200,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsLotusUpdateSystem> UpdateSystems
 			{
-				get { return mUpdateSystems; }
+				get { return _updateSystems; }
 			}
 
 			/// <summary>
@@ -208,7 +208,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<IEcsLotusLateUpdateSystem> LateUpdateSystems
 			{
-				get { return mLateUpdateSystems; }
+				get { return _lateUpdateSystems; }
 			}
 
 			/// <summary>
@@ -247,9 +247,9 @@ namespace Lotus
 				mWorlds = new ListArray<CEcsWorld>(2);
 
 				mPreInitSystems = new ListArray<IEcsLotusPreInitSystem>(24);
-				mInitSystems = new ListArray<IEcsLotusInitSystem>(24);
-				mUpdateSystems = new ListArray<IEcsLotusUpdateSystem>(24);
-				mLateUpdateSystems = new ListArray<IEcsLotusLateUpdateSystem>(24);
+				_initSystems = new ListArray<IEcsLotusInitSystem>(24);
+				_updateSystems = new ListArray<IEcsLotusUpdateSystem>(24);
+				_lateUpdateSystems = new ListArray<IEcsLotusLateUpdateSystem>(24);
 				mFixedUpdateSystems = new ListArray<IEcsLotusFixedUpdateSystem>(24);
 				mDestroySystems = new ListArray<IEcsDestroySystem>(24);
 				mPostDestroySystems = new ListArray<IEcsPostDestroySystem>(24);
@@ -280,11 +280,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnInitSystems()
 			{
-				for (var i = 0; i < mInitSystems.Count; i++)
+				for (var i = 0; i < _initSystems.Count; i++)
 				{
-					if (mInitSystems[i].IsDisabled == false)
+					if (_initSystems[i].IsDisabled == false)
 					{
-						mInitSystems[i].Init(this);
+						_initSystems[i].Init(this);
 					}
 				}
 			}
@@ -296,11 +296,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnUpdateSystems()
 			{
-				for (var i = 0; i < mUpdateSystems.Count; i++)
+				for (var i = 0; i < _updateSystems.Count; i++)
 				{
-					if (mUpdateSystems[i].IsDisabled == false)
+					if (_updateSystems[i].IsDisabled == false)
 					{
-						mUpdateSystems[i].Update(this);
+						_updateSystems[i].Update(this);
 					}
 				}
 			}
@@ -312,11 +312,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnLateUpdateSystems()
 			{
-				for (var i = 0; i < mLateUpdateSystems.Count; i++)
+				for (var i = 0; i < _lateUpdateSystems.Count; i++)
 				{
-					if (mLateUpdateSystems[i].IsDisabled == false)
+					if (_lateUpdateSystems[i].IsDisabled == false)
 					{
-						mLateUpdateSystems[i].LateUpdate(this);
+						_lateUpdateSystems[i].LateUpdate(this);
 					}
 				}
 			}

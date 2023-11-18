@@ -88,7 +88,7 @@ namespace Lotus
 			#region ======================================= ДАННЫЕ ====================================================
 			protected internal ListArray<ILotusMementoState> mHistoryStates;
 			protected internal Int32 mNextUndo;
-			protected internal Boolean mIsEnabled;
+			protected internal Boolean _isEnabled;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -141,11 +141,11 @@ namespace Lotus
 			{
 				get
 				{
-					return mIsEnabled;
+					return _isEnabled;
 				}
 				set
 				{
-					mIsEnabled = value;
+					_isEnabled = value;
 					NotifyPropertyChanged(PropertyArgsIsEnabled);
 				}
 			}

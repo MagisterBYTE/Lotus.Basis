@@ -32,9 +32,9 @@ namespace Lotus
 		public sealed class LotusMinValueAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly System.Object mMinValue;
-			internal readonly String mMemberName;
-			internal readonly TInspectorMemberType mMemberType;
+			internal readonly System.Object _minValue;
+			internal readonly String _memberName;
+			internal readonly TInspectorMemberType _memberType;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -43,7 +43,7 @@ namespace Lotus
 			/// </summary>
 			public System.Object MinValue
 			{
-				get { return mMinValue; }
+				get { return _minValue; }
 			}
 
 			/// <summary>
@@ -51,7 +51,7 @@ namespace Lotus
 			/// </summary>
 			public String MemberName
 			{
-				get { return mMemberName; }
+				get { return _memberName; }
 			}
 
 			/// <summary>
@@ -59,7 +59,7 @@ namespace Lotus
 			/// </summary>
 			public TInspectorMemberType MemberType
 			{
-				get { return mMemberType; }
+				get { return _memberType; }
 			}
 			#endregion
 
@@ -72,7 +72,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusMinValueAttribute(System.Object minValue)
 			{
-				mMinValue = minValue;
+				_minValue = minValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -84,8 +84,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusMinValueAttribute(String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -98,9 +98,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusMinValueAttribute(Type type, String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
-				mMinValue = type;
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_minValue = type;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 			#endregion
 		}

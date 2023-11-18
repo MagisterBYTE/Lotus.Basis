@@ -31,8 +31,8 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal ListArray<CTextLine> mLines;
-			protected internal Int32 mCurrentIndent;
+			protected internal ListArray<CTextLine> _lines;
+			protected internal Int32 _currentIndent;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -44,10 +44,10 @@ namespace Lotus
 			/// </summary>
 			public Int32 CurrentIndent
 			{
-				get { return mCurrentIndent; }
+				get { return _currentIndent; }
 				set
 				{
-					mCurrentIndent = value;
+					_currentIndent = value;
 				}
 			}
 			#endregion
@@ -61,7 +61,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextList(Int32 capacity = 24)
 			{
-				mLines = new ListArray<CTextLine>(capacity);
+				_lines = new ListArray<CTextLine>(capacity);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -72,10 +72,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextList(String str)
 			{
-				mLines = new ListArray<CTextLine>();
-				mLines.Add(str);
-				mLines[0].Index = 0;
-				mLines[0].Owned = this;
+				_lines = new ListArray<CTextLine>();
+				_lines.Add(str);
+				_lines[0].Index = 0;
+				_lines[0].Owned = this;
 			}
 			#endregion
 
@@ -91,10 +91,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Add(CTextLine line)
 			{
-				line.Index = mLines.Count;
+				line.Index = _lines.Count;
 				line.Owned = this;
-				line.Indent = mCurrentIndent;
-				mLines.Add(line);
+				line.Indent = _currentIndent;
+				_lines.Add(line);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -105,10 +105,10 @@ namespace Lotus
 			public void AddNewLine()
 			{
 				var line = new CTextLine(XString.NewLine);
-				line.Index = mLines.Count;
+				line.Index = _lines.Count;
 				line.Owned = this;
-				line.Indent = mCurrentIndent;
-				mLines.Add(line);
+				line.Indent = _currentIndent;
+				_lines.Add(line);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -119,10 +119,10 @@ namespace Lotus
 			public void AddEmptyLine()
 			{
 				var line = new CTextLine(String.Empty);
-				line.Index = mLines.Count;
+				line.Index = _lines.Count;
 				line.Owned = this;
-				line.Indent = mCurrentIndent;
-				mLines.Add(line);
+				line.Indent = _currentIndent;
+				_lines.Add(line);
 			}
 			#endregion
 
@@ -138,9 +138,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLength(Int32 length)
 			{
-				for (var i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < _lines.Count; i++)
 				{
-					mLines[i].SetLength(length);
+					_lines[i].SetLength(length);
 				}
 			}
 
@@ -156,9 +156,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLength(Int32 length, Char symbol)
 			{
-				for (var i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < _lines.Count; i++)
 				{
-					mLines[i].SetLength(length, symbol);
+					_lines[i].SetLength(length, symbol);
 				}
 			}
 
@@ -175,9 +175,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthAndLastChar(Int32 length, Char symbol)
 			{
-				for (var i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < _lines.Count; i++)
 				{
-					mLines[i].SetLengthAndLastChar(length, symbol);
+					_lines[i].SetLengthAndLastChar(length, symbol);
 				}
 			}
 
@@ -193,9 +193,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthWithTabs(Int32 length, Int32 tabsEquiv = 4)
 			{
-				for (var i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < _lines.Count; i++)
 				{
-					mLines[i].SetLengthWithTabs(length, tabsEquiv);
+					_lines[i].SetLengthWithTabs(length, tabsEquiv);
 				}
 			}
 
@@ -212,9 +212,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthWithTabs(Int32 length, Char symbol, Int32 tabsEquiv = 4)
 			{
-				for (var i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < _lines.Count; i++)
 				{
-					mLines[i].SetLengthWithTabs(length, symbol, tabsEquiv);
+					_lines[i].SetLengthWithTabs(length, symbol, tabsEquiv);
 				}
 			}
 
@@ -230,15 +230,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLengthWithTabsOnlyDelimetrs(Int32 length, Int32 tabsEquiv = 4)
 			{
-				for (var i = 0; i < mLines.Count; i++)
+				for (var i = 0; i < _lines.Count; i++)
 				{
-					if(mLines[i].RawString.Contains("//---------"))
+					if(_lines[i].RawString.Contains("//---------"))
 					{
-						mLines[i].SetLengthWithTabs(length, tabsEquiv);
+						_lines[i].SetLengthWithTabs(length, tabsEquiv);
 					}
-					if (mLines[i].RawString.Contains("//========"))
+					if (_lines[i].RawString.Contains("//========"))
 					{
-						mLines[i].SetLengthWithTabs(length, tabsEquiv);
+						_lines[i].SetLengthWithTabs(length, tabsEquiv);
 					}
 
 				}
@@ -264,12 +264,12 @@ namespace Lotus
 				var stream_writer = new StreamWriter(path);
 
 				// Записываем данные
-				for (var i = 0; i < mLines.Count - 1; i++)
+				for (var i = 0; i < _lines.Count - 1; i++)
 				{
-					stream_writer.WriteLine(mLines[i].RawString);
+					stream_writer.WriteLine(_lines[i].RawString);
 				}
 
-				stream_writer.Write(mLines.ItemLast.RawString);
+				stream_writer.Write(_lines.ItemLast.RawString);
 
 				stream_writer.Close();
 

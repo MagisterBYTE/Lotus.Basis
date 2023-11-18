@@ -33,8 +33,8 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			internal readonly System.Object mStepValue;
-			internal readonly String mMemberName;
-			internal readonly TInspectorMemberType mMemberType;
+			internal readonly String _memberName;
+			internal readonly TInspectorMemberType _memberType;
 			internal String mStyleButtonLeftName;
 			internal String mStyleButtonRightName;
 #if UNITY_EDITOR
@@ -57,7 +57,7 @@ namespace Lotus
 			/// </summary>
 			public String MemberName
 			{
-				get { return mMemberName; }
+				get { return _memberName; }
 			}
 
 			/// <summary>
@@ -65,7 +65,7 @@ namespace Lotus
 			/// </summary>
 			public TInspectorMemberType MemberType
 			{
-				get { return mMemberType; }
+				get { return _memberType; }
 			}
 
 			/// <summary>
@@ -108,8 +108,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusStepValueAttribute(String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -123,8 +123,8 @@ namespace Lotus
 			public LotusStepValueAttribute(Type type, String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
 				mStepValue = type;
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 			#endregion
 		}

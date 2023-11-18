@@ -43,8 +43,8 @@ namespace Lotus
 			// Основные параметры
 			protected internal Action<TTypeModel> mActionModel;
 			protected internal Action<TTypeView> mActionView;
-			protected internal Func<TTypeView, TTypeModel> mOnConvertToModel;
-			protected internal Func<TTypeModel, TTypeView> mOnConvertToView;
+			protected internal Func<TTypeView, TTypeModel> _onConvertToModel;
+			protected internal Func<TTypeModel, TTypeView> _onConvertToView;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -72,8 +72,8 @@ namespace Lotus
 			/// </summary>
 			public Func<TTypeView, TTypeModel> OnConvertToModel
 			{
-				get { return mOnConvertToModel; }
-				set { mOnConvertToModel = value; }
+				get { return _onConvertToModel; }
+				set { _onConvertToModel = value; }
 			}
 
 			/// <summary>
@@ -81,8 +81,8 @@ namespace Lotus
 			/// </summary>
 			public Func<TTypeModel, TTypeView> OnConvertToView
 			{
-				get { return mOnConvertToView; }
-				set { mOnConvertToView = value; }
+				get { return _onConvertToView; }
+				set { _onConvertToView = value; }
 			}
 			#endregion
 
@@ -94,7 +94,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public BindingDelegate()
 			{
-				mIsStringView = typeof(TTypeView) == typeof(String);
+				_isStringView = typeof(TTypeView) == typeof(String);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -127,12 +127,12 @@ namespace Lotus
 			public override void SetModel(System.Object modelInstance)
 			{
 				ResetModel(modelInstance);
-				if (mMode != TBindingMode.ViewData)
+				if (_mode != TBindingMode.ViewData)
 				{
-					var member_name_model = mModelMemberName;
-					if (mModelMemberType == TBindingMemberType.Property)
+					var member_name_model = _modelMemberName;
+					if (_modelMemberType == TBindingMemberType.Property)
 					{
-						member_name_model = "set_" + mModelMemberName;
+						member_name_model = "set_" + _modelMemberName;
 					}
 					try
 					{
@@ -160,15 +160,15 @@ namespace Lotus
 			{
 				ResetModel(modelInstance);
 
-				if (SetMemberType(modelInstance, memberName, ref mModelMemberType) != null)
+				if (SetMemberType(modelInstance, memberName, ref _modelMemberType) != null)
 				{
-					mModelMemberName = memberName;
-					if (mMode != TBindingMode.ViewData)
+					_modelMemberName = memberName;
+					if (_mode != TBindingMode.ViewData)
 					{
-						var member_name_model = mModelMemberName;
-						if (mModelMemberType == TBindingMemberType.Property)
+						var member_name_model = _modelMemberName;
+						if (_modelMemberType == TBindingMemberType.Property)
 						{
-							member_name_model = "set_" + mModelMemberName;
+							member_name_model = "set_" + _modelMemberName;
 						}
 						try
 						{
@@ -199,14 +199,14 @@ namespace Lotus
 			public override System.Object GetModelValue()
 			{
 				// Проверяем сначала свойство 
-				if (XReflection.ContainsProperty(mModelInstance, mModelMemberName))
+				if (XReflection.ContainsProperty(_modelInstance, _modelMemberName))
 				{
-					return XReflection.GetPropertyValue(mModelInstance, mModelMemberName);
+					return XReflection.GetPropertyValue(_modelInstance, _modelMemberName);
 				}
 				else
 				{
 					// Теперь поле
-					return XReflection.GetFieldValue(mModelInstance, mModelMemberName);
+					return XReflection.GetFieldValue(_modelInstance, _modelMemberName);
 				}
 			}
 
@@ -219,22 +219,22 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected override void UpdateModelProperty(Object sender, PropertyChangedEventArgs args)
 			{
-				if (mIsEnabled)
+				if (_isEnabled)
 				{
-					if (mModelMemberName == args.PropertyName)
+					if (_modelMemberName == args.PropertyName)
 					{
 						// Используется интерфейс INotifyPropertyChanged
-						if (mModelPropertyChanged != null)
+						if (_modelPropertyChanged != null)
 						{
 							// Получаем актуальное значение
 							var value = GetModelValue();
-							if (mOnConvertToView != null)
+							if (_onConvertToView != null)
 							{
-								mActionView(mOnConvertToView((TTypeModel)value));
+								mActionView(_onConvertToView((TTypeModel)value));
 							}
 							else
 							{
-								if (mIsStringView)
+								if (_isStringView)
 								{
 									mActionView((TTypeView)(System.Object)value.ToString());
 								}
@@ -262,12 +262,12 @@ namespace Lotus
 			public override void SetView(System.Object viewInstance)
 			{
 				ResetView(viewInstance);
-				if (mMode != TBindingMode.DataManager)
+				if (_mode != TBindingMode.DataManager)
 				{
-					var member_name_view = mViewMemberName;
-					if (mViewMemberType == TBindingMemberType.Property)
+					var member_name_view = _viewMemberName;
+					if (_viewMemberType == TBindingMemberType.Property)
 					{
-						member_name_view = "set_" + mViewMemberName;
+						member_name_view = "set_" + _viewMemberName;
 					}
 					try
 					{
@@ -293,17 +293,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void SetView(System.Object viewInstance, String memberName)
 			{
-				mIsStringView = typeof(TTypeView) == typeof(String);
+				_isStringView = typeof(TTypeView) == typeof(String);
 				ResetView(viewInstance);
-				if (SetMemberType(viewInstance, memberName, ref mViewMemberType) != null)
+				if (SetMemberType(viewInstance, memberName, ref _viewMemberType) != null)
 				{
-					mViewMemberName = memberName;
-					if (mMode != TBindingMode.DataManager)
+					_viewMemberName = memberName;
+					if (_mode != TBindingMode.DataManager)
 					{
-						var member_name_view = mViewMemberName;
-						if (mViewMemberType == TBindingMemberType.Property)
+						var member_name_view = _viewMemberName;
+						if (_viewMemberType == TBindingMemberType.Property)
 						{
-							member_name_view = "set_" + mViewMemberName;
+							member_name_view = "set_" + _viewMemberName;
 						}
 						try
 						{
@@ -334,14 +334,14 @@ namespace Lotus
 			public override System.Object GetViewValue()
 			{
 				// Проверяем сначала свойство 
-				if (XReflection.ContainsProperty(mViewInstance, mViewMemberName))
+				if (XReflection.ContainsProperty(_viewInstance, _viewMemberName))
 				{
-					return XReflection.GetPropertyValue(mViewInstance, mViewMemberName);
+					return XReflection.GetPropertyValue(_viewInstance, _viewMemberName);
 				}
 				else
 				{
 					// Теперь поле
-					return XReflection.GetFieldValue(mViewInstance, mViewMemberName);
+					return XReflection.GetFieldValue(_viewInstance, _viewMemberName);
 				}
 			}
 
@@ -354,19 +354,19 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected override void UpdateViewProperty(Object sender, PropertyChangedEventArgs args)
 			{
-				if (mIsEnabled)
+				if (_isEnabled)
 				{
-					if (mViewMemberName == args.PropertyName)
+					if (_viewMemberName == args.PropertyName)
 					{
 						// Используется интерфейс INotifyPropertyChanged
-						if (mViewPropertyChanged != null)
+						if (_viewPropertyChanged != null)
 						{
 							// Получаем актуальное значение
 							var value = GetModelValue();
 
-							if (mOnConvertToModel != null)
+							if (_onConvertToModel != null)
 							{
-								mActionModel(mOnConvertToModel((TTypeView)value));
+								mActionModel(_onConvertToModel((TTypeView)value));
 							}
 							else
 							{

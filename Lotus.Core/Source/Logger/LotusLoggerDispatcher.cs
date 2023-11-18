@@ -37,18 +37,18 @@ namespace Lotus
 		public static class XLogger
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal static ILoggerView mLogger;
-			internal static ListArray<TLogMessage> mMessages;
+			internal static ILotusLoggerView _logger;
+			internal static ListArray<TLogMessage> _messages;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
 			/// Текущий логгер для визуального отображения
 			/// </summary>
-			public static ILoggerView Logger
+			public static ILotusLoggerView Logger
 			{
-				get { return mLogger; }
-				set { mLogger = value; }
+				get { return _logger; }
+				set { _logger = value; }
 			}
 
 			/// <summary>
@@ -58,12 +58,12 @@ namespace Lotus
 			{
 				get
 				{
-					if (mMessages == null)
+					if (_messages == null)
 					{
-						mMessages = new ListArray<TLogMessage>();
-						mMessages.IsNotify = true;
+						_messages = new ListArray<TLogMessage>();
+						_messages.IsNotify = true;
 					}
-					return mMessages;
+					return _messages;
 				}
 			}
 			#endregion
@@ -78,9 +78,9 @@ namespace Lotus
 			public static void Log(TLogMessage message)
 			{
 				Messages.Add(message);
-				if (mLogger != null)
+				if (_logger != null)
 				{
-					mLogger.Log(message);
+					_logger.Log(message);
 				}
 			}
 
@@ -92,14 +92,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SaveToText(String fileName)
 			{
-				if (mMessages != null)
+				if (_messages != null)
 				{
 					var file_stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 					var stream_writer = new StreamWriter(file_stream);
 
-					for (var i = 0; i < mMessages.Count; i++)
+					for (var i = 0; i < _messages.Count; i++)
 					{
-						stream_writer.WriteLine(mMessages[i].Text);
+						stream_writer.WriteLine(_messages[i].Text);
 					}
 
 					stream_writer.Close();
@@ -133,7 +133,7 @@ namespace Lotus
 					message.LineNumber = lineNumber;
 
 					Messages.Add(message);
-					if (mLogger != null) mLogger.Log(message);
+					if (_logger != null) _logger.Log(message);
 				}
 			}
 
@@ -163,7 +163,7 @@ namespace Lotus
 
 					Messages.Add(message);
 
-					if (mLogger != null) mLogger.Log(message);
+					if (_logger != null) _logger.Log(message);
 				}
 			}
 
@@ -181,7 +181,7 @@ namespace Lotus
 				var message = new TLogMessage(text, TLogType.Info);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.Log(text, TLogType.Info);
+				if (_logger != null) _logger.Log(text, TLogType.Info);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ namespace Lotus
 				var message = new TLogMessage(moduleName, text, TLogType.Info);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.LogModule(moduleName, text, TLogType.Info);
+				if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Info);
 			}
 			#endregion
 
@@ -229,7 +229,7 @@ namespace Lotus
 
 					Messages.Add(message);
 
-					if (mLogger != null) mLogger.Log(message);
+					if (_logger != null) _logger.Log(message);
 				}
 			}
 
@@ -259,7 +259,7 @@ namespace Lotus
 
 					Messages.Add(message);
 
-					if (mLogger != null) mLogger.Log(message);
+					if (_logger != null) _logger.Log(message);
 				}
 			}
 
@@ -277,7 +277,7 @@ namespace Lotus
 				var message = new TLogMessage(text, TLogType.Warning);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.Log(text, TLogType.Warning);
+				if (_logger != null) _logger.Log(text, TLogType.Warning);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -295,7 +295,7 @@ namespace Lotus
 				var message = new TLogMessage(moduleName, text, TLogType.Warning);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.LogModule(moduleName, text, TLogType.Warning);
+				if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Warning);
 			}
 			#endregion
 
@@ -325,7 +325,7 @@ namespace Lotus
 
 					Messages.Add(message);
 
-					if (mLogger != null) mLogger.Log(message);
+					if (_logger != null) _logger.Log(message);
 				}
 			}
 
@@ -355,7 +355,7 @@ namespace Lotus
 
 					Messages.Add(message);
 
-					if (mLogger != null) mLogger.Log(message);
+					if (_logger != null) _logger.Log(message);
 				}
 			}
 
@@ -373,7 +373,7 @@ namespace Lotus
 				var message = new TLogMessage(text, TLogType.Error);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.Log(text, TLogType.Error);
+				if (_logger != null) _logger.Log(text, TLogType.Error);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -391,7 +391,7 @@ namespace Lotus
 				var message = new TLogMessage(moduleName, text, TLogType.Error);
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.LogModule(moduleName, text, TLogType.Error);
+				if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Error);
 			}
 			#endregion
 
@@ -417,7 +417,7 @@ namespace Lotus
 
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.Log(message);
+				if (_logger != null) _logger.Log(message);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -442,7 +442,7 @@ namespace Lotus
 
 				Messages.Add(message);
 
-				if (mLogger != null) mLogger.Log(message);
+				if (_logger != null) _logger.Log(message);
 			}
 			#endregion
 		}

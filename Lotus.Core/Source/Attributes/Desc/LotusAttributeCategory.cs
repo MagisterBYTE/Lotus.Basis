@@ -29,7 +29,7 @@ namespace Lotus
 		public sealed class LotusCategoryAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String mName;
+			internal readonly String _name;
 			internal readonly Int32 mOrder;
 			#endregion
 
@@ -39,7 +39,7 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
+				get { return _name; }
 			}
 
 			/// <summary>
@@ -61,7 +61,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusCategoryAttribute(String name, Int32 order)
 			{
-				mName = name;
+				_name = name;
 				mOrder = order;
 			}
 			#endregion

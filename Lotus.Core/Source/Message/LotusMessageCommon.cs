@@ -63,11 +63,11 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32 mId;
-			protected internal String mName;
-			protected internal System.Object mData;
-			protected internal System.Object mSender;
-			protected internal Boolean mIsPoolObject;
+			protected internal Int32 _id;
+			protected internal String _name;
+			protected internal System.Object _data;
+			protected internal System.Object _sender;
+			protected internal Boolean _isPoolObject;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -76,8 +76,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 Id
 			{
-				get { return mId; }
-				set { mId = value; }
+				get { return _id; }
+				set { _id = value; }
 			}
 
 			/// <summary>
@@ -85,8 +85,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -94,8 +94,8 @@ namespace Lotus
 			/// </summary>
 			public System.Object Data
 			{
-				get { return mData; }
-				set { mData = value; }
+				get { return _data; }
+				set { _data = value; }
 			}
 
 			/// <summary>
@@ -103,8 +103,8 @@ namespace Lotus
 			/// </summary>
 			public System.Object Sender
 			{
-				get { return mSender; }
-				set { mSender = value; }
+				get { return _sender; }
+				set { _sender = value; }
 			}
 
 #if UNITY_2017_1_OR_NEWER
@@ -113,8 +113,8 @@ namespace Lotus
 			/// </summary>
 			public UnityEngine.MonoBehaviour SenderBehaviour
 			{
-				get { return mSender as UnityEngine.MonoBehaviour; }
-				set { mSender = value; }
+				get { return _sender as UnityEngine.MonoBehaviour; }
+				set { _sender = value; }
 			}
 #endif
 
@@ -123,7 +123,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsPoolObject
 			{
-				get { return mIsPoolObject; }
+				get { return _isPoolObject; }
 			}
 			#endregion
 
@@ -146,8 +146,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMessageArgs(String name, Boolean isPool = false)
 			{
-				mName = name;
-				mIsPoolObject = isPool;
+				_name = name;
+				_isPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -159,8 +159,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMessageArgs(Int32 id, Boolean isPool = false)
 			{
-				mId = id;
-				mIsPoolObject = isPool;
+				_id = id;
+				_isPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -173,9 +173,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMessageArgs(String name, Int32 id, Boolean isPool = false)
 			{
-				mName = name;
-				mId = id;
-				mIsPoolObject = isPool;
+				_name = name;
+				_id = id;
+				_isPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -188,9 +188,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMessageArgs(String name, System.Object sender, Boolean isPool = false)
 			{
-				mName = name;
-				mSender = sender;
-				mIsPoolObject = isPool;
+				_name = name;
+				_sender = sender;
+				_isPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -203,9 +203,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMessageArgs(Int32 id, System.Object sender, Boolean isPool = false)
 			{
-				mId = id;
-				mSender = sender;
-				mIsPoolObject = isPool;
+				_id = id;
+				_sender = sender;
+				_isPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -219,9 +219,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMessageArgs(String name, Int32 id, System.Object sender, Boolean isPool = false)
 			{
-				mName = name;
-				mSender = sender;
-				mIsPoolObject = isPool;
+				_name = name;
+				_sender = sender;
+				_isPoolObject = isPool;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMessageArgs(Boolean isPool)
 			{
-				mIsPoolObject = isPool;
+				_isPoolObject = isPool;
 			}
 			#endregion
 
@@ -245,7 +245,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return"Name <" + mName + "> Value[" + mData?.ToString() + "]";
+				return"Name <" + _name + "> Value[" + _data?.ToString() + "]";
 			}
 			#endregion
 
@@ -273,10 +273,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnPoolRelease()
 			{
-				mData = null;
-				mSender = null;
-				mName = "";
-				mId = 0;
+				_data = null;
+				_sender = null;
+				_name = "";
+				_id = 0;
 			}
 			#endregion
 		}

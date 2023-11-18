@@ -36,10 +36,10 @@ namespace Lotus
 #endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly System.Object mListValues;
-			internal readonly String mMemberName;
-			internal readonly TInspectorMemberType mMemberType;
-			internal String mFormatMethodName;
+			internal readonly System.Object _listValues;
+			internal readonly String _memberName;
+			internal readonly TInspectorMemberType _memberType;
+			internal String _formatMethodName;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -48,7 +48,7 @@ namespace Lotus
 			/// </summary>
 			public System.Object ListValues
 			{
-				get { return mListValues; }
+				get { return _listValues; }
 			}
 
 			/// <summary>
@@ -56,7 +56,7 @@ namespace Lotus
 			/// </summary>
 			public String MemberName
 			{
-				get { return mMemberName; }
+				get { return _memberName; }
 			}
 
 			/// <summary>
@@ -64,7 +64,7 @@ namespace Lotus
 			/// </summary>
 			public TInspectorMemberType MemberType
 			{
-				get { return mMemberType; }
+				get { return _memberType; }
 			}
 
 			/// <summary>
@@ -75,8 +75,8 @@ namespace Lotus
 			/// </remarks>
 			public String FormatMethodName
 			{
-				get { return mFormatMethodName; }
-				set { mFormatMethodName = value; }
+				get { return _formatMethodName; }
+				set { _formatMethodName = value; }
 			}
 			#endregion
 
@@ -89,7 +89,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusListValuesAttribute(params System.Object[] listValues)
 			{
-				mListValues = listValues;
+				_listValues = listValues;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -101,8 +101,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusListValuesAttribute(String memberName, TInspectorMemberType memberType)
 			{
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -115,9 +115,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusListValuesAttribute(Type type, String memberName, TInspectorMemberType memberType)
 			{
-				mListValues = type;
-				mMemberName = memberName;
-				mMemberType = memberType;
+				_listValues = type;
+				_memberName = memberName;
+				_memberType = memberType;
 			}
 			#endregion
 		}

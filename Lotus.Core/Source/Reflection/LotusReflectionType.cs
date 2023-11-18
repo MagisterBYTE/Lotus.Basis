@@ -29,7 +29,7 @@ namespace Lotus
 		/// Класс содержащий тип и его кэшированные данные рефлексии
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public sealed class CReflectedType : IDisposable
+		public class CReflectedType : IDisposable
 		{
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			/// <summary>
@@ -72,10 +72,10 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			//Основные параметры
-			internal Type mCachedType;
-			internal Dictionary<String, FieldInfo> mFields;
-			internal Dictionary<String, PropertyInfo> mProperties;
-			internal Dictionary<String, MethodInfo> mMethods;
+			protected internal Type _cachedType;
+			protected internal Dictionary<String, FieldInfo> _fields;
+			protected internal Dictionary<String, PropertyInfo> _properties;
+			protected internal Dictionary<String, MethodInfo> _methods;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -87,7 +87,7 @@ namespace Lotus
 			/// </summary>
 			public Type CachedType
 			{
-				get { return mCachedType; }
+				get { return _cachedType; }
 			}
 
 			/// <summary>
@@ -95,7 +95,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, FieldInfo> Fields
 			{
-				get { return mFields; }
+				get { return _fields; }
 			}
 
 			/// <summary>
@@ -103,7 +103,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, PropertyInfo> Properties
 			{
-				get { return mProperties; }
+				get { return _properties; }
 			}
 
 			/// <summary>
@@ -111,7 +111,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, MethodInfo> Methods
 			{
-				get { return mMethods; }
+				get { return _methods; }
 			}
 			#endregion
 
@@ -124,7 +124,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CReflectedType(Type cachedType)
 			{
-				mCachedType = cachedType;
+				_cachedType = cachedType;
 				
 				GetFields();
 				GetProperties();
@@ -140,7 +140,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CReflectedType(Type cachedType, TExtractMembers extractMembers)
 			{
-				mCachedType = cachedType;
+				_cachedType = cachedType;
 				if (extractMembers.IsFlagSet(TExtractMembers.Fields))
 				{
 					GetFields();
@@ -179,23 +179,23 @@ namespace Lotus
 				// Освобождаем только управляемые ресурсы
 				if (disposing)
 				{
-					mCachedType = null;
-					if (mFields != null)
+					_cachedType = null;
+					if (_fields != null)
 					{
-						mFields.Clear();
-						mFields = null;
+						_fields.Clear();
+						_fields = null;
 					}
 
-					if (mProperties != null)
+					if (_properties != null)
 					{
-						mProperties.Clear();
-						mProperties = null;
+						_properties.Clear();
+						_properties = null;
 					}
 
-					if (mMethods != null)
+					if (_methods != null)
 					{
-						mMethods.Clear();
-						mMethods = null;
+						_methods.Clear();
+						_methods = null;
 					}
 				}
 
@@ -211,13 +211,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void GetFields()
 			{
-				if (mFields == null) mFields = new Dictionary<String, FieldInfo>();
+				if (_fields == null) _fields = new Dictionary<String, FieldInfo>();
 
-				FieldInfo[] fields = mCachedType.GetFields(BINDINGFIELDS);
+				FieldInfo[] fields = _cachedType.GetFields(BINDINGFIELDS);
 
 				foreach (FieldInfo field in fields)
 				{
-					mFields.Add(field.Name, field);
+					_fields.Add(field.Name, field);
 				}
 			}
 
@@ -230,8 +230,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsField(String fieldName)
 			{
-				if (mFields == null) GetFields();
-				return mFields.ContainsKey(fieldName);
+				if (_fields == null) GetFields();
+				return _fields.ContainsKey(fieldName);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -243,12 +243,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public FieldInfo GetField(String fieldName)
 			{
-				if (mFields == null || mFields.Count == 0)
+				if (_fields == null || _fields.Count == 0)
 				{
 					GetFields();
 				}
 				FieldInfo field_info;
-				if(mFields.TryGetValue(fieldName, out field_info))
+				if(_fields.TryGetValue(fieldName, out field_info))
 				{
 					return field_info;
 				}
@@ -265,9 +265,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Type GetFieldType(String fieldName)
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					return field_info.FieldType;
 				}
@@ -284,9 +284,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String GetFieldTypeName(String fieldName)
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					return field_info.FieldType.Name;
 				}
@@ -305,8 +305,8 @@ namespace Lotus
 			{
 				var fields = new List<FieldInfo>();
 
-				if (mFields == null) GetFields();
-				foreach (var field_info in mFields.Values)
+				if (_fields == null) GetFields();
+				foreach (var field_info in _fields.Values)
 				{
 					if (field_info.FieldType == typeof(TType))
 					{
@@ -328,8 +328,8 @@ namespace Lotus
 			{
 				var fields = new List<FieldInfo>();
 
-				if (mFields == null) GetFields();
-				foreach (var field_info in mFields.Values)
+				if (_fields == null) GetFields();
+				foreach (var field_info in _fields.Values)
 				{
 					if (Attribute.IsDefined(field_info, typeof(TAttribute)))
 					{
@@ -350,9 +350,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TAttribute GetAttributeFromField<TAttribute>(String fieldName) where TAttribute : System.Attribute
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					if (Attribute.IsDefined(field_info, typeof(TAttribute)))
 					{
@@ -373,9 +373,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object GetFieldValue(String fieldName, System.Object instance)
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					if (field_info.IsStatic)
 					{
@@ -401,9 +401,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object GetFieldValue(String fieldName, System.Object instance, out FieldInfo fieldInfoResult)
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					fieldInfoResult = field_info;
 					if (field_info.IsStatic)
@@ -431,9 +431,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object GetFieldValue(String fieldName, System.Object instance, Int32 index)
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					System.Object collection = null;
 					if (field_info.IsStatic)
@@ -488,9 +488,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object GetFieldValue(String fieldName, System.Object instance, Int32 index, out FieldInfo fieldInfoResult)
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					fieldInfoResult = field_info;
 					System.Object collection = null;
@@ -546,9 +546,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean SetFieldValue(String fieldName, System.Object instance, System.Object value)
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					if (field_info.IsStatic)
 					{
@@ -577,9 +577,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean SetFieldValue(String fieldName, System.Object instance, System.Object value, Int32 index)
 			{
-				if (mFields == null) GetFields();
+				if (_fields == null) GetFields();
 				FieldInfo field_info;
-				if (mFields.TryGetValue(fieldName, out field_info))
+				if (_fields.TryGetValue(fieldName, out field_info))
 				{
 					IList list = null;
 					if (field_info.IsStatic)
@@ -610,13 +610,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void GetProperties()
 			{
-				if (mProperties == null) mProperties = new Dictionary<String, PropertyInfo>();
+				if (_properties == null) _properties = new Dictionary<String, PropertyInfo>();
 
-				PropertyInfo[] properties = mCachedType.GetProperties(BINDINGPROPERTIES);
+				PropertyInfo[] properties = _cachedType.GetProperties(BINDINGPROPERTIES);
 
 				foreach (PropertyInfo property in properties)
 				{
-					mProperties.Add(property.Name, property);
+					_properties.Add(property.Name, property);
 				}
 			}
 
@@ -629,8 +629,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsProperty(String propertyName)
 			{
-				if (mProperties == null) GetProperties();
-				return mProperties.ContainsKey(propertyName);
+				if (_properties == null) GetProperties();
+				return _properties.ContainsKey(propertyName);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -642,10 +642,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public PropertyInfo GetProperty(String propertyName)
 			{
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 
 				PropertyInfo property_info;
-				if (mProperties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out property_info))
 				{
 					return property_info;
 				}
@@ -663,9 +663,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Type GetPropertyType(String propertyName)
 			{
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 				PropertyInfo property_info;
-				if (mProperties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out property_info))
 				{
 					return property_info.PropertyType;
 				}
@@ -682,9 +682,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String GetPropertyTypeName(String propertyName)
 			{
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 				PropertyInfo property_info;
-				if (mProperties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out property_info))
 				{
 					return property_info.PropertyType.Name;
 				}
@@ -702,9 +702,9 @@ namespace Lotus
 			public List<PropertyInfo> GetPropertiesFromType<TType>()
 			{
 				var properties = new List<PropertyInfo>();
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 
-				foreach (var property_info in mProperties.Values)
+				foreach (var property_info in _properties.Values)
 				{
 					if (property_info.PropertyType == typeof(TType))
 					{
@@ -727,8 +727,8 @@ namespace Lotus
 			{
 				var properties = new List<PropertyInfo>();
 
-				if (mProperties == null) GetProperties();
-				foreach (var property_info in mProperties.Values)
+				if (_properties == null) GetProperties();
+				foreach (var property_info in _properties.Values)
 				{
 					if (Attribute.IsDefined(property_info, typeof(TAttribute)))
 					{
@@ -749,9 +749,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TAttribute GetAttributeFromProperty<TAttribute>(String propertyName) where TAttribute : System.Attribute
 			{
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 				PropertyInfo property_info;
-				if (mProperties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out property_info))
 				{
 					if (Attribute.IsDefined(property_info, typeof(TAttribute)))
 					{
@@ -772,9 +772,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object GetPropertyValue(String propertyName, System.Object? instance)
 			{
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 				PropertyInfo property_info;
-				if (mProperties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out property_info))
 				{
 					return property_info.GetValue(instance);
 				}
@@ -793,9 +793,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object GetPropertyValue(String propertyName, System.Object instance, Int32 index)
 			{
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 				PropertyInfo property_info;
-				if (mProperties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out property_info))
 				{
 					var collection = property_info.GetValue(instance);
 
@@ -841,9 +841,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean SetPropertyValue(String propertyName, System.Object instance, System.Object value)
 			{
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 				PropertyInfo property_info;
-				if (mProperties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out property_info))
 				{
 					property_info.SetValue(instance, value);
 
@@ -865,9 +865,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean SetPropertyValue(String propertyName, System.Object instance, System.Object value, Int32 index)
 			{
-				if (mProperties == null) GetProperties();
+				if (_properties == null) GetProperties();
 				PropertyInfo property_info;
-				if (mProperties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out property_info))
 				{
 					var list = property_info.GetValue(instance) as IList;
 					if (list != null)
@@ -889,13 +889,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void GetMethods()
 			{
-				if (mMethods == null) mMethods = new Dictionary<String, MethodInfo>();
+				if (_methods == null) _methods = new Dictionary<String, MethodInfo>();
 
-				foreach (MethodInfo method in mCachedType.GetMethods(BINDINGMETHODS))
+				foreach (MethodInfo method in _cachedType.GetMethods(BINDINGMETHODS))
 				{
-					if (mMethods.ContainsKey(method.Name) == false)
+					if (_methods.ContainsKey(method.Name) == false)
 					{
-						mMethods.Add(method.Name, method);
+						_methods.Add(method.Name, method);
 					}
 				}
 			}
@@ -909,8 +909,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsMethod(String methodName)
 			{
-				if (mMethods == null) GetMethods();
-				return mMethods.ContainsKey(methodName);
+				if (_methods == null) GetMethods();
+				return _methods.ContainsKey(methodName);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -922,9 +922,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public MethodInfo GetMethod(String methodName)
 			{
-				if (mMethods == null) GetMethods();
+				if (_methods == null) GetMethods();
 				MethodInfo method_info;
-				if (mMethods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out method_info))
 				{
 					return method_info;
 				}
@@ -941,9 +941,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Type GetMethodReturnType(String methodName)
 			{
-				if (mMethods == null) GetMethods();
+				if (_methods == null) GetMethods();
 				MethodInfo method_info;
-				if (mMethods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out method_info))
 				{
 					return method_info.ReturnType;
 				}
@@ -960,9 +960,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String GetMethodReturnTypeName(String methodName)
 			{
-				if (mMethods == null) GetMethods();
+				if (_methods == null) GetMethods();
 				MethodInfo method_info;
-				if (mMethods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out method_info))
 				{
 					return method_info.ReturnType.Name;
 				}
@@ -981,8 +981,8 @@ namespace Lotus
 			{
 				var methods = new List<MethodInfo>();
 
-				if (mMethods == null) GetMethods();
-				foreach (var method_info in mMethods.Values)
+				if (_methods == null) GetMethods();
+				foreach (var method_info in _methods.Values)
 				{
 					if (Attribute.IsDefined(method_info, typeof(TAttribute)))
 					{
@@ -1003,9 +1003,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TAttribute GetAttributeFromMethod<TAttribute>(String methodName) where TAttribute : System.Attribute
 			{
-				if (mMethods == null) GetMethods();
+				if (_methods == null) GetMethods();
 				MethodInfo method_info;
-				if (mMethods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out method_info))
 				{
 					if (Attribute.IsDefined(method_info, typeof(TAttribute)))
 					{
@@ -1026,9 +1026,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object InvokeMethod(String methodName, System.Object instance)
 			{
-				if (mMethods == null) GetMethods();
+				if (_methods == null) GetMethods();
 				MethodInfo method_info;
-				if (mMethods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out method_info))
 				{
 					if (method_info.IsStatic)
 					{
@@ -1054,10 +1054,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object InvokeMethod(String methodName, System.Object instance, System.Object arg)
 			{
-				if (mMethods == null) GetMethods();
+				if (_methods == null) GetMethods();
 				ArgList1[0] = arg;
 				MethodInfo method_info;
-				if (mMethods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out method_info))
 				{
 					if (method_info.IsStatic)
 					{
@@ -1085,11 +1085,11 @@ namespace Lotus
 			public System.Object InvokeMethod(String methodName, System.Object instance, System.Object arg1,
 				System.Object arg2)
 			{
-				if (mMethods == null) GetMethods();
+				if (_methods == null) GetMethods();
 				ArgList2[0] = arg1;
 				ArgList2[1] = arg2;
 				MethodInfo method_info;
-				if (mMethods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out method_info))
 				{
 					if (method_info.IsStatic)
 					{
@@ -1118,12 +1118,12 @@ namespace Lotus
 			public System.Object InvokeMethod(String methodName, System.Object instance, System.Object arg1,
 				System.Object arg2, System.Object arg3)
 			{
-				if (mMethods == null) GetMethods();
+				if (_methods == null) GetMethods();
 				ArgList3[0] = arg1;
 				ArgList3[1] = arg2;
 				ArgList3[3] = arg3;
 				MethodInfo method_info;
-				if (mMethods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out method_info))
 				{
 					if (method_info.IsStatic)
 					{

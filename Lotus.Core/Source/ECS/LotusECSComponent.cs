@@ -67,8 +67,8 @@ namespace Lotus
 		public class CEcsComponentData<TComponent> : ILotusEcsComponentData where TComponent : struct
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal CEcsWorld mWorld;
-			protected internal SparseSet<TComponent> mComponents;
+			protected internal CEcsWorld _world;
+			protected internal SparseSet<TComponent> _components;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ===================================================
@@ -79,11 +79,11 @@ namespace Lotus
 			{
 				get
 				{
-					return mWorld;
+					return _world;
 				}
 				set
 				{
-					mWorld = value;
+					_world = value;
 				}
 			}
 
@@ -92,7 +92,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Count
 			{
-				get { return mComponents.Count; }
+				get { return _components.Count; }
 			}
 
 			/// <summary>
@@ -102,11 +102,11 @@ namespace Lotus
 			{
 				get
 				{
-					return mComponents;
+					return _components;
 				}
 				set
 				{
-					mComponents = value;
+					_components = value;
 				}
 			}
 			#endregion
@@ -119,7 +119,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CEcsComponentData()
 			{
-				mComponents = new SparseSet<TComponent>(24);
+				_components = new SparseSet<TComponent>(24);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -130,7 +130,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CEcsComponentData(CEcsWorldConfigs configs = null)
 			{
-				mComponents = new SparseSet<TComponent>(24);
+				_components = new SparseSet<TComponent>(24);
 			}
 			#endregion
 
@@ -144,11 +144,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ref TComponent AddEntity(Int32 entityId)
 			{
-				mComponents.Add(entityId, default(TComponent));
+				_components.Add(entityId, default(TComponent));
 
-				mWorld.GetEntity(entityId).mComponentCount++;
+				_world.GetEntity(entityId)._componentCount++;
 
-				return ref mComponents.GetValue(entityId);
+				return ref _components.GetValue(entityId);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -160,18 +160,18 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ref TComponent GetOrAddEntity(Int32 entityId)
 			{
-				if (mComponents.Contains(entityId))
+				if (_components.Contains(entityId))
 				{
-					return ref mComponents.GetValue(entityId);
+					return ref _components.GetValue(entityId);
 
 				}
 				else
 				{
-					mComponents.Add(entityId, default(TComponent));
+					_components.Add(entityId, default(TComponent));
 
-					mWorld.GetEntity(entityId).mComponentCount++;
+					_world.GetEntity(entityId)._componentCount++;
 
-					return ref mComponents.GetValue(entityId);
+					return ref _components.GetValue(entityId);
 				}
 			}
 
@@ -184,7 +184,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean HasEntity(Int32 entityId)
 			{
-				return mComponents.Contains(entityId);
+				return _components.Contains(entityId);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -195,9 +195,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RemoveEntity(Int32 entityId)
 			{
-				mWorld.GetEntity(entityId).mComponentCount--;
+				_world.GetEntity(entityId)._componentCount--;
 
-				mComponents.Remove(entityId);
+				_components.Remove(entityId);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -209,7 +209,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ref TComponent GetValue(Int32 entityId)
 			{
-				return ref mComponents.GetValue(entityId);
+				return ref _components.GetValue(entityId);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -221,7 +221,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetValue(Int32 entityId, in TComponent value)
 			{
-				mComponents.SetValue(entityId, in value);
+				_components.SetValue(entityId, in value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32[] GetEntities()
 			{
-				return mComponents.GetIndexes();
+				return _components.GetIndexes();
 			}
 			#endregion
 		}

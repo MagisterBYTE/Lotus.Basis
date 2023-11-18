@@ -34,7 +34,7 @@ namespace Lotus
 		public sealed class LotusAbbreviationAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String mName;
+			internal readonly String _name;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -43,7 +43,7 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
+				get { return _name; }
 			}
 			#endregion
 
@@ -56,7 +56,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusAbbreviationAttribute(String name)
 			{
-				mName = name;
+				_name = name;
 			}
 			#endregion
 		}

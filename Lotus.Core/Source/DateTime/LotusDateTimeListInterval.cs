@@ -36,10 +36,10 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal TTimeInterval mTimeInterval;
+			protected internal TTimeInterval _timeInterval;
 
 			// Служебные данные
-			protected internal TItemTimeable mDummyItem = Activator.CreateInstance<TItemTimeable>();
+			protected internal TItemTimeable _dummyItem = Activator.CreateInstance<TItemTimeable>();
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -55,8 +55,8 @@ namespace Lotus
 			/// </remarks>
 			public TTimeInterval TimeInterval
 			{
-				get { return mTimeInterval; }
-				set { mTimeInterval = value; }
+				get { return _timeInterval; }
+				set { _timeInterval = value; }
 			}
 
 			/// <summary>
@@ -132,7 +132,7 @@ namespace Lotus
 			public ListTimeInterval()
 				: base(120)
 			{
-				mTimeInterval = TTimeInterval.Daily;
+				_timeInterval = TTimeInterval.Daily;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ namespace Lotus
 			public ListTimeInterval(Int32 capacity) 
 				: base(capacity)
 			{
-				mTimeInterval = TTimeInterval.Daily;
+				_timeInterval = TTimeInterval.Daily;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ namespace Lotus
 			public ListTimeInterval(TTimeInterval timeInterval, Int32 capacity = 120)
 				: base(capacity)
 			{
-				mTimeInterval = timeInterval;
+				_timeInterval = timeInterval;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ namespace Lotus
 			public ListTimeInterval(TTimeInterval timeInterval, DateTime startData, DateTime endData, Int32 capacity = 120)
 				: base(capacity)
 			{
-				mTimeInterval = timeInterval;
+				_timeInterval = timeInterval;
 				AssingTimePeriod(startData, endData);
 			}
 			#endregion
@@ -193,7 +193,7 @@ namespace Lotus
 				TItemTimeable first_item = Activator.CreateInstance<TItemTimeable>();
 				first_item.Date = startData;
 				Add(first_item);
-				switch (mTimeInterval)
+				switch (_timeInterval)
 				{
 					case TTimeInterval.Minutely:
 						{
@@ -322,15 +322,15 @@ namespace Lotus
 					return LastIndex;
 				}
 
-				for (var i = 1; i < mCount; i++)
+				for (var i = 1; i < _count; i++)
 				{
-					if (mArrayOfItems[i].Date == date)
+					if (_arrayOfItems[i].Date == date)
 					{
 						return i;
 					}
 					else
 					{
-						if (mArrayOfItems[i].Date > date)
+						if (_arrayOfItems[i].Date > date)
 						{
 							return i - 1;
 						}
@@ -355,7 +355,7 @@ namespace Lotus
 					var end_index = (Int32)Math.Ceiling(index);
 					var delta = index - start_index;
 
-					return mArrayOfItems[start_index].Date.GetInterpolatedDate(mArrayOfItems[end_index].Date, delta);
+					return _arrayOfItems[start_index].Date.GetInterpolatedDate(_arrayOfItems[end_index].Date, delta);
 				}
 				else
 				{
@@ -373,9 +373,9 @@ namespace Lotus
 			{
 				var count = 0;
 
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					TItemTimeable item = mArrayOfItems[i];
+					TItemTimeable item = _arrayOfItems[i];
 					if (item.Date.DayOfWeek == DayOfWeek.Sunday || item.Date.DayOfWeek == DayOfWeek.Saturday)
 					{
 						count++;
@@ -418,8 +418,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 TrimStart(DateTime date, Boolean included = true)
 			{
-				mDummyItem.Date = date;
-				return TrimClosestStart(mDummyItem, included);
+				_dummyItem.Date = date;
+				return TrimClosestStart(_dummyItem, included);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -432,8 +432,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 TrimEnd(DateTime date, Boolean included = true)
 			{
-				mDummyItem.Date = date;
-				return TrimClosestEnd(mDummyItem, included);
+				_dummyItem.Date = date;
+				return TrimClosestEnd(_dummyItem, included);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -449,12 +449,12 @@ namespace Lotus
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				var list = new TResult();
-				list.TimeInterval = mTimeInterval;
+				list.TimeInterval = _timeInterval;
 
 				// Это не количество, а индекс поэтому и равно
 				for (var i = startIndex; i <= endIndex; i++)
 				{
-					list.Add(mArrayOfItems[i]);
+					list.Add(_arrayOfItems[i]);
 				}
 
 				list.SetIndexElement();
@@ -492,12 +492,12 @@ namespace Lotus
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				var list = new TResult();
-				list.TimeInterval = mTimeInterval;
+				list.TimeInterval = _timeInterval;
 
 				//Это не количество, а индекс поэтому и равно
 				for (var i = startIndex; i <= endIndex; i++)
 				{
-					list.Add((TItemTimeable)mArrayOfItems[i].Clone());
+					list.Add((TItemTimeable)_arrayOfItems[i].Clone());
 				}
 
 				list.SetIndexElement();
@@ -550,7 +550,7 @@ namespace Lotus
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				TResult list = null;
-				switch (mTimeInterval)
+				switch (_timeInterval)
 				{
 					case TTimeInterval.Minutely:
 						break;
@@ -599,11 +599,11 @@ namespace Lotus
 										list = new TResult();
 										list.TimeInterval = TTimeInterval.Weekly;
 
-										for (var i = 0; i < mCount; i++)
+										for (var i = 0; i < _count; i++)
 										{
-											if (mArrayOfItems[i].Date.DayOfWeek == DayOfWeek.Monday)
+											if (_arrayOfItems[i].Date.DayOfWeek == DayOfWeek.Monday)
 											{
-												list.Add(mArrayOfItems[i]);
+												list.Add(_arrayOfItems[i]);
 											}
 										}
 									}
@@ -613,11 +613,11 @@ namespace Lotus
 										list = new TResult();
 										list.TimeInterval = TTimeInterval.Monthly;
 
-										for (var i = 0; i < mCount; i++)
+										for (var i = 0; i < _count; i++)
 										{
-											if (mArrayOfItems[i].Date.Day == 1)
+											if (_arrayOfItems[i].Date.Day == 1)
 											{
-												list.Add(mArrayOfItems[i]);
+												list.Add(_arrayOfItems[i]);
 											}
 										}
 									}
@@ -649,11 +649,11 @@ namespace Lotus
 										list = new TResult();
 										list.TimeInterval = TTimeInterval.Monthly;
 
-										for (var i = 0; i < mCount; i++)
+										for (var i = 0; i < _count; i++)
 										{
-											if (mArrayOfItems[i].Date.Day == 1)
+											if (_arrayOfItems[i].Date.Day == 1)
 											{
-												list.Add(mArrayOfItems[i]);
+												list.Add(_arrayOfItems[i]);
 											}
 										}
 									}

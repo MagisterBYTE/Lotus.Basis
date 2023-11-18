@@ -87,10 +87,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			new public TItem this[Int32 index]
 			{
-				get { return mArrayOfItems[(mStartOffset + index) % mMaxCount]; }
+				get { return _arrayOfItems[(mStartOffset + index) % _maxCount]; }
 				set
 				{
-					mArrayOfItems[(mStartOffset + index) % mMaxCount] = value;
+					_arrayOfItems[(mStartOffset + index) % _maxCount] = value;
 				}
 			}
 			#endregion
@@ -105,7 +105,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem GetElement(Int32 index)
 			{
-				return mArrayOfItems[(mStartOffset + index) % mMaxCount];
+				return _arrayOfItems[(mStartOffset + index) % _maxCount];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -117,28 +117,28 @@ namespace Lotus
 			public void AddFront(in TItem item)
 			{
 				// Если текущие количество элементов равно максимально возможному
-				if (mCount == mMaxCount)
+				if (_count == _maxCount)
 				{
-					mMaxCount *= 2;
-					var items = new TItem[mMaxCount];
-					Array.Copy(mArrayOfItems, items, mCount);
-					mArrayOfItems = items;
+					_maxCount *= 2;
+					var items = new TItem[_maxCount];
+					Array.Copy(_arrayOfItems, items, _count);
+					_arrayOfItems = items;
 				}
 
 				// Нет возможности добавить в начало очереди
 				if (mStartOffset == 0)
 				{
-					mMaxCount *= 2;
-					var items = new TItem[mMaxCount];
-					mStartOffset = mMaxCount / 2;
-					Array.Copy(mArrayOfItems, 0, items, mStartOffset, mCount);
-					mArrayOfItems = items;
+					_maxCount *= 2;
+					var items = new TItem[_maxCount];
+					mStartOffset = _maxCount / 2;
+					Array.Copy(_arrayOfItems, 0, items, mStartOffset, _count);
+					_arrayOfItems = items;
 				}
 
 				// Уменьшаем индекс начало очереди
 				mStartOffset--;
-				mArrayOfItems[mStartOffset] = item;
-				mCount++;
+				_arrayOfItems[mStartOffset] = item;
+				_count++;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -150,16 +150,16 @@ namespace Lotus
 			public void AddBack(in TItem item)
 			{
 				// Если текущие количество элементов равно максимально возможному
-				if (mCount == mMaxCount)
+				if (_count == _maxCount)
 				{
-					mMaxCount *= 2;
-					var items = new TItem[mMaxCount];
-					Array.Copy(mArrayOfItems, items, mCount);
-					mArrayOfItems = items;
+					_maxCount *= 2;
+					var items = new TItem[_maxCount];
+					Array.Copy(_arrayOfItems, items, _count);
+					_arrayOfItems = items;
 				}
 
-				mArrayOfItems[mStartOffset + mCount] = item;
-				mCount++;
+				_arrayOfItems[mStartOffset + _count] = item;
+				_count++;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -170,12 +170,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem RemoveFront()
 			{
-				if (mCount > 0)
+				if (_count > 0)
 				{
-					TItem item = mArrayOfItems[mStartOffset];
-					mArrayOfItems[mStartOffset] = default;
+					TItem item = _arrayOfItems[mStartOffset];
+					_arrayOfItems[mStartOffset] = default;
 					mStartOffset++;
-					mCount--;
+					_count--;
 					return item;
 				}
 				else
@@ -197,11 +197,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem RemoveBack()
 			{
-				if (mCount > 0)
+				if (_count > 0)
 				{
-					mCount--;
-					TItem item = mArrayOfItems[mCount];
-					mArrayOfItems[mCount] = default;
+					_count--;
+					TItem item = _arrayOfItems[_count];
+					_arrayOfItems[_count] = default;
 
 					return item;
 				}
@@ -224,9 +224,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem PeekFront()
 			{
-				if (mCount > 0)
+				if (_count > 0)
 				{
-					return mArrayOfItems[mStartOffset];
+					return _arrayOfItems[mStartOffset];
 				}
 				else
 				{
@@ -248,9 +248,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem PeekBack()
 			{
-				if (mCount > 0)
+				if (_count > 0)
 				{
-					return mArrayOfItems[mCount - 1];
+					return _arrayOfItems[_count - 1];
 				}
 				else
 				{
@@ -274,15 +274,15 @@ namespace Lotus
 			public new Boolean Contains(in TItem item)
 			{
 				var index = mStartOffset;
-				var count = mCount;
+				var count = _count;
 
 				while (count-- > 0)
 				{
-					if (mArrayOfItems[index].Equals(item))
+					if (_arrayOfItems[index].Equals(item))
 					{
 						return true;
 					}
-					index = (index + 1) % mMaxCount;
+					index = (index + 1) % _maxCount;
 				}
 
 				return false;
@@ -295,9 +295,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public new void Clear()
 			{
-				Array.Clear(mArrayOfItems, mStartOffset, mCount);
-				mStartOffset = mMaxCount / 2;
-				mCount = 0;
+				Array.Clear(_arrayOfItems, mStartOffset, _count);
+				mStartOffset = _maxCount / 2;
+				_count = 0;
 			}
 			#endregion
 		}

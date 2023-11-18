@@ -29,7 +29,7 @@ namespace Lotus
 		public sealed class LotusShortNameAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String mName;
+			internal readonly String _name;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -38,7 +38,7 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
+				get { return _name; }
 			}
 			#endregion
 
@@ -51,7 +51,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusShortNameAttribute(String name)
 			{
-				mName = name;
+				_name = name;
 			}
 			#endregion
 		}

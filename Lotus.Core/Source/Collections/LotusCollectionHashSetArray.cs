@@ -40,9 +40,9 @@ namespace Lotus
 			{
 				#region ======================================= ДАННЫЕ ================================================
 				private HashSetArray<TItem> mSet;
-				private Int32 mIndex;
-				private Int32 mVersion;
-				private TItem mCurrent;
+				private Int32 _index;
+				private Int32 _version;
+				private TItem _current;
 				#endregion
 
 				#region ======================================= СВОЙСТВА ==============================================
@@ -53,7 +53,7 @@ namespace Lotus
 				{
 					get
 					{
-						return mCurrent;
+						return _current;
 					}
 				}
 
@@ -79,9 +79,9 @@ namespace Lotus
 				internal HashSetArrayEnumerator(HashSetArray<TItem> set)
 				{
 					mSet = set;
-					mIndex = 0;
-					mVersion = set.mVersion;
-					mCurrent = default;
+					_index = 0;
+					_version = set._version;
+					_current = default;
 				}
 				#endregion
 
@@ -103,23 +103,23 @@ namespace Lotus
 				//-----------------------------------------------------------------------------------------------------
 				public Boolean MoveNext()
 				{
-					if (mVersion != mSet.mVersion)
+					if (_version != mSet._version)
 					{
 						return false;
 					}
 
-					while (mIndex < mSet.mLastIndex)
+					while (_index < mSet._lastIndex)
 					{
-						if (mSet.mSlots[mIndex].hashCode >= 0)
+						if (mSet._slots[_index].hashCode >= 0)
 						{
-							mCurrent = mSet.mSlots[mIndex].value;
-							mIndex++;
+							_current = mSet._slots[_index].value;
+							_index++;
 							return true;
 						}
-						mIndex++;
+						_index++;
 					}
-					mIndex = mSet.mLastIndex + 1;
-					mCurrent = default;
+					_index = mSet._lastIndex + 1;
+					_current = default;
 					return false;
 				}
 
@@ -130,13 +130,13 @@ namespace Lotus
 				//-----------------------------------------------------------------------------------------------------
 				void IEnumerator.Reset()
 				{
-					if (mVersion != mSet.mVersion)
+					if (_version != mSet._version)
 					{
 						return;
 					}
 
-					mIndex = 0;
-					mCurrent = default;
+					_index = 0;
+					_current = default;
 				}
 				#endregion
 			}
@@ -170,13 +170,13 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal Int32[] mBuckets;
-			protected internal Slot[] mSlots;
-			protected internal Int32 mCount;
-			protected internal Int32 mLastIndex;
-			protected internal Int32 mFreeList;
-			protected internal IEqualityComparer<TItem> mComparer;
-			protected internal Int32 mVersion;
+			protected internal Int32[] _buckets;
+			protected internal Slot[] _slots;
+			protected internal Int32 _count;
+			protected internal Int32 _lastIndex;
+			protected internal Int32 _freeList;
+			protected internal IEqualityComparer<TItem> _comparer;
+			protected internal Int32 _version;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -185,7 +185,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Count
 			{
-				get { return mCount; }
+				get { return _count; }
 			}
 
 			/// <summary>
@@ -232,11 +232,11 @@ namespace Lotus
 					comparer = EqualityComparer<TItem>.Default;
 				}
 
-				mComparer = comparer;
-				mLastIndex = 0;
-				mCount = 0;
-				mFreeList = -1;
-				mVersion = 0;
+				_comparer = comparer;
+				_lastIndex = 0;
+				_count = 0;
+				_freeList = -1;
+				_version = 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -276,7 +276,7 @@ namespace Lotus
 
 					UnionWith(collection);
 
-					if (mCount > 0 && mSlots.Length / mCount > ShrinkThreshold)
+					if (_count > 0 && _slots.Length / _count > ShrinkThreshold)
 					{
 						TrimExcess();
 					}
@@ -321,17 +321,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Clear()
 			{
-				if (mLastIndex > 0)
+				if (_lastIndex > 0)
 				{
 					// clear the elements so that the gc can reclaim the references.
-					// clear only up to mLastIndex for mSlots 
-					Array.Clear(mSlots, 0, mLastIndex);
-					Array.Clear(mBuckets, 0, mBuckets.Length);
-					mLastIndex = 0;
-					mCount = 0;
-					mFreeList = -1;
+					// clear only up to _lastIndex for _slots 
+					Array.Clear(_slots, 0, _lastIndex);
+					Array.Clear(_buckets, 0, _buckets.Length);
+					_lastIndex = 0;
+					_count = 0;
+					_freeList = -1;
 				}
-				mVersion++;
+				_version++;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -343,19 +343,19 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Contains(TItem item)
 			{
-				if (mBuckets != null)
+				if (_buckets != null)
 				{
 					var hashCode = InternalGetHashCode(item);
 					// see note at "HashSetArray" level describing why "- 1" appears in for loop
-					for (var i = mBuckets[hashCode % mBuckets.Length] - 1; i >= 0; i = mSlots[i].next)
+					for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
 					{
-						if (mSlots[i].hashCode == hashCode && mComparer.Equals(mSlots[i].value, item))
+						if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, item))
 						{
 							return true;
 						}
 					}
 				}
-				// either mBuckets is null or wasn't found
+				// either _buckets is null or wasn't found
 				return false;
 			}
 
@@ -368,7 +368,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CopyTo(TItem[] array, Int32 arrayIndex)
 			{
-				CopyTo(array, arrayIndex, mCount);
+				CopyTo(array, arrayIndex, _count);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -380,45 +380,45 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Remove(TItem item)
 			{
-				if (mBuckets != null)
+				if (_buckets != null)
 				{
 					var hashCode = InternalGetHashCode(item);
-					var bucket = hashCode % mBuckets.Length;
+					var bucket = hashCode % _buckets.Length;
 					var last = -1;
-					for (var i = mBuckets[bucket] - 1; i >= 0; last = i, i = mSlots[i].next)
+					for (var i = _buckets[bucket] - 1; i >= 0; last = i, i = _slots[i].next)
 					{
-						if (mSlots[i].hashCode == hashCode && mComparer.Equals(mSlots[i].value, item))
+						if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, item))
 						{
 							if (last < 0)
 							{
 								// first iteration; update buckets
-								mBuckets[bucket] = mSlots[i].next + 1;
+								_buckets[bucket] = _slots[i].next + 1;
 							}
 							else
 							{
 								// subsequent iterations; update 'next' pointers
-								mSlots[last].next = mSlots[i].next;
+								_slots[last].next = _slots[i].next;
 							}
-							mSlots[i].hashCode = -1;
-							mSlots[i].value = default;
-							mSlots[i].next = mFreeList;
+							_slots[i].hashCode = -1;
+							_slots[i].value = default;
+							_slots[i].next = _freeList;
 
-							mCount--;
-							mVersion++;
-							if (mCount == 0)
+							_count--;
+							_version++;
+							if (_count == 0)
 							{
-								mLastIndex = 0;
-								mFreeList = -1;
+								_lastIndex = 0;
+								_freeList = -1;
 							}
 							else
 							{
-								mFreeList = i;
+								_freeList = i;
 							}
 							return true;
 						}
 					}
 				}
-				// either mBuckets is null or wasn't found
+				// either _buckets is null or wasn't found
 				return false;
 			}
 			#endregion
@@ -501,12 +501,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean TryGetValue(in TItem equalValue, out TItem actualValue)
 			{
-				if (mBuckets != null)
+				if (_buckets != null)
 				{
 					var i = InternalIndexOf(equalValue);
 					if (i >= 0)
 					{
-						actualValue = mSlots[i].value;
+						actualValue = _slots[i].value;
 						return true;
 					}
 				}
@@ -551,7 +551,7 @@ namespace Lotus
 			public void IntersectWith(IEnumerable<TItem> other)
 			{
 				// intersection of anything with empty set is empty set, so return if count is 0
-				if (mCount == 0)
+				if (_count == 0)
 				{
 					return;
 				}
@@ -589,7 +589,7 @@ namespace Lotus
 			public void ExceptWith(IEnumerable<TItem> other)
 			{
 				// this is already the enpty set; return
-				if (mCount == 0)
+				if (_count == 0)
 				{
 					return;
 				}
@@ -617,7 +617,7 @@ namespace Lotus
 			public void SymmetricExceptWith(IEnumerable<TItem> other)
 			{
 				// if set is empty, then symmetric difference is other
-				if (mCount == 0)
+				if (_count == 0)
 				{
 					UnionWith(other);
 					return;
@@ -665,7 +665,7 @@ namespace Lotus
 			public Boolean IsSubsetOf(IEnumerable<TItem> other)
 			{
 				// The empty set is a subset of any set
-				if (mCount == 0)
+				if (_count == 0)
 				{
 					return true;
 				}
@@ -676,7 +676,7 @@ namespace Lotus
 				if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet))
 				{
 					// if this has more elements then it can't be a subset
-					if (mCount > otherAsSet.Count)
+					if (_count > otherAsSet.Count)
 					{
 						return false;
 					}
@@ -688,7 +688,7 @@ namespace Lotus
 				else
 				{
 					//ElementCount result = CheckUniqueAndUnfoundElements(other, false);
-					//return (result.uniqueCount == mCount && result.unfoundCount >= 0);
+					//return (result.uniqueCount == _count && result.unfoundCount >= 0);
 					return false;
 				}
 			}
@@ -716,7 +716,7 @@ namespace Lotus
 				if (otherAsCollection != null)
 				{
 					// the empty set is a proper subset of anything but the empty set
-					if (mCount == 0)
+					if (_count == 0)
 					{
 						return otherAsCollection.Count > 0;
 					}
@@ -724,7 +724,7 @@ namespace Lotus
 					// faster if other is a hashset (and we're using same equality comparer)
 					if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet))
 					{
-						if (mCount >= otherAsSet.Count)
+						if (_count >= otherAsSet.Count)
 						{
 							return false;
 						}
@@ -735,7 +735,7 @@ namespace Lotus
 				}
 
 				//ElementCount result = CheckUniqueAndUnfoundElements(other, false);
-				//return (result.uniqueCount == mCount && result.unfoundCount > 0);
+				//return (result.uniqueCount == _count && result.unfoundCount > 0);
 				return false;
 
 			}
@@ -771,7 +771,7 @@ namespace Lotus
 					// same equality comparer
 					if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet))
 					{
-						if (otherAsSet.Count > mCount)
+						if (otherAsSet.Count > _count)
 						{
 							return false;
 						}
@@ -806,7 +806,7 @@ namespace Lotus
 			public Boolean IsProperSupersetOf(IEnumerable<TItem> other)
 			{
 				// the empty set isn't a proper superset of any set.
-				if (mCount == 0)
+				if (_count == 0)
 				{
 					return false;
 				}
@@ -824,7 +824,7 @@ namespace Lotus
 					// faster if other is a hashset with the same equality comparer
 					if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet))
 					{
-						if (otherAsSet.Count >= mCount)
+						if (otherAsSet.Count >= _count)
 						{
 							return false;
 						}
@@ -834,7 +834,7 @@ namespace Lotus
 				}
 				// couldn't fall out in the above cases; do it the long way
 				//ElementCount result = CheckUniqueAndUnfoundElements(other, true);
-				//return (result.uniqueCount < mCount && result.unfoundCount == 0);
+				//return (result.uniqueCount < _count && result.unfoundCount == 0);
 				return false;
 
 			}
@@ -848,7 +848,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean Overlaps(IEnumerable<TItem> other)
 			{
-				if (mCount == 0)
+				if (_count == 0)
 				{
 					return false;
 				}
@@ -879,7 +879,7 @@ namespace Lotus
 				{
 					// attempt to return early: since both contain unique elements, if they have 
 					// different counts, then they can't be equal
-					if (mCount != otherAsSet.Count)
+					if (_count != otherAsSet.Count)
 					{
 						return false;
 					}
@@ -894,13 +894,13 @@ namespace Lotus
 					if (otherAsCollection != null)
 					{
 						// if this count is 0 but other contains at least one element, they can't be equal
-						if (mCount == 0 && otherAsCollection.Count > 0)
+						if (_count == 0 && otherAsCollection.Count > 0)
 						{
 							return false;
 						}
 					}
 					//ElementCount result = CheckUniqueAndUnfoundElements(other, true);
-					//return (result.uniqueCount == mCount && result.unfoundCount == 0);
+					//return (result.uniqueCount == _count && result.unfoundCount == 0);
 					return false;
 				}
 			}
@@ -913,7 +913,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CopyTo(TItem[] array) 
 			{ 
-				CopyTo(array, 0, mCount);
+				CopyTo(array, 0, _count);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -947,11 +947,11 @@ namespace Lotus
 				}
 
 				var numCopied = 0;
-				for (var i = 0; i < mLastIndex && numCopied < count; i++)
+				for (var i = 0; i < _lastIndex && numCopied < count; i++)
 				{
-					if (mSlots[i].hashCode >= 0)
+					if (_slots[i].hashCode >= 0)
 					{
-						array[arrayIndex + numCopied] = mSlots[i].value;
+						array[arrayIndex + numCopied] = _slots[i].value;
 						numCopied++;
 					}
 				}
@@ -967,12 +967,12 @@ namespace Lotus
 			public Int32 RemoveWhere(Predicate<TItem> match)
 			{
 				var numRemoved = 0;
-				for (var i = 0; i < mLastIndex; i++)
+				for (var i = 0; i < _lastIndex; i++)
 				{
-					if (mSlots[i].hashCode >= 0)
+					if (_slots[i].hashCode >= 0)
 					{
 						// cache value in case delegate removes it
-						TItem value = mSlots[i].value;
+						TItem value = _slots[i].value;
 						if (match(value))
 						{
 							// check again that remove actually removed it
@@ -996,7 +996,7 @@ namespace Lotus
 			{
 				get
 				{
-					return mComparer;
+					return _comparer;
 				}
 			}
 
@@ -1015,29 +1015,29 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void TrimExcess()
 			{
-				if (mCount == 0)
+				if (_count == 0)
 				{
 					// if count is zero, clear references
-					mBuckets = null;
-					mSlots = null;
-					mVersion++;
+					_buckets = null;
+					_slots = null;
+					_version++;
 				}
 				else
 				{
 					// similar to IncreaseCapacity but moves down elements in case add/remove/etc
 					// caused fragmentation
-					var newSize = XHashHelpers.GetPrime(mCount);
+					var newSize = XHashHelpers.GetPrime(_count);
 					var newSlots = new Slot[newSize];
 					var newBuckets = new Int32[newSize];
 
 					// move down slots and rehash at the same time. newIndex keeps track of current 
 					// position in newSlots array
 					var newIndex = 0;
-					for (var i = 0; i < mLastIndex; i++)
+					for (var i = 0; i < _lastIndex; i++)
 					{
-						if (mSlots[i].hashCode >= 0)
+						if (_slots[i].hashCode >= 0)
 						{
-							newSlots[newIndex] = mSlots[i];
+							newSlots[newIndex] = _slots[i];
 
 							// rehash
 							var bucket = newSlots[newIndex].hashCode % newSize;
@@ -1048,10 +1048,10 @@ namespace Lotus
 						}
 					}
 
-					mLastIndex = newIndex;
-					mSlots = newSlots;
-					mBuckets = newBuckets;
-					mFreeList = -1;
+					_lastIndex = newIndex;
+					_slots = newSlots;
+					_buckets = newBuckets;
+					_freeList = -1;
 				}
 			}
 			#endregion
@@ -1066,30 +1066,30 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void CopyFrom(HashSetArray<TItem> source)
 			{
-				var count = source.mCount;
+				var count = source._count;
 				if (count == 0)
 				{
 					// As well as short-circuiting on the rest of the work done,
-					// this avoids errors from trying to access otherAsHashSet.mBuckets
-					// or otherAsHashSet.mSlots when they aren't initialized.
+					// this avoids errors from trying to access otherAsHashSet._buckets
+					// or otherAsHashSet._slots when they aren't initialized.
 					return;
 				}
 
-				var capacity = source.mBuckets.Length;
+				var capacity = source._buckets.Length;
 				var threshold = XHashHelpers.ExpandPrime(count + 1);
 
 				if (threshold >= capacity)
 				{
-					mBuckets = (Int32[])source.mBuckets.Clone();
-					mSlots = (Slot[])source.mSlots.Clone();
+					_buckets = (Int32[])source._buckets.Clone();
+					_slots = (Slot[])source._slots.Clone();
 
-					mLastIndex = source.mLastIndex;
-					mFreeList = source.mFreeList;
+					_lastIndex = source._lastIndex;
+					_freeList = source._freeList;
 				}
 				else
 				{
-					var lastIndex = source.mLastIndex;
-					Slot[] slots = source.mSlots;
+					var lastIndex = source._lastIndex;
+					Slot[] slots = source._slots;
 					Initialize(count);
 					var index = 0;
 					for (var i = 0; i < lastIndex; ++i)
@@ -1101,9 +1101,9 @@ namespace Lotus
 							++index;
 						}
 					}
-					mLastIndex = index;
+					_lastIndex = index;
 				}
-				mCount = count;
+				_count = count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1117,8 +1117,8 @@ namespace Lotus
 			{
 				var size = XHashHelpers.GetPrime(capacity);
 
-				mBuckets = new Int32[size];
-				mSlots = new Slot[size];
+				_buckets = new Int32[size];
+				_slots = new Slot[size];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1131,8 +1131,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void IncreaseCapacity()
 			{
-				var newSize = XHashHelpers.ExpandPrime(mCount);
-				if (newSize <= mCount)
+				var newSize = XHashHelpers.ExpandPrime(_count);
+				if (newSize <= _count)
 				{
 
 				}
@@ -1151,14 +1151,14 @@ namespace Lotus
 			private void SetCapacity(Int32 newSize, bool forceNewHashCodes)
 			{
 				var newSlots = new Slot[newSize];
-				if (mSlots != null)
+				if (_slots != null)
 				{
-					Array.Copy(mSlots, 0, newSlots, 0, mLastIndex);
+					Array.Copy(_slots, 0, newSlots, 0, _lastIndex);
 				}
 
 				if (forceNewHashCodes)
 				{
-					for (var i = 0; i < mLastIndex; i++)
+					for (var i = 0; i < _lastIndex; i++)
 					{
 						if (newSlots[i].hashCode != -1)
 						{
@@ -1168,14 +1168,14 @@ namespace Lotus
 				}
 
 				var newBuckets = new Int32[newSize];
-				for (var i = 0; i < mLastIndex; i++)
+				for (var i = 0; i < _lastIndex; i++)
 				{
 					var bucket = newSlots[i].hashCode % newSize;
 					newSlots[i].next = newBuckets[bucket] - 1;
 					newBuckets[bucket] = i + 1;
 				}
-				mSlots = newSlots;
-				mBuckets = newBuckets;
+				_slots = newSlots;
+				_buckets = newBuckets;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1188,45 +1188,45 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private Boolean AddIfNotPresent(in TItem value)
 			{
-				if (mBuckets == null)
+				if (_buckets == null)
 				{
 					Initialize(0);
 				}
 
 				var hashCode = InternalGetHashCode(value);
-				var bucket = hashCode % mBuckets.Length;
+				var bucket = hashCode % _buckets.Length;
 
-				for (var i = mBuckets[hashCode % mBuckets.Length] - 1; i >= 0; i = mSlots[i].next)
+				for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
 				{
-					if (mSlots[i].hashCode == hashCode && mComparer.Equals(mSlots[i].value, value))
+					if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, value))
 					{
 						return false;
 					}
 				}
 
 				Int32 index;
-				if (mFreeList >= 0)
+				if (_freeList >= 0)
 				{
-					index = mFreeList;
-					mFreeList = mSlots[index].next;
+					index = _freeList;
+					_freeList = _slots[index].next;
 				}
 				else
 				{
-					if (mLastIndex == mSlots.Length)
+					if (_lastIndex == _slots.Length)
 					{
 						IncreaseCapacity();
 						// this will change during resize
-						bucket = hashCode % mBuckets.Length;
+						bucket = hashCode % _buckets.Length;
 					}
-					index = mLastIndex;
-					mLastIndex++;
+					index = _lastIndex;
+					_lastIndex++;
 				}
-				mSlots[index].hashCode = hashCode;
-				mSlots[index].value = value;
-				mSlots[index].next = mBuckets[bucket] - 1;
-				mBuckets[bucket] = index + 1;
-				mCount++;
-				mVersion++;
+				_slots[index].hashCode = hashCode;
+				_slots[index].value = value;
+				_slots[index].next = _buckets[bucket] - 1;
+				_buckets[bucket] = index + 1;
+				_count++;
+				_version++;
 
 				return true;
 			}
@@ -1242,12 +1242,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void AddValue(Int32 index, Int32 hashCode, in TItem value)
 			{
-				var bucket = hashCode % mBuckets.Length;
+				var bucket = hashCode % _buckets.Length;
 
-				mSlots[index].hashCode = hashCode;
-				mSlots[index].value = value;
-				mSlots[index].next = mBuckets[bucket] - 1;
-				mBuckets[bucket] = index + 1;
+				_slots[index].hashCode = hashCode;
+				_slots[index].value = value;
+				_slots[index].next = _buckets[bucket] - 1;
+				_buckets[bucket] = index + 1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1308,11 +1308,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void IntersectWithHashSetWithSameEC(HashSetArray<TItem> other)
 			{
-				for (var i = 0; i < mLastIndex; i++)
+				for (var i = 0; i < _lastIndex; i++)
 				{
-					if (mSlots[i].hashCode >= 0)
+					if (_slots[i].hashCode >= 0)
 					{
-						TItem item = mSlots[i].value;
+						TItem item = _slots[i].value;
 						if (!other.Contains(item))
 						{
 							Remove(item);
@@ -1332,9 +1332,9 @@ namespace Lotus
 			private Int32 InternalIndexOf(in TItem item)
 			{
 				var hashCode = InternalGetHashCode(item);
-				for (var i = mBuckets[hashCode % mBuckets.Length] - 1; i >= 0; i = mSlots[i].next)
+				for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
 				{
-					if (mSlots[i].hashCode == hashCode && mComparer.Equals(mSlots[i].value, item))
+					if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, item))
 					{
 						return i;
 					}
@@ -1379,38 +1379,38 @@ namespace Lotus
 			private Boolean AddOrGetLocation(in TItem value, out Int32 location)
 			{
 				var hashCode = InternalGetHashCode(value);
-				var bucket = hashCode % mBuckets.Length;
-				for (var i = mBuckets[hashCode % mBuckets.Length] - 1; i >= 0; i = mSlots[i].next)
+				var bucket = hashCode % _buckets.Length;
+				for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
 				{
-					if (mSlots[i].hashCode == hashCode && mComparer.Equals(mSlots[i].value, value))
+					if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, value))
 					{
 						location = i;
 						return false; //already present
 					}
 				}
 				Int32 index;
-				if (mFreeList >= 0)
+				if (_freeList >= 0)
 				{
-					index = mFreeList;
-					mFreeList = mSlots[index].next;
+					index = _freeList;
+					_freeList = _slots[index].next;
 				}
 				else
 				{
-					if (mLastIndex == mSlots.Length)
+					if (_lastIndex == _slots.Length)
 					{
 						IncreaseCapacity();
 						// this will change during resize
-						bucket = hashCode % mBuckets.Length;
+						bucket = hashCode % _buckets.Length;
 					}
-					index = mLastIndex;
-					mLastIndex++;
+					index = _lastIndex;
+					_lastIndex++;
 				}
-				mSlots[index].hashCode = hashCode;
-				mSlots[index].value = value;
-				mSlots[index].next = mBuckets[bucket] - 1;
-				mBuckets[bucket] = index + 1;
-				mCount++;
-				mVersion++;
+				_slots[index].hashCode = hashCode;
+				_slots[index].value = value;
+				_slots[index].next = _buckets[bucket] - 1;
+				_buckets[bucket] = index + 1;
+				_count++;
+				_version++;
 				location = index;
 				return true;
 			}
@@ -1521,7 +1521,7 @@ namespace Lotus
 				{
 					return 0;
 				}
-				return mComparer.GetHashCode(item) & Lower31BitMask;
+				return _comparer.GetHashCode(item) & Lower31BitMask;
 			}
 			#endregion
 		}

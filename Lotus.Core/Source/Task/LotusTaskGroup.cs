@@ -38,21 +38,21 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal String mName;
-			protected internal List<CTaskHolder> mTasks;
+			protected internal String _name;
+			protected internal List<CTaskHolder> _tasks;
 			protected internal TTaskExecuteMode mExecuteMode;
-			protected internal Single mDelayStart;
+			protected internal Single _delayStart;
 
 			// Переменные состояния
-			protected internal Boolean mIsCompleted;
-			protected internal Boolean mIsRunning;
-			protected internal Boolean mIsPause;
-			protected internal Boolean mIsDelayStart;
-			protected internal CTaskHolder mCurrentTask;
-			protected internal Int32 mCurrentTaskIndex;
-			protected internal Single mStartTaskTime;
-			protected internal Int32 mCountTaskExecute;
-			protected internal Boolean mIsEachTaskCompletedHandler;
+			protected internal Boolean _isCompleted;
+			protected internal Boolean _isRunning;
+			protected internal Boolean _isPause;
+			protected internal Boolean _isDelayStart;
+			protected internal CTaskHolder _currentTask;
+			protected internal Int32 _currentTaskIndex;
+			protected internal Single _startTaskTime;
+			protected internal Int32 _countTaskExecute;
+			protected internal Boolean _isEachTaskCompletedHandler;
 
 			// Исполнитель группы задач
 			protected internal CTaskGroupExecutor mExecutor;
@@ -71,8 +71,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -80,7 +80,7 @@ namespace Lotus
 			/// </summary>
 			public List<CTaskHolder> Tasks
 			{
-				get { return mTasks; }
+				get { return _tasks; }
 			}
 
 			/// <summary>
@@ -97,10 +97,10 @@ namespace Lotus
 			/// </summary>
 			public Single DelayStart
 			{
-				get { return mDelayStart; }
+				get { return _delayStart; }
 				set
 				{
-					mDelayStart = value;
+					_delayStart = value;
 				}
 			}
 
@@ -112,10 +112,10 @@ namespace Lotus
 			/// </remarks>
 			public Boolean IsEachTaskCompletedHandler
 			{
-				get { return mIsEachTaskCompletedHandler; }
+				get { return _isEachTaskCompletedHandler; }
 				set
 				{
-					mIsEachTaskCompletedHandler = value;
+					_isEachTaskCompletedHandler = value;
 				}
 			}
 
@@ -127,7 +127,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsCompleted
 			{
-				get { return mIsCompleted; }
+				get { return _isCompleted; }
 			}
 
 			/// <summary>
@@ -135,7 +135,7 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsRunning
 			{
-				get { return mIsRunning; }
+				get { return _isRunning; }
 			}
 
 			/// <summary>
@@ -143,10 +143,10 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsPause
 			{
-				get { return mIsPause; }
+				get { return _isPause; }
 				set
 				{
-					mIsPause = value;
+					_isPause = value;
 				}
 			}
 
@@ -155,7 +155,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusTask CurrentTask
 			{
-				get { return mCurrentTask; }
+				get { return _currentTask; }
 			}
 
 			/// <summary>
@@ -163,7 +163,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CurrentTaskIndex
 			{
-				get { return mCurrentTaskIndex; }
+				get { return _currentTaskIndex; }
 			}
 
 			//
@@ -247,9 +247,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CGroupTask(String name, TTaskMethod method, CTaskGroupExecutor executor, params ILotusTask[] list)
 			{
-				mName = name;
+				_name = name;
 				mExecutor = executor;
-				mTasks = new List<CTaskHolder>();
+				_tasks = new List<CTaskHolder>();
 				AddList(method, list);
 			}
 			#endregion
@@ -263,9 +263,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetMethodMode(TTaskMethod methodMode)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					mTasks[i].MethodMode = methodMode;
+					_tasks[i].MethodMode = methodMode;
 				}
 			}
 
@@ -278,9 +278,9 @@ namespace Lotus
 			public void Add(ILotusTask task)
 			{
 				// Проверка против дублирования
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Task == task)
+					if (_tasks[i].Task == task)
 					{
 #if UNITY_EDITOR
 						UnityEngine.Debug.LogWarningFormat("Task: <{0}> already is present at the list <{1}>", task.ToString(),
@@ -292,7 +292,7 @@ namespace Lotus
 
 				CTaskHolder task_holder = mExecutor.TaskHolderPools.Take();
 				task_holder.Task = task;
-				mTasks.Add(task_holder);
+				_tasks.Add(task_holder);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -305,15 +305,15 @@ namespace Lotus
 			public void Add(ILotusTask task, TTaskMethod method)
 			{
 				// Проверка против дублирования
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Task == task)
+					if (_tasks[i].Task == task)
 					{
 #if UNITY_EDITOR
 						UnityEngine.Debug.LogWarningFormat("Task: <{0}> already is present at the list <{1}>", task.ToString(),
 							Name);
 #endif
-						mTasks[i].MethodMode = method;
+						_tasks[i].MethodMode = method;
 						return;
 					}
 				}
@@ -321,7 +321,7 @@ namespace Lotus
 				CTaskHolder task_holder = mExecutor.TaskHolderPools.Take();
 				task_holder.Task = task;
 				task_holder.MethodMode = method;
-				mTasks.Add(task_holder);
+				_tasks.Add(task_holder);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -361,16 +361,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Remove(ILotusTask task)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Task == task)
+					if (_tasks[i].Task == task)
 					{
 						// 1) Возвращаем в пул
-						CTaskHolder task_holder = mTasks[i];
+						CTaskHolder task_holder = _tasks[i];
 						mExecutor.TaskHolderPools.Release(task_holder);
 
 						// 2) Удаляем
-						mTasks.RemoveAt(i);
+						_tasks.RemoveAt(i);
 						break;
 					}
 				}
@@ -384,16 +384,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Remove(String taskName)
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					if (mTasks[i].Name == taskName)
+					if (_tasks[i].Name == taskName)
 					{
 						// 1) Возвращаем в пул
-						CTaskHolder task_holder = mTasks[i];
+						CTaskHolder task_holder = _tasks[i];
 						mExecutor.TaskHolderPools.Release(task_holder);
 
 						// 2) Удаляем
-						mTasks.RemoveAt(i);
+						_tasks.RemoveAt(i);
 						break;
 					}
 				}
@@ -406,27 +406,27 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Run()
 			{
-				mCurrentTaskIndex = 0;
-				mCurrentTask = mTasks[mCurrentTaskIndex];
-				mIsRunning = true;
-				mIsPause = false;
-				mIsCompleted = false;
-				mIsDelayStart = mDelayStart > 0;
-				mStartTaskTime = 0;
-				mCountTaskExecute = 0;
+				_currentTaskIndex = 0;
+				_currentTask = _tasks[_currentTaskIndex];
+				_isRunning = true;
+				_isPause = false;
+				_isCompleted = false;
+				_isDelayStart = _delayStart > 0;
+				_startTaskTime = 0;
+				_countTaskExecute = 0;
 
-				if (mIsDelayStart == false)
+				if (_isDelayStart == false)
 				{
 					if (mExecuteMode == TTaskExecuteMode.Parallel)
 					{
-						for (var i = 0; i < mTasks.Count; i++)
+						for (var i = 0; i < _tasks.Count; i++)
 						{
-							mTasks[i].RunTask();
+							_tasks[i].RunTask();
 						}
 					}
 					else
 					{
-						mCurrentTask.RunTask();
+						_currentTask.RunTask();
 					}
 				}
 			}
@@ -438,12 +438,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Stop()
 			{
-				mIsRunning = false;
-				mIsCompleted = true;
-				mIsPause = false;
-				for (var i = 0; i < mTasks.Count; i++)
+				_isRunning = false;
+				_isCompleted = true;
+				_isPause = false;
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					mTasks[i].StopTask();
+					_tasks[i].StopTask();
 				}
 			}
 
@@ -454,12 +454,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Reset()
 			{
-				mIsRunning = false;
-				mIsCompleted = true;
-				mIsPause = false;
-				for (var i = 0; i < mTasks.Count; i++)
+				_isRunning = false;
+				_isCompleted = true;
+				_isPause = false;
+				for (var i = 0; i < _tasks.Count; i++)
 				{
-					mTasks[i].ResetTask();
+					_tasks[i].ResetTask();
 				}
 			}
 
@@ -470,19 +470,19 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ExecuteInParallel()
 			{
-				if (mIsDelayStart)
+				if (_isDelayStart)
 				{
 #if UNITY_2017_1_OR_NEWER
-					mStartTaskTime += UnityEngine.Time.deltaTime;
+					_startTaskTime += UnityEngine.Time.deltaTime;
 #endif
-					if (mStartTaskTime > mDelayStart)
+					if (_startTaskTime > _delayStart)
 					{
-						for (var i = 0; i < mTasks.Count; i++)
+						for (var i = 0; i < _tasks.Count; i++)
 						{
-							mTasks[i].RunTask();
+							_tasks[i].RunTask();
 						}
 
-						mIsDelayStart = false;
+						_isDelayStart = false;
 					}
 				}
 				else
@@ -491,10 +491,10 @@ namespace Lotus
 					var is_completed = true;
 					var is_all_completed = true;
 
-					for (var i = 0; i < mTasks.Count; i++)
+					for (var i = 0; i < _tasks.Count; i++)
 					{
 						// Проверка на исполнение задачи
-						is_completed = mTasks[i].IsTaskCompleted;
+						is_completed = _tasks[i].IsTaskCompleted;
 
 						// Проверяем на то что все задачи точно выполнены
 						if(is_all_completed)
@@ -504,36 +504,36 @@ namespace Lotus
 
 						if (is_completed)
 						{
-							mCountTaskExecute++;
+							_countTaskExecute++;
 
-							if(mIsEachTaskCompletedHandler)
+							if(_isEachTaskCompletedHandler)
 							{
 								// Если был обработчик завершения каждой задачи группы
-								if (mExecutor.GroupTaskHandlersEachTaskCompleted.ContainsKey(mName))
+								if (mExecutor.GroupTaskHandlersEachTaskCompleted.ContainsKey(_name))
 								{
-									mExecutor.GroupTaskHandlersEachTaskCompleted[mName](mTasks[i].Task);
+									mExecutor.GroupTaskHandlersEachTaskCompleted[_name](_tasks[i].Task);
 								}
 							}
 						}
-						if (!is_completed && mIsRunning && mIsPause == false)
+						if (!is_completed && _isRunning && _isPause == false)
 						{
-							mTasks[i].ExecuteTask();
+							_tasks[i].ExecuteTask();
 						}
 					}
 
 					// Все задачи выполнены
 					if (is_all_completed)
 					{
-						mIsCompleted = true;
-						mIsRunning = false;
+						_isCompleted = true;
+						_isRunning = false;
 
 						// Информируем
-						if (mOnGroupTaskCompleted != null) mOnGroupTaskCompleted(mName);
+						if (mOnGroupTaskCompleted != null) mOnGroupTaskCompleted(_name);
 
 						// Если был задан обработчик завершения задач, то вызываем его
-						if (mExecutor.GroupTaskHandlersCompleted.ContainsKey(mName))
+						if (mExecutor.GroupTaskHandlersCompleted.ContainsKey(_name))
 						{
-							mExecutor.GroupTaskHandlersCompleted[mName]();
+							mExecutor.GroupTaskHandlersCompleted[_name]();
 						}
 					}
 				}
@@ -546,62 +546,62 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ExecuteSequentially()
 			{
-				if (mIsDelayStart)
+				if (_isDelayStart)
 				{
 #if UNITY_2017_1_OR_NEWER
-					mStartTaskTime += UnityEngine.Time.deltaTime;
+					_startTaskTime += UnityEngine.Time.deltaTime;
 #endif
-					if (mStartTaskTime > mDelayStart)
+					if (_startTaskTime > _delayStart)
 					{
-						mCurrentTask.RunTask();
-						mIsDelayStart = false;
+						_currentTask.RunTask();
+						_isDelayStart = false;
 					}
 				}
 				else
 				{
 
 					// Если есть задача
-					if (mIsRunning && mIsPause == false)
+					if (_isRunning && _isPause == false)
 					{
-						mCurrentTask.ExecuteTask();
+						_currentTask.ExecuteTask();
 					}
 
 					// Если задача завершена
-					if (mCurrentTask.IsTaskCompleted)
+					if (_currentTask.IsTaskCompleted)
 					{
-						if (mIsEachTaskCompletedHandler)
+						if (_isEachTaskCompletedHandler)
 						{
 							// Если был обработчик завершения каждой задачи группы
-							if (mExecutor.GroupTaskHandlersEachTaskCompleted.ContainsKey(mName))
+							if (mExecutor.GroupTaskHandlersEachTaskCompleted.ContainsKey(_name))
 							{
-								mExecutor.GroupTaskHandlersEachTaskCompleted[mName](mCurrentTask.Task);
+								mExecutor.GroupTaskHandlersEachTaskCompleted[_name](_currentTask.Task);
 							}
 						}
 
 						// Следующая задача
-						mCurrentTaskIndex++;
+						_currentTaskIndex++;
 
 						// Если это была последняя задача
-						if (mCurrentTaskIndex == mTasks.Count)
+						if (_currentTaskIndex == _tasks.Count)
 						{
-							mIsCompleted = true;
-							mIsRunning = false;
+							_isCompleted = true;
+							_isRunning = false;
 
 							// Информируем
-							if (mOnGroupTaskCompleted != null) mOnGroupTaskCompleted(mName);
+							if (mOnGroupTaskCompleted != null) mOnGroupTaskCompleted(_name);
 
 							// Если был прямой обработчик по имени задачи вызываем
-							if (mExecutor.GroupTaskHandlersCompleted.ContainsKey(mName))
+							if (mExecutor.GroupTaskHandlersCompleted.ContainsKey(_name))
 							{
-								mExecutor.GroupTaskHandlersCompleted[mName]();
+								mExecutor.GroupTaskHandlersCompleted[_name]();
 							}
 
 							return;
 						}
 
 						// Если не последняя исполняем следующую
-						mCurrentTask = mTasks[mCurrentTaskIndex];
-						mCurrentTask.RunTask();
+						_currentTask = _tasks[_currentTaskIndex];
+						_currentTask.RunTask();
 					}
 				}
 			}
@@ -613,14 +613,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Clear()
 			{
-				for (var i = 0; i < mTasks.Count; i++)
+				for (var i = 0; i < _tasks.Count; i++)
 				{
 					// 1) Возвращаем в пул
-					CTaskHolder task_holder = mTasks[i];
+					CTaskHolder task_holder = _tasks[i];
 					mExecutor.TaskHolderPools.Release(task_holder);
 				}
 
-				mTasks.Clear();
+				_tasks.Clear();
 			}
 			#endregion
 		}

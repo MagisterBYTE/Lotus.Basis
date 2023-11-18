@@ -47,11 +47,11 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal String mName;
-			protected internal PoolManager<CTaskHolder> mTaskHolderPools;
-			protected internal List<CGroupTask> mGroupTasks;
-			protected internal Dictionary<String, Action> mGroupTaskHandlersCompleted;
-			protected internal Dictionary<String, Action<ILotusTask>> mGroupTaskHandlersEachTaskCompleted;
+			protected internal String _name;
+			protected internal PoolManager<CTaskHolder> _taskHolderPools;
+			protected internal List<CGroupTask> _groupTasks;
+			protected internal Dictionary<String, Action> _groupTaskHandlersCompleted;
+			protected internal Dictionary<String, Action<ILotusTask>> _groupTaskHandlersEachTaskCompleted;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -60,8 +60,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 
 			/// <summary>
@@ -69,7 +69,7 @@ namespace Lotus
 			/// </summary>
 			public PoolManager<CTaskHolder> TaskHolderPools
 			{
-				get { return mTaskHolderPools; }
+				get { return _taskHolderPools; }
 			}
 
 			/// <summary>
@@ -77,7 +77,7 @@ namespace Lotus
 			/// </summary>
 			public List<CGroupTask> GroupTasks
 			{
-				get { return mGroupTasks; }
+				get { return _groupTasks; }
 			}
 
 			/// <summary>
@@ -85,7 +85,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, Action> GroupTaskHandlersCompleted
 			{
-				get { return mGroupTaskHandlersCompleted; }
+				get { return _groupTaskHandlersCompleted; }
 			}
 
 			/// <summary>
@@ -93,7 +93,7 @@ namespace Lotus
 			/// </summary>
 			public Dictionary<String, Action<ILotusTask>> GroupTaskHandlersEachTaskCompleted
 			{
-				get { return mGroupTaskHandlersEachTaskCompleted; }
+				get { return _groupTaskHandlersEachTaskCompleted; }
 			}
 			#endregion
 
@@ -116,10 +116,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTaskGroupExecutor(String name)
 			{
-				mTaskHolderPools = new PoolManager<CTaskHolder>(10, ConstructorTaskHolder);
-				mGroupTasks = new List<CGroupTask>(10);
-				mGroupTaskHandlersCompleted = new Dictionary<String, Action>(10);
-				mGroupTaskHandlersEachTaskCompleted = new Dictionary<String, Action<ILotusTask>>(10);
+				_taskHolderPools = new PoolManager<CTaskHolder>(10, ConstructorTaskHolder);
+				_groupTasks = new List<CGroupTask>(10);
+				_groupTaskHandlersCompleted = new Dictionary<String, Action>(10);
+				_groupTaskHandlersEachTaskCompleted = new Dictionary<String, Action<ILotusTask>>(10);
 			}
 			#endregion
 
@@ -132,9 +132,9 @@ namespace Lotus
 			public void OnUpdate()
 			{
 				// Выполняем отдельные группы задачи каждый кадр
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					CGroupTask group_task = mGroupTasks[i];
+					CGroupTask group_task = _groupTasks[i];
 
 					if (!group_task.IsCompleted)
 					{
@@ -159,11 +159,11 @@ namespace Lotus
 			public String GetStatus()
 			{
 				var str = new StringBuilder(200);
-				str.AppendLine("Всего групп задач: " + mGroupTasks.Count.ToString());
-				for (var ig = 0; ig < mGroupTasks.Count; ig++)
+				str.AppendLine("Всего групп задач: " + _groupTasks.Count.ToString());
+				for (var ig = 0; ig < _groupTasks.Count; ig++)
 				{
-					str.AppendLine("Группа: " + mGroupTasks[ig].Name + "(задач: " +
-						mGroupTasks[ig].Tasks.Count.ToString() + ")");
+					str.AppendLine("Группа: " + _groupTasks[ig].Name + "(задач: " +
+						_groupTasks[ig].Tasks.Count.ToString() + ")");
 				}
 
 				return str.ToString();
@@ -180,11 +180,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask GetGroupTask(String groupName)
 			{
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						return mGroupTasks[i];
+						return _groupTasks[i];
 					}
 				}
 
@@ -200,7 +200,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask AddGroupTask(CGroupTask groupTask)
 			{
-				mGroupTasks.Add(groupTask);
+				_groupTasks.Add(groupTask);
 				return groupTask;
 			}
 
@@ -214,17 +214,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask AddGroupTask(CGroupTask groupTask, Action<ILotusTask> onCompletedEachTask)
 			{
-				mGroupTasks.Add(groupTask);
+				_groupTasks.Add(groupTask);
 
 				if (onCompletedEachTask != null)
 				{
-					if (mGroupTaskHandlersEachTaskCompleted.ContainsKey(groupTask.Name))
+					if (_groupTaskHandlersEachTaskCompleted.ContainsKey(groupTask.Name))
 					{
-						mGroupTaskHandlersEachTaskCompleted[groupTask.Name] = onCompletedEachTask;
+						_groupTaskHandlersEachTaskCompleted[groupTask.Name] = onCompletedEachTask;
 					}
 					else
 					{
-						mGroupTaskHandlersEachTaskCompleted.Add(groupTask.Name, onCompletedEachTask);
+						_groupTaskHandlersEachTaskCompleted.Add(groupTask.Name, onCompletedEachTask);
 					}
 				}
 
@@ -272,7 +272,7 @@ namespace Lotus
 			{
 				var task = new CGroupTask(groupName, method, this, list);
 				task.ExecuteMode = executeMode;
-				mGroupTasks.Add(task);
+				_groupTasks.Add(task);
 				return task;
 			}
 
@@ -303,11 +303,11 @@ namespace Lotus
 			{
 				CGroupTask group_task = null;
 
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -316,7 +316,7 @@ namespace Lotus
 				{
 					group_task = new CGroupTask(groupName, method, this, task);
 					group_task.ExecuteMode = executeMode;
-					mGroupTasks.Add(group_task);
+					_groupTasks.Add(group_task);
 				}
 
 				return group_task;
@@ -363,11 +363,11 @@ namespace Lotus
 			{
 				CGroupTask group_task = null;
 
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -376,7 +376,7 @@ namespace Lotus
 				{
 					group_task = new CGroupTask(groupName, method, this, tasks);
 					group_task.ExecuteMode = executeMode;
-					mGroupTasks.Add(group_task);
+					_groupTasks.Add(group_task);
 				}
 
 				return group_task;
@@ -409,11 +409,11 @@ namespace Lotus
 			{
 				CGroupTask group_task = null;
 
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -422,7 +422,7 @@ namespace Lotus
 				{
 					group_task = new CGroupTask(groupName, method, this, task);
 					group_task.ExecuteMode = executeMode;
-					mGroupTasks.Add(group_task);
+					_groupTasks.Add(group_task);
 				}
 				else
 				{
@@ -473,11 +473,11 @@ namespace Lotus
 			{
 				CGroupTask group_task = null;
 
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -486,7 +486,7 @@ namespace Lotus
 				{
 					group_task = new CGroupTask(groupName, method, this, tasks);
 					group_task.ExecuteMode = executeMode;
-					mGroupTasks.Add(group_task);
+					_groupTasks.Add(group_task);
 				}
 				else
 				{
@@ -506,7 +506,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveGroupTask(CGroupTask groupTask)
 			{
-				if (mGroupTasks.Remove(groupTask))
+				if (_groupTasks.Remove(groupTask))
 				{
 					// Удаляем все связанные задачи
 					groupTask.Clear();
@@ -521,12 +521,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RemoveGroupTask(String groupName)
 			{
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						mGroupTasks[i].Clear();
-						mGroupTasks.RemoveAt(i);
+						_groupTasks[i].Clear();
+						_groupTasks.RemoveAt(i);
 						return;
 					}
 				}
@@ -540,11 +540,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ClearGroupTask(String groupName)
 			{
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						mGroupTasks[i].Clear();
+						_groupTasks[i].Clear();
 						return;
 					}
 				}
@@ -641,11 +641,11 @@ namespace Lotus
 			public virtual CGroupTask RunGroupTask(String groupName, Single delayStart, Action onCompleted)
 			{
 				CGroupTask group_task = null;
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -654,13 +654,13 @@ namespace Lotus
 				{
 					if (onCompleted != null)
 					{
-						if (mGroupTaskHandlersCompleted.ContainsKey(group_task.Name))
+						if (_groupTaskHandlersCompleted.ContainsKey(group_task.Name))
 						{
-							mGroupTaskHandlersCompleted[group_task.Name] = onCompleted;
+							_groupTaskHandlersCompleted[group_task.Name] = onCompleted;
 						}
 						else
 						{
-							mGroupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
+							_groupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
 						}
 					}
 
@@ -684,11 +684,11 @@ namespace Lotus
 			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, Single delayStart, Action onCompleted)
 			{
 				CGroupTask group_task = null;
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -697,13 +697,13 @@ namespace Lotus
 				{
 					if (onCompleted != null)
 					{
-						if (mGroupTaskHandlersCompleted.ContainsKey(group_task.Name))
+						if (_groupTaskHandlersCompleted.ContainsKey(group_task.Name))
 						{
-							mGroupTaskHandlersCompleted[group_task.Name] = onCompleted;
+							_groupTaskHandlersCompleted[group_task.Name] = onCompleted;
 						}
 						else
 						{
-							mGroupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
+							_groupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
 						}
 					}
 
@@ -729,11 +729,11 @@ namespace Lotus
 			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, Single delayStart, Action onCompleted)
 			{
 				CGroupTask group_task = null;
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -742,13 +742,13 @@ namespace Lotus
 				{
 					if (onCompleted != null)
 					{
-						if (mGroupTaskHandlersCompleted.ContainsKey(group_task.Name))
+						if (_groupTaskHandlersCompleted.ContainsKey(group_task.Name))
 						{
-							mGroupTaskHandlersCompleted[group_task.Name] = onCompleted;
+							_groupTaskHandlersCompleted[group_task.Name] = onCompleted;
 						}
 						else
 						{
-							mGroupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
+							_groupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
 						}
 					}
 
@@ -771,11 +771,11 @@ namespace Lotus
 			public virtual void PauseGroupTask(String groupName, Boolean pause)
 			{
 				CGroupTask group_task = null;
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -795,11 +795,11 @@ namespace Lotus
 			public virtual void StopGroupTask(String groupName)
 			{
 				CGroupTask group_task = null;
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						group_task = mGroupTasks[i];
+						group_task = _groupTasks[i];
 						break;
 					}
 				}
@@ -818,11 +818,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ResetGroupTask(String groupName)
 			{
-				for (var i = 0; i < mGroupTasks.Count; i++)
+				for (var i = 0; i < _groupTasks.Count; i++)
 				{
-					if (mGroupTasks[i].Name == groupName)
+					if (_groupTasks[i].Name == groupName)
 					{
-						mGroupTasks[i].Reset();
+						_groupTasks[i].Reset();
 						break;
 					}
 				}

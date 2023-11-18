@@ -164,14 +164,14 @@ namespace Lotus
 			/// <summary>
 			/// Сохранения объекта в файл
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <param name="parameters">Параметры сохранения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void SaveTo(String file_name, System.Object instance, CParameters? parameters = null)
+			public override void SaveTo(String fileName, System.Object instance, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
-				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
+				var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
 
 				// Создаем поток для записи
 				var stream_writer = new StreamWriter(path, false, Encoding.UTF8);
@@ -238,14 +238,14 @@ namespace Lotus
 			/// <summary>
 			/// Загрузка объекта из файла
 			/// </summary>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override System.Object LoadFrom(String file_name, CParameters? parameters = null)
+			public override System.Object LoadFrom(String fileName, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
-				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
+				var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
 
 				// Читаем данные
 				var string_json = File.ReadAllText(path);
@@ -261,14 +261,14 @@ namespace Lotus
 			/// Загрузка объекта из файла
 			/// </summary>
 			/// <typeparam name="TResultType">Тип объекта</typeparam>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override TResultType LoadFrom<TResultType>(String file_name, CParameters? parameters = null)
+			public override TResultType LoadFrom<TResultType>(String fileName, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
-				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
+				var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
 
 				// Читаем данные
 				var string_json = File.ReadAllText(path);
@@ -344,13 +344,13 @@ namespace Lotus
 			/// Обновление объекта из файла
 			/// </summary>
 			/// <param name="instance">Экземпляр объекта</param>
-			/// <param name="file_name">Имя файла</param>
+			/// <param name="fileName">Имя файла</param>
 			/// <param name="parameters">Параметры обновления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void UpdateFrom(System.Object instance, String file_name, CParameters? parameters = null)
+			public override void UpdateFrom(System.Object instance, String fileName, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
-				var path = XFilePath.GetFileName(DefaultPath, file_name, DefaultExt);
+				var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
 
 				// Читаем данные
 				var string_json = File.ReadAllText(path);

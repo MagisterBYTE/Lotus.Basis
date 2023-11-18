@@ -34,10 +34,10 @@ namespace Lotus
 		public class SurfaceData<TType> where TType : struct
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal TType[] mData;
-			protected internal Int32 mWidth;
-			protected internal Int32 mHeight;
-			protected internal Int32 mRank;
+			protected internal TType[] _data;
+			protected internal Int32 _width;
+			protected internal Int32 _height;
+			protected internal Int32 _rank;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -46,7 +46,7 @@ namespace Lotus
 			/// </summary>
 			public TType[] Data
 			{
-				get { return mData; }
+				get { return _data; }
 			}
 
 			/// <summary>
@@ -54,7 +54,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Count
 			{
-				get { return mData.Length; }
+				get { return _data.Length; }
 			}
 
 			/// <summary>
@@ -62,8 +62,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 Width
 			{
-				get { return mWidth; }
-				set { mWidth = value; }
+				get { return _width; }
+				set { _width = value; }
 			}
 
 			/// <summary>
@@ -71,8 +71,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 Height
 			{
-				get { return mHeight; }
-				set { mHeight = value; }
+				get { return _height; }
+				set { _height = value; }
 			}
 
 			/// <summary>
@@ -80,8 +80,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 Rank
 			{
-				get { return mRank; }
-				set { mRank = value; }
+				get { return _rank; }
+				set { _rank = value; }
 			}
 			#endregion
 
@@ -93,10 +93,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public SurfaceData()
 			{
-				mData = new TType[] { default };
-				mWidth = 1;
-				mHeight = 1;
-				mRank = 1;
+				_data = new TType[] { default };
+				_width = 1;
+				_height = 1;
+				_rank = 1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -107,12 +107,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public SurfaceData(TType[] data)
 			{
-				mData = new TType[data.Length];
-				for (var i = 0; i < mData.Length; i++)
+				_data = new TType[data.Length];
+				for (var i = 0; i < _data.Length; i++)
 				{
-					mData[i] = data[i];
+					_data[i] = data[i];
 				}
-				mRank = 1;
+				_rank = 1;
 			}
 			#endregion
 
@@ -128,11 +128,11 @@ namespace Lotus
 			{
 				get
 				{
-					return mData[index];
+					return _data[index];
 				}
 				set
 				{
-					mData[index] = value;
+					_data[index] = value;
 				}
 			}
 
@@ -148,11 +148,11 @@ namespace Lotus
 			{
 				get
 				{
-					return mData[x + (y * mWidth)];
+					return _data[x + (y * _width)];
 				}
 				set
 				{
-					mData[x + (y * mWidth)] = value;
+					_data[x + (y * _width)] = value;
 				}
 			}
 			#endregion
@@ -177,14 +177,14 @@ namespace Lotus
 					}
 					for (var i = 0; i < count_copy; i++)
 					{
-						data[i] = mData[i];
+						data[i] = _data[i];
 					}
 
-					mData = data;
+					_data = data;
 				}
 				else
 				{
-					mData = new TType[count];
+					_data = new TType[count];
 				}
 			}
 
@@ -196,10 +196,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetFromData(TType[] data)
 			{
-				mData = new TType[data.Length];
-				for (var i = 0; i < mData.Length; i++)
+				_data = new TType[data.Length];
+				for (var i = 0; i < _data.Length; i++)
 				{
-					mData[i] = data[i];
+					_data[i] = data[i];
 				}
 			}
 
@@ -214,8 +214,8 @@ namespace Lotus
 			{
 				var temp_data = new TType[newWidth * newHeight];
 
-				var factor_x = mWidth / (Double)newWidth;
-				var factor_y = mHeight / (Double)newHeight;
+				var factor_x = _width / (Double)newWidth;
+				var factor_y = _height / (Double)newHeight;
 
 				for (var x = 0; x < newWidth; ++x)
 				{
@@ -228,10 +228,10 @@ namespace Lotus
 					}
 				}
 
-				mData = temp_data;
-				mWidth = newWidth;
-				mHeight = newHeight;
-				mRank = 2;
+				_data = temp_data;
+				_width = newWidth;
+				_height = newHeight;
+				_rank = 2;
 			}
 			#endregion
 		}
@@ -263,7 +263,7 @@ namespace Lotus
 			public CSurfaceInt(Int32[] data)
 			{
 				SetFromData(data);
-				mRank = 1;
+				_rank = 1;
 			}
 			#endregion
 
@@ -280,8 +280,8 @@ namespace Lotus
 			{
 				var temp_data = new Int32[newWidth * newHeight];
 
-				var factor_x = mWidth / (Double)newWidth;
-				var factor_y = mHeight / (Double)newHeight;
+				var factor_x = _width / (Double)newWidth;
+				var factor_y = _height / (Double)newHeight;
 
 				if (useBilinear)
 				{
@@ -299,13 +299,13 @@ namespace Lotus
 							floor_y = (Int32)Math.Floor(y * factor_y);
 
 							ceil_x = floor_x + 1;
-							if (ceil_x >= mWidth)
+							if (ceil_x >= _width)
 							{
 								ceil_x = floor_x;
 							}
 
 							ceil_y = floor_y + 1;
-							if (ceil_y >= mHeight)
+							if (ceil_y >= _height)
 							{
 								ceil_y = floor_y;
 							}
@@ -343,10 +343,10 @@ namespace Lotus
 					}
 				}
 
-				mData = temp_data;
-				mWidth = newWidth;
-				mHeight = newHeight;
-				mRank = 2;
+				_data = temp_data;
+				_width = newWidth;
+				_height = newHeight;
+				_rank = 2;
 			}
 			#endregion
 		}
@@ -378,7 +378,7 @@ namespace Lotus
 			public CSurfaceColor(TColor[] data)
 			{
 				SetFromData(data);
-				mRank = 1;
+				_rank = 1;
 			}
 
 #if UNITY_2017_1_OR_NEWER
@@ -411,7 +411,7 @@ namespace Lotus
 				}
 				else
 				{
-					mData = new TColor[] { TColor.White };
+					_data = new TColor[] { TColor.White };
 					mWidth = 1;
 					mHeight = 1;
 					mRank = 1;
@@ -430,13 +430,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetFromData(UnityEngine.Color32[] data)
 			{
-				mData = new TColor[data.Length];
-				for (var i = 0; i < mData.Length; i++)
+				_data = new TColor[data.Length];
+				for (var i = 0; i < _data.Length; i++)
 				{
-					mData[i].A = data[i].a;
-					mData[i].R = data[i].r;
-					mData[i].G = data[i].g;
-					mData[i].B = data[i].b;
+					_data[i].A = data[i].a;
+					_data[i].R = data[i].r;
+					_data[i].G = data[i].g;
+					_data[i].B = data[i].b;
 				}
 			}
 
@@ -469,8 +469,8 @@ namespace Lotus
 			{
 				var temp_data = new TColor[newWidth * newHeight];
 
-				var factor_x = mWidth / (Single)newWidth;
-				var factor_y = mHeight / (Single)newHeight;
+				var factor_x = _width / (Single)newWidth;
+				var factor_y = _height / (Single)newHeight;
 
 				if (useBilinear)
 				{
@@ -488,13 +488,13 @@ namespace Lotus
 							floor_y = (Int32)Math.Floor(y * factor_y);
 
 							ceil_x = floor_x + 1;
-							if (ceil_x >= mWidth)
+							if (ceil_x >= _width)
 							{
 								ceil_x = floor_x;
 							}
 
 							ceil_y = floor_y + 1;
-							if (ceil_y >= mHeight)
+							if (ceil_y >= _height)
 							{
 								ceil_y = floor_y;
 							}
@@ -531,10 +531,10 @@ namespace Lotus
 					}
 				}
 
-				mData = temp_data;
-				mWidth = newWidth;
-				mHeight = newHeight;
-				mRank = 2;
+				_data = temp_data;
+				_width = newWidth;
+				_height = newHeight;
+				_rank = 2;
 			}
 			#endregion
 		}

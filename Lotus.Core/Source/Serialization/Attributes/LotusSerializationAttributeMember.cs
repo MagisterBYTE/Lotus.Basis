@@ -36,7 +36,7 @@ namespace Lotus
 		public sealed class LotusSerializeMemberAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal String mName;
+			internal String _name;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -45,8 +45,8 @@ namespace Lotus
 			/// </summary>
 			public String Name
 			{
-				get { return mName; }
-				set { mName = value; }
+				get { return _name; }
+				set { _name = value; }
 			}
 			#endregion
 
@@ -58,7 +58,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusSerializeMemberAttribute()
 			{
-				mName = "";
+				_name = "";
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusSerializeMemberAttribute(String name)
 			{
-				mName = name;
+				_name = name;
 			}
 			#endregion
 		}

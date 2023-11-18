@@ -66,10 +66,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public new TItem this[Int32 index]
 			{
-				get { return mArrayOfItems[index]; }
+				get { return _arrayOfItems[index]; }
 				set
 				{
-					mArrayOfItems[index] = value;
+					_arrayOfItems[index] = value;
 					Update(index);
 				}
 			}
@@ -95,7 +95,7 @@ namespace Lotus
 						break;
 					}
 					middle = (count - 1) / 2;
-					if (ComparerDefault.Compare(mArrayOfItems[count], mArrayOfItems[middle]) < 0)
+					if (ComparerDefault.Compare(_arrayOfItems[count], _arrayOfItems[middle]) < 0)
 					{
 						Swap(count, middle);
 						count = middle;
@@ -118,20 +118,20 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem Pop()
 			{
-				TItem result = mArrayOfItems[0];
+				TItem result = _arrayOfItems[0];
 				Int32 p = 0, p1, p2, pn;
-				mArrayOfItems[0] = mArrayOfItems[Count - 1];
+				_arrayOfItems[0] = _arrayOfItems[Count - 1];
 				RemoveAt(Count - 1);
 				do
 				{
 					pn = p;
 					p1 = (2 * p) + 1;
 					p2 = (2 * p) + 2;
-					if (Count > p1 && ComparerDefault.Compare(mArrayOfItems[p], mArrayOfItems[p1]) > 0)
+					if (Count > p1 && ComparerDefault.Compare(_arrayOfItems[p], _arrayOfItems[p1]) > 0)
 					{
 						p = p1;
 					}
-					if (Count > p2 && ComparerDefault.Compare(mArrayOfItems[p], mArrayOfItems[p2]) > 0)
+					if (Count > p2 && ComparerDefault.Compare(_arrayOfItems[p], _arrayOfItems[p2]) > 0)
 					{
 						p = p2;
 					}
@@ -156,7 +156,7 @@ namespace Lotus
 			{
 				if (Count > 0)
 				{
-					return mArrayOfItems[0];
+					return _arrayOfItems[0];
 				}
 				return default;
 			}
@@ -181,7 +181,7 @@ namespace Lotus
 						break;
 					}
 					p2 = (p - 1) / 2;
-					if (ComparerDefault.Compare(mArrayOfItems[p], mArrayOfItems[p2]) < 0)
+					if (ComparerDefault.Compare(_arrayOfItems[p], _arrayOfItems[p2]) < 0)
 					{
 						Swap(p, p2);
 						p = p2;
@@ -202,11 +202,11 @@ namespace Lotus
 					pn = p;
 					p1 = (2 * p) + 1;
 					p2 = (2 * p) + 2;
-					if (Count > p1 && ComparerDefault.Compare(mArrayOfItems[p], mArrayOfItems[p1]) > 0)
+					if (Count > p1 && ComparerDefault.Compare(_arrayOfItems[p], _arrayOfItems[p1]) > 0)
 					{
 						p = p1;
 					}
-					if (Count > p2 && ComparerDefault.Compare(mArrayOfItems[p], mArrayOfItems[p2]) > 0)
+					if (Count > p2 && ComparerDefault.Compare(_arrayOfItems[p], _arrayOfItems[p2]) > 0)
 					{
 						p = p2;
 					}

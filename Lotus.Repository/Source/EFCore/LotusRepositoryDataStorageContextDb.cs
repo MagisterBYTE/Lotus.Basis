@@ -10,14 +10,14 @@
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
-using Lotus.Core;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+//---------------------------------------------------------------------------------------------------------------------
+using Lotus.Core;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -39,6 +39,7 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			private readonly TContext _context;
+			private readonly Object[] _ids = new Object[1];
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -74,6 +75,23 @@ namespace Lotus
 			/// <typeparam name="TEntity">Тип сущности</typeparam>
 			/// <typeparam name="TKey">Тип идентификатора</typeparam>
 			/// <param name="id">Идентификатор сущности</param>
+			/// <returns>Найденная сущность или null</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public TEntity? GetById<TEntity, TKey>(TKey id) where TEntity : class
+													 where TKey : struct, IEquatable<TKey>
+			{
+				_ids[0] = id;
+				return _context.Find<TEntity>(_ids);
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Производит поиск сущности в БД или в хранилище по идентификатору.
+			/// Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <typeparam name="TKey">Тип идентификатора</typeparam>
+			/// <param name="id">Идентификатор сущности</param>
 			/// <param name="token">Токен отмены</param>
 			/// <returns>Найденная сущность или null</returns>
 			//---------------------------------------------------------------------------------------------------------
@@ -81,7 +99,68 @@ namespace Lotus
 				where TEntity : class
 				where TKey : struct, IEquatable<TKey>
 			{
-				return await _context.FindAsync<TEntity>(new object[] { id }, token);
+				_ids[0] = id;
+				return await _context.FindAsync<TEntity>(_ids, token);
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Производит поиск сущности в БД или в хранилище по ее имени.
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <param name="name">Имя сущности</param>
+			/// <returns>Найденная сущность или null</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public TEntity? GetByName<TEntity>(String name) where TEntity : class, ILotusNameable
+			{
+				var entity = _context.Set<TEntity>().FirstOrDefault(x => x.Name == name);
+				return entity;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Производит поиск сущности в БД или в хранилище по ее имени.
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <param name="name">Имя сущности</param>
+			/// <param name="token">Токен отмены</param>
+			/// <returns>Найденная сущность или null</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public async ValueTask<TEntity?> GetByNameAsync<TEntity>(String name, CancellationToken token = default)
+				where TEntity : class, ILotusNameable
+			{
+				var entity = await _context.Set<TEntity>().FirstOrDefaultAsync(x => x.Name == name);
+				return entity;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Производит поиск сущности в БД или в хранилище по идентификатору.
+			/// Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр.
+			/// Если сущность отсутствует то она будет создана с указанным идентификатором
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <typeparam name="TKey">Тип идентификатора</typeparam>
+			/// <param name="id">Идентификатор сущности</param>
+			/// <returns>Найденная сущность или null</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public TEntity GetOrAdd<TEntity, TKey>(TKey id) where TEntity : class, ILotusIdentifierIdTemplate<TKey>, new()
+													 where TKey : struct, IEquatable<TKey>
+			{
+				_ids[0] = id;
+				var entity = _context.Find<TEntity>(_ids);
+				if (entity == null)
+				{
+					entity = new TEntity();
+					entity.Id = id;
+
+					var entry = _context.Add(entity);
+					return entry.Entity;
+				}
+				else
+				{
+					return entity;
+				}
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -100,7 +179,8 @@ namespace Lotus
 				where TEntity : class, ILotusIdentifierIdTemplate<TKey>, new()
 				where TKey : struct, IEquatable<TKey>
 			{
-				var entity = await _context.FindAsync<TEntity>(new object[] { id }, token);
+				_ids[0] = id;
+				var entity = await _context.FindAsync<TEntity>(_ids, token);
 				if(entity == null) 
 				{
 					entity = new TEntity();
@@ -121,6 +201,20 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TEntity">Тип сущности</typeparam>
 			/// <param name="entity">Сущность</param>
+			/// <returns>Добавленная сущность</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public TEntity Add<TEntity>(TEntity entity) where TEntity : class
+			{
+				var entry = _context.Add(entity);
+				return entry.Entity;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Добавить сущность
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <param name="entity">Сущность</param>
 			/// <param name="token">Токен отмены</param>
 			/// <returns>Добавленная сущность</returns>
 			//---------------------------------------------------------------------------------------------------------
@@ -129,6 +223,19 @@ namespace Lotus
 			{
 				var entry = await _context.AddAsync(entity, token);
 				return entry.Entity;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Добавить список сущностей
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <param name="entities">Список сущностей</param>
+			/// <returns>Задача</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+			{
+				_context.AddRange(entities);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -197,6 +304,16 @@ namespace Lotus
 				where TEntity : class
 			{
 				_context.RemoveRange(entities);
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Сохранить в хранилище все изменения
+			/// </summary>
+			//---------------------------------------------------------------------------------------------------------
+			public void Flush()
+			{
+				_context.SaveChanges();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

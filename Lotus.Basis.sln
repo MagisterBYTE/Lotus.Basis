@@ -28,6 +28,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Repository", "Lotus.R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Repository.Test", "Lotus.Repository.Test\Lotus.Repository.Test.csproj", "{83B020FE-958C-4BBC-9796-CCF09809F0BB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssimpNet", "Lotus.Object3D.Depends\Assimp.Net\AssimpNet\AssimpNet.csproj", "{00F60498-2D53-491D-89C0-EEF7FBC3FA10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Depends", "Depends", "{A506857C-0835-4CC2-8452-1570FCB8E1CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,9 +93,18 @@ Global
 		{83B020FE-958C-4BBC-9796-CCF09809F0BB}.Publish|Any CPU.Build.0 = Publish|Any CPU
 		{83B020FE-958C-4BBC-9796-CCF09809F0BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83B020FE-958C-4BBC-9796-CCF09809F0BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Publish|Any CPU.Build.0 = Debug|Any CPU
+		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{00F60498-2D53-491D-89C0-EEF7FBC3FA10} = {A506857C-0835-4CC2-8452-1570FCB8E1CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE718856-AFBB-4705-B856-572D342FE084}

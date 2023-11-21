@@ -90,11 +90,11 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Double mValue;
+			internal Double _value;
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal TUnit mUnitType;
+			internal TUnit _unitType;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -103,10 +103,10 @@ namespace Lotus
 			/// </summary>
 			public Double Value
 			{
-				readonly get { return mValue; }
+				readonly get { return _value; }
 				set
 				{
-					mValue = value;
+					_value = value;
 				}
 			}
 
@@ -115,7 +115,7 @@ namespace Lotus
 			/// </summary>
 			public readonly TUnit UnitType
 			{
-				get { return mUnitType; }
+				get { return _unitType; }
 			}
 
 			/// <summary>
@@ -125,7 +125,7 @@ namespace Lotus
 			{
 				get
 				{
-					return mUnitType;
+					return _unitType;
 				}
 			}
 			#endregion
@@ -139,8 +139,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TUnitValue(Double value)
 			{
-				mValue = value;
-				mUnitType = (TUnit)(System.Object)1;
+				_value = value;
+				_unitType = (TUnit)(System.Object)1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -152,8 +152,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TUnitValue(Double value, TUnit unitType)
 			{
-				mValue = value;
-				mUnitType = unitType;
+				_value = value;
+				_unitType = unitType;
 			}
 			#endregion
 
@@ -187,7 +187,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Boolean Equals(TUnitValue<TUnit> other)
 			{
-				return mValue == other.mValue;
+				return _value == other._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Int32 CompareTo(TUnitValue<TUnit> other)
 			{
-				return mValue.CompareTo(other.mValue);
+				return _value.CompareTo(other._value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -210,7 +210,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly Int32 GetHashCode()
 			{
-				return mValue.GetHashCode() ^ base.GetHashCode();
+				return _value.GetHashCode() ^ base.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly String ToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 
@@ -274,7 +274,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator Double(TUnitValue<TUnit> value)
 			{
-				return value.mValue;
+				return value._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -299,7 +299,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly String SerializeToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 		}

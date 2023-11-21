@@ -106,17 +106,17 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Double mValue;
+			internal Double _value;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal TMeasurementType mMeasurementType;
+			internal TMeasurementType _measurementType;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Enum mUnitType;
+			internal Enum _unitType;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -125,10 +125,10 @@ namespace Lotus
 			/// </summary>
 			public Double Value
 			{
-				readonly get { return mValue; }
+				readonly get { return _value; }
 				set
 				{
-					mValue = value;
+					_value = value;
 				}
 			}
 
@@ -137,7 +137,7 @@ namespace Lotus
 			/// </summary>
 			public readonly TMeasurementType QuantityType
 			{
-				get { return mMeasurementType; }
+				get { return _measurementType; }
 			}
 
 			/// <summary>
@@ -145,7 +145,7 @@ namespace Lotus
 			/// </summary>
 			public readonly Enum UnitType
 			{
-				get { return mUnitType; }
+				get { return _unitType; }
 			}
 			#endregion
 
@@ -159,9 +159,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TMeasurementValue(Double value, TMeasurementType measurementType)
 			{
-				mValue = value;
-				mMeasurementType = measurementType;
-				mUnitType = mMeasurementType.GetUnitValueDefault();
+				_value = value;
+				_measurementType = measurementType;
+				_unitType = _measurementType.GetUnitValueDefault();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -174,9 +174,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TMeasurementValue(Double value, TMeasurementType measurementType, Enum unitType)
 			{
-				mValue = value;
-				mMeasurementType = measurementType;
-				mUnitType = unitType;
+				_value = value;
+				_measurementType = measurementType;
+				_unitType = unitType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -188,9 +188,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TMeasurementValue(Double value, Enum unitType)
 			{
-				mValue = value;
-				mUnitType = unitType;
-				mMeasurementType = XUnitType.GetMeasurementType(unitType);
+				_value = value;
+				_unitType = unitType;
+				_measurementType = XUnitType.GetMeasurementType(unitType);
 			}
 			#endregion
 
@@ -224,7 +224,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Boolean Equals(TMeasurementValue other)
 			{
-				return mValue == other.mValue && mUnitType == other.mUnitType;
+				return _value == other._value && _unitType == other._unitType;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -236,7 +236,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Int32 CompareTo(TMeasurementValue other)
 			{
-				return mValue.CompareTo(other.mValue);
+				return _value.CompareTo(other._value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -247,7 +247,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly Int32 GetHashCode()
 			{
-				return mValue.GetHashCode() ^ base.GetHashCode();
+				return _value.GetHashCode() ^ base.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -269,7 +269,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly String ToString()
 			{
-				return mValue.ToString() + " " + GetAbbreviationUnit();
+				return _value.ToString() + " " + GetAbbreviationUnit();
 			}
 			#endregion
 
@@ -363,7 +363,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator Double(TMeasurementValue value)
 			{
-				return value.mValue;
+				return value._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -389,7 +389,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly TMeasurementValue Clone(Double value)
 			{
-				return new TMeasurementValue(value, mMeasurementType, mUnitType);
+				return new TMeasurementValue(value, _measurementType, _unitType);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -401,7 +401,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly TMeasurementValue Clone(Enum unitType)
 			{
-				return new TMeasurementValue(mValue, unitType);
+				return new TMeasurementValue(_value, unitType);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -413,14 +413,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetQuantityAndUnit(TMeasurementType measurementType, Enum unitType)
 			{
-				mMeasurementType = measurementType;
+				_measurementType = measurementType;
 				if(unitType != null)
 				{
-					mUnitType = unitType;
+					_unitType = unitType;
 				}
 				else
 				{
-					mUnitType = measurementType.GetUnitValueDefault();
+					_unitType = measurementType.GetUnitValueDefault();
 				}
 			}
 
@@ -432,10 +432,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly String GetAbbreviationUnit()
 			{
-				if(mUnitType != null)
+				if(_unitType != null)
 				{
-					//return (mUnitType.GetAbbreviationOrName());
-					return mUnitType.ToString();
+					//return (_unitType.GetAbbreviationOrName());
+					return _unitType.ToString();
 				}
 				else
 				{
@@ -451,13 +451,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly String SerializeToString()
 			{
-				if (mUnitType == null)
+				if (_unitType == null)
 				{
-					return mValue.ToString() + "{" + mMeasurementType.ToString() + "}[TUnitThing.Undefined]";
+					return _value.ToString() + "{" + _measurementType.ToString() + "}[TUnitThing.Undefined]";
 				}
 				else
 				{
-					return mValue.ToString() + "{" + mMeasurementType.ToString() + "}[" + mUnitType.ToString() + "]";
+					return _value.ToString() + "{" + _measurementType.ToString() + "}[" + _unitType.ToString() + "]";
 				}
 			}
 			#endregion

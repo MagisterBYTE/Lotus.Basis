@@ -142,19 +142,19 @@ namespace Lotus
 			{
 				get
 				{
-					return Vector3Df.Distance(in mVertices.Vertices[1].Position, in mVertices.Vertices[0].Position);
+					return Vector3Df.Distance(in _vertices.Vertices[1].Position, in _vertices.Vertices[0].Position);
 				}
 
 				set
 				{
 					// Получаем направление
-					Vector3Df dir = (mVertices.Vertices[1].Position - mVertices.Vertices[0].Position).Normalized;
+					Vector3Df dir = (_vertices.Vertices[1].Position - _vertices.Vertices[0].Position).Normalized;
 
 					// Смещаем 1 вершину от 0
-					mVertices.Vertices[1].Position = mVertices.Vertices[0].Position + dir * value;
+					_vertices.Vertices[1].Position = _vertices.Vertices[0].Position + dir * value;
 
 					// Смещаем 3 вершину от 2
-					mVertices.Vertices[3].Position = mVertices.Vertices[2].Position + dir * value;
+					_vertices.Vertices[3].Position = _vertices.Vertices[2].Position + dir * value;
 
 					UpdateData();
 
@@ -169,20 +169,20 @@ namespace Lotus
 			{
 				get
 				{
-					return Vector3Df.Distance(in mVertices.Vertices[2].Position, in mVertices.Vertices[0].Position);
+					return Vector3Df.Distance(in _vertices.Vertices[2].Position, in _vertices.Vertices[0].Position);
 				}
 
 				set
 				{
 
 					// Получаем направление
-					Vector3Df dir = (mVertices.Vertices[2].Position - mVertices.Vertices[0].Position).Normalized;
+					Vector3Df dir = (_vertices.Vertices[2].Position - _vertices.Vertices[0].Position).Normalized;
 
 					// Смещаем 2 вершину от 0
-					mVertices.Vertices[2].Position = mVertices.Vertices[0].Position + dir * value;
+					_vertices.Vertices[2].Position = _vertices.Vertices[0].Position + dir * value;
 
 					// Смещаем 3 вершину от 1
-					mVertices.Vertices[3].Position = mVertices.Vertices[1].Position + dir * value;
+					_vertices.Vertices[3].Position = _vertices.Vertices[1].Position + dir * value;
 
 					UpdateData();
 				}
@@ -198,7 +198,7 @@ namespace Lotus
 			public CMeshPlanarQuad3Df()
 				:base()
 			{
-				mName = "Quad3D";
+				_name = "Quad3D";
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ namespace Lotus
 			public CMeshPlanarQuad3Df(Vector3Df p1, Vector3Df p2, Vector3Df p3, Vector3Df p4)
 				: base()
 			{
-				mName = "Quad3D";
+				_name = "Quad3D";
 				CreateQuadOfPoint(p1, p2, p3, p4);
 			}
 			#endregion
@@ -230,14 +230,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateQuadOfPoint(Vector3Df p1, Vector3Df p2, Vector3Df p3, Vector3Df p4)
 			{
-				mVertices.Clear();
-				mVertices.AddVertex(p1);
-				mVertices.AddVertex(p2);
-				mVertices.AddVertex(p3);
-				mVertices.AddVertex(p4);
+				_vertices.Clear();
+				_vertices.AddVertex(p1);
+				_vertices.AddVertex(p2);
+				_vertices.AddVertex(p3);
+				_vertices.AddVertex(p4);
 
-				mTriangles.Clear();
-				mTriangles.AddTriangleQuad();
+				_triangles.Clear();
+				_triangles.AddTriangleQuad();
 
 				this.ComputeNormals();
 				this.ComputeUVMap();
@@ -257,16 +257,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateQuadXZ(Vector3Df pivot, Single width, Single height)
 			{
-				mPlaneType = Maths.TDimensionPlane.XZ;
+				_planeType = Maths.TDimensionPlane.XZ;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot + new Vector3Df(-width / 2, 0, -height / 2));
-				mVertices.AddVertex(pivot + new Vector3Df(width / 2, 0, -height / 2));
-				mVertices.AddVertex(pivot + new Vector3Df(-width / 2, 0, height / 2));
-				mVertices.AddVertex(pivot + new Vector3Df(width / 2, 0, height / 2));
+				_vertices.Clear();
+				_vertices.AddVertex(pivot + new Vector3Df(-width / 2, 0, -height / 2));
+				_vertices.AddVertex(pivot + new Vector3Df(width / 2, 0, -height / 2));
+				_vertices.AddVertex(pivot + new Vector3Df(-width / 2, 0, height / 2));
+				_vertices.AddVertex(pivot + new Vector3Df(width / 2, 0, height / 2));
 
-				mTriangles.Clear();
-				mTriangles.AddTriangleQuad();
+				_triangles.Clear();
+				_triangles.AddTriangleQuad();
 
 				this.ComputeNormals();
 				this.ComputeUVMap();
@@ -287,16 +287,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateQuadZY(Vector3Df pivot, Single width, Single height)
 			{
-				mPlaneType = Maths.TDimensionPlane.ZY;
+				_planeType = Maths.TDimensionPlane.ZY;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot + new Vector3Df(0, -height / 2, -width / 2));
-				mVertices.AddVertex(pivot + new Vector3Df(0, -height / 2, width / 2));
-				mVertices.AddVertex(pivot + new Vector3Df(0, height / 2,-width / 2));
-				mVertices.AddVertex(pivot + new Vector3Df(0, height / 2, width / 2));
+				_vertices.Clear();
+				_vertices.AddVertex(pivot + new Vector3Df(0, -height / 2, -width / 2));
+				_vertices.AddVertex(pivot + new Vector3Df(0, -height / 2, width / 2));
+				_vertices.AddVertex(pivot + new Vector3Df(0, height / 2,-width / 2));
+				_vertices.AddVertex(pivot + new Vector3Df(0, height / 2, width / 2));
 
-				mTriangles.Clear();
-				mTriangles.AddTriangleQuad();
+				_triangles.Clear();
+				_triangles.AddTriangleQuad();
 
 				this.ComputeNormals();
 				this.ComputeUVMap();
@@ -317,16 +317,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateQuadXY(Vector3Df pivot, Single width, Single height)
 			{
-				mPlaneType = Maths.TDimensionPlane.XY;
+				_planeType = Maths.TDimensionPlane.XY;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot + new Vector3Df(-width / 2, -height / 2, 0));
-				mVertices.AddVertex(pivot + new Vector3Df(width / 2, -height / 2, 0));
-				mVertices.AddVertex(pivot + new Vector3Df(-width / 2, height / 2, 0));
-				mVertices.AddVertex(pivot + new Vector3Df(width / 2, height / 2, 0));
+				_vertices.Clear();
+				_vertices.AddVertex(pivot + new Vector3Df(-width / 2, -height / 2, 0));
+				_vertices.AddVertex(pivot + new Vector3Df(width / 2, -height / 2, 0));
+				_vertices.AddVertex(pivot + new Vector3Df(-width / 2, height / 2, 0));
+				_vertices.AddVertex(pivot + new Vector3Df(width / 2, height / 2, 0));
 
-				mTriangles.Clear();
-				mTriangles.AddTriangleQuad();
+				_triangles.Clear();
+				_triangles.AddTriangleQuad();
 
 				this.ComputeNormals();
 				this.ComputeUVMap();
@@ -343,15 +343,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeNormals()
 			{
-				Vector3Df down = mVertices.Vertices[2].Position - mVertices.Vertices[0].Position;
-				Vector3Df right = mVertices.Vertices[1].Position - mVertices.Vertices[0].Position;
+				Vector3Df down = _vertices.Vertices[2].Position - _vertices.Vertices[0].Position;
+				Vector3Df right = _vertices.Vertices[1].Position - _vertices.Vertices[0].Position;
 
 				Vector3Df normal = Vector3Df.Cross(in down, in right).Normalized;
 
-				mVertices.Vertices[0].Normal = normal;
-				mVertices.Vertices[1].Normal = normal;
-				mVertices.Vertices[2].Normal = normal;
-				mVertices.Vertices[3].Normal = normal;
+				_vertices.Vertices[0].Normal = normal;
+				_vertices.Vertices[1].Normal = normal;
+				_vertices.Vertices[2].Normal = normal;
+				_vertices.Vertices[3].Normal = normal;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -362,10 +362,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeUVMap(Int32 channel = 0)
 			{
-				mVertices.Vertices[0].UV = XGeometry2D.MapUVBottomLeft;
-				mVertices.Vertices[1].UV = XGeometry2D.MapUVBottomRight;
-				mVertices.Vertices[2].UV = XGeometry2D.MapUVTopLeft;
-				mVertices.Vertices[3].UV = XGeometry2D.MapUVTopRight;
+				_vertices.Vertices[0].UV = XGeometry2D.MapUVBottomLeft;
+				_vertices.Vertices[1].UV = XGeometry2D.MapUVBottomRight;
+				_vertices.Vertices[2].UV = XGeometry2D.MapUVTopLeft;
+				_vertices.Vertices[3].UV = XGeometry2D.MapUVTopRight;
 			}
 			#endregion
 		}

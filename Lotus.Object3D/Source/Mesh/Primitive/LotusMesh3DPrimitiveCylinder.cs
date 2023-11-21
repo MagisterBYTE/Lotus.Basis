@@ -40,10 +40,10 @@ namespace Lotus
 		public class CMeshPrimitiveCylinder3Df : CMesh3Df
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal Single mRadius;
-			internal Single mHeight;
-			internal Int32 mNumberVerticalSegment = 18;
-			internal Int32 mNumberHorizontalSegment = 18;
+			protected internal Single _radius;
+			protected internal Single _height;
+			protected internal Int32 _numberVerticalSegment = 18;
+			protected internal Int32 _numberHorizontalSegment = 18;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -54,12 +54,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mRadius;
+					return _radius;
 				}
 
 				set
 				{
-					mRadius = value;
+					_radius = value;
 					CreateCylinder();
 				}
 			}
@@ -71,12 +71,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mHeight;
+					return _height;
 				}
 
 				set
 				{
-					mHeight = value;
+					_height = value;
 					CreateCylinder();
 				}
 			}
@@ -88,12 +88,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mNumberVerticalSegment;
+					return _numberVerticalSegment;
 				}
 
 				set
 				{
-					mNumberVerticalSegment = value;
+					_numberVerticalSegment = value;
 					CreateCylinder();
 				}
 			}
@@ -105,12 +105,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mNumberHorizontalSegment;
+					return _numberHorizontalSegment;
 				}
 
 				set
 				{
-					mNumberHorizontalSegment = value;
+					_numberHorizontalSegment = value;
 					CreateCylinder();
 				}
 			}
@@ -125,7 +125,7 @@ namespace Lotus
 			public CMeshPrimitiveCylinder3Df()
 				:base()
 			{
-				mName = "Cylinder3D";
+				_name = "Cylinder3D";
 			}
 			#endregion
 

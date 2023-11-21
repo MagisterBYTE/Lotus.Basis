@@ -61,24 +61,24 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Boolean mIsVisible = true;
-			protected internal CMesh3Df mMesh;
-			protected internal CMaterial mMaterial;
+			protected internal Boolean _isVisible = true;
+			protected internal CMesh3Df _mesh;
+			protected internal CMaterial _material;
 
 			// Размеры и позиция
-			protected internal Vector3Df mLocation;
-			protected internal Vector3Df mMinPosition;
-			protected internal Vector3Df mMaxPosition;
+			protected internal Vector3Df _location;
+			protected internal Vector3Df _minPosition;
+			protected internal Vector3Df _maxPosition;
 
 			// Платформенно-зависимая часть
 #if USE_HELIX
-			internal MeshNode mHelixModel;
+			internal MeshNode _helixModel;
 #endif
 #if UNITY_2017_1_OR_NEWER
-			internal UnityEngine.MeshFilter mUnityModel;
+			internal UnityEngine.MeshFilter _unityModel;
 #endif
 #if UNITY_EDITOR
-			internal Autodesk.Fbx.FbxNode mFbxModel;
+			internal Autodesk.Fbx.FbxNode _fbxModel;
 #endif
 			#endregion
 
@@ -89,19 +89,15 @@ namespace Lotus
 			/// <summary>
 			/// Видимость модели
 			/// </summary>
-			[DisplayName("Видимость")]
-			[Description("Видимость модели")]
-			[Category(XInspectorGroupDesc.Params)]
-			[LotusPropertyOrder(0)]
 			public Boolean IsVisible
 			{
 				get
 				{
-					return mIsVisible;
+					return _isVisible;
 				}
 				set
 				{
-					mIsVisible = value;
+					_isVisible = value;
 					RaiseIsVisibleChanged();
 					NotifyPropertyChanged(PropertyArgsIsVisible );
 				}
@@ -110,19 +106,15 @@ namespace Lotus
 			/// <summary>
 			/// Меш модели
 			/// </summary>
-			[DisplayName("Меш модели")]
-			[Description("Меш модели")]
-			[Category(XInspectorGroupDesc.Params)]
-			[LotusPropertyOrder(1)]
 			public CMesh3Df Mesh
 			{
 				get
 				{
-					return mMesh;
+					return _mesh;
 				}
 				set
 				{
-					mMesh = value;
+					_mesh = value;
 					RaiseMeshChanged();
 					NotifyPropertyChanged(PropertyArgsMesh);
 				}
@@ -131,19 +123,15 @@ namespace Lotus
 			/// <summary>
 			/// Материал модели
 			/// </summary>
-			[DisplayName("Материал модели")]
-			[Description("Материал модели")]
-			[Category(XInspectorGroupDesc.Params)]
-			[LotusPropertyOrder(1)]
 			public CMaterial Material
 			{
 				get
 				{
-					return mMaterial;
+					return _material;
 				}
 				set
 				{
-					mMaterial = value;
+					_material = value;
 					RaiseMaterialChanged();
 					NotifyPropertyChanged(PropertyArgsMaterial);
 				}
@@ -155,45 +143,33 @@ namespace Lotus
 			/// <summary>
 			/// Позиция геометрического центра модели
 			/// </summary>
-			[DisplayName("Центр")]
-			[Description("Позиция геометрического центра модели")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Vector3Df Location
 			{
-				get { return mLocation; }
+				get { return _location; }
 			}
 
 			/// <summary>
 			/// Размер меша по оси X
 			/// </summary>
-			[DisplayName("Размер по X")]
-			[Description("Размер меша по оси X")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeX
 			{
-				get { return mMaxPosition.X - mMinPosition.X; }
+				get { return _maxPosition.X - _minPosition.X; }
 			}
 
 			/// <summary>
 			/// Размер меша по оси Y
 			/// </summary>
-			[DisplayName("Размер по Y")]
-			[Description("Размер меша по оси Y")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeY
 			{
-				get { return mMaxPosition.Y - mMinPosition.Y; }
+				get { return _maxPosition.Y - _minPosition.Y; }
 			}
 
 			/// <summary>
 			/// Размер меша по оси Z
 			/// </summary>
-			[DisplayName("Размер по Z")]
-			[Description("Размер меша по оси Z")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeZ
 			{
-				get { return mMaxPosition.Z - mMinPosition.Z; }
+				get { return _maxPosition.Z - _minPosition.Z; }
 			}
 
 			//
@@ -203,10 +179,9 @@ namespace Lotus
 			/// <summary>
 			/// Модель
 			/// </summary>
-			[Browsable(false)]
 			public MeshNode HelixModel
 			{
-				get { return mHelixModel; }
+				get { return _helixModel; }
 			}
 #endif
 			#endregion
@@ -222,8 +197,8 @@ namespace Lotus
 			public CModel3D(CScene3D ownerScene, CNode3D parentNode)
 				: base(ownerScene)
 			{
-				mOwnerScene = ownerScene;
-				mParentNode = parentNode;
+				_ownerScene = ownerScene;
+				_parentNode = parentNode;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -238,8 +213,8 @@ namespace Lotus
 			public CModel3D(CScene3D ownerScene, CNode3D parentNode, CMesh3Df mesh, CMaterial material)
 				: this(ownerScene, parentNode)
 			{
-				mMesh = mesh;
-				mMaterial = material;
+				_mesh = mesh;
+				_material = material;
 			}
 
 #if UNITY_2017_1_OR_NEWER
@@ -254,8 +229,8 @@ namespace Lotus
 			public CModel3D(CScene3D owner_scene, CNode3D parent_node, UnityEngine.MeshFilter unity_model)
 				: this(owner_scene, parent_node)
 			{
-				mName = unity_model.name;
-				mUnityModel = unity_model;
+				_name = unity_model.name;
+				_unityModel = unity_model;
 			}
 #endif
 #if UNITY_EDITOR
@@ -270,8 +245,8 @@ namespace Lotus
 			public CModel3D(CScene3D owner_scene, CNode3D parent_node, Autodesk.Fbx.FbxNode fbx_model)
 				: this(owner_scene, parent_node)
 			{
-				mName = fbx_model.GetName();
-				mFbxModel = fbx_model;
+				_name = fbx_model.GetName();
+				_fbxModel = fbx_model;
 			}
 #endif
 			#endregion
@@ -375,14 +350,14 @@ namespace Lotus
 				//mHelix3DModel = new Helix3D.MeshGeometryModel3D();
 
 				// Геометрия
-				//mHelix3DModel.Geometry = mSubmittedMesh.mHelixMesh;
+				//mHelix3DModel.Geometry = mSubmittedMesh._helixMesh;
 
 				// Материал
 				//mHelix3DModel.Material = mOwnerNode.OwnerScene.GetMaterialHelixFromIndex(mSubmittedMesh.MaterialIndex);
 
 				// Трансформация
-				//mHelix3DModel.Transform = new Media3D.MatrixTransform3D(mOwnerNode.mAssimpNode.Transform.ToWinMatrix4D());
-				//mHelix3DModel.Transform = mOwnerNode.mNodeTransform;
+				//mHelix3DModel.Transform = new Media3D.MatrixTransform3D(mOwnerNode._assimpNode.Transform.ToWinMatrix4D());
+				//mHelix3DModel.Transform = mOwnerNode._nodeTransform;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -392,16 +367,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			internal void ComputeBoundingBox()
 			{
-				if (mHelixModel != null)
+				if (_helixModel != null)
 				{
-					SharpDX.BoundingBox bounding_box = mHelixModel.BoundsWithTransform;
+					SharpDX.BoundingBox bounding_box = _helixModel.BoundsWithTransform;
 
-					mMinPosition = new Vector3D(bounding_box.Minimum.X, bounding_box.Minimum.Y, bounding_box.Minimum.Z);
-					mMaxPosition = new Vector3D(bounding_box.Maximum.X, bounding_box.Maximum.Y, bounding_box.Maximum.Z);
+					_minPosition = new Vector3D(bounding_box.Minimum.X, bounding_box.Minimum.Y, bounding_box.Minimum.Z);
+					_maxPosition = new Vector3D(bounding_box.Maximum.X, bounding_box.Maximum.Y, bounding_box.Maximum.Z);
 
-					mLocation.X = (mMinPosition.X + mMaxPosition.X) / 2.0f;
-					mLocation.Y = (mMinPosition.Y + mMaxPosition.Y) / 2.0f;
-					mLocation.Z = (mMinPosition.Z + mMaxPosition.Z) / 2.0f;
+					_location.X = (_minPosition.X + _maxPosition.X) / 2.0f;
+					_location.Y = (_minPosition.Y + _maxPosition.Y) / 2.0f;
+					_location.Z = (_minPosition.Z + _maxPosition.Z) / 2.0f;
 
 					NotifyPropertyChanged(PropertyArgsLocation);
 					NotifyPropertyChanged(PropertyArgsSizeX);

@@ -47,35 +47,35 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			internal protected Int32 mIndex;
-			internal protected Int32 mOrder;
-			internal protected Boolean mHasUVMap = true;
+			protected internal Int32 _index;
+			protected internal Int32 _order;
+			protected internal Boolean _hasUVMap = true;
 
 			// Параметры геометрии
-			internal protected CListVertex3D mVertices;
-			internal protected CListTriangle3D mTriangles;
-			internal protected CListEdge3D mEdges;
+			protected internal CListVertex3D _vertices;
+			protected internal CListTriangle3D _triangles;
+			protected internal CListEdge3D _edges;
 
 			// Размеры и позиция
-			internal protected Vector3Df mLocation;
-			internal protected Vector3Df mMinPosition;
-			internal protected Vector3Df mMaxPosition;
-			internal protected Vector3Df mUp;
-			internal protected Vector3Df mRight;
-			internal protected Vector3Df mFront;
+			protected internal Vector3Df _location;
+			protected internal Vector3Df _minPosition;
+			protected internal Vector3Df _maxPosition;
+			protected internal Vector3Df _up;
+			protected internal Vector3Df _right;
+			protected internal Vector3Df _front;
 
 			// Платформенно-зависимая часть
 #if USE_ASSIMP
-			internal Assimp.Mesh mAssimpMesh;
+			internal Assimp.Mesh _assimpMesh;
 #endif
 #if USE_HELIX
-			internal MeshGeometry3D mHelixMesh;
+			internal MeshGeometry3D _helixMesh;
 #endif
 #if UNITY_2017_1_OR_NEWER
-			internal UnityEngine.Mesh mUnityMesh;
+			internal UnityEngine.Mesh _unityMesh;
 #endif
 #if UNITY_EDITOR
-			internal Autodesk.Fbx.FbxMesh mFbxMesh;
+			internal Autodesk.Fbx.FbxMesh _fbxMesh;
 #endif
 			#endregion
 
@@ -86,17 +86,12 @@ namespace Lotus
 			/// <summary>
 			/// Индекс меша в наборе мешей сцены
 			/// </summary>
-			[DisplayName("Индекс меша")]
-			[Description("Индекс меша в наборе мешей сцены")]
-			[Category(XInspectorGroupDesc.Params)]
-			[ReadOnly(true)]
-			[LotusPropertyOrder(0)]
 			public Int32 Index
 			{
-				get { return mIndex; }
+				get { return _index; }
 				set
 				{
-					mIndex = value;
+					_index = value;
 				}
 			}
 
@@ -105,8 +100,8 @@ namespace Lotus
 			/// </summary>
 			public Int32 Order
 			{
-				get { return mOrder; }
-				set { mOrder = value; }
+				get { return _order; }
+				set { _order = value; }
 			}
 
 			//
@@ -117,7 +112,7 @@ namespace Lotus
 			/// </summary>
 			public CListVertex3D Vertices
 			{
-				get { return mVertices; }
+				get { return _vertices; }
 			}
 
 			/// <summary>
@@ -125,7 +120,7 @@ namespace Lotus
 			/// </summary>
 			public CListTriangle3D Triangles
 			{
-				get { return mTriangles; }
+				get { return _triangles; }
 			}
 
 			/// <summary>
@@ -133,16 +128,12 @@ namespace Lotus
 			/// </summary>
 			public CListEdge3D Edges
 			{
-				get { return mEdges; }
+				get { return _edges; }
 			}
 
 			/// <summary>
 			/// Количество вершин меша
 			/// </summary>
-			[DisplayName("Кол-во вершин")]
-			[Description("Количество вершин меша")]
-			[Category(XInspectorGroupDesc.Params)]
-			[LotusPropertyOrder(2)]
 			public Int32 CountVertices
 			{
 				get { return Vertices.Count; }
@@ -151,10 +142,6 @@ namespace Lotus
 			/// <summary>
 			/// Количество граней меша
 			/// </summary>
-			[DisplayName("Кол-во граней")]
-			[Description("Количество граней меша")]
-			[Category(XInspectorGroupDesc.Params)]
-			[LotusPropertyOrder(3)]
 			public Int32 CountFaces
 			{
 				get { return Triangles.Count; }
@@ -168,10 +155,10 @@ namespace Lotus
 			/// </summary>
 			public virtual CVertex3Df Pivot
 			{
-				get { return mVertices[0]; }
+				get { return _vertices[0]; }
 				set
 				{
-					mVertices.Vertices[0] = value;
+					_vertices.Vertices[0] = value;
 					UpdateData();
 				}
 			}
@@ -179,45 +166,33 @@ namespace Lotus
 			/// <summary>
 			/// Позиция геометрического центра меша
 			/// </summary>
-			[DisplayName("Центр")]
-			[Description("Позиция геометрического центра меша")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Vector3Df Location
 			{
-				get { return mLocation; }
+				get { return _location; }
 			}
 
 			/// <summary>
 			/// Размер меша по оси X
 			/// </summary>
-			[DisplayName("Размер по X")]
-			[Description("Размер меша по оси X")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeX
 			{
-				get { return mMaxPosition.X - mMinPosition.X; }
+				get { return _maxPosition.X - _minPosition.X; }
 			}
 
 			/// <summary>
 			/// Размер меша по оси Y
 			/// </summary>
-			[DisplayName("Размер по Y")]
-			[Description("Размер меша по оси Y")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeY
 			{
-				get { return mMaxPosition.Y - mMinPosition.Y; }
+				get { return _maxPosition.Y - _minPosition.Y; }
 			}
 
 			/// <summary>
 			/// Размер меша по оси Z
 			/// </summary>
-			[DisplayName("Размер по Z")]
-			[Description("Размер меша по оси Z")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeZ
 			{
-				get { return mMaxPosition.Z - mMinPosition.Z; }
+				get { return _maxPosition.Z - _minPosition.Z; }
 			}
 
 			/// <summary>
@@ -225,18 +200,13 @@ namespace Lotus
 			/// </summary>
 			public TMeshElement MeshElement { get { return TMeshElement.Mesh; } }
 
-
 			/// <summary>
 			/// Индекс используемого материала
 			/// </summary>
-			[DisplayName("Индекс материала")]
-			[Description("Индекс используемого материала")]
-			[Category(XInspectorGroupDesc.Params)]
-			[LotusPropertyOrder(1)]
 			public Int32 MaterialIndex
 			{
 #if USE_ASSIMP
-				get { return mAssimpMesh.MaterialIndex; }
+				get { return _assimpMesh.MaterialIndex; }
 #else
 				get { return 0; }
 #endif
@@ -251,9 +221,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMesh3Df()
 			{
-				mVertices = new CListVertex3D();
-				mTriangles = new CListTriangle3D(mVertices);
-				mEdges = new CListEdge3D(mVertices);
+				_vertices = new CListVertex3D();
+				_triangles = new CListTriangle3D(_vertices);
+				_edges = new CListEdge3D(_vertices);
 			}
 
 #if USE_ASSIMP
@@ -266,11 +236,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMesh3Df(String mesh_name, Assimp.Mesh assimp_mesh)
 			{
-				mName = mesh_name;
-				mVertices = new CListVertex3D();
-				mTriangles = new CListTriangle3D(mVertices);
-				mEdges = new CListEdge3D(mVertices);
-				mAssimpMesh = assimp_mesh;
+				_name = mesh_name;
+				_vertices = new CListVertex3D();
+				_triangles = new CListTriangle3D(_vertices);
+				_edges = new CListEdge3D(_vertices);
+				_assimpMesh = assimp_mesh;
 				//CreateFromAs(unity_mesh);
 			}
 #endif
@@ -284,10 +254,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMesh3Df(UnityEngine.Mesh unity_mesh)
 			{
-				mVertices = new CListVertex3D();
-				mTriangles = new CListTriangle3D(mVertices);
-				mEdges = new CListEdge3D(mVertices);
-				mUnityMesh = unity_mesh;
+				_vertices = new CListVertex3D();
+				_triangles = new CListTriangle3D(_vertices);
+				_edges = new CListEdge3D(_vertices);
+				_unityMesh = unity_mesh;
 				CreateFromUnityMesh(unity_mesh);
 			}
 #endif
@@ -300,14 +270,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMesh3Df(Autodesk.Fbx.FbxMesh fbx_mesh)
 			{
-				mVertices = new CListVertex3D();
-				mTriangles = new CListTriangle3D(mVertices);
-				mEdges = new CListEdge3D(mVertices);
-				mFbxMesh = fbx_mesh;
-				mName = fbx_mesh.GetName();
-				if(mName.IsExists() == false)
+				_vertices = new CListVertex3D();
+				_triangles = new CListTriangle3D(_vertices);
+				_edges = new CListEdge3D(_vertices);
+				_fbxMesh = fbx_mesh;
+				_name = fbx_mesh.GetName();
+				if(_name.IsExists() == false)
 				{
-					mName = fbx_mesh.GetInitialName();
+					_name = fbx_mesh.GetInitialName();
 				}
 				//CreateFromUnityMesh(unity_mesh);
 				//asdasd
@@ -325,13 +295,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(CMesh3Df other)
 			{
-				if (mOrder > other.mOrder)
+				if (_order > other._order)
 				{
 					return 1;
 				}
 				else
 				{
-					if (mOrder < other.mOrder)
+					if (_order < other._order)
 					{
 						return -1;
 					}
@@ -361,7 +331,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return mName;
+				return _name;
 			}
 			#endregion
 
@@ -374,7 +344,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Move(Vector3Df offset)
 			{
-				mVertices.Move(offset);
+				_vertices.Move(offset);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -385,7 +355,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Rotate(Quaternion3Df rotation)
 			{
-				mVertices.Rotate(rotation);
+				_vertices.Rotate(rotation);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -397,7 +367,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RotateFromX(Single angle, Boolean isCenter)
 			{
-				mVertices.RotateFromX(angle, isCenter);
+				_vertices.RotateFromX(angle, isCenter);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -409,7 +379,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RotateFromY(Single angle, Boolean isCenter)
 			{
-				mVertices.RotateFromY(angle, isCenter);
+				_vertices.RotateFromY(angle, isCenter);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -421,7 +391,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RotateFromZ(Single angle, Boolean isCenter)
 			{
-				mVertices.RotateFromZ(angle, isCenter);
+				_vertices.RotateFromZ(angle, isCenter);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -432,7 +402,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Scale(Single scale)
 			{
-				mVertices.Scale(scale);
+				_vertices.Scale(scale);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -443,7 +413,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Scale(Vector3Df scale)
 			{
-				mVertices.Scale(scale);
+				_vertices.Scale(scale);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -453,7 +423,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void FlipNormals()
 			{
-				mVertices.FlipNormals();
+				_vertices.FlipNormals();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -464,7 +434,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void FlipUVHorizontally(Int32 channel = 0)
 			{
-				mVertices.FlipUVHorizontally(channel);
+				_vertices.FlipUVHorizontally(channel);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -475,7 +445,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void FlipUVVertically(Int32 channel = 0)
 			{
-				mVertices.FlipUVVertically(channel);
+				_vertices.FlipUVVertically(channel);
 			}
 			#endregion
 
@@ -490,10 +460,10 @@ namespace Lotus
 			{
 				for (var i = 0; i < mesh.Triangles.Count; i++)
 				{
-					mTriangles.Add(mesh.mTriangles[i].GetTriangleOffset(mVertices.Count));
+					_triangles.Add(mesh._triangles[i].GetTriangleOffset(_vertices.Count));
 				}
 
-				Vertices.AddItems(mesh.mVertices);
+				Vertices.AddItems(mesh._vertices);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -505,10 +475,10 @@ namespace Lotus
 			public virtual CMesh3Df Duplicate()
 			{
 				var mesh = new CMesh3Df();
-				mesh.Name = mName + "(Copy)";
-				mesh.Order = mOrder;
-				mesh.mVertices.Add(mVertices);
-				mesh.mTriangles.Add(mTriangles);
+				mesh.Name = _name + "(Copy)";
+				mesh.Order = _order;
+				mesh._vertices.Add(_vertices);
+				mesh._triangles.Add(_triangles);
 
 				return mesh;
 			}
@@ -520,9 +490,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Clear()
 			{
-				mVertices.Clear();
-				mTriangles.Clear();
-				mEdges.Clear();
+				_vertices.Clear();
+				_triangles.Clear();
+				_edges.Clear();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -543,9 +513,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void FlipTriangles()
 			{
-				for (var i = 0; i < mTriangles.Count; i += 3)
+				for (var i = 0; i < _triangles.Count; i += 3)
 				{
-					//mTriangles.Vertices[i].F();
+					//_triangles.Vertices[i].F();
 				}
 			}
 
@@ -587,7 +557,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Centering()
 			{
-				mVertices.Move(-mVertices.GetCentredPosition());
+				_vertices.Move(-_vertices.GetCentredPosition());
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -597,25 +567,25 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ComputeLocalBoundingBox()
 			{
-				mMinPosition = new Vector3Df(1e10f, 1e10f, 1e10f);
-				mMaxPosition = new Vector3Df(-1e10f, -1e10f, -1e10f);
+				_minPosition = new Vector3Df(1e10f, 1e10f, 1e10f);
+				_maxPosition = new Vector3Df(-1e10f, -1e10f, -1e10f);
 
-				for (var i = 0; i < mVertices.Count; i++)
+				for (var i = 0; i < _vertices.Count; i++)
 				{
-					Vector3Df tmp = mVertices[i].Position;
+					Vector3Df tmp = _vertices[i].Position;
 
-					mMinPosition.X = Math.Min(mMinPosition.X, tmp.X);
-					mMinPosition.Y = Math.Min(mMinPosition.Y, tmp.Y);
-					mMinPosition.Z = Math.Min(mMinPosition.Z, tmp.Z);
+					_minPosition.X = Math.Min(_minPosition.X, tmp.X);
+					_minPosition.Y = Math.Min(_minPosition.Y, tmp.Y);
+					_minPosition.Z = Math.Min(_minPosition.Z, tmp.Z);
 
-					mMaxPosition.X = Math.Max(mMaxPosition.X, tmp.X);
-					mMaxPosition.Y = Math.Max(mMaxPosition.Y, tmp.Y);
-					mMaxPosition.Z = Math.Max(mMaxPosition.Z, tmp.Z);
+					_maxPosition.X = Math.Max(_maxPosition.X, tmp.X);
+					_maxPosition.Y = Math.Max(_maxPosition.Y, tmp.Y);
+					_maxPosition.Z = Math.Max(_maxPosition.Z, tmp.Z);
 				}
 
-				mLocation.X = (mMinPosition.X + mMaxPosition.X) / 2.0f;
-				mLocation.Y = (mMinPosition.Y + mMaxPosition.Y) / 2.0f;
-				mLocation.Z = (mMinPosition.Z + mMaxPosition.Z) / 2.0f;
+				_location.X = (_minPosition.X + _maxPosition.X) / 2.0f;
+				_location.Y = (_minPosition.Y + _maxPosition.Y) / 2.0f;
+				_location.Z = (_minPosition.Z + _maxPosition.Z) / 2.0f;
 			}
 			#endregion
 
@@ -629,7 +599,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void SetVertexPosition(Int32 index, Vector3Df position)
 			{
-				mVertices.Vertices[index].Position = position;
+				_vertices.Vertices[index].Position = position;
 			}
 			#endregion
 
@@ -644,13 +614,13 @@ namespace Lotus
 			public Vector3Df GetSmoothNormal(Int32 indexVertex)
 			{
 				// Получаем список треугольников к указанной вершине
-				List<CTriangle3Df> triangles = mTriangles.GetTrianglesOfIndexVertex(indexVertex);
+				List<CTriangle3Df> triangles = _triangles.GetTrianglesOfIndexVertex(indexVertex);
 
 				// Суммируем нормали
 				Vector3Df normal = Vector3Df.Zero;
 				for (var i = 0; i < triangles.Count; i++)
 				{
-					normal += triangles[i].GetNormal(indexVertex, mVertices);
+					normal += triangles[i].GetNormal(indexVertex, _vertices);
 				}
 
 				// Усредняем
@@ -666,9 +636,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SmoothNormals()
 			{
-				for (var i = 0; i < mVertices.Count; i++)
+				for (var i = 0; i < _vertices.Count; i++)
 				{
-					mVertices.Vertices[i].Normal = GetSmoothNormal(i);
+					_vertices.Vertices[i].Normal = GetSmoothNormal(i);
 				}
 			}
 			#endregion
@@ -682,48 +652,48 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateFromHelixMesh()
 			{
-                mHelixMesh = new MeshGeometry3D();
+                _helixMesh = new MeshGeometry3D();
 
                 // Вершины
-                mHelixMesh.Positions = new Vector3Collection(mAssimpMesh.VertexCount);
-                for (var i = 0; i < mAssimpMesh.VertexCount; i++)
+                _helixMesh.Positions = new Vector3Collection(_assimpMesh.VertexCount);
+                for (var i = 0; i < _assimpMesh.VertexCount; i++)
                 {
-                    mHelixMesh.Positions.Add(mAssimpMesh.Vertices[i].ToShVector3D());
+                    _helixMesh.Positions.Add(_assimpMesh.Vertices[i].ToShVector3D());
                 }
 
                 // Нормали
-                mHelixMesh.Normals = new Vector3Collection(mAssimpMesh.Normals.Count);
-                for (var i = 0; i < mAssimpMesh.Normals.Count; i++)
+                _helixMesh.Normals = new Vector3Collection(_assimpMesh.Normals.Count);
+                for (var i = 0; i < _assimpMesh.Normals.Count; i++)
                 {
-                    mHelixMesh.Normals.Add(mAssimpMesh.Normals[i].ToShVector3D());
+                    _helixMesh.Normals.Add(_assimpMesh.Normals[i].ToShVector3D());
                 }
 
                 // Текстурные координаты
-                if (mAssimpMesh.TextureCoordinateChannels != null && mAssimpMesh.TextureCoordinateChannels.Length > 0)
+                if (_assimpMesh.TextureCoordinateChannels != null && _assimpMesh.TextureCoordinateChannels.Length > 0)
                 {
-                    List<Assimp.Vector3D> tex_coord_1 = mAssimpMesh.TextureCoordinateChannels[0];
-                    mHelixMesh.TextureCoordinates = new Vector2Collection(tex_coord_1.Count);
+                    List<Assimp.Vector3D> tex_coord_1 = _assimpMesh.TextureCoordinateChannels[0];
+                    _helixMesh.TextureCoordinates = new Vector2Collection(tex_coord_1.Count);
                     for (var i = 0; i < tex_coord_1.Count; i++)
                     {
-                        mHelixMesh.TextureCoordinates.Add(tex_coord_1[i].ToShVector2D());
+                        _helixMesh.TextureCoordinates.Add(tex_coord_1[i].ToShVector2D());
                     }
                 }
 
                 // Индексы
                 // Общее количество индексов
                 var total_index = 0;
-                for (var i = 0; i < mAssimpMesh.FaceCount; i++)
+                for (var i = 0; i < _assimpMesh.FaceCount; i++)
                 {
-                    total_index += mAssimpMesh.Faces[i].Indices.Count;
+                    total_index += _assimpMesh.Faces[i].Indices.Count;
                 }
 
-                mHelixMesh.TriangleIndices = new IntCollection(total_index);
-                for (var i = 0; i < mAssimpMesh.FaceCount; i++)
+                _helixMesh.TriangleIndices = new IntCollection(total_index);
+                for (var i = 0; i < _assimpMesh.FaceCount; i++)
                 {
-                    List<Int32> indices = mAssimpMesh.Faces[i].Indices;
+                    List<Int32> indices = _assimpMesh.Faces[i].Indices;
                     for (var j = 0; j < indices.Count; j++)
                     {
-                        mHelixMesh.TriangleIndices.Add(indices[j]);
+                        _helixMesh.TriangleIndices.Add(indices[j]);
                     }
                 }
             }
@@ -745,7 +715,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateFromUnityMesh(UnityEngine.Mesh unity_mesh)
 			{
-				mName = unity_mesh.name;
+				_name = unity_mesh.name;
 				//
 				// Vertices
 				//
@@ -756,28 +726,28 @@ namespace Lotus
 
 				if((uv2 != null && uv2.Length > 0) && (uv != null && uv.Length > 0))
 				{
-					mHasUVMap = true;
+					_hasUVMap = true;
 					for (Int32 i = 0; i < vertices.Length; i++)
 					{
-						mVertices.AddVertex(vertices[i], normals[i], uv[i], uv2[i]);
+						_vertices.AddVertex(vertices[i], normals[i], uv[i], uv2[i]);
 					}
 				}
 				else
 				{
 					if ((uv != null && uv.Length > 0))
 					{
-						mHasUVMap = true;
+						_hasUVMap = true;
 						for (Int32 i = 0; i < vertices.Length; i++)
 						{
-							mVertices.AddVertex(vertices[i], normals[i], uv[i]);
+							_vertices.AddVertex(vertices[i], normals[i], uv[i]);
 						}
 					}
 					else
 					{
-						mHasUVMap = false;
+						_hasUVMap = false;
 						for (Int32 i = 0; i < vertices.Length; i++)
 						{
-							mVertices.AddVertex(vertices[i], normals[i]);
+							_vertices.AddVertex(vertices[i], normals[i]);
 						}
 					}
 				}
@@ -790,7 +760,7 @@ namespace Lotus
 					Int32[] triangles = unity_mesh.GetTriangles(ic);
 					for (Int32 t = 0; t < triangles.Length / 3; t += 3)
 					{
-						mTriangles.AddTriangle(triangles[t], triangles[t + 1], triangles[t + 2]);
+						_triangles.AddTriangle(triangles[t], triangles[t + 1], triangles[t + 2]);
 					}
 				}
 
@@ -835,41 +805,41 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void FillUnityMesh(ref UnityEngine.Mesh mesh)
 			{
-				if (mVertices.Count > 65000)
+				if (_vertices.Count > 65000)
 				{
-					UnityEngine.Debug.LogError("A mesh may not have more than 65000 vertices. Vertex count: " + mVertices.Count);
+					UnityEngine.Debug.LogError("A mesh may not have more than 65000 vertices. Vertex count: " + _vertices.Count);
 				}
-				mesh.name = mName;
+				mesh.name = _name;
 
 				//
 				// Vertices
 				//
-				List<UnityEngine.Vector3> vertices = new List<UnityEngine.Vector3>(mVertices.Count);
-				for (Int32 i = 0; i < mVertices.Count; i++)
+				List<UnityEngine.Vector3> vertices = new List<UnityEngine.Vector3>(_vertices.Count);
+				for (Int32 i = 0; i < _vertices.Count; i++)
 				{
-					vertices.Add(mVertices.Vertices[i].Position);
+					vertices.Add(_vertices.Vertices[i].Position);
 				}
 				mesh.SetVertices(vertices);
 
 				//
 				// Normals
 				//
-				List<UnityEngine.Vector3> normals = new List<UnityEngine.Vector3>(mVertices.Count);
-				for (Int32 i = 0; i < mVertices.Count; i++)
+				List<UnityEngine.Vector3> normals = new List<UnityEngine.Vector3>(_vertices.Count);
+				for (Int32 i = 0; i < _vertices.Count; i++)
 				{
-					normals.Add(mVertices.Vertices[i].Normal);
+					normals.Add(_vertices.Vertices[i].Normal);
 				}
 				mesh.SetNormals(normals);
 
 				//
 				// Triangles
 				// 
-				List<Int32> triangles = new List<Int32>(mTriangles.Count * 3);
-				for (Int32 i = 0; i < mTriangles.Count; i++)
+				List<Int32> triangles = new List<Int32>(_triangles.Count * 3);
+				for (Int32 i = 0; i < _triangles.Count; i++)
 				{
-					triangles.Add(mTriangles[i].IndexVertex0);
-					triangles.Add(mTriangles[i].IndexVertex1);
-					triangles.Add(mTriangles[i].IndexVertex2);
+					triangles.Add(_triangles[i].IndexVertex0);
+					triangles.Add(_triangles[i].IndexVertex1);
+					triangles.Add(_triangles[i].IndexVertex2);
 				}
 				mesh.SetTriangles(triangles, 0);
 
@@ -877,19 +847,19 @@ namespace Lotus
 				//
 				// UV
 				//
-				if (mHasUVMap)
+				if (_hasUVMap)
 				{
-					List<UnityEngine.Vector2> uvs = new List<UnityEngine.Vector2>(mVertices.Count);
-					for (Int32 i = 0; i < mVertices.Count; i++)
+					List<UnityEngine.Vector2> uvs = new List<UnityEngine.Vector2>(_vertices.Count);
+					for (Int32 i = 0; i < _vertices.Count; i++)
 					{
-						uvs.Add(mVertices.Vertices[i].UV);
+						uvs.Add(_vertices.Vertices[i].UV);
 					}
 					mesh.SetUVs(0, uvs);
 				}
 
-				//if (mChannelUV.Count > 0) mesh.SetUVs(0, mChannelUV.ConvertToVector2List());
-				//if (mChannelUV2.Count > 0) mesh.SetUVs(1, mChannelUV2.ConvertToVector2List());
-				//if (mChannelUV3.Count > 0) mesh.SetUVs(2, mChannelUV3.ConvertToVector2List());
+				//if (mChannelUV.Count > 0) mesh.SetUVs(0, _channelUV.ConvertToVector2List());
+				//if (mChannelUV2.Count > 0) mesh.SetUVs(1, _channelUV2.ConvertToVector2List());
+				//if (mChannelUV3.Count > 0) mesh.SetUVs(2, _channelUV3.ConvertToVector2List());
 
 				//if (mTangents.Count > 0)
 				//{
@@ -911,7 +881,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void FromDMesh3(g3.DMesh3 mesh)
 			{
-				mVertices.Clear();
+				_vertices.Clear();
 
 				for (Int32 iv = 0; iv < mesh.VertexCount; iv++)
 				{
@@ -921,15 +891,15 @@ namespace Lotus
 					Vector3Df pos = new Vector3Df((Single)vertex_info.v.x, (Single)vertex_info.v.y, (Single)vertex_info.v.z);
 					Vector3Df norm = new Vector3Df(vertex_info.n.x, vertex_info.n.y, vertex_info.n.z);
 					Vector2Df uv = new Vector2Df(vertex_info.uv.x, vertex_info.uv.y);
-					mVertices.AddVertex(pos, norm, uv);
+					_vertices.AddVertex(pos, norm, uv);
 				}
 
-				mTriangles.Clear();
+				_triangles.Clear();
 
 				for (Int32 it = 0; it < mesh.TriangleCount; it++)
 				{
 					g3.Index3i triangle = mesh.GetTriangle(it);
-					mTriangles.AddTriangle(triangle.a, triangle.b, triangle.c);
+					_triangles.AddTriangle(triangle.a, triangle.b, triangle.c);
 				}
 			}
 
@@ -942,11 +912,11 @@ namespace Lotus
 			public g3.DMesh3 ToDMesh3()
 			{
 				g3.DMesh3 mesh = new g3.DMesh3(g3.MeshComponents.VertexNormals | g3.MeshComponents.VertexUVs);
-				for (Int32 iv = 0; iv < mVertices.Count; iv++)
+				for (Int32 iv = 0; iv < _vertices.Count; iv++)
 				{
-					g3.Vector3d pos = new g3.Vector3d(mVertices[iv].Position.X, mVertices[iv].Position.Y, mVertices[iv].Position.Z);
-					g3.Vector3f norm = new g3.Vector3f(mVertices[iv].Normal.X, mVertices[iv].Normal.Y, mVertices[iv].Normal.Z);
-					g3.Vector2f uv = new g3.Vector2f(mVertices[iv].UV.X, mVertices[iv].UV.Y);
+					g3.Vector3d pos = new g3.Vector3d(_vertices[iv].Position.X, _vertices[iv].Position.Y, _vertices[iv].Position.Z);
+					g3.Vector3f norm = new g3.Vector3f(_vertices[iv].Normal.X, _vertices[iv].Normal.Y, _vertices[iv].Normal.Z);
+					g3.Vector2f uv = new g3.Vector2f(_vertices[iv].UV.X, _vertices[iv].UV.Y);
 					g3.NewVertexInfo vertex = new g3.NewVertexInfo();
 					vertex.v = pos;
 					vertex.n = norm;
@@ -956,10 +926,10 @@ namespace Lotus
 					mesh.AppendVertex(vertex);
 				}
 
-				for (Int32 it = 0; it < mTriangles.Count; it++)
+				for (Int32 it = 0; it < _triangles.Count; it++)
 				{
-					g3.Index3i triangle = new g3.Index3i(mTriangles[it].IndexVertex0,
-						mTriangles[it].IndexVertex1, mTriangles[it].IndexVertex2);
+					g3.Index3i triangle = new g3.Index3i(_triangles[it].IndexVertex0,
+						_triangles[it].IndexVertex1, _triangles[it].IndexVertex2);
 					mesh.AppendTriangle(triangle);
 				}
 
@@ -985,12 +955,14 @@ namespace Lotus
 				return new g3.DenseGridTrilinearImplicit(levelSet.Grid, levelSet.GridOrigin, levelSet.CellSize);
 			}
 
+			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// 
 			/// </summary>
 			/// <param name="root"></param>
 			/// <param name="numcells"></param>
 			/// <returns></returns>
+			//---------------------------------------------------------------------------------------------------------
 			public g3.DMesh3 GenerateMeshFromImplicit(g3.BoundedImplicitFunction3d root, Int32 numcells)
 			{
 				g3.MarchingCubes c = new g3.MarchingCubes();
@@ -1045,18 +1017,17 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal ListArray<CMesh3Df> mMeshes;
-			protected internal CScene3D mOwnerScene;
+			protected internal ListArray<CMesh3Df> _meshes;
+			protected internal CScene3D _ownerScene;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
 			/// Наблюдаемая коллекция трехмерных сеток
 			/// </summary>
-			[Browsable(false)]
 			public ListArray<CMesh3Df> Meshes
 			{
-				get { return mMeshes; }
+				get { return _meshes; }
 			}
 			#endregion
 
@@ -1069,10 +1040,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMeshSet(CScene3D ownerScene)
 			{
-				mOwnerScene = ownerScene;
-				mName = "Сетки";
-				mMeshes = new ListArray<CMesh3Df>();
-				mMeshes.IsNotify = true;
+				_ownerScene = ownerScene;
+				_name = "Сетки";
+				_meshes = new ListArray<CMesh3Df>();
+				_meshes.IsNotify = true;
 			}
 
 #if USE_ASSIMP
@@ -1084,14 +1055,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMeshSet(Assimp.Scene assimp_scene)
 			{
-				mName = "Сетки";
-				mMeshes = new ListArray<CMesh3Df>();
+				_name = "Сетки";
+				_meshes = new ListArray<CMesh3Df>();
 
 				// Устанавливаем меши
 				for (var i = 0; i < assimp_scene.MeshCount; i++)
 				{
 					Assimp.Mesh mesh = assimp_scene.Meshes[i];
-					mMeshes.Add(new CMesh3Df("Mesh_" + i.ToString(), mesh));
+					_meshes.Add(new CMesh3Df("Mesh_" + i.ToString(), mesh));
 				}
 			}
 #endif
@@ -1106,7 +1077,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetCountChildrenNode()
 			{
-				return mMeshes.Count;
+				return _meshes.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1118,7 +1089,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetChildrenNode(Int32 index)
 			{
-				return mMeshes[index];
+				return _meshes[index];
 			}
 			#endregion
 
@@ -1131,9 +1102,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateHelixMeshes()
 			{
-				for (var i = 0; i < mMeshes.Count; i++)
+				for (var i = 0; i < _meshes.Count; i++)
 				{
-					//mMeshes[i].CreateHelixMesh();
+					//_meshes[i].CreateHelixMesh();
 				}
 			}
 #endif

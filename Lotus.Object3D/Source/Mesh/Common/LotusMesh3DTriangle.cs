@@ -384,11 +384,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Move(Vector3Df offset)
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					Vertices.Vertices[mArrayOfItems[i].IndexVertex0].Position += offset;
-					Vertices.Vertices[mArrayOfItems[i].IndexVertex1].Position += offset;
-					Vertices.Vertices[mArrayOfItems[i].IndexVertex2].Position += offset;
+					Vertices.Vertices[_arrayOfItems[i].IndexVertex0].Position += offset;
+					Vertices.Vertices[_arrayOfItems[i].IndexVertex1].Position += offset;
+					Vertices.Vertices[_arrayOfItems[i].IndexVertex2].Position += offset;
 				}
 			}
 
@@ -468,9 +468,9 @@ namespace Lotus
 			public CListTriangle3D Duplicate()
 			{
 				var list_triangle = new CListTriangle3D(Vertices);
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					list_triangle.Add(mArrayOfItems[i]);
+					list_triangle.Add(_arrayOfItems[i]);
 				}
 				return list_triangle;
 			}
@@ -486,9 +486,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Offset(Int32 countVertex)
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					mArrayOfItems[i].Offset(countVertex);
+					_arrayOfItems[i].Offset(countVertex);
 				}
 			}
 
@@ -505,9 +505,9 @@ namespace Lotus
 			public CListTriangle3D GetTrianglesOffset(Int32 countVertex)
 			{
 				var list_triangle = new CListTriangle3D(Vertices);
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					list_triangle.Add(mArrayOfItems[i].GetTriangleOffset(countVertex));
+					list_triangle.Add(_arrayOfItems[i].GetTriangleOffset(countVertex));
 				}
 				return list_triangle;
 			}
@@ -524,11 +524,11 @@ namespace Lotus
 				var triangles = new List<CTriangle3Df>(3);
 				for (var i = 0; i < Count; i++)
 				{
-					if (mArrayOfItems[i].IndexVertex0 == indexVertex ||
-						mArrayOfItems[i].IndexVertex1 == indexVertex ||
-						mArrayOfItems[i].IndexVertex2 == indexVertex)
+					if (_arrayOfItems[i].IndexVertex0 == indexVertex ||
+						_arrayOfItems[i].IndexVertex1 == indexVertex ||
+						_arrayOfItems[i].IndexVertex2 == indexVertex)
 					{
-						triangles.Add(mArrayOfItems[i]);
+						triangles.Add(_arrayOfItems[i]);
 					}
 				}
 
@@ -542,9 +542,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Flip()
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					mArrayOfItems[i].Flip();
+					_arrayOfItems[i].Flip();
 				}
 			}
 			#endregion

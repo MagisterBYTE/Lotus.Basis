@@ -55,10 +55,10 @@ namespace Lotus
 		public class CMeshPlanarEllipse3Df : CMeshPlanar3Df
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal Single mRadiusX;
-			internal Single mRadiusY;
-			internal Single mStartAngle;
-			internal Int32 mNumberSegment = 18;
+			protected internal Single _radiusX;
+			protected internal Single _radiusY;
+			protected internal Single _startAngle;
+			protected internal Int32 _numberSegment = 18;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -67,10 +67,10 @@ namespace Lotus
 			/// </summary>
 			public Single RadiusX
 			{
-				get { return mRadiusX; }
+				get { return _radiusX; }
 				set
 				{
-					mRadiusX = value;
+					_radiusX = value;
 					CreateEllipse();
 				}
 			}
@@ -80,10 +80,10 @@ namespace Lotus
 			/// </summary>
 			public Single RadiusY
 			{
-				get { return mRadiusY; }
+				get { return _radiusY; }
 				set
 				{
-					mRadiusY = value;
+					_radiusY = value;
 					CreateEllipse();
 				}
 			}
@@ -93,10 +93,10 @@ namespace Lotus
 			/// </summary>
 			public Single StartAngle
 			{
-				get { return mStartAngle; }
+				get { return _startAngle; }
 				set
 				{
-					mStartAngle = value;
+					_startAngle = value;
 					CreateEllipse();
 				}
 			}
@@ -106,10 +106,10 @@ namespace Lotus
 			/// </summary>
 			public Int32 NumberSegment
 			{
-				get { return mNumberSegment; }
+				get { return _numberSegment; }
 				set
 				{
-					mNumberSegment = value;
+					_numberSegment = value;
 					CreateEllipse();
 				}
 			}
@@ -124,7 +124,7 @@ namespace Lotus
 			public CMeshPlanarEllipse3Df()
 				:base()
 			{
-				mName = "Ellipse3D";
+				_name = "Ellipse3D";
 			}
 			#endregion
 
@@ -137,37 +137,37 @@ namespace Lotus
 			protected void CreateEllipse()
 			{
 				// Сохраняем опорную точку
-				Vector3Df pivot = mVertices[0].Position;
-				mVertices.Clear();
+				Vector3Df pivot = _vertices[0].Position;
+				_vertices.Clear();
 
-				var segment_angle = 360f / mNumberSegment;
-				var current_angle = mStartAngle;
+				var segment_angle = 360f / _numberSegment;
+				var current_angle = _startAngle;
 
 				Vector3Df normal = GetPerpendicularVector();
-				mVertices.AddVertex(pivot, normal, XGeometry2D.MapUVMiddleCenter);
+				_vertices.AddVertex(pivot, normal, XGeometry2D.MapUVMiddleCenter);
 
-				for (var i = 0; i < mNumberSegment; i++)
+				for (var i = 0; i < _numberSegment; i++)
 				{
 					var angle_in_radians = current_angle * XMath.DegreeToRadian_F;
 					Vector3Df pos = Vector3Df.Zero;
-					switch (mPlaneType)
+					switch (_planeType)
 					{
 						case Maths.TDimensionPlane.XZ:
 							{
-								pos.X = mRadiusX * XMath.Cos(angle_in_radians);
-								pos.Z = mRadiusY * XMath.Sin(angle_in_radians);
+								pos.X = _radiusX * XMath.Cos(angle_in_radians);
+								pos.Z = _radiusY * XMath.Sin(angle_in_radians);
 							}
 							break;
 						case Maths.TDimensionPlane.ZY:
 							{
-								pos.Z = mRadiusX * XMath.Cos(angle_in_radians);
-								pos.Y = mRadiusY * XMath.Sin(angle_in_radians);
+								pos.Z = _radiusX * XMath.Cos(angle_in_radians);
+								pos.Y = _radiusY * XMath.Sin(angle_in_radians);
 							}
 							break;
 						case Maths.TDimensionPlane.XY:
 							{
-								pos.X = mRadiusX * XMath.Cos(angle_in_radians);
-								pos.Y = mRadiusY * XMath.Sin(angle_in_radians);
+								pos.X = _radiusX * XMath.Cos(angle_in_radians);
+								pos.Y = _radiusY * XMath.Sin(angle_in_radians);
 							}
 							break;
 						default:
@@ -176,13 +176,13 @@ namespace Lotus
 
 					var uv = new Vector2Df(0.5f * XMath.Cos(angle_in_radians) + 0.5f, 0.5f * XMath.Sin(angle_in_radians) + 0.5f);
 
-					mVertices.AddVertex(pivot + pos, normal, uv);
+					_vertices.AddVertex(pivot + pos, normal, uv);
 
 					current_angle += segment_angle;
 				}
 
-				mTriangles.Clear();
-				mTriangles.AddTriangleFan(0, mNumberSegment - 1, true);
+				_triangles.Clear();
+				_triangles.AddTriangleFan(0, _numberSegment - 1, true);
 			}
 			#endregion
 
@@ -199,14 +199,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateEllipseXZ(Vector3Df pivot, Single radiusX, Single radiusZ, Single startAngle, Int32 numberSegment)
 			{
-				mPlaneType = Maths.TDimensionPlane.XZ;
-				mRadiusX = radiusX;
-				mRadiusY = radiusZ;
-				mStartAngle = startAngle;
-				mNumberSegment = numberSegment;
+				_planeType = Maths.TDimensionPlane.XZ;
+				_radiusX = radiusX;
+				_radiusY = radiusZ;
+				_startAngle = startAngle;
+				_numberSegment = numberSegment;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot);
+				_vertices.Clear();
+				_vertices.AddVertex(pivot);
 
 				CreateEllipse();
 			}
@@ -223,14 +223,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateEllipseZY(Vector3Df pivot, Single radiusZ, Single radiusY, Single startAngle, Int32 numberSegment)
 			{
-				mPlaneType = Maths.TDimensionPlane.ZY;
-				mRadiusX = radiusZ;
-				mRadiusY = radiusY;
-				mStartAngle = startAngle;
-				mNumberSegment = numberSegment;
+				_planeType = Maths.TDimensionPlane.ZY;
+				_radiusX = radiusZ;
+				_radiusY = radiusY;
+				_startAngle = startAngle;
+				_numberSegment = numberSegment;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot);
+				_vertices.Clear();
+				_vertices.AddVertex(pivot);
 
 				CreateEllipse();
 			}
@@ -247,14 +247,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateEllipseXY(Vector3Df pivot, Single radiusX, Single radiusY, Single startAngle, Int32 numberSegment)
 			{
-				mPlaneType = Maths.TDimensionPlane.XY;
-				mRadiusX = radiusX;
-				mRadiusY = radiusY;
-				mStartAngle = startAngle;
-				mNumberSegment = numberSegment;
+				_planeType = Maths.TDimensionPlane.XY;
+				_radiusX = radiusX;
+				_radiusY = radiusY;
+				_startAngle = startAngle;
+				_numberSegment = numberSegment;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot);
+				_vertices.Clear();
+				_vertices.AddVertex(pivot);
 
 				CreateEllipse();
 			}

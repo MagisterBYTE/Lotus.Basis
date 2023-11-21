@@ -140,11 +140,11 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			internal Int32 mColumnCount;
-			internal Int32 mRowCount;
-			internal Single mColumnWidth;
-			internal Single mRowHeight;
-			internal Boolean mIsClosedColumn;
+			protected internal Int32 _columnCount;
+			protected internal Int32 _rowCount;
+			protected internal Single _columnWidth;
+			protected internal Single _rowHeight;
+			protected internal Boolean _isClosedColumn;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -155,12 +155,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mColumnCount;
+					return _columnCount;
 				}
 
 				set
 				{
-					mColumnCount = value;
+					_columnCount = value;
 					//CreateRegularGrid();
 				}
 			}
@@ -172,12 +172,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mRowCount;
+					return _rowCount;
 				}
 
 				set
 				{
-					mRowCount = value;
+					_rowCount = value;
 					//CreateRegularGrid();
 				}
 			}
@@ -189,12 +189,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mColumnWidth;
+					return _columnWidth;
 				}
 
 				set
 				{
-					mColumnWidth = value;
+					_columnWidth = value;
 					//CreateRegularGrid();
 				}
 			}
@@ -206,12 +206,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mRowHeight;
+					return _rowHeight;
 				}
 
 				set
 				{
-					mRowHeight = value;
+					_rowHeight = value;
 					//CreateRegularGrid();
 				}
 			}
@@ -223,12 +223,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mIsClosedColumn;
+					return _isClosedColumn;
 				}
 
 				set
 				{
-					mIsClosedColumn = value;
+					_isClosedColumn = value;
 					//CreateRegularGrid();
 				}
 			}
@@ -243,7 +243,7 @@ namespace Lotus
 			public CMeshPlanarGrid3Df()
 				:base()
 			{
-				mName = "RegularGrid3D";
+				_name = "RegularGrid3D";
 			}
 			#endregion
 
@@ -256,25 +256,25 @@ namespace Lotus
 			protected virtual void CreateRegularGrid()
 			{
 				// Сохраняем опорную точку
-				Vector3Df pivot = mVertices[0].Position;
+				Vector3Df pivot = _vertices[0].Position;
 
 				// Считаем необходимое количество вершин 
-				//Int32 count = ((mColumnCount + 1) * (mRowCount + 1));
+				//Int32 count = ((_columnCount + 1) * (_rowCount + 1));
 
 				// Заполняем вершины
-				mVertices.Clear();
-				for (var ir = 0; ir < mRowCount + 1; ir++)
+				_vertices.Clear();
+				for (var ir = 0; ir < _rowCount + 1; ir++)
 				{
-					for (var ic = 0; ic < mColumnCount + 1; ic++)
+					for (var ic = 0; ic < _columnCount + 1; ic++)
 					{
-						Vector3Df next_point = pivot + GetPlaneVector(ic * mColumnWidth, ir * mRowHeight);
-						mVertices.AddVertex(next_point);
+						Vector3Df next_point = pivot + GetPlaneVector(ic * _columnWidth, ir * _rowHeight);
+						_vertices.AddVertex(next_point);
 					}
 				}
 
 				// Заполняем треугольники
-				mTriangles.Clear();
-				mTriangles.AddTriangleRegularGrid(0, mColumnCount, mRowCount, mIsClosedColumn);
+				_triangles.Clear();
+				_triangles.AddTriangleRegularGrid(0, _columnCount, _rowCount, _isClosedColumn);
 
 				this.ComputeNormals();
 				this.ComputeUVMap();
@@ -300,15 +300,15 @@ namespace Lotus
 			public void CreateGridXZ(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth, 
 				Single rowHeight, Boolean isClosedColumn = false)
 			{
-				mPlaneType = Maths.TDimensionPlane.XZ;
-				mRowCount = rowCount;
-				mColumnCount = columnCount;
-				mColumnWidth = columnWidth;
-				mRowHeight = rowHeight;
-				mIsClosedColumn = isClosedColumn;
+				_planeType = Maths.TDimensionPlane.XZ;
+				_rowCount = rowCount;
+				_columnCount = columnCount;
+				_columnWidth = columnWidth;
+				_rowHeight = rowHeight;
+				_isClosedColumn = isClosedColumn;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot);
+				_vertices.Clear();
+				_vertices.AddVertex(pivot);
 
 				CreateRegularGrid();
 			}
@@ -331,15 +331,15 @@ namespace Lotus
 			public void CreateGridZY(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth,
 				Single rowHeight, Boolean isClosedColumn = false)
 			{
-				mPlaneType = Maths.TDimensionPlane.ZY;
-				mRowCount = rowCount;
-				mColumnCount = columnCount;
-				mColumnWidth = columnWidth;
-				mRowHeight = rowHeight;
-				mIsClosedColumn = isClosedColumn;
+				_planeType = Maths.TDimensionPlane.ZY;
+				_rowCount = rowCount;
+				_columnCount = columnCount;
+				_columnWidth = columnWidth;
+				_rowHeight = rowHeight;
+				_isClosedColumn = isClosedColumn;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot);
+				_vertices.Clear();
+				_vertices.AddVertex(pivot);
 
 				CreateRegularGrid();
 			}
@@ -362,15 +362,15 @@ namespace Lotus
 			public void CreateGridXY(Vector3Df pivot, Int32 columnCount, Int32 rowCount, Single columnWidth,
 				Single rowHeight, Boolean isClosedColumn = false)
 			{
-				mPlaneType = Maths.TDimensionPlane.XY;
-				mRowCount = rowCount;
-				mColumnCount = columnCount;
-				mColumnWidth = columnWidth;
-				mRowHeight = rowHeight;
-				mIsClosedColumn = isClosedColumn;
+				_planeType = Maths.TDimensionPlane.XY;
+				_rowCount = rowCount;
+				_columnCount = columnCount;
+				_columnWidth = columnWidth;
+				_rowHeight = rowHeight;
+				_isClosedColumn = isClosedColumn;
 
-				mVertices.Clear();
-				mVertices.AddVertex(pivot);
+				_vertices.Clear();
+				_vertices.AddVertex(pivot);
 
 				CreateRegularGrid();
 			}
@@ -386,30 +386,30 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateFromPointListXZ(IList<Vector3Df> pointList, Int32 rowCount, Single rowHeight, Boolean isClosedColumn = false)
 			{
-				mPlaneType = Maths.TDimensionPlane.XZ;
+				_planeType = Maths.TDimensionPlane.XZ;
 
-				mColumnCount = pointList.Count - 1;
-				mRowCount = rowCount;
-				mRowHeight = rowHeight;
-				mIsClosedColumn = isClosedColumn;
+				_columnCount = pointList.Count - 1;
+				_rowCount = rowCount;
+				_rowHeight = rowHeight;
+				_isClosedColumn = isClosedColumn;
 
 				// Считаем необходимое количество вершин 
-				// Int32 count = ((mColumnCount + 1) * (mRowCount + 1));
+				// Int32 count = ((_columnCount + 1) * (_rowCount + 1));
 
 				// Заполняем вершины
-				mVertices.Clear();
-				for (var ir = 0; ir < mRowCount + 1; ir++)
+				_vertices.Clear();
+				for (var ir = 0; ir < _rowCount + 1; ir++)
 				{
-					for (var ic = 0; ic < mColumnCount + 1; ic++)
+					for (var ic = 0; ic < _columnCount + 1; ic++)
 					{
 						Vector3Df next_point = pointList[ic] + GetPerpendicularVector() * rowHeight * ir;
-						mVertices.AddVertex(next_point);
+						_vertices.AddVertex(next_point);
 					}
 				}
 
 				// Заполняем треугольники
-				mTriangles.Clear();
-				mTriangles.AddTriangleRegularGrid(0, mColumnCount, mRowCount, mIsClosedColumn);
+				_triangles.Clear();
+				_triangles.AddTriangleRegularGrid(0, _columnCount, _rowCount, _isClosedColumn);
 
 				this.ComputeNormals();
 				this.ComputeUVMap();
@@ -425,21 +425,21 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void MinimizeToCylinder()
 			{
-				var radius = mColumnCount * mColumnWidth / XMath.PI2_F;
-				var horizont_delta = 360.0f / mColumnCount;
+				var radius = _columnCount * _columnWidth / XMath.PI2_F;
+				var horizont_delta = 360.0f / _columnCount;
 
 				var index = 0;
-				for (var ir = 0; ir < mRowCount + 1; ir++)
+				for (var ir = 0; ir < _rowCount + 1; ir++)
 				{
-					for (var ic = 0; ic < mColumnCount + 1; ic++)
+					for (var ic = 0; ic < _columnCount + 1; ic++)
 					{
 						var angle_in_radians = 360 - ic * horizont_delta;
 
 						var x = radius * XMath.Cos(angle_in_radians);
 						var y = radius * XMath.Sin(angle_in_radians);
 
-						mVertices.Vertices[index].Position = GetPlaneVector(x, y, mVertices.Vertices[index].Position);
-						mVertices.Vertices[index].Normal = mVertices.Vertices[index].Position.Normalized;
+						_vertices.Vertices[index].Position = GetPlaneVector(x, y, _vertices.Vertices[index].Position);
+						_vertices.Vertices[index].Normal = _vertices.Vertices[index].Position.Normalized;
 						index++;
 					}
 				}
@@ -453,19 +453,19 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void MinimizeToSphere(Single radius)
 			{
-				//Single horizont_delta = 360.0f / mColumnCount;
-				//Single vertical_delta = 180.0f / mRowCount;
+				//Single horizont_delta = 360.0f / _columnCount;
+				//Single vertical_delta = 180.0f / _rowCount;
 
 				var index = 0;
-				for (var ir = 0; ir < mRowCount + 1; ir++)
+				for (var ir = 0; ir < _rowCount + 1; ir++)
 				{
-					for (var ic = 0; ic < mColumnCount + 1; ic++)
+					for (var ic = 0; ic < _columnCount + 1; ic++)
 					{
 						// Single angle_horizontal = 360 - ic * horizont_delta;
 						// Single angle_vertical = ir * vertical_delta - 90;
 
-						//mVertices.Vertices[index].Position = XGeneration3D.PointOnSphere(radius, angle_horizontal, angle_vertical);
-						mVertices.Vertices[index].Normal = mVertices.Vertices[index].Position.Normalized;
+						//_vertices.Vertices[index].Position = XGeneration3D.PointOnSphere(radius, angle_horizontal, angle_vertical);
+						_vertices.Vertices[index].Normal = _vertices.Vertices[index].Position.Normalized;
 						index++;
 					}
 				}
@@ -481,24 +481,24 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ComputeNormals()
 			{
-				for (var ir = 0; ir < mRowCount; ir++)
+				for (var ir = 0; ir < _rowCount; ir++)
 				{
-					for (var ic = 0; ic < mColumnCount; ic++)
+					for (var ic = 0; ic < _columnCount; ic++)
 					{
-						var iv0 = ic + (mColumnCount + 1) * ir;
+						var iv0 = ic + (_columnCount + 1) * ir;
 						var iv1 = iv0 + 1;
-						var iv2 = iv0 + mColumnCount + 1;
+						var iv2 = iv0 + _columnCount + 1;
 						var iv3 = iv2 + 1;
 
-						Vector3Df down = mVertices.Vertices[iv2].Position - mVertices.Vertices[iv0].Position;
-						Vector3Df right = mVertices.Vertices[iv1].Position - mVertices.Vertices[iv0].Position;
+						Vector3Df down = _vertices.Vertices[iv2].Position - _vertices.Vertices[iv0].Position;
+						Vector3Df right = _vertices.Vertices[iv1].Position - _vertices.Vertices[iv0].Position;
 
 						Vector3Df normal = Vector3Df.Cross(in down, in right).Normalized;
 
-						mVertices.Vertices[iv0].Normal = normal;
-						mVertices.Vertices[iv1].Normal = normal;
-						mVertices.Vertices[iv2].Normal = normal;
-						mVertices.Vertices[iv3].Normal = normal;
+						_vertices.Vertices[iv0].Normal = normal;
+						_vertices.Vertices[iv1].Normal = normal;
+						_vertices.Vertices[iv2].Normal = normal;
+						_vertices.Vertices[iv3].Normal = normal;
 					}
 				}
 			}
@@ -512,14 +512,14 @@ namespace Lotus
 			public override void ComputeUVMap(Int32 channel = 0)
 			{
 				var index = 0;
-				for (var ir = 0; ir <= mRowCount; ir++)
+				for (var ir = 0; ir <= _rowCount; ir++)
 				{
-					for (var ic = 0; ic <= mColumnCount; ic++)
+					for (var ic = 0; ic <= _columnCount; ic++)
 					{
-						var u = ic / (Single)mColumnCount;
-						var v = ir / (Single)mRowCount;
+						var u = ic / (Single)_columnCount;
+						var v = ir / (Single)_rowCount;
 
-						mVertices.Vertices[index].UV = new Vector2Df(u, v);
+						_vertices.Vertices[index].UV = new Vector2Df(u, v);
 						index++;
 					}
 				}

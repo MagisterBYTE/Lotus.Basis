@@ -138,35 +138,35 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Идентификация
-			internal String mFileName;
+			protected internal String _fileName;
 
 			// Основные параметры
-			internal CNode3D mRootNode;
-			internal CMeshSet mMeshSet;
-			internal CMaterialSet mMaterialSet;
-			internal CTextureSet mTextureSet;
-			internal ListArray<CEntity3D> mAllEntities;
+			protected internal CNode3D _rootNode;
+			protected internal CMeshSet _meshSet;
+			protected internal CMaterialSet _materialSet;
+			protected internal CTextureSet _textureSet;
+			internal ListArray<CEntity3D> _allEntities;
 
 			// Размеры и позиция
-			internal Vector3Df mMinPosition;
-			internal Vector3Df mMaxPosition;
-			internal Vector3Df mCenterPosition;
+			protected internal Vector3Df _minPosition;
+			protected internal Vector3Df _maxPosition;
+			protected internal Vector3Df _centerPosition;
 
 			// Поддержка перечисления
-			internal Int32 mEnumeratorIndex;
+			protected internal Int32 _enumeratorIndex;
 
 			// Платформенно-зависимая часть
 #if USE_ASSIMP
-			internal Assimp.Scene mAssimpScene;
+			protected internal Assimp.Scene _assimpScene;
 #endif
 #if USE_HELIX
-			internal SceneNode mHelixScene;
+			protected internal SceneNode _helixScene;
 #endif
 #if UNITY_2017_1_OR_NEWER
-			internal GameObject mUnityScene;
+			protected internal GameObject _unityScene;
 #endif
 #if UNITY_EDITOR
-			internal Autodesk.Fbx.FbxScene mFbxScene;
+			protected internal Autodesk.Fbx.FbxScene _fbxScene;
 #endif
 			#endregion
 
@@ -177,13 +177,12 @@ namespace Lotus
 			/// <summary>
 			/// Имя файла
 			/// </summary>
-			[Browsable(false)]
 			public String FileName
 			{
-				get { return mFileName; }
+				get { return _fileName; }
 				set
 				{
-					mFileName = value;
+					_fileName = value;
 				}
 			}
 
@@ -193,49 +192,45 @@ namespace Lotus
 			/// <summary>
 			/// Корневой узел сцены
 			/// </summary>
-			[Browsable(false)]
 			public CNode3D RootNode
 			{
-				get { return mRootNode; }
+				get { return _rootNode; }
 			}
 
 			/// <summary>
 			/// Набор всех трехмерных сеток(мешей) в сцене
 			/// </summary>
-			[Browsable(false)]
 			public CMeshSet MeshSet
 			{
-				get { return mMeshSet; }
+				get { return _meshSet; }
 			}
 
 			/// <summary>
 			/// Набор всех материалов в сцене
 			/// </summary>
-			[Browsable(false)]
 			public CMaterialSet MaterialSet
 			{
-				get { return mMaterialSet; }
+				get { return _materialSet; }
 			}
 
 			/// <summary>
 			/// Все элементы сцены
 			/// </summary>
-			[Browsable(false)]
 			public ListArray<CEntity3D> AllEntities
 			{
 				get
 				{
-					if (mAllEntities == null)
+					if (_allEntities == null)
 					{
-						mAllEntities = new ListArray<CEntity3D>();
-						mAllEntities.IsNotify = false;
-						mAllEntities.Add(mMeshSet);
-						mAllEntities.Add(mMaterialSet);
-						mAllEntities.Add(mTextureSet);
-						mAllEntities.Add(mRootNode);
+						_allEntities = new ListArray<CEntity3D>();
+						_allEntities.IsNotify = false;
+						_allEntities.Add(_meshSet);
+						_allEntities.Add(_materialSet);
+						_allEntities.Add(_textureSet);
+						_allEntities.Add(_rootNode);
 					}
 
-					return mAllEntities;
+					return _allEntities;
 				}
 			}
 
@@ -245,45 +240,33 @@ namespace Lotus
 			/// <summary>
 			/// Геометрический центр сцены
 			/// </summary>
-			[DisplayName("Центр")]
-			[Description("Геометрический центр сцены")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Vector3Df CenterPosition
 			{
-				get { return mCenterPosition; }
+				get { return _centerPosition; }
 			}
 
 			/// <summary>
 			/// Размер сцены по X с учетом всех элементов
 			/// </summary>
-			[DisplayName("SizeX")]
-			[Description("Размер сцены по X с учетом всех элементов")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeX
 			{
-				get { return mMaxPosition.X - mMinPosition.X; }
+				get { return _maxPosition.X - _minPosition.X; }
 			}
 
 			/// <summary>
 			/// Размер сцены по Y с учетом всех элементов
 			/// </summary>
-			[DisplayName("SizeY")]
-			[Description("Размер сцены по Y с учетом всех элементов")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeY
 			{
-				get { return mMaxPosition.Y - mMinPosition.Y; }
+				get { return _maxPosition.Y - _minPosition.Y; }
 			}
 
 			/// <summary>
 			/// Размер сцены по Z с учетом всех элементов
 			/// </summary>
-			[DisplayName("SizeZ")]
-			[Description("Размер сцены по Z с учетом всех элементов")]
-			[Category(XInspectorGroupDesc.Size)]
 			public Single SizeZ
 			{
-				get { return mMaxPosition.Z - mMinPosition.Z; }
+				get { return _maxPosition.Z - _minPosition.Z; }
 			}
 
 			//
@@ -293,25 +276,23 @@ namespace Lotus
 			/// <summary>
 			/// Сцена Helix
 			/// </summary>
-			[Browsable(false)]
 			public SceneNode HelixScene
 			{
-				get { return mHelixScene; }
+				get { return _helixScene; }
 			}
 #endif
 #if UNITY_2017_1_OR_NEWER
 			/// <summary>
 			/// Сцена Unity
 			/// </summary>
-			[Browsable(false)]
 			public UnityEngine.GameObject UnityScene
 			{
-				get { return (mUnityScene);}
+				get { return (_unityScene);}
 				set
 				{
-					if (mUnityScene != value)
+					if (_unityScene != value)
 					{
-						mUnityScene = value;
+						_unityScene = value;
 						CreateSceneFromUnityGameObject();
 					}
 				}
@@ -327,9 +308,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CScene3D()
 			{
-				mMeshSet = new CMeshSet(this);
-				mMaterialSet = new CMaterialSet(this);
-				mTextureSet = new CTextureSet(this);
+				_meshSet = new CMeshSet(this);
+				_materialSet = new CMaterialSet(this);
+				_textureSet = new CTextureSet(this);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -341,7 +322,7 @@ namespace Lotus
 			public CScene3D(String name)
 				:this()
 			{
-				mName = name;
+				_name = name;
 			}
 
 #if USE_HELIX
@@ -354,12 +335,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CScene3D(String name, SceneNode helix_scene)
 			{
-				mName = name;
-				mHelixScene = helix_scene;
+				_name = name;
+				_helixScene = helix_scene;
 				//CreateSceneFromHelixScene();
-				//mMeshSet = new CMeshSet();
-				//mMaterialSet = new CMaterialSet();
-				//mRootNode = new CNode3D(this, mAssimpScene.RootNode);
+				//_meshSet = new CMeshSet();
+				//_materialSet = new CMaterialSet();
+				//_rootNode = new CNode3D(this, _assimpScene.RootNode);
 				//ComputeBoundingBox();
 			}
 #endif
@@ -374,11 +355,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CScene3D(String name, Assimp.Scene assimp_scene)
 			{
-				mName = name;
-				mAssimpScene = assimp_scene;
-				mMeshSet = new CMeshSet(mAssimpScene);
-				mMaterialSet = new CMaterialSet(this, mAssimpScene);
-				mRootNode = new CNode3D(this, mAssimpScene.RootNode);
+				_name = name;
+				_assimpScene = assimp_scene;
+				_meshSet = new CMeshSet(_assimpScene);
+				_materialSet = new CMaterialSet(this, _assimpScene);
+				_rootNode = new CNode3D(this, _assimpScene.RootNode);
 				ComputeBoundingBox();
 			}
 #endif
@@ -392,7 +373,7 @@ namespace Lotus
 			public CScene3D(GameObject unity_scene)
 				:this()
 			{
-				mUnityScene = unity_scene;
+				_unityScene = unity_scene;
 				CreateSceneFromUnityGameObject();
 			}
 #endif
@@ -407,7 +388,7 @@ namespace Lotus
 			public CScene3D(Autodesk.Fbx.FbxScene fbx_scene)
 				: this()
 			{
-				mFbxScene = fbx_scene;
+				_fbxScene = fbx_scene;
 				CreateSceneFromFbxScene();
 			}
 #endif
@@ -436,8 +417,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean MoveNext()
 			{
-				mEnumeratorIndex++;
-				return mEnumeratorIndex == 1;
+				_enumeratorIndex++;
+				return _enumeratorIndex == 1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -447,7 +428,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Reset()
 			{
-				mEnumeratorIndex = 0;
+				_enumeratorIndex = 0;
 			}
 			#endregion
 
@@ -464,7 +445,7 @@ namespace Lotus
 			}
 			#endregion
 
-			#region ======================================= МЕТОДЫ ILotusViewItemBuilder ==============================
+			#region ======================================= МЕТОДЫ ILotusViewModelBuilder =============================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение количества дочерних узлов
@@ -499,7 +480,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMesh3Df GetMeshFromIndex(Int32 index)
 			{
-				return mMeshSet.Meshes[index];
+				return _meshSet.Meshes[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -511,7 +492,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMaterial GetMaterialFromIndex(Int32 index)
 			{
-				return mMaterialSet.Materials[index];
+				return _materialSet.Materials[index];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -525,14 +506,14 @@ namespace Lotus
 				//Assimp.Vector3D max_position = new Assimp.Vector3D(-1e10f, -1e10f, -1e10f);
 				//Assimp.Matrix4x4 identity = Assimp.Matrix4x4.Identity;
 
-				//ComputeBoundingBox(mAssimpScene.RootNode, ref min_position, ref max_position, ref identity);
+				//ComputeBoundingBox(_assimpScene.RootNode, ref min_position, ref max_position, ref identity);
 
-				//mMaxPosition = max_position.ToVector3D();
-				//mMinPosition = min_position.ToVector3D();
+				//_maxPosition = max_position.ToVector3D();
+				//_minPosition = min_position.ToVector3D();
 
-				//mCenterPosition.X = (mMinPosition.X + mMaxPosition.X) / 2.0f;
-				//mCenterPosition.Y = (mMinPosition.Y + mMaxPosition.Y) / 2.0f;
-				//mCenterPosition.Z = (mMinPosition.Z + mMaxPosition.Z) / 2.0f;
+				//mCenterPosition.X = (_minPosition.X + _maxPosition.X) / 2.0f;
+				//mCenterPosition.Y = (_minPosition.Y + _maxPosition.Y) / 2.0f;
+				//mCenterPosition.Z = (_minPosition.Z + _maxPosition.Z) / 2.0f;
 			}
 			#endregion
 
@@ -545,14 +526,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void CreateSceneFromUnityGameObject()
 			{
-				if (mUnityScene == null) return;
+				if (_unityScene == null) return;
 
-				mRootNode = null;
-				mMeshSet.Meshes.Clear();
-				mMaterialSet.Materials.Clear();
+				_rootNode = null;
+				_meshSet.Meshes.Clear();
+				_materialSet.Materials.Clear();
 
-				mName = mUnityScene.name;
-				mRootNode = CreateSceneRecursiveFromUnity(mUnityScene.transform, null);
+				_name = _unityScene.name;
+				_rootNode = CreateSceneRecursiveFromUnity(_unityScene.transform, null);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -574,7 +555,7 @@ namespace Lotus
 					if(mesh_filter.sharedMesh != null)
 					{
 						CMesh3Df mesh = new CMesh3Df(mesh_filter.sharedMesh);
-						mMeshSet.Meshes.Add(mesh);
+						_meshSet.Meshes.Add(mesh);
 					}
 
 					// Добавляем материал
@@ -588,7 +569,7 @@ namespace Lotus
 							if(unity_mat != null)
 							{
 								CMaterial material = new CMaterial(this, unity_mat);
-								mMaterialSet.Materials.Add(material);
+								_materialSet.Materials.Add(material);
 
 								// Получаем все текстуры
 								String[] textures_name = unity_mat.GetTexturePropertyNames();
@@ -599,7 +580,7 @@ namespace Lotus
 									if(unity_texture != null)
 									{
 										CTexture texture = new CTexture(material, unity_texture as Texture2D);
-										mTextureSet.Textures.Add(texture);
+										_textureSet.Textures.Add(texture);
 									}
 								}
 							}
@@ -638,14 +619,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void CreateSceneFromFbxScene()
 			{
-				if (mFbxScene == null) return;
+				if (_fbxScene == null) return;
 
-				mRootNode = null;
-				mMeshSet.Meshes.Clear();
-				mMaterialSet.Materials.Clear();
+				_rootNode = null;
+				_meshSet.Meshes.Clear();
+				_materialSet.Materials.Clear();
 
-				mName = mFbxScene.GetName();
-				mRootNode = CreateSceneRecursiveFromFbx(mFbxScene.GetRootNode(), null);
+				_name = _fbxScene.GetName();
+				_rootNode = CreateSceneRecursiveFromFbx(_fbxScene.GetRootNode(), null);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -668,7 +649,7 @@ namespace Lotus
 					if (fbx_mesh != null)
 					{
 						CMesh3Df mesh = new CMesh3Df(fbx_mesh);
-						mMeshSet.Meshes.Add(mesh);
+						_meshSet.Meshes.Add(mesh);
 					}
 
 					// Добавляем материал
@@ -679,7 +660,7 @@ namespace Lotus
 						if (fbx_material != null)
 						{
 							CMaterial material = new CMaterial(this, fbx_material);
-							mMaterialSet.Materials.Add(material);
+							_materialSet.Materials.Add(material);
 						}
 					}
 

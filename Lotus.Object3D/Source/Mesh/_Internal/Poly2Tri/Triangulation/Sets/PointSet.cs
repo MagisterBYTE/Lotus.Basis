@@ -86,9 +86,9 @@ namespace Poly2Tri.Triangulation.Sets
         }
 
 
-        public int IndexOf(TriangulationPoint p)
+        public int IndexOf(TriangulationPoint item)
         {
-            return MPoints.IndexOf(p);
+            return MPoints.IndexOf(item);
         }
 
 
@@ -97,15 +97,15 @@ namespace Poly2Tri.Triangulation.Sets
             Add(p as TriangulationPoint, -1, false);
         }
 
-        public virtual void Add(TriangulationPoint p)
+        public virtual void Add(TriangulationPoint item)
         {
-            Add(p, -1, false);
+            Add(item, -1, false);
         }
 
 
-        protected override void Add(Point2D p, int idx, bool constrainToBounds)
+        protected override void Add(Point2D p, int idx, bool bCalcWindingOrderAndEpsilon)
         {
-            Add(p as TriangulationPoint, idx, constrainToBounds);
+            Add(p as TriangulationPoint, idx, bCalcWindingOrderAndEpsilon);
         }
 
 
@@ -179,9 +179,9 @@ namespace Poly2Tri.Triangulation.Sets
             return false;
         }
 
-        public void Insert(int idx, TriangulationPoint item)
+        public void Insert(int index, TriangulationPoint item)
         {
-            MPoints.Insert(idx, item);
+            MPoints.Insert(index, item);
         }
 
 
@@ -191,9 +191,9 @@ namespace Poly2Tri.Triangulation.Sets
         }
 
 
-        public bool Remove(TriangulationPoint p)
+        public bool Remove(TriangulationPoint item)
         {
-            return MPoints.Remove(p);
+            return MPoints.Remove(item);
         }
 
 
@@ -207,9 +207,9 @@ namespace Poly2Tri.Triangulation.Sets
         }
 
 
-        public bool Contains(TriangulationPoint p)
+        public bool Contains(TriangulationPoint item)
         {
-            return MPoints.Contains(p);
+            return MPoints.Contains(item);
         }
 
 

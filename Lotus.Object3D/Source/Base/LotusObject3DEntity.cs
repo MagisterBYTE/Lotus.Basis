@@ -33,45 +33,22 @@ namespace Lotus
 		/// Базовая сущность в подсистеме 3D объекта для формирование иерархической структуры трехмерной сцены
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public class CEntity3D : CNameableInt, ILotusViewItemOwner, ILotusViewItemBuilder, ILotusSupportViewInspector
+		public class CEntity3D : CNameableInt, ILotusViewModelOwner, ILotusViewModelBuilder
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal ILotusViewItem mOwnerViewItem;
+			protected internal ILotusViewModel _ownerViewModel;
 			#endregion
 
-			#region ======================================= СВОЙСТВА ILotusViewItemOwner ==============================
+			#region ======================================= СВОЙСТВА ILotusViewModelOwner =============================
 			/// <summary>
-			/// Узел отображения
+			/// ViewModel
 			/// </summary>
-			public ILotusViewItem OwnerViewItem
+			public ILotusViewModel OwnerViewModel
 			{
-				get { return mOwnerViewItem; }
+				get { return _ownerViewModel; }
 				set
 				{
-					mOwnerViewItem = value;
-				}
-			}
-			#endregion
-
-			#region ======================================= СВОЙСТВА ILotusSupportViewInspector =======================
-			/// <summary>
-			/// Отображаемое имя типа в инспекторе свойств
-			/// </summary>
-			[Browsable(false)]
-			public override String InspectorTypeName
-			{
-				get { return "Entity"; }
-			}
-
-			/// <summary>
-			/// Отображаемое имя объекта в инспекторе свойств
-			/// </summary>
-			[Browsable(false)]
-			public override String InspectorObjectName
-			{
-				get
-				{
-					return mName; 
+					_ownerViewModel = value;
 				}
 			}
 			#endregion
@@ -96,8 +73,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CEntity3D(String name, Int32 id)
 			{
-				mName = name;
-				mId = id;
+				_name = name;
+				_id = id;
 			}
 			#endregion
 
@@ -110,11 +87,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return mName;
+				return _name;
 			}
 			#endregion
 
-			#region ======================================= МЕТОДЫ ILotusViewItemBuilder ==============================
+			#region ======================================= МЕТОДЫ ILotusViewModelBuilder ==============================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение количества дочерних узлов

@@ -46,7 +46,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			internal Maths.TDimensionPlane mPlaneType;
+			protected internal Maths.TDimensionPlane _planeType;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -55,10 +55,10 @@ namespace Lotus
 			/// </summary>
 			public Maths.TDimensionPlane PlaneType
 			{
-				get { return mPlaneType; }
+				get { return _planeType; }
 				set
 				{
-					mPlaneType = value;
+					_planeType = value;
 					ChangePlaneType();
 				}
 			}
@@ -97,13 +97,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Vector3Df GetPerpendicularVector()
 			{
-				if (mPlaneType == Maths.TDimensionPlane.XZ)
+				if (_planeType == Maths.TDimensionPlane.XZ)
 				{
 					return Vector3Df.Up;
 				}
 				else
 				{
-					if (mPlaneType == Maths.TDimensionPlane.ZY)
+					if (_planeType == Maths.TDimensionPlane.ZY)
 					{
 						return Vector3Df.Right;
 					}
@@ -124,13 +124,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Vector3Df GetPlaneVector(Single x, Single y)
 			{
-				if (mPlaneType == Maths.TDimensionPlane.XZ)
+				if (_planeType == Maths.TDimensionPlane.XZ)
 				{
 					return new Vector3Df(x, 0, y);
 				}
 				else
 				{
-					if (mPlaneType == Maths.TDimensionPlane.ZY)
+					if (_planeType == Maths.TDimensionPlane.ZY)
 					{
 						return new Vector3Df(0, y, x);
 					}
@@ -152,13 +152,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Vector3Df GetPlaneVector(Single x, Single y, Vector3Df vectorSave)
 			{
-				if (mPlaneType == Maths.TDimensionPlane.XZ)
+				if (_planeType == Maths.TDimensionPlane.XZ)
 				{
 					return new Vector3Df(x, vectorSave.Y, y);
 				}
 				else
 				{
-					if (mPlaneType == Maths.TDimensionPlane.ZY)
+					if (_planeType == Maths.TDimensionPlane.ZY)
 					{
 						return new Vector3Df(vectorSave.X, y, x);
 					}

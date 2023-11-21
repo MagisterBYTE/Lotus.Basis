@@ -185,18 +185,18 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal CTexture mTexture;
-			protected internal TTextureMapping mMapping;
-			protected internal Int32 mUVIndex;
-			protected internal Single mBlendFactor;
-			protected internal TTextureOperation mOperation;
-			protected internal TTextureWrapMode mWrapModeU;
-			protected internal TTextureWrapMode mWrapModeV;
-			protected internal CMaterial mOwnerMaterial;
+			protected internal CTexture _texture;
+			protected internal TTextureMapping _mapping;
+			protected internal Int32 _indexUV;
+			protected internal Single _blendFactor;
+			protected internal TTextureOperation _operation;
+			protected internal TTextureWrapMode _wrapModeU;
+			protected internal TTextureWrapMode _wrapModeV;
+			protected internal CMaterial _ownerMaterial;
 
 			// Платформенно-зависимая часть
 #if USE_ASSIMP
-			internal Assimp.TextureSlot mAssimpTextureSlot;
+			internal Assimp.TextureSlot _assimpTextureSlot;
 #endif
 			#endregion
 
@@ -207,116 +207,96 @@ namespace Lotus
 			/// <summary>
 			/// Текстура связанная с данным текстурным слотом
 			/// </summary>
-			[Browsable(false)]
 			public CTexture Texture
 			{
-				get { return mTexture; }
+				get { return _texture; }
 				set
 				{
-					mTexture = value;
+					_texture = value;
 				}
 			}
 
 			/// <summary>
 			/// Режим наложения и формирования текстурных координат
 			/// </summary>
-			[DisplayName("Mapping")]
-			[Description("Режим наложения и формирования текстурных координат")]
-			[Category(XInspectorGroupDesc.Params)]
 			public TTextureMapping Mapping
 			{
-				get { return mMapping; }
+				get { return _mapping; }
 				set
 				{
-					mMapping = value;
+					_mapping = value;
 				}
 			}
 
 			/// <summary>
 			/// Индекс текстурных координат
 			/// </summary>
-			[DisplayName("UVIndex")]
-			[Description("Индекс текстурных координат")]
-			[Category(XInspectorGroupDesc.Params)]
 			public Int32 UVIndex
 			{
-				get { return mUVIndex; }
+				get { return _indexUV; }
 				set
 				{
-					mUVIndex = value;
+					_indexUV = value;
 				}
 			}
 
 			/// <summary>
 			/// Фактор смешивания
 			/// </summary>
-			[DisplayName("BlendFactor")]
-			[Description("Фактор смешивания")]
-			[Category(XInspectorGroupDesc.Params)]
 			public Single BlendFactor
 			{
-				get { return mBlendFactor; }
+				get { return _blendFactor; }
 				set
 				{
-					mBlendFactor = value;
+					_blendFactor = value;
 				}
 			}
 
 			/// <summary>
 			/// Режим смешивания текстур
 			/// </summary>
-			[DisplayName("Operation")]
-			[Description("Режим смешивания текстур")]
-			[Category(XInspectorGroupDesc.Params)]
 			public TTextureOperation Operation
 			{
-				get { return mOperation; }
+				get { return _operation; }
 				set
 				{
-					mOperation = value;
+					_operation = value;
 				}
 			}
 
 			/// <summary>
 			/// Режим обвёртки текстурных координат по U - координате
 			/// </summary>
-			[DisplayName("WrapModeU")]
-			[Description("Режим обвёртки текстурных координат по U - координате")]
-			[Category(XInspectorGroupDesc.Params)]
 			public TTextureWrapMode WrapModeU
 			{
-				get { return mWrapModeU; }
+				get { return _wrapModeU; }
 				set
 				{
-					mWrapModeU = value;
+					_wrapModeU = value;
 				}
 			}
 
 			/// <summary>
 			/// Режим обвёртки текстурных координат по V - координате
 			/// </summary>
-			[DisplayName("WrapModeU")]
-			[Description("Режим обвёртки текстурных координат по V - координате")]
-			[Category(XInspectorGroupDesc.Params)]
 			public TTextureWrapMode WrapModeV
 			{
-				get { return mWrapModeV; }
+				get { return _wrapModeV; }
 				set
 				{
-					mWrapModeV = value;
+					_wrapModeV = value;
 				}
 			}
 
 			/// <summary>
 			/// Владелец материал
 			/// </summary>
-			[Browsable(false)]
 			public CMaterial OwnerMaterial
 			{
-				get { return mOwnerMaterial; }
+				get { return _ownerMaterial; }
 				set
 				{
-					mOwnerMaterial = value;
+					_ownerMaterial = value;
 				}
 			}
 			#endregion
@@ -339,7 +319,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextureSlot(CMaterial ownerMaterial)
 			{
-				mOwnerMaterial = ownerMaterial;
+				_ownerMaterial = ownerMaterial;
 			}
 
 #if USE_ASSIMP
@@ -351,7 +331,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextureSlot(Assimp.TextureSlot assimp_texture_slot)
 			{
-				mAssimpTextureSlot = assimp_texture_slot;
+				_assimpTextureSlot = assimp_texture_slot;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -363,8 +343,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextureSlot(CMaterial material, Assimp.TextureSlot assimp_texture_slot)
 			{
-				mOwnerMaterial = material;
-				mAssimpTextureSlot = assimp_texture_slot;
+				_ownerMaterial = material;
+				_assimpTextureSlot = assimp_texture_slot;
 			}
 #endif
 			#endregion

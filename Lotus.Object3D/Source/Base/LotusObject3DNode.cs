@@ -50,35 +50,35 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			internal CNode3D mParentNode;
-			internal List<CNode3D> mChildren;
-			internal Vector3Df mOffset;
-			internal Vector3Df mOffsetOriginal;
-			internal Quaternion3Df mRotation;
-			internal Quaternion3Df mRotationOriginal;
-			internal Vector3Df mScale;
-			internal Vector3Df mScaleOriginal;
-			internal ListArray<CEntity3D> mAllEntities;
-			internal CScene3D mOwnerScene;
+			protected internal CNode3D _parentNode;
+			protected internal List<CNode3D> _children;
+			protected internal Vector3Df _offset;
+			protected internal Vector3Df _offsetOriginal;
+			protected internal Quaternion3Df _rotation;
+			protected internal Quaternion3Df _rotationOriginal;
+			protected internal Vector3Df _scale;
+			protected internal Vector3Df _scaleOriginal;
+			protected internal ListArray<CEntity3D> _allEntities;
+			protected internal CScene3D _ownerScene;
 
 			// Платформенно-зависимая часть
 #if USE_WINDOWS
-			internal Media3D.TranslateTransform3D mTranslateTransform;
-			internal Media3D.RotateTransform3D mRotateTransform;
-			internal Media3D.ScaleTransform3D mScaleTransform;
-			internal Media3D.Transform3DGroup mNodeTransform;
+			protected internal Media3D.TranslateTransform3D _translateTransform;
+			protected internal Media3D.RotateTransform3D _rotateTransform;
+			protected internal Media3D.ScaleTransform3D _scaleTransform;
+			protected internal Media3D.Transform3DGroup _nodeTransform;
 #endif
 #if USE_HELIX
-			internal List<Helix3D.MeshGeometryModel3D> mHelix3DModels;
+			protected internal List<Helix3D.MeshGeometryModel3D> _helix3DModels;
 #endif
 #if USE_ASSIMP
-			internal Assimp.Node mAssimpNode;
+			protected internal Assimp.Node _assimpNode;
 #endif
 #if UNITY_2017_1_OR_NEWER
-			internal UnityEngine.Transform mUnityNode;
+			protected internal UnityEngine.Transform _unityNode;
 #endif
 #if UNITY_EDITOR
-			internal Autodesk.Fbx.FbxNode mFbxNode;
+			protected internal Autodesk.Fbx.FbxNode _fbxNode;
 #endif
 			#endregion
 
@@ -89,26 +89,24 @@ namespace Lotus
 			/// <summary>
 			/// Родительский узел
 			/// </summary>
-			[Browsable(false)]
 			public CNode3D ParentNode
 			{
-				get { return mParentNode; }
+				get { return _parentNode; }
 				set
 				{
-					mParentNode = value;
+					_parentNode = value;
 				}
 			}
 
 			/// <summary>
 			/// Дочерние узлы
 			/// </summary>
-			[Browsable(false)]
 			public List<CNode3D> Children
 			{
-				get { return mChildren; }
+				get { return _children; }
 				set
 				{
-					mChildren = value;
+					_children = value;
 				}
 			}
 
@@ -118,17 +116,12 @@ namespace Lotus
 			/// <summary>
 			/// Смещение узла относительно родительского узла
 			/// </summary>
-			[DisplayName("Смещение")]
-			[Description("Смещение узла относительно родительского узла")]
-			[Category(XInspectorGroupDesc.Size)]
-			[LotusDefaultValue("mOffsetOriginal")]
-			[LotusPropertyOrder(0)]
 			public Vector3Df Offset
 			{
-				get { return mOffset; }
+				get { return _offset; }
 				set
 				{
-					mOffset = value;
+					_offset = value;
 					RaiseOffsetChanged();
 					NotifyPropertyChanged(PropertyArgsOffset);
 				}
@@ -137,16 +130,12 @@ namespace Lotus
 			/// <summary>
 			/// Кватернион вращения узла относительно родительского узла
 			/// </summary>
-			[DisplayName("Кватернион вращения")]
-			[Description("Кватернион вращения узла относительно родительского узла")]
-			[Category(XInspectorGroupDesc.Size)]
-			[LotusPropertyOrder(2)]
 			public Quaternion3Df Rotation
 			{
-				get { return mRotation; }
+				get { return _rotation; }
 				set
 				{
-					mRotation = value;
+					_rotation = value;
 					RaiseRotationChanged();
 					NotifyPropertyChanged(PropertyArgsRotation);
 				}
@@ -155,17 +144,12 @@ namespace Lotus
 			/// <summary>
 			/// Масштаб узла относительно родительского узла
 			/// </summary>
-			[DisplayName("Масштаб")]
-			[Description("Масштаб узла относительно родительского узла")]
-			[Category(XInspectorGroupDesc.Size)]
-			[LotusDefaultValue(nameof(mScaleOriginal), TInspectorMemberType.Field)]
-			[LotusPropertyOrder(1)]
 			public Vector3Df Scale
 			{
-				get { return mScale; }
+				get { return _scale; }
 				set
 				{
-					mScale = value;
+					_scale = value;
 					RaiseScaleChanged();
 					NotifyPropertyChanged(PropertyArgsScale);
 				}
@@ -174,34 +158,32 @@ namespace Lotus
 			/// <summary>
 			/// Все элементы узла
 			/// </summary>
-			[Browsable(false)]
 			public ListArray<CEntity3D> AllEntities
 			{
 				get
 				{
-					if (mAllEntities == null)
+					if (_allEntities == null)
 					{
-						mAllEntities = new ListArray<CEntity3D>();
+						_allEntities = new ListArray<CEntity3D>();
 						for (var i = 0; i < Children.Count; i++)
 						{
-							mAllEntities.Add(Children[i]);
+							_allEntities.Add(Children[i]);
 						}
 					}
 
-					return mAllEntities;
+					return _allEntities;
 				}
 			}
 
 			/// <summary>
 			/// Владелец сцена
 			/// </summary>
-			[Browsable(false)]
 			public CScene3D OwnerScene
 			{
-				get { return mOwnerScene; }
+				get { return _ownerScene; }
 				set
 				{
-					mOwnerScene = value;
+					_ownerScene = value;
 				}
 			}
 			#endregion
@@ -215,8 +197,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CNode3D(CScene3D ownerScene)
 			{
-				mOwnerScene = ownerScene;
-				mChildren = new List<CNode3D>();
+				_ownerScene = ownerScene;
+				_children = new List<CNode3D>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -229,7 +211,7 @@ namespace Lotus
 			public CNode3D(CScene3D ownerScene, CNode3D parentNode)
 				: this(ownerScene)
 			{
-				mParentNode = parentNode;
+				_parentNode = parentNode;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -242,7 +224,7 @@ namespace Lotus
 			public CNode3D(CScene3D ownerScene, String name) 
 				: this(ownerScene)
 			{
-				mName = name;
+				_name = name;
 			}
 
 #if USE_ASSIMP
@@ -259,11 +241,11 @@ namespace Lotus
 
 				InitModels();
 
-				if (mAssimpNode.HasChildren)
+				if (_assimpNode.HasChildren)
 				{
-					for (var i = 0; i < mAssimpNode.ChildCount; i++)
+					for (var i = 0; i < _assimpNode.ChildCount; i++)
 					{
-						mChildren.Add(new CNode3D(owner_scene, this, mAssimpNode.Children[i]));
+						_children.Add(new CNode3D(owner_scene, this, _assimpNode.Children[i]));
 					}
 				}
 			}
@@ -282,11 +264,11 @@ namespace Lotus
 
 				InitModels();
 
-				if (mAssimpNode.HasChildren)
+				if (_assimpNode.HasChildren)
 				{
-					for (var i = 0; i < mAssimpNode.ChildCount; i++)
+					for (var i = 0; i < _assimpNode.ChildCount; i++)
 					{
-						mChildren.Add(new CNode3D(owner_scene, this, mAssimpNode.Children[i]));
+						_children.Add(new CNode3D(owner_scene, this, _assimpNode.Children[i]));
 					}
 				}
 			}
@@ -303,11 +285,11 @@ namespace Lotus
 			public CNode3D(CScene3D owner_scene, UnityEngine.Transform unity_node)
 				: this(owner_scene)
 			{
-				mName = unity_node.name;
-				mUnityNode = unity_node;
-				mOffsetOriginal = mOffset = mUnityNode.localPosition.ToVector3Df();
-				mRotationOriginal = mRotation = mUnityNode.localRotation.ToQuaternion3Df();
-				mScaleOriginal = mScale = mUnityNode.localScale.ToVector3Df();
+				_name = unity_node.name;
+				_unityNode = unity_node;
+				_offsetOriginal = _offset = _unityNode.localPosition.ToVector3Df();
+				_rotationOriginal = _rotation = _unityNode.localRotation.ToQuaternion3Df();
+				_scaleOriginal = _scale = _unityNode.localScale.ToVector3Df();
 			}
 #endif
 #if UNITY_EDITOR
@@ -333,14 +315,14 @@ namespace Lotus
 			public CNode3D(CScene3D owner_scene, CNode3D parent_node, Autodesk.Fbx.FbxNode fbx_node)
 				: this(owner_scene, parent_node)
 			{
-				mName = fbx_node.GetName();
-				mFbxNode = fbx_node;
+				_name = fbx_node.GetName();
+				_fbxNode = fbx_node;
 
-				Autodesk.Fbx.FbxDouble3 offset = mFbxNode.LclTranslation.Get();
-				mOffsetOriginal = mOffset = new Vector3Df((Single)offset.X, (Single)offset.Y, (Single)offset.Z);
+				Autodesk.Fbx.FbxDouble3 offset = _fbxNode.LclTranslation.Get();
+				_offsetOriginal = _offset = new Vector3Df((Single)offset.X, (Single)offset.Y, (Single)offset.Z);
 
-				//mRotationOriginal = mRotation = mUnityNode.localRotation.ToQuaternion3Df();
-				//mScaleOriginal = mScale = mUnityNode.localScale.ToVector3Df();
+				//_rotationOriginal = _rotation = _unityNode.localRotation.ToQuaternion3Df();
+				//_scaleOriginal = _scale = _unityNode.localScale.ToVector3Df();
 			}
 #endif
 			#endregion
@@ -355,17 +337,17 @@ namespace Lotus
 			protected virtual void RaiseOffsetChanged()
 			{
 #if USE_WINDOWS
-				if (mTranslateTransform != null)
+				if (_translateTransform != null)
 				{
-					mTranslateTransform.OffsetX = mOffset.X;
-					mTranslateTransform.OffsetY = mOffset.Y;
-					mTranslateTransform.OffsetZ = mOffset.Z;
+					_translateTransform.OffsetX = _offset.X;
+					_translateTransform.OffsetY = _offset.Y;
+					_translateTransform.OffsetZ = _offset.Z;
 				}
 #endif
 #if UNITY_2017_1_OR_NEWER
-				if(mUnityNode != null)
+				if(_unityNode != null)
 				{
-					mUnityNode.localPosition = mOffset;
+					_unityNode.localPosition = _offset;
 				}
 #endif
 			}
@@ -379,18 +361,18 @@ namespace Lotus
 			protected virtual void RaiseRotationChanged()
 			{
 #if USE_WINDOWS
-				if (mRotateTransform != null)
+				if (_rotateTransform != null)
 				{
-					//mRotateTransform.M = mRotation;
-					//mRotateTransform.OffsetY = mOffset.Y;
-					//mRotateTransform.OffsetZ = mOffset.Z;
+					//_rotateTransform.M = _rotation;
+					//_rotateTransform.OffsetY = _offset.Y;
+					//_rotateTransform.OffsetZ = _offset.Z;
 				}
 #endif
 #if UNITY_2017_1_OR_NEWER
-				if (mUnityNode != null)
+				if (_unityNode != null)
 				{
-					mUnityNode.localRotation = new UnityEngine.Quaternion(mRotation.X, mRotation.Y,
-						mRotation.Z, mRotation.W);
+					_unityNode.localRotation = new UnityEngine.Quaternion(_rotation.X, _rotation.Y,
+						_rotation.Z, _rotation.W);
 				}
 #endif
 			}
@@ -404,23 +386,23 @@ namespace Lotus
 			protected virtual void RaiseScaleChanged()
 			{
 #if USE_WINDOWS
-				if (mScaleTransform != null)
+				if (_scaleTransform != null)
 				{
-					mScaleTransform.ScaleX = mScale.X;
-					mScaleTransform.ScaleY = mScale.Y;
-					mScaleTransform.ScaleZ = mScale.Z;
+					_scaleTransform.ScaleX = _scale.X;
+					_scaleTransform.ScaleY = _scale.Y;
+					_scaleTransform.ScaleZ = _scale.Z;
 				}
 #endif
 #if UNITY_2017_1_OR_NEWER
-				if (mUnityNode != null)
+				if (_unityNode != null)
 				{
-					mUnityNode.localScale = mScale;
+					_unityNode.localScale = _scale;
 				}
 #endif
 			}
 			#endregion
 
-			#region ======================================= МЕТОДЫ ILotusViewItemBuilder ==============================
+			#region ======================================= МЕТОДЫ ILotusViewModelBuilder =============================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение количества дочерних узлов
@@ -457,26 +439,26 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateHelixModels()
 			{
-                //if (mAssimpNode.HasMeshes)
+                //if (_assimpNode.HasMeshes)
                 //{
-                //    for (Int32 i = 0; i < mModels.Count; i++)
+                //    for (Int32 i = 0; i < _models.Count; i++)
                 //    {
-                //        mModels[i].CreateHelixModel();
+                //        _models[i].CreateHelixModel();
 
                 //        // Добавляем в список мешей
-                //        mHelix3DModels.Add(mModels[i].Helix3DModel);
+                //        _helix3DModels.Add(mModels[i].Helix3DModel);
                 //    }
 
                 //    // Добавляем на сцену
-                //    for (Int32 i = 0; i < mAssimpNode.MeshCount; i++)
+                //    for (Int32 i = 0; i < _assimpNode.MeshCount; i++)
                 //    {
-                //        mOwnerScene.mHelixScene.Add(mHelix3DModels[i]);
+                //        _ownerScene._helixScene.Add(_helix3DModels[i]);
                 //    }
                 //}
 
-                //for (Int32 i = 0; i < mChildren.Count; i++)
+                //for (Int32 i = 0; i < _children.Count; i++)
                 //{
-                //    mChildren[i].CreateHelixModels();
+                //    _children[i].CreateHelixModels();
                 //}
             }
 #endif
@@ -494,36 +476,36 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected void InitData(CScene3D owner_scene, CNode3D parent_node, Assimp.Node assimp_node)
 			{
-				mOwnerScene = owner_scene;
-				mParentNode = parent_node;
+				_ownerScene = owner_scene;
+				_parentNode = parent_node;
 
 				if (assimp_node != null)
 				{
-					mAssimpNode = assimp_node;
-					mName = mAssimpNode.Name;
+					_assimpNode = assimp_node;
+					_name = _assimpNode.Name;
 
 					Assimp.Vector3D scale;
 					Assimp.Quaternion rotation;
 					Assimp.Vector3D offset;
-					mAssimpNode.Transform.Decompose(out scale, out rotation, out offset);
-					mScale = scale.ToVector3D();
-					mScaleOriginal = mScale;
-					mRotation = rotation.ToQuaternion3Df();
-					mOffset = offset.ToVector3D();
-					mOffsetOriginal = mOffset;
+					_assimpNode.Transform.Decompose(out scale, out rotation, out offset);
+					_scale = scale.ToVector3D();
+					_scaleOriginal = _scale;
+					_rotation = rotation.ToQuaternion3Df();
+					_offset = offset.ToVector3D();
+					_offsetOriginal = _offset;
 
-					mTranslateTransform = new Media3D.TranslateTransform3D(mOffset.X, mOffset.Y, mOffset.Z);
-					mRotateTransform = new Media3D.RotateTransform3D();
-					mScaleTransform = new Media3D.ScaleTransform3D(mScale.X, mScale.Y, mScale.Z);
-					mNodeTransform = new Media3D.Transform3DGroup();
+					_translateTransform = new Media3D.TranslateTransform3D(_offset.X, _offset.Y, _offset.Z);
+					_rotateTransform = new Media3D.RotateTransform3D();
+					_scaleTransform = new Media3D.ScaleTransform3D(_scale.X, _scale.Y, _scale.Z);
+					_nodeTransform = new Media3D.Transform3DGroup();
 
-					mNodeTransform.Children.Add(mTranslateTransform);
-					mNodeTransform.Children.Add(mRotateTransform);
-					mNodeTransform.Children.Add(mScaleTransform);
+					_nodeTransform.Children.Add(_translateTransform);
+					_nodeTransform.Children.Add(_rotateTransform);
+					_nodeTransform.Children.Add(_scaleTransform);
 				}
 
-				mChildren = new List<CNode3D>();
-				mHelix3DModels = new List<Helix3D.MeshGeometryModel3D>();
+				_children = new List<CNode3D>();
+				_helix3DModels = new List<Helix3D.MeshGeometryModel3D>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -533,10 +515,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected void InitModels()
 			{
-				if (mAssimpNode.HasMeshes)
+				if (_assimpNode.HasMeshes)
 				{
-					//mModels = new List<CModel3D>(mAssimpNode.MeshCount);
-					//for (Int32 i = 0; i < mAssimpNode.MeshCount; i++)
+					//mModels = new List<CModel3D>(_assimpNode.MeshCount);
+					//for (Int32 i = 0; i < _assimpNode.MeshCount; i++)
 					//{
 					//	CModel3D model = new CModel3D(this, i);
 					//	mModels.Add(model);

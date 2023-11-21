@@ -36,11 +36,11 @@ namespace Lotus
 		public class CMeshPrimitiveSphere3Df : CMesh3Df
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal Vector3Df mPivot;
-			internal Single mRadius;
-			internal Int32 mNumberVerticalSegment = 18;
-			internal Int32 mNumberHorizontalSegment = 18;
-			internal Boolean mIsHalf;
+			internal Vector3Df _pivot;
+			internal Single _radius;
+			internal Int32 _numberVerticalSegment = 18;
+			internal Int32 _numberHorizontalSegment = 18;
+			internal Boolean _isHalf;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -51,12 +51,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mRadius;
+					return _radius;
 				}
 
 				set
 				{
-					mRadius = value;
+					_radius = value;
 					CreateSphere();
 				}
 			}
@@ -68,12 +68,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mNumberVerticalSegment;
+					return _numberVerticalSegment;
 				}
 
 				set
 				{
-					mNumberVerticalSegment = value;
+					_numberVerticalSegment = value;
 					CreateSphere();
 				}
 			}
@@ -85,12 +85,12 @@ namespace Lotus
 			{
 				get
 				{
-					return mNumberHorizontalSegment;
+					return _numberHorizontalSegment;
 				}
 
 				set
 				{
-					mNumberHorizontalSegment = value;
+					_numberHorizontalSegment = value;
 					CreateSphere();
 				}
 			}
@@ -105,7 +105,7 @@ namespace Lotus
 			public CMeshPrimitiveSphere3Df()
 				:base()
 			{
-				mName = "Sphere3D";
+				_name = "Sphere3D";
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ namespace Lotus
 			public CMeshPrimitiveSphere3Df(Vector3Df pivot, Single radius, Single startAngle, Int32 numberVerticalSegment,
 				 Int32 numberHorizontalSegment): base()
 			{
-				mName = "Sphere3D";
+				_name = "Sphere3D";
 				Create(pivot, radius, startAngle, numberVerticalSegment, numberHorizontalSegment);
 			}
 			#endregion
@@ -153,8 +153,8 @@ namespace Lotus
 				 Int32 numberHorizontalSegment)
 			{
 				// Сохраняем данные
-				mNumberVerticalSegment = numberVerticalSegment;
-				mNumberHorizontalSegment = numberHorizontalSegment;
+				_numberVerticalSegment = numberVerticalSegment;
+				_numberHorizontalSegment = numberHorizontalSegment;
 
 				// Количество строк - есть количество горизонтальных сегментов
 				var row_count = numberHorizontalSegment;
@@ -162,7 +162,7 @@ namespace Lotus
 				// Количество столбов - есть количество вертикальных сегментов
 				var column_count = numberVerticalSegment;
 
-				mVertices.Clear();
+				_vertices.Clear();
 
 				// Дельта углов для плоскостей
 				var horizont_delta = 360.0f / column_count;
@@ -181,13 +181,13 @@ namespace Lotus
 						var positon = Vector3Df.FromSpherical(radius, latitude_degree, longitude_degree);
 						Vector2Df uv = XGeometry3D.GetMapUVFromSpherical(latitude_degree, longitude_degree);
 
-						mVertices.AddVertex(positon + pivot, positon.Normalized, uv);
+						_vertices.AddVertex(positon + pivot, positon.Normalized, uv);
 					}
 				}
 
 				// Заполняем треугольники
-				mTriangles.Clear();
-				mTriangles.AddTriangleRegularGrid(0, column_count - 1, row_count, true);
+				_triangles.Clear();
+				_triangles.AddTriangleRegularGrid(0, column_count - 1, row_count, true);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -212,14 +212,14 @@ namespace Lotus
 			public override void ComputeUVMap(Int32 channel = 0)
 			{
 				var index = 0;
-				for (var ir = 0; ir <= mNumberHorizontalSegment; ir++)
+				for (var ir = 0; ir <= _numberHorizontalSegment; ir++)
 				{
-					for (var ic = 0; ic <= mNumberVerticalSegment; ic++)
+					for (var ic = 0; ic <= _numberVerticalSegment; ic++)
 					{
-						var u = ic / (Single)mNumberVerticalSegment;
-						var v = ir / (Single)mNumberHorizontalSegment;
+						var u = ic / (Single)_numberVerticalSegment;
+						var v = ir / (Single)_numberHorizontalSegment;
 
-						mVertices.Vertices[index].UV = new Vector2Df(v, u);
+						_vertices.Vertices[index].UV = new Vector2Df(v, u);
 						index++;
 					}
 				}

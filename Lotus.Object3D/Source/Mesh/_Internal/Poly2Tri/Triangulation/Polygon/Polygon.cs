@@ -118,9 +118,9 @@ namespace Poly2Tri.Triangulation.Polygon
         }
 
 
-        public int IndexOf(TriangulationPoint p)
+        public int IndexOf(TriangulationPoint item)
         {
-            return MPoints.IndexOf(p);
+            return MPoints.IndexOf(item);
         }
 
 
@@ -130,9 +130,9 @@ namespace Poly2Tri.Triangulation.Polygon
         }
 
 
-        public void Add(TriangulationPoint p)
+        public void Add(TriangulationPoint item)
         {
-            Add(p, -1, true);
+            Add(item, -1, true);
         }
 
 
@@ -228,15 +228,15 @@ namespace Poly2Tri.Triangulation.Polygon
         }
 
 
-        public void Insert(int idx, TriangulationPoint p)
+        public void Insert(int index, TriangulationPoint item)
         {
-            Add(p, idx, true);
+            Add(item, index, true);
         }
 
 
-        public bool Remove(TriangulationPoint p)
+        public bool Remove(TriangulationPoint item)
         {
-            return base.Remove(p);
+            return base.Remove(item);
         }
 
 
@@ -260,9 +260,9 @@ namespace Poly2Tri.Triangulation.Polygon
 
 
 
-        public bool Contains(TriangulationPoint p)
+        public bool Contains(TriangulationPoint item)
         {
-            return MPoints.Contains(p);
+            return MPoints.Contains(item);
         }
 
 

@@ -181,16 +181,16 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal String mFileName;
-			protected internal TTextureDestination mDestination;
-			protected internal Int32 mWidth;
-			protected internal Int32 mHeight;
-			protected internal Boolean mAlphaIsTransparency;
-			protected internal TTextureFormatColor mFormatColor;
-			protected internal CMaterial mOwnerMaterial;
+			protected internal String _fileName;
+			protected internal TTextureDestination _destination;
+			protected internal Int32 _width;
+			protected internal Int32 _height;
+			protected internal Boolean _alphaIsTransparency;
+			protected internal TTextureFormatColor _formatColor;
+			protected internal CMaterial _ownerMaterial;
 
 #if UNITY_2017_1_OR_NEWER
-			internal UnityEngine.Texture2D mUnityTexture;
+			internal UnityEngine.Texture2D _unityTexture;
 #endif
 			#endregion
 
@@ -201,18 +201,15 @@ namespace Lotus
 			/// <summary>
 			/// Имя файла текстуры
 			/// </summary>
-			[DisplayName("Имя текстуры")]
-			[Description("Имя файла текстуры")]
-			[Category(XInspectorGroupDesc.Params)]
 			public String FileName
 			{
 				get
 				{
-					return mFileName;
+					return _fileName;
 				}
 				set
 				{
-					mFileName = value;
+					_fileName = value;
 					RaiseFileNameChanged();
 					NotifyPropertyChanged(PropertyArgsFileName);
 				}
@@ -221,18 +218,15 @@ namespace Lotus
 			/// <summary>
 			/// Назначение текстуры
 			/// </summary>
-			[DisplayName("Назначение текстуры")]
-			[Description("Назначение текстуры")]
-			[Category(XInspectorGroupDesc.Params)]
 			public TTextureDestination Destination
 			{
 				get
 				{
-					return mDestination;
+					return _destination;
 				}
 				set
 				{
-					mDestination = value;
+					_destination = value;
 					RaiseDestinationChanged();
 					NotifyPropertyChanged(PropertyArgsDestination);
 				}
@@ -241,18 +235,15 @@ namespace Lotus
 			/// <summary>
 			/// Ширина текстуры
 			/// </summary>
-			[DisplayName("Ширина текстуры")]
-			[Description("Ширина текстуры")]
-			[Category(XInspectorGroupDesc.Params)]
 			public Int32 Width
 			{
 				get
 				{
-					return mWidth;
+					return _width;
 				}
 				set
 				{
-					mWidth = value;
+					_width = value;
 					RaiseWidthChanged();
 					NotifyPropertyChanged(PropertyArgsWidth);
 				}
@@ -261,18 +252,15 @@ namespace Lotus
 			/// <summary>
 			/// Высота текстуры
 			/// </summary>
-			[DisplayName("Высота текстуры")]
-			[Description("Высота текстуры")]
-			[Category(XInspectorGroupDesc.Params)]
 			public Int32 Height
 			{
 				get
 				{
-					return mHeight;
+					return _height;
 				}
 				set
 				{
-					mHeight = value;
+					_height = value;
 					RaiseHeightChanged();
 					NotifyPropertyChanged(PropertyArgsHeight);
 				}
@@ -281,18 +269,15 @@ namespace Lotus
 			/// <summary>
 			/// Альфа канал текстуру определяет ее прозрачность
 			/// </summary>
-			[DisplayName("Высота текстуры")]
-			[Description("Высота текстуры")]
-			[Category(XInspectorGroupDesc.Params)]
 			public Boolean AlphaIsTransparency
 			{
 				get
 				{
-					return mAlphaIsTransparency;
+					return _alphaIsTransparency;
 				}
 				set
 				{
-					mAlphaIsTransparency = value;
+					_alphaIsTransparency = value;
 					RaiseAlphaIsTransparencyChanged();
 					NotifyPropertyChanged(PropertyArgsAlphaIsTransparency);
 				}
@@ -301,18 +286,15 @@ namespace Lotus
 			/// <summary>
 			/// Формат цвета изображения предстающего собой текстуру
 			/// </summary>
-			[DisplayName("Формат цвета")]
-			[Description("Формат цвета изображения предстающего собой текстуру")]
-			[Category(XInspectorGroupDesc.Params)]
 			public TTextureFormatColor FormatColor
 			{
 				get
 				{
-					return mFormatColor;
+					return _formatColor;
 				}
 				set
 				{
-					mFormatColor = value;
+					_formatColor = value;
 					RaiseFormatColorChanged();
 					NotifyPropertyChanged(PropertyArgsFormatColor);
 				}
@@ -321,13 +303,12 @@ namespace Lotus
 			/// <summary>
 			/// Владелец материал
 			/// </summary>
-			[Browsable(false)]
 			public CMaterial OwnerMaterial
 			{
-				get { return mOwnerMaterial; }
+				get { return _ownerMaterial; }
 				set
 				{
-					mOwnerMaterial = value;
+					_ownerMaterial = value;
 				}
 			}
 			#endregion
@@ -350,7 +331,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTexture(CMaterial ownerMaterial)
 			{
-				mOwnerMaterial = ownerMaterial;
+				_ownerMaterial = ownerMaterial;
 			}
 
 #if UNITY_2017_1_OR_NEWER
@@ -366,8 +347,8 @@ namespace Lotus
 			{
 				if(unity_texture != null)
 				{
-					mName = unity_texture.name;
-					mUnityTexture = unity_texture;
+					_name = unity_texture.name;
+					_unityTexture = unity_texture;
 				}
 			}
 #endif
@@ -487,18 +468,17 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			internal ListArray<CTexture> mTextures;
-			internal CScene3D mOwnerScene;
+			internal ListArray<CTexture> _textures;
+			internal CScene3D _ownerScene;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
 			/// Наблюдаемая коллекция материал
 			/// </summary>
-			[Browsable(false)]
 			public ListArray<CTexture> Textures
 			{
-				get { return mTextures; }
+				get { return _textures; }
 			}
 			#endregion
 
@@ -511,16 +491,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextureSet(CScene3D ownerScene)
 			{
-				mOwnerScene = ownerScene;
-				mName = "Тексутры";
-				mTextures = new ListArray<CTexture>
+				_ownerScene = ownerScene;
+				_name = "Тексутры";
+				_textures = new ListArray<CTexture>
 				{
 					IsNotify = true
 				};
 			}
 			#endregion
 
-			#region ======================================= МЕТОДЫ ILotusTreeNodeViewBuilder ==========================
+			#region ======================================= МЕТОДЫ ILotusViewModelBuilder =============================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение количества дочерних узлов
@@ -529,7 +509,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetCountChildrenNode()
 			{
-				return mTextures.Count;
+				return _textures.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -541,7 +521,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetChildrenNode(Int32 index)
 			{
-				return mTextures[index];
+				return _textures[index];
 			}
 			#endregion
 

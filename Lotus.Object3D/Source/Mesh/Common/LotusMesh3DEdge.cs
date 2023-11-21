@@ -418,14 +418,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Move(Vector3Df offset)
 			{
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					Vertices.Vertices[mArrayOfItems[i].IndexVertex10].Position += offset;
-					Vertices.Vertices[mArrayOfItems[i].IndexVertex11].Position += offset;
-					if(mArrayOfItems[i].IndexTriangle2 != -1 && !mArrayOfItems[i].IsEqualsIndex())
+					Vertices.Vertices[_arrayOfItems[i].IndexVertex10].Position += offset;
+					Vertices.Vertices[_arrayOfItems[i].IndexVertex11].Position += offset;
+					if(_arrayOfItems[i].IndexTriangle2 != -1 && !_arrayOfItems[i].IsEqualsIndex())
 					{
-						Vertices.Vertices[mArrayOfItems[i].IndexVertex20].Position += offset;
-						Vertices.Vertices[mArrayOfItems[i].IndexVertex21].Position += offset;
+						Vertices.Vertices[_arrayOfItems[i].IndexVertex20].Position += offset;
+						Vertices.Vertices[_arrayOfItems[i].IndexVertex21].Position += offset;
 					}
 				}
 			}
@@ -510,9 +510,9 @@ namespace Lotus
 				Vector3Df p1 = Vertices[iv1].Position;
 				Vector3Df p2 = Vertices[iv2].Position;
 
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					if (mArrayOfItems[i].CheckFromPosition(Vertices, in p1, in p2))
+					if (_arrayOfItems[i].CheckFromPosition(Vertices, in p1, in p2))
 					{
 						return i;
 					}
@@ -534,11 +534,11 @@ namespace Lotus
 			{
 				var outer_edges = new CListEdge3D();
 
-				for (var i = 0; i < mCount; i++)
+				for (var i = 0; i < _count; i++)
 				{
-					if (mArrayOfItems[i].IndexTriangle2 == -1)
+					if (_arrayOfItems[i].IndexTriangle2 == -1)
 					{
-						outer_edges.Add(mArrayOfItems[i]);
+						outer_edges.Add(_arrayOfItems[i]);
 					}
 				}
 

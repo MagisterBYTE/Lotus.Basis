@@ -193,15 +193,15 @@ namespace Poly2Tri.Utility
         }
 
 
-        public int IndexOf(Point2D p)
+        public int IndexOf(Point2D item)
         {
-            return MPoints.IndexOf(p);
+            return MPoints.IndexOf(item);
         }
 
 
-        public virtual void Add(Point2D p)
+        public virtual void Add(Point2D item)
         {
-            Add(p, -1, true);
+            Add(item, -1, true);
         }
 
 
@@ -277,15 +277,15 @@ namespace Poly2Tri.Utility
         }
 
 
-        public virtual void Insert(int idx, Point2D item)
+        public virtual void Insert(int index, Point2D item)
         {
-            Add(item, idx, true);
+            Add(item, index, true);
         }
 
 
-        public virtual bool Remove(Point2D p)
+        public virtual bool Remove(Point2D item)
         {
-            if (MPoints.Remove(p))
+            if (MPoints.Remove(item))
             {
                 CalculateBounds();
                 Epsilon = CalculateEpsilon();
@@ -296,13 +296,13 @@ namespace Poly2Tri.Utility
         }
 
 
-        public virtual void RemoveAt(int idx)
+        public virtual void RemoveAt(int index)
         {
-            if (idx < 0 || idx >= Count)
+            if (index < 0 || index >= Count)
             {
                 return;
             }
-            MPoints.RemoveAt(idx);
+            MPoints.RemoveAt(index);
             CalculateBounds();
             Epsilon = CalculateEpsilon();
         }
@@ -325,9 +325,9 @@ namespace Poly2Tri.Utility
         }
 
 
-        public bool Contains(Point2D p)
+        public bool Contains(Point2D item)
         {
-            return MPoints.Contains(p);
+            return MPoints.Contains(item);
         }
 
 

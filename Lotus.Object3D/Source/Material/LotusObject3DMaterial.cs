@@ -52,29 +52,29 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			internal TColor mAmbientColor;
-			internal TColor mAmbientColorOriginal;
-			internal TColor mDiffuseColor;
-			internal TColor mDiffuseColorOriginal;
-			internal ListArray<CTextureSlot> mTextureSlots;
-			internal CTextureSlot mAmbientSlot;
-			internal CTextureSlot mDiffuseSlot;
-			internal CTextureSlot mNormalSlot;
-			internal CTextureSlot mHeightSlot;
-			internal CScene3D mOwnerScene;
+			internal TColor _ambientColor;
+			internal TColor _ambientColorOriginal;
+			internal TColor _diffuseColor;
+			internal TColor _diffuseColorOriginal;
+			internal ListArray<CTextureSlot> _textureSlots;
+			internal CTextureSlot _ambientSlot;
+			internal CTextureSlot _diffuseSlot;
+			internal CTextureSlot _normalSlot;
+			internal CTextureSlot _heightSlot;
+			internal CScene3D _ownerScene;
 
 			// Платформенно-зависимая часть
 #if USE_HELIX
-			internal Helix3D.PhongMaterial mHelixMaterial;
+			internal Helix3D.PhongMaterial _helixMaterial;
 #endif
 #if USE_ASSIMP
-			internal Assimp.Material mAssimpMaterial;
+			internal Assimp.Material _assimpMaterial;
 #endif
 #if UNITY_2017_1_OR_NEWER
-			internal UnityEngine.Material mUnityMaterial;
+			internal UnityEngine.Material _unityMaterial;
 #endif
 #if UNITY_EDITOR
-			internal Autodesk.Fbx.FbxSurfaceMaterial mFbxMaterial;
+			internal Autodesk.Fbx.FbxSurfaceMaterial _fbxMaterial;
 #endif
 			#endregion
 
@@ -85,18 +85,14 @@ namespace Lotus
 			/// <summary>
 			/// Цвет подсветки материала
 			/// </summary>
-			[DisplayName("AmbientColor")]
-			[Description("Цвет подсветки материала")]
-			[Category(XInspectorGroupDesc.Params)]
-			[LotusPropertyOrder(0)]
 			public TColor AmbientColor
 			{
-				get { return mAmbientColor; }
+				get { return _ambientColor; }
 				set
 				{
-					if (mAmbientColor != value)
+					if (_ambientColor != value)
 					{
-						mAmbientColor = value;
+						_ambientColor = value;
 						RaiseAmbientColorChanged();
 						NotifyPropertyChanged(PropertyArgsAmbientColor);
 					}
@@ -106,18 +102,14 @@ namespace Lotus
 			/// <summary>
 			/// Основной цвет материала
 			/// </summary>
-			[DisplayName("DiffuseColor")]
-			[Description("Основной цвет материала")]
-			[Category(XInspectorGroupDesc.Params)]
-			[LotusPropertyOrder(1)]
 			public TColor DiffuseColor
 			{
-				get { return mDiffuseColor; }
+				get { return _diffuseColor; }
 				set
 				{
-					if (mDiffuseColor != value)
+					if (_diffuseColor != value)
 					{
-						mDiffuseColor = value;
+						_diffuseColor = value;
 						RaiseDiffuseColorChanged();
 						NotifyPropertyChanged(PropertyArgsDiffuseColor);
 					}
@@ -127,22 +119,20 @@ namespace Lotus
 			/// <summary>
 			/// Все текстурные слоты
 			/// </summary>
-			[Browsable(false)]
 			public ListArray<CTextureSlot> TextureSlots
 			{
-				get { return mTextureSlots; }
+				get { return _textureSlots; }
 			}
 
 			/// <summary>
 			/// Владелец сцена
 			/// </summary>
-			[Browsable(false)]
 			public CScene3D OwnerScene
 			{
-				get { return mOwnerScene; }
+				get { return _ownerScene; }
 				set
 				{
-					mOwnerScene = value;
+					_ownerScene = value;
 				}
 			}
 			#endregion
@@ -156,8 +146,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMaterial(CScene3D ownerScene)
 			{
-				mOwnerScene = ownerScene;
-				mTextureSlots = new ListArray<CTextureSlot>
+				_ownerScene = ownerScene;
+				_textureSlots = new ListArray<CTextureSlot>
 				{
 					IsNotify = true
 				};
@@ -173,38 +163,38 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMaterial(CScene3D owner_scene, Assimp.Material assimp_material)
 			{
-				mOwnerScene = owner_scene;
-				mTextureSlots = new ListArray<CTextureSlot>();
+				_ownerScene = owner_scene;
+				_textureSlots = new ListArray<CTextureSlot>();
 
-				mAssimpMaterial = assimp_material;
-				mName = mAssimpMaterial.Name;
+				_assimpMaterial = assimp_material;
+				_name = _assimpMaterial.Name;
 
-				if (mAssimpMaterial.HasTextureAmbient)
+				if (_assimpMaterial.HasTextureAmbient)
 				{
-					mAmbientSlot = new CTextureSlot(this, mAssimpMaterial.TextureAmbient);
-					mAmbientSlot.Name = "Ambient";
-					mTextureSlots.Add(mAmbientSlot);
+					_ambientSlot = new CTextureSlot(this, _assimpMaterial.TextureAmbient);
+					_ambientSlot.Name = "Ambient";
+					_textureSlots.Add(_ambientSlot);
 				}
 
-				if (mAssimpMaterial.HasTextureDiffuse)
+				if (_assimpMaterial.HasTextureDiffuse)
 				{
-					mDiffuseSlot = new CTextureSlot(this, mAssimpMaterial.TextureDiffuse);
-					mDiffuseSlot.Name = "Diffuse";
-					mTextureSlots.Add(mDiffuseSlot);
+					_diffuseSlot = new CTextureSlot(this, _assimpMaterial.TextureDiffuse);
+					_diffuseSlot.Name = "Diffuse";
+					_textureSlots.Add(_diffuseSlot);
 				}
 
-				if (mAssimpMaterial.HasTextureNormal)
+				if (_assimpMaterial.HasTextureNormal)
 				{
-					mNormalSlot = new CTextureSlot(this, mAssimpMaterial.TextureNormal);
-					mNormalSlot.Name = "Normal";
-					mTextureSlots.Add(mNormalSlot);
+					_normalSlot = new CTextureSlot(this, _assimpMaterial.TextureNormal);
+					_normalSlot.Name = "Normal";
+					_textureSlots.Add(_normalSlot);
 				}
 
-				if (mAssimpMaterial.HasTextureHeight)
+				if (_assimpMaterial.HasTextureHeight)
 				{
-					mHeightSlot = new CTextureSlot(this, mAssimpMaterial.TextureHeight);
-					mHeightSlot.Name = "Height";
-					mTextureSlots.Add(mHeightSlot);
+					_heightSlot = new CTextureSlot(this, _assimpMaterial.TextureHeight);
+					_heightSlot.Name = "Height";
+					_textureSlots.Add(_heightSlot);
 				}
 			}
 #endif
@@ -220,10 +210,10 @@ namespace Lotus
 			public CMaterial(CScene3D owner_scene, UnityEngine.Material unity_material) 
 				: this(owner_scene)
 			{
-				mName = unity_material.name;
-				mUnityMaterial = unity_material;
-				//mAmbientColorOriginal = mAmbientColor = mUnityMaterial.GetColor("Ambient").ToTColor();
-				//mDiffuseColorOriginal = mDiffuseColor = mUnityMaterial.GetColor("Diffuse").ToTColor();
+				_name = unity_material.name;
+				_unityMaterial = unity_material;
+				//_ambientColorOriginal = _ambientColor = _unityMaterial.GetColor("Ambient").ToTColor();
+				//_diffuseColorOriginal = _diffuseColor = _unityMaterial.GetColor("Diffuse").ToTColor();
 			}
 #endif
 #if UNITY_EDITOR
@@ -237,10 +227,10 @@ namespace Lotus
 			public CMaterial(CScene3D owner_scene, Autodesk.Fbx.FbxSurfaceMaterial fbx_material)
 				: this(owner_scene)
 			{
-				mName = fbx_material.GetName();
-				mFbxMaterial = fbx_material;
-				//mAmbientColorOriginal = mAmbientColor = mUnityMaterial.GetColor("Ambient").ToTColor();
-				//mDiffuseColorOriginal = mDiffuseColor = mUnityMaterial.GetColor("Diffuse").ToTColor();
+				_name = fbx_material.GetName();
+				_fbxMaterial = fbx_material;
+				//_ambientColorOriginal = _ambientColor = _unityMaterial.GetColor("Ambient").ToTColor();
+				//_diffuseColorOriginal = _diffuseColor = _unityMaterial.GetColor("Diffuse").ToTColor();
 			}
 #endif
 			#endregion
@@ -258,15 +248,15 @@ namespace Lotus
 
 #endif
 #if USE_HELIX
-				if (mHelixMaterial != null)
+				if (_helixMaterial != null)
 				{
-					//mHelixMaterial.AmbientColor = mAmbientColor.ToShColor4();
+					//_helixMaterial.AmbientColor = _ambientColor.ToShColor4();
 				}
 #endif
 #if UNITY_2017_1_OR_NEWER
-				if (mUnityMaterial != null)
+				if (_unityMaterial != null)
 				{
-					mUnityMaterial.SetColor("Ambient", mAmbientColor);
+					_unityMaterial.SetColor("Ambient", _ambientColor);
 				}
 #endif
 			}
@@ -283,15 +273,15 @@ namespace Lotus
 
 #endif
 #if USE_HELIX
-				if (mHelixMaterial != null)
+				if (_helixMaterial != null)
 				{
-					//mHelixMaterial.DiffuseColor = mDiffuseColor.ToShColor4();
+					//_helixMaterial.DiffuseColor = _diffuseColor.ToShColor4();
 				}
 #endif
 #if UNITY_2017_1_OR_NEWER
-				if (mUnityMaterial != null)
+				if (_unityMaterial != null)
 				{
-					mUnityMaterial.SetColor("Diffuse", mAmbientColor);
+					_unityMaterial.SetColor("Diffuse", _ambientColor);
 				}
 #endif
 			}
@@ -308,22 +298,22 @@ namespace Lotus
 			{
 				try
 				{
-					mHelixMaterial = new Helix3D.PhongMaterial();
-					mHelixMaterial.Name = mName;
+					_helixMaterial = new Helix3D.PhongMaterial();
+					_helixMaterial.Name = _name;
 
-                    //if (mAssimpMaterial.HasTextureDiffuse)
+                    //if (_assimpMaterial.HasTextureDiffuse)
                     //{
-                    //    mHelixMaterial.DiffuseMap = mDiffuseSlot.GetTextureSteam();
+                    //    _helixMaterial.DiffuseMap = _diffuseSlot.GetTextureSteam();
                     //}
 
-                    //if (mAssimpMaterial.HasTextureNormal)
+                    //if (_assimpMaterial.HasTextureNormal)
                     //{
-                    //    mHelixMaterial.NormalMap = mNormalSlot.GetTextureSteam();
+                    //    _helixMaterial.NormalMap = _normalSlot.GetTextureSteam();
                     //}
 
-                    //if (mAssimpMaterial.HasTextureHeight)
+                    //if (_assimpMaterial.HasTextureHeight)
                     //{
-                    //    mHelixMaterial.DisplacementMap = mHeightSlot.GetTextureSteam();
+                    //    _helixMaterial.DisplacementMap = _heightSlot.GetTextureSteam();
                     //}
                 }
 
@@ -349,18 +339,17 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			internal ListArray<CMaterial> mMaterials;
-			internal CScene3D mOwnerScene;
+			protected internal ListArray<CMaterial> _materials;
+			protected internal CScene3D _ownerScene;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
 			/// Наблюдаемая коллекция материал
 			/// </summary>
-			[Browsable(false)]
 			public ListArray<CMaterial> Materials
 			{
-				get { return mMaterials; }
+				get { return _materials; }
 			}
 			#endregion
 
@@ -373,9 +362,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMaterialSet(CScene3D ownerScene)
 			{
-				mOwnerScene = ownerScene;
-				mName = "Материалы";
-				mMaterials = new ListArray<CMaterial>
+				_ownerScene = ownerScene;
+				_name = "Материалы";
+				_materials = new ListArray<CMaterial>
 				{
 					IsNotify = true
 				};
@@ -391,15 +380,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMaterialSet(CScene3D owner_scene, Assimp.Scene assimp_scene)
 			{
-				mName = "Материалы";
-				mMaterials = new ListArray<CMaterial>();
+				_name = "Материалы";
+				_materials = new ListArray<CMaterial>();
 
 				// Устанавливаем материалы
 				for (var i = 0; i < assimp_scene.MaterialCount; i++)
 				{
 					Assimp.Material assimp_material = assimp_scene.Materials[i];
 					var material = new CMaterial(owner_scene, assimp_material);
-					mMaterials.Add(material);
+					_materials.Add(material);
 				}
 			}
 #endif
@@ -414,7 +403,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetCountChildrenNode()
 			{
-				return mMaterials.Count;
+				return _materials.Count;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -426,7 +415,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetChildrenNode(Int32 index)
 			{
-				return mMaterials[index];
+				return _materials[index];
 			}
 			#endregion
 
@@ -439,9 +428,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void CreateHelixMaterials()
 			{
-				for (var i = 0; i < mMaterials.Count; i++)
+				for (var i = 0; i < _materials.Count; i++)
 				{
-					mMaterials[i].CreateHelixMaterial();
+					_materials[i].CreateHelixMaterial();
 				}
 			}
 #endif

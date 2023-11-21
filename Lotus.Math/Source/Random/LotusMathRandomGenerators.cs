@@ -471,7 +471,7 @@ namespace Lotus
 			/// <summary>
 			/// Current state of the random number generation
 			/// </summary>
-			private UInt32 mValue;
+			private UInt32 _value;
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -493,8 +493,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CRandomShift(UInt32 seed)
 			{
-				this.mValue = (UInt32)(M ^ seed);
-				this.mValue = NextInteger();
+				this._value = (UInt32)(M ^ seed);
+				this._value = NextInteger();
 			}
 			#endregion
 
@@ -544,11 +544,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public UInt32 NextInteger()
 			{
-				this.mValue ^= this.mValue >> A1;
-				this.mValue ^= this.mValue << A2;
-				this.mValue ^= this.mValue >> A3;
+				this._value ^= this._value >> A1;
+				this._value ^= this._value << A2;
+				this._value ^= this._value >> A3;
 
-				return (UInt32)(this.mValue * A);
+				return (UInt32)(this._value * A);
 			}
 
 			//---------------------------------------------------------------------------------------------------------

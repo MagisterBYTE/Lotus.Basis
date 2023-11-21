@@ -34,13 +34,13 @@ namespace Lotus
 		public struct Transform3Df
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal Vector3Df mPivot;
-			internal Vector3Df mOffset;
-			internal Quaternion3Df mRotation;
-			internal Vector3Df mForward;
-			internal Vector3Df mRight;
-			internal Vector3Df mUp;
-			internal Boolean mUpdateOrt;
+			internal Vector3Df _pivot;
+			internal Vector3Df _offset;
+			internal Quaternion3Df _rotation;
+			internal Vector3Df _forward;
+			internal Vector3Df _right;
+			internal Vector3Df _up;
+			internal Boolean _updateOrt;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -49,10 +49,10 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Pivot
 			{
-				readonly get { return mPivot; }
+				readonly get { return _pivot; }
 				set 
 				{
-					mPivot = value;
+					_pivot = value;
 				}
 			}
 
@@ -61,10 +61,10 @@ namespace Lotus
 			/// </summary>
 			public Vector3Df Offset
 			{
-				readonly get { return mOffset; }
+				readonly get { return _offset; }
 				set
 				{
-					mOffset = value;
+					_offset = value;
 				}
 			}
 
@@ -73,46 +73,46 @@ namespace Lotus
 			/// </summary>
 			public Quaternion3Df Rotation
 			{
-				readonly get { return mRotation; }
-				set { mRotation = value; }
+				readonly get { return _rotation; }
+				set 
+				{ 
+					_rotation = value;
+				}
 			}
 
 			/// <summary>
 			/// Вектор "вперед"
 			/// </summary>
-			public readonly Vector3Df Forward
+			public Vector3Df Forward
 			{
-				get { return mForward; }
-
+				get { return _forward; }
 				set
 				{
-
+					_forward = value;
 				}
 			}
 
 			/// <summary>
 			/// Вектор "вправо"
 			/// </summary>
-			public readonly Vector3Df Right
+			public Vector3Df Right
 			{
-				get { return mRight; }
-
+				get { return _right; }
 				set
 				{
-
+					_right = value;
 				}
 			}
 
 			/// <summary>
 			/// Вектор вверх
 			/// </summary>
-			public readonly Vector3Df Up
+			public Vector3Df Up
 			{
-				get { return mUp; }
-
+				get { return _up; }
 				set
 				{
-
+					_up = value;
 				}
 			}
 
@@ -125,30 +125,30 @@ namespace Lotus
 				{
 					var transform = new Matrix4Dx4();
 
-					//Vector3Df pos = Pivot;
-					//Single x = -Vector3Df.Dot(ref mRight, ref pos);
-					//Single y = -Vector3Df.Dot(ref mUp, ref pos);
-					//Single z = -Vector3Df.Dot(ref mForward, ref pos);
+					Vector3Df pos = Pivot;
+					Single x = -Vector3Df.Dot(in _right, in pos);
+					Single y = -Vector3Df.Dot(in _up, in pos);
+					Single z = -Vector3Df.Dot(in _forward, in pos);
 
-					//transform.M11 = mRight.X;
-					//transform.M12 = mUp.X;
-					//transform.M13 = mForward.X;
-					//transform.M14 = 0.0;
+					transform.M11 = _right.X;
+					transform.M12 = _up.X;
+					transform.M13 = _forward.X;
+					transform.M14 = 0.0;
 
-					//transform.M21 = mRight.Y;
-					//transform.M22 = mUp.Y;
-					//transform.M23 = mForward.Y;
-					//transform.M24 = 0.0;
+					transform.M21 = _right.Y;
+					transform.M22 = _up.Y;
+					transform.M23 = _forward.Y;
+					transform.M24 = 0.0;
 
-					//transform.M31 = mRight.Z;
-					//transform.M32 = mUp.Z;
-					//transform.M33 = mForward.Z;
-					//transform.M34 = 0.0;
+					transform.M31 = _right.Z;
+					transform.M32 = _up.Z;
+					transform.M33 = _forward.Z;
+					transform.M34 = 0.0;
 
-					//transform.M41 = x;
-					//transform.M42 = y;
-					//transform.M43 = z;
-					//transform.M44 = 1.0;
+					transform.M41 = x;
+					transform.M42 = y;
+					transform.M43 = z;
+					transform.M44 = 1.0;
 
 					return transform;
 				}
@@ -164,13 +164,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Transform3Df(Vector3Df pivot)
 			{
-				mPivot = pivot;
-				mOffset = Vector3Df.Zero;
-				mRotation = Quaternion3Df.Identity;
-				mForward = Vector3Df.Forward;
-				mRight = Vector3Df.Right;
-				mUp = Vector3Df.Up;
-				mUpdateOrt = false;
+				_pivot = pivot;
+				_offset = Vector3Df.Zero;
+				_rotation = Quaternion3Df.Identity;
+				_forward = Vector3Df.Forward;
+				_right = Vector3Df.Right;
+				_up = Vector3Df.Up;
+				_updateOrt = false;
 			}
 			#endregion
 
@@ -185,13 +185,13 @@ namespace Lotus
 			public void SetRotate(in Vector3Df axis, Single angle)
 			{
 				// Локальное вращение
-				mRotation = new Quaternion3Df(axis, angle);
+				_rotation = new Quaternion3Df(axis, angle);
 
 				// Трансформируем орты
-				mUp = mRotation.TransformVector(Vector3Df.Up);
-				mForward = mRotation.TransformVector(Vector3Df.Forward);
-				mRight = mRotation.TransformVector(Vector3Df.Right);
-				mUpdateOrt = true;
+				_up = _rotation.TransformVector(Vector3Df.Up);
+				_forward = _rotation.TransformVector(Vector3Df.Forward);
+				_right = _rotation.TransformVector(Vector3Df.Right);
+				_updateOrt = true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -205,13 +205,13 @@ namespace Lotus
 			{
 				//// Локальное вращение
 				//mAngleAxisPivot += angle;
-				//mRotation = new Quaternion3D(axis, mAngleAxisPivot);
+				//_rotation = new Quaternion3D(axis, mAngleAxisPivot);
 
 				//// Трансформируем орты
-				//mUp = mRotation.TransformVector(Vector3Df.Up);
-				//mForward = mRotation.TransformVector(Vector3Df.Forward);
-				//mRight = mRotation.TransformVector(Vector3Df.Right);
-				//mUpdateOrt = true;
+				//_up = _rotation.TransformVector(Vector3Df.Up);
+				//_forward = _rotation.TransformVector(Vector3Df.Forward);
+				//_right = _rotation.TransformVector(Vector3Df.Right);
+				//_updateOrt = true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -300,13 +300,13 @@ namespace Lotus
 			{
 				Vector3Df direction = point - Pivot;
 				direction.Normalize();
-				mRotation.SetLookRotation(in direction, in up);
+				_rotation.SetLookRotation(in direction, in up);
 				
 				// Трансформируем орты
-				mForward = direction;
-				mUp = up;
-				mRight = Vector3Df.Cross(in mUp, in mForward);
-				mUpdateOrt = true;
+				_forward = direction;
+				_up = up;
+				_right = Vector3Df.Cross(in _up, in _forward);
+				_updateOrt = true;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -316,16 +316,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Update()
 			{
-				if (mUpdateOrt)
+				if (_updateOrt)
 				{
-					mUp = Vector3Df.Cross(in mForward, in mRight);
-					mRight = Vector3Df.Cross(in mUp, in mForward);
+					_up = Vector3Df.Cross(in _forward, in _right);
+					_right = Vector3Df.Cross(in _up, in _forward);
 					
 
-					mForward.Normalize();
-					mRight.Normalize();
-					mUp.Normalize();
-					mUpdateOrt = false;
+					_forward.Normalize();
+					_right.Normalize();
+					_up.Normalize();
+					_updateOrt = false;
 				}
 			}
 			#endregion

@@ -1,83 +1,75 @@
 ﻿//=====================================================================================================================
 // Проект: Модуль базового ядра
-// Раздел: Подсистема параметрических объектов
+// Раздел: Подсистема поддержки инспектора свойств
+// Подраздел: Атрибуты для инспектора свойств
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusParameterList.cs
-*		Класс для представления параметра значения которого представляет собой список указанного типа.
+/** \file LotusInspectorDecorationBackground.cs
+*		Атрибут для определения фонового цвета элемента инспектора свойств.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Xml;
-using System.Xml.Serialization;
 //=====================================================================================================================
 namespace Lotus
 {
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreParameters
+		/** \addtogroup CoreInspectorAttribute
 		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
-		/// Класс для представления параметра значения которого представляет собой список указанного типа
+		/// Атрибут для определения фонового цвета элемента инспектора свойств
 		/// </summary>
-		/// <typeparam name="TType">Тип элемента списка</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class CParameterList<TType> : ParameterItem<ListArray<TType>>
+		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+#if UNITY_2017_1_OR_NEWER
+		public sealed class LotusBackgroundAttribute : UnityEngine.PropertyAttribute
+#else
+		public sealed class LotusBackgroundAttribute : Attribute
+#endif
 		{
+			#region ======================================= ДАННЫЕ ====================================================
+			internal readonly TColor _background;
+			#endregion
+
 			#region ======================================= СВОЙСТВА ==================================================
-			//
-			// ОСНОВНЫЕ ПАРАМЕТРЫ
-			//
 			/// <summary>
-			/// Тип данных значения
+			/// Фоновый цвет
 			/// </summary>
-			[XmlAttribute]
-			public override TParameterValueType ValueType
+			public TColor Background
 			{
-				get { return TParameterValueType.List; }
+				get { return _background; }
 			}
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
+			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
+			/// <param name="red">Красная компонента цвета</param>
+			/// <param name="green">Зеленая компонента цвета</param>
+			/// <param name="blue">Синяя компонента цвета</param>
+			/// <param name="alpha">Альфа компонента цвета</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterList()
+			public LotusBackgroundAttribute(Byte red, Byte green, Byte blue, Byte alpha = 255)
 			{
+				_background = new TColor(red, green, blue, alpha);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameterName">Имя параметра</param>
-			/// <param name="items">Список элементов</param>
+			/// <param name="colorBgra">Цвет в формате BGRA</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterList(String parameterName, params TType[] items)
-				: base(parameterName)
+			public LotusBackgroundAttribute(UInt32 colorBgra)
 			{
-				_value = new ListArray<TType>(items);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="id">Идентификатор параметра</param>
-			/// <param name="items">Список элементов</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CParameterList(Int32 id, params TType[] items)
-				: base(id)
-			{
-				_value = new ListArray<TType>(items);
+				_background = TColor.FromBGRA(colorBgra);
 			}
 			#endregion
 		}

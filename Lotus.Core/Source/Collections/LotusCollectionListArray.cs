@@ -293,7 +293,6 @@ namespace Lotus
 			/// <summary>
 			/// Данные массива для сериализации
 			/// </summary>
-			[Browsable(false)]
 			public TItem[] SerializeItems
 			{
 				get 
@@ -313,7 +312,6 @@ namespace Lotus
 			/// <summary>
 			/// Первый элемент
 			/// </summary>
-			[Browsable(false)]
 			public TItem ItemFirst
 			{
 				get
@@ -329,7 +327,6 @@ namespace Lotus
 			/// <summary>
 			/// Второй элемент
 			/// </summary>
-			[Browsable(false)]
 			public TItem ItemSecond
 			{
 				get
@@ -345,7 +342,6 @@ namespace Lotus
 			/// <summary>
 			/// Предпоследний элемент
 			/// </summary>
-			[Browsable(false)]
 			public TItem ItemPenultimate
 			{
 				get
@@ -361,7 +357,6 @@ namespace Lotus
 			/// <summary>
 			/// Последний элемент
 			/// </summary>
-			[Browsable(false)]
 			public TItem ItemLast
 			{
 				get

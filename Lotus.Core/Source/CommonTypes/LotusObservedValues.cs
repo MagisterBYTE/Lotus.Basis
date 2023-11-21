@@ -50,9 +50,9 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Boolean mValue;
+			internal Boolean _value;
 			[NonSerialized]
-			internal Action<Boolean> mOnChanged;
+			internal Action<Boolean> _onChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -61,13 +61,13 @@ namespace Lotus
 			/// </summary>
 			public Boolean Value
 			{
-				readonly get { return mValue; }
+				readonly get { return _value; }
 				set
 				{
-					if (mValue != value)
+					if (_value != value)
 					{
-						mValue = value;
-						if (mOnChanged != null) mOnChanged(mValue);
+						_value = value;
+						if (_onChanged != null) _onChanged(_value);
 					}
 				}
 			}
@@ -77,8 +77,8 @@ namespace Lotus
 			/// </summary>
 			public Action<Boolean> OnChanged
 			{
-				readonly get { return mOnChanged; }
-				set { mOnChanged = value; }
+				readonly get { return _onChanged; }
+				set { _onChanged = value; }
 			}
 			#endregion
 
@@ -91,8 +91,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public BoolObserved(Boolean value)
 			{
-				mValue = value;
-				mOnChanged = null;
+				_value = value;
+				_onChanged = null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -104,8 +104,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public BoolObserved(Boolean value, Action<Boolean> onChanged)
 			{
-				mValue = value;
-				mOnChanged = onChanged;
+				_value = value;
+				_onChanged = onChanged;
 			}
 			#endregion
 
@@ -138,7 +138,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Boolean Equals(BoolObserved other)
 			{
-				return mValue == other.mValue;
+				return _value == other._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Int32 CompareTo(BoolObserved other)
 			{
-				return mValue.CompareTo(other.mValue);
+				return _value.CompareTo(other._value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -161,7 +161,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly Int32 GetHashCode()
 			{
-				return mValue.GetHashCode() ^ base.GetHashCode();
+				return _value.GetHashCode() ^ base.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -183,7 +183,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly String ToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 
@@ -225,7 +225,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator Boolean(BoolObserved value)
 			{
-				return value.mValue;
+				return value._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetValue(Boolean value)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -260,7 +260,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly void ChangedValue()
 			{
-				if (mOnChanged != null) mOnChanged(mValue);
+				if (_onChanged != null) _onChanged(_value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -271,7 +271,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly String SerializeToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 		}
@@ -304,9 +304,9 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Int32 mValue;
+			internal Int32 _value;
 			[NonSerialized]
-			internal Action<Int32> mOnChanged;
+			internal Action<Int32> _onChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -315,13 +315,13 @@ namespace Lotus
 			/// </summary>
 			public Int32 Value
 			{
-				readonly get { return mValue; }
+				readonly get { return _value; }
 				set
 				{
-					if (mValue != value)
+					if (_value != value)
 					{
-						mValue = value;
-						if (mOnChanged != null) mOnChanged(mValue);
+						_value = value;
+						if (_onChanged != null) _onChanged(_value);
 					}
 				}
 			}
@@ -331,8 +331,8 @@ namespace Lotus
 			/// </summary>
 			public Action<Int32> OnChanged
 			{
-				readonly get { return mOnChanged; }
-				set { mOnChanged = value; }
+				readonly get { return _onChanged; }
+				set { _onChanged = value; }
 			}
 			#endregion
 
@@ -345,8 +345,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public IntObserved(Int32 value)
 			{
-				mValue = value;
-				mOnChanged = null;
+				_value = value;
+				_onChanged = null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -358,8 +358,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public IntObserved(Int32 value, Action<Int32> onChanged)
 			{
-				mValue = value;
-				mOnChanged = onChanged;
+				_value = value;
+				_onChanged = onChanged;
 			}
 			#endregion
 
@@ -392,7 +392,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Boolean Equals(IntObserved other)
 			{
-				return mValue == other.mValue;
+				return _value == other._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -404,7 +404,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Int32 CompareTo(IntObserved other)
 			{
-				return mValue.CompareTo(other.mValue);
+				return _value.CompareTo(other._value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -415,7 +415,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly Int32 GetHashCode()
 			{
-				return mValue.GetHashCode() ^ base.GetHashCode();
+				return _value.GetHashCode() ^ base.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -437,7 +437,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly String ToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 
@@ -479,7 +479,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator Int32(IntObserved value)
 			{
-				return value.mValue;
+				return value._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -504,7 +504,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetValue(Int32 value)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -514,7 +514,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly void ChangedValue()
 			{
-				if (mOnChanged != null) mOnChanged(mValue);
+				if (_onChanged != null) _onChanged(_value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -525,7 +525,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly String SerializeToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 		}
@@ -558,9 +558,9 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal Single mValue;
+			internal Single _value;
 			[NonSerialized]
-			internal Action<Single> mOnChanged;
+			internal Action<Single> _onChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -569,13 +569,13 @@ namespace Lotus
 			/// </summary>
 			public Single Value
 			{
-				readonly get { return mValue; }
+				readonly get { return _value; }
 				set
 				{
-					if (mValue != value)
+					if (_value != value)
 					{
-						mValue = value;
-						if (mOnChanged != null) mOnChanged(mValue);
+						_value = value;
+						if (_onChanged != null) _onChanged(_value);
 					}
 				}
 			}
@@ -585,8 +585,8 @@ namespace Lotus
 			/// </summary>
 			public Action<Single> OnChanged
 			{
-				readonly get { return mOnChanged; }
-				set { mOnChanged = value; }
+				readonly get { return _onChanged; }
+				set { _onChanged = value; }
 			}
 			#endregion
 
@@ -599,8 +599,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public SingleObserved(Single value)
 			{
-				mValue = value;
-				mOnChanged = null;
+				_value = value;
+				_onChanged = null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -612,8 +612,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public SingleObserved(Single value, Action<Single> onChanged)
 			{
-				mValue = value;
-				mOnChanged = onChanged;
+				_value = value;
+				_onChanged = onChanged;
 			}
 			#endregion
 
@@ -646,7 +646,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Boolean Equals(SingleObserved other)
 			{
-				return mValue == other.mValue;
+				return _value == other._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -658,7 +658,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Int32 CompareTo(SingleObserved other)
 			{
-				return mValue.CompareTo(other.mValue);
+				return _value.CompareTo(other._value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -669,7 +669,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly Int32 GetHashCode()
 			{
-				return mValue.GetHashCode() ^ base.GetHashCode();
+				return _value.GetHashCode() ^ base.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -691,7 +691,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly String ToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 
@@ -733,7 +733,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator Single(SingleObserved value)
 			{
-				return value.mValue;
+				return value._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -758,7 +758,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetValue(Single value)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -768,7 +768,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly void ChangedValue()
 			{
-				if (mOnChanged != null) mOnChanged(mValue);
+				if (_onChanged != null) _onChanged(_value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -779,7 +779,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly String SerializeToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 		}
@@ -811,9 +811,9 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal String mValue;
+			internal String _value;
 			[NonSerialized]
-			internal Action<String> mOnChanged;
+			internal Action<String> _onChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -822,13 +822,13 @@ namespace Lotus
 			/// </summary>
 			public String Value
 			{
-				readonly get { return mValue; }
+				readonly get { return _value; }
 				set
 				{
-					if (mValue != value)
+					if (_value != value)
 					{
-						mValue = value;
-						if (mOnChanged != null) mOnChanged(mValue);
+						_value = value;
+						if (_onChanged != null) _onChanged(_value);
 					}
 				}
 			}
@@ -838,8 +838,8 @@ namespace Lotus
 			/// </summary>
 			public Action<String> OnChanged
 			{
-				readonly get { return mOnChanged; }
-				set { mOnChanged = value; }
+				readonly get { return _onChanged; }
+				set { _onChanged = value; }
 			}
 			#endregion
 
@@ -852,8 +852,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public StringObserved(String value)
 			{
-				mValue = value;
-				mOnChanged = null;
+				_value = value;
+				_onChanged = null;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -865,8 +865,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public StringObserved(String value, Action<String> onChanged)
 			{
-				mValue = value;
-				mOnChanged = onChanged;
+				_value = value;
+				_onChanged = onChanged;
 			}
 			#endregion
 
@@ -899,7 +899,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Boolean Equals(StringObserved other)
 			{
-				return mValue == other.mValue;
+				return _value == other._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -911,7 +911,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly Int32 CompareTo(StringObserved other)
 			{
-				return String.CompareOrdinal(mValue, other.mValue);
+				return String.CompareOrdinal(_value, other._value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -922,7 +922,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly Int32 GetHashCode()
 			{
-				return mValue.GetHashCode() ^ base.GetHashCode();
+				return _value.GetHashCode() ^ base.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -944,7 +944,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly String ToString()
 			{
-				return mValue.ToString();
+				return _value.ToString();
 			}
 			#endregion
 
@@ -986,7 +986,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static implicit operator String(StringObserved value)
 			{
-				return value.mValue;
+				return value._value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1011,7 +1011,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetValue(String value)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1021,7 +1021,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly void ChangedValue()
 			{
-				if (mOnChanged != null) mOnChanged(mValue);
+				if (_onChanged != null) _onChanged(_value);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1032,7 +1032,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public readonly String SerializeToString()
 			{
-				return mValue;
+				return _value;
 			}
 			#endregion
 		}

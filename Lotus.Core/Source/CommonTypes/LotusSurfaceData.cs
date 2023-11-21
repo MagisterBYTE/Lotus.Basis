@@ -405,15 +405,15 @@ namespace Lotus
 				if (texture != null)
 				{
 					this.SetFromData(texture.GetPixels32());
-					mWidth = texture.width;
-					mHeight = texture.height;
+					_width = texture.width;
+					_height = texture.height;
 					mRank = 2;
 				}
 				else
 				{
 					_data = new TColor[] { TColor.White };
-					mWidth = 1;
-					mHeight = 1;
+					_width = 1;
+					_height = 1;
 					mRank = 1;
 				}
 			}
@@ -451,8 +451,8 @@ namespace Lotus
 				if (texture != null)
 				{
 					this.SetFromData(texture.GetPixels32());
-					mWidth = texture.width;
-					mHeight = texture.height;
+					_width = texture.width;
+					_height = texture.height;
 					mRank = 2;
 				}
 			}

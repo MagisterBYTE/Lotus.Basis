@@ -206,14 +206,14 @@ namespace Lotus
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
 			protected internal String _name;
-			protected internal TValue mValue;
+			protected internal TValue _value;
 			protected internal Int64 _id;
 			protected internal Boolean _isActive;
-			protected internal Byte mUserTag;
-			protected internal Byte mUserData;
+			protected internal Byte _userTag;
+			protected internal Byte _userData;
 
 			// Владелец
-			protected internal ILotusOwnerObject mOwner;
+			protected internal ILotusOwnerObject _owner;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -234,7 +234,7 @@ namespace Lotus
 				{
 					_name = value;
 					NotifyPropertyChanged(PropertyArgsName);
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, _name, nameof(Name));
+					if (_owner != null) _owner.OnNotifyUpdated(this, _name, nameof(Name));
 				}
 			}
 
@@ -253,12 +253,12 @@ namespace Lotus
 			[XmlIgnore]
 			System.Object IParameterItem.Value
 			{
-				get { return mValue; }
+				get { return _value; }
 				set 
 				{
-					mValue = (TValue)value;
+					_value = (TValue)value;
 					NotifyPropertyChanged(PropertyArgsIValue);
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mValue, nameof(Value));
+					if (_owner != null) _owner.OnNotifyUpdated(this, _value, nameof(Value));
 				}
 			}
 
@@ -268,12 +268,12 @@ namespace Lotus
 			[XmlElement]
 			public TValue Value
 			{
-				get { return mValue; }
+				get { return _value; }
 				set
 				{
-					mValue = value;
+					_value = value;
 					NotifyPropertyChanged(PropertyArgsValue);
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mValue, nameof(Value));
+					if (_owner != null) _owner.OnNotifyUpdated(this, _value, nameof(Value));
 				}
 			}
 
@@ -288,7 +288,7 @@ namespace Lotus
 				{
 					_id = value;
 					NotifyPropertyChanged(PropertyArgsId);
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, Id, nameof(Id));
+					if (_owner != null) _owner.OnNotifyUpdated(this, Id, nameof(Id));
 				}
 			}
 
@@ -306,7 +306,7 @@ namespace Lotus
 				{
 					_isActive = value;
 					NotifyPropertyChanged(PropertyArgsIsActive);
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, IsActive, nameof(IsActive));
+					if (_owner != null) _owner.OnNotifyUpdated(this, IsActive, nameof(IsActive));
 				}
 			}
 
@@ -316,12 +316,12 @@ namespace Lotus
 			[XmlAttribute]
 			public Byte UserTag
 			{
-				get { return mUserTag; }
+				get { return _userTag; }
 				set 
 				{
-					mUserTag = value;
+					_userTag = value;
 					NotifyPropertyChanged(PropertyArgsUserTag);
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, UserTag, nameof(UserTag));
+					if (_owner != null) _owner.OnNotifyUpdated(this, UserTag, nameof(UserTag));
 				}
 			}
 
@@ -331,12 +331,12 @@ namespace Lotus
 			[XmlAttribute]
 			public Byte UserData
 			{
-				get { return mUserData; }
+				get { return _userData; }
 				set 
 				{
-					mUserData = value;
+					_userData = value;
 					NotifyPropertyChanged(PropertyArgsUserData);
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, UserData, nameof(UserData));
+					if (_owner != null) _owner.OnNotifyUpdated(this, UserData, nameof(UserData));
 				}
 			}
 
@@ -346,8 +346,8 @@ namespace Lotus
 			[XmlIgnore]
 			public ILotusOwnerObject IOwner
 			{
-				get { return mOwner; }
-				set { mOwner = value; }
+				get { return _owner; }
+				set { _owner = value; }
 			}
 			#endregion
 

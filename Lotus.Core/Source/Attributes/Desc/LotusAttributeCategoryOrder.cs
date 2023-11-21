@@ -29,7 +29,7 @@ namespace Lotus
 		public sealed class LotusCategoryOrderAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly Int32 mOrder;
+			internal readonly Int32 _order;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -38,7 +38,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Order
 			{
-				get { return mOrder; }
+				get { return _order; }
 			}
 			#endregion
 
@@ -51,7 +51,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusCategoryOrderAttribute(Int32 order)
 			{
-				mOrder = order;
+				_order = order;
 			}
 			#endregion
 		}

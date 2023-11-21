@@ -1,46 +1,52 @@
 ﻿//=====================================================================================================================
 // Проект: Модуль базового ядра
-// Раздел: Подсистема параметрических объектов
+// Раздел: Подсистема поддержки инспектора свойств
+// Подраздел: Атрибуты для инспектора свойств
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusParameterList.cs
-*		Класс для представления параметра значения которого представляет собой список указанного типа.
+/** \file LotusInspectorControlPreview.cs
+*		Атрибут для возможности предпросмотра объекта.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Xml;
-using System.Xml.Serialization;
 //=====================================================================================================================
 namespace Lotus
 {
 	namespace Core
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreParameters
+		/** \addtogroup CoreInspectorAttribute
 		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
-		/// Класс для представления параметра значения которого представляет собой список указанного типа
+		/// Атрибут для возможности предпросмотра объекта
 		/// </summary>
-		/// <typeparam name="TType">Тип элемента списка</typeparam>
+		/// <remarks>
+		/// Только в режиме разработке
+		/// </remarks>
 		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class CParameterList<TType> : ParameterItem<ListArray<TType>>
+		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+#if UNITY_2017_1_OR_NEWER
+		public sealed class LotusPreviewAttribute : UnityEngine.PropertyAttribute
+#else
+		public sealed class LotusPreviewAttribute : Attribute
+#endif
 		{
+			#region ======================================= ДАННЫЕ ====================================================
+			internal Single mPreviewHeight;
+			#endregion
+
 			#region ======================================= СВОЙСТВА ==================================================
-			//
-			// ОСНОВНЫЕ ПАРАМЕТРЫ
-			//
 			/// <summary>
-			/// Тип данных значения
+			/// Высота области предпросмотра
 			/// </summary>
-			[XmlAttribute]
-			public override TParameterValueType ValueType
+			public Single PreviewHeight
 			{
-				get { return TParameterValueType.List; }
+				get { return mPreviewHeight; }
+				set { mPreviewHeight = value; }
 			}
 			#endregion
 
@@ -50,34 +56,20 @@ namespace Lotus
 			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterList()
+			public LotusPreviewAttribute()
 			{
+				mPreviewHeight = 200;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="parameterName">Имя параметра</param>
-			/// <param name="items">Список элементов</param>
+			/// <param name="previewHeight">Высота области предпросмотра</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterList(String parameterName, params TType[] items)
-				: base(parameterName)
+			public LotusPreviewAttribute(Single previewHeight)
 			{
-				_value = new ListArray<TType>(items);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="id">Идентификатор параметра</param>
-			/// <param name="items">Список элементов</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CParameterList(Int32 id, params TType[] items)
-				: base(id)
-			{
-				_value = new ListArray<TType>(items);
+				mPreviewHeight = previewHeight;
 			}
 			#endregion
 		}

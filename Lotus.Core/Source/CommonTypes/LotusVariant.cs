@@ -160,31 +160,31 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal protected TValueType mValueType;
+			protected internal TValueType _valueType;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal protected String mStringData;
+			protected internal String _stringData;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
-			internal protected UnityEngine.Vector4 mNumberData;
+			protected internal UnityEngine.Vector4 _numberData;
 #else
-			internal Vector4 mNumberData;
+			internal Vector4 _numberData;
 #endif
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			internal protected System.Object mReferenceData;
+			protected internal System.Object _referenceData;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
-			internal protected UnityEngine.Object mUnityData;
+			protected internal UnityEngine.Object _unityData;
 #endif
 
 			[NonSerialized]
-			internal protected ILotusOwnerObject mOwner;
+			protected internal ILotusOwnerObject _owner;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -193,11 +193,11 @@ namespace Lotus
 			/// </summary>
 			public TValueType ValueType
 			{
-				get { return mValueType; }
+				get { return _valueType; }
 				set 
 				{ 
-					mValueType = value;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mValueType, nameof(ValueType));
+					_valueType = value;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _valueType, nameof(ValueType));
 				}
 			}
 
@@ -207,36 +207,36 @@ namespace Lotus
 			public Boolean BooleanValue
 			{
 #if UNITY_2017_1_OR_NEWER
-				get { return mNumberData.x == 1; }
+				get { return _numberData.x == 1; }
 				set
 				{
 					if (value)
 					{
-						mNumberData.x = 1;
+						_numberData.x = 1;
 					}
 					else
 					{
-						mNumberData.x = 0;
+						_numberData.x = 0;
 					}
 
-					mValueType = TValueType.Boolean;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData.x == 1, nameof(BooleanValue));
+					_valueType = TValueType.Boolean;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.x == 1, nameof(BooleanValue));
 				}
 #else
-				get { return mNumberData.X == 1; }
+				get { return _numberData.X == 1; }
 				set
 				{
 					if (value)
 					{
-						mNumberData.X = 1;
+						_numberData.X = 1;
 					}
 					else
 					{
-						mNumberData.X = 0;
+						_numberData.X = 0;
 					}
 
-					mValueType = TValueType.Boolean;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData.X == 1, nameof(BooleanValue));
+					_valueType = TValueType.Boolean;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.X == 1, nameof(BooleanValue));
 				}
 #endif
 			}
@@ -247,20 +247,20 @@ namespace Lotus
 			public Int32 IntegerValue
 			{
 #if UNITY_2017_1_OR_NEWER
-				get { return (Int32)mNumberData.x; }
+				get { return (Int32)_numberData.x; }
 				set
 				{
-					mNumberData.x = value;
-					mValueType = TValueType.Integer;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, (Int32)mNumberData.x, nameof(IntegerValue));
+					_numberData.x = value;
+					_valueType = TValueType.Integer;
+					if (_owner != null) _owner.OnNotifyUpdated(this, (Int32)_numberData.x, nameof(IntegerValue));
 				}
 #else
-				get { return (Int32)mNumberData.X; }
+				get { return (Int32)_numberData.X; }
 				set
 				{
-					mNumberData.X = value;
-					mValueType = TValueType.Integer;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, (Int32)mNumberData.X, nameof(IntegerValue));
+					_numberData.X = value;
+					_valueType = TValueType.Integer;
+					if (_owner != null) _owner.OnNotifyUpdated(this, (Int32)_numberData.X, nameof(IntegerValue));
 				}
 #endif
 			}
@@ -269,15 +269,15 @@ namespace Lotus
 			/// Перечисление
 			/// </summary>
 			/// <remarks>
-			/// Имя реального типа сохраняется в поле <see cref="mStringData"/>
+			/// Имя реального типа сохраняется в поле <see cref="_stringData"/>
 			/// </remarks>
 			public Enum EnumValue
 			{
 				get
 				{
-					if (mReferenceData != null && mReferenceData.GetType().IsEnum)
+					if (_referenceData != null && _referenceData.GetType().IsEnum)
 					{
-						return (Enum)mReferenceData;
+						return (Enum)_referenceData;
 					}
 					else
 					{
@@ -286,13 +286,13 @@ namespace Lotus
 				}
 				set
 				{
-					mReferenceData = value;
-					mValueType = TValueType.Enum;
-					if(mReferenceData != null)
+					_referenceData = value;
+					_valueType = TValueType.Enum;
+					if(_referenceData != null)
 					{
-						mStringData = mReferenceData.GetType().Name;
+						_stringData = _referenceData.GetType().Name;
 					}
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
+					if (_owner != null) _owner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
 				}
 			}
 
@@ -302,20 +302,20 @@ namespace Lotus
 			public Single FloatValue
 			{
 #if UNITY_2017_1_OR_NEWER
-				get { return mNumberData.x; }
+				get { return _numberData.x; }
 				set
 				{
-					mNumberData.x = value;
-					mValueType = TValueType.Float;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData.x, nameof(FloatValue));
+					_numberData.x = value;
+					_valueType = TValueType.Float;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.x, nameof(FloatValue));
 				}
 #else
-				get { return (Single)mNumberData.X; }
+				get { return (Single)_numberData.X; }
 				set
 				{
-					mNumberData.X = value;
-					mValueType = TValueType.Float;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData.X, nameof(FloatValue));
+					_numberData.X = value;
+					_valueType = TValueType.Float;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.X, nameof(FloatValue));
 				}
 #endif
 			}
@@ -325,12 +325,12 @@ namespace Lotus
 			/// </summary>
 			public DateTime DateTimeValue
 			{
-				get { return DateTime.Parse(mStringData); }
+				get { return DateTime.Parse(_stringData); }
 				set
 				{
-					mStringData = value.ToString();
-					mValueType = TValueType.DateTime;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, DateTime.Parse(mStringData), nameof(DateTimeValue));
+					_stringData = value.ToString();
+					_valueType = TValueType.DateTime;
+					if (_owner != null) _owner.OnNotifyUpdated(this, DateTime.Parse(_stringData), nameof(DateTimeValue));
 				}
 			}
 
@@ -339,12 +339,12 @@ namespace Lotus
 			/// </summary>
 			public String StringValue
 			{
-				get { return mStringData; }
+				get { return _stringData; }
 				set
 				{
-					mStringData = value;
-					mValueType = TValueType.String;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mStringData, nameof(StringValue));
+					_stringData = value;
+					_valueType = TValueType.String;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _stringData, nameof(StringValue));
 				}
 			}
 
@@ -354,12 +354,12 @@ namespace Lotus
 			/// </summary>
 			public UnityEngine.Vector2 Vector2DValue
 			{
-				get { return mNumberData; }
+				get { return _numberData; }
 				set
 				{
-					mNumberData = value;
-					mValueType = TValueType.Vector2D;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData, nameof(Vector2DValue));
+					_numberData = value;
+					_valueType = TValueType.Vector2D;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector2DValue));
 				}
 			}
 
@@ -368,12 +368,12 @@ namespace Lotus
 			/// </summary>
 			public UnityEngine.Vector3 Vector3DValue
 			{
-				get { return mNumberData; }
+				get { return _numberData; }
 				set
 				{
-					mNumberData = value;
-					mValueType = TValueType.Vector3D;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData, nameof(Vector3DValue));
+					_numberData = value;
+					_valueType = TValueType.Vector3D;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector3DValue));
 				}
 			}
 
@@ -382,12 +382,12 @@ namespace Lotus
 			/// </summary>
 			public UnityEngine.Vector4 Vector4DValue
 			{
-				get { return mNumberData; }
+				get { return _numberData; }
 				set
 				{
-					mNumberData = value;
-					mValueType = TValueType.Vector4D;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mNumberData, nameof(Vector4DValue));
+					_numberData = value;
+					_valueType = TValueType.Vector4D;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector4DValue));
 				}
 			}
 
@@ -396,15 +396,15 @@ namespace Lotus
 			/// </summary>
 			public UnityEngine.Color ColorValue
 			{
-				get { return new UnityEngine.Color(mNumberData.x, mNumberData.y, mNumberData.z, mNumberData.w); }
+				get { return new UnityEngine.Color(_numberData.x, _numberData.y, _numberData.z, _numberData.w); }
 				set
 				{
-					mNumberData.x = value.r;
-					mNumberData.y = value.g;
-					mNumberData.z = value.b;
-					mNumberData.w = value.a;
-					mValueType = TValueType.Color;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
+					_numberData.x = value.r;
+					_numberData.y = value.g;
+					_numberData.z = value.b;
+					_numberData.w = value.a;
+					_valueType = TValueType.Color;
+					if (_owner != null) _owner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
 				}
 			}
 #else
@@ -413,13 +413,13 @@ namespace Lotus
 			/// </summary>
 			public Vector2 Vector2DValue
 			{
-				get { return new Vector2(mNumberData.X, mNumberData.Y); }
+				get { return new Vector2(_numberData.X, _numberData.Y); }
 				set
 				{
-					mNumberData.X = value.X;
-					mNumberData.Y = value.Y;
-					mValueType = TValueType.Vector2D;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
+					_numberData.X = value.X;
+					_numberData.Y = value.Y;
+					_valueType = TValueType.Vector2D;
+					if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
 				}
 			}
 
@@ -428,14 +428,14 @@ namespace Lotus
 			/// </summary>
 			public Vector3 Vector3DValue
 			{
-				get { return new Vector3(mNumberData.X, mNumberData.Y, mNumberData.Z); }
+				get { return new Vector3(_numberData.X, _numberData.Y, _numberData.Z); }
 				set
 				{
-					mNumberData.X = value.X;
-					mNumberData.Y = value.Y;
-					mNumberData.Z = value.Z;
-					mValueType = TValueType.Vector3D;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector3DValue));
+					_numberData.X = value.X;
+					_numberData.Y = value.Y;
+					_numberData.Z = value.Z;
+					_valueType = TValueType.Vector3D;
+					if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector3DValue));
 				}
 			}
 
@@ -444,12 +444,12 @@ namespace Lotus
 			/// </summary>
 			public Vector4 Vector4DValue
 			{
-				get { return mNumberData; }
+				get { return _numberData; }
 				set
 				{
-					mNumberData = value;
-					mValueType = TValueType.Vector4D;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector4DValue));
+					_numberData = value;
+					_valueType = TValueType.Vector4D;
+					if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector4DValue));
 				}
 			}
 
@@ -458,15 +458,15 @@ namespace Lotus
 			/// </summary>
 			public TColor ColorValue
 			{
-				get { return new TColor((Byte)mNumberData.X, (Byte)mNumberData.Y, (Byte)mNumberData.Z, (Byte)mNumberData.W); }
+				get { return new TColor((Byte)_numberData.X, (Byte)_numberData.Y, (Byte)_numberData.Z, (Byte)_numberData.W); }
 				set
 				{
-					mNumberData.X = value.R;
-					mNumberData.Y = value.G;
-					mNumberData.Z = value.B;
-					mNumberData.W = value.A;
-					mValueType = TValueType.Color;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
+					_numberData.X = value.R;
+					_numberData.Y = value.G;
+					_numberData.Z = value.B;
+					_numberData.W = value.A;
+					_valueType = TValueType.Color;
+					if (_owner != null) _owner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
 				}
 			}
 #endif
@@ -474,21 +474,21 @@ namespace Lotus
 			/// Базовый объект
 			/// </summary>
 			/// <remarks>
-			/// Имя реального типа объекта сохраняется в поле <see cref="mStringData"/>
+			/// Имя реального типа объекта сохраняется в поле <see cref="_stringData"/>
 			/// </remarks>
 			public System.Object SysObject
 			{
-				get { return mReferenceData; }
+				get { return _referenceData; }
 				set
 				{
-					mReferenceData = value;
-					mValueType = TValueType.SysObject;
-					if (mReferenceData != null)
+					_referenceData = value;
+					_valueType = TValueType.SysObject;
+					if (_referenceData != null)
 					{
-						mStringData = mReferenceData.GetType().Name;
+						_stringData = _referenceData.GetType().Name;
 					}
 
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mReferenceData, nameof(SysObject));
+					if (_owner != null) _owner.OnNotifyUpdated(this, _referenceData, nameof(SysObject));
 				}
 			}
 
@@ -500,13 +500,13 @@ namespace Lotus
 			{
 				get 
 				{ 
-					return mUnityData as UnityEngine.GameObject; 
+					return _unityData as UnityEngine.GameObject; 
 				}
 				set
 				{
-					mUnityData = value;
-					mValueType = TValueType.GameObject;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mUnityData as UnityEngine.GameObject, nameof(GameObjectValue));
+					_unityData = value;
+					_valueType = TValueType.GameObject;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.GameObject, nameof(GameObjectValue));
 				}
 			}
 
@@ -517,13 +517,13 @@ namespace Lotus
 			{
 				get
 				{
-					return mUnityData as UnityEngine.Texture2D;
+					return _unityData as UnityEngine.Texture2D;
 				}
 				set
 				{
-					mUnityData = value;
-					mValueType = TValueType.Texture2D;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mUnityData as UnityEngine.Texture2D, nameof(Texture2DValue));
+					_unityData = value;
+					_valueType = TValueType.Texture2D;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.Texture2D, nameof(Texture2DValue));
 				}
 			}
 
@@ -534,13 +534,13 @@ namespace Lotus
 			{
 				get
 				{
-					return mUnityData as UnityEngine.Sprite;
+					return _unityData as UnityEngine.Sprite;
 				}
 				set
 				{
-					mUnityData = value;
-					mValueType = TValueType.Sprite;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mUnityData as UnityEngine.Sprite, nameof(SpriteValue));
+					_unityData = value;
+					_valueType = TValueType.Sprite;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.Sprite, nameof(SpriteValue));
 				}
 			}
 
@@ -551,13 +551,13 @@ namespace Lotus
 			{
 				get
 				{
-					return mUnityData as UnityEngine.GameObject;
+					return _unityData as UnityEngine.GameObject;
 				}
 				set
 				{
-					mUnityData = value;
-					mValueType = TValueType.Model;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mUnityData as UnityEngine.GameObject, nameof(ModelValue));
+					_unityData = value;
+					_valueType = TValueType.Model;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.GameObject, nameof(ModelValue));
 				}
 			}
 
@@ -568,13 +568,13 @@ namespace Lotus
 			{
 				get
 				{
-					return mUnityData as UnityEngine.TextAsset;
+					return _unityData as UnityEngine.TextAsset;
 				}
 				set
 				{
-					mUnityData = value;
-					mValueType = TValueType.TextAsset;
-					if (mOwner != null) mOwner.OnNotifyUpdated(this, mUnityData as UnityEngine.TextAsset, nameof(TextAssetValue));
+					_unityData = value;
+					_valueType = TValueType.TextAsset;
+					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.TextAsset, nameof(TextAssetValue));
 				}
 			}
 #endif
@@ -583,10 +583,10 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner
 			{
-				get { return mOwner; }
+				get { return _owner; }
 				set 
 				{ 
-					mOwner = value; 
+					_owner = value; 
 				}
 			}
 			#endregion
@@ -599,7 +599,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CVariant()
 			{
-				mValueType = TValueType.Void;
+				_valueType = TValueType.Void;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -628,7 +628,7 @@ namespace Lotus
 			public Int32 CompareTo(CVariant other)
 			{
 				var result = 0;
- 				switch (mValueType)
+ 				switch (_valueType)
 				{
 					case TValueType.Void:
 						break;
@@ -679,8 +679,8 @@ namespace Lotus
 					case TValueType.TextAsset:
 						{
 							// Сравниваем по имени
-							UnityEngine.Object unity_object_this = mUnityData;
-							UnityEngine.Object unity_object_other = other.mUnityData;
+							UnityEngine.Object unity_object_this = _unityData;
+							UnityEngine.Object unity_object_other = other._unityData;
 							if(unity_object_this != null && unity_object_other != null)
 							{
 								result = String.CompareOrdinal(unity_object_this.name, unity_object_other.name);
@@ -706,7 +706,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetHashCode()
 			{
-				return this.GetHashCode() ^ mNumberData.GetHashCode() ^ mStringData.GetHashCode();
+				return this.GetHashCode() ^ _numberData.GetHashCode() ^ _stringData.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -729,7 +729,7 @@ namespace Lotus
 			public override String ToString()
 			{
 				var result = "";
-				switch (mValueType)
+				switch (_valueType)
 				{
 					case TValueType.Void:
 						{
@@ -787,13 +787,13 @@ namespace Lotus
 					case TValueType.Model:
 					case TValueType.TextAsset:
 						{
-							result = mUnityData?.ToString();
+							result = _unityData?.ToString();
 						}
 						break;
 #endif
 					case TValueType.SysObject:
 						{
-							result = mReferenceData.ToString();
+							result = _referenceData.ToString();
 						}
 						break;
 
@@ -814,7 +814,7 @@ namespace Lotus
 			public String ToString(String format)
 			{
 				var result = "";
-				switch (mValueType)
+				switch (_valueType)
 				{
 					case TValueType.Void:
 						{
@@ -894,7 +894,7 @@ namespace Lotus
 #endif
 					case TValueType.SysObject:
 						{
-							result = mReferenceData.ToString();
+							result = _referenceData.ToString();
 						}
 						break;
 					default:
@@ -916,7 +916,7 @@ namespace Lotus
 			{
 				if (value == null)
 				{
-					mValueType = TValueType.Void;
+					_valueType = TValueType.Void;
 					return;
 				}
 
@@ -930,98 +930,98 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 							if (v)
 							{
-								mNumberData.x = 1;
+								_numberData.x = 1;
 							}
 							else
 							{
-								mNumberData.x = 0;
+								_numberData.x = 0;
 							}
 #else
 
 							if (v)
 							{
-								mNumberData.X = 1;
+								_numberData.X = 1;
 							}
 							else
 							{
-								mNumberData.X = 0;
+								_numberData.X = 0;
 							}
 #endif
-							mValueType = TValueType.Boolean;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, BooleanValue, nameof(BooleanValue));
+							_valueType = TValueType.Boolean;
+							if (_owner != null) _owner.OnNotifyUpdated(this, BooleanValue, nameof(BooleanValue));
 						}
 						break;
 					case nameof(Int32):
 						{
 #if UNITY_2017_1_OR_NEWER
-							mNumberData.x = (Int32)value;
+							_numberData.x = (Int32)value;
 #else
-							mNumberData.X = (Int32)value;
+							_numberData.X = (Int32)value;
 #endif
-							mValueType = TValueType.Integer;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, IntegerValue, nameof(IntegerValue));
+							_valueType = TValueType.Integer;
+							if (_owner != null) _owner.OnNotifyUpdated(this, IntegerValue, nameof(IntegerValue));
 						}
 						break;
 					case nameof(Single):
 						{
 #if UNITY_2017_1_OR_NEWER
-							mNumberData.x = (Single)value;
+							_numberData.x = (Single)value;
 #else
-							mNumberData.X = (Single)value;
+							_numberData.X = (Single)value;
 #endif
-							mValueType = TValueType.Float;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, FloatValue, nameof(FloatValue));
+							_valueType = TValueType.Float;
+							if (_owner != null) _owner.OnNotifyUpdated(this, FloatValue, nameof(FloatValue));
 						}
 						break;
 					case nameof(DateTime):
 						{
 							var v = (DateTime)value;
-							mStringData = v.ToString();
-							mValueType = TValueType.DateTime;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, DateTimeValue, nameof(DateTimeValue));
+							_stringData = v.ToString();
+							_valueType = TValueType.DateTime;
+							if (_owner != null) _owner.OnNotifyUpdated(this, DateTimeValue, nameof(DateTimeValue));
 						}
 						break;
 					case nameof(String):
 						{
-							mStringData = value.ToString();
-							mValueType = TValueType.String;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, StringValue, nameof(StringValue));
+							_stringData = value.ToString();
+							_valueType = TValueType.String;
+							if (_owner != null) _owner.OnNotifyUpdated(this, StringValue, nameof(StringValue));
 						}
 						break;
 #if UNITY_2017_1_OR_NEWER
 					case nameof(UnityEngine.Color):
 						{
 							var v = (UnityEngine.Color)value;
-							mNumberData.x = v.r;
-							mNumberData.y = v.g;
-							mNumberData.z = v.b;
-							mNumberData.w = v.a;
-							mValueType = TValueType.Color;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
+							_numberData.x = v.r;
+							_numberData.y = v.g;
+							_numberData.z = v.b;
+							_numberData.w = v.a;
+							_valueType = TValueType.Color;
+							if (_owner != null) _owner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
 						}
 						break;
 					case nameof(UnityEngine.Vector2):
 						{
 							var v = (UnityEngine.Vector2)value;
-							mNumberData = v;
-							mValueType = TValueType.Vector2D;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
+							_numberData = v;
+							_valueType = TValueType.Vector2D;
+							if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
 						}
 						break;
 					case nameof(UnityEngine.Vector3):
 						{
 							var v = (UnityEngine.Vector3)value;
-							mNumberData = v;
-							mValueType = TValueType.Vector3D;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector3DValue, nameof(Vector3DValue));
+							_numberData = v;
+							_valueType = TValueType.Vector3D;
+							if (_owner != null) _owner.OnNotifyUpdated(this, Vector3DValue, nameof(Vector3DValue));
 						}
 						break;
 					case nameof(UnityEngine.Vector4):
 						{
 							var v = (UnityEngine.Vector4)value;
-							mNumberData = v;
-							mValueType = TValueType.Vector4D;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, Vector4DValue, nameof(Vector4DValue));
+							_numberData = v;
+							_valueType = TValueType.Vector4D;
+							if (_owner != null) _owner.OnNotifyUpdated(this, Vector4DValue, nameof(Vector4DValue));
 						}
 						break;
 #endif
@@ -1030,9 +1030,9 @@ namespace Lotus
 							// Проверка на перечисление
 							if (type.IsEnum)
 							{
-								mReferenceData = value;
-								mStringData = type.Name;
-								if (mOwner != null) mOwner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
+								_referenceData = value;
+								_stringData = type.Name;
+								if (_owner != null) _owner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
 								break;
 							}
 
@@ -1041,16 +1041,16 @@ namespace Lotus
 							if (type == typeof(UnityEngine.GameObject))
 							{
 								var game_object = value as UnityEngine.GameObject;
-								mUnityData = value as UnityEngine.GameObject;
+								_unityData = value as UnityEngine.GameObject;
 								if (game_object.scene.name == null)
 								{
-									mValueType = TValueType.Model;
-									if (mOwner != null) mOwner.OnNotifyUpdated(this, ModelValue, nameof(ModelValue));
+									_valueType = TValueType.Model;
+									if (_owner != null) _owner.OnNotifyUpdated(this, ModelValue, nameof(ModelValue));
 								}
 								else
 								{
-									mValueType = TValueType.GameObject;
-									if (mOwner != null) mOwner.OnNotifyUpdated(this, GameObjectValue, nameof(GameObjectValue));
+									_valueType = TValueType.GameObject;
+									if (_owner != null) _owner.OnNotifyUpdated(this, GameObjectValue, nameof(GameObjectValue));
 								}
 								break;
 							}
@@ -1058,34 +1058,34 @@ namespace Lotus
 							// Проверка на тип Texture2D
 							if (type == typeof(UnityEngine.Texture2D))
 							{
-								mUnityData = value as UnityEngine.Texture2D;
-								mValueType = TValueType.Texture2D;
-								if (mOwner != null) mOwner.OnNotifyUpdated(this, Texture2DValue, nameof(Texture2DValue));
+								_unityData = value as UnityEngine.Texture2D;
+								_valueType = TValueType.Texture2D;
+								if (_owner != null) _owner.OnNotifyUpdated(this, Texture2DValue, nameof(Texture2DValue));
 								break;
 							}
 
 							// Проверка на тип Sprite
 							if (type == typeof(UnityEngine.Sprite))
 							{
-								mUnityData = value as UnityEngine.Sprite;
-								mValueType = TValueType.Sprite;
-								if (mOwner != null) mOwner.OnNotifyUpdated(this, SpriteValue, nameof(SpriteValue));
+								_unityData = value as UnityEngine.Sprite;
+								_valueType = TValueType.Sprite;
+								if (_owner != null) _owner.OnNotifyUpdated(this, SpriteValue, nameof(SpriteValue));
 								break;
 							}
 
 							// Проверка на тип TextAsset
 							if (type == typeof(UnityEngine.TextAsset))
 							{
-								mUnityData = value as UnityEngine.TextAsset;
-								mValueType = TValueType.TextAsset;
-								if (mOwner != null) mOwner.OnNotifyUpdated(this, TextAssetValue, nameof(TextAssetValue));
+								_unityData = value as UnityEngine.TextAsset;
+								_valueType = TValueType.TextAsset;
+								if (_owner != null) _owner.OnNotifyUpdated(this, TextAssetValue, nameof(TextAssetValue));
 								break;
 							}
 #endif
-							mReferenceData = value;
-							mValueType = TValueType.SysObject;
-							mStringData = type.Name;
-							if (mOwner != null) mOwner.OnNotifyUpdated(this, SysObject, nameof(SysObject));
+							_referenceData = value;
+							_valueType = TValueType.SysObject;
+							_stringData = type.Name;
+							if (_owner != null) _owner.OnNotifyUpdated(this, SysObject, nameof(SysObject));
 
 						}
 						break;
@@ -1104,48 +1104,48 @@ namespace Lotus
 				{
 					case nameof(Boolean):
 						{
-							mValueType = TValueType.Boolean;
+							_valueType = TValueType.Boolean;
 						}
 						break;
 					case nameof(Int32):
 						{
-							mValueType = TValueType.Integer;
+							_valueType = TValueType.Integer;
 						}
 						break;
 					case nameof(Single):
 						{
-							mValueType = TValueType.Float;
+							_valueType = TValueType.Float;
 						}
 						break;
 					case nameof(DateTime):
 						{
-							mValueType = TValueType.DateTime;
+							_valueType = TValueType.DateTime;
 						}
 						break;
 					case nameof(String):
 						{
-							mValueType = TValueType.String;
+							_valueType = TValueType.String;
 						}
 						break;
 #if UNITY_2017_1_OR_NEWER
 					case nameof(UnityEngine.Color):
 						{
-							mValueType = TValueType.Color;
+							_valueType = TValueType.Color;
 						}
 						break;
 					case nameof(UnityEngine.Vector2):
 						{
-							mValueType = TValueType.Vector2D;
+							_valueType = TValueType.Vector2D;
 						}
 						break;
 					case nameof(UnityEngine.Vector3):
 						{
-							mValueType = TValueType.Vector3D;
+							_valueType = TValueType.Vector3D;
 						}
 						break;
 					case nameof(UnityEngine.Vector4):
 						{
-							mValueType = TValueType.Vector4D;
+							_valueType = TValueType.Vector4D;
 						}
 						break;
 #endif
@@ -1154,7 +1154,7 @@ namespace Lotus
 							// Проверка на перечисление
 							if (type.IsEnum)
 							{
-								mValueType = TValueType.Enum;
+								_valueType = TValueType.Enum;
 								break;
 							}
 
@@ -1163,39 +1163,39 @@ namespace Lotus
 							// Проверка на тип Unity
 							if (type == typeof(UnityEngine.GameObject))
 							{
-								mValueType = TValueType.GameObject;
+								_valueType = TValueType.GameObject;
 								break;
 							}
 
 							// Проверка на тип Texture2D
 							if (type == typeof(UnityEngine.Texture2D))
 							{
-								mValueType = TValueType.Texture2D;
+								_valueType = TValueType.Texture2D;
 								break;
 							}
 
 							// Проверка на тип Sprite
 							if (type == typeof(UnityEngine.Sprite))
 							{
-								mValueType = TValueType.Sprite;
+								_valueType = TValueType.Sprite;
 								break;
 							}
 
 							// Проверка на тип TextAsset
 							if (type == typeof(UnityEngine.TextAsset))
 							{
-								mValueType = TValueType.TextAsset;
+								_valueType = TValueType.TextAsset;
 								break;
 							}
 #endif
-							mValueType = TValueType.SysObject;
-							mStringData = type.Name;
+							_valueType = TValueType.SysObject;
+							_stringData = type.Name;
 
 						}
 						break;
 				}
 
-				if (mOwner != null) mOwner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
+				if (_owner != null) _owner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1206,7 +1206,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object Get()
 			{
-				switch (mValueType)
+				switch (_valueType)
 				{
 					case TValueType.Void:
 						{
@@ -1215,75 +1215,75 @@ namespace Lotus
 					case TValueType.Boolean:
 						{
 #if UNITY_2017_1_OR_NEWER
-							return mNumberData.x == 1;
+							return _numberData.x == 1;
 #else
-							return mNumberData.X == 1;
+							return _numberData.X == 1;
 #endif
 						}
 					case TValueType.Integer:
 						{
 #if UNITY_2017_1_OR_NEWER
-							return (Int32)mNumberData.x;
+							return (Int32)_numberData.x;
 #else
-							return (Int32)mNumberData.X;
+							return (Int32)_numberData.X;
 #endif
 						}
 					case TValueType.Enum:
 						{
-							return mReferenceData;
+							return _referenceData;
 						}
 					case TValueType.Float:
 						{
 #if UNITY_2017_1_OR_NEWER
-							return mNumberData.x;
+							return _numberData.x;
 #else
-							return mNumberData.X;
+							return _numberData.X;
 #endif
 						}
 					case TValueType.DateTime:
 						{
-							return DateTime.Parse(mStringData);
+							return DateTime.Parse(_stringData);
 						}
 					case TValueType.String:
 						{
-							return mStringData;
+							return _stringData;
 						}
 #if UNITY_2017_1_OR_NEWER
 					case TValueType.Color:
 						{
-							return new UnityEngine.Color(mNumberData.x, mNumberData.y, mNumberData.z, mNumberData.w);
+							return new UnityEngine.Color(_numberData.x, _numberData.y, _numberData.z, _numberData.w);
 						}
 					case TValueType.Vector2D:
 						{
-							return new UnityEngine.Vector2(mNumberData.x, mNumberData.y);
+							return new UnityEngine.Vector2(_numberData.x, _numberData.y);
 						}
 					case TValueType.Vector3D:
 						{
-							return new UnityEngine.Vector3(mNumberData.x, mNumberData.y, mNumberData.z);
+							return new UnityEngine.Vector3(_numberData.x, _numberData.y, _numberData.z);
 						}
 					case TValueType.Vector4D:
 						{
-							return new UnityEngine.Vector4(mNumberData.x, mNumberData.y, mNumberData.z, mNumberData.w);
+							return new UnityEngine.Vector4(_numberData.x, _numberData.y, _numberData.z, _numberData.w);
 						}
 					case TValueType.GameObject:
 						{
-							return mUnityData;
+							return _unityData;
 						}
 					case TValueType.Texture2D:
 						{
-							return mUnityData;
+							return _unityData;
 						}
 					case TValueType.Sprite:
 						{
-							return mUnityData;
+							return _unityData;
 						}
 					case TValueType.Model:
 						{
-							return mUnityData;
+							return _unityData;
 						}
 					case TValueType.TextAsset:
 						{
-							return mUnityData;
+							return _unityData;
 						}
 #endif
 					case TValueType.SysObject:
@@ -1294,7 +1294,7 @@ namespace Lotus
 						break;
 				}
 
-				return mReferenceData;
+				return _referenceData;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1305,7 +1305,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String GetAsString()
 			{
-				switch (mValueType)
+				switch (_valueType)
 				{
 					case TValueType.Void:
 						{
@@ -1314,82 +1314,82 @@ namespace Lotus
 					case TValueType.Boolean:
 						{
 #if UNITY_2017_1_OR_NEWER
-							return(mNumberData.x == 1).ToString();
+							return(_numberData.x == 1).ToString();
 #else
-							return(mNumberData.X == 1).ToString();
+							return(_numberData.X == 1).ToString();
 #endif
 						}
 					case TValueType.Integer:
 						{
 #if UNITY_2017_1_OR_NEWER
-							return ((Int32)mNumberData.x).ToString();
+							return ((Int32)_numberData.x).ToString();
 #else
-							return ((Int32)mNumberData.X).ToString();
+							return ((Int32)_numberData.X).ToString();
 #endif
 						}
 					case TValueType.Enum:
 						{
-							if(mReferenceData != null)
+							if(_referenceData != null)
 							{
 								return "Null";
 							}
 							else
 							{
-								return mReferenceData.ToString();
+								return _referenceData.ToString();
 							}
 						}
 					case TValueType.Float:
 						{
 #if UNITY_2017_1_OR_NEWER
-							return mNumberData.x.ToString();
+							return _numberData.x.ToString();
 #else
-							return mNumberData.X.ToString();
+							return _numberData.X.ToString();
 #endif
 						}
 					case TValueType.DateTime:
 						{
-							return mStringData;
+							return _stringData;
 						}
 					case TValueType.String:
 						{
-							return mStringData;
+							return _stringData;
 						}
 #if UNITY_2017_1_OR_NEWER
 					case TValueType.Color:
 						{
-							return new UnityEngine.Color(mNumberData.x, mNumberData.y, mNumberData.z, mNumberData.w).ToString();
+							return new UnityEngine.Color(_numberData.x, _numberData.y, _numberData.z, _numberData.w).ToString();
 						}
 					case TValueType.Vector2D:
 						{
-							return new UnityEngine.Vector2(mNumberData.x, mNumberData.y).ToString();
+							return new UnityEngine.Vector2(_numberData.x, _numberData.y).ToString();
 						}
 					case TValueType.Vector3D:
 						{
-							return new UnityEngine.Vector3(mNumberData.x, mNumberData.y, mNumberData.z).ToString();
+							return new UnityEngine.Vector3(_numberData.x, _numberData.y, _numberData.z).ToString();
 						}
 					case TValueType.Vector4D:
 						{
-							return new UnityEngine.Vector4(mNumberData.x, mNumberData.y, mNumberData.z, mNumberData.w).ToString();
+							return new UnityEngine.Vector4(_numberData.x, _numberData.y, _numberData.z, _numberData.w).ToString();
 						}
 					case TValueType.GameObject:
 						{
-							return ((UnityEngine.GameObject)mUnityData)?.name;
+							return ((UnityEngine.GameObject)_unityData)?.name;
 						}
 					case TValueType.Texture2D:
 						{
-							return ((UnityEngine.Texture2D)mUnityData)?.name;
+							return ((UnityEngine.Texture2D)_unityData)?.name;
 						}
 					case TValueType.Sprite:
 						{
-							return ((UnityEngine.Sprite)mUnityData)?.name;
+							return ((UnityEngine.Sprite)_unityData)?.name;
 						}
 					case TValueType.Model:
 						{
-							return ((UnityEngine.GameObject)mUnityData)?.name;
+							return ((UnityEngine.GameObject)_unityData)?.name;
 						}
 					case TValueType.TextAsset:
 						{
-							return ((UnityEngine.TextAsset)mUnityData)?.name;
+							return ((UnityEngine.TextAsset)_unityData)?.name;
 						}
 #endif
 					case TValueType.SysObject:
@@ -1401,13 +1401,13 @@ namespace Lotus
 						break;
 				}
 
-				if (mReferenceData != null)
+				if (_referenceData != null)
 				{
 					return "Null";
 				}
 				else
 				{
-					return mReferenceData.ToString();
+					return _referenceData.ToString();
 				}
 			}
 
@@ -1418,8 +1418,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Clear()
 			{
-				mValueType = TValueType.Void;
-				if (mOwner != null) mOwner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
+				_valueType = TValueType.Void;
+				if (_owner != null) _owner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -1430,7 +1430,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual String SerializeToString()
 			{
-				return String.Format("[{0}]", mValueType);
+				return String.Format("[{0}]", _valueType);
 			}
 			#endregion
 		}

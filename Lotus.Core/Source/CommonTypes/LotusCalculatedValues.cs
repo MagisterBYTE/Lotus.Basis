@@ -48,10 +48,10 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal Int32 mValue;
-			protected internal Int32 mSupplement;
-			protected internal Boolean mNotCalculation;
-			protected internal ILotusOwnerObject mOwner;
+			protected internal Int32 _value;
+			protected internal Int32 _supplement;
+			protected internal Boolean _notCalculation;
+			protected internal ILotusOwnerObject _owner;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -63,14 +63,14 @@ namespace Lotus
 			{
 				get
 				{
-					return mValue;
+					return _value;
 				}
 				set
 				{
-					mValue = value;
-					if(mOwner != null)
+					_value = value;
+					if(_owner != null)
 					{
-						mOwner.OnNotifyUpdated(this, mValue, nameof(Value));
+						_owner.OnNotifyUpdated(this, _value, nameof(Value));
 					}
 
 					NotifyPropertyChanged(nameof(Value));
@@ -86,14 +86,14 @@ namespace Lotus
 			{
 				get
 				{
-					return mSupplement;
+					return _supplement;
 				}
 				set
 				{
-					mSupplement = value;
-					if (mOwner != null)
+					_supplement = value;
+					if (_owner != null)
 					{
-						mOwner.OnNotifyUpdated(this, mSupplement, nameof(Supplement));
+						_owner.OnNotifyUpdated(this, _supplement, nameof(Supplement));
 					}
 
 					NotifyPropertyChanged(nameof(Supplement));
@@ -109,23 +109,23 @@ namespace Lotus
 			{
 				get
 				{
-					if (mNotCalculation)
+					if (_notCalculation)
 					{
 						return 0;
 					}
 					else
 					{
-						return mValue + mSupplement;
+						return _value + _supplement;
 					}
 				}
 				set
 				{
-					if (mNotCalculation != true)
+					if (_notCalculation != true)
 					{
-						mValue = value - mSupplement;
-						if (mOwner != null)
+						_value = value - _supplement;
+						if (_owner != null)
 						{
-							mOwner.OnNotifyUpdated(this, mValue + mSupplement, nameof(CalculatedValue));
+							_owner.OnNotifyUpdated(this, _value + _supplement, nameof(CalculatedValue));
 						}
 
 						NotifyPropertyChanged(nameof(Value));
@@ -140,8 +140,8 @@ namespace Lotus
 			[XmlIgnore]
 			public ILotusOwnerObject IOwner
 			{
-				get { return mOwner; }
-				set { mOwner = value; }
+				get { return _owner; }
+				set { _owner = value; }
 			}
 			#endregion
 
@@ -152,14 +152,14 @@ namespace Lotus
 			[XmlAttribute]
 			public Boolean NotCalculation
 			{
-				get { return mNotCalculation; }
+				get { return _notCalculation; }
 				set
 				{
-					mNotCalculation = value;
+					_notCalculation = value;
 
-					if (mOwner != null)
+					if (_owner != null)
 					{
-						mOwner.OnNotifyUpdated(this, mNotCalculation, nameof(NotCalculation));
+						_owner.OnNotifyUpdated(this, _notCalculation, nameof(NotCalculation));
 					}
 
 					NotifyPropertyChanged(nameof(CalculatedValue));
@@ -177,7 +177,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CIntCalculated(Int32 value)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -189,8 +189,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CIntCalculated(Int32 value, ILotusOwnerObject ownerObject)
 			{
-				mValue = value;
-				mOwner = ownerObject;
+				_value = value;
+				_owner = ownerObject;
 			}
 			#endregion
 

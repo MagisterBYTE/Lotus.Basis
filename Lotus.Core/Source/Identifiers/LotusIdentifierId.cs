@@ -57,7 +57,6 @@ namespace Lotus
 			/// <summary>
 			/// Уникальный идентификатор объекта
 			/// </summary>
-			[Browsable(false)]
 			public virtual TKey Id
 			{
 				get { return _id; }

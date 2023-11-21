@@ -188,7 +188,7 @@ namespace Lotus
 		public class COwnedObject : PropertyChangedBase, ILotusOwnedObject
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal ILotusOwnerObject mOwner;
+			protected internal ILotusOwnerObject _owner;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -197,10 +197,10 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner 
 			{
-				get { return mOwner; } 
+				get { return _owner; } 
 				set
 				{
-					mOwner = value;
+					_owner = value;
 					RaiseOwnerObjectChanged();
 				}
 			}
@@ -255,7 +255,7 @@ namespace Lotus
 			where TOwner : ILotusOwnerObject
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal TOwner mOwner;
+			protected internal TOwner _owner;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -264,10 +264,10 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner
 			{
-				get { return mOwner; }
+				get { return _owner; }
 				set
 				{
-					mOwner = (TOwner)value;
+					_owner = (TOwner)value;
 					RaiseOwnerObjectChanged();
 				}
 			}
@@ -277,10 +277,10 @@ namespace Lotus
 			/// </summary>
 			public TOwner Owner
 			{
-				get { return mOwner; }
+				get { return _owner; }
 				set
 				{
-					mOwner = value;
+					_owner = value;
 					RaiseOwnerObjectChanged();
 				}
 			}

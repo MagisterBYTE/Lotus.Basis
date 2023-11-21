@@ -30,7 +30,7 @@ namespace Lotus
 		public class CFileSystemFile : CNameable, ILotusOwnedObject, ILotusFileSystemEntity
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal ILotusOwnerObject mOwner;
+			protected internal ILotusOwnerObject _owner;
 			protected internal FileInfo _info;
 			#endregion
 
@@ -40,7 +40,7 @@ namespace Lotus
 			/// </summary>
 			public ILotusOwnerObject IOwner
 			{
-				get { return mOwner; }
+				get { return _owner; }
 				set { }
 			}
 

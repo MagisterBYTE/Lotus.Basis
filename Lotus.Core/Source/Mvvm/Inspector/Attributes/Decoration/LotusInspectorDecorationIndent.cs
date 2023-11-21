@@ -1,11 +1,11 @@
 ﻿//=====================================================================================================================
 // Проект: Модуль базового ядра
-// Раздел: Подсистема атрибутов
-// Подраздел: Атрибуты дополнительного описания поля/свойства объекта
+// Раздел: Подсистема поддержки инспектора свойств
+// Подраздел: Атрибуты для инспектора свойств
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusAttributeCategory.cs
-*		Атрибут для определения группы свойств/полей.
+/** \file LotusInspectorDecorationIndent.cs
+*		Атрибут для определения уровня смещения отображения элемента инспектора свойств.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
@@ -17,37 +17,41 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreAttribute
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreInspectorAttribute
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Атрибут для определения группы свойств/полей
-        /// </summary>
-        //-------------------------------------------------------------------------------------------------------------
-        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-		public sealed class LotusCategoryAttribute : Attribute
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Атрибут для определения уровня смещения отображения элемента инспектора свойств
+		/// </summary>
+		//-------------------------------------------------------------------------------------------------------------
+		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+#if UNITY_2017_1_OR_NEWER
+		public sealed class LotusIndentLevelAttribute : UnityEngine.PropertyAttribute
+#else
+		public sealed class LotusIndentLevelAttribute : Attribute
+#endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String _name;
-			internal readonly Int32 _order;
+			internal readonly Int32 _indentLevel;
+			internal readonly Boolean _isAbsolute = false;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
-			/// Имя группы
+			/// Уровень смещения
 			/// </summary>
-			public String Name
+			public Int32 IndentLevel
 			{
-				get { return _name; }
+				get { return _indentLevel; }
 			}
 
 			/// <summary>
-			/// Порядок отображения группы свойств
+			/// Статус абсолютного смещения
 			/// </summary>
-			public Int32 Order
+			public Boolean IsAbsolute
 			{
-				get { return _order; }
+				get { return _isAbsolute; }
 			}
 			#endregion
 
@@ -56,13 +60,13 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="name">Имя группы</param>
-			/// <param name="order">Порядок отображения группы свойств</param>
+			/// <param name="indentLevel">Уровень смещения</param>
+			/// <param name="isAbsolute">Статус абсолютного смещения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusCategoryAttribute(String name, Int32 order)
+			public LotusIndentLevelAttribute(Int32 indentLevel, Boolean isAbsolute = true)
 			{
-				_name = name;
-				_order = order;
+				_indentLevel = indentLevel;
+				_isAbsolute = isAbsolute;
 			}
 			#endregion
 		}

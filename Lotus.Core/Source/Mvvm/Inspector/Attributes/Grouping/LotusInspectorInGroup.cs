@@ -1,11 +1,11 @@
 ﻿//=====================================================================================================================
 // Проект: Модуль базового ядра
-// Раздел: Подсистема атрибутов
-// Подраздел: Атрибуты дополнительного описания поля/свойства объекта
+// Раздел: Подсистема поддержки инспектора свойств
+// Подраздел: Атрибуты для инспектора свойств
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusAttributeCategory.cs
-*		Атрибут для определения группы свойств/полей.
+/** \file LotusInspectorInGroup.cs
+*		Атрибут для определения статуса вхождения элемента инспектора свойств в определённую группу.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
@@ -17,37 +17,32 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreAttribute
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreInspectorAttribute
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Атрибут для определения группы свойств/полей
-        /// </summary>
-        //-------------------------------------------------------------------------------------------------------------
-        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-		public sealed class LotusCategoryAttribute : Attribute
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Атрибут для определения статуса вхождения элемента инспектора свойств в определённую группу
+		/// </summary>
+		//-------------------------------------------------------------------------------------------------------------
+		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+#if UNITY_2017_1_OR_NEWER
+		public sealed class LotusInGroupAttribute : UnityEngine.PropertyAttribute
+#else
+		public sealed class LotusInGroupAttribute : Attribute
+#endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String _name;
-			internal readonly Int32 _order;
+			internal readonly String _groupName;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
-			/// Имя группы
+			/// Имя группы которой принадлежит данный элемент
 			/// </summary>
-			public String Name
+			public String GroupName
 			{
-				get { return _name; }
-			}
-
-			/// <summary>
-			/// Порядок отображения группы свойств
-			/// </summary>
-			public Int32 Order
-			{
-				get { return _order; }
+				get { return _groupName; }
 			}
 			#endregion
 
@@ -56,13 +51,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="name">Имя группы</param>
-			/// <param name="order">Порядок отображения группы свойств</param>
+			/// <param name="groupName">Имя группы которой принадлежит данный элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusCategoryAttribute(String name, Int32 order)
+			public LotusInGroupAttribute(String groupName)
 			{
-				_name = name;
-				_order = order;
+				_groupName = groupName;
 			}
 			#endregion
 		}

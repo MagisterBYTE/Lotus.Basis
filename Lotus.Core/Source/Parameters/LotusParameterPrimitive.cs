@@ -63,7 +63,7 @@ namespace Lotus
 			public CParameterBool(String parameterName, Boolean value)
 				: base(parameterName)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ namespace Lotus
 			public CParameterBool(Int32 id, Boolean value)
 				: base(id)
 			{
-				mValue = value;
+				_value = value;
 			}
 			#endregion
 		}
@@ -123,7 +123,7 @@ namespace Lotus
 			public CParameterInteger(String parameterName, Int32 value)
 				: base(parameterName)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ namespace Lotus
 			public CParameterInteger(Int32 id, Int32 value)
 				: base(id)
 			{
-				mValue = value;
+				_value = value;
 			}
 			#endregion
 		}
@@ -183,7 +183,7 @@ namespace Lotus
 			public CParameterReal(String parameterName, Double value)
 				: base(parameterName)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -196,7 +196,7 @@ namespace Lotus
 			public CParameterReal(Int32 id, Double value)
 				: base(id)
 			{
-				mValue = value;
+				_value = value;
 			}
 			#endregion
 		}
@@ -231,7 +231,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameterDatetime()
 			{
-				mValue = DateTime.Now;
+				_value = DateTime.Now;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -244,7 +244,7 @@ namespace Lotus
 			public CParameterDatetime(String parameterName, DateTime value)
 				: base(parameterName)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -257,7 +257,7 @@ namespace Lotus
 			public CParameterDatetime(Int32 id, DateTime value)
 				: base(id)
 			{
-				mValue = value;
+				_value = value;
 			}
 			#endregion
 		}
@@ -304,7 +304,7 @@ namespace Lotus
 			public CParameterString(String parameterName, String value)
 				: base(parameterName)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -317,7 +317,7 @@ namespace Lotus
 			public CParameterString(Int32 id, String value)
 				: base(id)
 			{
-				mValue = value;
+				_value = value;
 			}
 			#endregion
 		}
@@ -365,7 +365,7 @@ namespace Lotus
 			public CParameterEnum(String parameterName, TEnum value)
 				: base(parameterName)
 			{
-				mValue = value;
+				_value = value;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -378,7 +378,7 @@ namespace Lotus
 			public CParameterEnum(Int32 id, TEnum value)
 				: base(id)
 			{
-				mValue = value;
+				_value = value;
 			}
 			#endregion
 		}

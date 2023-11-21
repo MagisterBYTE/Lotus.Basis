@@ -1,11 +1,11 @@
 ﻿//=====================================================================================================================
 // Проект: Модуль базового ядра
-// Раздел: Подсистема атрибутов
-// Подраздел: Атрибуты дополнительного описания поля/свойства объекта
+// Раздел: Подсистема поддержки инспектора свойств
+// Подраздел: Атрибуты для инспектора свойств
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusAttributeCategory.cs
-*		Атрибут для определения группы свойств/полей.
+/** \file LotusInspectorEventValueChanged.cs
+*		Атрибут информирующий об изменении значения поля/свойства объекта.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
@@ -17,37 +17,36 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreAttribute
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreInspectorAttribute
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Атрибут для определения группы свойств/полей
-        /// </summary>
-        //-------------------------------------------------------------------------------------------------------------
-        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-		public sealed class LotusCategoryAttribute : Attribute
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Атрибут информирующий об изменении значения поля/свойства объекта
+		/// </summary>
+		//-------------------------------------------------------------------------------------------------------------
+		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+#if UNITY_2017_1_OR_NEWER
+		public sealed class LotusEventValueChangedAttribute : UnityEngine.PropertyAttribute
+#else
+		public sealed class LotusEventValueChangedAttribute : Attribute
+#endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String _name;
-			internal readonly Int32 _order;
+			internal String mEventMethodName;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
-			/// Имя группы
+			/// Имя метода который будет вызван при изменении значения
 			/// </summary>
-			public String Name
+			/// <remarks>
+			/// Метод должен быть без аргументов
+			/// </remarks>
+			public String EventMethodName
 			{
-				get { return _name; }
-			}
-
-			/// <summary>
-			/// Порядок отображения группы свойств
-			/// </summary>
-			public Int32 Order
-			{
-				get { return _order; }
+				get { return mEventMethodName; }
+				set { mEventMethodName = value; }
 			}
 			#endregion
 
@@ -56,13 +55,11 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="name">Имя группы</param>
-			/// <param name="order">Порядок отображения группы свойств</param>
+			/// <param name="eventMethodName">Имя метода который будет вызван при изменении значения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusCategoryAttribute(String name, Int32 order)
+			public LotusEventValueChangedAttribute(String eventMethodName)
 			{
-				_name = name;
-				_order = order;
+				mEventMethodName = eventMethodName;
 			}
 			#endregion
 		}

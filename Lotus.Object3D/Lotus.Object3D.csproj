@@ -44,8 +44,4 @@
     <ProjectReference Include="..\Lotus.Core\Lotus.Core.csproj" />
     <ProjectReference Include="..\Lotus.Math\Lotus.Math.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Lotus.Object3D.Depends\Assimp.Net\AssimpNet\AssimpNet.csproj" />
-  </ItemGroup>
 </Project>

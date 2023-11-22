@@ -33,9 +33,10 @@ namespace Lotus
 			/// Создание конкретной ViewModel для указанной модели
 			/// </summary>
 			/// <param name="model">Модель</param>
+			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model);
+			ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -81,7 +82,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TViewModelHierarchy Build(TModel model, ILotusViewModelHierarchy parent, ILotusCollectionViewModelHierarchy owner)
 			{
-				var node_view = owner.CreateViewModelHierarchy(model);
+				var node_view = owner.CreateViewModelHierarchy(model, parent);
 				node_view.IParent = parent;
 				node_view.IOwner = owner;
 
@@ -232,7 +233,7 @@ namespace Lotus
 			public static TViewModelHierarchy BuildFilter(TModel model, ILotusViewModelHierarchy parent, 
 				Predicate<TModel> filter, ILotusCollectionViewModelHierarchy owner)
 			{
-				var node_root_view = owner.CreateViewModelHierarchy(model);
+				var node_root_view = owner.CreateViewModelHierarchy(model, parent);
 				node_root_view.IParent = parent;
 				node_root_view.IOwner = owner;
 				if (model is ILotusCheckOne<TModel> check)
@@ -500,7 +501,7 @@ namespace Lotus
 			/// <param name="model">Модель</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model)
+			public virtual ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent)
 			{
 				return null;
 			}

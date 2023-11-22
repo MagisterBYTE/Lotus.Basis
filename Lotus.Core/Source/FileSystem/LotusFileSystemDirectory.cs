@@ -27,7 +27,8 @@ namespace Lotus
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
 		[Serializable]
-		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity
+		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity, 
+			ILotusViewModelBuilder, ILotusModelExpanded
 		{
 			#region ======================================= СТАТИЧЕСКИЕ МЕТОДЫ ========================================
 			//---------------------------------------------------------------------------------------------------------
@@ -256,6 +257,56 @@ namespace Lotus
 				}
 
 				return false;
+			}
+			#endregion
+
+			#region ======================================= МЕТОДЫ ILotusViewModelBuilder =============================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получение количества дочерних узлов
+			/// </summary>
+			/// <returns>Количество дочерних узлов</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public Int32 GetCountChildrenNode()
+			{
+				return _entities.Count;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Получение дочернего узла по индексу
+			/// </summary>
+			/// <param name="index">Индекс дочернего узла</param>
+			/// <returns>Дочерней узел</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public System.Object GetChildrenNode(Int32 index)
+			{
+				return _entities[index];
+			}
+			#endregion
+
+			#region ======================================= МЕТОДЫ ILotusModelExpanded ================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Установка статуса раскрытия объекта
+			/// </summary>
+			/// <param name="viewModel">Элемент ViewModel</param>
+			/// <param name="expanded">Статус раскрытия объекта</param>
+			//---------------------------------------------------------------------------------------------------------
+			public void SetModelExpanded(ILotusViewModelHierarchy viewModel, Boolean expanded)
+			{
+				if(expanded)
+				{
+					foreach (var entity in _entities)
+					{
+						if(entity is CFileSystemDirectory directory)
+						{
+							directory.GetFileSystemItemsTwoLevel();
+						}
+					}
+
+					viewModel.BuildFromModel();
+				}
 			}
 			#endregion
 

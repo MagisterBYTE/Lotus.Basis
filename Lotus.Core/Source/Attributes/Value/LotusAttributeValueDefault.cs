@@ -36,7 +36,7 @@ namespace Lotus
 #endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly System.Object mDefaultValue;
+			internal readonly System.Object _defaultValue;
 			internal readonly String _memberName;
 			internal readonly TInspectorMemberType _memberType;
 			#endregion
@@ -47,7 +47,7 @@ namespace Lotus
 			/// </summary>
 			public System.Object DefaultValue
 			{
-				get { return mDefaultValue; }
+				get { return _defaultValue; }
 			}
 
 			/// <summary>
@@ -76,7 +76,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusDefaultValueAttribute(System.Object defaultValue)
 			{
-				mDefaultValue = defaultValue;
+				_defaultValue = defaultValue;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusDefaultValueAttribute(Type type, String memberName, TInspectorMemberType memberType)
 			{
-				mDefaultValue = type;
+				_defaultValue = type;
 				_memberName = memberName;
 				_memberType = memberType;
 			}

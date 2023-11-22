@@ -69,18 +69,19 @@ namespace Lotus
 			/// Создание конкретной ViewModel для указанной модели
 			/// </summary>
 			/// <param name="model">Модель</param>
+			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model)
+			public override ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent)
 			{
 				if(model is CFileSystemFile file)
 				{
-					return new ViewModelFileSystemFile(file, null);
+					return new ViewModelFileSystemFile(file, parent);
 				}
 
 				if (model is CFileSystemDirectory directory)
 				{
-					return new ViewModelDirectorySystemFile(directory, null);
+					return new ViewModelDirectorySystemFile(directory, parent);
 				}
 
 				return null;

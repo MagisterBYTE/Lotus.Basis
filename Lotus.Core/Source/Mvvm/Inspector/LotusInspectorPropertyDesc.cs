@@ -334,19 +334,19 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal String mPropertyName;
+			protected internal String _propertyName;
 
 			// Параметры описания
 			protected internal String _displayName;
-			protected internal String mDescription;
-			protected internal Int32 mPropertyOrder = -1;
+			protected internal String _description;
+			protected internal Int32 _propertyOrder = -1;
 			protected internal String _category;
 			protected internal Int32 _categoryOrder = -1;
 
 			// Параметры управления
 			protected internal Boolean _isHideInspector;
 			protected internal Boolean _isReadOnly;
-			protected internal Object mDefaultValue;
+			protected internal Object _defaultValue;
 			protected internal Object _listValues;
 			#endregion
 
@@ -361,11 +361,11 @@ namespace Lotus
 			{
 				get
 				{
-					return mPropertyName;
+					return _propertyName;
 				}
 				set
 				{
-					mPropertyName = value;
+					_propertyName = value;
 				}
 			}
 
@@ -392,10 +392,10 @@ namespace Lotus
 			/// </summary>
 			public String Description
 			{
-				get { return mDescription; }
+				get { return _description; }
 				set
 				{
-					mDescription = value;
+					_description = value;
 				}
 			}
 
@@ -404,10 +404,10 @@ namespace Lotus
 			/// </summary>
 			public Int32 PropertyOrder
 			{
-				get { return mPropertyOrder; }
+				get { return _propertyOrder; }
 				set
 				{
-					mPropertyOrder = value;
+					_propertyOrder = value;
 				}
 			}
 
@@ -467,10 +467,10 @@ namespace Lotus
 			/// </summary>
 			public Object DefaultValue
 			{
-				get { return mDefaultValue; }
+				get { return _defaultValue; }
 				set
 				{
-					mDefaultValue = value;
+					_defaultValue = value;
 				}
 			}
 

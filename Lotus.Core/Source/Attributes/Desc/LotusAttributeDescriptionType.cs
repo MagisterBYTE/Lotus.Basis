@@ -29,7 +29,7 @@ namespace Lotus
 		public sealed class LotusDescriptionTypeAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String mDescription;
+			internal readonly String _description;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -38,7 +38,7 @@ namespace Lotus
 			/// </summary>
 			public String Description
 			{
-				get { return mDescription; }
+				get { return _description; }
 			}
 			#endregion
 
@@ -51,7 +51,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusDescriptionTypeAttribute(String description)
 			{
-				mDescription = description;
+				_description = description;
 			}
 			#endregion
 		}

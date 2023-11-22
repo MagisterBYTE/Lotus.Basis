@@ -75,9 +75,10 @@ namespace Lotus
 			/// Создание конкретной ViewModel для указанной модели
 			/// </summary>
 			/// <param name="model">Модель</param>
+			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model);
+			ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -871,9 +872,10 @@ namespace Lotus
 			/// Создание конкретной ViewModel для указанной модели
 			/// </summary>
 			/// <param name="model">Модель</param>
+			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model)
+			public virtual ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent)
 			{
 				return null;
 			}
@@ -1117,7 +1119,7 @@ namespace Lotus
 									if (is_dublicate == false)
 									{
 										var model = (TModel)new_models[i];
-										ILotusViewModelHierarchy view_model = this.CreateViewModelHierarchy(model);
+										ILotusViewModelHierarchy view_model = this.CreateViewModelHierarchy(model, null);
 										view_model.IOwner = this.IOwner;
 										view_model.IParent = this;
 

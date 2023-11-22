@@ -52,13 +52,14 @@ namespace Lotus
 			/// Создание конкретной ViewModel для указанной модели
 			/// </summary>
 			/// <param name="model">Модель</param>
+			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model)
+			public override ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent)
 			{
 				if(model is JObject jobject)
 				{
-					return new CViewModelJson(jobject, this.IParent);
+					return new CViewModelJson(jobject, parent);
 				}
 
 				return null;

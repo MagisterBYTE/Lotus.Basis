@@ -391,7 +391,7 @@ namespace Lotus
 			public CSurfaceColor(UnityEngine.Color32[] data)
 			{
 				SetFromData(data);
-				mRank = 1;
+				_rank = 1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -407,14 +407,14 @@ namespace Lotus
 					this.SetFromData(texture.GetPixels32());
 					_width = texture.width;
 					_height = texture.height;
-					mRank = 2;
+					_rank = 2;
 				}
 				else
 				{
 					_data = new TColor[] { TColor.White };
 					_width = 1;
 					_height = 1;
-					mRank = 1;
+					_rank = 1;
 				}
 			}
 #endif
@@ -453,7 +453,7 @@ namespace Lotus
 					this.SetFromData(texture.GetPixels32());
 					_width = texture.width;
 					_height = texture.height;
-					mRank = 2;
+					_rank = 2;
 				}
 			}
 #endif

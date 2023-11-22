@@ -210,7 +210,7 @@ namespace Lotus
 			/// <param name="value">Значение</param>
 			/// <returns>Интерполированное значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double SmoothStep(Double start,Double end, Double value)
+			public static Double SmoothStep(Double start, Double end, Double value)
 			{
 				value = XMath.Clamp(value, start, end);
 				var v1 = (value - start) / (end - start);

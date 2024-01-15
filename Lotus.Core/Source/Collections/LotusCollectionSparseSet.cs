@@ -19,15 +19,16 @@ namespace Lotus
 {
 	namespace Core
 	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreCollections
+        //-------------------------------------------------------------------------------------------------------------
+        /** \addtogroup CoreCollections
 		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public class SparseSet : IEnumerable<Int32>
+        //-------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
+        /// </summary>
+        //-------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class SparseSet : IEnumerable<Int32>
 		{
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			/// <summary>
@@ -38,8 +39,8 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32[] mDenseItems;
-			protected internal Int32[] mSparseItems;
+			protected internal Int32[] _denseItems;
+			protected internal Int32[] _sparseItems;
 			protected internal Int32 _count;
 			protected internal Int32 _maxCount;
 			#endregion
@@ -101,7 +102,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 this[Int32 index]
 			{
-				get { return mDenseItems[index]; }
+				get { return _denseItems[index]; }
 			}
 			#endregion
 
@@ -126,8 +127,8 @@ namespace Lotus
 			{
 				_maxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
 				_count = 0;
-				mDenseItems = new Int32[_maxCount];
-				mSparseItems = new Int32[_maxCount];
+				_denseItems = new Int32[_maxCount];
+				_sparseItems = new Int32[_maxCount];
 			}
 			#endregion
 
@@ -143,7 +144,7 @@ namespace Lotus
 				var i = 0;
 				while (i < _count)
 				{
-					yield return mDenseItems[i];
+					yield return _denseItems[i];
 					i++;
 				}
 			}
@@ -170,22 +171,22 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public void Add(Int32 value)
 			{
-				if(value >= _maxCount)
+				if (value >= _maxCount)
 				{
 					_maxCount = Math.Max(value + 1, _maxCount << 1);
-					Array.Resize(ref mDenseItems, _maxCount);
-					Array.Resize(ref mSparseItems, _maxCount);
+					Array.Resize(ref _denseItems, _maxCount);
+					Array.Resize(ref _sparseItems, _maxCount);
 				}
 
-				if(_count >= _maxCount)
+				if (_count >= _maxCount)
 				{
 					_maxCount <<= 1;
-					Array.Resize(ref mDenseItems, _maxCount);
-					Array.Resize(ref mSparseItems, _maxCount);
+					Array.Resize(ref _denseItems, _maxCount);
+					Array.Resize(ref _sparseItems, _maxCount);
 				}
 
-				mDenseItems[_count] = value;
-				mSparseItems[value] = _count;
+				_denseItems[_count] = value;
+				_sparseItems[value] = _count;
 				_count++;
 			}
 
@@ -201,8 +202,8 @@ namespace Lotus
 				if (_count + values.Length >= _maxCount)
 				{
 					_maxCount = Math.Max(_count + values.Length + 1, _maxCount << 1);
-					Array.Resize(ref mDenseItems, _maxCount);
-					Array.Resize(ref mSparseItems, _maxCount);
+					Array.Resize(ref _denseItems, _maxCount);
+					Array.Resize(ref _sparseItems, _maxCount);
 				}
 
 				for (var i = 0; i < values.Length; i++)
@@ -212,14 +213,14 @@ namespace Lotus
 					if (value >= _maxCount)
 					{
 						_maxCount = Math.Max(value + 1, _maxCount << 1);
-						Array.Resize(ref mDenseItems, _maxCount);
-						Array.Resize(ref mSparseItems, _maxCount);
+						Array.Resize(ref _denseItems, _maxCount);
+						Array.Resize(ref _sparseItems, _maxCount);
 					}
 
-					if (mDenseItems[mSparseItems[value]] != value || mSparseItems[value] >= _count)
+					if (_denseItems[_sparseItems[value]] != value || _sparseItems[value] >= _count)
 					{
-						mDenseItems[_count] = value;
-						mSparseItems[value] = _count;
+						_denseItems[_count] = value;
+						_sparseItems[value] = _count;
 						_count++;
 					}
 				}
@@ -237,10 +238,10 @@ namespace Lotus
 				if (Contains(value))
 				{
 					// put the value at the end of the dense array into the slot of the removed value
-					mDenseItems[mSparseItems[value]] = mDenseItems[_count - 1]; 
+					_denseItems[_sparseItems[value]] = _denseItems[_count - 1];
 
 					// put the link to the removed value in the slot of the replaced value
-					mSparseItems[mDenseItems[_count - 1]] = mSparseItems[value];
+					_sparseItems[_denseItems[_count - 1]] = _sparseItems[value];
 
 					_count--;
 				}
@@ -261,10 +262,10 @@ namespace Lotus
 					if (Contains(value))
 					{
 						// put the value at the end of the dense array into the slot of the removed value
-						mDenseItems[mSparseItems[value]] = mDenseItems[_count - 1];
+						_denseItems[_sparseItems[value]] = _denseItems[_count - 1];
 
 						// put the link to the removed value in the slot of the replaced value
-						mSparseItems[mDenseItems[_count - 1]] = mSparseItems[value];
+						_sparseItems[_denseItems[_count - 1]] = _sparseItems[value];
 
 						_count--;
 					}
@@ -290,7 +291,7 @@ namespace Lotus
 					// value must meet two conditions:
 					// 1. link value from the sparse array must point to the current used range in the dense array
 					// 2. there must be a valid two-way link
-					return mSparseItems[value] < _count && mDenseItems[mSparseItems[value]] == value;
+					return _sparseItems[value] < _count && _denseItems[_sparseItems[value]] == value;
 				}
 			}
 
@@ -302,31 +303,32 @@ namespace Lotus
 			public void Clear()
 			{
 				_count = 0; // simply set n to 0 to clear the set; no re-initialization is required
-				Array.Clear(mDenseItems, 0, _maxCount);
-				Array.Clear(mSparseItems, 0, _maxCount);
+				Array.Clear(_denseItems, 0, _maxCount);
+				Array.Clear(_sparseItems, 0, _maxCount);
 			}
 			#endregion
 		}
 
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
-		/// </summary>
-		/// <typeparam name="TItem">Тип элемента списка</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		public class SparseSet<TItem> : IEnumerable<TItem>
+        //-------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
+        /// </summary>
+        /// <typeparam name="TItem">Тип элемента списка</typeparam>
+        //-------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class SparseSet<TItem> : IEnumerable<TItem>
 		{
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			/// <summary>
 			/// Максимальное количество элементов на начальном этапе
 			/// </summary>
-			public const Int32 INITMAXCOUNT = 16;
+			public const Int32 INIT_MAX_COUNT = 16;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32[] mDenseItems;
-			protected internal Int32[] mSparseItems;
+			protected internal Int32[] _denseItems;
+			protected internal Int32[] _sparseItems;
 			protected internal TItem[] _items;
 			protected internal Int32 _count;
 			protected internal Int32 _maxCount;
@@ -400,7 +402,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public SparseSet()
-				: this(INITMAXCOUNT)
+				: this(INIT_MAX_COUNT)
 			{
 			}
 
@@ -412,10 +414,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public SparseSet(Int32 capacity)
 			{
-				_maxCount = capacity > INITMAXCOUNT ? capacity : INITMAXCOUNT;
+				_maxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
 				_count = 0;
-				mDenseItems = new Int32[_maxCount];
-				mSparseItems = new Int32[_maxCount];
+				_denseItems = new Int32[_maxCount];
+				_sparseItems = new Int32[_maxCount];
 				_items = new TItem[_maxCount];
 			}
 			#endregion
@@ -463,22 +465,22 @@ namespace Lotus
 				if (index >= _maxCount)
 				{
 					_maxCount = Math.Max(index + 1, _maxCount << 1);
-					Array.Resize(ref mDenseItems, _maxCount);
-					Array.Resize(ref mSparseItems, _maxCount);
+					Array.Resize(ref _denseItems, _maxCount);
+					Array.Resize(ref _sparseItems, _maxCount);
 					Array.Resize(ref _items, _maxCount);
 				}
 
 				if (_count >= _maxCount)
 				{
 					_maxCount <<= 1;
-					Array.Resize(ref mDenseItems, _maxCount);
-					Array.Resize(ref mSparseItems, _maxCount);
+					Array.Resize(ref _denseItems, _maxCount);
+					Array.Resize(ref _sparseItems, _maxCount);
 					Array.Resize(ref _items, _maxCount);
 				}
 
 				_items[_count] = item;
-				mDenseItems[_count] = index;
-				mSparseItems[index] = _count;
+				_denseItems[_count] = index;
+				_sparseItems[index] = _count;
 				_count++;
 			}
 
@@ -494,11 +496,11 @@ namespace Lotus
 				if (Contains(index))
 				{
 					// put the value at the end of the dense array into the slot of the removed value
-					_items[mSparseItems[index]] = _items[_count - 1];
-					mDenseItems[mSparseItems[index]] = mDenseItems[_count - 1];
-					
+					_items[_sparseItems[index]] = _items[_count - 1];
+					_denseItems[_sparseItems[index]] = _denseItems[_count - 1];
+
 					// put the link to the removed value in the slot of the replaced value
-					mSparseItems[mDenseItems[_count - 1]] = mSparseItems[index];
+					_sparseItems[_denseItems[_count - 1]] = _sparseItems[index];
 
 					_count--;
 				}
@@ -519,11 +521,11 @@ namespace Lotus
 					if (Contains(index))
 					{
 						// put the value at the end of the dense array into the slot of the removed value
-						mDenseItems[mSparseItems[index]] = mDenseItems[_count - 1];
-						_items[mSparseItems[index]] = _items[_count - 1];
+						_denseItems[_sparseItems[index]] = _denseItems[_count - 1];
+						_items[_sparseItems[index]] = _items[_count - 1];
 
 						// put the link to the removed value in the slot of the replaced value
-						mSparseItems[mDenseItems[_count - 1]] = mSparseItems[index];
+						_sparseItems[_denseItems[_count - 1]] = _sparseItems[index];
 
 						_count--;
 					}
@@ -549,7 +551,7 @@ namespace Lotus
 					// value must meet two conditions:
 					// 1. link value from the sparse array must point to the current used range in the dense array
 					// 2. there must be a valid two-way link
-					return mSparseItems[index] < _count && mDenseItems[mSparseItems[index]] == index;
+					return _sparseItems[index] < _count && _denseItems[_sparseItems[index]] == index;
 				}
 			}
 
@@ -576,7 +578,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public ref TItem GetValue(Int32 index)
 			{
-				return ref _items[mSparseItems[index]];
+				return ref _items[_sparseItems[index]];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -589,7 +591,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public void SetValue(Int32 index, in TItem item)
 			{
-				_items[mSparseItems[index]] = item;
+				_items[_sparseItems[index]] = item;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -601,7 +603,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public Int32[] GetIndexes()
 			{
-				return mDenseItems;
+				return _denseItems;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -612,8 +614,8 @@ namespace Lotus
 			public void Clear()
 			{
 				_count = 0; // simply set n to 0 to clear the set; no re-initialization is required
-				Array.Clear(mDenseItems, 0, _maxCount);
-				Array.Clear(mSparseItems, 0, _maxCount);
+				Array.Clear(_denseItems, 0, _maxCount);
+				Array.Clear(_sparseItems, 0, _maxCount);
 				Array.Clear(_items, 0, _maxCount);
 			}
 			#endregion

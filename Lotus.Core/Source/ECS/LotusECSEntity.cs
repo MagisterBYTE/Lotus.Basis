@@ -117,9 +117,9 @@ namespace Lotus
 			/// <remarks>
 			/// Является уникальным в пределах одного мира
 			/// </remarks>
-			public readonly Int32 Id 
-			{ 
-				get 
+			public readonly Int32 Id
+			{
+				get
 				{
 					return _id;
 				}
@@ -271,7 +271,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(Object obj)
+			public override readonly Boolean Equals(Object? obj)
 			{
 				if (obj != null)
 				{

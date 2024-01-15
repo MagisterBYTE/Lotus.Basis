@@ -40,7 +40,7 @@ namespace Lotus
 			/// <param name="model">Модель</param>
 			/// <param name="parentItem">Родительский узел</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CViewModelJson(JObject model, ILotusViewModelHierarchy parentItem)
+			public CViewModelJson(JObject model, ILotusViewModelHierarchy? parentItem)
 				: base(model, parentItem)
 			{
 			}
@@ -55,14 +55,14 @@ namespace Lotus
 			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent)
+			public override ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy? parent)
 			{
 				if(model is JObject jobject)
 				{
 					return new CViewModelJson(jobject, parent);
 				}
 
-				return null;
+				throw new NotImplementedException("Model must be type <JObject>");
 			}	
 
 			//---------------------------------------------------------------------------------------------------------

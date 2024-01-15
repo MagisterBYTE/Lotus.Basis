@@ -35,17 +35,17 @@ namespace Lotus
 			/// <summary>
 			/// Флаги метаданных используемые при поиске полей
 			/// </summary>
-			public const BindingFlags BINDINGFIELDS = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+			public const BindingFlags BINDING_FIELDS = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
 			/// <summary>
 			/// Флаги метаданных используемые при поиске свойств
 			/// </summary>
-			public const BindingFlags BINDINGPROPERTIES = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
+			public const BindingFlags BINDING_PROPERTIES = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
 
 			/// <summary>
 			/// Флаги метаданных используемые при поиске методов
 			/// </summary>
-			public const BindingFlags BINDINGMETHODS = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+			public const BindingFlags BINDING_METHODS = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 			#endregion
 
 			#region ======================================= СТАТИСТИЧЕСКИЕ ДАННЫЕ =====================================
@@ -179,23 +179,19 @@ namespace Lotus
 				// Освобождаем только управляемые ресурсы
 				if (disposing)
 				{
-					_cachedType = null;
 					if (_fields != null)
 					{
 						_fields.Clear();
-						_fields = null;
 					}
 
 					if (_properties != null)
 					{
 						_properties.Clear();
-						_properties = null;
 					}
 
 					if (_methods != null)
 					{
 						_methods.Clear();
-						_methods = null;
 					}
 				}
 
@@ -211,13 +207,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void GetFields()
 			{
-				if (_fields == null) _fields = new Dictionary<String, FieldInfo>();
-
-				FieldInfo[] fields = _cachedType.GetFields(BINDINGFIELDS);
-
-				foreach (FieldInfo field in fields)
+				if (_fields == null)
 				{
-					_fields.Add(field.Name, field);
+					_fields = new Dictionary<String, FieldInfo>();
+
+					FieldInfo[] fields = _cachedType.GetFields(BINDING_FIELDS);
+
+					foreach (FieldInfo field in fields)
+					{
+						_fields.Add(field.Name, field);
+					}
 				}
 			}
 
@@ -230,8 +229,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsField(String fieldName)
 			{
-				if (_fields == null) GetFields();
-				return _fields.ContainsKey(fieldName);
+				GetFields();
+				return _fields!.ContainsKey(fieldName);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -241,14 +240,10 @@ namespace Lotus
 			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Метаданные поля или null если поля с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public FieldInfo GetField(String fieldName)
+			public FieldInfo? GetField(String fieldName)
 			{
-				if (_fields == null || _fields.Count == 0)
-				{
-					GetFields();
-				}
-				FieldInfo field_info;
-				if(_fields.TryGetValue(fieldName, out field_info))
+                GetFields();
+				if(_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
 					return field_info;
 				}
@@ -263,11 +258,10 @@ namespace Lotus
 			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Тип поля или null если поля с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Type GetFieldType(String fieldName)
+			public Type? GetFieldType(String fieldName)
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				GetFields();
+				if (_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
 					return field_info.FieldType;
 				}
@@ -280,18 +274,17 @@ namespace Lotus
 			/// Получение имени типа поля по имени
 			/// </summary>
 			/// <param name="fieldName">Имя поля</param>
-			/// <returns>Имя типа поля или null если поля с таким именем не оказалось</returns>
+			/// <returns>Имя типа поля или пустая строка если поля с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public String GetFieldTypeName(String fieldName)
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				GetFields();
+				if (_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
 					return field_info.FieldType.Name;
 				}
 
-				return "";
+				return String.Empty;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -305,7 +298,7 @@ namespace Lotus
 			{
 				var fields = new List<FieldInfo>();
 
-				if (_fields == null) GetFields();
+				GetFields();
 				foreach (var field_info in _fields.Values)
 				{
 					if (field_info.FieldType == typeof(TType))
@@ -328,7 +321,7 @@ namespace Lotus
 			{
 				var fields = new List<FieldInfo>();
 
-				if (_fields == null) GetFields();
+				GetFields();
 				foreach (var field_info in _fields.Values)
 				{
 					if (Attribute.IsDefined(field_info, typeof(TAttribute)))
@@ -348,11 +341,10 @@ namespace Lotus
 			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Атрибут поля или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TAttribute GetAttributeFromField<TAttribute>(String fieldName) where TAttribute : System.Attribute
+			public TAttribute? GetAttributeFromField<TAttribute>(String fieldName) where TAttribute : System.Attribute
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				 GetFields();
+				if (_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
 					if (Attribute.IsDefined(field_info, typeof(TAttribute)))
 					{
@@ -371,11 +363,10 @@ namespace Lotus
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object GetFieldValue(String fieldName, System.Object instance)
+			public System.Object? GetFieldValue(String fieldName, System.Object? instance)
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				GetFields();
+				if (_fields!.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
 					if (field_info.IsStatic)
 					{
@@ -399,11 +390,10 @@ namespace Lotus
 			/// <param name="fieldInfoResult">Метаданные поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object GetFieldValue(String fieldName, System.Object instance, out FieldInfo fieldInfoResult)
+			public System.Object? GetFieldValue(String fieldName, System.Object instance, out FieldInfo? fieldInfoResult)
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				GetFields();
+				if (_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
 					fieldInfoResult = field_info;
 					if (field_info.IsStatic)
@@ -429,13 +419,12 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object GetFieldValue(String fieldName, System.Object instance, Int32 index)
+			public System.Object? GetFieldValue(String fieldName, System.Object instance, Int32 index)
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				GetFields();
+				if (_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
-					System.Object collection = null;
+					System.Object? collection = null;
 					if (field_info.IsStatic)
 					{
 						collection = field_info.GetValue(null);
@@ -447,17 +436,14 @@ namespace Lotus
 
 					if (collection != null)
 					{
-						if (collection is IList)
+						if (collection is IList list)
 						{
-							var list = collection as IList;
 							return list[index];
 						}
 						else
 						{
-							if (collection is IEnumerable)
+							if (collection is IEnumerable enumerable)
 							{
-								var enumerable = collection as IEnumerable;
-
 								var enumeration = enumerable.GetEnumerator();
 
 								for (var i = 0; i <= index; i++)
@@ -486,14 +472,13 @@ namespace Lotus
 			/// <param name="fieldInfoResult">Метаданные поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object GetFieldValue(String fieldName, System.Object instance, Int32 index, out FieldInfo fieldInfoResult)
+			public System.Object? GetFieldValue(String fieldName, System.Object instance, Int32 index, out FieldInfo? fieldInfoResult)
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				GetFields();
+				if (_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
 					fieldInfoResult = field_info;
-					System.Object collection = null;
+					System.Object? collection = null;
 					if (field_info.IsStatic)
 					{
 						collection = field_info.GetValue(null);
@@ -505,17 +490,14 @@ namespace Lotus
 
 					if (collection != null)
 					{
-						if (collection is IList)
+						if (collection is IList list)
 						{
-							var list = collection as IList;
 							return list[index];
 						}
 						else
 						{
-							if (collection is IEnumerable)
+							if (collection is IEnumerable enumerable)
 							{
-								var enumerable = collection as IEnumerable;
-
 								var enumeration = enumerable.GetEnumerator();
 
 								for (var i = 0; i <= index; i++)
@@ -544,11 +526,10 @@ namespace Lotus
 			/// <param name="value">Значение поля</param>
 			/// <returns> Статус успешности установки поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean SetFieldValue(String fieldName, System.Object instance, System.Object value)
+			public Boolean SetFieldValue(String fieldName, System.Object? instance, System.Object value)
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				GetFields();
+				if (_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
 					if (field_info.IsStatic)
 					{
@@ -575,13 +556,12 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns> Статус успешности установки поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean SetFieldValue(String fieldName, System.Object instance, System.Object value, Int32 index)
+			public Boolean SetFieldValue(String fieldName, System.Object? instance, System.Object value, Int32 index)
 			{
-				if (_fields == null) GetFields();
-				FieldInfo field_info;
-				if (_fields.TryGetValue(fieldName, out field_info))
+				GetFields();
+				if (_fields.TryGetValue(fieldName, out FieldInfo? field_info))
 				{
-					IList list = null;
+					IList? list = null;
 					if (field_info.IsStatic)
 					{
 						list = field_info.GetValue(null) as IList;
@@ -610,13 +590,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void GetProperties()
 			{
-				if (_properties == null) _properties = new Dictionary<String, PropertyInfo>();
-
-				PropertyInfo[] properties = _cachedType.GetProperties(BINDINGPROPERTIES);
-
-				foreach (PropertyInfo property in properties)
+				if (_properties == null)
 				{
-					_properties.Add(property.Name, property);
+					_properties = new Dictionary<String, PropertyInfo>();
+
+					PropertyInfo[] properties = _cachedType.GetProperties(BINDING_PROPERTIES);
+
+					foreach (PropertyInfo property in properties)
+					{
+						_properties.Add(property.Name, property);
+					}
 				}
 			}
 
@@ -629,7 +612,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsProperty(String propertyName)
 			{
-				if (_properties == null) GetProperties();
+				GetProperties();
 				return _properties.ContainsKey(propertyName);
 			}
 
@@ -640,16 +623,14 @@ namespace Lotus
 			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Метаданные свойства или null если свойства с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public PropertyInfo GetProperty(String propertyName)
+			public PropertyInfo? GetProperty(String propertyName)
 			{
-				if (_properties == null) GetProperties();
+				GetProperties();
 
-				PropertyInfo property_info;
-				if (_properties.TryGetValue(propertyName, out property_info))
+				if (_properties.TryGetValue(propertyName, out PropertyInfo? property_info))
 				{
 					return property_info;
 				}
-
 
 				return null;
 			}
@@ -661,11 +642,10 @@ namespace Lotus
 			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Тип свойства или null если свойства с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Type GetPropertyType(String propertyName)
+			public Type? GetPropertyType(String propertyName)
 			{
-				if (_properties == null) GetProperties();
-				PropertyInfo property_info;
-				if (_properties.TryGetValue(propertyName, out property_info))
+				GetProperties();
+				if (_properties.TryGetValue(propertyName, out PropertyInfo? property_info))
 				{
 					return property_info.PropertyType;
 				}
@@ -678,18 +658,17 @@ namespace Lotus
 			/// Получение имени типа свойства по имени
 			/// </summary>
 			/// <param name="propertyName">Имя свойства</param>
-			/// <returns>Имя типа свойства или null если свойства с таким именем не оказалось</returns>
+			/// <returns>Имя типа свойства или пустая строка если свойства с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public String GetPropertyTypeName(String propertyName)
 			{
-				if (_properties == null) GetProperties();
-				PropertyInfo property_info;
-				if (_properties.TryGetValue(propertyName, out property_info))
+				GetProperties();
+				if (_properties.TryGetValue(propertyName, out PropertyInfo? property_info))
 				{
 					return property_info.PropertyType.Name;
 				}
 
-				return "";
+				return String.Empty;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -702,8 +681,7 @@ namespace Lotus
 			public List<PropertyInfo> GetPropertiesFromType<TType>()
 			{
 				var properties = new List<PropertyInfo>();
-				if (_properties == null) GetProperties();
-
+				GetProperties();
 				foreach (var property_info in _properties.Values)
 				{
 					if (property_info.PropertyType == typeof(TType))
@@ -711,7 +689,6 @@ namespace Lotus
 						properties.Add(property_info);
 					}
 				}
-
 
 				return properties;
 			}
@@ -727,7 +704,7 @@ namespace Lotus
 			{
 				var properties = new List<PropertyInfo>();
 
-				if (_properties == null) GetProperties();
+				GetProperties();
 				foreach (var property_info in _properties.Values)
 				{
 					if (Attribute.IsDefined(property_info, typeof(TAttribute)))
@@ -747,11 +724,10 @@ namespace Lotus
 			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Атрибут поля или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TAttribute GetAttributeFromProperty<TAttribute>(String propertyName) where TAttribute : System.Attribute
+			public TAttribute? GetAttributeFromProperty<TAttribute>(String propertyName) where TAttribute : System.Attribute
 			{
-				if (_properties == null) GetProperties();
-				PropertyInfo property_info;
-				if (_properties.TryGetValue(propertyName, out property_info))
+				GetProperties();
+				if (_properties.TryGetValue(propertyName, out PropertyInfo? property_info))
 				{
 					if (Attribute.IsDefined(property_info, typeof(TAttribute)))
 					{
@@ -770,11 +746,10 @@ namespace Lotus
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object GetPropertyValue(String propertyName, System.Object? instance)
+			public System.Object? GetPropertyValue(String propertyName, System.Object? instance)
 			{
-				if (_properties == null) GetProperties();
-				PropertyInfo property_info;
-				if (_properties.TryGetValue(propertyName, out property_info))
+				GetProperties();
+				if (_properties.TryGetValue(propertyName, out PropertyInfo? property_info))
 				{
 					return property_info.GetValue(instance);
 				}
@@ -791,27 +766,23 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object GetPropertyValue(String propertyName, System.Object instance, Int32 index)
+			public System.Object? GetPropertyValue(String propertyName, System.Object instance, Int32 index)
 			{
-				if (_properties == null) GetProperties();
-				PropertyInfo property_info;
-				if (_properties.TryGetValue(propertyName, out property_info))
+				GetProperties();
+				if (_properties.TryGetValue(propertyName, out PropertyInfo? property_info))
 				{
 					var collection = property_info.GetValue(instance);
 
 					if (collection != null)
 					{
-						if (collection is IList)
+						if (collection is IList list)
 						{
-							var list = collection as IList;
 							return list[index];
 						}
 						else
 						{
-							if (collection is IEnumerable)
+							if (collection is IEnumerable enumerable)
 							{
-								var enumerable = collection as IEnumerable;
-
 								var enumeration = enumerable.GetEnumerator();
 
 								for (var i = 0; i <= index; i++)
@@ -841,12 +812,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean SetPropertyValue(String propertyName, System.Object instance, System.Object value)
 			{
-				if (_properties == null) GetProperties();
-				PropertyInfo property_info;
-				if (_properties.TryGetValue(propertyName, out property_info))
+				GetProperties();
+				if (_properties.TryGetValue(propertyName, out PropertyInfo? property_info))
 				{
 					property_info.SetValue(instance, value);
-
 					return true;
 				}
 
@@ -865,9 +834,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean SetPropertyValue(String propertyName, System.Object instance, System.Object value, Int32 index)
 			{
-				if (_properties == null) GetProperties();
-				PropertyInfo property_info;
-				if (_properties.TryGetValue(propertyName, out property_info))
+				GetProperties();
+				if (_properties.TryGetValue(propertyName, out PropertyInfo? property_info))
 				{
 					var list = property_info.GetValue(instance) as IList;
 					if (list != null)
@@ -889,13 +857,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private void GetMethods()
 			{
-				if (_methods == null) _methods = new Dictionary<String, MethodInfo>();
-
-				foreach (MethodInfo method in _cachedType.GetMethods(BINDINGMETHODS))
+				if (_methods == null)
 				{
-					if (_methods.ContainsKey(method.Name) == false)
+					_methods = new Dictionary<String, MethodInfo>();
+
+					foreach (MethodInfo method in _cachedType.GetMethods(BINDING_METHODS))
 					{
-						_methods.Add(method.Name, method);
+						if (_methods.ContainsKey(method.Name) == false)
+						{
+							_methods.Add(method.Name, method);
+						}
 					}
 				}
 			}
@@ -909,7 +880,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsMethod(String methodName)
 			{
-				if (_methods == null) GetMethods();
+				GetMethods();
 				return _methods.ContainsKey(methodName);
 			}
 
@@ -920,11 +891,10 @@ namespace Lotus
 			/// <param name="methodName">Имя метода</param>
 			/// <returns>Метаданные метода или null если метода с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public MethodInfo GetMethod(String methodName)
+			public MethodInfo? GetMethod(String methodName)
 			{
-				if (_methods == null) GetMethods();
-				MethodInfo method_info;
-				if (_methods.TryGetValue(methodName, out method_info))
+				GetMethods();
+				if (_methods.TryGetValue(methodName, out MethodInfo? method_info))
 				{
 					return method_info;
 				}
@@ -939,11 +909,10 @@ namespace Lotus
 			/// <param name="methodName">Имя метода</param>
 			/// <returns>Тип возвращаемого значения метода или null если метода с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Type GetMethodReturnType(String methodName)
+			public Type? GetMethodReturnType(String methodName)
 			{
-				if (_methods == null) GetMethods();
-				MethodInfo method_info;
-				if (_methods.TryGetValue(methodName, out method_info))
+				GetMethods();
+				if (_methods.TryGetValue(methodName, out MethodInfo? method_info))
 				{
 					return method_info.ReturnType;
 				}
@@ -956,18 +925,17 @@ namespace Lotus
 			/// Получение имени типа возвращаемого значения метода по имени
 			/// </summary>
 			/// <param name="methodName">Имя метода</param>
-			/// <returns>Имя типа возвращаемого значения метода или null если метода с таким именем не оказалось</returns>
+			/// <returns>Имя типа возвращаемого значения метода или пустая строка если метода с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public String GetMethodReturnTypeName(String methodName)
 			{
-				if (_methods == null) GetMethods();
-				MethodInfo method_info;
-				if (_methods.TryGetValue(methodName, out method_info))
+				GetMethods();
+				if (_methods.TryGetValue(methodName, out MethodInfo? method_info))
 				{
 					return method_info.ReturnType.Name;
 				}
 
-				return "";
+				return String.Empty;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -981,7 +949,7 @@ namespace Lotus
 			{
 				var methods = new List<MethodInfo>();
 
-				if (_methods == null) GetMethods();
+				GetMethods();
 				foreach (var method_info in _methods.Values)
 				{
 					if (Attribute.IsDefined(method_info, typeof(TAttribute)))
@@ -1001,11 +969,10 @@ namespace Lotus
 			/// <param name="methodName">Имя метода</param>
 			/// <returns>Атрибут метода или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TAttribute GetAttributeFromMethod<TAttribute>(String methodName) where TAttribute : System.Attribute
+			public TAttribute? GetAttributeFromMethod<TAttribute>(String methodName) where TAttribute : System.Attribute
 			{
-				if (_methods == null) GetMethods();
-				MethodInfo method_info;
-				if (_methods.TryGetValue(methodName, out method_info))
+				GetMethods();
+				if (_methods.TryGetValue(methodName, out MethodInfo? method_info))
 				{
 					if (Attribute.IsDefined(method_info, typeof(TAttribute)))
 					{
@@ -1024,11 +991,10 @@ namespace Lotus
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <returns>Значение метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object InvokeMethod(String methodName, System.Object instance)
+			public System.Object? InvokeMethod(String methodName, System.Object? instance)
 			{
-				if (_methods == null) GetMethods();
-				MethodInfo method_info;
-				if (_methods.TryGetValue(methodName, out method_info))
+				GetMethods();
+				if (_methods.TryGetValue(methodName, out MethodInfo? method_info))
 				{
 					if (method_info.IsStatic)
 					{
@@ -1052,12 +1018,11 @@ namespace Lotus
 			/// <param name="arg">Аргумент метода</param>
 			/// <returns>Значение метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object InvokeMethod(String methodName, System.Object instance, System.Object arg)
+			public System.Object? InvokeMethod(String methodName, System.Object? instance, System.Object? arg)
 			{
-				if (_methods == null) GetMethods();
+				GetMethods();
 				ArgList1[0] = arg;
-				MethodInfo method_info;
-				if (_methods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out MethodInfo? method_info))
 				{
 					if (method_info.IsStatic)
 					{
@@ -1082,14 +1047,13 @@ namespace Lotus
 			/// <param name="arg2">Второй аргумент метода</param>
 			/// <returns>Значение метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object InvokeMethod(String methodName, System.Object instance, System.Object arg1,
-				System.Object arg2)
+			public System.Object? InvokeMethod(String methodName, System.Object? instance, System.Object? arg1,
+				System.Object? arg2)
 			{
-				if (_methods == null) GetMethods();
+				GetMethods();
 				ArgList2[0] = arg1;
 				ArgList2[1] = arg2;
-				MethodInfo method_info;
-				if (_methods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out MethodInfo? method_info))
 				{
 					if (method_info.IsStatic)
 					{
@@ -1115,15 +1079,14 @@ namespace Lotus
 			/// <param name="arg3">Третий аргумент метода</param>
 			/// <returns>Значение метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object InvokeMethod(String methodName, System.Object instance, System.Object arg1,
-				System.Object arg2, System.Object arg3)
+			public System.Object? InvokeMethod(String methodName, System.Object? instance, System.Object? arg1,
+				System.Object? arg2, System.Object? arg3)
 			{
-				if (_methods == null) GetMethods();
+				GetMethods();
 				ArgList3[0] = arg1;
 				ArgList3[1] = arg2;
 				ArgList3[3] = arg3;
-				MethodInfo method_info;
-				if (_methods.TryGetValue(methodName, out method_info))
+				if (_methods.TryGetValue(methodName, out MethodInfo? method_info))
 				{
 					if (method_info.IsStatic)
 					{

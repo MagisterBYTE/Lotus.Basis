@@ -36,7 +36,7 @@ namespace Lotus
 #endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal Single mPreviewHeight;
+			internal Single _previewHeight;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -45,8 +45,8 @@ namespace Lotus
 			/// </summary>
 			public Single PreviewHeight
 			{
-				get { return mPreviewHeight; }
-				set { mPreviewHeight = value; }
+				get { return _previewHeight; }
+				set { _previewHeight = value; }
 			}
 			#endregion
 
@@ -58,7 +58,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusPreviewAttribute()
 			{
-				mPreviewHeight = 200;
+				_previewHeight = 200;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusPreviewAttribute(Single previewHeight)
 			{
-				mPreviewHeight = previewHeight;
+				_previewHeight = previewHeight;
 			}
 			#endregion
 		}

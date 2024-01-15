@@ -36,12 +36,12 @@ namespace Lotus
 			/// <param name="serializer">Сериализатор</param>
 			/// <returns>Документ</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TDocument LoadDocument<TDocument>(String title = null, ILotusSerializer serializer = null) where TDocument : ILotusDocument
+			public static TDocument? LoadDocument<TDocument>(String? title = null, ILotusSerializer? serializer = null) where TDocument : ILotusDocument
 			{
 				var file_name = XFileDialog.Open(title != null ? title : "Открыть документ", "", null);
 				if (file_name.IsExists())
 				{
-					TDocument document = default;
+					TDocument? document = default;
 
 					// Если есть сериализатор то используем его
 					if (serializer != null)
@@ -92,9 +92,10 @@ namespace Lotus
 			/// <param name="serializer">Сериализатор</param>
 			/// <returns>Статус</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean LoadDocument<TDocument>(this TDocument document, String title = null, ILotusSerializer serializer = null) where TDocument : ILotusDocument
+			public static Boolean LoadDocument<TDocument>(this TDocument document, String? title = null,
+				ILotusSerializer? serializer = null) where TDocument : ILotusDocument
 			{
-				if(document != null)
+				if (document != null)
 				{
 					var file_name = XFileDialog.Open(title != null ? title : "Открыть документ", "", document.GetFileExtension());
 					if (file_name.IsExists())
@@ -139,7 +140,7 @@ namespace Lotus
 						// Корректируем имя
 						if (document is ILotusNameable nameable)
 						{
-							if(nameable.Name.IsExists() == false)
+							if (nameable.Name.IsExists() == false)
 							{
 								nameable.Name = Path.GetFileNameWithoutExtension(file_name);
 							}
@@ -164,7 +165,7 @@ namespace Lotus
 			/// <param name="serializer">Сериализатор</param>
 			/// <returns>Статус восстановления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RestoreDocument<TDocument>(this TDocument document, ILotusSerializer serializer = null) where TDocument : ILotusDocument
+			public static Boolean RestoreDocument<TDocument>(this TDocument document, ILotusSerializer? serializer = null) where TDocument : ILotusDocument
 			{
 				if (document != null)
 				{
@@ -225,7 +226,8 @@ namespace Lotus
 			/// <param name="serializer">Сериализатор</param>
 			/// <returns>Статус сохранения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SaveDocument<TDocument>(this TDocument document, String title = null, ILotusSerializer serializer = null) where TDocument : ILotusDocument
+			public static Boolean SaveDocument<TDocument>(this TDocument document, String? title = null,
+				ILotusSerializer? serializer = null) where TDocument : ILotusDocument
 			{
 				if (document != null)
 				{
@@ -306,7 +308,8 @@ namespace Lotus
 			/// <param name="serializer">Сериализатор</param>
 			/// <returns>Статус сохранения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean SaveAsDocument<TDocument>(this TDocument document, String title = null, ILotusSerializer serializer = null) where TDocument : ILotusDocument
+			public static Boolean SaveAsDocument<TDocument>(this TDocument document, String? title = null,
+				ILotusSerializer? serializer = null) where TDocument : ILotusDocument
 			{
 				if (document != null)
 				{
@@ -325,7 +328,7 @@ namespace Lotus
 					if (file_name.IsExists())
 					{
 						// Сохраняем документ
-						if(serializer != null)
+						if (serializer != null)
 						{
 							serializer.SaveTo(file_name, document);
 						}

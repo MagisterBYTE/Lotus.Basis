@@ -34,7 +34,7 @@ namespace Lotus
 			/// <param name="model">Модель</param>
 			/// <param name="parentItem">Родительский узел</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ViewModelFileSystemFile(ILotusFileSystemEntity model, ILotusViewModelHierarchy parentItem)
+			public ViewModelFileSystemFile(ILotusFileSystemEntity model, ILotusViewModelHierarchy? parentItem)
 				: base(model, parentItem)
 			{
 				SetContextMenu();

@@ -134,7 +134,7 @@ namespace Lotus
 						// Записываем данные по порядку
 						for (var i = 0; i < primitives.Count; i++)
 						{
-							writer.Write((Int32)(System.Object)primitives[i]);
+							writer.Write((Int32)(System.Object)primitives[i]!);
 						}
 					}
 					else
@@ -153,7 +153,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Boolean)(System.Object)primitives[i]);
+										writer.Write((Boolean)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -162,7 +162,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Char)(System.Object)primitives[i]);
+										writer.Write((Char)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -171,7 +171,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((SByte)(System.Object)primitives[i]);
+										writer.Write((SByte)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -180,7 +180,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Byte)(System.Object)primitives[i]);
+										writer.Write((Byte)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -189,7 +189,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Int16)(System.Object)primitives[i]);
+										writer.Write((Int16)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -198,7 +198,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((UInt16)(System.Object)primitives[i]);
+										writer.Write((UInt16)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -207,7 +207,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Int32)(System.Object)primitives[i]);
+										writer.Write((Int32)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -216,7 +216,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((UInt32)(System.Object)primitives[i]);
+										writer.Write((UInt32)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -225,7 +225,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Int64)(System.Object)primitives[i]);
+										writer.Write((Int64)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -234,7 +234,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((UInt64)(System.Object)primitives[i]);
+										writer.Write((UInt64)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -243,7 +243,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Single)(System.Object)primitives[i]);
+										writer.Write((Single)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -252,7 +252,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Double)(System.Object)primitives[i]);
+										writer.Write((Double)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -261,7 +261,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((Decimal)(System.Object)primitives[i]);
+										writer.Write((Decimal)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -270,7 +270,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((DateTime)(System.Object)primitives[i]);
+										writer.Write((DateTime)(System.Object)primitives[i]!);
 									}
 								}
 								break;
@@ -279,7 +279,7 @@ namespace Lotus
 									// Записываем данные по порядку
 									for (var i = 0; i < primitives.Count; i++)
 									{
-										writer.Write((String)(System.Object)primitives[i]);
+										writer.Write((String)(System.Object)primitives[i]!);
 									}
 								}
 								break;

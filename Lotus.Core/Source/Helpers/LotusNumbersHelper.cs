@@ -182,7 +182,7 @@ namespace Lotus
 				{
 					var c = text[i];
 
-					if(c == '-')
+					if (c == '-')
 					{
 						number.Append(c);
 						continue;

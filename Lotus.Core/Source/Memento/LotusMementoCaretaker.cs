@@ -74,7 +74,7 @@ namespace Lotus
 			/// <summary>
 			/// Объект состояние которого сохраняется и восстанавливается
 			/// </summary>
-			public ILotusMementoOriginator MementoOriginator 
+			public ILotusMementoOriginator MementoOriginator
 			{
 				get { return mOriginator; }
 				set { mOriginator = value; }

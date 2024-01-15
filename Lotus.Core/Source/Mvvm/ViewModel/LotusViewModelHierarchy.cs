@@ -117,7 +117,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="exclude">Исключаемый элемент ViewModel</param>
 			//---------------------------------------------------------------------------------------------------------
-			void UnsetAllSelected(ILotusViewModelHierarchy exclude);
+			void UnsetAllSelected(ILotusViewModelHierarchy? exclude);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -126,7 +126,7 @@ namespace Lotus
 			/// <param name="exclude">Исключаемый элемент ViewModel</param>
 			/// <param name="parameters">Параметры контекста исключения</param>
 			//---------------------------------------------------------------------------------------------------------
-			void UnsetAllPresent(ILotusViewModelHierarchy exclude, CParameters parameters);
+			void UnsetAllPresent(ILotusViewModelHierarchy? exclude, CParameters parameters);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -193,7 +193,7 @@ namespace Lotus
 			/// <param name="owner">Коллекция владелец</param>
 			/// <returns>Элемент ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static ViewModelHierarchy<TModel> Build(TModel model, ILotusViewModelHierarchy parent, ILotusCollectionViewModelHierarchy owner)
+			public static ViewModelHierarchy<TModel> Build(TModel model, ILotusViewModelHierarchy? parent, ILotusCollectionViewModelHierarchy owner)
 			{
 				var node_root_view = new ViewModelHierarchy<TModel>(model, parent);
 				node_root_view.IOwner = owner;
@@ -280,7 +280,7 @@ namespace Lotus
 			/// <param name="owner">Коллекция владелец</param>
 			/// <returns>Элемент ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static ViewModelHierarchy<TModel> BuildFilter(TModel model, ILotusViewModelHierarchy parent,
+			public static ViewModelHierarchy<TModel> BuildFilter(TModel model, ILotusViewModelHierarchy? parent,
 				Predicate<TModel> filter, ILotusCollectionViewModelHierarchy owner)
 			{
 				var node_root_view = new ViewModelHierarchy<TModel>(model, parent);
@@ -391,7 +391,7 @@ namespace Lotus
 			/// <summary>
 			/// Владелец объекта
 			/// </summary>
-			public ILotusOwnerObject IOwner
+			public ILotusOwnerObject? IOwner
 			{
 				get { return _owner; }
 				set { _owner = value as ILotusCollectionViewModelHierarchy; }
@@ -542,7 +542,7 @@ namespace Lotus
 						NotifyPropertyChanged(PropertyArgsIsChecked);
 						RaiseIsCheckedChanged();
 
-						if(_isChecked.HasValue)
+						if (_isChecked.HasValue)
 						{
 							for (var i = 0; i < _count; i++)
 							{
@@ -657,8 +657,9 @@ namespace Lotus
 			/// </summary>
 			/// <param name="model">Модель</param>
 			/// <param name="parentItem">Родительский узел</param>
+			/// <param name="name">Наименование элемента ViewModel</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ViewModelHierarchy(TModel model, ILotusViewModelHierarchy parentItem, String name = "")
+			public ViewModelHierarchy(TModel model, ILotusViewModelHierarchy? parentItem, String name = "")
 			{
 				_parent = parentItem;
 				_model = model;
@@ -831,7 +832,7 @@ namespace Lotus
 			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 				return true;
 			}
@@ -844,7 +845,7 @@ namespace Lotus
 			/// <param name="data">Объект, данные которого изменились</param>
 			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 				if (_owner != null)
 				{
@@ -875,9 +876,9 @@ namespace Lotus
 			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent)
+			public virtual ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy? parent)
 			{
-				return null;
+				throw new NotImplementedException("CreateViewModelHierarchy must be implemented");
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -937,7 +938,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="exclude">Исключаемый элемент ViewModel</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void UnsetAllSelected(ILotusViewModelHierarchy exclude)
+			public virtual void UnsetAllSelected(ILotusViewModelHierarchy? exclude)
 			{
 				if (exclude != null)
 				{
@@ -967,7 +968,7 @@ namespace Lotus
 			/// <param name="exclude">Исключаемый элемент ViewModel</param>
 			/// <param name="parameters">Параметры контекста исключения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void UnsetAllPresent(ILotusViewModelHierarchy exclude, CParameters parameters)
+			public virtual void UnsetAllPresent(ILotusViewModelHierarchy? exclude, CParameters? parameters = null)
 			{
 				if (exclude != null)
 				{
@@ -1037,7 +1038,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void BuildFromModel()
 			{
-				
+
 			}
 			#endregion
 
@@ -1066,7 +1067,7 @@ namespace Lotus
 					view_item_owner.OwnerViewModel = this;
 				}
 
-				if(_model is INotifyCollectionChanged collection_changed)
+				if (_model is INotifyCollectionChanged collection_changed)
 				{
 					collection_changed.CollectionChanged += OnCollectionChangedHandler;
 				}
@@ -1094,14 +1095,14 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//-------------------------------------------------------------------------------------------------------------
-			private void OnCollectionChangedHandler(Object sender, NotifyCollectionChangedEventArgs args)
+			private void OnCollectionChangedHandler(Object? sender, NotifyCollectionChangedEventArgs args)
 			{
 				switch (args.Action)
 				{
 					case NotifyCollectionChangedAction.Add:
 						{
-							IList new_models = args.NewItems;
-							if(new_models != null && new_models.Count > 0)
+							IList? new_models = args.NewItems;
+							if (new_models != null && new_models.Count > 0)
 							{
 								for (var i = 0; i < new_models.Count; i++)
 								{
@@ -1109,7 +1110,7 @@ namespace Lotus
 									var is_dublicate = false;
 									for (var j = 0; j < Count; j++)
 									{
-										if(_arrayOfItems[j].Model == new_models[i])
+										if (_arrayOfItems[j].Model == new_models[i])
 										{
 											is_dublicate = true;
 											break;
@@ -1118,8 +1119,8 @@ namespace Lotus
 
 									if (is_dublicate == false)
 									{
-										var model = (TModel)new_models[i];
-										ILotusViewModelHierarchy view_model = this.CreateViewModelHierarchy(model, null);
+										var model = new_models[i] as TModel;
+										ILotusViewModelHierarchy view_model = this.CreateViewModelHierarchy(model!, null);
 										view_model.IOwner = this.IOwner;
 										view_model.IParent = this;
 
@@ -1136,17 +1137,17 @@ namespace Lotus
 						break;
 					case NotifyCollectionChangedAction.Remove:
 						{
-							IList old_models = args.OldItems;
-							if(old_models != null && old_models.Count > 0)
+							IList? old_models = args.OldItems;
+							if (old_models != null && old_models.Count > 0)
 							{
 								for (var i = 0; i < old_models.Count; i++)
 								{
-									var model = (TModel)old_models[i];
+									var model = old_models[i] as TModel;
 
 									// Находим элемент с данным контекстом
-									ILotusViewModelHierarchy view_model = this.Search((item) =>
+									ILotusViewModelHierarchy? view_model = this.Search((item) =>
 									{
-										if(Object.ReferenceEquals(item.Model, model))
+										if (Object.ReferenceEquals(item.Model, model))
 										{
 											return true;
 										}
@@ -1156,7 +1157,7 @@ namespace Lotus
 										}
 									});
 
-									if(view_model != null)
+									if (view_model != null)
 									{
 										this.Remove(view_model);
 									}

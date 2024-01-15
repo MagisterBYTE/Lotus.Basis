@@ -13,10 +13,10 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -199,7 +199,7 @@ namespace Lotus
 				/// <param name="y">Второй объект</param>
 				/// <returns>Статус сравнения</returns>
 				//-----------------------------------------------------------------------------------------------------
-				public Int32 Compare(TViewModel x, TViewModel y)
+				public Int32 Compare(TViewModel? x, TViewModel? y)
 				{
 					return ComprareOfAscending(x, y);
 				}
@@ -225,10 +225,10 @@ namespace Lotus
 				/// <param name="y">Второй объект</param>
 				/// <returns>Статус сравнения</returns>
 				//-----------------------------------------------------------------------------------------------------
-				public Int32 Compare(TViewModel x, TViewModel y)
+				public Int32 Compare(TViewModel? x, TViewModel? y)
 				{
 					var result = ComprareOfAscending(x, y);
-					if(result == 1)
+					if (result == 1)
 					{
 						return -1;
 					}
@@ -298,7 +298,7 @@ namespace Lotus
 			/// <param name="right">Второй объект</param>
 			/// <returns>Статус сравнения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 ComprareOfAscending(TViewModel left, TViewModel right)
+			public static Int32 ComprareOfAscending(TViewModel? left, TViewModel? right)
 			{
 				if (left == null)
 				{
@@ -359,7 +359,7 @@ namespace Lotus
 
 			// Параметры фильтрации
 			protected internal Boolean _isFiltered;
-			protected internal Predicate<TModel> mFilter;
+			protected internal Predicate<TModel> _filter;
 
 			// Параметры сортировки
 			protected internal Boolean _isSorted;
@@ -420,7 +420,7 @@ namespace Lotus
 			/// <summary>
 			/// Список элементов ViewModel
 			/// </summary>
-			public IList IViewModels 
+			public IList IViewModels
 			{
 				get { return this; }
 			}
@@ -428,7 +428,7 @@ namespace Lotus
 			/// <summary>
 			/// Количество элементов ViewModel
 			/// </summary>
-			public Int32 CountViewModels 
+			public Int32 CountViewModels
 			{
 				get { return _count; }
 			}
@@ -527,7 +527,7 @@ namespace Lotus
 			/// <summary>
 			/// Статус фильтрации коллекции
 			/// </summary>
-			public Boolean IsFiltered 
+			public Boolean IsFiltered
 			{
 				get { return _isFiltered; }
 				set
@@ -545,14 +545,14 @@ namespace Lotus
 			{
 				get
 				{
-					return mFilter;
+					return _filter;
 				}
 				set
 				{
-					if(mFilter == null || mFilter != value)
+					if (_filter == null || _filter != value)
 					{
-						mFilter = value;
-						if (mFilter != null)
+						_filter = value;
+						if (_filter != null)
 						{
 							_isFiltered = true;
 							NotifyPropertyChanged(PropertyArgsIsFiltered);
@@ -574,7 +574,7 @@ namespace Lotus
 			/// <summary>
 			/// Статус сортировки коллекции
 			/// </summary>
-			public Boolean IsSorted 
+			public Boolean IsSorted
 			{
 				get { return _isSorted; }
 				set
@@ -842,7 +842,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected virtual void RaiseIsFilteredChanged()
 			{
-				if(_isFiltered && mFilter != null)
+				if (_isFiltered && _filter != null)
 				{
 					ResetSource();
 				}
@@ -859,8 +859,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual ILotusViewModel CreateViewModel(System.Object model)
 			{
-				return null;
-			}
+                throw new NotImplementedException("CreateViewModel must be implemented");
+            }
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -1030,7 +1030,7 @@ namespace Lotus
 			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 				return true;
 			}
@@ -1043,7 +1043,7 @@ namespace Lotus
 			/// <param name="data">Объект, данные которого изменились</param>
 			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 			}
 			#endregion
@@ -1067,7 +1067,7 @@ namespace Lotus
 				_isFixedSize = list.IsFixedSize;
 
 				// Смотрим статус фильта
-				if (mFilter != null && _isFiltered == true)
+				if (_filter != null && _isFiltered == true)
 				{
 					for (var i = 0; i < list.Count; i++)
 					{
@@ -1075,7 +1075,7 @@ namespace Lotus
 						if (list[i] is TModel model)
 						{
 							// И проходит условия фильтрации
-							if (mFilter(model))
+							if (_filter(model))
 							{
 								var view_model = CreateViewModel(model);
 								view_model.IOwner = this;
@@ -1120,7 +1120,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ResetSource()
 			{
-				if(_source == null)
+				if (_source == null)
 				{
 					if (_count > 0)
 					{
@@ -1131,7 +1131,7 @@ namespace Lotus
 					_isFixedSize = false;
 				}
 
-				if(_source is IList list)
+				if (_source is IList list)
 				{
 					CreateFromList(list);
 				}
@@ -1175,7 +1175,7 @@ namespace Lotus
 					{
 						if (IsSupportModelSelected)
 						{
-							if(_arrayOfItems[_selectedIndex].Model is ILotusModelSelected selected_item)
+							if (_arrayOfItems[_selectedIndex].Model is ILotusModelSelected selected_item)
 							{
 								selected_item.SetModelSelected(_arrayOfItems[_selectedIndex], false);
 							}
@@ -1272,7 +1272,7 @@ namespace Lotus
 								// Если нет мульти выбора
 								if (IsSupportModelSelected && _isEnabledUnselectingItem)
 								{
-									if(_arrayOfItems[_prevSelectedIndex].Model is ILotusModelSelected prev_selected_item)
+									if (_arrayOfItems[_prevSelectedIndex].Model is ILotusModelSelected prev_selected_item)
 									{
 										prev_selected_item.SetModelSelected(_arrayOfItems[_prevSelectedIndex], false);
 									}
@@ -1443,13 +1443,13 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected virtual void OnCollectionChangedHandler(Object sender, NotifyCollectionChangedEventArgs args)
+			protected virtual void OnCollectionChangedHandler(Object? sender, NotifyCollectionChangedEventArgs args)
 			{
 				switch (args.Action)
 				{
 					case NotifyCollectionChangedAction.Add:
 						{
-							IList new_models = args.NewItems;
+							IList? new_models = args.NewItems;
 							if (new_models != null && new_models.Count > 0)
 							{
 								for (var i = 0; i < new_models.Count; i++)
@@ -1467,8 +1467,8 @@ namespace Lotus
 
 									if (is_dublicate == false)
 									{
-										var model = (TModel)new_models[i];
-										var view_model = CreateViewModel(model);
+										var model = new_models[i] as TModel;
+										var view_model = CreateViewModel(model!);
 										view_model.IOwner = this;
 
 										if (model is ILotusViewModelOwner view_item_owner)
@@ -1492,15 +1492,15 @@ namespace Lotus
 						break;
 					case NotifyCollectionChangedAction.Remove:
 						{
-							IList old_models = args.OldItems;
+							IList? old_models = args.OldItems;
 							if (old_models != null && old_models.Count > 0)
 							{
 								for (var i = 0; i < old_models.Count; i++)
 								{
-									var model = (TModel)old_models[i];
+									var model = old_models[i] as TModel;
 
 									// Находим элемент с данным контекстом
-									ILotusViewModel view_model = this.Search((item) =>
+									ILotusViewModel? view_model = this.Search((item) =>
 									{
 										if (Object.ReferenceEquals(item.Model, model))
 										{

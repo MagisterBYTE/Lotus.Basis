@@ -14,8 +14,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -40,7 +40,7 @@ namespace Lotus
 			/// <param name="this">Коллекция</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TItem RandomElement<TItem>(this IEnumerable<TItem> @this)
+			public static TItem? RandomElement<TItem>(this IEnumerable<TItem> @this)
 			{
 				var count = @this.Count();
 
@@ -101,7 +101,8 @@ namespace Lotus
 			{
 				foreach (var item in @this)
 				{
-					onOutputItem(item.ToString());
+					string print = item?.ToString() ?? "null";
+                    onOutputItem(print);
 				}
 			}
 
@@ -268,7 +269,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента списка</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetAt(this IList @this, Int32 index)
+			public static System.Object? GetAt(this IList @this, Int32 index)
 			{
 				if (index >= @this.Count)
 				{
@@ -297,7 +298,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента списка</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetLoopedObject(this IList @this, Int32 index)
+			public static System.Object? GetLoopedObject(this IList @this, Int32 index)
 			{
 				while (index < 0)
 				{
@@ -465,7 +466,7 @@ namespace Lotus
 				{
 					for (var i = 0; i < @this.Count; i++)
 					{
-						if (@this[i].Equals(element))
+						if (@this[i]!.Equals(element))
 						{
 							return i;
 						}
@@ -502,7 +503,7 @@ namespace Lotus
 					{
 						for (var j = i + 1; j < @this.Count; j++)
 						{
-							if (@this[i].Equals(@this[j]))
+							if (@this[i]!.Equals(@this[j]))
 							{
 								return false;
 							}
@@ -541,7 +542,7 @@ namespace Lotus
 				{
 					for (var i = 0; i < @this.Count; i++)
 					{
-						if (@this[i].Equals(element))
+						if (@this[i]!.Equals(element))
 						{
 							return i;
 						}
@@ -580,7 +581,7 @@ namespace Lotus
 				{
 					for (var i = 0; i < @this.Count; i++)
 					{
-						if (!@this[i].Equals(other[i]))
+						if (!@this[i]!.Equals(other[i]))
 						{
 							return false;
 						}
@@ -715,7 +716,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 GetNearestIndex(this IList<Single> @this, Single value)
 			{
-				if(value <= @this[0])
+				if (value <= @this[0])
 				{
 					return 0;
 				}
@@ -726,11 +727,11 @@ namespace Lotus
 
 				for (var i = 0; i < @this.Count; i++)
 				{
-					if(value < @this[i])
+					if (value < @this[i])
 					{
 						var prev_delta = Math.Abs(value - @this[i - 1]);
 						var curr_delta = Math.Abs(@this[i] - value);
-						if(prev_delta < curr_delta)
+						if (prev_delta < curr_delta)
 						{
 							return i - 1;
 						}
@@ -919,7 +920,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void SetAt<TItem>(this TItem[] @this, Int32 index, TItem element)
 			{
-				if(index >= @this.Length)
+				if (index >= @this.Length)
 				{
 					Array.Resize(ref @this, index + 1);
 					@this[index] = element;
@@ -1054,14 +1055,14 @@ namespace Lotus
 			/// <param name="index">Индекс элемента списка</param>
 			/// <param name="element">Элемент списка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SetAt<TItem>(this List<TItem> @this, Int32 index, in TItem element)
+			public static void SetAt<TItem>(this List<TItem> @this, Int32 index, in TItem? element)
 			{
 				if (index >= @this.Count)
 				{
 					var delta = index - @this.Count + 1;
 					for (var i = 0; i < delta; i++)
 					{
-						@this.Add(default(TItem));
+						@this.Add(default(TItem)!);
 					}
 
 					@this[index] = element;
@@ -1084,14 +1085,14 @@ namespace Lotus
 			/// <param name="index">Индекс элемента списка</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TItem GetAt<TItem>(this List<TItem> @this, Int32 index)
+			public static TItem? GetAt<TItem>(this List<TItem> @this, Int32 index)
 			{
 				if (index >= @this.Count)
 				{
 					if (@this.Count == 0)
 					{
 						// Создаем объект по умолчанию
-						@this.Add(default(TItem));
+						@this.Add(default(TItem)!);
 						return @this[0];
 					}
 					else
@@ -1113,7 +1114,7 @@ namespace Lotus
 			/// <param name="this">Список</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static List<TItem> SortDescending<TItem>(this List<TItem> @this)
+			public static List<TItem>? SortDescending<TItem>(this List<TItem> @this)
 			{
 				@this.Sort();
 				@this.Reverse();
@@ -1214,8 +1215,10 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> @this, in TKey key, TValue defaultValue) where TValue : struct
-			{
+			public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> @this, in TKey key, TValue defaultValue) 
+				where TValue : struct
+                where TKey : notnull
+            {
 				TValue result;
 				if (!@this.TryGetValue(key, out result))
 				{
@@ -1234,9 +1237,11 @@ namespace Lotus
 			/// <param name="key">Ключ</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TValue Get<TKey, TValue>(this Dictionary<TKey, TValue> @this, in TKey key) where TValue : new()
-			{
-				TValue result;
+			public static TValue? Get<TKey, TValue>(this Dictionary<TKey, TValue> @this, in TKey key) 
+				where TValue : new()
+                where TKey : notnull
+            {
+				TValue? result;
 				if (!@this.TryGetValue(key, out result))
 				{
 					@this[key] = result = new TValue();

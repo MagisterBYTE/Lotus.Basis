@@ -97,7 +97,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextLine(String str)
 			{
-				mRawString = str;
+				_rawString = str;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextLine(String prefix, Char symbol, Int32 totalLength)
 			{
-				mRawString = prefix + new String(symbol, totalLength - prefix.Length);
+				_rawString = prefix + new String(symbol, totalLength - prefix.Length);
 			}
 			#endregion
 
@@ -122,9 +122,9 @@ namespace Lotus
 			/// <param name="other">Строка</param>
 			/// <returns>Статус сравнения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CTextLine other)
+			public Int32 CompareTo(CTextLine? other)
 			{
-				return mRawString.CompareTo(other.mRawString);
+				return _rawString.CompareTo(other?._rawString);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры дублирования объекта</param>
 			/// <returns>Дубликат объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CTextLine Duplicate(CParameters parameters = null)
+			public CTextLine Duplicate(CParameters? parameters = null)
 			{
 				return new CTextLine(this.RawString);
 			}
@@ -151,7 +151,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CTextLine operator +(CTextLine left, CTextLine right)
 			{
-				return new CTextLine(left.mRawString + right.mRawString);
+				return new CTextLine(left._rawString + right._rawString);
 			}
 			#endregion
 

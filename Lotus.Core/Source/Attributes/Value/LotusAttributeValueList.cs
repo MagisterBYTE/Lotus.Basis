@@ -39,7 +39,7 @@ namespace Lotus
 			internal readonly System.Object _listValues;
 			internal readonly String _memberName;
 			internal readonly TInspectorMemberType _memberType;
-			internal String _formatMethodName;
+			internal String _formatMethodName = "";
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================

@@ -67,7 +67,7 @@ namespace Lotus
 			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName);
+			Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object? data, String dataName);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -77,7 +77,7 @@ namespace Lotus
 			/// <param name="data">Объект, данные которого изменились</param>
 			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName);
+			void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object? data, String dataName);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ namespace Lotus
 			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 				return true;
 			}
@@ -160,7 +160,7 @@ namespace Lotus
 			/// <param name="data">Объект, данные которого изменились</param>
 			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 
 			}
@@ -177,7 +177,7 @@ namespace Lotus
 			/// <summary>
 			/// Владелец объекта
 			/// </summary>
-			ILotusOwnerObject IOwner { get; set; }
+			ILotusOwnerObject? IOwner { get; set; }
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -195,7 +195,7 @@ namespace Lotus
 			/// <summary>
 			/// Владелец объекта
 			/// </summary>
-			public ILotusOwnerObject IOwner 
+			public ILotusOwnerObject? IOwner 
 			{
 				get { return _owner; } 
 				set
@@ -262,12 +262,12 @@ namespace Lotus
 			/// <summary>
 			/// Владелец объекта
 			/// </summary>
-			public ILotusOwnerObject IOwner
+			public ILotusOwnerObject? IOwner
 			{
 				get { return _owner; }
 				set
 				{
-					_owner = (TOwner)value;
+					_owner = value == null ? default : (TOwner)value;
 					RaiseOwnerObjectChanged();
 				}
 			}

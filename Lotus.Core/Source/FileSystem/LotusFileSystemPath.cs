@@ -13,7 +13,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Collections.Generic;
 using System.IO;
 //=====================================================================================================================
 namespace Lotus
@@ -40,9 +39,9 @@ namespace Lotus
 			public const String TXT = "txt";
 
 			/// <summary>
-			/// Расширение текстового файла
+			/// Расширение текстового файла с начальной точкой
 			/// </summary>
-			public const String TXTD = ".txt";
+			public const String TXT_D = ".txt";
 
 			/// <summary>
 			/// Расширение XML файла
@@ -50,9 +49,9 @@ namespace Lotus
 			public const String XML = "xml";
 
 			/// <summary>
-			/// Расширение XML файла
+			/// Расширение XML файла с начальной точкой
 			/// </summary>
-			public const String XMLD = ".xml";
+			public const String XML_D = ".xml";
 
 			/// <summary>
 			/// Расширение JSON файла
@@ -60,9 +59,9 @@ namespace Lotus
 			public const String JSON = "json";
 
 			/// <summary>
-			/// Расширение JSON файла
+			/// Расширение JSON файла с начальной точкой
 			/// </summary>
-			public const String JSOND = ".json";
+			public const String JSON_D = ".json";
 
 			/// <summary>
 			/// Расширение файла Lua скрипта
@@ -70,9 +69,9 @@ namespace Lotus
 			public const String LUA = "lua";
 
 			/// <summary>
-			/// Расширение файла Lua скрипта
+			/// Расширение файла Lua скрипта с начальной точкой
 			/// </summary>
-			public const String LUAD = ".lua";
+			public const String LUA_D = ".lua";
 
 			/// <summary>
 			/// Стандартное расширение файла с бинарными данными
@@ -80,9 +79,9 @@ namespace Lotus
 			public const String BIN = "bin";
 
 			/// <summary>
-			/// Стандартное расширение файла с бинарными данными
+			/// Стандартное расширение файла с бинарными данными с начальной точкой
 			/// </summary>
-			public const String BIND = ".bin";
+			public const String BIN_D = ".bin";
 
 			/// <summary>
 			/// Расширение файла с бинарными данными для TextAsset
@@ -90,9 +89,9 @@ namespace Lotus
 			public const String BYTES = "bytes";
 
 			/// <summary>
-			/// Расширение файла с бинарными данными для TextAsset
+			/// Расширение файла с бинарными данными для TextAsset с начальной точкой
 			/// </summary>
-			public const String BYTESD = ".bytes";
+			public const String BYTES_D = ".bytes";
 			#endregion
 
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
@@ -106,7 +105,7 @@ namespace Lotus
 			public static Boolean IsTextFileName(String fileName)
 			{
 				var exe = Path.GetExtension(fileName).ToLower();
-				if(exe == TXTD)
+				if (exe == TXT_D)
 				{
 					return true;
 				}
@@ -124,7 +123,7 @@ namespace Lotus
 			public static Boolean IsBinaryFileName(String fileName)
 			{
 				var exe = Path.GetExtension(fileName).ToLower();
-				if (exe == BIND || exe == BYTESD)
+				if (exe == BIN_D || exe == BYTES_D)
 				{
 					return true;
 				}
@@ -142,7 +141,7 @@ namespace Lotus
 			public static Boolean IsXmlFileName(String fileName)
 			{
 				var exe = Path.GetExtension(fileName).ToLower();
-				if (exe == XMLD)
+				if (exe == XML_D)
 				{
 					return true;
 				}
@@ -160,7 +159,7 @@ namespace Lotus
 			public static Boolean IsJSONFileName(String fileName)
 			{
 				var exe = Path.GetExtension(fileName).ToLower();
-				if (exe == JSOND)
+				if (exe == JSON_D)
 				{
 					return true;
 				}
@@ -199,7 +198,7 @@ namespace Lotus
 #endif
 
 				var result = "";
-				if(fileName.IndexOf(Path.DirectorySeparatorChar) > -1 || fileName.IndexOf(Path.AltDirectorySeparatorChar) > -1)
+				if (fileName.IndexOf(Path.DirectorySeparatorChar) > -1 || fileName.IndexOf(Path.AltDirectorySeparatorChar) > -1)
 				{
 #if UNITY_2017_1_OR_NEWER
 					if(fileName.Contains(XCoreSettings.ASSETS_PATH))
@@ -219,7 +218,7 @@ namespace Lotus
 					result = Path.Combine(path, fileName);
 				}
 
-				if(Path.HasExtension(result) == false)
+				if (Path.HasExtension(result) == false)
 				{
 					if (ext[0] != XChar.Dot)
 					{
@@ -256,11 +255,11 @@ namespace Lotus
 				var result = "";
 				if (Path.HasExtension(newFileName))
 				{
-					result = Path.Combine(dir, newFileName);
+					result = Path.Combine(dir ?? String.Empty, newFileName);
 				}
 				else
 				{
-					result = Path.Combine(dir, newFileName + exe);
+					result = Path.Combine(dir ?? String.Empty, newFileName + exe);
 				}
 
 #if UNITY_2017_1_OR_NEWER
@@ -284,7 +283,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean CheckCorrectFileName(String fileName)
 			{
-				if(String.IsNullOrEmpty(fileName))
+				if (String.IsNullOrEmpty(fileName))
 				{
 					return false;
 				}

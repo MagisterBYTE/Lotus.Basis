@@ -33,7 +33,7 @@ namespace Lotus
 #endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal String mEventMethodName;
+			internal String _eventMethodName;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -45,8 +45,8 @@ namespace Lotus
 			/// </remarks>
 			public String EventMethodName
 			{
-				get { return mEventMethodName; }
-				set { mEventMethodName = value; }
+				get { return _eventMethodName; }
+				set { _eventMethodName = value; }
 			}
 			#endregion
 
@@ -59,7 +59,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusEventValueChangedAttribute(String eventMethodName)
 			{
-				mEventMethodName = eventMethodName;
+				_eventMethodName = eventMethodName;
 			}
 			#endregion
 		}

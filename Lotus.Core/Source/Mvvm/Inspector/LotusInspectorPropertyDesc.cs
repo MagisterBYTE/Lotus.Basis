@@ -57,7 +57,8 @@ namespace Lotus
 			/// <param name="description">Описание свойства</param>
 			/// <returns>Описатель свойств</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CPropertyDesc OverrideDisplayNameAndDescription<TType>(String propertyName, String displayName, String description = null)
+			public static CPropertyDesc OverrideDisplayNameAndDescription<TType>(String propertyName, String displayName, 
+				String? description = null)
 			{
 				var property_desc = new CPropertyDesc();
 
@@ -223,19 +224,18 @@ namespace Lotus
 			/// <param name="instance"></param>
 			/// <returns>Экземпляр объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetValue(System.Object declareValue, String memberName, TInspectorMemberType memberType, 
-				System.Object instance = null)
+			public static System.Object? GetValue(System.Object declareValue, String memberName, TInspectorMemberType memberType, 
+				System.Object? instance = null)
 			{
-				System.Object result = null;
+				System.Object? result = null;
 
 				// Проверяем непосредственного значение
 				if (declareValue != null)
 				{
 					// 1) Задан как статические данные
-					if(declareValue is Type && memberName.IsExists())
+					if(declareValue is Type type && memberName.IsExists())
 					{
 						// Получаем тип
-						var type = declareValue as Type;
 						switch (memberType)
 						{
 							case TInspectorMemberType.Field:
@@ -257,32 +257,30 @@ namespace Lotus
 					else
 					{
 						// 2) Это может быть метаданные поля 
-						if (declareValue is FieldInfo)
+						if (declareValue is FieldInfo fieldInfo)
 						{
-							var field_info = declareValue as FieldInfo;
-							if(field_info.IsStatic)
+							if(fieldInfo.IsStatic)
 							{
-								result = field_info.GetValue(null);
+								result = fieldInfo.GetValue(null);
 							}
 							else
 							{
-								result = field_info.GetValue(instance);
+								result = fieldInfo.GetValue(instance);
 							}
 
 							return result;
 						}
 
 						// 3) Это может быть метаданные свойства
-						if (declareValue is PropertyInfo)
+						if (declareValue is PropertyInfo propertyInfo)
 						{
-							var property_info = declareValue as PropertyInfo;
-							if (property_info.IsStatic())
+							if (propertyInfo.IsStatic())
 							{
-								result = property_info.GetValue(null, null);
+								result = propertyInfo.GetValue(null, null);
 							}
 							else
 							{
-								result = property_info.GetValue(instance, null);
+								result = propertyInfo.GetValue(instance, null);
 							}
 
 							return result;
@@ -305,7 +303,9 @@ namespace Lotus
 					else
 					{
 						// Задано только имя члена данных, используем экземпляр объекта
-						switch (memberType)
+						if(instance == null) return result;
+
+                        switch (memberType)
 						{
 							case TInspectorMemberType.Field:
 								{
@@ -506,8 +506,10 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус сравнения объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CPropertyDesc other)
+			public Int32 CompareTo(CPropertyDesc? other)
 			{
+				if (other == null) return 0;
+
 				return DisplayName.CompareTo(other.DisplayName);
 			}
 

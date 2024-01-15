@@ -12,8 +12,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -75,7 +73,7 @@ namespace Lotus
 			protected internal String _name;
 			protected internal PoolManager<CMessageArgs> _messageArgsPools;
 			protected internal ListArray<ILotusMessageHandler> _messageHandlers;
-			protected internal QueueArray<CMessageArgs> mQueueMessages;
+			protected internal QueueArray<CMessageArgs> _queueMessages;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -109,7 +107,7 @@ namespace Lotus
 			/// </summary>
 			public QueueArray<CMessageArgs> QueueMessages
 			{
-				get { return mQueueMessages; }
+				get { return _queueMessages; }
 			}
 			#endregion
 
@@ -120,7 +118,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public CPublisher()
-				: this("")
+				: this(String.Empty)
 			{
 			}
 
@@ -135,7 +133,7 @@ namespace Lotus
 				_name = name;
 				_messageArgsPools = new PoolManager<CMessageArgs>(100, ConstructorMessageArgs);
 				_messageHandlers = new ListArray<ILotusMessageHandler>(10);
-				mQueueMessages = new QueueArray<CMessageArgs>(100);
+				_queueMessages = new QueueArray<CMessageArgs>(100);
 			}
 			#endregion
 
@@ -148,7 +146,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RegisterMessageHandler(ILotusMessageHandler messageHandler)
 			{
-				if(_messageHandlers.Contains(messageHandler) == false)
+				if (_messageHandlers.Contains(messageHandler) == false)
 				{
 					_messageHandlers.Add(in messageHandler);
 				}
@@ -175,13 +173,13 @@ namespace Lotus
 			public void OnUpdate()
 			{
 				// Если у нас есть обработчики и сообщения
-				if (_messageHandlers.Count > 0 && mQueueMessages.Count > 0)
+				if (_messageHandlers.Count > 0 && _queueMessages.Count > 0)
 				{
 					// Перебираем все сообщения
-					while (mQueueMessages.Count != 0)
+					while (_queueMessages.Count != 0)
 					{
 						// Выталкиваем сообщения
-						CMessageArgs message = mQueueMessages.Dequeue();
+						CMessageArgs message = _queueMessages.Dequeue()!;
 
 						for (var i = 0; i < _messageHandlers.Count; i++)
 						{
@@ -217,7 +215,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SendMessage(CMessageArgs message)
 			{
-				mQueueMessages.Enqueue(message);
+				_queueMessages.Enqueue(message);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -234,7 +232,7 @@ namespace Lotus
 				message.Name = name;
 				message.Data = data;
 				message.Sender = sender;
-				mQueueMessages.Enqueue(message);
+				_queueMessages.Enqueue(message);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -251,7 +249,7 @@ namespace Lotus
 				message.Id = id;
 				message.Data = data;
 				message.Sender = sender;
-				mQueueMessages.Enqueue(message);
+				_queueMessages.Enqueue(message);
 			}
 			#endregion
 		}

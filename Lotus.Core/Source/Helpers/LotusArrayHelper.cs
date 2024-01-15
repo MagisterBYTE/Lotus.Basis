@@ -63,7 +63,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TType[] Add<TType>(TType[] array, ref Int32 currentCount, in TType item)
 			{
-				if(currentCount == array.Length)
+				if (currentCount == array.Length)
 				{
 					Array.Resize(ref array, currentCount << 1);
 				}
@@ -85,7 +85,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TType[] AddRange<TType>(TType[] array, ref Int32 currentCount, params TType[] items)
 			{
-				if(array.Length < currentCount + items.Length)
+				if (array.Length < currentCount + items.Length)
 				{
 					var max_size = currentCount + items.Length;
 					var new_arary = new TType[max_size];

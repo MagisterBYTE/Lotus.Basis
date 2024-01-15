@@ -194,8 +194,8 @@ namespace Lotus
 			public TValueType ValueType
 			{
 				get { return _valueType; }
-				set 
-				{ 
+				set
+				{
 					_valueType = value;
 					if (_owner != null) _owner.OnNotifyUpdated(this, _valueType, nameof(ValueType));
 				}
@@ -271,7 +271,7 @@ namespace Lotus
 			/// <remarks>
 			/// Имя реального типа сохраняется в поле <see cref="_stringData"/>
 			/// </remarks>
-			public Enum EnumValue
+			public Enum? EnumValue
 			{
 				get
 				{
@@ -288,7 +288,7 @@ namespace Lotus
 				{
 					_referenceData = value;
 					_valueType = TValueType.Enum;
-					if(_referenceData != null)
+					if (_referenceData != null)
 					{
 						_stringData = _referenceData.GetType().Name;
 					}
@@ -581,12 +581,12 @@ namespace Lotus
 			/// <summary>
 			/// Владелец
 			/// </summary>
-			public ILotusOwnerObject IOwner
+			public ILotusOwnerObject? IOwner
 			{
 				get { return _owner; }
-				set 
-				{ 
-					_owner = value; 
+				set
+				{
+					_owner = value;
 				}
 			}
 			#endregion
@@ -616,7 +616,7 @@ namespace Lotus
 				Set(obj);
 			}
 			#endregion
-		
+
 			#region ======================================= СИСТЕМНЫЕ МЕТОДЫ ==========================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -625,10 +625,12 @@ namespace Lotus
 			/// <param name="other">Объект универсального типа данных</param>
 			/// <returns>Статус сравнения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CVariant other)
+			public Int32 CompareTo(CVariant? other)
 			{
+				if (other == null) return 0;
+
 				var result = 0;
- 				switch (_valueType)
+				switch (_valueType)
 				{
 					case TValueType.Void:
 						break;
@@ -726,7 +728,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Текстовое представление</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override String? ToString()
 			{
 				var result = "";
 				switch (_valueType)
@@ -811,7 +813,7 @@ namespace Lotus
 			/// <param name="format">Формат отображения</param>
 			/// <returns>Текстовое представление</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String ToString(String format)
+			public String? ToString(String format)
 			{
 				var result = "";
 				switch (_valueType)
@@ -1204,7 +1206,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object Get()
+			public System.Object? Get()
 			{
 				switch (_valueType)
 				{
@@ -1303,7 +1305,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String GetAsString()
+			public String? GetAsString()
 			{
 				switch (_valueType)
 				{
@@ -1316,7 +1318,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 							return(_numberData.x == 1).ToString();
 #else
-							return(_numberData.X == 1).ToString();
+							return (_numberData.X == 1).ToString();
 #endif
 						}
 					case TValueType.Integer:
@@ -1329,7 +1331,7 @@ namespace Lotus
 						}
 					case TValueType.Enum:
 						{
-							if(_referenceData != null)
+							if (_referenceData == null)
 							{
 								return "Null";
 							}
@@ -1401,7 +1403,7 @@ namespace Lotus
 						break;
 				}
 
-				if (_referenceData != null)
+				if (_referenceData == null)
 				{
 					return "Null";
 				}

@@ -128,7 +128,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="configs">Конфигурация начальных настроек мира</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CEcsComponentData(CEcsWorldConfigs configs = null)
+			public CEcsComponentData(CEcsWorldConfigs? configs = null)
 			{
 				_components = new SparseSet<TComponent>(24);
 			}

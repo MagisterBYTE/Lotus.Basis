@@ -37,7 +37,7 @@ namespace Lotus
 			/// <summary>
 			/// Маска для шифрования/декодирование
 			/// </summary>
-			public const Byte XORMASK = 0x53;
+			public const Byte XOR_MASK = 0x53;
 			#endregion
 
 			#region ======================================= МЕТОДЫ ====================================================
@@ -53,7 +53,7 @@ namespace Lotus
 				var data = Encoding.UTF8.GetBytes(original);
 				for (var i = 0; i < data.Length; i++)
 				{
-					data[i] = (Byte)(data[i] ^ XORMASK);
+					data[i] = (Byte)(data[i] ^ XOR_MASK);
 				}
 				return Convert.ToBase64String(data);
 			}
@@ -69,7 +69,7 @@ namespace Lotus
 				var data = Convert.FromBase64String(decode);
 				for (var i = 0; i < data.Length; i++)
 				{
-					data[i] = (Byte)(data[i] ^ XORMASK);
+					data[i] = (Byte)(data[i] ^ XOR_MASK);
 				}
 				return Encoding.UTF8.GetString(data);
 			}

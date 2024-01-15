@@ -69,7 +69,7 @@ namespace Lotus
 			/// <param name="this">Дата/время</param>
 			/// <returns>Послезавтрашний день</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static DateTime DayAfterTomorrow(this DateTime @this)
+			public static DateTime? DayAfterTomorrow(this DateTime @this)
 			{
 				return @this + TimeSpan.FromDays(2);
 			}
@@ -112,9 +112,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ToStrDateTime(this DateTime @this)
 			{
-				String result = null;
-
-				result = String.Format("{0}y_{1}m_{2}d_{3}h_{4}m_{5}", @this.Year, @this.Month.ToString("D2"), 
+                String result = String.Format("{0}y_{1}m_{2}d_{3}h_{4}m_{5}", @this.Year, @this.Month.ToString("D2"),
 					@this.Day.ToString("D2"), @this.Hour.ToString("D2"), @this.Minute.ToString("D2"), @this.Second.ToString("D2"));
 
 				return result;
@@ -129,9 +127,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ToStrDateTimeShort(this DateTime @this)
 			{
-				String result = null;
-
-				result = String.Format("{0}_{1}_{2}@{3}_{4}_{5}", (@this.Year - 2000).ToString("D2"), 
+                String result = String.Format("{0}_{1}_{2}@{3}_{4}_{5}", (@this.Year - 2000).ToString("D2"),
 					@this.Month.ToString("D2"), @this.Day.ToString("D2"), @this.Hour.ToString("D2"),
 					@this.Minute.ToString("D2"), @this.Second.ToString("D2"));
 

@@ -12,10 +12,10 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Reflection;
+using System.ComponentModel;
 using System.Globalization;
+using System.Reflection;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -46,7 +46,7 @@ namespace Lotus
 				var values = new List<String>();
 				foreach (FieldInfo fi in enumType.GetFields())
 				{
-					var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+					var dna = Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)) as DescriptionAttribute;
 
 					if (dna != null)
 					{
@@ -74,8 +74,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetDescriptionOrName(Type enumType, Enum enumValue)
 			{
-				FieldInfo fi = enumType.GetField(Enum.GetName(enumType, enumValue));
-				var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+				FieldInfo? fi = enumType.GetField(Enum.GetName(enumType, enumValue) ?? String.Empty);
+
+				if (fi == null) return String.Empty;
+
+				var dna = Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)) as DescriptionAttribute;
+
 				if (dna != null)
 				{
 					return dna.Description;
@@ -96,8 +100,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetAbbreviationOrName(Type enumType, Enum enumValue)
 			{
-				FieldInfo fi = enumType.GetField(Enum.GetName(enumType, enumValue));
-				var abbr = (LotusAbbreviationAttribute)Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute));
+				FieldInfo? fi = enumType.GetField(Enum.GetName(enumType, enumValue) ?? String.Empty);
+
+				if (fi == null) return String.Empty;
+
+				var abbr = Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute)) as LotusAbbreviationAttribute;
 				if (abbr != null)
 				{
 					return abbr.Name;
@@ -120,7 +127,7 @@ namespace Lotus
 			{
 				foreach (FieldInfo fi in enumType.GetFields())
 				{
-					var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+					var dna = Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)) as DescriptionAttribute;
 
 					if ((dna != null) && (value == dna.Description))
 					{
@@ -143,7 +150,7 @@ namespace Lotus
 			{
 				foreach (FieldInfo fi in enumType.GetFields())
 				{
-					var abbr = (LotusAbbreviationAttribute)Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute));
+					var abbr = Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute)) as LotusAbbreviationAttribute;
 
 					if ((abbr != null) && (value == abbr.Name))
 					{
@@ -218,7 +225,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TEnum ToEnum<TEnum>(Object value, TEnum defaultValue) where TEnum : Enum
 			{
-				return ToEnum(Convert.ToString(value), defaultValue);
+				return ToEnum(Convert.ToString(value) ?? String.Empty, defaultValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -229,7 +236,7 @@ namespace Lotus
 			/// <param name="value">Значение</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Enum ToEnumOfType(Type enumType, System.Object value)
+			public static Enum? ToEnumOfType(Type enumType, System.Object value)
 			{
 				if (value == null)
 				{
@@ -243,7 +250,7 @@ namespace Lotus
 					}
 					else
 					{
-						return Enum.Parse(enumType, Convert.ToString(value), true) as Enum;
+						return Enum.Parse(enumType, Convert.ToString(value) ?? String.Empty, true) as Enum;
 					}
 				}
 			}
@@ -278,7 +285,7 @@ namespace Lotus
 						}
 						else
 						{
-							result = (TEnum)Enum.Parse(typeof(TEnum), Convert.ToString(value), true);
+							result = (TEnum)Enum.Parse(typeof(TEnum), Convert.ToString(value) ?? String.Empty, true);
 						}
 					}
 					return true;
@@ -352,8 +359,10 @@ namespace Lotus
 			/// <param name="destinationType">Целевой тип</param>
 			/// <returns>Статус возможности</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+			public override Boolean CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
 			{
+				if (destinationType == null) return false;
+
 				return destinationType == typeof(String);
 			}
 
@@ -365,8 +374,10 @@ namespace Lotus
 			/// <param name="sourceType">Тип источник</param>
 			/// <returns>Статус возможности</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+			public override Boolean CanConvertFrom(ITypeDescriptorContext? context, Type? sourceType)
 			{
+				if (sourceType == null) return false;
+
 				return sourceType == typeof(String);
 			}
 
@@ -380,10 +391,13 @@ namespace Lotus
 			/// <param name="destinationType">Целевой тип</param>
 			/// <returns>Значение целевого типа</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, Object value, Type destinationType)
+			public override Object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, Object? value, Type? destinationType)
 			{
 				Type type_enum = typeof(TEnum);
-				return XEnum.GetDescriptionOrName(type_enum, (Enum)value);
+
+				if (value == null) return string.Empty;
+
+				return XEnum.GetDescriptionOrName(type_enum, (value as Enum)!);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -395,10 +409,13 @@ namespace Lotus
 			/// <param name="value">Значение целевого типа</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+			public override Object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, Object? value)
 			{
 				Type type_enum = typeof(TEnum);
-				return XEnum.ConvertFromDescriptionOrName(type_enum, value.ToString());
+
+				if (value == null) return string.Empty;
+
+				return XEnum.ConvertFromDescriptionOrName(type_enum, value.ToString()!);
 			}
 			#endregion
 		}

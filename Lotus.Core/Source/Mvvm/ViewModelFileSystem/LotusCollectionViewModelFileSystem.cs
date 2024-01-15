@@ -72,9 +72,9 @@ namespace Lotus
 			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent)
+			public override ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy? parent)
 			{
-				if(model is CFileSystemFile file)
+				if (model is CFileSystemFile file)
 				{
 					return new ViewModelFileSystemFile(file, parent);
 				}
@@ -84,8 +84,8 @@ namespace Lotus
 					return new ViewModelDirectorySystemFile(directory, parent);
 				}
 
-				return null;
-			}
+                throw new NotImplementedException("Model must be type <CFileSystemFile> or <CFileSystemDirectory>");
+            }
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------

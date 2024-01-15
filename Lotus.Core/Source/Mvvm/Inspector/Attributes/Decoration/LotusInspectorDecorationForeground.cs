@@ -33,7 +33,7 @@ namespace Lotus
 #endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly TColor mForeground;
+			internal readonly TColor _foreground;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -42,7 +42,7 @@ namespace Lotus
 			/// </summary>
 			public TColor Foreground
 			{
-				get { return mForeground; }
+				get { return _foreground; }
 			}
 			#endregion
 
@@ -58,7 +58,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusForegroundAttribute(Byte red, Byte green, Byte blue, Byte alpha = 255)
 			{
-				mForeground = new TColor(red, green, blue, alpha);
+				_foreground = new TColor(red, green, blue, alpha);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusForegroundAttribute(UInt32 colorBgra)
 			{
-				mForeground = TColor.FromBGRA(colorBgra);
+				_foreground = TColor.FromBGRA(colorBgra);
 			}
 			#endregion
 		}

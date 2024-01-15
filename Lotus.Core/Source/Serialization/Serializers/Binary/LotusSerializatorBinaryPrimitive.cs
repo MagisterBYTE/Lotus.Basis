@@ -259,13 +259,13 @@ namespace Lotus
 							// Проверка на примитивный тип
 							if (type.HasAttribute<LotusSerializeAsPrimitiveAttribute>())
 							{
-								MethodInfo method_info = type.GetMethod(
-									LotusSerializeAsPrimitiveAttribute.SERIALIZETOSTRING, 
+								MethodInfo? method_info = type.GetMethod(
+									LotusSerializeAsPrimitiveAttribute.SERIALIZE_TO_STRING, 
 									BindingFlags.Public | BindingFlags.Instance);
 								if (method_info != null)
 								{
-									var data = method_info.Invoke(instance, null).ToString();
-									writer.Write(data);
+									var data = method_info.Invoke(instance, null)?.ToString();
+									writer.Write(data!);
 								}
 							}
 						}

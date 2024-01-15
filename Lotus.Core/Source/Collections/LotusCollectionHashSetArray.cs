@@ -18,17 +18,17 @@ namespace Lotus
 {
 	namespace Core
 	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreCollections
+        //-------------------------------------------------------------------------------------------------------------
+        /** \addtogroup CoreCollections
 		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// HashSetArray на основе массива
-		/// </summary>
-		/// <typeparam name="TItem">Тип элемента</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class HashSetArray<TItem> : ICollection<TItem>, ISet<TItem>, IReadOnlyCollection<TItem>
+        //-------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// HashSetArray на основе массива
+        /// </summary>
+        /// <typeparam name="TItem">Тип элемента</typeparam>
+        //-------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class HashSetArray<TItem> : ISet<TItem>, IReadOnlyCollection<TItem>
 		{
 			#region ======================================= ВНУТРЕННИЕ ТИПЫ ===========================================
 			//---------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ namespace Lotus
 			public struct HashSetArrayEnumerator : IEnumerator<TItem>
 			{
 				#region ======================================= ДАННЫЕ ================================================
-				private HashSetArray<TItem> mSet;
+				private HashSetArray<TItem> _set;
 				private Int32 _index;
 				private Int32 _version;
 				private TItem _current;
@@ -64,7 +64,7 @@ namespace Lotus
 				{
 					get
 					{
-						return Current;
+						return _current!;
 					}
 				}
 				#endregion
@@ -78,7 +78,7 @@ namespace Lotus
 				//-----------------------------------------------------------------------------------------------------
 				internal HashSetArrayEnumerator(HashSetArray<TItem> set)
 				{
-					mSet = set;
+					_set = set;
 					_index = 0;
 					_version = set._version;
 					_current = default;
@@ -103,22 +103,22 @@ namespace Lotus
 				//-----------------------------------------------------------------------------------------------------
 				public Boolean MoveNext()
 				{
-					if (_version != mSet._version)
+					if (_version != _set._version)
 					{
 						return false;
 					}
 
-					while (_index < mSet._lastIndex)
+					while (_index < _set._lastIndex)
 					{
-						if (mSet._slots[_index].hashCode >= 0)
+						if (_set._slots[_index].hashCode >= 0)
 						{
-							_current = mSet._slots[_index].value;
+							_current = _set._slots[_index].value;
 							_index++;
 							return true;
 						}
 						_index++;
 					}
-					_index = mSet._lastIndex + 1;
+					_index = _set._lastIndex + 1;
 					_current = default;
 					return false;
 				}
@@ -130,7 +130,7 @@ namespace Lotus
 				//-----------------------------------------------------------------------------------------------------
 				void IEnumerator.Reset()
 				{
-					if (_version != mSet._version)
+					if (_version != _set._version)
 					{
 						return;
 					}
@@ -148,8 +148,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected internal struct Slot
 			{
-				internal Int32 hashCode;	  // Lower 31 bits of hash code, -1 if unused
-				internal Int32 next;		  // Index of next entry, -1 if last
+				internal Int32 hashCode;      // Lower 31 bits of hash code, -1 if unused
+				internal Int32 next;          // Index of next entry, -1 if last
 				internal TItem value;
 			}
 			#endregion
@@ -157,10 +157,10 @@ namespace Lotus
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			// store lower 31 bits of hash code
 			private const Int32 Lower31BitMask = 0x7FFFFFFF;
-			
+
 			// cutoff poInt32, above which we won't do stackallocs. This corresponds to 100 integers.
 			private const Int32 StackAllocThreshold = 100;
-			
+
 			// when constructing a hashset from an existing collection, it may contain duplicates, 
 			// so this is used as the max acceptable excess ratio of capacity to count. Note that
 			// this is only used on the ctor and not to automatically shrink if the hashset has, e.g,
@@ -204,7 +204,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public HashSetArray()
-				: this(EqualityComparer<TItem>.Default) 
+				: this(EqualityComparer<TItem>.Default)
 			{
 			}
 
@@ -215,8 +215,8 @@ namespace Lotus
 			/// <param name="capacity">Начальная максимальная емкость списка</param>
 			//---------------------------------------------------------------------------------------------------------
 			public HashSetArray(Int32 capacity)
-				: this(capacity, EqualityComparer<TItem>.Default) 
-			{ 
+				: this(capacity, EqualityComparer<TItem>.Default)
+			{
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -246,8 +246,8 @@ namespace Lotus
 			/// <param name="collection">Список элементов</param>
 			//---------------------------------------------------------------------------------------------------------
 			public HashSetArray(IEnumerable<TItem> collection)
-				: this(collection, EqualityComparer<TItem>.Default) 
-			{ 
+				: this(collection, EqualityComparer<TItem>.Default)
+			{
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -712,7 +712,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean IsProperSubsetOf(IEnumerable<TItem> other)
 			{
-				 var otherAsCollection = other as ICollection<TItem>;
+				var otherAsCollection = other as ICollection<TItem>;
 				if (otherAsCollection != null)
 				{
 					// the empty set is a proper subset of anything but the empty set
@@ -757,7 +757,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean IsSupersetOf(IEnumerable<TItem> other)
 			{
-				 // try to fall out early based on counts
+				// try to fall out early based on counts
 				var otherAsCollection = other as ICollection<TItem>;
 				if (otherAsCollection != null)
 				{
@@ -911,8 +911,8 @@ namespace Lotus
 			/// </summary>
 			/// <param name="array"></param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CopyTo(TItem[] array) 
-			{ 
+			public void CopyTo(TItem[] array)
+			{
 				CopyTo(array, 0, _count);
 			}
 
@@ -1017,9 +1017,11 @@ namespace Lotus
 			{
 				if (_count == 0)
 				{
-					// if count is zero, clear references
-					_buckets = null;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+                    // if count is zero, clear references
+                    _buckets = null;
 					_slots = null;
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 					_version++;
 				}
 				else
@@ -1194,7 +1196,7 @@ namespace Lotus
 				}
 
 				var hashCode = InternalGetHashCode(value);
-				var bucket = hashCode % _buckets.Length;
+				var bucket = hashCode % _buckets!.Length;
 
 				for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
 				{

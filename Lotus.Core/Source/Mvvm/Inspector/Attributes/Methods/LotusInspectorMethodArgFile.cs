@@ -34,9 +34,9 @@ namespace Lotus
 #endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal String mExtension;
-			internal String mDefaultName;
-			internal String mDefaultPath;
+			internal String _extension;
+			internal String _defaultName;
+			internal String _defaultPath;
 			internal Boolean _isOpenFile;
 			#endregion
 
@@ -49,8 +49,8 @@ namespace Lotus
 			/// </remarks>
 			public String Extension
 			{
-				get { return mExtension; }
-				set { mExtension = value; }
+				get { return _extension; }
+				set { _extension = value; }
 			}
 
 			/// <summary>
@@ -61,8 +61,8 @@ namespace Lotus
 			/// </remarks>
 			public String DefaultName
 			{
-				get { return mDefaultName; }
-				set { mDefaultName = value; }
+				get { return _defaultName; }
+				set { _defaultName = value; }
 			}
 
 			/// <summary>
@@ -73,8 +73,8 @@ namespace Lotus
 			/// </remarks>
 			public String DefaultPath
 			{
-				get { return mDefaultPath; }
-				set { mDefaultPath = value; }
+				get { return _defaultPath; }
+				set { _defaultPath = value; }
 			}
 
 			/// <summary>
@@ -98,11 +98,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusMethodArgFileAttribute()
 			{
-				mDefaultName = "File";
+				_defaultName = "File";
 #if UNITY_2017_1_OR_NEWER
 				mDefaultPath = XCoreSettings.ASSETS_PATH;
 #else
-				mDefaultPath = "";
+				_defaultPath = "";
 #endif
 
 			}
@@ -123,8 +123,8 @@ namespace Lotus
 				"")
 #endif
 			{
-				mExtension = extension;
-				mDefaultPath = defaultPath;
+				_extension = extension;
+				_defaultPath = defaultPath;
 			}
 			#endregion
 		}

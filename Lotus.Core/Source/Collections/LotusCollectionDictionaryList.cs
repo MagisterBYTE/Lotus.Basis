@@ -11,9 +11,8 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -29,8 +28,7 @@ namespace Lotus
 		/// <typeparam name="TKey">Тип ключа словаря</typeparam>
 		/// <typeparam name="TValue">Тип значения списка словаря</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class DictionaryList<TKey, TValue> : Dictionary<TKey, ListArray<TValue>>
+		public class DictionaryList<TKey, TValue> : Dictionary<TKey, ListArray<TValue>> where TKey : notnull
 		{
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
 			//---------------------------------------------------------------------------------------------------------
@@ -66,15 +64,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Add(in TKey key, in TValue item)
 			{
-				if(ContainsKey(key))
+				if (ContainsKey(key))
 				{
 					ListArray<TValue> list = this[key];
 					list.Add(item);
 				}
 				else
 				{
-					var list = new ListArray<TValue>();
-					list.Add(item);
+					var list = new ListArray<TValue>
+					{
+						item
+					};
 					Add(key, list);
 				}
 			}
@@ -92,7 +92,7 @@ namespace Lotus
 
 				foreach (var list in Values)
 				{
-					if(list.Contains(item))
+					if (list.Contains(item))
 					{
 						return true;
 					}
@@ -115,7 +115,7 @@ namespace Lotus
 				foreach (var list in Values)
 				{
 					var index = list.IndexOf(item);
-					if(index > -1)
+					if (index > -1)
 					{
 						list.RemoveAt(index);
 

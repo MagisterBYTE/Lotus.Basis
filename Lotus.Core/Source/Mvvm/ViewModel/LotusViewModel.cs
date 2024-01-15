@@ -196,7 +196,7 @@ namespace Lotus
 			/// <summary>
 			/// Владелец объекта
 			/// </summary>
-			public ILotusOwnerObject IOwner
+			public ILotusOwnerObject? IOwner
 			{
 				get { return _owner; }
 				set { _owner = value; }
@@ -346,9 +346,9 @@ namespace Lotus
 			/// </summary>
 			public System.Object UIElement
 			{
-				get { return _elementUI; } 
-				set 
-				{ 
+				get { return _elementUI; }
+				set
+				{
 					_elementUI = value;
 				}
 			}
@@ -378,8 +378,8 @@ namespace Lotus
 			/// <param name="model">Модель</param>
 			/// <param name="name">Служебное наименование ViewModel</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ViewModel(TModel model, String name = null)
-				:base(name)
+			public ViewModel(TModel model, String name = "")
+				: base(name)
 			{
 				_model = model;
 				SetDataContext();
@@ -478,7 +478,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void SetDataContext()
 			{
-				if(String.IsNullOrEmpty(_name))
+				if (String.IsNullOrEmpty(_name))
 				{
 					if (_model is ILotusNameable nameable)
 					{

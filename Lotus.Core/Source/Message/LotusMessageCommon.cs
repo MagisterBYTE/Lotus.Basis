@@ -65,8 +65,8 @@ namespace Lotus
 			// Основные параметры
 			protected internal Int32 _id;
 			protected internal String _name;
-			protected internal System.Object _data;
-			protected internal System.Object _sender;
+			protected internal System.Object? _data;
+			protected internal System.Object? _sender;
 			protected internal Boolean _isPoolObject;
 			#endregion
 
@@ -92,7 +92,7 @@ namespace Lotus
 			/// <summary>
 			/// Данные сообщения
 			/// </summary>
-			public System.Object Data
+			public System.Object? Data
 			{
 				get { return _data; }
 				set { _data = value; }
@@ -101,7 +101,7 @@ namespace Lotus
 			/// <summary>
 			/// Источник сообщения
 			/// </summary>
-			public System.Object Sender
+			public System.Object? Sender
 			{
 				get { return _sender; }
 				set { _sender = value; }
@@ -245,7 +245,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return"Name <" + _name + "> Value[" + _data?.ToString() + "]";
+				return $"Name <{_name}> | Value[{_data?.ToString()}]";
 			}
 			#endregion
 

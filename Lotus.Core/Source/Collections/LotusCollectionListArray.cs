@@ -53,7 +53,7 @@ namespace Lotus
 			public struct ListArrayEnumerator : IEnumerator<TItem>
 			{
 				#region ======================================= ДАННЫЕ ================================================
-				private ListArray<TItem> _list;
+				private readonly ListArray<TItem> _list;
 				private Int32 _index;
 				private TItem _current;
 				#endregion
@@ -77,7 +77,7 @@ namespace Lotus
 				{
 					get
 					{
-						return Current;
+						return _current!;
 					}
 				}
 				#endregion
@@ -93,7 +93,7 @@ namespace Lotus
 				{
 					_list = list;
 					_index = 0;
-					_current = default;
+					_current = _list[0];
 				}
 				#endregion
 
@@ -137,7 +137,7 @@ namespace Lotus
 				void IEnumerator.Reset()
 				{
 					_index = 0;
-					_current = default;
+					_current = _list[0];
 				}
 				#endregion
 			}
@@ -156,9 +156,9 @@ namespace Lotus
 					Comparison = comparison;
 				}
 
-				public Int32 Compare(TItem x, TItem y)
+				public Int32 Compare(TItem? x, TItem? y)
 				{
-					return Comparison(x, y);
+					return Comparison(x!, y!);
 				}
 			}
 			#endregion
@@ -246,7 +246,7 @@ namespace Lotus
 			/// </remarks>
 			public Int32 MaxCount
 			{
-				get { return _maxCount;}
+				get { return _maxCount; }
 			}
 
 			/// <summary>
@@ -295,10 +295,10 @@ namespace Lotus
 			/// </summary>
 			public TItem[] SerializeItems
 			{
-				get 
+				get
 				{
 					TrimExcess();
-					return _arrayOfItems; 
+					return _arrayOfItems;
 				}
 				set
 				{
@@ -312,7 +312,7 @@ namespace Lotus
 			/// <summary>
 			/// Первый элемент
 			/// </summary>
-			public TItem ItemFirst
+			public TItem? ItemFirst
 			{
 				get
 				{
@@ -327,7 +327,7 @@ namespace Lotus
 			/// <summary>
 			/// Второй элемент
 			/// </summary>
-			public TItem ItemSecond
+			public TItem? ItemSecond
 			{
 				get
 				{
@@ -342,7 +342,7 @@ namespace Lotus
 			/// <summary>
 			/// Предпоследний элемент
 			/// </summary>
-			public TItem ItemPenultimate
+			public TItem? ItemPenultimate
 			{
 				get
 				{
@@ -357,7 +357,7 @@ namespace Lotus
 			/// <summary>
 			/// Последний элемент
 			/// </summary>
-			public TItem ItemLast
+			public TItem? ItemLast
 			{
 				get
 				{
@@ -393,8 +393,8 @@ namespace Lotus
 			/// </summary>
 			public Boolean IsFixedSize
 			{
-				get 
-				{ 
+				get
+				{
 					return _isFixedSize;
 				}
 				set
@@ -426,7 +426,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			System.Object IList.this[Int32 index]
+			System.Object? IList.this[Int32 index]
 			{
 				get
 				{
@@ -436,7 +436,7 @@ namespace Lotus
 				{
 					try
 					{
-						_arrayOfItems[index] = (TItem)value;
+						_arrayOfItems[index] = value == null ? default: (TItem)value;
 
 						if (_isNotify)
 						{
@@ -486,7 +486,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="items">Список элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ListArray(IList<TItem> items)
+			public ListArray(IList<TItem?> items)
 			{
 				if (items != null && items.Count > 0)
 				{
@@ -523,7 +523,7 @@ namespace Lotus
 				{
 					if (_isNotify)
 					{
-						TItem original_item = _arrayOfItems[index];
+						TItem? original_item = _arrayOfItems[index];
 						_arrayOfItems[index] = value;
 
 						NotifyPropertyChanged(PropertyArgsIndexer);
@@ -566,14 +566,14 @@ namespace Lotus
 			/// <summary>
 			/// Добавление элемента
 			/// </summary>
-			/// <param name="item">Элемент</param>
+			/// <param name="value">Элемент</param>
 			/// <returns>Количество элементов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 Add(System.Object item)
+			public Int32 Add(System.Object? value)
 			{
 				try
 				{
-					Add((TItem)item);
+					Add(value == null ? default : (TItem)value);
 					return _count;
 				}
 				catch (Exception exc)
@@ -592,24 +592,24 @@ namespace Lotus
 			/// <summary>
 			/// Проверка на наличие элемента в списке
 			/// </summary>
-			/// <param name="item">Элемент</param>
+			/// <param name="value">Элемент</param>
 			/// <returns>Статус наличия элемента в списке</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(System.Object item)
+			public Boolean Contains(System.Object? value)
 			{
-				return Array.IndexOf(_arrayOfItems, item, 0, _count) > -1;
+				return Array.IndexOf(_arrayOfItems, value, 0, _count) > -1;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получение индекса элемента в списке
 			/// </summary>
-			/// <param name="item">Элемент</param>
+			/// <param name="value">Элемент</param>
 			/// <returns>Индекс элемента в списке</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 IndexOf(System.Object item)
+			public Int32 IndexOf(System.Object? value)
 			{
-				return Array.IndexOf(_arrayOfItems, item, 0, _count);
+				return Array.IndexOf(_arrayOfItems, value, 0, _count);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -617,11 +617,11 @@ namespace Lotus
 			/// Вставка элемента в указанную позицию
 			/// </summary>
 			/// <param name="index">Позиция вставки</param>
-			/// <param name="item">Элемент</param>
+			/// <param name="value">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Insert(Int32 index, System.Object item)
+			public void Insert(Int32 index, System.Object? value)
 			{
-				if(item is TItem item_type)
+				if (value is TItem item_type)
 				{
 					Insert(index, item_type);
 				}
@@ -631,11 +631,11 @@ namespace Lotus
 			/// <summary>
 			/// Удаление элемента
 			/// </summary>
-			/// <param name="item">Элемент</param>
+			/// <param name="value">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Remove(System.Object item)
+			public void Remove(System.Object? value)
 			{
-				if (item is TItem item_type)
+				if (value is TItem item_type)
 				{
 					Remove(item_type);
 				}
@@ -661,7 +661,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="item">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Add(TItem item)
+			public void Add(TItem? item)
 			{
 				Add(in item);
 			}
@@ -673,7 +673,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус наличия элемента в списке</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(TItem item)
+			public Boolean Contains(TItem? item)
 			{
 				return Contains(in item);
 			}
@@ -685,7 +685,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Индекс элемента в списке</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 IndexOf(TItem item)
+			public Int32 IndexOf(TItem? item)
 			{
 				return Array.IndexOf(_arrayOfItems, item, 0, _count);
 			}
@@ -697,7 +697,7 @@ namespace Lotus
 			/// <param name="index">Позиция вставки</param>
 			/// <param name="item">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Insert(Int32 index, TItem item)
+			public void Insert(Int32 index, TItem? item)
 			{
 				Insert(index, in item);
 			}
@@ -709,7 +709,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус успешности удаления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Remove(TItem item)
+			public Boolean Remove(TItem? item)
 			{
 				return Remove(in item);
 			}
@@ -914,7 +914,7 @@ namespace Lotus
 				{
 					for (var i = 0; i < _count; i++)
 					{
-						((ILotusIndexable)_arrayOfItems[i]).Index = i;
+						((ILotusIndexable)_arrayOfItems[i]!).Index = i;
 					}
 				}
 			}
@@ -951,7 +951,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="item">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Add(in TItem item)
+			public void Add(in TItem? item)
 			{
 				// Если текущие количество элементов равно максимально возможному
 				if (_count == _maxCount)
@@ -994,13 +994,13 @@ namespace Lotus
 					var item = default(TItem);
 					if (IsDuplicatable)
 					{
-						item = (ItemLast as ILotusDuplicate<TItem>).Duplicate();
+						item = (ItemLast as ILotusDuplicate<TItem>)!.Duplicate();
 					}
 					else
 					{
 						if (ItemLast is ICloneable)
 						{
-							item = (TItem)(ItemLast as ICloneable).Clone();
+							item = (TItem)(ItemLast as ICloneable)!.Clone();
 						}
 						else
 						{
@@ -1087,7 +1087,7 @@ namespace Lotus
 			/// <param name="index">Позиция вставки</param>
 			/// <param name="item">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Insert(Int32 index, in TItem item)
+			public void Insert(Int32 index, in TItem? item)
 			{
 				if (index >= _count)
 				{
@@ -1218,7 +1218,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус успешности удаления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Remove(in TItem item)
+			public Boolean Remove(in TItem? item)
 			{
 				var index = Array.IndexOf(_arrayOfItems, item, 0, _count);
 				if (index != -1)
@@ -1466,7 +1466,7 @@ namespace Lotus
 				{
 					TItem item = _arrayOfItems[i];
 					var index = Array.IndexOf(unique, item);
-					if(index == -1)
+					if (index == -1)
 					{
 						unique[count] = item;
 						count++;
@@ -1548,9 +1548,9 @@ namespace Lotus
 			public Int32 TrimStart(in TItem item, Boolean included = true)
 			{
 				var index = Array.IndexOf(_arrayOfItems, item);
-				if(index > -1)
+				if (index > -1)
 				{
-					if(index == 0)
+					if (index == 0)
 					{
 						if (included)
 						{
@@ -1760,7 +1760,7 @@ namespace Lotus
 				Reserve(items.Count);
 				for (var i = 0; i < items.Count; i++)
 				{
-					if(Array.IndexOf(_arrayOfItems, items[i]) == -1)
+					if (Array.IndexOf(_arrayOfItems, items[i]) == -1)
 					{
 						Add(items[i]);
 					}
@@ -1839,7 +1839,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус наличия</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(in TItem item)
+			public Boolean Contains(in TItem? item)
 			{
 				return Array.IndexOf(_arrayOfItems, item, 0, _count) != -1;
 			}
@@ -1851,7 +1851,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Индекс элемента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 IndexOf(in TItem item)
+			public Int32 IndexOf(in TItem? item)
 			{
 				return Array.IndexOf(_arrayOfItems, item, 0, _count);
 			}
@@ -1863,7 +1863,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Индекс элемента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 LastIndexOf(in TItem item)
+			public Int32 LastIndexOf(in TItem? item)
 			{
 				return Array.LastIndexOf(_arrayOfItems, item, 0, _count);
 			}
@@ -1909,7 +1909,7 @@ namespace Lotus
 			/// <param name="match">Предикат</param>
 			/// <returns>Элемент или значение по умолчанию</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem Search(Predicate<TItem> match)
+			public TItem? Search(Predicate<TItem> match)
 			{
 				for (var i = 0; i < _count; i++)
 				{
@@ -1926,7 +1926,7 @@ namespace Lotus
 			/// <param name="match">Предикат</param>
 			/// <returns>Элемент или значение по умолчанию</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem SearchLast(Predicate<TItem> match)
+			public TItem? SearchLast(Predicate<TItem> match)
 			{
 				for (var i = LastIndex; i >= 0; i--)
 				{
@@ -1953,7 +1953,7 @@ namespace Lotus
 				var result = true;
 				for (var i = 0; i < _count; i++)
 				{
-					if(match(_arrayOfItems[i]) == false)
+					if (match(_arrayOfItems[i]) == false)
 					{
 						result = false;
 						break;
@@ -2011,7 +2011,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Swap(Int32 oldIndex, Int32 newIndex)
 			{
-				TItem temp = _arrayOfItems[oldIndex];
+				TItem? temp = _arrayOfItems[oldIndex];
 				_arrayOfItems[oldIndex] = _arrayOfItems[newIndex];
 				_arrayOfItems[newIndex] = temp;
 
@@ -2440,7 +2440,7 @@ namespace Lotus
 					for (var i = 0; i < _count; i++)
 					{
 						// Получем свойство
-						PropertyInfo property_info = _arrayOfItems[i].GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+						PropertyInfo? property_info = _arrayOfItems[i]?.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
 						if (property_info != null)
 						{
@@ -2481,7 +2481,7 @@ namespace Lotus
 				else
 				{
 					// Получаем свойство 1 раз
-					PropertyInfo property_info = typeof(TItem).GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+					PropertyInfo? property_info = typeof(TItem).GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 					if (property_info != null)
 					{
 						for (var i = 0; i < _count; i++)
@@ -2552,7 +2552,7 @@ namespace Lotus
 					// Ищем совпадение в существующем списке
 					var find_index = unique_list.Find((TItem value) =>
 					{
-						return value.Equals(_arrayOfItems[i]);
+						return value!.Equals(_arrayOfItems[i]);
 					});
 
 					// Совпадение не нашли значит это уникальный элемент
@@ -2586,7 +2586,7 @@ namespace Lotus
 					for (var i = 0; i < _count; i++)
 					{
 						// Получем свойство
-						PropertyInfo property_info = _arrayOfItems[i].GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+						PropertyInfo? property_info = _arrayOfItems[i]?.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
 						if (property_info != null)
 						{
@@ -2608,7 +2608,7 @@ namespace Lotus
 				else
 				{
 					// Получаем свойство 1 раз
-					PropertyInfo property_info = typeof(TItem).GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+					PropertyInfo? property_info = typeof(TItem).GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 					if (property_info != null)
 					{
 						for (var i = 0; i < _count; i++)
@@ -2646,7 +2646,7 @@ namespace Lotus
 
 				for (var i = 0; i < _count; i++)
 				{
-					if(match(_arrayOfItems[i]))
+					if (match(_arrayOfItems[i]))
 					{
 						result.Add(_arrayOfItems[i]);
 					}
@@ -2660,7 +2660,7 @@ namespace Lotus
 			/// <summary>
 			/// Событие срабатывает ПОСЛЕ изменения свойства
 			/// </summary>
-			public event PropertyChangedEventHandler PropertyChanged;
+			public event PropertyChangedEventHandler? PropertyChanged;
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -2689,7 +2689,7 @@ namespace Lotus
 			/// <summary>
 			/// Событие для информирование событий коллекций
 			/// </summary>
-			public event NotifyCollectionChangedEventHandler CollectionChanged;
+			public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -2699,7 +2699,7 @@ namespace Lotus
 			/// <param name="item">Элемент коллекции</param>
 			/// <param name="index">Индекс элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object item, Int32 index)
+			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object? item, Int32 index)
 			{
 				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item, index));
 			}
@@ -2713,7 +2713,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <param name="oldIndex">Предыдущий индекс элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object item, Int32 index, Int32 oldIndex)
+			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object? item, Int32 index, Int32 oldIndex)
 			{
 				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item, index, oldIndex));
 			}
@@ -2727,7 +2727,7 @@ namespace Lotus
 			/// <param name="newItem">Элемент коллекции</param>
 			/// <param name="index">Индекс элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object oldItem, System.Object newItem, Int32 index)
+			protected void NotifyCollectionChanged(NotifyCollectionChangedAction action, System.Object? oldItem, System.Object? newItem, Int32 index)
 			{
 				CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
 			}

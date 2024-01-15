@@ -43,7 +43,7 @@ namespace Lotus
 			/// <param name="this">Значение</param>
 			/// <returns>Объем информации с суффиксом</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String ToShortString(this Int32 @this)
+			public static String? ToShortString(this Int32 @this)
 			{
 				if (@this < 0)
 				{

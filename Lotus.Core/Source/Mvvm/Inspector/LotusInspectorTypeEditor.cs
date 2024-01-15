@@ -25,10 +25,10 @@ namespace Lotus
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
 		[AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-		public class LotusInspectorTypeEditor : Attribute
+		public sealed class LotusInspectorTypeEditor : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal Type mEditorType;
+			internal Type _editorType;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -37,7 +37,7 @@ namespace Lotus
 			/// </summary>
 			public Type EditorType
 			{
-				get { return mEditorType; }
+				get { return _editorType; }
 			}
 			#endregion
 
@@ -50,7 +50,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusInspectorTypeEditor(Type editorType)
 			{
-				mEditorType = editorType;
+				_editorType = editorType;
 			}
 			#endregion
 		}

@@ -192,7 +192,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public System.Object TakeObjectFromPool()
 			{
-				return Take();
+				return Take()!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -238,7 +238,7 @@ namespace Lotus
 					ResizePool();
 				}
 
-				TPoolObject pool_object = _poolObjects.Pop();
+				TPoolObject pool_object = _poolObjects.Pop()!;
 				return pool_object;
 			}
 
@@ -289,7 +289,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public PoolManager()
-				:base()
+				: base()
 			{
 			}
 
@@ -326,12 +326,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override TPoolObject Take()
 			{
-				if(_poolObjects.Count == 0 && _constructor != null)
+				if (_poolObjects.Count == 0 && _constructor != null)
 				{
 					ResizePool();
 				}
 
-				TPoolObject pool_object = _poolObjects.Pop();
+				TPoolObject pool_object = _poolObjects.Pop()!;
 				pool_object.OnPoolTake();
 				return pool_object;
 			}

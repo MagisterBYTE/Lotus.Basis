@@ -52,7 +52,7 @@ namespace Lotus
 #endif
 			internal Boolean _value;
 			[NonSerialized]
-			internal Action<Boolean> _onChanged;
+			internal Action<Boolean>? _onChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -75,7 +75,7 @@ namespace Lotus
 			/// <summary>
 			/// Событие для нотификации об изменении значения
 			/// </summary>
-			public Action<Boolean> OnChanged
+			public Action<Boolean>? OnChanged
 			{
 				readonly get { return _onChanged; }
 				set { _onChanged = value; }
@@ -117,7 +117,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (obj != null)
 				{
@@ -306,7 +306,7 @@ namespace Lotus
 #endif
 			internal Int32 _value;
 			[NonSerialized]
-			internal Action<Int32> _onChanged;
+			internal Action<Int32>? _onChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -329,7 +329,7 @@ namespace Lotus
 			/// <summary>
 			/// Событие для нотификации об изменении значения
 			/// </summary>
-			public Action<Int32> OnChanged
+			public Action<Int32>? OnChanged
 			{
 				readonly get { return _onChanged; }
 				set { _onChanged = value; }
@@ -371,7 +371,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (obj != null)
 				{
@@ -560,7 +560,7 @@ namespace Lotus
 #endif
 			internal Single _value;
 			[NonSerialized]
-			internal Action<Single> _onChanged;
+			internal Action<Single>? _onChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -583,7 +583,7 @@ namespace Lotus
 			/// <summary>
 			/// Событие для нотификации об изменении значения
 			/// </summary>
-			public Action<Single> OnChanged
+			public Action<Single>? OnChanged
 			{
 				readonly get { return _onChanged; }
 				set { _onChanged = value; }
@@ -625,7 +625,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (obj != null)
 				{
@@ -813,7 +813,7 @@ namespace Lotus
 #endif
 			internal String _value;
 			[NonSerialized]
-			internal Action<String> _onChanged;
+			internal Action<String>? _onChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -836,7 +836,7 @@ namespace Lotus
 			/// <summary>
 			/// Событие для нотификации об изменении значения
 			/// </summary>
-			public Action<String> OnChanged
+			public Action<String>? OnChanged
 			{
 				readonly get { return _onChanged; }
 				set { _onChanged = value; }
@@ -878,7 +878,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (obj != null)
 				{

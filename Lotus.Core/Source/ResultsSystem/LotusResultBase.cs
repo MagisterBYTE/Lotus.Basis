@@ -58,7 +58,7 @@ namespace Lotus
 			/// <summary>
 			/// Дополнительные данные
 			/// </summary>
-			System.Object Data { get; set; }
+			System.Object? Data { get; set; }
 			#endregion
 		}
 
@@ -74,7 +74,7 @@ namespace Lotus
 			/// <summary>
 			/// Дополнительные данные
 			/// </summary>
-			new TData Data { get; set; }
+			new TData? Data { get; set; }
 			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------

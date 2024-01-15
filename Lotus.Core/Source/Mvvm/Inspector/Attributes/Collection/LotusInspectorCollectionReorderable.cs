@@ -36,13 +36,13 @@ namespace Lotus
 			internal String _contextMenuMethodName;
 
 			// Методы переупорядочивания коллекции
-			internal String mSortAscendingMethodName;
-			internal String mSortDescendingMethodName;
-			internal String mReorderItemChangedMethodName;
+			internal String _sortAscendingMethodName;
+			internal String _sortDescendingMethodName;
+			internal String _reorderItemChangedMethodName;
 
 			// Методы для рисования элементов коллекции
-			internal String mDrawItemMethodName;
-			internal String mHeightItemMethodName;
+			internal String _drawItemMethodName;
+			internal String _heightItemMethodName;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -96,8 +96,8 @@ namespace Lotus
 			/// </remarks>
 			public String SortAscendingMethodName
 			{
-				get { return mSortAscendingMethodName; }
-				set { mSortAscendingMethodName = value; }
+				get { return _sortAscendingMethodName; }
+				set { _sortAscendingMethodName = value; }
 			}
 
 			/// <summary>
@@ -109,8 +109,8 @@ namespace Lotus
 			/// </remarks>
 			public String SortDescendingMethodName
 			{
-				get { return mSortDescendingMethodName; }
-				set { mSortDescendingMethodName = value; }
+				get { return _sortDescendingMethodName; }
+				set { _sortDescendingMethodName = value; }
 			}
 
 			/// <summary>
@@ -124,8 +124,8 @@ namespace Lotus
 			/// </remarks>
 			public String ReorderItemChangedMethodName
 			{
-				get { return mReorderItemChangedMethodName; }
-				set { mReorderItemChangedMethodName = value; }
+				get { return _reorderItemChangedMethodName; }
+				set { _reorderItemChangedMethodName = value; }
 			}
 
 			//
@@ -141,8 +141,8 @@ namespace Lotus
 			/// </remarks>
 			public String DrawItemMethodName
 			{
-				get { return mDrawItemMethodName; }
-				set { mDrawItemMethodName = value; }
+				get { return _drawItemMethodName; }
+				set { _drawItemMethodName = value; }
 			}
 
 			/// <summary>
@@ -154,8 +154,8 @@ namespace Lotus
 			/// </remarks>
 			public String HeightItemMethodName
 			{
-				get { return mHeightItemMethodName; }
-				set { mHeightItemMethodName = value; }
+				get { return _heightItemMethodName; }
+				set { _heightItemMethodName = value; }
 			}
 			#endregion
 

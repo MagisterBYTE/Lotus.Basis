@@ -93,7 +93,7 @@ namespace Lotus
 			/// <typeparam name="TResource">Тип объекта</typeparam>
 			/// <param name="resource">Ссылка на экземпляр объекта для утилизации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void SafeDispose<TResource>(ref TResource resource) where TResource : class
+			public static void SafeDispose<TResource>(ref TResource? resource) where TResource : class
 			{
 				if (resource == null)
 				{

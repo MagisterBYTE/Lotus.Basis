@@ -36,7 +36,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal String mRawString;
+			protected internal String _rawString;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -60,13 +60,13 @@ namespace Lotus
 					var count = GetTabsStart();
 					if (value > count)
 					{
-						mRawString = mRawString.Insert(count, new String(XChar.Tab, value - count));
+						_rawString = _rawString.Insert(count, new String(XChar.Tab, value - count));
 					}
 					else
 					{
 						if (value < count)
 						{
-							mRawString = mRawString.Remove(0, count - value);
+							_rawString = _rawString.Remove(0, count - value);
 						}
 					}
 				}
@@ -82,7 +82,7 @@ namespace Lotus
 			{
 				get
 				{
-					return mRawString.Length;
+					return _rawString.Length;
 				}
 				set
 				{
@@ -101,7 +101,7 @@ namespace Lotus
 				get
 				{
 					var tabs = GetTabsStart();
-					return mRawString.Length - tabs + (tabs * 4);
+					return _rawString.Length - tabs + (tabs * 4);
 				}
 			}
 
@@ -110,10 +110,10 @@ namespace Lotus
 			/// </summary>
 			public String RawString
 			{
-				get { return mRawString; }
+				get { return _rawString; }
 				set
 				{
-					mRawString = value;
+					_rawString = value;
 				}
 			}
 
@@ -122,7 +122,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 RawLength
 			{
-				get { return mRawString.Length; }
+				get { return _rawString.Length; }
 			}
 
 			//
@@ -133,12 +133,12 @@ namespace Lotus
 			/// </summary>
 			public Char CharFirst
 			{
-				get { return mRawString[0]; }
+				get { return _rawString[0]; }
 				set
 				{
-					var massive = mRawString.ToCharArray();
+					var massive = _rawString.ToCharArray();
 					massive[0] = value;
-					mRawString = new String(massive);
+					_rawString = new String(massive);
 				}
 			}
 
@@ -147,12 +147,12 @@ namespace Lotus
 			/// </summary>
 			public Char CharSecond
 			{
-				get { return mRawString[1]; }
+				get { return _rawString[1]; }
 				set
 				{
-					var massive = mRawString.ToCharArray();
+					var massive = _rawString.ToCharArray();
 					massive[1] = value;
-					mRawString = new String(massive);
+					_rawString = new String(massive);
 				}
 			}
 
@@ -161,12 +161,12 @@ namespace Lotus
 			/// </summary>
 			public Char CharPenultimate
 			{
-				get { return mRawString[mRawString.Length - 2]; }
+				get { return _rawString[_rawString.Length - 2]; }
 				set
 				{
-					var massive = mRawString.ToCharArray();
-					massive[mRawString.Length - 2] = value;
-					mRawString = new String(massive);
+					var massive = _rawString.ToCharArray();
+					massive[_rawString.Length - 2] = value;
+					_rawString = new String(massive);
 				}
 			}
 
@@ -175,12 +175,12 @@ namespace Lotus
 			/// </summary>
 			public Char CharLast
 			{
-				get { return mRawString[mRawString.Length - 1]; }
+				get { return _rawString[_rawString.Length - 1]; }
 				set
 				{
-					var massive = mRawString.ToCharArray();
-					massive[mRawString.Length - 1] = value;
-					mRawString = new String(massive);
+					var massive = _rawString.ToCharArray();
+					massive[_rawString.Length - 1] = value;
+					_rawString = new String(massive);
 				}
 			}
 			#endregion
@@ -203,7 +203,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CTextStr(String str)
 			{
-				mRawString = str;
+				_rawString = str;
 			}
 			#endregion
 
@@ -215,13 +215,13 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean Equals(Object obj)
+			public override Boolean Equals(System.Object? obj)
 			{
 				if (obj != null)
 				{
 					if (obj is CTextStr text_str)
 					{
-						return mRawString == text_str.mRawString;
+						return _rawString == text_str._rawString;
 					}
 				}
 				return base.Equals(obj);
@@ -234,9 +234,9 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(CTextStr other)
+			public Boolean Equals(CTextStr? other)
 			{
-				return String.Equals(mRawString, other.mRawString);
+				return String.Equals(_rawString, other?._rawString);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -246,9 +246,11 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Equals(String other)
+			public Boolean Equals(String? other)
 			{
-				return String.Equals(mRawString, other);
+                if (other == null) return false;
+
+                return String.Equals(_rawString, other);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -258,9 +260,9 @@ namespace Lotus
 			/// <param name="other">Строка</param>
 			/// <returns>Статус сравнения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CTextStr other)
+			public Int32 CompareTo(CTextStr? other)
 			{
-				return String.CompareOrdinal(mRawString, other.RawString);
+                return String.CompareOrdinal(_rawString, other?.RawString);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -270,9 +272,11 @@ namespace Lotus
 			/// <param name="other">Строка</param>
 			/// <returns>Статус сравнения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(String other)
+			public Int32 CompareTo(String? other)
 			{
-				return String.CompareOrdinal(mRawString, other);
+                if (other == null) return 0;
+
+                return String.CompareOrdinal(_rawString, other);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -283,7 +287,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Int32 GetHashCode()
 			{
-				return mRawString.GetHashCode();
+				return _rawString.GetHashCode();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -294,7 +298,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return mRawString;
+				return _rawString;
 			}
 			#endregion
 
@@ -309,7 +313,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static CTextStr operator +(CTextStr left, CTextStr right)
 			{
-				return new CTextStr(left.mRawString + right.mRawString);
+				return new CTextStr(left._rawString + right._rawString);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -322,7 +326,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean operator ==(CTextStr left, CTextStr right)
 			{
-				return String.Equals(left.mRawString, right.mRawString);
+				return String.Equals(left._rawString, right._rawString);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -335,7 +339,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean operator !=(CTextStr left, CTextStr right)
 			{
-				return !String.Equals(left.mRawString, right.mRawString);
+				return !String.Equals(left._rawString, right._rawString);
 			}
 			#endregion
 
@@ -375,12 +379,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Char this[Int32 index]
 			{
-				get { return mRawString[index]; }
+				get { return _rawString[index]; }
 				set
 				{
-					var massive = mRawString.ToCharArray();
+					var massive = _rawString.ToCharArray();
 					massive[index] = value;
-					mRawString = new String(massive);
+					_rawString = new String(massive);
 				}
 			}
 			#endregion
@@ -396,15 +400,15 @@ namespace Lotus
 			{
 				var count = 0;
 				var find = false;
-				for (var i = 0; i < mRawString.Length; i++)
+				for (var i = 0; i < _rawString.Length; i++)
 				{
-					if (mRawString[i] != XChar.Tab)
+					if (_rawString[i] != XChar.Tab)
 					{
 						if (i == 0) break;
 						if (find) break;
 					}
 
-					if (mRawString[i] == XChar.Tab)
+					if (_rawString[i] == XChar.Tab)
 					{
 						count++;
 						find = true;
@@ -424,16 +428,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLength(Int32 length)
 			{
-				if (mRawString.Length > length)
+				if (_rawString.Length > length)
 				{
-					mRawString = mRawString.Remove(length);
+					_rawString = _rawString.Remove(length);
 				}
 				else
 				{
-					if (mRawString.Length < length)
+					if (_rawString.Length < length)
 					{
-						var count = length - mRawString.Length;
-						mRawString += new String(CharLast, count);
+						var count = length - _rawString.Length;
+						_rawString += new String(CharLast, count);
 					}
 				}
 			}
@@ -450,16 +454,16 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetLength(Int32 length, Char symbol)
 			{
-				if (mRawString.Length > length)
+				if (_rawString.Length > length)
 				{
-					mRawString = mRawString.Remove(length);
+					_rawString = _rawString.Remove(length);
 				}
 				else
 				{
-					if (mRawString.Length < length)
+					if (_rawString.Length < length)
 					{
-						var count = length - mRawString.Length;
-						mRawString += new String(symbol, count);
+						var count = length - _rawString.Length;
+						_rawString += new String(symbol, count);
 					}
 				}
 			}
@@ -494,17 +498,17 @@ namespace Lotus
 			public void SetLengthWithTabs(Int32 length, Int32 tabsEquiv = 4)
 			{
 				var count_tabs = GetTabsStart();
-				if(count_tabs > 0)
+				if (count_tabs > 0)
 				{
 					// Меняем табы на пробелы
-					mRawString = mRawString.Remove(0, count_tabs);
-					mRawString = mRawString.Insert(0, new String(XChar.Space, count_tabs * tabsEquiv));
+					_rawString = _rawString.Remove(0, count_tabs);
+					_rawString = _rawString.Insert(0, new String(XChar.Space, count_tabs * tabsEquiv));
 
 					SetLength(length);
 
 					// Меняем пробелы на табы
-					mRawString = mRawString.Remove(0, count_tabs * tabsEquiv);
-					mRawString = mRawString.Insert(0, new String(XChar.Tab, count_tabs));
+					_rawString = _rawString.Remove(0, count_tabs * tabsEquiv);
+					_rawString = _rawString.Insert(0, new String(XChar.Tab, count_tabs));
 				}
 				else
 				{
@@ -529,14 +533,14 @@ namespace Lotus
 				if (count_tabs > 0)
 				{
 					// Меняем табы на пробелы
-					mRawString = mRawString.Remove(0, count_tabs);
-					mRawString = mRawString.Insert(0, new String(XChar.Space, count_tabs * tabsEquiv));
+					_rawString = _rawString.Remove(0, count_tabs);
+					_rawString = _rawString.Insert(0, new String(XChar.Space, count_tabs * tabsEquiv));
 
 					SetLength(length, symbol);
 
 					// Меняем пробелы на табы
-					mRawString = mRawString.Remove(0, count_tabs * tabsEquiv);
-					mRawString = mRawString.Insert(0, new String(XChar.Tab, count_tabs));
+					_rawString = _rawString.Remove(0, count_tabs * tabsEquiv);
+					_rawString = _rawString.Insert(0, new String(XChar.Tab, count_tabs));
 				}
 				else
 				{

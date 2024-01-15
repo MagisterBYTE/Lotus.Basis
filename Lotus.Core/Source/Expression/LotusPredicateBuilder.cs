@@ -11,7 +11,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -123,9 +122,10 @@ namespace Lotus
 				//-----------------------------------------------------------------------------------------------------
 				protected override Expression VisitParameter(ParameterExpression node)
 				{
-					ParameterExpression parameterExpression;
-					if (_map.TryGetValue(node, out parameterExpression))
+					if (_map.TryGetValue(node, out ParameterExpression? parameterExpression))
+					{
 						node = parameterExpression;
+					}
 					return base.VisitParameter(node);
 				}
 			}

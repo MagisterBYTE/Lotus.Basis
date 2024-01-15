@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -176,10 +177,10 @@ namespace Lotus
 				view_item.IsSelected = true;
 				view_item.IsPresented = true;
 
-				Assert.AreEqual(true, ViewModelActivity.IsSupportIdentifierLong);
-				Assert.AreEqual(false, ViewModelActivity.IsSupportNameable);
-				Assert.AreEqual(false, ViewModelActivity.IsSupportModelEnabled);
-				Assert.AreEqual(false, ViewModelActivity.IsSupportModelSelected);
+				ClassicAssert.AreEqual(true, ViewModelActivity.IsSupportIdentifierLong);
+				ClassicAssert.AreEqual(false, ViewModelActivity.IsSupportNameable);
+				ClassicAssert.AreEqual(false, ViewModelActivity.IsSupportModelEnabled);
+				ClassicAssert.AreEqual(false, ViewModelActivity.IsSupportModelSelected);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -194,28 +195,28 @@ namespace Lotus
 				viewItems.Source = CActivity.Activities;
 				
 				// Общие данные
-				Assert.AreEqual(10, viewItems.Count);
-				Assert.AreEqual(true, CollectionViewModelActivity.IsNullable);
-				Assert.AreEqual(false, viewItems.IsReadOnly);
-				Assert.AreEqual(true, viewItems.IsFixedSize);
+				ClassicAssert.AreEqual(10, viewItems.Count);
+				ClassicAssert.AreEqual(true, CollectionViewModelActivity.IsNullable);
+				ClassicAssert.AreEqual(false, viewItems.IsReadOnly);
+				ClassicAssert.AreEqual(true, viewItems.IsFixedSize);
 
 				// Проверка имени 
 				for (var i = 0; i < CActivity.Activities.Length; i++)
 				{
-					Assert.AreEqual(viewItems[i].ToString(), CActivity.Activities[i].ToString());
+					ClassicAssert.AreEqual(viewItems[i].ToString(), CActivity.Activities[i].ToString());
 				}
 
 				// Сортировка
 				viewItems.SortAscending();
 				for (var i = 0; i < CActivity.Activities.Length; i++)
 				{
-					Assert.AreEqual(CActivity.Activities[i].Price, viewItems[i].Model.Price);
+					ClassicAssert.AreEqual(CActivity.Activities[i].Price, viewItems[i].Model.Price);
 				}
 
 				viewItems.SortDescending();
 				for (var i = 0; i < CActivity.Activities.Length; i++)
 				{
-					Assert.AreEqual(CActivity.Activities[9 - i].Price, viewItems[i].Model.Price);
+					ClassicAssert.AreEqual(CActivity.Activities[9 - i].Price, viewItems[i].Model.Price);
 				}
 
 				// Фильтрация
@@ -224,13 +225,13 @@ namespace Lotus
 				{
 					return activity.Price > 5;
 				};
-				Assert.AreEqual(5, viewItems.Count);
+				ClassicAssert.AreEqual(5, viewItems.Count);
 				viewItems.SortDescending();
-				Assert.AreEqual(10, viewItems[0].Model.Price);
-				Assert.AreEqual(9, viewItems[1].Model.Price);
-				Assert.AreEqual(8, viewItems[2].Model.Price);
-				Assert.AreEqual(7, viewItems[3].Model.Price);
-				Assert.AreEqual(6, viewItems[4].Model.Price);
+				ClassicAssert.AreEqual(10, viewItems[0].Model.Price);
+				ClassicAssert.AreEqual(9, viewItems[1].Model.Price);
+				ClassicAssert.AreEqual(8, viewItems[2].Model.Price);
+				ClassicAssert.AreEqual(7, viewItems[3].Model.Price);
+				ClassicAssert.AreEqual(6, viewItems[4].Model.Price);
 
 				// Удаление
 				//viewItems.RemoveAll()

@@ -30,7 +30,7 @@ namespace Lotus
 			системных/межплатформенных сообщений, так и всех сообщений от бизнес-логики приложения.
 
 			## Использование
-			1. Реализовать интерфейс(логгер) \ref Lotus.Core.ILoggerView для вывода и отображения сообщений
+			1. Реализовать интерфейс(логгер) \ref Lotus.Core.ILotusLoggerView для вывода и отображения сообщений
 			2. Присоединить объект-логгер к свойству \ref Lotus.Core.XLogger.Logger
          * @{
          */
@@ -120,9 +120,9 @@ namespace Lotus
 			/// <summary>
 			/// Краткая трассировка сообщения с указанием файла, строки и метода
 			/// </summary>
-			public readonly String TraceShort 
+			public readonly String TraceShort
 			{
-				get { return MemberName + " [" + Path.GetFileNameWithoutExtension(FilePath) + ":" + LineNumber.ToString() + "]"; } 
+				get { return MemberName + " [" + Path.GetFileNameWithoutExtension(FilePath) + ":" + LineNumber.ToString() + "]"; }
 			}
 			#endregion
 
@@ -175,24 +175,24 @@ namespace Lotus
 			public void ParseTrace(String trace)
 			{
 				var items = trace.Split(XChar.SeparatorNewCarriageLine);
-				if(items.Length > 0)
+				if (items.Length > 0)
 				{
 					Text = items[0];
 
-					if(items.Length > 1)
+					if (items.Length > 1)
 					{
 						var data = items[1];
 
 						// Находим имя файла
 						var index_file = data.IndexOf("(at");
-						if(index_file > -1)
+						if (index_file > -1)
 						{
 							// Формируем имя метода
 							MemberName = data.Remove(index_file);
 
 							// Находим последнюю точку
 							var index_dot = MemberName.LastIndexOf('.');
-							if(index_dot > -1)
+							if (index_dot > -1)
 							{
 								// Удаляем названия пространства имен
 								MemberName = MemberName.Remove(0, index_dot);
@@ -208,7 +208,7 @@ namespace Lotus
 
 							// Находим двоеточие и удаляем до него
 							var index_colon = FilePath.LastIndexOf(':');
-							if(index_colon > -1)
+							if (index_colon > -1)
 							{
 								FilePath = FilePath.Remove(index_colon);
 								FilePath = Path.GetFileNameWithoutExtension(FilePath);
@@ -281,7 +281,7 @@ namespace Lotus
 					// Удаляем все аргументы
 					var start = member_name.IndexOf('(');
 					var end = member_name.IndexOf(')');
-					if(end - start > 1)
+					if (end - start > 1)
 					{
 						member_name = member_name.Remove(start + 1, end - start);
 					}

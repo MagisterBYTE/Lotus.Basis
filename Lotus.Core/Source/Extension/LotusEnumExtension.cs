@@ -101,7 +101,7 @@ namespace Lotus
 			/// <param name="enumValue">Экземпляр перечисления</param>
 			/// <returns>Найденный атрибут</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType GetAttributeOfType<TType>(this Enum enumValue) where TType : Attribute
+			public static TType? GetAttributeOfType<TType>(this Enum enumValue) where TType : Attribute
 			{
 				var type = enumValue.GetType();
 				var member_info = type.GetMember(enumValue.ToString());
@@ -116,7 +116,7 @@ namespace Lotus
 			/// <param name="enumValue">Экземпляр перечисления</param>
 			/// <returns>Описание либо имя перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetDescriptionOrName(this Enum enumValue)
+			public static String? GetDescriptionOrName(this Enum enumValue)
 			{
 				Type type_enum = enumValue.GetType();
 				return XEnum.GetDescriptionOrName(type_enum, enumValue);
@@ -129,7 +129,7 @@ namespace Lotus
 			/// <param name="enumValue">Экземпляр перечисления</param>
 			/// <returns>Аббревиатура либо имя перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetAbbreviationOrName(this Enum enumValue)
+			public static String? GetAbbreviationOrName(this Enum enumValue)
 			{
 				Type type_enum = enumValue.GetType();
 				return XEnum.GetAbbreviationOrName(type_enum, enumValue);

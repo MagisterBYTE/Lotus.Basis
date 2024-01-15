@@ -36,7 +36,7 @@ namespace Lotus
 			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent);
+			ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy? parent);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ namespace Lotus
 		/// <typeparam name="TViewModelHierarchy">Тип элемента ViewModel</typeparam>
 		/// <typeparam name="TModel">Тип модели</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public class CollectionViewModelHierarchy<TViewModelHierarchy, TModel> : CollectionViewModel<TViewModelHierarchy, TModel>, 
+		public class CollectionViewModelHierarchy<TViewModelHierarchy, TModel> : CollectionViewModel<TViewModelHierarchy, TModel>,
 			ILotusCollectionViewModelHierarchy
 			where TViewModelHierarchy : ILotusViewModelHierarchy
 			where TModel : class
@@ -80,7 +80,7 @@ namespace Lotus
 			/// <param name="owner">Коллекция владелец</param>
 			/// <returns>Элемент ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TViewModelHierarchy Build(TModel model, ILotusViewModelHierarchy parent, ILotusCollectionViewModelHierarchy owner)
+			public static TViewModelHierarchy Build(TModel model, ILotusViewModelHierarchy? parent, ILotusCollectionViewModelHierarchy owner)
 			{
 				var node_view = owner.CreateViewModelHierarchy(model, parent);
 				node_view.IParent = parent;
@@ -154,7 +154,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void BuildFromParent(ILotusViewModelHierarchy parent, ILotusCollectionViewModelHierarchy owner)
 			{
-				if(parent != null)
+				if (parent != null)
 				{
 					// Получаем данные
 					var data = parent.Model;
@@ -230,7 +230,7 @@ namespace Lotus
 			/// <param name="owner">Коллекция владелец</param>
 			/// <returns>Элемент ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TViewModelHierarchy BuildFilter(TModel model, ILotusViewModelHierarchy parent, 
+			public static TViewModelHierarchy BuildFilter(TModel model, ILotusViewModelHierarchy? parent,
 				Predicate<TModel> filter, ILotusCollectionViewModelHierarchy owner)
 			{
 				var node_root_view = owner.CreateViewModelHierarchy(model, parent);
@@ -381,8 +381,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual ILotusViewModel<TModelData> CreateViewModel<TModelData>(TModelData model)
 			{
-				return null;
-			}
+                throw new NotImplementedException("CreateViewModel must be implemented");
+            }
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -402,9 +402,9 @@ namespace Lotus
 					}
 					else
 					{
-						if (mFilter != null)
+						if (_filter != null)
 						{
-							TViewModelHierarchy view_item_hierarchy = BuildFilter(data, mFilter, this);
+							TViewModelHierarchy view_item_hierarchy = BuildFilter(data, _filter, this);
 							Add(view_item_hierarchy);
 						}
 					}
@@ -499,12 +499,14 @@ namespace Lotus
 			/// Создание конкретной ViewModel для указанной модели
 			/// </summary>
 			/// <param name="model">Модель</param>
+			/// <param name="parent">Родительская модель</param>
 			/// <returns>ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model, ILotusViewModelHierarchy parent)
+			public virtual ILotusViewModelHierarchy CreateViewModelHierarchy(System.Object model,
+				ILotusViewModelHierarchy? parent)
 			{
-				return null;
-			}
+                throw new NotImplementedException("Model must be type <JObject>");
+            }
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -582,7 +584,7 @@ namespace Lotus
 			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public override Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 				return true;
 			}
@@ -595,7 +597,7 @@ namespace Lotus
 			/// <param name="data">Объект, данные которого изменились</param>
 			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			public override void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public override void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 				base.OnNotifyUpdated(ownedObject, data, dataName);
 			}

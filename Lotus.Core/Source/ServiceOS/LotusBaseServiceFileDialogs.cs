@@ -35,7 +35,7 @@ namespace Lotus
 			/// <param name="extension">Расширение файла без точки или список расширений или null</param>
 			/// <returns>Полное имя существующего файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			String Open(String title, String directory, String extension);
+			String Open(String title, String directory, String? extension);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -47,7 +47,7 @@ namespace Lotus
 			/// <param name="extension">Расширение файла без точки</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			String Save(String title, String directory, String defaultName, String extension);
+			String Save(String title, String directory, String defaultName, String? extension);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -211,7 +211,7 @@ namespace Lotus
 			/// <param name="extension">Расширение файла без точки</param>
 			/// <returns>Полное имя существующего файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Open(String title, String directory, String extension)
+			public static String Open(String title, String directory, String? extension)
 			{
 				return FileDialogs.Open(title, directory, extension);
 			}
@@ -278,7 +278,7 @@ namespace Lotus
 			/// <param name="extension">Расширение файла без точки</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Save(String title, String directory, String defaultName, String extension)
+			public static String Save(String title, String directory, String defaultName, String? extension)
 			{
 				return FileDialogs.Save(title, directory, defaultName, extension);
 			}

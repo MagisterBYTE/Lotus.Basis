@@ -13,8 +13,8 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Reflection;
 using System.ComponentModel;
+using System.Reflection;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -102,7 +102,7 @@ namespace Lotus
 			/// <param name="viewInstance">Экземпляр объекта представления</param>
 			/// <param name="viewMemberName">Имя члена объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CBindingReflection(System.Object modelInstance, String modelMemberName, System.Object viewInstance, 
+			public CBindingReflection(System.Object modelInstance, String modelMemberName, System.Object viewInstance,
 				String viewMemberName)
 			{
 				SetModel(modelInstance, modelMemberName);
@@ -136,7 +136,7 @@ namespace Lotus
 			{
 				ResetModel(modelInstance);
 
-				_modelMember = SetMemberType(modelInstance, memberName, ref _modelMemberType);
+				_modelMember = SetMemberType(modelInstance, memberName, _modelMemberType);
 				if (_modelMember != null)
 				{
 					_modelMemberName = memberName;
@@ -155,7 +155,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetModelValue()
 			{
-				return _modelMember.GetMemberValue(_modelInstance);
+				return _modelMember.GetMemberValue(_modelInstance)!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected override void UpdateModelProperty(Object sender, PropertyChangedEventArgs args)
+			protected override void UpdateModelProperty(Object? sender, PropertyChangedEventArgs args)
 			{
 				if (_isEnabled)
 				{
@@ -186,7 +186,7 @@ namespace Lotus
 							{
 								if (_isStringView)
 								{
-									_viewMember.SetMemberValue(_viewInstance, value.ToString());
+									_viewMember.SetMemberValue(_viewInstance, value?.ToString()!);
 								}
 								else
 								{
@@ -224,15 +224,16 @@ namespace Lotus
 			public override void SetView(System.Object viewInstance, String memberName)
 			{
 				ResetView(viewInstance);
-				_viewMember = SetMemberType(viewInstance, memberName, ref _viewMemberType);
+				_viewMember = SetMemberType(viewInstance, memberName, _viewMemberType);
 				if (_viewMember != null)
 				{
 					_viewMemberName = memberName;
-				}
-				if(_viewMember.GetMemberType() == typeof(String))
-				{
-					_isStringView = true;
-				}
+
+                    if (_viewMember.GetMemberType() == typeof(String))
+                    {
+                        _isStringView = true;
+                    }
+                }
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -247,7 +248,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override System.Object GetViewValue()
 			{
-				return _viewMember.GetMemberValue(_viewInstance);
+				return _viewMember.GetMemberValue(_viewInstance)!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -257,7 +258,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected override void UpdateViewProperty(Object sender, PropertyChangedEventArgs args)
+			protected override void UpdateViewProperty(Object? sender, PropertyChangedEventArgs args)
 			{
 				if (_isEnabled)
 				{

@@ -61,7 +61,7 @@ namespace Lotus
 			/// <summary>
 			/// Расширение файла по умолчанию
 			/// </summary>
-			public static String DefaultExt = XFileExtension.JSOND;
+			public static String DefaultExt = XFileExtension.JSON_D;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
@@ -139,7 +139,7 @@ namespace Lotus
 			/// <param name="useTypeName">Использовать имя типа</param>
 			//---------------------------------------------------------------------------------------------------------
 			public void AddDefaultConverters(Boolean useTypeName)
-            {
+			{
 				mSerializer.Converters.Add(CColorConverter.Instance);
 #if UNITY_2017_1_OR_NEWER
 				mSerializer.Converters.Add(CUnityColor32Converter.Instance);
@@ -219,7 +219,7 @@ namespace Lotus
 				if (parameters == null) parameters = new CParameters("SerializerJson");
 				parameters.AddObject(this.Name, this, false);
 
-				if(instance is ILotusBeforeSave before_save)
+				if (instance is ILotusBeforeSave before_save)
 				{
 					before_save.OnBeforeSave(parameters);
 				}
@@ -242,7 +242,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override System.Object LoadFrom(String fileName, CParameters? parameters = null)
+			public override System.Object? LoadFrom(String fileName, CParameters? parameters = null)
 			{
 				// Формируем правильный путь
 				var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
@@ -256,19 +256,19 @@ namespace Lotus
 				return result;
 			}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Загрузка объекта из файла
-			/// </summary>
-			/// <typeparam name="TResultType">Тип объекта</typeparam>
-			/// <param name="fileName">Имя файла</param>
-			/// <param name="parameters">Параметры загрузки</param>
-			/// <returns>Объект</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override TResultType LoadFrom<TResultType>(String fileName, CParameters? parameters = null)
-			{
-				// Формируем правильный путь
-				var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
+            //---------------------------------------------------------------------------------------------------------
+            /// <summary>
+            /// Загрузка объекта из файла
+            /// </summary>
+            /// <typeparam name="TResultType">Тип объекта</typeparam>
+            /// <param name="fileName">Имя файла</param>
+            /// <param name="parameters">Параметры загрузки</param>
+            /// <returns>Объект</returns>
+            //---------------------------------------------------------------------------------------------------------
+            public override TResultType? LoadFrom<TResultType>(String fileName, CParameters? parameters = null) where TResultType : default
+            {
+                // Формируем правильный путь
+                var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
 
 				// Читаем данные
 				var string_json = File.ReadAllText(path);
@@ -277,7 +277,7 @@ namespace Lotus
 				var string_reader = new StringReader(string_json);
 
 				// Читаем объект
-				TResultType result = LoadFrom<TResultType>(string_reader, parameters);
+				var result = LoadFrom<TResultType>(string_reader, parameters);
 				string_reader.Close();
 
 				return result;
@@ -291,7 +291,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object LoadFromString(String stringJson, CParameters? parameters = null)
+			public System.Object? LoadFromString(String stringJson, CParameters? parameters = null)
 			{
 				// Читаем объект
 				var result = JsonConvert.DeserializeObject(stringJson);
@@ -316,9 +316,9 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TResultType LoadFrom<TResultType>(TextReader textReader, CParameters? parameters = null)
+			public TResultType? LoadFrom<TResultType>(TextReader textReader, CParameters? parameters = null)
 			{
-				TResultType result = default;
+				TResultType? result = default;
 
 				using (JsonReader reader = new JsonTextReader(textReader))
 				{

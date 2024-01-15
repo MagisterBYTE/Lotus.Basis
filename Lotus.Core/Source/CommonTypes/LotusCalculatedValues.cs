@@ -27,7 +27,7 @@ namespace Lotus
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
 		[Serializable]
-		public class CIntCalculated : PropertyChangedBase, ICloneable, ILotusOwnedObject, ILotusNotCalculation
+		public class IntCalculated : PropertyChangedBase, ICloneable, ILotusOwnedObject, ILotusNotCalculation
 		{
 			#region ======================================= СТАТИЧЕСКИЕ МЕТОДЫ ========================================
 			//---------------------------------------------------------------------------------------------------------
@@ -37,10 +37,10 @@ namespace Lotus
 			/// <param name="data">Строка данных</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CIntCalculated DeserializeFromString(String data)
+			public static IntCalculated DeserializeFromString(String data)
 			{
 				var int_value = XNumbers.ParseInt(data, 0);
-				return new CIntCalculated(int_value);
+				return new IntCalculated(int_value);
 			}
 			#endregion
 
@@ -68,7 +68,7 @@ namespace Lotus
 				set
 				{
 					_value = value;
-					if(_owner != null)
+					if (_owner != null)
 					{
 						_owner.OnNotifyUpdated(this, _value, nameof(Value));
 					}
@@ -138,7 +138,7 @@ namespace Lotus
 			/// Владелец объекта
 			/// </summary>
 			[XmlIgnore]
-			public ILotusOwnerObject IOwner
+			public ILotusOwnerObject? IOwner
 			{
 				get { return _owner; }
 				set { _owner = value; }
@@ -175,7 +175,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="value">Значение</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CIntCalculated(Int32 value)
+			public IntCalculated(Int32 value)
 			{
 				_value = value;
 			}
@@ -187,7 +187,7 @@ namespace Lotus
 			/// <param name="value">Значение</param>
 			/// <param name="ownerObject">Владелец значения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CIntCalculated(Int32 value, ILotusOwnerObject ownerObject)
+			public IntCalculated(Int32 value, ILotusOwnerObject ownerObject)
 			{
 				_value = value;
 				_owner = ownerObject;

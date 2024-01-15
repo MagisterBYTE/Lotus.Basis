@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -101,7 +102,7 @@ namespace Lotus
 				filter_health.Include<THealth>().Include<TPlayer>();
 
 				var filter_entities = filter_health.GetEntities();
-				Assert.AreEqual(filter_health.CountEntities, 2);
+				ClassicAssert.AreEqual(filter_health.CountEntities, 2);
 				for (var i = 0; i < filter_health.CountEntities; i++)
                 {
 					ref var health = ref world.GetComponent<THealth>(filter_entities[i]);
@@ -113,7 +114,7 @@ namespace Lotus
 
 				filter_health.Include<TDeadStatus>();
 				filter_entities = filter_health.GetEntities();
-				Assert.AreEqual(filter_health.CountEntities, 0);
+				ClassicAssert.AreEqual(filter_health.CountEntities, 0);
 				for (var i = 0; i < filter_health.CountEntities; i++)
 				{
 					ref var health = ref world.GetComponent<THealth>(filter_entities[i]);
@@ -123,15 +124,15 @@ namespace Lotus
 					player.Id = 17;
 				}
 
-				Assert.AreEqual(world.HasComponent<TWeapon>(pety.Id), true);
-				Assert.AreEqual(world.HasComponent<THealth>(pety.Id), true);
-				Assert.AreEqual(world.HasComponent<TPlayer>(pety.Id), true);
+				ClassicAssert.AreEqual(world.HasComponent<TWeapon>(pety.Id), true);
+				ClassicAssert.AreEqual(world.HasComponent<THealth>(pety.Id), true);
+				ClassicAssert.AreEqual(world.HasComponent<TPlayer>(pety.Id), true);
 
-				Assert.AreEqual(world.HasComponent<TWeapon>(sany.Id), true);
-				Assert.AreEqual(world.HasComponent<THealth>(sany.Id), true);
+				ClassicAssert.AreEqual(world.HasComponent<TWeapon>(sany.Id), true);
+				ClassicAssert.AreEqual(world.HasComponent<THealth>(sany.Id), true);
 
-				Assert.AreEqual(world.HasComponent<THealth>(igor.Id), true);
-				Assert.AreEqual(world.HasComponent<TPlayer>(igor.Id), true);
+				ClassicAssert.AreEqual(world.HasComponent<THealth>(igor.Id), true);
+				ClassicAssert.AreEqual(world.HasComponent<TPlayer>(igor.Id), true);
 			}
 		}
 	}

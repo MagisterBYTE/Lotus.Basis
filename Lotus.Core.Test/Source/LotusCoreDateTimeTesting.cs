@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -80,8 +81,8 @@ namespace Lotus
 					var list_minutes = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Minutely, 30);
 					list_minutes.AssingTimePeriod(from, to_minut);
 
-					Assert.AreEqual(list_minutes.Count, count_minut + 1 - 17);
-					Assert.AreEqual(list_minutes.CountMinutes, count_minut - 17);
+					ClassicAssert.AreEqual(list_minutes.Count, count_minut + 1 - 17);
+					ClassicAssert.AreEqual(list_minutes.CountMinutes, count_minut - 17);
 				}
 
 				// Проверка часов
@@ -91,8 +92,8 @@ namespace Lotus
 					var list_houres = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Hourly, 30);
 					list_houres.AssingTimePeriod(from, to_hour);
 
-					Assert.AreEqual(list_houres.Count, count_hour + 1 - 12);
-					Assert.AreEqual(list_houres.CountHours, count_hour - 12);
+					ClassicAssert.AreEqual(list_houres.Count, count_hour + 1 - 12);
+					ClassicAssert.AreEqual(list_houres.CountHours, count_hour - 12);
 				}
 
 				// Проверка дней
@@ -102,15 +103,15 @@ namespace Lotus
 					var list_days = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
 					list_days.AssingTimePeriod(from, to_day);
 
-					Assert.AreEqual(list_days.Count, count_day + 1 - 2);
-					Assert.AreEqual(list_days.CountDay, count_day - 2);
+					ClassicAssert.AreEqual(list_days.Count, count_day + 1 - 2);
+					ClassicAssert.AreEqual(list_days.CountDay, count_day - 2);
 
 					// Проверка недель
 					var to_week = new DateTime(2016, 1, 6, 12, 17, 0);
 					var list_week = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Weekly, 30);
 					list_week.AssingTimePeriod(from, to_week);
 
-					Assert.AreEqual(list_week.Count, list_week.CountWeek + 1);
+					ClassicAssert.AreEqual(list_week.Count, list_week.CountWeek + 1);
 				}
 
 				//
@@ -123,16 +124,16 @@ namespace Lotus
 					list_index.AssingTimePeriod(from_index, to_index);
 
 					var weekends = list_index.CountWeekends();
-					Assert.AreEqual(weekends, list_index.RemoveWeekends());
+					ClassicAssert.AreEqual(weekends, list_index.RemoveWeekends());
 
 					var index = list_index.GetIndexFromDate(new DateTime(2015, 8, 2));
 					DateTime find_date = list_index[index].Date;
-					Assert.AreEqual(find_date.Year, 2015);
-					Assert.AreEqual(find_date.Month, 7);
-					Assert.AreEqual(find_date.Day, 31);
+					ClassicAssert.AreEqual(find_date.Year, 2015);
+					ClassicAssert.AreEqual(find_date.Month, 7);
+					ClassicAssert.AreEqual(find_date.Day, 31);
 
-					Assert.AreEqual(list_index.GetIndexFromDate(2011, 2, 12), 0);
-					Assert.AreEqual(list_index.GetIndexFromDate(DateTime.Now), list_index.LastIndex);
+					ClassicAssert.AreEqual(list_index.GetIndexFromDate(2011, 2, 12), 0);
+					ClassicAssert.AreEqual(list_index.GetIndexFromDate(DateTime.Now), list_index.LastIndex);
 				}
 
 				//
@@ -142,21 +143,21 @@ namespace Lotus
 					var from_index = new DateTime(2012, 1, 6);
 					var to_index = new DateTime(2012, 1, 26);
 
-					Assert.AreEqual(from_index.GetInterpolatedDate(to_index, 0).Day, 6);
-					Assert.AreEqual(from_index.GetInterpolatedDate(to_index, 0.1f).Day, 8);
-					Assert.AreEqual(from_index.GetInterpolatedDate(to_index, 0.5f).Day, 16);
-					Assert.AreEqual(from_index.GetInterpolatedDate(to_index, 1).Day, 26);
+					ClassicAssert.AreEqual(from_index.GetInterpolatedDate(to_index, 0).Day, 6);
+					ClassicAssert.AreEqual(from_index.GetInterpolatedDate(to_index, 0.1f).Day, 8);
+					ClassicAssert.AreEqual(from_index.GetInterpolatedDate(to_index, 0.5f).Day, 16);
+					ClassicAssert.AreEqual(from_index.GetInterpolatedDate(to_index, 1).Day, 26);
 
 					var list = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
 
 					list.Add(new TestTimePeriod(from_index));
 					list.Add(new TestTimePeriod(to_index));
 
-					Assert.AreEqual(list.GetInterpolatedDate(-2).Day, 6);
-					Assert.AreEqual(list.GetInterpolatedDate(0).Day, 6);
-					Assert.AreEqual(list.GetInterpolatedDate(0.1f).Day, 8);
-					Assert.AreEqual(list.GetInterpolatedDate(0.5f).Day, 16);
-					Assert.AreEqual(list.GetInterpolatedDate(1).Day, 26);
+					ClassicAssert.AreEqual(list.GetInterpolatedDate(-2).Value.Day, 6);
+					ClassicAssert.AreEqual(list.GetInterpolatedDate(0).Value.Day, 6);
+					ClassicAssert.AreEqual(list.GetInterpolatedDate(0.1f).Value.Day, 8);
+					ClassicAssert.AreEqual(list.GetInterpolatedDate(0.5f).Value.Day, 16);
+					ClassicAssert.AreEqual(list.GetInterpolatedDate(1).Value.Day, 26);
 				}
 
 				//
@@ -169,63 +170,63 @@ namespace Lotus
 
 					// Удаляем до конечной даты
 					var count = list.Count;
-					Assert.AreEqual(list.TrimStart(end_date, true), count);
-					Assert.AreEqual(list.Count, 0);
+					ClassicAssert.AreEqual(list.TrimStart(end_date, true), count);
+					ClassicAssert.AreEqual(list.Count, 0);
 
 					// Удаляем до конечной даты (но ее не удаляем)
 					list.AssingTimePeriod(start_date, end_date);
 					count = list.Count;
-					Assert.AreEqual(list.TrimStart(end_date, false), count - 1);
-					Assert.AreEqual(list.DateFirst.Day, 18);
+					ClassicAssert.AreEqual(list.TrimStart(end_date, false), count - 1);
+					ClassicAssert.AreEqual(list.DateFirst.Value.Day, 18);
 
 					// Удаляем до 15 числа
 					list.AssingTimePeriod(start_date, end_date);
 					count = list.Count;
-					Assert.AreEqual(list.TrimStart(new DateTime(2019, 1, 15), true), 10);
-					Assert.AreEqual(list.DateFirst.Day, 16);
+					ClassicAssert.AreEqual(list.TrimStart(new DateTime(2019, 1, 15), true), 10);
+					ClassicAssert.AreEqual(list.DateFirst.Value.Day, 16);
 
 					// Удаляем до 15 числа (но его не удаляем)
 					list.AssingTimePeriod(start_date, end_date);
 					count = list.Count;
-					Assert.AreEqual(list.TrimStart(new DateTime(2019, 1, 15), false), 9);
-					Assert.AreEqual(list.DateFirst.Day, 15);
+					ClassicAssert.AreEqual(list.TrimStart(new DateTime(2019, 1, 15), false), 9);
+					ClassicAssert.AreEqual(list.DateFirst.Value.Day, 15);
 
 					// Удаляем выходные
 					start_date = new DateTime(2019, 6, 1);
 					end_date = new DateTime(2019, 7, 18);
 					list.AssingTimePeriod(start_date, end_date);
-					Assert.AreEqual(list[0].Date, new DateTime(2019, 6, 1)); // Суббота
-					Assert.AreEqual(list[1].Date, new DateTime(2019, 6, 2)); // Воскресенье
-					Assert.AreEqual(list[2].Date, new DateTime(2019, 6, 3)); // Понедельник
-					Assert.AreEqual(list[3].Date, new DateTime(2019, 6, 4)); // Вторник
-					Assert.AreEqual(list[4].Date, new DateTime(2019, 6, 5)); // Среда
-					Assert.AreEqual(list[5].Date, new DateTime(2019, 6, 6)); // Четверг
-					Assert.AreEqual(list[6].Date, new DateTime(2019, 6, 7)); // Пятница
-					Assert.AreEqual(list[7].Date, new DateTime(2019, 6, 8)); // Суббота
-					Assert.AreEqual(list[8].Date, new DateTime(2019, 6, 9)); // Воскресенье
-					Assert.AreEqual(list[9].Date, new DateTime(2019, 6, 10)); // Понедельник
-					Assert.AreEqual(list[10].Date, new DateTime(2019, 6, 11)); // Вторник
+					ClassicAssert.AreEqual(list[0].Date, new DateTime(2019, 6, 1)); // Суббота
+					ClassicAssert.AreEqual(list[1].Date, new DateTime(2019, 6, 2)); // Воскресенье
+					ClassicAssert.AreEqual(list[2].Date, new DateTime(2019, 6, 3)); // Понедельник
+					ClassicAssert.AreEqual(list[3].Date, new DateTime(2019, 6, 4)); // Вторник
+					ClassicAssert.AreEqual(list[4].Date, new DateTime(2019, 6, 5)); // Среда
+					ClassicAssert.AreEqual(list[5].Date, new DateTime(2019, 6, 6)); // Четверг
+					ClassicAssert.AreEqual(list[6].Date, new DateTime(2019, 6, 7)); // Пятница
+					ClassicAssert.AreEqual(list[7].Date, new DateTime(2019, 6, 8)); // Суббота
+					ClassicAssert.AreEqual(list[8].Date, new DateTime(2019, 6, 9)); // Воскресенье
+					ClassicAssert.AreEqual(list[9].Date, new DateTime(2019, 6, 10)); // Понедельник
+					ClassicAssert.AreEqual(list[10].Date, new DateTime(2019, 6, 11)); // Вторник
 
 					// Удаляем выходные
 					count = list.CountWeekends();
-					Assert.AreEqual(list.RemoveWeekends(), count);
-					Assert.AreEqual(list[0].Date, new DateTime(2019, 6, 3)); // Понедельник
-					Assert.AreEqual(list[1].Date, new DateTime(2019, 6, 4)); // Вторник
-					Assert.AreEqual(list[2].Date, new DateTime(2019, 6, 5)); // Среда
-					Assert.AreEqual(list[3].Date, new DateTime(2019, 6, 6)); // Четверг
-					Assert.AreEqual(list[4].Date, new DateTime(2019, 6, 7)); // Пятница
-					Assert.AreEqual(list[5].Date, new DateTime(2019, 6, 10)); // Понедельник
-					Assert.AreEqual(list[6].Date, new DateTime(2019, 6, 11)); // Вторник
+					ClassicAssert.AreEqual(list.RemoveWeekends(), count);
+					ClassicAssert.AreEqual(list[0].Date, new DateTime(2019, 6, 3)); // Понедельник
+					ClassicAssert.AreEqual(list[1].Date, new DateTime(2019, 6, 4)); // Вторник
+					ClassicAssert.AreEqual(list[2].Date, new DateTime(2019, 6, 5)); // Среда
+					ClassicAssert.AreEqual(list[3].Date, new DateTime(2019, 6, 6)); // Четверг
+					ClassicAssert.AreEqual(list[4].Date, new DateTime(2019, 6, 7)); // Пятница
+					ClassicAssert.AreEqual(list[5].Date, new DateTime(2019, 6, 10)); // Понедельник
+					ClassicAssert.AreEqual(list[6].Date, new DateTime(2019, 6, 11)); // Вторник
 
 					// Удаляем до 9 числа
 					list.TrimStart(new DateTime(2019, 6, 9));
-					Assert.AreEqual(list[0].Date.Month, 6);
-					Assert.AreEqual(list[0].Date.Day, 10);
+					ClassicAssert.AreEqual(list[0].Date.Month, 6);
+					ClassicAssert.AreEqual(list[0].Date.Day, 10);
 
 					// Удаляем до 10 числа (удалиться и оно)
 					list.TrimStart(new DateTime(2019, 7, 10));
-					Assert.AreEqual(list[0].Date.Month, 7);
-					Assert.AreEqual(list[0].Date.Day, 11);
+					ClassicAssert.AreEqual(list[0].Date.Month, 7);
+					ClassicAssert.AreEqual(list[0].Date.Day, 11);
 				}
 
 				//
@@ -238,22 +239,22 @@ namespace Lotus
 
 					// Удаляем все
 					var count = list.Count;
-					Assert.AreEqual(list.TrimEnd(start_date, true), count);
+					ClassicAssert.AreEqual(list.TrimEnd(start_date, true), count);
 
 					// Удаляем все за исключением первого элемента
 					list.AssingTimePeriod(start_date, end_date);
 					count = list.Count;
-					Assert.AreEqual(list.TrimEnd(start_date, false), count - 1);
+					ClassicAssert.AreEqual(list.TrimEnd(start_date, false), count - 1);
 					
 					list.AssingTimePeriod(start_date, end_date);
 					count = list.Count;
-					Assert.AreEqual(list.TrimEnd(new DateTime(2020, 2, 25)), 5);
-					Assert.AreEqual(list.DateLast.Day, 24);
+					ClassicAssert.AreEqual(list.TrimEnd(new DateTime(2020, 2, 25)), 5);
+					ClassicAssert.AreEqual(list.DateLast.Value.Day, 24);
 
 					list.AssingTimePeriod(start_date, end_date);
 					count = list.Count;
-					Assert.AreEqual(list.TrimEnd(new DateTime(2020, 2, 20), false), 9);
-					Assert.AreEqual(list.DateLast.Day, 20);
+					ClassicAssert.AreEqual(list.TrimEnd(new DateTime(2020, 2, 20), false), 9);
+					ClassicAssert.AreEqual(list.DateLast.Value.Day, 20);
 				}
 			}
 		}

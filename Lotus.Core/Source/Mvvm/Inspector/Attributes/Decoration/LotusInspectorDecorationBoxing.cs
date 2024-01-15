@@ -33,10 +33,10 @@ namespace Lotus
 #endif
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly Int32 mOffsetLeft;
-			internal readonly Int32 mOffsetTop;
-			internal readonly Int32 mOffsetRight;
-			internal readonly Int32 mOffsetBottom;
+			internal readonly Int32 _offsetLeft;
+			internal readonly Int32 _offsetTop;
+			internal readonly Int32 _offsetRight;
+			internal readonly Int32 _offsetBottom;
 			internal String _backgroundStyleName;
 			#endregion
 
@@ -46,7 +46,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 OffsetLeft
 			{
-				get { return mOffsetLeft; }
+				get { return _offsetLeft; }
 			}
 
 			/// <summary>
@@ -54,7 +54,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 OffsetTop
 			{
-				get { return mOffsetTop; }
+				get { return _offsetTop; }
 			}
 
 			/// <summary>
@@ -62,7 +62,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 OffsetRight
 			{
-				get { return mOffsetRight; }
+				get { return _offsetRight; }
 			}
 
 			/// <summary>
@@ -70,7 +70,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 OffsetBottom
 			{
-				get { return mOffsetBottom; }
+				get { return _offsetBottom; }
 			}
 
 			/// <summary>
@@ -96,13 +96,13 @@ namespace Lotus
 			/// <param name="offsetRight">Синяя компонента цвета</param>
 			/// <param name="offsetBottom">Альфа компонента цвета</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusBoxingAttribute(Int32 offsetLeft, Int32 offsetTop = 0, Int32 offsetRight = 0, 
+			public LotusBoxingAttribute(Int32 offsetLeft, Int32 offsetTop = 0, Int32 offsetRight = 0,
 				Int32 offsetBottom = 0)
 			{
-				mOffsetLeft = offsetLeft;
-				mOffsetTop = offsetTop;
-				mOffsetRight = offsetRight;
-				mOffsetBottom = offsetBottom;
+				_offsetLeft = offsetLeft;
+				_offsetTop = offsetTop;
+				_offsetRight = offsetRight;
+				_offsetBottom = offsetBottom;
 			}
 			#endregion
 		}

@@ -49,7 +49,9 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public EntityDb()
+#pragma warning disable CS8604 // Possible null reference argument.
 				: this(default)
+#pragma warning restore CS8604 // Possible null reference argument.
 			{
 
 			}
@@ -73,9 +75,9 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Наименование объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override String? ToString()
 			{
-				return base.ToString();
+				return Id.ToString();
 			}
 			#endregion
 		}
@@ -95,10 +97,12 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public EntityDbNotifyProperty()
-				: this(default(TKey))
-			{
+#pragma warning disable CS8604 // Possible null reference argument.
+                : this(default)
+#pragma warning restore CS8604 // Possible null reference argument.
+            {
 
-			}
+            }
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -119,9 +123,9 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Наименование объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override String? ToString()
 			{
-				return base.ToString();
+				return Id.ToString();
 			}
 			#endregion
 
@@ -129,7 +133,7 @@ namespace Lotus
 			/// <summary>
 			/// Событие срабатывает ПОСЛЕ изменения свойства
 			/// </summary>
-			public event PropertyChangedEventHandler PropertyChanged;
+			public event PropertyChangedEventHandler? PropertyChanged;
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -186,10 +190,12 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public EntityNameDb()
-				: this(default)
-			{
+#pragma warning disable CS8604 // Possible null reference argument.
+                : this(default)
+#pragma warning restore CS8604 // Possible null reference argument.
+            {
 
-			}
+            }
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -211,9 +217,9 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Наименование объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override String? ToString()
 			{
-				return Name;
+				return $"Name: {Name} | Id: {Id}";
 			}
 			#endregion
 		}

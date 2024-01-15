@@ -11,9 +11,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -64,7 +61,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountMinutes
 			{
-				get { return (DateLast - DateFirst).Minutes; }
+				get { return (DateLast - DateFirst).HasValue ? (DateLast - DateFirst)!.Value.Minutes : 0; }
 			}
 
 			/// <summary>
@@ -72,7 +69,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountHours
 			{
-				get { return (DateLast - DateFirst).Hours; }
+				get { return (DateLast - DateFirst).HasValue ? (DateLast - DateFirst)!.Value.Hours : 0; }
 			}
 
 			/// <summary>
@@ -80,7 +77,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 CountDay
 			{
-				get { return (DateLast - DateFirst).Days; }
+				get { return (DateLast - DateFirst).HasValue ? (DateLast - DateFirst)!.Value.Days : 0; }
 			}
 
 			/// <summary>
@@ -90,7 +87,7 @@ namespace Lotus
 			{
 				get
 				{
-					Double count_days = (DateLast - DateFirst).Days;
+					Double count_days = (DateLast - DateFirst).HasValue ? (DateLast - DateFirst)!.Value.Days : 0;
 					return (Int32)Math.Ceiling(count_days / 7.0);
 				}
 			}
@@ -101,25 +98,25 @@ namespace Lotus
 			/// <summary>
 			/// Первый объект даты-времени
 			/// </summary>
-			public DateTime DateFirst
+			public DateTime? DateFirst
 			{
-				get { return ItemFirst.Date; }
+				get { return ItemFirst?.Date; }
 			}
 
 			/// <summary>
 			/// Предпоследний объект даты-времени
 			/// </summary>
-			public DateTime DatePenultimate
+			public DateTime? DatePenultimate
 			{
-				get { return ItemPenultimate.Date; }
+				get { return ItemPenultimate?.Date; }
 			}
 
 			/// <summary>
 			/// Последний объект даты-времени
 			/// </summary>
-			public DateTime DateLast
+			public DateTime? DateLast
 			{
-				get { return ItemLast.Date; }
+				get { return ItemLast?.Date; }
 			}
 			#endregion
 
@@ -141,7 +138,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="capacity">Начальная максимальная емкость списка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ListTimeInterval(Int32 capacity) 
+			public ListTimeInterval(Int32 capacity)
 				: base(capacity)
 			{
 				_timeInterval = TTimeInterval.Daily;
@@ -347,7 +344,7 @@ namespace Lotus
 			/// <param name="index">Индекс</param>
 			/// <returns>Дата</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public DateTime GetInterpolatedDate(Single index)
+			public DateTime? GetInterpolatedDate(Single index)
 			{
 				if (index > 0)
 				{
@@ -513,7 +510,7 @@ namespace Lotus
 			/// <param name="endData">Дата окончания периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult DublicateListPeriod<TResult>(DateTime startDate, DateTime endData)
+			public virtual TResult? DublicateListPeriod<TResult>(DateTime startDate, DateTime endData)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				var start_index = GetIndexFromDate(startDate);
@@ -530,7 +527,7 @@ namespace Lotus
 			/// <param name="timeInterval">Временной интервал</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult GetConvertedListInterval<TResult>(TTimeInterval timeInterval)
+			public virtual TResult? GetConvertedListInterval<TResult>(TTimeInterval timeInterval)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				return GetConvertedListPeriodAndInterval<TResult>(timeInterval, 0, LastIndex);
@@ -546,10 +543,10 @@ namespace Lotus
 			/// <param name="endIndex">Конечный индекс периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult GetConvertedListPeriodAndInterval<TResult>(TTimeInterval timeInterval, Int32 startIndex, Int32 endIndex)
+			public virtual TResult? GetConvertedListPeriodAndInterval<TResult>(TTimeInterval timeInterval, Int32 startIndex, Int32 endIndex)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
-				TResult list = null;
+				TResult? list = null;
 				switch (_timeInterval)
 				{
 					case TTimeInterval.Minutely:
@@ -673,7 +670,10 @@ namespace Lotus
 						break;
 				}
 
-				list.SetIndexElement();
+				if (list != null)
+				{
+					list.SetIndexElement();
+				}
 				return list;
 			}
 
@@ -687,7 +687,7 @@ namespace Lotus
 			/// <param name="endData">Дата окончания периода</param>
 			/// <returns>Список</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResult GetConvertedListPeriodAndInterval<TResult>(TTimeInterval timeInterval, DateTime startDate, DateTime endData)
+			public virtual TResult? GetConvertedListPeriodAndInterval<TResult>(TTimeInterval timeInterval, DateTime startDate, DateTime endData)
 				where TResult : ListTimeInterval<TItemTimeable>, new()
 			{
 				var index_from = GetIndexFromDate(startDate);

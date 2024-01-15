@@ -13,8 +13,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 //---------------------------------------------------------------------------------------------------------------------
 #if USE_WINDOWS
 using Lotus.Windows;
@@ -35,9 +33,9 @@ namespace Lotus
 		public class CUIContextMenuItem : ILotusDuplicate<CUIContextMenuItem>
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			public ILotusViewModel ViewModel;
-			public Action<ILotusViewModel> OnAction;
-			public Action<ILotusViewModel> OnAfterAction;
+			public ILotusViewModel? ViewModel;
+			public Action<ILotusViewModel>? OnAction;
+			public Action<ILotusViewModel>? OnAfterAction;
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -56,7 +54,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="viewModel">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(ILotusViewModel viewModel)
+			public CUIContextMenuItem(ILotusViewModel? viewModel)
 				: this(viewModel, String.Empty, null, null)
 			{
 			}
@@ -68,7 +66,7 @@ namespace Lotus
 			/// <param name="viewModel">Элемент отображения</param>
 			/// <param name="name">Имя элемента меню</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(ILotusViewModel viewModel, String name)
+			public CUIContextMenuItem(ILotusViewModel? viewModel, String name)
 				: this(viewModel, name, null, null)
 			{
 			}
@@ -93,7 +91,7 @@ namespace Lotus
 			/// <param name="name">Имя элемента меню</param>
 			/// <param name="onAction">Обработчик событие основного действия</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(ILotusViewModel viewModel, String name, Action<ILotusViewModel> onAction)
+			public CUIContextMenuItem(ILotusViewModel? viewModel, String name, Action<ILotusViewModel> onAction)
 				: this(viewModel, name, onAction, null)
 			{
 			}
@@ -107,8 +105,8 @@ namespace Lotus
 			/// <param name="onAction">Обработчик событие основного действия</param>
 			/// <param name="onAfterAction">Дополнительный обработчик события после основного действия</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenuItem(ILotusViewModel viewModel, String name, Action<ILotusViewModel> onAction, 
-				Action<ILotusViewModel> onAfterAction)
+			public CUIContextMenuItem(ILotusViewModel? viewModel, String name, Action<ILotusViewModel>? onAction,
+				Action<ILotusViewModel>? onAfterAction)
 			{
 				ViewModel = viewModel;
 				OnAction = onAction;
@@ -128,7 +126,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры дублирования объекта</param>
 			/// <returns>Дубликат объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CUIContextMenuItem Duplicate(CParameters parameters = null)
+			public virtual CUIContextMenuItem Duplicate(CParameters? parameters = null)
 			{
 				var item = new CUIContextMenuItem();
 				item.ViewModel = ViewModel;
@@ -256,13 +254,13 @@ namespace Lotus
 			protected static void OnRemoveItemClick(ILotusViewModel viewModel)
 			{
 				// Удаляем с отображения
-				if(viewModel.IOwner is ILotusOwnerObject owner)
+				if (viewModel.IOwner is ILotusOwnerObject owner)
 				{
 					owner.DetachOwnedObject(viewModel, true);
 				}
 				if (viewModel.IOwner is IList list)
 				{
-					if(list.IndexOf(viewModel) != -1)
+					if (list.IndexOf(viewModel) != -1)
 					{
 						list.Remove(viewModel);
 					}
@@ -271,7 +269,7 @@ namespace Lotus
 				// Удаляем реальные данные
 				if (viewModel.Model is ILotusOwnerObject owner_data_context)
 				{
-					owner_data_context.DetachOwnedObject(viewModel.Model as ILotusOwnedObject, true);
+					owner_data_context.DetachOwnedObject((viewModel.Model as ILotusOwnedObject)!, true);
 				}
 				else
 				{
@@ -303,7 +301,7 @@ namespace Lotus
 				if (viewModel != null && viewModel.IOwner is IList list)
 				{
 					var index = list.IndexOf(viewModel);
-					if(index > 0)
+					if (index > 0)
 					{
 						list.MoveObjectUp(index);
 					}
@@ -344,8 +342,8 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			public ILotusViewModel ViewModel;
-			public Boolean IsCreatedItems;
+			public ILotusViewModel? ViewModel;
+			public Boolean? IsCreatedItems;
 			public List<CUIContextMenuItem> Items;
 			#endregion
 
@@ -366,7 +364,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="viewModel">Элемент отображения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenu(ILotusViewModel viewModel)
+			public CUIContextMenu(ILotusViewModel? viewModel)
 				: this(viewModel, null)
 			{
 			}
@@ -378,7 +376,7 @@ namespace Lotus
 			/// <param name="viewModel">Элемент отображения</param>
 			/// <param name="items">Набор элементов меню</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CUIContextMenu(ILotusViewModel viewModel, params CUIContextMenuItem[] items)
+			public CUIContextMenu(ILotusViewModel? viewModel, params CUIContextMenuItem[]? items)
 			{
 				ViewModel = viewModel;
 				if (items != null && items.Length > 0)

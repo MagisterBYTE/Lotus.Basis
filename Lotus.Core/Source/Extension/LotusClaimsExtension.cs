@@ -37,7 +37,7 @@ namespace Lotus
 			/// <param name="claimType">Тип утверждения</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String FindFirstValue(this IEnumerable<Claim> claims, String claimType)
+			public static String? FindFirstValue(this IEnumerable<Claim> claims, String claimType)
 			{
 				foreach (var item in claims)
 				{

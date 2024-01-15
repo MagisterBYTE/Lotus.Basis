@@ -12,8 +12,8 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -220,7 +220,7 @@ namespace Lotus
 			/// <summary>
 			/// Массив символов табуляции
 			/// </summary>
-			public static readonly String[] Depths = new String[] 
+			public static readonly String[] Depths = new String[]
 			{
 				"",
 				"\t",
@@ -242,7 +242,7 @@ namespace Lotus
 			/// <summary>
 			/// Массив символов пробела
 			/// </summary>
-			public static readonly String[] Spaces = new String[] 
+			public static readonly String[] Spaces = new String[]
 			{
 				"",
 				new String(XChar.Space, 1),

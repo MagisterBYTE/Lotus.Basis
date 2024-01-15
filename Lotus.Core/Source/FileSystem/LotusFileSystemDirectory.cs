@@ -11,7 +11,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.ComponentModel;
 using System.IO;
 //=====================================================================================================================
 namespace Lotus
@@ -27,7 +26,7 @@ namespace Lotus
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
 		[Serializable]
-		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity, 
+		public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity,
 			ILotusViewModelBuilder, ILotusModelExpanded
 		{
 			#region ======================================= СТАТИЧЕСКИЕ МЕТОДЫ ========================================
@@ -128,10 +127,10 @@ namespace Lotus
 				_name = _info.Name;
 				_entities = new ListArray<ILotusFileSystemEntity>();
 				_entities.IsNotify = true;
-				if(_info != null)
+				if (_info != null)
 				{
 					var path = Path.Combine(_info.FullName, "Info.json");
-					if(File.Exists(path))
+					if (File.Exists(path))
 					{
 						_parameters = new CParameters();
 						_parameters.Load(path);
@@ -209,7 +208,7 @@ namespace Lotus
 			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 				return true;
 			}
@@ -222,7 +221,7 @@ namespace Lotus
 			/// <param name="data">Объект, данные которого изменились</param>
 			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 
 			}
@@ -249,7 +248,7 @@ namespace Lotus
 				{
 					for (var i = 0; i < _entities.Count; i++)
 					{
-						if(_entities[i].CheckOne(match))
+						if (_entities[i].CheckOne(match))
 						{
 							return true;
 						}
@@ -295,11 +294,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SetModelExpanded(ILotusViewModelHierarchy viewModel, Boolean expanded)
 			{
-				if(expanded)
+				if (expanded)
 				{
 					foreach (var entity in _entities)
 					{
-						if(entity is CFileSystemDirectory directory)
+						if (entity is CFileSystemDirectory directory)
 						{
 							directory.GetFileSystemItemsTwoLevel();
 						}
@@ -318,8 +317,10 @@ namespace Lotus
 			/// <param name="directoryInfo">Информация о директории</param>
 			/// <returns>Элемент файловой системы представляющий собой директорию</returns>
 			//---------------------------------------------------------------------------------------------------------
-			protected CFileSystemDirectory AddDirectory(DirectoryInfo directoryInfo)
+			protected CFileSystemDirectory? AddDirectory(DirectoryInfo? directoryInfo)
 			{
+				if (directoryInfo == null) return null;
+
 				// Не создаем не нежные директории
 				if (directoryInfo.Name.Contains(".git")) return null;
 				if (directoryInfo.Name.Contains(".vs")) return null;
@@ -340,7 +341,7 @@ namespace Lotus
 			/// <param name="fileInfo">Информация о файле</param>
 			/// <returns>Элемент файловой системы представляющий собой файл</returns>
 			//---------------------------------------------------------------------------------------------------------
-			protected CFileSystemFile AddFile(FileInfo fileInfo)
+			protected CFileSystemFile? AddFile(FileInfo fileInfo)
 			{
 				// Не создаем ненужные файлы
 				if (fileInfo.Extension == ".meta") return null;
@@ -397,8 +398,8 @@ namespace Lotus
 				for (var i = 0; i < dirs_info.Length; i++)
 				{
 					DirectoryInfo dir_info = dirs_info[i];
-					CFileSystemDirectory directory = AddDirectory(dir_info);
-					if(directory != null)
+					CFileSystemDirectory? directory = AddDirectory(dir_info);
+					if (directory != null)
 					{
 						directory.GetFileSystemItems();
 					}
@@ -425,7 +426,7 @@ namespace Lotus
 				{
 					if (_entities[i] is CFileSystemDirectory directory)
 					{
-						if(directory.Entities.Count == 0)
+						if (directory.Entities.Count == 0)
 						{
 							directory.GetFileSystemItems();
 							status = true;
@@ -472,7 +473,7 @@ namespace Lotus
 				for (var i = 0; i < dirs_info.Length; i++)
 				{
 					DirectoryInfo dir_info = dirs_info[i];
-					CFileSystemDirectory sub_directory = AddDirectory(dir_info);
+					CFileSystemDirectory? sub_directory = AddDirectory(dir_info);
 
 					//// 2 уровень
 					//for (Int32 i2 = 0; i2 < dirs_info.Length; i2++)
@@ -573,7 +574,7 @@ namespace Lotus
 				for (var i = 0; i < _entities.Count; i++)
 				{
 					var file_node = _entities[i] as CFileSystemFile;
-					if (file_node != null)
+					if (file_node != null && file_node.Info != null)
 					{
 						if (file_node.Info.Name == fileInfo.Name)
 						{
@@ -592,12 +593,12 @@ namespace Lotus
 			/// <param name="dirInfo">Информация о директории</param>
 			/// <returns>Узел директории</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CFileSystemDirectory GetDirectoryNodeFromChildren(DirectoryInfo dirInfo)
+			public CFileSystemDirectory? GetDirectoryNodeFromChildren(DirectoryInfo dirInfo)
 			{
 				for (var i = 0; i < _entities.Count; i++)
 				{
 					var dir_node = _entities[i] as CFileSystemDirectory;
-					if (dir_node != null)
+					if (dir_node != null && dir_node.Info != null)
 					{
 						if (dir_node.Info.Name == dirInfo.Name)
 						{
@@ -616,12 +617,12 @@ namespace Lotus
 			/// <param name="fileInfo">Информация о файле</param>
 			/// <returns>Узел файла</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CFileSystemFile GetFileNodeFromChildren(FileInfo fileInfo)
+			public CFileSystemFile? GetFileNodeFromChildren(FileInfo fileInfo)
 			{
 				for (var i = 0; i < _entities.Count; i++)
 				{
 					var file_node = _entities[i] as CFileSystemFile;
-					if (file_node != null)
+					if (file_node != null && file_node.Info != null)
 					{
 						if (file_node.Info.Name == fileInfo.Name)
 						{
@@ -642,7 +643,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Copy(String path, Boolean isDirectoryName)
 			{
-				if(isDirectoryName)
+				if (isDirectoryName)
 				{
 					var dest_path_dir = Path.Combine(path, Info.Name);
 					if (Directory.Exists(dest_path_dir) == false)
@@ -654,7 +655,7 @@ namespace Lotus
 				for (var i = 0; i < _entities.Count; i++)
 				{
 					var file_node = _entities[i] as CFileSystemFile;
-					if (file_node != null)
+					if (file_node != null && file_node.Info != null)
 					{
 						if (isDirectoryName)
 						{

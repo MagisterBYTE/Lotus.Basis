@@ -35,11 +35,11 @@ namespace Lotus
 			internal readonly System.Object mStepValue;
 			internal readonly String _memberName;
 			internal readonly TInspectorMemberType _memberType;
-			internal String mStyleButtonLeftName;
-			internal String mStyleButtonRightName;
+			internal String _styleButtonLeftName;
+			internal String _styleButtonRightName;
 #if UNITY_EDITOR
-			internal UnityEngine.GUIStyle mStyleButtonLeft;
-			internal UnityEngine.GUIStyle mStyleButtonRight;
+			internal UnityEngine.GUIStyle _styleButtonLeft;
+			internal UnityEngine.GUIStyle _styleButtonRight;
 #endif
 			#endregion
 
@@ -73,8 +73,8 @@ namespace Lotus
 			/// </summary>
 			public String StyleButtonLeftName
 			{
-				get { return mStyleButtonLeftName; }
-				set { mStyleButtonLeftName = value; }
+				get { return _styleButtonLeftName; }
+				set { _styleButtonLeftName = value; }
 			}
 
 			/// <summary>
@@ -82,8 +82,8 @@ namespace Lotus
 			/// </summary>
 			public String StyleButtonRightName
 			{
-				get { return mStyleButtonRightName; }
-				set { mStyleButtonRightName = value; }
+				get { return _styleButtonRightName; }
+				set { _styleButtonRightName = value; }
 			}
 			#endregion
 

@@ -232,7 +232,7 @@ namespace Lotus
 			{
 				for (var i = 0; i < _lines.Count; i++)
 				{
-					if(_lines[i].RawString.Contains("//---------"))
+					if (_lines[i].RawString.Contains("//---------"))
 					{
 						_lines[i].SetLengthWithTabs(length, tabsEquiv);
 					}
@@ -269,7 +269,7 @@ namespace Lotus
 					stream_writer.WriteLine(_lines[i].RawString);
 				}
 
-				stream_writer.Write(_lines.ItemLast.RawString);
+				stream_writer.Write(_lines.ItemLast!.RawString);
 
 				stream_writer.Close();
 

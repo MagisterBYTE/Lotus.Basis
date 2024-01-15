@@ -312,7 +312,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ReadStringFromAttribute(this XmlReader xmlReader, String name, String defaultValue = "")
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return value;
@@ -331,7 +331,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean ReadBooleanFromAttribute(this XmlReader xmlReader, String name, Boolean defaultValue = false)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return XBoolean.Parse(value);
@@ -350,7 +350,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 ReadIntegerFromAttribute(this XmlReader xmlReader, String name, Int32 defaultValue = 0)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Int32.Parse(value);
@@ -369,7 +369,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int64 ReadLongFromAttribute(this XmlReader xmlReader, String name, Int64 defaultValue = -1)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Int64.Parse(value);
@@ -388,7 +388,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single ReadSingleFromAttribute(this XmlReader xmlReader, String name, Single defaultValue = 0)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return XNumbers.ParseSingle(value);
@@ -407,7 +407,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double ReadDoubleFromAttribute(this XmlReader xmlReader, String name, Double defaultValue = 0)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return XNumbers.ParseDouble(value);
@@ -423,9 +423,9 @@ namespace Lotus
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Массив целых значений, или null если данные пустые</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32[] ReadIntegersFromAttribute(this XmlReader xmlReader, String name)
+			public static Int32[]? ReadIntegersFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
@@ -452,9 +452,9 @@ namespace Lotus
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Массив вещественных значений, или null если данные пустые</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Single[] ReadSinglesFromAttribute(this XmlReader xmlReader, String name)
+			public static Single[]? ReadSinglesFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
@@ -481,9 +481,9 @@ namespace Lotus
 			/// <param name="name">Имя атрибута</param>
 			/// <returns>Массив вещественных значений, или null если данные пустые</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Double[] ReadDoublesFromAttribute(this XmlReader xmlReader, String name)
+			public static Double[]? ReadDoublesFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
@@ -514,7 +514,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TEnum ReadEnumFromAttribute<TEnum>(this XmlReader xmlReader, String name, TEnum defaultValue = default(TEnum))
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return (TEnum)Enum.Parse(typeof(TEnum), value);
@@ -532,7 +532,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static DateTime ReadDateTimeFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return DateTime.Parse(value);
@@ -552,7 +552,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static DateTime ReadDateTimeFromAttribute(this XmlReader xmlReader, String name, DateTime defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return DateTime.Parse(value);
@@ -571,7 +571,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Version ReadVersionFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return new Version(value);
@@ -591,7 +591,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Version ReadVersionFromAttribute(this XmlReader xmlReader, String name, Version defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return new Version(value);
@@ -610,7 +610,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Uri ReadUriFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return new Uri(value);
@@ -630,7 +630,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Uri ReadUriFromAttribute(this XmlReader xmlReader, String name, Uri defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return new Uri(value);
@@ -661,16 +661,18 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetAttributeValueFromName(this XmlNode @this, String attributeName, String defaultValue = "")
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					return @this.Attributes[attributeName].Value;
+					return @this.Attributes[attributeName]!.Value;
 				}
 				else
 				{
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						return @this.Attributes[upper_name].Value;
+						return @this.Attributes[upper_name]!.Value;
 					}
 					else
 					{
@@ -690,9 +692,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean GetAttributeValueFromNameAsBoolean(this XmlNode @this, String attributeName, Boolean defaultValue = false)
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					var value = @this.Attributes[attributeName].Value;
+					var value = @this.Attributes[attributeName]!.Value;
 					return XBoolean.Parse(value);
 				}
 				else
@@ -700,7 +704,7 @@ namespace Lotus
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						var value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name]!.Value;
 						return XBoolean.Parse(value);
 					}
 					else
@@ -721,9 +725,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int32 GetAttributeValueFromNameAsInteger(this XmlNode @this, String attributeName, Int32 defaultValue = 0)
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					var value = @this.Attributes[attributeName].Value;
+					var value = @this.Attributes[attributeName]!.Value;
 					return Int32.Parse(value);
 				}
 				else
@@ -731,7 +737,7 @@ namespace Lotus
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						var value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name]!.Value;
 						return Int32.Parse(value);
 					}
 					else
@@ -752,9 +758,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Int64 GetAttributeValueFromNameAsLong(this XmlNode @this, String attributeName, Int64 defaultValue = 0)
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					var value = @this.Attributes[attributeName].Value;
+					var value = @this.Attributes[attributeName]!.Value;
 					return Int64.Parse(value);
 				}
 				else
@@ -762,7 +770,7 @@ namespace Lotus
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						var value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name]!.Value;
 						return Int64.Parse(value);
 					}
 					else
@@ -783,9 +791,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single GetAttributeValueFromNameAsSingle(this XmlNode @this, String attributeName, Single defaultValue = 0)
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					var value = @this.Attributes[attributeName].Value;
+					var value = @this.Attributes[attributeName]!.Value;
 					return XNumbers.ParseSingle(value, defaultValue);
 				}
 				else
@@ -793,7 +803,7 @@ namespace Lotus
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						var value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name]!.Value;
 						return XNumbers.ParseSingle(value, defaultValue);
 					}
 					else
@@ -814,9 +824,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Double GetAttributeValueFromNameAsDouble(this XmlNode @this, String attributeName, Single defaultValue = 0)
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					var value = @this.Attributes[attributeName].Value;
+					var value = @this.Attributes[attributeName]!.Value;
 					return XNumbers.ParseDouble(value, defaultValue);
 				}
 				else
@@ -824,7 +836,7 @@ namespace Lotus
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						var value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name]!.Value;
 						return XNumbers.ParseDouble(value, defaultValue);
 					}
 					else
@@ -845,9 +857,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Decimal GetAttributeValueFromNameAsDecimal(this XmlNode @this, String attributeName, Decimal defaultValue = 0)
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					var value = @this.Attributes[attributeName].Value;
+					var value = @this.Attributes[attributeName]!.Value;
 					return XNumbers.ParseDecimal(value, defaultValue);
 				}
 				else
@@ -855,7 +869,7 @@ namespace Lotus
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						var value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name]!.Value;
 						return XNumbers.ParseDecimal(value, defaultValue);
 					}
 					else
@@ -877,9 +891,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TEnum GetAttributeValueFromNameAsEnum<TEnum>(this XmlNode @this, String attributeName, TEnum defaultValue = default(TEnum))
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					var value = @this.Attributes[attributeName].Value;
+					var value = @this.Attributes[attributeName]!.Value;
 					return (TEnum)Enum.Parse(typeof(TEnum), value);
 				}
 				else
@@ -887,7 +903,7 @@ namespace Lotus
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						var value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name]!.Value;
 						return (TEnum)Enum.Parse(typeof(TEnum), value);
 					}
 					else
@@ -903,13 +919,17 @@ namespace Lotus
 			/// </summary>
 			/// <param name="this">Узел документа XML</param>
 			/// <param name="attributeName">Имя атрибута</param>
+			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Значение атрибута</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static DateTime GetAttributeValueFromNameAsDateTime(this XmlNode @this, String attributeName)
+			public static DateTime GetAttributeValueFromNameAsDateTime(this XmlNode @this, String attributeName,
+				DateTime defaultValue = default(DateTime))
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes[attributeName] != null)
 				{
-					var value = @this.Attributes[attributeName].Value;
+					var value = @this.Attributes[attributeName]!.Value;
 					return DateTime.Parse(value);
 				}
 				else
@@ -917,12 +937,12 @@ namespace Lotus
 					var upper_name = attributeName.ToUpper();
 					if (@this.Attributes[upper_name] != null)
 					{
-						var value = @this.Attributes[upper_name].Value;
+						var value = @this.Attributes[upper_name]!.Value;
 						return DateTime.Parse(value);
 					}
 					else
 					{
-						return DateTime.Now;
+						return defaultValue;
 					}
 				}
 			}
@@ -938,14 +958,16 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Значение атрибута</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetAttributeValueFromDependentName(this XmlNode @this, String attributeName, 
+			public static String GetAttributeValueFromDependentName(this XmlNode @this, String attributeName,
 				String defaultValue = "")
 			{
+				if (@this.Attributes == null) return defaultValue;
+
 				if (@this.Attributes["name"] != null)
 				{
-					if (@this.Attributes["name"].Value == attributeName)
+					if (@this.Attributes["name"]!.Value == attributeName)
 					{
-						return @this.Attributes["value"].Value;
+						return @this.Attributes["value"]!.Value;
 					}
 					else
 					{

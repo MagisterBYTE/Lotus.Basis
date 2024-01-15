@@ -34,7 +34,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры адаптации</param>
 			/// <returns>Статус адаптации</returns>
 			//---------------------------------------------------------------------------------------------------------
-			Boolean CheckAdaptedObject<TType>(CParameters parameters = null);
+			Boolean CheckAdaptedObject<TType>(CParameters? parameters = null);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -44,7 +44,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры адаптации</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			TType GetAdaptedObject<TType>(CParameters parameters = null);
+			TType GetAdaptedObject<TType>(CParameters? parameters = null);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры дублирования объекта</param>
 			/// <returns>Дубликат объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			TType Duplicate(CParameters parameters = null);
+			TType Duplicate(CParameters? parameters = null);
 		}
 		//-------------------------------------------------------------------------------------------------------------
 		/**@}*/

@@ -16,25 +16,25 @@ namespace Lotus
 {
 	namespace Core
 	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreCollections
+        //-------------------------------------------------------------------------------------------------------------
+        /** \addtogroup CoreCollections
 		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Очередь на основе массива
-		/// </summary>
-		/// <remarks>
-		/// Реализация очереди на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
-		/// с учетом особенности реализации очереди
-		/// </remarks>
-		/// <typeparam name="TItem">Тип элемента очереди</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class QueueArray<TItem> : ListArray<TItem>
+        //-------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Очередь на основе массива
+        /// </summary>
+        /// <remarks>
+        /// Реализация очереди на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
+        /// с учетом особенности реализации очереди
+        /// </remarks>
+        /// <typeparam name="TItem">Тип элемента очереди</typeparam>
+        //-------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class QueueArray<TItem> : ListArray<TItem>
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32 mHead;
+			protected internal Int32 _head;
 			protected internal Int32 _tail;
 			#endregion
 
@@ -47,7 +47,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 Head
 			{
-				get { return mHead; }
+				get { return _head; }
 			}
 
 			/// <summary>
@@ -68,7 +68,7 @@ namespace Lotus
 			public QueueArray()
 				: base(INIT_MAX_COUNT)
 			{
-				mHead = 0;
+				_head = 0;
 				_tail = -1;
 			}
 
@@ -81,7 +81,7 @@ namespace Lotus
 			public QueueArray(Int32 maxCount)
 				: base(maxCount)
 			{
-				mHead = 0;
+				_head = 0;
 				_tail = -1;
 			}
 			#endregion
@@ -94,12 +94,12 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Элемент очереди</returns>
 			//---------------------------------------------------------------------------------------------------------
-			new public TItem this[Int32 index]
+			new public TItem? this[Int32 index]
 			{
-				get { return _arrayOfItems[(mHead + index) % _maxCount]; }
+				get { return _arrayOfItems[(_head + index) % _maxCount]; }
 				set
 				{
-					_arrayOfItems[(mHead + index) % _maxCount] = value;
+					_arrayOfItems[(_head + index) % _maxCount] = value;
 				}
 			}
 			#endregion
@@ -112,9 +112,9 @@ namespace Lotus
 			/// <param name="index">Индекс элемента очереди</param>
 			/// <returns>Элемент очереди</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem GetElement(Int32 index)
+			public TItem? GetElement(Int32 index)
 			{
-				return _arrayOfItems[(mHead + index) % _maxCount];
+				return _arrayOfItems[(_head + index) % _maxCount];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="item">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Enqueue(in TItem item)
+			public void Enqueue(in TItem? item)
 			{
 				// Если текущие количество элементов равно максимально возможному
 				if (_count == _maxCount)
@@ -145,13 +145,13 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem Dequeue()
+			public TItem? Dequeue()
 			{
 				if (_count > 0)
 				{
-					TItem item = _arrayOfItems[mHead];
-					_arrayOfItems[mHead] = default;
-					mHead = (mHead + 1) % _maxCount;
+					TItem item = _arrayOfItems[_head];
+					_arrayOfItems[_head] = default;
+					_head = (_head + 1) % _maxCount;
 					_count--;
 					return item;
 				}
@@ -173,11 +173,11 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem Peek()
+			public TItem? Peek()
 			{
 				if (_count > 0)
 				{
-					return _arrayOfItems[mHead];
+					return _arrayOfItems[_head];
 				}
 				else
 				{
@@ -198,14 +198,14 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус наличия</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public new Boolean Contains(in TItem item)
+			public new Boolean Contains(in TItem? item)
 			{
-				var index = mHead;
+				var index = _head;
 				var count = _count;
 
 				while (count-- > 0)
 				{
-					if (_arrayOfItems[index].Equals(item))
+					if (_arrayOfItems[index]!.Equals(item))
 					{
 						return true;
 					}
@@ -222,17 +222,17 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public new void Clear()
 			{
-				if (mHead < _tail)
+				if (_head < _tail)
 				{
-					Array.Clear(_arrayOfItems, mHead, _count);
+					Array.Clear(_arrayOfItems, _head, _count);
 				}
 				else
 				{
-					Array.Clear(_arrayOfItems, mHead, _maxCount - mHead);
+					Array.Clear(_arrayOfItems, _head, _maxCount - _head);
 					Array.Clear(_arrayOfItems, 0, _tail);
 				}
 
-				mHead = 0;
+				_head = 0;
 				_tail = -1;
 				_count = 0;
 			}

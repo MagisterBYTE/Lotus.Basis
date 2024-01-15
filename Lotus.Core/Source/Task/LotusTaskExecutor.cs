@@ -12,9 +12,8 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Text;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Text;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -169,7 +168,7 @@ namespace Lotus
 			/// <param name="taskName">Имя задачи</param>
 			/// <returns>Найденная задача или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CTaskHolder GetTask(String taskName)
+			public virtual CTaskHolder? GetTask(String taskName)
 			{
 				for (var i = 0; i < _tasks.Count; i++)
 				{
@@ -291,7 +290,7 @@ namespace Lotus
 			/// <param name="delayStart">Время задержки запуска выполнения задачи</param>
 			/// <param name="onCompleted">Обработчик события окончания выполнения задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void RunTask(String taskName, Single delayStart, Action onCompleted)
+			public virtual void RunTask(String taskName, Single delayStart, Action? onCompleted)
 			{
 				for (var i = 0; i < _tasks.Count; i++)
 				{

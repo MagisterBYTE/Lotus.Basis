@@ -45,7 +45,7 @@ namespace Lotus
 			{
 				get
 				{
-					if(mBindings == null)
+					if (mBindings == null)
 					{
 						mBindings = new List<CBindingBase>();
 					}
@@ -68,7 +68,7 @@ namespace Lotus
 			/// <param name="mode">Режим связывания данных между объектом модели и объектом представления</param>
 			/// <returns>Экземпляр связывания данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CBindingReflection CreateReflection(String name, System.Object model, String modelName, System.Object view, 
+			public static CBindingReflection CreateReflection(String name, System.Object model, String modelName, System.Object view,
 				String viewName, TBindingMode mode = TBindingMode.ViewData)
 			{
 				var binding = new CBindingReflection(model, modelName, view, viewName);
@@ -196,7 +196,7 @@ namespace Lotus
 			/// <returns>Экземпляр связывания данных</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(String name, System.Object model, String modelName, System.Object view,
-				String viewName, TBindingMode mode, Func<TTypeModel, TTypeView> onConvertToView, 
+				String viewName, TBindingMode mode, Func<TTypeModel, TTypeView> onConvertToView,
 				Func<TTypeView, TTypeModel> onConvertToModel)
 			{
 				var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName);
@@ -217,7 +217,7 @@ namespace Lotus
 			/// <param name="name">Имя привязки данных</param>
 			/// <returns>Найденная привязка данных или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static CBindingBase GetBinding(String name)
+			public static CBindingBase? GetBinding(String name)
 			{
 				for (var i = 0; i < Bindings.Count; i++)
 				{
@@ -333,7 +333,7 @@ namespace Lotus
 			/// <param name="name">Имя привязки данных</param>
 			/// <returns>Экземпляр объекта модели</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetBindingModel(String name)
+			public static System.Object? GetBindingModel(String name)
 			{
 				for (var i = 0; i < Bindings.Count; i++)
 				{
@@ -353,7 +353,7 @@ namespace Lotus
 			/// <param name="name">Имя привязки данных</param>
 			/// <returns>Экземпляр объекта представления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetBindingView(String name)
+			public static System.Object? GetBindingView(String name)
 			{
 				for (var i = 0; i < Bindings.Count; i++)
 				{
@@ -373,7 +373,7 @@ namespace Lotus
 			/// <param name="name">Имя привязки данных</param>
 			/// <returns>Значение привязанного свойства/метода объекта модели привязки данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetBindingModelValue(String name)
+			public static System.Object? GetBindingModelValue(String name)
 			{
 				for (var i = 0; i < Bindings.Count; i++)
 				{
@@ -393,7 +393,7 @@ namespace Lotus
 			/// <param name="name">Имя привязки данных</param>
 			/// <returns>Значение привязанного свойства/метода объекта представления привязки данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetBindingViewValue(String name)
+			public static System.Object? GetBindingViewValue(String name)
 			{
 				for (var i = 0; i < Bindings.Count; i++)
 				{

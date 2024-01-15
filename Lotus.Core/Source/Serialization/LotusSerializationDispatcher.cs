@@ -61,7 +61,7 @@ namespace Lotus
 				var ext = Path.GetExtension(fileName).ToLower();
 				switch (ext)
 				{
-					case XFileExtension.XMLD:
+					case XFileExtension.XML_D:
 						{
 							if(SerializerXml == null)
 							{
@@ -71,7 +71,7 @@ namespace Lotus
 							SerializerXml.SaveTo(fileName, instance);
 						}
 						break;
-					case XFileExtension.JSOND:
+					case XFileExtension.JSON_D:
 						{
 							if (SerializerJson == null)
 							{
@@ -81,8 +81,8 @@ namespace Lotus
 							SerializerJson.SaveTo(fileName, instance);
 						}
 						break;
-					case XFileExtension.BIND:
-					case XFileExtension.BYTESD:
+					case XFileExtension.BIN_D:
+					case XFileExtension.BYTES_D:
 						{
 						}
 						break;
@@ -103,13 +103,13 @@ namespace Lotus
 			/// <param name="fileName">Имя файла</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object LoadFrom(String fileName)
+			public static System.Object? LoadFrom(String fileName)
 			{
 				var ext = Path.GetExtension(fileName).ToLower();
-				System.Object result = null;
+				System.Object? result = null;
 				switch (ext)
 				{
-					case XFileExtension.XMLD:
+					case XFileExtension.XML_D:
 						{
 							if (SerializerXml == null)
 							{
@@ -119,7 +119,7 @@ namespace Lotus
 							result = SerializerXml.LoadFrom(fileName);
 						}
 						break;
-					case XFileExtension.JSOND:
+					case XFileExtension.JSON_D:
 						{
 							if (SerializerJson == null)
 							{
@@ -129,8 +129,8 @@ namespace Lotus
 							result = SerializerJson.LoadFrom(fileName);
 						}
 						break;
-					case XFileExtension.BIND:
-					case XFileExtension.BYTESD:
+					case XFileExtension.BIN_D:
+					case XFileExtension.BYTES_D:
 						{
 						}
 						break;
@@ -152,13 +152,13 @@ namespace Lotus
 			/// <param name="fileName">Имя файла</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TResultType LoadFrom<TResultType>(String fileName)
+			public static TResultType? LoadFrom<TResultType>(String fileName)
 			{
 				var ext = Path.GetExtension(fileName).ToLower();
-				TResultType result = default;
+				TResultType? result = default;
 				switch (ext)
 				{
-					case XFileExtension.XMLD:
+					case XFileExtension.XML_D:
 						{
 							if (SerializerXml == null)
 							{
@@ -168,7 +168,7 @@ namespace Lotus
 							result = SerializerXml.LoadFrom<TResultType>(fileName);
 						}
 						break;
-					case XFileExtension.JSOND:
+					case XFileExtension.JSON_D:
 						{
 							if (SerializerJson == null)
 							{
@@ -178,8 +178,8 @@ namespace Lotus
 							result = SerializerJson.LoadFrom<TResultType>(fileName);
 						}
 						break;
-					case XFileExtension.BIND:
-					case XFileExtension.BYTESD:
+					case XFileExtension.BIN_D:
+					case XFileExtension.BYTES_D:
 						{
 						}
 						break;
@@ -207,7 +207,7 @@ namespace Lotus
 				var ext = Path.GetExtension(fileName).ToLower();
 				switch (ext)
 				{
-					case XFileExtension.XMLD:
+					case XFileExtension.XML_D:
 						{
 							if (SerializerXml == null)
 							{
@@ -217,7 +217,7 @@ namespace Lotus
 							SerializerXml.UpdateFrom(instance, fileName);
 						}
 						break;
-					case XFileExtension.JSOND:
+					case XFileExtension.JSON_D:
 						{
 							if (SerializerJson == null)
 							{
@@ -227,8 +227,8 @@ namespace Lotus
 							SerializerJson.UpdateFrom(instance, fileName);
 						}
 						break;
-					case XFileExtension.BIND:
-					case XFileExtension.BYTESD:
+					case XFileExtension.BIN_D:
+					case XFileExtension.BYTES_D:
 						{
 						}
 						break;

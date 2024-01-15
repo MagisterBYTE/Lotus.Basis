@@ -104,10 +104,10 @@ namespace Lotus
 		public class CEcsFilterComponent : ILotusEcsFilterComponent
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal CEcsWorld mWorld;
+			protected internal CEcsWorld _world;
 			protected internal SparseSet _entities;
 			protected internal ListArray<Type> _includedComponents;
-			protected internal ListArray<Type> mExcludedComponents;
+			protected internal ListArray<Type> _excludedComponents;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ===================================================
@@ -118,11 +118,11 @@ namespace Lotus
 			{
 				get
 				{
-					return mWorld;
+					return _world;
 				}
 				set
 				{
-					mWorld = value;
+					_world = value;
 				}
 			}
 
@@ -152,7 +152,7 @@ namespace Lotus
 			{
 				get
 				{
-					return mExcludedComponents;
+					return _excludedComponents;
 				}
 			}
 			#endregion
@@ -167,7 +167,7 @@ namespace Lotus
 			{
 				_entities = new SparseSet(16);
 				_includedComponents = new ListArray<Type>(8);
-				mExcludedComponents = new ListArray<Type>(4);
+				_excludedComponents = new ListArray<Type>(4);
 			}
 			#endregion
 
@@ -249,7 +249,7 @@ namespace Lotus
 			public Boolean Exsist<TComponent>() where TComponent : struct
 			{
 				Type component_type = typeof(TComponent);
-				return _includedComponents.Contains(component_type) || mExcludedComponents.Contains(component_type);
+				return _includedComponents.Contains(component_type) || _excludedComponents.Contains(component_type);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public Boolean Exsist(Type componentType)
 			{
-				return _includedComponents.Contains(componentType) || mExcludedComponents.Contains(componentType);
+				return _includedComponents.Contains(componentType) || _excludedComponents.Contains(componentType);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -289,9 +289,9 @@ namespace Lotus
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public ILotusEcsFilterComponent Exclude(Type componentType)
 			{
-				mExcludedComponents.AddIfNotContains(componentType);
-				ILotusEcsComponentData component_data;
-				if (mWorld._componentsData.TryGetValue(componentType, out component_data))
+				_excludedComponents.AddIfNotContains(componentType);
+				ILotusEcsComponentData? component_data;
+				if (_world._componentsData.TryGetValue(componentType, out component_data))
 				{
 					var exclude_entities = component_data.GetEntities();
 					_entities.RemoveValues(exclude_entities);
@@ -309,11 +309,11 @@ namespace Lotus
 			public void UpdateFilter()
 			{
 				_entities.Clear();
-				if(_includedComponents.Count > 1)
+				if (_includedComponents.Count > 1)
 				{
 					Type first_type_filter = _includedComponents[0];
-					ILotusEcsComponentData component_data;
-					if (mWorld._componentsData.TryGetValue(first_type_filter, out component_data))
+					ILotusEcsComponentData? component_data;
+					if (_world._componentsData.TryGetValue(first_type_filter, out component_data))
 					{
 						var entities = component_data.GetEntities();
 						for (var i = 0; i < component_data.Count; i++)
@@ -323,10 +323,10 @@ namespace Lotus
 							for (var f = 1; f < _includedComponents.Count; f++)
 							{
 								Type type_filter = _includedComponents[f];
-								ILotusEcsComponentData filter_data;
-								if (mWorld._componentsData.TryGetValue(type_filter, out filter_data))
+								ILotusEcsComponentData? filter_data;
+								if (_world._componentsData.TryGetValue(type_filter, out filter_data))
 								{
-									if(filter_data.HasEntity(id))
+									if (filter_data.HasEntity(id))
 									{
 										find_count++;
 									}
@@ -337,7 +337,7 @@ namespace Lotus
 								}
 							}
 
-							if(find_count == _includedComponents.Count - 1)
+							if (find_count == _includedComponents.Count - 1)
 							{
 								AddEntity(id);
 							}
@@ -345,10 +345,10 @@ namespace Lotus
 					}
 				}
 
-				for (var i = 0; i < mExcludedComponents.Count; i++)
+				for (var i = 0; i < _excludedComponents.Count; i++)
 				{
-					ILotusEcsComponentData component_data;
-					if (mWorld._componentsData.TryGetValue(mExcludedComponents[i], out component_data))
+					ILotusEcsComponentData? component_data;
+					if (_world._componentsData.TryGetValue(_excludedComponents[i], out component_data))
 					{
 						var include_entities = component_data.GetEntities();
 						_entities.RemoveValues(include_entities);
@@ -364,7 +364,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32[] GetEntities()
 			{
-				return _entities.mDenseItems;
+				return _entities._denseItems;
 			}
 			#endregion
 		}

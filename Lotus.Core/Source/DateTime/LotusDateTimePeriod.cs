@@ -11,7 +11,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.ComponentModel;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -62,9 +61,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetPeriodOfText(this ILotusDatePeriod @this)
 			{
-				if(@this.EndPeriodDate != null)
+				if (@this.EndPeriodDate != null)
 				{
-					return @this.BeginPeriodDate.ToString(XDateFormats.Default) 
+					return @this.BeginPeriodDate.ToString(XDateFormats.Default)
 						+ "г. - " + @this.EndPeriodDate.GetValueOrDefault().ToString(XDateFormats.Default) + "г.";
 				}
 				else

@@ -72,9 +72,9 @@ namespace Lotus
 							parameters[i].IOwner = this;
 						}
 					}
-				}
 
-				_value = new ListArray<IParameterItem>(parameters);
+                    _value = new ListArray<IParameterItem>(parameters);
+                }
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -99,18 +99,18 @@ namespace Lotus
 			public CParameters(String parameterName, params IParameterItem[] parameters)
 				: base(parameterName)
 			{
-				if(parameters != null && parameters.Length > 0)
+				if (parameters != null && parameters.Length > 0)
 				{
 					for (var i = 0; i < parameters.Length; i++)
 					{
-						if(parameters[i] != null)
+						if (parameters[i] != null)
 						{
 							parameters[i].IOwner = this;
 						}
 					}
-				}
 
-				_value = new ListArray<IParameterItem>(parameters);
+                    _value = new ListArray<IParameterItem>(parameters);
+                }
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -132,9 +132,9 @@ namespace Lotus
 							parameters[i].IOwner = this;
 						}
 					}
-				}
 
-				_value = new ListArray<IParameterItem>(parameters);
+                    _value = new ListArray<IParameterItem>(parameters);
+                }
 			}
 			#endregion
 
@@ -182,7 +182,7 @@ namespace Lotus
 			/// <param name="dataName">Имя данных</param>
 			/// <returns>Статус разрешения/согласования изменения данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public virtual Boolean OnNotifyUpdating(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 				return true;
 			}
@@ -195,7 +195,7 @@ namespace Lotus
 			/// <param name="data">Объект, данные которого изменились</param>
 			/// <param name="dataName">Имя данных</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object data, String dataName)
+			public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, System.Object? data, String dataName)
 			{
 
 			}
@@ -212,7 +212,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TType GetValueOfType<TType>(TType defaultValue = default)
 			{
-				for (var i = 0; i < Value.Count; i++)
+				if (Value == default) return defaultValue;
+
+                for (var i = 0; i < Value.Count; i++)
 				{
 					if (Value[i].Value is TType result)
 					{
@@ -235,7 +237,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddBool(String parameterName, Boolean parameterValue)
 			{
-				_value.Add(new CParameterBool(parameterName, parameterValue));
+				_value?.Add(new CParameterBool(parameterName, parameterValue));
 				return this;
 			}
 
@@ -249,7 +251,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddInteger(String parameterName, Int32 parameterValue)
 			{
-				_value.Add(new CParameterInteger(parameterName, parameterValue));
+				_value?.Add(new CParameterInteger(parameterName, parameterValue));
 				return this;
 			}
 
@@ -263,7 +265,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddReal(String parameterName, Double parameterValue)
 			{
-				_value.Add(new CParameterReal(parameterName, parameterValue));
+				_value?.Add(new CParameterReal(parameterName, parameterValue));
 				return this;
 			}
 
@@ -277,7 +279,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddString(String parameterName, String parameterValue)
 			{
-				_value.Add(new CParameterString(parameterName, parameterValue));
+				_value?.Add(new CParameterString(parameterName, parameterValue));
 				return this;
 			}
 
@@ -292,7 +294,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddEnum<TEnum>(String parameterName, TEnum parameterValue) where TEnum : Enum
 			{
-				_value.Add(new CParameterEnum<TEnum>(parameterName, parameterValue));
+				_value?.Add(new CParameterEnum<TEnum>(parameterName, parameterValue));
 				return this;
 			}
 
@@ -307,6 +309,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddObject(String parameterName, System.Object parameterValue, Boolean allowDuplicates)
 			{
+				if(_value == default) return this;
+
 				if (allowDuplicates)
 				{
 					_value.Add(new CParameterObject(parameterName, parameterValue));
@@ -314,11 +318,11 @@ namespace Lotus
 				else
 				{
 					// Смотрим есть ли объект с таким значением и именем
-					for (var i = 0; i < Value.Count; i++)
+					for (var i = 0; i < _value.Count; i++)
 					{
-						if(Value[i].ValueType == TParameterValueType.Object &&
-							Value[i].Value == parameterValue &&
-							Value[i].Name == parameterName)
+						if (_value[i].ValueType == TParameterValueType.Object &&
+                            _value[i].Value == parameterValue &&
+                            _value[i].Name == parameterName)
 						{
 							return this;
 						}
@@ -339,11 +343,13 @@ namespace Lotus
 			/// <param name="parameterName">Имя параметра</param>
 			/// <returns>Параметр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterBool GetBool(String parameterName)
+			public CParameterBool? GetBool(String parameterName)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return null;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
-					if(String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterBool parameter)
+					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterBool parameter)
 					{
 						return parameter;
 					}
@@ -362,7 +368,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean GetBoolValue(String parameterName, Boolean parameterValueDefault = false)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return parameterValueDefault;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterBool parameter)
 					{
@@ -380,9 +388,11 @@ namespace Lotus
 			/// <param name="parameterName">Имя параметра</param>
 			/// <returns>Параметр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterInteger GetInteger(String parameterName)
+			public CParameterInteger? GetInteger(String parameterName)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return null;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterInteger parameter)
 					{
@@ -403,7 +413,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 GetIntegerValue(String parameterName, Int32 parameterValueDefault = -1)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return parameterValueDefault;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterInteger parameter)
 					{
@@ -421,9 +433,11 @@ namespace Lotus
 			/// <param name="parameterName">Имя параметра</param>
 			/// <returns>Параметр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterReal GetReal(String parameterName)
+			public CParameterReal? GetReal(String parameterName)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return null;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterReal parameter)
 					{
@@ -444,7 +458,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double GetRealValue(String parameterName, Double parameterValueDefault = -1)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return parameterValueDefault;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterReal parameter)
 					{
@@ -462,9 +478,11 @@ namespace Lotus
 			/// <param name="parameterName">Имя параметра</param>
 			/// <returns>Параметр</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CParameterString GetString(String parameterName)
+			public CParameterString? GetString(String parameterName)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return null;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterString parameter)
 					{
@@ -483,9 +501,11 @@ namespace Lotus
 			/// <param name="parameterValueDefault">Значение параметра по умолчанию</param>
 			/// <returns>Значение параметра</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public String GetStringValue(String parameterName, String parameterValueDefault = "")
+			public String? GetStringValue(String parameterName, String parameterValueDefault = "")
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return parameterValueDefault;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterString parameter)
 					{
@@ -508,6 +528,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean UpdateBoolValue(String parameterName, Boolean newValue)
 			{
+				if (_value == default) return false;
+
 				for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterBool parameter)
@@ -530,7 +552,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean UpdateIntegerValue(String parameterName, Int32 newValue)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return false;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterInteger parameter)
 					{
@@ -552,7 +576,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean UpdateRealValue(String parameterName, Double newValue)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return false;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterReal parameter)
 					{
@@ -574,7 +600,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean UpdateStringValue(String parameterName, String newValue)
 			{
-				for (var i = 0; i < _value.Count; i++)
+                if (_value == default) return false;
+
+                for (var i = 0; i < _value.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterString parameter)
 					{
@@ -597,56 +625,56 @@ namespace Lotus
 			public void Load(String fileName)
 			{
 				//FileStream file_stream = new FileStream(file_name, FileMode.Open);
-    //            JsonDocument json_doc = JsonDocument.Parse(file_stream);
-    //            JsonElement root_element = json_doc.RootElement;
+				//            JsonDocument json_doc = JsonDocument.Parse(file_stream);
+				//            JsonElement root_element = json_doc.RootElement;
 
-    //            foreach (JsonProperty item in root_element.EnumerateObject())
-    //            {
-    //                switch (item.Value.ValueKind)
-    //                {
-    //                    case JsonValueKind.Undefined:
-    //                        break;
-    //                    case JsonValueKind.Object:
-    //                        break;
-    //                    case JsonValueKind.Array:
-    //                        break;
-    //                    case JsonValueKind.String:
-    //                        {
-    //                            AddString(item.Name, item.Value.GetString());
-    //                        }
-    //                        break;
-    //                    case JsonValueKind.Number:
-    //                        {
-    //                            String number = item.Value.GetString();
-    //                            if (number.IsDotOrCommaSymbols())
-    //                            {
-    //                                Double value = XNumbers.ParseDouble(number);
-    //                                AddReal(item.Name, value);
-    //                            }
-    //                            else
-    //                            {
-    //                                AddInteger(item.Name, item.Value.GetInt32());
-    //                            }
-    //                        }
-    //                        break;
-    //                    case JsonValueKind.True:
-    //                        {
-    //                            AddBool(item.Name, item.Value.GetBoolean());
-    //                        }
-    //                        break;
-    //                    case JsonValueKind.False:
-    //                        {
-    //                            AddBool(item.Name, item.Value.GetBoolean());
-    //                        }
-    //                        break;
-    //                    case JsonValueKind.Null:
-    //                        break;
-    //                    default:
-    //                        break;
-    //                }
-    //            }
+				//            foreach (JsonProperty item in root_element.EnumerateObject())
+				//            {
+				//                switch (item.Value.ValueKind)
+				//                {
+				//                    case JsonValueKind.Undefined:
+				//                        break;
+				//                    case JsonValueKind.Object:
+				//                        break;
+				//                    case JsonValueKind.Array:
+				//                        break;
+				//                    case JsonValueKind.String:
+				//                        {
+				//                            AddString(item.Name, item.Value.GetString());
+				//                        }
+				//                        break;
+				//                    case JsonValueKind.Number:
+				//                        {
+				//                            String number = item.Value.GetString();
+				//                            if (number.IsDotOrCommaSymbols())
+				//                            {
+				//                                Double value = XNumbers.ParseDouble(number);
+				//                                AddReal(item.Name, value);
+				//                            }
+				//                            else
+				//                            {
+				//                                AddInteger(item.Name, item.Value.GetInt32());
+				//                            }
+				//                        }
+				//                        break;
+				//                    case JsonValueKind.True:
+				//                        {
+				//                            AddBool(item.Name, item.Value.GetBoolean());
+				//                        }
+				//                        break;
+				//                    case JsonValueKind.False:
+				//                        {
+				//                            AddBool(item.Name, item.Value.GetBoolean());
+				//                        }
+				//                        break;
+				//                    case JsonValueKind.Null:
+				//                        break;
+				//                    default:
+				//                        break;
+				//                }
+				//            }
 
-    //            file_stream.Close();
+				//            file_stream.Close();
 			}
 			#endregion
 
@@ -659,13 +687,15 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void SaveToJson(String fileName)
 			{
-				var file_stream = new FileStream(fileName, FileMode.Create);
+                if (_value == default) return;
+
+                var file_stream = new FileStream(fileName, FileMode.Create);
 				var stream_writer = new StreamWriter(file_stream, System.Text.Encoding.UTF8);
 				stream_writer.Write('{');
 
-				for (var i = 0; i < Value.Count; i++)
+				for (var i = 0; i < _value.Count; i++)
 				{
-					IParameterItem parameter = Value[i];
+					IParameterItem parameter = _value[i];
 
 					switch (parameter.ValueType)
 					{
@@ -681,7 +711,7 @@ namespace Lotus
 
 								stream_writer.Write(": ");
 
-								stream_writer.Write(parameter.Value.ToString());
+								stream_writer.Write(parameter.Value!.ToString());
 							}
 							break;
 						case TParameterValueType.Real:
@@ -692,7 +722,7 @@ namespace Lotus
 
 								stream_writer.Write(": ");
 
-								stream_writer.Write(parameter.Value.ToString());
+								stream_writer.Write(parameter.Value!.ToString());
 							}
 							break;
 						case TParameterValueType.DateTime:
@@ -730,7 +760,7 @@ namespace Lotus
 							break;
 					}
 
-					if(i != Value.Count - 1)
+					if (i != _value.Count - 1)
 					{
 						stream_writer.Write(XChar.Comma);
 					}

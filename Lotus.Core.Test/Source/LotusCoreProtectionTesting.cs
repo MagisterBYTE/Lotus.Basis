@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -44,7 +45,7 @@ namespace Lotus
 				TProtectionInt protect_ind = 6566;
 				var encrypted_value = protect_ind.EncryptedValue;
 				Int32 decrypted_value = protect_ind;
-				Assert.AreEqual(6566, decrypted_value);
+				ClassicAssert.AreEqual(6566, decrypted_value);
 			}
 		}
 	}

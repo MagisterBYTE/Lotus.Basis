@@ -40,7 +40,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			private static ListArray<ILotusPoolManager> mPoolManagers;
+			private static ListArray<ILotusPoolManager> _poolManagers;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -51,11 +51,11 @@ namespace Lotus
 			{
 				get
 				{
-					if (mPoolManagers == null)
+					if (_poolManagers == null)
 					{
 						OnInit();
 					}
-					return mPoolManagers;
+					return _poolManagers!;
 				}
 			}
 			#endregion
@@ -77,9 +77,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void OnInit()
 			{
-				if (mPoolManagers == null)
+				if (_poolManagers == null)
 				{
-					mPoolManagers = new ListArray<ILotusPoolManager>();
+					_poolManagers = new ListArray<ILotusPoolManager>();
 				}
 			}
 			#endregion
@@ -119,9 +119,9 @@ namespace Lotus
 			/// <param name="managerName">Имя менеджер</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TPoolObject Take<TPoolObject>(String managerName)
+			public static TPoolObject? Take<TPoolObject>(String managerName)
 			{
-				ILotusPoolManager result = PoolManagers.Search(x => x.Name == managerName);
+				ILotusPoolManager? result = PoolManagers.Search(x => x.Name == managerName);
 				if(result != null)
 				{
 					return (TPoolObject)result.TakeObjectFromPool();
@@ -140,10 +140,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean Release<TPoolObject>(String managerName, TPoolObject poolObject)
 			{
-				ILotusPoolManager result = PoolManagers.Search(x => x.Name == managerName);
+				ILotusPoolManager? result = PoolManagers.Search(x => x.Name == managerName);
 				if (result != null)
 				{
-					result.ReleaseObjectToPool(poolObject);
+					result.ReleaseObjectToPool(poolObject!);
 					return true;
 				}
 

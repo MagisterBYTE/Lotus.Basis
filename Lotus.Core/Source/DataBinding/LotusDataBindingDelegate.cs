@@ -12,9 +12,8 @@
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
+using Newtonsoft.Json.Linq;
 using System;
-using System.Reflection;
-using System.Collections.Generic;
 using System.ComponentModel;
 //=====================================================================================================================
 namespace Lotus
@@ -41,8 +40,8 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Action<TTypeModel> mActionModel;
-			protected internal Action<TTypeView> mActionView;
+			protected internal Action<TTypeModel> _actionModel;
+			protected internal Action<TTypeView> _actionView;
 			protected internal Func<TTypeView, TTypeModel> _onConvertToModel;
 			protected internal Func<TTypeModel, TTypeView> _onConvertToView;
 			#endregion
@@ -56,7 +55,7 @@ namespace Lotus
 			/// </summary>
 			public Action<TTypeModel> ActionModel
 			{
-				get { return mActionModel; }
+				get { return _actionModel; }
 			}
 
 			/// <summary>
@@ -64,7 +63,7 @@ namespace Lotus
 			/// </summary>
 			public Action<TTypeView> ActionView
 			{
-				get { return mActionView; }
+				get { return _actionView; }
 			}
 
 			/// <summary>
@@ -106,7 +105,7 @@ namespace Lotus
 			/// <param name="viewInstance">Экземпляр объекта представления</param>
 			/// <param name="viewMemberName">Имя члена объекта представления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public BindingDelegate(System.Object modelInstance, String modelMemberName, System.Object viewInstance, 
+			public BindingDelegate(System.Object modelInstance, String modelMemberName, System.Object viewInstance,
 				String viewMemberName)
 			{
 				SetModel(modelInstance, modelMemberName);
@@ -136,7 +135,7 @@ namespace Lotus
 					}
 					try
 					{
-						mActionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, member_name_model);
+						_actionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, member_name_model);
 					}
 					catch (Exception exc)
 					{
@@ -160,7 +159,7 @@ namespace Lotus
 			{
 				ResetModel(modelInstance);
 
-				if (SetMemberType(modelInstance, memberName, ref _modelMemberType) != null)
+				if (SetMemberType(modelInstance, memberName, _modelMemberType) != null)
 				{
 					_modelMemberName = memberName;
 					if (_mode != TBindingMode.ViewData)
@@ -172,7 +171,7 @@ namespace Lotus
 						}
 						try
 						{
-							mActionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, member_name_model);
+							_actionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, member_name_model);
 						}
 						catch (Exception exc)
 						{
@@ -201,12 +200,12 @@ namespace Lotus
 				// Проверяем сначала свойство 
 				if (XReflection.ContainsProperty(_modelInstance, _modelMemberName))
 				{
-					return XReflection.GetPropertyValue(_modelInstance, _modelMemberName);
+					return XReflection.GetPropertyValue(_modelInstance, _modelMemberName)!;
 				}
 				else
 				{
 					// Теперь поле
-					return XReflection.GetFieldValue(_modelInstance, _modelMemberName);
+					return XReflection.GetFieldValue(_modelInstance, _modelMemberName)!;
 				}
 			}
 
@@ -217,7 +216,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected override void UpdateModelProperty(Object sender, PropertyChangedEventArgs args)
+			protected override void UpdateModelProperty(Object? sender, PropertyChangedEventArgs args)
 			{
 				if (_isEnabled)
 				{
@@ -227,20 +226,23 @@ namespace Lotus
 						if (_modelPropertyChanged != null)
 						{
 							// Получаем актуальное значение
-							var value = GetModelValue();
-							if (_onConvertToView != null)
+							var valueRaw = GetModelValue();
+
+                            if (_onConvertToView != null)
 							{
-								mActionView(_onConvertToView((TTypeModel)value));
+								TTypeModel valueModel = (valueRaw == null ? default : (TTypeModel)valueRaw)!;
+                                _actionView(_onConvertToView(valueModel));
 							}
 							else
 							{
-								if (_isStringView)
+                                TTypeView valueView = (valueRaw == null ? default : (TTypeView)valueRaw)!;
+                                if (_isStringView)
 								{
-									mActionView((TTypeView)(System.Object)value.ToString());
+                                    _actionView((TTypeView)(System.Object)valueRaw!.ToString()!);
 								}
 								else
 								{
-									mActionView((TTypeView)value);
+									_actionView(valueView);
 								}
 							}
 						}
@@ -271,7 +273,7 @@ namespace Lotus
 					}
 					try
 					{
-						mActionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, member_name_view);
+						_actionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, member_name_view);
 					}
 					catch (Exception exc)
 					{
@@ -295,7 +297,7 @@ namespace Lotus
 			{
 				_isStringView = typeof(TTypeView) == typeof(String);
 				ResetView(viewInstance);
-				if (SetMemberType(viewInstance, memberName, ref _viewMemberType) != null)
+				if (SetMemberType(viewInstance, memberName, _viewMemberType) != null)
 				{
 					_viewMemberName = memberName;
 					if (_mode != TBindingMode.DataManager)
@@ -307,7 +309,7 @@ namespace Lotus
 						}
 						try
 						{
-							mActionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, member_name_view);
+							_actionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, member_name_view);
 						}
 						catch (Exception exc)
 						{
@@ -336,12 +338,12 @@ namespace Lotus
 				// Проверяем сначала свойство 
 				if (XReflection.ContainsProperty(_viewInstance, _viewMemberName))
 				{
-					return XReflection.GetPropertyValue(_viewInstance, _viewMemberName);
+					return XReflection.GetPropertyValue(_viewInstance, _viewMemberName)!;
 				}
 				else
 				{
 					// Теперь поле
-					return XReflection.GetFieldValue(_viewInstance, _viewMemberName);
+					return XReflection.GetFieldValue(_viewInstance, _viewMemberName)!;
 				}
 			}
 
@@ -352,7 +354,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected override void UpdateViewProperty(Object sender, PropertyChangedEventArgs args)
+			protected override void UpdateViewProperty(Object? sender, PropertyChangedEventArgs args)
 			{
 				if (_isEnabled)
 				{
@@ -366,11 +368,11 @@ namespace Lotus
 
 							if (_onConvertToModel != null)
 							{
-								mActionModel(_onConvertToModel((TTypeView)value));
+								_actionModel(_onConvertToModel((TTypeView)value));
 							}
 							else
 							{
-								mActionModel((TTypeModel)value);
+								_actionModel((TTypeModel)value);
 							}
 						}
 					}

@@ -73,7 +73,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem Pop()
+			public TItem? Pop()
 			{
 				if (_count > 0)
 				{
@@ -100,7 +100,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem Peek()
+			public TItem? Peek()
 			{
 				if (_count > 0)
 				{

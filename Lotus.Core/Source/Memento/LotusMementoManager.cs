@@ -95,9 +95,9 @@ namespace Lotus
 			/// <summary>
 			/// История состояния объектов
 			/// </summary>
-			public ListArray<ILotusMementoState> HistoryStates 
+			public ListArray<ILotusMementoState> HistoryStates
 			{
-				get { return mHistoryStates; } 
+				get { return mHistoryStates; }
 			}
 
 			/// <summary>

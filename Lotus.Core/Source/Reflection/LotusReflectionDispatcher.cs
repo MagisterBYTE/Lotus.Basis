@@ -11,9 +11,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.IO;
-using System.Xml;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -83,7 +80,7 @@ namespace Lotus
 					{
 						Init();
 					}
-					return _stringContainsMethod;
+					return _stringContainsMethod!;
 				}
 			}
 
@@ -98,7 +95,7 @@ namespace Lotus
 					{
 						Init();
 					}
-					return _stringStartsWithMethod;
+					return _stringStartsWithMethod!;
 				}
 			}
 
@@ -113,7 +110,7 @@ namespace Lotus
 					{
 						Init();
 					}
-					return _stringEndsWithMethod;
+					return _stringEndsWithMethod!;
 				}
 			}
 
@@ -283,14 +280,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean AddCachedType(Type cachedType)
 			{
-				if (Cached.ContainsKey(cachedType.FullName))
+				if (Cached.ContainsKey(cachedType.FullName!))
 				{
 					return false;
 				}
 				else
 				{
 					var reflected_type = new CReflectedType(cachedType);
-					Cached.Add(cachedType.FullName, reflected_type);
+					Cached.Add(cachedType.FullName!, reflected_type);
 					return true;
 				}
 			}
@@ -305,14 +302,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean AddCachedType(Type cachedType, TExtractMembers extractMembers)
 			{
-				if (Cached.ContainsKey(cachedType.FullName))
+				if (Cached.ContainsKey(cachedType.FullName!))
 				{
 					return false;
 				}
 				else
 				{
 					var reflected_type = new CReflectedType(cachedType, extractMembers);
-					Cached.Add(cachedType.FullName, reflected_type);
+					Cached.Add(cachedType.FullName!, reflected_type);
 					return true;
 				}
 			}
@@ -327,10 +324,10 @@ namespace Lotus
 			/// <param name="fullTypeNameMemberName">Строка данных</param>
 			/// <returns>Значение</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetStaticDataFromType(String fullTypeNameMemberName)
+			public static System.Object? GetStaticDataFromType(String fullTypeNameMemberName)
 			{
 				var last_dot = fullTypeNameMemberName.LastIndexOf(XChar.Dot);
-				if(last_dot > -1)
+				if (last_dot > -1)
 				{
 					var full_type_name = fullTypeNameMemberName.Substring(0, last_dot);
 					var member_name = fullTypeNameMemberName.Substring(last_dot + 1);
@@ -380,11 +377,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			private static Boolean FilterAssembly(Assembly assembly)
 			{
-				if (assembly.FullName.Contains("Mono")) return false;
-				if (assembly.FullName.Contains("mscorlib")) return false;
-				if (assembly.FullName.Contains("System")) return false;
-				if (assembly.FullName.Contains("Editor")) return false;
-				if (assembly.FullName.Contains("Test")) return false;
+				if (assembly.FullName!.Contains("Mono")) return false;
+				if (assembly.FullName!.Contains("mscorlib")) return false;
+				if (assembly.FullName!.Contains("System")) return false;
+				if (assembly.FullName!.Contains("Editor")) return false;
+				if (assembly.FullName!.Contains("Test")) return false;
 				return true;
 			}
 			#endregion
@@ -397,9 +394,9 @@ namespace Lotus
 			/// <typeparam name="TType">Тип объекта</typeparam>
 			/// <returns>Созданный объект или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType CreateInstance<TType>()
+			public static TType? CreateInstance<TType>()
 			{
-				return (TType)CreateInstance(typeof(TType));
+				return (TType?)CreateInstance(typeof(TType));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -409,7 +406,7 @@ namespace Lotus
 			/// <param name="type">Тип объекта</param>
 			/// <returns>Созданный объект или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object CreateInstance(Type type)
+			public static System.Object? CreateInstance(Type type)
 			{
 				return CreateInstance(type, null);
 			}
@@ -422,9 +419,9 @@ namespace Lotus
 			/// <param name="args">Аргументы для конструктора</param>
 			/// <returns>Созданный объект или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TType CreateInstance<TType>(params System.Object[] args)
-			{
-				return (TType)CreateInstance(typeof(TType), args);
+			public static TType? CreateInstance<TType>(params System.Object[]? args)
+            {
+				return (TType?)CreateInstance(typeof(TType), args);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -439,7 +436,7 @@ namespace Lotus
 			/// <param name="args">Аргументы для конструктора</param>
 			/// <returns>Созданный объект или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object CreateInstance(Type type, params System.Object[] args)
+			public static System.Object? CreateInstance(Type type, params System.Object[]? args)
 			{
 				// Проверяем тип на принадлежность к системе Unity
 #if UNITY_2017_1_OR_NEWER
@@ -659,7 +656,7 @@ namespace Lotus
 			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Метаданные поля или null если поля с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static FieldInfo GetField(System.Object instance, String fieldName)
+			public static FieldInfo? GetField(System.Object instance, String fieldName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -682,7 +679,7 @@ namespace Lotus
 			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Тип поля или null если поля с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Type GetFieldType(System.Object instance, String fieldName)
+			public static Type? GetFieldType(System.Object instance, String fieldName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -703,7 +700,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <param name="fieldName">Имя поля</param>
-			/// <returns>Имя типа поля или null если поля с таким именем не оказалось</returns>
+			/// <returns>Имя типа поля или пустая строка если поля с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetFieldTypeName(System.Object instance, String fieldName)
 			{
@@ -775,7 +772,7 @@ namespace Lotus
 			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Атрибут поля или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TAttribute GetAttributeFromField<TAttribute>(System.Object instance, String fieldName) where TAttribute : System.Attribute
+			public static TAttribute? GetAttributeFromField<TAttribute>(System.Object instance, String fieldName) where TAttribute : System.Attribute
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -798,7 +795,7 @@ namespace Lotus
 			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetFieldValue(System.Object instance, String fieldName)
+			public static System.Object? GetFieldValue(System.Object instance, String fieldName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -822,7 +819,7 @@ namespace Lotus
 			/// <param name="fieldInfoResult">Метаданные поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetFieldValue(System.Object instance, String fieldName, out FieldInfo fieldInfoResult)
+			public static System.Object? GetFieldValue(System.Object instance, String fieldName, out FieldInfo fieldInfoResult)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -846,7 +843,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetFieldValue(System.Object instance, String fieldName, Int32 index)
+			public static System.Object? GetFieldValue(System.Object instance, String fieldName, Int32 index)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -871,7 +868,7 @@ namespace Lotus
 			/// <param name="fieldInfoResult">Метаданные поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetFieldValue(System.Object instance, String fieldName, Int32 index, out FieldInfo fieldInfoResult)
+			public static System.Object? GetFieldValue(System.Object instance, String fieldName, Int32 index, out FieldInfo fieldInfoResult)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -968,7 +965,7 @@ namespace Lotus
 			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Метаданные свойства или null если свойства с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static PropertyInfo GetProperty(System.Object instance, String propertyName)
+			public static PropertyInfo? GetProperty(System.Object instance, String propertyName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -991,7 +988,7 @@ namespace Lotus
 			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Тип свойства или null если свойства с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Type GetPropertyType(System.Object instance, String propertyName)
+			public static Type? GetPropertyType(System.Object instance, String propertyName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1012,7 +1009,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <param name="propertyName">Имя свойства</param>
-			/// <returns>Имя типа свойства или null если свойства с таким именем не оказалось</returns>
+			/// <returns>Имя типа свойства или пустая строка если свойство с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetPropertyTypeName(System.Object instance, String propertyName)
 			{
@@ -1084,7 +1081,7 @@ namespace Lotus
 			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Атрибут свойства или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TAttribute GetAttributeFromProperty<TAttribute>(System.Object instance, String propertyName) where TAttribute : System.Attribute
+			public static TAttribute? GetAttributeFromProperty<TAttribute>(System.Object instance, String propertyName) where TAttribute : System.Attribute
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1107,7 +1104,7 @@ namespace Lotus
 			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetPropertyValue(System.Object instance, String propertyName)
+			public static System.Object? GetPropertyValue(System.Object instance, String propertyName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1131,7 +1128,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetPropertyValue(System.Object instance, String propertyName, Int32 index)
+			public static System.Object? GetPropertyValue(System.Object instance, String propertyName, Int32 index)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1228,7 +1225,7 @@ namespace Lotus
 			/// <param name="methodName">Имя метода</param>
 			/// <returns>Метаданные метода или null если метода с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static MethodInfo GetMethod(System.Object instance, String methodName)
+			public static MethodInfo? GetMethod(System.Object instance, String methodName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1251,7 +1248,7 @@ namespace Lotus
 			/// <param name="methodName">Имя метода</param>
 			/// <returns>Тип возвращаемого значения метода или null если метода с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Type GetMethodReturnType(System.Object instance, String methodName)
+			public static Type? GetMethodReturnType(System.Object instance, String methodName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1272,7 +1269,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <param name="methodName">Имя метода</param>
-			/// <returns>Имя типа возвращаемого значения метода или null если метода с таким именем не оказалось</returns>
+			/// <returns>Имя типа возвращаемого значения метода или пустая строка если метода с таким именем не оказалось</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static String GetMethodReturnTypeName(System.Object instance, String methodName)
 			{
@@ -1321,7 +1318,7 @@ namespace Lotus
 			/// <param name="methodName">Имя метода</param>
 			/// <returns>Атрибут метода или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TAttribute GetAttributeFromMethod<TAttribute>(System.Object instance, String methodName) where TAttribute : System.Attribute
+			public static TAttribute? GetAttributeFromMethod<TAttribute>(System.Object instance, String methodName) where TAttribute : System.Attribute
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1344,7 +1341,7 @@ namespace Lotus
 			/// <param name="methodName">Имя метода</param>
 			/// <returns>Значение метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object InvokeMethod(System.Object instance, String methodName)
+			public static System.Object? InvokeMethod(System.Object instance, String methodName)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1368,7 +1365,7 @@ namespace Lotus
 			/// <param name="arg">Аргумент метода</param>
 			/// <returns>Значение метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object InvokeMethod(System.Object instance, String methodName, System.Object arg)
+			public static System.Object? InvokeMethod(System.Object instance, String methodName, System.Object arg)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -1393,7 +1390,7 @@ namespace Lotus
 			/// <param name="arg2">Второй аргумент метода</param>
 			/// <returns>Значение метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object InvokeMethod(System.Object instance, String methodName, System.Object arg1,
+			public static System.Object? InvokeMethod(System.Object instance, String methodName, System.Object arg1,
 				System.Object arg2)
 			{
 				Type type = instance.GetType();
@@ -1420,7 +1417,7 @@ namespace Lotus
 			/// <param name="arg3">Третий аргумент метода</param>
 			/// <returns>Значение метода</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object InvokeMethod(System.Object instance, String methodName, System.Object arg1,
+			public static System.Object? InvokeMethod(System.Object instance, String methodName, System.Object arg1,
 				System.Object arg2, System.Object arg3)
 			{
 				Type type = instance.GetType();
@@ -1466,7 +1463,7 @@ namespace Lotus
 			/// <param name="fieldName">Имя поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetStaticFieldValue(String fullTypeName, String fieldName)
+			public static System.Object? GetStaticFieldValue(String fullTypeName, String fieldName)
 			{
 				if (Cached.ContainsKey(fullTypeName))
 				{
@@ -1508,8 +1505,8 @@ namespace Lotus
 			/// <param name="propertyName">Имя свойства</param>
 			/// <returns>Значение свойства</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object GetStaticPropertyValue(String fullTypeName, String propertyName)
-			{ 
+			public static System.Object? GetStaticPropertyValue(String fullTypeName, String propertyName)
+			{
 				if (Cached.ContainsKey(fullTypeName))
 				{
 					return Cached[fullTypeName].GetPropertyValue(propertyName, null);
@@ -1532,7 +1529,7 @@ namespace Lotus
 			public static MethodInfo GetEnumerableCountMethod(Type type)
 			{
 				var result = EnumerableCountMethods.GetValueOrDefault(type, null);
-				if(result != null)
+				if (result != null)
 				{
 					return result;
 				}

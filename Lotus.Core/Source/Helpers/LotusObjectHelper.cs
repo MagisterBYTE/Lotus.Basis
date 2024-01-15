@@ -54,11 +54,11 @@ namespace Lotus
 			/// <param name="right">Объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean GenericEquals<TType>(in TType left, in TType right)
+			public static Boolean GenericEquals<TType>(in TType? left, in TType? right)
 			{
 				if (typeof(TType).IsValueType)
 				{
-					return left.Equals(right);
+					return left!.Equals(right);
 				}
 				else
 				{
@@ -86,7 +86,7 @@ namespace Lotus
 			/// <param name="right">Объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean ObjectEquals(System.Object left, System.Object right)
+			public static Boolean ObjectEquals(System.Object? left, System.Object? right)
 			{
 				if (left != null)
 				{

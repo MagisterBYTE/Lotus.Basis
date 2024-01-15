@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -42,19 +43,19 @@ namespace Lotus
 			public static void TestExtensionString()
 			{
 				var test_beetwen = "Use the Assert[2222] class[00000] to";
-				Assert.AreEqual(test_beetwen.RemoveAllBetweenSymbol('[', ']'),
+				ClassicAssert.AreEqual(test_beetwen.RemoveAllBetweenSymbol('[', ']'),
 					"Use the Assert[] class[] to");
 
 				test_beetwen = "Use the Assert[2222] class";
-				Assert.AreEqual(test_beetwen.RemoveAllBetweenSymbol('[', ']'),
+				ClassicAssert.AreEqual(test_beetwen.RemoveAllBetweenSymbol('[', ']'),
 					"Use the Assert[] class");
 
 				var test_beetwen_all = "Use the Assert[2222] class";
-				Assert.AreEqual(test_beetwen_all.RemoveAllBetweenSymbolWithSymbols('[', ']'),
+				ClassicAssert.AreEqual(test_beetwen_all.RemoveAllBetweenSymbolWithSymbols('[', ']'),
 					"Use the Assert class");
 
 				test_beetwen_all = "Use the Assert[2222] class[00000] to";
-				Assert.AreEqual(test_beetwen_all.RemoveAllBetweenSymbolWithSymbols('[', ']'),
+				ClassicAssert.AreEqual(test_beetwen_all.RemoveAllBetweenSymbolWithSymbols('[', ']'),
 					"Use the Assert class to");
 
 
@@ -65,11 +66,11 @@ namespace Lotus
 				var eqal21 = "привет";
 				var eqal22 = "Привет";
 
-				Assert.AreEqual(eqal21.Equal(eqal11), true);
-				Assert.AreEqual(eqal21.Equal(eqal12), false);
+				ClassicAssert.AreEqual(eqal21.Equal(eqal11), true);
+				ClassicAssert.AreEqual(eqal21.Equal(eqal12), false);
 
-				Assert.AreEqual(eqal22.EqualIgnoreCase(eqal11), true);
-				Assert.AreEqual(eqal22.EqualIgnoreCase(eqal12), true);
+				ClassicAssert.AreEqual(eqal22.EqualIgnoreCase(eqal11), true);
+				ClassicAssert.AreEqual(eqal22.EqualIgnoreCase(eqal12), true);
 
 
 				var test = "Use the Assert class to test conditions class.";
@@ -77,45 +78,45 @@ namespace Lotus
 				test = test.RemoveFirstOccurrence("566");
 
 				test = test.RemoveFirstOccurrence("class");
-				Assert.AreEqual(test, "Use the Assert  to test conditions class.");
+				ClassicAssert.AreEqual(test, "Use the Assert  to test conditions class.");
 
 
 				test = "Use the Assert class to test conditions class.";
 				test = test.RemoveLastOccurrence("class");
-				Assert.AreEqual(test, "Use the Assert class to test conditions .");
+				ClassicAssert.AreEqual(test, "Use the Assert class to test conditions .");
 
 				test = "Use the Assert class to test conditions class.xtx";
 				test = test.RemoveExtension();
-				Assert.AreEqual(test, "Use the Assert class to test conditions class");
+				ClassicAssert.AreEqual(test, "Use the Assert class to test conditions class");
 
 				test = "Проверяемая строка хороша";
 				test = test.RemoveFromSearchOption("хороша", TStringSearchOption.End);
-				Assert.AreEqual(test, "Проверяемая строка ");
+				ClassicAssert.AreEqual(test, "Проверяемая строка ");
 
 				test = "dfsfsd[778]sdfsd[090]";
 				var nf = test.ExtractNumber();
-				Assert.AreEqual(nf, 778);
+				ClassicAssert.AreEqual(nf, 778);
 
 				test = "dfsfsd[778]sdfsd[090]";
 				var nl = test.ExtractNumberLast();
-				Assert.AreEqual(nl, 90);
+				ClassicAssert.AreEqual(nl, 90);
 
 				test = "/// <param name=\"begin\">String begin</param>";
 				var token = test.ExtractString(">", "<");
-				Assert.AreEqual(token, "String begin");
+				ClassicAssert.AreEqual(token, "String begin");
 
 				test = "222.3333";
 				var before = test.SubstringTo(".", false);
-				Assert.AreEqual(before, "222");
+				ClassicAssert.AreEqual(before, "222");
 
 				var after = test.SubstringFrom(".", false);
-				Assert.AreEqual(after, "3333");
+				ClassicAssert.AreEqual(after, "3333");
 
 				before = test.SubstringTo(".", true);
-				Assert.AreEqual(before, "222.");
+				ClassicAssert.AreEqual(before, "222.");
 
 				after = test.SubstringFrom(".", true);
-				Assert.AreEqual(after, ".3333");
+				ClassicAssert.AreEqual(after, ".3333");
 
 
 				//
@@ -123,7 +124,7 @@ namespace Lotus
 				//
 				test = "yield null to skip";
 				test = test.ToWordUpper();
-				Assert.AreEqual(test, "Yield null to skip");
+				ClassicAssert.AreEqual(test, "Yield null to skip");
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -191,21 +192,21 @@ namespace Lotus
 			public static void TestExtensionReflection()
 			{
 				// Проверка типа на поддержку интерфейса
-				Assert.AreEqual(typeof(A).IsSupportInterface<IA>(), true);
-				Assert.AreEqual(typeof(A).IsSupportInterface<IB>(), false);
+				ClassicAssert.AreEqual(typeof(A).IsSupportInterface<IA>(), true);
+				ClassicAssert.AreEqual(typeof(A).IsSupportInterface<IB>(), false);
 
-				Assert.AreEqual(typeof(B).IsSupportInterface<IA>(), true);
-				Assert.AreEqual(typeof(B).IsSupportInterface<IB>(), true);
+				ClassicAssert.AreEqual(typeof(B).IsSupportInterface<IA>(), true);
+				ClassicAssert.AreEqual(typeof(B).IsSupportInterface<IB>(), true);
 
 				// Проверка типа на базовый класс
-				Assert.AreEqual(typeof(B).IsSubclassOf(typeof(System.Object)), true);
-				Assert.AreEqual(typeof(B).IsSubclassOf(typeof(A)), true);
-				Assert.AreEqual(typeof(B).IsSubclassOf(typeof(B)), false);
+				ClassicAssert.AreEqual(typeof(B).IsSubclassOf(typeof(System.Object)), true);
+				ClassicAssert.AreEqual(typeof(B).IsSubclassOf(typeof(A)), true);
+				ClassicAssert.AreEqual(typeof(B).IsSubclassOf(typeof(B)), false);
 
 				// Проверка на равенство
-				Assert.AreEqual(typeof(B).IsAssignableFrom(typeof(A)), false);
-				Assert.AreEqual(typeof(B).IsAssignableFrom(typeof(B)), true);
-				Assert.AreEqual(typeof(B).IsAssignableFrom(typeof(C)), true);
+				ClassicAssert.AreEqual(typeof(B).IsAssignableFrom(typeof(A)), false);
+				ClassicAssert.AreEqual(typeof(B).IsAssignableFrom(typeof(B)), true);
+				ClassicAssert.AreEqual(typeof(B).IsAssignableFrom(typeof(C)), true);
 			}
 		}
 	}

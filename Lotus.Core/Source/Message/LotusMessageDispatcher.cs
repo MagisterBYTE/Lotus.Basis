@@ -41,7 +41,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			private static ListArray<CPublisher> mPublishers;
+			private static ListArray<CPublisher> _publishers;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -50,13 +50,13 @@ namespace Lotus
 			/// </summary>
 			public static ListArray<CPublisher> Publishers
 			{
-				get 
+				get
 				{
-					if(mPublishers == null)
+					if (_publishers == null)
 					{
 						OnInit();
 					}
-					return mPublishers;
+					return _publishers!;
 				}
 			}
 
@@ -65,9 +65,9 @@ namespace Lotus
 			/// </summary>
 			public static CPublisher Default
 			{
-				get 
+				get
 				{
-					return Publishers[0]; 
+					return Publishers[0];
 				}
 			}
 			#endregion
@@ -89,10 +89,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void OnInit()
 			{
-				if (mPublishers == null)
+				if (_publishers == null)
 				{
-					mPublishers = new ListArray<CPublisher>();
-					mPublishers.Add(new CPublisher(DefaultName));
+					_publishers = new ListArray<CPublisher>();
+					_publishers.Add(new CPublisher(DefaultName));
 				}
 			}
 
@@ -103,9 +103,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static void OnUpdate()
 			{
-				for (var i = 0; i < mPublishers.Count; i++)
+				for (var i = 0; i < _publishers.Count; i++)
 				{
-					mPublishers[i].OnUpdate();
+					_publishers[i].OnUpdate();
 				}
 			}
 			#endregion

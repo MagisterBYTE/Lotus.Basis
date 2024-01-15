@@ -13,9 +13,9 @@
 //=====================================================================================================================
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Globalization;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -43,7 +43,7 @@ namespace Lotus
 			/// <param name="y">Вторая строка</param>
 			/// <returns>Статус сравнения строк</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override Int32 Compare(String x, String y)
+			public override Int32 Compare(String? x, String? y)
 			{
 				if (x == y)
 				{
@@ -58,11 +58,11 @@ namespace Lotus
 					return 1;
 				}
 
-				if(System.IO.Path.HasExtension(x))
+				if (System.IO.Path.HasExtension(x))
 				{
 					if (System.IO.Path.HasExtension(y))
 					{
-						if(x.Length > y.Length)
+						if (x.Length > y.Length)
 						{
 							return 1;
 						}
@@ -241,7 +241,7 @@ namespace Lotus
 			/// <param name="str">Сравниваемая строка</param>
 			/// <returns>Статус равенства строк</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean Equal(this String @this, String str)
+			public static Boolean Equal(this String @this, String? str)
 			{
 				return String.Compare(@this, str, false) == 0;
 			}
@@ -254,7 +254,7 @@ namespace Lotus
 			/// <param name="str">Сравниваемая строка</param>
 			/// <returns>Статус равенства строк</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean EqualIgnoreCase(this String @this, String str)
+			public static Boolean EqualIgnoreCase(this String @this, String? str)
 			{
 				return String.Compare(@this, str, true) == 0;
 			}
@@ -816,7 +816,7 @@ namespace Lotus
 				var is_pre_opened = false;
 				for (var i = 0; i < @this.Length; i++)
 				{
-					if(is_pre_opened)
+					if (is_pre_opened)
 					{
 						is_opened = true;
 					}
@@ -864,7 +864,7 @@ namespace Lotus
 						is_pre_opened = true;
 					}
 
-					if(is_pre_opened == false)
+					if (is_pre_opened == false)
 					{
 						is_opened = false;
 					}
@@ -898,7 +898,7 @@ namespace Lotus
 				{
 					case TStringSearchOption.Start:
 						{
-							if(@this.StartsWith(check))
+							if (@this.StartsWith(check))
 							{
 								return @this.Remove(0, check.Length);
 							}
@@ -906,7 +906,7 @@ namespace Lotus
 						break;
 					case TStringSearchOption.End:
 						{
-							if(@this.EndsWith(check))
+							if (@this.EndsWith(check))
 							{
 								return @this.Remove(@this.Length - check.Length);
 							}
@@ -915,7 +915,7 @@ namespace Lotus
 					case TStringSearchOption.Contains:
 						{
 							var index = @this.IndexOf(check);
-							if(index > -1)
+							if (index > -1)
 							{
 								return @this.Remove(index, check.Length);
 							}
@@ -999,7 +999,7 @@ namespace Lotus
 				var find = false;
 				for (var i = 0; i < @this.Length; i++)
 				{
-					if(Char.IsDigit(@this[i]))
+					if (Char.IsDigit(@this[i]))
 					{
 						find = true;
 						number.Append(@this[i]);
@@ -1113,13 +1113,13 @@ namespace Lotus
 				var builder = new StringBuilder(@this);
 				for (var i = 0; i < builder.Length; i++)
 				{
-					if(Char.IsLetter(builder[i]))
+					if (Char.IsLetter(builder[i]))
 					{
 						builder[i] = Char.ToUpper(builder[i]);
 						break;
 					}
 				}
-				
+
 				return builder.ToString();
 			}
 
@@ -1203,11 +1203,11 @@ namespace Lotus
 
 					if (current == XChar.Space) continue;
 
-					if(Char.IsUpper(current))
+					if (Char.IsUpper(current))
 					{
-						if(i > 0)
+						if (i > 0)
 						{
-							if(Char.IsLower(@this[i - 1]) || (@this[i - 1] == XChar.Space))
+							if (Char.IsLower(@this[i - 1]) || (@this[i - 1] == XChar.Space))
 							{
 								builder.Append('_');
 								builder.Append(current);
@@ -1405,7 +1405,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static String ToDrawColor(this String @this, TColor color)
 			{
-				return "<color=#"+ color.ToStringHEX() + ">" + @this + "</color>";
+				return "<color=#" + color.ToStringHEX() + ">" + @this + "</color>";
 			}
 			#endregion
 		}

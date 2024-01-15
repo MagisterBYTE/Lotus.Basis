@@ -97,7 +97,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Значение идентификатора</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
+			public override String? ToString()
 			{
 				return Id.ToString();
 			}

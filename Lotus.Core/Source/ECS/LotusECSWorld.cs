@@ -45,17 +45,17 @@ namespace Lotus
 			protected internal Int32 _countEntity;
 			protected internal Int32 _maxCountEntity;
 			protected internal Int32 _currentIdEntity = 1;
-			protected internal TEcsEntity[] mDenseEntities;
-			protected internal TEcsEntity mDummyEntity = new TEcsEntity(-1);
-			protected internal Int32[] mSparseEntities;
-			protected internal Int32[] mRemovedEntities;
+			protected internal TEcsEntity[] _denseEntities;
+			protected internal TEcsEntity _dummyEntity = new TEcsEntity(-1);
+			protected internal Int32[] _sparseEntities;
+			protected internal Int32[] _removedEntities;
 			protected internal Int32 _countRemovedEntity;
 
 			// Компоненты
 			protected internal Dictionary<Type, ILotusEcsComponentData> _componentsData;
 
 			// Фильтры
-			protected internal ListArray<CEcsFilterComponent> mFilterComponents;
+			protected internal ListArray<CEcsFilterComponent> _filterComponents;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -72,7 +72,7 @@ namespace Lotus
 			/// </summary>
 			public TEcsEntity[] Entities
 			{
-				get { return mDenseEntities; }
+				get { return _denseEntities; }
 			}
 
 			/// <summary>
@@ -88,7 +88,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<CEcsFilterComponent> FilterComponents
 			{
-				get { return mFilterComponents; }
+				get { return _filterComponents; }
 			}
 			#endregion
 
@@ -99,16 +99,16 @@ namespace Lotus
 			/// </summary>
 			/// <param name="configs">Конфигурация начальных настроек мира</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CEcsWorld(CEcsWorldConfigs configs = null)
+			public CEcsWorld(CEcsWorldConfigs? configs = null)
 			{
 				_maxCountEntity = configs is null ? 512 : configs.EntityCachSize;
-				mDenseEntities = new TEcsEntity[_maxCountEntity];
-				mSparseEntities = new Int32[_maxCountEntity];
-				mRemovedEntities = new Int32[_maxCountEntity];
+				_denseEntities = new TEcsEntity[_maxCountEntity];
+				_sparseEntities = new Int32[_maxCountEntity];
+				_removedEntities = new Int32[_maxCountEntity];
 
 				_componentsData = new Dictionary<Type, ILotusEcsComponentData>(configs is null ? 512 : configs.ComponentCachSize);
 
-				mFilterComponents = new ListArray<CEcsFilterComponent>(24);
+				_filterComponents = new ListArray<CEcsFilterComponent>(24);
 			}
 			#endregion
 
@@ -127,7 +127,7 @@ namespace Lotus
 				if (_countRemovedEntity > 0)
 				{
 					_countRemovedEntity--;
-					current_id = mRemovedEntities[_countRemovedEntity];
+					current_id = _removedEntities[_countRemovedEntity];
 				}
 				else
 				{
@@ -138,25 +138,25 @@ namespace Lotus
 				if (current_id >= _maxCountEntity)
 				{
 					_maxCountEntity = Math.Max(current_id + 1, _maxCountEntity << 1);
-					Array.Resize(ref mDenseEntities, _maxCountEntity);
-					Array.Resize(ref mSparseEntities, _maxCountEntity);
-					Array.Resize(ref mRemovedEntities, _maxCountEntity);
+					Array.Resize(ref _denseEntities, _maxCountEntity);
+					Array.Resize(ref _sparseEntities, _maxCountEntity);
+					Array.Resize(ref _removedEntities, _maxCountEntity);
 				}
 
 				if (_countEntity >= _maxCountEntity)
 				{
 					_maxCountEntity = _maxCountEntity << 1;
-					Array.Resize(ref mDenseEntities, _maxCountEntity);
-					Array.Resize(ref mSparseEntities, _maxCountEntity);
-					Array.Resize(ref mRemovedEntities, _maxCountEntity);
+					Array.Resize(ref _denseEntities, _maxCountEntity);
+					Array.Resize(ref _sparseEntities, _maxCountEntity);
+					Array.Resize(ref _removedEntities, _maxCountEntity);
 				}
 
 				var current_count = _countEntity;
-				mSparseEntities[current_id] = current_count;
-				mDenseEntities[current_count] = new TEcsEntity(current_id);
+				_sparseEntities[current_id] = current_count;
+				_denseEntities[current_count] = new TEcsEntity(current_id);
 				_countEntity++;
 
-				return ref mDenseEntities[current_count];
+				return ref _denseEntities[current_count];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean ContainsEntity(Int32 id)
 			{
-				return mSparseEntities[id] < _countEntity && mDenseEntities[mSparseEntities[id]].Id == id;
+				return _sparseEntities[id] < _countEntity && _denseEntities[_sparseEntities[id]].Id == id;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -180,13 +180,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public ref TEcsEntity GetEntity(Int32 id)
 			{
-				if(mSparseEntities[id] < _countEntity && mDenseEntities[mSparseEntities[id]].Id == id)
+				if(_sparseEntities[id] < _countEntity && _denseEntities[_sparseEntities[id]].Id == id)
 				{
-					return ref mDenseEntities[mSparseEntities[id]];
+					return ref _denseEntities[_sparseEntities[id]];
 				}
 				else
 				{
-					return ref mDummyEntity;
+					return ref _dummyEntity;
 				}
 			}
 
@@ -198,11 +198,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void RemoveEntity(Int32 id)
 			{
-				mRemovedEntities[_countRemovedEntity] = id;
+				_removedEntities[_countRemovedEntity] = id;
 				_countRemovedEntity++;
 
-				mDenseEntities[mSparseEntities[id]] = mDenseEntities[_countEntity - 1];
-				mSparseEntities[mDenseEntities[_countEntity - 1].Id] = mSparseEntities[id];
+				_denseEntities[_sparseEntities[id]] = _denseEntities[_countEntity - 1];
+				_sparseEntities[_denseEntities[_countEntity - 1].Id] = _sparseEntities[id];
 				_countEntity--;
 			}
 
@@ -213,10 +213,10 @@ namespace Lotus
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
 			/// <returns>Список идентификатор сущностей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32[] GetEntities<TComponent>() where TComponent : struct
+			public Int32[]? GetEntities<TComponent>() where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					return component_data.GetEntities();
@@ -238,10 +238,10 @@ namespace Lotus
 			public ref TComponent AddComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
-					var component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
 
 					if (component_data_exist.HasEntity(entityId) == false)
 					{
@@ -276,10 +276,10 @@ namespace Lotus
 			public ref TComponent GetOrAddComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
-					var component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
 
 					if (component_data_exist.HasEntity(entityId) == false)
 					{
@@ -314,7 +314,7 @@ namespace Lotus
 			public Boolean HasComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
 					return component_data.HasEntity(entityId);
@@ -334,10 +334,10 @@ namespace Lotus
 			public ref TComponent GetComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
-					var component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
 					ref TComponent value = ref component_data_exist.GetValue(entityId);
 					return ref value;
 				}
@@ -356,10 +356,10 @@ namespace Lotus
 			public void UpdateComponent<TComponent>(Int32 entityId, in TComponent value) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
-					var component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
 					component_data_exist.SetValue(entityId, in value);
 				}
 			}
@@ -374,10 +374,10 @@ namespace Lotus
 			public void RemoveComponent<TComponent>(Int32 entityId) where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
-					var component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
 					component_data_exist.RemoveEntity(entityId);
 				}
 			}
@@ -389,13 +389,13 @@ namespace Lotus
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
 			/// <returns>Массив компонентов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TComponent[] GetComponents<TComponent>() where TComponent : struct
+			public TComponent[]? GetComponents<TComponent>() where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
-					var component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
 					return component_data_exist.Components._items;
 				}
 
@@ -409,13 +409,13 @@ namespace Lotus
 			/// <typeparam name="TComponent">Тип компонента</typeparam>
 			/// <returns>Список сущностей и компонента определённого типа</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public CEcsComponentData<TComponent> GetComponentData<TComponent>() where TComponent : struct
+			public CEcsComponentData<TComponent>? GetComponentData<TComponent>() where TComponent : struct
 			{
 				var component_type = typeof(TComponent);
-				ILotusEcsComponentData component_data;
+				ILotusEcsComponentData? component_data;
 				if (_componentsData.TryGetValue(component_type, out component_data))
 				{
-					var component_data_exist = component_data as CEcsComponentData<TComponent>;
+					var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
 					return component_data_exist;
 				}
 
@@ -434,7 +434,7 @@ namespace Lotus
 			{
 				var filter_сomponent = new CEcsFilterComponent();
 				filter_сomponent.World = this;
-				mFilterComponents.Add(filter_сomponent);
+				_filterComponents.Add(filter_сomponent);
 				return filter_сomponent;
 			}
 
@@ -446,11 +446,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void UpdateFilterComponentsForAdd(Type componentType)
 			{
-				for (var i = 0; i < mFilterComponents.Count; i++)
+				for (var i = 0; i < _filterComponents.Count; i++)
 				{
-					if (mFilterComponents[i].IncludedComponents.Contains(componentType))
+					if (_filterComponents[i].IncludedComponents.Contains(componentType))
 					{
-						mFilterComponents[i].UpdateFilter();
+						_filterComponents[i].UpdateFilter();
 					}
 				}
 			}

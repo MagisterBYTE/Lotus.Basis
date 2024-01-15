@@ -40,7 +40,7 @@ namespace Lotus
 			// Основные параметры
 			protected internal String _name;
 			protected internal List<CTaskHolder> _tasks;
-			protected internal TTaskExecuteMode mExecuteMode;
+			protected internal TTaskExecuteMode _executeMode;
 			protected internal Single _delayStart;
 
 			// Переменные состояния
@@ -55,11 +55,11 @@ namespace Lotus
 			protected internal Boolean _isEachTaskCompletedHandler;
 
 			// Исполнитель группы задач
-			protected internal CTaskGroupExecutor mExecutor;
+			protected internal CTaskGroupExecutor _executor;
 
 			// События
-			protected internal Action<String> mOnGroupTaskStarted;
-			protected internal Action<String> mOnGroupTaskCompleted;
+			protected internal Action<String> _onGroupTaskStarted;
+			protected internal Action<String> _onGroupTaskCompleted;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -88,8 +88,8 @@ namespace Lotus
 			/// </summary>
 			public TTaskExecuteMode ExecuteMode
 			{
-				get { return mExecuteMode; }
-				set { mExecuteMode = value; }
+				get { return _executeMode; }
+				set { _executeMode = value; }
 			}
 
 			/// <summary>
@@ -174,7 +174,7 @@ namespace Lotus
 			/// </summary>
 			public CTaskGroupExecutor Executor
 			{
-				get { return mExecutor; }
+				get { return _executor; }
 			}
 
 			//
@@ -185,8 +185,8 @@ namespace Lotus
 			/// </summary>
 			public Action<String> OnGroupTaskStarted
 			{
-				get { return mOnGroupTaskStarted; }
-				set { mOnGroupTaskStarted = value; }
+				get { return _onGroupTaskStarted; }
+				set { _onGroupTaskStarted = value; }
 			}
 
 			/// <summary>
@@ -194,8 +194,8 @@ namespace Lotus
 			/// </summary>
 			public Action<String> OnGroupTaskCompleted
 			{
-				get { return mOnGroupTaskCompleted; }
-				set { mOnGroupTaskCompleted = value; }
+				get { return _onGroupTaskCompleted; }
+				set { _onGroupTaskCompleted = value; }
 			}
 			#endregion
 
@@ -245,10 +245,10 @@ namespace Lotus
 			/// <param name="executor">Исполнитель группы задач</param>
 			/// <param name="list">Список задач</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CGroupTask(String name, TTaskMethod method, CTaskGroupExecutor executor, params ILotusTask[] list)
+			public CGroupTask(String name, TTaskMethod method, CTaskGroupExecutor executor, params ILotusTask[]? list)
 			{
 				_name = name;
-				mExecutor = executor;
+				_executor = executor;
 				_tasks = new List<CTaskHolder>();
 				AddList(method, list);
 			}
@@ -290,7 +290,7 @@ namespace Lotus
 					}
 				}
 
-				CTaskHolder task_holder = mExecutor.TaskHolderPools.Take();
+				CTaskHolder task_holder = _executor.TaskHolderPools.Take();
 				task_holder.Task = task;
 				_tasks.Add(task_holder);
 			}
@@ -318,7 +318,7 @@ namespace Lotus
 					}
 				}
 
-				CTaskHolder task_holder = mExecutor.TaskHolderPools.Take();
+				CTaskHolder task_holder = _executor.TaskHolderPools.Take();
 				task_holder.Task = task;
 				task_holder.MethodMode = method;
 				_tasks.Add(task_holder);
@@ -345,8 +345,10 @@ namespace Lotus
 			/// <param name="method">Способ выполнения задачи</param>
 			/// <param name="list">Список задач</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void AddList(TTaskMethod method, params ILotusTask[] list)
+			public void AddList(TTaskMethod method, params ILotusTask[]? list)
 			{
+				if (list == null) return;
+
 				for (var i = 0; i < list.Length; i++)
 				{
 					Add(list[i], method);
@@ -367,7 +369,7 @@ namespace Lotus
 					{
 						// 1) Возвращаем в пул
 						CTaskHolder task_holder = _tasks[i];
-						mExecutor.TaskHolderPools.Release(task_holder);
+						_executor.TaskHolderPools.Release(task_holder);
 
 						// 2) Удаляем
 						_tasks.RemoveAt(i);
@@ -390,7 +392,7 @@ namespace Lotus
 					{
 						// 1) Возвращаем в пул
 						CTaskHolder task_holder = _tasks[i];
-						mExecutor.TaskHolderPools.Release(task_holder);
+						_executor.TaskHolderPools.Release(task_holder);
 
 						// 2) Удаляем
 						_tasks.RemoveAt(i);
@@ -417,7 +419,7 @@ namespace Lotus
 
 				if (_isDelayStart == false)
 				{
-					if (mExecuteMode == TTaskExecuteMode.Parallel)
+					if (_executeMode == TTaskExecuteMode.Parallel)
 					{
 						for (var i = 0; i < _tasks.Count; i++)
 						{
@@ -509,9 +511,9 @@ namespace Lotus
 							if(_isEachTaskCompletedHandler)
 							{
 								// Если был обработчик завершения каждой задачи группы
-								if (mExecutor.GroupTaskHandlersEachTaskCompleted.ContainsKey(_name))
+								if (_executor.GroupTaskHandlersEachTaskCompleted.ContainsKey(_name))
 								{
-									mExecutor.GroupTaskHandlersEachTaskCompleted[_name](_tasks[i].Task);
+									_executor.GroupTaskHandlersEachTaskCompleted[_name](_tasks[i].Task);
 								}
 							}
 						}
@@ -528,12 +530,12 @@ namespace Lotus
 						_isRunning = false;
 
 						// Информируем
-						if (mOnGroupTaskCompleted != null) mOnGroupTaskCompleted(_name);
+						if (_onGroupTaskCompleted != null) _onGroupTaskCompleted(_name);
 
 						// Если был задан обработчик завершения задач, то вызываем его
-						if (mExecutor.GroupTaskHandlersCompleted.ContainsKey(_name))
+						if (_executor.GroupTaskHandlersCompleted.ContainsKey(_name))
 						{
-							mExecutor.GroupTaskHandlersCompleted[_name]();
+							_executor.GroupTaskHandlersCompleted[_name]();
 						}
 					}
 				}
@@ -572,9 +574,9 @@ namespace Lotus
 						if (_isEachTaskCompletedHandler)
 						{
 							// Если был обработчик завершения каждой задачи группы
-							if (mExecutor.GroupTaskHandlersEachTaskCompleted.ContainsKey(_name))
+							if (_executor.GroupTaskHandlersEachTaskCompleted.ContainsKey(_name))
 							{
-								mExecutor.GroupTaskHandlersEachTaskCompleted[_name](_currentTask.Task);
+								_executor.GroupTaskHandlersEachTaskCompleted[_name](_currentTask.Task);
 							}
 						}
 
@@ -588,12 +590,12 @@ namespace Lotus
 							_isRunning = false;
 
 							// Информируем
-							if (mOnGroupTaskCompleted != null) mOnGroupTaskCompleted(_name);
+							if (_onGroupTaskCompleted != null) _onGroupTaskCompleted(_name);
 
 							// Если был прямой обработчик по имени задачи вызываем
-							if (mExecutor.GroupTaskHandlersCompleted.ContainsKey(_name))
+							if (_executor.GroupTaskHandlersCompleted.ContainsKey(_name))
 							{
-								mExecutor.GroupTaskHandlersCompleted[_name]();
+								_executor.GroupTaskHandlersCompleted[_name]();
 							}
 
 							return;
@@ -617,7 +619,7 @@ namespace Lotus
 				{
 					// 1) Возвращаем в пул
 					CTaskHolder task_holder = _tasks[i];
-					mExecutor.TaskHolderPools.Release(task_holder);
+					_executor.TaskHolderPools.Release(task_holder);
 				}
 
 				_tasks.Clear();

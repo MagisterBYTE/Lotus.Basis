@@ -12,7 +12,6 @@
 //=====================================================================================================================
 using System;
 using System.IO;
-using System.Linq;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -31,14 +30,14 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			protected internal ILotusOwnerObject _owner;
-			protected internal FileInfo _info;
+			protected internal FileInfo? _info;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
 			/// Родительский объект владелей
 			/// </summary>
-			public ILotusOwnerObject IOwner
+			public ILotusOwnerObject? IOwner
 			{
 				get { return _owner; }
 				set { }
@@ -54,7 +53,7 @@ namespace Lotus
 				{
 					try
 					{
-						if(_info != null)
+						if (_info != null)
 						{
 							var new_file_path = XFilePath.GetPathForRenameFile(_info.FullName, value);
 							File.Move(_info.FullName, new_file_path);
@@ -80,11 +79,11 @@ namespace Lotus
 			/// <summary>
 			/// Полное имя(полный путь) элемента файловой системы
 			/// </summary>
-			public String FullName 
+			public String FullName
 			{
-				get 
+				get
 				{
-					if(_info != null)
+					if (_info != null)
 					{
 						return _info.FullName;
 					}
@@ -98,7 +97,7 @@ namespace Lotus
 			/// <summary>
 			/// Информация о файле
 			/// </summary>
-			public FileInfo Info
+			public FileInfo? Info
 			{
 				get { return _info; }
 				set { _info = value; }
@@ -261,6 +260,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Delete()
 			{
+				if(_info == null) return;
+
 				File.Delete(_info.FullName);
 
 				var metaFile = _info.FullName + ".meta";

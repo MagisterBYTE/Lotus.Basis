@@ -398,11 +398,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void OnPoolRelease()
 			{
-				_id = -1;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+                _id = -1;
 				_task = null;
 				_delayStart = 0.0f;
 				_onTaskStarted = null;
 				_onTaskCompleted = null;
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 			}
 			#endregion
 

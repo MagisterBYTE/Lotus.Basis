@@ -60,7 +60,7 @@ namespace Lotus
 					Int64 result = 0;
 
 					// Пакуем хеш код
-					XPacked.PackLong(ref result, 0, 28, obj.GetHashCode()/16);
+					XPacked.PackLong(ref result, 0, 28, obj.GetHashCode() / 16);
 
 					// Пакуем дату
 					XPacked.PackLong(ref result, 28, 36, elapsed_millisecond);

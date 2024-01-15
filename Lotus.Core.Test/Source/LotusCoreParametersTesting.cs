@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -46,8 +47,8 @@ namespace Lotus
 				var parameterObject = new CParameters("Программа",
 					new CParameterString("Имя", "Эра"), parameter_inner);
 
-				Assert.AreEqual(parameterObject.Value[0].Name, "Имя");
-				Assert.AreEqual(parameterObject.Value[0].Value, "Эра");
+				ClassicAssert.AreEqual(parameterObject.Value[0].Name, "Имя");
+				ClassicAssert.AreEqual(parameterObject.Value[0].Value, "Эра");
 			}
 		}
 	}

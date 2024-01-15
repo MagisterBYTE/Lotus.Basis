@@ -11,32 +11,30 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Collections;
-using System.Collections.Generic;
 //=====================================================================================================================
 namespace Lotus
 {
 	namespace Core
 	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreCollections
+        //-------------------------------------------------------------------------------------------------------------
+        /** \addtogroup CoreCollections
 		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Двусторонняя очередь на основе массива
-		/// </summary>
-		/// <remarks>
-		/// Реализация двусторонней очереди на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
-		/// с учетом особенности реализации двусторонней очереди
-		/// </remarks>
-		/// <typeparam name="TItem">Тип элемента очереди</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class DequeArray<TItem> : ListArray<TItem>
+        //-------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Двусторонняя очередь на основе массива
+        /// </summary>
+        /// <remarks>
+        /// Реализация двусторонней очереди на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
+        /// с учетом особенности реализации двусторонней очереди
+        /// </remarks>
+        /// <typeparam name="TItem">Тип элемента очереди</typeparam>
+        //-------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class DequeArray<TItem> : ListArray<TItem>
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32 mStartOffset;
+			protected internal Int32 _startOffset;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -48,7 +46,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 StartOffset
 			{
-				get { return mStartOffset; }
+				get { return _startOffset; }
 			}
 			#endregion
 
@@ -61,7 +59,7 @@ namespace Lotus
 			public DequeArray()
 				: base(INIT_MAX_COUNT)
 			{
-				mStartOffset = INIT_MAX_COUNT / 2;
+				_startOffset = INIT_MAX_COUNT / 2;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -73,7 +71,7 @@ namespace Lotus
 			public DequeArray(Int32 maxCount)
 				: base(maxCount)
 			{
-				mStartOffset = maxCount / 2;
+				_startOffset = maxCount / 2;
 			}
 			#endregion
 
@@ -87,10 +85,10 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			new public TItem this[Int32 index]
 			{
-				get { return _arrayOfItems[(mStartOffset + index) % _maxCount]; }
+				get { return _arrayOfItems[(_startOffset + index) % _maxCount]; }
 				set
 				{
-					_arrayOfItems[(mStartOffset + index) % _maxCount] = value;
+					_arrayOfItems[(_startOffset + index) % _maxCount] = value;
 				}
 			}
 			#endregion
@@ -105,7 +103,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem GetElement(Int32 index)
 			{
-				return _arrayOfItems[(mStartOffset + index) % _maxCount];
+				return _arrayOfItems[(_startOffset + index) % _maxCount];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -126,18 +124,18 @@ namespace Lotus
 				}
 
 				// Нет возможности добавить в начало очереди
-				if (mStartOffset == 0)
+				if (_startOffset == 0)
 				{
 					_maxCount *= 2;
 					var items = new TItem[_maxCount];
-					mStartOffset = _maxCount / 2;
-					Array.Copy(_arrayOfItems, 0, items, mStartOffset, _count);
+					_startOffset = _maxCount / 2;
+					Array.Copy(_arrayOfItems, 0, items, _startOffset, _count);
 					_arrayOfItems = items;
 				}
 
 				// Уменьшаем индекс начало очереди
-				mStartOffset--;
-				_arrayOfItems[mStartOffset] = item;
+				_startOffset--;
+				_arrayOfItems[_startOffset] = item;
 				_count++;
 			}
 
@@ -158,7 +156,7 @@ namespace Lotus
 					_arrayOfItems = items;
 				}
 
-				_arrayOfItems[mStartOffset + _count] = item;
+				_arrayOfItems[_startOffset + _count] = item;
 				_count++;
 			}
 
@@ -168,13 +166,13 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem RemoveFront()
+			public TItem? RemoveFront()
 			{
 				if (_count > 0)
 				{
-					TItem item = _arrayOfItems[mStartOffset];
-					_arrayOfItems[mStartOffset] = default;
-					mStartOffset++;
+					TItem item = _arrayOfItems[_startOffset];
+					_arrayOfItems[_startOffset] = default;
+					_startOffset++;
 					_count--;
 					return item;
 				}
@@ -195,7 +193,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem RemoveBack()
+			public TItem? RemoveBack()
 			{
 				if (_count > 0)
 				{
@@ -222,11 +220,11 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem PeekFront()
+			public TItem? PeekFront()
 			{
 				if (_count > 0)
 				{
-					return _arrayOfItems[mStartOffset];
+					return _arrayOfItems[_startOffset];
 				}
 				else
 				{
@@ -246,7 +244,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem PeekBack()
+			public TItem? PeekBack()
 			{
 				if (_count > 0)
 				{
@@ -273,12 +271,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public new Boolean Contains(in TItem item)
 			{
-				var index = mStartOffset;
+				var index = _startOffset;
 				var count = _count;
 
 				while (count-- > 0)
 				{
-					if (_arrayOfItems[index].Equals(item))
+					if (_arrayOfItems[index]!.Equals(item))
 					{
 						return true;
 					}
@@ -295,8 +293,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public new void Clear()
 			{
-				Array.Clear(_arrayOfItems, mStartOffset, _count);
-				mStartOffset = _maxCount / 2;
+				Array.Clear(_arrayOfItems, _startOffset, _count);
+				_startOffset = _maxCount / 2;
 				_count = 0;
 			}
 			#endregion

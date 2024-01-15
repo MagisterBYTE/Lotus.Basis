@@ -137,7 +137,7 @@ namespace Lotus
 			/// <summary>
 			/// Значение параметра
 			/// </summary>
-			System.Object Value { get; set; }
+			System.Object? Value { get; set; }
 
 			/// <summary>
 			/// Активность параметра
@@ -172,7 +172,7 @@ namespace Lotus
 			/// <summary>
 			/// Значение параметра
 			/// </summary>
-			new TValue Value { get; set; }
+			new TValue? Value { get; set; }
 			#endregion
 		}
 
@@ -206,7 +206,7 @@ namespace Lotus
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
 			protected internal String _name;
-			protected internal TValue _value;
+			protected internal TValue? _value;
 			protected internal Int64 _id;
 			protected internal Boolean _isActive;
 			protected internal Byte _userTag;
@@ -251,12 +251,19 @@ namespace Lotus
 			/// Значение параметра
 			/// </summary>
 			[XmlIgnore]
-			System.Object IParameterItem.Value
+			System.Object? IParameterItem.Value
 			{
 				get { return _value; }
 				set 
 				{
-					_value = (TValue)value;
+					if (value == null)
+					{
+						_value = default;
+					}
+					else
+					{
+                        _value = (TValue)value;
+                    }
 					NotifyPropertyChanged(PropertyArgsIValue);
 					if (_owner != null) _owner.OnNotifyUpdated(this, _value, nameof(Value));
 				}
@@ -266,7 +273,7 @@ namespace Lotus
 			/// Значение параметра
 			/// </summary>
 			[XmlElement]
-			public TValue Value
+			public TValue? Value
 			{
 				get { return _value; }
 				set
@@ -344,7 +351,7 @@ namespace Lotus
 			/// Владелец параметра
 			/// </summary>
 			[XmlIgnore]
-			public ILotusOwnerObject IOwner
+			public ILotusOwnerObject? IOwner
 			{
 				get { return _owner; }
 				set { _owner = value; }
@@ -396,9 +403,9 @@ namespace Lotus
 			/// <param name="other">Параметр</param>
 			/// <returns>Статус сравнения параметров</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(ParameterItem<TValue> other)
+			public Int32 CompareTo(ParameterItem<TValue>? other)
 			{
-				return String.CompareOrdinal(Name, other.Name);
+				return String.CompareOrdinal(Name, other?.Name);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -419,9 +426,9 @@ namespace Lotus
 			/// <param name="parameters">Параметры дублирования объекта</param>
 			/// <returns>Дубликат объекта</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ParameterItem<TValue> Duplicate(CParameters parameters = null)
+			public ParameterItem<TValue> Duplicate(CParameters? parameters = null)
 			{
-				return MemberwiseClone() as ParameterItem<TValue>;
+				return (MemberwiseClone() as ParameterItem<TValue>)!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -432,7 +439,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				var result = String.Format("{0} = {1}", _name, base.ToString());
+				var result = String.Format("{0} = {1}", _name, _value?.ToString());
 				return result;
 			}
 			#endregion

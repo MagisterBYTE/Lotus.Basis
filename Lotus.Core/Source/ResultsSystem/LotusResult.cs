@@ -11,8 +11,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -187,7 +185,7 @@ namespace Lotus
 			/// <param name="data">Дополнительные данные</param>
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Result(Int32 code, System.Object data, Boolean status)
+			public Result(Int32 code, System.Object? data, Boolean status)
 			{
 				Code = code;
 				Data = data;
@@ -218,7 +216,7 @@ namespace Lotus
 			/// <param name="data">Дополнительные данные</param>
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public Result(Int32 code, String message, System.Object data, Boolean status)
+			public Result(Int32 code, String message, System.Object? data, Boolean status)
 			{
 				Code = code;
 				Message = message;
@@ -271,7 +269,7 @@ namespace Lotus
 			/// <summary>
 			/// Данные
 			/// </summary>
-			new public TData Data { get; set; }
+			new public TData? Data { get; set; }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -348,7 +346,7 @@ namespace Lotus
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
 			public Result(Int32 code, String message, TData? data, Boolean status)
-				:base(code, message, data, status)
+				: base(code, message, data, status)
 			{
 				Data = data;
 			}

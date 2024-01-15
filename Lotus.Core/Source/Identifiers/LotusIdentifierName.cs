@@ -92,8 +92,10 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус сравнения объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(ILotusNameable other)
+			public Int32 CompareTo(ILotusNameable? other)
 			{
+				if (other == null) return 0;
+
 				return _name.CompareTo(other.Name);
 			}
 
@@ -104,9 +106,11 @@ namespace Lotus
 			/// <param name="other">Сравниваемый объект</param>
 			/// <returns>Статус сравнения объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CNameable other)
+			public Int32 CompareTo(CNameable? other)
 			{
-				return _name.CompareTo(other.Name);
+                if (other == null) return 0;
+
+                return _name.CompareTo(other.Name);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -239,7 +243,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(ILotusNameable? other)
 			{
-				if (other == null) { return 0; }
+				if (other == null) return 0;
+
 				return _name.CompareTo(other.Name);
 			}
 
@@ -252,7 +257,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 CompareTo(CNameableInt? other)
 			{
-				if (other == null) { return 0; }
+				if (other == null) return 0;
+
 				return _name.CompareTo(other.Name);
 			}
 
@@ -264,8 +270,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return _name;
-			}
+                return $"Name: {_name} | Id: {_id}";
+            }
 			#endregion
 
 			#region ======================================= СЛУЖЕБНЫЕ МЕТОДЫ СОБЫТИЙ ==================================

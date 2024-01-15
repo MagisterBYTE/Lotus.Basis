@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -45,508 +46,508 @@ namespace Lotus
 
 				// Добавление
 				sample.Add(2000);
-				Assert.AreEqual(sample.Count, 1);
-				Assert.AreEqual(sample[0], 2000);
+				ClassicAssert.AreEqual(sample.Count, 1);
+				ClassicAssert.AreEqual(sample[0], 2000);
 
 				// Вставка
 				sample.Insert(0, 1000);
-				Assert.AreEqual(sample.Count, 2);
-				Assert.AreEqual(sample[0], 1000);
-				Assert.AreEqual(sample[1], 2000);
+				ClassicAssert.AreEqual(sample.Count, 2);
+				ClassicAssert.AreEqual(sample[0], 1000);
+				ClassicAssert.AreEqual(sample[1], 2000);
 
 				// Вставка
 				sample.Insert(1, 500);
-				Assert.AreEqual(sample.Count, 3);
-				Assert.AreEqual(sample[0], 1000);
-				Assert.AreEqual(sample[1], 500);
-				Assert.AreEqual(sample[2], 2000);
+				ClassicAssert.AreEqual(sample.Count, 3);
+				ClassicAssert.AreEqual(sample[0], 1000);
+				ClassicAssert.AreEqual(sample[1], 500);
+				ClassicAssert.AreEqual(sample[2], 2000);
 
 				// Удаление
 				sample.Remove(500);
-				Assert.AreEqual(sample.Count, 2);
-				Assert.AreEqual(sample[0], 1000);
-				Assert.AreEqual(sample[1], 2000);
+				ClassicAssert.AreEqual(sample.Count, 2);
+				ClassicAssert.AreEqual(sample[0], 1000);
+				ClassicAssert.AreEqual(sample[1], 2000);
 
 				// Очистка
 				sample.Clear();
-				Assert.AreEqual(sample.Count, 0);
-				Assert.AreEqual(sample.MaxCount, 20);
+				ClassicAssert.AreEqual(sample.Count, 0);
+				ClassicAssert.AreEqual(sample.MaxCount, 20);
 
 				// Добавление списка элементов
 				sample.AddItems(23, 568, 788, 4587);
-				Assert.AreEqual(sample.Count, 4);
+				ClassicAssert.AreEqual(sample.Count, 4);
 
 				// Вставка списка элементов
 				sample.InsertItems(2, 87, 987);
-				Assert.AreEqual(sample.Count, 6);
-				Assert.AreEqual(sample[0], 23);
-				Assert.AreEqual(sample[1], 568);
-				Assert.AreEqual(sample[2], 87);
-				Assert.AreEqual(sample[3], 987);
-				Assert.AreEqual(sample[4], 788);
-				Assert.AreEqual(sample[5], 4587);
+				ClassicAssert.AreEqual(sample.Count, 6);
+				ClassicAssert.AreEqual(sample[0], 23);
+				ClassicAssert.AreEqual(sample[1], 568);
+				ClassicAssert.AreEqual(sample[2], 87);
+				ClassicAssert.AreEqual(sample[3], 987);
+				ClassicAssert.AreEqual(sample[4], 788);
+				ClassicAssert.AreEqual(sample[5], 4587);
 
 				// Удаление диапазона
 				sample.RemoveRange(3, 2);
-				Assert.AreEqual(sample.Count, 4);
-				Assert.AreEqual(sample[0], 23);
-				Assert.AreEqual(sample[1], 568);
-				Assert.AreEqual(sample[2], 87);
-				Assert.AreEqual(sample[3], 4587);
+				ClassicAssert.AreEqual(sample.Count, 4);
+				ClassicAssert.AreEqual(sample[0], 23);
+				ClassicAssert.AreEqual(sample[1], 568);
+				ClassicAssert.AreEqual(sample[2], 87);
+				ClassicAssert.AreEqual(sample[3], 4587);
 
 				// Добавление списка элементов
 				sample.AddItems(444, 545, 999, 842);
-				Assert.AreEqual(sample.Count, 8);
-				Assert.AreEqual(sample[0], 23);
-				Assert.AreEqual(sample[1], 568); // Будет удалено в следующем тесте
-				Assert.AreEqual(sample[2], 87);
-				Assert.AreEqual(sample[3], 4587);
-				Assert.AreEqual(sample[4], 444); // Будет удалено в следующем тесте
-				Assert.AreEqual(sample[5], 545);
-				Assert.AreEqual(sample[6], 999);
-				Assert.AreEqual(sample[7], 842); // Будет удалено в следующем тесте
+				ClassicAssert.AreEqual(sample.Count, 8);
+				ClassicAssert.AreEqual(sample[0], 23);
+				ClassicAssert.AreEqual(sample[1], 568); // Будет удалено в следующем тесте
+				ClassicAssert.AreEqual(sample[2], 87);
+				ClassicAssert.AreEqual(sample[3], 4587);
+				ClassicAssert.AreEqual(sample[4], 444); // Будет удалено в следующем тесте
+				ClassicAssert.AreEqual(sample[5], 545);
+				ClassicAssert.AreEqual(sample[6], 999);
+				ClassicAssert.AreEqual(sample[7], 842); // Будет удалено в следующем тесте
 
 				// Удаление по условию
 				var count = sample.RemoveAll((Int32 x) =>
 				{
 					return x % 2 == 0;
 				});
-				Assert.AreEqual(sample.Count, 5);
-				Assert.AreEqual(count, 3);
-				Assert.AreEqual(sample[0], 23);
-				Assert.AreEqual(sample[1], 87);
-				Assert.AreEqual(sample[2], 4587);
-				Assert.AreEqual(sample[3], 545);
-				Assert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample.Count, 5);
+				ClassicAssert.AreEqual(count, 3);
+				ClassicAssert.AreEqual(sample[0], 23);
+				ClassicAssert.AreEqual(sample[1], 87);
+				ClassicAssert.AreEqual(sample[2], 4587);
+				ClassicAssert.AreEqual(sample[3], 545);
+				ClassicAssert.AreEqual(sample[4], 999);
 
 				// Добавление списка элементов
 				sample.AddItems(23, 568, 788, 4587);
-				Assert.AreEqual(sample.Count, 9);
-				Assert.AreEqual(sample[0], 23); // Duplicate 23
-				Assert.AreEqual(sample[1], 87);
-				Assert.AreEqual(sample[2], 4587); // Duplicate 4587
-				Assert.AreEqual(sample[3], 545);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 23); // Duplicate 23
-				Assert.AreEqual(sample[6], 568);
-				Assert.AreEqual(sample[7], 788);
-				Assert.AreEqual(sample[8], 4587); // Duplicate 4587
+				ClassicAssert.AreEqual(sample.Count, 9);
+				ClassicAssert.AreEqual(sample[0], 23); // Duplicate 23
+				ClassicAssert.AreEqual(sample[1], 87);
+				ClassicAssert.AreEqual(sample[2], 4587); // Duplicate 4587
+				ClassicAssert.AreEqual(sample[3], 545);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 23); // Duplicate 23
+				ClassicAssert.AreEqual(sample[6], 568);
+				ClassicAssert.AreEqual(sample[7], 788);
+				ClassicAssert.AreEqual(sample[8], 4587); // Duplicate 4587
 
 				// Удаление дубликатов
 				var count_dublicate = sample.RemoveDuplicates();
-				Assert.AreEqual(count_dublicate, 2);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 23);
-				Assert.AreEqual(sample[1], 87);
-				Assert.AreEqual(sample[2], 4587);
-				Assert.AreEqual(sample[3], 545);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 568);
-				Assert.AreEqual(sample[6], 788);
+				ClassicAssert.AreEqual(count_dublicate, 2);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 23);
+				ClassicAssert.AreEqual(sample[1], 87);
+				ClassicAssert.AreEqual(sample[2], 4587);
+				ClassicAssert.AreEqual(sample[3], 545);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 568);
+				ClassicAssert.AreEqual(sample[6], 788);
 
 				// Сортировка по возрастанию
 				sample.SortAscending();
-				Assert.AreEqual(sample[0], 23);
-				Assert.AreEqual(sample[1], 87);
-				Assert.AreEqual(sample[2], 545);
-				Assert.AreEqual(sample[3], 568);
-				Assert.AreEqual(sample[4], 788);
-				Assert.AreEqual(sample[5], 999);
-				Assert.AreEqual(sample[6], 4587);
+				ClassicAssert.AreEqual(sample[0], 23);
+				ClassicAssert.AreEqual(sample[1], 87);
+				ClassicAssert.AreEqual(sample[2], 545);
+				ClassicAssert.AreEqual(sample[3], 568);
+				ClassicAssert.AreEqual(sample[4], 788);
+				ClassicAssert.AreEqual(sample[5], 999);
+				ClassicAssert.AreEqual(sample[6], 4587);
 
 				// Сортировка по убыванию
 				sample.SortDescending();
-				Assert.AreEqual(sample[0], 4587);
-				Assert.AreEqual(sample[1], 999);
-				Assert.AreEqual(sample[2], 788);
-				Assert.AreEqual(sample[3], 568);
-				Assert.AreEqual(sample[4], 545);
-				Assert.AreEqual(sample[5], 87);
-				Assert.AreEqual(sample[6], 23);
+				ClassicAssert.AreEqual(sample[0], 4587);
+				ClassicAssert.AreEqual(sample[1], 999);
+				ClassicAssert.AreEqual(sample[2], 788);
+				ClassicAssert.AreEqual(sample[3], 568);
+				ClassicAssert.AreEqual(sample[4], 545);
+				ClassicAssert.AreEqual(sample[5], 87);
+				ClassicAssert.AreEqual(sample[6], 23);
 
 				// Удаление первого элемента
 				sample.RemoveFirst();
-				Assert.AreEqual(sample.Count, 6);
-				Assert.AreEqual(sample[0], 999);
-				Assert.AreEqual(sample[1], 788);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 545);
-				Assert.AreEqual(sample[4], 87);
-				Assert.AreEqual(sample[5], 23);
+				ClassicAssert.AreEqual(sample.Count, 6);
+				ClassicAssert.AreEqual(sample[0], 999);
+				ClassicAssert.AreEqual(sample[1], 788);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 545);
+				ClassicAssert.AreEqual(sample[4], 87);
+				ClassicAssert.AreEqual(sample[5], 23);
 
 				// Удаление последнего элемента
 				sample.RemoveLast();
-				Assert.AreEqual(sample.Count, 5);
-				Assert.AreEqual(sample[0], 999);
-				Assert.AreEqual(sample[1], 788);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 545);
-				Assert.AreEqual(sample[4], 87);
+				ClassicAssert.AreEqual(sample.Count, 5);
+				ClassicAssert.AreEqual(sample[0], 999);
+				ClassicAssert.AreEqual(sample[1], 788);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 545);
+				ClassicAssert.AreEqual(sample[4], 87);
 
 				// Емкость
 				sample.TrimExcess();
-				Assert.AreEqual(sample.Count, 5);
-				Assert.AreEqual(sample.MaxCount, 5);
+				ClassicAssert.AreEqual(sample.Count, 5);
+				ClassicAssert.AreEqual(sample.MaxCount, 5);
 
 				// Перемещаем элемент с индексом 2 вниз
 				sample.MoveDown(2);
-				Assert.AreEqual(sample[0], 999);
-				Assert.AreEqual(sample[1], 788);
-				Assert.AreEqual(sample[2], 545);
-				Assert.AreEqual(sample[3], 568);
-				Assert.AreEqual(sample[4], 87);
+				ClassicAssert.AreEqual(sample[0], 999);
+				ClassicAssert.AreEqual(sample[1], 788);
+				ClassicAssert.AreEqual(sample[2], 545);
+				ClassicAssert.AreEqual(sample[3], 568);
+				ClassicAssert.AreEqual(sample[4], 87);
 
 				// Циклическое смещение элементов списка вниз
 				sample.ShiftDown();
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 999);
-				Assert.AreEqual(sample[2], 788);
-				Assert.AreEqual(sample[3], 545);
-				Assert.AreEqual(sample[4], 568);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 999);
+				ClassicAssert.AreEqual(sample[2], 788);
+				ClassicAssert.AreEqual(sample[3], 545);
+				ClassicAssert.AreEqual(sample[4], 568);
 
 				sample.SortAscending();
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
 
 				// Поиск ближайшего индекса
-				Assert.AreEqual(sample.GetClosestIndex(50), 0);
-				Assert.AreEqual(sample.GetClosestIndex(87), 0);
-				Assert.AreEqual(sample.GetClosestIndex(90), 0);
-				Assert.AreEqual(sample.GetClosestIndex(545), 1);
-				Assert.AreEqual(sample.GetClosestIndex(550), 1);
-				Assert.AreEqual(sample.GetClosestIndex(998), 3);
-				Assert.AreEqual(sample.GetClosestIndex(999), sample.LastIndex);
-				Assert.AreEqual(sample.GetClosestIndex(1000), sample.LastIndex);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(50), 0);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(87), 0);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(90), 0);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(545), 1);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(550), 1);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(998), 3);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(999), sample.LastIndex);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(1000), sample.LastIndex);
 
 				// Обрезка
 				sample.Add(5566);
 				sample.Add(9874);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
 
 				ListArray<Int32> save = sample.GetItemsDuplicate();
 
 				//
 				// Обрезка списка сначала
 				//
-				Assert.AreEqual(sample.TrimStart(87, false), 0);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
+				ClassicAssert.AreEqual(sample.TrimStart(87, false), 0);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
 
-				Assert.AreEqual(sample.TrimStart(87), 1);
-				Assert.AreEqual(sample[0], 545);
-				Assert.AreEqual(sample[1], 568);
-				Assert.AreEqual(sample[2], 788);
-				Assert.AreEqual(sample[3], 999);
-				Assert.AreEqual(sample[4], 5566);
-				Assert.AreEqual(sample[5], 9874);
+				ClassicAssert.AreEqual(sample.TrimStart(87), 1);
+				ClassicAssert.AreEqual(sample[0], 545);
+				ClassicAssert.AreEqual(sample[1], 568);
+				ClassicAssert.AreEqual(sample[2], 788);
+				ClassicAssert.AreEqual(sample[3], 999);
+				ClassicAssert.AreEqual(sample[4], 5566);
+				ClassicAssert.AreEqual(sample[5], 9874);
 
-				Assert.AreEqual(sample.TrimStart(999, false), 3);
-				Assert.AreEqual(sample[0], 999);
-				Assert.AreEqual(sample[1], 5566);
-				Assert.AreEqual(sample[2], 9874);
+				ClassicAssert.AreEqual(sample.TrimStart(999, false), 3);
+				ClassicAssert.AreEqual(sample[0], 999);
+				ClassicAssert.AreEqual(sample[1], 5566);
+				ClassicAssert.AreEqual(sample[2], 9874);
 
 				sample.AssignItems(save);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
 
-				Assert.AreEqual(sample.TrimStart(999), 5);
-				Assert.AreEqual(sample[0], 5566);
-				Assert.AreEqual(sample[1], 9874);
+				ClassicAssert.AreEqual(sample.TrimStart(999), 5);
+				ClassicAssert.AreEqual(sample[0], 5566);
+				ClassicAssert.AreEqual(sample[1], 9874);
 
-				Assert.AreEqual(sample.TrimStart(999), -1); // Ничего не нашли
+				ClassicAssert.AreEqual(sample.TrimStart(999), -1); // Ничего не нашли
 				
 				sample.AssignItems(save);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
 
-				Assert.AreEqual(sample.TrimStart(9874, false), 6);
-				Assert.AreEqual(sample.Count, 1);
-				Assert.AreEqual(sample[0], 9874);
+				ClassicAssert.AreEqual(sample.TrimStart(9874, false), 6);
+				ClassicAssert.AreEqual(sample.Count, 1);
+				ClassicAssert.AreEqual(sample[0], 9874);
 
 				sample.AssignItems(save);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
 
-				Assert.AreEqual(sample.TrimStart(9874), 7);
-				Assert.AreEqual(sample.Count, 0);
+				ClassicAssert.AreEqual(sample.TrimStart(9874), 7);
+				ClassicAssert.AreEqual(sample.Count, 0);
 
 				//
 				// Поиск ближайшего индекса
 				//
 				sample.AssignItems(87, 545, 568, 788, 999);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
 
 				
-				Assert.AreEqual(sample.GetClosestIndex(50), 0);
-				Assert.AreEqual(sample.GetClosestIndex(87), 0);
-				Assert.AreEqual(sample.GetClosestIndex(90), 0);
-				Assert.AreEqual(sample.GetClosestIndex(545), 1);
-				Assert.AreEqual(sample.GetClosestIndex(550), 1);
-				Assert.AreEqual(sample.GetClosestIndex(568), 2);
-				Assert.AreEqual(sample.GetClosestIndex(788), 3);
-				Assert.AreEqual(sample.GetClosestIndex(998), 3);
-				Assert.AreEqual(sample.GetClosestIndex(999), sample.LastIndex);
-				Assert.AreEqual(sample.GetClosestIndex(1000), sample.LastIndex);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(50), 0);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(87), 0);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(90), 0);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(545), 1);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(550), 1);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(568), 2);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(788), 3);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(998), 3);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(999), sample.LastIndex);
+				ClassicAssert.AreEqual(sample.GetClosestIndex(1000), sample.LastIndex);
 
 				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
-				Assert.AreEqual(sample.Count, 8);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 1203);
-				Assert.AreEqual(sample[6], 5684);
-				Assert.AreEqual(sample[7], 5987);
+				ClassicAssert.AreEqual(sample.Count, 8);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 1203);
+				ClassicAssert.AreEqual(sample[6], 5684);
+				ClassicAssert.AreEqual(sample[7], 5987);
 
-				Assert.AreEqual(sample.TrimClosestStart(50), 0);
-				Assert.AreEqual(sample.TrimClosestStart(87, false), 0);
-				Assert.AreEqual(sample.TrimClosestStart(87), 1);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 545);
-				Assert.AreEqual(sample[1], 568);
-				Assert.AreEqual(sample[2], 788);
-				Assert.AreEqual(sample[3], 999);
-				Assert.AreEqual(sample[4], 1203);
-				Assert.AreEqual(sample[5], 5684);
-				Assert.AreEqual(sample[6], 5987);
-
-				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
-				Assert.AreEqual(sample.Count, 8);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 1203);
-				Assert.AreEqual(sample[6], 5684);
-				Assert.AreEqual(sample[7], 5987);
-
-				Assert.AreEqual(sample.TrimClosestStart(800), 4);
-				Assert.AreEqual(sample.Count, 4);
-				Assert.AreEqual(sample[0], 999);
-				Assert.AreEqual(sample[1], 1203);
-				Assert.AreEqual(sample[2], 5684);
-				Assert.AreEqual(sample[3], 5987);
+				ClassicAssert.AreEqual(sample.TrimClosestStart(50), 0);
+				ClassicAssert.AreEqual(sample.TrimClosestStart(87, false), 0);
+				ClassicAssert.AreEqual(sample.TrimClosestStart(87), 1);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 545);
+				ClassicAssert.AreEqual(sample[1], 568);
+				ClassicAssert.AreEqual(sample[2], 788);
+				ClassicAssert.AreEqual(sample[3], 999);
+				ClassicAssert.AreEqual(sample[4], 1203);
+				ClassicAssert.AreEqual(sample[5], 5684);
+				ClassicAssert.AreEqual(sample[6], 5987);
 
 				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
-				Assert.AreEqual(sample.Count, 8);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 1203);
-				Assert.AreEqual(sample[6], 5684);
-				Assert.AreEqual(sample[7], 5987);
+				ClassicAssert.AreEqual(sample.Count, 8);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 1203);
+				ClassicAssert.AreEqual(sample[6], 5684);
+				ClassicAssert.AreEqual(sample[7], 5987);
 
-				Assert.AreEqual(sample.TrimClosestStart(788), 4);
-				Assert.AreEqual(sample.Count, 4);
-				Assert.AreEqual(sample[0], 999);
-				Assert.AreEqual(sample[1], 1203);
-				Assert.AreEqual(sample[2], 5684);
-				Assert.AreEqual(sample[3], 5987);
-
-				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
-				Assert.AreEqual(sample.Count, 8);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 1203);
-				Assert.AreEqual(sample[6], 5684);
-				Assert.AreEqual(sample[7], 5987);
-
-				Assert.AreEqual(sample.TrimClosestStart(788, false), 3);
-				Assert.AreEqual(sample.Count, 5);
-				Assert.AreEqual(sample[0], 788);
-				Assert.AreEqual(sample[1], 999);
-				Assert.AreEqual(sample[2], 1203);
-				Assert.AreEqual(sample[3], 5684);
-				Assert.AreEqual(sample[4], 5987);
-
-				Assert.AreEqual(sample.TrimClosestStart(5987, false), 4);
-				Assert.AreEqual(sample.Count, 1);
-				Assert.AreEqual(sample[0], 5987);
+				ClassicAssert.AreEqual(sample.TrimClosestStart(800), 4);
+				ClassicAssert.AreEqual(sample.Count, 4);
+				ClassicAssert.AreEqual(sample[0], 999);
+				ClassicAssert.AreEqual(sample[1], 1203);
+				ClassicAssert.AreEqual(sample[2], 5684);
+				ClassicAssert.AreEqual(sample[3], 5987);
 
 				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
-				Assert.AreEqual(sample.Count, 8);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 1203);
-				Assert.AreEqual(sample[6], 5684);
-				Assert.AreEqual(sample[7], 5987);
+				ClassicAssert.AreEqual(sample.Count, 8);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 1203);
+				ClassicAssert.AreEqual(sample[6], 5684);
+				ClassicAssert.AreEqual(sample[7], 5987);
 
-				Assert.AreEqual(sample.TrimClosestStart(5987), 8);
-				Assert.AreEqual(sample.Count, 0);
-
-				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
-				Assert.AreEqual(sample.Count, 8);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 1203);
-				Assert.AreEqual(sample[6], 5684);
-				Assert.AreEqual(sample[7], 5987);
-
-				Assert.AreEqual(sample.TrimClosestEnd(10000, false), 0);
-				Assert.AreEqual(sample.TrimClosestEnd(10000), 0);
-				Assert.AreEqual(sample.TrimClosestEnd(5987, false), 0);
-				Assert.AreEqual(sample.TrimClosestEnd(5987), 1);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 1203);
-				Assert.AreEqual(sample[6], 5684);
-
-				Assert.AreEqual(sample.TrimClosestEnd(1000), 2);
-				Assert.AreEqual(sample.Count, 5);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-
-				Assert.AreEqual(sample.TrimClosestEnd(545), 4);
-				Assert.AreEqual(sample.Count, 1);
-				Assert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample.TrimClosestStart(788), 4);
+				ClassicAssert.AreEqual(sample.Count, 4);
+				ClassicAssert.AreEqual(sample[0], 999);
+				ClassicAssert.AreEqual(sample[1], 1203);
+				ClassicAssert.AreEqual(sample[2], 5684);
+				ClassicAssert.AreEqual(sample[3], 5987);
 
 				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
-				Assert.AreEqual(sample.Count, 8);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 1203);
-				Assert.AreEqual(sample[6], 5684);
-				Assert.AreEqual(sample[7], 5987);
+				ClassicAssert.AreEqual(sample.Count, 8);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 1203);
+				ClassicAssert.AreEqual(sample[6], 5684);
+				ClassicAssert.AreEqual(sample[7], 5987);
 
-				Assert.AreEqual(sample.TrimClosestEnd(545, false), 6);
-				Assert.AreEqual(sample.Count, 2);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample.TrimClosestStart(788, false), 3);
+				ClassicAssert.AreEqual(sample.Count, 5);
+				ClassicAssert.AreEqual(sample[0], 788);
+				ClassicAssert.AreEqual(sample[1], 999);
+				ClassicAssert.AreEqual(sample[2], 1203);
+				ClassicAssert.AreEqual(sample[3], 5684);
+				ClassicAssert.AreEqual(sample[4], 5987);
 
-				Assert.AreEqual(sample.TrimClosestEnd(40, false), 2);
-				Assert.AreEqual(sample.Count, 0);
+				ClassicAssert.AreEqual(sample.TrimClosestStart(5987, false), 4);
+				ClassicAssert.AreEqual(sample.Count, 1);
+				ClassicAssert.AreEqual(sample[0], 5987);
+
+				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
+				ClassicAssert.AreEqual(sample.Count, 8);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 1203);
+				ClassicAssert.AreEqual(sample[6], 5684);
+				ClassicAssert.AreEqual(sample[7], 5987);
+
+				ClassicAssert.AreEqual(sample.TrimClosestStart(5987), 8);
+				ClassicAssert.AreEqual(sample.Count, 0);
+
+				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
+				ClassicAssert.AreEqual(sample.Count, 8);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 1203);
+				ClassicAssert.AreEqual(sample[6], 5684);
+				ClassicAssert.AreEqual(sample[7], 5987);
+
+				ClassicAssert.AreEqual(sample.TrimClosestEnd(10000, false), 0);
+				ClassicAssert.AreEqual(sample.TrimClosestEnd(10000), 0);
+				ClassicAssert.AreEqual(sample.TrimClosestEnd(5987, false), 0);
+				ClassicAssert.AreEqual(sample.TrimClosestEnd(5987), 1);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 1203);
+				ClassicAssert.AreEqual(sample[6], 5684);
+
+				ClassicAssert.AreEqual(sample.TrimClosestEnd(1000), 2);
+				ClassicAssert.AreEqual(sample.Count, 5);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+
+				ClassicAssert.AreEqual(sample.TrimClosestEnd(545), 4);
+				ClassicAssert.AreEqual(sample.Count, 1);
+				ClassicAssert.AreEqual(sample[0], 87);
+
+				sample.AssignItems(87, 545, 568, 788, 999, 1203, 5684, 5987);
+				ClassicAssert.AreEqual(sample.Count, 8);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 1203);
+				ClassicAssert.AreEqual(sample[6], 5684);
+				ClassicAssert.AreEqual(sample[7], 5987);
+
+				ClassicAssert.AreEqual(sample.TrimClosestEnd(545, false), 6);
+				ClassicAssert.AreEqual(sample.Count, 2);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+
+				ClassicAssert.AreEqual(sample.TrimClosestEnd(40, false), 2);
+				ClassicAssert.AreEqual(sample.Count, 0);
 
 				//
 				// Обрезка сконца
 				//
 				sample.AssignItems(save);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
 
-				Assert.AreEqual(sample.TrimEnd(9874, false), 0);
-				Assert.AreEqual(sample.TrimEnd(9874), 1);
-				Assert.AreEqual(sample.Count, 6);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample.TrimEnd(9874, false), 0);
+				ClassicAssert.AreEqual(sample.TrimEnd(9874), 1);
+				ClassicAssert.AreEqual(sample.Count, 6);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
 
-				Assert.AreEqual(sample.TrimEnd(788, false), 2);
-				Assert.AreEqual(sample.Count, 4);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-
-				sample.AssignItems(save);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
-
-				Assert.AreEqual(sample.TrimEnd(788), 4);
-				Assert.AreEqual(sample.Count, 3);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample.TrimEnd(788, false), 2);
+				ClassicAssert.AreEqual(sample.Count, 4);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
 
 				sample.AssignItems(save);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
 
-				Assert.AreEqual(sample.TrimEnd(87, false), 6);
-				Assert.AreEqual(sample.Count, 1);
-				Assert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample.TrimEnd(788), 4);
+				ClassicAssert.AreEqual(sample.Count, 3);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
 
 				sample.AssignItems(save);
-				Assert.AreEqual(sample.Count, 7);
-				Assert.AreEqual(sample[0], 87);
-				Assert.AreEqual(sample[1], 545);
-				Assert.AreEqual(sample[2], 568);
-				Assert.AreEqual(sample[3], 788);
-				Assert.AreEqual(sample[4], 999);
-				Assert.AreEqual(sample[5], 5566);
-				Assert.AreEqual(sample[6], 9874);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
 
-				Assert.AreEqual(sample.TrimEnd(87), 7);
-				Assert.AreEqual(sample.Count, 0);
+				ClassicAssert.AreEqual(sample.TrimEnd(87, false), 6);
+				ClassicAssert.AreEqual(sample.Count, 1);
+				ClassicAssert.AreEqual(sample[0], 87);
+
+				sample.AssignItems(save);
+				ClassicAssert.AreEqual(sample.Count, 7);
+				ClassicAssert.AreEqual(sample[0], 87);
+				ClassicAssert.AreEqual(sample[1], 545);
+				ClassicAssert.AreEqual(sample[2], 568);
+				ClassicAssert.AreEqual(sample[3], 788);
+				ClassicAssert.AreEqual(sample[4], 999);
+				ClassicAssert.AreEqual(sample[5], 5566);
+				ClassicAssert.AreEqual(sample[6], 9874);
+
+				ClassicAssert.AreEqual(sample.TrimEnd(87), 7);
+				ClassicAssert.AreEqual(sample.Count, 0);
 
 				//
 				// Еще один пример
@@ -567,15 +568,15 @@ namespace Lotus
 
 				list.RemoveRange(1, 4);
 
-				Assert.AreEqual(list.Count, 8);
-				Assert.AreEqual(list[0], "00");
-				Assert.AreEqual(list[1], "05");
-				Assert.AreEqual(list[2], "06");
-				Assert.AreEqual(list[3], "07");
-				Assert.AreEqual(list[4], "08");
-				Assert.AreEqual(list[5], "09");
-				Assert.AreEqual(list[6], "10");
-				Assert.AreEqual(list[7], "11");
+				ClassicAssert.AreEqual(list.Count, 8);
+				ClassicAssert.AreEqual(list[0], "00");
+				ClassicAssert.AreEqual(list[1], "05");
+				ClassicAssert.AreEqual(list[2], "06");
+				ClassicAssert.AreEqual(list[3], "07");
+				ClassicAssert.AreEqual(list[4], "08");
+				ClassicAssert.AreEqual(list[5], "09");
+				ClassicAssert.AreEqual(list[6], "10");
+				ClassicAssert.AreEqual(list[7], "11");
 
 				list.Clear();
 
@@ -594,41 +595,41 @@ namespace Lotus
 
 				list.RemoveRange(list.LastIndex, 1);
 
-				Assert.AreEqual(list.Count, 11);
-				Assert.AreEqual(list[0], "00");
-				Assert.AreEqual(list[1], "01");
-				Assert.AreEqual(list[2], "02");
-				Assert.AreEqual(list[3], "03");
-				Assert.AreEqual(list[4], "04");
-				Assert.AreEqual(list[5], "05");
-				Assert.AreEqual(list[6], "06");
-				Assert.AreEqual(list[7], "07");
-				Assert.AreEqual(list[8], "08");
-				Assert.AreEqual(list[9], "09");
-				Assert.AreEqual(list[10], "10");
+				ClassicAssert.AreEqual(list.Count, 11);
+				ClassicAssert.AreEqual(list[0], "00");
+				ClassicAssert.AreEqual(list[1], "01");
+				ClassicAssert.AreEqual(list[2], "02");
+				ClassicAssert.AreEqual(list[3], "03");
+				ClassicAssert.AreEqual(list[4], "04");
+				ClassicAssert.AreEqual(list[5], "05");
+				ClassicAssert.AreEqual(list[6], "06");
+				ClassicAssert.AreEqual(list[7], "07");
+				ClassicAssert.AreEqual(list[8], "08");
+				ClassicAssert.AreEqual(list[9], "09");
+				ClassicAssert.AreEqual(list[10], "10");
 
 				list.RemoveItemsEnd(8);
 
-				Assert.AreEqual(list.Count, 8);
-				Assert.AreEqual(list[0], "00");
-				Assert.AreEqual(list[1], "01");
-				Assert.AreEqual(list[2], "02");
-				Assert.AreEqual(list[3], "03");
-				Assert.AreEqual(list[4], "04");
-				Assert.AreEqual(list[5], "05");
-				Assert.AreEqual(list[6], "06");
-				Assert.AreEqual(list[7], "07");
+				ClassicAssert.AreEqual(list.Count, 8);
+				ClassicAssert.AreEqual(list[0], "00");
+				ClassicAssert.AreEqual(list[1], "01");
+				ClassicAssert.AreEqual(list[2], "02");
+				ClassicAssert.AreEqual(list[3], "03");
+				ClassicAssert.AreEqual(list[4], "04");
+				ClassicAssert.AreEqual(list[5], "05");
+				ClassicAssert.AreEqual(list[6], "06");
+				ClassicAssert.AreEqual(list[7], "07");
 
 				list.RemoveItemsEnd(7);
 
-				Assert.AreEqual(list.Count, 7);
-				Assert.AreEqual(list[0], "00");
-				Assert.AreEqual(list[1], "01");
-				Assert.AreEqual(list[2], "02");
-				Assert.AreEqual(list[3], "03");
-				Assert.AreEqual(list[4], "04");
-				Assert.AreEqual(list[5], "05");
-				Assert.AreEqual(list[6], "06");
+				ClassicAssert.AreEqual(list.Count, 7);
+				ClassicAssert.AreEqual(list[0], "00");
+				ClassicAssert.AreEqual(list[1], "01");
+				ClassicAssert.AreEqual(list[2], "02");
+				ClassicAssert.AreEqual(list[3], "03");
+				ClassicAssert.AreEqual(list[4], "04");
+				ClassicAssert.AreEqual(list[5], "05");
+				ClassicAssert.AreEqual(list[6], "06");
 
 				//
 				// Операции множеств
@@ -637,9 +638,9 @@ namespace Lotus
 				deferencs_source.AddItems(0, 2, 4, 7, 5);
 
 				ListArray<Int32> deferencs = deferencs_source.DifferenceItems(0, 4, 7, 12, 15, 7);
-				Assert.AreEqual(deferencs.Count, 2);
-				Assert.AreEqual(deferencs[0], 2);
-				Assert.AreEqual(deferencs[1], 5);
+				ClassicAssert.AreEqual(deferencs.Count, 2);
+				ClassicAssert.AreEqual(deferencs[0], 2);
+				ClassicAssert.AreEqual(deferencs[1], 5);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -659,14 +660,14 @@ namespace Lotus
 				queue.Enqueue(50);
 				queue.Enqueue(30);
 
-				Assert.AreEqual(queue.Dequeue(), 100);
-				Assert.AreEqual(queue.Dequeue(), 90);
-				Assert.AreEqual(queue.Dequeue(), 80);
-				Assert.AreEqual(queue.Dequeue(), 70);
-				Assert.AreEqual(queue.Dequeue(), 60);
-				Assert.AreEqual(queue.Dequeue(), 50);
-				Assert.AreEqual(queue.Dequeue(), 30);
-				Assert.AreEqual(queue.Count, 0);
+				ClassicAssert.AreEqual(queue.Dequeue(), 100);
+				ClassicAssert.AreEqual(queue.Dequeue(), 90);
+				ClassicAssert.AreEqual(queue.Dequeue(), 80);
+				ClassicAssert.AreEqual(queue.Dequeue(), 70);
+				ClassicAssert.AreEqual(queue.Dequeue(), 60);
+				ClassicAssert.AreEqual(queue.Dequeue(), 50);
+				ClassicAssert.AreEqual(queue.Dequeue(), 30);
+				ClassicAssert.AreEqual(queue.Count, 0);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -688,33 +689,33 @@ namespace Lotus
 				deque.AddBack(7);
 				deque.AddBack(8);
 
-				Assert.AreEqual(deque.GetElement(0), 1);
-				Assert.AreEqual(deque.GetElement(1), 2);
-				Assert.AreEqual(deque.GetElement(2), 3);
-				Assert.AreEqual(deque.GetElement(3), 4);
-				Assert.AreEqual(deque.GetElement(4), 5);
-				Assert.AreEqual(deque.GetElement(5), 6);
-				Assert.AreEqual(deque.GetElement(6), 7);
-				Assert.AreEqual(deque.GetElement(7), 8);
-				Assert.AreEqual(deque.Count, 8);
+				ClassicAssert.AreEqual(deque.GetElement(0), 1);
+				ClassicAssert.AreEqual(deque.GetElement(1), 2);
+				ClassicAssert.AreEqual(deque.GetElement(2), 3);
+				ClassicAssert.AreEqual(deque.GetElement(3), 4);
+				ClassicAssert.AreEqual(deque.GetElement(4), 5);
+				ClassicAssert.AreEqual(deque.GetElement(5), 6);
+				ClassicAssert.AreEqual(deque.GetElement(6), 7);
+				ClassicAssert.AreEqual(deque.GetElement(7), 8);
+				ClassicAssert.AreEqual(deque.Count, 8);
 
 
 				deque.AddFront(100);
 				deque.AddFront(200);
 				deque.AddBack(10000);
 
-				Assert.AreEqual(deque.GetElement(0), 200);
-				Assert.AreEqual(deque.GetElement(1), 100);
-				Assert.AreEqual(deque.GetElement(2), 1);
-				Assert.AreEqual(deque.GetElement(3), 2);
-				Assert.AreEqual(deque.GetElement(4), 3);
-				Assert.AreEqual(deque.GetElement(5), 4);
-				Assert.AreEqual(deque.GetElement(6), 5);
-				Assert.AreEqual(deque.GetElement(7), 6);
-				Assert.AreEqual(deque.GetElement(8), 7);
-				Assert.AreEqual(deque.GetElement(9), 8);
-				Assert.AreEqual(deque.GetElement(10), 10000);
-				Assert.AreEqual(deque.Count, 11);
+				ClassicAssert.AreEqual(deque.GetElement(0), 200);
+				ClassicAssert.AreEqual(deque.GetElement(1), 100);
+				ClassicAssert.AreEqual(deque.GetElement(2), 1);
+				ClassicAssert.AreEqual(deque.GetElement(3), 2);
+				ClassicAssert.AreEqual(deque.GetElement(4), 3);
+				ClassicAssert.AreEqual(deque.GetElement(5), 4);
+				ClassicAssert.AreEqual(deque.GetElement(6), 5);
+				ClassicAssert.AreEqual(deque.GetElement(7), 6);
+				ClassicAssert.AreEqual(deque.GetElement(8), 7);
+				ClassicAssert.AreEqual(deque.GetElement(9), 8);
+				ClassicAssert.AreEqual(deque.GetElement(10), 10000);
+				ClassicAssert.AreEqual(deque.Count, 11);
 
 
 				deque.RemoveFront();
@@ -722,40 +723,40 @@ namespace Lotus
 				deque.RemoveFront();
 				deque.RemoveFront();
 
-				Assert.AreEqual(deque.GetElement(0), 3);
-				Assert.AreEqual(deque.GetElement(1), 4);
-				Assert.AreEqual(deque.GetElement(2), 5);
-				Assert.AreEqual(deque.GetElement(3), 6);
-				Assert.AreEqual(deque.GetElement(4), 7);
-				Assert.AreEqual(deque.GetElement(5), 8);
-				Assert.AreEqual(deque.GetElement(6), 10000);
-				Assert.AreEqual(deque.Count, 7);
+				ClassicAssert.AreEqual(deque.GetElement(0), 3);
+				ClassicAssert.AreEqual(deque.GetElement(1), 4);
+				ClassicAssert.AreEqual(deque.GetElement(2), 5);
+				ClassicAssert.AreEqual(deque.GetElement(3), 6);
+				ClassicAssert.AreEqual(deque.GetElement(4), 7);
+				ClassicAssert.AreEqual(deque.GetElement(5), 8);
+				ClassicAssert.AreEqual(deque.GetElement(6), 10000);
+				ClassicAssert.AreEqual(deque.Count, 7);
 
 
 				deque.RemoveBack();
 				deque.RemoveBack();
 
-				Assert.AreEqual(deque.GetElement(0), 3);
-				Assert.AreEqual(deque.GetElement(1), 4);
-				Assert.AreEqual(deque.GetElement(2), 5);
-				Assert.AreEqual(deque.GetElement(3), 6);
-				Assert.AreEqual(deque.GetElement(4), 7);
-				Assert.AreEqual(deque.Count, 5);
+				ClassicAssert.AreEqual(deque.GetElement(0), 3);
+				ClassicAssert.AreEqual(deque.GetElement(1), 4);
+				ClassicAssert.AreEqual(deque.GetElement(2), 5);
+				ClassicAssert.AreEqual(deque.GetElement(3), 6);
+				ClassicAssert.AreEqual(deque.GetElement(4), 7);
+				ClassicAssert.AreEqual(deque.Count, 5);
 
 
 				deque.AddFront(100);
 				deque.AddFront(200);
 				deque.AddBack(10000);
 
-				Assert.AreEqual(deque.GetElement(0), 200);
-				Assert.AreEqual(deque.GetElement(1), 100);
-				Assert.AreEqual(deque.GetElement(2), 3);
-				Assert.AreEqual(deque.GetElement(3), 4);
-				Assert.AreEqual(deque.GetElement(4), 5);
-				Assert.AreEqual(deque.GetElement(5), 6);
-				Assert.AreEqual(deque.GetElement(6), 7);
-				Assert.AreEqual(deque.GetElement(7), 10000);
-				Assert.AreEqual(deque.Count, 8);
+				ClassicAssert.AreEqual(deque.GetElement(0), 200);
+				ClassicAssert.AreEqual(deque.GetElement(1), 100);
+				ClassicAssert.AreEqual(deque.GetElement(2), 3);
+				ClassicAssert.AreEqual(deque.GetElement(3), 4);
+				ClassicAssert.AreEqual(deque.GetElement(4), 5);
+				ClassicAssert.AreEqual(deque.GetElement(5), 6);
+				ClassicAssert.AreEqual(deque.GetElement(6), 7);
+				ClassicAssert.AreEqual(deque.GetElement(7), 10000);
+				ClassicAssert.AreEqual(deque.Count, 8);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -777,24 +778,24 @@ namespace Lotus
 				priority_queue.Push(8);
 				priority_queue.Push(4);
 
-				Assert.AreEqual(priority_queue.Pop(), 1);
-				Assert.AreEqual(priority_queue.Pop(), 2);
-				Assert.AreEqual(priority_queue.Pop(), 3);
-				Assert.AreEqual(priority_queue.Pop(), 4);
-				Assert.AreEqual(priority_queue.Pop(), 5);
-				Assert.AreEqual(priority_queue.Pop(), 6);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 1);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 2);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 3);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 4);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 5);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 6);
 
 				priority_queue.Push(60);
 				priority_queue.Push(70);
 				priority_queue.Push(80);
 				priority_queue.Push(40);
 
-				Assert.AreEqual(priority_queue.Pop(), 7);
-				Assert.AreEqual(priority_queue.Pop(), 8);
-				Assert.AreEqual(priority_queue.Pop(), 40);
-				Assert.AreEqual(priority_queue.Pop(), 60);
-				Assert.AreEqual(priority_queue.Pop(), 70);
-				Assert.AreEqual(priority_queue.Pop(), 80);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 7);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 8);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 40);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 60);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 70);
+				ClassicAssert.AreEqual(priority_queue.Pop(), 80);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -811,44 +812,44 @@ namespace Lotus
 				sparse_set.Add(25); // 2
 				sparse_set.Add(30); // 3
 
-				Assert.AreEqual(sparse_set.Contains(15), true);
-				Assert.AreEqual(sparse_set.Contains(20), true);
-				Assert.AreEqual(sparse_set.Contains(25), true);
-				Assert.AreEqual(sparse_set.Contains(30), true);
-				Assert.AreEqual(sparse_set.Count, 4);
-				Assert.AreEqual(sparse_set.MaxCount, 1024);
+				ClassicAssert.AreEqual(sparse_set.Contains(15), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(20), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(25), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(30), true);
+				ClassicAssert.AreEqual(sparse_set.Count, 4);
+				ClassicAssert.AreEqual(sparse_set.MaxCount, 1024);
 
 				sparse_set.Remove(20);
 
-				Assert.AreEqual(sparse_set.Contains(20), false);
-				Assert.AreEqual(sparse_set[0], 15);
-				Assert.AreEqual(sparse_set[1], 30);
-				Assert.AreEqual(sparse_set[2], 25);
+				ClassicAssert.AreEqual(sparse_set.Contains(20), false);
+				ClassicAssert.AreEqual(sparse_set[0], 15);
+				ClassicAssert.AreEqual(sparse_set[1], 30);
+				ClassicAssert.AreEqual(sparse_set[2], 25);
 
-				Assert.AreEqual(sparse_set.Count, 3);
-				Assert.AreEqual(sparse_set.MaxCount, 1024);
+				ClassicAssert.AreEqual(sparse_set.Count, 3);
+				ClassicAssert.AreEqual(sparse_set.MaxCount, 1024);
 
 				sparse_set.Add(1024);
-				Assert.AreEqual(sparse_set.Contains(1024), true);
-				Assert.AreEqual(sparse_set.Count, 4);
-				Assert.AreEqual(sparse_set.MaxCount, 2048);
+				ClassicAssert.AreEqual(sparse_set.Contains(1024), true);
+				ClassicAssert.AreEqual(sparse_set.Count, 4);
+				ClassicAssert.AreEqual(sparse_set.MaxCount, 2048);
 
 				sparse_set.AddValues(233, 3666, 15, 5555, 66, 777);
-				Assert.AreEqual(sparse_set.Contains(233), true);
-				Assert.AreEqual(sparse_set.Contains(3666), true);
-				Assert.AreEqual(sparse_set.Contains(5555), true);
-				Assert.AreEqual(sparse_set.Contains(15), true);
-				Assert.AreEqual(sparse_set.Contains(66), true);
-				Assert.AreEqual(sparse_set.Contains(777), true);
-				Assert.AreEqual(sparse_set.Count, 9);
-				Assert.AreEqual(sparse_set.MaxCount, 8192);
+				ClassicAssert.AreEqual(sparse_set.Contains(233), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(3666), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(5555), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(15), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(66), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(777), true);
+				ClassicAssert.AreEqual(sparse_set.Count, 9);
+				ClassicAssert.AreEqual(sparse_set.MaxCount, 8192);
 
 				sparse_set.RemoveValues(233, 3666, 5555, 15, 66, 777);
-				Assert.AreEqual(sparse_set.Count, 3);
-				Assert.AreEqual(sparse_set.Contains(1024), true);
-				Assert.AreEqual(sparse_set.Contains(25), true);
-				Assert.AreEqual(sparse_set.Contains(30), true);
-				Assert.AreEqual(sparse_set.MaxCount, 8192);
+				ClassicAssert.AreEqual(sparse_set.Count, 3);
+				ClassicAssert.AreEqual(sparse_set.Contains(1024), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(25), true);
+				ClassicAssert.AreEqual(sparse_set.Contains(30), true);
+				ClassicAssert.AreEqual(sparse_set.MaxCount, 8192);
 			}
 		}
 	}

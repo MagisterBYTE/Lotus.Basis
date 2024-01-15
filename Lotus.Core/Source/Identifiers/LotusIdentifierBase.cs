@@ -40,8 +40,8 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TKey">Тип ключа</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public interface ILotusIdentifierIdTemplate<TKey> : ILotusIdentifier where TKey : IEquatable<TKey>
-		{
+		public interface ILotusIdentifierIdTemplate<TKey> : ILotusIdentifier where TKey : notnull, IEquatable<TKey> 
+        {
 			/// <summary>
 			/// Ключ сущности
 			/// </summary>

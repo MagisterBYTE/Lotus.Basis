@@ -12,8 +12,8 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -178,7 +178,7 @@ namespace Lotus
 			/// <param name="groupName">Имя группы задач</param>
 			/// <returns>Найденная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask GetGroupTask(String groupName)
+			public virtual CGroupTask? GetGroupTask(String groupName)
 			{
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
@@ -301,7 +301,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask GetGroupTaskExistsTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, ILotusTask task)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
@@ -361,7 +361,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask GetGroupTaskExistsTasks(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, params ILotusTask[] tasks)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
@@ -407,7 +407,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask AddGroupTaskExistsTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, ILotusTask task)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
@@ -471,7 +471,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual CGroupTask AddGroupTaskExistsTasks(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, params ILotusTask[] tasks)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
@@ -638,9 +638,9 @@ namespace Lotus
 			/// <param name="onCompleted">Обработчик события окончания выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String groupName, Single delayStart, Action onCompleted)
+			public virtual CGroupTask RunGroupTask(String groupName, Single delayStart, Action? onCompleted)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
 					if (_groupTasks[i].Name == groupName)
@@ -650,7 +650,7 @@ namespace Lotus
 					}
 				}
 
-				if(group_task != null)
+				if (group_task != null)
 				{
 					if (onCompleted != null)
 					{
@@ -668,7 +668,7 @@ namespace Lotus
 					group_task.Run();
 				}
 
-				return group_task;
+				return group_task!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -681,9 +681,9 @@ namespace Lotus
 			/// <param name="onCompleted">Обработчик события окончания выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, Single delayStart, Action onCompleted)
+			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, Single delayStart, Action? onCompleted)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
 					if (_groupTasks[i].Name == groupName)
@@ -712,7 +712,7 @@ namespace Lotus
 					group_task.Run();
 				}
 
-				return group_task;
+				return group_task!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -726,9 +726,9 @@ namespace Lotus
 			/// <param name="onCompleted">Обработчик события окончания выполнения задач группы</param>
 			/// <returns>Запущенная группа задач или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, Single delayStart, Action onCompleted)
+			public virtual CGroupTask RunGroupTask(String groupName, TTaskExecuteMode executeMode, TTaskMethod method, Single delayStart, Action? onCompleted)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
 					if (_groupTasks[i].Name == groupName)
@@ -758,7 +758,7 @@ namespace Lotus
 					group_task.Run();
 				}
 
-				return group_task;
+				return group_task!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -770,7 +770,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void PauseGroupTask(String groupName, Boolean pause)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
 					if (_groupTasks[i].Name == groupName)
@@ -794,7 +794,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void StopGroupTask(String groupName)
 			{
-				CGroupTask group_task = null;
+				CGroupTask? group_task = null;
 				for (var i = 0; i < _groupTasks.Count; i++)
 				{
 					if (_groupTasks[i].Name == groupName)

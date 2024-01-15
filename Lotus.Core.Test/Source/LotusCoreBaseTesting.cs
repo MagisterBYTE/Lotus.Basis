@@ -19,6 +19,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -122,7 +123,7 @@ namespace Lotus
 
 				var un_pack_0 = XPacked.UnpackInteger(pack_0, 0, 28);
 
-				Assert.AreEqual(un_pack_0, uid);
+				ClassicAssert.AreEqual(un_pack_0, uid);
 
 				//
 				// Запись 15 бит с 4 бита
@@ -133,7 +134,7 @@ namespace Lotus
 
 				var un_pack_4 = XPacked.UnpackInteger(pack_4, 4, 15);
 
-				Assert.AreEqual(un_pack_4, uid);
+				ClassicAssert.AreEqual(un_pack_4, uid);
 
 				//
 				// Запись 27 бит с 4 бита
@@ -144,7 +145,7 @@ namespace Lotus
 
 				var un_pack_27 = XPacked.UnpackInteger(pack_27, 4, 27);
 
-				Assert.AreEqual(un_pack_27, uid);
+				ClassicAssert.AreEqual(un_pack_27, uid);
 
 
 				//
@@ -156,7 +157,7 @@ namespace Lotus
 
 				var un_pack_4_20 = XPacked.UnpackInteger(pack_4_20, 4, 27);
 
-				Assert.AreEqual(un_pack_4_20, uid);
+				ClassicAssert.AreEqual(un_pack_4_20, uid);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -177,7 +178,7 @@ namespace Lotus
 
 				var un_pack_0 = XPacked.UnpackLong(pack_0, 0, 28);
 
-				Assert.AreEqual(un_pack_0, uid);
+				ClassicAssert.AreEqual(un_pack_0, uid);
 
 				//
 				// Запись 15 бит с 4 бита
@@ -188,7 +189,7 @@ namespace Lotus
 
 				var un_pack_4 = XPacked.UnpackLong(pack_4, 4, 15);
 
-				Assert.AreEqual(un_pack_4, uid);
+				ClassicAssert.AreEqual(un_pack_4, uid);
 
 				//
 				// Запись 27 бит с 4 бита
@@ -199,7 +200,7 @@ namespace Lotus
 
 				var un_pack_27 = XPacked.UnpackLong(pack_27, 4, 27);
 
-				Assert.AreEqual(un_pack_27, uid);
+				ClassicAssert.AreEqual(un_pack_27, uid);
 
 
 				//
@@ -211,7 +212,7 @@ namespace Lotus
 
 				var un_pack_4_20 = XPacked.UnpackLong(pack_4_20, 20, 4);
 
-				Assert.AreEqual(un_pack_4_20, uid);
+				ClassicAssert.AreEqual(un_pack_4_20, uid);
 
 				//
 				// Запись 24 бит с 0 бита
@@ -222,7 +223,7 @@ namespace Lotus
 
 				var un_pack_24_0 = XPacked.UnpackLong(pack_24_0, 0, 24);
 
-				Assert.AreEqual(un_pack_24_0, uid);
+				ClassicAssert.AreEqual(un_pack_24_0, uid);
 
 				//
 				// Запись 16 бит с 40 бита
@@ -233,7 +234,7 @@ namespace Lotus
 
 				var un_pack_16_40 = XPacked.UnpackLong(pack_16_40, 40, 16);
 
-				Assert.AreEqual(un_pack_16_40, uid);
+				ClassicAssert.AreEqual(un_pack_16_40, uid);
 
 				//
 				// Запись 24 бит с 40 бита
@@ -244,7 +245,7 @@ namespace Lotus
 
 				var un_pack_24_40 = XPacked.UnpackLong(pack_24_40, 40, 24);
 
-				Assert.AreEqual(un_pack_24_40, uid);
+				ClassicAssert.AreEqual(un_pack_24_40, uid);
 
 				//
 				// Запись 40 бит с 24 бита
@@ -255,7 +256,7 @@ namespace Lotus
 
 				var un_pack_40_24 = XPacked.UnpackLong(pack_40_24, 24, 40);
 
-				Assert.AreEqual(un_pack_40_24, uid);
+				ClassicAssert.AreEqual(un_pack_40_24, uid);
 
 				//
 				// Упаковка
@@ -268,10 +269,10 @@ namespace Lotus
 				XPacked.PackLong(ref pack_uid, 24, 40, date_time);
 
 				var un_hash_code = (Int32)XPacked.UnpackLong(pack_uid, 0, 24);
-				Assert.AreEqual(un_hash_code, hash_code);
+				ClassicAssert.AreEqual(un_hash_code, hash_code);
 
 				var un_date_time = XPacked.UnpackLong(pack_uid, 24, 40);
-				Assert.AreEqual(un_date_time, date_time);
+				ClassicAssert.AreEqual(un_date_time, date_time);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -291,7 +292,7 @@ namespace Lotus
 				var oh = test.GetHashCode() / 16 * 16;
 				var rh = XGenerateId.UnpackIdToHashCode(uid);
 
-				Assert.AreEqual(rh, oh);
+				ClassicAssert.AreEqual(rh, oh);
 
 			}
 		}

@@ -125,7 +125,7 @@ namespace Lotus
 			{
 				if (info != null)
 				{
-					var text = info.ToString();
+					var text = info.ToString() ?? String.Empty;
 
 					var message = new TLogMessage(text, TLogType.Info);
 					message.MemberName = memberName;
@@ -154,7 +154,7 @@ namespace Lotus
 			{
 				if (info != null)
 				{
-					var text = info.ToString();
+					var text = info.ToString() ?? String.Empty;
 
 					var message = new TLogMessage(moduleName, text, TLogType.Info);
 					message.MemberName = memberName;
@@ -220,7 +220,7 @@ namespace Lotus
 			{
 				if (warning != null)
 				{
-					var text = warning.ToString();
+					var text = warning.ToString() ?? String.Empty;
 
 					var message = new TLogMessage(text, TLogType.Warning);
 					message.MemberName = memberName;
@@ -250,7 +250,7 @@ namespace Lotus
 			{
 				if (warning != null)
 				{
-					var text = warning.ToString();
+					var text = warning.ToString() ?? String.Empty;
 
 					var message = new TLogMessage(moduleName, text, TLogType.Warning);
 					message.MemberName = memberName;
@@ -316,7 +316,7 @@ namespace Lotus
 			{
 				if (error != null)
 				{
-					var text = error.ToString();
+					var text = error.ToString() ?? String.Empty;
 
 					var message = new TLogMessage(text, TLogType.Error);
 					message.MemberName = memberName;
@@ -346,7 +346,7 @@ namespace Lotus
 			{
 				if (error != null)
 				{
-					var text = error.ToString();
+					var text = error.ToString() ?? String.Empty;
 
 					var message = new TLogMessage(moduleName, text, TLogType.Error);
 					message.MemberName = memberName;

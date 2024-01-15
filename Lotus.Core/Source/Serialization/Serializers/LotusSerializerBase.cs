@@ -40,7 +40,7 @@ namespace Lotus
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <param name="parameters">Параметры сохранения</param>
 			//---------------------------------------------------------------------------------------------------------
-			void SaveTo(String fileName, System.Object instance, CParameters parameters = null);
+			void SaveTo(String fileName, System.Object instance, CParameters? parameters = null);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -53,7 +53,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public System.Object LoadFrom(String fileName, CParameters parameters = null);
+			public System.Object? LoadFrom(String fileName, CParameters? parameters = null);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -67,7 +67,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			TResultType LoadFrom<TResultType>(String fileName, CParameters parameters = null);
+			TResultType? LoadFrom<TResultType>(String fileName, CParameters? parameters = null);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -80,7 +80,7 @@ namespace Lotus
 			/// <param name="fileName">Имя файла</param>
 			/// <param name="parameters">Параметры обновления</param>
 			//---------------------------------------------------------------------------------------------------------
-			void UpdateFrom(System.Object instance, String fileName, CParameters parameters = null);
+			void UpdateFrom(System.Object instance, String fileName, CParameters? parameters = null);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -96,10 +96,10 @@ namespace Lotus
 			#region ======================================= ДАННЫЕ ====================================================
 			protected internal String _name;
 			protected internal Func<String, System.Object> _constructor;
-			protected internal Dictionary<Int64, ILotusSerializableObject> mSerializableObjects;
+			protected internal Dictionary<Int64, ILotusSerializableObject> _serializableObjects;
 
 #if UNITY_2017_1_OR_NEWER
-			protected internal List<CSerializeReferenceUnity> mSerializeReferences;
+			protected internal List<CSerializeReferenceUnity> _serializeReferences;
 #endif
 			#endregion
 
@@ -135,7 +135,7 @@ namespace Lotus
 			{
 				get
 				{
-					return mSerializableObjects;
+					return _serializableObjects;
 				}
 			}
 
@@ -147,7 +147,7 @@ namespace Lotus
 			{
 				get
 				{
-					return (mSerializeReferences);
+					return (_serializeReferences);
 				}
 			}
 #endif
@@ -160,7 +160,7 @@ namespace Lotus
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
 			public CBaseSerializer()
-				: this("")
+				: this(String.Empty)
 			{
 				
 			}
@@ -174,9 +174,9 @@ namespace Lotus
 			public CBaseSerializer(String name)
 			{
 				_name = name;
-				mSerializableObjects = new Dictionary<Int64, ILotusSerializableObject>(100);
+				_serializableObjects = new Dictionary<Int64, ILotusSerializableObject>(100);
 #if UNITY_2017_1_OR_NEWER
-				mSerializeReferences = new List<CSerializeReferenceUnity>();
+				_serializeReferences = new List<CSerializeReferenceUnity>();
 #endif
 			}
 			#endregion
@@ -193,7 +193,7 @@ namespace Lotus
 			/// <param name="instance">Экземпляр объекта</param>
 			/// <param name="parameters">Параметры сохранения</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void SaveTo(String fileName, System.Object instance, CParameters parameters = null)
+			public virtual void SaveTo(String fileName, System.Object instance, CParameters? parameters = null)
 			{
 
 			}
@@ -209,7 +209,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual System.Object LoadFrom(String fileName, CParameters parameters = null)
+			public virtual System.Object? LoadFrom(String fileName, CParameters? parameters = null)
 			{
 				return null;
 			}
@@ -226,7 +226,7 @@ namespace Lotus
 			/// <param name="parameters">Параметры загрузки</param>
 			/// <returns>Объект</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual TResultType LoadFrom<TResultType>(String fileName, CParameters parameters = null)
+			public virtual TResultType? LoadFrom<TResultType>(String fileName, CParameters? parameters = null)
 			{
 				return default;
 			}
@@ -242,7 +242,7 @@ namespace Lotus
 			/// <param name="fileName">Имя файла</param>
 			/// <param name="parameters">Параметры обновления</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void UpdateFrom(System.Object instance, String fileName, CParameters parameters = null)
+			public virtual void UpdateFrom(System.Object instance, String fileName, CParameters? parameters = null)
 			{
 			}
 			#endregion
@@ -348,9 +348,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void LinkSerializeReferences()
 			{
-				for (var i = 0; i < mSerializeReferences.Count; i++)
+				for (var i = 0; i < _serializeReferences.Count; i++)
 				{
-					mSerializeReferences[i].Link();
+					_serializeReferences[i].Link();
 				}
 			}
 
@@ -361,7 +361,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void ClearSerializeReferences()
 			{
-				mSerializeReferences.Clear();
+				_serializeReferences.Clear();
 			}
 #endif
 			#endregion

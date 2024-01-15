@@ -38,7 +38,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Дата в текстовом формате UTC</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetStrDateUTC()
+			public static String? GetStrDateUTC()
 			{
 				return DateTime.Now.ToStrDateUTC();
 			}
@@ -49,7 +49,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Дата/время в текстовом формате</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetStrDateTime()
+			public static String? GetStrDateTime()
 			{
 				return DateTime.Now.ToStrDateTime();
 			}
@@ -60,7 +60,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Дата/время в текстовом формате</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String GetStrDateTimeShort()
+			public static String? GetStrDateTimeShort()
 			{
 				return DateTime.Now.ToStrDateTimeShort();
 			}
@@ -99,7 +99,7 @@ namespace Lotus
 			public static Boolean CheckDateRangeInRange(DateTime beginCheck, DateTime? endCheck,
 				DateTime beginRange, DateTime endRange)
 #else
-			public static Boolean CheckDateRangeInRange(DateOnly beginCheck, DateOnly? endCheck, 
+			public static Boolean? CheckDateRangeInRange(DateOnly beginCheck, DateOnly? endCheck,
 				DateOnly beginRange, DateOnly endRange)
 #endif
 			{

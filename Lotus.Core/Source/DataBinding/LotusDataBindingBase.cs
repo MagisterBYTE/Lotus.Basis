@@ -19,8 +19,8 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Reflection;
 using System.ComponentModel;
+using System.Reflection;
 //=====================================================================================================================
 namespace Lotus
 {
@@ -78,7 +78,7 @@ namespace Lotus
 #endif
 			protected internal TBindingMemberType _modelMemberType;
 			protected internal System.Object _modelInstance;
-			protected internal INotifyPropertyChanged _modelPropertyChanged;
+			protected internal INotifyPropertyChanged? _modelPropertyChanged;
 
 			// Объект представления
 #if UNITY_2017_1_OR_NEWER
@@ -91,7 +91,7 @@ namespace Lotus
 			protected internal TBindingMemberType _viewMemberType;
 			protected internal Boolean _isStringView;
 			protected internal System.Object _viewInstance;
-			protected internal INotifyPropertyChanged _viewPropertyChanged;
+			protected internal INotifyPropertyChanged? _viewPropertyChanged;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -180,7 +180,7 @@ namespace Lotus
 			/// <summary>
 			/// Интерфейс объекта модели для нотификации об изменении данных
 			/// </summary>
-			public INotifyPropertyChanged ModelPropertyChanged
+			public INotifyPropertyChanged? ModelPropertyChanged
 			{
 				get { return _modelPropertyChanged; }
 			}
@@ -234,7 +234,7 @@ namespace Lotus
 			/// <summary>
 			/// Интерфейс объекта представления для нотификации об изменении данных
 			/// </summary>
-			public INotifyPropertyChanged ViewPropertyChanged
+			public INotifyPropertyChanged? ViewPropertyChanged
 			{
 				get { return _viewPropertyChanged; }
 			}
@@ -259,8 +259,10 @@ namespace Lotus
 			/// <param name="other">Объект</param>
 			/// <returns>Статус сравнения объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CBindingBase other)
+			public Int32 CompareTo(CBindingBase? other)
 			{
+				if(other == null) return 0;
+
 				return String.CompareOrdinal(Name, other.Name);
 			}
 
@@ -368,7 +370,7 @@ namespace Lotus
 			/// <param name="memberType">Тип члена объекта</param>
 			/// <returns>Член данных</returns>
 			//---------------------------------------------------------------------------------------------------------
-			protected MemberInfo SetMemberType(System.Object instance, String memberName, ref TBindingMemberType memberType)
+			protected MemberInfo? SetMemberType(System.Object instance, String memberName, TBindingMemberType memberType)
 			{
 				MemberInfo member = instance.GetType().GetMember(memberName)[0];
 				if (member != null)
@@ -423,7 +425,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected virtual void UpdateModelProperty(Object sender, PropertyChangedEventArgs args)
+			protected virtual void UpdateModelProperty(Object? sender, PropertyChangedEventArgs args)
 			{
 
 			}
@@ -464,7 +466,7 @@ namespace Lotus
 			/// </remarks>
 			/// <returns>Значение привязанного свойства/метода объекта модели</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual System.Object GetModelValue()
+			public virtual System.Object? GetModelValue()
 			{
 				return null;
 			}
@@ -499,7 +501,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected virtual void UpdateViewProperty(Object sender, PropertyChangedEventArgs args)
+			protected virtual void UpdateViewProperty(Object? sender, PropertyChangedEventArgs args)
 			{
 			}
 
@@ -537,7 +539,7 @@ namespace Lotus
 			/// </remarks>
 			/// <returns>Значение привязанного свойства/метода объекта представления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual System.Object GetViewValue()
+			public virtual System.Object? GetViewValue()
 			{
 				return null;
 			}

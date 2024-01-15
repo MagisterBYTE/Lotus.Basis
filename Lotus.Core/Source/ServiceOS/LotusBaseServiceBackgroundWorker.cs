@@ -41,10 +41,10 @@ namespace Lotus
 		public static class XBackgroundManager
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal static BackgroundWorker mDefault;
-			internal static Action mOnCompute;
-			internal static Action<Int32, Object> mOnProgress;
-			internal static Action<Object> mOnCompleted;
+			internal static BackgroundWorker _default;
+			internal static Action _onCompute;
+			internal static Action<Int32, Object?>? _onProgress;
+			internal static Action<Object?> _onCompleted;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -55,15 +55,15 @@ namespace Lotus
 			{
 				get
 				{
-					if (mDefault == null)
+					if (_default == null)
 					{
-						mDefault = new BackgroundWorker();
-						mDefault.WorkerReportsProgress = true;
-						mDefault.DoWork += OnBackgroundWorkerDoWork;
-						mDefault.ProgressChanged += OnBackgroundWorkerProgressWork;
-						mDefault.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;
+						_default = new BackgroundWorker();
+						_default.WorkerReportsProgress = true;
+						_default.DoWork += OnBackgroundWorkerDoWork;
+						_default.ProgressChanged += OnBackgroundWorkerProgressWork;
+						_default.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;
 					}
-					return mDefault;
+					return _default;
 				}
 			}
 
@@ -72,26 +72,26 @@ namespace Lotus
 			/// </summary>
 			public static Action OnCompute
 			{
-				get { return mOnCompute; }
-				set { mOnCompute = value; }
+				get { return _onCompute; }
+				set { _onCompute = value; }
 			}
 
 			/// <summary>
 			/// Делегат для информирования ходе выполнения задачи. Аргумент – процент выполнения и объект состояния 
 			/// </summary>
-			public static Action<Int32, Object> OnProgress
+			public static Action<Int32, Object?>? OnProgress
 			{
-				get { return mOnProgress; }
-				set { mOnProgress = value; }
+				get { return _onProgress; }
+				set { _onProgress = value; }
 			}
 
 			/// <summary>
 			/// Делегат для информирования окончания задачи. Аргумент – результата выполнения задачи
 			/// </summary>
-			public static Action<Object> OnCompleted
+			public static Action<Object?> OnCompleted
 			{
-				get { return mOnCompleted; }
-				set { mOnCompleted = value; }
+				get { return _onCompleted; }
+				set { _onCompleted = value; }
 			}
 			#endregion
 
@@ -103,11 +103,11 @@ namespace Lotus
 			/// <param name="onCompute">Основной делегат для выполнения задачи</param>
 			/// <param name="onCompleted">Делегат для информирования окончания задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Run(Action onCompute, Action<Object> onCompleted)
+			public static void Run(Action onCompute, Action<Object?> onCompleted)
 			{
-				mOnCompute = onCompute;
-				mOnCompleted = onCompleted;
-				mOnProgress = null;
+				_onCompute = onCompute;
+				_onCompleted = onCompleted;
+				_onProgress = null;
 				Default.RunWorkerAsync();
 			}
 
@@ -119,11 +119,11 @@ namespace Lotus
 			/// <param name="onProgress">Делегат для информирования ходе выполнения задачи</param>
 			/// <param name="onCompleted">Делегат для информирования окончания задачи</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void Run(Action onCompute, Action<Int32, Object> onProgress, Action<Object> onCompleted)
+			public static void Run(Action onCompute, Action<Int32, Object?> onProgress, Action<Object?> onCompleted)
 			{
-				mOnCompute = onCompute;
-				mOnCompleted = onCompleted;
-				mOnProgress = onProgress;
+				_onCompute = onCompute;
+				_onCompleted = onCompleted;
+				_onProgress = onProgress;
 				Default.RunWorkerAsync();
 			}
 
@@ -151,9 +151,9 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			private static void OnBackgroundWorkerDoWork(Object sender, DoWorkEventArgs args)
+			private static void OnBackgroundWorkerDoWork(Object? sender, DoWorkEventArgs args)
 			{
-				mOnCompute();
+				_onCompute();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -163,11 +163,11 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			private static void OnBackgroundWorkerProgressWork(Object sender, ProgressChangedEventArgs args)
+			private static void OnBackgroundWorkerProgressWork(Object? sender, ProgressChangedEventArgs args)
 			{
-				if (mOnProgress != null)
+				if (_onProgress != null)
 				{
-					mOnProgress(args.ProgressPercentage, args.UserState);
+					_onProgress(args.ProgressPercentage, args.UserState);
 				}
 				else
 				{
@@ -185,7 +185,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			private static void OnBackgroundWorkerRunWorkerCompleted(Object sender, RunWorkerCompletedEventArgs args)
+			private static void OnBackgroundWorkerRunWorkerCompleted(Object? sender, RunWorkerCompletedEventArgs args)
 			{
 				if (args.Error != null)
 				{
@@ -193,7 +193,7 @@ namespace Lotus
 				}
 				else
 				{
-					mOnCompleted(args.Result);
+					_onCompleted(args.Result);
 				}
 			}
 			#endregion
@@ -215,11 +215,12 @@ namespace Lotus
 			/// <param name="percent">Процент выполнения </param>
 			/// <param name="info">Объект информации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void ReportProgressLogInfo(this BackgroundWorker backgroundWorker, Int32 percent, System.Object info)
+			public static void ReportProgressLogInfo(this BackgroundWorker backgroundWorker, Int32 percent, System.Object? info)
 			{
-				if(backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
+				if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
 				{
-					backgroundWorker.ReportProgress(percent, new TLogMessage(info.ToString(), TLogType.Info));
+					var text = info != null ? info.ToString()! : $"Persent: {percent}";
+					backgroundWorker.ReportProgress(percent, new TLogMessage(text, TLogType.Info));
 				}
 			}
 
@@ -232,12 +233,13 @@ namespace Lotus
 			/// <param name="moduleName">Имя модуля/подсистемы</param>
 			/// <param name="info">Объект информации</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void ReportProgressLogInfo(this BackgroundWorker backgroundWorker, Int32 percent, 
-				String moduleName, System.Object info)
+			public static void ReportProgressLogInfo(this BackgroundWorker backgroundWorker, Int32 percent,
+				String moduleName, System.Object? info)
 			{
 				if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
 				{
-					backgroundWorker.ReportProgress(percent, new TLogMessage(moduleName, info.ToString(), TLogType.Info));
+					var text = info != null ? info.ToString()! : $"Persent: {percent}";
+					backgroundWorker.ReportProgress(percent, new TLogMessage(moduleName, text, TLogType.Info));
 				}
 			}
 
@@ -249,11 +251,12 @@ namespace Lotus
 			/// <param name="percent">Процент выполнения </param>
 			/// <param name="error">Объект ошибки</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void ReportProgressLogError(this BackgroundWorker backgroundWorker, Int32 percent, System.Object error)
+			public static void ReportProgressLogError(this BackgroundWorker backgroundWorker, Int32 percent, System.Object? error)
 			{
 				if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
 				{
-					backgroundWorker.ReportProgress(percent, new TLogMessage(error.ToString(), TLogType.Error));
+					var text = error != null ? error.ToString()! : $"Persent: {percent}";
+					backgroundWorker.ReportProgress(percent, new TLogMessage(text, TLogType.Error));
 				}
 			}
 
@@ -267,11 +270,12 @@ namespace Lotus
 			/// <param name="error">Объект ошибки</param>
 			//---------------------------------------------------------------------------------------------------------
 			public static void ReportProgressLogError(this BackgroundWorker backgroundWorker, Int32 percent,
-				String moduleName, System.Object error)
+				String moduleName, System.Object? error)
 			{
 				if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
 				{
-					backgroundWorker.ReportProgress(percent, new TLogMessage(moduleName, error.ToString(), TLogType.Error));
+					var text = error != null ? error.ToString()! : $"Persent: {percent}";
+					backgroundWorker.ReportProgress(percent, new TLogMessage(moduleName, text, TLogType.Error));
 				}
 			}
 			#endregion

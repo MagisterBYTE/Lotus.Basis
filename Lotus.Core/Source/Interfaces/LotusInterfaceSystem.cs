@@ -37,7 +37,7 @@ namespace Lotus
 			/// <param name="sourceObject">Объект-источник с которого будут скопированы параметры</param>
 			/// <param name="parameters">Параметры контекста копирования параметров</param>
 			//---------------------------------------------------------------------------------------------------------
-			void CopyParameters(System.Object sourceObject, CParameters parameters);
+			void CopyParameters(System.Object sourceObject, CParameters? parameters);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ namespace Lotus
 			/// </remarks>
 			/// <param name="parameters">Параметры контекста</param>
 			//---------------------------------------------------------------------------------------------------------
-			void OnBeforeLoad(CParameters parameters);
+			void OnBeforeLoad(CParameters? parameters);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ namespace Lotus
 			/// </remarks>
 			/// <param name="parameters">Параметры контекста</param>
 			//---------------------------------------------------------------------------------------------------------
-			void OnAfterLoad(CParameters parameters);
+			void OnAfterLoad(CParameters? parameters);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="parameters">Параметры контекста</param>
 			//---------------------------------------------------------------------------------------------------------
-			void OnBeforeSave(CParameters parameters);
+			void OnBeforeSave(CParameters? parameters);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="parameters">Параметры контекста</param>
 			//---------------------------------------------------------------------------------------------------------
-			void OnAfterSave(CParameters parameters);
+			void OnAfterSave(CParameters? parameters);
 		}
 		//-------------------------------------------------------------------------------------------------------------
 		/**@}*/

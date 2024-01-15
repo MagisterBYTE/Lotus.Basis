@@ -302,7 +302,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TEnum ToEnum<TEnum>(Object value, TEnum defaultValue) where TEnum : Enum
 			{
-				return ToEnum<TEnum>(Convert.ToString(value), defaultValue);
+				return ToEnum<TEnum>(Convert.ToString(value)!, defaultValue);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -315,7 +315,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Enum ToEnumOfType(Type enumType, System.Object value)
 			{
-				return XEnum.ToEnumOfType(enumType, value);
+				return XEnum.ToEnumOfType(enumType, value)!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -345,7 +345,7 @@ namespace Lotus
 			/// <param name="value">Значение</param>
 			/// <returns>Значение примитивного типа</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TPrimitive ToPrimitive<TPrimitive>(TypeCode typeCode, System.Object value)
+			public static TPrimitive? ToPrimitive<TPrimitive>(TypeCode typeCode, System.Object value)
 			{
 				return default;
 			}
@@ -361,9 +361,9 @@ namespace Lotus
 			/// <param name="text">Текстовое значение</param>
 			/// <returns>Значение примитивного типа</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TPrimitive ToPrimitive<TPrimitive>(TypeCode typeCode, String text)
+			public static TPrimitive? ToPrimitive<TPrimitive>(TypeCode typeCode, String text)
 			{
-				System.Object result = default;
+				System.Object? result = null;
 
 				switch (typeCode)
 				{
@@ -456,6 +456,11 @@ namespace Lotus
 						break;
 					default:
 						break;
+				}
+
+				if(result == null)
+				{
+					return default;
 				}
 
 				return (TPrimitive)result;

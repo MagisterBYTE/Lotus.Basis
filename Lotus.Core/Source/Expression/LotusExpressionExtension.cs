@@ -11,7 +11,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 //=====================================================================================================================
@@ -62,7 +61,7 @@ namespace Lotus
 				this Expression<Func<TSource, TReturn>> source,
 				Expression<Func<TDestination, TSource>> mapFrom)
 			{
-				return Expression.Lambda<Func<TDestination, TReturn>>(Expression.Invoke(source, mapFrom.Body), 
+				return Expression.Lambda<Func<TDestination, TReturn>>(Expression.Invoke(source, mapFrom.Body),
 					(IEnumerable<ParameterExpression>)mapFrom.Parameters);
 			}
 		}

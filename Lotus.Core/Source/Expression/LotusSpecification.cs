@@ -74,7 +74,7 @@ namespace Lotus
 			/// <summary>
 			/// Неявное преобразование к дереву выражений
 			/// </summary>
-			public static implicit operator Expression<Func<TItem, Boolean>>(Specification<TItem> spec) => spec?._expression;
+			public static implicit operator Expression<Func<TItem, Boolean>>(Specification<TItem> spec) => spec?._expression!;
 
 			/// <summary>
 			/// Неявное преобразование к спецификации
@@ -88,7 +88,7 @@ namespace Lotus
 			/// IMPORTANT! Это функция, а не дерево выражений
 			/// </summary>
 			public Boolean IsSatisfiedBy(TItem obj) => (_func ?? (_func = _expression.AsFunc()))(obj);
-			
+
 			/// <summary>
 			/// Композиция спецификаций
 			/// </summary>

@@ -166,7 +166,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static ValueTask<ResultHttp> SucceedOkAsync()
 			{
-				return ValueTask.FromResult(new ResultHttp(HttpStatusCode.OK, 0, null, true));
+				return ValueTask.FromResult(new ResultHttp(HttpStatusCode.OK, 0, String.Empty, true));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static ValueTask<ResultHttp> SucceedNoContentAsync()
 			{
-				return ValueTask.FromResult(new ResultHttp(HttpStatusCode.NoContent, 0, null, true));
+				return ValueTask.FromResult(new ResultHttp(HttpStatusCode.NoContent, 0, String.Empty, true));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -190,7 +190,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static ValueTask<ResultHttp<TData>> SucceedOkAsync<TData>(TData data)
 			{
-				return ValueTask.FromResult(new ResultHttp<TData>(HttpStatusCode.OK, 0, null, data, true));
+				return ValueTask.FromResult(new ResultHttp<TData>(HttpStatusCode.OK, 0, String.Empty, data, true));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static ValueTask<ResultHttp<TData>> SucceedCreatedAsync<TData>(TData data)
 			{
-				return ValueTask.FromResult(new ResultHttp<TData>(HttpStatusCode.Created, 0, null, data, true));
+				return ValueTask.FromResult(new ResultHttp<TData>(HttpStatusCode.Created, 0, String.Empty, data, true));
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static ValueTask<ResultHttp<TData>> SucceedNoContentAsync<TData>(TData data)
 			{
-				return ValueTask.FromResult(new ResultHttp<TData>(HttpStatusCode.NoContent, 0, null, data, true));
+				return ValueTask.FromResult(new ResultHttp<TData>(HttpStatusCode.NoContent, 0, String.Empty, data, true));
 			}
 			#endregion
 		}
@@ -254,7 +254,7 @@ namespace Lotus
 			/// <param name="status">Статус выполнения операции</param>
 			//---------------------------------------------------------------------------------------------------------
 			public ResultHttp(Int32 code, Boolean status)
-				:base(code, status)
+				: base(code, status)
 			{
 				HttpCode = status ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
 			}

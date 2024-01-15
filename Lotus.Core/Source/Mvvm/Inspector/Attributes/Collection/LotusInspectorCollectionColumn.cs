@@ -29,7 +29,7 @@ namespace Lotus
 		public class LotusColumnAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly Single mPercent;
+			internal readonly Single _percent;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -38,7 +38,7 @@ namespace Lotus
 			/// </summary>
 			public Single Percent
 			{
-				get { return mPercent; }
+				get { return _percent; }
 			}
 			#endregion
 
@@ -51,7 +51,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public LotusColumnAttribute(Single percent)
 			{
-				mPercent = percent;
+				_percent = percent;
 			}
 			#endregion
 		}

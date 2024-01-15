@@ -12,9 +12,6 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Text;
-using System.IO;
-using System.Linq;
 //---------------------------------------------------------------------------------------------------------------------
 using Newtonsoft.Json;
 //=====================================================================================================================
@@ -91,8 +88,14 @@ namespace Lotus
 			public override TColor ReadJson(JsonReader reader, Type objectType, TColor existingValue,
 				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return TColor.DeserializeFromString((String)reader.Value);
-			}
+				if(reader.Value != null)
+				{
+                    return TColor.DeserializeFromString(reader.Value.ToString()!);
+                }
+
+				return existingValue;
+
+            }
 			#endregion
 		}
 	}

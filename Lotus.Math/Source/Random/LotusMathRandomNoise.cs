@@ -49,12 +49,12 @@ namespace Lotus
 			/// <summary>
 			/// Целочисленная шумовая функция в трехмерном пространстве
 			/// </summary>
-			public static Func<Int32, Int32, Int32, Int32> NoiseInteger3D;
+			public static Func<Int32, Int32, Int32, Int32>? NoiseInteger3D;
 
 			/// <summary>
 			/// Вещественная шумовая функция в одномерном пространстве
 			/// </summary>
-			public static Func<Single, Single> NoiseSingle1D;
+			public static Func<Single, Single>? NoiseSingle1D;
 
 			/// <summary>
 			/// Вещественная шумовая функция в двухмерном пространстве
@@ -64,7 +64,7 @@ namespace Lotus
 			/// <summary>
 			/// Вещественная шумовая функция в трехмерном пространстве
 			/// </summary>
-			public static Func<Single, Single, Single, Single> NoiseSingle3D;
+			public static Func<Single, Single, Single, Single>? NoiseSingle3D;
 			#endregion
 
 			#region ====================================== ОБЩИЕ МЕТОДЫ ===============================================

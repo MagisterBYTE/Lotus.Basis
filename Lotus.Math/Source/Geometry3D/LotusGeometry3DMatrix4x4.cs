@@ -507,7 +507,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемая матрица</param>
 			/// <returns>Статус идентичности матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (obj != null)
 				{
@@ -1326,7 +1326,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемая матрица</param>
 			/// <returns>Статус идентичности матриц</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (obj != null)
 				{

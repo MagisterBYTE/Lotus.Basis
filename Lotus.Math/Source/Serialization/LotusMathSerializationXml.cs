@@ -158,7 +158,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Rect2D ReadMathRect2DFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Rect2D.DeserializeFromString(value);
@@ -177,7 +177,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Rect2D ReadMathRect2DFromAttribute(this XmlReader xmlReader, String name, Rect2D defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Rect2D.DeserializeFromString(value);
@@ -195,7 +195,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Rect2Df ReadMathRect2DfFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Rect2Df.DeserializeFromString(value);
@@ -214,7 +214,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Rect2Df ReadMathRect2DfFromAttribute(this XmlReader xmlReader, String name, Rect2Df defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Rect2Df.DeserializeFromString(value);
@@ -232,7 +232,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2D ReadMathVector2DFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2D.DeserializeFromString(value);
@@ -251,7 +251,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2D ReadMathVector2DFromAttribute(this XmlReader xmlReader, String name, Vector2D defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2D.DeserializeFromString(value);
@@ -269,7 +269,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df ReadMathVector2DfFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2Df.DeserializeFromString(value);
@@ -288,7 +288,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Df ReadMathVector2DfFromAttribute(this XmlReader xmlReader, String name, Vector2Df defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2Df.DeserializeFromString(value);
@@ -306,7 +306,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Di ReadMathVector2DiFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2Di.DeserializeFromString(value);
@@ -325,7 +325,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector2Di ReadMathVector2DiFromAttribute(this XmlReader xmlReader, String name, Vector2Di defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector2Di.DeserializeFromString(value);
@@ -343,7 +343,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3D ReadMathVector3DFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector3D.DeserializeFromString(value);
@@ -362,7 +362,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3D ReadMathVector3DFromAttribute(this XmlReader xmlReader, String name, Vector3D defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector3D.DeserializeFromString(value);
@@ -380,7 +380,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df ReadMathVector3DfFromAttribute(this XmlReader xmlReader, String name)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector3Df.DeserializeFromString(value);
@@ -399,7 +399,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Vector3Df ReadMathVector3DfFromAttribute(this XmlReader xmlReader, String name, Vector3Df defaultValue)
 			{
-				String value;
+				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return Vector3Df.DeserializeFromString(value);

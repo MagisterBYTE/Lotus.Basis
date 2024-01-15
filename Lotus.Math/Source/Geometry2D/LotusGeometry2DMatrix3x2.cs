@@ -881,7 +881,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (!(obj is Matrix3Dx2f))
 				{
@@ -992,7 +992,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public readonly String ToString(IFormatProvider formatProvider)
+			public readonly String ToString(IFormatProvider? formatProvider)
 			{
 				return String.Format(formatProvider, "[M11:{0} M12:{1}] [M21:{2} M22:{3}] [M31:{4} M32:{5}]",
 					M11.ToString(formatProvider), M12.ToString(formatProvider),
@@ -1010,7 +1010,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public readonly String ToString(String format, IFormatProvider formatProvider)
+			public readonly String ToString(String? format, IFormatProvider? formatProvider)
 			{
 				if (format == null)
 				{

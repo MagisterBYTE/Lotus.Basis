@@ -90,7 +90,12 @@ namespace Lotus
 			public override Vector2Df ReadJson(JsonReader reader, Type objectType, Vector2Df existingValue, 
 				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return Vector2Df.DeserializeFromString((String)reader.Value);
+				if (reader.Value != null)
+				{
+					return Vector2Df.DeserializeFromString(reader.Value.ToString()!);
+				}
+
+				return existingValue;
 			}
 			#endregion
 		}
@@ -161,7 +166,12 @@ namespace Lotus
 			public override Vector2D ReadJson(JsonReader reader, Type objectType, Vector2D existingValue,
 				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return Vector2D.DeserializeFromString((String)reader.Value);
+				if (reader.Value != null)
+				{
+					return Vector2D.DeserializeFromString(reader.Value.ToString()!);
+				}
+
+				return existingValue;
 			}
 			#endregion
 		}
@@ -232,7 +242,12 @@ namespace Lotus
 			public override Vector2Di ReadJson(JsonReader reader, Type objectType, Vector2Di existingValue,
 				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return Vector2Di.DeserializeFromString((String)reader.Value);
+				if (reader.Value != null)
+				{
+					return Vector2Di.DeserializeFromString(reader.Value.ToString()!);
+				}
+
+				return existingValue;
 			}
 			#endregion
 		}
@@ -303,7 +318,12 @@ namespace Lotus
 			public override Vector3Df ReadJson(JsonReader reader, Type objectType, Vector3Df existingValue,
 				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return Vector3Df.DeserializeFromString((String)reader.Value);
+				if (reader.Value != null)
+				{
+					return Vector3Df.DeserializeFromString(reader.Value.ToString()!);
+				}
+
+				return existingValue;
 			}
 			#endregion
 		}
@@ -374,7 +394,12 @@ namespace Lotus
 			public override Vector3D ReadJson(JsonReader reader, Type objectType, Vector3D existingValue,
 				Boolean hasExistingValue, JsonSerializer serializer)
 			{
-				return Vector3D.DeserializeFromString((String)reader.Value);
+				if (reader.Value != null)
+				{
+					return Vector3D.DeserializeFromString(reader.Value.ToString()!);
+				}
+
+				return existingValue;
 			}
 			#endregion
 		}

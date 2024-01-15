@@ -186,7 +186,7 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (obj != null)
 				{
@@ -1955,7 +1955,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (!(obj is Matrix3Dx3f))
 				{
@@ -2072,7 +2072,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public readonly String ToString(IFormatProvider formatProvider)
+			public readonly String ToString(IFormatProvider? formatProvider)
 			{
 				return String.Format(formatProvider, "[M11:{0} M12:{1} M13:{2}] [M21:{3} M22:{4} M23:{5}] [M31:{6} M32:{7} M33:{8}]",
 					M11.ToString(formatProvider), M12.ToString(formatProvider), M13.ToString(formatProvider),
@@ -2090,7 +2090,7 @@ namespace Lotus
 			/// Текстовое представление матрицы с указание значений компонентов
 			/// </returns>
 			//----------------------------------------------------------------------------------------------------------
-			public readonly String ToString(String format, IFormatProvider formatProvider)
+			public readonly String ToString(String? format, IFormatProvider? formatProvider)
 			{
 				if (format == null)
 				{

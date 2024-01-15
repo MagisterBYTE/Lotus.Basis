@@ -257,7 +257,7 @@ namespace Lotus
 			/// <c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
 				if (!(obj is Plane3Df))
 				{
@@ -351,7 +351,7 @@ namespace Lotus
 			/// Текстовое представление плоскости с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public readonly String ToString(IFormatProvider formatProvider)
+			public readonly String ToString(IFormatProvider? formatProvider)
 			{
 				return String.Format(formatProvider, "A:{0} B:{1} C:{2} D:{3}", Normal.X, Normal.Y, Normal.Z, Distance);
 			}
@@ -366,7 +366,7 @@ namespace Lotus
 			/// Текстовое представление плоскости с указание значений компонентов
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public readonly String ToString(String format, IFormatProvider formatProvider)
+			public readonly String ToString(String? format, IFormatProvider? formatProvider)
 			{
 				return String.Format(formatProvider, "A:{0} B:{1} C:{2} D:{3}", Normal.X.ToString(format, formatProvider),
 					Normal.Y.ToString(format, formatProvider), Normal.Z.ToString(format, formatProvider),

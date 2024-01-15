@@ -36,17 +36,17 @@ namespace Lotus
 			/// <summary>
 			/// Нулевые данные по значению в контексте записи/чтения ссылочных объектов бинарного потока
 			/// </summary>
-			public const Int32 ZERODATA = -1;
+			public const Int32 ZERO_DATA = -1;
 
 			/// <summary>
 			/// Существующие данные по значению в контексте записи/чтения ссылочных объектов бинарного потока
 			/// </summary>
-			public const Int32 EXISTINGDATA = 1;
+			public const Int32 EXISTING_DATA = 1;
 
 			/// <summary>
 			/// Метка успешности
 			/// </summary>
-			public const Int32 SUCCESSLABEL = 198418;
+			public const Int32 SUCCESS_LABEL = 198418;
 			#endregion
 
 			#region ======================================= ЗАПИСЬ ДАННЫХ =============================================
@@ -88,7 +88,7 @@ namespace Lotus
 				// Проверка против нулевых значений
 				if (vectors == null || vectors.Count == 0)
 				{
-					writer.Write(ZERODATA);
+					writer.Write(ZERO_DATA);
 				}
 				else
 				{
@@ -146,7 +146,7 @@ namespace Lotus
 				// Проверка против нулевых значений
 				if (rects == null || rects.Count == 0)
 				{
-					writer.Write(ZERODATA);
+					writer.Write(ZERO_DATA);
 				}
 				else
 				{
@@ -199,13 +199,13 @@ namespace Lotus
 			/// <param name="reader">Бинарный поток открытый для чтения</param>
 			/// <returns>Массив двухмерных векторов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Vector2D[] ReadMathVectors2D(this BinaryReader reader)
+			public static Vector2D[]? ReadMathVectors2D(this BinaryReader reader)
 			{
 				// Чтение количество элементов массива
 				var count = reader.ReadInt32();
 
 				// Проверка нулевых данных
-				if (count == ZERODATA)
+				if (count == ZERO_DATA)
 				{
 					return null;
 				}
@@ -263,13 +263,13 @@ namespace Lotus
 			/// <param name="reader">Бинарный поток открытый для чтения</param>
 			/// <returns>Массив прямоугольников</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Rect2D[] ReadMathRects2D(this BinaryReader reader)
+			public static Rect2D[]? ReadMathRects2D(this BinaryReader reader)
 			{
 				// Чтение количество элементов массива
 				var count = reader.ReadInt32();
 
 				// Проверка нулевых данных
-				if (count == ZERODATA)
+				if (count == ZERO_DATA)
 				{
 					return null;
 				}

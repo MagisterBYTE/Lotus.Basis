@@ -66,17 +66,17 @@ namespace Lotus
 			/// <summary>
 			/// Табличные значения синуса
 			/// </summary>
-			private static Single[] _sinTableCache;
+			private static Single[] _sinTableCache = new Single[] { 0 };
 
 			/// <summary>
 			/// Табличные значения косинуса
 			/// </summary>
-			private static Single[] _cosTableCache;
+			private static Single[] _cosTableCache = new Single[] { 0 };
 
 			/// <summary>
 			/// Точность заполнения таблиц синуса и косинуса
 			/// </summary>
-			private static Single mSinCosIndexFactor = SinCosCacheSize / XMath.PI_2_F;
+			private static Single _sinCosIndexFactor = SinCosCacheSize / XMath.PI_2_F;
 
 			/// <summary>
 			/// Размер таблицы для арктангенса
@@ -91,42 +91,42 @@ namespace Lotus
 			/// <summary>
 			/// Служебная таблица для значений арктангенса
 			/// </summary>
-			private static readonly Single[] mAtan2CachePPY = new Single[Atan2Size + 1];
+			private static readonly Single[] _atan2CachePPY = new Single[Atan2Size + 1];
 
 			/// <summary>
 			/// Служебная таблица для значений арктангенса
 			/// </summary>
-			private static readonly Single[] mAtan2CachePPX = new Single[Atan2Size + 1];
+			private static readonly Single[] _atan2CachePPX = new Single[Atan2Size + 1];
 
 			/// <summary>
 			/// Служебная таблица для значений арктангенса
 			/// </summary>
-			private static readonly Single[] mAtan2CachePNY = new Single[Atan2Size + 1];
+			private static readonly Single[] _atan2CachePNY = new Single[Atan2Size + 1];
 
 			/// <summary>
 			/// Служебная таблица для значений арктангенса
 			/// </summary>
-			private static readonly Single[] mAtan2CachePNX = new Single[Atan2Size + 1];
+			private static readonly Single[] _atan2CachePNX = new Single[Atan2Size + 1];
 
 			/// <summary>
 			/// Служебная таблица для значений арктангенса
 			/// </summary>
-			private static readonly Single[] mAtan2CacheNPY = new Single[Atan2Size + 1];
+			private static readonly Single[] _atan2CacheNPY = new Single[Atan2Size + 1];
 
 			/// <summary>
 			/// Служебная таблица для значений арктангенса
 			/// </summary>
-			private static readonly Single[] mAtan2CacheNPX = new Single[Atan2Size + 1];
+			private static readonly Single[] _atan2CacheNPX = new Single[Atan2Size + 1];
 
 			/// <summary>
 			/// Служебная таблица для значений арктангенса
 			/// </summary>
-			private static readonly Single[] mAtan2CacheNNY = new Single[Atan2Size + 1];
+			private static readonly Single[] _atan2CacheNNY = new Single[Atan2Size + 1];
 
 			/// <summary>
 			/// Служебная таблица для значений арктангенса
 			/// </summary>
-			private static readonly Single[] mAtan2CacheNNX = new Single[Atan2Size + 1];
+			private static readonly Single[] _atan2CacheNNX = new Single[Atan2Size + 1];
 			#endregion
 
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
@@ -169,14 +169,14 @@ namespace Lotus
 				var invAtan2Size = 1f / Atan2Size;
 				for (i = 0; i <= Atan2Size; i++)
 				{
-					mAtan2CachePPY[i] = (Single)System.Math.Atan(i * invAtan2Size);
-					mAtan2CachePPX[i] = XMath.PI_2_F - mAtan2CachePPY[i];
-					mAtan2CachePNY[i] = -mAtan2CachePPY[i];
-					mAtan2CachePNX[i] = mAtan2CachePPY[i] - XMath.PI_2_F;
-					mAtan2CacheNPY[i] = XMath.PI_F - mAtan2CachePPY[i];
-					mAtan2CacheNPX[i] = mAtan2CachePPY[i] + XMath.PI_2_F;
-					mAtan2CacheNNY[i] = mAtan2CachePPY[i] - XMath.PI_F;
-					mAtan2CacheNNX[i] = -XMath.PI_2_F - mAtan2CachePPY[i];
+					_atan2CachePPY[i] = (Single)System.Math.Atan(i * invAtan2Size);
+					_atan2CachePPX[i] = XMath.PI_2_F - _atan2CachePPY[i];
+					_atan2CachePNY[i] = -_atan2CachePPY[i];
+					_atan2CachePNX[i] = _atan2CachePPY[i] - XMath.PI_2_F;
+					_atan2CacheNPY[i] = XMath.PI_F - _atan2CachePPY[i];
+					_atan2CacheNPX[i] = _atan2CachePPY[i] + XMath.PI_2_F;
+					_atan2CacheNNY[i] = _atan2CachePPY[i] - XMath.PI_F;
+					_atan2CacheNNX[i] = -XMath.PI_2_F - _atan2CachePPY[i];
 				}
 			}
 
@@ -256,7 +256,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Sin(Single radians)
 			{
-				return _sinTableCache[(Int32)(radians * mSinCosIndexFactor) & SinCosIndexMask];
+				return _sinTableCache[(Int32)(radians * _sinCosIndexFactor) & SinCosIndexMask];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -268,7 +268,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Single Cos(Single radians)
 			{
-				return _cosTableCache[(Int32)(radians * mSinCosIndexFactor) & SinCosIndexMask];
+				return _cosTableCache[(Int32)(radians * _sinCosIndexFactor) & SinCosIndexMask];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -291,22 +291,22 @@ namespace Lotus
 					{
 						if (x >= y)
 						{
-							return mAtan2CachePPY[(Int32)((Atan2Size * y / x) + 0.5f)];
+							return _atan2CachePPY[(Int32)((Atan2Size * y / x) + 0.5f)];
 						}
 						else
 						{
-							return mAtan2CachePPX[(Int32)((Atan2Size * x / y) + 0.5f)];
+							return _atan2CachePPX[(Int32)((Atan2Size * x / y) + 0.5f)];
 						}
 					}
 					else
 					{
 						if (x >= -y)
 						{
-							return mAtan2CachePNY[(Int32)((Atan2NegSize * y / x) + 0.5f)];
+							return _atan2CachePNY[(Int32)((Atan2NegSize * y / x) + 0.5f)];
 						}
 						else
 						{
-							return mAtan2CachePNX[(Int32)((Atan2NegSize * x / y) + 0.5f)];
+							return _atan2CachePNX[(Int32)((Atan2NegSize * x / y) + 0.5f)];
 						}
 					}
 				}
@@ -316,22 +316,22 @@ namespace Lotus
 					{
 						if (-x >= y)
 						{
-							return mAtan2CacheNPY[(Int32)((Atan2NegSize * y / x) + 0.5f)];
+							return _atan2CacheNPY[(Int32)((Atan2NegSize * y / x) + 0.5f)];
 						}
 						else
 						{
-							return mAtan2CacheNPX[(Int32)((Atan2NegSize * x / y) + 0.5f)];
+							return _atan2CacheNPX[(Int32)((Atan2NegSize * x / y) + 0.5f)];
 						}
 					}
 					else
 					{
 						if (x <= y)
 						{
-							return mAtan2CacheNNY[(Int32)((Atan2Size * y / x) + 0.5f)];
+							return _atan2CacheNNY[(Int32)((Atan2Size * y / x) + 0.5f)];
 						}
 						else
 						{
-							return mAtan2CacheNNX[(Int32)((Atan2Size * x / y) + 0.5f)];
+							return _atan2CacheNNX[(Int32)((Atan2Size * x / y) + 0.5f)];
 						}
 					}
 				}

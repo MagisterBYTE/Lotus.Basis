@@ -31,7 +31,7 @@ namespace Lotus
 			/// <summary>
 			/// Владелец - поле которому принадлежат ячейка
 			/// </summary>
-			ILotusField OwnerField { get; set; }
+			ILotusField? OwnerField { get; set; }
 
 			/// <summary>
 			/// Слой для расположения ячейки
@@ -76,27 +76,27 @@ namespace Lotus
 			/// <summary>
 			/// Смежная ячейка расположенная слева
 			/// </summary>
-			ILotusFieldCell CellLeft { get; }
+			ILotusFieldCell? CellLeft { get; }
 
 			/// <summary>
 			/// Смежная ячейка расположенная справа
 			/// </summary>
-			ILotusFieldCell CellRight { get; }
+			ILotusFieldCell? CellRight { get; }
 
 			/// <summary>
 			/// Смежная ячейка расположенная сверху
 			/// </summary>
-			ILotusFieldCell CellTop { get; }
+			ILotusFieldCell? CellTop { get; }
 
 			/// <summary>
 			/// Смежная ячейка расположенная снизу
 			/// </summary>
-			ILotusFieldCell CellBottom { get; }
+			ILotusFieldCell? CellBottom { get; }
 
 			/// <summary>
 			/// Элемент визуализации для отображения ячейки поля
 			/// </summary>
-			System.Object VisualElement { get; set; }
+			System.Object? VisualElement { get; set; }
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ namespace Lotus
 		public class CFieldCellBase : ILotusFieldCell
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal ILotusField _ownerField;
+			protected internal ILotusField? _ownerField;
 			protected internal Int32 _cellLayer;
 			protected internal Int32 _cellCoordinateX;
 			protected internal Int32 _cellCoordinateY;
@@ -116,21 +116,21 @@ namespace Lotus
 			protected internal Boolean _isCellBorderUp;
 			protected internal Boolean _isCellBorderDown;
 			protected internal Int32 _cellStatus;
-			protected internal ILotusFieldCell _cellLeft;
-			protected internal ILotusFieldCell _cellRight;
-			protected internal ILotusFieldCell _cellTop;
-			protected internal ILotusFieldCell _cellBottom;
-			protected internal System.Object _visualElement;
+			protected internal ILotusFieldCell? _cellLeft;
+			protected internal ILotusFieldCell? _cellRight;
+			protected internal ILotusFieldCell? _cellTop;
+			protected internal ILotusFieldCell? _cellBottom;
+			protected internal System.Object? _visualElement;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
 			/// Владелец - поле которому принадлежат ячейка
 			/// </summary>
-			public ILotusField OwnerField 
-			{ 
+			public ILotusField? OwnerField
+			{
 				get { return _ownerField; }
-				set { _ownerField = value; } 
+				set { _ownerField = value; }
 			}
 
 			/// <summary>
@@ -208,7 +208,7 @@ namespace Lotus
 			/// <summary>
 			/// Смежная ячейка расположенная слева
 			/// </summary>
-			public ILotusFieldCell CellLeft
+			public ILotusFieldCell? CellLeft
 			{
 				get { return _cellLeft; }
 			}
@@ -216,7 +216,7 @@ namespace Lotus
 			/// <summary>
 			/// Смежная ячейка расположенная справа
 			/// </summary>
-			public ILotusFieldCell CellRight
+			public ILotusFieldCell? CellRight
 			{
 				get { return _cellRight; }
 			}
@@ -224,7 +224,7 @@ namespace Lotus
 			/// <summary>
 			/// Смежная ячейка расположенная сверху
 			/// </summary>
-			public ILotusFieldCell CellTop
+			public ILotusFieldCell? CellTop
 			{
 				get { return _cellTop; }
 			}
@@ -232,7 +232,7 @@ namespace Lotus
 			/// <summary>
 			/// Смежная ячейка расположенная снизу
 			/// </summary>
-			public ILotusFieldCell CellBottom
+			public ILotusFieldCell? CellBottom
 			{
 				get { return _cellBottom; }
 			}
@@ -240,7 +240,7 @@ namespace Lotus
 			/// <summary>
 			/// Элемент визуализации для отображения ячейки поля
 			/// </summary>
-			public System.Object VisualElement
+			public System.Object? VisualElement
 			{
 				get { return _visualElement; }
 				set { _visualElement = value; }
@@ -271,10 +271,10 @@ namespace Lotus
 				_cellCoordinateX = cellCoordinateX;
 				_cellCoordinateY = cellCoordinateY;
 				_ownerField = ownerField;
-				//mCellLeft = _ownerField.GetCell(_cellCoordinateX - 1, _cellCoordinateY);
-				//mCellRight = _ownerField.GetCell(_cellCoordinateX + 1, _cellCoordinateY);
-				//mCellTop = _ownerField.GetCell(_cellCoordinateX, _cellCoordinateY + 1);
-				//mCellBottom = _ownerField.GetCell(_cellCoordinateX, _cellCoordinateY - 1);
+				_cellLeft = _ownerField.GetCell(_cellCoordinateX - 1, _cellCoordinateY);
+				_cellRight = _ownerField.GetCell(_cellCoordinateX + 1, _cellCoordinateY);
+				_cellTop = _ownerField.GetCell(_cellCoordinateX, _cellCoordinateY + 1);
+				_cellBottom = _ownerField.GetCell(_cellCoordinateX, _cellCoordinateY - 1);
 			}
 			#endregion
 

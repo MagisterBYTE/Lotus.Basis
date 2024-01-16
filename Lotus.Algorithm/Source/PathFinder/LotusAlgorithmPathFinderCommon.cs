@@ -177,15 +177,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
-				if (obj != null)
+				if (obj is TPathPoint path_point)
 				{
-					if (obj is TPathPoint)
-					{
-						var path_point = (TPathPoint)obj;
-						return Equals(path_point);
-					}
+					return Equals(path_point);
 				}
 				return base.Equals(obj);
 			}
@@ -507,7 +503,7 @@ namespace Lotus
 					TPathPoint p = this[i];
 					for (var j = 0; j < path.Count; j++)
 					{
-						if(p.X == path[j].X && p.Y == path[j].Y)
+						if (p.X == path[j].X && p.Y == path[j].Y)
 						{
 							pointIntersect = p;
 							return true;
@@ -535,7 +531,7 @@ namespace Lotus
 			/// <summary>
 			/// Интерфейс карты для поиска пути
 			/// </summary>
-			ILotusMap2D Map { get; set; }
+			ILotusMap2D? Map { get; set; }
 
 			/// <summary>
 			/// Возможность перемещения по диагонали
@@ -611,7 +607,7 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal ILotusMap2D _map;
+			protected internal ILotusMap2D? _map;
 			protected internal Boolean _isAllowDiagonal;
 			protected internal Boolean _heavyDiagonals;
 			protected internal Int32 _searchLimit;
@@ -621,7 +617,7 @@ namespace Lotus
 			protected internal CPath _path;
 
 			// События
-			protected internal Action mOnPathFound;
+			protected internal Action? _onPathFound;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ILotusPathFinder =================================
@@ -631,7 +627,7 @@ namespace Lotus
 			/// <summary>
 			/// Интерфейс карты для поиска пути
 			/// </summary>
-			public ILotusMap2D Map
+			public ILotusMap2D? Map
 			{
 				get { return _map; }
 				set { _map = value; }
@@ -706,8 +702,8 @@ namespace Lotus
 			/// </summary>
 			public event Action OnPathFound
 			{
-				add { mOnPathFound += value; }
-				remove { mOnPathFound -= value; }
+				add { _onPathFound += value; }
+				remove { _onPathFound -= value; }
 			}
 			#endregion
 

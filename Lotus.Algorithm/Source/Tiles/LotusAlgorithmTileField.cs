@@ -33,17 +33,17 @@ namespace Lotus
 			/// <summary>
 			/// Событие нажатие на ячейку поля
 			/// </summary>
-			Action<ILotusFieldCell> OnCellDown { get; set; }
+			Action<ILotusFieldCell>? OnCellDown { get; set; }
 
 			/// <summary>
 			/// Событие отпускание ячейки поля
 			/// </summary>
-			Action<ILotusFieldCell> OnCellUp { get; set; }
+			Action<ILotusFieldCell>? OnCellUp { get; set; }
 
 			/// <summary>
 			/// Событие щелчок по ячейки поля
 			/// </summary>
-			Action<ILotusFieldCell> OnCellClick { get; set; }
+			Action<ILotusFieldCell>? OnCellClick { get; set; }
 			#endregion
 
 			#region ======================================= МЕТОДЫ ====================================================
@@ -53,7 +53,7 @@ namespace Lotus
 			/// <param name="x">Координата ячейки по X</param>
 			/// <param name="y">Координата ячейки по Y</param>
 			/// <returns>Ячейка поля</returns>
-			ILotusFieldCell GetCell(Int32 x, Int32 y);
+			ILotusFieldCell? GetCell(Int32 x, Int32 y);
 
 			/// <summary>
 			/// Споско ячеек
@@ -68,7 +68,7 @@ namespace Lotus
 		/// </summary>
 		/// <typeparam name="TCell">Тип ячейки поля</typeparam>
 		//-------------------------------------------------------------------------------------------------------------
-		public class CFieldBase<TCell> : ILotusField where TCell : ILotusFieldCell
+		public class FieldBaseTemplate<TCell> : ILotusField where TCell : ILotusFieldCell
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			protected internal ListArray<TCell> _cells;
@@ -94,17 +94,17 @@ namespace Lotus
 			/// <summary>
 			/// Событие нажатие на ячейку поля
 			/// </summary>
-			public Action<ILotusFieldCell> OnCellDown { get; set; }
+			public Action<ILotusFieldCell>? OnCellDown { get; set; }
 
 			/// <summary>
 			/// Событие отпускание ячейки поля
 			/// </summary>
-			public Action<ILotusFieldCell> OnCellUp { get; set; }
+			public Action<ILotusFieldCell>? OnCellUp { get; set; }
 
 			/// <summary>
 			/// Событие щелчок по ячейки поля
 			/// </summary>
-			public Action<ILotusFieldCell> OnCellClick { get; set; }
+			public Action<ILotusFieldCell>? OnCellClick { get; set; }
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -113,7 +113,7 @@ namespace Lotus
 			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			public CFieldBase()
+			public FieldBaseTemplate()
 			{
 				_cells = new ListArray<TCell>();
 			}
@@ -124,7 +124,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="capacity">Начальная максимальная емкость списка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CFieldBase(Int32 capacity)
+			public FieldBaseTemplate(Int32 capacity)
 			{
 				_cells = new ListArray<TCell>(capacity);
 			}
@@ -143,11 +143,11 @@ namespace Lotus
 			/// <param name="y">Координата ячейки по Y</param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ILotusFieldCell GetCell(Int32 x, Int32 y)
+			public ILotusFieldCell? GetCell(Int32 x, Int32 y)
 			{
 				for (var i = 0; i < _cells.Count; i++)
 				{
-					if(_cells[i].CellCoordinateX == x && _cells[i].CellCoordinateY == y)
+					if (_cells[i].CellCoordinateX == x && _cells[i].CellCoordinateY == y)
 					{
 						return _cells[i];
 					}
@@ -163,7 +163,7 @@ namespace Lotus
 		/// Базовый класс реализующий функциональность поля для размещения тайлов
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public class CFieldBase : CFieldBase<CFieldCellBase>
+		public class CFieldBase : FieldBaseTemplate<CFieldCellBase>
 		{
 			#region ======================================= СТАТИЧЕСКИЕ МЕТОДЫ ========================================
 			//---------------------------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ namespace Lotus
 			/// </remarks>
 			/// <param name="countX">Размер поля по X</param>
 			/// <param name="countY">Размер поля по Y</param>
-			/// <returns></returns>
+			/// <returns>Прямоугольное поле</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static CFieldBase CreateSquare(Int32 countX, Int32 countY)
 			{
@@ -215,7 +215,7 @@ namespace Lotus
 			{
 			}
 			#endregion
-		}		
+		}
 		//-------------------------------------------------------------------------------------------------------------
 		/**@}*/
 		//-------------------------------------------------------------------------------------------------------------

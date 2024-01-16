@@ -123,15 +123,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
-				if (obj != null)
+				if (obj is TSnapPoint2D snap_point)
 				{
-					if (obj is TSnapPoint2D)
-					{
-						var snap_point = (TSnapPoint2D)obj;
-						return Equals(snap_point);
-					}
+					return Equals(snap_point);
 				}
 				return base.Equals(obj);
 			}
@@ -559,7 +555,7 @@ namespace Lotus
 				var minimum = Single.MaxValue;
 				for (var i = 0; i < _count; i++)
 				{
-					if(_arrayOfItems[i].Distance < minimum)
+					if (_arrayOfItems[i].Distance < minimum)
 					{
 						minimum = _arrayOfItems[i].Distance;
 					}
@@ -605,7 +601,7 @@ namespace Lotus
 			{
 				for (var i = 0; i < _count; i++)
 				{
-					if(_arrayOfItems[i].ApproximatelyPoint(ref point, deltaX, deltaY))
+					if (_arrayOfItems[i].ApproximatelyPoint(ref point, deltaX, deltaY))
 					{
 						return i;
 					}

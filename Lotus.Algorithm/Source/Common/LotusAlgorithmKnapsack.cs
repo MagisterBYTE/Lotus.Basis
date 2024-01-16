@@ -44,7 +44,7 @@ namespace Lotus
 			/// </returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static Dictionary<TElement, Int32> Knapsack<TElement>(Dictionary<TElement, Single> set, Single capacity,
-				Dictionary<TElement, Int32> knapsack = null)
+				Dictionary<TElement, Int32>? knapsack = null) where TElement : notnull
 			{
 				var keys = new List<TElement>(set.Keys);
 				// Sort keys by their weights in descending order
@@ -74,7 +74,7 @@ namespace Lotus
 			/// <returns>Заполненный словарь</returns>
 			//---------------------------------------------------------------------------------------------------------
 			private static Dictionary<TElement, Int32> Knapsack<TElement>(Dictionary<TElement, Single> set, List<TElement> keys, Single remainder,
-				Dictionary<TElement, Int32> knapsack, Int32 start_index)
+				Dictionary<TElement, Int32> knapsack, Int32 start_index) where TElement : notnull
 			{
 				TElement smallest_key = keys[keys.Count - 1];
 				if (remainder < set[smallest_key])

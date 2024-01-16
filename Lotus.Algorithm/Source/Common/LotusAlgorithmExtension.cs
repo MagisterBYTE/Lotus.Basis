@@ -48,7 +48,7 @@ namespace Lotus
 			/// <param name="comparer">Компаратор</param>
 			//---------------------------------------------------------------------------------------------------------
 			public static void FloodVisit4<TType>(this TType[,] massive, Vector2Di start, Action<Int32, Int32> visitorDelegate,
-				IEqualityComparer<TType> comparer = null)
+				IEqualityComparer<TType>? comparer = null)
 			{
 				FloodVisit4(massive, start.X, start.Y, visitorDelegate, comparer);
 			}

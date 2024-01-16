@@ -129,15 +129,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
-				if (obj != null)
+				if (obj is TMapPoint map_point)
 				{
-					if (obj is TMapPoint)
-					{
-						var map_point = (TMapPoint)obj;
-						return Equals(map_point);
-					}
+					return Equals(map_point);
 				}
 				return base.Equals(obj);
 			}
@@ -441,13 +437,13 @@ namespace Lotus
 			// Основные параметры
 			protected internal TMapPoint _start;
 			protected internal TMapPoint _target;
-			protected internal Int32[,] mWave;
-			protected internal CPath _path;
+			protected internal Int32[,] _wave;
+			protected internal CPath? _path;
 
 			// Параметры отображения
-			protected internal Single mOffsetX;
-			protected internal Single mOffsetY;
-			protected internal Single mSizeCell;
+			protected internal Single _offsetX;
+			protected internal Single _offsetY;
+			protected internal Single _sizeCell;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -525,13 +521,13 @@ namespace Lotus
 			/// </summary>
 			public Int32[,] Wave
 			{
-				get { return mWave; }
+				get { return _wave; }
 			}
 
 			/// <summary>
 			/// Путь
 			/// </summary>
-			public CPath Path
+			public CPath? Path
 			{
 				get { return _path; }
 				set
@@ -548,10 +544,10 @@ namespace Lotus
 			/// </summary>
 			public Single OffsetX
 			{
-				get { return mOffsetX; }
+				get { return _offsetX; }
 				set
 				{
-					mOffsetX = value;
+					_offsetX = value;
 				}
 			}
 
@@ -560,10 +556,10 @@ namespace Lotus
 			/// </summary>
 			public Single OffsetY
 			{
-				get { return mOffsetY; }
+				get { return _offsetY; }
 				set
 				{
-					mOffsetY = value;
+					_offsetY = value;
 				}
 			}
 
@@ -572,10 +568,10 @@ namespace Lotus
 			/// </summary>
 			public Single SizeCell
 			{
-				get { return mSizeCell; }
+				get { return _sizeCell; }
 				set
 				{
-					mSizeCell = value;
+					_sizeCell = value;
 				}
 			}
 			#endregion
@@ -591,7 +587,7 @@ namespace Lotus
 			{
 				_start = TMapPoint.Undef;
 				_target = TMapPoint.Undef;
-				mWave = new Int32[1, 1];
+				_wave = new Int32[1, 1];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -606,7 +602,7 @@ namespace Lotus
 			{
 				_start = TMapPoint.Undef;
 				_target = TMapPoint.Undef;
-				mWave = new Int32[mapWidth, mapHeight];
+				_wave = new Int32[mapWidth, mapHeight];
 			}
 			#endregion
 
@@ -622,7 +618,7 @@ namespace Lotus
 				{
 					for (var iy = 0; iy < _mapHeight; iy++)
 					{
-						mWave[ix, iy] = 0;
+						_wave[ix, iy] = 0;
 					}
 				}
 			}

@@ -246,7 +246,7 @@ namespace Lotus
 			// Основные параметры
 			protected internal PriorityQueue<TPathPointStar> _openList;
 			protected internal List<TPathPointStar> _closeList;
-			protected internal Int32[,] _directions;
+			protected internal Int32[,]? _directions;
 			protected internal Int32 _horiz = 0;
 			protected internal THeuristicFormula _formula = THeuristicFormula.Manhattan;
 			protected internal Int32 _heuristicEstimate = 2;
@@ -381,6 +381,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Boolean ExpansionWave()
 			{
+				if(_map == null) return false;
+
 				_isFoundPath = false;
 
 				_openList.Clear();
@@ -633,6 +635,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Boolean ExpansionWaveOnStep()
 			{
+				if (_map == null) return false;
+
 				TPathPointStar parent_node = _openList.Pop();
 
 				// Если нашли
@@ -656,8 +660,8 @@ namespace Lotus
 				for (var i = 0; i < (_isAllowDiagonal ? 8 : 4); i++)
 				{
 					TPathPointStar new_node;
-					new_node.X = parent_node.X + _directions[i, 0];
-					new_node.Y = parent_node.Y + _directions[i, 1];
+					new_node.X = parent_node.X + _directions![i, 0];
+					new_node.Y = parent_node.Y + _directions![i, 1];
 
 					if (new_node.X < 0 || new_node.Y < 0 || new_node.X >= _map.MapWidth || new_node.Y >= _map.MapHeight)
 					{

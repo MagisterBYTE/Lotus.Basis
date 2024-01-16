@@ -32,8 +32,8 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32[,] mWaveMap;
-			protected internal Int32 mStepWave;
+			protected internal Int32[,] _waveMap;
+			protected internal Int32 _stepWave;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -45,8 +45,8 @@ namespace Lotus
 			/// </remarks>
 			public Int32[,] WaveMap
 			{
-				get { return mWaveMap; }
-				set { mWaveMap = value; }
+				get { return _waveMap; }
+				set { _waveMap = value; }
 			}
 
 			/// <summary>
@@ -54,7 +54,7 @@ namespace Lotus
 			/// </summary>
 			public Int32 StepWave
 			{
-				get { return mStepWave; }
+				get { return _stepWave; }
 			}
 			#endregion
 
@@ -67,7 +67,7 @@ namespace Lotus
 			public CPathFinderWave()
 				: base()
 			{
-				mWaveMap = new Int32[1, 1];
+				_waveMap = new Int32[1, 1];
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ namespace Lotus
 			public CPathFinderWave(ILotusMap2D map)
 				: base(map)
 			{
-				mWaveMap = new Int32[map.MapWidth, map.MapHeight];
+				_waveMap = new Int32[map.MapWidth, map.MapHeight];
 			}
 			#endregion
 
@@ -91,11 +91,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void ResetWave()
 			{
+				if(_map == null) return;
+
 				for (var y = 0; y < _map.MapHeight; y++)
 				{
 					for (var x = 0; x < _map.MapWidth; x++)
 					{
-						mWaveMap[x, y] = -1;
+						_waveMap[x, y] = -1;
 					}
 				}
 
@@ -110,10 +112,12 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Boolean ExpansionWave()
 			{
+				if (_map == null) return false;
+
 				var add = true;
 				Int32 indicate_wall = -2, indicate_empty = -1;
 				_isFoundPath = false;
-				mStepWave = 0;
+				_stepWave = 0;
 
 				// Заполняем карту поиска пути на основе карты препятствий
 				for (var y = 0; y < _map.MapHeight; y++)
@@ -122,29 +126,29 @@ namespace Lotus
 					{
 						if (_map.Map[x, y] == XMapCode.BLOCK)
 						{
-							mWaveMap[x, y] = indicate_wall; // индикатор стены
+							_waveMap[x, y] = indicate_wall; // индикатор стены
 						}
 						else
 						{
-							mWaveMap[x, y] = indicate_empty; // индикатор еще не ступали сюда
+							_waveMap[x, y] = indicate_empty; // индикатор еще не ступали сюда
 						}
 					}
 				}
 
 				// Если стартовая позиция находится на стене
-				if (mWaveMap[_start.X, _start.Y] == indicate_wall)
+				if (_waveMap[_start.X, _start.Y] == indicate_wall)
 				{
 					return false;
 				}
 
 				// Если финишная позиция находится на стене
-				if (mWaveMap[_target.X, _target.Y] == indicate_wall)
+				if (_waveMap[_target.X, _target.Y] == indicate_wall)
 				{
 					return false;
 				}
 
 				// Начинаем с финиша
-				mWaveMap[_target.X, _target.Y] = 0;
+				_waveMap[_target.X, _target.Y] = 0;
 
 				while (add == true)
 				{
@@ -154,50 +158,50 @@ namespace Lotus
 						for (var y = 0; y < _map.MapHeight; y++)
 						{
 							// Если ячейка свободная
-							if (mWaveMap[x, y] == mStepWave)
+							if (_waveMap[x, y] == _stepWave)
 							{
 								// Ставим значение шага + 1 в соседние ячейки (если они проходимы)
-								if (x - 1 >= 0 && mWaveMap[x - 1, y] == indicate_empty)
+								if (x - 1 >= 0 && _waveMap[x - 1, y] == indicate_empty)
 								{
-									mWaveMap[x - 1, y] = mStepWave + 1;
+									_waveMap[x - 1, y] = _stepWave + 1;
 								}
 
-								if (x + 1 < _map.MapWidth && mWaveMap[x + 1, y] == indicate_empty)
+								if (x + 1 < _map.MapWidth && _waveMap[x + 1, y] == indicate_empty)
 								{
-									mWaveMap[x + 1, y] = mStepWave + 1;
+									_waveMap[x + 1, y] = _stepWave + 1;
 								}
 
-								if (y - 1 >= 0 && mWaveMap[x, y - 1] == indicate_empty)
+								if (y - 1 >= 0 && _waveMap[x, y - 1] == indicate_empty)
 								{
-									mWaveMap[x, y - 1] = mStepWave + 1;
+									_waveMap[x, y - 1] = _stepWave + 1;
 								}
-								if (y + 1 < _map.MapHeight && mWaveMap[x, y + 1] == indicate_empty)
+								if (y + 1 < _map.MapHeight && _waveMap[x, y + 1] == indicate_empty)
 								{
-									mWaveMap[x, y + 1] = mStepWave + 1;
+									_waveMap[x, y + 1] = _stepWave + 1;
 								}
 							}
 						}
 					}
 
-					mStepWave++;
+					_stepWave++;
 
 					add = true;
 
 					// Решение найдено
-					if (mWaveMap[_start.X, _start.Y] != indicate_empty)
+					if (_waveMap[_start.X, _start.Y] != indicate_empty)
 					{
 						_isFoundPath = true;
 						add = false;
 					}
 
 					// Решение не найдено
-					if (mStepWave > _map.MapWidth * _map.MapHeight)
+					if (_stepWave > _map.MapWidth * _map.MapHeight)
 					{
 						add = false;
 					}
 
 					// Если есть лимит и он превышен
-					if(_searchLimit > 0 && mStepWave > _searchLimit)
+					if (_searchLimit > 0 && _stepWave > _searchLimit)
 					{
 						add = false;
 					}
@@ -213,6 +217,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void BuildPath()
 			{
+				if (_map == null) return;
 				if (_isFoundPath == false) return;
 				_path.Clear();
 
@@ -225,7 +230,7 @@ namespace Lotus
 
 				while (found)
 				{
-					if (mWaveMap[cx, cy] == 0)
+					if (_waveMap[cx, cy] == 0)
 					{
 						found = false;
 						break;
@@ -233,7 +238,7 @@ namespace Lotus
 
 					if (cx - 1 >= 0)
 					{
-						current_value = mWaveMap[cx - 1, cy];
+						current_value = _waveMap[cx - 1, cy];
 						if (current_value < minimum && current_value > 0)
 						{
 							cx = cx - 1;
@@ -244,7 +249,7 @@ namespace Lotus
 
 					if (cx + 1 < _map.MapWidth)
 					{
-						current_value = mWaveMap[cx + 1, cy];
+						current_value = _waveMap[cx + 1, cy];
 						if (current_value < minimum && current_value > 0)
 						{
 							cx = cx + 1;
@@ -255,7 +260,7 @@ namespace Lotus
 
 					if (cy - 1 >= 0)
 					{
-						current_value = mWaveMap[cx, cy - 1];
+						current_value = _waveMap[cx, cy - 1];
 						if (current_value < minimum && current_value > 0)
 						{
 							cy = cy - 1;
@@ -266,7 +271,7 @@ namespace Lotus
 
 					if (cy + 1 < _map.MapHeight)
 					{
-						current_value = mWaveMap[cx, cy + 1];
+						current_value = _waveMap[cx, cy + 1];
 						if (current_value < minimum && current_value > 0)
 						{
 							cy = cy + 1;
@@ -275,7 +280,7 @@ namespace Lotus
 						}
 					}
 
-					ortho:;
+				ortho:;
 					_path.AddPathPoint(cx, cy, minimum);
 
 					count++;
@@ -294,6 +299,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void PreparationsWaveOnStep()
 			{
+				if (_map == null) return;
+
 				Int32 indicate_wall = -2, indicate_empty = -1;
 
 				// Заполняем карту поиска пути на основе карты препятствий
@@ -303,31 +310,31 @@ namespace Lotus
 					{
 						if (_map.Map[x, y] == XMapCode.BLOCK)
 						{
-							mWaveMap[x, y] = indicate_wall; // индикатор стены
+							_waveMap[x, y] = indicate_wall; // индикатор стены
 						}
 						else
 						{
-							mWaveMap[x, y] = indicate_empty; // индикатор еще не ступали сюда
+							_waveMap[x, y] = indicate_empty; // индикатор еще не ступали сюда
 						}
 					}
 				}
 
 				// Если стартовая позиция находится на стене
-				if (mWaveMap[_start.X, _start.Y] == indicate_wall)
+				if (_waveMap[_start.X, _start.Y] == indicate_wall)
 				{
 					return;
 				}
 
 				// Если финишная позиция находится на стене
-				if (mWaveMap[_target.X, _target.Y] == indicate_wall)
+				if (_waveMap[_target.X, _target.Y] == indicate_wall)
 				{
 					return;
 				}
 
 				// Начинаем с финиша
-				mWaveMap[_target.X, _target.Y] = 0;
+				_waveMap[_target.X, _target.Y] = 0;
 				_isFoundPath = false;
-				mStepWave = 0;
+				_stepWave = 0;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -341,6 +348,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override Boolean ExpansionWaveOnStep()
 			{
+				if (_map == null) return false;
+
 				var indicate_empty = -1;
 
 				for (var x = 0; x < _map.MapWidth; x++)
@@ -348,48 +357,48 @@ namespace Lotus
 					for (var y = 0; y < _map.MapHeight; y++)
 					{
 						// Если ячейка свободная
-						if (mWaveMap[x, y] == mStepWave)
+						if (_waveMap[x, y] == _stepWave)
 						{
 							// Ставим значение шага + 1 в соседние ячейки (если они проходимы)
-							if (x - 1 >= 0 && mWaveMap[x - 1, y] == indicate_empty)
+							if (x - 1 >= 0 && _waveMap[x - 1, y] == indicate_empty)
 							{
-								mWaveMap[x - 1, y] = mStepWave + 1;
+								_waveMap[x - 1, y] = _stepWave + 1;
 							}
 
-							if (x + 1 < _map.MapWidth && mWaveMap[x + 1, y] == indicate_empty)
+							if (x + 1 < _map.MapWidth && _waveMap[x + 1, y] == indicate_empty)
 							{
-								mWaveMap[x + 1, y] = mStepWave + 1;
+								_waveMap[x + 1, y] = _stepWave + 1;
 							}
 
-							if (y - 1 >= 0 && mWaveMap[x, y - 1] == indicate_empty)
+							if (y - 1 >= 0 && _waveMap[x, y - 1] == indicate_empty)
 							{
-								mWaveMap[x, y - 1] = mStepWave + 1;
+								_waveMap[x, y - 1] = _stepWave + 1;
 							}
-							if (y + 1 < _map.MapHeight && mWaveMap[x, y + 1] == indicate_empty)
+							if (y + 1 < _map.MapHeight && _waveMap[x, y + 1] == indicate_empty)
 							{
-								mWaveMap[x, y + 1] = mStepWave + 1;
+								_waveMap[x, y + 1] = _stepWave + 1;
 							}
 						}
 					}
 				}
 
-				mStepWave++;
+				_stepWave++;
 
 				// Решение найдено
-				if (mWaveMap[_start.X, _start.Y] != indicate_empty)
+				if (_waveMap[_start.X, _start.Y] != indicate_empty)
 				{
 					_isFoundPath = true;
 					return false;
 				}
 
 				// Решение не найдено
-				if (mStepWave > _map.MapWidth * _map.MapHeight)
+				if (_stepWave > _map.MapWidth * _map.MapHeight)
 				{
 					return false;
 				}
 
 				// Если есть лимит и он превышен
-				if (_searchLimit > 0 && mStepWave > _searchLimit)
+				if (_searchLimit > 0 && _stepWave > _searchLimit)
 				{
 					return false;
 				}
@@ -408,11 +417,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override void SetWave(Int32[,] wave)
 			{
+				if (_map == null) return;
+
 				for (var ix = 0; ix < _map.MapWidth; ix++)
 				{
 					for (var iy = 0; iy < _map.MapHeight; iy++)
 					{
-						wave[ix, iy] = mWaveMap[ix, iy];
+						wave[ix, iy] = _waveMap[ix, iy];
 					}
 				}
 			}

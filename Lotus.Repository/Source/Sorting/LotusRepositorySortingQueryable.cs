@@ -84,7 +84,7 @@ namespace Lotus
 
 				var mce = Expression.Call(typeof(Queryable), method, types, query.Expression, exp);
 
-				return query.Provider.CreateQuery<TEntity>(mce) as IOrderedQueryable<TEntity>;
+				return (query.Provider.CreateQuery<TEntity>(mce) as IOrderedQueryable<TEntity>)!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ namespace Lotus
 					return query.OrderBy(keySelector);
 				}
 
-				var queryOrder = Sort(query, properties) as IOrderedQueryable<TEntity>;
+				var queryOrder = (Sort(query, properties) as IOrderedQueryable<TEntity>)!;
 				return queryOrder;
 			}
 		}

@@ -64,7 +64,7 @@ namespace Lotus
 			/// <summary>
 			/// Значение для фильтрации
 			/// </summary>
-			public TPropertyType Value { get; set; }
+			public TPropertyType? Value { get; set; }
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override String ToString()
 			{
-				return base.ToString();
+				return $"Name = {PropertyName}";
 			}
 			#endregion
 
@@ -190,7 +190,7 @@ namespace Lotus
 			{
 				var value = index == -1 ? Value! : Values![index];
 
-				ConstantExpression constantExpression = null;
+				ConstantExpression? constantExpression = null;
 				switch (PropertyType)
 				{
 					case TEntityPropertyType.Boolean:
@@ -225,7 +225,7 @@ namespace Lotus
 						break;
 				}
 
-				return constantExpression;
+				return constantExpression!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------

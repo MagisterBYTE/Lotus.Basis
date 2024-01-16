@@ -36,7 +36,7 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			private readonly ILotusDataStorage _dataStorage;
+			private readonly ILotusRepository _dataStorage;
 			#endregion
 
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
@@ -46,7 +46,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="dataStorage">Интерфейс для работы с сущностями</param>
 			//---------------------------------------------------------------------------------------------------------
-			public ResourceFileService(ILotusDataStorage dataStorage)
+			public ResourceFileService(ILotusRepository dataStorage)
             {
 				_dataStorage = dataStorage;
             }

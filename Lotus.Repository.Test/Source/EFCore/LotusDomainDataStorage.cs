@@ -27,7 +27,7 @@ namespace Lotus
 		/// Контекст базы данных для тестирования
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public class DomainDataStorage : DataStorageContextDb<DomainContext>
+		public class DomainDataStorage : RepositoryContextDb<DomainContext>
 		{
 			public DomainDataStorage(DomainContext context) 
 				: base(context)

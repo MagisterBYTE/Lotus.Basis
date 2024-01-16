@@ -1,58 +1,59 @@
 ﻿//=====================================================================================================================
 // Проект: Модуль репозитория
-// Раздел: Методы расширений
+// Раздел: Подсистема EF Core
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusRepositoryDbContextExtensions.cs
-*		Статический класс реализующий методы расширения для работы с DbContext.
+/** \file LotusRepositoryEntityTypeBuilderExtensions.cs
+*		Статический класс реализующий методы расширения для работы с ModelBuilder.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 //=====================================================================================================================
 namespace Lotus
 {
 	namespace Repository
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup RepositoryExtensions
+		/** \addtogroup RepositoryEFCore
 		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы расширения для работы с ModelBuilder
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public static class XDbContextExtensions
+		public static class XModelBuilderExtensions
 		{
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Сохранение в базу данных 
+			/// Изменить поведение при удалении на <see cref="DeleteBehavior.Restrict"/>
 			/// </summary>
-			/// <param name="dbContext">Контекст БД</param>
-			/// <param name="token">Токен отмены</param>
-			/// <param name="desc">Описание ошибки</param>
-			/// <returns>Задача</returns>
+			/// <param name="modelBuilder">Построитель модели</param>
+			/// <returns>Построитель модели</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static async Task TrySaveChangesAsync(this DbContext dbContext, String desc = "", 
-				CancellationToken token = default)
+			public static ModelBuilder ReplaceCascadeDeleteBehaviorToRestrict(this ModelBuilder modelBuilder)
 			{
-				var status = await dbContext.SaveChangesAsync(token);
+				var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+					.SelectMany(x => x.GetForeignKeys())
+					.Where(x => !x.IsOwnership
+								&& !HasIgnoreAnnotation(x)
+								&& x.DeleteBehavior == DeleteBehavior.Cascade);
 
-				if (status == default)
+				foreach (var fk in cascadeFKs)
 				{
-					if (string.IsNullOrEmpty(desc))
-					{
-						throw new Exception("При сохранении БД произошла ошибка");
-					}
-					else
-					{
-						throw new Exception(desc);
-					}
+					fk.DeleteBehavior = DeleteBehavior.Restrict;
+				}
+
+				return modelBuilder;
+
+				Boolean HasIgnoreAnnotation(IMutableForeignKey key)
+				{
+					return (Boolean?)key.FindAnnotation(XEntityTypeBuilderExtensions.IgnoreOverrideDeleteBehavior)?.Value == true;
 				}
 			}
 		}

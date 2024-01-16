@@ -229,6 +229,10 @@ dotnet_diagnostic.S1210.severity = none
 
 # S1125: Boolean literals should not be redundant
 dotnet_diagnostic.S1125.severity = none
+csharp_style_prefer_primary_constructors = true:suggestion
+
+# CS8601 - Possible null reference assignment
+dotnet_diagnostic.CS8601.severity = none
 
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
@@ -266,3 +270,6 @@ dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:silent
 dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:silent
 dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
 dotnet_style_require_accessibility_modifiers = for_non_interface_members:silent
+
+# Default severity for all analyzer diagnostics
+dotnet_analyzer_diagnostic.severity = none

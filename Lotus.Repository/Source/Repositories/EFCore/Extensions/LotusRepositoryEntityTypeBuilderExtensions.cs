@@ -1,6 +1,6 @@
 ﻿//=====================================================================================================================
 // Проект: Модуль репозитория
-// Раздел: Методы расширений
+// Раздел: Подсистема EF Core
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
 /** \file LotusRepositoryEntityTypeBuilderExtensions.cs
@@ -22,12 +22,8 @@ namespace Lotus
 	namespace Repository
 	{
 		//-------------------------------------------------------------------------------------------------------------
-		/**
-         * \defgroup RepositoryExtensions Методы расширений
-         * \ingroup Repository
-         * \brief Методы расширений для EF Core.
-         * @{
-         */
+		/** \addtogroup RepositoryEFCore
+		*@{*/
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Статический класс реализующий методы расширения для работы с EntityTypeBuilder
@@ -64,10 +60,11 @@ namespace Lotus
 			/// <returns>Построитель сущности</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static IndexBuilder<TEntity> HasNotDeletedPartialUniqueIndex<TEntity>(this EntityTypeBuilder<TEntity> builder,
-				[NotNull] Expression<Func<TEntity, object>> indexExpression) where TEntity : class, ILotusRepositorySoftDeletable
+				[NotNull] Expression<Func<TEntity, object>> indexExpression) 
+				where TEntity : class, ILotusRepositorySoftDeletable
 			{
 				return builder
-					.HasIndex(indexExpression)
+					.HasIndex(indexExpression!)
 					.HasFilter("deleted IS NULL")
 					.IsUnique();
 			}

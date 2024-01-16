@@ -3,8 +3,8 @@
 // Раздел: Подсистема EF Core
 // Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
 //---------------------------------------------------------------------------------------------------------------------
-/** \file LotusRepositoryDataStorageContextDb.cs
-*		Класс представляющий собой основной контекст БД для работы сущностями.
+/** \file LotusRepositoryContextDb.cs
+*		Класс представляющий собой репозиторий для EF Core.
 */
 //---------------------------------------------------------------------------------------------------------------------
 // Версия: 1.0.0.0
@@ -32,10 +32,10 @@ namespace Lotus
          */
 		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
-		/// Класс представляющий собой основной контекст БД для работы сущностями
+		/// Класс представляющий собой репозиторий для EF Core
 		/// </summary>
 		//-------------------------------------------------------------------------------------------------------------
-		public class DataStorageContextDb<TContext> : ILotusDataStorage where TContext : DbContext
+		public class RepositoryContextDb<TContext> : ILotusRepository where TContext : DbContext
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			private readonly TContext _context;
@@ -49,12 +49,13 @@ namespace Lotus
 			/// </summary>
 			/// <param name="context">Контекст БД</param>
 			//---------------------------------------------------------------------------------------------------------
-			public DataStorageContextDb(TContext context)
+			public RepositoryContextDb(TContext context)
 			{
 				_context = context;
 			}
 			#endregion
 
+			#region ======================================= МЕТОДЫ ILotusRepository ===================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
 			/// Получить провайдер данных указанной сущности
@@ -78,7 +79,7 @@ namespace Lotus
 			/// <returns>Найденная сущность или null</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public TEntity? GetById<TEntity, TKey>(TKey id) where TEntity : class
-													 where TKey : struct, IEquatable<TKey>
+															where TKey : struct, IEquatable<TKey>
 			{
 				_ids[0] = id;
 				return _context.Find<TEntity>(_ids);
@@ -101,6 +102,39 @@ namespace Lotus
 			{
 				_ids[0] = id;
 				return await _context.FindAsync<TEntity>(_ids, token);
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Производит поиск сущностей в БД или в хранилище по идентификаторам.
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <typeparam name="TKey">Тип идентификатора</typeparam>
+			/// <param name="ids">Список идентифиакторов</param>
+			/// <returns>Список сущностей</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public IList<TEntity?> GetByIds<TEntity, TKey>(IEnumerable<TKey> ids)
+				where TEntity : class, ILotusIdentifierIdTemplate<TKey>
+				where TKey : struct, IEquatable<TKey>
+			{
+				return _context.Set<TEntity>().Where(x => ids.Contains(x.Id)).ToArray();
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Производит поиск сущностей в БД или в хранилище по идентификаторам.
+			/// </summary>
+			/// <typeparam name="TEntity">Тип сущности</typeparam>
+			/// <typeparam name="TKey">Тип идентификатора</typeparam>
+			/// <param name="ids">Список идентифиакторов</param>
+			/// <param name="token">Токен отмены</param>
+			/// <returns>Список сущностей</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public async ValueTask<IList<TEntity?>> GetByIdsAsync<TEntity, TKey>(IEnumerable<TKey> ids, CancellationToken token = default)
+				where TEntity : class, ILotusIdentifierIdTemplate<TKey>
+				where TKey : struct, IEquatable<TKey>
+			{
+				return await _context.Set<TEntity>().Where(x => ids.Contains(x.Id)).ToArrayAsync();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -151,8 +185,10 @@ namespace Lotus
 				var entity = _context.Find<TEntity>(_ids);
 				if (entity == null)
 				{
-					entity = new TEntity();
-					entity.Id = id;
+					entity = new TEntity
+					{
+						Id = id
+					};
 
 					var entry = _context.Add(entity);
 					return entry.Entity;
@@ -183,8 +219,10 @@ namespace Lotus
 				var entity = await _context.FindAsync<TEntity>(_ids, token);
 				if(entity == null) 
 				{
-					entity = new TEntity();
-					entity.Id = id;
+					entity = new TEntity
+					{
+						Id = id
+					};
 
 					var entry = await _context.AddAsync(entity, token);
 					return entry.Entity;
@@ -231,7 +269,6 @@ namespace Lotus
 			/// </summary>
 			/// <typeparam name="TEntity">Тип сущности</typeparam>
 			/// <param name="entities">Список сущностей</param>
-			/// <returns>Задача</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
 			{
@@ -327,6 +364,7 @@ namespace Lotus
 			{
 				await _context.SaveChangesAsync(token);
 			}
+			#endregion
 		}
 		//-------------------------------------------------------------------------------------------------------------
 		/**@}*/

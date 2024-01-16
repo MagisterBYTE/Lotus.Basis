@@ -111,11 +111,11 @@ namespace Lotus
 			{
 				if (request.PageInfo is null)
 				{
-					return await query.ToResponsePageAsync<TEntity>(token);
+					return await query.ToResponsePageAsync(token);
 				}
 				else
 				{
-					return await query.ToResponsePageAsync<TEntity>(request.PageInfo.PageNumber,
+					return await query.ToResponsePageAsync(request.PageInfo.PageNumber,
 						request.PageInfo.PageSize, token);
 				}
 			}
@@ -206,8 +206,7 @@ namespace Lotus
 				this IOrderedQueryable<TEntity> query, CancellationToken token = default)
 			{
 				var totalCount = await query.CountAsync(token);
-				var data = await query.ProjectToType<TResponse>()
-					.ToArrayAsync(token);
+				var data = await query.ProjectToType<TResponse>().ToArrayAsync(token);
 
 				var pageInfo = new CPageInfoResponse()
 				{

@@ -239,7 +239,7 @@ namespace Lotus
 					case TFilterFunction.IncludeAll:
 						{
 							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
-							if (propertyType.IsPrimitiveType() == false)
+							if (propertyType != null && propertyType.IsPrimitiveType() == false)
 							{
 								var lambdaContains = filterProperty.GetContainsInPropertyExpression(propertyType);
 
@@ -257,7 +257,7 @@ namespace Lotus
 						{
 							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
 
-							if (propertyType.IsPrimitiveType() == false)
+							if (propertyType != null && propertyType.IsPrimitiveType() == false)
 							{
 								var lambdaContains = filterProperty.GetContainsInPropertyExpression(propertyType);
 
@@ -275,7 +275,7 @@ namespace Lotus
 						{
 							var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
 
-							if (propertyType.IsPrimitiveType() == false)
+							if (propertyType != null && propertyType.IsPrimitiveType() == false)
 							{
 								var lambdaNotContains = filterProperty.GetNotContainsInPropertyExpression(propertyType);
 

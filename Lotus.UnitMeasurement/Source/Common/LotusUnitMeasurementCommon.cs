@@ -165,15 +165,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
-				if (obj != null)
+				if (obj is TUnitValue<TUnit> value)
 				{
-					if (obj is TUnitValue<TUnit>)
-					{
-						var value = (TUnitValue<TUnit>)obj;
-						return Equals(value);
-					}
+					return Equals(value);
 				}
 				return base.Equals(obj);
 			}

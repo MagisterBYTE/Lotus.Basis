@@ -47,9 +47,9 @@ namespace Lotus
 			/// <param name="measurementType">Тип измерения</param>
 			/// <returns>Тип единицы измерения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Type GetUnitType(this TMeasurementType measurementType)
+			public static Type? GetUnitType(this TMeasurementType measurementType)
 			{
-				Type type = default;
+				Type? type = null;
 				switch (measurementType)
 				{
 					case TMeasurementType.Undefined:
@@ -86,9 +86,9 @@ namespace Lotus
 			/// <param name="measurementType">Тип измерения</param>
 			/// <returns>Единица измерения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Enum GetUnitValueDefault(this TMeasurementType measurementType)
+			public static Enum? GetUnitValueDefault(this TMeasurementType measurementType)
 			{
-				Enum value = default;
+				Enum? value = default;
 				switch (measurementType)
 				{
 					case TMeasurementType.Undefined:
@@ -126,9 +126,9 @@ namespace Lotus
 			/// <param name="unitValue">Строка единицы измерения</param>
 			/// <returns>Единица измерения</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Enum GetUnitValueFromString(this TMeasurementType measurementType, String unitValue)
+			public static Enum? GetUnitValueFromString(this TMeasurementType measurementType, String unitValue)
 			{
-				Enum value = default;
+				Enum? value = default;
 				switch (measurementType)
 				{
 					case TMeasurementType.Undefined:

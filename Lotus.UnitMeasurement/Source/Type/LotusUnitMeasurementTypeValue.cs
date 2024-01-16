@@ -16,6 +16,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+//---------------------------------------------------------------------------------------------------------------------
+#nullable disable
 //=====================================================================================================================
 namespace Lotus
 {
@@ -204,13 +206,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public override readonly Boolean Equals(System.Object obj)
 			{
-				if (obj != null)
+				if (obj is TMeasurementValue value)
 				{
-					if (obj is TMeasurementValue)
-					{
-						var value = (TMeasurementValue)obj;
-						return Equals(value);
-					}
+					return Equals(value);
 				}
 				return base.Equals(obj);
 			}

@@ -59,7 +59,7 @@ namespace Lotus
 				var permissionCanWorldCreate = new Permission(6, "canWorldCreate");
 				var permissionCanPersonCreate = new Permission(7, "canWorldCreate");
 				var permissionFake1 = new Permission(8, "");
-				var permissionFake2 = new Permission(9, null);
+				var permissionFake2 = new Permission(9, "");
 
 				Permissions.Add(permissionAdmin);
 				Permissions.Add(permissionEditor);

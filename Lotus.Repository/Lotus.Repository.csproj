@@ -37,7 +37,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Publish'">
-    <PackageReference Include="Lotus.Core" Version="2.1.3" />
+    <PackageReference Include="Lotus.Core" Version="2.4.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' != 'Publish'">

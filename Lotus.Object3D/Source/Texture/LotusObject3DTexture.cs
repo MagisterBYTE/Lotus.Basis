@@ -181,13 +181,13 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal String _fileName;
+			protected internal String? _fileName;
 			protected internal TTextureDestination _destination;
 			protected internal Int32 _width;
 			protected internal Int32 _height;
 			protected internal Boolean _alphaIsTransparency;
 			protected internal TTextureFormatColor _formatColor;
-			protected internal CMaterial _ownerMaterial;
+			protected internal CMaterial? _ownerMaterial;
 
 #if UNITY_2017_1_OR_NEWER
 			internal UnityEngine.Texture2D _unityTexture;
@@ -201,7 +201,7 @@ namespace Lotus
 			/// <summary>
 			/// Имя файла текстуры
 			/// </summary>
-			public String FileName
+			public String? FileName
 			{
 				get
 				{
@@ -303,7 +303,7 @@ namespace Lotus
 			/// <summary>
 			/// Владелец материал
 			/// </summary>
-			public CMaterial OwnerMaterial
+			public CMaterial? OwnerMaterial
 			{
 				get { return _ownerMaterial; }
 				set

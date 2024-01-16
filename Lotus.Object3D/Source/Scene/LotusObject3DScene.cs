@@ -138,10 +138,10 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Идентификация
-			protected internal String _fileName;
+			protected internal String? _fileName;
 
 			// Основные параметры
-			protected internal CNode3D _rootNode;
+			protected internal CNode3D? _rootNode;
 			protected internal CMeshSet _meshSet;
 			protected internal CMaterialSet _materialSet;
 			protected internal CTextureSet _textureSet;
@@ -177,7 +177,7 @@ namespace Lotus
 			/// <summary>
 			/// Имя файла
 			/// </summary>
-			public String FileName
+			public String? FileName
 			{
 				get { return _fileName; }
 				set
@@ -192,7 +192,7 @@ namespace Lotus
 			/// <summary>
 			/// Корневой узел сцены
 			/// </summary>
-			public CNode3D RootNode
+			public CNode3D? RootNode
 			{
 				get { return _rootNode; }
 			}
@@ -311,6 +311,7 @@ namespace Lotus
 				_meshSet = new CMeshSet(this);
 				_materialSet = new CMaterialSet(this);
 				_textureSet = new CTextureSet(this);
+				_allEntities = new ListArray<CEntity3D>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

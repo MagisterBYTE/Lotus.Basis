@@ -281,15 +281,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
-				if (obj != null)
+				if (obj is CVertex3Df vertex)
 				{
-					if (GetType() == obj.GetType())
-					{
-						var vertex = (CVertex3Df)obj;
-						return Equals(vertex);
-					}
+					return Equals(vertex);
 				}
 				return base.Equals(obj);
 			}

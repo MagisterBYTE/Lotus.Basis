@@ -95,15 +95,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
-				if (obj != null)
+				if (obj is CTriangle3Df triangle)
 				{
-					if (GetType() == obj.GetType())
-					{
-						var triangle = (CTriangle3Df)obj;
-						return Equals(triangle);
-					}
+					return Equals(triangle);
 				}
 				return base.Equals(obj);
 			}
@@ -361,6 +357,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CListTriangle3D()
 			{
+				Vertices = new CListVertex3D();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

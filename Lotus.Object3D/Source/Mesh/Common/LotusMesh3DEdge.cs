@@ -163,15 +163,11 @@ namespace Lotus
 			/// <param name="obj">Сравниваемый объект</param>
 			/// <returns>Статус равенства объектов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(Object obj)
+			public override readonly Boolean Equals(System.Object? obj)
 			{
-				if (obj != null)
+				if (obj is CEdge3Df edge)
 				{
-					if (GetType() == obj.GetType())
-					{
-						var edge = (CEdge3Df)obj;
-						return Equals(edge);
-					}
+					return Equals(edge);
 				}
 				return base.Equals(obj);
 			}
@@ -395,6 +391,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CListEdge3D()
 			{
+				Vertices = new CListVertex3D();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

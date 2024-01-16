@@ -50,7 +50,7 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal CNode3D _parentNode;
+			protected internal CNode3D? _parentNode;
 			protected internal List<CNode3D> _children;
 			protected internal Vector3Df _offset;
 			protected internal Vector3Df _offsetOriginal;
@@ -89,7 +89,7 @@ namespace Lotus
 			/// <summary>
 			/// Родительский узел
 			/// </summary>
-			public CNode3D ParentNode
+			public CNode3D? ParentNode
 			{
 				get { return _parentNode; }
 				set
@@ -199,6 +199,7 @@ namespace Lotus
 			{
 				_ownerScene = ownerScene;
 				_children = new List<CNode3D>();
+				_allEntities = new ListArray<CEntity3D>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------

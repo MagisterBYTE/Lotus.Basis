@@ -293,8 +293,10 @@ namespace Lotus
 			/// <param name="other">Меш</param>
 			/// <returns>Статус сравнения мешей</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CMesh3Df other)
+			public Int32 CompareTo(CMesh3Df? other)
 			{
+				if(other == null) return 0;
+
 				if (_order > other._order)
 				{
 					return 1;

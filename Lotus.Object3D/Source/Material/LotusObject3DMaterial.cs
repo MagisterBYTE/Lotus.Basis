@@ -57,10 +57,10 @@ namespace Lotus
 			internal TColor _diffuseColor;
 			internal TColor _diffuseColorOriginal;
 			internal ListArray<CTextureSlot> _textureSlots;
-			internal CTextureSlot _ambientSlot;
-			internal CTextureSlot _diffuseSlot;
-			internal CTextureSlot _normalSlot;
-			internal CTextureSlot _heightSlot;
+			internal CTextureSlot? _ambientSlot;
+			internal CTextureSlot? _diffuseSlot;
+			internal CTextureSlot? _normalSlot;
+			internal CTextureSlot? _heightSlot;
 			internal CScene3D _ownerScene;
 
 			// Платформенно-зависимая часть

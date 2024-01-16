@@ -43,6 +43,8 @@ using Poly2Tri.Utility;
 using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Delaunay
 {
     public class DelaunayTriangle

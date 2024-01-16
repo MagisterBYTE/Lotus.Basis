@@ -36,6 +36,8 @@ using Poly2Tri.Triangulation.Delaunay;
 using Poly2Tri.Triangulation.Sets;
 using Poly2Tri.Utility;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Polygon
 {
 

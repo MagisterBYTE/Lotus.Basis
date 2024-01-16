@@ -33,6 +33,8 @@ using System.Collections.Generic;
 using Poly2Tri.Triangulation.Delaunay;
 using Poly2Tri.Triangulation.Delaunay.Sweep;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation
 {
     public abstract class TriangulationContext

@@ -39,6 +39,8 @@
 using System;
 using Poly2Tri.Utility;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation
 {
     public class Edge

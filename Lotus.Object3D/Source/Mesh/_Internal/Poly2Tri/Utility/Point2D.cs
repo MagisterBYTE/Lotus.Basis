@@ -31,6 +31,8 @@
 
 using System;
 
+#nullable disable
+
 namespace Poly2Tri.Utility
 {
     public class Point2D : IComparable<Point2D>

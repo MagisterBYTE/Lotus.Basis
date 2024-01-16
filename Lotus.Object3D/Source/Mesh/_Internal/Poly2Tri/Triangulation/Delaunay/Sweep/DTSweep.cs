@@ -49,6 +49,8 @@ using System;
 using Poly2Tri.Triangulation.Util;
 using Poly2Tri.Utility;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Delaunay.Sweep
 {
     public static class DTSweep

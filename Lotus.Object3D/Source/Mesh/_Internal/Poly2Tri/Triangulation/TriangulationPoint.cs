@@ -35,6 +35,8 @@ using System.Linq;
 using Poly2Tri.Triangulation.Delaunay.Sweep;
 using Poly2Tri.Utility;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation
 {
 

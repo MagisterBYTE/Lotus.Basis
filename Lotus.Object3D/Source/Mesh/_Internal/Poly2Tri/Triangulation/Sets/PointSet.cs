@@ -35,6 +35,8 @@ using System.Linq;
 using Poly2Tri.Triangulation.Delaunay;
 using Poly2Tri.Utility;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Sets
 {
     public class PointSet : Point2DList, ITriangulatable, IEnumerable<TriangulationPoint>, IList<TriangulationPoint>

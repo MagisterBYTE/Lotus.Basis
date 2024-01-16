@@ -35,6 +35,8 @@
 // Future possibilities
 //   Comments!
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Delaunay.Sweep
 {
     public class AdvancingFrontNode

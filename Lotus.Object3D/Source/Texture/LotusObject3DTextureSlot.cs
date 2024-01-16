@@ -44,7 +44,7 @@ namespace Lotus
 		/// Определяет, как генерируются координаты текстуры
 		/// <para>
 		/// Приложениям реального времени обычно требуются полные UV-координаты. Поэтому настоятельно рекомендуется
-		/// использовать шаг <see cref = "Assimp.PostProcessSteps.GenerateUVCoords" />. Он генерирует правильные UV-каналы для
+		/// использовать шаг "Assimp.PostProcessSteps.GenerateUVCoords". Он генерирует правильные UV-каналы для
 		/// объектов, не относящихся к UV, при условии, что дано точное описание того, как должно выглядеть отображение.
 		/// </para>
 		/// </summary>
@@ -185,14 +185,14 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal CTexture _texture;
+			protected internal CTexture? _texture;
 			protected internal TTextureMapping _mapping;
 			protected internal Int32 _indexUV;
 			protected internal Single _blendFactor;
 			protected internal TTextureOperation _operation;
 			protected internal TTextureWrapMode _wrapModeU;
 			protected internal TTextureWrapMode _wrapModeV;
-			protected internal CMaterial _ownerMaterial;
+			protected internal CMaterial? _ownerMaterial;
 
 			// Платформенно-зависимая часть
 #if USE_ASSIMP
@@ -207,7 +207,7 @@ namespace Lotus
 			/// <summary>
 			/// Текстура связанная с данным текстурным слотом
 			/// </summary>
-			public CTexture Texture
+			public CTexture? Texture
 			{
 				get { return _texture; }
 				set
@@ -291,7 +291,7 @@ namespace Lotus
 			/// <summary>
 			/// Владелец материал
 			/// </summary>
-			public CMaterial OwnerMaterial
+			public CMaterial? OwnerMaterial
 			{
 				get { return _ownerMaterial; }
 				set

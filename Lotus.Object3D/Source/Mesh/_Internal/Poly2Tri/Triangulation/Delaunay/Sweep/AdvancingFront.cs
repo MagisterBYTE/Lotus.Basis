@@ -38,6 +38,8 @@
 using System;
 using System.Text;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Delaunay.Sweep
 {
     /**

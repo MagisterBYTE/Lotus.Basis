@@ -32,6 +32,8 @@
 // Changes from the Java version
 //   Turned DTSweepEdgeEvent into a value type
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Delaunay.Sweep
 {
     public class DTSweepEdgeEvent

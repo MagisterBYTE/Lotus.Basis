@@ -62,8 +62,8 @@ namespace Lotus
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
 			protected internal Boolean _isVisible = true;
-			protected internal CMesh3Df _mesh;
-			protected internal CMaterial _material;
+			protected internal CMesh3Df? _mesh;
+			protected internal CMaterial? _material;
 
 			// Размеры и позиция
 			protected internal Vector3Df _location;
@@ -106,7 +106,7 @@ namespace Lotus
 			/// <summary>
 			/// Меш модели
 			/// </summary>
-			public CMesh3Df Mesh
+			public CMesh3Df? Mesh
 			{
 				get
 				{
@@ -123,7 +123,7 @@ namespace Lotus
 			/// <summary>
 			/// Материал модели
 			/// </summary>
-			public CMaterial Material
+			public CMaterial? Material
 			{
 				get
 				{

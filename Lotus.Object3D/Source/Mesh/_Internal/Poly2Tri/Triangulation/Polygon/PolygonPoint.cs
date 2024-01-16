@@ -34,6 +34,7 @@
 // Future possibilities
 //   Documentation!
 
+#nullable disable
 
 namespace Poly2Tri.Triangulation.Polygon
 {

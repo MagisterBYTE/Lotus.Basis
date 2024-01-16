@@ -132,6 +132,8 @@ using System.Text;
 using Poly2Tri.Triangulation.Util;
 using Poly2Tri.Utility;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Polygon
 {
     public static class PolygonUtil

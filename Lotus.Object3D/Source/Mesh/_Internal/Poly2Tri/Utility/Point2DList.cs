@@ -59,6 +59,8 @@ using System.Text;
 using Poly2Tri.Triangulation;
 using Poly2Tri.Triangulation.Util;
 
+#nullable disable
+
 namespace Poly2Tri.Utility
 {
     public class Point2DList : IEnumerable<Point2D>, IList<Point2D>

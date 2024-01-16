@@ -31,6 +31,8 @@
 
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Poly2Tri.Triangulation.Delaunay.Sweep
 {
     public class DTSweepPointComparator : IComparer<TriangulationPoint>

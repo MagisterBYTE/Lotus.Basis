@@ -121,7 +121,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TPoolObject? Take<TPoolObject>(String managerName)
 			{
-				ILotusPoolManager? result = PoolManagers.Search(x => x.Name == managerName);
+				ILotusPoolManager? result = PoolManagers.Search(x => x!.Name == managerName);
 				if(result != null)
 				{
 					return (TPoolObject)result.TakeObjectFromPool();
@@ -140,7 +140,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean Release<TPoolObject>(String managerName, TPoolObject poolObject)
 			{
-				ILotusPoolManager? result = PoolManagers.Search(x => x.Name == managerName);
+				ILotusPoolManager? result = PoolManagers.Search(x => x!.Name == managerName);
 				if (result != null)
 				{
 					result.ReleaseObjectToPool(poolObject!);

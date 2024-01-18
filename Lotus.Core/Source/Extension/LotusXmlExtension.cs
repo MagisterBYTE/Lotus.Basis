@@ -512,14 +512,14 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута</param>
 			/// <returns>Перечисление</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ReadEnumFromAttribute<TEnum>(this XmlReader xmlReader, String name, TEnum defaultValue = default(TEnum))
+			public static TEnum ReadEnumFromAttribute<TEnum>(this XmlReader xmlReader, String name, TEnum? defaultValue = default(TEnum))
 			{
 				String? value;
 				if ((value = xmlReader.GetAttribute(name)) != null)
 				{
 					return (TEnum)Enum.Parse(typeof(TEnum), value);
 				}
-				return defaultValue;
+				return defaultValue!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -889,9 +889,9 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Значение атрибута</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum GetAttributeValueFromNameAsEnum<TEnum>(this XmlNode @this, String attributeName, TEnum defaultValue = default(TEnum))
+			public static TEnum GetAttributeValueFromNameAsEnum<TEnum>(this XmlNode @this, String attributeName, TEnum? defaultValue = default(TEnum))
 			{
-				if (@this.Attributes == null) return defaultValue;
+				if (@this.Attributes == null) return defaultValue!;
 
 				if (@this.Attributes[attributeName] != null)
 				{
@@ -908,7 +908,7 @@ namespace Lotus
 					}
 					else
 					{
-						return defaultValue;
+						return defaultValue!;
 					}
 				}
 			}

@@ -11,6 +11,7 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 //=====================================================================================================================
@@ -52,6 +53,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameterList()
 			{
+				_value = new ListArray<TType>();
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -78,6 +80,54 @@ namespace Lotus
 				: base(id)
 			{
 				_value = new ListArray<TType>(items);
+			}
+			#endregion
+
+			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Запись в строковый поток в формате Json
+			/// </summary>
+			/// <param name="streamWriter">Строковый поток</param>
+			/// <param name="depth">Текущая глубина вложенности</param>
+			/// <param name="isArray">Статус массива</param>
+			//---------------------------------------------------------------------------------------------------------
+			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
+			{
+				streamWriter.Write(XChar.NewLine);
+				streamWriter.Write(XString.Depths[depth]);
+
+				streamWriter.Write(XChar.DoubleQuotes);
+				streamWriter.Write(Name);
+				streamWriter.Write(XChar.DoubleQuotes);
+
+				streamWriter.Write(":\n");
+				streamWriter.Write(XString.Depths[depth]);
+				streamWriter.Write("[");
+
+				if (typeof(TType).IsSupportInterface<IParameterItem>())
+				{
+					foreach (IParameterItem? item in _value!)
+					{
+						if(item != null) 
+						{
+							item.WriteToJson(streamWriter, depth + 1, true);
+							streamWriter.Write(",");
+						}
+					}
+				}
+				else
+				{
+					foreach (TType item in _value!) 
+					{
+						streamWriter.Write(item);
+						streamWriter.Write(",");
+					}
+				}
+
+				streamWriter.Write("\n");
+				streamWriter.Write(XString.Depths[depth]);
+				streamWriter.Write("]");
 			}
 			#endregion
 		}

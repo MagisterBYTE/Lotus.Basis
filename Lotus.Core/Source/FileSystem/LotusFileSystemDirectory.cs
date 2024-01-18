@@ -238,7 +238,7 @@ namespace Lotus
 			/// <param name="match">Предикат проверки</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean CheckOne(Predicate<ILotusFileSystemEntity> match)
+			public Boolean CheckOne(Predicate<ILotusFileSystemEntity?> match)
 			{
 				if (match(this))
 				{

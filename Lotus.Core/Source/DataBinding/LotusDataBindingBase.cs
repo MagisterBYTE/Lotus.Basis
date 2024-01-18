@@ -425,7 +425,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected virtual void UpdateModelProperty(Object? sender, PropertyChangedEventArgs args)
+			protected virtual void UpdateModelProperty(System.Object? sender, PropertyChangedEventArgs args)
 			{
 
 			}
@@ -501,7 +501,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected virtual void UpdateViewProperty(Object? sender, PropertyChangedEventArgs args)
+			protected virtual void UpdateViewProperty(System.Object? sender, PropertyChangedEventArgs args)
 			{
 			}
 

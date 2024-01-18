@@ -66,7 +66,7 @@ namespace Lotus
 			/// <summary>
 			/// Родительский элемент ViewModel
 			/// </summary>
-			ILotusViewModelHierarchy IParent { get; set; }
+			ILotusViewModelHierarchy? IParent { get; set; }
 			#endregion
 
 			#region ======================================= МЕТОДЫ ====================================================
@@ -264,7 +264,7 @@ namespace Lotus
 			/// <param name="owner">Коллекция владелец</param>
 			/// <returns>Элемент ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static ViewModelHierarchy<TModel> BuildFilter(TModel rootModel, Predicate<TModel> filter, ILotusCollectionViewModelHierarchy owner)
+			public static ViewModelHierarchy<TModel> BuildFilter(TModel rootModel, Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
 			{
 				ViewModelHierarchy<TModel> node_root_view = BuildFilter(rootModel, null, filter, owner);
 				return node_root_view;
@@ -281,7 +281,7 @@ namespace Lotus
 			/// <returns>Элемент ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static ViewModelHierarchy<TModel> BuildFilter(TModel model, ILotusViewModelHierarchy? parent,
-				Predicate<TModel> filter, ILotusCollectionViewModelHierarchy owner)
+				Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
 			{
 				var node_root_view = new ViewModelHierarchy<TModel>(model, parent);
 				node_root_view.IOwner = owner;
@@ -353,8 +353,8 @@ namespace Lotus
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
 			protected internal String _name;
-			protected internal ILotusCollectionViewModelHierarchy _owner;
-			protected internal ILotusViewModelHierarchy _parent;
+			protected internal ILotusCollectionViewModelHierarchy? _owner;
+			protected internal ILotusViewModelHierarchy? _parent;
 			protected internal TModel _model;
 			protected internal Int32 _level;
 			protected internal Boolean _isExpanded;
@@ -546,7 +546,7 @@ namespace Lotus
 						{
 							for (var i = 0; i < _count; i++)
 							{
-								_arrayOfItems[i].IsChecked = value;
+								_arrayOfItems[i]!.IsChecked = value;
 							}
 						}
 					}
@@ -615,7 +615,7 @@ namespace Lotus
 			/// <summary>
 			/// Родительский элемент ViewModel
 			/// </summary>
-			public ILotusViewModelHierarchy IParent
+			public ILotusViewModelHierarchy? IParent
 			{
 				get { return _parent; }
 				set { _parent = value; }
@@ -818,8 +818,8 @@ namespace Lotus
 			{
 				for (var i = 0; i < _count; i++)
 				{
-					_arrayOfItems[i].IParent = this;
-					_arrayOfItems[i].UpdateOwnedObjects();
+					_arrayOfItems[i]!.IParent = this;
+					_arrayOfItems[i]!.UpdateOwnedObjects();
 				}
 			}
 
@@ -891,7 +891,7 @@ namespace Lotus
 				IsExpanded = true;
 				for (var i = 0; i < _count; i++)
 				{
-					_arrayOfItems[i].Expanded();
+					_arrayOfItems[i]!.Expanded();
 				}
 			}
 
@@ -905,7 +905,7 @@ namespace Lotus
 				IsExpanded = false;
 				for (var i = 0; i < _count; i++)
 				{
-					_arrayOfItems[i].Collapsed();
+					_arrayOfItems[i]!.Collapsed();
 				}
 			}
 
@@ -946,8 +946,8 @@ namespace Lotus
 					{
 						if (Object.ReferenceEquals(_arrayOfItems[i], exclude) == false)
 						{
-							_arrayOfItems[i].IsSelected = false;
-							_arrayOfItems[i].UnsetAllSelected(exclude);
+							_arrayOfItems[i]!.IsSelected = false;
+							_arrayOfItems[i]!.UnsetAllSelected(exclude);
 						}
 					}
 				}
@@ -955,8 +955,8 @@ namespace Lotus
 				{
 					for (var i = 0; i < _count; i++)
 					{
-						_arrayOfItems[i].IsSelected = false;
-						_arrayOfItems[i].UnsetAllSelected(exclude);
+						_arrayOfItems[i]!.IsSelected = false;
+						_arrayOfItems[i]!.UnsetAllSelected(exclude);
 					}
 				}
 			}
@@ -978,8 +978,8 @@ namespace Lotus
 						{
 							if (Object.ReferenceEquals(_arrayOfItems[i], exclude) == false)
 							{
-								_arrayOfItems[i].IsPresented = false;
-								_arrayOfItems[i].UnsetAllPresent(exclude, parameters);
+								_arrayOfItems[i]!.IsPresented = false;
+								_arrayOfItems[i]!.UnsetAllPresent(exclude, parameters);
 							}
 						}
 					}
@@ -999,8 +999,8 @@ namespace Lotus
 						// Выключаем все элемента ViewModel
 						for (var i = 0; i < _count; i++)
 						{
-							_arrayOfItems[i].IsPresented = false;
-							_arrayOfItems[i].UnsetAllPresent(exclude, parameters);
+							_arrayOfItems[i]!.IsPresented = false;
+							_arrayOfItems[i]!.UnsetAllPresent(exclude, parameters);
 						}
 					}
 					else
@@ -1026,7 +1026,7 @@ namespace Lotus
 				{
 					for (var i = 0; i < _count; ++i)
 					{
-						_arrayOfItems[i].Visit(match);
+						_arrayOfItems[i]!.Visit(match);
 					}
 				}
 			}
@@ -1058,7 +1058,7 @@ namespace Lotus
 					}
 					else
 					{
-						_name = _model.ToString();
+						_name = _model.ToString()!;
 					}
 				}
 
@@ -1095,7 +1095,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//-------------------------------------------------------------------------------------------------------------
-			private void OnCollectionChangedHandler(Object? sender, NotifyCollectionChangedEventArgs args)
+			private void OnCollectionChangedHandler(System.Object? sender, NotifyCollectionChangedEventArgs args)
 			{
 				switch (args.Action)
 				{
@@ -1110,7 +1110,7 @@ namespace Lotus
 									var is_dublicate = false;
 									for (var j = 0; j < Count; j++)
 									{
-										if (_arrayOfItems[j].Model == new_models[i])
+										if (_arrayOfItems[j]!.Model == new_models[i])
 										{
 											is_dublicate = true;
 											break;
@@ -1147,7 +1147,7 @@ namespace Lotus
 									// Находим элемент с данным контекстом
 									ILotusViewModelHierarchy? view_model = this.Search((item) =>
 									{
-										if (Object.ReferenceEquals(item.Model, model))
+										if (Object.ReferenceEquals(item!.Model, model))
 										{
 											return true;
 										}

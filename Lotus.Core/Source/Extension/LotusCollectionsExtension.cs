@@ -1065,11 +1065,11 @@ namespace Lotus
 						@this.Add(default(TItem)!);
 					}
 
-					@this[index] = element;
+					@this[index] = element!;
 				}
 				else
 				{
-					@this[index] = element;
+					@this[index] = element!;
 				}
 			}
 

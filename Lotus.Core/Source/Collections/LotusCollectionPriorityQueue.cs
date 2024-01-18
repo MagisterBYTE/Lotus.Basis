@@ -119,7 +119,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem? Pop()
 			{
-				TItem result = _arrayOfItems[0];
+				TItem? result = _arrayOfItems[0];
 				Int32 p = 0, p1, p2, pn;
 				_arrayOfItems[0] = _arrayOfItems[Count - 1];
 				RemoveAt(Count - 1);

@@ -149,7 +149,7 @@ namespace Lotus
 			{
 				if (_count > 0)
 				{
-					TItem item = _arrayOfItems[_head];
+					TItem? item = _arrayOfItems[_head];
 					_arrayOfItems[_head] = default;
 					_head = (_head + 1) % _maxCount;
 					_count--;

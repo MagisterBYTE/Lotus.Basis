@@ -11,7 +11,9 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Xml;
 using System.Xml.Serialization;
 //=====================================================================================================================
@@ -75,6 +77,10 @@ namespace Lotus
 
                     _value = new ListArray<IParameterItem>(parameters);
                 }
+				else
+				{
+					_value = new ListArray<IParameterItem>();
+				}
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -111,6 +117,10 @@ namespace Lotus
 
                     _value = new ListArray<IParameterItem>(parameters);
                 }
+				else
+				{
+					_value = new ListArray<IParameterItem>();
+				}
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -135,6 +145,10 @@ namespace Lotus
 
                     _value = new ListArray<IParameterItem>(parameters);
                 }
+				else
+				{
+					_value = new ListArray<IParameterItem>();
+				}
 			}
 			#endregion
 
@@ -204,15 +218,54 @@ namespace Lotus
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
+			/// Запись в строковый поток в формате Json
+			/// </summary>
+			/// <param name="streamWriter">Строковый поток</param>
+			/// <param name="depth">Текущая глубина вложенности</param>
+			/// <param name="isArray">Статус массива</param>
+			//---------------------------------------------------------------------------------------------------------
+			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
+			{
+				streamWriter.Write(XChar.NewLine);
+				streamWriter.Write(XString.Depths[depth]);
+
+				if (isArray == false)
+				{
+					streamWriter.Write(XChar.DoubleQuotes);
+					streamWriter.Write(Name);
+					streamWriter.Write(XChar.DoubleQuotes);
+
+					streamWriter.Write(":");
+					streamWriter.Write("\n");
+					streamWriter.Write(XString.Depths[depth]);
+				}
+				
+				streamWriter.Write("{");
+
+				foreach (var item in _value!)
+				{
+					if(item != null) 
+					{
+						item.WriteToJson(streamWriter, depth + 1, false);
+					}
+				}
+
+				streamWriter.Write("\n");
+				streamWriter.Write(XString.Depths[depth]);
+				streamWriter.Write("}");
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
 			/// Получение первого параметра имеющего указанный тип или значение по умолчанию
 			/// </summary>
 			/// <typeparam name="TType">Тип значения</typeparam>
 			/// <param name="defaultValue">Значение по умолчанию если элемент не найден</param>
 			/// <returns>Первый найденный параметрам с указанным типов или значение по умолчанию</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TType GetValueOfType<TType>(TType defaultValue = default)
+			public TType GetValueOfType<TType>(TType? defaultValue = default)
 			{
-				if (Value == default) return defaultValue;
+				if (Value == default) return defaultValue!;
 
                 for (var i = 0; i < Value.Count; i++)
 				{
@@ -222,7 +275,7 @@ namespace Lotus
 					}
 				}
 
-				return defaultValue;
+				return defaultValue!;
 			}
 			#endregion
 
@@ -237,7 +290,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddBool(String parameterName, Boolean parameterValue)
 			{
-				_value?.Add(new CParameterBool(parameterName, parameterValue));
+				_value!.Add(new CParameterBool(parameterName, parameterValue));
 				return this;
 			}
 
@@ -251,7 +304,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddInteger(String parameterName, Int32 parameterValue)
 			{
-				_value?.Add(new CParameterInteger(parameterName, parameterValue));
+				_value!.Add(new CParameterInteger(parameterName, parameterValue));
 				return this;
 			}
 
@@ -265,7 +318,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddReal(String parameterName, Double parameterValue)
 			{
-				_value?.Add(new CParameterReal(parameterName, parameterValue));
+				_value!.Add(new CParameterReal(parameterName, parameterValue));
 				return this;
 			}
 
@@ -279,7 +332,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddString(String parameterName, String parameterValue)
 			{
-				_value?.Add(new CParameterString(parameterName, parameterValue));
+				_value!.Add(new CParameterString(parameterName, parameterValue));
 				return this;
 			}
 
@@ -294,7 +347,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddEnum<TEnum>(String parameterName, TEnum parameterValue) where TEnum : Enum
 			{
-				_value?.Add(new CParameterEnum<TEnum>(parameterName, parameterValue));
+				_value!.Add(new CParameterEnum<TEnum>(parameterName, parameterValue));
 				return this;
 			}
 
@@ -309,16 +362,14 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameters AddObject(String parameterName, System.Object parameterValue, Boolean allowDuplicates)
 			{
-				if(_value == default) return this;
-
 				if (allowDuplicates)
 				{
-					_value.Add(new CParameterObject(parameterName, parameterValue));
+					_value!.Add(new CParameterObject(parameterName, parameterValue));
 				}
 				else
 				{
 					// Смотрим есть ли объект с таким значением и именем
-					for (var i = 0; i < _value.Count; i++)
+					for (var i = 0; i < _value!.Count; i++)
 					{
 						if (_value[i].ValueType == TParameterValueType.Object &&
                             _value[i].Value == parameterValue &&
@@ -333,6 +384,39 @@ namespace Lotus
 				}
 				return this;
 			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Добавить параметр имеющий тип списка параметра
+			/// </summary>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <returns>Список</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public CParameterList<IParameterItem> AddListParameter(String parameterName)
+			{
+				var parameterList = new CParameterList<IParameterItem>(parameterName);
+
+				_value!.Add(parameterList);
+
+				return parameterList;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Добавить параметр имеющий тип шаблонного списка
+			/// </summary>
+			/// <typeparam name="TItem">Тип элемента списка</typeparam>
+			/// <param name="parameterName">Имя параметра</param>
+			/// <returns>Список</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public CParameterList<TItem> AddListTemplate<TItem>(String parameterName)
+			{
+				var parameterList = new CParameterList<TItem>(parameterName);
+
+				_value!.Add(parameterList);
+
+				return parameterList;
+			}
 			#endregion
 
 			#region ======================================= МЕТОДЫ ПОЛУЧЕНИЯ ДАННЫХ ===================================
@@ -345,9 +429,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameterBool? GetBool(String parameterName)
 			{
-                if (_value == default) return null;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterBool parameter)
 					{
@@ -368,9 +450,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean GetBoolValue(String parameterName, Boolean parameterValueDefault = false)
 			{
-                if (_value == default) return parameterValueDefault;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterBool parameter)
 					{
@@ -390,9 +470,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameterInteger? GetInteger(String parameterName)
 			{
-                if (_value == default) return null;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterInteger parameter)
 					{
@@ -413,9 +491,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 GetIntegerValue(String parameterName, Int32 parameterValueDefault = -1)
 			{
-                if (_value == default) return parameterValueDefault;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterInteger parameter)
 					{
@@ -435,9 +511,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameterReal? GetReal(String parameterName)
 			{
-                if (_value == default) return null;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterReal parameter)
 					{
@@ -458,9 +532,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Double GetRealValue(String parameterName, Double parameterValueDefault = -1)
 			{
-                if (_value == default) return parameterValueDefault;
 
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterReal parameter)
 					{
@@ -480,9 +553,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CParameterString? GetString(String parameterName)
 			{
-                if (_value == default) return null;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterString parameter)
 					{
@@ -503,9 +574,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public String? GetStringValue(String parameterName, String parameterValueDefault = "")
 			{
-                if (_value == default) return parameterValueDefault;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterString parameter)
 					{
@@ -528,9 +597,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean UpdateBoolValue(String parameterName, Boolean newValue)
 			{
-				if (_value == default) return false;
-
-				for (var i = 0; i < _value.Count; i++)
+				for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterBool parameter)
 					{
@@ -552,9 +619,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean UpdateIntegerValue(String parameterName, Int32 newValue)
 			{
-                if (_value == default) return false;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterInteger parameter)
 					{
@@ -576,9 +641,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean UpdateRealValue(String parameterName, Double newValue)
 			{
-                if (_value == default) return false;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterReal parameter)
 					{
@@ -600,9 +663,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Boolean UpdateStringValue(String parameterName, String newValue)
 			{
-                if (_value == default) return false;
-
-                for (var i = 0; i < _value.Count; i++)
+                for (var i = 0; i < _value!.Count; i++)
 				{
 					if (String.Compare(parameterName, _value[i].Name) == 0 && _value[i] is CParameterString parameter)
 					{
@@ -625,56 +686,56 @@ namespace Lotus
 			public void Load(String fileName)
 			{
 				//FileStream file_stream = new FileStream(file_name, FileMode.Open);
-				//            JsonDocument json_doc = JsonDocument.Parse(file_stream);
-				//            JsonElement root_element = json_doc.RootElement;
+				//JsonDocument json_doc = JsonDocument.Parse(file_stream);
+				//JsonElement root_element = json_doc.RootElement;
 
-				//            foreach (JsonProperty item in root_element.EnumerateObject())
-				//            {
-				//                switch (item.Value.ValueKind)
-				//                {
-				//                    case JsonValueKind.Undefined:
-				//                        break;
-				//                    case JsonValueKind.Object:
-				//                        break;
-				//                    case JsonValueKind.Array:
-				//                        break;
-				//                    case JsonValueKind.String:
-				//                        {
-				//                            AddString(item.Name, item.Value.GetString());
-				//                        }
-				//                        break;
-				//                    case JsonValueKind.Number:
-				//                        {
-				//                            String number = item.Value.GetString();
-				//                            if (number.IsDotOrCommaSymbols())
-				//                            {
-				//                                Double value = XNumbers.ParseDouble(number);
-				//                                AddReal(item.Name, value);
-				//                            }
-				//                            else
-				//                            {
-				//                                AddInteger(item.Name, item.Value.GetInt32());
-				//                            }
-				//                        }
-				//                        break;
-				//                    case JsonValueKind.True:
-				//                        {
-				//                            AddBool(item.Name, item.Value.GetBoolean());
-				//                        }
-				//                        break;
-				//                    case JsonValueKind.False:
-				//                        {
-				//                            AddBool(item.Name, item.Value.GetBoolean());
-				//                        }
-				//                        break;
-				//                    case JsonValueKind.Null:
-				//                        break;
-				//                    default:
-				//                        break;
-				//                }
-				//            }
+				//foreach (JsonProperty item in root_element.EnumerateObject())
+				//{
+				//	switch (item.Value.ValueKind)
+				//	{
+				//		case JsonValueKind.Undefined:
+				//			break;
+				//		case JsonValueKind.Object:
+				//			break;
+				//		case JsonValueKind.Array:
+				//			break;
+				//		case JsonValueKind.String:
+				//			{
+				//				AddString(item.Name, item.Value.GetString());
+				//			}
+				//			break;
+				//		case JsonValueKind.Number:
+				//			{
+				//				String number = item.Value.GetString();
+				//				if (number.IsDotOrCommaSymbols())
+				//				{
+				//					Double value = XNumbers.ParseDouble(number);
+				//					AddReal(item.Name, value);
+				//				}
+				//				else
+				//				{
+				//					AddInteger(item.Name, item.Value.GetInt32());
+				//				}
+				//			}
+				//			break;
+				//		case JsonValueKind.True:
+				//			{
+				//				AddBool(item.Name, item.Value.GetBoolean());
+				//			}
+				//			break;
+				//		case JsonValueKind.False:
+				//			{
+				//				AddBool(item.Name, item.Value.GetBoolean());
+				//			}
+				//			break;
+				//		case JsonValueKind.Null:
+				//			break;
+				//		default:
+				//			break;
+				//	}
+				//}
 
-				//            file_stream.Close();
+				//file_stream.Close();
 			}
 			#endregion
 
@@ -684,89 +745,21 @@ namespace Lotus
 			/// Сохранения параметров в файл в формате Json
 			/// </summary>
 			/// <param name="fileName">Полное имя файла</param>
+			/// <param name="human">Статус читаемого вида</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void SaveToJson(String fileName)
+			public void SaveToJson(String fileName, Boolean human)
 			{
                 if (_value == default) return;
 
                 var file_stream = new FileStream(fileName, FileMode.Create);
 				var stream_writer = new StreamWriter(file_stream, System.Text.Encoding.UTF8);
-				stream_writer.Write('{');
+				
+				stream_writer.Write("{");
 
-				for (var i = 0; i < _value.Count; i++)
-				{
-					IParameterItem parameter = _value[i];
+				WriteToJson(stream_writer, 1, false);
 
-					switch (parameter.ValueType)
-					{
-						case TParameterValueType.Null:
-							break;
-						case TParameterValueType.Boolean:
-							break;
-						case TParameterValueType.Integer:
-							{
-								stream_writer.Write(XChar.DoubleQuotes);
-								stream_writer.Write(parameter.Name);
-								stream_writer.Write(XChar.DoubleQuotes);
+				stream_writer.Write("\n}");
 
-								stream_writer.Write(": ");
-
-								stream_writer.Write(parameter.Value!.ToString());
-							}
-							break;
-						case TParameterValueType.Real:
-							{
-								stream_writer.Write(XChar.DoubleQuotes);
-								stream_writer.Write(parameter.Name);
-								stream_writer.Write(XChar.DoubleQuotes);
-
-								stream_writer.Write(": ");
-
-								stream_writer.Write(parameter.Value!.ToString());
-							}
-							break;
-						case TParameterValueType.DateTime:
-							break;
-						case TParameterValueType.String:
-							{
-								stream_writer.Write(XChar.DoubleQuotes);
-								stream_writer.Write(parameter.Name);
-								stream_writer.Write(XChar.DoubleQuotes);
-
-								stream_writer.Write(": ");
-
-								stream_writer.Write(XChar.DoubleQuotes);
-								stream_writer.Write(parameter.Value);
-								stream_writer.Write(XChar.DoubleQuotes);
-							}
-							break;
-						case TParameterValueType.Enum:
-							break;
-						case TParameterValueType.List:
-							break;
-						case TParameterValueType.Object:
-							break;
-						case TParameterValueType.Parameters:
-							break;
-						case TParameterValueType.Color:
-							break;
-						case TParameterValueType.Vector2D:
-							break;
-						case TParameterValueType.Vector3D:
-							break;
-						case TParameterValueType.Vector4D:
-							break;
-						default:
-							break;
-					}
-
-					if (i != _value.Count - 1)
-					{
-						stream_writer.Write(XChar.Comma);
-					}
-				}
-
-				stream_writer.Write('}');
 				stream_writer.Close();
 				file_stream.Close();
 			}

@@ -151,7 +151,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			private static void OnBackgroundWorkerDoWork(Object? sender, DoWorkEventArgs args)
+			private static void OnBackgroundWorkerDoWork(System.Object? sender, DoWorkEventArgs args)
 			{
 				_onCompute();
 			}
@@ -163,7 +163,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			private static void OnBackgroundWorkerProgressWork(Object? sender, ProgressChangedEventArgs args)
+			private static void OnBackgroundWorkerProgressWork(System.Object? sender, ProgressChangedEventArgs args)
 			{
 				if (_onProgress != null)
 				{
@@ -185,7 +185,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			private static void OnBackgroundWorkerRunWorkerCompleted(Object? sender, RunWorkerCompletedEventArgs args)
+			private static void OnBackgroundWorkerRunWorkerCompleted(System.Object? sender, RunWorkerCompletedEventArgs args)
 			{
 				if (args.Error != null)
 				{

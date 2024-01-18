@@ -179,7 +179,7 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal ILotusOwnerObject _owner;
+			protected internal ILotusOwnerObject? _owner;
 			protected internal TModel _model;
 			protected internal Boolean _isEnabled;
 			protected internal Boolean _isSelected;
@@ -486,7 +486,7 @@ namespace Lotus
 					}
 					else
 					{
-						_name = _model.ToString();
+						_name = _model.ToString()!;
 					}
 				}
 

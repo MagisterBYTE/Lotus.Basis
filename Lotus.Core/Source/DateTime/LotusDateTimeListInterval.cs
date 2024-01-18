@@ -321,13 +321,13 @@ namespace Lotus
 
 				for (var i = 1; i < _count; i++)
 				{
-					if (_arrayOfItems[i].Date == date)
+					if (_arrayOfItems[i]!.Date == date)
 					{
 						return i;
 					}
 					else
 					{
-						if (_arrayOfItems[i].Date > date)
+						if (_arrayOfItems[i]!.Date > date)
 						{
 							return i - 1;
 						}
@@ -352,7 +352,7 @@ namespace Lotus
 					var end_index = (Int32)Math.Ceiling(index);
 					var delta = index - start_index;
 
-					return _arrayOfItems[start_index].Date.GetInterpolatedDate(_arrayOfItems[end_index].Date, delta);
+					return _arrayOfItems[start_index]!.Date.GetInterpolatedDate(_arrayOfItems[end_index]!.Date, delta);
 				}
 				else
 				{
@@ -372,7 +372,7 @@ namespace Lotus
 
 				for (var i = 0; i < _count; i++)
 				{
-					TItemTimeable item = _arrayOfItems[i];
+					TItemTimeable item = _arrayOfItems[i]!;
 					if (item.Date.DayOfWeek == DayOfWeek.Sunday || item.Date.DayOfWeek == DayOfWeek.Saturday)
 					{
 						count++;
@@ -390,9 +390,9 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 RemoveWeekends()
 			{
-				var count = RemoveAll((TItemTimeable item) =>
+				var count = RemoveAll((TItemTimeable? item) =>
 				{
-					if (item.Date.DayOfWeek == DayOfWeek.Sunday || item.Date.DayOfWeek == DayOfWeek.Saturday)
+					if (item!.Date.DayOfWeek == DayOfWeek.Sunday || item.Date.DayOfWeek == DayOfWeek.Saturday)
 					{
 						return true;
 					}
@@ -494,7 +494,7 @@ namespace Lotus
 				//Это не количество, а индекс поэтому и равно
 				for (var i = startIndex; i <= endIndex; i++)
 				{
-					list.Add((TItemTimeable)_arrayOfItems[i].Clone());
+					list.Add((TItemTimeable)_arrayOfItems[i]!.Clone());
 				}
 
 				list.SetIndexElement();
@@ -598,7 +598,7 @@ namespace Lotus
 
 										for (var i = 0; i < _count; i++)
 										{
-											if (_arrayOfItems[i].Date.DayOfWeek == DayOfWeek.Monday)
+											if (_arrayOfItems[i]!.Date.DayOfWeek == DayOfWeek.Monday)
 											{
 												list.Add(_arrayOfItems[i]);
 											}
@@ -612,7 +612,7 @@ namespace Lotus
 
 										for (var i = 0; i < _count; i++)
 										{
-											if (_arrayOfItems[i].Date.Day == 1)
+											if (_arrayOfItems[i]!.Date.Day == 1)
 											{
 												list.Add(_arrayOfItems[i]);
 											}
@@ -648,7 +648,7 @@ namespace Lotus
 
 										for (var i = 0; i < _count; i++)
 										{
-											if (_arrayOfItems[i].Date.Day == 1)
+											if (_arrayOfItems[i]!.Date.Day == 1)
 											{
 												list.Add(_arrayOfItems[i]);
 											}

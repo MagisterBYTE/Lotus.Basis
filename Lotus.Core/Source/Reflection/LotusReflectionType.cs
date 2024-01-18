@@ -52,22 +52,22 @@ namespace Lotus
 			/// <summary>
 			/// Массив списка аргументов для одного аргумента
 			/// </summary>
-			public static readonly System.Object[] ArgList1 = new System.Object[1];
+			public static readonly System.Object?[] ArgList1 = new System.Object[1];
 
 			/// <summary>
 			/// Массив списка аргументов для двух аргументов
 			/// </summary>
-			public static readonly System.Object[] ArgList2 = new System.Object[2];
+			public static readonly System.Object?[] ArgList2 = new System.Object[2];
 
 			/// <summary>
 			/// Массив списка аргументов для трех аргументов
 			/// </summary>
-			public static readonly System.Object[] ArgList3 = new System.Object[3];
+			public static readonly System.Object?[] ArgList3 = new System.Object[3];
 
 			/// <summary>
 			/// Массив списка аргументов для четырех аргументов
 			/// </summary>
-			public static readonly System.Object[] ArgList4 = new System.Object[4];
+			public static readonly System.Object?[] ArgList4 = new System.Object[4];
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================

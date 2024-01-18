@@ -77,7 +77,7 @@ namespace Lotus
 			{
 				if (_count > 0)
 				{
-					TItem item = _arrayOfItems[_count - 1];
+					TItem? item = _arrayOfItems[_count - 1];
 					_count--;
 					_arrayOfItems[_count] = default;
 

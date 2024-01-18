@@ -216,7 +216,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected override void UpdateModelProperty(Object? sender, PropertyChangedEventArgs args)
+			protected override void UpdateModelProperty(System.Object? sender, PropertyChangedEventArgs args)
 			{
 				if (_isEnabled)
 				{
@@ -354,7 +354,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected override void UpdateViewProperty(Object? sender, PropertyChangedEventArgs args)
+			protected override void UpdateViewProperty(System.Object? sender, PropertyChangedEventArgs args)
 			{
 				if (_isEnabled)
 				{

@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
+//---------------------------------------------------------------------------------------------------------------------
+#pragma warning disable 8620
 //=====================================================================================================================
 namespace Lotus
 {
@@ -55,7 +57,7 @@ namespace Lotus
 				#region ======================================= ДАННЫЕ ================================================
 				private readonly ListArray<TItem> _list;
 				private Int32 _index;
-				private TItem _current;
+				private TItem? _current;
 				#endregion
 
 				#region ======================================= СВОЙСТВА ==============================================
@@ -66,7 +68,7 @@ namespace Lotus
 				{
 					get
 					{
-						return _current;
+						return _current!;
 					}
 				}
 
@@ -208,7 +210,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal TItem[] _arrayOfItems;
+			protected internal TItem?[] _arrayOfItems;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.HideInInspector]
@@ -293,7 +295,7 @@ namespace Lotus
 			/// <summary>
 			/// Данные массива для сериализации
 			/// </summary>
-			public TItem[] SerializeItems
+			public TItem?[] SerializeItems
 			{
 				get
 				{
@@ -518,7 +520,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem this[Int32 index]
 			{
-				get { return _arrayOfItems[index]; }
+				get { return _arrayOfItems[index]!; }
 				set
 				{
 					if (_isNotify)
@@ -745,7 +747,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента списка</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem GetAt(Int32 index)
+			public TItem? GetAt(Int32 index)
 			{
 				if (index >= _count)
 				{
@@ -895,7 +897,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Данные</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem[] GetData()
+			public TItem?[] GetData()
 			{
 				return _arrayOfItems;
 			}
@@ -1411,7 +1413,7 @@ namespace Lotus
 
 				if (_isNotify)
 				{
-					TItem temp = _arrayOfItems[index];
+					TItem? temp = _arrayOfItems[index];
 
 					_count--;
 					Array.Copy(_arrayOfItems, index + 1, _arrayOfItems, index, _count - index);
@@ -1460,11 +1462,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public Int32 RemoveDuplicates()
 			{
-				var unique = new TItem[_count];
+				var unique = new TItem?[_count];
 				var count = 0;
 				for (var i = 0; i < _count; i++)
 				{
-					TItem item = _arrayOfItems[i];
+					TItem? item = _arrayOfItems[i];
 					var index = Array.IndexOf(unique, item);
 					if (index == -1)
 					{
@@ -1504,7 +1506,7 @@ namespace Lotus
 			/// <param name="match">Предикат</param>
 			/// <returns>Количество удаленных элементов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 RemoveAll(Predicate<TItem> match)
+			public Int32 RemoveAll(Predicate<TItem?> match)
 			{
 				var free_index = 0;   // the first free slot in items array
 
@@ -1780,7 +1782,7 @@ namespace Lotus
 			/// <param name="items">Элементы</param>
 			/// <returns>Список элементов списка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ListArray<TItem> DifferenceItems(IList<TItem> items)
+			public ListArray<TItem> DifferenceItems(IList<TItem?> items)
 			{
 				var difference = new ListArray<TItem>();
 
@@ -1815,7 +1817,7 @@ namespace Lotus
 			/// <param name="items">Элементы</param>
 			/// <returns>Список элементов списка</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ListArray<TItem> DifferenceItems(params TItem[] items)
+			public ListArray<TItem> DifferenceItems(params TItem?[] items)
 			{
 				var difference = new ListArray<TItem>();
 
@@ -1875,7 +1877,7 @@ namespace Lotus
 			/// <param name="match">Предикат</param>
 			/// <returns>Индекс элемента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 Find(Predicate<TItem> match)
+			public Int32 Find(Predicate<TItem?> match)
 			{
 				for (var i = 0; i < _count; i++)
 				{
@@ -1892,7 +1894,7 @@ namespace Lotus
 			/// <param name="match">Предикат</param>
 			/// <returns>Индекс элемента</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 FindLast(Predicate<TItem> match)
+			public Int32 FindLast(Predicate<TItem?> match)
 			{
 				for (var i = LastIndex; i >= 0; i--)
 				{
@@ -1909,7 +1911,7 @@ namespace Lotus
 			/// <param name="match">Предикат</param>
 			/// <returns>Элемент или значение по умолчанию</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem? Search(Predicate<TItem> match)
+			public TItem? Search(Predicate<TItem?> match)
 			{
 				for (var i = 0; i < _count; i++)
 				{
@@ -1926,7 +1928,7 @@ namespace Lotus
 			/// <param name="match">Предикат</param>
 			/// <returns>Элемент или значение по умолчанию</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem? SearchLast(Predicate<TItem> match)
+			public TItem? SearchLast(Predicate<TItem?> match)
 			{
 				for (var i = LastIndex; i >= 0; i--)
 				{
@@ -1948,7 +1950,7 @@ namespace Lotus
 			/// <param name="match">Предикат проверки</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual Boolean CheckAll(Predicate<TItem> match)
+			public virtual Boolean CheckAll(Predicate<TItem?> match)
 			{
 				var result = true;
 				for (var i = 0; i < _count; i++)
@@ -1972,7 +1974,7 @@ namespace Lotus
 			/// <param name="match">Предикат проверки</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual Boolean CheckOne(Predicate<TItem> match)
+			public virtual Boolean CheckOne(Predicate<TItem?> match)
 			{
 				var result = false;
 				for (var i = 0; i < _count; i++)
@@ -1992,7 +1994,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="onVisitor">Делегат посетителя</param>
 			//---------------------------------------------------------------------------------------------------------
-			public virtual void Visit(Action<TItem> onVisitor)
+			public virtual void Visit(Action<TItem?> onVisitor)
 			{
 				for (var i = 0; i < _count; i++)
 				{
@@ -2031,7 +2033,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void Move(Int32 oldIndex, Int32 newIndex)
 			{
-				TItem temp = _arrayOfItems[oldIndex];
+				TItem? temp = _arrayOfItems[oldIndex];
 				RemoveAt(oldIndex);
 				Insert(newIndex, temp);
 
@@ -2445,10 +2447,10 @@ namespace Lotus
 						if (property_info != null)
 						{
 							// Ищем совпадение в существующем списке
-							var find_index = unique_list.Find((System.Object value) =>
+							var find_index = unique_list.Find((System.Object? value) =>
 							{
-								var property_value = property_info.GetValue(_arrayOfItems[i], null);
-								return value.Equals(property_value);
+								var findValue = property_info.GetValue(_arrayOfItems[i], null);
+								return Object.ReferenceEquals(value, findValue);
 							});
 
 							// Совпадение не нашли значит это уникальный элемент
@@ -2487,9 +2489,10 @@ namespace Lotus
 						for (var i = 0; i < _count; i++)
 						{
 							// Ищем совпадение в существующем списке
-							var find_index = unique_list.Find((System.Object value) =>
+							var find_index = unique_list.Find((System.Object? value) =>
 							{
-								return value.Equals(property_info.GetValue(_arrayOfItems[i], null));
+								var findValue = property_info.GetValue(_arrayOfItems[i], null);
+								return value!.Equals(findValue);
 							});
 
 							// Совпадение не нашли значит это уникальный элемент
@@ -2547,19 +2550,40 @@ namespace Lotus
 			{
 				var unique_list = new ListArray<TItem>();
 
-				for (var i = 0; i < _count; i++)
+				if (IsNullable)
 				{
-					// Ищем совпадение в существующем списке
-					var find_index = unique_list.Find((TItem value) =>
+					for (var i = 0; i < _count; i++)
 					{
-						return value!.Equals(_arrayOfItems[i]);
-					});
+						// Ищем совпадение в существующем списке
+						var find_index = unique_list.Find((TItem? value) =>
+						{
+							return Object.ReferenceEquals(value, _arrayOfItems[i]);
+						});
 
-					// Совпадение не нашли значит это уникальный элемент
-					if (find_index == -1)
+						// Совпадение не нашли значит это уникальный элемент
+						if (find_index == -1)
+						{
+							// Добавляем в уникальные значений
+							unique_list.Add(_arrayOfItems[i]);
+						}
+					}
+				}
+				else
+				{
+					for (var i = 0; i < _count; i++)
 					{
-						// Добавляем в уникальные значений
-						unique_list.Add(_arrayOfItems[i]);
+						// Ищем совпадение в существующем списке
+						var find_index = unique_list.Find((TItem? value) =>
+						{
+							return value!.Equals(_arrayOfItems[i]);
+						});
+
+						// Совпадение не нашли значит это уникальный элемент
+						if (find_index == -1)
+						{
+							// Добавляем в уникальные значений
+							unique_list.Add(_arrayOfItems[i]);
+						}
 					}
 				}
 
@@ -2591,9 +2615,10 @@ namespace Lotus
 						if (property_info != null)
 						{
 							// Ищем совпадение в существующем списке
-							var find_index = unique_list.Find((System.Object value) =>
+							var find_index = unique_list.Find((System.Object? value) =>
 							{
-								return value.Equals(property_info.GetValue(_arrayOfItems[i], null));
+								var findValue = property_info.GetValue(_arrayOfItems[i], null);
+								return Object.ReferenceEquals(value, findValue);
 							});
 
 							// Совпадение не нашли значит это уникальный элемент
@@ -2614,9 +2639,10 @@ namespace Lotus
 						for (var i = 0; i < _count; i++)
 						{
 							// Ищем совпадение в существующем списке
-							var find_index = unique_list.Find((System.Object value) =>
+							var find_index = unique_list.Find((System.Object? value) =>
 							{
-								return value.Equals(property_info.GetValue(_arrayOfItems[i], null));
+								var findValue = property_info.GetValue(_arrayOfItems[i], null);
+								return value!.Equals(findValue);
 							});
 
 							// Совпадение не нашли значит это уникальный элемент
@@ -2640,7 +2666,7 @@ namespace Lotus
 			/// <param name="match">Предикатор</param>
 			/// <returns>Список элементов</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public ListArray<TItem> GetItemsWhere(Predicate<TItem> match)
+			public ListArray<TItem> GetItemsWhere(Predicate<TItem?> match)
 			{
 				var result = new ListArray<TItem>(_maxCount);
 

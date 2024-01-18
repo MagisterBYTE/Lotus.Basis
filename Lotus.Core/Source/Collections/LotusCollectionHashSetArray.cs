@@ -42,7 +42,7 @@ namespace Lotus
 				private HashSetArray<TItem> _set;
 				private Int32 _index;
 				private Int32 _version;
-				private TItem _current;
+				private TItem? _current;
 				#endregion
 
 				#region ======================================= СВОЙСТВА ==============================================
@@ -53,7 +53,7 @@ namespace Lotus
 				{
 					get
 					{
-						return _current;
+						return _current!;
 					}
 				}
 
@@ -400,7 +400,7 @@ namespace Lotus
 								_slots[last].next = _slots[i].next;
 							}
 							_slots[i].hashCode = -1;
-							_slots[i].value = default;
+							_slots[i].value = default!;
 							_slots[i].next = _freeList;
 
 							_count--;
@@ -499,7 +499,7 @@ namespace Lotus
 			/// comparer functions indicate they are equal.
 			/// </remarks>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean TryGetValue(in TItem equalValue, out TItem actualValue)
+			public Boolean TryGetValue(in TItem equalValue, out TItem? actualValue)
 			{
 				if (_buckets != null)
 				{

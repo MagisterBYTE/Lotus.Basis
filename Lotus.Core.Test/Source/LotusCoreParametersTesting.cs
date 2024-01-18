@@ -11,15 +11,11 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
 #if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 #endif
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 //=====================================================================================================================
@@ -42,13 +38,60 @@ namespace Lotus
 			[Test]
 			public static void TestParameters()
 			{
-				var parameter_inner = new CParameters(223, new CParameterString("Имя", "Эра"));
+				// Просто объект
+				// "Человек":
+				// {
+				//	"Имя" : "Даниил"
+				//  "Фамилия" : "Дементьев"
+				//  "Возраст" : 39
+				// }
 
-				var parameterObject = new CParameters("Программа",
-					new CParameterString("Имя", "Эра"), parameter_inner);
+				var parameterHuman = new CParameters("Человек",
+					new CParameterString("Имя", "Даниил"),
+					new CParameterString("Фамилия", "Дементьев"),
+					new CParameterInteger("Возраст", 39));
 
-				ClassicAssert.AreEqual(parameterObject.Value[0].Name, "Имя");
-				ClassicAssert.AreEqual(parameterObject.Value[0].Value, "Эра");
+				parameterHuman.SaveToJson("D:\\parameterHuman.json", true);
+
+				// Просто объект
+				// "Человек":
+				// {
+				//	"Имя" : "Даниил"
+				//  "Фамилия" : "Дементьев"
+				//  "Возраст" : 39
+				//  "Дети"
+				//  [
+				//	  {
+				//	    "Имя" : "Яна"
+				//      "Фамилия" : "Дементьева"
+				//      "Возраст" : "2"
+				//	  }
+				//  ]
+				// }
+
+				var parameterHuman2 = new CParameters("Человек",
+					new CParameterString("Имя", "Даниил"),
+					new CParameterString("Фамилия", "Дементьев"),
+					new CParameterInteger("Возраст", 39));
+
+				var parameterChild = parameterHuman2.AddListParameter("Дети");
+				parameterChild.Value.Add(new CParameters("Человек",
+					new CParameterString("Имя", "Яна"),
+					new CParameterString("Фамилия", "Дементьева"),
+					new CParameterInteger("Возраст", 2)));
+				parameterChild.Value.Add(new CParameters("Человек",
+					new CParameterString("Имя", "Яна"),
+					new CParameterString("Фамилия", "Дементьева"),
+					new CParameterInteger("Возраст", 2)));
+
+				var parameterIds = parameterHuman2.AddListTemplate<Int32>("Ids");
+				for (var i = 0; i < 1000; i++)
+				{
+					parameterIds.Value.Add(i + 1);
+				}
+
+
+				parameterHuman2.SaveToJson("D:\\parameterHuman2.json", true);
 			}
 		}
 	}

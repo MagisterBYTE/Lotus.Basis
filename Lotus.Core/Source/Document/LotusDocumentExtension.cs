@@ -39,7 +39,7 @@ namespace Lotus
 			public static TDocument? LoadDocument<TDocument>(String? title = null, ILotusSerializer? serializer = null) where TDocument : ILotusDocument
 			{
 				var file_name = XFileDialog.Open(title != null ? title : "Открыть документ", "", null);
-				if (file_name.IsExists())
+				if (file_name != null && file_name.IsExists())
 				{
 					TDocument? document = default;
 
@@ -56,7 +56,7 @@ namespace Lotus
 					if (document != null)
 					{
 						// Получаем путь и имя файла
-						document.PathFile = Path.GetDirectoryName(file_name);
+						document.PathFile = Path.GetDirectoryName(file_name) ?? String.Empty;
 						document.FileName = Path.GetFileName(file_name);
 
 						// Если документ поддерживает коллекцию то обновляем связи
@@ -98,10 +98,10 @@ namespace Lotus
 				if (document != null)
 				{
 					var file_name = XFileDialog.Open(title != null ? title : "Открыть документ", "", document.GetFileExtension());
-					if (file_name.IsExists())
+					if (file_name != null && file_name.IsExists())
 					{
 						// Получаем путь и имя файла
-						document.PathFile = Path.GetDirectoryName(file_name);
+						document.PathFile = Path.GetDirectoryName(file_name) ?? String.Empty;
 						document.FileName = Path.GetFileName(file_name);
 
 						// Если документ поддерживает коллекцию то очищаем её
@@ -246,7 +246,7 @@ namespace Lotus
 						}
 
 						var file_name = XFileDialog.Save(title != null ? title : "Сохранить документ", document.PathFile, doc_name, document.GetFileExtension());
-						if (file_name.IsExists())
+						if (file_name != null && file_name.IsExists())
 						{
 							// Сохраняем документ
 							if (serializer != null)
@@ -257,7 +257,7 @@ namespace Lotus
 							{
 								XSerializationDispatcher.SaveTo(file_name, document);
 							}
-							document.PathFile = Path.GetDirectoryName(file_name);
+							document.PathFile = Path.GetDirectoryName(file_name) ?? String.Empty;
 							document.FileName = Path.GetFileName(file_name);
 
 							if (document is ILotusNameable doc_nameable)
@@ -325,7 +325,7 @@ namespace Lotus
 					}
 
 					var file_name = XFileDialog.Save(title != null ? title : "Сохранить документ как", document.PathFile, doc_name, document.GetFileExtension());
-					if (file_name.IsExists())
+					if (file_name != null && file_name.IsExists())
 					{
 						// Сохраняем документ
 						if (serializer != null)
@@ -336,7 +336,7 @@ namespace Lotus
 						{
 							XSerializationDispatcher.SaveTo(file_name, document);
 						}
-						document.PathFile = Path.GetDirectoryName(file_name);
+						document.PathFile = Path.GetDirectoryName(file_name) ?? String.Empty;
 						document.FileName = Path.GetFileName(file_name);
 
 						if (document is ILotusNameable doc_nameable)

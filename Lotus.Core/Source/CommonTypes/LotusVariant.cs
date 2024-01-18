@@ -176,7 +176,7 @@ namespace Lotus
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal System.Object _referenceData;
+			protected internal System.Object? _referenceData;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
@@ -184,7 +184,7 @@ namespace Lotus
 #endif
 
 			[NonSerialized]
-			protected internal ILotusOwnerObject _owner;
+			protected internal ILotusOwnerObject? _owner;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -476,7 +476,7 @@ namespace Lotus
 			/// <remarks>
 			/// Имя реального типа объекта сохраняется в поле <see cref="_stringData"/>
 			/// </remarks>
-			public System.Object SysObject
+			public System.Object? SysObject
 			{
 				get { return _referenceData; }
 				set
@@ -795,7 +795,7 @@ namespace Lotus
 #endif
 					case TValueType.SysObject:
 						{
-							result = _referenceData.ToString();
+							result = _referenceData?.ToString();
 						}
 						break;
 
@@ -896,7 +896,7 @@ namespace Lotus
 #endif
 					case TValueType.SysObject:
 						{
-							result = _referenceData.ToString();
+							result = _referenceData?.ToString();
 						}
 						break;
 					default:
@@ -985,7 +985,7 @@ namespace Lotus
 						break;
 					case nameof(String):
 						{
-							_stringData = value.ToString();
+							_stringData = value.ToString()!;
 							_valueType = TValueType.String;
 							if (_owner != null) _owner.OnNotifyUpdated(this, StringValue, nameof(StringValue));
 						}

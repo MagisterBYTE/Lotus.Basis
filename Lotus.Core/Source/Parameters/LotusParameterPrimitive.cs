@@ -11,6 +11,7 @@
 // Последнее изменение от 30.04.2023
 //=====================================================================================================================
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 //=====================================================================================================================
@@ -79,6 +80,32 @@ namespace Lotus
 				_value = value;
 			}
 			#endregion
+
+			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Запись в строковый поток в формате Json
+			/// </summary>
+			/// <param name="streamWriter">Строковый поток</param>
+			/// <param name="depth">Текущая глубина вложенности</param>
+			/// <param name="isArray">Статус массива</param>
+			//---------------------------------------------------------------------------------------------------------
+			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
+			{
+				streamWriter.Write(XChar.NewLine);
+				streamWriter.Write(XString.Depths[depth]);
+
+				if(isArray == false) 
+				{
+					streamWriter.Write(XChar.DoubleQuotes);
+					streamWriter.Write(Name);
+					streamWriter.Write(XChar.DoubleQuotes);
+
+					streamWriter.Write(": ");
+				}
+				streamWriter.Write(Value);
+			}
+			#endregion
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -139,6 +166,33 @@ namespace Lotus
 				_value = value;
 			}
 			#endregion
+
+			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Запись в строковый поток в формате Json
+			/// </summary>
+			/// <param name="streamWriter">Строковый поток</param>
+			/// <param name="depth">Текущая глубина вложенности</param>
+			/// <param name="isArray">Статус массива</param>
+			//---------------------------------------------------------------------------------------------------------
+			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
+			{
+				streamWriter.Write(XChar.NewLine);
+				streamWriter.Write(XString.Depths[depth]);
+
+				if (isArray == false)
+				{
+					streamWriter.Write(XChar.DoubleQuotes);
+					streamWriter.Write(Name);
+					streamWriter.Write(XChar.DoubleQuotes);
+
+					streamWriter.Write(": ");
+				}
+
+				streamWriter.Write(Value);
+			}
+			#endregion
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -197,6 +251,33 @@ namespace Lotus
 				: base(id)
 			{
 				_value = value;
+			}
+			#endregion
+
+			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Запись в строковый поток в формате Json
+			/// </summary>
+			/// <param name="streamWriter">Строковый поток</param>
+			/// <param name="depth">Текущая глубина вложенности</param>
+			/// <param name="isArray">Статус массива</param>
+			//---------------------------------------------------------------------------------------------------------
+			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
+			{
+				streamWriter.Write(XChar.NewLine);
+				streamWriter.Write(XString.Depths[depth]);
+
+				if (isArray == false)
+				{
+					streamWriter.Write(XChar.DoubleQuotes);
+					streamWriter.Write(Name);
+					streamWriter.Write(XChar.DoubleQuotes);
+
+					streamWriter.Write(": ");
+				}
+
+				streamWriter.Write(Value);
 			}
 			#endregion
 		}
@@ -260,6 +341,33 @@ namespace Lotus
 				_value = value;
 			}
 			#endregion
+
+			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Запись в строковый поток в формате Json
+			/// </summary>
+			/// <param name="streamWriter">Строковый поток</param>
+			/// <param name="depth">Текущая глубина вложенности</param>
+			/// <param name="isArray">Статус массива</param>
+			//---------------------------------------------------------------------------------------------------------
+			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
+			{
+				streamWriter.Write(XChar.NewLine);
+				streamWriter.Write(XString.Depths[depth]);
+
+				if (isArray == false)
+				{
+					streamWriter.Write(XChar.DoubleQuotes);
+					streamWriter.Write(Name);
+					streamWriter.Write(XChar.DoubleQuotes);
+
+					streamWriter.Write(": ");
+				}
+
+				streamWriter.Write(Value.ToShortTimeString());
+			}
+			#endregion
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -318,6 +426,35 @@ namespace Lotus
 				: base(id)
 			{
 				_value = value;
+			}
+			#endregion
+
+			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Запись в строковый поток в формате Json
+			/// </summary>
+			/// <param name="streamWriter">Строковый поток</param>
+			/// <param name="depth">Текущая глубина вложенности</param>
+			/// <param name="isArray">Статус массива</param>
+			//---------------------------------------------------------------------------------------------------------
+			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
+			{
+				streamWriter.Write(XChar.NewLine);
+				streamWriter.Write(XString.Depths[depth]);
+
+				if (isArray == false)
+				{
+					streamWriter.Write(XChar.DoubleQuotes);
+					streamWriter.Write(Name);
+					streamWriter.Write(XChar.DoubleQuotes);
+
+					streamWriter.Write(": ");
+				}
+
+				streamWriter.Write(XChar.DoubleQuotes);
+				streamWriter.Write(Value);
+				streamWriter.Write(XChar.DoubleQuotes);
 			}
 			#endregion
 		}
@@ -379,6 +516,35 @@ namespace Lotus
 				: base(id)
 			{
 				_value = value;
+			}
+			#endregion
+
+			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Запись в строковый поток в формате Json
+			/// </summary>
+			/// <param name="streamWriter">Строковый поток</param>
+			/// <param name="depth">Текущая глубина вложенности</param>
+			/// <param name="isArray">Статус массива</param>
+			//---------------------------------------------------------------------------------------------------------
+			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
+			{
+				streamWriter.Write(XChar.NewLine);
+				streamWriter.Write(XString.Depths[depth]);
+
+				if (isArray == false)
+				{
+					streamWriter.Write(XChar.DoubleQuotes);
+					streamWriter.Write(Name);
+					streamWriter.Write(XChar.DoubleQuotes);
+
+					streamWriter.Write(": ");
+				}
+
+				streamWriter.Write(XChar.DoubleQuotes);
+				streamWriter.Write(Value);
+				streamWriter.Write(XChar.DoubleQuotes);
 			}
 			#endregion
 		}

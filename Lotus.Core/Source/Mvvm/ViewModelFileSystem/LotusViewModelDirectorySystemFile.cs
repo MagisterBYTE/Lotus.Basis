@@ -63,7 +63,7 @@ namespace Lotus
 			public override void BuildFromModel()
 			{
 				Clear();
-				CollectionViewModelFileSystem.BuildFromParent(this, _owner);
+				CollectionViewModelFileSystem.BuildFromParent(this, _owner!);
 			}
 			#endregion
 		}

@@ -70,7 +70,7 @@ namespace Lotus
 
 				property_desc.PropertyName = propertyName;
 				property_desc.DisplayName = displayName;
-				property_desc.Description = description;
+				property_desc.Description = description ?? String.Empty;
 
 				return property_desc;
 			}

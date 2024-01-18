@@ -117,7 +117,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static Boolean ToDoubleFormat(String text, out Double result)
 			{
-				return XNumbers.ParseDoubleFormat(text, out result);
+				return XNumbers.TryParseDoubleFormat(text, out result);
 			}
 			#endregion
 
@@ -272,7 +272,7 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ToEnum<TEnum>(String text, TEnum defaultValue = default(TEnum)) where TEnum : Enum
+			public static TEnum ToEnum<TEnum>(String text, TEnum? defaultValue = default(TEnum)) where TEnum : Enum
 			{
 				return XEnum.ToEnum<TEnum>(text, defaultValue);
 			}
@@ -286,7 +286,7 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ToEnum<TEnum>(Int32 value, TEnum defaultValue = default(TEnum)) where TEnum : Enum
+			public static TEnum ToEnum<TEnum>(Int32 value, TEnum? defaultValue = default(TEnum)) where TEnum : Enum
 			{
 				return XEnum.ToEnum<TEnum>(value, defaultValue);
 			}
@@ -300,7 +300,7 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ToEnum<TEnum>(Object value, TEnum defaultValue) where TEnum : Enum
+			public static TEnum ToEnum<TEnum>(Object value, TEnum? defaultValue) where TEnum : Enum
 			{
 				return ToEnum<TEnum>(Convert.ToString(value)!, defaultValue);
 			}

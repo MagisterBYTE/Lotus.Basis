@@ -221,7 +221,7 @@ namespace Lotus
 			/// <param name="result">Значение</param>
 			/// <returns>Статус успешности преобразования</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean ParseDoubleFormat(String text, out Double result)
+			public static Boolean TryParseDoubleFormat(String text, out Double result)
 			{
 				var number = new StringBuilder(text.Length);
 

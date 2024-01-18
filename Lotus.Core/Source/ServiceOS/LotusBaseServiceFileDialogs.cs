@@ -35,7 +35,7 @@ namespace Lotus
 			/// <param name="extension">Расширение файла без точки или список расширений или null</param>
 			/// <returns>Полное имя существующего файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			String Open(String title, String directory, String? extension);
+			String? Open(String title, String directory, String? extension);
 
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
@@ -47,7 +47,7 @@ namespace Lotus
 			/// <param name="extension">Расширение файла без точки</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			String Save(String title, String directory, String defaultName, String? extension);
+			String? Save(String title, String directory, String defaultName, String? extension);
 		}
 
 		//-------------------------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Полное имя существующего файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Open()
+			public static String? Open()
 			{
 				return FileDialogs.Open("Открыть файл", DefaultPath, DefaultExt);
 			}
@@ -184,7 +184,7 @@ namespace Lotus
 			/// <param name="title">Заголовок диалога</param>
 			/// <returns>Полное имя существующего файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Open(String title)
+			public static String? Open(String title)
 			{
 				return FileDialogs.Open(title, DefaultPath, DefaultExt);
 			}
@@ -197,7 +197,7 @@ namespace Lotus
 			/// <param name="directory">Директория для открытия файла</param>
 			/// <returns>Полное имя существующего файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Open(String title, String directory)
+			public static String? Open(String title, String directory)
 			{
 				return FileDialogs.Open(title, directory, DefaultExt);
 			}
@@ -211,7 +211,7 @@ namespace Lotus
 			/// <param name="extension">Расширение файла без точки</param>
 			/// <returns>Полное имя существующего файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Open(String title, String directory, String? extension)
+			public static String? Open(String title, String directory, String? extension)
 			{
 				return FileDialogs.Open(title, directory, extension);
 			}
@@ -224,7 +224,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Save()
+			public static String? Save()
 			{
 				return FileDialogs.Save("Сохранить файл", DefaultPath, "Новый файл", DefaultExt);
 			}
@@ -236,7 +236,7 @@ namespace Lotus
 			/// <param name="title">Заголовок диалога</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Save(String title)
+			public static String? Save(String title)
 			{
 				return FileDialogs.Save(title, DefaultPath, "Новый файл", DefaultExt);
 			}
@@ -249,7 +249,7 @@ namespace Lotus
 			/// <param name="directory">Директория для сохранения файла</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Save(String title, String directory)
+			public static String? Save(String title, String directory)
 			{
 				return FileDialogs.Save(title, directory, "Новый файл", DefaultExt);
 			}
@@ -263,7 +263,7 @@ namespace Lotus
 			/// <param name="defaultName">Имя файла по умолчанию</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Save(String title, String directory, String defaultName)
+			public static String? Save(String title, String directory, String defaultName)
 			{
 				return FileDialogs.Save(title, directory, defaultName, DefaultExt);
 			}
@@ -278,7 +278,7 @@ namespace Lotus
 			/// <param name="extension">Расширение файла без точки</param>
 			/// <returns>Полное имя файла или null</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static String Save(String title, String directory, String defaultName, String? extension)
+			public static String? Save(String title, String directory, String defaultName, String? extension)
 			{
 				return FileDialogs.Save(title, directory, defaultName, extension);
 			}

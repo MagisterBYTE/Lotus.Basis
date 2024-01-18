@@ -152,7 +152,7 @@ namespace Lotus
 			/// <param name="parent">Родительский элемент ViewModel</param>
 			/// <param name="owner">Коллекция владелец</param>
 			//---------------------------------------------------------------------------------------------------------
-			public static void BuildFromParent(ILotusViewModelHierarchy parent, ILotusCollectionViewModelHierarchy owner)
+			public static void BuildFromParent(ILotusViewModelHierarchy? parent, ILotusCollectionViewModelHierarchy owner)
 			{
 				if (parent != null)
 				{
@@ -214,7 +214,7 @@ namespace Lotus
 			/// <param name="owner">Коллекция владелец</param>
 			/// <returns>Элемент ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TViewModelHierarchy BuildFilter(TModel rootModel, Predicate<TModel> filter, ILotusCollectionViewModelHierarchy owner)
+			public static TViewModelHierarchy BuildFilter(TModel rootModel, Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
 			{
 				TViewModelHierarchy node_root_view = BuildFilter(rootModel, null, filter, owner);
 				return node_root_view;
@@ -231,7 +231,7 @@ namespace Lotus
 			/// <returns>Элемент ViewModel</returns>
 			//---------------------------------------------------------------------------------------------------------
 			public static TViewModelHierarchy BuildFilter(TModel model, ILotusViewModelHierarchy? parent,
-				Predicate<TModel> filter, ILotusCollectionViewModelHierarchy owner)
+				Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
 			{
 				var node_root_view = owner.CreateViewModelHierarchy(model, parent);
 				node_root_view.IParent = parent;
@@ -438,8 +438,8 @@ namespace Lotus
 					{
 						if (Object.ReferenceEquals(_arrayOfItems[i], exclude) == false)
 						{
-							_arrayOfItems[i].IsSelected = false;
-							_arrayOfItems[i].UnsetAllSelected(exclude as ILotusViewModelHierarchy);
+							_arrayOfItems[i]!.IsSelected = false;
+							_arrayOfItems[i]!.UnsetAllSelected(exclude as ILotusViewModelHierarchy);
 						}
 					}
 
@@ -449,8 +449,8 @@ namespace Lotus
 				{
 					for (var i = 0; i < _count; i++)
 					{
-						_arrayOfItems[i].IsSelected = false;
-						_arrayOfItems[i].UnsetAllSelected(exclude as ILotusViewModelHierarchy);
+						_arrayOfItems[i]!.IsSelected = false;
+						_arrayOfItems[i]!.UnsetAllSelected(exclude as ILotusViewModelHierarchy);
 					}
 
 					SelectedViewModel = default;
@@ -472,8 +472,8 @@ namespace Lotus
 					{
 						if (Object.ReferenceEquals(_arrayOfItems[i], exclude) == false)
 						{
-							_arrayOfItems[i].IsPresented = false;
-							_arrayOfItems[i].UnsetAllPresent(exclude as ILotusViewModelHierarchy, parameters);
+							_arrayOfItems[i]!.IsPresented = false;
+							_arrayOfItems[i]!.UnsetAllPresent(exclude as ILotusViewModelHierarchy, parameters);
 						}
 					}
 
@@ -484,8 +484,8 @@ namespace Lotus
 					// Выключаем все элемента ViewModel
 					for (var i = 0; i < _count; i++)
 					{
-						_arrayOfItems[i].IsPresented = false;
-						_arrayOfItems[i].UnsetAllPresent(exclude as ILotusViewModelHierarchy, parameters);
+						_arrayOfItems[i]!.IsPresented = false;
+						_arrayOfItems[i]!.UnsetAllPresent(exclude as ILotusViewModelHierarchy, parameters);
 					}
 
 					PresentedViewModel = default;
@@ -517,7 +517,7 @@ namespace Lotus
 			{
 				for (var i = 0; i < _count; i++)
 				{
-					_arrayOfItems[i].Expanded();
+					_arrayOfItems[i]!.Expanded();
 				}
 			}
 
@@ -530,7 +530,7 @@ namespace Lotus
 			{
 				for (var i = 0; i < _count; i++)
 				{
-					_arrayOfItems[i].Collapsed();
+					_arrayOfItems[i]!.Collapsed();
 				}
 			}
 
@@ -555,7 +555,7 @@ namespace Lotus
 			{
 				for (var i = 0; i < _count; ++i)
 				{
-					_arrayOfItems[i].Visit(match);
+					_arrayOfItems[i]!.Visit(match);
 				}
 			}
 			#endregion
@@ -570,8 +570,8 @@ namespace Lotus
 			{
 				for (var i = 0; i < _count; i++)
 				{
-					_arrayOfItems[i].IOwner = this;
-					_arrayOfItems[i].UpdateOwnedObjects();
+					_arrayOfItems[i]!.IOwner = this;
+					_arrayOfItems[i]!.UpdateOwnedObjects();
 				}
 			}
 

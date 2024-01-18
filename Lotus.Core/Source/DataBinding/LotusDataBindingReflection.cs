@@ -136,7 +136,7 @@ namespace Lotus
 			{
 				ResetModel(modelInstance);
 
-				_modelMember = SetMemberType(modelInstance, memberName, _modelMemberType);
+				_modelMember = SetMemberType(modelInstance, memberName, _modelMemberType)!;
 				if (_modelMember != null)
 				{
 					_modelMemberName = memberName;
@@ -165,7 +165,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected override void UpdateModelProperty(Object? sender, PropertyChangedEventArgs args)
+			protected override void UpdateModelProperty(System.Object? sender, PropertyChangedEventArgs args)
 			{
 				if (_isEnabled)
 				{
@@ -224,7 +224,7 @@ namespace Lotus
 			public override void SetView(System.Object viewInstance, String memberName)
 			{
 				ResetView(viewInstance);
-				_viewMember = SetMemberType(viewInstance, memberName, _viewMemberType);
+				_viewMember = SetMemberType(viewInstance, memberName, _viewMemberType)!;
 				if (_viewMember != null)
 				{
 					_viewMemberName = memberName;
@@ -258,7 +258,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected override void UpdateViewProperty(Object? sender, PropertyChangedEventArgs args)
+			protected override void UpdateViewProperty(System.Object? sender, PropertyChangedEventArgs args)
 			{
 				if (_isEnabled)
 				{

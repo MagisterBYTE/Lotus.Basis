@@ -170,7 +170,7 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ToEnum<TEnum>(String value, TEnum defaultValue = default(TEnum)) where TEnum : Enum
+			public static TEnum ToEnum<TEnum>(String value, TEnum? defaultValue = default(TEnum)) where TEnum : Enum
 			{
 				if (!typeof(TEnum).IsEnum)
 				{
@@ -184,7 +184,7 @@ namespace Lotus
 				}
 				catch
 				{
-					return defaultValue;
+					return defaultValue!;
 				}
 			}
 
@@ -197,7 +197,7 @@ namespace Lotus
 			/// <param name="defaultValue">Значение по умолчанию</param>
 			/// <returns>Объект перечисления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static TEnum ToEnum<TEnum>(Int32 value, TEnum defaultValue = default(TEnum)) where TEnum : Enum
+			public static TEnum ToEnum<TEnum>(Int32 value, TEnum? defaultValue = default(TEnum)) where TEnum : Enum
 			{
 				if (!typeof(TEnum).IsEnum)
 				{
@@ -210,7 +210,7 @@ namespace Lotus
 				}
 				catch
 				{
-					return defaultValue;
+					return defaultValue!;
 				}
 			}
 
@@ -292,7 +292,7 @@ namespace Lotus
 				}
 				catch
 				{
-					result = default(TEnum);
+					result = default(TEnum)!;
 					return false;
 				}
 			}

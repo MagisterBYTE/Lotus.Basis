@@ -70,12 +70,12 @@ namespace Lotus
 			/// <summary>
 			/// Текущий выбранный элемент ViewModel
 			/// </summary>
-			ILotusViewModel ISelectedViewModel { get; set; }
+			ILotusViewModel? ISelectedViewModel { get; set; }
 
 			/// <summary>
 			/// Текущий элемент ViewModel для отображения в отдельном контексте
 			/// </summary>
-			ILotusViewModel IPresentedViewModel { get; set; }
+			ILotusViewModel? IPresentedViewModel { get; set; }
 
 			//
 			// ПАРАМЕТРЫ ФИЛЬТРАЦИИ
@@ -354,12 +354,12 @@ namespace Lotus
 			// Выбранный элемент
 			protected internal Int32 _selectedIndex = -1;
 			protected internal Int32 _prevSelectedIndex = -1;
-			protected internal TViewModel _selectedViewModel;
-			protected internal TViewModel _presentedViewModel;
+			protected internal TViewModel? _selectedViewModel;
+			protected internal TViewModel? _presentedViewModel;
 
 			// Параметры фильтрации
 			protected internal Boolean _isFiltered;
-			protected internal Predicate<TModel> _filter;
+			protected internal Predicate<TModel?> _filter;
 
 			// Параметры сортировки
 			protected internal Boolean _isSorted;
@@ -462,19 +462,19 @@ namespace Lotus
 			/// <summary>
 			/// Текущий выбранный элемент ViewModel
 			/// </summary>
-			public ILotusViewModel ISelectedViewModel
+			public ILotusViewModel? ISelectedViewModel
 			{
 				get { return _selectedViewModel; }
 				set
 				{
-					SelectedViewModel = (TViewModel)value;
+					SelectedViewModel = value == null ? default : (TViewModel)value;
 				}
 			}
 
 			/// <summary>
 			/// Текущий выбранный элемент ViewModel
 			/// </summary>
-			public TViewModel SelectedViewModel
+			public TViewModel? SelectedViewModel
 			{
 				get
 				{
@@ -493,19 +493,19 @@ namespace Lotus
 			/// <summary>
 			/// Текущий элемент ViewModel для отображения в отдельном контексте
 			/// </summary>
-			public ILotusViewModel IPresentedViewModel
+			public ILotusViewModel? IPresentedViewModel
 			{
 				get { return _presentedViewModel; }
 				set
 				{
-					PresentedViewModel = (TViewModel)value;
+					PresentedViewModel = value == null ? default : (TViewModel)value;
 				}
 			}
 
 			/// <summary>
 			/// Текущий элемент ViewModel для отображения в отдельном контексте
 			/// </summary>
-			public TViewModel PresentedViewModel
+			public TViewModel? PresentedViewModel
 			{
 				get
 				{
@@ -541,7 +541,7 @@ namespace Lotus
 			/// <summary>
 			/// Функтор осуществляющий фильтрацию данных
 			/// </summary>
-			public Predicate<TModel> Filter
+			public Predicate<TModel?> Filter
 			{
 				get
 				{
@@ -876,7 +876,7 @@ namespace Lotus
 					{
 						if (Object.ReferenceEquals(_arrayOfItems[i], exclude) == false)
 						{
-							_arrayOfItems[i].IsSelected = false;
+							_arrayOfItems[i]!.IsSelected = false;
 						}
 					}
 
@@ -886,7 +886,7 @@ namespace Lotus
 				{
 					for (var i = 0; i < _count; i++)
 					{
-						_arrayOfItems[i].IsSelected = false;
+						_arrayOfItems[i]!.IsSelected = false;
 					}
 
 					SelectedViewModel = default;
@@ -910,7 +910,7 @@ namespace Lotus
 						{
 							if (Object.ReferenceEquals(_arrayOfItems[i], exclude) == false)
 							{
-								_arrayOfItems[i].IsPresented = false;
+								_arrayOfItems[i]!.IsPresented = false;
 							}
 						}
 
@@ -932,7 +932,7 @@ namespace Lotus
 						// Выключаем все элемента ViewModel
 						for (var i = 0; i < _count; i++)
 						{
-							_arrayOfItems[i].IsPresented = false;
+							_arrayOfItems[i]!.IsPresented = false;
 						}
 
 						PresentedViewModel = default;
@@ -1017,7 +1017,7 @@ namespace Lotus
 			{
 				for (var i = 0; i < _count; i++)
 				{
-					_arrayOfItems[i].IOwner = this;
+					_arrayOfItems[i]!.IOwner = this;
 				}
 			}
 
@@ -1175,9 +1175,9 @@ namespace Lotus
 					{
 						if (IsSupportModelSelected)
 						{
-							if (_arrayOfItems[_selectedIndex].Model is ILotusModelSelected selected_item)
+							if (_arrayOfItems[_selectedIndex]?.Model is ILotusModelSelected selected_item)
 							{
-								selected_item.SetModelSelected(_arrayOfItems[_selectedIndex], false);
+								selected_item.SetModelSelected(_arrayOfItems[_selectedIndex]!, false);
 							}
 						}
 					}
@@ -1213,12 +1213,12 @@ namespace Lotus
 				for (var i = 0; i < Count; i++)
 				{
 					// 1) Смотрим на совпадение
-					if (_arrayOfItems[i].Model.Equals(item))
+					if (_arrayOfItems[i]!.Model.Equals(item))
 					{
 						SetSelectedItem(i);
 						if (_onActivatedItem != null)
 						{
-							_onActivatedItem(_arrayOfItems[i]);
+							_onActivatedItem(_arrayOfItems[i]!);
 						}
 						break;
 					}
@@ -1238,8 +1238,8 @@ namespace Lotus
 					// Выключенный элемент выбрать нельзя
 					if (IsSupportModelSelected)
 					{
-						var selected_item = _arrayOfItems[index].Model as ILotusModelSelected;
-						if (selected_item != null && selected_item.CanModelSelected(_arrayOfItems[index]) == false)
+						var selected_item = _arrayOfItems[index]?.Model as ILotusModelSelected;
+						if (selected_item != null && selected_item.CanModelSelected(_arrayOfItems[index]!) == false)
 						{
 							return;
 						}
@@ -1260,9 +1260,9 @@ namespace Lotus
 							// Обновляем статус
 							if (IsSupportModelSelected)
 							{
-								if (_arrayOfItems[_selectedIndex].Model is ILotusModelSelected selected_item)
+								if (_arrayOfItems[_selectedIndex]?.Model is ILotusModelSelected selected_item)
 								{
-									selected_item.SetModelSelected(_arrayOfItems[_selectedIndex], true);
+									selected_item.SetModelSelected(_arrayOfItems[_selectedIndex]!, true);
 								}
 							}
 
@@ -1272,9 +1272,9 @@ namespace Lotus
 								// Если нет мульти выбора
 								if (IsSupportModelSelected && _isEnabledUnselectingItem)
 								{
-									if (_arrayOfItems[_prevSelectedIndex].Model is ILotusModelSelected prev_selected_item)
+									if (_arrayOfItems[_prevSelectedIndex]?.Model is ILotusModelSelected prev_selected_item)
 									{
-										prev_selected_item.SetModelSelected(_arrayOfItems[_prevSelectedIndex], false);
+										prev_selected_item.SetModelSelected(_arrayOfItems[_prevSelectedIndex]!, false);
 									}
 								}
 							}
@@ -1289,7 +1289,7 @@ namespace Lotus
 					if (_isMultiSelected)
 					{
 						// Смотрим, есть ли у нас элемент в выделенных
-						if (selectedItems.Contains(_arrayOfItems[index].Model))
+						if (selectedItems.Contains(_arrayOfItems[index]!.Model))
 						{
 							// Есть
 							// Режим снятие/выделения
@@ -1302,14 +1302,14 @@ namespace Lotus
 									// Убираем выделение
 									if (IsSupportModelSelected && _isEnabledUnselectingItem)
 									{
-										if (_arrayOfItems[index].Model is ILotusModelSelected selected_item)
+										if (_arrayOfItems[index]?.Model is ILotusModelSelected selected_item)
 										{
-											selected_item.SetModelSelected(_arrayOfItems[index], false);
+											selected_item.SetModelSelected(_arrayOfItems[index]!, false);
 										}
 									}
 
 									// Удаляем
-									selectedItems.Remove(_arrayOfItems[index].Model);
+									selectedItems.Remove(_arrayOfItems[index]!.Model);
 
 									// Информируем - вызываем событие
 									if (_onSelectionRemovedItem != null) _onSelectionRemovedItem(index);
@@ -1327,14 +1327,14 @@ namespace Lotus
 						else
 						{
 							// Нету - добавляем
-							selectedItems.Add(_arrayOfItems[index].Model);
+							selectedItems.Add(_arrayOfItems[index]!.Model);
 
 							// Выделяем элемент
 							if (IsSupportModelSelected)
 							{
-								if (_arrayOfItems[index].Model is ILotusModelSelected selected_item)
+								if (_arrayOfItems[index]?.Model is ILotusModelSelected selected_item)
 								{
-									selected_item.SetModelSelected(_arrayOfItems[index], true);
+									selected_item.SetModelSelected(_arrayOfItems[index]!, true);
 								}
 							}
 
@@ -1443,7 +1443,7 @@ namespace Lotus
 			/// <param name="sender">Источник события</param>
 			/// <param name="args">Аргументы события</param>
 			//---------------------------------------------------------------------------------------------------------
-			protected virtual void OnCollectionChangedHandler(Object? sender, NotifyCollectionChangedEventArgs args)
+			protected virtual void OnCollectionChangedHandler(System.Object? sender, NotifyCollectionChangedEventArgs args)
 			{
 				switch (args.Action)
 				{
@@ -1458,7 +1458,7 @@ namespace Lotus
 									var is_dublicate = false;
 									for (var j = 0; j < Count; j++)
 									{
-										if (_arrayOfItems[j].Model == new_models[i])
+										if (_arrayOfItems[j]!.Model == new_models[i])
 										{
 											is_dublicate = true;
 											break;
@@ -1502,7 +1502,7 @@ namespace Lotus
 									// Находим элемент с данным контекстом
 									ILotusViewModel? view_model = this.Search((item) =>
 									{
-										if (Object.ReferenceEquals(item.Model, model))
+										if (Object.ReferenceEquals(item?.Model, model))
 										{
 											return true;
 										}

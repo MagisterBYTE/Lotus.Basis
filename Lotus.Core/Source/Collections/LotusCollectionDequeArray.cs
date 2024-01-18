@@ -85,7 +85,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			new public TItem this[Int32 index]
 			{
-				get { return _arrayOfItems[(_startOffset + index) % _maxCount]; }
+				get { return _arrayOfItems[(_startOffset + index) % _maxCount]!; }
 				set
 				{
 					_arrayOfItems[(_startOffset + index) % _maxCount] = value;
@@ -103,7 +103,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public TItem GetElement(Int32 index)
 			{
-				return _arrayOfItems[(_startOffset + index) % _maxCount];
+				return _arrayOfItems[(_startOffset + index) % _maxCount]!;
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ namespace Lotus
 			{
 				if (_count > 0)
 				{
-					TItem item = _arrayOfItems[_startOffset];
+					TItem? item = _arrayOfItems[_startOffset];
 					_arrayOfItems[_startOffset] = default;
 					_startOffset++;
 					_count--;
@@ -198,7 +198,7 @@ namespace Lotus
 				if (_count > 0)
 				{
 					_count--;
-					TItem item = _arrayOfItems[_count];
+					TItem? item = _arrayOfItems[_count];
 					_arrayOfItems[_count] = default;
 
 					return item;

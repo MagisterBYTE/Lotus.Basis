@@ -290,8 +290,7 @@ namespace Lotus
 			public ILotusEcsFilterComponent Exclude(Type componentType)
 			{
 				_excludedComponents.AddIfNotContains(componentType);
-				ILotusEcsComponentData? component_data;
-				if (_world._componentsData.TryGetValue(componentType, out component_data))
+				if (_world._componentsData.TryGetValue(componentType, out ILotusEcsComponentData? component_data))
 				{
 					var exclude_entities = component_data.GetEntities();
 					_entities.RemoveValues(exclude_entities);

@@ -51,7 +51,7 @@ namespace Lotus
 			protected internal Int32 _value;
 			protected internal Int32 _supplement;
 			protected internal Boolean _notCalculation;
-			protected internal ILotusOwnerObject _owner;
+			protected internal ILotusOwnerObject? _owner;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================

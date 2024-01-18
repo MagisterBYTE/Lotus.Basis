@@ -193,7 +193,7 @@ namespace Lotus
 				if (viewModel != null && viewModel.Model != null)
 				{
 					var file_name = XFileDialog.Open();
-					if (file_name.IsExists())
+					if (file_name != null && file_name.IsExists())
 					{
 						// Уведомляем о начале загрузки
 						if (viewModel.Model is ILotusBeforeLoad before_load)
@@ -226,7 +226,7 @@ namespace Lotus
 				if (viewModel != null && viewModel.Model != null)
 				{
 					var file_name = XFileDialog.Save();
-					if (file_name.IsExists())
+					if (file_name != null && file_name.IsExists())
 					{
 						// Уведомляем о начале сохранения 
 						if (viewModel.Model is ILotusBeforeSave before_save)

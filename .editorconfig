@@ -229,10 +229,74 @@ dotnet_diagnostic.S1210.severity = none
 
 # S1125: Boolean literals should not be redundant
 dotnet_diagnostic.S1125.severity = none
-csharp_style_prefer_primary_constructors = true:suggestion
 
-# CS8601 - Possible null reference assignment
-dotnet_diagnostic.CS8601.severity = none
+# S4200: Native methods should be wrapped
+dotnet_diagnostic.S4200.severity = none
+
+# S1125: Boolean literals should not be redundant
+dotnet_diagnostic.S1125.severity = none
+
+# S2346: Flags enumerations zero-value members should be named "None"
+dotnet_diagnostic.S2346.severity = none
+
+# S1104: Fields should not have public accessibility
+dotnet_diagnostic.S1104.severity = none
+
+# S1210: "Equals" and the comparison operators should be overridden when implementing "IComparable"
+dotnet_diagnostic.S1210.severity = none
+
+# S2292: Trivial properties should be auto-implemented
+dotnet_diagnostic.S2292.severity = none
+
+# S108: Nested blocks of code should not be left empty
+dotnet_diagnostic.S108.severity = none
+
+# S2386: Mutable fields should not be "public static"
+dotnet_diagnostic.S2386.severity = none
+
+# S3887: Mutable, non-private fields should not be "readonly"
+dotnet_diagnostic.S3887.severity = none
+
+# S4136: Method overloads should be grouped together
+dotnet_diagnostic.S4136.severity = none
+
+# S1168: Empty arrays and collections should be returned instead of null
+dotnet_diagnostic.S1168.severity = none
+
+# S1066: Collapsible "if" statements should be merged
+dotnet_diagnostic.S1066.severity = none
+
+# S3263: Static fields should appear in the order they must be initialized 
+dotnet_diagnostic.S3263.severity = none
+
+# CS8618: Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+dotnet_diagnostic.CS8618.severity = none
+
+# S2743: Static fields should not be used in generic types
+dotnet_diagnostic.S2743.severity = none
+
+# S2696: Static fields should not be used in generic types
+dotnet_diagnostic.S2696.severity = none
+
+# S112: General exceptions should never be thrown
+dotnet_diagnostic.S112.severity = none
+
+# S125: Sections of code should not be commented out
+dotnet_diagnostic.S125.severity = none
+
+# S1144: Unused private types or members should be removed
+dotnet_diagnostic.S1144.severity = none
+
+# S2368: Public methods should not have multidimensional array parameters
+dotnet_diagnostic.S2368.severity = none
+
+# CS8632: The annotation for nullable reference types should only be used in code within a nullable context
+dotnet_diagnostic.CS8632.severity = none
+
+# S101: Types should be named in PascalCase
+dotnet_diagnostic.S101.severity = none
+
+csharp_style_prefer_primary_constructors = true:suggestion
 
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line

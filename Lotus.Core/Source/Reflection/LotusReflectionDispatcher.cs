@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+//---------------------------------------------------------------------------------------------------------------------
+#pragma warning disable 8620
 //=====================================================================================================================
 namespace Lotus
 {
@@ -819,7 +821,7 @@ namespace Lotus
 			/// <param name="fieldInfoResult">Метаданные поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object? GetFieldValue(System.Object instance, String fieldName, out FieldInfo fieldInfoResult)
+			public static System.Object? GetFieldValue(System.Object instance, String fieldName, out FieldInfo? fieldInfoResult)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))
@@ -868,7 +870,7 @@ namespace Lotus
 			/// <param name="fieldInfoResult">Метаданные поля</param>
 			/// <returns>Значение поля</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static System.Object? GetFieldValue(System.Object instance, String fieldName, Int32 index, out FieldInfo fieldInfoResult)
+			public static System.Object? GetFieldValue(System.Object instance, String fieldName, Int32 index, out FieldInfo? fieldInfoResult)
 			{
 				Type type = instance.GetType();
 				if (Cached.ContainsKey(type.FullName!))

@@ -72,13 +72,13 @@ namespace Lotus
 
 			// Платформенно-зависимая часть
 #if USE_HELIX
-			internal MeshNode _helixModel;
+			protected internal MeshNode? _helixModel;
 #endif
 #if UNITY_2017_1_OR_NEWER
-			internal UnityEngine.MeshFilter _unityModel;
+			protected internal UnityEngine.MeshFilter _unityModel;
 #endif
 #if UNITY_EDITOR
-			internal Autodesk.Fbx.FbxNode _fbxModel;
+			protected internal Autodesk.Fbx.FbxNode _fbxModel;
 #endif
 			#endregion
 
@@ -179,7 +179,7 @@ namespace Lotus
 			/// <summary>
 			/// Модель
 			/// </summary>
-			public MeshNode HelixModel
+			public MeshNode? HelixModel
 			{
 				get { return _helixModel; }
 			}

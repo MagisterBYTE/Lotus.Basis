@@ -52,29 +52,29 @@ namespace Lotus
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			internal TColor _ambientColor;
-			internal TColor _ambientColorOriginal;
-			internal TColor _diffuseColor;
-			internal TColor _diffuseColorOriginal;
-			internal ListArray<CTextureSlot> _textureSlots;
-			internal CTextureSlot? _ambientSlot;
-			internal CTextureSlot? _diffuseSlot;
-			internal CTextureSlot? _normalSlot;
-			internal CTextureSlot? _heightSlot;
-			internal CScene3D _ownerScene;
+			protected internal TColor _ambientColor;
+			protected internal TColor _ambientColorOriginal;
+			protected internal TColor _diffuseColor;
+			protected internal TColor _diffuseColorOriginal;
+			protected internal ListArray<CTextureSlot> _textureSlots;
+			protected internal CTextureSlot? _ambientSlot;
+			protected internal CTextureSlot? _diffuseSlot;
+			protected internal CTextureSlot? _normalSlot;
+			protected internal CTextureSlot? _heightSlot;
+			protected internal CScene3D _ownerScene;
 
 			// Платформенно-зависимая часть
 #if USE_HELIX
-			internal Helix3D.PhongMaterial _helixMaterial;
+			protected internal Helix3D.PhongMaterial? _helixMaterial;
 #endif
 #if USE_ASSIMP
-			internal Assimp.Material _assimpMaterial;
+			protected internal Assimp.Material? _assimpMaterial;
 #endif
 #if UNITY_2017_1_OR_NEWER
-			internal UnityEngine.Material _unityMaterial;
+			protected internal UnityEngine.Material _unityMaterial;
 #endif
 #if UNITY_EDITOR
-			internal Autodesk.Fbx.FbxSurfaceMaterial _fbxMaterial;
+			protected internal Autodesk.Fbx.FbxSurfaceMaterial _fbxMaterial;
 #endif
 			#endregion
 
@@ -375,11 +375,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="owner_scene">Сцена</param>
+			/// <param name="ownerScene">Сцена</param>
 			/// <param name="assimp_scene">Сцена</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMaterialSet(CScene3D owner_scene, Assimp.Scene assimp_scene)
+			public CMaterialSet(CScene3D ownerScene, Assimp.Scene assimp_scene)
 			{
+				_ownerScene = ownerScene;
 				_name = "Материалы";
 				_materials = new ListArray<CMaterial>();
 
@@ -387,7 +388,7 @@ namespace Lotus
 				for (var i = 0; i < assimp_scene.MaterialCount; i++)
 				{
 					Assimp.Material assimp_material = assimp_scene.Materials[i];
-					var material = new CMaterial(owner_scene, assimp_material);
+					var material = new CMaterial(ownerScene, assimp_material);
 					_materials.Add(material);
 				}
 			}

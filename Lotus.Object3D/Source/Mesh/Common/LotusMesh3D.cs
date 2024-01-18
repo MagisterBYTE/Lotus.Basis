@@ -66,16 +66,16 @@ namespace Lotus
 
 			// Платформенно-зависимая часть
 #if USE_ASSIMP
-			internal Assimp.Mesh _assimpMesh;
+			protected internal Assimp.Mesh? _assimpMesh;
 #endif
 #if USE_HELIX
-			internal MeshGeometry3D _helixMesh;
+			protected internal MeshGeometry3D? _helixMesh;
 #endif
 #if UNITY_2017_1_OR_NEWER
-			internal UnityEngine.Mesh _unityMesh;
+			protected internal UnityEngine.Mesh _unityMesh;
 #endif
 #if UNITY_EDITOR
-			internal Autodesk.Fbx.FbxMesh _fbxMesh;
+			protected internal Autodesk.Fbx.FbxMesh _fbxMesh;
 #endif
 			#endregion
 
@@ -206,7 +206,7 @@ namespace Lotus
 			public Int32 MaterialIndex
 			{
 #if USE_ASSIMP
-				get { return _assimpMesh.MaterialIndex; }
+				get { return _assimpMesh == null ? 0 : _assimpMesh.MaterialIndex; }
 #else
 				get { return 0; }
 #endif
@@ -657,14 +657,14 @@ namespace Lotus
                 _helixMesh = new MeshGeometry3D();
 
                 // Вершины
-                _helixMesh.Positions = new Vector3Collection(_assimpMesh.VertexCount);
+                _helixMesh.Positions = new Vector3Collection(_assimpMesh!.VertexCount);
                 for (var i = 0; i < _assimpMesh.VertexCount; i++)
                 {
                     _helixMesh.Positions.Add(_assimpMesh.Vertices[i].ToShVector3D());
                 }
 
                 // Нормали
-                _helixMesh.Normals = new Vector3Collection(_assimpMesh.Normals.Count);
+                _helixMesh.Normals = new Vector3Collection(_assimpMesh!.Normals.Count);
                 for (var i = 0; i < _assimpMesh.Normals.Count; i++)
                 {
                     _helixMesh.Normals.Add(_assimpMesh.Normals[i].ToShVector3D());
@@ -1053,10 +1053,12 @@ namespace Lotus
 			/// <summary>
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
-			/// <param name="assimp_scene">Сцена</param>
+			/// <param name="ownerScene">Сцена Assimp</param>
+			/// <param name="assimp_scene">Сцена Assimp</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMeshSet(Assimp.Scene assimp_scene)
+			public CMeshSet(CScene3D ownerScene, Assimp.Scene assimp_scene)
 			{
+				_ownerScene = ownerScene;
 				_name = "Сетки";
 				_meshes = new ListArray<CMesh3Df>();
 

@@ -40,6 +40,8 @@ using UnityEditor;
 //---------------------------------------------------------------------------------------------------------------------
 using Lotus.Core;
 using Lotus.Maths;
+//---------------------------------------------------------------------------------------------------------------------
+#nullable disable
 //=====================================================================================================================
 namespace Lotus
 {
@@ -358,7 +360,7 @@ namespace Lotus
 			{
 				_name = name;
 				_assimpScene = assimp_scene;
-				_meshSet = new CMeshSet(_assimpScene);
+				_meshSet = new CMeshSet(this, _assimpScene);
 				_materialSet = new CMaterialSet(this, _assimpScene);
 				_rootNode = new CNode3D(this, _assimpScene.RootNode);
 				ComputeBoundingBox();

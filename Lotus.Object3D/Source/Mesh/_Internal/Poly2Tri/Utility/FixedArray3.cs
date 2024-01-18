@@ -99,7 +99,7 @@ namespace Poly2Tri.Utility
         
         public void Clear()
         {
-            Item0 = Item1 = Item2 = default(T);
+            Item0 = Item1 = Item2 = default(T)!;
         }
 
         
@@ -109,7 +109,7 @@ namespace Poly2Tri.Utility
             {
                 if (this[i].Equals(default(T)) && this[i].Equals(value))
                 {
-                    this[i] = default(T);
+                    this[i] = default(T)!;
                 }
             }
         }

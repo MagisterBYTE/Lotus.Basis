@@ -36,7 +36,7 @@ namespace Lotus
 			}
 
 			[Fact]
-			public async Task TestFiltrationString()
+			public async Task TestResourceFile()
 			{
 				var dataStorage = Fixture.CreateDataStorage();
 				ResourceFileService service = new ResourceFileService(dataStorage);

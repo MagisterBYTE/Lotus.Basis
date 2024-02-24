@@ -42,6 +42,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public static TItem? RandomElement<TItem>(this IEnumerable<TItem> @this)
 			{
+				if (@this == null) return default(TItem);
+
 				var count = @this.Count();
 
 				if (count == 0)
@@ -71,6 +73,27 @@ namespace Lotus
 				foreach (var item in @this)
 				{
 					onActionItem.Invoke(item);
+				}
+
+				return @this;
+			}
+
+			//---------------------------------------------------------------------------------------------------------
+			/// <summary>
+			/// Выполнить действие над каждым элементом коллекции
+			/// </summary>
+			/// <typeparam name="TItem">Тип элемента коллекции</typeparam>
+			/// <param name="this">Коллекция</param>
+			/// <param name="onActionItem">Обработчик действия над каждым элементов коллекции</param>
+			/// <returns>Коллекция</returns>
+			//---------------------------------------------------------------------------------------------------------
+			public static IEnumerable<TItem> ForEach<TItem>(this IEnumerable<TItem> @this, Action<TItem, int> onActionItem)
+			{
+				int index = 0;
+				foreach (var item in @this)
+				{
+					onActionItem.Invoke(item, index);
+					index++;
 				}
 
 				return @this;

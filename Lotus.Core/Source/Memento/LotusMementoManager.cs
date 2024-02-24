@@ -86,8 +86,8 @@ namespace Lotus
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal ListArray<ILotusMementoState> mHistoryStates;
-			protected internal Int32 mNextUndo;
+			protected internal ListArray<ILotusMementoState> _historyStates;
+			protected internal Int32 _nextUndo;
 			protected internal Boolean _isEnabled;
 			#endregion
 
@@ -97,7 +97,7 @@ namespace Lotus
 			/// </summary>
 			public ListArray<ILotusMementoState> HistoryStates
 			{
-				get { return mHistoryStates; }
+				get { return _historyStates; }
 			}
 
 			/// <summary>
@@ -108,7 +108,7 @@ namespace Lotus
 				get
 				{
 					// If the NextUndo pointer is -1, no commands to undo
-					if (mNextUndo < 0 || mNextUndo > mHistoryStates.Count - 1) // precaution
+					if (_nextUndo < 0 || _nextUndo > _historyStates.Count - 1) // precaution
 					{
 						return false;
 					}
@@ -125,7 +125,7 @@ namespace Lotus
 				get
 				{
 					// If the NextUndo pointer points to the last item, no commands to redo
-					if (mNextUndo == mHistoryStates.Count - 1)
+					if (_nextUndo == _historyStates.Count - 1)
 					{
 						return false;
 					}
@@ -159,11 +159,11 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public CMementoManager()
 			{
-				mHistoryStates = new ListArray<ILotusMementoState>()
+				_historyStates = new ListArray<ILotusMementoState>()
 				{
 					IsNotify = true
 				};
-				mNextUndo = -1;
+				_nextUndo = -1;
 			}
 			#endregion
 
@@ -175,8 +175,8 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public void ClearHistory()
 			{
-				mHistoryStates.Clear();
-				mNextUndo = -1;
+				_historyStates.Clear();
+				_nextUndo = -1;
 				NotifyPropertyChanged(PropertyArgsCanUndo);
 				NotifyPropertyChanged(PropertyArgsCanRedo);
 			}
@@ -196,9 +196,9 @@ namespace Lotus
 				TrimHistoryList();
 
 				// Add command and increment undo counter
-				mHistoryStates.Add(state);
+				_historyStates.Add(state);
 
-				mNextUndo++;
+				_nextUndo++;
 
 				NotifyPropertyChanged(PropertyArgsCanUndo);
 				NotifyPropertyChanged(PropertyArgsCanRedo);
@@ -217,13 +217,13 @@ namespace Lotus
 				}
 
 				// Get the Command object to be undone
-				ILotusMementoState state = mHistoryStates[mNextUndo];
+				ILotusMementoState state = _historyStates[_nextUndo];
 
 				// Execute the Command object's undo method
 				state.Undo();
 
 				// Move the pointer up one item
-				mNextUndo--;
+				_nextUndo--;
 
 				// Обновляем свойства
 				NotifyPropertyChanged(PropertyArgsCanUndo);
@@ -243,14 +243,14 @@ namespace Lotus
 				}
 
 				// Get the Command object to redo
-				var item_to_redo = mNextUndo + 1;
-				ILotusMementoState state = mHistoryStates[item_to_redo];
+				var item_to_redo = _nextUndo + 1;
+				ILotusMementoState state = _historyStates[item_to_redo];
 
 				// Execute the Command object
 				state.Redo();
 
 				// Move the undo pointer down one item
-				mNextUndo++;
+				_nextUndo++;
 
 				// Обновляем свойства
 				NotifyPropertyChanged(PropertyArgsCanUndo);
@@ -270,21 +270,21 @@ namespace Lotus
 				// So, we purge all undone commands from the history list.*/
 
 				// Exit if no items in History list
-				if (mHistoryStates.Count == 0)
+				if (_historyStates.Count == 0)
 				{
 					return;
 				}
 
 				// Exit if NextUndo points to last item on the list
-				if (mNextUndo == mHistoryStates.Count - 1)
+				if (_nextUndo == _historyStates.Count - 1)
 				{
 					return;
 				}
 
 				// Purge all items below the NextUndo pointer
-				for (var i = mHistoryStates.Count - 1; i > mNextUndo; i--)
+				for (var i = _historyStates.Count - 1; i > _nextUndo; i--)
 				{
-					mHistoryStates.RemoveAt(i);
+					_historyStates.RemoveAt(i);
 				}
 			}
 			#endregion

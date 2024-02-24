@@ -66,8 +66,8 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Общие данные
-			internal ILotusMementoOriginator mOriginator;
-			internal System.Object mState;
+			protected internal ILotusMementoOriginator _originator;
+			protected internal System.Object _state;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -76,8 +76,8 @@ namespace Lotus
 			/// </summary>
 			public ILotusMementoOriginator MementoOriginator
 			{
-				get { return mOriginator; }
-				set { mOriginator = value; }
+				get { return _originator; }
+				set { _originator = value; }
 			}
 			#endregion
 
@@ -96,12 +96,12 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="originator">Объект</param>
-			/// <param name="nameState">Наименование состояния объекта</param>
+			/// <param name="stateName">Наименование состояния объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMementoCaretaker(ILotusMementoOriginator originator, String nameState)
+			public CMementoCaretaker(ILotusMementoOriginator originator, String stateName)
 			{
-				mOriginator = originator;
-				mState = originator.GetMemento(nameState);
+				_originator = originator;
+				_state = originator.GetMemento(stateName);
 			}
 			#endregion
 
@@ -114,7 +114,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void SaveState(String stateName)
 			{
-				mState = mOriginator.GetMemento(stateName);
+				_state = _originator.GetMemento(stateName);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RestoreState(String stateName)
 			{
-				mOriginator.SetMemento(mState, stateName);
+				_originator.SetMemento(_state, stateName);
 			}
 			#endregion
 		}
@@ -139,10 +139,10 @@ namespace Lotus
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Общие данные
-			internal ILotusMementoOriginator mOriginator;
-			internal System.Object mBeforeState;
-			internal System.Object mAfterState;
-			internal String mNameState;
+			protected internal ILotusMementoOriginator _originator;
+			protected internal System.Object _beforeState;
+			protected internal System.Object _afterState;
+			protected internal String _stateName;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -151,8 +151,8 @@ namespace Lotus
 			/// </summary>
 			public ILotusMementoOriginator MementoOriginator
 			{
-				get { return mOriginator; }
-				set { mOriginator = value; }
+				get { return _originator; }
+				set { _originator = value; }
 			}
 			#endregion
 
@@ -174,13 +174,13 @@ namespace Lotus
 			/// Конструктор инициализирует объект класса указанными параметрами
 			/// </summary>
 			/// <param name="originator">Объект</param>
-			/// <param name="nameState">Наименование состояния объекта</param>
+			/// <param name="stateName">Наименование состояния объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public CMementoCaretakerChanged(ILotusMementoOriginator originator, String nameState)
+			public CMementoCaretakerChanged(ILotusMementoOriginator originator, String stateName)
 			{
-				mOriginator = originator;
-				mBeforeState = originator.GetMemento(nameState);
-				mNameState = nameState;
+				_originator = originator;
+				_beforeState = originator.GetMemento(stateName);
+				_stateName = stateName;
 			}
 			#endregion
 
@@ -193,7 +193,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void SaveState(String stateName)
 			{
-				mBeforeState = mOriginator.GetMemento(stateName);
+				_beforeState = _originator.GetMemento(stateName);
 			}
 
 			//---------------------------------------------------------------------------------------------------------
@@ -204,7 +204,7 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void RestoreState(String stateName)
 			{
-				mOriginator.SetMemento(mBeforeState, stateName);
+				_originator.SetMemento(_beforeState, stateName);
 			}
 			#endregion
 
@@ -216,13 +216,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Undo()
 			{
-				if (mOriginator != null)
+				if (_originator != null)
 				{
 					// Сначала сохраняем актуальное значение
-					mAfterState = mOriginator.GetMemento(mNameState);
+					_afterState = _originator.GetMemento(_stateName);
 
 					// Теперь ставим предыдущие
-					mOriginator.SetMemento(mBeforeState, mNameState);
+					_originator.SetMemento(_beforeState, _stateName);
 				}
 			}
 
@@ -233,13 +233,13 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			public virtual void Redo()
 			{
-				if (mOriginator != null)
+				if (_originator != null)
 				{
 					// Сначала сохраняем актуальное значение
-					mBeforeState = mOriginator.GetMemento(mNameState);
+					_beforeState = _originator.GetMemento(_stateName);
 
 					// Теперь ставим предыдущие
-					mOriginator.SetMemento(mAfterState, mNameState);
+					_originator.SetMemento(_afterState, _stateName);
 				}
 			}
 			#endregion

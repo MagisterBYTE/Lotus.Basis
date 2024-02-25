@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Runtime.InteropServices;
 
 namespace Lotus.Core
@@ -17,14 +18,929 @@ namespace Lotus.Core
 	/// </remarks>
 	[Serializable]
 	[StructLayout(LayoutKind.Sequential, Size = 4)]
-	public struct TColor : IComparable<TColor>, IEquatable<TColor>, ICloneable
-	{
+	public struct TColor : IComparable<TColor>, IEquatable<TColor>, ICloneable,
+		IAdditionOperators<TColor, TColor, TColor>,
+		ISubtractionOperators<TColor, TColor, TColor>,
+        IMultiplyOperators<TColor, TColor, TColor>,
+        IMultiplyOperators<TColor, float, TColor>,
+        IMultiplyOperators<TColor, double, TColor>
+    {
 		#region Const
 		/// <summary>
 		/// Текстовый формат отображения компонентов цвета.
 		/// </summary>
 		private const string ToStringFormat = "A:{0} R:{1} G:{2} B:{3}";
+		#endregion
 
+		#region Static methods
+		/// <summary>
+		/// Преобразование к допустимому значению компоненты цвета.
+		/// </summary>
+		/// <param name="component">Значение.</param>
+		/// <returns>Допустимое значение компоненты цвета.</returns>
+		private static byte ToByte(double component)
+		{
+			var value = (int)(component * 255.0);
+			return ToByte(value);
+		}
+
+		/// <summary>
+		/// Преобразование к допустимому значению компоненты цвета.
+		/// </summary>
+		/// <param name="component">Значение.</param>
+		/// <returns>Допустимое значение компоненты цвета.</returns>
+		private static byte ToByte(float component)
+		{
+			var value = (int)(component * 255.0f);
+			return ToByte(value);
+		}
+
+		/// <summary>
+		/// Преобразование к допустимому значению компоненты цвета.
+		/// </summary>
+		/// <param name="value">Значение.</param>
+		/// <returns>Допустимое значение компоненты цвета.</returns>
+		public static byte ToByte(int value)
+		{
+			return (byte)(value < 0 ? 0 : value > 255 ? 255 : value);
+		}
+
+		/// <summary>
+		/// Сложение цвета.
+		/// </summary>
+		/// <param name="a">Первый цвет.</param>
+		/// <param name="b">Второй цвет.</param>
+		/// <param name="result">Результирующий цвет.</param>
+		public static void Add(in TColor a, in TColor b, out TColor result)
+		{
+			result.A = (byte)(a.A + b.A);
+			result.R = (byte)(a.R + b.R);
+			result.G = (byte)(a.G + b.G);
+			result.B = (byte)(a.B + b.B);
+		}
+
+		/// <summary>
+		/// Сложение цвета.
+		/// </summary>
+		/// <param name="a">Первый цвет.</param>
+		/// <param name="b">Второй цвет.</param>
+		/// <returns>Результирующий цвет.</returns>
+		public static TColor Add(TColor a, TColor b)
+		{
+			return new TColor(a.R + b.R, a.G + b.G, a.B + b.B, a.A + b.A);
+		}
+
+		/// <summary>
+		/// Вычитание цвета.
+		/// </summary>
+		/// <param name="a">Первый цвет.</param>
+		/// <param name="b">Второй цвет.</param>
+		/// <param name="result">Результирующий цвет.</param>
+		public static void Subtract(in TColor a, in TColor b, out TColor result)
+		{
+			result.A = (byte)(a.A - b.A);
+			result.R = (byte)(a.R - b.R);
+			result.G = (byte)(a.G - b.G);
+			result.B = (byte)(a.B - b.B);
+		}
+
+		/// <summary>
+		/// Вычитание цвета.
+		/// </summary>
+		/// <param name="a">Первый цвет.</param>
+		/// <param name="b">Второй цвет.</param>
+		/// <returns>Результирующий цвет.</returns>
+		public static TColor Subtract(TColor a, TColor b)
+		{
+			return new TColor(a.R - b.R, a.G - b.G, a.B - b.B, a.A - b.A);
+		}
+
+		/// <summary>
+		/// Модуляция цвета.
+		/// </summary>
+		/// <param name="a">Первый цвет.</param>
+		/// <param name="b">Второй цвет.</param>
+		/// <param name="result">Результирующий цвет.</param>
+		public static void Modulate(in TColor a, in TColor b, out TColor result)
+		{
+			result.A = (byte)(a.A * b.A / 255.0f);
+			result.R = (byte)(a.R * b.R / 255.0f);
+			result.G = (byte)(a.G * b.G / 255.0f);
+			result.B = (byte)(a.B * b.B / 255.0f);
+		}
+
+		/// <summary>
+		/// Модуляция цвета.
+		/// </summary>
+		/// <param name="a">Первый цвет.</param>
+		/// <param name="b">Второй цвет.</param>
+		/// <returns>Результирующий цвет.</returns>
+		public static TColor Modulate(TColor a, TColor b)
+		{
+			return new TColor(a.R * b.R, a.G * b.G, a.B * b.B, a.A * b.A);
+		}
+
+		/// <summary>
+		/// Масштабирование компонентов цвета.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <param name="scale">Коэффициент масштаба.</param>
+		/// <param name="result">Результирующий цвет.</param>
+		public static void Scale(in TColor value, float scale, out TColor result)
+		{
+			result.A = (byte)(value.A * scale);
+			result.R = (byte)(value.R * scale);
+			result.G = (byte)(value.G * scale);
+			result.B = (byte)(value.B * scale);
+		}
+
+		/// <summary>
+		/// Масштабирование компонентов цвета.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <param name="scale">Коэффициент масштаба.</param>
+		/// <returns>Результирующий цвет.</returns>
+		public static TColor Scale(TColor value, float scale)
+		{
+			return new TColor((byte)(value.R * scale), (byte)(value.G * scale), (byte)(value.B * scale), (byte)(value.A * scale));
+		}
+
+		/// <summary>
+		/// Инвертированный цвет.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <param name="result">Результирующий цвет.</param>
+		public static void Negate(in TColor value, out TColor result)
+		{
+			result.A = (byte)(255 - value.A);
+			result.R = (byte)(255 - value.R);
+			result.G = (byte)(255 - value.G);
+			result.B = (byte)(255 - value.B);
+		}
+
+		/// <summary>
+		/// Инвертированный цвет.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <returns>Результирующий цвет.</returns>
+		public static TColor Negate(TColor value)
+		{
+			return new TColor(255 - value.R, 255 - value.G, 255 - value.B, 255 - value.A);
+		}
+
+		/// <summary>
+		/// Ограничение цвета в пределах указанного диапазона.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <param name="min">Минимальное значение.</param>
+		/// <param name="max">Максимальное значение.</param>
+		/// <param name="result">Результирующий цвет.</param>
+		public static void Clamp(in TColor value, in TColor min, in TColor max, out TColor result)
+		{
+			var alpha = value.A;
+			alpha = alpha > max.A ? max.A : alpha;
+			alpha = alpha < min.A ? min.A : alpha;
+
+			var red = value.R;
+			red = red > max.R ? max.R : red;
+			red = red < min.R ? min.R : red;
+
+			var green = value.G;
+			green = green > max.G ? max.G : green;
+			green = green < min.G ? min.G : green;
+
+			var blue = value.B;
+			blue = blue > max.B ? max.B : blue;
+			blue = blue < min.B ? min.B : blue;
+
+			result = new TColor(red, green, blue, alpha);
+		}
+
+		/// <summary>
+		/// Формирование цвет из упакованного формата BGRA целого числа.
+		/// </summary>
+		/// <param name="color">Значение цвета в BGRA формате целого числа.</param>
+		/// <returns>Цвет.</returns>
+		public static TColor FromBGRA(int color)
+		{
+			return new TColor((byte)((color >> 16) & 255), (byte)((color >> 8) & 255), (byte)(color & 255), (byte)((color >> 24) & 255));
+		}
+
+		/// <summary>
+		/// Формирование цвет из упакованного формата BGRA целого числа.
+		/// </summary>
+		/// <param name="color">Значение цвета в BGRA формате целого числа.</param>
+		/// <returns>Цвет.</returns>
+		public static TColor FromBGRA(uint color)
+		{
+			return new TColor((byte)((color >> 16) & 255), (byte)((color >> 8) & 255), (byte)(color & 255), (byte)((color >> 24) & 255));
+		}
+
+		/// <summary>
+		/// Формирование цвет из упакованного формата ABGR целого числа.
+		/// </summary>
+		/// <param name="color">Значение цвета в ABGR формате целого числа.</param>
+		/// <returns>Цвет.</returns>
+		public static TColor FromABGR(int color)
+		{
+			return new TColor((byte)(color >> 24), (byte)(color >> 16), (byte)(color >> 8), (byte)color);
+		}
+
+		/// <summary>
+		/// Формирование цвет из упакованного формата RGBA целого числа.
+		/// </summary>
+		/// <param name="color">Значение цвета в RGBA формате целого числа.</param>
+		/// <returns>Цвет.</returns>
+		public static TColor FromRGBA(int color)
+		{
+			return new TColor(color);
+		}
+
+		/// <summary>
+		/// Регулировка контрастности цвета.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <param name="contrast">Коэффициент контраста.</param>
+		/// <param name="result">Результирующий цвет.</param>
+		public static void AdjustContrast(in TColor value, float contrast, out TColor result)
+		{
+			result.A = value.A;
+			result.R = ToByte(0.5f + (contrast * ((value.R / 255.0f) - 0.5f)));
+			result.G = ToByte(0.5f + (contrast * ((value.G / 255.0f) - 0.5f)));
+			result.B = ToByte(0.5f + (contrast * ((value.B / 255.0f) - 0.5f)));
+		}
+
+		/// <summary>
+		/// Регулировка контрастности цвета.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <param name="contrast">Коэффициент контраста.</param>
+		/// <returns>Результирующий цвет.</returns>
+		public static TColor AdjustContrast(TColor value, float contrast)
+		{
+			return new TColor(
+				ToByte(0.5f + (contrast * ((value.R / 255.0f) - 0.5f))),
+				ToByte(0.5f + (contrast * ((value.G / 255.0f) - 0.5f))),
+				ToByte(0.5f + (contrast * ((value.B / 255.0f) - 0.5f))),
+				value.A);
+		}
+
+		/// <summary>
+		/// Регулировка насыщенности цвета.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <param name="saturation">Коэффициент насыщенности.</param>
+		/// <param name="result">Результирующий цвет.</param>
+		public static void AdjustSaturation(in TColor value, float saturation, out TColor result)
+		{
+			var grey = (value.R / 255.0f * 0.2125f) + (value.G / 255.0f * 0.7154f) + (value.B / 255.0f * 0.0721f);
+
+			result.A = value.A;
+			result.R = ToByte(grey + (saturation * ((value.R / 255.0f) - grey)));
+			result.G = ToByte(grey + (saturation * ((value.G / 255.0f) - grey)));
+			result.B = ToByte(grey + (saturation * ((value.B / 255.0f) - grey)));
+		}
+
+		/// <summary>
+		/// Регулировка насыщенности цвета.
+		/// </summary>
+		/// <param name="value">Цвет.</param>
+		/// <param name="saturation">Коэффициент насыщенности.</param>
+		/// <returns>Результирующий цвет.</returns>
+		public static TColor AdjustSaturation(TColor value, float saturation)
+		{
+			var grey = (value.R / 255.0f * 0.2125f) + (value.G / 255.0f * 0.7154f) + (value.B / 255.0f * 0.0721f);
+
+			return new TColor(
+				ToByte(grey + (saturation * ((value.R / 255.0f) - grey))),
+				ToByte(grey + (saturation * ((value.G / 255.0f) - grey))),
+				ToByte(grey + (saturation * ((value.B / 255.0f) - grey))),
+				value.A);
+		}
+
+		/// <summary>
+		/// Аппроксимация равенства значений цвета.
+		/// </summary>
+		/// <param name="a">Первое значение.</param>
+		/// <param name="b">Второе значение.</param>
+		/// <param name="epsilon">Погрешность.</param>
+		/// <returns>Статус равенства значений цвета.</returns>
+		public static bool Approximately(in TColor a, in TColor b, int epsilon = 1)
+		{
+			return Math.Abs(a.R - b.G) <= epsilon &&
+				   Math.Abs(a.G - b.G) <= epsilon &&
+				   Math.Abs(a.B - b.B) <= epsilon;
+		}
+
+		/// <summary>
+		/// Десереализация цвета из строки.
+		/// </summary>
+		/// <param name="data">Строка данных.</param>
+		/// <returns>Цвет.</returns>
+		public static TColor DeserializeFromString(string data)
+		{
+			var color = new TColor();
+			var color_data = data.Split(',');
+			color.R = byte.Parse(color_data[0]);
+			color.G = byte.Parse(color_data[1]);
+			color.B = byte.Parse(color_data[2]);
+			color.A = byte.Parse(color_data[3]);
+			return color;
+		}
+		#endregion
+
+		#region Fields
+		/// <summary>
+		/// Красная компонента цвета.
+		/// </summary>
+		public byte R;
+
+		/// <summary>
+		/// Зеленая компонента цвета.
+		/// </summary>
+		public byte G;
+
+		/// <summary>
+		/// Синяя компонента цвета.
+		/// </summary>
+		public byte B;
+
+		/// <summary>
+		/// Альфа компонента цвета.
+		/// </summary>
+		public byte A;
+		#endregion
+
+		#region Properties
+		/// <summary>
+		/// Красная компонента цвета.
+		/// </summary>
+		public float RedComponent
+		{
+			readonly get { return R / 255.0f; }
+			set { R = ToByte(value); }
+		}
+
+		/// <summary>
+		/// Зеленая компонента цвета.
+		/// </summary>
+		public float GreenComponent
+		{
+			readonly get { return G / 255.0f; }
+			set { G = ToByte(value); }
+		}
+
+		/// <summary>
+		/// Синяя компонента цвета.
+		/// </summary>
+		public float BlueComponent
+		{
+			readonly get { return B / 255.0f; }
+			set { B = ToByte(value); }
+		}
+
+		/// <summary>
+		/// Альфа компонента цвета.
+		/// </summary>
+		public float AlphaComponent
+		{
+			readonly get { return A / 255.0f; }
+			set { A = ToByte(value); }
+		}
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Конструктор инициализирует объект класса указанными параметрами.
+		/// </summary>
+		/// <param name="value">Компонент цвета.</param>
+		public TColor(byte value)
+		{
+			A = R = G = B = value;
+		}
+
+		/// <summary>
+		/// Конструктор инициализирует объект класса указанными параметрами.
+		/// </summary>
+		/// <param name="red">Красная компонента цвета.</param>
+		/// <param name="green">Зеленая компонента цвета.</param>
+		/// <param name="blue">Синяя компонента цвета.</param>
+		/// <param name="alpha">Альфа компонента цвета.</param>
+		public TColor(byte red, byte green, byte blue, byte alpha = 255)
+		{
+			R = red;
+			G = green;
+			B = blue;
+			A = alpha;
+		}
+
+		/// <summary>
+		/// Конструктор инициализирует объект класса указанными параметрами.
+		/// </summary>
+		/// <param name="red">Красная компонента цвета.</param>
+		/// <param name="green">Зеленая компонента цвета.</param>
+		/// <param name="blue">Синяя компонента цвета.</param>
+		/// <param name="alpha">Альфа компонента цвета.</param>
+		public TColor(float red, float green, float blue, float alpha = 1.0f)
+		{
+			R = ToByte(red);
+			G = ToByte(green);
+			B = ToByte(blue);
+			A = ToByte(alpha);
+		}
+
+		/// <summary>
+		/// Конструктор инициализирует объект класса указанными параметрами.
+		/// </summary>
+		/// <param name="rgba">Значение цвета в RGBA формате целого числа.</param>
+		public TColor(int rgba)
+		{
+			A = (byte)((rgba >> 24) & 255);
+			B = (byte)((rgba >> 16) & 255);
+			G = (byte)((rgba >> 8) & 255);
+			R = (byte)(rgba & 255);
+		}
+#if UNITY_2017_1_OR_NEWER
+			/// <summary>
+			/// Конструктор инициализирует объект класса указанными параметрами.
+			/// </summary>
+			/// <param name="color">Цвет UnityEngine.</param>
+			public TColor(UnityEngine.Color color)
+			{
+				R = (Byte)(color.r * 255);
+				G = (Byte)(color.g * 255);
+				B = (Byte)(color.b * 255);
+				A = (Byte)(color.a * 255);
+			}
+
+			/// <summary>
+			/// Конструктор инициализирует объект класса указанными параметрами.
+			/// </summary>
+			/// <param name="color">Цвет UnityEngine.</param>
+			public TColor(UnityEngine.Color32 color)
+			{
+				R = color.r;
+				G = color.g;
+				B = color.b;
+				A = color.a;
+			}
+#endif
+
+#if USE_WINDOWS
+			/// <summary>
+			/// Конструктор инициализирует объект класса указанными параметрами.
+			/// </summary>
+			/// <param name="color">Цвет WPF.</param>
+			public TColor(System.Windows.Media.Color color)
+			{
+				R = color.R;
+				G = color.G;
+				B = color.B;
+				A = color.A;
+			}
+#endif
+#if USE_GDI
+			/// <summary>
+			/// Конструктор инициализирует объект класса указанными параметрами.
+			/// </summary>
+			/// <param name="color">Цвет WPF.</param>
+			public TColor(System.Drawing.Color color)
+			{
+				R = color.R;
+				G = color.G;
+				B = color.B;
+				A = color.A;
+			}
+#endif
+#if USE_SHARPDX
+			/// <summary>
+			/// Конструктор инициализирует объект класса указанными параметрами.
+			/// </summary>
+			/// <param name="color">Цвет SharpDX.</param>
+			public TColor(SharpDX.Color color)
+			{
+				R = color.R;
+				G = color.G;
+				B = color.B;
+				A = color.A;
+			}
+#endif
+		#endregion
+
+		#region System methods
+		/// <summary>
+		/// Проверяет равен ли текущий объект другому объекту того же типа.
+		/// </summary>
+		/// <param name="obj">Сравниваемый объект.</param>
+		/// <returns>Статус равенства объектов.</returns>
+		public override readonly bool Equals(object? obj)
+		{
+			if (obj is TColor color)
+			{
+				return Equals(color);
+			}
+			return base.Equals(obj);
+		}
+
+		/// <summary>
+		/// Проверка равенства цветов по значению.
+		/// </summary>
+		/// <param name="other">Сравниваемый цвет.</param>
+		/// <returns>Статус равенства цветов.</returns>
+#if NET45 || UNITY_2017_1_OR_NEWER
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+		public readonly bool Equals(TColor other)
+		{
+			return R == other.R && G == other.G && B == other.B && A == other.A;
+		}
+
+		/// <summary>
+		/// Сравнение цветов для упорядочивания.
+		/// </summary>
+		/// <param name="other">Сравниваемый цвет.</param>
+		/// <returns>Статус сравнения цветов.</returns>
+		public readonly int CompareTo(TColor other)
+		{
+			if (R > other.R)
+			{
+				return 1;
+			}
+			else
+			{
+				if (R == other.R && G > other.G)
+				{
+					return 1;
+				}
+				else
+				{
+					return 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Получение хеш-кода цвета.
+		/// </summary>
+		/// <returns>Хеш-код цвета.</returns>
+		public override readonly int GetHashCode()
+		{
+			unchecked
+			{
+				var hash_code = R.GetHashCode();
+				hash_code = (hash_code * 397) ^ G.GetHashCode();
+				hash_code = (hash_code * 397) ^ B.GetHashCode();
+				hash_code = (hash_code * 397) ^ A.GetHashCode();
+				return hash_code;
+			}
+		}
+
+		/// <summary>
+		/// Полное копирование цвета.
+		/// </summary>
+		/// <returns>Копия цвета.</returns>
+		public readonly object Clone()
+		{
+			return MemberwiseClone();
+		}
+
+		/// <summary>
+		/// Преобразование к текстовому представлению.
+		/// </summary>
+		/// <returns>Текстовое представление цвета с указанием значений компонентов.</returns>
+		public override readonly string ToString()
+		{
+			return string.Format(ToStringFormat, A, R, G, B);
+		}
+		#endregion
+
+		#region Operators
+		/// <summary>
+		/// Сравнение объектов на равенство.
+		/// </summary>
+		/// <param name="left">Первый объект.</param>
+		/// <param name="right">Второй объект.</param>
+		/// <returns>Статус равенства.</returns>
+		public static bool operator ==(TColor left, TColor right)
+		{
+			return left.Equals(right);
+		}
+
+		/// <summary>
+		/// Сравнение объектов на неравенство.
+		/// </summary>
+		/// <param name="left">Первый объект.</param>
+		/// <param name="right">Второй объект.</param>
+		/// <returns>Статус неравенство.</returns>
+		public static bool operator !=(TColor left, TColor right)
+		{
+			return !(left == right);
+		}
+
+		public static TColor operator +(TColor left, TColor right)
+		{
+			return TColor.Add(left, right);
+		}
+
+		public static TColor operator -(TColor left, TColor right)
+		{
+			return TColor.Subtract(left, right);
+		}
+
+        public static TColor operator *(TColor left, TColor right)
+        {
+            return TColor.Modulate(left, right);
+        }
+
+        public static TColor operator *(TColor left, float right)
+        {
+            return TColor.Scale(left, right);
+        }
+
+        public static TColor operator *(TColor left, double right)
+        {
+            return TColor.Scale(left, (float)right);
+        }
+        #endregion
+
+        #region Operators conversion 
+#if UNITY_2017_1_OR_NEWER
+			/// <summary>
+			/// Неявное преобразование в объект типа <see cref="UnityEngine.Color32">.
+			/// </summary>
+			/// <param name="color">Цвет.</param>
+			/// <returns>Объект <see cref="UnityEngine.Color32">.</returns>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public static implicit operator UnityEngine.Color32(TColor color)
+			{
+				return new UnityEngine.Color32(color.R, color.G, color.B, color.A);
+			}
+
+			/// <summary>
+			/// Неявное преобразование в объект типа <see cref="UnityEngine.Color">.
+			/// </summary>
+			/// <param name="color">Цвет.</param>
+			/// <returns>Объект <see cref="UnityEngine.Color">.</returns>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public static implicit operator UnityEngine.Color(TColor color)
+			{
+				return new UnityEngine.Color((color.R / 255.0f), (color.G / 255.0f), 
+					(color.B / 255.0f), (color.A / 255.0f));
+			}
+#endif
+#if USE_WINDOWS
+			/// <summary>
+			/// Неявное преобразование в объект типа <see cref="System.Windows.Media.Color">.
+			/// </summary>
+			/// <param name="color">Цвет.</param>
+			/// <returns>Объект <see cref="System.Windows.Media.Color">.</returns>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public static implicit operator System.Windows.Media.Color(TColor color)
+			{
+				return (System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B));
+			}
+#endif
+#if USE_GDI
+			/// <summary>
+			/// Неявное преобразование в объект типа <see cref="System.Drawing.Color">.
+			/// </summary>
+			/// <param name="color">Цвет.</param>
+			/// <returns>Объект <see cref="System.Drawing.Color">.</returns>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public static implicit operator System.Drawing.Color(TColor color)
+			{
+				return (System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B));
+			}
+#endif
+#if USE_SHARPDX
+			/// <summary>
+			/// Неявное преобразование в объект типа <see cref="SharpDX.Color">.
+			/// </summary>
+			/// <param name="color">Цвет.</param>
+			/// <returns>Объект <see cref="SharpDX.Color">.</returns>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public unsafe static implicit operator SharpDX.Color(TColor color)
+			{
+				return (*(SharpDX.Color*)&color);
+			}
+
+			/// <summary>
+			/// Неявное преобразование в объект типа <see cref="SharpDX.Color">.
+			/// </summary>
+			/// <param name="color">Цвет.</param>
+			/// <returns>Объект <see cref="SharpDX.Color">.</returns>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public static implicit operator SharpDX.Color4(TColor color)
+			{
+				return (new SharpDX.Color4(color.RedComponent, color.GreenComponent, color.BlueComponent, color.AlphaComponent));
+			}
+
+			/// <summary>
+			/// Неявное преобразование в объект типа <see cref="SharpDX.RawColorBGRA">.
+			/// </summary>
+			/// <param name="color">Цвет.</param>
+			/// <returns>Объект <see cref="SharpDX.RawColorBGRA">.</returns>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public static implicit operator global::SharpDX.Mathematics.Interop.RawColorBGRA(TColor value)
+			{
+				return (new SharpDX.Mathematics.Interop.RawColorBGRA(value.B, value.G, value.R, value.A));
+			}
+
+			/// <summary>
+			/// Неявное преобразование в объект типа <see cref="SharpDX.RawColor4">.
+			/// </summary>
+			/// <param name="color">Цвет.</param>
+			/// <returns>Объект <see cref="SharpDX.RawColor4">.</returns>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public static implicit operator SharpDX.Mathematics.Interop.RawColor4(TColor color)
+			{
+				return (new SharpDX.Mathematics.Interop.RawColor4(color.RedComponent, color.GreenComponent,
+					color.BlueComponent, color.AlphaComponent));
+			}
+#endif
+        #endregion
+
+        #region Indexer
+        /// <summary>
+        /// Индексация компонентов цвета на основе индекса.
+        /// </summary>
+        /// <param name="index">Индекс компонента.</param>
+        /// <returns>Компонента цвета.</returns>
+        public byte this[int index]
+		{
+			readonly get
+			{
+				switch (index)
+				{
+					case 0: return R;
+					case 1: return G;
+					case 2: return B;
+					default: return A;
+				}
+			}
+
+			set
+			{
+				switch (index)
+				{
+					case 0: R = value; break;
+					case 1: G = value; break;
+					case 2: B = value; break;
+					default: A = value; break;
+				}
+			}
+		}
+		#endregion
+
+		#region Main methods
+		/// <summary>
+		/// Получение яркости цвета в модели(HSB).
+		/// </summary>
+		/// <returns>Яркость цвета в модели(HSB).</returns>
+		public readonly float GetBrightness()
+		{
+			var r = R / 255.0f;
+			var g = G / 255.0f;
+			var b = B / 255.0f;
+
+			float max, min;
+
+			max = r; min = r;
+
+			if (g > max) max = g;
+			if (b > max) max = b;
+
+			if (g < min) min = g;
+			if (b < min) min = b;
+
+			return (max + min) / 2;
+		}
+
+		/// <summary>
+		/// Получение оттенка цвета в модели(HSB).
+		/// </summary>
+		/// <returns>Оттенок цвета в модели(HSB).</returns>
+		public readonly float GetHue()
+		{
+			if (R == G && G == B)
+			{
+				return 0; // 0 makes as good an UNDEFINED value as any
+			}
+
+			var r = R / 255.0f;
+			var g = G / 255.0f;
+			var b = B / 255.0f;
+
+			float max, min;
+			float delta;
+			var hue = 0.0f;
+
+			max = r; min = r;
+
+			if (g > max) max = g;
+			if (b > max) max = b;
+
+			if (g < min) min = g;
+			if (b < min) min = b;
+
+			delta = max - min;
+
+			if (r == max)
+			{
+				hue = (g - b) / delta;
+			}
+			else if (g == max)
+			{
+				hue = 2 + ((b - r) / delta);
+			}
+			else if (b == max)
+			{
+				hue = 4 + ((r - g) / delta);
+			}
+			hue *= 60;
+
+			if (hue < 0.0f)
+			{
+				hue += 360.0f;
+			}
+
+			return hue;
+		}
+
+		/// <summary>
+		/// Получение насыщенности цвета в модели(HSB).
+		/// </summary>
+		/// <returns>Насыщенность цвета в модели(HSB).</returns>
+		public readonly float GetSaturation()
+		{
+			var r = R / 255.0f;
+			var g = G / 255.0f;
+			var b = B / 255.0f;
+
+			float max, min;
+			float l, s = 0;
+
+			max = r; min = r;
+
+			if (g > max) max = g;
+			if (b > max) max = b;
+
+			if (g < min) min = g;
+			if (b < min) min = b;
+
+			// if max == min, then there is no color and
+			// the saturation is zero.
+			//
+			if (max != min)
+			{
+				l = (max + min) / 2;
+
+				if (l <= .5)
+				{
+					s = (max - min) / (max + min);
+				}
+				else
+				{
+					s = (max - min) / (2 - max - min);
+				}
+			}
+			return s;
+		}
+
+		/// <summary>
+		/// Сериализация цвета в строку.
+		/// </summary>
+		/// <returns>Строка данных.</returns>
+		public readonly string SerializeToString()
+		{
+			return string.Format("{0},{1},{2},{3}", R, G, B, A);
+		}
+
+		/// <summary>
+		/// Преобразование к цвету в формате RGBA.
+		/// </summary>
+		/// <returns>Цвет в формате RGBA.</returns>
+		public readonly int ToRGBA()
+		{
+			return (R << 24) | (G << 16) | (B << 8) | A;
+		}
+
+		/// <summary>
+		/// Преобразование к текстовому представлению в шестнадцатеричном формате в порядке RGBA.
+		/// </summary>
+		/// <returns>Текстовое представление цвета.</returns>
+		public readonly string ToStringHEX()
+		{
+			return string.Format("{0:x2}{1:x2}{2:x2}{3:x2}", R, G, B, A);
+		}
+		#endregion
+	}
+
+	/// <summary>
+	/// Статический класс определяющий константы цвета. 
+	/// </summary>
+	public static class XColors
+	{
 		/// <summary>
 		/// Нулевой цвет.
 		/// </summary>
@@ -734,889 +1650,10 @@ namespace Lotus.Core
 		/// Цвет - YellowGreen.
 		/// </summary>
 		public static readonly TColor YellowGreen = TColor.FromBGRA(0xFF9ACD32);
-		#endregion
-
-		#region Static methods
-		/// <summary>
-		/// Преобразование к допустимому значению компоненты цвета.
-		/// </summary>
-		/// <param name="component">Значение.</param>
-		/// <returns>Допустимое значение компоненты цвета.</returns>
-		private static byte ToByte(double component)
-		{
-			var value = (int)(component * 255.0);
-			return ToByte(value);
-		}
-
-		/// <summary>
-		/// Преобразование к допустимому значению компоненты цвета.
-		/// </summary>
-		/// <param name="component">Значение.</param>
-		/// <returns>Допустимое значение компоненты цвета.</returns>
-		private static byte ToByte(float component)
-		{
-			var value = (int)(component * 255.0f);
-			return ToByte(value);
-		}
-
-		/// <summary>
-		/// Преобразование к допустимому значению компоненты цвета.
-		/// </summary>
-		/// <param name="value">Значение.</param>
-		/// <returns>Допустимое значение компоненты цвета.</returns>
-		public static byte ToByte(int value)
-		{
-			return (byte)(value < 0 ? 0 : value > 255 ? 255 : value);
-		}
-
-		/// <summary>
-		/// Сложение цвета.
-		/// </summary>
-		/// <param name="a">Первый цвет.</param>
-		/// <param name="b">Второй цвет.</param>
-		/// <param name="result">Результирующий цвет.</param>
-		public static void Add(ref TColor a, ref TColor b, out TColor result)
-		{
-			result.A = (byte)(a.A + b.A);
-			result.R = (byte)(a.R + b.R);
-			result.G = (byte)(a.G + b.G);
-			result.B = (byte)(a.B + b.B);
-		}
-
-		/// <summary>
-		/// Сложение цвета.
-		/// </summary>
-		/// <param name="a">Первый цвет.</param>
-		/// <param name="b">Второй цвет.</param>
-		/// <returns>Результирующий цвет.</returns>
-		public static TColor Add(TColor a, TColor b)
-		{
-			return new TColor(a.R + b.R, a.G + b.G, a.B + b.B, a.A + b.A);
-		}
-
-		/// <summary>
-		/// Вычитание цвета.
-		/// </summary>
-		/// <param name="a">Первый цвет.</param>
-		/// <param name="b">Второй цвет.</param>
-		/// <param name="result">Результирующий цвет.</param>
-		public static void Subtract(ref TColor a, ref TColor b, out TColor result)
-		{
-			result.A = (byte)(a.A - b.A);
-			result.R = (byte)(a.R - b.R);
-			result.G = (byte)(a.G - b.G);
-			result.B = (byte)(a.B - b.B);
-		}
-
-		/// <summary>
-		/// Вычитание цвета.
-		/// </summary>
-		/// <param name="a">Первый цвет.</param>
-		/// <param name="b">Второй цвет.</param>
-		/// <returns>Результирующий цвет.</returns>
-		public static TColor Subtract(TColor a, TColor b)
-		{
-			return new TColor(a.R - b.R, a.G - b.G, a.B - b.B, a.A - b.A);
-		}
-
-		/// <summary>
-		/// Модуляция цвета.
-		/// </summary>
-		/// <param name="a">Первый цвет.</param>
-		/// <param name="b">Второй цвет.</param>
-		/// <param name="result">Результирующий цвет.</param>
-		public static void Modulate(ref TColor a, ref TColor b, out TColor result)
-		{
-			result.A = (byte)(a.A * b.A / 255.0f);
-			result.R = (byte)(a.R * b.R / 255.0f);
-			result.G = (byte)(a.G * b.G / 255.0f);
-			result.B = (byte)(a.B * b.B / 255.0f);
-		}
-
-		/// <summary>
-		/// Модуляция цвета.
-		/// </summary>
-		/// <param name="a">Первый цвет.</param>
-		/// <param name="b">Второй цвет.</param>
-		/// <returns>Результирующий цвет.</returns>
-		public static TColor Modulate(TColor a, TColor b)
-		{
-			return new TColor(a.R * b.R, a.G * b.G, a.B * b.B, a.A * b.A);
-		}
-
-		/// <summary>
-		/// Масштабирование компонентов цвета.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <param name="scale">Коэффициент масштаба.</param>
-		/// <param name="result">Результирующий цвет.</param>
-		public static void Scale(ref TColor value, float scale, out TColor result)
-		{
-			result.A = (byte)(value.A * scale);
-			result.R = (byte)(value.R * scale);
-			result.G = (byte)(value.G * scale);
-			result.B = (byte)(value.B * scale);
-		}
-
-		/// <summary>
-		/// Масштабирование компонентов цвета.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <param name="scale">Коэффициент масштаба.</param>
-		/// <returns>Результирующий цвет.</returns>
-		public static TColor Scale(TColor value, float scale)
-		{
-			return new TColor((byte)(value.R * scale), (byte)(value.G * scale), (byte)(value.B * scale), (byte)(value.A * scale));
-		}
-
-		/// <summary>
-		/// Инвертированный цвет.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <param name="result">Результирующий цвет.</param>
-		public static void Negate(ref TColor value, out TColor result)
-		{
-			result.A = (byte)(255 - value.A);
-			result.R = (byte)(255 - value.R);
-			result.G = (byte)(255 - value.G);
-			result.B = (byte)(255 - value.B);
-		}
-
-		/// <summary>
-		/// Инвертированный цвет.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <returns>Результирующий цвет.</returns>
-		public static TColor Negate(TColor value)
-		{
-			return new TColor(255 - value.R, 255 - value.G, 255 - value.B, 255 - value.A);
-		}
-
-		/// <summary>
-		/// Ограничение цвета в пределах указанного диапазона.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <param name="min">Минимальное значение.</param>
-		/// <param name="max">Максимальное значение.</param>
-		/// <param name="result">Результирующий цвет.</param>
-		public static void Clamp(ref TColor value, ref TColor min, ref TColor max, out TColor result)
-		{
-			var alpha = value.A;
-			alpha = alpha > max.A ? max.A : alpha;
-			alpha = alpha < min.A ? min.A : alpha;
-
-			var red = value.R;
-			red = red > max.R ? max.R : red;
-			red = red < min.R ? min.R : red;
-
-			var green = value.G;
-			green = green > max.G ? max.G : green;
-			green = green < min.G ? min.G : green;
-
-			var blue = value.B;
-			blue = blue > max.B ? max.B : blue;
-			blue = blue < min.B ? min.B : blue;
-
-			result = new TColor(red, green, blue, alpha);
-		}
-
-		/// <summary>
-		/// Формирование цвет из упакованного формата BGRA целого числа.
-		/// </summary>
-		/// <param name="color">Значение цвета в BGRA формате целого числа.</param>
-		/// <returns>Цвет.</returns>
-		public static TColor FromBGRA(int color)
-		{
-			return new TColor((byte)((color >> 16) & 255), (byte)((color >> 8) & 255), (byte)(color & 255), (byte)((color >> 24) & 255));
-		}
-
-		/// <summary>
-		/// Формирование цвет из упакованного формата BGRA целого числа.
-		/// </summary>
-		/// <param name="color">Значение цвета в BGRA формате целого числа.</param>
-		/// <returns>Цвет.</returns>
-		public static TColor FromBGRA(uint color)
-		{
-			return new TColor((byte)((color >> 16) & 255), (byte)((color >> 8) & 255), (byte)(color & 255), (byte)((color >> 24) & 255));
-		}
-
-		/// <summary>
-		/// Формирование цвет из упакованного формата ABGR целого числа.
-		/// </summary>
-		/// <param name="color">Значение цвета в ABGR формате целого числа.</param>
-		/// <returns>Цвет.</returns>
-		public static TColor FromABGR(int color)
-		{
-			return new TColor((byte)(color >> 24), (byte)(color >> 16), (byte)(color >> 8), (byte)color);
-		}
-
-		/// <summary>
-		/// Формирование цвет из упакованного формата RGBA целого числа.
-		/// </summary>
-		/// <param name="color">Значение цвета в RGBA формате целого числа.</param>
-		/// <returns>Цвет.</returns>
-		public static TColor FromRGBA(int color)
-		{
-			return new TColor(color);
-		}
-
-		/// <summary>
-		/// Регулировка контрастности цвета.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <param name="contrast">Коэффициент контраста.</param>
-		/// <param name="result">Результирующий цвет.</param>
-		public static void AdjustContrast(ref TColor value, float contrast, out TColor result)
-		{
-			result.A = value.A;
-			result.R = ToByte(0.5f + (contrast * ((value.R / 255.0f) - 0.5f)));
-			result.G = ToByte(0.5f + (contrast * ((value.G / 255.0f) - 0.5f)));
-			result.B = ToByte(0.5f + (contrast * ((value.B / 255.0f) - 0.5f)));
-		}
-
-		/// <summary>
-		/// Регулировка контрастности цвета.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <param name="contrast">Коэффициент контраста.</param>
-		/// <returns>Результирующий цвет.</returns>
-		public static TColor AdjustContrast(TColor value, float contrast)
-		{
-			return new TColor(
-				ToByte(0.5f + (contrast * ((value.R / 255.0f) - 0.5f))),
-				ToByte(0.5f + (contrast * ((value.G / 255.0f) - 0.5f))),
-				ToByte(0.5f + (contrast * ((value.B / 255.0f) - 0.5f))),
-				value.A);
-		}
-
-		/// <summary>
-		/// Регулировка насыщенности цвета.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <param name="saturation">Коэффициент насыщенности.</param>
-		/// <param name="result">Результирующий цвет.</param>
-		public static void AdjustSaturation(ref TColor value, float saturation, out TColor result)
-		{
-			var grey = (value.R / 255.0f * 0.2125f) + (value.G / 255.0f * 0.7154f) + (value.B / 255.0f * 0.0721f);
-
-			result.A = value.A;
-			result.R = ToByte(grey + (saturation * ((value.R / 255.0f) - grey)));
-			result.G = ToByte(grey + (saturation * ((value.G / 255.0f) - grey)));
-			result.B = ToByte(grey + (saturation * ((value.B / 255.0f) - grey)));
-		}
-
-		/// <summary>
-		/// Регулировка насыщенности цвета.
-		/// </summary>
-		/// <param name="value">Цвет.</param>
-		/// <param name="saturation">Коэффициент насыщенности.</param>
-		/// <returns>Результирующий цвет.</returns>
-		public static TColor AdjustSaturation(TColor value, float saturation)
-		{
-			var grey = (value.R / 255.0f * 0.2125f) + (value.G / 255.0f * 0.7154f) + (value.B / 255.0f * 0.0721f);
-
-			return new TColor(
-				ToByte(grey + (saturation * ((value.R / 255.0f) - grey))),
-				ToByte(grey + (saturation * ((value.G / 255.0f) - grey))),
-				ToByte(grey + (saturation * ((value.B / 255.0f) - grey))),
-				value.A);
-		}
-
-		/// <summary>
-		/// Аппроксимация равенства значений цвета.
-		/// </summary>
-		/// <param name="a">Первое значение.</param>
-		/// <param name="b">Второе значение.</param>
-		/// <param name="epsilon">Погрешность.</param>
-		/// <returns>Статус равенства значений цвета.</returns>
-		public static bool Approximately(in TColor a, in TColor b, int epsilon = 1)
-		{
-			return Math.Abs(a.R - b.G) <= epsilon &&
-				   Math.Abs(a.G - b.G) <= epsilon &&
-				   Math.Abs(a.B - b.B) <= epsilon;
-		}
-
-		/// <summary>
-		/// Десереализация цвета из строки.
-		/// </summary>
-		/// <param name="data">Строка данных.</param>
-		/// <returns>Цвет.</returns>
-		public static TColor DeserializeFromString(string data)
-		{
-			var color = new TColor();
-			var color_data = data.Split(',');
-			color.R = byte.Parse(color_data[0]);
-			color.G = byte.Parse(color_data[1]);
-			color.B = byte.Parse(color_data[2]);
-			color.A = byte.Parse(color_data[3]);
-			return color;
-		}
-		#endregion
-
-		#region Fields
-		/// <summary>
-		/// Красная компонента цвета.
-		/// </summary>
-		public byte R;
-
-		/// <summary>
-		/// Зеленая компонента цвета.
-		/// </summary>
-		public byte G;
-
-		/// <summary>
-		/// Синяя компонента цвета.
-		/// </summary>
-		public byte B;
-
-		/// <summary>
-		/// Альфа компонента цвета.
-		/// </summary>
-		public byte A;
-		#endregion
-
-		#region Properties
-		/// <summary>
-		/// Красная компонента цвета.
-		/// </summary>
-		public float RedComponent
-		{
-			readonly get { return R / 255.0f; }
-			set { R = ToByte(value); }
-		}
-
-		/// <summary>
-		/// Зеленая компонента цвета.
-		/// </summary>
-		public float GreenComponent
-		{
-			readonly get { return G / 255.0f; }
-			set { G = ToByte(value); }
-		}
-
-		/// <summary>
-		/// Синяя компонента цвета.
-		/// </summary>
-		public float BlueComponent
-		{
-			readonly get { return B / 255.0f; }
-			set { B = ToByte(value); }
-		}
-
-		/// <summary>
-		/// Альфа компонента цвета.
-		/// </summary>
-		public float AlphaComponent
-		{
-			readonly get { return A / 255.0f; }
-			set { A = ToByte(value); }
-		}
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Конструктор инициализирует объект класса указанными параметрами.
-		/// </summary>
-		/// <param name="value">Компонент цвета.</param>
-		public TColor(byte value)
-		{
-			A = R = G = B = value;
-		}
-
-		/// <summary>
-		/// Конструктор инициализирует объект класса указанными параметрами.
-		/// </summary>
-		/// <param name="red">Красная компонента цвета.</param>
-		/// <param name="green">Зеленая компонента цвета.</param>
-		/// <param name="blue">Синяя компонента цвета.</param>
-		/// <param name="alpha">Альфа компонента цвета.</param>
-		public TColor(byte red, byte green, byte blue, byte alpha = 255)
-		{
-			R = red;
-			G = green;
-			B = blue;
-			A = alpha;
-		}
-
-		/// <summary>
-		/// Конструктор инициализирует объект класса указанными параметрами.
-		/// </summary>
-		/// <param name="red">Красная компонента цвета.</param>
-		/// <param name="green">Зеленая компонента цвета.</param>
-		/// <param name="blue">Синяя компонента цвета.</param>
-		/// <param name="alpha">Альфа компонента цвета.</param>
-		public TColor(float red, float green, float blue, float alpha = 1.0f)
-		{
-			R = ToByte(red);
-			G = ToByte(green);
-			B = ToByte(blue);
-			A = ToByte(alpha);
-		}
-
-		/// <summary>
-		/// Конструктор инициализирует объект класса указанными параметрами.
-		/// </summary>
-		/// <param name="rgba">Значение цвета в RGBA формате целого числа.</param>
-		public TColor(int rgba)
-		{
-			A = (byte)((rgba >> 24) & 255);
-			B = (byte)((rgba >> 16) & 255);
-			G = (byte)((rgba >> 8) & 255);
-			R = (byte)(rgba & 255);
-		}
-#if UNITY_2017_1_OR_NEWER
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами.
-			/// </summary>
-			/// <param name="color">Цвет UnityEngine.</param>
-			public TColor(UnityEngine.Color color)
-			{
-				R = (Byte)(color.r * 255);
-				G = (Byte)(color.g * 255);
-				B = (Byte)(color.b * 255);
-				A = (Byte)(color.a * 255);
-			}
-
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами.
-			/// </summary>
-			/// <param name="color">Цвет UnityEngine.</param>
-			public TColor(UnityEngine.Color32 color)
-			{
-				R = color.r;
-				G = color.g;
-				B = color.b;
-				A = color.a;
-			}
-#endif
-
-#if USE_WINDOWS
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами.
-			/// </summary>
-			/// <param name="color">Цвет WPF.</param>
-			public TColor(System.Windows.Media.Color color)
-			{
-				R = color.R;
-				G = color.G;
-				B = color.B;
-				A = color.A;
-			}
-#endif
-#if USE_GDI
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами.
-			/// </summary>
-			/// <param name="color">Цвет WPF.</param>
-			public TColor(System.Drawing.Color color)
-			{
-				R = color.R;
-				G = color.G;
-				B = color.B;
-				A = color.A;
-			}
-#endif
-#if USE_SHARPDX
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами.
-			/// </summary>
-			/// <param name="color">Цвет SharpDX.</param>
-			public TColor(SharpDX.Color color)
-			{
-				R = color.R;
-				G = color.G;
-				B = color.B;
-				A = color.A;
-			}
-#endif
-		#endregion
-
-		#region System methods
-		/// <summary>
-		/// Проверяет равен ли текущий объект другому объекту того же типа.
-		/// </summary>
-		/// <param name="obj">Сравниваемый объект.</param>
-		/// <returns>Статус равенства объектов.</returns>
-		public override readonly bool Equals(object? obj)
-		{
-			if (obj is TColor color)
-			{
-				return Equals(color);
-			}
-			return base.Equals(obj);
-		}
-
-		/// <summary>
-		/// Проверка равенства цветов по значению.
-		/// </summary>
-		/// <param name="other">Сравниваемый цвет.</param>
-		/// <returns>Статус равенства цветов.</returns>
-#if NET45 || UNITY_2017_1_OR_NEWER
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
-		public readonly bool Equals(TColor other)
-		{
-			return R == other.R && G == other.G && B == other.B && A == other.A;
-		}
-
-		/// <summary>
-		/// Сравнение цветов для упорядочивания.
-		/// </summary>
-		/// <param name="other">Сравниваемый цвет.</param>
-		/// <returns>Статус сравнения цветов.</returns>
-		public readonly int CompareTo(TColor other)
-		{
-			if (R > other.R)
-			{
-				return 1;
-			}
-			else
-			{
-				if (R == other.R && G > other.G)
-				{
-					return 1;
-				}
-				else
-				{
-					return 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Получение хеш-кода цвета.
-		/// </summary>
-		/// <returns>Хеш-код цвета.</returns>
-		public override readonly int GetHashCode()
-		{
-			unchecked
-			{
-				var hash_code = R.GetHashCode();
-				hash_code = (hash_code * 397) ^ G.GetHashCode();
-				hash_code = (hash_code * 397) ^ B.GetHashCode();
-				hash_code = (hash_code * 397) ^ A.GetHashCode();
-				return hash_code;
-			}
-		}
-
-		/// <summary>
-		/// Полное копирование цвета.
-		/// </summary>
-		/// <returns>Копия цвета.</returns>
-		public readonly object Clone()
-		{
-			return MemberwiseClone();
-		}
-
-		/// <summary>
-		/// Преобразование к текстовому представлению.
-		/// </summary>
-		/// <returns>Текстовое представление цвета с указанием значений компонентов.</returns>
-		public override readonly string ToString()
-		{
-			return string.Format(ToStringFormat, A, R, G, B);
-		}
-		#endregion
-
-		#region Operators
-		/// <summary>
-		/// Сравнение объектов на равенство.
-		/// </summary>
-		/// <param name="left">Первый объект.</param>
-		/// <param name="right">Второй объект.</param>
-		/// <returns>Статус равенства.</returns>
-		public static bool operator ==(TColor left, TColor right)
-		{
-			return left.Equals(right);
-		}
-
-		/// <summary>
-		/// Сравнение объектов на неравенство.
-		/// </summary>
-		/// <param name="left">Первый объект.</param>
-		/// <param name="right">Второй объект.</param>
-		/// <returns>Статус неравенство.</returns>
-		public static bool operator !=(TColor left, TColor right)
-		{
-			return !(left == right);
-		}
-		#endregion
-
-		#region Operators conversion 
-#if UNITY_2017_1_OR_NEWER
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="UnityEngine.Color32">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="UnityEngine.Color32">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public static implicit operator UnityEngine.Color32(TColor color)
-			{
-				return new UnityEngine.Color32(color.R, color.G, color.B, color.A);
-			}
-
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="UnityEngine.Color">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="UnityEngine.Color">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public static implicit operator UnityEngine.Color(TColor color)
-			{
-				return new UnityEngine.Color((color.R / 255.0f), (color.G / 255.0f), 
-					(color.B / 255.0f), (color.A / 255.0f));
-			}
-#endif
-#if USE_WINDOWS
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="System.Windows.Media.Color">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="System.Windows.Media.Color">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public static implicit operator System.Windows.Media.Color(TColor color)
-			{
-				return (System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B));
-			}
-#endif
-#if USE_GDI
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="System.Drawing.Color">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="System.Drawing.Color">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public static implicit operator System.Drawing.Color(TColor color)
-			{
-				return (System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B));
-			}
-#endif
-#if USE_SHARPDX
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="SharpDX.Color">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="SharpDX.Color">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public unsafe static implicit operator SharpDX.Color(TColor color)
-			{
-				return (*(SharpDX.Color*)&color);
-			}
-
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="SharpDX.Color">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="SharpDX.Color">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public static implicit operator SharpDX.Color4(TColor color)
-			{
-				return (new SharpDX.Color4(color.RedComponent, color.GreenComponent, color.BlueComponent, color.AlphaComponent));
-			}
-
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="SharpDX.RawColorBGRA">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="SharpDX.RawColorBGRA">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public static implicit operator global::SharpDX.Mathematics.Interop.RawColorBGRA(TColor value)
-			{
-				return (new SharpDX.Mathematics.Interop.RawColorBGRA(value.B, value.G, value.R, value.A));
-			}
-
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="SharpDX.RawColor4">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="SharpDX.RawColor4">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public static implicit operator SharpDX.Mathematics.Interop.RawColor4(TColor color)
-			{
-				return (new SharpDX.Mathematics.Interop.RawColor4(color.RedComponent, color.GreenComponent,
-					color.BlueComponent, color.AlphaComponent));
-			}
-#endif
-		#endregion
-
-		#region Indexer
-		/// <summary>
-		/// Индексация компонентов цвета на основе индекса.
-		/// </summary>
-		/// <param name="index">Индекс компонента.</param>
-		/// <returns>Компонента цвета.</returns>
-		public byte this[int index]
-		{
-			readonly get
-			{
-				switch (index)
-				{
-					case 0: return R;
-					case 1: return G;
-					case 2: return B;
-					default: return A;
-				}
-			}
-
-			set
-			{
-				switch (index)
-				{
-					case 0: R = value; break;
-					case 1: G = value; break;
-					case 2: B = value; break;
-					default: A = value; break;
-				}
-			}
-		}
-		#endregion
-
-		#region Main methods
-		/// <summary>
-		/// Получение яркости цвета в модели(HSB).
-		/// </summary>
-		/// <returns>Яркость цвета в модели(HSB).</returns>
-		public readonly float GetBrightness()
-		{
-			var r = R / 255.0f;
-			var g = G / 255.0f;
-			var b = B / 255.0f;
-
-			float max, min;
-
-			max = r; min = r;
-
-			if (g > max) max = g;
-			if (b > max) max = b;
-
-			if (g < min) min = g;
-			if (b < min) min = b;
-
-			return (max + min) / 2;
-		}
-
-		/// <summary>
-		/// Получение оттенка цвета в модели(HSB).
-		/// </summary>
-		/// <returns>Оттенок цвета в модели(HSB).</returns>
-		public readonly float GetHue()
-		{
-			if (R == G && G == B)
-			{
-				return 0; // 0 makes as good an UNDEFINED value as any
-			}
-
-			var r = R / 255.0f;
-			var g = G / 255.0f;
-			var b = B / 255.0f;
-
-			float max, min;
-			float delta;
-			var hue = 0.0f;
-
-			max = r; min = r;
-
-			if (g > max) max = g;
-			if (b > max) max = b;
-
-			if (g < min) min = g;
-			if (b < min) min = b;
-
-			delta = max - min;
-
-			if (r == max)
-			{
-				hue = (g - b) / delta;
-			}
-			else if (g == max)
-			{
-				hue = 2 + ((b - r) / delta);
-			}
-			else if (b == max)
-			{
-				hue = 4 + ((r - g) / delta);
-			}
-			hue *= 60;
-
-			if (hue < 0.0f)
-			{
-				hue += 360.0f;
-			}
-
-			return hue;
-		}
-
-		/// <summary>
-		/// Получение насыщенности цвета в модели(HSB).
-		/// </summary>
-		/// <returns>Насыщенность цвета в модели(HSB).</returns>
-		public readonly float GetSaturation()
-		{
-			var r = R / 255.0f;
-			var g = G / 255.0f;
-			var b = B / 255.0f;
-
-			float max, min;
-			float l, s = 0;
-
-			max = r; min = r;
-
-			if (g > max) max = g;
-			if (b > max) max = b;
-
-			if (g < min) min = g;
-			if (b < min) min = b;
-
-			// if max == min, then there is no color and
-			// the saturation is zero.
-			//
-			if (max != min)
-			{
-				l = (max + min) / 2;
-
-				if (l <= .5)
-				{
-					s = (max - min) / (max + min);
-				}
-				else
-				{
-					s = (max - min) / (2 - max - min);
-				}
-			}
-			return s;
-		}
-
-		/// <summary>
-		/// Сериализация цвета в строку.
-		/// </summary>
-		/// <returns>Строка данных.</returns>
-		public readonly string SerializeToString()
-		{
-			return string.Format("{0},{1},{2},{3}", R, G, B, A);
-		}
-
-		/// <summary>
-		/// Преобразование к цвету в формате RGBA.
-		/// </summary>
-		/// <returns>Цвет в формате RGBA.</returns>
-		public readonly int ToRGBA()
-		{
-			return (R << 24) | (G << 16) | (B << 8) | A;
-		}
-
-		/// <summary>
-		/// Преобразование к текстовому представлению в шестнадцатеричном формате в порядке RGBA.
-		/// </summary>
-		/// <returns>Текстовое представление цвета.</returns>
-		public readonly string ToStringHEX()
-		{
-			return string.Format("{0:x2}{1:x2}{2:x2}{3:x2}", R, G, B, A);
-		}
-		#endregion
 	}
 
 	/// <summary>
-	/// Статический класс реализующий константы цвета в формате BGRA.
+	/// Статический класс определяющий константы цвета в формате BGRA.
 	/// </summary>
 	public static class XColorBGRA
 	{

@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 
 namespace Lotus.Core
 {
@@ -10,11 +11,15 @@ namespace Lotus.Core
 	/// <remarks>
 	/// Одна из основных функций поверхности - интерполяция данных при изменении ее размеров.
 	/// </remarks>
-	/// <typeparam name="TType">Тип данных поверхности.</typeparam>
-	public class SurfaceData<TType> where TType : struct
+	/// <typeparam name="TNumber">Тип данных поверхности.</typeparam>
+	public class SurfaceData<TNumber> where TNumber : struct,
+        IEquatable<TNumber>,
+		IAdditionOperators<TNumber, TNumber, TNumber>,
+		ISubtractionOperators<TNumber, TNumber, TNumber>,
+		IMultiplyOperators<TNumber, TNumber, TNumber>
 	{
 		#region Fields
-		protected internal TType[] _data;
+		protected internal TNumber[] _data;
 		protected internal int _width;
 		protected internal int _height;
 		protected internal int _rank;
@@ -24,7 +29,7 @@ namespace Lotus.Core
 		/// <summary>
 		/// Данные поверхности.
 		/// </summary>
-		public TType[] Data
+		public TNumber[] Data
 		{
 			get { return _data; }
 		}
@@ -71,7 +76,7 @@ namespace Lotus.Core
 		/// </summary>
 		public SurfaceData()
 		{
-			_data = new TType[] { default };
+			_data = new TNumber[] { default };
 			_width = 1;
 			_height = 1;
 			_rank = 1;
@@ -81,9 +86,9 @@ namespace Lotus.Core
 		/// Конструктор инициализирует данные поверхности указанными значениями.
 		/// </summary>
 		/// <param name="data">Данные.</param>
-		public SurfaceData(TType[] data)
+		public SurfaceData(TNumber[] data)
 		{
-			_data = new TType[data.Length];
+			_data = new TNumber[data.Length];
 			for (var i = 0; i < _data.Length; i++)
 			{
 				_data[i] = data[i];
@@ -98,7 +103,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="index">Индекс элемента.</param>
 		/// <returns>Элемент поверхности.</returns>
-		public TType this[int index]
+		public TNumber this[int index]
 		{
 			get
 			{
@@ -116,7 +121,7 @@ namespace Lotus.Core
 		/// <param name="x">Индекс элемента по x.</param>
 		/// <param name="y">Индекс элемента по y.</param>
 		/// <returns>Элемент поверхности.</returns>
-		public TType this[int x, int y]
+		public TNumber this[int x, int y]
 		{
 			get
 			{
@@ -139,7 +144,7 @@ namespace Lotus.Core
 		{
 			if (saveOldData)
 			{
-				var data = new TType[count];
+				var data = new TNumber[count];
 				var count_copy = count;
 				if (count > Count)
 				{
@@ -154,7 +159,7 @@ namespace Lotus.Core
 			}
 			else
 			{
-				_data = new TType[count];
+				_data = new TNumber[count];
 			}
 		}
 
@@ -162,9 +167,9 @@ namespace Lotus.Core
 		/// Установка данных из источника.
 		/// </summary>
 		/// <param name="data">Данные.</param>
-		public void SetFromData(TType[] data)
+		public void SetFromData(TNumber[] data)
 		{
-			_data = new TType[data.Length];
+			_data = new TNumber[data.Length];
 			for (var i = 0; i < _data.Length; i++)
 			{
 				_data[i] = data[i];
@@ -178,7 +183,7 @@ namespace Lotus.Core
 		/// <param name="newHeight">Новая высота.</param>
 		public void Resize(int newWidth, int newHeight)
 		{
-			var temp_data = new TType[newWidth * newHeight];
+			var temp_data = new TNumber[newWidth * newHeight];
 
 			var factor_x = _width / (double)newWidth;
 			var factor_y = _height / (double)newHeight;
@@ -189,7 +194,7 @@ namespace Lotus.Core
 				{
 					var gx = (int)Math.Floor(x * factor_x);
 					var gy = (int)Math.Floor(y * factor_y);
-					TType val = this[gx, gy];
+					TNumber val = this[gx, gy];
 					temp_data[x + (y * newWidth)] = val;
 				}
 			}
@@ -199,35 +204,7 @@ namespace Lotus.Core
 			_height = newHeight;
 			_rank = 2;
 		}
-		#endregion
-	}
 
-	/// <summary>
-	/// Поверхность данных для целых значения.
-	/// </summary>
-	public class CSurfaceInt : SurfaceData<int>
-	{
-		#region Constructors
-		/// <summary>
-		/// Конструктор инициализирует данные поверхности предустановленными значениями.
-		/// </summary>
-		public CSurfaceInt()
-		{
-
-		}
-
-		/// <summary>
-		/// Конструктор инициализирует данные поверхности указанными значениями.
-		/// </summary>
-		/// <param name="data">Данные.</param>
-		public CSurfaceInt(int[] data)
-		{
-			SetFromData(data);
-			_rank = 1;
-		}
-		#endregion
-
-		#region Main methods
 		/// <summary>
 		/// Линейная интерполяция значений поверхности.
 		/// </summary>
@@ -236,7 +213,7 @@ namespace Lotus.Core
 		/// <param name="useBilinear">Использовать билинейную интерполяцию.</param>
 		public void Resize(int newWidth, int newHeight, bool useBilinear)
 		{
-			var temp_data = new int[newWidth * newHeight];
+			var temp_data = new TNumber[newWidth * newHeight];
 
 			var factor_x = _width / (double)newWidth;
 			var factor_y = _height / (double)newHeight;
@@ -245,8 +222,8 @@ namespace Lotus.Core
 			{
 				double fraction_x, fraction_y, one_minus_x, one_minus_y;
 				int ceil_x, ceil_y, floor_x, floor_y;
-				int c1, c2, c3, c4;
-				int b1, b2;
+				TNumber c1, c2, c3, c4;
+				TNumber b1, b2;
 
 				for (var x = 0; x < newWidth; ++x)
 				{
@@ -278,10 +255,9 @@ namespace Lotus.Core
 						c3 = this[floor_x, ceil_y];
 						c4 = this[ceil_x, ceil_y];
 
-						b1 = (int)((one_minus_x * c1) + (fraction_x * c2));
-						b2 = (int)((one_minus_x * c3) + (fraction_x * c4));
-						var val = (int)((one_minus_y * b1) + (fraction_y * b2));
-
+						b1 = (GetScale(c1, one_minus_x) + GetScale(c2, fraction_x));
+						b2 = (GetScale(c3, one_minus_x) + GetScale(c4, fraction_x));
+						var val = (GetScale(b1, one_minus_y) + GetScale(b2, fraction_y));
 
 						temp_data[x + (y * newWidth)] = val;
 					}
@@ -305,6 +281,57 @@ namespace Lotus.Core
 			_width = newWidth;
 			_height = newHeight;
 			_rank = 2;
+		}
+
+		/// <summary>
+		/// Получить масштабированное значение.
+		/// </summary>
+		/// <param name="value">Значение.</param>
+		/// <param name="scale">Масштаб.</param>
+		/// <returns>Масштабированное значение.</returns>
+		protected virtual TNumber GetScale(TNumber value, double scale)
+		{
+			return value;
+		}
+		#endregion
+	}
+
+	/// <summary>
+	/// Поверхность данных для целых значения.
+	/// </summary>
+	public class CSurfaceInt : SurfaceData<int>
+	{
+		#region Constructors
+		/// <summary>
+		/// Конструктор инициализирует данные поверхности предустановленными значениями.
+		/// </summary>
+		public CSurfaceInt()
+		{
+
+		}
+
+		/// <summary>
+		/// Конструктор инициализирует данные поверхности указанными значениями.
+		/// </summary>
+		/// <param name="data">Данные.</param>
+		public CSurfaceInt(int[] data)
+		{
+			SetFromData(data);
+			_rank = 1;
+		}
+
+		#endregion
+
+		#region Main methods
+		/// <summary>
+		/// Получить масштабированное значение.
+		/// </summary>
+		/// <param name="value">Значение.</param>
+		/// <param name="scale">Масштаб.</param>
+		/// <returns>Масштабированное значение.</returns>
+		protected override int GetScale(int value, double scale)
+		{
+			return (int)(value * scale);
 		}
 		#endregion
 	}
@@ -401,82 +428,18 @@ namespace Lotus.Core
 			}
 		}
 #endif
+		#endregion
+
+		#region Main methods
 		/// <summary>
-		/// Линейная интерполяция значений поверхности.
+		/// Получить масштабированное значение.
 		/// </summary>
-		/// <param name="newWidth">Новая ширина.</param>
-		/// <param name="newHeight">Новая высота.</param>
-		/// <param name="useBilinear">Использовать билинейную интерполяцию.</param>
-		public void Resize(int newWidth, int newHeight, bool useBilinear)
+		/// <param name="value">Значение.</param>
+		/// <param name="scale">Масштаб.</param>
+		/// <returns>Масштабированное значение.</returns>
+		protected override TColor GetScale(TColor value, double scale)
 		{
-			var temp_data = new TColor[newWidth * newHeight];
-
-			var factor_x = _width / (float)newWidth;
-			var factor_y = _height / (float)newHeight;
-
-			if (useBilinear)
-			{
-				float fraction_x, fraction_y, one_minus_x, one_minus_y;
-				int ceil_x, ceil_y, floor_x, floor_y;
-				TColor c1, c2, c3, c4;
-				TColor b1, b2;
-
-				for (var x = 0; x < newWidth; ++x)
-				{
-					for (var y = 0; y < newHeight; ++y)
-					{
-						// Setup
-						floor_x = (int)Math.Floor(x * factor_x);
-						floor_y = (int)Math.Floor(y * factor_y);
-
-						ceil_x = floor_x + 1;
-						if (ceil_x >= _width)
-						{
-							ceil_x = floor_x;
-						}
-
-						ceil_y = floor_y + 1;
-						if (ceil_y >= _height)
-						{
-							ceil_y = floor_y;
-						}
-
-						fraction_x = (x * factor_x) - floor_x;
-						fraction_y = (y * factor_y) - floor_y;
-						one_minus_x = 1.0f - fraction_x;
-						one_minus_y = 1.0f - fraction_y;
-
-						c1 = this[floor_x, floor_y];
-						c2 = this[ceil_x, floor_y];
-						c3 = this[floor_x, ceil_y];
-						c4 = this[ceil_x, ceil_y];
-
-						b1 = TColor.Add(TColor.Scale(c1, one_minus_x), TColor.Scale(c2, fraction_x));
-						b2 = TColor.Add(TColor.Scale(c3, one_minus_x), TColor.Scale(c4, fraction_x));
-						var val = TColor.Add(TColor.Scale(b1, one_minus_y), TColor.Scale(b2, fraction_y));
-
-						temp_data[x + (y * newWidth)] = val;
-					}
-				}
-			}
-			else
-			{
-				for (var x = 0; x < newWidth; ++x)
-				{
-					for (var y = 0; y < newHeight; ++y)
-					{
-						var gx = (int)Math.Floor(x * factor_x);
-						var gy = (int)Math.Floor(y * factor_y);
-						TColor val = this[gx, gy];
-						temp_data[x + (y * newWidth)] = val;
-					}
-				}
-			}
-
-			_data = temp_data;
-			_width = newWidth;
-			_height = newHeight;
-			_rank = 2;
+			return (value * scale);
 		}
 		#endregion
 	}

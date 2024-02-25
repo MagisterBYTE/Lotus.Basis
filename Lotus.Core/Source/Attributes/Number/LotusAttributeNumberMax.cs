@@ -1,4 +1,4 @@
-﻿//=====================================================================================================================
+//=====================================================================================================================
 // Проект: Модуль базового ядра
 // Раздел: Подсистема атрибутов
 // Подраздел: Атрибуты для управления и оформления числовых свойств/полей
@@ -17,23 +17,23 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreAttribute
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreAttribute
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Атрибут для определения максимального значения величины
-        /// </summary>
-        /// <remarks>
-        /// В зависимости от способа задания значение распространяется либо на весь тип, либо к каждому экземпляру
-        /// </remarks>
-        //-------------------------------------------------------------------------------------------------------------
-        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Атрибут для определения максимального значения величины
+		/// </summary>
+		/// <remarks>
+		/// В зависимости от способа задания значение распространяется либо на весь тип, либо к каждому экземпляру
+		/// </remarks>
+		//-------------------------------------------------------------------------------------------------------------
+		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
 		public sealed class LotusMaxValueAttribute : Attribute
 		{
 			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly System.Object _maxValue;
-			internal readonly String _memberName;
+			internal readonly object _maxValue;
+			internal readonly string _memberName;
 			internal readonly TInspectorMemberType _memberType;
 			#endregion
 
@@ -41,7 +41,7 @@ namespace Lotus
 			/// <summary>
 			/// Максимальное значение величины
 			/// </summary>
-			public System.Object MaxValue
+			public object MaxValue
 			{
 				get { return _maxValue; }
 			}
@@ -49,7 +49,7 @@ namespace Lotus
 			/// <summary>
 			/// Имя члена объекта содержащие максимальное значение
 			/// </summary>
-			public String MemberName
+			public string MemberName
 			{
 				get { return _memberName; }
 			}
@@ -70,7 +70,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="maxValue">Максимальное значение величины</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMaxValueAttribute(System.Object maxValue)
+			public LotusMaxValueAttribute(object maxValue)
 			{
 				_maxValue = maxValue;
 			}
@@ -82,7 +82,7 @@ namespace Lotus
 			/// <param name="memberName">Имя члена объекта содержащие максимальное значение</param>
 			/// <param name="memberType">Тип члена объекта</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMaxValueAttribute(String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
+			public LotusMaxValueAttribute(string memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
 				_memberName = memberName;
 				_memberType = memberType;
@@ -96,7 +96,7 @@ namespace Lotus
 			/// <param name="memberName">Имя члена типа содержащие максимальное значение</param>
 			/// <param name="memberType">Тип члена типа</param>
 			//---------------------------------------------------------------------------------------------------------
-			public LotusMaxValueAttribute(Type type, String memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
+			public LotusMaxValueAttribute(Type type, string memberName, TInspectorMemberType memberType = TInspectorMemberType.Method)
 			{
 				_maxValue = type;
 				_memberName = memberName;

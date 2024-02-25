@@ -47,7 +47,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="capacity">Емкость</param>
 			//---------------------------------------------------------------------------------------------------------
-			public DictionaryList(Int32 capacity)
+			public DictionaryList(int capacity)
 				: base(capacity)
 			{
 
@@ -86,7 +86,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус наличия</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean ContainsValue(in TValue item)
+			public bool ContainsValue(in TValue item)
 			{
 				var result = false;
 
@@ -108,7 +108,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус успешности удаления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean RemoveValue(in TValue item)
+			public bool RemoveValue(in TValue item)
 			{
 				var result = false;
 
@@ -141,7 +141,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус успешности удаления</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean RemoveValue(in TKey key, in TValue item)
+			public bool RemoveValue(in TKey key, in TValue item)
 			{
 				var result = false;
 

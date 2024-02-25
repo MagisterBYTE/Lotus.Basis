@@ -49,7 +49,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="maxCount">Максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public StackArray(Int32 maxCount)
+			public StackArray(int maxCount)
 				: base(maxCount)
 			{
 			}

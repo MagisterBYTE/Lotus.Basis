@@ -18,17 +18,17 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreCollections
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreCollections
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// HashSetArray на основе массива
-        /// </summary>
-        /// <typeparam name="TItem">Тип элемента</typeparam>
-        //-------------------------------------------------------------------------------------------------------------
-        [Serializable]
-        public class HashSetArray<TItem> : ISet<TItem>, IReadOnlyCollection<TItem>
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// HashSetArray на основе массива
+		/// </summary>
+		/// <typeparam name="TItem">Тип элемента</typeparam>
+		//-------------------------------------------------------------------------------------------------------------
+		[Serializable]
+		public class HashSetArray<TItem> : ISet<TItem>, IReadOnlyCollection<TItem>
 		{
 			#region ======================================= ВНУТРЕННИЕ ТИПЫ ===========================================
 			//---------------------------------------------------------------------------------------------------------
@@ -40,8 +40,8 @@ namespace Lotus
 			{
 				#region ======================================= ДАННЫЕ ================================================
 				private HashSetArray<TItem> _set;
-				private Int32 _index;
-				private Int32 _version;
+				private int _index;
+				private int _version;
 				private TItem? _current;
 				#endregion
 
@@ -60,7 +60,7 @@ namespace Lotus
 				/// <summary>
 				/// Текущий элемент
 				/// </summary>
-				readonly Object IEnumerator.Current
+				readonly object IEnumerator.Current
 				{
 					get
 					{
@@ -101,7 +101,7 @@ namespace Lotus
 				/// </summary>
 				/// <returns>Возможность перехода к следующему элементу списка</returns>
 				//-----------------------------------------------------------------------------------------------------
-				public Boolean MoveNext()
+				public bool MoveNext()
 				{
 					if (_version != _set._version)
 					{
@@ -148,50 +148,50 @@ namespace Lotus
 			//---------------------------------------------------------------------------------------------------------
 			protected internal struct Slot
 			{
-				internal Int32 hashCode;      // Lower 31 bits of hash code, -1 if unused
-				internal Int32 next;          // Index of next entry, -1 if last
+				internal int hashCode;      // Lower 31 bits of hash code, -1 if unused
+				internal int next;          // Index of next entry, -1 if last
 				internal TItem value;
 			}
 			#endregion
 
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			// store lower 31 bits of hash code
-			private const Int32 Lower31BitMask = 0x7FFFFFFF;
+			private const int Lower31BitMask = 0x7FFFFFFF;
 
 			// cutoff poInt32, above which we won't do stackallocs. This corresponds to 100 integers.
-			private const Int32 StackAllocThreshold = 100;
+			private const int StackAllocThreshold = 100;
 
 			// when constructing a hashset from an existing collection, it may contain duplicates, 
 			// so this is used as the max acceptable excess ratio of capacity to count. Note that
 			// this is only used on the ctor and not to automatically shrink if the hashset has, e.g,
 			// a lot of adds followed by removes. Users must explicitly shrink by calling TrimExcess.
 			// This is set to 3 because capacity is acceptable as 2x rounded up to nearest prime.
-			private const Int32 ShrinkThreshold = 3;
+			private const int ShrinkThreshold = 3;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
-			protected internal Int32[] _buckets;
+			protected internal int[] _buckets;
 			protected internal Slot[] _slots;
-			protected internal Int32 _count;
-			protected internal Int32 _lastIndex;
-			protected internal Int32 _freeList;
+			protected internal int _count;
+			protected internal int _lastIndex;
+			protected internal int _freeList;
 			protected internal IEqualityComparer<TItem> _comparer;
-			protected internal Int32 _version;
+			protected internal int _version;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
 			/// <summary>
 			/// Number of elements in this hashset
 			/// </summary>
-			public Int32 Count
+			public int Count
 			{
 				get { return _count; }
 			}
 
-			/// <summary>
-			/// Whether this is readonly
-			/// </summary>
-			Boolean ICollection<TItem>.IsReadOnly
+            /// <summary>
+            /// Whether this is readonly
+            /// </summary>
+            bool ICollection<TItem>.IsReadOnly
 			{
 				get { return false; }
 			}
@@ -214,7 +214,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="capacity">Начальная максимальная емкость списка</param>
 			//---------------------------------------------------------------------------------------------------------
-			public HashSetArray(Int32 capacity)
+			public HashSetArray(int capacity)
 				: this(capacity, EqualityComparer<TItem>.Default)
 			{
 			}
@@ -290,7 +290,7 @@ namespace Lotus
 			/// <param name="capacity">Начальная максимальная емкость списка</param>
 			/// <param name="comparer">Компаратор</param>
 			//---------------------------------------------------------------------------------------------------------
-			public HashSetArray(Int32 capacity, IEqualityComparer<TItem> comparer)
+			public HashSetArray(int capacity, IEqualityComparer<TItem> comparer)
 				: this(comparer)
 			{
 				if (capacity > 0)
@@ -341,7 +341,7 @@ namespace Lotus
 			/// <param name="item">item to check for containment</param>
 			/// <returns>true if item contained; false if not</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Contains(TItem item)
+			public bool Contains(TItem item)
 			{
 				if (_buckets != null)
 				{
@@ -366,7 +366,7 @@ namespace Lotus
 			/// <param name="array">array to add items to</param>
 			/// <param name="arrayIndex">index to start at</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CopyTo(TItem[] array, Int32 arrayIndex)
+			public void CopyTo(TItem[] array, int arrayIndex)
 			{
 				CopyTo(array, arrayIndex, _count);
 			}
@@ -378,7 +378,7 @@ namespace Lotus
 			/// <param name="item">item to remove</param>
 			/// <returns>true if removed; false if not (i.e. if the item wasn't in the HashSetArray)</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Remove(TItem item)
+			public bool Remove(TItem item)
 			{
 				if (_buckets != null)
 				{
@@ -461,13 +461,12 @@ namespace Lotus
 			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
 			//---------------------------------------------------------------------------------------------------------
 			/// <summary>
-			/// Add item to this HashSetArray. Returns bool indicating whether item was added (won't be 
-			/// added if already present)
+			/// Add item to this HashSetArray. Returns bool indicating whether item was added (won't be added if already present)
 			/// </summary>
 			/// <param name="item"></param>
 			/// <returns>true if added, false if already present</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Add(TItem item)
+			public bool Add(TItem item)
 			{
 				return AddIfNotPresent(in item);
 			}
@@ -480,7 +479,7 @@ namespace Lotus
 			/// <param name="item"></param>
 			/// <returns>true if added, false if already present</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Add(in TItem item)
+			public bool Add(in TItem item)
 			{
 				return AddIfNotPresent(in item);
 			}
@@ -499,7 +498,7 @@ namespace Lotus
 			/// comparer functions indicate they are equal.
 			/// </remarks>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean TryGetValue(in TItem equalValue, out TItem? actualValue)
+			public bool TryGetValue(in TItem equalValue, out TItem? actualValue)
 			{
 				if (_buckets != null)
 				{
@@ -662,7 +661,7 @@ namespace Lotus
 			/// <param name="other"></param>
 			/// <returns>true if this is a subset of other; false if not</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean IsSubsetOf(IEnumerable<TItem> other)
+			public bool IsSubsetOf(IEnumerable<TItem> other)
 			{
 				// The empty set is a subset of any set
 				if (_count == 0)
@@ -710,7 +709,7 @@ namespace Lotus
 			/// <param name="other"></param>
 			/// <returns>true if this is a proper subset of other; false if not</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean IsProperSubsetOf(IEnumerable<TItem> other)
+			public bool IsProperSubsetOf(IEnumerable<TItem> other)
 			{
 				var otherAsCollection = other as ICollection<TItem>;
 				if (otherAsCollection != null)
@@ -755,7 +754,7 @@ namespace Lotus
 			/// <param name="other"></param>
 			/// <returns>true if this is a superset of other; false if not</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean IsSupersetOf(IEnumerable<TItem> other)
+			public bool IsSupersetOf(IEnumerable<TItem> other)
 			{
 				// try to fall out early based on counts
 				var otherAsCollection = other as ICollection<TItem>;
@@ -803,7 +802,7 @@ namespace Lotus
 			/// <param name="other"></param>
 			/// <returns>true if this is a proper superset of other; false if not</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean IsProperSupersetOf(IEnumerable<TItem> other)
+			public bool IsProperSupersetOf(IEnumerable<TItem> other)
 			{
 				// the empty set isn't a proper superset of any set.
 				if (_count == 0)
@@ -846,7 +845,7 @@ namespace Lotus
 			/// <param name="other"></param>
 			/// <returns>true if these have at least one common element; false if disjoInt32</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean Overlaps(IEnumerable<TItem> other)
+			public bool Overlaps(IEnumerable<TItem> other)
 			{
 				if (_count == 0)
 				{
@@ -871,7 +870,7 @@ namespace Lotus
 			/// <param name="other"></param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Boolean SetEquals(IEnumerable<TItem> other)
+			public bool SetEquals(IEnumerable<TItem> other)
 			{
 				var otherAsSet = other as HashSetArray<TItem>;
 				// faster if other is a hashset and we're using same equality comparer
@@ -924,7 +923,7 @@ namespace Lotus
 			/// <param name="arrayIndex"></param>
 			/// <param name="count"></param>
 			//---------------------------------------------------------------------------------------------------------
-			public void CopyTo(TItem[] array, Int32 arrayIndex, Int32 count)
+			public void CopyTo(TItem[] array, int arrayIndex, int count)
 			{
 				// check array index valid index Int32o array
 				if (arrayIndex < 0)
@@ -964,7 +963,7 @@ namespace Lotus
 			/// <param name="match"></param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 RemoveWhere(Predicate<TItem> match)
+			public int RemoveWhere(Predicate<TItem> match)
 			{
 				var numRemoved = 0;
 				for (var i = 0; i < _lastIndex; i++)
@@ -1018,8 +1017,8 @@ namespace Lotus
 				if (_count == 0)
 				{
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-                    // if count is zero, clear references
-                    _buckets = null;
+					// if count is zero, clear references
+					_buckets = null;
 					_slots = null;
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 					_version++;
@@ -1030,7 +1029,7 @@ namespace Lotus
 					// caused fragmentation
 					var newSize = XHashHelpers.GetPrime(_count);
 					var newSlots = new Slot[newSize];
-					var newBuckets = new Int32[newSize];
+					var newBuckets = new int[newSize];
 
 					// move down slots and rehash at the same time. newIndex keeps track of current 
 					// position in newSlots array
@@ -1082,7 +1081,7 @@ namespace Lotus
 
 				if (threshold >= capacity)
 				{
-					_buckets = (Int32[])source._buckets.Clone();
+					_buckets = (int[])source._buckets.Clone();
 					_slots = (Slot[])source._slots.Clone();
 
 					_lastIndex = source._lastIndex;
@@ -1115,11 +1114,11 @@ namespace Lotus
 			/// </summary>
 			/// <param name="capacity"></param>
 			//---------------------------------------------------------------------------------------------------------
-			private void Initialize(Int32 capacity)
+			private void Initialize(int capacity)
 			{
 				var size = XHashHelpers.GetPrime(capacity);
 
-				_buckets = new Int32[size];
+				_buckets = new int[size];
 				_slots = new Slot[size];
 			}
 
@@ -1150,7 +1149,7 @@ namespace Lotus
 			/// instead of this method.
 			/// </summary>
 			//---------------------------------------------------------------------------------------------------------
-			private void SetCapacity(Int32 newSize, bool forceNewHashCodes)
+			private void SetCapacity(int newSize, bool forceNewHashCodes)
 			{
 				var newSlots = new Slot[newSize];
 				if (_slots != null)
@@ -1169,7 +1168,7 @@ namespace Lotus
 					}
 				}
 
-				var newBuckets = new Int32[newSize];
+				var newBuckets = new int[newSize];
 				for (var i = 0; i < _lastIndex; i++)
 				{
 					var bucket = newSlots[i].hashCode % newSize;
@@ -1188,7 +1187,7 @@ namespace Lotus
 			/// <param name="value">value to find</param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			private Boolean AddIfNotPresent(in TItem value)
+			private bool AddIfNotPresent(in TItem value)
 			{
 				if (_buckets == null)
 				{
@@ -1206,7 +1205,7 @@ namespace Lotus
 					}
 				}
 
-				Int32 index;
+                int index;
 				if (_freeList >= 0)
 				{
 					index = _freeList;
@@ -1242,7 +1241,7 @@ namespace Lotus
 			/// <param name="hashCode"></param>
 			/// <param name="value"></param>
 			//---------------------------------------------------------------------------------------------------------
-			private void AddValue(Int32 index, Int32 hashCode, in TItem value)
+			private void AddValue(int index, int hashCode, in TItem value)
 			{
 				var bucket = hashCode % _buckets.Length;
 
@@ -1261,7 +1260,7 @@ namespace Lotus
 			/// <param name="other"></param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			private Boolean ContainsAllElements(IEnumerable<TItem> other)
+			private bool ContainsAllElements(IEnumerable<TItem> other)
 			{
 				foreach (TItem element in other)
 				{
@@ -1288,7 +1287,7 @@ namespace Lotus
 			/// <param name="other"></param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			private Boolean IsSubsetOfHashSetWithSameEC(HashSetArray<TItem> other)
+			private bool IsSubsetOfHashSetWithSameEC(HashSetArray<TItem> other)
 			{
 
 				foreach (TItem item in this)
@@ -1331,7 +1330,7 @@ namespace Lotus
 			/// <param name="item"></param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			private Int32 InternalIndexOf(in TItem item)
+			private int InternalIndexOf(in TItem item)
 			{
 				var hashCode = InternalGetHashCode(item);
 				for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
@@ -1378,7 +1377,7 @@ namespace Lotus
 			/// <param name="location"></param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			private Boolean AddOrGetLocation(in TItem value, out Int32 location)
+			private bool AddOrGetLocation(in TItem value, out int location)
 			{
 				var hashCode = InternalGetHashCode(value);
 				var bucket = hashCode % _buckets.Length;
@@ -1390,7 +1389,7 @@ namespace Lotus
 						return false; //already present
 					}
 				}
-				Int32 index;
+                int index;
 				if (_freeList >= 0)
 				{
 					index = _freeList;
@@ -1443,7 +1442,7 @@ namespace Lotus
 			/// <param name="comparer"></param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			internal static Boolean HashSetEquals(HashSetArray<TItem> set1, HashSetArray<TItem> set2, IEqualityComparer<TItem> comparer)
+			internal static bool HashSetEquals(HashSetArray<TItem> set1, HashSetArray<TItem> set2, IEqualityComparer<TItem> comparer)
 			{
 				// handle null cases first
 				if (set1 == null)
@@ -1505,7 +1504,7 @@ namespace Lotus
 			/// <param name="set2"></param>
 			/// <returns></returns>
 			//---------------------------------------------------------------------------------------------------------
-			private static Boolean AreEqualityComparersEqual(HashSetArray<TItem> set1, HashSetArray<TItem> set2)
+			private static bool AreEqualityComparersEqual(HashSetArray<TItem> set1, HashSetArray<TItem> set2)
 			{
 				return set1.Comparer.Equals(set2.Comparer);
 			}
@@ -1517,7 +1516,7 @@ namespace Lotus
 			/// <param name="item"></param>
 			/// <returns>hash code</returns>
 			//---------------------------------------------------------------------------------------------------------
-			private Int32 InternalGetHashCode(in TItem item)
+			private int InternalGetHashCode(in TItem item)
 			{
 				if (item == null)
 				{

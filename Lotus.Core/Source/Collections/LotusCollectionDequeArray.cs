@@ -16,25 +16,25 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreCollections
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreCollections
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Двусторонняя очередь на основе массива
-        /// </summary>
-        /// <remarks>
-        /// Реализация двусторонней очереди на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
-        /// с учетом особенности реализации двусторонней очереди
-        /// </remarks>
-        /// <typeparam name="TItem">Тип элемента очереди</typeparam>
-        //-------------------------------------------------------------------------------------------------------------
-        [Serializable]
-        public class DequeArray<TItem> : ListArray<TItem>
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Двусторонняя очередь на основе массива
+		/// </summary>
+		/// <remarks>
+		/// Реализация двусторонней очереди на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
+		/// с учетом особенности реализации двусторонней очереди
+		/// </remarks>
+		/// <typeparam name="TItem">Тип элемента очереди</typeparam>
+		//-------------------------------------------------------------------------------------------------------------
+		[Serializable]
+		public class DequeArray<TItem> : ListArray<TItem>
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32 _startOffset;
+			protected internal int _startOffset;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -44,7 +44,7 @@ namespace Lotus
 			/// <summary>
 			/// Начальное смещение для формирование очереди
 			/// </summary>
-			public Int32 StartOffset
+			public int StartOffset
 			{
 				get { return _startOffset; }
 			}
@@ -68,7 +68,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="maxCount">Максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public DequeArray(Int32 maxCount)
+			public DequeArray(int maxCount)
 				: base(maxCount)
 			{
 				_startOffset = maxCount / 2;
@@ -83,7 +83,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Элемент очереди</returns>
 			//---------------------------------------------------------------------------------------------------------
-			new public TItem this[Int32 index]
+			new public TItem this[int index]
 			{
 				get { return _arrayOfItems[(_startOffset + index) % _maxCount]!; }
 				set
@@ -101,7 +101,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента очереди</param>
 			/// <returns>Элемент очереди</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem GetElement(Int32 index)
+			public TItem GetElement(int index)
 			{
 				return _arrayOfItems[(_startOffset + index) % _maxCount]!;
 			}
@@ -269,7 +269,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус наличия</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public new Boolean Contains(in TItem item)
+			public new bool Contains(in TItem item)
 			{
 				var index = _startOffset;
 				var count = _count;

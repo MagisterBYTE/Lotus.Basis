@@ -16,21 +16,21 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreCollections
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreCollections
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Очередь с приоритетом
-        /// </summary>
-        /// <remarks>
-        /// Реализация очереди с приоритетом на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
-        /// с учетом особенности очереди с приоритетом
-        /// </remarks>
-        /// <typeparam name="TItem">Тип элемента очереди</typeparam>
-        //-------------------------------------------------------------------------------------------------------------
-        [Serializable]
-        public class PriorityQueue<TItem> : ListArray<TItem>
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Очередь с приоритетом
+		/// </summary>
+		/// <remarks>
+		/// Реализация очереди с приоритетом на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
+		/// с учетом особенности очереди с приоритетом
+		/// </remarks>
+		/// <typeparam name="TItem">Тип элемента очереди</typeparam>
+		//-------------------------------------------------------------------------------------------------------------
+		[Serializable]
+		public class PriorityQueue<TItem> : ListArray<TItem>
 		{
 			#region ======================================= КОНСТРУКТОРЫ ==============================================
 			//---------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="maxCount">Максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public PriorityQueue(Int32 maxCount)
+			public PriorityQueue(int maxCount)
 				: base(maxCount)
 			{
 
@@ -65,7 +65,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Элемент очереди</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public new TItem? this[Int32 index]
+			public new TItem? this[int index]
 			{
 				get { return _arrayOfItems[index]; }
 				set
@@ -84,10 +84,10 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Индекс в очереди где находится элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 Push(in TItem? item)
+			public int Push(in TItem? item)
 			{
 				var count = Count;
-				Int32 middle;
+                int middle;
 				Add(item);
 				do
 				{
@@ -120,7 +120,7 @@ namespace Lotus
 			public TItem? Pop()
 			{
 				TItem? result = _arrayOfItems[0];
-				Int32 p = 0, p1, p2, pn;
+                int p = 0, p1, p2, pn;
 				_arrayOfItems[0] = _arrayOfItems[Count - 1];
 				RemoveAt(Count - 1);
 				do
@@ -171,10 +171,10 @@ namespace Lotus
 			/// </remarks>
 			/// <param name="index">Индекс элемента</param>
 			//---------------------------------------------------------------------------------------------------------
-			public void Update(Int32 index)
+			public void Update(int index)
 			{
-				Int32 p = index, pn;
-				Int32 p1, p2;
+                int p = index, pn;
+                int p1, p2;
 				do
 				{
 					if (p == 0)

@@ -19,30 +19,30 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreCollections
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreCollections
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
-        /// </summary>
-        //-------------------------------------------------------------------------------------------------------------
-        [Serializable]
-        public class SparseSet : IEnumerable<Int32>
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
+		/// </summary>
+		//-------------------------------------------------------------------------------------------------------------
+		[Serializable]
+		public class SparseSet : IEnumerable<int>
 		{
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			/// <summary>
 			/// Максимальное количество элементов на начальном этапе
 			/// </summary>
-			public const Int32 INIT_MAX_COUNT = 16;
+			public const int INIT_MAX_COUNT = 16;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32[] _denseItems;
-			protected internal Int32[] _sparseItems;
-			protected internal Int32 _count;
-			protected internal Int32 _maxCount;
+			protected internal int[] _denseItems;
+			protected internal int[] _sparseItems;
+			protected internal int _count;
+			protected internal int _maxCount;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -52,7 +52,7 @@ namespace Lotus
 			/// <summary>
 			/// Количество элементов
 			/// </summary>
-			public Int32 Count
+			public int Count
 			{
 				get { return _count; }
 			}
@@ -65,7 +65,7 @@ namespace Lotus
 			/// то при следующем добавления элемента в коллекцию произойдет перераспределения памяти и максимальное количество
 			/// элементов увеличится в двое.
 			/// </remarks>
-			public Int32 MaxCount
+			public int MaxCount
 			{
 				get { return _maxCount; }
 			}
@@ -73,7 +73,7 @@ namespace Lotus
 			/// <summary>
 			/// Статус пустой коллекции
 			/// </summary>
-			public Boolean IsEmpty
+			public bool IsEmpty
 			{
 				get { return _count == 0; }
 			}
@@ -86,7 +86,7 @@ namespace Lotus
 			/// и при следующем добавления элемента в коллекцию произойдет перераспределения памяти и максимальное количество 
 			/// элементов увеличится в двое
 			/// </remarks>
-			public Boolean IsFill
+			public bool IsFill
 			{
 				get { return _count == _maxCount; }
 			}
@@ -100,7 +100,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public Int32 this[Int32 index]
+			public int this[int index]
 			{
 				get { return _denseItems[index]; }
 			}
@@ -123,12 +123,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="capacity">Начальная максимальная емкость коллекции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public SparseSet(Int32 capacity)
+			public SparseSet(int capacity)
 			{
 				_maxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
 				_count = 0;
-				_denseItems = new Int32[_maxCount];
-				_sparseItems = new Int32[_maxCount];
+				_denseItems = new int[_maxCount];
+				_sparseItems = new int[_maxCount];
 			}
 			#endregion
 
@@ -139,7 +139,7 @@ namespace Lotus
 			/// </summary>
 			/// <returns>Перечислитель </returns>
 			//---------------------------------------------------------------------------------------------------------
-			public IEnumerator<Int32> GetEnumerator()
+			public IEnumerator<int> GetEnumerator()
 			{
 				var i = 0;
 				while (i < _count)
@@ -169,7 +169,7 @@ namespace Lotus
 			/// <param name="value">Значение</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void Add(Int32 value)
+			public void Add(int value)
 			{
 				if (value >= _maxCount)
 				{
@@ -197,7 +197,7 @@ namespace Lotus
 			/// <param name="values">Массив значений</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void AddValues(params Int32[] values)
+			public void AddValues(params int[] values)
 			{
 				if (_count + values.Length >= _maxCount)
 				{
@@ -233,7 +233,7 @@ namespace Lotus
 			/// <param name="value">Значение</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void Remove(Int32 value)
+			public void Remove(int value)
 			{
 				if (Contains(value))
 				{
@@ -254,7 +254,7 @@ namespace Lotus
 			/// <param name="values">Массив значений</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void RemoveValues(params Int32[] values)
+			public void RemoveValues(params int[] values)
 			{
 				for (var i = 0; i < values.Length; i++)
 				{
@@ -280,7 +280,7 @@ namespace Lotus
 			/// <returns>Статус наличия значения</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public Boolean Contains(Int32 value)
+			public bool Contains(int value)
 			{
 				if (value >= _maxCount || value < 0)
 				{
@@ -309,29 +309,29 @@ namespace Lotus
 			#endregion
 		}
 
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
-        /// </summary>
-        /// <typeparam name="TItem">Тип элемента списка</typeparam>
-        //-------------------------------------------------------------------------------------------------------------
-        [Serializable]
-        public class SparseSet<TItem> : IEnumerable<TItem>
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве
+		/// </summary>
+		/// <typeparam name="TItem">Тип элемента списка</typeparam>
+		//-------------------------------------------------------------------------------------------------------------
+		[Serializable]
+		public class SparseSet<TItem> : IEnumerable<TItem>
 		{
 			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
 			/// <summary>
 			/// Максимальное количество элементов на начальном этапе
 			/// </summary>
-			public const Int32 INIT_MAX_COUNT = 16;
+			public const int INIT_MAX_COUNT = 16;
 			#endregion
 
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32[] _denseItems;
-			protected internal Int32[] _sparseItems;
+			protected internal int[] _denseItems;
+			protected internal int[] _sparseItems;
 			protected internal TItem[] _items;
-			protected internal Int32 _count;
-			protected internal Int32 _maxCount;
+			protected internal int _count;
+			protected internal int _maxCount;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -341,7 +341,7 @@ namespace Lotus
 			/// <summary>
 			/// Количество элементов
 			/// </summary>
-			public Int32 Count
+			public int Count
 			{
 				get { return _count; }
 			}
@@ -354,7 +354,7 @@ namespace Lotus
 			/// то при следующем добавления элемента в коллекцию произойдет перераспределения памяти и максимальное количество
 			/// элементов увеличится в двое.
 			/// </remarks>
-			public Int32 MaxCount
+			public int MaxCount
 			{
 				get { return _maxCount; }
 			}
@@ -362,7 +362,7 @@ namespace Lotus
 			/// <summary>
 			/// Статус пустой коллекции
 			/// </summary>
-			public Boolean IsEmpty
+			public bool IsEmpty
 			{
 				get { return _count == 0; }
 			}
@@ -375,7 +375,7 @@ namespace Lotus
 			/// и при следующем добавления элемента в коллекцию произойдет перераспределения памяти и максимальное количество 
 			/// элементов увеличится в двое
 			/// </remarks>
-			public Boolean IsFill
+			public bool IsFill
 			{
 				get { return _count == _maxCount; }
 			}
@@ -389,7 +389,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Элемент</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem this[Int32 index]
+			public TItem this[int index]
 			{
 				get { return _items[index]; }
 			}
@@ -412,12 +412,12 @@ namespace Lotus
 			/// </summary>
 			/// <param name="capacity">Начальная максимальная емкость коллекции</param>
 			//---------------------------------------------------------------------------------------------------------
-			public SparseSet(Int32 capacity)
+			public SparseSet(int capacity)
 			{
 				_maxCount = capacity > INIT_MAX_COUNT ? capacity : INIT_MAX_COUNT;
 				_count = 0;
-				_denseItems = new Int32[_maxCount];
-				_sparseItems = new Int32[_maxCount];
+				_denseItems = new int[_maxCount];
+				_sparseItems = new int[_maxCount];
 				_items = new TItem[_maxCount];
 			}
 			#endregion
@@ -460,7 +460,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void Add(Int32 index, in TItem item)
+			public void Add(int index, in TItem item)
 			{
 				if (index >= _maxCount)
 				{
@@ -491,7 +491,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void Remove(Int32 index)
+			public void Remove(int index)
 			{
 				if (Contains(index))
 				{
@@ -513,7 +513,7 @@ namespace Lotus
 			/// <param name="indexes">Массив индексов</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void RemoveValues(params Int32[] indexes)
+			public void RemoveValues(params int[] indexes)
 			{
 				for (var i = 0; i < indexes.Length; i++)
 				{
@@ -540,7 +540,7 @@ namespace Lotus
 			/// <returns>Статус наличия элемента</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public Boolean Contains(Int32 index)
+			public bool Contains(int index)
 			{
 				if (index >= _maxCount || index < 0)
 				{
@@ -563,7 +563,7 @@ namespace Lotus
 			/// <returns>Статус наличия элемента</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public Boolean Contains(in TItem item)
+			public bool Contains(in TItem item)
 			{
 				return Array.IndexOf(_items, item) > -1;
 			}
@@ -576,7 +576,7 @@ namespace Lotus
 			/// <returns>Ссылка на элемент коллекции</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public ref TItem GetValue(Int32 index)
+			public ref TItem GetValue(int index)
 			{
 				return ref _items[_sparseItems[index]];
 			}
@@ -589,7 +589,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public void SetValue(Int32 index, in TItem item)
+			public void SetValue(int index, in TItem item)
 			{
 				_items[_sparseItems[index]] = item;
 			}
@@ -601,7 +601,7 @@ namespace Lotus
 			/// <returns>Список индексов</returns>
 			//---------------------------------------------------------------------------------------------------------
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public Int32[] GetIndexes()
+			public int[] GetIndexes()
 			{
 				return _denseItems;
 			}

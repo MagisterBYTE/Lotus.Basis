@@ -16,26 +16,26 @@ namespace Lotus
 {
 	namespace Core
 	{
-        //-------------------------------------------------------------------------------------------------------------
-        /** \addtogroup CoreCollections
+		//-------------------------------------------------------------------------------------------------------------
+		/** \addtogroup CoreCollections
 		*@{*/
-        //-------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Очередь на основе массива
-        /// </summary>
-        /// <remarks>
-        /// Реализация очереди на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
-        /// с учетом особенности реализации очереди
-        /// </remarks>
-        /// <typeparam name="TItem">Тип элемента очереди</typeparam>
-        //-------------------------------------------------------------------------------------------------------------
-        [Serializable]
-        public class QueueArray<TItem> : ListArray<TItem>
+		//-------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// Очередь на основе массива
+		/// </summary>
+		/// <remarks>
+		/// Реализация очереди на основе массива, с полной поддержкой функциональности <see cref="ListArray{TItem}"/>
+		/// с учетом особенности реализации очереди
+		/// </remarks>
+		/// <typeparam name="TItem">Тип элемента очереди</typeparam>
+		//-------------------------------------------------------------------------------------------------------------
+		[Serializable]
+		public class QueueArray<TItem> : ListArray<TItem>
 		{
 			#region ======================================= ДАННЫЕ ====================================================
 			// Основные параметры
-			protected internal Int32 _head;
-			protected internal Int32 _tail;
+			protected internal int _head;
+			protected internal int _tail;
 			#endregion
 
 			#region ======================================= СВОЙСТВА ==================================================
@@ -45,7 +45,7 @@ namespace Lotus
 			/// <summary>
 			/// Индекс текущего элемента в начале(голове) очереди
 			/// </summary>
-			public Int32 Head
+			public int Head
 			{
 				get { return _head; }
 			}
@@ -53,7 +53,7 @@ namespace Lotus
 			/// <summary>
 			/// Индекс текущего добавленного элемента в конец(хвост) очереди
 			/// </summary>
-			public Int32 Tail
+			public int Tail
 			{
 				get { return _tail; }
 			}
@@ -78,7 +78,7 @@ namespace Lotus
 			/// </summary>
 			/// <param name="maxCount">Максимальное количество элементов</param>
 			//---------------------------------------------------------------------------------------------------------
-			public QueueArray(Int32 maxCount)
+			public QueueArray(int maxCount)
 				: base(maxCount)
 			{
 				_head = 0;
@@ -94,7 +94,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента</param>
 			/// <returns>Элемент очереди</returns>
 			//---------------------------------------------------------------------------------------------------------
-			new public TItem? this[Int32 index]
+			new public TItem? this[int index]
 			{
 				get { return _arrayOfItems[(_head + index) % _maxCount]; }
 				set
@@ -112,7 +112,7 @@ namespace Lotus
 			/// <param name="index">Индекс элемента очереди</param>
 			/// <returns>Элемент очереди</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public TItem? GetElement(Int32 index)
+			public TItem? GetElement(int index)
 			{
 				return _arrayOfItems[(_head + index) % _maxCount];
 			}
@@ -198,7 +198,7 @@ namespace Lotus
 			/// <param name="item">Элемент</param>
 			/// <returns>Статус наличия</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public new Boolean Contains(in TItem? item)
+			public new bool Contains(in TItem? item)
 			{
 				var index = _head;
 				var count = _count;

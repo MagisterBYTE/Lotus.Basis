@@ -30,7 +30,7 @@ namespace Lotus
 			/// <summary>
 			/// Массив простых чисел
 			/// </summary>
-			public static readonly Int32[] Primes = new Int32[]
+			public static readonly int[] Primes = new int[]
 			{
 				3,
 				7,
@@ -115,11 +115,11 @@ namespace Lotus
 			/// <param name="candidate">Проверяемое число</param>
 			/// <returns>Статус проверки</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Boolean IsPrime(Int32 candidate)
+			public static bool IsPrime(int candidate)
 			{
 				if ((candidate & 1) != 0)
 				{
-					var num = (Int32)Math.Sqrt(candidate);
+					var num = (int)Math.Sqrt(candidate);
 					for (var i = 3; i <= num; i += 2)
 					{
 						if (candidate % i == 0)
@@ -139,7 +139,7 @@ namespace Lotus
 			/// <param name="min">Минимальное число</param>
 			/// <returns>Ближайшее простое число</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 GetPrime(Int32 min)
+			public static int GetPrime(int min)
 			{
 				for (var i = 0; i < Primes.Length; i++)
 				{
@@ -167,7 +167,7 @@ namespace Lotus
 			/// <param name="oldSize">Предыдущий размер</param>
 			/// <returns>Большее простое число</returns>
 			//---------------------------------------------------------------------------------------------------------
-			public static Int32 ExpandPrime(Int32 oldSize)
+			public static int ExpandPrime(int oldSize)
 			{
 				var num = 2 * oldSize;
 				if (num > 2146435069 && 2146435069 > oldSize)

@@ -1,678 +1,649 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема общих типов
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusVariant.cs
-*		Универсальный тип данных.
-*		Реализация универсального типа данных с поддержкой сериализации на уровне Unity. Данный тип хранит один из возможных
-*	предопределённых типов данных.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core
 {
-	namespace Core
+	/** \addtogroup CoreCommonTypes
+	*@{*/
+	/// <summary>
+	/// Определение допустимых типов значений.
+	/// </summary>
+	/// <remarks>
+	/// Определение стандартных типов данных значения в контексте использования универсального типа.
+	/// Указанные типы данных имеют прямую поддержку в подсистеме сообщений.
+	/// Также они охватываю более 90% функциональности которая требуется в проектах с поддержкой универсального типа.
+	/// Для Unity определенна поддержка игровых объектов и наиболее распространённых ресурсов
+	/// </remarks>
+	public enum TValueType
 	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreCommonTypes
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
 		/// <summary>
-		/// Определение допустимых типов значений
+		/// Отсутствие определенного значения.
 		/// </summary>
-		/// <remarks>
-		/// Определение стандартных типов данных значения в контексте использования универсального типа.
-		/// Указанные типы данных имеют прямую поддержку в подсистеме сообщений.
-		/// Также они охватываю более 90% функциональности которая требуется в проектах с поддержкой универсального типа.
-		/// Для Unity определенна поддержка игровых объектов и наиболее распространённых ресурсов
-		/// </remarks>
-		//-------------------------------------------------------------------------------------------------------------
-		public enum TValueType
-		{
-			/// <summary>
-			/// Отсутствие определенного значения
-			/// </summary>
-			Void,
+		Void,
 
-			/// <summary>
-			/// Логический тип
-			/// </summary>
-			Boolean,
+		/// <summary>
+		/// Логический тип.
+		/// </summary>
+		Boolean,
 
-			/// <summary>
-			/// Целый тип
-			/// </summary>
-			Integer,
+		/// <summary>
+		/// Целый тип.
+		/// </summary>
+		Integer,
 
-			/// <summary>
-			/// Перечисление
-			/// </summary>
-			Enum,
+		/// <summary>
+		/// Перечисление.
+		/// </summary>
+		Enum,
 
-			/// <summary>
-			/// Вещественный тип
-			/// </summary>
-			Float,
+		/// <summary>
+		/// Вещественный тип.
+		/// </summary>
+		Float,
 
-			/// <summary>
-			/// Тип даты-времени
-			/// </summary>
-			DateTime,
+		/// <summary>
+		/// Тип даты-времени.
+		/// </summary>
+		DateTime,
 
-			/// <summary>
-			/// Строковый тип
-			/// </summary>
-			String,
+		/// <summary>
+		/// Строковый тип.
+		/// </summary>
+		String,
 
-			/// <summary>
-			/// Цвет
-			/// </summary>
-			Color,
+		/// <summary>
+		/// Цвет.
+		/// </summary>
+		Color,
 
-			/// <summary>
-			/// Двухмерный объект данных
-			/// </summary>
-			Vector2D,
+		/// <summary>
+		/// Двухмерный объект данных.
+		/// </summary>
+		Vector2D,
 
-			/// <summary>
-			/// Трехмерный объект данных
-			/// </summary>
-			Vector3D,
+		/// <summary>
+		/// Трехмерный объект данных.
+		/// </summary>
+		Vector3D,
 
-			/// <summary>
-			/// Четырехмерный объект данных
-			/// </summary>
-			Vector4D,
+		/// <summary>
+		/// Четырехмерный объект данных.
+		/// </summary>
+		Vector4D,
 
 #if UNITY_2017_1_OR_NEWER
-			/// <summary>
-			/// Игровой объект
-			/// </summary>
-			GameObject,
+		/// <summary>
+		/// Игровой объект.
+		/// </summary>
+		GameObject,
 
-			/// <summary>
-			/// Ресурс Unity - двухмерная текстура
-			/// </summary>
-			Texture2D,
+		/// <summary>
+		/// Ресурс Unity - двухмерная текстура.
+		/// </summary>
+		Texture2D,
 
-			/// <summary>
-			/// Ресурс Unity - спрайт
-			/// </summary>
-			Sprite,
+		/// <summary>
+		/// Ресурс Unity - спрайт.
+		/// </summary>
+		Sprite,
 
-			/// <summary>
-			/// Ресурс Unity - трехмерная модель
-			/// </summary>
-			Model,
+		/// <summary>
+		/// Ресурс Unity - трехмерная модель.
+		/// </summary>
+		Model,
 
-			/// <summary>
-			/// Ресурс Unity - текстовые или бинарные данные
-			/// </summary>
-			TextAsset,
+		/// <summary>
+		/// Ресурс Unity - текстовые или бинарные данные.
+		/// </summary>
+		TextAsset,
 #endif
-			/// <summary>
-			/// Базовый объект
-			/// </summary>
-			SysObject
+		/// <summary>
+		/// Базовый объект.
+		/// </summary>
+		SysObject
+	}
+
+	/// <summary>
+	/// Универсальный тип данных.
+	/// </summary>
+	/// <remarks>
+	/// Реализация универсального типа данных с поддержкой сериализации на уровне Unity.
+	/// Данный тип хранит один из возможных предопределённых типов данных.
+	/// Для однозначной идентификации объектов которые не могут быть сведены к стандартному типу в поле <see cref="CVariant.StringValue"/>
+	/// храниться контекстная информация об объекте (его тип, ссылка и т.д.).
+	/// При установке владельца интерфейса для уведомлений, объект уведомляет об изменении своих свойств.
+	/// </remarks>
+	[Serializable]
+	public class CVariant : IComparable<CVariant>, ILotusOwnedObject, ICloneable
+	{
+		#region Static methods
+		/// <summary>
+		/// Десереализация универсального типа данных из строки.
+		/// </summary>
+		/// <param name="data">Строка данных.</param>
+		/// <returns>Универсальный тип данных.</returns>
+		public static CVariant DeserializeFromString(string data)
+		{
+			//
+			// TODO
+			// 
+			var variant = new CVariant();
+			return variant;
 		}
+		#endregion
 
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Универсальный тип данных
-		/// </summary>
-		/// <remarks>
-		/// Реализация универсального типа данных с поддержкой сериализации на уровне Unity.
-		/// Данный тип хранит один из возможных предопределённых типов данных.
-		/// Для однозначной идентификации объектов которые не могут быть сведены к стандартному типу в поле <see cref="CVariant.StringValue"/>
-		/// храниться контекстная информация об объекте (его тип, ссылка и т.д.).
-		/// При установке владельца интерфейса для уведомлений, объект уведомляет об изменении своих свойств.
-		/// </remarks>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class CVariant : IComparable<CVariant>, ILotusOwnedObject, ICloneable
-		{
-			#region ======================================= СТАТИЧЕСКИЕ МЕТОДЫ ========================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Десереализация универсального типа данных из строки
-			/// </summary>
-			/// <param name="data">Строка данных</param>
-			/// <returns>Универсальный тип данных</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static CVariant DeserializeFromString(String data)
-			{
-				//
-				// TODO
-				// 
-				var variant = new CVariant();
-				return variant;
-			}
-			#endregion
-
-			#region ======================================= ДАННЫЕ ====================================================
+		#region Fields
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal TValueType _valueType;
+		protected internal TValueType _valueType;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal String _stringData;
+		protected internal string _stringData;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 			protected internal UnityEngine.Vector4 _numberData;
 #else
-			internal Vector4 _numberData;
+		internal Vector4 _numberData;
 #endif
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 #endif
-			protected internal System.Object? _referenceData;
+		protected internal object? _referenceData;
 
 #if UNITY_2017_1_OR_NEWER
 			[UnityEngine.SerializeField]
 			protected internal UnityEngine.Object _unityData;
 #endif
 
-			[NonSerialized]
-			protected internal ILotusOwnerObject? _owner;
-			#endregion
+		[NonSerialized]
+		protected internal ILotusOwnerObject? _owner;
+		#endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Тип данных значения
-			/// </summary>
-			public TValueType ValueType
+		#region Properties
+		/// <summary>
+		/// Тип данных значения.
+		/// </summary>
+		public TValueType ValueType
+		{
+			get { return _valueType; }
+			set
 			{
-				get { return _valueType; }
-				set
-				{
-					_valueType = value;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _valueType, nameof(ValueType));
-				}
+				_valueType = value;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _valueType, nameof(ValueType));
 			}
+		}
 
-			/// <summary>
-			/// Логический тип
-			/// </summary>
-			public Boolean BooleanValue
-			{
+		/// <summary>
+		/// Логический тип.
+		/// </summary>
+		public bool BooleanValue
+		{
 #if UNITY_2017_1_OR_NEWER
-				get { return _numberData.x == 1; }
-				set
-				{
-					if (value)
-					{
-						_numberData.x = 1;
-					}
-					else
-					{
-						_numberData.x = 0;
-					}
-
-					_valueType = TValueType.Boolean;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.x == 1, nameof(BooleanValue));
-				}
-#else
-				get { return _numberData.X == 1; }
-				set
-				{
-					if (value)
-					{
-						_numberData.X = 1;
-					}
-					else
-					{
-						_numberData.X = 0;
-					}
-
-					_valueType = TValueType.Boolean;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.X == 1, nameof(BooleanValue));
-				}
-#endif
-			}
-
-			/// <summary>
-			/// Целый тип
-			/// </summary>
-			public Int32 IntegerValue
+			get { return _numberData.x == 1; }
+			set
 			{
-#if UNITY_2017_1_OR_NEWER
-				get { return (Int32)_numberData.x; }
-				set
+				if (value)
 				{
-					_numberData.x = value;
-					_valueType = TValueType.Integer;
-					if (_owner != null) _owner.OnNotifyUpdated(this, (Int32)_numberData.x, nameof(IntegerValue));
+					_numberData.x = 1;
 				}
-#else
-				get { return (Int32)_numberData.X; }
-				set
+				else
 				{
-					_numberData.X = value;
-					_valueType = TValueType.Integer;
-					if (_owner != null) _owner.OnNotifyUpdated(this, (Int32)_numberData.X, nameof(IntegerValue));
+					_numberData.x = 0;
 				}
-#endif
-			}
 
-			/// <summary>
-			/// Перечисление
-			/// </summary>
-			/// <remarks>
-			/// Имя реального типа сохраняется в поле <see cref="_stringData"/>
-			/// </remarks>
-			public Enum? EnumValue
-			{
-				get
-				{
-					if (_referenceData != null && _referenceData.GetType().IsEnum)
-					{
-						return (Enum)_referenceData;
-					}
-					else
-					{
-						return null;
-					}
-				}
-				set
-				{
-					_referenceData = value;
-					_valueType = TValueType.Enum;
-					if (_referenceData != null)
-					{
-						_stringData = _referenceData.GetType().Name;
-					}
-					if (_owner != null) _owner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
-				}
-			}
-
-			/// <summary>
-			/// Вещественный тип
-			/// </summary>
-			public Single FloatValue
-			{
-#if UNITY_2017_1_OR_NEWER
-				get { return _numberData.x; }
-				set
-				{
-					_numberData.x = value;
-					_valueType = TValueType.Float;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.x, nameof(FloatValue));
-				}
-#else
-				get { return (Single)_numberData.X; }
-				set
-				{
-					_numberData.X = value;
-					_valueType = TValueType.Float;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.X, nameof(FloatValue));
-				}
-#endif
-			}
-
-			/// <summary>
-			/// Тип даты-времени
-			/// </summary>
-			public DateTime DateTimeValue
-			{
-				get { return DateTime.Parse(_stringData); }
-				set
-				{
-					_stringData = value.ToString();
-					_valueType = TValueType.DateTime;
-					if (_owner != null) _owner.OnNotifyUpdated(this, DateTime.Parse(_stringData), nameof(DateTimeValue));
-				}
-			}
-
-			/// <summary>
-			/// Строковый тип
-			/// </summary>
-			public String StringValue
-			{
-				get { return _stringData; }
-				set
-				{
-					_stringData = value;
-					_valueType = TValueType.String;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _stringData, nameof(StringValue));
-				}
-			}
-
-#if UNITY_2017_1_OR_NEWER
-			/// <summary>
-			/// Двухмерный объект данных
-			/// </summary>
-			public UnityEngine.Vector2 Vector2DValue
-			{
-				get { return _numberData; }
-				set
-				{
-					_numberData = value;
-					_valueType = TValueType.Vector2D;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector2DValue));
-				}
-			}
-
-			/// <summary>
-			/// Трехмерный объект данных
-			/// </summary>
-			public UnityEngine.Vector3 Vector3DValue
-			{
-				get { return _numberData; }
-				set
-				{
-					_numberData = value;
-					_valueType = TValueType.Vector3D;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector3DValue));
-				}
-			}
-
-			/// <summary>
-			/// Четырехмерный объект данных
-			/// </summary>
-			public UnityEngine.Vector4 Vector4DValue
-			{
-				get { return _numberData; }
-				set
-				{
-					_numberData = value;
-					_valueType = TValueType.Vector4D;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector4DValue));
-				}
-			}
-
-			/// <summary>
-			/// Цвет
-			/// </summary>
-			public UnityEngine.Color ColorValue
-			{
-				get { return new UnityEngine.Color(_numberData.x, _numberData.y, _numberData.z, _numberData.w); }
-				set
-				{
-					_numberData.x = value.r;
-					_numberData.y = value.g;
-					_numberData.z = value.b;
-					_numberData.w = value.a;
-					_valueType = TValueType.Color;
-					if (_owner != null) _owner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
-				}
+				_valueType = TValueType.Boolean;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.x == 1, nameof(BooleanValue));
 			}
 #else
-			/// <summary>
-			/// Двухмерный объект данных
-			/// </summary>
-			public Vector2 Vector2DValue
+			get { return _numberData.X == 1; }
+			set
 			{
-				get { return new Vector2(_numberData.X, _numberData.Y); }
-				set
+				if (value)
 				{
-					_numberData.X = value.X;
-					_numberData.Y = value.Y;
-					_valueType = TValueType.Vector2D;
-					if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
+					_numberData.X = 1;
 				}
-			}
+				else
+				{
+					_numberData.X = 0;
+				}
 
-			/// <summary>
-			/// Трехмерный объект данных
-			/// </summary>
-			public Vector3 Vector3DValue
-			{
-				get { return new Vector3(_numberData.X, _numberData.Y, _numberData.Z); }
-				set
-				{
-					_numberData.X = value.X;
-					_numberData.Y = value.Y;
-					_numberData.Z = value.Z;
-					_valueType = TValueType.Vector3D;
-					if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector3DValue));
-				}
-			}
-
-			/// <summary>
-			/// Четырехмерный объект данных
-			/// </summary>
-			public Vector4 Vector4DValue
-			{
-				get { return _numberData; }
-				set
-				{
-					_numberData = value;
-					_valueType = TValueType.Vector4D;
-					if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector4DValue));
-				}
-			}
-
-			/// <summary>
-			/// Цвет
-			/// </summary>
-			public TColor ColorValue
-			{
-				get { return new TColor((Byte)_numberData.X, (Byte)_numberData.Y, (Byte)_numberData.Z, (Byte)_numberData.W); }
-				set
-				{
-					_numberData.X = value.R;
-					_numberData.Y = value.G;
-					_numberData.Z = value.B;
-					_numberData.W = value.A;
-					_valueType = TValueType.Color;
-					if (_owner != null) _owner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
-				}
+				_valueType = TValueType.Boolean;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.X == 1, nameof(BooleanValue));
 			}
 #endif
-			/// <summary>
-			/// Базовый объект
-			/// </summary>
-			/// <remarks>
-			/// Имя реального типа объекта сохраняется в поле <see cref="_stringData"/>
-			/// </remarks>
-			public System.Object? SysObject
-			{
-				get { return _referenceData; }
-				set
-				{
-					_referenceData = value;
-					_valueType = TValueType.SysObject;
-					if (_referenceData != null)
-					{
-						_stringData = _referenceData.GetType().Name;
-					}
+		}
 
-					if (_owner != null) _owner.OnNotifyUpdated(this, _referenceData, nameof(SysObject));
+		/// <summary>
+		/// Целый тип.
+		/// </summary>
+		public int IntegerValue
+		{
+#if UNITY_2017_1_OR_NEWER
+			get { return (Int32)_numberData.x; }
+			set
+			{
+				_numberData.x = value;
+				_valueType = TValueType.Integer;
+				if (_owner != null) _owner.OnNotifyUpdated(this, (Int32)_numberData.x, nameof(IntegerValue));
+			}
+#else
+			get { return (int)_numberData.X; }
+			set
+			{
+				_numberData.X = value;
+				_valueType = TValueType.Integer;
+				if (_owner != null) _owner.OnNotifyUpdated(this, (int)_numberData.X, nameof(IntegerValue));
+			}
+#endif
+		}
+
+		/// <summary>
+		/// Перечисление.
+		/// </summary>
+		/// <remarks>
+		/// Имя реального типа сохраняется в поле <see cref="_stringData"/>.
+		/// </remarks>
+		public Enum? EnumValue
+		{
+			get
+			{
+				if (_referenceData != null && _referenceData.GetType().IsEnum)
+				{
+					return (Enum)_referenceData;
+				}
+				else
+				{
+					return null;
 				}
 			}
+			set
+			{
+				_referenceData = value;
+				_valueType = TValueType.Enum;
+				if (_referenceData != null)
+				{
+					_stringData = _referenceData.GetType().Name;
+				}
+				if (_owner != null) _owner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
+			}
+		}
+
+		/// <summary>
+		/// Вещественный тип.
+		/// </summary>
+		public float FloatValue
+		{
+#if UNITY_2017_1_OR_NEWER
+			get { return _numberData.x; }
+			set
+			{
+				_numberData.x = value;
+				_valueType = TValueType.Float;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.x, nameof(FloatValue));
+			}
+#else
+			get { return (float)_numberData.X; }
+			set
+			{
+				_numberData.X = value;
+				_valueType = TValueType.Float;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.X, nameof(FloatValue));
+			}
+#endif
+		}
+
+		/// <summary>
+		/// Тип даты-времени.
+		/// </summary>
+		public DateTime DateTimeValue
+		{
+			get { return DateTime.Parse(_stringData); }
+			set
+			{
+				_stringData = value.ToString();
+				_valueType = TValueType.DateTime;
+				if (_owner != null) _owner.OnNotifyUpdated(this, DateTime.Parse(_stringData), nameof(DateTimeValue));
+			}
+		}
+
+		/// <summary>
+		/// Строковый тип.
+		/// </summary>
+		public string StringValue
+		{
+			get { return _stringData; }
+			set
+			{
+				_stringData = value;
+				_valueType = TValueType.String;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _stringData, nameof(StringValue));
+			}
+		}
 
 #if UNITY_2017_1_OR_NEWER
-			/// <summary>
-			/// Игровой объект
-			/// </summary>
-			public UnityEngine.GameObject GameObjectValue
+		/// <summary>
+		/// Двухмерный объект данных.
+		/// </summary>
+		public UnityEngine.Vector2 Vector2DValue
+		{
+			get { return _numberData; }
+			set
 			{
-				get 
-				{ 
-					return _unityData as UnityEngine.GameObject; 
-				}
-				set
-				{
-					_unityData = value;
-					_valueType = TValueType.GameObject;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.GameObject, nameof(GameObjectValue));
-				}
+				_numberData = value;
+				_valueType = TValueType.Vector2D;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector2DValue));
 			}
+		}
 
-			/// <summary>
-			/// Ресурс Unity - двухмерная текстура
-			/// </summary>
-			public UnityEngine.Texture2D Texture2DValue
+		/// <summary>
+		/// Трехмерный объект данных.
+		/// </summary>
+		public UnityEngine.Vector3 Vector3DValue
+		{
+			get { return _numberData; }
+			set
 			{
-				get
-				{
-					return _unityData as UnityEngine.Texture2D;
-				}
-				set
-				{
-					_unityData = value;
-					_valueType = TValueType.Texture2D;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.Texture2D, nameof(Texture2DValue));
-				}
+				_numberData = value;
+				_valueType = TValueType.Vector3D;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector3DValue));
 			}
+		}
 
-			/// <summary>
-			/// Ресурс Unity - спрайт
-			/// </summary>
-			public UnityEngine.Sprite SpriteValue
+		/// <summary>
+		/// Четырехмерный объект данных.
+		/// </summary>
+		public UnityEngine.Vector4 Vector4DValue
+		{
+			get { return _numberData; }
+			set
 			{
-				get
-				{
-					return _unityData as UnityEngine.Sprite;
-				}
-				set
-				{
-					_unityData = value;
-					_valueType = TValueType.Sprite;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.Sprite, nameof(SpriteValue));
-				}
+				_numberData = value;
+				_valueType = TValueType.Vector4D;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _numberData, nameof(Vector4DValue));
 			}
+		}
 
-			/// <summary>
-			/// Ресурс Unity - трехмерная модель
-			/// </summary>
-			public UnityEngine.GameObject ModelValue
+		/// <summary>
+		/// Цвет.
+		/// </summary>
+		public UnityEngine.Color ColorValue
+		{
+			get { return new UnityEngine.Color(_numberData.x, _numberData.y, _numberData.z, _numberData.w); }
+			set
 			{
-				get
-				{
-					return _unityData as UnityEngine.GameObject;
-				}
-				set
-				{
-					_unityData = value;
-					_valueType = TValueType.Model;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.GameObject, nameof(ModelValue));
-				}
+				_numberData.x = value.r;
+				_numberData.y = value.g;
+				_numberData.z = value.b;
+				_numberData.w = value.a;
+				_valueType = TValueType.Color;
+				if (_owner != null) _owner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
 			}
+		}
+#else
+		/// <summary>
+		/// Двухмерный объект данных.
+		/// </summary>
+		public Vector2 Vector2DValue
+		{
+			get { return new Vector2(_numberData.X, _numberData.Y); }
+			set
+			{
+				_numberData.X = value.X;
+				_numberData.Y = value.Y;
+				_valueType = TValueType.Vector2D;
+				if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
+			}
+		}
 
-			/// <summary>
-			/// Ресурс Unity - текстовые или бинарные данные
-			/// </summary>
-			public UnityEngine.TextAsset TextAssetValue
+		/// <summary>
+		/// Трехмерный объект данных.
+		/// </summary>
+		public Vector3 Vector3DValue
+		{
+			get { return new Vector3(_numberData.X, _numberData.Y, _numberData.Z); }
+			set
 			{
-				get
-				{
-					return _unityData as UnityEngine.TextAsset;
-				}
-				set
-				{
-					_unityData = value;
-					_valueType = TValueType.TextAsset;
-					if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.TextAsset, nameof(TextAssetValue));
-				}
+				_numberData.X = value.X;
+				_numberData.Y = value.Y;
+				_numberData.Z = value.Z;
+				_valueType = TValueType.Vector3D;
+				if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector3DValue));
 			}
+		}
+
+		/// <summary>
+		/// Четырехмерный объект данных.
+		/// </summary>
+		public Vector4 Vector4DValue
+		{
+			get { return _numberData; }
+			set
+			{
+				_numberData = value;
+				_valueType = TValueType.Vector4D;
+				if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector4DValue));
+			}
+		}
+
+		/// <summary>
+		/// Цвет.
+		/// </summary>
+		public TColor ColorValue
+		{
+			get { return new TColor((byte)_numberData.X, (byte)_numberData.Y, (byte)_numberData.Z, (byte)_numberData.W); }
+			set
+			{
+				_numberData.X = value.R;
+				_numberData.Y = value.G;
+				_numberData.Z = value.B;
+				_numberData.W = value.A;
+				_valueType = TValueType.Color;
+				if (_owner != null) _owner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
+			}
+		}
 #endif
-			/// <summary>
-			/// Владелец
-			/// </summary>
-			public ILotusOwnerObject? IOwner
+		/// <summary>
+		/// Базовый объект.
+		/// </summary>
+		/// <remarks>
+		/// Имя реального типа объекта сохраняется в поле <see cref="_stringData"/>.
+		/// </remarks>
+		public object? SysObject
+		{
+			get { return _referenceData; }
+			set
 			{
-				get { return _owner; }
-				set
+				_referenceData = value;
+				_valueType = TValueType.SysObject;
+				if (_referenceData != null)
 				{
-					_owner = value;
+					_stringData = _referenceData.GetType().Name;
 				}
+
+				if (_owner != null) _owner.OnNotifyUpdated(this, _referenceData, nameof(SysObject));
 			}
-			#endregion
+		}
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует данные универсального типа нулевыми значениями
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public CVariant()
-			{
-				_valueType = TValueType.Void;
+#if UNITY_2017_1_OR_NEWER
+		/// <summary>
+		/// Игровой объект.
+		/// </summary>
+		public UnityEngine.GameObject GameObjectValue
+		{
+			get 
+			{ 
+				return _unityData as UnityEngine.GameObject; 
 			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует данные универсального типа указанным объектом
-			/// </summary>
-			/// <remarks>
-			/// Тип объекта выводится автоматически
-			/// </remarks>
-			/// <param name="obj">Объект</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CVariant(System.Object obj)
+			set
 			{
-				Set(obj);
+				_unityData = value;
+				_valueType = TValueType.GameObject;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.GameObject, nameof(GameObjectValue));
 			}
-			#endregion
+		}
 
-			#region ======================================= СИСТЕМНЫЕ МЕТОДЫ ==========================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение универсальных типов данных для упорядочивания
-			/// </summary>
-			/// <param name="other">Объект универсального типа данных</param>
-			/// <returns>Статус сравнения</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CVariant? other)
+		/// <summary>
+		/// Ресурс Unity - двухмерная текстура.
+		/// </summary>
+		public UnityEngine.Texture2D Texture2DValue
+		{
+			get
 			{
-				if (other == null) return 0;
+				return _unityData as UnityEngine.Texture2D;
+			}
+			set
+			{
+				_unityData = value;
+				_valueType = TValueType.Texture2D;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.Texture2D, nameof(Texture2DValue));
+			}
+		}
 
-				var result = 0;
-				switch (_valueType)
-				{
-					case TValueType.Void:
-						break;
-					case TValueType.Boolean:
-						break;
-					case TValueType.Integer:
-						{
-							result = Comparer<Int32>.Default.Compare(IntegerValue, other.IntegerValue);
-						}
-						break;
-					case TValueType.Enum:
-						break;
-					case TValueType.Float:
-						{
-							result = Comparer<Single>.Default.Compare(FloatValue, other.FloatValue);
-						}
-						break;
-					case TValueType.DateTime:
-						{
-							result = Comparer<DateTime>.Default.Compare(DateTimeValue, other.DateTimeValue);
-						}
-						break;
-					case TValueType.String:
-						{
-							result = String.CompareOrdinal(StringValue, other.StringValue);
-						}
-						break;
-					case TValueType.Color:
-						{
+		/// <summary>
+		/// Ресурс Unity - спрайт.
+		/// </summary>
+		public UnityEngine.Sprite SpriteValue
+		{
+			get
+			{
+				return _unityData as UnityEngine.Sprite;
+			}
+			set
+			{
+				_unityData = value;
+				_valueType = TValueType.Sprite;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.Sprite, nameof(SpriteValue));
+			}
+		}
+
+		/// <summary>
+		/// Ресурс Unity - трехмерная модель.
+		/// </summary>
+		public UnityEngine.GameObject ModelValue
+		{
+			get
+			{
+				return _unityData as UnityEngine.GameObject;
+			}
+			set
+			{
+				_unityData = value;
+				_valueType = TValueType.Model;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.GameObject, nameof(ModelValue));
+			}
+		}
+
+		/// <summary>
+		/// Ресурс Unity - текстовые или бинарные данные.
+		/// </summary>
+		public UnityEngine.TextAsset TextAssetValue
+		{
+			get
+			{
+				return _unityData as UnityEngine.TextAsset;
+			}
+			set
+			{
+				_unityData = value;
+				_valueType = TValueType.TextAsset;
+				if (_owner != null) _owner.OnNotifyUpdated(this, _unityData as UnityEngine.TextAsset, nameof(TextAssetValue));
+			}
+		}
+#endif
+		/// <summary>
+		/// Владелец.
+		/// </summary>
+		public ILotusOwnerObject? IOwner
+		{
+			get { return _owner; }
+			set
+			{
+				_owner = value;
+			}
+		}
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Конструктор инициализирует данные универсального типа нулевыми значениями.
+		/// </summary>
+		public CVariant()
+		{
+			_valueType = TValueType.Void;
+		}
+
+		/// <summary>
+		/// Конструктор инициализирует данные универсального типа указанным объектом.
+		/// </summary>
+		/// <remarks>
+		/// Тип объекта выводится автоматически.
+		/// </remarks>
+		/// <param name="obj">Объект.</param>
+		public CVariant(object obj)
+		{
+			Set(obj);
+		}
+		#endregion
+
+		#region System methods
+		/// <summary>
+		/// Сравнение универсальных типов данных для упорядочивания.
+		/// </summary>
+		/// <param name="other">Объект универсального типа данных.</param>
+		/// <returns>Статус сравнения.</returns>
+		public int CompareTo(CVariant? other)
+		{
+			if (other == null) return 0;
+
+			var result = 0;
+			switch (_valueType)
+			{
+				case TValueType.Void:
+					break;
+				case TValueType.Boolean:
+					break;
+				case TValueType.Integer:
+					{
+						result = Comparer<int>.Default.Compare(IntegerValue, other.IntegerValue);
+					}
+					break;
+				case TValueType.Enum:
+					break;
+				case TValueType.Float:
+					{
+						result = Comparer<float>.Default.Compare(FloatValue, other.FloatValue);
+					}
+					break;
+				case TValueType.DateTime:
+					{
+						result = Comparer<DateTime>.Default.Compare(DateTimeValue, other.DateTimeValue);
+					}
+					break;
+				case TValueType.String:
+					{
+						result = string.CompareOrdinal(StringValue, other.StringValue);
+					}
+					break;
+				case TValueType.Color:
+					{
 #if UNITY_2017_1_OR_NEWER
 							result = Comparer<UnityEngine.Color>.Default.Compare(ColorValue, other.ColorValue);
 #else
-							result = Comparer<TColor>.Default.Compare(ColorValue, other.ColorValue);
+						result = Comparer<TColor>.Default.Compare(ColorValue, other.ColorValue);
 #endif
-						}
-						break;
-					case TValueType.Vector2D:
-						break;
-					case TValueType.Vector3D:
-						break;
-					case TValueType.Vector4D:
-						break;
+					}
+					break;
+				case TValueType.Vector2D:
+					break;
+				case TValueType.Vector3D:
+					break;
+				case TValueType.Vector4D:
+					break;
 #if UNITY_2017_1_OR_NEWER
 					case TValueType.GameObject:
 					case TValueType.Texture2D:
@@ -690,98 +661,92 @@ namespace Lotus
 						}
 						break;
 #endif
-					case TValueType.SysObject:
-						break;
+				case TValueType.SysObject:
+					break;
 
-					default:
-						break;
-				}
-
-				return result;
+				default:
+					break;
 			}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получение хеш-кода объекта универсального типа данных
-			/// </summary>
-			/// <returns>Хеш-код</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override Int32 GetHashCode()
-			{
-				return this.GetHashCode() ^ _numberData.GetHashCode() ^ _stringData.GetHashCode();
-			}
+			return result;
+		}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Полное копирование объекта универсального типа данных
-			/// </summary>
-			/// <returns>Копия объекта универсального типа данных</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public System.Object Clone()
-			{
-				return MemberwiseClone();
-			}
+		/// <summary>
+		/// Получение хеш-кода объекта универсального типа данных.
+		/// </summary>
+		/// <returns>Хеш-код.</returns>
+		public override int GetHashCode()
+		{
+			return this.GetHashCode() ^ _numberData.GetHashCode() ^ _stringData.GetHashCode();
+		}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование к текстовому представлению
-			/// </summary>
-			/// <returns>Текстовое представление</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override String? ToString()
+		/// <summary>
+		/// Полное копирование объекта универсального типа данных.
+		/// </summary>
+		/// <returns>Копия объекта универсального типа данных.</returns>
+		public object Clone()
+		{
+			return MemberwiseClone();
+		}
+
+		/// <summary>
+		/// Преобразование к текстовому представлению.
+		/// </summary>
+		/// <returns>Текстовое представление.</returns>
+		public override string? ToString()
+		{
+			var result = "";
+			switch (_valueType)
 			{
-				var result = "";
-				switch (_valueType)
-				{
-					case TValueType.Void:
-						{
-							result = nameof(TValueType.Void);
-						}
-						break;
-					case TValueType.Boolean:
-						{
-							result = BooleanValue.ToString();
-						}
-						break;
-					case TValueType.Integer:
-						{
-							result = IntegerValue.ToString();
-						}
-						break;
-					case TValueType.Enum:
-						break;
-					case TValueType.Float:
-						{
-							result = FloatValue.ToString();
-						}
-						break;
-					case TValueType.DateTime:
-						break;
-					case TValueType.String:
-						{
-							result = StringValue;
-						}
-						break;
-					case TValueType.Color:
-						{
-							result = ColorValue.ToString();
-						}
-						break;
-					case TValueType.Vector2D:
-						{
-							result = Vector2DValue.ToString();
-						}
-						break;
-					case TValueType.Vector3D:
-						{
-							result = Vector3DValue.ToString();
-						}
-						break;
-					case TValueType.Vector4D:
-						{
-							result = Vector4DValue.ToString();
-						}
-						break;
+				case TValueType.Void:
+					{
+						result = nameof(TValueType.Void);
+					}
+					break;
+				case TValueType.Boolean:
+					{
+						result = BooleanValue.ToString();
+					}
+					break;
+				case TValueType.Integer:
+					{
+						result = IntegerValue.ToString();
+					}
+					break;
+				case TValueType.Enum:
+					break;
+				case TValueType.Float:
+					{
+						result = FloatValue.ToString();
+					}
+					break;
+				case TValueType.DateTime:
+					break;
+				case TValueType.String:
+					{
+						result = StringValue;
+					}
+					break;
+				case TValueType.Color:
+					{
+						result = ColorValue.ToString();
+					}
+					break;
+				case TValueType.Vector2D:
+					{
+						result = Vector2DValue.ToString();
+					}
+					break;
+				case TValueType.Vector3D:
+					{
+						result = Vector3DValue.ToString();
+					}
+					break;
+				case TValueType.Vector4D:
+					{
+						result = Vector4DValue.ToString();
+					}
+					break;
 #if UNITY_2017_1_OR_NEWER
 					case TValueType.GameObject:
 					case TValueType.Texture2D:
@@ -793,80 +758,78 @@ namespace Lotus
 						}
 						break;
 #endif
-					case TValueType.SysObject:
-						{
-							result = _referenceData?.ToString();
-						}
-						break;
+				case TValueType.SysObject:
+					{
+						result = _referenceData?.ToString();
+					}
+					break;
 
-					default:
-						break;
-				}
-
-				return result;
+				default:
+					break;
 			}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование к текстовому представлению
-			/// </summary>
-			/// <param name="format">Формат отображения</param>
-			/// <returns>Текстовое представление</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public String? ToString(String format)
+			return result;
+		}
+
+		/// <summary>
+		/// Преобразование к текстовому представлению.
+		/// </summary>
+		/// <param name="format">Формат отображения.</param>
+		/// <returns>Текстовое представление.</returns>
+		public string? ToString(string format)
+		{
+			var result = "";
+			switch (_valueType)
 			{
-				var result = "";
-				switch (_valueType)
-				{
-					case TValueType.Void:
-						{
-							result = nameof(TValueType.Void);
-						}
-						break;
-					case TValueType.Boolean:
-						{
-							result = BooleanValue.ToString();
-						}
-						break;
-					case TValueType.Integer:
-						{
-							result = IntegerValue.ToString(format);
-						}
-						break;
-					case TValueType.Enum:
-						break;
-					case TValueType.Float:
-						{
-							result = FloatValue.ToString(format);
-						}
-						break;
-					case TValueType.DateTime:
-						break;
-					case TValueType.String:
-						{
-							result = StringValue;
-						}
-						break;
-					case TValueType.Color:
-						{
-							result = ColorValue.ToString();
-						}
-						break;
-					case TValueType.Vector2D:
-						{
-							result = Vector2DValue.ToString(format);
-						}
-						break;
-					case TValueType.Vector3D:
-						{
-							result = Vector3DValue.ToString(format);
-						}
-						break;
-					case TValueType.Vector4D:
-						{
-							result = Vector4DValue.ToString(format);
-						}
-						break;
+				case TValueType.Void:
+					{
+						result = nameof(TValueType.Void);
+					}
+					break;
+				case TValueType.Boolean:
+					{
+						result = BooleanValue.ToString();
+					}
+					break;
+				case TValueType.Integer:
+					{
+						result = IntegerValue.ToString(format);
+					}
+					break;
+				case TValueType.Enum:
+					break;
+				case TValueType.Float:
+					{
+						result = FloatValue.ToString(format);
+					}
+					break;
+				case TValueType.DateTime:
+					break;
+				case TValueType.String:
+					{
+						result = StringValue;
+					}
+					break;
+				case TValueType.Color:
+					{
+						result = ColorValue.ToString();
+					}
+					break;
+				case TValueType.Vector2D:
+					{
+						result = Vector2DValue.ToString(format);
+					}
+					break;
+				case TValueType.Vector3D:
+					{
+						result = Vector3DValue.ToString(format);
+					}
+					break;
+				case TValueType.Vector4D:
+					{
+						result = Vector4DValue.ToString(format);
+					}
+					break;
 #if UNITY_2017_1_OR_NEWER
 					case TValueType.GameObject:
 						{
@@ -894,41 +857,39 @@ namespace Lotus
 						}
 						break;
 #endif
-					case TValueType.SysObject:
-						{
-							result = _referenceData?.ToString();
-						}
-						break;
-					default:
-						break;
-				}
-
-				return result;
+				case TValueType.SysObject:
+					{
+						result = _referenceData?.ToString();
+					}
+					break;
+				default:
+					break;
 			}
-			#endregion
 
-			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Установка значения универсального типа данных
-			/// </summary>
-			/// <param name="value">Значение</param>
-			//---------------------------------------------------------------------------------------------------------
-			public void Set(System.Object value)
+			return result;
+		}
+		#endregion
+
+		#region Main methods
+		/// <summary>
+		/// Установка значения универсального типа данных.
+		/// </summary>
+		/// <param name="value">Значение.</param>
+		public void Set(object value)
+		{
+			if (value == null)
 			{
-				if (value == null)
-				{
-					_valueType = TValueType.Void;
-					return;
-				}
+				_valueType = TValueType.Void;
+				return;
+			}
 
-				// Получаем тип
-				Type type = value.GetType();
-				switch (type.Name)
-				{
-					case nameof(Boolean):
-						{
-							var v = (Boolean)value;
+			// Получаем тип
+			Type type = value.GetType();
+			switch (type.Name)
+			{
+				case nameof(Boolean):
+					{
+						var v = (bool)value;
 #if UNITY_2017_1_OR_NEWER
 							if (v)
 							{
@@ -940,56 +901,56 @@ namespace Lotus
 							}
 #else
 
-							if (v)
-							{
-								_numberData.X = 1;
-							}
-							else
-							{
-								_numberData.X = 0;
-							}
-#endif
-							_valueType = TValueType.Boolean;
-							if (_owner != null) _owner.OnNotifyUpdated(this, BooleanValue, nameof(BooleanValue));
-						}
-						break;
-					case nameof(Int32):
+						if (v)
 						{
+							_numberData.X = 1;
+						}
+						else
+						{
+							_numberData.X = 0;
+						}
+#endif
+						_valueType = TValueType.Boolean;
+						if (_owner != null) _owner.OnNotifyUpdated(this, BooleanValue, nameof(BooleanValue));
+					}
+					break;
+				case nameof(Int32):
+					{
 #if UNITY_2017_1_OR_NEWER
 							_numberData.x = (Int32)value;
 #else
-							_numberData.X = (Int32)value;
+						_numberData.X = (int)value;
 #endif
-							_valueType = TValueType.Integer;
-							if (_owner != null) _owner.OnNotifyUpdated(this, IntegerValue, nameof(IntegerValue));
-						}
-						break;
-					case nameof(Single):
-						{
+						_valueType = TValueType.Integer;
+						if (_owner != null) _owner.OnNotifyUpdated(this, IntegerValue, nameof(IntegerValue));
+					}
+					break;
+				case nameof(Single):
+					{
 #if UNITY_2017_1_OR_NEWER
 							_numberData.x = (Single)value;
 #else
-							_numberData.X = (Single)value;
+						_numberData.X = (float)value;
 #endif
-							_valueType = TValueType.Float;
-							if (_owner != null) _owner.OnNotifyUpdated(this, FloatValue, nameof(FloatValue));
-						}
-						break;
-					case nameof(DateTime):
-						{
-							var v = (DateTime)value;
-							_stringData = v.ToString();
-							_valueType = TValueType.DateTime;
-							if (_owner != null) _owner.OnNotifyUpdated(this, DateTimeValue, nameof(DateTimeValue));
-						}
-						break;
-					case nameof(String):
-						{
-							_stringData = value.ToString()!;
-							_valueType = TValueType.String;
-							if (_owner != null) _owner.OnNotifyUpdated(this, StringValue, nameof(StringValue));
-						}
-						break;
+						_valueType = TValueType.Float;
+						if (_owner != null) _owner.OnNotifyUpdated(this, FloatValue, nameof(FloatValue));
+					}
+					break;
+				case nameof(DateTime):
+					{
+						var v = (DateTime)value;
+						_stringData = v.ToString();
+						_valueType = TValueType.DateTime;
+						if (_owner != null) _owner.OnNotifyUpdated(this, DateTimeValue, nameof(DateTimeValue));
+					}
+					break;
+				case nameof(String):
+					{
+						_stringData = value.ToString()!;
+						_valueType = TValueType.String;
+						if (_owner != null) _owner.OnNotifyUpdated(this, StringValue, nameof(StringValue));
+					}
+					break;
 #if UNITY_2017_1_OR_NEWER
 					case nameof(UnityEngine.Color):
 						{
@@ -1027,16 +988,16 @@ namespace Lotus
 						}
 						break;
 #endif
-					default:
+				default:
+					{
+						// Проверка на перечисление
+						if (type.IsEnum)
 						{
-							// Проверка на перечисление
-							if (type.IsEnum)
-							{
-								_referenceData = value;
-								_stringData = type.Name;
-								if (_owner != null) _owner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
-								break;
-							}
+							_referenceData = value;
+							_stringData = type.Name;
+							if (_owner != null) _owner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
+							break;
+						}
 
 #if UNITY_2017_1_OR_NEWER
 							// Проверка на тип Unity
@@ -1084,51 +1045,49 @@ namespace Lotus
 								break;
 							}
 #endif
-							_referenceData = value;
-							_valueType = TValueType.SysObject;
-							_stringData = type.Name;
-							if (_owner != null) _owner.OnNotifyUpdated(this, SysObject, nameof(SysObject));
+						_referenceData = value;
+						_valueType = TValueType.SysObject;
+						_stringData = type.Name;
+						if (_owner != null) _owner.OnNotifyUpdated(this, SysObject, nameof(SysObject));
 
-						}
-						break;
-				}
+					}
+					break;
 			}
+		}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Установка типа универсального типа данных
-			/// </summary>
-			/// <param name="type">Тип</param>
-			//---------------------------------------------------------------------------------------------------------
-			public void Set(Type type)
+		/// <summary>
+		/// Установка типа универсального типа данных.
+		/// </summary>
+		/// <param name="type">Тип.</param>
+		public void Set(Type type)
+		{
+			switch (type.Name)
 			{
-				switch (type.Name)
-				{
-					case nameof(Boolean):
-						{
-							_valueType = TValueType.Boolean;
-						}
-						break;
-					case nameof(Int32):
-						{
-							_valueType = TValueType.Integer;
-						}
-						break;
-					case nameof(Single):
-						{
-							_valueType = TValueType.Float;
-						}
-						break;
-					case nameof(DateTime):
-						{
-							_valueType = TValueType.DateTime;
-						}
-						break;
-					case nameof(String):
-						{
-							_valueType = TValueType.String;
-						}
-						break;
+				case nameof(Boolean):
+					{
+						_valueType = TValueType.Boolean;
+					}
+					break;
+				case nameof(Int32):
+					{
+						_valueType = TValueType.Integer;
+					}
+					break;
+				case nameof(Single):
+					{
+						_valueType = TValueType.Float;
+					}
+					break;
+				case nameof(DateTime):
+					{
+						_valueType = TValueType.DateTime;
+					}
+					break;
+				case nameof(String):
+					{
+						_valueType = TValueType.String;
+					}
+					break;
 #if UNITY_2017_1_OR_NEWER
 					case nameof(UnityEngine.Color):
 						{
@@ -1151,14 +1110,14 @@ namespace Lotus
 						}
 						break;
 #endif
-					default:
+				default:
+					{
+						// Проверка на перечисление
+						if (type.IsEnum)
 						{
-							// Проверка на перечисление
-							if (type.IsEnum)
-							{
-								_valueType = TValueType.Enum;
-								break;
-							}
+							_valueType = TValueType.Enum;
+							break;
+						}
 
 #if UNITY_2017_1_OR_NEWER
 
@@ -1190,66 +1149,64 @@ namespace Lotus
 								break;
 							}
 #endif
-							_valueType = TValueType.SysObject;
-							_stringData = type.Name;
+						_valueType = TValueType.SysObject;
+						_stringData = type.Name;
 
-						}
-						break;
-				}
-
-				if (_owner != null) _owner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
+					}
+					break;
 			}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получение значение соответствующего типа
-			/// </summary>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public System.Object? Get()
+			if (_owner != null) _owner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
+		}
+
+		/// <summary>
+		/// Получение значение соответствующего типа.
+		/// </summary>
+		/// <returns>Значение.</returns>
+		public object? Get()
+		{
+			switch (_valueType)
 			{
-				switch (_valueType)
-				{
-					case TValueType.Void:
-						{
-							return null;
-						}
-					case TValueType.Boolean:
-						{
+				case TValueType.Void:
+					{
+						return null;
+					}
+				case TValueType.Boolean:
+					{
 #if UNITY_2017_1_OR_NEWER
 							return _numberData.x == 1;
 #else
-							return _numberData.X == 1;
+						return _numberData.X == 1;
 #endif
-						}
-					case TValueType.Integer:
-						{
+					}
+				case TValueType.Integer:
+					{
 #if UNITY_2017_1_OR_NEWER
 							return (Int32)_numberData.x;
 #else
-							return (Int32)_numberData.X;
+						return (int)_numberData.X;
 #endif
-						}
-					case TValueType.Enum:
-						{
-							return _referenceData;
-						}
-					case TValueType.Float:
-						{
+					}
+				case TValueType.Enum:
+					{
+						return _referenceData;
+					}
+				case TValueType.Float:
+					{
 #if UNITY_2017_1_OR_NEWER
 							return _numberData.x;
 #else
-							return _numberData.X;
+						return _numberData.X;
 #endif
-						}
-					case TValueType.DateTime:
-						{
-							return DateTime.Parse(_stringData);
-						}
-					case TValueType.String:
-						{
-							return _stringData;
-						}
+					}
+				case TValueType.DateTime:
+					{
+						return DateTime.Parse(_stringData);
+					}
+				case TValueType.String:
+					{
+						return _stringData;
+					}
 #if UNITY_2017_1_OR_NEWER
 					case TValueType.Color:
 						{
@@ -1288,74 +1245,72 @@ namespace Lotus
 							return _unityData;
 						}
 #endif
-					case TValueType.SysObject:
-						break;
-					default:
-						{
-						}
-						break;
-				}
-
-				return _referenceData;
+				case TValueType.SysObject:
+					break;
+				default:
+					{
+					}
+					break;
 			}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получение значение как строкового типа
-			/// </summary>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public String? GetAsString()
+			return _referenceData;
+		}
+
+		/// <summary>
+		/// Получение значение как строкового типа.
+		/// </summary>
+		/// <returns>Значение.</returns>
+		public string? GetAsString()
+		{
+			switch (_valueType)
 			{
-				switch (_valueType)
-				{
-					case TValueType.Void:
-						{
-							return nameof(TValueType.Void);
-						}
-					case TValueType.Boolean:
-						{
+				case TValueType.Void:
+					{
+						return nameof(TValueType.Void);
+					}
+				case TValueType.Boolean:
+					{
 #if UNITY_2017_1_OR_NEWER
 							return(_numberData.x == 1).ToString();
 #else
-							return (_numberData.X == 1).ToString();
+						return (_numberData.X == 1).ToString();
 #endif
-						}
-					case TValueType.Integer:
-						{
+					}
+				case TValueType.Integer:
+					{
 #if UNITY_2017_1_OR_NEWER
 							return ((Int32)_numberData.x).ToString();
 #else
-							return ((Int32)_numberData.X).ToString();
+						return ((int)_numberData.X).ToString();
 #endif
-						}
-					case TValueType.Enum:
+					}
+				case TValueType.Enum:
+					{
+						if (_referenceData == null)
 						{
-							if (_referenceData == null)
-							{
-								return "Null";
-							}
-							else
-							{
-								return _referenceData.ToString();
-							}
+							return "Null";
 						}
-					case TValueType.Float:
+						else
 						{
+							return _referenceData.ToString();
+						}
+					}
+				case TValueType.Float:
+					{
 #if UNITY_2017_1_OR_NEWER
 							return _numberData.x.ToString();
 #else
-							return _numberData.X.ToString();
+						return _numberData.X.ToString();
 #endif
-						}
-					case TValueType.DateTime:
-						{
-							return _stringData;
-						}
-					case TValueType.String:
-						{
-							return _stringData;
-						}
+					}
+				case TValueType.DateTime:
+					{
+						return _stringData;
+					}
+				case TValueType.String:
+					{
+						return _stringData;
+					}
 #if UNITY_2017_1_OR_NEWER
 					case TValueType.Color:
 						{
@@ -1394,51 +1349,43 @@ namespace Lotus
 							return ((UnityEngine.TextAsset)_unityData)?.name;
 						}
 #endif
-					case TValueType.SysObject:
-						break;
+				case TValueType.SysObject:
+					break;
 
-					default:
-						{
-						}
-						break;
-				}
-
-				if (_referenceData == null)
-				{
-					return "Null";
-				}
-				else
-				{
-					return _referenceData.ToString();
-				}
+				default:
+					{
+					}
+					break;
 			}
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Очистка данных
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public void Clear()
+			if (_referenceData == null)
 			{
-				_valueType = TValueType.Void;
-				if (_owner != null) _owner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
+				return "Null";
 			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сериализация типа данных в строку
-			/// </summary>
-			/// <returns>Строка данных</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public virtual String SerializeToString()
+			else
 			{
-				return String.Format("[{0}]", _valueType);
+				return _referenceData.ToString();
 			}
-			#endregion
 		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
+
+		/// <summary>
+		/// Очистка данных.
+		/// </summary>
+		public void Clear()
+		{
+			_valueType = TValueType.Void;
+			if (_owner != null) _owner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
+		}
+
+		/// <summary>
+		/// Сериализация типа данных в строку.
+		/// </summary>
+		/// <returns>Строка данных.</returns>
+		public virtual string SerializeToString()
+		{
+			return string.Format("[{0}]", _valueType);
+		}
+		#endregion
 	}
+	/**@}*/
 }
-//=====================================================================================================================

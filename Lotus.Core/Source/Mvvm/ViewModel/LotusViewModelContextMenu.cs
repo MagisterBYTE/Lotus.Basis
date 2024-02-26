@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using Lotus.Core.Serialization;
+
 namespace Lotus.Core
 {
     /** \addtogroup CoreViewModel

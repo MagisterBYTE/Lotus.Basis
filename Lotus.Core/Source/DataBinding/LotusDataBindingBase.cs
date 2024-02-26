@@ -243,7 +243,7 @@ namespace Lotus.Core
         /// <returns>Текстовое представление.</returns>
         public string ToStringShort()
         {
-            var mode = "";
+            string mode = "";
             switch (_mode)
             {
                 case TBindingMode.ViewData:
@@ -268,7 +268,7 @@ namespace Lotus.Core
         /// <returns>Текстовое представление.</returns>
         public override string ToString()
         {
-            var mode = "";
+            string mode = "";
             switch (_mode)
             {
                 case TBindingMode.ViewData:

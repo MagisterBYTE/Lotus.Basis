@@ -44,10 +44,7 @@ namespace Lotus.Core
         {
             get
             {
-                if (_cached == null)
-                {
-                    _cached = new Dictionary<string, CReflectedType>(400);
-                }
+                _cached ??= new Dictionary<string, CReflectedType>(400);
                 return _cached;
             }
         }
@@ -104,10 +101,7 @@ namespace Lotus.Core
         {
             get
             {
-                if (_enumerableCountMethods == null)
-                {
-                    _enumerableCountMethods = new Dictionary<Type, MethodInfo>(4);
-                }
+                _enumerableCountMethods ??= new Dictionary<Type, MethodInfo>(4);
                 return _enumerableCountMethods;
             }
         }
@@ -119,10 +113,7 @@ namespace Lotus.Core
         {
             get
             {
-                if (_enumerableContainsMethods == null)
-                {
-                    _enumerableContainsMethods = new Dictionary<Type, MethodInfo>(4);
-                }
+                _enumerableContainsMethods ??= new Dictionary<Type, MethodInfo>(4);
                 return _enumerableContainsMethods;
             }
         }
@@ -134,10 +125,7 @@ namespace Lotus.Core
         {
             get
             {
-                if (_enumerableAnyMethods == null)
-                {
-                    _enumerableAnyMethods = new Dictionary<Type, MethodInfo>(4);
-                }
+                _enumerableAnyMethods ??= new Dictionary<Type, MethodInfo>(4);
                 return _enumerableAnyMethods;
             }
         }
@@ -149,10 +137,7 @@ namespace Lotus.Core
         {
             get
             {
-                if (_enumerableAllMethods == null)
-                {
-                    _enumerableAllMethods = new Dictionary<Type, MethodInfo>(4);
-                }
+                _enumerableAllMethods ??= new Dictionary<Type, MethodInfo>(4);
                 return _enumerableAllMethods;
             }
         }
@@ -164,10 +149,7 @@ namespace Lotus.Core
         {
             get
             {
-                if (_enumerableUnionMethods == null)
-                {
-                    _enumerableUnionMethods = new Dictionary<Type, MethodInfo>(4);
-                }
+                _enumerableUnionMethods ??= new Dictionary<Type, MethodInfo>(4);
                 return _enumerableUnionMethods;
             }
         }
@@ -179,10 +161,7 @@ namespace Lotus.Core
         {
             get
             {
-                if (_enumerableExceptMethods == null)
-                {
-                    _enumerableExceptMethods = new Dictionary<Type, MethodInfo>(4);
-                }
+                _enumerableExceptMethods ??= new Dictionary<Type, MethodInfo>(4);
                 return _enumerableExceptMethods;
             }
         }
@@ -194,10 +173,7 @@ namespace Lotus.Core
         {
             get
             {
-                if (_enumerableSelectMethods == null)
-                {
-                    _enumerableSelectMethods = new Dictionary<KeyValuePair<Type, Type>, MethodInfo>(16);
-                }
+                _enumerableSelectMethods ??= new Dictionary<KeyValuePair<Type, Type>, MethodInfo>(16);
                 return _enumerableSelectMethods;
             }
         }
@@ -301,26 +277,26 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static object? GetStaticDataFromType(string fullTypeNameMemberName)
         {
-            var last_dot = fullTypeNameMemberName.LastIndexOf(XChar.Dot);
+            int last_dot = fullTypeNameMemberName.LastIndexOf(XChar.Dot);
             if (last_dot > -1)
             {
-                var full_type_name = fullTypeNameMemberName.Substring(0, last_dot);
-                var member_name = fullTypeNameMemberName.Substring(last_dot + 1);
+                string full_type_name = fullTypeNameMemberName.Substring(0, last_dot);
+                string member_name = fullTypeNameMemberName.Substring(last_dot + 1);
 
                 // Проверяем наличие типа
-                if (Cached.ContainsKey(full_type_name))
+                if (Cached.TryGetValue(full_type_name, out CReflectedType? value))
                 {
                     // Проверяем наличие статического поля
-                    if (Cached[full_type_name].ContainsField(member_name))
+                    if (value.ContainsField(member_name))
                     {
-                        return Cached[full_type_name].GetFieldValue(member_name, null);
+                        return value.GetFieldValue(member_name, null);
                     }
                     else
                     {
                         // Проверяем наличие статического свойства
-                        if (Cached[full_type_name].ContainsProperty(member_name))
+                        if (value.ContainsProperty(member_name))
                         {
-                            return Cached[full_type_name].GetPropertyValue(member_name, null);
+                            return value.GetPropertyValue(member_name, null);
                         }
                         else
                         {
@@ -479,7 +455,7 @@ namespace Lotus.Core
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             // Проходим по всем сборкам
-            for (var ia = 0; ia < assemblies.Length; ia++)
+            for (int ia = 0; ia < assemblies.Length; ia++)
             {
                 // Сборка
                 var assemble = assemblies[ia];
@@ -490,7 +466,7 @@ namespace Lotus.Core
                     var types = assemble.GetTypes();
 
                     // Проходим по всем типам
-                    for (var it = 0; it < types.Length; it++)
+                    for (int it = 0; it < types.Length; it++)
                     {
                         // Получаем тип
                         var type = types[it];
@@ -500,7 +476,7 @@ namespace Lotus.Core
                         {
                             try
                             {
-                                var instance = Activator.CreateInstance(type, true);
+                                object? instance = Activator.CreateInstance(type, true);
                                 if (instance != null)
                                 {
                                     list.Add(instance);
@@ -509,6 +485,7 @@ namespace Lotus.Core
                             }
                             catch (Exception)
                             {
+                                // Исключение
                             }
                         }
                     }
@@ -593,9 +570,9 @@ namespace Lotus.Core
         public static bool ContainsField(object instance, string fieldName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].ContainsField(fieldName);
+                return value.ContainsField(fieldName);
             }
             else
             {
@@ -614,9 +591,9 @@ namespace Lotus.Core
         public static FieldInfo? GetField(object instance, string fieldName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetField(fieldName);
+                return value.GetField(fieldName);
             }
             else
             {
@@ -635,9 +612,9 @@ namespace Lotus.Core
         public static Type? GetFieldType(object instance, string fieldName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetFieldType(fieldName);
+                return value.GetFieldType(fieldName);
             }
             else
             {
@@ -656,9 +633,9 @@ namespace Lotus.Core
         public static string GetFieldTypeName(object instance, string fieldName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetFieldTypeName(fieldName);
+                return value.GetFieldTypeName(fieldName);
             }
             else
             {
@@ -677,9 +654,9 @@ namespace Lotus.Core
         public static List<FieldInfo> GetFieldsFromType<TType>(object instance)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetFieldsFromType<TType>();
+                return value.GetFieldsFromType<TType>();
             }
             else
             {
@@ -698,9 +675,9 @@ namespace Lotus.Core
         public static List<FieldInfo> GetFieldsHasAttribute<TAttribute>(object instance) where TAttribute : Attribute
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetFieldsHasAttribute<TAttribute>();
+                return value.GetFieldsHasAttribute<TAttribute>();
             }
             else
             {
@@ -720,9 +697,9 @@ namespace Lotus.Core
         public static TAttribute? GetAttributeFromField<TAttribute>(object instance, string fieldName) where TAttribute : System.Attribute
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetAttributeFromField<TAttribute>(fieldName);
+                return value.GetAttributeFromField<TAttribute>(fieldName);
             }
             else
             {
@@ -741,9 +718,9 @@ namespace Lotus.Core
         public static object? GetFieldValue(object instance, string fieldName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetFieldValue(fieldName, instance);
+                return value.GetFieldValue(fieldName, instance);
             }
             else
             {
@@ -763,9 +740,9 @@ namespace Lotus.Core
         public static object? GetFieldValue(object instance, string fieldName, out FieldInfo? fieldInfoResult)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetFieldValue(fieldName, instance, out fieldInfoResult);
+                return value.GetFieldValue(fieldName, instance, out fieldInfoResult);
             }
             else
             {
@@ -785,9 +762,9 @@ namespace Lotus.Core
         public static object? GetFieldValue(object instance, string fieldName, int index)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetFieldValue(fieldName, instance, index);
+                return value.GetFieldValue(fieldName, instance, index);
             }
             else
             {
@@ -808,9 +785,9 @@ namespace Lotus.Core
         public static object? GetFieldValue(object instance, string fieldName, int index, out FieldInfo? fieldInfoResult)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetFieldValue(fieldName, instance, index, out fieldInfoResult);
+                return value.GetFieldValue(fieldName, instance, index, out fieldInfoResult);
             }
             else
             {
@@ -830,9 +807,9 @@ namespace Lotus.Core
         public static bool SetFieldValue(object instance, string fieldName, object value)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? valueType))
             {
-                return Cached[type.FullName!].SetFieldValue(fieldName, instance, value);
+                return valueType.SetFieldValue(fieldName, instance, value);
             }
             else
             {
@@ -853,9 +830,9 @@ namespace Lotus.Core
         public static bool SetFieldValue(object instance, string fieldName, object value, int index)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? valueType))
             {
-                return Cached[type.FullName!].SetFieldValue(fieldName, instance, value, index);
+                return valueType.SetFieldValue(fieldName, instance, value, index);
             }
             else
             {
@@ -876,9 +853,9 @@ namespace Lotus.Core
         public static bool ContainsProperty(object instance, string propertyName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].ContainsProperty(propertyName);
+                return value.ContainsProperty(propertyName);
             }
             else
             {
@@ -897,9 +874,9 @@ namespace Lotus.Core
         public static PropertyInfo? GetProperty(object instance, string propertyName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetProperty(propertyName);
+                return value.GetProperty(propertyName);
             }
             else
             {
@@ -918,9 +895,9 @@ namespace Lotus.Core
         public static Type? GetPropertyType(object instance, string propertyName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetPropertyType(propertyName);
+                return value.GetPropertyType(propertyName);
             }
             else
             {
@@ -939,9 +916,9 @@ namespace Lotus.Core
         public static string GetPropertyTypeName(object instance, string propertyName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetPropertyTypeName(propertyName);
+                return value.GetPropertyTypeName(propertyName);
             }
             else
             {
@@ -960,9 +937,9 @@ namespace Lotus.Core
         public static List<PropertyInfo> GetPropertiesFromType<TType>(object instance)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetPropertiesFromType<TType>();
+                return value.GetPropertiesFromType<TType>();
             }
             else
             {
@@ -981,9 +958,9 @@ namespace Lotus.Core
         public static List<PropertyInfo> GetPropertiesHasAttribute<TAttribute>(object instance) where TAttribute : Attribute
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetPropertiesHasAttribute<TAttribute>();
+                return value.GetPropertiesHasAttribute<TAttribute>();
             }
             else
             {
@@ -1003,9 +980,9 @@ namespace Lotus.Core
         public static TAttribute? GetAttributeFromProperty<TAttribute>(object instance, string propertyName) where TAttribute : System.Attribute
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetAttributeFromProperty<TAttribute>(propertyName);
+                return value.GetAttributeFromProperty<TAttribute>(propertyName);
             }
             else
             {
@@ -1024,9 +1001,9 @@ namespace Lotus.Core
         public static object? GetPropertyValue(object instance, string propertyName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetPropertyValue(propertyName, instance);
+                return value.GetPropertyValue(propertyName, instance);
             }
             else
             {
@@ -1046,9 +1023,9 @@ namespace Lotus.Core
         public static object? GetPropertyValue(object instance, string propertyName, int index)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetPropertyValue(propertyName, instance, index);
+                return value.GetPropertyValue(propertyName, instance, index);
             }
             else
             {
@@ -1068,9 +1045,9 @@ namespace Lotus.Core
         public static bool SetPropertyValue(object instance, string propertyName, object value)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? valueType))
             {
-                return Cached[type.FullName!].SetPropertyValue(propertyName, instance, value);
+                return valueType.SetPropertyValue(propertyName, instance, value);
             }
             else
             {
@@ -1091,9 +1068,9 @@ namespace Lotus.Core
         public static bool SetPropertyValue(object instance, string propertyName, object value, int index)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? valueType))
             {
-                return Cached[type.FullName!].SetPropertyValue(propertyName, instance, value, index);
+                return valueType.SetPropertyValue(propertyName, instance, value, index);
             }
             else
             {
@@ -1114,9 +1091,9 @@ namespace Lotus.Core
         public static bool ContainsMethod(object instance, string methodName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].ContainsMethod(methodName);
+                return value.ContainsMethod(methodName);
             }
             else
             {
@@ -1135,9 +1112,9 @@ namespace Lotus.Core
         public static MethodInfo? GetMethod(object instance, string methodName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetMethod(methodName);
+                return value.GetMethod(methodName);
             }
             else
             {
@@ -1156,9 +1133,9 @@ namespace Lotus.Core
         public static Type? GetMethodReturnType(object instance, string methodName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetMethodReturnType(methodName);
+                return value.GetMethodReturnType(methodName);
             }
             else
             {
@@ -1177,9 +1154,9 @@ namespace Lotus.Core
         public static string GetMethodReturnTypeName(object instance, string methodName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetMethodReturnTypeName(methodName);
+                return value.GetMethodReturnTypeName(methodName);
             }
             else
             {
@@ -1198,9 +1175,9 @@ namespace Lotus.Core
         public static List<MethodInfo> GetMethodsHasAttribute<TAttribute>(object instance) where TAttribute : Attribute
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetMethodsHasAttribute<TAttribute>();
+                return value.GetMethodsHasAttribute<TAttribute>();
             }
             else
             {
@@ -1220,9 +1197,9 @@ namespace Lotus.Core
         public static TAttribute? GetAttributeFromMethod<TAttribute>(object instance, string methodName) where TAttribute : System.Attribute
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].GetAttributeFromMethod<TAttribute>(methodName);
+                return value.GetAttributeFromMethod<TAttribute>(methodName);
             }
             else
             {
@@ -1241,9 +1218,9 @@ namespace Lotus.Core
         public static object? InvokeMethod(object instance, string methodName)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].InvokeMethod(methodName, instance);
+                return value.InvokeMethod(methodName, instance);
             }
             else
             {
@@ -1263,9 +1240,9 @@ namespace Lotus.Core
         public static object? InvokeMethod(object instance, string methodName, object arg)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].InvokeMethod(methodName, instance, arg);
+                return value.InvokeMethod(methodName, instance, arg);
             }
             else
             {
@@ -1287,9 +1264,9 @@ namespace Lotus.Core
                 object arg2)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].InvokeMethod(methodName, instance, arg1, arg2);
+                return value.InvokeMethod(methodName, instance, arg1, arg2);
             }
             else
             {
@@ -1312,9 +1289,9 @@ namespace Lotus.Core
                 object arg2, object arg3)
         {
             Type type = instance.GetType();
-            if (Cached.ContainsKey(type.FullName!))
+            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
             {
-                return Cached[type.FullName!].InvokeMethod(methodName, instance, arg1, arg2, arg3);
+                return value.InvokeMethod(methodName, instance, arg1, arg2, arg3);
             }
             else
             {
@@ -1334,9 +1311,9 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         public static bool ContainsStaticField(string fullTypeName, string fieldName)
         {
-            if (Cached.ContainsKey(fullTypeName))
+            if (Cached.TryGetValue(fullTypeName, out CReflectedType? value))
             {
-                return Cached[fullTypeName].ContainsField(fieldName);
+                return value.ContainsField(fieldName);
             }
             else
             {
@@ -1352,9 +1329,9 @@ namespace Lotus.Core
         /// <returns>Значение поля.</returns>
         public static object? GetStaticFieldValue(string fullTypeName, string fieldName)
         {
-            if (Cached.ContainsKey(fullTypeName))
+            if (Cached.TryGetValue(fullTypeName, out CReflectedType? value))
             {
-                return Cached[fullTypeName].GetFieldValue(fieldName, null);
+                return value.GetFieldValue(fieldName, null);
             }
             else
             {
@@ -1363,7 +1340,7 @@ namespace Lotus.Core
         }
         #endregion
 
-        #region Static Property methods  
+        #region Static property methods  
         /// <summary>
         /// Проверка на существование статического свойства с указанным именем.
         /// </summary>
@@ -1372,9 +1349,9 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         public static bool ContainsStaticProperty(string fullTypeName, string propertyName)
         {
-            if (Cached.ContainsKey(fullTypeName))
+            if (Cached.TryGetValue(fullTypeName, out CReflectedType? value))
             {
-                return Cached[fullTypeName].ContainsProperty(propertyName);
+                return value.ContainsProperty(propertyName);
             }
             else
             {
@@ -1390,9 +1367,9 @@ namespace Lotus.Core
         /// <returns>Значение свойства.</returns>
         public static object? GetStaticPropertyValue(string fullTypeName, string propertyName)
         {
-            if (Cached.ContainsKey(fullTypeName))
+            if (Cached.TryGetValue(fullTypeName, out CReflectedType? value))
             {
-                return Cached[fullTypeName].GetPropertyValue(propertyName, null);
+                return value.GetPropertyValue(propertyName, null);
             }
             else
             {
@@ -1409,13 +1386,13 @@ namespace Lotus.Core
         /// <returns>Типизированная версия метода.</returns>
         public static MethodInfo GetEnumerableCountMethod(Type type)
         {
-            var result = EnumerableCountMethods.GetValueOrDefault(type, null);
+            var result = EnumerableCountMethods.GetValueOrDefault(type);
             if (result != null)
             {
                 return result;
             }
 
-            var genericMethod = EnumerableCountMethods.GetValueOrDefault(ObjectType, null);
+            var genericMethod = EnumerableCountMethods.GetValueOrDefault(ObjectType);
 
             if (genericMethod != null)
             {
@@ -1451,13 +1428,13 @@ namespace Lotus.Core
         /// <returns>Типизированная версия метода.</returns>
         public static MethodInfo GetEnumerableContainsMethod(Type type)
         {
-            var result = EnumerableContainsMethods.GetValueOrDefault(type, null);
+            var result = EnumerableContainsMethods.GetValueOrDefault(type);
             if (result != null)
             {
                 return result;
             }
 
-            var genericMethod = EnumerableContainsMethods.GetValueOrDefault(ObjectType, null);
+            var genericMethod = EnumerableContainsMethods.GetValueOrDefault(ObjectType);
 
             if (genericMethod != null)
             {
@@ -1493,13 +1470,13 @@ namespace Lotus.Core
         /// <returns>Типизированная версия метода.</returns>
         public static MethodInfo GetEnumerableAnyMethod(Type type)
         {
-            var result = EnumerableAnyMethods.GetValueOrDefault(type, null);
+            var result = EnumerableAnyMethods.GetValueOrDefault(type);
             if (result != null)
             {
                 return result;
             }
 
-            var genericMethod = EnumerableAnyMethods.GetValueOrDefault(ObjectType, null);
+            var genericMethod = EnumerableAnyMethods.GetValueOrDefault(ObjectType);
 
             if (genericMethod != null)
             {
@@ -1535,13 +1512,13 @@ namespace Lotus.Core
         /// <returns>Типизированная версия метода.</returns>
         public static MethodInfo GetEnumerableAllMethod(Type type)
         {
-            var result = EnumerableAllMethods.GetValueOrDefault(type, null);
+            var result = EnumerableAllMethods.GetValueOrDefault(type);
             if (result != null)
             {
                 return result;
             }
 
-            var genericMethod = EnumerableAllMethods.GetValueOrDefault(ObjectType, null);
+            var genericMethod = EnumerableAllMethods.GetValueOrDefault(ObjectType);
 
             if (genericMethod != null)
             {
@@ -1577,13 +1554,13 @@ namespace Lotus.Core
         /// <returns>Типизированная версия метода.</returns>
         public static MethodInfo GetEnumerableUnionMethod(Type type)
         {
-            var result = EnumerableUnionMethods.GetValueOrDefault(type, null);
+            var result = EnumerableUnionMethods.GetValueOrDefault(type);
             if (result != null)
             {
                 return result;
             }
 
-            var genericMethod = EnumerableUnionMethods.GetValueOrDefault(ObjectType, null);
+            var genericMethod = EnumerableUnionMethods.GetValueOrDefault(ObjectType);
 
             if (genericMethod != null)
             {
@@ -1619,13 +1596,13 @@ namespace Lotus.Core
         /// <returns>Типизированная версия метода.</returns>
         public static MethodInfo GetEnumerableExceptMethod(Type type)
         {
-            var result = EnumerableExceptMethods.GetValueOrDefault(type, null);
+            var result = EnumerableExceptMethods.GetValueOrDefault(type);
             if (result != null)
             {
                 return result;
             }
 
-            var genericMethod = EnumerableExceptMethods.GetValueOrDefault(ObjectType, null);
+            var genericMethod = EnumerableExceptMethods.GetValueOrDefault(ObjectType);
 
             if (genericMethod != null)
             {
@@ -1663,14 +1640,14 @@ namespace Lotus.Core
         public static MethodInfo GetEnumerableSelectMethod(Type typeEntity, Type typeResult)
         {
             var check = new KeyValuePair<Type, Type>(typeEntity, typeResult);
-            var result = EnumerableSelectMethods.GetValueOrDefault(check, null);
+            var result = EnumerableSelectMethods.GetValueOrDefault(check);
             if (result != null)
             {
                 return result;
             }
 
             var checkObject = new KeyValuePair<Type, Type>(ObjectType, ObjectType);
-            var genericMethod = EnumerableSelectMethods.GetValueOrDefault(checkObject, null);
+            var genericMethod = EnumerableSelectMethods.GetValueOrDefault(checkObject);
 
             if (genericMethod != null)
             {

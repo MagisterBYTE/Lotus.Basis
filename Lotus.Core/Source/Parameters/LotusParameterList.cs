@@ -1,139 +1,110 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема параметрических объектов
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusParameterList.cs
-*		Класс для представления параметра значения которого представляет собой список указанного типа.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreParameters
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Класс для представления параметра значения которого представляет собой список указанного типа
-		/// </summary>
-		/// <typeparam name="TType">Тип элемента списка</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class CParameterList<TType> : ParameterItem<ListArray<TType>>
-		{
-			#region ======================================= СВОЙСТВА ==================================================
-			//
-			// ОСНОВНЫЕ ПАРАМЕТРЫ
-			//
-			/// <summary>
-			/// Тип данных значения
-			/// </summary>
-			[XmlAttribute]
-			public override TParameterValueType ValueType
-			{
-				get { return TParameterValueType.List; }
-			}
-			#endregion
+    /** \addtogroup CoreParameters
+	*@{*/
+    /// <summary>
+    /// Класс для представления параметра значения которого представляет собой список указанного типа.
+    /// </summary>
+    /// <typeparam name="TType">Тип элемента списка.</typeparam>
+    [Serializable]
+    public class CParameterList<TType> : ParameterItem<ListArray<TType>>
+    {
+        #region Properties
+        //
+        // ОСНОВНЫЕ ПАРАМЕТРЫ
+        //
+        /// <summary>
+        /// Тип данных значения.
+        /// </summary>
+        [XmlAttribute]
+        public override TParameterValueType ValueType
+        {
+            get { return TParameterValueType.List; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public CParameterList()
-			{
-				_value = new ListArray<TType>();
-			}
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        public CParameterList()
+        {
+            _value = new ListArray<TType>();
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="parameterName">Имя параметра</param>
-			/// <param name="items">Список элементов</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CParameterList(String parameterName, params TType[] items)
-				: base(parameterName)
-			{
-				_value = new ListArray<TType>(items);
-			}
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="parameterName">Имя параметра.</param>
+        /// <param name="items">Список элементов.</param>
+        public CParameterList(string parameterName, params TType[] items)
+            : base(parameterName)
+        {
+            _value = new ListArray<TType>(items);
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="id">Идентификатор параметра</param>
-			/// <param name="items">Список элементов</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CParameterList(Int32 id, params TType[] items)
-				: base(id)
-			{
-				_value = new ListArray<TType>(items);
-			}
-			#endregion
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="id">Идентификатор параметра.</param>
+        /// <param name="items">Список элементов.</param>
+        public CParameterList(int id, params TType[] items)
+            : base(id)
+        {
+            _value = new ListArray<TType>(items);
+        }
+        #endregion
 
-			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Запись в строковый поток в формате Json
-			/// </summary>
-			/// <param name="streamWriter">Строковый поток</param>
-			/// <param name="depth">Текущая глубина вложенности</param>
-			/// <param name="isArray">Статус массива</param>
-			//---------------------------------------------------------------------------------------------------------
-			public override void WriteToJson(StreamWriter streamWriter, Int32 depth, Boolean isArray)
-			{
-				streamWriter.Write(XChar.NewLine);
-				streamWriter.Write(XString.Depths[depth]);
+        #region Main methods
+        /// <summary>
+        /// Запись в строковый поток в формате Json.
+        /// </summary>
+        /// <param name="streamWriter">Строковый поток.</param>
+        /// <param name="depth">Текущая глубина вложенности.</param>
+        /// <param name="isArray">Статус массива.</param>
+        public override void WriteToJson(StreamWriter streamWriter, int depth, bool isArray)
+        {
+            streamWriter.Write(XChar.NewLine);
+            streamWriter.Write(XString.Depths[depth]);
 
-				streamWriter.Write(XChar.DoubleQuotes);
-				streamWriter.Write(Name);
-				streamWriter.Write(XChar.DoubleQuotes);
+            streamWriter.Write(XChar.DoubleQuotes);
+            streamWriter.Write(Name);
+            streamWriter.Write(XChar.DoubleQuotes);
 
-				streamWriter.Write(":\n");
-				streamWriter.Write(XString.Depths[depth]);
-				streamWriter.Write("[");
+            streamWriter.Write(":\n");
+            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write("[");
 
-				if (typeof(TType).IsSupportInterface<IParameterItem>())
-				{
-					foreach (IParameterItem? item in _value!)
-					{
-						if(item != null) 
-						{
-							item.WriteToJson(streamWriter, depth + 1, true);
-							streamWriter.Write(",");
-						}
-					}
-				}
-				else
-				{
-					foreach (TType item in _value!) 
-					{
-						streamWriter.Write(item);
-						streamWriter.Write(",");
-					}
-				}
+            if (typeof(TType).IsSupportInterface<IParameterItem>())
+            {
+                foreach (IParameterItem? item in _value!)
+                {
+                    if (item != null)
+                    {
+                        item.WriteToJson(streamWriter, depth + 1, true);
+                        streamWriter.Write(",");
+                    }
+                }
+            }
+            else
+            {
+                foreach (TType item in _value!)
+                {
+                    streamWriter.Write(item);
+                    streamWriter.Write(",");
+                }
+            }
 
-				streamWriter.Write("\n");
-				streamWriter.Write(XString.Depths[depth]);
-				streamWriter.Write("]");
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+            streamWriter.Write("\n");
+            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write("]");
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

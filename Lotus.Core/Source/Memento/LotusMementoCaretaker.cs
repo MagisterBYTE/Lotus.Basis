@@ -1,252 +1,199 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема хранения состояний
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusMementoCaretaker.cs
-*		Определение концепции смотрителя за объектом.
-*		Смотритель может сохранить состояние объекта и восстановить его. Также реализована концепция смотрителя с 
-*	поддержкой отмены/повторения действий.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
-//=====================================================================================================================
-namespace Lotus
+namespace Lotus.Core
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreMemento
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Интерфейс смотрителя за объектом
-		/// </summary>
-		/// <remarks>
-		/// Смотритель может сохранить состояние объекта и восстановить его
-		/// </remarks>
-		//-------------------------------------------------------------------------------------------------------------
-		public interface ILotusMementoCaretaker
-		{
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Объект состояние которого сохраняется и восстанавливается
-			/// </summary>
-			ILotusMementoOriginator MementoOriginator { get; set; }
-			#endregion
+    /** \addtogroup CoreMemento
+	*@{*/
+    /// <summary>
+    /// Интерфейс смотрителя за объектом.
+    /// </summary>
+    /// <remarks>
+    /// Смотритель может сохранить состояние объекта и восстановить его.
+    /// </remarks>
+    public interface ILotusMementoCaretaker
+    {
+        #region Properties
+        /// <summary>
+        /// Объект состояние которого сохраняется и восстанавливается.
+        /// </summary>
+        ILotusMementoOriginator MementoOriginator { get; set; }
+        #endregion
 
-			#region ======================================= МЕТОДЫ ====================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сохранить состояние объекта
-			/// </summary>
-			/// <param name="stateName">Наименование состояния объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			void SaveState(String stateName);
+        #region МЕТОДЫ 
+        /// <summary>
+        /// Сохранить состояние объекта.
+        /// </summary>
+        /// <param name="stateName">Наименование состояния объекта.</param>
+        void SaveState(string stateName);
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Восстановить состояние объекта
-			/// </summary>
-			/// <param name="stateName">Наименование состояния объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			void RestoreState(String stateName);
-			#endregion
-		}
+        /// <summary>
+        /// Восстановить состояние объекта.
+        /// </summary>
+        /// <param name="stateName">Наименование состояния объекта.</param>
+        void RestoreState(string stateName);
+        #endregion
+    }
 
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Класс реализующий смотрителя за объектом
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public class CMementoCaretaker : ILotusMementoCaretaker
-		{
-			#region ======================================= ДАННЫЕ ====================================================
-			// Общие данные
-			protected internal ILotusMementoOriginator _originator;
-			protected internal System.Object _state;
-			#endregion
+    /// <summary>
+    /// Класс реализующий смотрителя за объектом.
+    /// </summary>
+    public class CMementoCaretaker : ILotusMementoCaretaker
+    {
+        #region Fields
+        // Общие данные
+        protected internal ILotusMementoOriginator _originator;
+        protected internal object _state;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Объект состояние которого сохраняется и восстанавливается
-			/// </summary>
-			public ILotusMementoOriginator MementoOriginator
-			{
-				get { return _originator; }
-				set { _originator = value; }
-			}
-			#endregion
+        #region Properties
+        /// <summary>
+        /// Объект состояние которого сохраняется и восстанавливается.
+        /// </summary>
+        public ILotusMementoOriginator MementoOriginator
+        {
+            get { return _originator; }
+            set { _originator = value; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public CMementoCaretaker()
-			{
-			}
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        public CMementoCaretaker()
+        {
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="originator">Объект</param>
-			/// <param name="stateName">Наименование состояния объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CMementoCaretaker(ILotusMementoOriginator originator, String stateName)
-			{
-				_originator = originator;
-				_state = originator.GetMemento(stateName);
-			}
-			#endregion
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="originator">Объект.</param>
+        /// <param name="stateName">Наименование состояния объекта.</param>
+        public CMementoCaretaker(ILotusMementoOriginator originator, string stateName)
+        {
+            _originator = originator;
+            _state = originator.GetMemento(stateName);
+        }
+        #endregion
 
-			#region ======================================= МЕТОДЫ ====================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сохранить состояние объекта
-			/// </summary>
-			/// <param name="stateName">Наименование состояния объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public virtual void SaveState(String stateName)
-			{
-				_state = _originator.GetMemento(stateName);
-			}
+        #region Main methods 
+        /// <summary>
+        /// Сохранить состояние объекта.
+        /// </summary>
+        /// <param name="stateName">Наименование состояния объекта.</param>
+        public virtual void SaveState(string stateName)
+        {
+            _state = _originator.GetMemento(stateName);
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Восстановить состояние объекта
-			/// </summary>
-			/// <param name="stateName">Наименование состояния объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public virtual void RestoreState(String stateName)
-			{
-				_originator.SetMemento(_state, stateName);
-			}
-			#endregion
-		}
+        /// <summary>
+        /// Восстановить состояние объекта.
+        /// </summary>
+        /// <param name="stateName">Наименование состояния объекта.</param>
+        public virtual void RestoreState(string stateName)
+        {
+            _originator.SetMemento(_state, stateName);
+        }
+        #endregion
+    }
 
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Класс реализующий смотрителя за объектом с поддержкой отмены/повторения действий
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public class CMementoCaretakerChanged : ILotusMementoCaretaker, ILotusMementoState
-		{
-			#region ======================================= ДАННЫЕ ====================================================
-			// Общие данные
-			protected internal ILotusMementoOriginator _originator;
-			protected internal System.Object _beforeState;
-			protected internal System.Object _afterState;
-			protected internal String _stateName;
-			#endregion
+    /// <summary>
+    /// Класс реализующий смотрителя за объектом с поддержкой отмены/повторения действий.
+    /// </summary>
+    public class CMementoCaretakerChanged : ILotusMementoCaretaker, ILotusMementoState
+    {
+        #region Fields
+        // Общие данные
+        protected internal ILotusMementoOriginator _originator;
+        protected internal object _beforeState;
+        protected internal object _afterState;
+        protected internal string _stateName;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Объект состояние которого сохраняется и восстанавливается
-			/// </summary>
-			public ILotusMementoOriginator MementoOriginator
-			{
-				get { return _originator; }
-				set { _originator = value; }
-			}
-			#endregion
+        #region Properties
+        /// <summary>
+        /// Объект состояние которого сохраняется и восстанавливается.
+        /// </summary>
+        public ILotusMementoOriginator MementoOriginator
+        {
+            get { return _originator; }
+            set { _originator = value; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			/// <remarks>
-			/// Конструктор без параметров запрещен
-			/// </remarks>
-			//---------------------------------------------------------------------------------------------------------
-			private CMementoCaretakerChanged()
-			{
-			}
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        /// <remarks>
+        /// Конструктор без параметров запрещен.
+        /// </remarks>
+        private CMementoCaretakerChanged()
+        {
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="originator">Объект</param>
-			/// <param name="stateName">Наименование состояния объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CMementoCaretakerChanged(ILotusMementoOriginator originator, String stateName)
-			{
-				_originator = originator;
-				_beforeState = originator.GetMemento(stateName);
-				_stateName = stateName;
-			}
-			#endregion
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="originator">Объект.</param>
+        /// <param name="stateName">Наименование состояния объекта.</param>
+        public CMementoCaretakerChanged(ILotusMementoOriginator originator, string stateName)
+        {
+            _originator = originator;
+            _beforeState = originator.GetMemento(stateName);
+            _stateName = stateName;
+        }
+        #endregion
 
-			#region ======================================= МЕТОДЫ ====================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сохранить состояние объекта
-			/// </summary>
-			/// <param name="stateName">Наименование состояния объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public virtual void SaveState(String stateName)
-			{
-				_beforeState = _originator.GetMemento(stateName);
-			}
+        #region Main methods 
+        /// <summary>
+        /// Сохранить состояние объекта.
+        /// </summary>
+        /// <param name="stateName">Наименование состояния объекта.</param>
+        public virtual void SaveState(string stateName)
+        {
+            _beforeState = _originator.GetMemento(stateName);
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Восстановить состояние объекта
-			/// </summary>
-			/// <param name="stateName">Наименование состояния объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public virtual void RestoreState(String stateName)
-			{
-				_originator.SetMemento(_beforeState, stateName);
-			}
-			#endregion
+        /// <summary>
+        /// Восстановить состояние объекта.
+        /// </summary>
+        /// <param name="stateName">Наименование состояния объекта.</param>
+        public virtual void RestoreState(string stateName)
+        {
+            _originator.SetMemento(_beforeState, stateName);
+        }
+        #endregion
 
-			#region ======================================= МЕТОДЫ ILotusMementoState =================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Отмена последнего действия
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public virtual void Undo()
-			{
-				if (_originator != null)
-				{
-					// Сначала сохраняем актуальное значение
-					_afterState = _originator.GetMemento(_stateName);
+        #region ILotusMementoState methods
+        /// <summary>
+        /// Отмена последнего действия.
+        /// </summary>
+        public virtual void Undo()
+        {
+            if (_originator != null)
+            {
+                // Сначала сохраняем актуальное значение
+                _afterState = _originator.GetMemento(_stateName);
 
-					// Теперь ставим предыдущие
-					_originator.SetMemento(_beforeState, _stateName);
-				}
-			}
+                // Теперь ставим предыдущие
+                _originator.SetMemento(_beforeState, _stateName);
+            }
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Повторение последнего действия
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public virtual void Redo()
-			{
-				if (_originator != null)
-				{
-					// Сначала сохраняем актуальное значение
-					_beforeState = _originator.GetMemento(_stateName);
+        /// <summary>
+        /// Повторение последнего действия.
+        /// </summary>
+        public virtual void Redo()
+        {
+            if (_originator != null)
+            {
+                // Сначала сохраняем актуальное значение
+                _beforeState = _originator.GetMemento(_stateName);
 
-					// Теперь ставим предыдущие
-					_originator.SetMemento(_afterState, _stateName);
-				}
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+                // Теперь ставим предыдущие
+                _originator.SetMemento(_afterState, _stateName);
+            }
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

@@ -1,81 +1,55 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема поддержки инспектора свойств
-// Подраздел: Атрибуты для инспектора свойств
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusInspectorControlPreview.cs
-*		Атрибут для возможности предпросмотра объекта.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core.Inspector
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreInspectorAttribute
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Атрибут для возможности предпросмотра объекта
-		/// </summary>
-		/// <remarks>
-		/// Только в режиме разработке
-		/// </remarks>
-		//-------------------------------------------------------------------------------------------------------------
-		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+    /** \addtogroup CoreInspectorAttribute
+	*@{*/
+    /// <summary>
+    /// Атрибут для возможности предпросмотра объекта.
+    /// </summary>
+    /// <remarks>
+    /// Только в режиме разработке.
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
 #if UNITY_2017_1_OR_NEWER
-		public sealed class LotusPreviewAttribute : UnityEngine.PropertyAttribute
+	public sealed class LotusPreviewAttribute : UnityEngine.PropertyAttribute
 #else
-		public sealed class LotusPreviewAttribute : Attribute
+    public sealed class LotusPreviewAttribute : Attribute
 #endif
-		{
-			#region ======================================= ДАННЫЕ ====================================================
-			internal Single _previewHeight;
-			#endregion
+    {
+        #region Fields
+        internal float _previewHeight;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Высота области предпросмотра
-			/// </summary>
-			public Single PreviewHeight
-			{
-				get { return _previewHeight; }
-				set { _previewHeight = value; }
-			}
-			#endregion
+        #region Properties
+        /// <summary>
+        /// Высота области предпросмотра.
+        /// </summary>
+        public float PreviewHeight
+        {
+            get { return _previewHeight; }
+            set { _previewHeight = value; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public LotusPreviewAttribute()
-			{
-				_previewHeight = 200;
-			}
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        public LotusPreviewAttribute()
+        {
+            _previewHeight = 200;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="previewHeight">Высота области предпросмотра</param>
-			//---------------------------------------------------------------------------------------------------------
-			public LotusPreviewAttribute(Single previewHeight)
-			{
-				_previewHeight = previewHeight;
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="previewHeight">Высота области предпросмотра.</param>
+        public LotusPreviewAttribute(float previewHeight)
+        {
+            _previewHeight = previewHeight;
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

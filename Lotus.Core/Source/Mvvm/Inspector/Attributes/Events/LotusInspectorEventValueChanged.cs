@@ -1,71 +1,47 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема поддержки инспектора свойств
-// Подраздел: Атрибуты для инспектора свойств
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusInspectorEventValueChanged.cs
-*		Атрибут информирующий об изменении значения поля/свойства объекта.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core.Inspector
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreInspectorAttribute
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Атрибут информирующий об изменении значения поля/свойства объекта
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+    /** \addtogroup CoreInspectorAttribute
+	*@{*/
+    /// <summary>
+    /// Атрибут информирующий об изменении значения поля/свойства объекта.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
 #if UNITY_2017_1_OR_NEWER
-		public sealed class LotusEventValueChangedAttribute : UnityEngine.PropertyAttribute
+	public sealed class LotusEventValueChangedAttribute : UnityEngine.PropertyAttribute
 #else
-		public sealed class LotusEventValueChangedAttribute : Attribute
+    public sealed class LotusEventValueChangedAttribute : Attribute
 #endif
-		{
-			#region ======================================= ДАННЫЕ ====================================================
-			internal String _eventMethodName;
-			#endregion
+    {
+        #region Fields
+        internal string _eventMethodName;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Имя метода который будет вызван при изменении значения
-			/// </summary>
-			/// <remarks>
-			/// Метод должен быть без аргументов
-			/// </remarks>
-			public String EventMethodName
-			{
-				get { return _eventMethodName; }
-				set { _eventMethodName = value; }
-			}
-			#endregion
+        #region Properties
+        /// <summary>
+        /// Имя метода который будет вызван при изменении значения.
+        /// </summary>
+        /// <remarks>
+        /// Метод должен быть без аргументов.
+        /// </remarks>
+        public string EventMethodName
+        {
+            get { return _eventMethodName; }
+            set { _eventMethodName = value; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="eventMethodName">Имя метода который будет вызван при изменении значения</param>
-			//---------------------------------------------------------------------------------------------------------
-			public LotusEventValueChangedAttribute(String eventMethodName)
-			{
-				_eventMethodName = eventMethodName;
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        #region Constructors
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="eventMethodName">Имя метода который будет вызван при изменении значения.</param>
+        public LotusEventValueChangedAttribute(string eventMethodName)
+        {
+            _eventMethodName = eventMethodName;
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

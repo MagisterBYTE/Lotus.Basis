@@ -1,81 +1,55 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема поддержки инспектора свойств
-// Подраздел: Атрибуты для инспектора свойств
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusInspectorDecorationForeground.cs
-*		Атрибут для определения цвета текста элемента инспектора свойств.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core.Inspector
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreInspectorAttribute
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Атрибут для определения цвета текста элемента инспектора свойств
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+    /** \addtogroup CoreInspectorAttribute
+	*@{*/
+    /// <summary>
+    /// Атрибут для определения цвета текста элемента инспектора свойств.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
 #if UNITY_2017_1_OR_NEWER
-		public sealed class LotusForegroundAttribute : UnityEngine.PropertyAttribute
+	public sealed class LotusForegroundAttribute : UnityEngine.PropertyAttribute
 #else
-		public sealed class LotusForegroundAttribute : Attribute
+    public sealed class LotusForegroundAttribute : Attribute
 #endif
-		{
-			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly TColor _foreground;
-			#endregion
+    {
+        #region Fields
+        internal readonly TColor _foreground;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Цвет текста
-			/// </summary>
-			public TColor Foreground
-			{
-				get { return _foreground; }
-			}
-			#endregion
+        #region Properties
+        /// <summary>
+        /// Цвет текста.
+        /// </summary>
+        public TColor Foreground
+        {
+            get { return _foreground; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="red">Красная компонента цвета</param>
-			/// <param name="green">Зеленая компонента цвета</param>
-			/// <param name="blue">Синяя компонента цвета</param>
-			/// <param name="alpha">Альфа компонента цвета</param>
-			//---------------------------------------------------------------------------------------------------------
-			public LotusForegroundAttribute(Byte red, Byte green, Byte blue, Byte alpha = 255)
-			{
-				_foreground = new TColor(red, green, blue, alpha);
-			}
+        #region Constructors
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="red">Красная компонента цвета.</param>
+        /// <param name="green">Зеленая компонента цвета.</param>
+        /// <param name="blue">Синяя компонента цвета.</param>
+        /// <param name="alpha">Альфа компонента цвета.</param>
+        public LotusForegroundAttribute(byte red, byte green, byte blue, byte alpha = 255)
+        {
+            _foreground = new TColor(red, green, blue, alpha);
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="colorBgra">Цвет в формате BGRA</param>
-			//---------------------------------------------------------------------------------------------------------
-			public LotusForegroundAttribute(UInt32 colorBgra)
-			{
-				_foreground = TColor.FromBGRA(colorBgra);
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="colorBgra">Цвет в формате BGRA.</param>
+        public LotusForegroundAttribute(uint colorBgra)
+        {
+            _foreground = TColor.FromBGRA(colorBgra);
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

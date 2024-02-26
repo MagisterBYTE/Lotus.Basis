@@ -1,91 +1,67 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема поддержки инспектора свойств
-// Подраздел: Атрибуты для инспектора свойств
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusInspectorControlButton.cs
-*		Атрибут реализующий отображение кнопки рядом с полем/свойством для вызова метода.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core.Inspector
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreInspectorAttribute
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Атрибут реализующий отображение кнопки рядом с полем/свойством для вызова метода
-		/// </summary>
-		/// <remarks>
-		/// Если метод принимает аргумент то он должен быть того же типа как и тип поля/свойства.
-		/// </remarks>
-		//-------------------------------------------------------------------------------------------------------------
-		[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+    /** \addtogroup CoreInspectorAttribute
+	*@{*/
+    /// <summary>
+    /// Атрибут реализующий отображение кнопки рядом с полем/свойством для вызова метода.
+    /// </summary>
+    /// <remarks>
+    /// Если метод принимает аргумент то он должен быть того же типа как и тип поля/свойства.
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
 #if UNITY_2017_1_OR_NEWER
-		public sealed class LotusButtonAttribute : UnityEngine.PropertyAttribute
+	public sealed class LotusButtonAttribute : UnityEngine.PropertyAttribute
 #else
-		public sealed class LotusButtonAttribute : Attribute
+    public sealed class LotusButtonAttribute : Attribute
 #endif
-		{
-			#region ======================================= ДАННЫЕ ====================================================
-			internal readonly String _methodName;
-			internal String _label;
-			internal Boolean _inputArgument;
-			#endregion
+    {
+        #region Fields
+        internal readonly string _methodName;
+        internal string _label;
+        internal bool _inputArgument;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Имя метода
-			/// </summary>
-			public String MethodName
-			{
-				get { return _methodName; }
-			}
+        #region Properties
+        /// <summary>
+        /// Имя метода.
+        /// </summary>
+        public string MethodName
+        {
+            get { return _methodName; }
+        }
 
-			/// <summary>
-			/// Надпись на кнопке
-			/// </summary>
-			public String Label
-			{
-				get { return _label; }
-				set { _label = value; }
-			}
+        /// <summary>
+        /// Надпись на кнопке.
+        /// </summary>
+        public string Label
+        {
+            get { return _label; }
+            set { _label = value; }
+        }
 
-			/// <summary>
-			/// Статус получения аргумента
-			/// </summary>
-			public Boolean InputArgument
-			{
-				get { return _inputArgument; }
-				set { _inputArgument = value; }
-			}
-			#endregion
+        /// <summary>
+        /// Статус получения аргумента.
+        /// </summary>
+        public bool InputArgument
+        {
+            get { return _inputArgument; }
+            set { _inputArgument = value; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="methodName">Имя метода</param>
-			/// <param name="label">Надпись на кнопке</param>
-			//---------------------------------------------------------------------------------------------------------
-			public LotusButtonAttribute(String methodName, String label = "D")
-			{
-				_methodName = methodName;
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        #region Constructors
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="methodName">Имя метода.</param>
+        /// <param name="label">Надпись на кнопке.</param>
+        public LotusButtonAttribute(string methodName, string label = "D")
+        {
+            _methodName = methodName;
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

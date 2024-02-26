@@ -1,136 +1,109 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема поддержки инспектора свойств
-// Подраздел: Атрибуты для инспектора свойств
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusInspectorMethodArgFile.cs
-*		Атрибуты для определения возможности вызова метода через инспектор свойств.
-*		Реализация обеспечивающих инфраструктуру вызова метода объекта(компонента) посредством инспектора свойств.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core.Inspector
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreInspectorAttribute
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Атрибут для вызова метода с возможностью указания для аргумента имени файла
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		[AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+    /** \addtogroup CoreInspectorAttribute
+    *@{*/
+    /// <summary>
+    /// Атрибут для вызова метода с возможностью указания для аргумента имени файла.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
 #if UNITY_2017_1_OR_NEWER
-		public sealed class LotusMethodArgFileAttribute : UnityEngine.PropertyAttribute
+    public sealed class LotusMethodArgFileAttribute : UnityEngine.PropertyAttribute
 #else
-		public sealed class LotusMethodArgFileAttribute : Attribute
+    public sealed class LotusMethodArgFileAttribute : Attribute
 #endif
-		{
-			#region ======================================= ДАННЫЕ ====================================================
-			internal String _extension;
-			internal String _defaultName;
-			internal String _defaultPath;
-			internal Boolean _isOpenFile;
-			#endregion
+    {
+        #region Fields
+        internal string _extension;
+        internal string _defaultName;
+        internal string _defaultPath;
+        internal bool _isOpenFile;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Расширение файла
-			/// </summary>
-			/// <remarks>
-			/// Расширение файла задается без точки
-			/// </remarks>
-			public String Extension
-			{
-				get { return _extension; }
-				set { _extension = value; }
-			}
+        #region Properties
+        /// <summary>
+        /// Расширение файла.
+        /// </summary>
+        /// <remarks>
+        /// Расширение файла задается без точки.
+        /// </remarks>
+        public string Extension
+        {
+            get { return _extension; }
+            set { _extension = value; }
+        }
 
-			/// <summary>
-			/// Имя файла по умолчанию
-			/// </summary>
-			/// <remarks>
-			/// Стандартное значение - File
-			/// </remarks>
-			public String DefaultName
-			{
-				get { return _defaultName; }
-				set { _defaultName = value; }
-			}
+        /// <summary>
+        /// Имя файла по умолчанию.
+        /// </summary>
+        /// <remarks>
+        /// Стандартное значение - File.
+        /// </remarks>
+        public string DefaultName
+        {
+            get { return _defaultName; }
+            set { _defaultName = value; }
+        }
 
-			/// <summary>
-			/// Путь файла по умолчанию
-			/// </summary>
-			/// <remarks>
-			/// Стандартное значение - Assets/
-			/// </remarks>
-			public String DefaultPath
-			{
-				get { return _defaultPath; }
-				set { _defaultPath = value; }
-			}
+        /// <summary>
+        /// Путь файла по умолчанию.
+        /// </summary>
+        /// <remarks>
+        /// Стандартное значение - Assets/.
+        /// </remarks>
+        public string DefaultPath
+        {
+            get { return _defaultPath; }
+            set { _defaultPath = value; }
+        }
 
-			/// <summary>
-			/// Статус открытия файла (Показывается диалог для открытия файла)
-			/// </summary>
-			/// <remarks>
-			/// В случае отрицательного значения будет показываться диалог закрытия файлов
-			/// </remarks>
-			public Boolean IsOpenFile
-			{
-				get { return _isOpenFile; }
-				set { _isOpenFile = value; }
-			}
-			#endregion
+        /// <summary>
+        /// Статус открытия файла (Показывается диалог для открытия файла).
+        /// </summary>
+        /// <remarks>
+        /// В случае отрицательного значения будет показываться диалог закрытия файлов.
+        /// </remarks>
+        public bool IsOpenFile
+        {
+            get { return _isOpenFile; }
+            set { _isOpenFile = value; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public LotusMethodArgFileAttribute()
-			{
-				_defaultName = "File";
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        public LotusMethodArgFileAttribute()
+        {
+            _defaultName = "File";
 #if UNITY_2017_1_OR_NEWER
-				mDefaultPath = XCoreSettings.ASSETS_PATH;
+		    _defaultPath = XCoreSettings.ASSETS_PATH;
 #else
-				_defaultPath = "";
+            _defaultPath = "";
 #endif
 
-			}
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="extension">Расширение файла</param>
-			/// <param name="defaultName">Имя файла по умолчанию</param>
-			/// <param name="defaultPath">Путь файла по умолчанию</param>
-			//---------------------------------------------------------------------------------------------------------
-			public LotusMethodArgFileAttribute(String extension, String defaultName = "File", 
-				String defaultPath =
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="extension">Расширение файла.</param>
+        /// <param name="defaultName">Имя файла по умолчанию.</param>
+        /// <param name="defaultPath">Путь файла по умолчанию.</param>
+        public LotusMethodArgFileAttribute(string extension, string defaultName = "File",
+            string defaultPath =
 #if UNITY_2017_1_OR_NEWER
-				XCoreSettings.ASSETS_PATH)
+		    XCoreSettings.ASSETS_PATH)
 #else
-				"")
+            "")
 #endif
-			{
-				_extension = extension;
-				_defaultPath = defaultPath;
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        {
+            _extension = extension;
+            _defaultPath = defaultPath;
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

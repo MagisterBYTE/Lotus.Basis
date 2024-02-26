@@ -1,317 +1,271 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Вспомогательная подсистема
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusNumbersHelper.cs
-*		Работа с числовыми типами.
-*		Реализация дополнительных методов для работы с числовыми типами.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
 using System.Globalization;
 using System.Text;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreHelpers
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Статический класс реализующий дополнительные методы для работы с числовыми типами
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public static class XNumbers
-		{
-			#region ======================================= ФОРМАТЫ ОТОБРАЖЕНИЯ ЧИСЕЛ =================================
-			/// <summary>
-			/// Денежный формат
-			/// </summary>
-			public const String Monetary = "{0:c}";
-			#endregion
+    /** \addtogroup CoreHelpers
+	*@{*/
+    /// <summary>
+    /// Статический класс реализующий дополнительные методы для работы с числовыми типами.
+    /// </summary>
+    public static class XNumbers
+    {
+        #region ФОРМАТЫ ОТОБРАЖЕНИЯ ЧИСЕЛ 
+        /// <summary>
+        /// Денежный формат.
+        /// </summary>
+        public const string Monetary = "{0:c}";
+        #endregion
 
-			#region ======================================= Int32 =====================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Проверка на установленный флаг
-			/// </summary>
-			/// <param name="value">Значение</param>
-			/// <param name="flag">Проверяемый флаг</param>
-			/// <returns>Статус установки флага</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean IsFlagSet(Int32 value, Int32 flag)
-			{
-				return (value & flag) != 0;
-			}
+        #region Int32 
+        /// <summary>
+        /// Проверка на установленный флаг.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="flag">Проверяемый флаг.</param>
+        /// <returns>Статус установки флага.</returns>
+        public static bool IsFlagSet(int value, int flag)
+        {
+            return (value & flag) != 0;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Установка флага
-			/// </summary>
-			/// <param name="value">Значение</param>
-			/// <param name="flags">Флаг</param>
-			/// <returns>Новое значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Int32 SetFlag(Int32 value, Int32 flags)
-			{
-				value |= flags;
-				return value;
-			}
+        /// <summary>
+        /// Установка флага.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="flags">Флаг.</param>
+        /// <returns>Новое значение.</returns>
+        public static int SetFlag(int value, int flags)
+        {
+            value |= flags;
+            return value;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Очистка флага
-			/// </summary>
-			/// <param name="value">Значение</param>
-			/// <param name="flags">Флаг</param>
-			/// <returns>Новое значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Int32 ClearFlag(Int32 value, Int32 flags)
-			{
-				value &= ~flags;
-				return value;
-			}
+        /// <summary>
+        /// Очистка флага.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="flags">Флаг.</param>
+        /// <returns>Новое значение.</returns>
+        public static int ClearFlag(int value, int flags)
+        {
+            value &= ~flags;
+            return value;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование текста в число
-			/// </summary>
-			/// <param name="text">Текст</param>
-			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Int32 ParseInt(String text, Int32 defaultValue = 0)
-			{
-				if (Int32.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out defaultValue))
-				{
+        /// <summary>
+        /// Преобразование текста в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
+        /// <returns>Значение.</returns>
+        public static int ParseInt(string text, int defaultValue = 0)
+        {
+            if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var resultValue))
+            {
+                return resultValue;
 
-				}
+            }
 
-				return defaultValue;
-			}
-			#endregion
+            return defaultValue;
+        }
+        #endregion
 
-			#region ======================================= Int64 =====================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование текста в число
-			/// </summary>
-			/// <param name="text">Текст</param>
-			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Int64 ParseLong(String text, Int64 defaultValue = 0)
-			{
-				if (Int64.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out defaultValue))
-				{
+        #region Int64 
+        /// <summary>
+        /// Преобразование текста в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
+        /// <returns>Значение.</returns>
+        public static long ParseLong(string text, long defaultValue = 0)
+        {
+            if (long.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var resultValue))
+            {
+                return resultValue;
+            }
 
-				}
+            return defaultValue;
+        }
+        #endregion
 
-				return defaultValue;
-			}
-			#endregion
+        #region Single 
+        /// <summary>
+        /// Преобразование текста в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
+        /// <returns>Значение.</returns>
+        public static float ParseSingle(string text, float defaultValue = 0)
+        {
+            if (text.IndexOf(',') > -1)
+            {
+                text = text.Replace(',', XChar.Dot);
+            }
 
-			#region ======================================= Single ====================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование текста в число
-			/// </summary>
-			/// <param name="text">Текст</param>
-			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Single ParseSingle(String text, Single defaultValue = 0)
-			{
-				if (text.IndexOf(',') > -1)
-				{
-					text = text.Replace(',', XChar.Dot);
-				}
+            if (float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
+            {
+                return resultValue;
+            }
 
-				if (Single.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out defaultValue))
-				{
+            return defaultValue;
+        }
+        #endregion
 
-				}
+        #region Double 
+        /// <summary>
+        /// Преобразование текста в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
+        /// <returns>Значение.</returns>
+        public static double ParseDouble(string text, double defaultValue = 0)
+        {
+            if (text.IndexOf(',') > -1)
+            {
+                text = text.Replace(',', XChar.Dot);
+            }
 
-				return defaultValue;
-			}
-			#endregion
+            if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
+            {
+                return resultValue;
+            }
 
-			#region ======================================= Double ====================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование текста в число
-			/// </summary>
-			/// <param name="text">Текст</param>
-			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Double ParseDouble(String text, Double defaultValue = 0)
-			{
-				if (text.IndexOf(',') > -1)
-				{
-					text = text.Replace(',', XChar.Dot);
-				}
+            return defaultValue;
+        }
 
-				if (Double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out defaultValue))
-				{
+        /// <summary>
+        /// Преобразование форматированного текста в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
+        /// <returns>Значение.</returns>
+        public static double ParseDoubleFormat(string text, double defaultValue = 0)
+        {
+            var number = new StringBuilder(text.Length);
 
-				}
+            for (var i = 0; i < text.Length; i++)
+            {
+                var c = text[i];
 
-				return defaultValue;
-			}
+                if (c == '-')
+                {
+                    number.Append(c);
+                    continue;
+                }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование форматированного текста в число
-			/// </summary>
-			/// <param name="text">Текст</param>
-			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Double ParseDoubleFormat(String text, Double defaultValue = 0)
-			{
-				var number = new StringBuilder(text.Length);
+                if (c == ',' || c == XChar.Dot)
+                {
+                    if (i != text.Length - 1)
+                    {
+                        number.Append(XChar.Dot);
+                    }
+                    continue;
+                }
 
-				for (var i = 0; i < text.Length; i++)
-				{
-					var c = text[i];
+                if (c >= '0' && c <= '9')
+                {
+                    number.Append(c);
+                }
 
-					if (c == '-')
-					{
-						number.Append(c);
-						continue;
-					}
+            }
 
-					if (c == ',' || c == XChar.Dot)
-					{
-						if (i != text.Length - 1)
-						{
-							number.Append(XChar.Dot);
-						}
-						continue;
-					}
+            if (double.TryParse(number.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
+            {
+                return resultValue;
+            }
 
-					if (c >= '0' && c <= '9')
-					{
-						number.Append(c);
-						continue;
-					}
+            return defaultValue;
+        }
 
-				}
+        /// <summary>
+        /// Преобразование форматированного текста в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="result">Значение.</param>
+        /// <returns>Статус успешности преобразования.</returns>
+        public static bool TryParseDoubleFormat(string text, out double result)
+        {
+            var number = new StringBuilder(text.Length);
 
-				if (Double.TryParse(number.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out defaultValue))
-				{
+            for (var i = 0; i < text.Length; i++)
+            {
+                var c = text[i];
 
-				}
+                if (c == '-')
+                {
+                    number.Append(c);
+                    continue;
+                }
 
-				return defaultValue;
-			}
+                if (c == ',' || c == XChar.Dot)
+                {
+                    if (i != text.Length - 1)
+                    {
+                        number.Append(XChar.Dot);
+                    }
+                    continue;
+                }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование форматированного текста в число
-			/// </summary>
-			/// <param name="text">Текст</param>
-			/// <param name="result">Значение</param>
-			/// <returns>Статус успешности преобразования</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean TryParseDoubleFormat(String text, out Double result)
-			{
-				var number = new StringBuilder(text.Length);
+                if (c >= '0' && c <= '9')
+                {
+                    number.Append(c);
+                }
 
-				for (var i = 0; i < text.Length; i++)
-				{
-					var c = text[i];
+            }
 
-					if (c == '-')
-					{
-						number.Append(c);
-						continue;
-					}
+            if (double.TryParse(number.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out result))
+            {
+                return true;
+            }
 
-					if (c == ',' || c == XChar.Dot)
-					{
-						if (i != text.Length - 1)
-						{
-							number.Append(XChar.Dot);
-						}
-						continue;
-					}
+            return false;
+        }
+        #endregion
 
-					if (c >= '0' && c <= '9')
-					{
-						number.Append(c);
-						continue;
-					}
+        #region Decimal 
+        /// <summary>
+        /// Преобразование текста в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
+        /// <returns>Значение.</returns>
+        public static decimal ParseDecimal(string text, decimal defaultValue = 0)
+        {
+            if (text.IndexOf(',') > -1)
+            {
+                text = text.Replace(',', XChar.Dot);
+            }
 
-				}
+            if (decimal.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
+            {
+                return resultValue;
+            }
 
-				if (Double.TryParse(number.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out result))
-				{
-					return true;
-				}
+            return defaultValue;
+        }
 
-				return false;
-			}
-			#endregion
+        /// <summary>
+        /// Преобразование текста, представленного как отображение валюты, в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
+        /// <returns>Значение.</returns>
+        public static decimal ParseCurrency(string text, decimal defaultValue = 0)
+        {
+            if (text.IndexOf(',') > -1)
+            {
+                text = text.Replace(',', XChar.Dot);
+            }
 
-			#region ======================================= Decimal ===================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование текста в число
-			/// </summary>
-			/// <param name="text">Текст</param>
-			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Decimal ParseDecimal(String text, Decimal defaultValue = 0)
-			{
-				if (text.IndexOf(',') > -1)
-				{
-					text = text.Replace(',', XChar.Dot);
-				}
+            if (decimal.TryParse(text, NumberStyles.Currency, CultureInfo.InvariantCulture, out var resultValue))
+            {
+                return resultValue;
+            }
 
-				if (Decimal.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out defaultValue))
-				{
-
-				}
-
-				return defaultValue;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование текста, представленного как отображение валюты, в число
-			/// </summary>
-			/// <param name="text">Текст</param>
-			/// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось</param>
-			/// <returns>Значение</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Decimal ParseCurrency(String text, Decimal defaultValue = 0)
-			{
-				if (text.IndexOf(',') > -1)
-				{
-					text = text.Replace(',', XChar.Dot);
-				}
-
-				if (Decimal.TryParse(text, NumberStyles.Currency, CultureInfo.InvariantCulture, out defaultValue))
-				{
-
-				}
-
-				return defaultValue;
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+            return defaultValue;
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

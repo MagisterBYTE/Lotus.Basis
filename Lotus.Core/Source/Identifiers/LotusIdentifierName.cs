@@ -1,294 +1,246 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема идентификаторов
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusIdentifierName.cs
-*		Определение сущностей реализующих понятие имя объекта.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
 using System.ComponentModel;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreIdentifiers
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Базовый класс реализующий имя объекта
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class CNameable : PropertyChangedBase, ILotusNameable, IComparable<ILotusNameable>, IComparable<CNameable>
-		{
-			#region ======================================= СТАТИЧЕСКИЕ ДАННЫЕ ========================================
-			//
-			// Константы для информирования об изменении свойств
-			//
-			// Идентификация
-			protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
-			#endregion
+    /** \addtogroup CoreIdentifiers
+    *@{*/
+    /// <summary>
+    /// Базовый класс реализующий имя объекта.
+    /// </summary>
+    [Serializable]
+    public class CNameable : PropertyChangedBase, ILotusNameable, IComparable<ILotusNameable>,
+        IComparable<CNameable>
+    {
+        #region Static fields
+        //
+        // Константы для информирования об изменении свойств
+        //
+        // Идентификация
+        protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
+        #endregion
 
-			#region ======================================= ДАННЫЕ ====================================================
+        #region Fields
 #if UNITY_2017_1_OR_NEWER
-			[UnityEngine.SerializeField]
-			[LotusDisplayName(nameof(Name))]
+		[UnityEngine.SerializeField]
+		[LotusDisplayName(nameof(Name))]
 #endif
-			protected internal String _name = "";
-			#endregion
+        protected internal string _name = "";
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Наименование объекта
-			/// </summary>
-			public virtual String Name
-			{
-				get { return _name; }
-				set
-				{
-					_name = value;
-					NotifyPropertyChanged(PropertyArgsName);
-					RaiseNameChanged();
-				}
-			}
-			#endregion
-
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public CNameable()
-				: this(String.Empty)
-			{
-
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="name">Имя объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CNameable(String name)
-			{
-				_name = name;
-			}
-			#endregion
-
-			#region ======================================= СИСТЕМНЫЕ МЕТОДЫ ==========================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение объектов для упорядочивания
-			/// </summary>
-			/// <param name="other">Сравниваемый объект</param>
-			/// <returns>Статус сравнения объектов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(ILotusNameable? other)
-			{
-				if (other == null) return 0;
-
-				return _name.CompareTo(other.Name);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение объектов для упорядочивания
-			/// </summary>
-			/// <param name="other">Сравниваемый объект</param>
-			/// <returns>Статус сравнения объектов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CNameable? other)
-			{
-                if (other == null) return 0;
-
-                return _name.CompareTo(other.Name);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование к текстовому представлению
-			/// </summary>
-			/// <returns>Наименование объекта</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
-			{
-				return _name;
-			}
-			#endregion
-
-			#region ======================================= СЛУЖЕБНЫЕ МЕТОДЫ СОБЫТИЙ ==================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Изменение имени объекта.
-			/// Метод автоматически вызывается после установки соответствующего свойства
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			protected virtual void RaiseNameChanged()
-			{
-			}
-			#endregion
-		}
-
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Базовый класс реализующий имя объекта и уникальный числовой идентификатор
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class CNameableInt : PropertyChangedBase, ILotusNameable, ILotusIdentifierInt, IComparable<ILotusNameable>, 
-			IComparable<CNameableInt>
-		{
-			#region ======================================= СТАТИЧЕСКИЕ ДАННЫЕ ========================================
-			//
-			// Константы для информирования об изменении свойств
-			//
-			// Идентификация
-			protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
-			protected static readonly PropertyChangedEventArgs PropertyArgsId = new PropertyChangedEventArgs(nameof(Id));
-			#endregion
-
-			#region ======================================= ДАННЫЕ ====================================================
-#if UNITY_2017_1_OR_NEWER
-			[UnityEngine.SerializeField]
-			[LotusDisplayName(nameof(Name))]
-#endif
-			protected internal String _name = "";
-#if UNITY_2017_1_OR_NEWER
-			[UnityEngine.SerializeField]
-			[UnityEngine.HideInInspector]
-#endif
-			protected internal Int32 _id;
-			#endregion
-
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Наименование объекта
-			/// </summary>
-			public virtual String Name
-			{
-				get { return _name; }
-				set
-				{
-					_name = value;
-					NotifyPropertyChanged(PropertyArgsName);
-					RaiseNameChanged();
-				}
-			}
-
-			/// <summary>
-			/// Уникальный идентификатор объекта
-			/// </summary>
-			public virtual Int32 Id
-			{
-				get { return _id; }
-				set
-				{
-					_id = value;
-					NotifyPropertyChanged(PropertyArgsId);
-				}
-			}
-			#endregion
-
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public CNameableInt()
-				: this(String.Empty)
-			{
-
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="name">Имя объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CNameableInt(String name)
-			{
-				_name = name;
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="id">Идентификатор объекта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CNameableInt(Int32 id)
-			{
-				_id = id;
-			}
-			#endregion
-
-			#region ======================================= СИСТЕМНЫЕ МЕТОДЫ ==========================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение объектов для упорядочивания
-			/// </summary>
-			/// <param name="other">Сравниваемый объект</param>
-			/// <returns>Статус сравнения объектов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(ILotusNameable? other)
-			{
-				if (other == null) return 0;
-
-				return _name.CompareTo(other.Name);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение объектов для упорядочивания
-			/// </summary>
-			/// <param name="other">Сравниваемый объект</param>
-			/// <returns>Статус сравнения объектов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(CNameableInt? other)
-			{
-				if (other == null) return 0;
-
-				return _name.CompareTo(other.Name);
-			}
-
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование к текстовому представлению
-			/// </summary>
-			/// <returns>Наименование объекта</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
-			{
-                return $"Name: {_name} | Id: {_id}";
+        #region Properties
+        /// <summary>
+        /// Наименование объекта.
+        /// </summary>
+        public virtual string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                NotifyPropertyChanged(PropertyArgsName);
+                RaiseNameChanged();
             }
-			#endregion
+        }
+        #endregion
 
-			#region ======================================= СЛУЖЕБНЫЕ МЕТОДЫ СОБЫТИЙ ==================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Изменение имени объекта.
-			/// Метод автоматически вызывается после установки соответствующего свойства
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			protected virtual void RaiseNameChanged()
-			{
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        public CNameable()
+            : this(string.Empty)
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="name">Имя объекта.</param>
+        public CNameable(string name)
+        {
+            _name = name;
+        }
+        #endregion
+
+        #region System methods
+        /// <summary>
+        /// Сравнение объектов для упорядочивания.
+        /// </summary>
+        /// <param name="other">Сравниваемый объект.</param>
+        /// <returns>Статус сравнения объектов.</returns>
+        public int CompareTo(ILotusNameable? other)
+        {
+            if (other == null) return 0;
+
+            return _name.CompareTo(other.Name);
+        }
+
+        /// <summary>
+        /// Сравнение объектов для упорядочивания.
+        /// </summary>
+        /// <param name="other">Сравниваемый объект.</param>
+        /// <returns>Статус сравнения объектов.</returns>
+        public int CompareTo(CNameable? other)
+        {
+            if (other == null) return 0;
+
+            return _name.CompareTo(other.Name);
+        }
+
+        /// <summary>
+        /// Преобразование к текстовому представлению.
+        /// </summary>
+        /// <returns>Наименование объекта.</returns>
+        public override string ToString()
+        {
+            return _name;
+        }
+        #endregion
+
+        #region Service methods
+        /// <summary>
+        /// Изменение имени объекта.
+        /// Метод автоматически вызывается после установки соответствующего свойства.
+        /// </summary>
+        protected virtual void RaiseNameChanged()
+        {
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// Базовый класс реализующий имя объекта и уникальный числовой идентификатор.
+    /// </summary>
+    [Serializable]
+    public class CNameableInt : PropertyChangedBase, ILotusNameable, ILotusIdentifierInt, IComparable<ILotusNameable>,
+        IComparable<CNameableInt>
+    {
+        #region Static fields
+        //
+        // Константы для информирования об изменении свойств
+        //
+        // Идентификация
+        protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
+        protected static readonly PropertyChangedEventArgs PropertyArgsId = new PropertyChangedEventArgs(nameof(Id));
+        #endregion
+
+        #region Fields
+#if UNITY_2017_1_OR_NEWER
+		[UnityEngine.SerializeField]
+		[LotusDisplayName(nameof(Name))]
+#endif
+        protected internal string _name = "";
+#if UNITY_2017_1_OR_NEWER
+		[UnityEngine.SerializeField]
+		[UnityEngine.HideInInspector]
+#endif
+        protected internal int _id;
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Наименование объекта.
+        /// </summary>
+        public virtual string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                NotifyPropertyChanged(PropertyArgsName);
+                RaiseNameChanged();
+            }
+        }
+
+        /// <summary>
+        /// Уникальный идентификатор объекта.
+        /// </summary>
+        public virtual int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                NotifyPropertyChanged(PropertyArgsId);
+            }
+        }
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        public CNameableInt()
+            : this(string.Empty)
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="name">Имя объекта.</param>
+        public CNameableInt(string name)
+        {
+            _name = name;
+        }
+
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="id">Идентификатор объекта.</param>
+        public CNameableInt(int id)
+        {
+            _id = id;
+        }
+        #endregion
+
+        #region System methods
+        /// <summary>
+        /// Сравнение объектов для упорядочивания.
+        /// </summary>
+        /// <param name="other">Сравниваемый объект.</param>
+        /// <returns>Статус сравнения объектов.</returns>
+        public int CompareTo(ILotusNameable? other)
+        {
+            if (other == null) return 0;
+
+            return _name.CompareTo(other.Name);
+        }
+
+        /// <summary>
+        /// Сравнение объектов для упорядочивания.
+        /// </summary>
+        /// <param name="other">Сравниваемый объект.</param>
+        /// <returns>Статус сравнения объектов.</returns>
+        public int CompareTo(CNameableInt? other)
+        {
+            if (other == null) return 0;
+
+            return _name.CompareTo(other.Name);
+        }
+
+        /// <summary>
+        /// Преобразование к текстовому представлению.
+        /// </summary>
+        /// <returns>Наименование объекта.</returns>
+        public override string ToString()
+        {
+            return $"Name: {_name} | Id: {_id}";
+        }
+        #endregion
+
+        #region Service methods
+        /// <summary>
+        /// Изменение имени объекта.
+        /// Метод автоматически вызывается после установки соответствующего свойства.
+        /// </summary>
+        protected virtual void RaiseNameChanged()
+        {
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

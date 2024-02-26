@@ -38,7 +38,7 @@ namespace Lotus.Core
             set
             {
                 _name = value;
-                NotifyPropertyChanged(PropertyArgsName);
+                OnPropertyChanged(PropertyArgsName);
                 RaiseNameChanged();
             }
         }
@@ -149,7 +149,7 @@ namespace Lotus.Core
             set
             {
                 _name = value;
-                NotifyPropertyChanged(PropertyArgsName);
+                OnPropertyChanged(PropertyArgsName);
                 RaiseNameChanged();
             }
         }
@@ -163,7 +163,7 @@ namespace Lotus.Core
             set
             {
                 _id = value;
-                NotifyPropertyChanged(PropertyArgsId);
+                OnPropertyChanged(PropertyArgsId);
             }
         }
         #endregion

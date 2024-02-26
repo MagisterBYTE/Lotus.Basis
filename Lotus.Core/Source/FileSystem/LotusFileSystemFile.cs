@@ -41,14 +41,14 @@ namespace Lotus.Core
                         var new_file_path = XFilePath.GetPathForRenameFile(_info.FullName, value);
                         File.Move(_info.FullName, new_file_path);
                         _name = value;
-                        NotifyPropertyChanged(PropertyArgsName);
+                        OnPropertyChanged(PropertyArgsName);
                         RaiseNameChanged();
 
                     }
                     else
                     {
                         _name = value;
-                        NotifyPropertyChanged(PropertyArgsName);
+                        OnPropertyChanged(PropertyArgsName);
                         RaiseNameChanged();
                     }
                 }

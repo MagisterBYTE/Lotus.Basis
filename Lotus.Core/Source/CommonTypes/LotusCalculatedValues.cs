@@ -53,8 +53,8 @@ namespace Lotus.Core
 					_owner.OnNotifyUpdated(this, _value, nameof(Value));
 				}
 
-				NotifyPropertyChanged(nameof(Value));
-				NotifyPropertyChanged(nameof(CalculatedValue));
+				OnPropertyChanged(nameof(Value));
+				OnPropertyChanged(nameof(CalculatedValue));
 			}
 		}
 
@@ -76,8 +76,8 @@ namespace Lotus.Core
 					_owner.OnNotifyUpdated(this, _supplement, nameof(Supplement));
 				}
 
-				NotifyPropertyChanged(nameof(Supplement));
-				NotifyPropertyChanged(nameof(CalculatedValue));
+				OnPropertyChanged(nameof(Supplement));
+				OnPropertyChanged(nameof(CalculatedValue));
 			}
 		}
 
@@ -108,8 +108,8 @@ namespace Lotus.Core
 						_owner.OnNotifyUpdated(this, _value + _supplement, nameof(CalculatedValue));
 					}
 
-					NotifyPropertyChanged(nameof(Value));
-					NotifyPropertyChanged(nameof(CalculatedValue));
+					OnPropertyChanged(nameof(Value));
+					OnPropertyChanged(nameof(CalculatedValue));
 				}
 			}
 		}
@@ -142,8 +142,8 @@ namespace Lotus.Core
 					_owner.OnNotifyUpdated(this, _notCalculation, nameof(NotCalculation));
 				}
 
-				NotifyPropertyChanged(nameof(CalculatedValue));
-				NotifyPropertyChanged(nameof(NotCalculation));
+				OnPropertyChanged(nameof(CalculatedValue));
+				OnPropertyChanged(nameof(NotCalculation));
 			}
 		}
 		#endregion

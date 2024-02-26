@@ -120,7 +120,7 @@ namespace Lotus.Core
             set
             {
                 _isEnabled = value;
-                NotifyPropertyChanged(PropertyArgsIsEnabled);
+                OnPropertyChanged(PropertyArgsIsEnabled);
             }
         }
         #endregion
@@ -147,8 +147,8 @@ namespace Lotus.Core
         {
             _historyStates.Clear();
             _nextUndo = -1;
-            NotifyPropertyChanged(PropertyArgsCanUndo);
-            NotifyPropertyChanged(PropertyArgsCanRedo);
+            OnPropertyChanged(PropertyArgsCanUndo);
+            OnPropertyChanged(PropertyArgsCanRedo);
         }
 
         /// <summary>
@@ -168,8 +168,8 @@ namespace Lotus.Core
 
             _nextUndo++;
 
-            NotifyPropertyChanged(PropertyArgsCanUndo);
-            NotifyPropertyChanged(PropertyArgsCanRedo);
+            OnPropertyChanged(PropertyArgsCanUndo);
+            OnPropertyChanged(PropertyArgsCanRedo);
         }
 
         /// <summary>
@@ -192,8 +192,8 @@ namespace Lotus.Core
             _nextUndo--;
 
             // Обновляем свойства
-            NotifyPropertyChanged(PropertyArgsCanUndo);
-            NotifyPropertyChanged(PropertyArgsCanRedo);
+            OnPropertyChanged(PropertyArgsCanUndo);
+            OnPropertyChanged(PropertyArgsCanRedo);
         }
 
         /// <summary>
@@ -217,8 +217,8 @@ namespace Lotus.Core
             _nextUndo++;
 
             // Обновляем свойства
-            NotifyPropertyChanged(PropertyArgsCanUndo);
-            NotifyPropertyChanged(PropertyArgsCanRedo);
+            OnPropertyChanged(PropertyArgsCanUndo);
+            OnPropertyChanged(PropertyArgsCanRedo);
         }
 
         /// <summary>

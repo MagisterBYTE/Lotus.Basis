@@ -43,7 +43,7 @@ namespace Lotus.Core
             set
             {
                 _name = value;
-                NotifyPropertyChanged(PropertyArgsName);
+                OnPropertyChanged(PropertyArgsName);
                 RaiseNameChanged();
             }
         }

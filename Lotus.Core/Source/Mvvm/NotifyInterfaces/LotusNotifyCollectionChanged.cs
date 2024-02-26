@@ -1,6 +1,6 @@
 using System;
 
-namespace Lotus.Core.Inspector
+namespace Lotus.Core
 {
     /** \addtogroup CoreNotifyInterfaces
 	*@{*/

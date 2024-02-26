@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Lotus.Core.Inspector
+namespace Lotus.Core
 {
     /** \addtogroup CoreNotifyInterfaces
 	*@{*/

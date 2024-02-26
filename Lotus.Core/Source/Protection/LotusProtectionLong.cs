@@ -1,103 +1,76 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема защиты
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusProtectionLong.cs
-*		Защита целого числа (64 бит).
-*		Реализация механизма защиты (шифрования/декодирование) целого числа.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
 using System.Runtime.InteropServices;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreProtection
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Структура-оболочка для защиты целого числа (64 бит)
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		[StructLayout(LayoutKind.Explicit)]
-		public struct TProtectionLong
-		{
-			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
-			/// <summary>
-			/// Маска для шифрования/декодирование
-			/// </summary>
-			public const UInt64 XOR_MASK = 0XAAAAAAAAAAAAAAAA;
-			#endregion
+    /** \addtogroup CoreProtection
+	*@{*/
+    /// <summary>
+    /// Структура-оболочка для защиты целого числа (64 бит).
+    /// </summary>
+    [StructLayout(LayoutKind.Explicit)]
+    public struct TProtectionLong
+    {
+        #region Const
+        /// <summary>
+        /// Маска для шифрования/декодирование.
+        /// </summary>
+        public const ulong XOR_MASK = 0XAAAAAAAAAAAAAAAA;
+        #endregion
 
-			#region ======================================= ДАННЫЕ ====================================================
-			[FieldOffset(0)]
-			private Int64 _encryptValue;
+        #region Fields
+        [FieldOffset(0)]
+        private long _encryptValue;
 
-			[FieldOffset(0)]
-			private UInt64 _convertValue;
-			#endregion
+        [FieldOffset(0)]
+        private ulong _convertValue;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Зашифрованное значение
-			/// </summary>
-			public Int64 EncryptedValue
-			{
-				get
-				{
-					// Обходное решение для конструктора структуры по умолчанию
-					if (_convertValue == 0 && _encryptValue == 0)
-					{
-						_convertValue = XOR_MASK;
-					}
+        #region Properties
+        /// <summary>
+        /// Зашифрованное значение.
+        /// </summary>
+        public long EncryptedValue
+        {
+            get
+            {
+                // Обходное решение для конструктора структуры по умолчанию
+                if (_convertValue == 0 && _encryptValue == 0)
+                {
+                    _convertValue = XOR_MASK;
+                }
 
-					return _encryptValue;
-				}
-			}
-			#endregion
+                return _encryptValue;
+            }
+        }
+        #endregion
 
-			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Неявное преобразование в обычное целое число
-			/// </summary>
-			/// <param name="value">Структура-оболочка для защиты целого числа</param>
-			/// <returns>Целое число</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static implicit operator Int64(TProtectionLong value)
-			{
-				value._convertValue ^= XOR_MASK;
-				var original = value._encryptValue;
-				value._convertValue ^= XOR_MASK;
-				return original;
-			}
+        #region Operators conversion 
+        /// <summary>
+        /// Неявное преобразование в обычное целое число.
+        /// </summary>
+        /// <param name="value">Структура-оболочка для защиты целого числа.</param>
+        /// <returns>Целое число.</returns>
+        public static implicit operator long(TProtectionLong value)
+        {
+            value._convertValue ^= XOR_MASK;
+            var original = value._encryptValue;
+            value._convertValue ^= XOR_MASK;
+            return original;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Неявное преобразование в объект типа cтруктуры-оболочки для защиты целого числа
-			/// </summary>
-			/// <param name="value">Целое число</param>
-			/// <returns>Структура-оболочка для защиты целого числа</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static implicit operator TProtectionLong(Int64 value)
-			{
-				var protection = new TProtectionLong();
-				protection._encryptValue = value;
-				protection._convertValue ^= XOR_MASK;
-				return protection;
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        /// <summary>
+        /// Неявное преобразование в объект типа cтруктуры-оболочки для защиты целого числа.
+        /// </summary>
+        /// <param name="value">Целое число.</param>
+        /// <returns>Структура-оболочка для защиты целого числа.</returns>
+        public static implicit operator TProtectionLong(long value)
+        {
+            var protection = new TProtectionLong();
+            protection._encryptValue = value;
+            protection._convertValue ^= XOR_MASK;
+            return protection;
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

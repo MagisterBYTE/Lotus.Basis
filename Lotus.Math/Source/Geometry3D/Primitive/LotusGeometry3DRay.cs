@@ -10,7 +10,7 @@ namespace Lotus.Maths
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct Ray3D : IEquatable<Ray3D>, IComparable<Ray3D>
+    public struct Ray3D : IEquatable<Ray3D>
     {
         #region Static fields
         /// <summary>

@@ -1,78 +1,48 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Интерфейсы уведомления
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusNotifyPropertySuspendable.cs
-*		Класс для реализации оповещения об изменении своих свойств с возможностью приостановки оповещения.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Core.Inspector
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreNotifyInterfaces
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Класс для реализации оповещения об изменении своих свойств с возможностью приостановки оповещения
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public class PropertyChangedSuspendable : INotifyPropertyChanged
-		{
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Статус приостановки оповещения объекта об изменении своих свойств
-			/// </summary>
-			public Boolean SuspendableNotify { get; set; }
-			#endregion
+    /** \addtogroup CoreNotifyInterfaces
+	*@{*/
+    /// <summary>
+    /// Класс для реализации оповещения об изменении своих свойств с возможностью приостановки оповещения.
+    /// </summary>
+    public class PropertyChangedSuspendable : INotifyPropertyChanged
+    {
+        /// <summary>
+        /// Статус приостановки оповещения объекта об изменении своих свойств.
+        /// </summary>
+        public bool SuspendableNotify { get; set; }
 
-			#region ======================================= ДАННЫЕ INotifyPropertyChanged =============================
-			/// <summary>
-			/// Событие срабатывает ПОСЛЕ изменения свойства
-			/// </summary>
-			public event PropertyChangedEventHandler? PropertyChanged;
+        /// <summary>
+        /// Событие срабатывает ПОСЛЕ изменения свойства.
+        /// </summary>
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Вспомогательный метод для нотификации изменений свойства
-			/// </summary>
-			/// <param name="propertyName">Имя свойства</param>
-			//---------------------------------------------------------------------------------------------------------
-			public void NotifyPropertyChanged([CallerMemberName] String? propertyName = null)
-			{
-				if (PropertyChanged != null && !SuspendableNotify)
-				{
-					PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-				}
-			}
+        /// <summary>
+        /// Вспомогательный метод для нотификации изменений свойства.
+        /// </summary>
+        /// <param name="propertyName">Имя свойства.</param>
+        public void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            if (PropertyChanged != null && !SuspendableNotify)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Вспомогательный метод для нотификации изменений свойства
-			/// </summary>
-			/// <param name="args">Аргументы события</param>
-			//---------------------------------------------------------------------------------------------------------
-			public void NotifyPropertyChanged(PropertyChangedEventArgs args)
-			{
-				if (PropertyChanged != null && !SuspendableNotify)
-				{
-					PropertyChanged(this, args);
-				}
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        /// <summary>
+        /// Вспомогательный метод для нотификации изменений свойства.
+        /// </summary>
+        /// <param name="args">Аргументы события.</param>
+        public void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            if (PropertyChanged != null && !SuspendableNotify)
+            {
+                PropertyChanged(this, args);
+            }
+        }
+    }
+    /**@}*/
 }
-//=====================================================================================================================

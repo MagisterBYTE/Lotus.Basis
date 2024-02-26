@@ -1,159 +1,122 @@
-﻿//=====================================================================================================================
-// Проект: Модуль базового ядра
-// Раздел: Подсистема объектного пула
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusObjectPoolDispatcher.cs
-*		Центральный диспетчер для управления менеджерами пулом объектов.
-*		Реализация диспетчер который обеспечивает глобальный доступ к всем зарегистрированным менеджерам пулом объектов.
-*	Доступ к зарегистрированным менеджерам пулом объектов осуществляется по имени менеджера.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
-//=====================================================================================================================
-namespace Lotus
+namespace Lotus.Core
 {
-	namespace Core
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup CoreObjectPool
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Центральный диспетчер для управления менеджерами пулом объектов
-		/// </summary>
-		/// <remarks>
-		/// Реализация диспетчер который обеспечивает глобальный доступ к всем зарегистрированным менеджерам пулом объектов.
-		/// Доступ к зарегистрированным менеджерам пулом объектов осуществляется по имени менеджера
-		/// </remarks>
-		//-------------------------------------------------------------------------------------------------------------
-		public static class XPoolDispatcher
-		{
-			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
-			/// <summary>
-			/// Имя менеджера по умолчанию
-			/// </summary>
-			public const String DefaultName = "Default";
-			#endregion
+    /** \addtogroup CoreObjectPool
+	*@{*/
+    /// <summary>
+    /// Центральный диспетчер для управления менеджерами пулом объектов.
+    /// </summary>
+    /// <remarks>
+    /// Реализация диспетчер который обеспечивает глобальный доступ к всем зарегистрированным менеджерам пулом объектов.
+    /// Доступ к зарегистрированным менеджерам пулом объектов осуществляется по имени менеджера.
+    /// </remarks>
+    public static class XPoolDispatcher
+    {
+        #region Const
+        /// <summary>
+        /// Имя менеджера по умолчанию.
+        /// </summary>
+        public const string DefaultName = "Default";
+        #endregion
 
-			#region ======================================= ДАННЫЕ ====================================================
-			private static ListArray<ILotusPoolManager> _poolManagers;
-			#endregion
+        #region Fields
+        private static ListArray<ILotusPoolManager> _poolManagers;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Список менеджеров пулов объектов
-			/// </summary>
-			public static ListArray<ILotusPoolManager> PoolManagers
-			{
-				get
-				{
-					if (_poolManagers == null)
-					{
-						OnInit();
-					}
-					return _poolManagers!;
-				}
-			}
-			#endregion
+        #region Properties
+        /// <summary>
+        /// Список менеджеров пулов объектов.
+        /// </summary>
+        public static ListArray<ILotusPoolManager> PoolManagers
+        {
+            get
+            {
+                if (_poolManagers == null)
+                {
+                    OnInit();
+                }
+                return _poolManagers!;
+            }
+        }
+        #endregion
 
-			#region ======================================= ОСНОВНЫЕ МЕТОДЫ ДИСПЕТЧЕРА ================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Перезапуск данных центрального диспетчера в режиме редактора
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public static void OnResetEditor()
-			{
-			}
+        #region Dispatcher methods
+        /// <summary>
+        /// Перезапуск данных центрального диспетчера в режиме редактора.
+        /// </summary>
+        public static void OnResetEditor()
+        {
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Первичная инициализация данных центрального диспетчера
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public static void OnInit()
-			{
-				if (_poolManagers == null)
-				{
-					_poolManagers = new ListArray<ILotusPoolManager>();
-				}
-			}
-			#endregion
+        /// <summary>
+        /// Первичная инициализация данных центрального диспетчера.
+        /// </summary>
+        public static void OnInit()
+        {
+            if (_poolManagers == null)
+            {
+                _poolManagers = new ListArray<ILotusPoolManager>();
+            }
+        }
+        #endregion
 
-			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Регистрация менеджера управления пулом объектов
-			/// </summary>
-			/// <param name="manager">Менеджер управления пулом объектов</param>
-			/// <returns>Статус успешности регистрации</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean RegisterManager(ILotusPoolManager manager)
-			{
-				PoolManagers.Add(manager);
-				return true;
-			}
+        #region Main methods
+        /// <summary>
+        /// Регистрация менеджера управления пулом объектов.
+        /// </summary>
+        /// <param name="manager">Менеджер управления пулом объектов.</param>
+        /// <returns>Статус успешности регистрации.</returns>
+        public static bool RegisterManager(ILotusPoolManager manager)
+        {
+            PoolManagers.Add(manager);
+            return true;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Отмена регистрации менеджера управления пулом объектов
-			/// </summary>
-			/// <param name="manager">Менеджер управления пулом объектов</param>
-			/// <returns>Статус успешности отмены регистрации</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean UnRegisterManager(ILotusPoolManager manager)
-			{
-				return PoolManagers.Remove(in manager);
-			}
-			#endregion
+        /// <summary>
+        /// Отмена регистрации менеджера управления пулом объектов.
+        /// </summary>
+        /// <param name="manager">Менеджер управления пулом объектов.</param>
+        /// <returns>Статус успешности отмены регистрации.</returns>
+        public static bool UnRegisterManager(ILotusPoolManager manager)
+        {
+            return PoolManagers.Remove(in manager);
+        }
+        #endregion
 
-			#region ======================================= МЕТОДЫ ILotusPoolManager ==================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Взять готовый объект из пула
-			/// </summary>
-			/// <param name="managerName">Имя менеджер</param>
-			/// <returns>Объект</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static TPoolObject? Take<TPoolObject>(String managerName)
-			{
-				ILotusPoolManager? result = PoolManagers.Search(x => x!.Name == managerName);
-				if(result != null)
-				{
-					return (TPoolObject)result.TakeObjectFromPool();
-				}
+        #region ILotusPoolManager methods
+        /// <summary>
+        /// Взять готовый объект из пула.
+        /// </summary>
+        /// <param name="managerName">Имя менеджер.</param>
+        /// <returns>Объект.</returns>
+        public static TPoolObject? Take<TPoolObject>(string managerName)
+        {
+            ILotusPoolManager? result = PoolManagers.Search(x => x!.Name == managerName);
+            if (result != null)
+            {
+                return (TPoolObject)result.TakeObjectFromPool();
+            }
 
-				return default(TPoolObject);
-			}
+            return default(TPoolObject);
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Освободить объект и положить его назад в пул
-			/// </summary>
-			/// <param name="managerName">Имя менеджер</param>
-			/// <param name="poolObject">Объект</param>
-			/// <returns>Статус успешности добавления объекта в пул</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean Release<TPoolObject>(String managerName, TPoolObject poolObject)
-			{
-				ILotusPoolManager? result = PoolManagers.Search(x => x!.Name == managerName);
-				if (result != null)
-				{
-					result.ReleaseObjectToPool(poolObject!);
-					return true;
-				}
+        /// <summary>
+        /// Освободить объект и положить его назад в пул.
+        /// </summary>
+        /// <param name="managerName">Имя менеджер.</param>
+        /// <param name="poolObject">Объект.</param>
+        /// <returns>Статус успешности добавления объекта в пул.</returns>
+        public static bool Release<TPoolObject>(string managerName, TPoolObject poolObject)
+        {
+            ILotusPoolManager? result = PoolManagers.Search(x => x!.Name == managerName);
+            if (result != null)
+            {
+                result.ReleaseObjectToPool(poolObject!);
+                return true;
+            }
 
-				return false;
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+            return false;
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

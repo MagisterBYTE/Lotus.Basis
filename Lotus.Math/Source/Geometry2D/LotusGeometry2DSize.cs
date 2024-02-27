@@ -16,12 +16,12 @@ namespace Lotus.Maths
         /// <summary>
         /// Пустой размер.
         /// </summary>
-        public static readonly Size2D Empty = new Size2D(0, 0);
+        public static readonly Size2D Empty = new(0, 0);
 
         /// <summary>
         /// Нулевой размер.
         /// </summary>
-        public static readonly Size2D Default = new Size2D(10, 10);
+        public static readonly Size2D Default = new(10, 10);
         #endregion
 
         #region Static fields
@@ -320,7 +320,7 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Size2D left, Size2D right)
         {
-            return left.Width < right.Width || left.Width == right.Width && left.Height < right.Height;
+            return left.Width < right.Width || (left.Width == right.Width && left.Height < right.Height);
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Size2D left, Size2D right)
         {
-            return left.Width > right.Width || left.Width == right.Width && left.Height > right.Height;
+            return left.Width > right.Width || (left.Width == right.Width && left.Height > right.Height);
         }
 
         /// <summary>
@@ -458,12 +458,12 @@ namespace Lotus.Maths
         /// <summary>
         /// Пустой размер.
         /// </summary>
-        public static readonly Size2Df Empty = new Size2Df(0, 0);
+        public static readonly Size2Df Empty = new(0, 0);
 
         /// <summary>
         /// Нулевой размер.
         /// </summary>
-        public static readonly Size2Df Default = new Size2Df(10, 10);
+        public static readonly Size2Df Default = new(10, 10);
         #endregion
 
         #region Static fields
@@ -762,7 +762,7 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Size2Df left, Size2Df right)
         {
-            return left.Width < right.Width || left.Width == right.Width && left.Height < right.Height;
+            return left.Width < right.Width || (left.Width == right.Width && left.Height < right.Height);
         }
 
         /// <summary>
@@ -773,7 +773,7 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Size2Df left, Size2Df right)
         {
-            return left.Width > right.Width || left.Width == right.Width && left.Height > right.Height;
+            return left.Width > right.Width || (left.Width == right.Width && left.Height > right.Height);
         }
 
         /// <summary>

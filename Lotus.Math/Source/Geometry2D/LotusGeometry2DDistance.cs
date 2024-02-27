@@ -159,7 +159,7 @@ namespace Lotus.Maths
             if (Math.Abs(Vector2Df.DotPerp(in dirA, in dirB)) < XGeometry2D.Eplsilon_f)
             {
                 // Parallel
-                Vector2Df pos_b_to_a = posA - posB;
+                var pos_b_to_a = posA - posB;
                 if (Math.Abs(Vector2Df.DotPerp(in dirA, in pos_b_to_a)) > XGeometry2D.Eplsilon_f ||
                     Math.Abs(Vector2Df.DotPerp(in dirB, in pos_b_to_a)) > XGeometry2D.Eplsilon_f)
                 {
@@ -202,7 +202,7 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float LineRay(in Vector2Df linePos, in Vector2Df lineDir, in Vector2Df rayPos, in Vector2Df rayDir)
         {
-            Vector2Df ray_pos_to_line_pos = linePos - rayPos;
+            var ray_pos_to_line_pos = linePos - rayPos;
             var denominator = Vector2Df.DotPerp(in lineDir, in rayDir);
             var perp_dot_a = Vector2Df.DotPerp(in lineDir, in ray_pos_to_line_pos);
 
@@ -228,7 +228,7 @@ namespace Lotus.Maths
             {
                 // No intersection
                 var ray_pos_projection = Vector2Df.Dot(in lineDir, in ray_pos_to_line_pos);
-                Vector2Df line_point = linePos - (lineDir * ray_pos_projection);
+                var line_point = linePos - (lineDir * ray_pos_projection);
                 return Vector2Df.Distance(in line_point, in rayPos);
             }
             // Point intersection
@@ -258,8 +258,8 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float LineSegment(in Vector2Df linePos, in Vector2Df lineDir, in Vector2Df start, in Vector2Df end)
         {
-            Vector2Df segment_start_to_pos = linePos - start;
-            Vector2Df segment_direction = end - start;
+            var segment_start_to_pos = linePos - start;
+            var segment_direction = end - start;
             var denominator = Vector2Df.DotPerp(in lineDir, in segment_direction);
             var perp_dot_a = Vector2Df.DotPerp(in lineDir, in segment_start_to_pos);
 
@@ -285,9 +285,9 @@ namespace Lotus.Maths
             if (segment_distance < -XGeometry2D.Eplsilon_f || segment_distance > 1 + XGeometry2D.Eplsilon_f)
             {
                 // No intersection
-                Vector2Df segment_point = start + (segment_direction * XMath.Clamp01(segment_distance));
+                var segment_point = start + (segment_direction * XMath.Clamp01(segment_distance));
                 var segmentPointProjection = Vector2Df.Dot(lineDir, segment_point - linePos);
-                Vector2Df line_point = linePos + (lineDir * segmentPointProjection);
+                var line_point = linePos + (lineDir * segmentPointProjection);
                 return Vector2Df.Distance(in line_point, in segment_point);
             }
             // Point intersection
@@ -318,7 +318,7 @@ namespace Lotus.Maths
         public static float LineCircle(in Vector2Df linePos, in Vector2Df lineDir,
             in Vector2Df circleCenter, float circleRadius)
         {
-            Vector2Df pos_to_center = circleCenter - linePos;
+            var pos_to_center = circleCenter - linePos;
             var center_projection = Vector2Df.Dot(in lineDir, in pos_to_center);
             var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
             var sqr_distance_to_intersection = (circleRadius * circleRadius) - sqr_distance_to_line;
@@ -354,7 +354,7 @@ namespace Lotus.Maths
         public static float RayRay(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB,
             in Vector2Df dirB)
         {
-            Vector2Df pos_b_to_a = posA - posB;
+            var pos_b_to_a = posA - posB;
             var denominator = Vector2Df.DotPerp(in dirA, in dirB);
             var perp_dot_a = Vector2Df.DotPerp(in dirA, in pos_b_to_a);
             var perp_dot_b = Vector2Df.DotPerp(in dirB, in pos_b_to_a);
@@ -408,15 +408,15 @@ namespace Lotus.Maths
                     var pos_a_projection = Vector2Df.Dot(dirB, pos_b_to_a);
                     if (pos_a_projection > -XGeometry2D.Eplsilon_f)
                     {
-                        Vector2Df ray_point_a = posA;
-                        Vector2Df ray_point_b = posB + (dirB * pos_a_projection);
+                        var ray_point_a = posA;
+                        var ray_point_b = posB + (dirB * pos_a_projection);
                         return Vector2Df.Distance(in ray_point_a, in ray_point_b);
                     }
                     var pos_b_projection = -Vector2Df.Dot(dirA, pos_b_to_a);
                     if (pos_b_projection > -XGeometry2D.Eplsilon_f)
                     {
-                        Vector2Df ray_point_a = posA + (dirA * pos_b_projection);
-                        Vector2Df ray_point_b = posB;
+                        var ray_point_a = posA + (dirA * pos_b_projection);
+                        var ray_point_b = posB;
                         return Vector2Df.Distance(in ray_point_a, in ray_point_b);
                     }
                     return Vector2Df.Distance(in posA, in posB);
@@ -428,8 +428,8 @@ namespace Lotus.Maths
                         var pos_b_projection = -Vector2Df.Dot(dirA, pos_b_to_a);
                         if (pos_b_projection > -XGeometry2D.Eplsilon_f)
                         {
-                            Vector2Df ray_point_a = posA + (dirA * pos_b_projection);
-                            Vector2Df ray_point_b = posB;
+                            var ray_point_a = posA + (dirA * pos_b_projection);
+                            var ray_point_b = posB;
                             return Vector2Df.Distance(in ray_point_a, in ray_point_b);
                         }
                     }
@@ -438,8 +438,8 @@ namespace Lotus.Maths
                         var pos_a_projection = Vector2Df.Dot(in dirB, in pos_b_to_a);
                         if (pos_a_projection > -XGeometry2D.Eplsilon_f)
                         {
-                            Vector2Df ray_point_a = posA;
-                            Vector2Df ray_point_b = posB + (dirB * pos_a_projection);
+                            var ray_point_a = posA;
+                            var ray_point_b = posB + (dirB * pos_a_projection);
                             return Vector2Df.Distance(in ray_point_a, in ray_point_b);
                         }
                     }
@@ -473,10 +473,10 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float RaySegment(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df start, in Vector2Df end)
         {
-            Vector2Df start_copy = start;
-            Vector2Df end_copy = end;
-            Vector2Df segment_start_to_pos = rayPos - start_copy;
-            Vector2Df segment_direction = end_copy - start_copy;
+            var start_copy = start;
+            var end_copy = end;
+            var segment_start_to_pos = rayPos - start_copy;
+            var segment_direction = end_copy - start_copy;
             var denominator = Vector2Df.DotPerp(in rayDir, in segment_direction);
             var perp_dot_a = Vector2Df.DotPerp(in rayDir, in segment_start_to_pos);
 
@@ -487,7 +487,7 @@ namespace Lotus.Maths
             {
                 // Parallel
                 var segment_start_projection = -Vector2Df.Dot(in rayDir, in segment_start_to_pos);
-                Vector2Df originToSegmentB = end_copy - rayPos;
+                var originToSegmentB = end_copy - rayPos;
                 var segment_end_projection = Vector2Df.Dot(in rayDir, in originToSegmentB);
                 if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
                 {
@@ -551,14 +551,14 @@ namespace Lotus.Maths
                 {
                     if (segment_distance < 0)
                     {
-                        Vector2Df ray_point = rayPos + (rayDir * segment_start_projection);
-                        Vector2Df segment_point = start_copy;
+                        var ray_point = rayPos + (rayDir * segment_start_projection);
+                        var segment_point = start_copy;
                         return Vector2Df.Distance(in ray_point, in segment_point);
                     }
                     else
                     {
-                        Vector2Df ray_point = rayPos + (rayDir * segment_end_projection);
-                        Vector2Df segment_point = end_copy;
+                        var ray_point = rayPos + (rayDir * segment_end_projection);
+                        var segment_point = end_copy;
                         return Vector2Df.Distance(in ray_point, in segment_point);
                     }
                 }
@@ -566,28 +566,28 @@ namespace Lotus.Maths
                 {
                     if (segment_distance < 0)
                     {
-                        Vector2Df ray_point = rayPos;
-                        Vector2Df segment_point = start_copy;
+                        var ray_point = rayPos;
+                        var segment_point = start_copy;
                         return Vector2Df.Distance(in ray_point, in segment_point);
                     }
                     else if (segment_distance > 1 + XGeometry2D.Eplsilon_f)
                     {
-                        Vector2Df ray_point = rayPos + (rayDir * segment_end_projection);
-                        Vector2Df segment_point = end_copy;
+                        var ray_point = rayPos + (rayDir * segment_end_projection);
+                        var segment_point = end_copy;
                         return Vector2Df.Distance(in ray_point, in segment_point);
                     }
                     else
                     {
-                        Vector2Df ray_point = rayPos;
+                        var ray_point = rayPos;
                         var pos_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_pos);
-                        Vector2Df segment_point = start_copy + (segment_direction * pos_projection / segment_direction.SqrLength);
+                        var segment_point = start_copy + (segment_direction * pos_projection / segment_direction.SqrLength);
                         return Vector2Df.Distance(in ray_point, in segment_point);
                     }
                 }
                 else
                 {
                     // Not on ray
-                    Vector2Df ray_point = rayPos;
+                    var ray_point = rayPos;
                     var pos_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_pos);
                     var sqr_segment_length = segment_direction.SqrLength;
                     if (pos_projection < 0)
@@ -600,7 +600,7 @@ namespace Lotus.Maths
                     }
                     else
                     {
-                        Vector2Df segment_point = start_copy + (segment_direction * pos_projection / sqr_segment_length);
+                        var segment_point = start_copy + (segment_direction * pos_projection / sqr_segment_length);
                         return Vector2Df.Distance(in ray_point, in segment_point);
                     }
                 }
@@ -633,7 +633,7 @@ namespace Lotus.Maths
         public static float RayCircle(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df circleCenter,
                 float circleRadius)
         {
-            Vector2Df pos_to_center = circleCenter - rayPos;
+            var pos_to_center = circleCenter - rayPos;
             var center_projection = Vector2Df.Dot(in rayDir, in pos_to_center);
             if (center_projection + circleRadius < -XGeometry2D.Eplsilon_f)
             {
@@ -709,11 +709,11 @@ namespace Lotus.Maths
         public static float SegmentSegment(in Vector2Df segment1Start, in Vector2Df segment1End,
             in Vector2Df segment2Start, in Vector2Df segment2End)
         {
-            Vector2Df segment2_start_copy = segment2Start;
-            Vector2Df segment2_end_copy = segment2End;
-            Vector2Df from_2start_to_1start = segment1Start - segment2_start_copy;
-            Vector2Df direction1 = segment1End - segment1Start;
-            Vector2Df direction2 = segment2_end_copy - segment2_start_copy;
+            var segment2_start_copy = segment2Start;
+            var segment2_end_copy = segment2End;
+            var from_2start_to_1start = segment1Start - segment2_start_copy;
+            var direction1 = segment1End - segment1Start;
+            var direction2 = segment2_end_copy - segment2_start_copy;
             var segment_1length = direction1.Length;
             var segment_2length = direction2.Length;
 
@@ -755,7 +755,7 @@ namespace Lotus.Maths
                         return distanceSqr <= 0 ? 0 : XMath.Sqrt(distanceSqr);
                     }
 
-                    Vector2Df from1ATo2B = segment2_end_copy - segment1Start;
+                    var from1ATo2B = segment2_end_copy - segment1Start;
                     var segment2BProjection = Vector2Df.Dot(in direction1, in from1ATo2B);
                     if (segment2BProjection > -XGeometry2D.Eplsilon_f &&
                         segment2BProjection < segment_1length + XGeometry2D.Eplsilon_f)
@@ -782,7 +782,7 @@ namespace Lotus.Maths
                         return Vector2Df.Distance(in segment1End, in segment2_end_copy);
                     }
                     var segment1AProjection = Vector2Df.Dot(in direction2, in from_2start_to_1start);
-                    Vector2Df segment2Point = segment2_start_copy + (direction2 * segment1AProjection);
+                    var segment2Point = segment2_start_copy + (direction2 * segment1AProjection);
                     return Vector2Df.Distance(in segment1Start, in segment2Point);
                 }
                 // Collinear
@@ -929,7 +929,7 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         private static float SegmentSegmentCollinear(in Vector2Df left_a, in Vector2Df left_b, in Vector2Df right_a)
         {
-            Vector2Df left_direction = left_b - left_a;
+            var left_direction = left_b - left_a;
             var right_a_projection = Vector2Df.Dot(left_direction.Normalized, right_a - left_b);
             if (Math.Abs(right_a_projection) < XGeometry2D.Eplsilon_f)
             {
@@ -982,15 +982,15 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float SegmentCircle(in Vector2Df start, in Vector2Df end, in Vector2Df circleCenter, float circleRadius)
         {
-            Vector2Df segment_start_to_center = circleCenter - start;
-            Vector2Df from_start_to_end = end - start;
+            var segment_start_to_center = circleCenter - start;
+            var from_start_to_end = end - start;
             var segment_length = from_start_to_end.Length;
             if (segment_length < XGeometry2D.Eplsilon_f)
             {
                 return segment_start_to_center.Length - circleRadius;
             }
 
-            Vector2Df segment_direction = from_start_to_end.Normalized;
+            var segment_direction = from_start_to_end.Normalized;
             var center_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_center);
             if (center_projection + circleRadius < -XGeometry2D.Eplsilon_f ||
                 center_projection - circleRadius > segment_length + XGeometry2D.Eplsilon_f)

@@ -129,7 +129,7 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float LineSphere(in Vector3Df linePos, in Vector3Df lineDir, in Vector3Df sphereCenter, float sphereRadius)
         {
-            Vector3Df pos_to_center = sphereCenter - linePos;
+            var pos_to_center = sphereCenter - linePos;
             var center_projection = Vector3Df.Dot(in lineDir, in pos_to_center);
             var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
             var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
@@ -164,7 +164,7 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float RaySphere(in Vector3Df rayPos, in Vector3Df rayDir, in Vector3Df sphereCenter, float sphereRadius)
         {
-            Vector3Df pos_to_center = sphereCenter - rayPos;
+            var pos_to_center = sphereCenter - rayPos;
             var center_projection = Vector3Df.Dot(in rayDir, in pos_to_center);
             if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f)
             {
@@ -239,15 +239,15 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphereCenter, float sphereRadius)
         {
-            Vector3Df segment_start_to_center = sphereCenter - start;
-            Vector3Df from_start_to_end = end - start;
+            var segment_start_to_center = sphereCenter - start;
+            var from_start_to_end = end - start;
             var segment_length = from_start_to_end.Length;
             if (segment_length < XGeometry3D.Eplsilon_f)
             {
                 return segment_start_to_center.Length - sphereRadius;
             }
 
-            Vector3Df segment_direction = from_start_to_end.Normalized;
+            var segment_direction = from_start_to_end.Normalized;
             var center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
             if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f ||
                 center_projection - sphereRadius > segment_length + XGeometry3D.Eplsilon_f)

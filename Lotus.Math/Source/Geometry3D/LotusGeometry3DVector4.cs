@@ -16,27 +16,27 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный вектор.
         /// </summary>
-        public static readonly Vector4D One = new Vector4D(1, 1, 1);
+        public static readonly Vector4D One = new(1, 1, 1);
 
         /// <summary>
         /// Вектор "право".
         /// </summary>
-        public static readonly Vector4D Right = new Vector4D(1, 0, 0);
+        public static readonly Vector4D Right = new(1, 0, 0);
 
         /// <summary>
         /// Вектор "вверх".
         /// </summary>
-        public static readonly Vector4D Up = new Vector4D(0, 1, 0);
+        public static readonly Vector4D Up = new(0, 1, 0);
 
         /// <summary>
         /// Вектор "вперед".
         /// </summary>
-        public static readonly Vector4D Forward = new Vector4D(0, 0, 1);
+        public static readonly Vector4D Forward = new(0, 0, 1);
 
         /// <summary>
         /// Нулевой вектор.
         /// </summary>
-        public static readonly Vector4D Zero = new Vector4D(0, 0, 0);
+        public static readonly Vector4D Zero = new(0, 0, 0);
         #endregion
 
         #region Static fields
@@ -426,8 +426,8 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Vector4D left, Vector4D right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y ||
-                   left.X == right.X && left.Y == right.Y && left.Z < right.Z;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y) ||
+                   (left.X == right.X && left.Y == right.Y && left.Z < right.Z);
         }
 
         /// <summary>
@@ -438,8 +438,8 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Vector4D left, Vector4D right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y ||
-                   left.X == right.X && left.Y == right.Y && left.Z > right.Z;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y) ||
+                   (left.X == right.X && left.Y == right.Y && left.Z > right.Z);
         }
 
         /// <summary>
@@ -641,27 +641,27 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный вектор.
         /// </summary>
-        public static readonly Vector4Df One = new Vector4Df(1, 1, 1);
+        public static readonly Vector4Df One = new(1, 1, 1);
 
         /// <summary>
         /// Вектор "право".
         /// </summary>
-        public static readonly Vector4Df Right = new Vector4Df(1, 0, 0);
+        public static readonly Vector4Df Right = new(1, 0, 0);
 
         /// <summary>
         /// Вектор "вверх".
         /// </summary>
-        public static readonly Vector4Df Up = new Vector4Df(0, 1, 0);
+        public static readonly Vector4Df Up = new(0, 1, 0);
 
         /// <summary>
         /// Вектор "вперед".
         /// </summary>
-        public static readonly Vector4Df Forward = new Vector4Df(0, 0, 1);
+        public static readonly Vector4Df Forward = new(0, 0, 1);
 
         /// <summary>
         /// Нулевой вектор.
         /// </summary>
-        public static readonly Vector4Df Zero = new Vector4Df(0, 0, 0);
+        public static readonly Vector4Df Zero = new(0, 0, 0);
         #endregion
 
         #region Static fields
@@ -1051,8 +1051,8 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Vector4Df left, Vector4Df right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y ||
-                   left.X == right.X && left.Y == right.Y && left.Z < right.Z;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y) ||
+                   (left.X == right.X && left.Y == right.Y && left.Z < right.Z);
         }
 
         /// <summary>
@@ -1063,8 +1063,8 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Vector4Df left, Vector4Df right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y ||
-                   left.X == right.X && left.Y == right.Y && left.Z > right.Z;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y) ||
+                   (left.X == right.X && left.Y == right.Y && left.Z > right.Z);
         }
 
         /// <summary>

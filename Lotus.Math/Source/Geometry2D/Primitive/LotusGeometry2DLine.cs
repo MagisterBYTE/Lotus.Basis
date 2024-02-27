@@ -24,12 +24,12 @@ namespace Lotus.Maths
         /// <summary>
         /// Горизонтальная ось.
         /// </summary>
-        public readonly static Line2Df XAxis = new Line2Df(Vector2Df.Zero, Vector2Df.Right);
+        public readonly static Line2Df XAxis = new(Vector2Df.Zero, Vector2Df.Right);
 
         /// <summary>
         /// Вертикальная ось.
         /// </summary>
-        public readonly static Line2Df YAxis = new Line2Df(Vector2Df.Zero, Vector2Df.Up);
+        public readonly static Line2Df YAxis = new(Vector2Df.Zero, Vector2Df.Up);
         #endregion
 
         #region Fields

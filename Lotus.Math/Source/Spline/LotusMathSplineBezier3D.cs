@@ -505,7 +505,7 @@ namespace Lotus.Maths
         {
             var mode_index = (index + 1) / 3;
             var mode = _handleModes[mode_index];
-            if (mode == TBezierHandleMode.Free || !_isClosed && (mode_index == 0 || mode_index == _handleModes.Length - 1))
+            if (mode == TBezierHandleMode.Free || (!_isClosed && (mode_index == 0 || mode_index == _handleModes.Length - 1)))
             {
                 return;
             }
@@ -746,7 +746,7 @@ namespace Lotus.Maths
         /// <returns>Контрольная точка.</returns>
         public Vector3Df GetCurveControlPoint(int curveIndex, int pointIndex)
         {
-            curveIndex = curveIndex * 3;
+            curveIndex *= 3;
             return _controlPoints[curveIndex + pointIndex];
         }
 
@@ -758,7 +758,7 @@ namespace Lotus.Maths
         /// <param name="position">Позиция контрольной точки.</param>
         public void SetCurveControlPoint(int curveIndex, int pointIndex, Vector3Df position)
         {
-            curveIndex = curveIndex * 3;
+            curveIndex *= 3;
             _controlPoints[curveIndex + pointIndex] = position;
         }
         #endregion

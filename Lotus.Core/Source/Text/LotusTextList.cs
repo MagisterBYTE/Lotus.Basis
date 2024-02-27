@@ -249,7 +249,8 @@ namespace Lotus.Core
         /// <summary>
         /// Удалить пустые скобки.
         /// </summary>
-        public void RemoveEmptyBraces()
+        /// <param name="prevValue">Значение</param>
+        public void RemoveEmptyBraces(string prevValue)
         {
             var findOpen = -1;
             for (var i = 0; i < _lines.Count; i++)
@@ -258,7 +259,7 @@ namespace Lotus.Core
                 var prev = i > 0 ? _lines[i - 1].RawString.Trim() : string.Empty;
                 var current = _lines[i].RawString.Trim();
 
-                if (current.Contains("{") && prev.Contains("{") && prev2.Contains("namespace Lotus.Core"))
+                if (current.Contains("{") && prev.Contains("{") && prev2.Contains(prevValue))
                 {
                     findOpen = i;
                     break;

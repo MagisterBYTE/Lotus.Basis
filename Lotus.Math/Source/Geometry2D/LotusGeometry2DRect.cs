@@ -16,12 +16,12 @@ namespace Lotus.Maths
         /// <summary>
         /// Пустой прямоугольник.
         /// </summary>
-        public static readonly Rect2D Empty = new Rect2D(0, 0, 0, 0);
+        public static readonly Rect2D Empty = new(0, 0, 0, 0);
 
         /// <summary>
         /// Прямоугольник по умолчанию.
         /// </summary>
-        public static readonly Rect2D Default = new Rect2D(0, 0, 100, 100);
+        public static readonly Rect2D Default = new(0, 0, 100, 100);
         #endregion
 
         #region Static fields
@@ -374,7 +374,7 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Rect2D left, Rect2D right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y);
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Rect2D left, Rect2D right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y);
         }
         #endregion
 
@@ -578,12 +578,12 @@ namespace Lotus.Maths
         /// <summary>
         /// Пустой прямоугольник.
         /// </summary>
-        public static readonly Rect2Df Empty = new Rect2Df(0, 0, 0, 0);
+        public static readonly Rect2Df Empty = new(0, 0, 0, 0);
 
         /// <summary>
         /// Прямоугольник по умолчанию.
         /// </summary>
-        public static readonly Rect2Df Default = new Rect2Df(0, 0, 100, 100);
+        public static readonly Rect2Df Default = new(0, 0, 100, 100);
         #endregion
 
         #region Static fields
@@ -602,8 +602,7 @@ namespace Lotus.Maths
         /// <returns>Прямоугольник полученный в результате пересечения.</returns>
         public static Rect2Df IntersectRect(in Rect2Df a, in Rect2Df b)
         {
-            Rect2Df result;
-            IntersectRect(in a, in b, out result);
+            IntersectRect(in a, in b, out var result);
             return result;
         }
 
@@ -639,8 +638,7 @@ namespace Lotus.Maths
         /// <returns>Прямоугольник полученный в результате объединения.</returns>
         public static Rect2Df UnionRect(in Rect2Df a, in Rect2Df b)
         {
-            Rect2Df result;
-            UnionRect(in a, in b, out result);
+            UnionRect(in a, in b, out var result);
             return result;
         }
 
@@ -1072,7 +1070,7 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Rect2Df left, Rect2Df right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y);
         }
 
         /// <summary>
@@ -1083,7 +1081,7 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Rect2Df left, Rect2Df right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y);
         }
         #endregion
 

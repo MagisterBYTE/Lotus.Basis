@@ -32,7 +32,6 @@ namespace Lotus.Maths
         /// </remarks>
         public static float Eplsilon_d = 0.00f;
 
-#pragma warning disable 0414
         //
         // Здесь приняты текстурные координаты как в OpenGL - начало координат нижний-левый угол
         // В Unity используется такая же система координат
@@ -40,48 +39,47 @@ namespace Lotus.Maths
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVTopLeft = new Vector2Df(0, 1);
+        public static readonly Vector2Df MapUVTopLeft = new(0, 1);
 
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVTopCenter = new Vector2Df(0.5f, 1);
+        public static readonly Vector2Df MapUVTopCenter = new(0.5f, 1);
 
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVTopRight = new Vector2Df(1, 1);
+        public static readonly Vector2Df MapUVTopRight = new(1, 1);
 
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVMiddleLeft = new Vector2Df(0, 0.5f);
+        public static readonly Vector2Df MapUVMiddleLeft = new(0, 0.5f);
 
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVMiddleCenter = new Vector2Df(0.5f, 0.5f);
+        public static readonly Vector2Df MapUVMiddleCenter = new(0.5f, 0.5f);
 
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVMiddleRight = new Vector2Df(1, 0.5f);
+        public static readonly Vector2Df MapUVMiddleRight = new(1, 0.5f);
 
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVBottomLeft = new Vector2Df(0, 0);
+        public static readonly Vector2Df MapUVBottomLeft = new(0, 0);
 
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVBottomCenter = new Vector2Df(0.5f, 0);
+        public static readonly Vector2Df MapUVBottomCenter = new(0.5f, 0);
 
         /// <summary>
         /// Текстурные координаты.
         /// </summary>
-        public static readonly Vector2Df MapUVBottomRight = new Vector2Df(1, 0);
-#pragma warning restore 0414
+        public static readonly Vector2Df MapUVBottomRight = new(1, 0);
         #endregion
 
         #region Main methods

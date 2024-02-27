@@ -105,7 +105,7 @@ namespace Lotus.Maths
         /// <returns>Спроецированная точка.</returns>
         public static Vector3Df PointRay(in Vector3Df point, in Vector3Df rayPos, in Vector3Df rayDir, out float distance)
         {
-            Vector3Df to_point = point - rayPos;
+            var to_point = point - rayPos;
             var point_projection = Vector3Df.Dot(in rayDir, in to_point);
             if (point_projection <= 0)
             {
@@ -166,7 +166,7 @@ namespace Lotus.Maths
         public static Vector3Df PointSegment(in Vector3Df point, in Vector3Df start, in Vector3Df end,
             out float normalizeDistance)
         {
-            Vector3Df segment_direction = end - start;
+            var segment_direction = end - start;
             var sqr_segment_length = segment_direction.SqrLength;
             if (sqr_segment_length < XGeometry3D.Eplsilon_f)
             {
@@ -242,7 +242,7 @@ namespace Lotus.Maths
         public static void LineSphere(in Vector3Df linePos, in Vector3Df lineDir, in Vector3Df sphereCenter, float sphereRadius,
             out Vector3Df linePoint, out Vector3Df spherePoint)
         {
-            Vector3Df pos_to_center = sphereCenter - linePos;
+            var pos_to_center = sphereCenter - linePos;
             var center_projection = Vector3Df.Dot(in lineDir, in pos_to_center);
             var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
             var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
@@ -292,7 +292,7 @@ namespace Lotus.Maths
         public static void RaySphere(in Vector3Df rayPos, in Vector3Df rayDir, in Vector3Df sphereCenter, float sphereRadius,
             out Vector3Df rayPoint, out Vector3Df spherePoint)
         {
-            Vector3Df pos_to_center = sphereCenter - rayPos;
+            var pos_to_center = sphereCenter - rayPos;
             var center_projection = Vector3Df.Dot(rayDir, pos_to_center);
             if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f)
             {
@@ -381,8 +381,8 @@ namespace Lotus.Maths
         public static void SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphereCenter, float sphereRadius,
             out Vector3Df segmentPoint, out Vector3Df spherePoint)
         {
-            Vector3Df segment_start_to_center = sphereCenter - start;
-            Vector3Df from_start_to_end = end - start;
+            var segment_start_to_center = sphereCenter - start;
+            var from_start_to_end = end - start;
             var segment_length = from_start_to_end.Length;
             if (segment_length < XGeometry3D.Eplsilon_f)
             {
@@ -401,12 +401,12 @@ namespace Lotus.Maths
                         return;
                     }
                 }
-                Vector3Df to_point = -segment_start_to_center / distanceToPoint;
+                var to_point = -segment_start_to_center / distanceToPoint;
                 spherePoint = sphereCenter + (to_point * sphereRadius);
                 return;
             }
 
-            Vector3Df segment_direction = from_start_to_end.Normalized;
+            var segment_direction = from_start_to_end.Normalized;
             var center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
             if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f ||
                 center_projection - sphereRadius > segment_length + XGeometry3D.Eplsilon_f)
@@ -545,7 +545,7 @@ namespace Lotus.Maths
         public static void SphereSphere(in Vector3Df centerA, float radiusA, in Vector3Df centerB, float radiusB,
             out Vector3Df pointA, out Vector3Df pointB)
         {
-            Vector3Df from_b_to_a = (centerA - centerB).Normalized;
+            var from_b_to_a = (centerA - centerB).Normalized;
             pointA = centerA - (from_b_to_a * radiusA);
             pointB = centerB + (from_b_to_a * radiusB);
         }

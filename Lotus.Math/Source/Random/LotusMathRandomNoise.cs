@@ -134,7 +134,7 @@ namespace Lotus.Maths
         public static int NoiseInteger1DV2(int value)
         {
             var state = (ulong)value;
-            state = state * state;
+            state *= state;
             state = (state * 6364136223846793005UL) + 1442695040888963407UL;
             var xorshifted = (long)(((state >> 18) ^ state) >> 27);
             var rot = (int)(state >> 59);

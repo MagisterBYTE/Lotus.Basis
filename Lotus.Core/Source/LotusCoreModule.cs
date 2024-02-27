@@ -1,5 +1,4 @@
-﻿#pragma warning disable S3261 // Namespaces should not be empty
-namespace Lotus.Core
+﻿namespace Lotus.Core
 {
     /**
      * \defgroup Core Модуль базового ядра
@@ -9,7 +8,5 @@ namespace Lotus.Core
      * \details Модуль это прежде всего кроссплатформенный набор инструментов для решения повседневных задач: большая библиотека
         расширений, реализации коллекций на основе массива, гибкая и универсальная подсистема задач, подсистема сообщений
         и многое другое.
-     * @{
      */
 }
-#pragma warning restore S3261 // Namespaces should not be empty

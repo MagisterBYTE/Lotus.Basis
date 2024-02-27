@@ -46,17 +46,17 @@ namespace Lotus.Maths
         /// <summary>
         /// Табличные значения синуса.
         /// </summary>
-        private static float[] _sinTableCache = new float[] { 0 };
+        private static float[] _sinTableCache = [0];
 
         /// <summary>
         /// Табличные значения косинуса.
         /// </summary>
-        private static float[] _cosTableCache = new float[] { 0 };
+        private static float[] _cosTableCache = [0];
 
         /// <summary>
         /// Точность заполнения таблиц синуса и косинуса.
         /// </summary>
-        private static float _sinCosIndexFactor = SinCosCacheSize / XMath.PI_2_F;
+        private static readonly float _sinCosIndexFactor = SinCosCacheSize / XMath.PI_2_F;
 
         /// <summary>
         /// Размер таблицы для арктангенса.
@@ -163,8 +163,10 @@ namespace Lotus.Maths
         /// <returns>Значение обратного квадратного корня.</returns>
         public static float InvSqrt(float value)
         {
-            var wrapper = new TFloatInt();
-            wrapper.Float = value;
+            var wrapper = new TFloatInt
+            {
+                Float = value
+            };
             wrapper.Int = 0x5f3759df - (wrapper.Int >> 1);
             return wrapper.Float;
         }
@@ -176,8 +178,10 @@ namespace Lotus.Maths
         /// <returns>Значение квадратного корня.</returns>
         public static float Sqrt(float value)
         {
-            var wrapper = new TFloatInt();
-            wrapper.Float = value;
+            var wrapper = new TFloatInt
+            {
+                Float = value
+            };
             wrapper.Int = (1 << 29) + (wrapper.Int >> 1) - (1 << 22);
             return wrapper.Float;
         }

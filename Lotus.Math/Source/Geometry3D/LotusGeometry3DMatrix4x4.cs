@@ -19,7 +19,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичная матрица.
         /// </summary>
-        public static readonly Matrix4Dx4 Identity = new Matrix4Dx4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        public static readonly Matrix4Dx4 Identity = new(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
         #endregion
 
         #region Static methods
@@ -384,9 +384,8 @@ namespace Lotus.Maths
         {
             get
             {
-                Matrix4Dx4 result;
 
-                Matrix4Dx4.Inverse(in this, out result);
+                Matrix4Dx4.Inverse(in this, out var result);
 
                 return result;
             }
@@ -399,9 +398,8 @@ namespace Lotus.Maths
         {
             get
             {
-                Matrix4Dx4 result;
 
-                Matrix4Dx4.Transpose(in this, out result);
+                Matrix4Dx4.Transpose(in this, out var result);
 
                 return result;
             }
@@ -612,9 +610,8 @@ namespace Lotus.Maths
         /// <returns>Результирующая матрица.</returns>
         public static Matrix4Dx4 operator *(Matrix4Dx4 left, Matrix4Dx4 right)
         {
-            Matrix4Dx4 result;
 
-            Multiply(in left, in right, out result);
+            Multiply(in left, in right, out var result);
 
             return result;
         }
@@ -764,7 +761,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичная матрица.
         /// </summary>
-        public static readonly Matrix4Dx4f Identity = new Matrix4Dx4f(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        public static readonly Matrix4Dx4f Identity = new(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
         #endregion
 
         #region Static methods
@@ -1129,9 +1126,8 @@ namespace Lotus.Maths
         {
             get
             {
-                Matrix4Dx4f result;
 
-                Matrix4Dx4f.Inverse(in this, out result);
+                Matrix4Dx4f.Inverse(in this, out var result);
 
                 return result;
             }
@@ -1144,9 +1140,8 @@ namespace Lotus.Maths
         {
             get
             {
-                Matrix4Dx4f result;
 
-                Matrix4Dx4f.Transpose(in this, out result);
+                Matrix4Dx4f.Transpose(in this, out var result);
 
                 return result;
             }
@@ -1357,9 +1352,8 @@ namespace Lotus.Maths
         /// <returns>Результирующая матрица.</returns>
         public static Matrix4Dx4f operator *(Matrix4Dx4f left, Matrix4Dx4f right)
         {
-            Matrix4Dx4f result;
 
-            Multiply(in left, in right, out result);
+            Multiply(in left, in right, out var result);
 
             return result;
         }

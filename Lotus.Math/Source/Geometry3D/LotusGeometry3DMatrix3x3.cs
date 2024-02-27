@@ -17,7 +17,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичная матрица.
         /// </summary>
-        public static readonly Matrix3Dx3 Identity = new Matrix3Dx3(1, 0, 0, 0, 1, 0, 0, 0, 1);
+        public static readonly Matrix3Dx3 Identity = new(1, 0, 0, 0, 1, 0, 0, 0, 1);
         #endregion
 
         #region Static methods
@@ -224,12 +224,12 @@ namespace Lotus.Maths
         /// <summary>
         /// A <see cref="Matrix3Dx3f"/> with all of its components set to zero.
         /// </summary>
-        public static readonly Matrix3Dx3f Zero = new Matrix3Dx3f();
+        public static readonly Matrix3Dx3f Zero = new();
 
         /// <summary>
         /// The identity <see cref="Matrix3Dx3f"/>.
         /// </summary>
-        public static readonly Matrix3Dx3f Identity = new Matrix3Dx3f() { M11 = 1.0f, M22 = 1.0f, M33 = 1.0f };
+        public static readonly Matrix3Dx3f Identity = new() { M11 = 1.0f, M22 = 1.0f, M33 = 1.0f };
         #endregion
 
         #region Static methods
@@ -352,8 +352,7 @@ namespace Lotus.Maths
         /// <returns>The sum of the two matrices.</returns>
         public static Matrix3Dx3f Add(in Matrix3Dx3f left, in Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Add(in left, in right, out result);
+            Add(in left, in right, out var result);
             return result;
         }
 
@@ -384,8 +383,7 @@ namespace Lotus.Maths
         /// <returns>The difference between the two matrices.</returns>
         public static Matrix3Dx3f Subtract(in Matrix3Dx3f left, in Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Subtract(in left, in right, out result);
+            Subtract(in left, in right, out var result);
             return result;
         }
 
@@ -416,8 +414,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx3f Multiply(in Matrix3Dx3f left, float right)
         {
-            Matrix3Dx3f result;
-            Multiply(in left, right, out result);
+            Multiply(in left, right, out var result);
             return result;
         }
 
@@ -429,16 +426,18 @@ namespace Lotus.Maths
         /// <param name="result">The product of the two matrices.</param>
         public static void Multiply(in Matrix3Dx3f left, in Matrix3Dx3f right, out Matrix3Dx3f result)
         {
-            var temp = new Matrix3Dx3f();
-            temp.M11 = (left.M11 * right.M11) + (left.M12 * right.M21) + (left.M13 * right.M31);
-            temp.M12 = (left.M11 * right.M12) + (left.M12 * right.M22) + (left.M13 * right.M32);
-            temp.M13 = (left.M11 * right.M13) + (left.M12 * right.M23) + (left.M13 * right.M33);
-            temp.M21 = (left.M21 * right.M11) + (left.M22 * right.M21) + (left.M23 * right.M31);
-            temp.M22 = (left.M21 * right.M12) + (left.M22 * right.M22) + (left.M23 * right.M32);
-            temp.M23 = (left.M21 * right.M13) + (left.M22 * right.M23) + (left.M23 * right.M33);
-            temp.M31 = (left.M31 * right.M11) + (left.M32 * right.M21) + (left.M33 * right.M31);
-            temp.M32 = (left.M31 * right.M12) + (left.M32 * right.M22) + (left.M33 * right.M32);
-            temp.M33 = (left.M31 * right.M13) + (left.M32 * right.M23) + (left.M33 * right.M33);
+            var temp = new Matrix3Dx3f
+            {
+                M11 = (left.M11 * right.M11) + (left.M12 * right.M21) + (left.M13 * right.M31),
+                M12 = (left.M11 * right.M12) + (left.M12 * right.M22) + (left.M13 * right.M32),
+                M13 = (left.M11 * right.M13) + (left.M12 * right.M23) + (left.M13 * right.M33),
+                M21 = (left.M21 * right.M11) + (left.M22 * right.M21) + (left.M23 * right.M31),
+                M22 = (left.M21 * right.M12) + (left.M22 * right.M22) + (left.M23 * right.M32),
+                M23 = (left.M21 * right.M13) + (left.M22 * right.M23) + (left.M23 * right.M33),
+                M31 = (left.M31 * right.M11) + (left.M32 * right.M21) + (left.M33 * right.M31),
+                M32 = (left.M31 * right.M12) + (left.M32 * right.M22) + (left.M33 * right.M32),
+                M33 = (left.M31 * right.M13) + (left.M32 * right.M23) + (left.M33 * right.M33)
+            };
             result = temp;
         }
 
@@ -450,8 +449,7 @@ namespace Lotus.Maths
         /// <returns>The product of the two matrices.</returns>
         public static Matrix3Dx3f Multiply(in Matrix3Dx3f left, in Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Multiply(in left, in right, out result);
+            Multiply(in left, in right, out var result);
             return result;
         }
 
@@ -484,8 +482,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx3f Divide(in Matrix3Dx3f left, float right)
         {
-            Matrix3Dx3f result;
-            Divide(in left, right, out result);
+            Divide(in left, right, out var result);
             return result;
         }
 
@@ -516,8 +513,7 @@ namespace Lotus.Maths
         /// <returns>The quotient of the two matrices.</returns>
         public static Matrix3Dx3f Divide(in Matrix3Dx3f left, in Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Divide(in left, in right, out result);
+            Divide(in left, in right, out var result);
             return result;
         }
 
@@ -544,13 +540,13 @@ namespace Lotus.Maths
                 return;
             }
 
-            Matrix3Dx3f identity = Matrix3Dx3f.Identity;
-            Matrix3Dx3f temp = value;
+            var identity = Matrix3Dx3f.Identity;
+            var temp = value;
 
             while (true)
             {
                 if ((exponent & 1) != 0)
-                    identity = identity * temp;
+                    identity *= temp;
 
                 exponent /= 2;
 
@@ -571,8 +567,7 @@ namespace Lotus.Maths
         /// <returns>The exponential Matrix3Dx3f.</returns>
         public static Matrix3Dx3f Exponent(in Matrix3Dx3f value, int exponent)
         {
-            Matrix3Dx3f result;
-            Exponent(in value, exponent, out result);
+            Exponent(in value, exponent, out var result);
             return result;
         }
 
@@ -601,8 +596,7 @@ namespace Lotus.Maths
         /// <returns>The negated matrix.</returns>
         public static Matrix3Dx3f Negate(in Matrix3Dx3f value)
         {
-            Matrix3Dx3f result;
-            Negate(in value, out result);
+            Negate(in value, out var result);
             return result;
         }
 
@@ -641,8 +635,7 @@ namespace Lotus.Maths
         /// </remarks>
         public static Matrix3Dx3f Lerp(in Matrix3Dx3f start, in Matrix3Dx3f end, float time)
         {
-            Matrix3Dx3f result;
-            Lerp(in start, in end, time, out result);
+            Lerp(in start, in end, time, out var result);
             return result;
         }
 
@@ -668,8 +661,7 @@ namespace Lotus.Maths
         /// <returns>The cubic interpolation of the two matrices.</returns>
         public static Matrix3Dx3f SmoothStep(in Matrix3Dx3f start, in Matrix3Dx3f end, float time)
         {
-            Matrix3Dx3f result;
-            SmoothStep(in start, in end, time, out result);
+            SmoothStep(in start, in end, time, out var result);
             return result;
         }
 
@@ -680,16 +672,18 @@ namespace Lotus.Maths
         /// <param name="result">When the method completes, contains the transpose of the specified matrix.</param>
         public static void Transpose(in Matrix3Dx3f value, out Matrix3Dx3f result)
         {
-            var temp = new Matrix3Dx3f();
-            temp.M11 = value.M11;
-            temp.M12 = value.M21;
-            temp.M13 = value.M31;
-            temp.M21 = value.M12;
-            temp.M22 = value.M22;
-            temp.M23 = value.M32;
-            temp.M31 = value.M13;
-            temp.M32 = value.M23;
-            temp.M33 = value.M33;
+            var temp = new Matrix3Dx3f
+            {
+                M11 = value.M11,
+                M12 = value.M21,
+                M13 = value.M31,
+                M21 = value.M12,
+                M22 = value.M22,
+                M23 = value.M32,
+                M31 = value.M13,
+                M32 = value.M23,
+                M33 = value.M33
+            };
 
             result = temp;
         }
@@ -719,8 +713,7 @@ namespace Lotus.Maths
         /// <returns>The transpose of the specified matrix.</returns>
         public static Matrix3Dx3f Transpose(in Matrix3Dx3f value)
         {
-            Matrix3Dx3f result;
-            Transpose(in value, out result);
+            Transpose(in value, out var result);
             return result;
         }
 
@@ -794,10 +787,10 @@ namespace Lotus.Maths
             //By separating the above algorithm into multiple lines, we actually increase accuracy.
             result = value;
 
-            result.Row2 = result.Row2 - (Vector3Df.Dot(result.Row1, result.Row2) / Vector3Df.Dot(result.Row1, result.Row1) * result.Row1);
+            result.Row2 -= (Vector3Df.Dot(result.Row1, result.Row2) / Vector3Df.Dot(result.Row1, result.Row1) * result.Row1);
 
-            result.Row3 = result.Row3 - (Vector3Df.Dot(result.Row1, result.Row3) / Vector3Df.Dot(result.Row1, result.Row1) * result.Row1);
-            result.Row3 = result.Row3 - (Vector3Df.Dot(result.Row2, result.Row3) / Vector3Df.Dot(result.Row2, result.Row2) * result.Row2);
+            result.Row3 -= (Vector3Df.Dot(result.Row1, result.Row3) / Vector3Df.Dot(result.Row1, result.Row1) * result.Row1);
+            result.Row3 -= (Vector3Df.Dot(result.Row2, result.Row3) / Vector3Df.Dot(result.Row2, result.Row2) * result.Row2);
         }
 
         /// <summary>
@@ -823,8 +816,7 @@ namespace Lotus.Maths
         /// </remarks>
         public static Matrix3Dx3f Orthogonalize(in Matrix3Dx3f value)
         {
-            Matrix3Dx3f result;
-            Orthogonalize(in value, out result);
+            Orthogonalize(in value, out var result);
             return result;
         }
 
@@ -860,11 +852,11 @@ namespace Lotus.Maths
 
             result.Row1 = Vector3Df.Normalize(result.Row1);
 
-            result.Row2 = result.Row2 - (Vector3Df.Dot(result.Row1, result.Row2) * result.Row1);
+            result.Row2 -= (Vector3Df.Dot(result.Row1, result.Row2) * result.Row1);
             result.Row2 = Vector3Df.Normalize(result.Row2);
 
-            result.Row3 = result.Row3 - (Vector3Df.Dot(result.Row1, result.Row3) * result.Row1);
-            result.Row3 = result.Row3 - (Vector3Df.Dot(result.Row2, result.Row3) * result.Row2);
+            result.Row3 -= (Vector3Df.Dot(result.Row1, result.Row3) * result.Row1);
+            result.Row3 -= (Vector3Df.Dot(result.Row2, result.Row3) * result.Row2);
             result.Row3 = Vector3Df.Normalize(result.Row3);
         }
 
@@ -888,8 +880,7 @@ namespace Lotus.Maths
         /// </remarks>
         public static Matrix3Dx3f Orthonormalize(in Matrix3Dx3f value)
         {
-            Matrix3Dx3f result;
-            Orthonormalize(in value, out result);
+            Orthonormalize(in value, out var result);
             return result;
         }
 
@@ -914,9 +905,6 @@ namespace Lotus.Maths
 
             for (var r = 0; r < rowcount; ++r)
             {
-                if (columncount <= lead)
-                    return;
-
                 var i = r;
 
                 while (XMath.IsZero(result[i, lead]))
@@ -967,8 +955,7 @@ namespace Lotus.Maths
         /// </remarks>
         public static Matrix3Dx3f UpperTriangularForm(in Matrix3Dx3f value)
         {
-            Matrix3Dx3f result;
-            UpperTriangularForm(in value, out result);
+            UpperTriangularForm(in value, out var result);
             return result;
         }
 
@@ -986,7 +973,7 @@ namespace Lotus.Maths
         public static void LowerTriangularForm(in Matrix3Dx3f value, out Matrix3Dx3f result)
         {
             //Adapted from the row echelon code.
-            Matrix3Dx3f temp = value;
+            var temp = value;
             Matrix3Dx3f.Transpose(in temp, out result);
 
             var lead = 0;
@@ -995,9 +982,6 @@ namespace Lotus.Maths
 
             for (var r = 0; r < rowcount; ++r)
             {
-                if (columncount <= lead)
-                    return;
-
                 var i = r;
 
                 while (XMath.IsZero(result[i, lead]))
@@ -1050,8 +1034,7 @@ namespace Lotus.Maths
         /// </remarks>
         public static Matrix3Dx3f LowerTriangularForm(in Matrix3Dx3f value)
         {
-            Matrix3Dx3f result;
-            LowerTriangularForm(in value, out result);
+            LowerTriangularForm(in value, out var result);
             return result;
         }
 
@@ -1072,9 +1055,6 @@ namespace Lotus.Maths
 
             for (var r = 0; r < rowcount; ++r)
             {
-                if (columncount <= lead)
-                    return;
-
                 var i = r;
 
                 while (XMath.IsZero(result[i, lead]))
@@ -1122,8 +1102,7 @@ namespace Lotus.Maths
         /// <returns>When the method completes, contains the row echelon form of the matrix.</returns>
         public static Matrix3Dx3f RowEchelonForm(in Matrix3Dx3f value)
         {
-            Matrix3Dx3f result;
-            RowEchelonForm(in value, out result);
+            RowEchelonForm(in value, out var result);
             return result;
         }
 
@@ -1137,9 +1116,7 @@ namespace Lotus.Maths
         /// <param name="result">When the method completes, contains the created billboard Matrix3Dx3f.</param>
         public static void BillboardLH(in Vector3Df objectPosition, in Vector3Df cameraPosition, in Vector3Df cameraUpVector, in Vector3Df cameraForwardVector, out Matrix3Dx3f result)
         {
-            Vector3Df crossed;
-            Vector3Df final;
-            Vector3Df difference = cameraPosition - objectPosition;
+            var difference = cameraPosition - objectPosition;
 
             var lengthSq = difference.SqrLength;
             if (XMath.IsZero(lengthSq))
@@ -1147,9 +1124,9 @@ namespace Lotus.Maths
             else
                 difference *= (float)(1.0 / Math.Sqrt(lengthSq));
 
-            Vector3Df.Cross(in cameraUpVector, in difference, out crossed);
+            Vector3Df.Cross(in cameraUpVector, in difference, out var crossed);
             crossed.Normalize();
-            Vector3Df.Cross(in difference, in crossed, out final);
+            Vector3Df.Cross(in difference, in crossed, out var final);
 
             result.M11 = crossed.X;
             result.M12 = crossed.Y;
@@ -1173,8 +1150,7 @@ namespace Lotus.Maths
         public static Matrix3Dx3f BillboardLH(in Vector3Df objectPosition, in Vector3Df cameraPosition, in Vector3Df cameraUpVector,
             in Vector3Df cameraForwardVector)
         {
-            Matrix3Dx3f result;
-            BillboardLH(in objectPosition, in cameraPosition, in cameraUpVector, in cameraForwardVector, out result);
+            BillboardLH(in objectPosition, in cameraPosition, in cameraUpVector, in cameraForwardVector, out var result);
             return result;
         }
 
@@ -1189,9 +1165,7 @@ namespace Lotus.Maths
         public static void BillboardRH(in Vector3Df objectPosition, in Vector3Df cameraPosition, in Vector3Df cameraUpVector,
             in Vector3Df cameraForwardVector, out Matrix3Dx3f result)
         {
-            Vector3Df crossed;
-            Vector3Df final;
-            Vector3Df difference = objectPosition - cameraPosition;
+            var difference = objectPosition - cameraPosition;
 
             var lengthSq = difference.SqrLength;
             if (XMath.IsZero(lengthSq))
@@ -1199,9 +1173,9 @@ namespace Lotus.Maths
             else
                 difference *= (float)(1.0 / Math.Sqrt(lengthSq));
 
-            Vector3Df.Cross(in cameraUpVector, in difference, out crossed);
+            Vector3Df.Cross(in cameraUpVector, in difference, out var crossed);
             crossed.Normalize();
-            Vector3Df.Cross(in difference, in crossed, out final);
+            Vector3Df.Cross(in difference, in crossed, out var final);
 
             result.M11 = crossed.X;
             result.M12 = crossed.Y;
@@ -1225,8 +1199,7 @@ namespace Lotus.Maths
         public static Matrix3Dx3f BillboardRH(in Vector3Df objectPosition, in Vector3Df cameraPosition, in Vector3Df cameraUpVector,
             in Vector3Df cameraForwardVector)
         {
-            Matrix3Dx3f result;
-            BillboardRH(in objectPosition, in cameraPosition, in cameraUpVector, in cameraForwardVector, out result);
+            BillboardRH(in objectPosition, in cameraPosition, in cameraUpVector, in cameraForwardVector, out var result);
             return result;
         }
 
@@ -1239,10 +1212,9 @@ namespace Lotus.Maths
         /// <param name="result">When the method completes, contains the created look-at matrix.</param>
         public static void LookAtLH(in Vector3Df eye, in Vector3Df target, in Vector3Df up, out Matrix3Dx3f result)
         {
-            Vector3Df xaxis, yaxis, zaxis;
-            Vector3Df.Subtract(in target, in eye, out zaxis); zaxis.Normalize();
-            Vector3Df.Cross(in up, in zaxis, out xaxis); xaxis.Normalize();
-            Vector3Df.Cross(in zaxis, in xaxis, out yaxis);
+            Vector3Df.Subtract(in target, in eye, out var zaxis); zaxis.Normalize();
+            Vector3Df.Cross(in up, in zaxis, out var xaxis); xaxis.Normalize();
+            Vector3Df.Cross(in zaxis, in xaxis, out var yaxis);
 
             result = Matrix3Dx3f.Identity;
             result.M11 = xaxis.X; result.M21 = xaxis.Y; result.M31 = xaxis.Z;
@@ -1259,8 +1231,7 @@ namespace Lotus.Maths
         /// <returns>The created look-at matrix.</returns>
         public static Matrix3Dx3f LookAtLH(Vector3Df eye, Vector3Df target, Vector3Df up)
         {
-            Matrix3Dx3f result;
-            LookAtLH(in eye, in target, in up, out result);
+            LookAtLH(in eye, in target, in up, out var result);
             return result;
         }
 
@@ -1273,10 +1244,9 @@ namespace Lotus.Maths
         /// <param name="result">When the method completes, contains the created look-at matrix.</param>
         public static void LookAtRH(in Vector3Df eye, in Vector3Df target, in Vector3Df up, out Matrix3Dx3f result)
         {
-            Vector3Df xaxis, yaxis, zaxis;
-            Vector3Df.Subtract(in eye, in target, out zaxis); zaxis.Normalize();
-            Vector3Df.Cross(in up, in zaxis, out xaxis); xaxis.Normalize();
-            Vector3Df.Cross(in zaxis, in xaxis, out yaxis);
+            Vector3Df.Subtract(in eye, in target, out var zaxis); zaxis.Normalize();
+            Vector3Df.Cross(in up, in zaxis, out var xaxis); xaxis.Normalize();
+            Vector3Df.Cross(in zaxis, in xaxis, out var yaxis);
 
             result = Matrix3Dx3f.Identity;
             result.M11 = xaxis.X; result.M21 = xaxis.Y; result.M31 = xaxis.Z;
@@ -1293,8 +1263,7 @@ namespace Lotus.Maths
         /// <returns>The created look-at matrix.</returns>
         public static Matrix3Dx3f LookAtRH(in Vector3Df eye, in Vector3Df target, in Vector3Df up)
         {
-            Matrix3Dx3f result;
-            LookAtRH(in eye, in target, in up, out result);
+            LookAtRH(in eye, in target, in up, out var result);
             return result;
         }
 
@@ -1315,8 +1284,7 @@ namespace Lotus.Maths
         /// <returns>The created scaling matrix.</returns>
         public static Matrix3Dx3f Scaling(in Vector3Df scale)
         {
-            Matrix3Dx3f result;
-            Scaling(in scale, out result);
+            Scaling(in scale, out var result);
             return result;
         }
 
@@ -1344,8 +1312,7 @@ namespace Lotus.Maths
         /// <returns>The created scaling matrix.</returns>
         public static Matrix3Dx3f Scaling(float x, float y, float z)
         {
-            Matrix3Dx3f result;
-            Scaling(x, y, z, out result);
+            Scaling(x, y, z, out var result);
             return result;
         }
 
@@ -1367,8 +1334,7 @@ namespace Lotus.Maths
         /// <returns>The created scaling matrix.</returns>
         public static Matrix3Dx3f Scaling(float scale)
         {
-            Matrix3Dx3f result;
-            Scaling(scale, out result);
+            Scaling(scale, out var result);
             return result;
         }
 
@@ -1398,8 +1364,7 @@ namespace Lotus.Maths
         /// <returns>The created rotation matrix.</returns>
         public static Matrix3Dx3f RotationX(float angle)
         {
-            Matrix3Dx3f result;
-            RotationX(angle, out result);
+            RotationX(angle, out var result);
             return result;
         }
 
@@ -1429,8 +1394,7 @@ namespace Lotus.Maths
         /// <returns>The created rotation matrix.</returns>
         public static Matrix3Dx3f RotationY(float angle)
         {
-            Matrix3Dx3f result;
-            RotationY(angle, out result);
+            RotationY(angle, out var result);
             return result;
         }
 
@@ -1460,8 +1424,7 @@ namespace Lotus.Maths
         /// <returns>The created rotation matrix.</returns>
         public static Matrix3Dx3f RotationZ(float angle)
         {
-            Matrix3Dx3f result;
-            RotationZ(angle, out result);
+            RotationZ(angle, out var result);
             return result;
         }
 
@@ -1507,8 +1470,7 @@ namespace Lotus.Maths
         /// <returns>The created rotation matrix.</returns>
         public static Matrix3Dx3f RotationAxis(in Vector3Df axis, float angle)
         {
-            Matrix3Dx3f result;
-            RotationAxis(in axis, angle, out result);
+            RotationAxis(in axis, angle, out var result);
             return result;
         }
 
@@ -1548,8 +1510,7 @@ namespace Lotus.Maths
         /// <returns>The created rotation matrix.</returns>
         public static Matrix3Dx3f RotationQuaternion(in Quaternion3Df rotation)
         {
-            Matrix3Dx3f result;
-            RotationQuaternion(in rotation, out result);
+            RotationQuaternion(in rotation, out var result);
             return result;
         }
 
@@ -1563,8 +1524,7 @@ namespace Lotus.Maths
         public static void RotationYawPitchRoll(float yaw, float pitch, float roll, out Matrix3Dx3f result)
         {
             _ = new Quaternion3Df();
-            Quaternion3Df quaternion;
-            Quaternion3Df.RotationYawPitchRoll(yaw, pitch, roll, out quaternion);
+            Quaternion3Df.RotationYawPitchRoll(yaw, pitch, roll, out var quaternion);
             RotationQuaternion(in quaternion, out result);
         }
 
@@ -1577,8 +1537,7 @@ namespace Lotus.Maths
         /// <returns>The created rotation matrix.</returns>
         public static Matrix3Dx3f RotationYawPitchRoll(float yaw, float pitch, float roll)
         {
-            Matrix3Dx3f result;
-            RotationYawPitchRoll(yaw, pitch, roll, out result);
+            RotationYawPitchRoll(yaw, pitch, roll, out var result);
             return result;
         }
         #endregion
@@ -1700,7 +1659,7 @@ namespace Lotus.Maths
         /// <value>
         /// <c>true</c> if this instance is an identity Matrix3Dx3f; otherwise, <c>false</c>.
         /// </value>
-        public bool IsIdentity
+        public readonly bool IsIdentity
         {
             get { return this.Equals(Identity); }
         }
@@ -1913,8 +1872,7 @@ namespace Lotus.Maths
         /// <returns>The sum of the two matrices.</returns>
         public static Matrix3Dx3f operator +(Matrix3Dx3f left, Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Add(in left, in right, out result);
+            Add(in left, in right, out var result);
             return result;
         }
 
@@ -1936,8 +1894,7 @@ namespace Lotus.Maths
         /// <returns>The difference between the two matrices.</returns>
         public static Matrix3Dx3f operator -(Matrix3Dx3f left, Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Subtract(in left, in right, out result);
+            Subtract(in left, in right, out var result);
             return result;
         }
 
@@ -1948,8 +1905,7 @@ namespace Lotus.Maths
         /// <returns>The negated matrix.</returns>
         public static Matrix3Dx3f operator -(Matrix3Dx3f value)
         {
-            Matrix3Dx3f result;
-            Negate(in value, out result);
+            Negate(in value, out var result);
             return result;
         }
 
@@ -1961,8 +1917,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx3f operator *(float left, Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Multiply(in right, left, out result);
+            Multiply(in right, left, out var result);
             return result;
         }
 
@@ -1974,8 +1929,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx3f operator *(Matrix3Dx3f left, float right)
         {
-            Matrix3Dx3f result;
-            Multiply(in left, right, out result);
+            Multiply(in left, right, out var result);
             return result;
         }
 
@@ -1987,8 +1941,7 @@ namespace Lotus.Maths
         /// <returns>The product of the two matrices.</returns>
         public static Matrix3Dx3f operator *(Matrix3Dx3f left, Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Multiply(in left, in right, out result);
+            Multiply(in left, in right, out var result);
             return result;
         }
 
@@ -2000,8 +1953,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx3f operator /(Matrix3Dx3f left, float right)
         {
-            Matrix3Dx3f result;
-            Divide(in left, right, out result);
+            Divide(in left, right, out var result);
             return result;
         }
 
@@ -2013,8 +1965,7 @@ namespace Lotus.Maths
         /// <returns>The quotient of the two matrices.</returns>
         public static Matrix3Dx3f operator /(Matrix3Dx3f left, Matrix3Dx3f right)
         {
-            Matrix3Dx3f result;
-            Divide(in left, in right, out result);
+            Divide(in left, in right, out var result);
             return result;
         }
 
@@ -2208,20 +2159,22 @@ namespace Lotus.Maths
         /// <param name="R">When the method completes, contains the right triangular Matrix3Dx3f of the decomposition.</param>
         public readonly void DecomposeQR(out Matrix3Dx3f Q, out Matrix3Dx3f R)
         {
-            Matrix3Dx3f temp = this;
+            var temp = this;
             temp.Transpose();
             Orthonormalize(in temp, out Q);
             Q.Transpose();
 
-            R = new Matrix3Dx3f();
-            R.M11 = Vector3Df.Dot(Q.Column1, Column1);
-            R.M12 = Vector3Df.Dot(Q.Column1, Column2);
-            R.M13 = Vector3Df.Dot(Q.Column1, Column3);
+            R = new Matrix3Dx3f
+            {
+                M11 = Vector3Df.Dot(Q.Column1, Column1),
+                M12 = Vector3Df.Dot(Q.Column1, Column2),
+                M13 = Vector3Df.Dot(Q.Column1, Column3),
 
-            R.M22 = Vector3Df.Dot(Q.Column2, Column2);
-            R.M23 = Vector3Df.Dot(Q.Column2, Column3);
+                M22 = Vector3Df.Dot(Q.Column2, Column2),
+                M23 = Vector3Df.Dot(Q.Column2, Column3),
 
-            R.M33 = Vector3Df.Dot(Q.Column3, Column3);
+                M33 = Vector3Df.Dot(Q.Column3, Column3)
+            };
         }
 
         /// <summary>
@@ -2233,15 +2186,17 @@ namespace Lotus.Maths
         {
             Orthonormalize(in this, out Q);
 
-            L = new Matrix3Dx3f();
-            L.M11 = Vector3Df.Dot(Q.Row1, Row1);
+            L = new Matrix3Dx3f
+            {
+                M11 = Vector3Df.Dot(Q.Row1, Row1),
 
-            L.M21 = Vector3Df.Dot(Q.Row1, Row2);
-            L.M22 = Vector3Df.Dot(Q.Row2, Row2);
+                M21 = Vector3Df.Dot(Q.Row1, Row2),
+                M22 = Vector3Df.Dot(Q.Row2, Row2),
 
-            L.M31 = Vector3Df.Dot(Q.Row1, Row3);
-            L.M32 = Vector3Df.Dot(Q.Row2, Row3);
-            L.M33 = Vector3Df.Dot(Q.Row3, Row3);
+                M31 = Vector3Df.Dot(Q.Row1, Row3),
+                M32 = Vector3Df.Dot(Q.Row2, Row3),
+                M33 = Vector3Df.Dot(Q.Row3, Row3)
+            };
         }
 
         /// <summary>
@@ -2273,18 +2228,20 @@ namespace Lotus.Maths
             }
 
             //The rotation is the left over Matrix3Dx3f after dividing out the scaling.
-            var rotationMatrix3x3 = new Matrix3Dx3f();
-            rotationMatrix3x3.M11 = M11 / scale.X;
-            rotationMatrix3x3.M12 = M12 / scale.X;
-            rotationMatrix3x3.M13 = M13 / scale.X;
+            var rotationMatrix3x3 = new Matrix3Dx3f
+            {
+                M11 = M11 / scale.X,
+                M12 = M12 / scale.X,
+                M13 = M13 / scale.X,
 
-            rotationMatrix3x3.M21 = M21 / scale.Y;
-            rotationMatrix3x3.M22 = M22 / scale.Y;
-            rotationMatrix3x3.M23 = M23 / scale.Y;
+                M21 = M21 / scale.Y,
+                M22 = M22 / scale.Y,
+                M23 = M23 / scale.Y,
 
-            rotationMatrix3x3.M31 = M31 / scale.Z;
-            rotationMatrix3x3.M32 = M32 / scale.Z;
-            rotationMatrix3x3.M33 = M33 / scale.Z;
+                M31 = M31 / scale.Z,
+                M32 = M32 / scale.Z,
+                M33 = M33 / scale.Z
+            };
 
             Quaternion3Df.RotationMatrix(in rotationMatrix3x3, out rotation);
             return true;
@@ -2314,18 +2271,20 @@ namespace Lotus.Maths
             }
 
             //The rotation is the left over matrix after dividing out the scaling.
-            var rotationmatrix = new Matrix3Dx3f();
-            rotationmatrix.M11 = M11 * inv_scale;
-            rotationmatrix.M12 = M12 * inv_scale;
-            rotationmatrix.M13 = M13 * inv_scale;
+            var rotationmatrix = new Matrix3Dx3f
+            {
+                M11 = M11 * inv_scale,
+                M12 = M12 * inv_scale,
+                M13 = M13 * inv_scale,
 
-            rotationmatrix.M21 = M21 * inv_scale;
-            rotationmatrix.M22 = M22 * inv_scale;
-            rotationmatrix.M23 = M23 * inv_scale;
+                M21 = M21 * inv_scale,
+                M22 = M22 * inv_scale,
+                M23 = M23 * inv_scale,
 
-            rotationmatrix.M31 = M31 * inv_scale;
-            rotationmatrix.M32 = M32 * inv_scale;
-            rotationmatrix.M33 = M33 * inv_scale;
+                M31 = M31 * inv_scale,
+                M32 = M32 * inv_scale,
+                M33 = M33 * inv_scale
+            };
 
             Quaternion3Df.RotationMatrix(in rotationmatrix, out rotation);
 
@@ -2384,7 +2343,7 @@ namespace Lotus.Maths
         /// <returns>A 9-element array containing the components of the matrix.</returns>
         public readonly float[] ToArray()
         {
-            return new[] { M11, M12, M13, M21, M22, M23, M31, M32, M33 };
+            return [M11, M12, M13, M21, M22, M23, M31, M32, M33];
         }
         #endregion
     }

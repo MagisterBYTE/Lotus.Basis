@@ -20,7 +20,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичная матрица.
         /// </summary>
-        public static readonly Matrix3Dx2f Identity = new Matrix3Dx2f(1, 0, 0, 1, 0, 0);
+        public static readonly Matrix3Dx2f Identity = new(1, 0, 0, 1, 0, 0);
         #endregion
 
         #region Static methods
@@ -48,8 +48,7 @@ namespace Lotus.Maths
         /// <returns>The sum of the two matrices.</returns>
         public static Matrix3Dx2f Add(in Matrix3Dx2f left, in Matrix3Dx2f right)
         {
-            Matrix3Dx2f result;
-            Add(in left, in right, out result);
+            Add(in left, in right, out var result);
             return result;
         }
 
@@ -77,8 +76,7 @@ namespace Lotus.Maths
         /// <returns>The difference between the two matrices.</returns>
         public static Matrix3Dx2f Subtract(in Matrix3Dx2f left, in Matrix3Dx2f right)
         {
-            Matrix3Dx2f result;
-            Subtract(in left, in right, out result);
+            Subtract(in left, in right, out var result);
             return result;
         }
 
@@ -106,8 +104,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx2f Multiply(in Matrix3Dx2f left, float right)
         {
-            Matrix3Dx2f result;
-            Multiply(in left, right, out result);
+            Multiply(in left, right, out var result);
             return result;
         }
 
@@ -119,13 +116,15 @@ namespace Lotus.Maths
         /// <param name="result">The product of the two matrices.</param>
         public static void Multiply(in Matrix3Dx2f left, in Matrix3Dx2f right, out Matrix3Dx2f result)
         {
-            result = new Matrix3Dx2f();
-            result.M11 = (left.M11 * right.M11) + (left.M12 * right.M21);
-            result.M12 = (left.M11 * right.M12) + (left.M12 * right.M22);
-            result.M21 = (left.M21 * right.M11) + (left.M22 * right.M21);
-            result.M22 = (left.M21 * right.M12) + (left.M22 * right.M22);
-            result.M31 = (left.M31 * right.M11) + (left.M32 * right.M21) + right.M31;
-            result.M32 = (left.M31 * right.M12) + (left.M32 * right.M22) + right.M32;
+            result = new Matrix3Dx2f
+            {
+                M11 = (left.M11 * right.M11) + (left.M12 * right.M21),
+                M12 = (left.M11 * right.M12) + (left.M12 * right.M22),
+                M21 = (left.M21 * right.M11) + (left.M22 * right.M21),
+                M22 = (left.M21 * right.M12) + (left.M22 * right.M22),
+                M31 = (left.M31 * right.M11) + (left.M32 * right.M21) + right.M31,
+                M32 = (left.M31 * right.M12) + (left.M32 * right.M22) + right.M32
+            };
         }
 
         /// <summary>
@@ -136,8 +135,7 @@ namespace Lotus.Maths
         /// <returns>The product of the two matrices.</returns>
         public static Matrix3Dx2f Multiply(in Matrix3Dx2f left, in Matrix3Dx2f right)
         {
-            Matrix3Dx2f result;
-            Multiply(in left, in right, out result);
+            Multiply(in left, in right, out var result);
             return result;
         }
 
@@ -197,8 +195,7 @@ namespace Lotus.Maths
         /// <returns>The negated matrix.</returns>
         public static Matrix3Dx2f Negate(in Matrix3Dx2f value)
         {
-            Matrix3Dx2f result;
-            Negate(in value, out result);
+            Negate(in value, out var result);
             return result;
         }
 
@@ -228,8 +225,7 @@ namespace Lotus.Maths
         /// <returns>The linear interpolation of the two matrices.</returns>
         public static Matrix3Dx2f Lerp(in Matrix3Dx2f start, in Matrix3Dx2f end, float time)
         {
-            Matrix3Dx2f result;
-            Lerp(in start, in end, time, out result);
+            Lerp(in start, in end, time, out var result);
             return result;
         }
 
@@ -255,8 +251,7 @@ namespace Lotus.Maths
         /// <returns>The cubic interpolation of the two matrices.</returns>
         public static Matrix3Dx2f SmoothStep(in Matrix3Dx2f start, in Matrix3Dx2f end, float time)
         {
-            Matrix3Dx2f result;
-            SmoothStep(in start, in end, time, out result);
+            SmoothStep(in start, in end, time, out var result);
             return result;
         }
 
@@ -277,8 +272,7 @@ namespace Lotus.Maths
         /// <returns>The created scaling matrix.</returns>
         public static Matrix3Dx2f Scaling(in Vector2Df scale)
         {
-            Matrix3Dx2f result;
-            Scaling(in scale, out result);
+            Scaling(in scale, out var result);
             return result;
         }
 
@@ -303,8 +297,7 @@ namespace Lotus.Maths
         /// <returns>The created scaling matrix.</returns>
         public static Matrix3Dx2f Scaling(float x, float y)
         {
-            Matrix3Dx2f result;
-            Scaling(x, y, out result);
+            Scaling(x, y, out var result);
             return result;
         }
 
@@ -326,8 +319,7 @@ namespace Lotus.Maths
         /// <returns>The created scaling matrix.</returns>
         public static Matrix3Dx2f Scaling(float scale)
         {
-            Matrix3Dx2f result;
-            Scaling(scale, out result);
+            Scaling(scale, out var result);
             return result;
         }
 
@@ -395,8 +387,7 @@ namespace Lotus.Maths
         /// <returns>The created rotation matrix.</returns>
         public static Matrix3Dx2f Rotation(float angle)
         {
-            Matrix3Dx2f result;
-            Rotation(angle, out result);
+            Rotation(angle, out var result);
             return result;
         }
 
@@ -408,8 +399,7 @@ namespace Lotus.Maths
         /// <returns>The created rotation matrix.</returns>
         public static Matrix3Dx2f Rotation(float angle, in Vector2Df center)
         {
-            Matrix3Dx2f result;
-            Rotation(angle, center, out result);
+            Rotation(angle, center, out var result);
             return result;
         }
 
@@ -450,8 +440,7 @@ namespace Lotus.Maths
         /// <returns>The created transformation matrix.</returns>
         public static Matrix3Dx2f Transformation(float xScale, float yScale, float angle, float xOffset, float yOffset)
         {
-            Matrix3Dx2f result;
-            Transformation(xScale, yScale, angle, xOffset, yOffset, out result);
+            Transformation(xScale, yScale, angle, xOffset, yOffset, out var result);
             return result;
         }
 
@@ -472,8 +461,7 @@ namespace Lotus.Maths
         /// <returns>The created translation matrix.</returns>
         public static Matrix3Dx2f Translation(in Vector2Df value)
         {
-            Matrix3Dx2f result;
-            Translation(in value, out result);
+            Translation(in value, out var result);
             return result;
         }
 
@@ -498,8 +486,7 @@ namespace Lotus.Maths
         /// <returns>The created translation matrix.</returns>
         public static Matrix3Dx2f Translation(float x, float y)
         {
-            Matrix3Dx2f result;
-            Translation(x, y, out result);
+            Translation(x, y, out var result);
             return result;
         }
 
@@ -552,8 +539,7 @@ namespace Lotus.Maths
         /// <returns>The created skew matrix.</returns>
         public static Matrix3Dx2f Skew(float angleX, float angleY)
         {
-            Matrix3Dx2f result;
-            Skew(angleX, angleY, out result);
+            Skew(angleX, angleY, out var result);
             return result;
         }
 
@@ -577,8 +563,7 @@ namespace Lotus.Maths
         /// <returns>the inverse of the specified matrix.</returns>
         public static Matrix3Dx2f Invert(in Matrix3Dx2f value)
         {
-            Matrix3Dx2f result;
-            Invert(in value, out result);
+            Invert(in value, out var result);
             return result;
         }
 
@@ -713,7 +698,7 @@ namespace Lotus.Maths
         /// <value>
         /// <c>true</c> if this instance is an identity matrix; otherwise, <c>false</c>.
         /// </value>
-        public bool IsIdentity
+        public readonly bool IsIdentity
         {
             get { return this.Equals(Identity); }
         }
@@ -912,8 +897,7 @@ namespace Lotus.Maths
         /// <returns>The sum of the two matrices.</returns>
         public static Matrix3Dx2f operator +(Matrix3Dx2f left, Matrix3Dx2f right)
         {
-            Matrix3Dx2f result;
-            Add(in left, in right, out result);
+            Add(in left, in right, out var result);
             return result;
         }
 
@@ -935,8 +919,7 @@ namespace Lotus.Maths
         /// <returns>The difference between the two matrices.</returns>
         public static Matrix3Dx2f operator -(Matrix3Dx2f left, Matrix3Dx2f right)
         {
-            Matrix3Dx2f result;
-            Subtract(in left, in right, out result);
+            Subtract(in left, in right, out var result);
             return result;
         }
 
@@ -947,8 +930,7 @@ namespace Lotus.Maths
         /// <returns>The negated matrix.</returns>
         public static Matrix3Dx2f operator -(Matrix3Dx2f value)
         {
-            Matrix3Dx2f result;
-            Negate(in value, out result);
+            Negate(in value, out var result);
             return result;
         }
 
@@ -960,8 +942,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx2f operator *(float left, Matrix3Dx2f right)
         {
-            Matrix3Dx2f result;
-            Multiply(in right, left, out result);
+            Multiply(in right, left, out var result);
             return result;
         }
 
@@ -973,8 +954,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx2f operator *(Matrix3Dx2f left, float right)
         {
-            Matrix3Dx2f result;
-            Multiply(in left, right, out result);
+            Multiply(in left, right, out var result);
             return result;
         }
 
@@ -986,8 +966,7 @@ namespace Lotus.Maths
         /// <returns>The product of the two matrices.</returns>
         public static Matrix3Dx2f operator *(Matrix3Dx2f left, Matrix3Dx2f right)
         {
-            Matrix3Dx2f result;
-            Multiply(in left, in right, out result);
+            Multiply(in left, in right, out var result);
             return result;
         }
 
@@ -999,8 +978,7 @@ namespace Lotus.Maths
         /// <returns>The scaled matrix.</returns>
         public static Matrix3Dx2f operator /(Matrix3Dx2f left, float right)
         {
-            Matrix3Dx2f result;
-            Divide(in left, right, out result);
+            Divide(in left, right, out var result);
             return result;
         }
 
@@ -1012,8 +990,7 @@ namespace Lotus.Maths
         /// <returns>The quotient of the two matrices.</returns>
         public static Matrix3Dx2f operator /(Matrix3Dx2f left, Matrix3Dx2f right)
         {
-            Matrix3Dx2f result;
-            Divide(in left, in right, out result);
+            Divide(in left, in right, out var result);
             return result;
         }
 
@@ -1085,16 +1062,16 @@ namespace Lotus.Maths
         {
             readonly get
             {
-                switch (index)
+                return index switch
                 {
-                    case 0: return M11;
-                    case 1: return M12;
-                    case 2: return M21;
-                    case 3: return M22;
-                    case 4: return M31;
-                    case 5: return M32;
-                    default: return 0;
-                }
+                    0 => M11,
+                    1 => M12,
+                    2 => M21,
+                    3 => M22,
+                    4 => M31,
+                    5 => M32,
+                    _ => 0,
+                };
             }
 
             set
@@ -1139,7 +1116,7 @@ namespace Lotus.Maths
         /// <returns>A sixteen-element array containing the components of the matrix.</returns>
         public readonly float[] ToArray()
         {
-            return new[] { M11, M12, M21, M22, M31, M32 };
+            return [M11, M12, M21, M22, M31, M32];
         }
 
         /// <summary>

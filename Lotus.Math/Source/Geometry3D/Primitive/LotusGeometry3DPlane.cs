@@ -64,9 +64,9 @@ namespace Lotus.Maths
         /// <param name="p3">Точка принадлежащая плоскости.</param>
         public Plane3D(in Vector3D p1, in Vector3D p2, in Vector3D p3)
         {
-            Vector3D v1 = p2 - p1;
-            Vector3D v2 = p3 - p1;
-            Vector3D normal = v1 ^ v2;
+            var v1 = p2 - p1;
+            var v2 = p3 - p1;
+            var normal = v1 ^ v2;
             Normal = normal.Normalized;
             Distance = -(Normal * p1);
         }
@@ -184,9 +184,9 @@ namespace Lotus.Maths
         /// <param name="p3">Точка принадлежащая плоскости.</param>
         public Plane3Df(in Vector3Df p1, in Vector3Df p2, in Vector3Df p3)
         {
-            Vector3Df v1 = p2 - p1;
-            Vector3Df v2 = p3 - p1;
-            Vector3Df normal = v1 ^ v2;
+            var v1 = p2 - p1;
+            var v2 = p3 - p1;
+            var normal = v1 ^ v2;
             Normal = normal.Normalized;
             Distance = -(Normal * p1);
         }

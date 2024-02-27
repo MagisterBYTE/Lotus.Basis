@@ -17,32 +17,32 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный вектор.
         /// </summary>
-        public static readonly Vector2D One = new Vector2D(1, 1);
+        public static readonly Vector2D One = new(1, 1);
 
         /// <summary>
         /// Вектор "право".
         /// </summary>
-        public static readonly Vector2D Right = new Vector2D(1, 0);
+        public static readonly Vector2D Right = new(1, 0);
 
         /// <summary>
         /// Вектор "влево".
         /// </summary>
-        public static readonly Vector2D Left = new Vector2D(-1, 0);
+        public static readonly Vector2D Left = new(-1, 0);
 
         /// <summary>
         /// Вектор "вверх".
         /// </summary>
-        public static readonly Vector2D Up = new Vector2D(0, 1);
+        public static readonly Vector2D Up = new(0, 1);
 
         /// <summary>
         /// Вектор "вниз".
         /// </summary>
-        public static readonly Vector2D Down = new Vector2D(0, -1);
+        public static readonly Vector2D Down = new(0, -1);
 
         /// <summary>
         /// Нулевой вектор.
         /// </summary>
-        public static readonly Vector2D Zero = new Vector2D(0, 0);
+        public static readonly Vector2D Zero = new(0, 0);
         #endregion
 
         #region Static fields
@@ -203,8 +203,7 @@ namespace Lotus.Maths
         /// <returns>Результирующий вектор.</returns>
         public static Vector2D Reflect(in Vector2D vector, in Vector2D normal)
         {
-            Vector2D result;
-            Reflect(in vector, in normal, out result);
+            Reflect(in vector, in normal, out var result);
             return result;
         }
 
@@ -546,7 +545,7 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Vector2D left, Vector2D right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y);
         }
 
         /// <summary>
@@ -557,7 +556,7 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Vector2D left, Vector2D right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y);
         }
 
         /// <summary>
@@ -865,32 +864,32 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный вектор.
         /// </summary>
-        public static readonly Vector2Df One = new Vector2Df(1, 1);
+        public static readonly Vector2Df One = new(1, 1);
 
         /// <summary>
         /// Вектор "право".
         /// </summary>
-        public static readonly Vector2Df Right = new Vector2Df(1, 0);
+        public static readonly Vector2Df Right = new(1, 0);
 
         /// <summary>
         /// Вектор "влево".
         /// </summary>
-        public static readonly Vector2Df Left = new Vector2Df(-1, 0);
+        public static readonly Vector2Df Left = new(-1, 0);
 
         /// <summary>
         /// Вектор "вверх".
         /// </summary>
-        public static readonly Vector2Df Up = new Vector2Df(0, 1);
+        public static readonly Vector2Df Up = new(0, 1);
 
         /// <summary>
         /// Вектор "вниз".
         /// </summary>
-        public static readonly Vector2Df Down = new Vector2Df(0, -1);
+        public static readonly Vector2Df Down = new(0, -1);
 
         /// <summary>
         /// Нулевой вектор.
         /// </summary>
-        public static readonly Vector2Df Zero = new Vector2Df(0, 0);
+        public static readonly Vector2Df Zero = new(0, 0);
         #endregion
 
         #region Static fields
@@ -1057,8 +1056,7 @@ namespace Lotus.Maths
         /// <returns>Результирующий вектор.</returns>
         public static Vector2Df Reflect(in Vector2Df vector, in Vector2Df normal)
         {
-            Vector2Df result;
-            Reflect(in vector, in normal, out result);
+            Reflect(in vector, in normal, out var result);
             return result;
         }
 
@@ -1423,7 +1421,7 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Vector2Df left, Vector2Df right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y);
         }
 
         /// <summary>
@@ -1434,7 +1432,7 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Vector2Df left, Vector2Df right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y);
         }
 
         /// <summary>
@@ -1830,32 +1828,32 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный вектор.
         /// </summary>
-        public static readonly Vector2Di One = new Vector2Di(1, 1);
+        public static readonly Vector2Di One = new(1, 1);
 
         /// <summary>
         /// Вектор "право".
         /// </summary>
-        public static readonly Vector2Di Right = new Vector2Di(1, 0);
+        public static readonly Vector2Di Right = new(1, 0);
 
         /// <summary>
         /// Вектор "влево".
         /// </summary>
-        public static readonly Vector2Di Left = new Vector2Di(-1, 0);
+        public static readonly Vector2Di Left = new(-1, 0);
 
         /// <summary>
         /// Вектор "вверх".
         /// </summary>
-        public static readonly Vector2Di Up = new Vector2Di(0, 1);
+        public static readonly Vector2Di Up = new(0, 1);
 
         /// <summary>
         /// Вектор "вниз".
         /// </summary>
-        public static readonly Vector2Di Down = new Vector2Di(0, -1);
+        public static readonly Vector2Di Down = new(0, -1);
 
         /// <summary>
         /// Нулевой вектор.
         /// </summary>
-        public static readonly Vector2Di Zero = new Vector2Di(0, 0);
+        public static readonly Vector2Di Zero = new(0, 0);
         #endregion
 
         #region Static fields
@@ -2325,7 +2323,7 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Vector2Di left, Vector2Di right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y);
         }
 
         /// <summary>
@@ -2336,7 +2334,7 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Vector2Di left, Vector2Di right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y);
         }
 
         /// <summary>

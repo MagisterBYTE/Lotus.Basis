@@ -19,7 +19,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный кватернион.
         /// </summary>
-        public static readonly Quaternion3D Identity = new Quaternion3D(0, 0, 0);
+        public static readonly Quaternion3D Identity = new(0, 0, 0);
         #endregion
 
         #region Static methods
@@ -31,7 +31,7 @@ namespace Lotus.Maths
         /// <param name="result">Результирующий кватернион.</param>
         public static void AxisAngle(in Vector3D axis, double angle, out Quaternion3D result)
         {
-            Vector3D v = axis.Normalized;
+            var v = axis.Normalized;
 
             var half_angle = angle * 0.5;
             var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
@@ -51,7 +51,7 @@ namespace Lotus.Maths
         public static void FromToRotation(in Vector3D fromDirection, in Vector3D toDirection, out Quaternion3D result)
         {
             // Получаем ось вращения
-            Vector3D axis = fromDirection ^ toDirection;
+            var axis = fromDirection ^ toDirection;
 
             result.X = axis.X;
             result.Y = axis.Y;
@@ -256,7 +256,7 @@ namespace Lotus.Maths
         /// <param name="angle">Угол поворота (в градусах).</param>
         public Quaternion3D(Vector3D axis, double angle)
         {
-            Vector3D v = axis.Normalized;
+            var v = axis.Normalized;
 
             var half_angle = angle * 0.5;
             var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
@@ -538,7 +538,7 @@ namespace Lotus.Maths
         /// <param name="angle">Угол поворота (в градусах).</param>
         public void SetFromAxisAngle(in Vector3D axis, double angle)
         {
-            Vector3D v = axis.Normalized;
+            var v = axis.Normalized;
 
             var half_angle = angle * 0.5;
             var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
@@ -557,7 +557,7 @@ namespace Lotus.Maths
         public void SetFromToRotation(in Vector3D fromDirection, in Vector3D toDirection)
         {
             // Получаем ось вращения
-            Vector3D axis = fromDirection ^ toDirection;
+            var axis = fromDirection ^ toDirection;
 
             Set(axis.X, axis.Y, axis.Z, fromDirection * toDirection);
             Normalize();
@@ -622,7 +622,7 @@ namespace Lotus.Maths
         public readonly Vector3D TransformVector(in Vector3D vector)
         {
             // Быстрая трансформация
-            Quaternion3D r = this * new Quaternion3D(vector.X, vector.Y, vector.Z, 0) * Conjugated;
+            var r = this * new Quaternion3D(vector.X, vector.Y, vector.Z, 0) * Conjugated;
             return new Vector3D(r.X, r.Y, r.Z);
         }
 
@@ -651,7 +651,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный кватернион.
         /// </summary>
-        public static readonly Quaternion3Df Identity = new Quaternion3Df(0, 0, 0);
+        public static readonly Quaternion3Df Identity = new(0, 0, 0);
         #endregion
 
         #region Static methods
@@ -663,7 +663,7 @@ namespace Lotus.Maths
         /// <param name="result">Результирующий кватернион.</param>
         public static void AxisAngle(in Vector3Df axis, float angle, out Quaternion3Df result)
         {
-            Vector3Df v = axis.Normalized;
+            var v = axis.Normalized;
 
             var half_angle = angle * 0.5f;
             var sin_a = (float)Math.Sin(half_angle * XMath.DegreeToRadian_D);
@@ -683,7 +683,7 @@ namespace Lotus.Maths
         public static void SetFromToRotation(in Vector3Df fromDirection, in Vector3Df toDirection, out Quaternion3Df result)
         {
             // Получаем ось вращения
-            Vector3Df axis = fromDirection ^ toDirection;
+            var axis = fromDirection ^ toDirection;
 
             result.X = axis.X;
             result.Y = axis.Y;
@@ -832,8 +832,7 @@ namespace Lotus.Maths
         /// <returns>The newly created quaternion.</returns>
         public static Quaternion3Df RotationYawPitchRoll(float yaw, float pitch, float roll)
         {
-            Quaternion3Df result;
-            RotationYawPitchRoll(yaw, pitch, roll, out result);
+            RotationYawPitchRoll(yaw, pitch, roll, out var result);
             return result;
         }
 
@@ -981,7 +980,7 @@ namespace Lotus.Maths
         /// <param name="angle">Угол поворота (в градусах).</param>
         public Quaternion3Df(Vector3Df axis, float angle)
         {
-            Vector3Df v = axis.Normalized;
+            var v = axis.Normalized;
 
             var half_angle = angle * 0.5f;
             var sin_a = (float)Math.Sin(half_angle * XMath.DegreeToRadian_D);
@@ -1263,7 +1262,7 @@ namespace Lotus.Maths
         /// <param name="angle">Угол поворота (в градусах).</param>
         public void SetFromAxisAngle(in Vector3Df axis, float angle)
         {
-            Vector3Df v = axis.Normalized;
+            var v = axis.Normalized;
 
             var half_angle = angle * 0.5f;
             var sin_a = (float)Math.Sin(half_angle * XMath.DegreeToRadian_D);
@@ -1302,7 +1301,7 @@ namespace Lotus.Maths
         public readonly Vector3Df TransformVector(in Vector3Df vector)
         {
             // Быстрая трансформация
-            Quaternion3Df r = this * new Quaternion3Df(vector.X, vector.Y, vector.Z, 0) * Conjugated;
+            var r = this * new Quaternion3Df(vector.X, vector.Y, vector.Z, 0) * Conjugated;
             return new Vector3Df(r.X, r.Y, r.Z);
         }
 

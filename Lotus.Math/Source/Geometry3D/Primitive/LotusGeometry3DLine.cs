@@ -24,17 +24,17 @@ namespace Lotus.Maths
         /// <summary>
         /// Ось по X.
         /// </summary>
-        public readonly static Line3Df XAxis = new Line3Df(Vector3Df.Zero, Vector3Df.Right);
+        public readonly static Line3Df XAxis = new(Vector3Df.Zero, Vector3Df.Right);
 
         /// <summary>
         /// Ось по Y.
         /// </summary>
-        public readonly static Line3Df YAxis = new Line3Df(Vector3Df.Zero, Vector3Df.Up);
+        public readonly static Line3Df YAxis = new(Vector3Df.Zero, Vector3Df.Up);
 
         /// <summary>
         /// Ось по Z.
         /// </summary>
-        public readonly static Line3Df ZAxis = new Line3Df(Vector3Df.Zero, Vector3Df.Forward);
+        public readonly static Line3Df ZAxis = new(Vector3Df.Zero, Vector3Df.Forward);
         #endregion
 
         #region Fields

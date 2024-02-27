@@ -264,7 +264,7 @@ namespace Lotus.Maths
         /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
         /// </summary>
         /// <param name="count">Количество контрольных точек.</param>
-        public SplineBase2D(int count)
+        protected SplineBase2D(int count)
         {
             _controlPoints = new Vector2Df[count];
             _drawingPoints = new List<Vector2Df>();
@@ -276,7 +276,7 @@ namespace Lotus.Maths
         /// </summary>
         /// <param name="startPoint">Начальная точка.</param>
         /// <param name="endPoint">Конечная точка.</param>
-        public SplineBase2D(Vector2Df startPoint, Vector2Df endPoint)
+        protected SplineBase2D(Vector2Df startPoint, Vector2Df endPoint)
         {
             _controlPoints = new Vector2Df[3];
             _controlPoints[0] = startPoint;
@@ -290,7 +290,7 @@ namespace Lotus.Maths
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="controlPoints">Набор контрольных точек сплайна.</param>
-        public SplineBase2D(params Vector2Df[] controlPoints)
+        protected SplineBase2D(params Vector2Df[] controlPoints)
         {
             _controlPoints = new Vector2Df[controlPoints.Length];
             Array.Copy(controlPoints, _controlPoints, controlPoints.Length);
@@ -383,11 +383,13 @@ namespace Lotus.Maths
                 if (point.Y > y_max) y_max = point.Y;
             }
 
-            var rect_area = new Rect2Df();
-            rect_area.X = x_min;
-            rect_area.Width = x_max - x_min;
-            rect_area.Y = y_min;
-            rect_area.Height = y_max - y_min;
+            var rect_area = new Rect2Df
+            {
+                X = x_min,
+                Width = x_max - x_min,
+                Y = y_min,
+                Height = y_max - y_min
+            };
 
             return rect_area;
         }
@@ -476,7 +478,7 @@ namespace Lotus.Maths
                 var p1 = _drawingPoints[i] - _drawingPoints[i - 1];
                 var p2 = position - _drawingPoints[i - 1];
 
-                var angle = Vector2Df.Dot(p2, p1) / Vector2Df.Dot(p2, p1);
+                var angle = Vector2Df.Dot(p2, p1) / Vector2Df.Dot(position, p1);
                 if (angle + epsilon > 0 && angle - epsilon < 1)
                 {
                     // TODO: Найти точное положение на всей кривой
@@ -808,7 +810,7 @@ namespace Lotus.Maths
         /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
         /// </summary>
         /// <param name="count">Количество контрольных точек.</param>
-        public SplineBase3D(int count)
+        protected SplineBase3D(int count)
         {
             _controlPoints = new Vector3Df[count];
             _drawingPoints = new List<Vector3Df>();
@@ -820,7 +822,7 @@ namespace Lotus.Maths
         /// </summary>
         /// <param name="startPoint">Начальная точка.</param>
         /// <param name="endPoint">Конечная точка.</param>
-        public SplineBase3D(Vector3Df startPoint, Vector3Df endPoint)
+        protected SplineBase3D(Vector3Df startPoint, Vector3Df endPoint)
         {
             _controlPoints = new Vector3Df[3];
             _controlPoints[0] = startPoint;
@@ -834,7 +836,7 @@ namespace Lotus.Maths
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="controlPoints">Набор контрольных точек сплайна.</param>
-        public SplineBase3D(params Vector3Df[] controlPoints)
+        protected SplineBase3D(params Vector3Df[] controlPoints)
         {
             _controlPoints = new Vector3Df[controlPoints.Length];
             Array.Copy(controlPoints, _controlPoints, controlPoints.Length);
@@ -927,11 +929,13 @@ namespace Lotus.Maths
                 if (point.Y > y_max) y_max = point.Y;
             }
 
-            var rect_area = new Rect2Df();
-            rect_area.X = x_min;
-            rect_area.Width = x_max - x_min;
-            rect_area.Y = y_min;
-            rect_area.Height = y_max - y_min;
+            var rect_area = new Rect2Df
+            {
+                X = x_min,
+                Width = x_max - x_min,
+                Y = y_min,
+                Height = y_max - y_min
+            };
 
             return rect_area;
         }
@@ -1020,7 +1024,7 @@ namespace Lotus.Maths
                 var p1 = _drawingPoints[i] - _drawingPoints[i - 1];
                 var p2 = position - _drawingPoints[i - 1];
 
-                var angle = Vector3Df.Dot(p2, p1) / Vector3Df.Dot(p2, p1);
+                var angle = Vector3Df.Dot(p2, p1) / Vector3Df.Dot(position, p1);
                 if (angle + epsilon > 0 && angle - epsilon < 1)
                 {
                     // TODO: Найти точное положение на всей кривой

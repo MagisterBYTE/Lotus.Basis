@@ -179,7 +179,7 @@ namespace Lotus.Maths
         /// <returns>Спроецированная точка.</returns>
         public static Vector2Df PointSegment(in Vector2Df point, in Vector2Df start, in Vector2Df end, out float normalizeDistance)
         {
-            Vector2Df segment_direction = end - start;
+            var segment_direction = end - start;
             var sqr_segment_length = segment_direction.SqrLength;
             if (sqr_segment_length < XGeometry2D.Eplsilon_f)
             {
@@ -284,7 +284,7 @@ namespace Lotus.Maths
         public static void LineLine(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB,
             in Vector2Df dirB, out Vector2Df pointA, out Vector2Df pointB)
         {
-            Vector2Df pos_b_to_a = posA - posB;
+            var pos_b_to_a = posA - posB;
             var denominator = Vector2Df.DotPerp(in dirA, in dirB);
             var perp_dot_b = Vector2Df.DotPerp(in dirB, in pos_b_to_a);
 
@@ -335,7 +335,7 @@ namespace Lotus.Maths
         public static void LineRay(in Vector2Df linePos, in Vector2Df lineDir, in Vector2Df rayPos, in Vector2Df rayDir,
             out Vector2Df linePoint, out Vector2Df rayPoint)
         {
-            Vector2Df ray_pos_to_line_pos = linePos - rayPos;
+            var ray_pos_to_line_pos = linePos - rayPos;
             var denominator = Vector2Df.DotPerp(in lineDir, in rayDir);
             var perp_dot_a = Vector2Df.DotPerp(in lineDir, in ray_pos_to_line_pos);
 
@@ -398,8 +398,8 @@ namespace Lotus.Maths
         public static void LineSegment(in Vector2Df linePos, in Vector2Df lineDir, in Vector2Df start, in Vector2Df end,
             out Vector2Df linePoint, out Vector2Df segmentPoint)
         {
-            Vector2Df segment_direction = end - start;
-            Vector2Df segment_start_to_pos = linePos - start;
+            var segment_direction = end - start;
+            var segment_start_to_pos = linePos - start;
             var denominator = Vector2Df.DotPerp(in lineDir, in segment_direction);
             var perp_dot_start = Vector2Df.DotPerp(in lineDir, in segment_start_to_pos);
 
@@ -481,7 +481,7 @@ namespace Lotus.Maths
         public static void LineCircle(in Vector2Df linePos, in Vector2Df lineDir, in Vector2Df circleCenter,
                 float circleRadius, out Vector2Df linePoint, out Vector2Df circlePoint)
         {
-            Vector2Df pos_to_center = circleCenter - linePos;
+            var pos_to_center = circleCenter - linePos;
             var center_projection = Vector2Df.Dot(in lineDir, in pos_to_center);
             var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
             var sqr_distance_to_intersection = (circleRadius * circleRadius) - sqr_distance_to_line;
@@ -531,7 +531,7 @@ namespace Lotus.Maths
         public static void RayRay(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB, in Vector2Df dirB,
             out Vector2Df pointA, out Vector2Df pointB)
         {
-            Vector2Df pos_b_to_a = posA - posB;
+            var pos_b_to_a = posA - posB;
             var denominator = Vector2Df.DotPerp(in dirA, in dirB);
             var perp_dot_a = Vector2Df.DotPerp(in dirA, in pos_b_to_a);
             var perp_dot_b = Vector2Df.DotPerp(in dirB, in pos_b_to_a);
@@ -695,10 +695,10 @@ namespace Lotus.Maths
         public static void RaySegment(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df start, in Vector2Df end,
             out Vector2Df rayPoint, out Vector2Df segmentPoint)
         {
-            Vector2Df start_copy = start;
-            Vector2Df end_copy = end;
-            Vector2Df segment_direction = end_copy - start_copy;
-            Vector2Df segment_start_to_pos = rayPos - start_copy;
+            var start_copy = start;
+            var end_copy = end;
+            var segment_direction = end_copy - start_copy;
+            var segment_start_to_pos = rayPos - start_copy;
             var denominator = Vector2Df.DotPerp(in rayDir, in segment_direction);
             var perp_dot_a = Vector2Df.DotPerp(in rayDir, in segment_start_to_pos);
             // Normalized direction gives more stable results 
@@ -708,7 +708,7 @@ namespace Lotus.Maths
             {
                 // Parallel
                 var segment_start_projection = -Vector2Df.Dot(rayDir, segment_start_to_pos);
-                Vector2Df ray_posToSegmentB = end_copy - rayPos;
+                var ray_posToSegmentB = end_copy - rayPos;
                 var segment_end_projection = Vector2Df.Dot(rayDir, ray_posToSegmentB);
                 if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
                 {
@@ -883,7 +883,7 @@ namespace Lotus.Maths
         public static void RayCircle(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df circleCenter, float circleRadius,
             out Vector2Df rayPoint, out Vector2Df circlePoint)
         {
-            Vector2Df pos_to_center = circleCenter - rayPos;
+            var pos_to_center = circleCenter - rayPos;
             var center_projection = Vector2Df.Dot(in rayDir, in pos_to_center);
             if (center_projection + circleRadius < -XGeometry2D.Eplsilon_f)
             {
@@ -974,11 +974,11 @@ namespace Lotus.Maths
             in Vector2Df segment2Start, in Vector2Df segment2End, out Vector2Df segment1Point,
             out Vector2Df segment2Point)
         {
-            Vector2Df segment2_start_copy = segment2Start;
-            Vector2Df segment2_end_copy = segment2End;
-            Vector2Df from_2start_to_1start = segment1Start - segment2_start_copy;
-            Vector2Df direction1 = segment1End - segment1Start;
-            Vector2Df direction2 = segment2_end_copy - segment2_start_copy;
+            var segment2_start_copy = segment2Start;
+            var segment2_end_copy = segment2End;
+            var from_2start_to_1start = segment1Start - segment2_start_copy;
+            var direction1 = segment1End - segment1Start;
+            var direction2 = segment2_end_copy - segment2_start_copy;
             var segment_1length = direction1.Length;
             var segment_2length = direction2.Length;
 
@@ -1234,7 +1234,7 @@ namespace Lotus.Maths
         private static void SegmentSegmentCollinear(in Vector2Df left_a, in Vector2Df left_b, in Vector2Df right_a,
             out Vector2Df left_point, out Vector2Df right_point)
         {
-            Vector2Df left_direction = left_b - left_a;
+            var left_direction = left_b - left_a;
             var rightAProjection = Vector2Df.Dot(left_direction.Normalized, right_a - left_b);
             if (Math.Abs(rightAProjection) < XGeometry2D.Eplsilon_f)
             {
@@ -1293,8 +1293,8 @@ namespace Lotus.Maths
         public static void SegmentCircle(in Vector2Df start, in Vector2Df end, in Vector2Df circleCenter, float circleRadius,
             out Vector2Df segmentPoint, out Vector2Df circlePoint)
         {
-            Vector2Df segment_start_to_center = circleCenter - start;
-            Vector2Df from_start_to_end = end - start;
+            var segment_start_to_center = circleCenter - start;
+            var from_start_to_end = end - start;
             var segment_length = from_start_to_end.Length;
             if (segment_length < XGeometry2D.Eplsilon_f)
             {
@@ -1313,12 +1313,12 @@ namespace Lotus.Maths
                         return;
                     }
                 }
-                Vector2Df to_point = -segment_start_to_center / distance_to_point;
+                var to_point = -segment_start_to_center / distance_to_point;
                 circlePoint = circleCenter + (to_point * circleRadius);
                 return;
             }
 
-            Vector2Df segment_direction = from_start_to_end.Normalized;
+            var segment_direction = from_start_to_end.Normalized;
             var center_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_center);
             if (center_projection + circleRadius < -XGeometry2D.Eplsilon_f ||
                 center_projection - circleRadius > segment_length + XGeometry2D.Eplsilon_f)
@@ -1457,7 +1457,7 @@ namespace Lotus.Maths
         public static void CircleCircle(in Vector2Df centerA, float radiusA, in Vector2Df centerB, float radiusB,
             out Vector2Df pointA, out Vector2Df pointB)
         {
-            Vector2Df from_b_to_a = (centerA - centerB).Normalized;
+            var from_b_to_a = (centerA - centerB).Normalized;
             pointA = centerA - (from_b_to_a * radiusA);
             pointB = centerB + (from_b_to_a * radiusB);
         }

@@ -19,42 +19,42 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный вектор.
         /// </summary>
-        public static readonly Vector3D One = new Vector3D(1, 1, 1);
+        public static readonly Vector3D One = new(1, 1, 1);
 
         /// <summary>
         /// Вектор - право.
         /// </summary>
-        public static readonly Vector3D Right = new Vector3D(1, 0, 0);
+        public static readonly Vector3D Right = new(1, 0, 0);
 
         /// <summary>
         /// Вектор - влево.
         /// </summary>
-        public static readonly Vector3D Left = new Vector3D(-1, 0, 0);
+        public static readonly Vector3D Left = new(-1, 0, 0);
 
         /// <summary>
         /// Вектор - вверх.
         /// </summary>
-        public static readonly Vector3D Up = new Vector3D(0, 1, 0);
+        public static readonly Vector3D Up = new(0, 1, 0);
 
         /// <summary>
         /// Вектор - вниз.
         /// </summary>
-        public static readonly Vector3D Down = new Vector3D(0, -1, 0);
+        public static readonly Vector3D Down = new(0, -1, 0);
 
         /// <summary>
         /// Вектор - вперед.
         /// </summary>
-        public static readonly Vector3D Forward = new Vector3D(0, 0, 1);
+        public static readonly Vector3D Forward = new(0, 0, 1);
 
         /// <summary>
         /// Вектор - назад.
         /// </summary>
-        public static readonly Vector3D Back = new Vector3D(0, 0, -1);
+        public static readonly Vector3D Back = new(0, 0, -1);
 
         /// <summary>
         /// Нулевой вектор.
         /// </summary>
-        public static readonly Vector3D Zero = new Vector3D(0, 0, 0);
+        public static readonly Vector3D Zero = new(0, 0, 0);
         #endregion
 
         #region Static fields
@@ -532,8 +532,8 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Vector3D left, Vector3D right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y
-                                      || left.X == right.X && left.Y == right.Y && left.Z < right.Z;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y)
+                                      || (left.X == right.X && left.Y == right.Y && left.Z < right.Z);
         }
 
         /// <summary>
@@ -544,8 +544,8 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Vector3D left, Vector3D right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y
-                                      || left.X == right.X && left.Y == right.Y && left.Z > right.Z;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y)
+                                      || (left.X == right.X && left.Y == right.Y && left.Z > right.Z);
         }
 
         /// <summary>
@@ -845,42 +845,42 @@ namespace Lotus.Maths
         /// <summary>
         /// Единичный вектор.
         /// </summary>
-        public static readonly Vector3Df One = new Vector3Df(1, 1, 1);
+        public static readonly Vector3Df One = new(1, 1, 1);
 
         /// <summary>
         /// Вектор - право.
         /// </summary>
-        public static readonly Vector3Df Right = new Vector3Df(1, 0, 0);
+        public static readonly Vector3Df Right = new(1, 0, 0);
 
         /// <summary>
         /// Вектор - влево.
         /// </summary>
-        public static readonly Vector3Df Left = new Vector3Df(-1, 0, 0);
+        public static readonly Vector3Df Left = new(-1, 0, 0);
 
         /// <summary>
         /// Вектор - вверх.
         /// </summary>
-        public static readonly Vector3Df Up = new Vector3Df(0, 1, 0);
+        public static readonly Vector3Df Up = new(0, 1, 0);
 
         /// <summary>
         /// Вектор - вниз.
         /// </summary>
-        public static readonly Vector3Df Down = new Vector3Df(0, -1, 0);
+        public static readonly Vector3Df Down = new(0, -1, 0);
 
         /// <summary>
         /// Вектор - вперед.
         /// </summary>
-        public static readonly Vector3Df Forward = new Vector3Df(0, 0, 1);
+        public static readonly Vector3Df Forward = new(0, 0, 1);
 
         /// <summary>
         /// Вектор - назад.
         /// </summary>
-        public static readonly Vector3Df Back = new Vector3Df(0, 0, -1);
+        public static readonly Vector3Df Back = new(0, 0, -1);
 
         /// <summary>
         /// Нулевой вектор.
         /// </summary>
-        public static readonly Vector3Df Zero = new Vector3Df(0, 0, 0);
+        public static readonly Vector3Df Zero = new(0, 0, 0);
         #endregion
 
         #region Static fields
@@ -1000,8 +1000,7 @@ namespace Lotus.Maths
         /// <returns>Вектор, перпендикулярный обоим векторам.</returns>
         public static Vector3Df Cross(in Vector3Df left, in Vector3Df right)
         {
-            Vector3Df result;
-            Cross(in left, in right, out result);
+            Cross(in left, in right, out var result);
             return result;
         }
 
@@ -1465,8 +1464,8 @@ namespace Lotus.Maths
         /// <returns>Статус меньше.</returns>
         public static bool operator <(Vector3Df left, Vector3Df right)
         {
-            return left.X < right.X || left.X == right.X && left.Y < right.Y
-                || left.X == right.X && left.Y == right.Y && left.Z < right.Z;
+            return left.X < right.X || (left.X == right.X && left.Y < right.Y)
+                || (left.X == right.X && left.Y == right.Y && left.Z < right.Z);
         }
 
         /// <summary>
@@ -1477,8 +1476,8 @@ namespace Lotus.Maths
         /// <returns>Статус больше.</returns>
         public static bool operator >(Vector3Df left, Vector3Df right)
         {
-            return left.X > right.X || left.X == right.X && left.Y > right.Y
-                || left.X == right.X && left.Y == right.Y && left.Z > right.Z;
+            return left.X > right.X || (left.X == right.X && left.Y > right.Y)
+                || (left.X == right.X && left.Y == right.Y && left.Z > right.Z);
         }
 
         /// <summary>

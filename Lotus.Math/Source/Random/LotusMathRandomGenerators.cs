@@ -132,7 +132,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Коэффициент перевода в вещественное число.
         /// </summary>
-        private const float TO_SINGLE_COEFF = (float)1.0f / uint.MaxValue;
+        private const float TO_SINGLE_COEFF = 1.0f / uint.MaxValue;
 
         /// <summary>
         /// Array for the state vector.
@@ -142,7 +142,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Magic number.
         /// </summary>
-        private readonly uint[] MAG_01 = new uint[] { 0, MATRIX_A };
+        private readonly uint[] MAG_01 = [0, MATRIX_A];
         #endregion
 
         #region Fields
@@ -400,7 +400,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Коэффициент перевода в вещественное число.
         /// </summary>
-        private const float TO_SINGLE_COEFF = (float)1.0f / uint.MaxValue;
+        private const float TO_SINGLE_COEFF = (1.0f / uint.MaxValue);
         #endregion
 
         #region Fields

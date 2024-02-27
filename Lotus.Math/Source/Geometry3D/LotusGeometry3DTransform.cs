@@ -66,7 +66,7 @@ namespace Lotus.Maths
         /// </summary>
         public Vector3Df Forward
         {
-            get { return _forward; }
+            readonly get { return _forward; }
             set
             {
                 _forward = value;
@@ -78,7 +78,7 @@ namespace Lotus.Maths
         /// </summary>
         public Vector3Df Right
         {
-            get { return _right; }
+            readonly get { return _right; }
             set
             {
                 _right = value;
@@ -90,7 +90,7 @@ namespace Lotus.Maths
         /// </summary>
         public Vector3Df Up
         {
-            get { return _up; }
+            readonly get { return _up; }
             set
             {
                 _up = value;
@@ -106,10 +106,10 @@ namespace Lotus.Maths
             {
                 var transform = new Matrix4Dx4();
 
-                Vector3Df pos = Pivot;
-                float x = -Vector3Df.Dot(in _right, in pos);
-                float y = -Vector3Df.Dot(in _up, in pos);
-                float z = -Vector3Df.Dot(in _forward, in pos);
+                var pos = Pivot;
+                var x = -Vector3Df.Dot(in _right, in pos);
+                var y = -Vector3Df.Dot(in _up, in pos);
+                var z = -Vector3Df.Dot(in _forward, in pos);
 
                 transform.M11 = _right.X;
                 transform.M12 = _up.X;
@@ -263,7 +263,7 @@ namespace Lotus.Maths
         /// <param name="up">Вектор вверх.</param>
         public void LookAt(Vector3Df point, Vector3Df up)
         {
-            Vector3Df direction = point - Pivot;
+            var direction = point - Pivot;
             direction.Normalize();
             _rotation.SetLookRotation(in direction, in up);
 

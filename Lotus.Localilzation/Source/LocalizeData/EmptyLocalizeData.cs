@@ -1,7 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 
 namespace Lotus.Localilzation
 {
@@ -58,9 +58,9 @@ namespace Lotus.Localilzation
 		}
 
 		/// <summary>
-		/// Преобразование к текстовому представлению
+		/// Преобразование к текстовому представлению.
 		/// </summary>
-		/// <returns>Наименование культуры</returns>
+		/// <returns>Наименование культуры.</returns>
 		public override string ToString()
 		{
 			return Culture.NativeName;

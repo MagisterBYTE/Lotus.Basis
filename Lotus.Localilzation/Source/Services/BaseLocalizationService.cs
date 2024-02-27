@@ -41,7 +41,7 @@ namespace Lotus.Localilzation
 		}
 
 		/// <summary>
-		/// Событие изменение культуры
+		/// Событие изменение культуры.
 		/// </summary>
 		public event EventHandler OnCultureChanged;
 
@@ -65,7 +65,7 @@ namespace Lotus.Localilzation
 		/// <returns>Массив локализованных данных.</returns>
 		public ILocalizeData[] GetCultures()
 		{
-			Dictionary<string, ILocalizeData> values = new Dictionary<string, ILocalizeData>();
+			var values = new Dictionary<string, ILocalizeData>();
 			foreach (var i in Cultures)
 			{
 				if (!values.ContainsKey(i.Culture.Name))
@@ -102,16 +102,6 @@ namespace Lotus.Localilzation
 			}
 
 			var cultureData = Cultures.Find(x => cultureName.Contains(x.Culture.Name) || x.Culture.Name.Contains(cultureName));
-
-			if(cultureData != null) 
-			{
-				Console.WriteLine($"Find culture {cultureData.Culture.Name}");
-			}
-			else
-			{
-				Console.WriteLine($"NULL");
-			}
-
 
 			if (cultureData == null)
 			{

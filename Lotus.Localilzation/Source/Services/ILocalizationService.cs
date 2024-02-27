@@ -9,12 +9,12 @@ namespace Lotus.Localilzation
 	public interface ILocalizationService : INotifyPropertyChanged
 	{
 		/// <summary>
-		/// Текущие локализованные данные
+		/// Текущие локализованные данные.
 		/// </summary>
 		ILocalizeData CultureData { get; }
 
 		/// <summary>
-		/// Событие изменение культуры
+		/// Событие изменение культуры.
 		/// </summary>
 		event EventHandler OnCultureChanged;
 
@@ -27,7 +27,7 @@ namespace Lotus.Localilzation
 
 		/// <summary>
 		/// Получение массива локализованных данных которые поддерживает данный сервис локализации 
-		/// и все его дополнительные сервисы
+		/// и все его дополнительные сервисы.
 		/// </summary>
 		/// <returns>Массив локализованных данных.</returns>
 		ILocalizeData[] GetCultures();

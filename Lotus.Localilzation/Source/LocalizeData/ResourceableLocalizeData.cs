@@ -11,25 +11,25 @@ namespace Lotus.Localilzation
 	{
 		#region Static methods
 		/// <summary>
-		/// Чтение данных по локализации со строки в формате JSON
+		/// Чтение данных по локализации со строки в формате JSON.
 		/// </summary>
-		/// <param name="json">Строка в формате JSON</param>
-		/// <returns>Словарь локализованных данных</returns>
+		/// <param name="json">Строка в формате JSON.</param>
+		/// <returns>Словарь локализованных данных.</returns>
 		public static Dictionary<string, string> ReadJsonStringDictionary(string json)
 		{
 			var dict = new Dictionary<string, string>();
 
-			var configs = json.Split('\r', '\n');
+			var configs = json.Split('\r', '\n', StringSplitOptions.RemoveEmptyEntries);
 
 			foreach (var line in configs)
 			{
 				var configLine = line.Trim();
 
-				if (!configLine.Contains(":") || configLine.StartsWith("\\"))
+				if (!configLine.Contains(":") || configLine.StartsWith('\\'))
 					continue;
 
-				var endPos = 0;
-				var key = PickStringToken(configLine, 0, out endPos);
+                int endPos;
+                var key = PickStringToken(configLine, 0, out endPos);
 
 				if (key == null)
 					continue;
@@ -67,7 +67,6 @@ namespace Lotus.Localilzation
 					if (escape == i - 1 && escape != -1)
 					{
 						escape = -1;
-						continue;
 					}
 					else if (begin == -1)
 					{
@@ -149,9 +148,9 @@ namespace Lotus.Localilzation
 		public abstract bool Reload();
 
 		/// <summary>
-		/// Преобразование к текстовому представлению
+		/// Преобразование к текстовому представлению.
 		/// </summary>
-		/// <returns>Наименование культуры</returns>
+		/// <returns>Наименование культуры.</returns>
 		public override string ToString()
 		{
 			return Culture.NativeName;

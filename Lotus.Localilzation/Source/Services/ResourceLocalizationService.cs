@@ -46,7 +46,7 @@ namespace Lotus.Localilzation
 			{
 				foreach (var service in _extraServices)
 				{
-					string value = service[key];
+					var value = service[key];
 
 					if (string.IsNullOrEmpty(value) == false && value != key)
 					{

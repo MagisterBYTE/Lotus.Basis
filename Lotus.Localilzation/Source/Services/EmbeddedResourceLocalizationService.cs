@@ -24,7 +24,7 @@ namespace Lotus.Localilzation
 		{
 			foreach (var fileName in fileNames)
 			{
-				EmbeddedResourceJsonLocalizeData assetCultureData = new EmbeddedResourceJsonLocalizeData(fileName, assemblyName);
+				var assetCultureData = new EmbeddedResourceJsonLocalizeData(fileName, assemblyName);
 
 				Cultures.Add(assetCultureData);
 			}
@@ -43,7 +43,7 @@ namespace Lotus.Localilzation
 			{
 				foreach (var service in _extraServices)
 				{
-					string value = service[key];
+					var value = service[key];
 
 					if (string.IsNullOrEmpty(value) == false && value != key)
 					{

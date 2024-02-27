@@ -1,437 +1,430 @@
-﻿//=====================================================================================================================
-// Проект: Модуль алгоритмов
-// Раздел: Алгоритмы поиска пути
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusAlgorithmPathFinderWave.cs
-*		Простой волновой поиск пути.
-*		Реализация простого волнового алгоритма поиска минимального пути на двухмерной карте.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
-//=====================================================================================================================
-namespace Lotus
+namespace Lotus.Algorithm
 {
-	namespace Algorithm
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup AlgorithmPathFinder
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Волновой поиск пути
-		/// </summary>
-		/// <remarks>
-		/// Реализация простого волнового алгоритма поиска минимального пути на двухмерной карте
-		/// </remarks>
-		//-------------------------------------------------------------------------------------------------------------
-		public class CPathFinderWave : CPathFinder
-		{
-			#region ======================================= ДАННЫЕ ====================================================
-			// Основные параметры
-			protected internal Int32[,] _waveMap;
-			protected internal Int32 _stepWave;
-			#endregion
+    /** \addtogroup AlgorithmPathFinder
+	*@{*/
+    /// <summary>
+    /// Волновой поиск пути.
+    /// </summary>
+    /// <remarks>
+    /// Реализация простого волнового алгоритма поиска минимального пути на двухмерной карте.
+    /// </remarks>
+    public class PathFinderWave : PathFinder
+    {
+        #region Fields
+        // Основные параметры
+        protected internal int[,] _waveMap;
+        protected internal int _stepWave;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Карта отображающая действие алгоритма - распространение волны
-			/// </summary>
-			/// <remarks>
-			/// Значение в ячейки определяет шаг распространения волны
-			/// </remarks>
-			public Int32[,] WaveMap
-			{
-				get { return _waveMap; }
-				set { _waveMap = value; }
-			}
+        #region Properties
+        /// <summary>
+        /// Карта отображающая действие алгоритма - распространение волны.
+        /// </summary>
+        /// <remarks>
+        /// Значение в ячейки определяет шаг распространения волны.
+        /// </remarks>
+        public int[,] WaveMap
+        {
+            get { return _waveMap; }
+            set { _waveMap = value; }
+        }
 
-			/// <summary>
-			/// Количество шагов волны
-			/// </summary>
-			public Int32 StepWave
-			{
-				get { return _stepWave; }
-			}
-			#endregion
+        /// <summary>
+        /// Количество шагов волны.
+        /// </summary>
+        public int StepWave
+        {
+            get { return _stepWave; }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public CPathFinderWave()
-				: base()
-			{
-				_waveMap = new Int32[1, 1];
-			}
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        public PathFinderWave()
+            : base()
+        {
+            _waveMap = new int[1, 1];
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="map">Карта</param>
-			//---------------------------------------------------------------------------------------------------------
-			public CPathFinderWave(ILotusMap2D map)
-				: base(map)
-			{
-				_waveMap = new Int32[map.MapWidth, map.MapHeight];
-			}
-			#endregion
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="map">Карта.</param>
+        public PathFinderWave(ILotusMap2D map)
+            : base(map)
+        {
+            _waveMap = new int[map.MapWidth, map.MapHeight];
+        }
+        #endregion
 
-			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сброс данных о прохождении пути
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public override void ResetWave()
-			{
-				if(_map == null) return;
+        #region Main methods
+        /// <summary>
+        /// Сброс данных о прохождении пути.
+        /// </summary>
+        public override void ResetWave()
+        {
+            if (_map == null)
+            {
+                return;
+            }
 
-				for (var y = 0; y < _map.MapHeight; y++)
-				{
-					for (var x = 0; x < _map.MapWidth; x++)
-					{
-						_waveMap[x, y] = -1;
-					}
-				}
+            for (var y = 0; y < _map.MapHeight; y++)
+            {
+                for (var x = 0; x < _map.MapWidth; x++)
+                {
+                    _waveMap[x, y] = -1;
+                }
+            }
 
-				_isFoundPath = false;
-			}
+            _isFoundPath = false;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Распространение волны по карте
-			/// </summary>
-			/// <returns>Статус нахождение пути</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override Boolean ExpansionWave()
-			{
-				if (_map == null) return false;
+        /// <summary>
+        /// Распространение волны по карте.
+        /// </summary>
+        /// <returns>Статус нахождение пути.</returns>
+        public override bool ExpansionWave()
+        {
+            if (_map == null)
+            {
+                return false;
+            }
 
-				var add = true;
-				Int32 indicate_wall = -2, indicate_empty = -1;
-				_isFoundPath = false;
-				_stepWave = 0;
+            var add = true;
+            int indicate_wall = -2, indicate_empty = -1;
+            _isFoundPath = false;
+            _stepWave = 0;
 
-				// Заполняем карту поиска пути на основе карты препятствий
-				for (var y = 0; y < _map.MapHeight; y++)
-				{
-					for (var x = 0; x < _map.MapWidth; x++)
-					{
-						if (_map.Map[x, y] == XMapCode.BLOCK)
-						{
-							_waveMap[x, y] = indicate_wall; // индикатор стены
-						}
-						else
-						{
-							_waveMap[x, y] = indicate_empty; // индикатор еще не ступали сюда
-						}
-					}
-				}
+            // Заполняем карту поиска пути на основе карты препятствий
+            for (var y = 0; y < _map.MapHeight; y++)
+            {
+                for (var x = 0; x < _map.MapWidth; x++)
+                {
+                    if (_map.Map[x, y] == XMapCode.BLOCK)
+                    {
+                        _waveMap[x, y] = indicate_wall; // индикатор стены
+                    }
+                    else
+                    {
+                        _waveMap[x, y] = indicate_empty; // индикатор еще не ступали сюда
+                    }
+                }
+            }
 
-				// Если стартовая позиция находится на стене
-				if (_waveMap[_start.X, _start.Y] == indicate_wall)
-				{
-					return false;
-				}
+            // Если стартовая позиция находится на стене
+            if (_waveMap[_start.X, _start.Y] == indicate_wall)
+            {
+                return false;
+            }
 
-				// Если финишная позиция находится на стене
-				if (_waveMap[_target.X, _target.Y] == indicate_wall)
-				{
-					return false;
-				}
+            // Если финишная позиция находится на стене
+            if (_waveMap[_target.X, _target.Y] == indicate_wall)
+            {
+                return false;
+            }
 
-				// Начинаем с финиша
-				_waveMap[_target.X, _target.Y] = 0;
+            // Начинаем с финиша
+            _waveMap[_target.X, _target.Y] = 0;
 
-				while (add == true)
-				{
-					add = false;
-					for (var x = 0; x < _map.MapWidth; x++)
-					{
-						for (var y = 0; y < _map.MapHeight; y++)
-						{
-							// Если ячейка свободная
-							if (_waveMap[x, y] == _stepWave)
-							{
-								// Ставим значение шага + 1 в соседние ячейки (если они проходимы)
-								if (x - 1 >= 0 && _waveMap[x - 1, y] == indicate_empty)
-								{
-									_waveMap[x - 1, y] = _stepWave + 1;
-								}
+            while (add == true)
+            {
+                for (var x = 0; x < _map.MapWidth; x++)
+                {
+                    for (var y = 0; y < _map.MapHeight; y++)
+                    {
+                        // Если ячейка свободная
+                        if (_waveMap[x, y] == _stepWave)
+                        {
+                            // Ставим значение шага + 1 в соседние ячейки (если они проходимы)
+                            if (x - 1 >= 0 && _waveMap[x - 1, y] == indicate_empty)
+                            {
+                                _waveMap[x - 1, y] = _stepWave + 1;
+                            }
 
-								if (x + 1 < _map.MapWidth && _waveMap[x + 1, y] == indicate_empty)
-								{
-									_waveMap[x + 1, y] = _stepWave + 1;
-								}
+                            if (x + 1 < _map.MapWidth && _waveMap[x + 1, y] == indicate_empty)
+                            {
+                                _waveMap[x + 1, y] = _stepWave + 1;
+                            }
 
-								if (y - 1 >= 0 && _waveMap[x, y - 1] == indicate_empty)
-								{
-									_waveMap[x, y - 1] = _stepWave + 1;
-								}
-								if (y + 1 < _map.MapHeight && _waveMap[x, y + 1] == indicate_empty)
-								{
-									_waveMap[x, y + 1] = _stepWave + 1;
-								}
-							}
-						}
-					}
+                            if (y - 1 >= 0 && _waveMap[x, y - 1] == indicate_empty)
+                            {
+                                _waveMap[x, y - 1] = _stepWave + 1;
+                            }
+                            if (y + 1 < _map.MapHeight && _waveMap[x, y + 1] == indicate_empty)
+                            {
+                                _waveMap[x, y + 1] = _stepWave + 1;
+                            }
+                        }
+                    }
+                }
 
-					_stepWave++;
+                _stepWave++;
 
-					add = true;
+                add = true;
 
-					// Решение найдено
-					if (_waveMap[_start.X, _start.Y] != indicate_empty)
-					{
-						_isFoundPath = true;
-						add = false;
-					}
+                // Решение найдено
+                if (_waveMap[_start.X, _start.Y] != indicate_empty)
+                {
+                    _isFoundPath = true;
+                    add = false;
+                }
 
-					// Решение не найдено
-					if (_stepWave > _map.MapWidth * _map.MapHeight)
-					{
-						add = false;
-					}
+                // Решение не найдено
+                if (_stepWave > _map.MapWidth * _map.MapHeight)
+                {
+                    add = false;
+                }
 
-					// Если есть лимит и он превышен
-					if (_searchLimit > 0 && _stepWave > _searchLimit)
-					{
-						add = false;
-					}
-				}
+                // Если есть лимит и он превышен
+                if (_searchLimit > 0 && _stepWave > _searchLimit)
+                {
+                    add = false;
+                }
+            }
 
-				return _isFoundPath;
-			}
+            return _isFoundPath;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Построение пути
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public override void BuildPath()
-			{
-				if (_map == null) return;
-				if (_isFoundPath == false) return;
-				_path.Clear();
+        /// <summary>
+        /// Построение пути.
+        /// </summary>
+        public override void BuildPath()
+        {
+            if (_map == null)
+            {
+                return;
+            }
 
-				var minimum = 100000;
-				var found = true;
-				Int32 current_value;
-				var count = 0;
-				var cx = _start.X;
-				var cy = _start.Y;
+            if (_isFoundPath == false)
+            {
+                return;
+            }
 
-				while (found)
-				{
-					if (_waveMap[cx, cy] == 0)
-					{
-						found = false;
-						break;
-					}
+            _path.Clear();
 
-					if (cx - 1 >= 0)
-					{
-						current_value = _waveMap[cx - 1, cy];
-						if (current_value < minimum && current_value > 0)
-						{
-							cx = cx - 1;
-							minimum = current_value;
-							if (!_isAllowDiagonal) goto ortho;
-						}
-					}
+            var minimum = 100000;
+            var found = true;
+            int current_value;
+            var count = 0;
+            var cx = _start.X;
+            var cy = _start.Y;
 
-					if (cx + 1 < _map.MapWidth)
-					{
-						current_value = _waveMap[cx + 1, cy];
-						if (current_value < minimum && current_value > 0)
-						{
-							cx = cx + 1;
-							minimum = current_value;
-							if (!_isAllowDiagonal) goto ortho;
-						}
-					}
+            while (found)
+            {
+                if (_waveMap[cx, cy] == 0)
+                {
+                    break;
+                }
 
-					if (cy - 1 >= 0)
-					{
-						current_value = _waveMap[cx, cy - 1];
-						if (current_value < minimum && current_value > 0)
-						{
-							cy = cy - 1;
-							minimum = current_value;
-							if (!_isAllowDiagonal) goto ortho;
-						}
-					}
+                if (cx - 1 >= 0)
+                {
+                    current_value = _waveMap[cx - 1, cy];
+                    if (current_value < minimum && current_value > 0)
+                    {
+                        cx--;
+                        minimum = current_value;
+                        if (!_isAllowDiagonal)
+                        {
+                            goto ortho;
+                        }
+                    }
+                }
 
-					if (cy + 1 < _map.MapHeight)
-					{
-						current_value = _waveMap[cx, cy + 1];
-						if (current_value < minimum && current_value > 0)
-						{
-							cy = cy + 1;
-							minimum = current_value;
-							if (!_isAllowDiagonal) goto ortho;
-						}
-					}
+                if (cx + 1 < _map.MapWidth)
+                {
+                    current_value = _waveMap[cx + 1, cy];
+                    if (current_value < minimum && current_value > 0)
+                    {
+                        cx++;
+                        minimum = current_value;
+                        if (!_isAllowDiagonal)
+                        {
+                            goto ortho;
+                        }
+                    }
+                }
 
-				ortho:;
-					_path.AddPathPoint(cx, cy, minimum);
+                if (cy - 1 >= 0)
+                {
+                    current_value = _waveMap[cx, cy - 1];
+                    if (current_value < minimum && current_value > 0)
+                    {
+                        cy--;
+                        minimum = current_value;
+                        if (!_isAllowDiagonal)
+                        {
+                            goto ortho;
+                        }
+                    }
+                }
 
-					count++;
+                if (cy + 1 < _map.MapHeight)
+                {
+                    current_value = _waveMap[cx, cy + 1];
+                    if (current_value < minimum && current_value > 0)
+                    {
+                        cy++;
+                        minimum = current_value;
+                        if (!_isAllowDiagonal)
+                        {
+                            goto ortho;
+                        }
+                    }
+                }
 
-					if (count > _map.MapHeight * _map.MapWidth)
-					{
-						break;
-					}
-				}
-			}
+            ortho:
+                _path.AddPathPoint(cx, cy, minimum);
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Подготовка данных к запуску волны. Применяется когда надо отобразить распространение волны по шагам
-			/// </summary>
-			//---------------------------------------------------------------------------------------------------------
-			public override void PreparationsWaveOnStep()
-			{
-				if (_map == null) return;
+                count++;
 
-				Int32 indicate_wall = -2, indicate_empty = -1;
+                if (count > _map.MapHeight * _map.MapWidth)
+                {
+                    break;
+                }
+            }
+        }
 
-				// Заполняем карту поиска пути на основе карты препятствий
-				for (var y = 0; y < _map.MapHeight; y++)
-				{
-					for (var x = 0; x < _map.MapWidth; x++)
-					{
-						if (_map.Map[x, y] == XMapCode.BLOCK)
-						{
-							_waveMap[x, y] = indicate_wall; // индикатор стены
-						}
-						else
-						{
-							_waveMap[x, y] = indicate_empty; // индикатор еще не ступали сюда
-						}
-					}
-				}
+        /// <summary>
+        /// Подготовка данных к запуску волны. Применяется когда надо отобразить распространение волны по шагам.
+        /// </summary>
+        public override void PreparationsWaveOnStep()
+        {
+            if (_map == null)
+            {
+                return;
+            }
 
-				// Если стартовая позиция находится на стене
-				if (_waveMap[_start.X, _start.Y] == indicate_wall)
-				{
-					return;
-				}
+            int indicate_wall = -2, indicate_empty = -1;
 
-				// Если финишная позиция находится на стене
-				if (_waveMap[_target.X, _target.Y] == indicate_wall)
-				{
-					return;
-				}
+            // Заполняем карту поиска пути на основе карты препятствий
+            for (var y = 0; y < _map.MapHeight; y++)
+            {
+                for (var x = 0; x < _map.MapWidth; x++)
+                {
+                    if (_map.Map[x, y] == XMapCode.BLOCK)
+                    {
+                        _waveMap[x, y] = indicate_wall; // индикатор стены
+                    }
+                    else
+                    {
+                        _waveMap[x, y] = indicate_empty; // индикатор еще не ступали сюда
+                    }
+                }
+            }
 
-				// Начинаем с финиша
-				_waveMap[_target.X, _target.Y] = 0;
-				_isFoundPath = false;
-				_stepWave = 0;
-			}
+            // Если стартовая позиция находится на стене
+            if (_waveMap[_start.X, _start.Y] == indicate_wall)
+            {
+                return;
+            }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Распространение волны по карте по шагово
-			/// </summary>
-			/// <remarks>
-			/// Метод должен быть вызван в цикле до достижения окончания поиска
-			/// </remarks>
-			/// <returns>True, если решение еще не найдено и False если решение найдено или превышен лимит</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override Boolean ExpansionWaveOnStep()
-			{
-				if (_map == null) return false;
+            // Если финишная позиция находится на стене
+            if (_waveMap[_target.X, _target.Y] == indicate_wall)
+            {
+                return;
+            }
 
-				var indicate_empty = -1;
+            // Начинаем с финиша
+            _waveMap[_target.X, _target.Y] = 0;
+            _isFoundPath = false;
+            _stepWave = 0;
+        }
 
-				for (var x = 0; x < _map.MapWidth; x++)
-				{
-					for (var y = 0; y < _map.MapHeight; y++)
-					{
-						// Если ячейка свободная
-						if (_waveMap[x, y] == _stepWave)
-						{
-							// Ставим значение шага + 1 в соседние ячейки (если они проходимы)
-							if (x - 1 >= 0 && _waveMap[x - 1, y] == indicate_empty)
-							{
-								_waveMap[x - 1, y] = _stepWave + 1;
-							}
+        /// <summary>
+        /// Распространение волны по карте по шагово.
+        /// </summary>
+        /// <remarks>
+        /// Метод должен быть вызван в цикле до достижения окончания поиска.
+        /// </remarks>
+        /// <returns>True, если решение еще не найдено и False если решение найдено или превышен лимит.</returns>
+        public override bool ExpansionWaveOnStep()
+        {
+            if (_map == null)
+            {
+                return false;
+            }
 
-							if (x + 1 < _map.MapWidth && _waveMap[x + 1, y] == indicate_empty)
-							{
-								_waveMap[x + 1, y] = _stepWave + 1;
-							}
+            var indicate_empty = -1;
 
-							if (y - 1 >= 0 && _waveMap[x, y - 1] == indicate_empty)
-							{
-								_waveMap[x, y - 1] = _stepWave + 1;
-							}
-							if (y + 1 < _map.MapHeight && _waveMap[x, y + 1] == indicate_empty)
-							{
-								_waveMap[x, y + 1] = _stepWave + 1;
-							}
-						}
-					}
-				}
+            for (var x = 0; x < _map.MapWidth; x++)
+            {
+                for (var y = 0; y < _map.MapHeight; y++)
+                {
+                    // Если ячейка свободная
+                    if (_waveMap[x, y] == _stepWave)
+                    {
+                        // Ставим значение шага + 1 в соседние ячейки (если они проходимы)
+                        if (x - 1 >= 0 && _waveMap[x - 1, y] == indicate_empty)
+                        {
+                            _waveMap[x - 1, y] = _stepWave + 1;
+                        }
 
-				_stepWave++;
+                        if (x + 1 < _map.MapWidth && _waveMap[x + 1, y] == indicate_empty)
+                        {
+                            _waveMap[x + 1, y] = _stepWave + 1;
+                        }
 
-				// Решение найдено
-				if (_waveMap[_start.X, _start.Y] != indicate_empty)
-				{
-					_isFoundPath = true;
-					return false;
-				}
+                        if (y - 1 >= 0 && _waveMap[x, y - 1] == indicate_empty)
+                        {
+                            _waveMap[x, y - 1] = _stepWave + 1;
+                        }
+                        if (y + 1 < _map.MapHeight && _waveMap[x, y + 1] == indicate_empty)
+                        {
+                            _waveMap[x, y + 1] = _stepWave + 1;
+                        }
+                    }
+                }
+            }
 
-				// Решение не найдено
-				if (_stepWave > _map.MapWidth * _map.MapHeight)
-				{
-					return false;
-				}
+            _stepWave++;
 
-				// Если есть лимит и он превышен
-				if (_searchLimit > 0 && _stepWave > _searchLimit)
-				{
-					return false;
-				}
+            // Решение найдено
+            if (_waveMap[_start.X, _start.Y] != indicate_empty)
+            {
+                _isFoundPath = true;
+                return false;
+            }
 
-				return true;
-			}
+            // Решение не найдено
+            if (_stepWave > _map.MapWidth * _map.MapHeight)
+            {
+                return false;
+            }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Заполнение данных распространения волны действия алгоритма
-			/// </summary>
-			/// <remarks>
-			/// Метод в основном служебный, предназначен для демонстрации действия алгоритма
-			/// </remarks>
-			/// <param name="wave">Карта для отображения волны действия алгоритма</param>
-			//---------------------------------------------------------------------------------------------------------
-			public override void SetWave(Int32[,] wave)
-			{
-				if (_map == null) return;
+            // Если есть лимит и он превышен
+            if (_searchLimit > 0 && _stepWave > _searchLimit)
+            {
+                return false;
+            }
 
-				for (var ix = 0; ix < _map.MapWidth; ix++)
-				{
-					for (var iy = 0; iy < _map.MapHeight; iy++)
-					{
-						wave[ix, iy] = _waveMap[ix, iy];
-					}
-				}
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+            return true;
+        }
+
+        /// <summary>
+        /// Заполнение данных распространения волны действия алгоритма.
+        /// </summary>
+        /// <remarks>
+        /// Метод в основном служебный, предназначен для демонстрации действия алгоритма.
+        /// </remarks>
+        /// <param name="wave">Карта для отображения волны действия алгоритма.</param>
+        public override void SetWave(int[,] wave)
+        {
+            if (_map == null)
+            {
+                return;
+            }
+
+            for (var ix = 0; ix < _map.MapWidth; ix++)
+            {
+                for (var iy = 0; iy < _map.MapHeight; iy++)
+                {
+                    wave[ix, iy] = _waveMap[ix, iy];
+                }
+            }
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

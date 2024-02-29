@@ -1,307 +1,253 @@
-﻿//=====================================================================================================================
-// Проект: Модуль единиц измерения
-// Раздел: Общие данные
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusUnitMeasurementCommon.cs
-*		Общие типы и структуры данных единиц измерения.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.UnitMeasurement
 {
-	namespace UnitMeasurement
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup UnitMeasurement
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Интерфейс для определения величины поддерживающую определённую единицу измерения
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public interface ILotusUnitValue
-		{
-			/// <summary>
-			/// Значение величины
-			/// </summary>
-			Double Value { get; set; }
+    /** \addtogroup UnitMeasurement
+	*@{*/
+    /// <summary>
+    /// Интерфейс для определения величины поддерживающую определённую единицу измерения.
+    /// </summary>
+    public interface ILotusUnitValue
+    {
+        /// <summary>
+        /// Значение величины.
+        /// </summary>
+        double Value { get; set; }
 
-			/// <summary>
-			/// Единица измерения
-			/// </summary>
-			Enum UnitType { get; }
-		}
+        /// <summary>
+        /// Единица измерения.
+        /// </summary>
+        Enum UnitType { get; }
+    }
 
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Интерфейс для определения величины поддерживающую определённую единицу измерения
-		/// </summary>
-		/// <typeparam name="TUnit">Тип единицы измерения</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		public interface ILotusUnitValue<TUnit> : ILotusUnitValue where TUnit : Enum
-		{
-			/// <summary>
-			/// Единица измерения
-			/// </summary>
-			new TUnit UnitType { get; }
-		}
+    /// <summary>
+    /// Интерфейс для определения величины поддерживающую определённую единицу измерения.
+    /// </summary>
+    /// <typeparam name="TUnit">Тип единицы измерения.</typeparam>
+    public interface ILotusUnitValue<out TUnit> : ILotusUnitValue where TUnit : Enum
+    {
+        /// <summary>
+        /// Единица измерения.
+        /// </summary>
+        new TUnit UnitType { get; }
+    }
 
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Класс определяющий величину и соответствующую определённую единицу измерения
-		/// </summary>
-		/// <typeparam name="TUnit">Тип единицы измерения</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public struct TUnitValue<TUnit> : ILotusUnitValue<TUnit>, IEquatable<TUnitValue<TUnit>>, 
-			IComparable<TUnitValue<TUnit>>, ICloneable where TUnit : Enum
-		{
-			#region ======================================= СТАТИЧЕСКИЕ МЕТОДЫ ========================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Десереализация объекта из строки
-			/// </summary>
-			/// <param name="data">Строка данных</param>
-			/// <returns>Объект</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static TUnitValue<TUnit> DeserializeFromString(String data)
-			{
-				if(data.Contains(','))
-				{
-					data = data.Replace(',', '.');
-				}
+    /// <summary>
+    /// Класс определяющий величину и соответствующую определённую единицу измерения.
+    /// </summary>
+    /// <typeparam name="TUnit">Тип единицы измерения.</typeparam>
+    [Serializable]
+    public struct TUnitValue<TUnit> : ILotusUnitValue<TUnit>, IEquatable<TUnitValue<TUnit>>,
+        IComparable<TUnitValue<TUnit>>, ICloneable where TUnit : Enum
+    {
+        #region Static methods
+        /// <summary>
+        /// Десереализация объекта из строки.
+        /// </summary>
+        /// <param name="data">Строка данных.</param>
+        /// <returns>Объект.</returns>
+        public static TUnitValue<TUnit> DeserializeFromString(string data)
+        {
+            if (data.Contains(','))
+            {
+                data = data.Replace(',', '.');
+            }
 
-				Double result = 0;
-				if(Double.TryParse(data, out result))
-				{
-				}
+            if (double.TryParse(data, out var result))
+            {
+            }
 
-				var value = new TUnitValue<TUnit>(result);
-				return value;
-			}
-			#endregion
+            var value = new TUnitValue<TUnit>(result);
+            return value;
+        }
+        #endregion
 
-			#region ======================================= ДАННЫЕ ====================================================
+        #region Fields
 #if UNITY_2017_1_OR_NEWER
-			[UnityEngine.SerializeField]
+		[UnityEngine.SerializeField]
 #endif
-			internal Double _value;
+        internal double _value;
 #if UNITY_2017_1_OR_NEWER
-			[UnityEngine.SerializeField]
+		[UnityEngine.SerializeField]
 #endif
-			internal TUnit _unitType;
-			#endregion
+        internal TUnit _unitType;
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Значение
-			/// </summary>
-			public Double Value
-			{
-				readonly get { return _value; }
-				set
-				{
-					_value = value;
-				}
-			}
+        #region Properties
+        /// <summary>
+        /// Значение.
+        /// </summary>
+        public double Value
+        {
+            readonly get { return _value; }
+            set
+            {
+                _value = value;
+            }
+        }
 
-			/// <summary>
-			/// Единица измерения
-			/// </summary>
-			public readonly TUnit UnitType
-			{
-				get { return _unitType; }
-			}
+        /// <summary>
+        /// Единица измерения.
+        /// </summary>
+        public readonly TUnit UnitType
+        {
+            get { return _unitType; }
+        }
 
-			/// <summary>
-			/// Единица измерения
-			/// </summary>
-			readonly Enum ILotusUnitValue.UnitType
-			{
-				get
-				{
-					return _unitType;
-				}
-			}
-			#endregion
+        /// <summary>
+        /// Единица измерения.
+        /// </summary>
+        readonly Enum ILotusUnitValue.UnitType
+        {
+            get
+            {
+                return _unitType;
+            }
+        }
+        #endregion
 
-			#region ======================================= КОНСТРУКТОРЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="value">Значение</param>
-			//---------------------------------------------------------------------------------------------------------
-			public TUnitValue(Double value)
-			{
-				_value = value;
-				_unitType = (TUnit)(System.Object)1;
-			}
+        #region Constructors
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        public TUnitValue(double value)
+        {
+            _value = value;
+            _unitType = (TUnit)(object)1;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="value">Значение</param>
-			/// <param name="unitType">Единица измерения</param>
-			//---------------------------------------------------------------------------------------------------------
-			public TUnitValue(Double value, TUnit unitType)
-			{
-				_value = value;
-				_unitType = unitType;
-			}
-			#endregion
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <param name="unitType">Единица измерения.</param>
+        public TUnitValue(double value, TUnit unitType)
+        {
+            _value = value;
+            _unitType = unitType;
+        }
+        #endregion
 
-			#region ======================================= СИСТЕМНЫЕ МЕТОДЫ ==========================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Проверяет равен ли текущий объект другому объекту того же типа
-			/// </summary>
-			/// <param name="obj">Сравниваемый объект</param>
-			/// <returns>Статус равенства объектов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override readonly Boolean Equals(System.Object? obj)
-			{
-				if (obj is TUnitValue<TUnit> value)
-				{
-					return Equals(value);
-				}
-				return base.Equals(obj);
-			}
+        #region System methods
+        /// <summary>
+        /// Проверяет равен ли текущий объект другому объекту того же типа.
+        /// </summary>
+        /// <param name="obj">Сравниваемый объект.</param>
+        /// <returns>Статус равенства объектов.</returns>
+        public override readonly bool Equals(object? obj)
+        {
+            if (obj is TUnitValue<TUnit> value)
+            {
+                return Equals(value);
+            }
+            return base.Equals(obj);
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Проверка равенства объектов по значению
-			/// </summary>
-			/// <param name="other">Сравниваемый объект</param>
-			/// <returns>Статус равенства объектов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public readonly Boolean Equals(TUnitValue<TUnit> other)
-			{
-				return _value == other._value;
-			}
+        /// <summary>
+        /// Проверка равенства объектов по значению.
+        /// </summary>
+        /// <param name="other">Сравниваемый объект.</param>
+        /// <returns>Статус равенства объектов.</returns>
+        public readonly bool Equals(TUnitValue<TUnit> other)
+        {
+            return _value == other._value;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение объектов для упорядочивания
-			/// </summary>
-			/// <param name="other">Сравниваемый объект</param>
-			/// <returns>Статус сравнения объектов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public readonly Int32 CompareTo(TUnitValue<TUnit> other)
-			{
-				return _value.CompareTo(other._value);
-			}
+        /// <summary>
+        /// Сравнение объектов для упорядочивания.
+        /// </summary>
+        /// <param name="other">Сравниваемый объект.</param>
+        /// <returns>Статус сравнения объектов.</returns>
+        public readonly int CompareTo(TUnitValue<TUnit> other)
+        {
+            return _value.CompareTo(other._value);
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Получение хеш-кода объекта
-			/// </summary>
-			/// <returns>Хеш-код объекта</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override readonly Int32 GetHashCode()
-			{
-				return _value.GetHashCode() ^ base.GetHashCode();
-			}
+        /// <summary>
+        /// Получение хеш-кода объекта.
+        /// </summary>
+        /// <returns>Хеш-код объекта.</returns>
+        public override readonly int GetHashCode()
+        {
+            return _value.GetHashCode() ^ base.GetHashCode();
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Полное копирование объекта
-			/// </summary>
-			/// <returns>Копия объекта</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public readonly System.Object Clone()
-			{
-				return MemberwiseClone();
-			}
+        /// <summary>
+        /// Полное копирование объекта.
+        /// </summary>
+        /// <returns>Копия объекта.</returns>
+        public readonly object Clone()
+        {
+            return MemberwiseClone();
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование к текстовому представлению
-			/// </summary>
-			/// <returns>Текстовое представление объекта</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override readonly String ToString()
-			{
-				return _value.ToString();
-			}
-			#endregion
+        /// <summary>
+        /// Преобразование к текстовому представлению.
+        /// </summary>
+        /// <returns>Текстовое представление объекта.</returns>
+        public override readonly string ToString()
+        {
+            return _value.ToString();
+        }
+        #endregion
 
-			#region ======================================= ОПЕРАТОРЫ =================================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение объектов на равенство
-			/// </summary>
-			/// <param name="left">Первый объект</param>
-			/// <param name="right">Второй объект</param>
-			/// <returns>Статус равенства</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean operator ==(TUnitValue<TUnit> left, TUnitValue<TUnit> right)
-			{
-				return left.Equals(right);
-			}
+        #region Operators
+        /// <summary>
+        /// Сравнение объектов на равенство.
+        /// </summary>
+        /// <param name="left">Первый объект.</param>
+        /// <param name="right">Второй объект.</param>
+        /// <returns>Статус равенства.</returns>
+        public static bool operator ==(TUnitValue<TUnit> left, TUnitValue<TUnit> right)
+        {
+            return left.Equals(right);
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение объектов на неравенство
-			/// </summary>
-			/// <param name="left">Первый объект</param>
-			/// <param name="right">Второй объект</param>
-			/// <returns>Статус неравенство</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static Boolean operator !=(TUnitValue<TUnit> left, TUnitValue<TUnit> right)
-			{
-				return !(left == right);
-			}
-			#endregion
+        /// <summary>
+        /// Сравнение объектов на неравенство.
+        /// </summary>
+        /// <param name="left">Первый объект.</param>
+        /// <param name="right">Второй объект.</param>
+        /// <returns>Статус неравенство.</returns>
+        public static bool operator !=(TUnitValue<TUnit> left, TUnitValue<TUnit> right)
+        {
+            return !(left == right);
+        }
+        #endregion
 
-			#region ======================================= ОПЕРАТОРЫ ПРЕОБРАЗОВАНИЯ ==================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="System.Double"/>
-			/// </summary>
-			/// <param name="value">Значение</param>
-			/// <returns>Объект <see cref="System.Double"/></returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static implicit operator Double(TUnitValue<TUnit> value)
-			{
-				return value._value;
-			}
+        #region Operators conversion
+        /// <summary>
+        /// Неявное преобразование в объект типа <see cref="double"/>.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <returns>Объект <see cref="double"/>.</returns>
+        public static implicit operator double(TUnitValue<TUnit> value)
+        {
+            return value._value;
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="TUnitValue{TUnit}"/>
-			/// </summary>
-			/// <param name="value">Значение</param>
-			/// <returns>Объект <see cref="TUnitValue{TUnit}"/></returns>
-			//---------------------------------------------------------------------------------------------------------
-			public static implicit operator TUnitValue<TUnit>(Double value)
-			{
-				return new TUnitValue<TUnit>(value);
-			}
-			#endregion
+        /// <summary>
+        /// Неявное преобразование в объект типа <see cref="TUnitValue{TUnit}"/>.
+        /// </summary>
+        /// <param name="value">Значение.</param>
+        /// <returns>Объект <see cref="TUnitValue{TUnit}"/>.</returns>
+        public static implicit operator TUnitValue<TUnit>(double value)
+        {
+            return new TUnitValue<TUnit>(value);
+        }
+        #endregion
 
-			#region ======================================= ОБЩИЕ МЕТОДЫ ==============================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сериализация объекта в строку
-			/// </summary>
-			/// <returns>Строка данных</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public readonly String SerializeToString()
-			{
-				return _value.ToString();
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        #region Main methods
+        /// <summary>
+        /// Сериализация объекта в строку.
+        /// </summary>
+        /// <returns>Строка данных.</returns>
+        public readonly string SerializeToString()
+        {
+            return _value.ToString();
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

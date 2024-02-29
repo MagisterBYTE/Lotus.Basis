@@ -34,39 +34,39 @@ using System.Collections.Generic;
 
 namespace Poly2Tri.Triangulation.Util
 {
-    public class PointGenerator
-    {
-        static readonly Random _rng = new Random();
+	public class PointGenerator
+	{
+		static readonly Random _rng = new();
 
 
-        public static List<TriangulationPoint> UniformDistribution(int n, double scale)
-        {
-            List<TriangulationPoint> points = new List<TriangulationPoint>();
-            for (int i = 0; i < n; i++)
-            {
-                points.Add(new TriangulationPoint(scale * (0.5 - _rng.NextDouble()), scale * (0.5 - _rng.NextDouble())));
-            }
+		public static List<TriangulationPoint> UniformDistribution(int n, double scale)
+		{
+			var points = new List<TriangulationPoint>();
+			for (var i = 0; i < n; i++)
+			{
+				points.Add(new TriangulationPoint(scale * (0.5 - _rng.NextDouble()), scale * (0.5 - _rng.NextDouble())));
+			}
 
-            return points;
-        }
+			return points;
+		}
 
 
-        public static List<TriangulationPoint> UniformGrid(int n, double scale)
-        {
-            double size = scale / n;
-            double halfScale = 0.5 * scale;
+		public static List<TriangulationPoint> UniformGrid(int n, double scale)
+		{
+			var size = scale / n;
+			var halfScale = 0.5 * scale;
 
-            List<TriangulationPoint> points = new List<TriangulationPoint>();
-            for (int i = 0; i < n + 1; i++)
-            {
-                double x = halfScale - i * size;
-                for (int j = 0; j < n + 1; j++)
-                {
-                    points.Add(new TriangulationPoint(x, halfScale - j * size));
-                }
-            }
+			var points = new List<TriangulationPoint>();
+			for (var i = 0; i < n + 1; i++)
+			{
+				var x = halfScale - (i * size);
+				for (var j = 0; j < n + 1; j++)
+				{
+					points.Add(new TriangulationPoint(x, halfScale - (j * size)));
+				}
+			}
 
-            return points;
-        }
-    }
+			return points;
+		}
+	}
 }

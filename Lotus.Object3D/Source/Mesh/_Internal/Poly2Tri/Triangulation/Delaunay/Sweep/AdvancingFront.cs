@@ -42,126 +42,126 @@ using System.Text;
 
 namespace Poly2Tri.Triangulation.Delaunay.Sweep
 {
-    /**
+	/**
      * @author Thomas Åhlen (thahlen@gmail.com)
      */
-    public class AdvancingFront
-    {
-        public AdvancingFrontNode Head;
-        public AdvancingFrontNode Tail;
-        private AdvancingFrontNode _search;
+	public class AdvancingFront
+	{
+		public AdvancingFrontNode Head;
+		public AdvancingFrontNode Tail;
+		private AdvancingFrontNode _search;
 
-        public AdvancingFront(AdvancingFrontNode head, AdvancingFrontNode tail)
-        {
-            Head = head;
-            Tail = tail;
-            _search = head;
-        }
+		public AdvancingFront(AdvancingFrontNode head, AdvancingFrontNode tail)
+		{
+			Head = head;
+			Tail = tail;
+			_search = head;
+		}
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            AdvancingFrontNode node = Head;
-            while (node != Tail)
-            {
-                sb.Append(node.Point.X).Append("->");
-                node = node.Next;
-            }
-            sb.Append(Tail.Point.X);
-            return sb.ToString();
-        }
+		public override string ToString()
+		{
+			var sb = new StringBuilder();
+			var node = Head;
+			while (node != Tail)
+			{
+				sb.Append(node.Point.X).Append("->");
+				node = node.Next;
+			}
+			sb.Append(Tail.Point.X);
+			return sb.ToString();
+		}
 
-        /// <summary>
-        /// We use a balancing tree to locate a node smaller or equal to given key value (in theory)
-        /// </summary>
-        public AdvancingFrontNode LocateNode(TriangulationPoint point)
-        {
-            return LocateNode(point.X);
-        }
+		/// <summary>
+		/// We use a balancing tree to locate a node smaller or equal to given key value (in theory)
+		/// </summary>
+		public AdvancingFrontNode LocateNode(TriangulationPoint point)
+		{
+			return LocateNode(point.X);
+		}
 
-        private AdvancingFrontNode LocateNode(double x)
-        {
-            AdvancingFrontNode node = _search;
-            if (x < node.Value)
-            {
-                while ((node = node.Prev) != null)
-                {
-                    if (x >= node.Value)
-                    {
-                        _search = node;
-                        return node;
-                    }
-                }
-            }
-            else
-            {
-                while ((node = node.Next) != null)
-                {
-                    if (x < node.Value)
-                    {
-                        _search = node.Prev;
-                        return node.Prev;
-                    }
-                }
-            }
+		private AdvancingFrontNode LocateNode(double x)
+		{
+			var node = _search;
+			if (x < node.Value)
+			{
+				while ((node = node.Prev) != null)
+				{
+					if (x >= node.Value)
+					{
+						_search = node;
+						return node;
+					}
+				}
+			}
+			else
+			{
+				while ((node = node.Next) != null)
+				{
+					if (x < node.Value)
+					{
+						_search = node.Prev;
+						return node.Prev;
+					}
+				}
+			}
 
-            return null;
-        }
+			return null;
+		}
 
 
-        /// <summary>
-        /// This implementation will use simple node traversal algorithm to find a point on the front
-        /// </summary>
-        public AdvancingFrontNode LocatePoint(TriangulationPoint point)
-        {
-            double px = point.X;
-            AdvancingFrontNode node = _search;
-            double nx = node.Point.X;
+		/// <summary>
+		/// This implementation will use simple node traversal algorithm to find a point on the front
+		/// </summary>
+		public AdvancingFrontNode LocatePoint(TriangulationPoint point)
+		{
+			var px = point.X;
+			var node = _search;
+			var nx = node.Point.X;
 
-// ReSharper disable CompareOfFloatsByEqualityOperator
-            if (px == nx)
-// ReSharper restore CompareOfFloatsByEqualityOperator
-            {
-                if (!point.Equals(node.Point))
-                {
-                    // We might have two nodes with same x value for a short time
-                    if (point.Equals(node.Prev.Point))
-                    {
-                        node = node.Prev;
-                    }
-                    else if (point.Equals(node.Next.Point))
-                    {
-                        node = node.Next;
-                    }
-                    else
-                    {
-                        throw new Exception("Failed to find Node for given afront point");
-                    }
-                }
-            }
-            else if (px < nx)
-            {
-                while ((node = node.Prev) != null)
-                {
-                    if (point.Equals(node.Point))
-                    {
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                while ((node = node.Next) != null)
-                {
-                    if (point.Equals(node.Point))
-                    {
-                        break;
-                    }
-                }
-            }
-            _search = node;
+			// ReSharper disable CompareOfFloatsByEqualityOperator
+			if (px == nx)
+			// ReSharper restore CompareOfFloatsByEqualityOperator
+			{
+				if (!point.Equals(node.Point))
+				{
+					// We might have two nodes with same x value for a short time
+					if (point.Equals(node.Prev.Point))
+					{
+						node = node.Prev;
+					}
+					else if (point.Equals(node.Next.Point))
+					{
+						node = node.Next;
+					}
+					else
+					{
+						throw new Exception("Failed to find Node for given afront point");
+					}
+				}
+			}
+			else if (px < nx)
+			{
+				while ((node = node.Prev) != null)
+				{
+					if (point.Equals(node.Point))
+					{
+						break;
+					}
+				}
+			}
+			else
+			{
+				while ((node = node.Next) != null)
+				{
+					if (point.Equals(node.Point))
+					{
+						break;
+					}
+				}
+			}
+			_search = node;
 
-            return node;
-        }
-    }
+			return node;
+		}
+	}
 }

@@ -29,47 +29,47 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
 using Poly2Tri.Triangulation;
 using Poly2Tri.Triangulation.Delaunay.Sweep;
 using Poly2Tri.Triangulation.Polygon;
+using System.Collections.Generic;
 
 namespace Poly2Tri
 {
-    public static class P2T
-    {
-        private const TriangulationAlgorithm DEFAULT_ALGORITHM = TriangulationAlgorithm.DTSweep;
+	public static class P2T
+	{
+		private const TriangulationAlgorithm DEFAULT_ALGORITHM = TriangulationAlgorithm.DTSweep;
 
-        public static void Triangulate(IEnumerable<Polygon> polygons)
-        {
-            foreach (var p in polygons)
-                Triangulate(p);
-        }
+		public static void Triangulate(IEnumerable<Polygon> polygons)
+		{
+			foreach (var p in polygons)
+				Triangulate(p);
+		}
 
-        private static TriangulationContext CreateContext(TriangulationAlgorithm algorithm)
-        {
-            switch (algorithm)
-            {
-                default:
-                    return new DTSweepContext();
-            }
-        }
+		private static TriangulationContext CreateContext(TriangulationAlgorithm algorithm)
+		{
+			switch (algorithm)
+			{
+				default:
+					return new DTSweepContext();
+			}
+		}
 
-        public static void Triangulate(ITriangulatable t, TriangulationAlgorithm algorithm = DEFAULT_ALGORITHM)
-        {
-            TriangulationContext tcx = CreateContext(algorithm);
-            tcx.PrepareTriangulation(t);
-            Triangulate(tcx);
-        }
+		public static void Triangulate(ITriangulatable t, TriangulationAlgorithm algorithm = DEFAULT_ALGORITHM)
+		{
+			var tcx = CreateContext(algorithm);
+			tcx.PrepareTriangulation(t);
+			Triangulate(tcx);
+		}
 
-        private static void Triangulate(TriangulationContext tcx)
-        {
-            switch (tcx.Algorithm)
-            {
-                default:
-                    DTSweep.Triangulate((DTSweepContext)tcx);
-                    break;
-            }
-        }
-    }
+		private static void Triangulate(TriangulationContext tcx)
+		{
+			switch (tcx.Algorithm)
+			{
+				default:
+					DTSweep.Triangulate((DTSweepContext)tcx);
+					break;
+			}
+		}
+	}
 }

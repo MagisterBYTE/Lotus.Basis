@@ -29,156 +29,156 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+using Poly2Tri.Triangulation.Delaunay.Sweep;
+using Poly2Tri.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Poly2Tri.Triangulation.Delaunay.Sweep;
-using Poly2Tri.Utility;
 
 #nullable disable
 
 namespace Poly2Tri.Triangulation
 {
 
-    public class TriangulationPoint : Point2D, IEquatable<TriangulationPoint>
-    {
-        public const double VERTEX_CODE_DEFAULT_PRECISION = 3.0;
+	public class TriangulationPoint : Point2D, IEquatable<TriangulationPoint>
+	{
+		public const double VERTEX_CODE_DEFAULT_PRECISION = 3.0;
 
-        public override double X
-        {
-            get { return base.X; }
-            set
-            {
-// ReSharper disable CompareOfFloatsByEqualityOperator
-                if (value != base.X)
-// ReSharper restore CompareOfFloatsByEqualityOperator
-                {
-                    base.X = value;
-                    VertexCode = CreateVertexCode(base.X, base.Y, VERTEX_CODE_DEFAULT_PRECISION);
+		public override double X
+		{
+			get { return base.X; }
+			set
+			{
+				// ReSharper disable CompareOfFloatsByEqualityOperator
+				if (value != base.X)
+				// ReSharper restore CompareOfFloatsByEqualityOperator
+				{
+					base.X = value;
+					VertexCode = CreateVertexCode(base.X, base.Y, VERTEX_CODE_DEFAULT_PRECISION);
 
-                    // Technically, we should change the ConstraintCodes of any edges that contain this point.
-                    // We don't for 2 reasons:
-                    // 1) Currently the only time we care about Vertex/Constraint Codes is when entering data in the point-set.
-                    //    Once the data is being used by the algorithm, the point locations are (currently) not modified.
-                    // 2) Since this Point's Edge list will only contain SOME of the edges that this point is a part of, 
-                    //    there currently isn't a way to (easily) get any edges that contain this point but are not in this
-                    //    point's edge list.
-                }
-            }
-        }
-        public override double Y
-        {
-            get { return base.Y; }
-            set
-            {
-// ReSharper disable CompareOfFloatsByEqualityOperator
-                if (value != base.Y)
-// ReSharper restore CompareOfFloatsByEqualityOperator
-                {
-                    base.Y = value;
-                    VertexCode = CreateVertexCode(base.X, base.Y, VERTEX_CODE_DEFAULT_PRECISION);
+					// Technically, we should change the ConstraintCodes of any edges that contain this point.
+					// We don't for 2 reasons:
+					// 1) Currently the only time we care about Vertex/Constraint Codes is when entering data in the point-set.
+					//    Once the data is being used by the algorithm, the point locations are (currently) not modified.
+					// 2) Since this Point's Edge list will only contain SOME of the edges that this point is a part of, 
+					//    there currently isn't a way to (easily) get any edges that contain this point but are not in this
+					//    point's edge list.
+				}
+			}
+		}
+		public override double Y
+		{
+			get { return base.Y; }
+			set
+			{
+				// ReSharper disable CompareOfFloatsByEqualityOperator
+				if (value != base.Y)
+				// ReSharper restore CompareOfFloatsByEqualityOperator
+				{
+					base.Y = value;
+					VertexCode = CreateVertexCode(base.X, base.Y, VERTEX_CODE_DEFAULT_PRECISION);
 
-                    // Technically, we should change the ConstraintCodes of any edges that contain this point.
-                    // We don't for 2 reasons:
-                    // 1) Currently the only time we care about Vertex/Constraint Codes is when entering data in the point-set.
-                    //    Once the data is being used by the algorithm, the point locations are (currently) not modified.
-                    // 2) Since this Point's Edge list will only contain SOME of the edges that this point is a part of, 
-                    //    there currently isn't a way to (easily) get any edges that contain this point but are not in this
-                    //    point's edge list.
-                }
-            }
-        }
+					// Technically, we should change the ConstraintCodes of any edges that contain this point.
+					// We don't for 2 reasons:
+					// 1) Currently the only time we care about Vertex/Constraint Codes is when entering data in the point-set.
+					//    Once the data is being used by the algorithm, the point locations are (currently) not modified.
+					// 2) Since this Point's Edge list will only contain SOME of the edges that this point is a part of, 
+					//    there currently isn't a way to (easily) get any edges that contain this point but are not in this
+					//    point's edge list.
+				}
+			}
+		}
 
-        public uint VertexCode { get; private set; }
+		public uint VertexCode { get; private set; }
 
-        // List of edges this point constitutes an upper ending point (CDT)
-        public List<DTSweepConstraint> Edges { get; private set; }
-        public bool HasEdges { get { return Edges != null; } }
+		// List of edges this point constitutes an upper ending point (CDT)
+		public List<DTSweepConstraint> Edges { get; private set; }
+		public bool HasEdges { get { return Edges != null; } }
 
-        public TriangulationPoint(double x, double y, double precision = VERTEX_CODE_DEFAULT_PRECISION)
-            : base(x,y)
-        {
-            VertexCode = CreateVertexCode(x, y, precision);
-        }
-
-
-        public override string ToString()
-        {
-            return base.ToString() + ":{" + VertexCode + "}";
-        }
+		public TriangulationPoint(double x, double y, double precision = VERTEX_CODE_DEFAULT_PRECISION)
+			: base(x, y)
+		{
+			VertexCode = CreateVertexCode(x, y, precision);
+		}
 
 
-        public override int GetHashCode()
-        {
-            return (int)VertexCode;
-        }
+		public override string ToString()
+		{
+			return base.ToString() + ":{" + VertexCode + "}";
+		}
 
 
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as TriangulationPoint);
-        }
-
-        public bool Equals(TriangulationPoint other)
-        {
-            if (other == null)
-                return false;
-
-            return VertexCode == other.VertexCode && base.Equals(other);
-        }
+		public override int GetHashCode()
+		{
+			return (int)VertexCode;
+		}
 
 
-        public override void Set(double x, double y)
-        {
-            X = x;
-            Y = y;
-        }
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as TriangulationPoint);
+		}
 
-        
-        public static uint CreateVertexCode(double x, double y, double precision)
-        {
-            float fx = (float)MathUtil.RoundWithPrecision(x, precision);
-            float fy = (float)MathUtil.RoundWithPrecision(y, precision);
-            uint vc = MathUtil.Jenkins32Hash(BitConverter.GetBytes(fx), 0);
-            vc = MathUtil.Jenkins32Hash(BitConverter.GetBytes(fy), vc);
+		public bool Equals(TriangulationPoint other)
+		{
+			if (other == null)
+				return false;
 
-            return vc;
-        }
+			return VertexCode == other.VertexCode && base.Equals(other);
+		}
 
 
-        public void AddEdge(DTSweepConstraint e)
-        {
-            if (Edges == null)
-            {
-                Edges = new List<DTSweepConstraint>();
-            }
-            Edges.Add(e);
-        }
-
-        
-        public bool HasEdge(TriangulationPoint p)
-        {
-            DTSweepConstraint tmp;
-            return GetEdge(p, out tmp);
-        }
+		public override void Set(double x, double y)
+		{
+			X = x;
+			Y = y;
+		}
 
 
-        public bool GetEdge(TriangulationPoint p, out DTSweepConstraint edge)
-        {
-            edge = null;
-            if (Edges == null || Edges.Count < 1 || p == null || p.Equals(this))
-            {
-                return false;
-            }
+		public static uint CreateVertexCode(double x, double y, double precision)
+		{
+			var fx = (float)MathUtil.RoundWithPrecision(x, precision);
+			var fy = (float)MathUtil.RoundWithPrecision(y, precision);
+			var vc = MathUtil.Jenkins32Hash(BitConverter.GetBytes(fx), 0);
+			vc = MathUtil.Jenkins32Hash(BitConverter.GetBytes(fy), vc);
 
-            foreach (DTSweepConstraint sc in Edges.Where(sc => (sc.P.Equals(this) && sc.Q.Equals(p)) || (sc.P.Equals(p) && sc.Q.Equals(this))))
-            {
-                edge = sc;
-                return true;
-            }
+			return vc;
+		}
 
-            return false;
-        }
 
-    }
+		public void AddEdge(DTSweepConstraint e)
+		{
+			if (Edges == null)
+			{
+				Edges = new List<DTSweepConstraint>();
+			}
+			Edges.Add(e);
+		}
+
+
+		public bool HasEdge(TriangulationPoint p)
+		{
+			DTSweepConstraint tmp;
+			return GetEdge(p, out tmp);
+		}
+
+
+		public bool GetEdge(TriangulationPoint p, out DTSweepConstraint edge)
+		{
+			edge = null;
+			if (Edges == null || Edges.Count < 1 || p == null || p.Equals(this))
+			{
+				return false;
+			}
+
+			foreach (var sc in Edges.Where(sc => (sc.P.Equals(this) && sc.Q.Equals(p)) || (sc.P.Equals(p) && sc.Q.Equals(this))))
+			{
+				edge = sc;
+				return true;
+			}
+
+			return false;
+		}
+
+	}
 }

@@ -35,135 +35,135 @@ using System;
 
 namespace Poly2Tri.Utility
 {
-    public class Point2D : IComparable<Point2D>
-    {
-        private double _x;
-        public virtual double X { get { return _x; } set { _x = value; } }
-        private double _y;
-        public virtual double Y { get { return _y; } set { _y = value; } }
+	public class Point2D : IComparable<Point2D>
+	{
+		private double _x;
+		public virtual double X { get { return _x; } set { _x = value; } }
+		private double _y;
+		public virtual double Y { get { return _y; } set { _y = value; } }
 
-        public float Xf { get { return (float)X; } }
-        public float Yf { get { return (float)Y; } }
-
-
-        public Point2D()
-        {
-            _x = 0.0;
-            _y = 0.0;
-        }
+		public float Xf { get { return (float)X; } }
+		public float Yf { get { return (float)Y; } }
 
 
-        public Point2D(double x, double y)
-        {
-            _x = x;
-            _y = y;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("[{0},{1}]", X, Y);
-        }
+		public Point2D()
+		{
+			_x = 0.0;
+			_y = 0.0;
+		}
 
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return 378163771 * _x.GetHashCode()
-                     + 113137337 * _y.GetHashCode();
-            }
-        }
+		public Point2D(double x, double y)
+		{
+			_x = x;
+			_y = y;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[{0},{1}]", X, Y);
+		}
 
 
-        public override bool Equals(Object obj)
-        {
-            Point2D p = obj as Point2D;
-            if (p != null)
-                return Equals(p);
-
-            return false;
-        }
-
-        public bool Equals(Point2D p, double epsilon = 0.0)
-        {
-            if (p == null || !MathUtil.AreValuesEqual(X, p.X, epsilon) || !MathUtil.AreValuesEqual(Y, p.Y, epsilon))
-                return false;
-
-            return true;
-        }
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				return (378163771 * _x.GetHashCode())
+					 + (113137337 * _y.GetHashCode());
+			}
+		}
 
 
-        public int CompareTo(Point2D other)
-        {
-            if (Y < other.Y)
-            {
-                return -1;
-            }
-            else if (Y > other.Y)
-            {
-                return 1;
-            }
-            else
-            {
-                if (X < other.X)
-                {
-                    return -1;
-                }
-                else if (X > other.X)
-                {
-                    return 1;
-                }
-            }
+		public override bool Equals(object obj)
+		{
+			var p = obj as Point2D;
+			if (p != null)
+				return Equals(p);
 
-            return 0;
-        }
+			return false;
+		}
+
+		public bool Equals(Point2D p, double epsilon = 0.0)
+		{
+			if (p == null || !MathUtil.AreValuesEqual(X, p.X, epsilon) || !MathUtil.AreValuesEqual(Y, p.Y, epsilon))
+				return false;
+
+			return true;
+		}
 
 
-        public virtual void Set(double x, double y) { X = x; Y = y; }
+		public int CompareTo(Point2D other)
+		{
+			if (Y < other.Y)
+			{
+				return -1;
+			}
+			else if (Y > other.Y)
+			{
+				return 1;
+			}
+			else
+			{
+				if (X < other.X)
+				{
+					return -1;
+				}
+				else if (X > other.X)
+				{
+					return 1;
+				}
+			}
 
-        public void Subtract(Point2D p) { X -= p.X; Y -= p.Y; }
-        private void Multiply(double scalar) { X *= scalar; Y *= scalar; }
-        public double Magnitude() { return Math.Sqrt(MagnitudeSquared()); }
-        public double MagnitudeSquared() { return (X * X) + (Y * Y); }
-        private double MagnitudeReciprocal() { return 1.0 / Magnitude(); }
-        public void Normalize() { Multiply(MagnitudeReciprocal()); }
-        public double Dot(Point2D p) { return (X * p.X) + (Y * p.Y); }
-        public double Cross(Point2D p) { return (X * p.Y) - (Y * p.X); }
+			return 0;
+		}
 
-        public static double Dot(Point2D lhs, Point2D rhs) { return (lhs.X * rhs.X) + (lhs.Y * rhs.Y); }
-        public static double Cross(Point2D lhs, Point2D rhs) { return (lhs.X * rhs.Y) - (lhs.Y * rhs.X); }
 
-        // returns a scaled perpendicular vector.  Which direction it goes depends on the order in which the arguments are passed
-        public static Point2D Perpendicular(Point2D lhs, double scalar) { Point2D p = new Point2D(lhs.Y * scalar, lhs.X * -scalar); return p; }
-        public static Point2D Perpendicular(double scalar, Point2D rhs) { Point2D p = new Point2D(-scalar * rhs.Y, scalar * rhs.X); return p; }
+		public virtual void Set(double x, double y) { X = x; Y = y; }
 
-        
-        //
-        // operator overloading
-        //
+		public void Subtract(Point2D p) { X -= p.X; Y -= p.Y; }
+		private void Multiply(double scalar) { X *= scalar; Y *= scalar; }
+		public double Magnitude() { return Math.Sqrt(MagnitudeSquared()); }
+		public double MagnitudeSquared() { return (X * X) + (Y * Y); }
+		private double MagnitudeReciprocal() { return 1.0 / Magnitude(); }
+		public void Normalize() { Multiply(MagnitudeReciprocal()); }
+		public double Dot(Point2D p) { return (X * p.X) + (Y * p.Y); }
+		public double Cross(Point2D p) { return (X * p.Y) - (Y * p.X); }
 
-        // Binary Operators
-        // Note that in C#, when a binary operator is overloaded, its corresponding compound assignment operator is also automatically
-        // overloaded.  So, for example, overloading operator + implicitly overloads += as well
-        public static Point2D operator +(Point2D lhs, Point2D rhs) { return new Point2D(lhs.X + rhs.X, lhs.Y + rhs.Y); }
-        public static Point2D operator +(Point2D lhs, double scalar) { return new Point2D(lhs.X + scalar, lhs.Y + scalar); }
-        public static Point2D operator -(Point2D lhs, Point2D rhs) { return new Point2D(lhs.X - rhs.X, lhs.Y - rhs.Y); }
-        public static Point2D operator -(Point2D lhs, double scalar) { return new Point2D(lhs.X - scalar, lhs.Y - scalar); }
-        public static Point2D operator *(Point2D lhs, Point2D rhs) { return new Point2D(lhs.X * rhs.X, lhs.Y * rhs.Y); }
-        public static Point2D operator *(Point2D lhs, double scalar) { return new Point2D(lhs.X * scalar, lhs.Y * scalar); }
-        public static Point2D operator *(double scalar, Point2D rhs) { return rhs * scalar; }
-        public static Point2D operator /(Point2D lhs, Point2D rhs) { return new Point2D(lhs.X / rhs.X, lhs.Y / rhs.Y); }
-        public static Point2D operator /(Point2D lhs, double scalar) { return new Point2D(lhs.X / scalar, lhs.Y / scalar); }
+		public static double Dot(Point2D lhs, Point2D rhs) { return (lhs.X * rhs.X) + (lhs.Y * rhs.Y); }
+		public static double Cross(Point2D lhs, Point2D rhs) { return (lhs.X * rhs.Y) - (lhs.Y * rhs.X); }
 
-        // Unary Operators
-        public static Point2D operator -(Point2D p) { return new Point2D(-p.X, -p.Y); }
+		// returns a scaled perpendicular vector.  Which direction it goes depends on the order in which the arguments are passed
+		public static Point2D Perpendicular(Point2D lhs, double scalar) { var p = new Point2D(lhs.Y * scalar, lhs.X * -scalar); return p; }
+		public static Point2D Perpendicular(double scalar, Point2D rhs) { var p = new Point2D(-scalar * rhs.Y, scalar * rhs.X); return p; }
 
-        // Relational Operators
-        //public static bool operator ==(Point2D lhs, Point2D rhs) { if ((object)lhs != null) { return lhs.Equals(rhs, 0.0); } if ((object)rhs == null) { return true; } else { return false; } }
-        //public static bool operator !=(Point2D lhs, Point2D rhs) { if ((object)lhs != null) { return !lhs.Equals(rhs, 0.0); } if ((object)rhs == null) { return false; } else { return true; } }
-        public static bool operator <(Point2D lhs, Point2D rhs) { return (lhs.CompareTo(rhs) == -1); }
-        public static bool operator >(Point2D lhs, Point2D rhs) { return (lhs.CompareTo(rhs) == 1); }
-        public static bool operator <=(Point2D lhs, Point2D rhs) { return (lhs.CompareTo(rhs) <= 0); }
-        public static bool operator >=(Point2D lhs, Point2D rhs) { return (lhs.CompareTo(rhs) >= 0); }
-    }
+
+		//
+		// operator overloading
+		//
+
+		// Binary Operators
+		// Note that in C#, when a binary operator is overloaded, its corresponding compound assignment operator is also automatically
+		// overloaded.  So, for example, overloading operator + implicitly overloads += as well
+		public static Point2D operator +(Point2D lhs, Point2D rhs) { return new Point2D(lhs.X + rhs.X, lhs.Y + rhs.Y); }
+		public static Point2D operator +(Point2D lhs, double scalar) { return new Point2D(lhs.X + scalar, lhs.Y + scalar); }
+		public static Point2D operator -(Point2D lhs, Point2D rhs) { return new Point2D(lhs.X - rhs.X, lhs.Y - rhs.Y); }
+		public static Point2D operator -(Point2D lhs, double scalar) { return new Point2D(lhs.X - scalar, lhs.Y - scalar); }
+		public static Point2D operator *(Point2D lhs, Point2D rhs) { return new Point2D(lhs.X * rhs.X, lhs.Y * rhs.Y); }
+		public static Point2D operator *(Point2D lhs, double scalar) { return new Point2D(lhs.X * scalar, lhs.Y * scalar); }
+		public static Point2D operator *(double scalar, Point2D rhs) { return rhs * scalar; }
+		public static Point2D operator /(Point2D lhs, Point2D rhs) { return new Point2D(lhs.X / rhs.X, lhs.Y / rhs.Y); }
+		public static Point2D operator /(Point2D lhs, double scalar) { return new Point2D(lhs.X / scalar, lhs.Y / scalar); }
+
+		// Unary Operators
+		public static Point2D operator -(Point2D p) { return new Point2D(-p.X, -p.Y); }
+
+		// Relational Operators
+		//public static bool operator ==(Point2D lhs, Point2D rhs) { if ((object)lhs != null) { return lhs.Equals(rhs, 0.0); } if ((object)rhs == null) { return true; } else { return false; } }
+		//public static bool operator !=(Point2D lhs, Point2D rhs) { if ((object)lhs != null) { return !lhs.Equals(rhs, 0.0); } if ((object)rhs == null) { return false; } else { return true; } }
+		public static bool operator <(Point2D lhs, Point2D rhs) { return (lhs.CompareTo(rhs) == -1); }
+		public static bool operator >(Point2D lhs, Point2D rhs) { return (lhs.CompareTo(rhs) == 1); }
+		public static bool operator <=(Point2D lhs, Point2D rhs) { return (lhs.CompareTo(rhs) <= 0); }
+		public static bool operator >=(Point2D lhs, Point2D rhs) { return (lhs.CompareTo(rhs) >= 0); }
+	}
 }

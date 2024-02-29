@@ -1271,15 +1271,6 @@ namespace Lotus.Maths
         }
 
         /// <summary>
-        /// Полное копирование вектора.
-        /// </summary>
-        /// <returns>Копия вектора.</returns>
-        public readonly object Clone()
-        {
-            return MemberwiseClone();
-        }
-
-        /// <summary>
         /// Преобразование к текстовому представлению.
         /// </summary>
         /// <returns>Текстовое представление вектора с указанием значений координат.</returns>

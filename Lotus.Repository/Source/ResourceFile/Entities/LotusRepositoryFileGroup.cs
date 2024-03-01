@@ -1,101 +1,75 @@
-﻿//=====================================================================================================================
-// Проект: Модуль репозитория
-// Раздел: Подсистема файловых ресурсов
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusRepositoryFileGroup.cs
-*		Класс для группы файла.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
 using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-//---------------------------------------------------------------------------------------------------------------------
+
 using Lotus.Core;
-//=====================================================================================================================
-namespace Lotus
+
+using Microsoft.EntityFrameworkCore;
+
+namespace Lotus.Repository
 {
-	namespace Repository
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup RepositoryResourceFile
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Класс для группы файла
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public class ResourceFileGroup : EntityDb<Int32>, IComparable<ResourceFileGroup>
-		{
-			#region ======================================= КОНСТАНТНЫЕ ДАННЫЕ ========================================
-			/// <summary>
-			/// Имя таблицы
-			/// </summary>
-			public const String TABLE_NAME = "ResourceFileGroup";
-			#endregion
+    /** \addtogroup RepositoryResourceFile
+	*@{*/
+    /// <summary>
+    /// Класс для группы файла.
+    /// </summary>
+    public class ResourceFileGroup : EntityDb<int>, IComparable<ResourceFileGroup>
+    {
+        #region Const
+        /// <summary>
+        /// Имя таблицы.
+        /// </summary>
+        public const string TABLE_NAME = "ResourceFileGroup";
+        #endregion
 
-			#region ======================================= МЕТОДЫ ОПРЕДЕЛЕНИЯ МОДЕЛЕЙ ================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Конфигурирование модели для типа <see cref="ResourceFileGroup"/>
-			/// </summary>
-			/// <param name="modelBuilder">Интерфейс для построения моделей</param>
-			/// <param name="schemeName">Схема куда будет помещена таблица</param>
-			//---------------------------------------------------------------------------------------------------------
-			public static void ModelCreating(ModelBuilder modelBuilder, String schemeName)
-			{
-				// Определение для таблицы
-				var model = modelBuilder.Entity<ResourceFileGroup>();
-				model.ToTable(TABLE_NAME, schemeName);
-			}
-			#endregion
+        #region Models methods
+        /// <summary>
+        /// Конфигурирование модели для типа <see cref="ResourceFileGroup"/>.
+        /// </summary>
+        /// <param name="modelBuilder">Интерфейс для построения моделей.</param>
+        /// <param name="schemeName">Схема куда будет помещена таблица.</param>
+        public static void ModelCreating(ModelBuilder modelBuilder, string schemeName)
+        {
+            // Определение для таблицы
+            var model = modelBuilder.Entity<ResourceFileGroup>();
+            model.ToTable(TABLE_NAME, schemeName);
+        }
+        #endregion
 
-			#region ======================================= СВОЙСТВА ==================================================
-			/// <summary>
-			/// Наименование группы
-			/// </summary>
-			[MaxLength(20)]
-			public String Name { get; set; } = default!;
+        #region Properties
+        /// <summary>
+        /// Наименование группы.
+        /// </summary>
+        [MaxLength(20)]
+        public string Name { get; set; } = default!;
 
-			/// <summary>
-			/// Отображаемое наименование группы
-			/// </summary>
-			[MaxLength(40)]
-			public String? DisplayName { get; set; }
-			#endregion
+        /// <summary>
+        /// Отображаемое наименование группы.
+        /// </summary>
+        [MaxLength(40)]
+        public string? DisplayName { get; set; }
+        #endregion
 
-			#region ======================================= СИСТЕМНЫЕ МЕТОДЫ ==========================================
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Сравнение объектов для упорядочивания
-			/// </summary>
-			/// <param name="other">Сравниваемый объект</param>
-			/// <returns>Статус сравнения объектов</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public Int32 CompareTo(ResourceFileGroup? other)
-			{
-				if (other == null) return 0;
-				return (Name.CompareTo(other.Name));
-			}
+        #region System methods
+        /// <summary>
+        /// Сравнение объектов для упорядочивания.
+        /// </summary>
+        /// <param name="other">Сравниваемый объект.</param>
+        /// <returns>Статус сравнения объектов.</returns>
+        public int CompareTo(ResourceFileGroup? other)
+        {
+            if (other == null) return 0;
+            return (Name.CompareTo(other.Name));
+        }
 
-			//---------------------------------------------------------------------------------------------------------
-			/// <summary>
-			/// Преобразование к текстовому представлению
-			/// </summary>
-			/// <returns>Имя объекта</returns>
-			//---------------------------------------------------------------------------------------------------------
-			public override String ToString()
-			{
-				return (DisplayName ?? Name);
-			}
-			#endregion
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        /// <summary>
+        /// Преобразование к текстовому представлению.
+        /// </summary>
+        /// <returns>Имя объекта.</returns>
+        public override string ToString()
+        {
+            return (DisplayName ?? Name);
+        }
+        #endregion
+    }
+    /**@}*/
 }
-//=====================================================================================================================

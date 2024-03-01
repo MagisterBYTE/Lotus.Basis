@@ -1,71 +1,48 @@
-﻿//=====================================================================================================================
-// Проект: Модуль репозитория
-// Раздел: Базовая подсистема
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusRepositoryResponsePage.cs
-*		Определение интерфейса и моделей для постраничного получения данных.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
 using System.Collections.Generic;
+
 using Lotus.Core;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Repository
 {
-	namespace Repository
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/** \addtogroup RepositoryBase
-		*@{*/
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Интерфейс для постраничного получения данных
-		/// </summary>
-		/// <typeparam name="TData">Тип данных</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		public interface ILotusResponsePage<TData> : ILotusResponse
-		{
-			/// <summary>
-			/// Данные
-			/// </summary>
-			IReadOnlyCollection<TData> Payload { get; set; }
+    /** \addtogroup RepositoryBase
+	*@{*/
+    /// <summary>
+    /// Интерфейс для постраничного получения данных.
+    /// </summary>
+    /// <typeparam name="TData">Тип данных.</typeparam>
+    public interface ILotusResponsePage<TData> : ILotusResponse
+    {
+        /// <summary>
+        /// Данные.
+        /// </summary>
+        IReadOnlyCollection<TData> Payload { get; set; }
 
-			/// <summary>
-			/// Информация о странице
-			/// </summary>
-			ILotusPageInfoResponse PageInfo { get; set; }
-		}
+        /// <summary>
+        /// Информация о странице.
+        /// </summary>
+        ILotusPageInfoResponse PageInfo { get; set; }
+    }
 
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Класс для постраничного получения данных
-		/// </summary>
-		/// <typeparam name="TData">Тип данных</typeparam>
-		//-------------------------------------------------------------------------------------------------------------
-		public class ResponsePage<TData> : ILotusResponsePage<TData> 
-		{
-			/// <summary>
-			/// Результат получения данных
-			/// </summary>
-			public ILotusResult? Result { get; set; }
+    /// <summary>
+    /// Класс для постраничного получения данных.
+    /// </summary>
+    /// <typeparam name="TData">Тип данных.</typeparam>
+    public class ResponsePage<TData> : ILotusResponsePage<TData>
+    {
+        /// <summary>
+        /// Результат получения данных.
+        /// </summary>
+        public ILotusResult? Result { get; set; }
 
-			/// <summary>
-			/// Данные
-			/// </summary>
-			public IReadOnlyCollection<TData> Payload { get; set; } = default!;
+        /// <summary>
+        /// Данные.
+        /// </summary>
+        public IReadOnlyCollection<TData> Payload { get; set; } = default!;
 
-			/// <summary>
-			/// Информация о странице
-			/// </summary>
-			public ILotusPageInfoResponse PageInfo { get; set; } = default!;
-		}
-		//-------------------------------------------------------------------------------------------------------------
-		/**@}*/
-		//-------------------------------------------------------------------------------------------------------------
-	}
+        /// <summary>
+        /// Информация о странице.
+        /// </summary>
+        public ILotusPageInfoResponse PageInfo { get; set; } = default!;
+    }
+    /**@}*/
 }
-//=====================================================================================================================

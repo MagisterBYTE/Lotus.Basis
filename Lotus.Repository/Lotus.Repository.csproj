@@ -54,9 +54,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Source\Repositories\Excel\" />
-    <Folder Include="Source\Repositories\Json\" />
-  </ItemGroup>
-
 </Project>

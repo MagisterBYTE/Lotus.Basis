@@ -1,64 +1,40 @@
-﻿//=====================================================================================================================
-// Проект: LotusPlatform
-// Проект: Модуль репозитория
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusDomainContextFixture.cs
-*		Контекст базы данных для тестирования.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-//---------------------------------------------------------------------------------------------------------------------
-using Lotus.Repository;
-//=====================================================================================================================
-namespace Lotus
+namespace Lotus.Repository
 {
-	namespace Repository
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Контекст базы данных для тестирования
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public class DomainContextFixture
-		{
-			private static readonly Object _lock = new();
-			private static Boolean _databaseInitialized;
+    /// <summary>
+    /// Контекст базы данных для тестирования.
+    /// </summary>
+    public class DomainContextFixture
+    {
+        private static readonly object _lock = new();
+        private static bool _databaseInitialized;
 
-			public DomainContextFixture()
-			{
-				lock (_lock)
-				{
-					if (!_databaseInitialized)
-					{
-						using (var context = CreateContext())
-						{
-							context.Database.EnsureDeleted();
-							context.Database.EnsureCreated();
+        public DomainContextFixture()
+        {
+            lock (_lock)
+            {
+                if (!_databaseInitialized)
+                {
+                    using (var context = CreateContext())
+                    {
+                        context.Database.EnsureDeleted();
+                        context.Database.EnsureCreated();
 
-							context.Initialize();
-						}
+                        context.Initialize();
+                    }
 
-						_databaseInitialized = true;
-					}
-				}
-			}
+                    _databaseInitialized = true;
+                }
+            }
+        }
 
-			public DomainDataStorage CreateDataStorage()
-			{
-				return new DomainDataStorage(CreateContext());
-			}
+        public DomainDataStorage CreateDataStorage()
+        {
+            return new DomainDataStorage(CreateContext());
+        }
 
-			public DomainContext CreateContext()
-			{
-				return DomainContext.Create(XConnection.ConnectionString);
-			}
-		}
-	}
+        public DomainContext CreateContext()
+        {
+            return DomainContext.Create(XConnection.ConnectionString);
+        }
+    }
 }
-//=====================================================================================================================

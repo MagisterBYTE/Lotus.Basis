@@ -1,46 +1,20 @@
-﻿//=====================================================================================================================
-// Проект: LotusPlatform
-// Проект: Модуль репозитория
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-//---------------------------------------------------------------------------------------------------------------------
-/** \file LotusEntityPermission.cs
-*		Разрешение.
-*/
-//---------------------------------------------------------------------------------------------------------------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-//=====================================================================================================================
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-//---------------------------------------------------------------------------------------------------------------------
-using Lotus.Repository;
 using Lotus.Core;
-//=====================================================================================================================
-namespace Lotus
+
+namespace Lotus.Repository
 {
-	namespace Repository
-	{
-		//-------------------------------------------------------------------------------------------------------------
-		/// <summary>
-		/// Пользователь
-		/// </summary>
-		//-------------------------------------------------------------------------------------------------------------
-		public class Permission : EntityDb<Int32>
-		{
-			public String? Name { get; set; }
+    /// <summary>
+    /// Разрешение.
+    /// </summary>
+    public class Permission : EntityDb<int>
+    {
+        public string? Name { get; set; }
 
-			public List<Role> Roles { get; set; } = new List<Role>();
+        public List<Role> Roles { get; set; } = new List<Role>();
 
-			public Permission(Int32 id, String name)
-				: base(id)
-			{
-				Name = name;
-			}
-		}
-	}
+        public Permission(int id, string name)
+            : base(id)
+        {
+            Name = name;
+        }
+    }
 }
-//=====================================================================================================================

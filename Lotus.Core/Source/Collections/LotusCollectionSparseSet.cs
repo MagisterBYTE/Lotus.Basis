@@ -109,11 +109,11 @@ namespace Lotus.Core
         }
         #endregion
 
-        #region  МЕТОДЫ IEnumerator
+        #region IEnumerator methods
         /// <summary>
         /// Returns an enumerator that iterates through all elements in the set.
         /// </summary>
-        /// <returns>Перечислитель .</returns>
+        /// <returns>Перечислитель.</returns>
         public IEnumerator<int> GetEnumerator()
         {
             var i = 0;
@@ -127,7 +127,7 @@ namespace Lotus.Core
         /// <summary>
         /// Returns an enumerator that iterates through all elements in the set.
         /// </summary>
-        /// <returns>Перечислитель .</returns>
+        /// <returns>Перечислитель.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

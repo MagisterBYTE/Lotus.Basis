@@ -441,7 +441,6 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="callback">Посетитель узла.</param>
-        /// <returns>Найденный узел или null.</returns>
         public static void VisitDescendants(this ITreeNode @this, Action<ITreeNode> callback)
         {
             if (@this.IChildNodes == null) return;
@@ -458,7 +457,6 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="callback">Посетитель узла.</param>
-        /// <returns>Найденный узел или null.</returns>
         public static void VisitAncestors(this ITreeNode @this, Action<ITreeNode> callback)
         {
             callback(@this);

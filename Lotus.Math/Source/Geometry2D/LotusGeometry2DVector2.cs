@@ -3,6 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace Lotus.Maths
 {
+    /** \addtogroup MathGeometry2D
+    *@{*/
     /// <summary>
     /// Двухмерный вектор.
     /// </summary>

@@ -19,14 +19,14 @@ namespace Lotus.Core
         /// </summary>
         public struct HashSetArrayEnumerator : IEnumerator<TItem>
         {
-            #region  ДАННЫЕ
+            #region Fields
             private HashSetArray<TItem> _set;
             private int _index;
             private int _version;
             private TItem? _current;
             #endregion
 
-            #region  СВОЙСТВА
+            #region Properties
             /// <summary>
             /// Текущий элемент.
             /// </summary>
@@ -50,13 +50,11 @@ namespace Lotus.Core
             }
             #endregion
 
-            #region  КОНСТРУКТОРЫ
-            //-----------------------------------------------------------------------------------------------------
+            #region Constructors
             /// <summary>
             /// Конструктор инициализирует данные перечислителя указанным списком.
             /// </summary>
             /// <param name="set">Список.</param>
-            //-----------------------------------------------------------------------------------------------------
             internal HashSetArrayEnumerator(HashSetArray<TItem> set)
             {
                 _set = set;
@@ -66,22 +64,18 @@ namespace Lotus.Core
             }
             #endregion
 
-            #region  ОБЩИЕ МЕТОДЫ
-            //-----------------------------------------------------------------------------------------------------
+            #region Main methods
             /// <summary>
             /// Освобождение управляемых ресурсов.
             /// </summary>
-            //-----------------------------------------------------------------------------------------------------
             public readonly void Dispose()
             {
             }
 
-            //-----------------------------------------------------------------------------------------------------
             /// <summary>
             /// Переход к следующему элементу списка.
             /// </summary>
             /// <returns>Возможность перехода к следующему элементу списка.</returns>
-            //-----------------------------------------------------------------------------------------------------
             public bool MoveNext()
             {
                 if (_version != _set._version)
@@ -104,12 +98,10 @@ namespace Lotus.Core
                 return false;
             }
 
-            //-----------------------------------------------------------------------------------------------------
             /// <summary>
             /// Перестановка позиции на первый элемент списка.
             /// </summary>
-            //-----------------------------------------------------------------------------------------------------
-            void IEnumerator.Reset()
+            public void Reset()
             {
                 if (_version != _set._version)
                 {
@@ -381,28 +373,16 @@ namespace Lotus.Core
         #endregion
 
         #region IEnumerable methods
-        /// <summary>
-        ///.
-        /// </summary>
-        /// <returns></returns>
         public HashSetArrayEnumerator GetEnumerator()
         {
             return new HashSetArrayEnumerator(this);
         }
 
-        /// <summary>
-        ///.
-        /// </summary>
-        /// <returns></returns>
         IEnumerator<TItem> IEnumerable<TItem>.GetEnumerator()
         {
             return new HashSetArrayEnumerator(this);
         }
 
-        /// <summary>
-        ///.
-        /// </summary>
-        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new HashSetArrayEnumerator(this);
@@ -830,20 +810,20 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        ///.
+        /// Копирование элементов массива.
         /// </summary>
-        /// <param name="array"></param>
+        /// <param name="array">Массив.</param>
         public void CopyTo(TItem[] array)
         {
             CopyTo(array, 0, _count);
         }
 
         /// <summary>
-        ///.
+        /// Копирование элементов массива.
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="arrayIndex"></param>
-        /// <param name="count"></param>
+        /// <param name="array">Массив.</param>
+        /// <param name="arrayIndex">Начальный индекс</param>
+        /// <param name="count">Количество элементов.</param>
         public void CopyTo(TItem[] array, int arrayIndex, int count)
         {
             // check array index valid index Int32o array

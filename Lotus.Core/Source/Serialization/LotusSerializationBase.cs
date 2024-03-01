@@ -20,11 +20,11 @@ namespace Lotus.Core.Serialization
 
 		## Использование
 		1. Указать соответствующие атрибуты для полей и свойств которые подлежат сериализации
-		2. Можно реализовать интерфейс \ref Lotus.Core.ILotusSerializeToXml или \ref Lotus.Core.ILotusSerializeToBinary
+		2. Можно реализовать интерфейс \ref Lotus.Core.Serialization.ILotusSerializeToXml или \ref Lotus.Core.Serialization.ILotusSerializeToBinary
 		для самостоятельной записи/чтения данных объектом в соответствующий формат.
-		3. Можно реализовать интерфейс \ref Lotus.Core.ILotusSerializableObject, добавить объект в словарь \ref Lotus.Core.CBaseSerializer.SerializableObjects 
+		3. Можно реализовать интерфейс \ref Lotus.Core.Serialization.ILotusSerializableObject, добавить объект в словарь \ref Lotus.Core.Serialization.CBaseSerializer.SerializableObjects 
 		по ключу IDKeySerial, и тогда при последующей загрузки произойдет обновление данного объекта.
-		4. Для сохранения/загрузки использовать соответствующие методы \ref Lotus.Core.XSerializationDispatcher
+		4. Для сохранения/загрузки использовать соответствующие методы \ref Lotus.Core.Serialization.XSerializationDispatcher
      * @{
      */
     /// <summary>

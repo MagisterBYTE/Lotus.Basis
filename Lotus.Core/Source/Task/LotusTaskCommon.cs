@@ -27,7 +27,7 @@ namespace Lotus.Core
 
 		## Использование
 		1. Правильно реализовать интерфейс \ref Lotus.Core.ILotusTask.
-		2. Сформировать задачу или группу задач и запустить на исполнение методами \ref Lotus.Core.CTaskExecutor или \ref Lotus.Core.CTaskGroupExecutor
+		2. Сформировать задачу или группу задач и запустить на исполнение методами \ref Lotus.Core.TaskExecutor или \ref Lotus.Core.TaskGroupExecutor
 		3. Методы исполнителя задач нужно использовать в ручную(непосредственно вызывать его методы в нужных местах)
      * @{
      */

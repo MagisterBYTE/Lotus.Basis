@@ -338,7 +338,7 @@ namespace Lotus.Object3D
         }
 
         /// <summary>
-        ///.
+        /// Создание регулярной сетки в плоскости XZ.
         /// </summary>
         /// <param name="pointList"></param>
         /// <param name="rowCount"></param>

@@ -101,7 +101,7 @@ namespace Lotus.Core
         /// Режим включения отмены выделения элемента ViewModel.
         /// </summary>
         /// <remarks>
-        /// При его включение будет вызваться метод элемента <see cref="ILotusModelSelected.SetModelSelected(ILotusViewModel, Boolean)"/>.
+        /// При его включение будет вызваться метод элемента <see cref="ILotusModelSelected.SetModelSelected(ILotusViewModel, bool)"/>.
         /// Это может не понадобиться если, например, режим визуального реагирования как у кнопки
         /// </remarks>
         bool IsEnabledUnselectingItem { get; set; }

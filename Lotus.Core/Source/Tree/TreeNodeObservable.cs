@@ -291,7 +291,7 @@ namespace Lotus.Core
         /// Вспомогательный метод для нотификации изменений свойства.
         /// </summary>
         /// <param name="propertyName">Имя свойства.</param>
-        public void OnPropertyChanged([CallerMemberName] String? propertyName = null)
+        public void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             if (PropertyChanged != null)
             {

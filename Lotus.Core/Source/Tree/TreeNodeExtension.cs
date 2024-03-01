@@ -16,7 +16,7 @@ namespace Lotus.Core
         /// </summary>
         public class TreeNodeOrderComprare : IComparer
         {
-            public int Compare(Object? x, Object? y)
+            public int Compare(object? x, object? y)
             {
                 if (x is ITreeNode xNode && y is ITreeNode yNode)
                 {

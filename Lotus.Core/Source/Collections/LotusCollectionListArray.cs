@@ -849,9 +849,7 @@ namespace Lotus.Core
         /// </summary>
         public void NotifyCollectionClear()
         {
-            PropertyChanged?.Invoke(this, PropertyArgsCount);
-            PropertyChanged?.Invoke(this, PropertyArgsIndexer);
-            CollectionChanged?.Invoke(this, CollectionArgsReset);
+            NotifyCollectionReset();
         }
         #endregion
 
@@ -1239,24 +1237,20 @@ namespace Lotus.Core
 #endif
             }
 
-            if (count > 0)
+            _count -= count;
+
+            if (index < _count)
             {
-                var i = _count;
-                _count -= count;
+                Array.Copy(_arrayOfItems, index + count, _arrayOfItems, index, _count - index);
+            }
 
-                if (index < _count)
-                {
-                    Array.Copy(_arrayOfItems, index + count, _arrayOfItems, index, _count - index);
-                }
+            Array.Clear(_arrayOfItems, _count, count);
 
-                Array.Clear(_arrayOfItems, _count, count);
-
-                if (_isNotify)
-                {
-                    PropertyChanged?.Invoke(this, PropertyArgsCount);
-                    PropertyChanged?.Invoke(this, PropertyArgsIndexer);
-                    NotifyCollectionReset();
-                }
+            if (_isNotify)
+            {
+                PropertyChanged?.Invoke(this, PropertyArgsCount);
+                PropertyChanged?.Invoke(this, PropertyArgsIndexer);
+                NotifyCollectionReset();
             }
         }
 
@@ -2284,7 +2278,7 @@ namespace Lotus.Core
             else
             {
                 // Получаем свойство 1 раз
-                var property_info = typeof(TItem).GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                var property_info = typeof(TItem).GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
                 if (property_info != null)
                 {
                     for (var i = 0; i < _count; i++)
@@ -2428,7 +2422,7 @@ namespace Lotus.Core
             else
             {
                 // Получаем свойство 1 раз
-                var property_info = typeof(TItem).GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                var property_info = typeof(TItem).GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
                 if (property_info != null)
                 {
                     for (var i = 0; i < _count; i++)

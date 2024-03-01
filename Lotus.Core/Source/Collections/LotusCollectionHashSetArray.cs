@@ -20,10 +20,10 @@ namespace Lotus.Core
         public struct HashSetArrayEnumerator : IEnumerator<TItem>
         {
             #region Fields
-            private HashSetArray<TItem> _set;
             private int _index;
-            private int _version;
             private TItem? _current;
+            private readonly HashSetArray<TItem> _set;
+            private readonly int _version;
             #endregion
 
             #region Properties
@@ -493,7 +493,6 @@ namespace Lotus.Core
                 if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet))
                 {
                     IntersectWithHashSetWithSameEC(otherAsSet);
-                    return;
                 }
             }
 

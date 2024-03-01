@@ -24,7 +24,7 @@ namespace Lotus.Core
         public static List<string> GetDescriptions(Type enumType)
         {
             var values = new List<string>();
-            foreach (FieldInfo fi in enumType.GetFields())
+            foreach (var fi in enumType.GetFields())
             {
                 var dna = Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)) as DescriptionAttribute;
 
@@ -52,7 +52,7 @@ namespace Lotus.Core
         /// <returns>Описание либо имя перечисления.</returns>
         public static string GetDescriptionOrName(Type enumType, Enum enumValue)
         {
-            FieldInfo? fi = enumType.GetField(Enum.GetName(enumType, enumValue) ?? string.Empty);
+            var fi = enumType.GetField(Enum.GetName(enumType, enumValue) ?? string.Empty);
 
             if (fi == null) return string.Empty;
 
@@ -76,7 +76,7 @@ namespace Lotus.Core
         /// <returns>Аббревиатура либо имя перечисления.</returns>
         public static string GetAbbreviationOrName(Type enumType, Enum enumValue)
         {
-            FieldInfo? fi = enumType.GetField(Enum.GetName(enumType, enumValue) ?? string.Empty);
+            var fi = enumType.GetField(Enum.GetName(enumType, enumValue) ?? string.Empty);
 
             if (fi == null) return string.Empty;
 
@@ -99,7 +99,7 @@ namespace Lotus.Core
         /// <returns>Экземпляр перечисления.</returns>
         public static Enum ConvertFromDescriptionOrName(Type enumType, string value)
         {
-            foreach (FieldInfo fi in enumType.GetFields())
+            foreach (var fi in enumType.GetFields())
             {
                 var dna = Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)) as DescriptionAttribute;
 
@@ -120,7 +120,7 @@ namespace Lotus.Core
         /// <returns>Экземпляр перечисления.</returns>
         public static Enum ConvertFromAbbreviationOrName(Type enumType, string value)
         {
-            foreach (FieldInfo fi in enumType.GetFields())
+            foreach (var fi in enumType.GetFields())
             {
                 var abbr = Attribute.GetCustomAttribute(fi, typeof(LotusAbbreviationAttribute)) as LotusAbbreviationAttribute;
 
@@ -343,7 +343,7 @@ namespace Lotus.Core
         /// <returns>Значение целевого типа.</returns>
         public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type? destinationType)
         {
-            Type type_enum = typeof(TEnum);
+            var type_enum = typeof(TEnum);
 
             if (value == null) return string.Empty;
 
@@ -359,7 +359,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
         {
-            Type type_enum = typeof(TEnum);
+            var type_enum = typeof(TEnum);
 
             if (value == null) return string.Empty;
 

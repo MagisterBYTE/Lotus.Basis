@@ -141,7 +141,7 @@ namespace Lotus.Core
                 while (_queueMessages.Count != 0)
                 {
                     // Выталкиваем сообщения
-                    CMessageArgs message = _queueMessages.Dequeue()!;
+                    var message = _queueMessages.Dequeue()!;
 
                     for (var i = 0; i < _messageHandlers.Count; i++)
                     {
@@ -186,7 +186,7 @@ namespace Lotus.Core
         /// <param name="sender">Источник сообщения.</param>
         public void SendMessage(string name, object data, object sender)
         {
-            CMessageArgs message = _messageArgsPools.Take();
+            var message = _messageArgsPools.Take();
             message.Name = name;
             message.Data = data;
             message.Sender = sender;
@@ -201,7 +201,7 @@ namespace Lotus.Core
         /// <param name="sender">Источник сообщения.</param>
         public void SendMessage(int id, object data, object sender)
         {
-            CMessageArgs message = _messageArgsPools.Take();
+            var message = _messageArgsPools.Take();
             message.Id = id;
             message.Data = data;
             message.Sender = sender;

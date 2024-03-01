@@ -1,6 +1,6 @@
 namespace Lotus.Core
 {
-	/**
+    /**
 	 * \defgroup CoreCollections Подсистема коллекций
 	 * \ingroup Core
 	 * \brief Дополнительные коллекции данных. 
@@ -12,11 +12,11 @@ namespace Lotus.Core
 		расширенного управления и отображения коллекцией (в том числе и с возможностью перемещать элементы).
 	 * @{
 	 */
-	/// <summary>
-	/// Базовый интерфейс для определения объекта служащего элементом коллекции.
-	/// </summary>
-	public interface ILotusCollectionItem
-	{
-	}
-	/**@}*/
+    /// <summary>
+    /// Базовый интерфейс для определения объекта служащего элементом коллекции.
+    /// </summary>
+    public interface ILotusCollectionItem
+    {
+    }
+    /**@}*/
 }

@@ -90,7 +90,7 @@ namespace Lotus.Core
         /// <returns>Объект.</returns>
         public static TPoolObject? Take<TPoolObject>(string managerName)
         {
-            ILotusPoolManager? result = PoolManagers.Search(x => x!.Name == managerName);
+            var result = PoolManagers.Search(x => x!.Name == managerName);
             if (result != null)
             {
                 return (TPoolObject)result.TakeObjectFromPool();
@@ -107,7 +107,7 @@ namespace Lotus.Core
         /// <returns>Статус успешности добавления объекта в пул.</returns>
         public static bool Release<TPoolObject>(string managerName, TPoolObject poolObject)
         {
-            ILotusPoolManager? result = PoolManagers.Search(x => x!.Name == managerName);
+            var result = PoolManagers.Search(x => x!.Name == managerName);
             if (result != null)
             {
                 result.ReleaseObjectToPool(poolObject!);

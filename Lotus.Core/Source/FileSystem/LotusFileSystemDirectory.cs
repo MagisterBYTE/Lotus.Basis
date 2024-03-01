@@ -315,20 +315,20 @@ namespace Lotus.Core
         {
             _entities.Clear();
 
-            DirectoryInfo[] dirs_info = Info.GetDirectories();
-            FileInfo[] files_info = Info.GetFiles();
+            var dirs_info = Info.GetDirectories();
+            var files_info = Info.GetFiles();
 
             // Сначала директории
             for (var i = 0; i < dirs_info.Length; i++)
             {
-                DirectoryInfo dir_info = dirs_info[i];
+                var dir_info = dirs_info[i];
                 AddDirectory(dir_info);
             }
 
             // Теперь файлы
             for (var i = 0; i < files_info.Length; i++)
             {
-                FileInfo file_info = files_info[i];
+                var file_info = files_info[i];
                 AddFile(file_info);
             }
         }
@@ -340,14 +340,14 @@ namespace Lotus.Core
         {
             _entities.Clear();
 
-            DirectoryInfo[] dirs_info = Info.GetDirectories();
-            FileInfo[] files_info = Info.GetFiles();
+            var dirs_info = Info.GetDirectories();
+            var files_info = Info.GetFiles();
 
             // Сначала директории
             for (var i = 0; i < dirs_info.Length; i++)
             {
-                DirectoryInfo dir_info = dirs_info[i];
-                CFileSystemDirectory? directory = AddDirectory(dir_info);
+                var dir_info = dirs_info[i];
+                var directory = AddDirectory(dir_info);
                 if (directory != null)
                 {
                     directory.GetFileSystemItems();
@@ -357,7 +357,7 @@ namespace Lotus.Core
             // Теперь файлы
             for (var i = 0; i < files_info.Length; i++)
             {
-                FileInfo file_info = files_info[i];
+                var file_info = files_info[i];
                 AddFile(file_info);
             }
         }
@@ -407,14 +407,14 @@ namespace Lotus.Core
         /// </summary>
         public void RecursiveFileSyste_infoTwoLevel()
         {
-            DirectoryInfo[] dirs_info = Info.GetDirectories();
-            FileInfo[] files_info = Info.GetFiles();
+            var dirs_info = Info.GetDirectories();
+            var files_info = Info.GetFiles();
 
             // Сначала директории
             for (var i = 0; i < dirs_info.Length; i++)
             {
-                DirectoryInfo dir_info = dirs_info[i];
-                CFileSystemDirectory? sub_directory = AddDirectory(dir_info);
+                var dir_info = dirs_info[i];
+                var sub_directory = AddDirectory(dir_info);
 
                 //// 2 уровень
                 //for (Int32 i2 = 0; i2 < dirs_info.Length; i2++)
@@ -438,7 +438,7 @@ namespace Lotus.Core
             // Теперь файлы
             for (var i = 0; i < files_info.Length; i++)
             {
-                FileInfo file_info = files_info[i];
+                var file_info = files_info[i];
                 AddFile(file_info);
             }
         }
@@ -449,8 +449,8 @@ namespace Lotus.Core
         /// <param name="parentDirectoryNode">Родительский узел директории.</param>
         protected void RecursiveFileSyste_info(CFileSystemDirectory parentDirectoryNode)
         {
-            DirectoryInfo[] sub_directories = parentDirectoryNode.Info.GetDirectories();
-            FileInfo[] files = parentDirectoryNode.Info.GetFiles();
+            var sub_directories = parentDirectoryNode.Info.GetDirectories();
+            var files = parentDirectoryNode.Info.GetFiles();
 
             // Сначала директории
             for (var i = 0; i < sub_directories.Length; i++)
@@ -468,7 +468,7 @@ namespace Lotus.Core
             // Теперь файлы
             for (var i = 0; i < files.Length; i++)
             {
-                FileInfo file_info = files[i];
+                var file_info = files[i];
 
                 if (file_info.Extension == ".meta") continue;
 

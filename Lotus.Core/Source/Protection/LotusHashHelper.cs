@@ -57,7 +57,7 @@ namespace Lotus.Core
             var hashOfInput = GetHash(input);
 
             // Create a StringComparer an compare the hashes.
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+            var comparer = StringComparer.OrdinalIgnoreCase;
 
             return comparer.Compare(hashOfInput, hash) == 0;
         }

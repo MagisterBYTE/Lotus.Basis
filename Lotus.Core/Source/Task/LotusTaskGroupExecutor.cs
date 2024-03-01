@@ -108,7 +108,7 @@ namespace Lotus.Core
             // Выполняем отдельные группы задачи каждый кадр
             for (var i = 0; i < _groupTasks.Count; i++)
             {
-                GroupTask group_task = _groupTasks[i];
+                var group_task = _groupTasks[i];
 
                 if (!group_task.IsCompleted)
                 {

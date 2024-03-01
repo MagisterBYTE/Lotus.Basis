@@ -65,7 +65,7 @@ namespace Lotus.Core
         /// <returns>Коллекция.</returns>
         public static IEnumerable<TItem> ForEach<TItem>(this IEnumerable<TItem> @this, Action<TItem, int> onActionItem)
         {
-            int index = 0;
+            var index = 0;
             foreach (var item in @this)
             {
                 onActionItem.Invoke(item, index);
@@ -96,7 +96,7 @@ namespace Lotus.Core
         {
             foreach (var item in @this)
             {
-                string print = item?.ToString() ?? "null";
+                var print = item?.ToString() ?? "null";
                 onOutputItem(print);
             }
         }
@@ -110,7 +110,7 @@ namespace Lotus.Core
         public static IEnumerable<TItem> WhereNotNullRef<TItem>(this IEnumerable<TItem> @this)
             where TItem : class
         {
-            foreach (TItem item in @this)
+            foreach (var item in @this)
             {
                 if (item != null)
                 {
@@ -128,7 +128,7 @@ namespace Lotus.Core
         public static IEnumerable<TItem> WhereNotNullValue<TItem>(this IEnumerable<TItem?> @this)
             where TItem : struct
         {
-            foreach (TItem? item in @this)
+            foreach (var item in @this)
             {
                 if (item.HasValue)
                 {
@@ -594,7 +594,7 @@ namespace Lotus.Core
         /// <returns>Список.</returns>
         public static IList<TItem> Swap<TItem>(this IList<TItem> @this, int oldIndex, int newIndex)
         {
-            TItem temp = @this[oldIndex];
+            var temp = @this[oldIndex];
             @this[oldIndex] = @this[newIndex];
             @this[newIndex] = temp;
             return @this;
@@ -627,7 +627,7 @@ namespace Lotus.Core
                 condition = () => i >= 0;
             }
 
-            TItem element_to_move = @this[start];
+            var element_to_move = @this[start];
             for (i = start; condition(); i += sign)
             {
                 // - get the next element's atIndex

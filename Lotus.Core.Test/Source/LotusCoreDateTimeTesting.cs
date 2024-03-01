@@ -104,7 +104,7 @@ namespace Lotus.Core
                 ClassicAssert.AreEqual(weekends, list_index.RemoveWeekends());
 
                 var index = list_index.GetIndexFromDate(new DateTime(2015, 8, 2));
-                DateTime find_date = list_index[index].Date;
+                var find_date = list_index[index].Date;
                 ClassicAssert.AreEqual(find_date.Year, 2015);
                 ClassicAssert.AreEqual(find_date.Month, 7);
                 ClassicAssert.AreEqual(find_date.Day, 31);

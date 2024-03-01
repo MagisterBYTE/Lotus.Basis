@@ -84,7 +84,7 @@ namespace Lotus.Core
         /// <returns>Массив.</returns>
         public static TType[] InsertAt<TType>(TType[] array, in TType item, int index)
         {
-            TType[] temp = array;
+            var temp = array;
             array = new TType[array.Length + 1];
             Array.Copy(temp, 0, array, 0, index);
             array[index] = item;
@@ -103,7 +103,7 @@ namespace Lotus.Core
         /// <returns>Массив.</returns>
         public static TType[] InsertAt<TType>(TType[] array, int index, params TType[] items)
         {
-            TType[] temp = array;
+            var temp = array;
             array = new TType[array.Length + items.Length];
             Array.Copy(temp, 0, array, 0, index);
             Array.Copy(items, 0, array, index, items.Length);
@@ -134,7 +134,7 @@ namespace Lotus.Core
         /// <returns>Массив.</returns>
         public static TType[] RemoveAt<TType>(TType[] array, int start, int count)
         {
-            TType[] temp = array;
+            var temp = array;
             array = new TType[array.Length - count >= 0 ? array.Length - count : 0];
             Array.Copy(temp, array, start);
             var index = start + count;

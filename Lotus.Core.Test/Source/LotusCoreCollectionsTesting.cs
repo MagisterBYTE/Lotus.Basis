@@ -210,7 +210,7 @@ namespace Lotus.Core
             ClassicAssert.AreEqual(sample[5], 5566);
             ClassicAssert.AreEqual(sample[6], 9874);
 
-            ListArray<int> save = sample.GetItemsDuplicate();
+            var save = sample.GetItemsDuplicate();
 
             //
             // Обрезка списка сначала
@@ -614,7 +614,7 @@ namespace Lotus.Core
             var deferencs_source = new ListArray<int>();
             deferencs_source.AddItems(0, 2, 4, 7, 5);
 
-            ListArray<int> deferencs = deferencs_source.DifferenceItems(0, 4, 7, 12, 15, 7);
+            var deferencs = deferencs_source.DifferenceItems(0, 4, 7, 12, 15, 7);
             ClassicAssert.AreEqual(deferencs.Count, 2);
             ClassicAssert.AreEqual(deferencs[0], 2);
             ClassicAssert.AreEqual(deferencs[1], 5);

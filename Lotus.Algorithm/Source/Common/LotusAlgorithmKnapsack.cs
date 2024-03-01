@@ -26,7 +26,7 @@ namespace Lotus.Algorithm
         public static Dictionary<TElement, int> Knapsack<TElement>(Dictionary<TElement, float> set, float capacity,
             Dictionary<TElement, int>? knapsack = null) where TElement : notnull
         {
-            if(set.Count == 0) return new Dictionary<TElement, int> { };
+            if (set.Count == 0) return new Dictionary<TElement, int> { };
 
             var keys = new List<TElement>(set.Keys);
             // Sort keys by their weights in descending order

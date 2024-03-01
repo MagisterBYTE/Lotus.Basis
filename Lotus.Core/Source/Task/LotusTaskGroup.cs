@@ -257,7 +257,7 @@ namespace Lotus.Core
                 }
             }
 
-            CTaskHolder task_holder = _executor.TaskHolderPools.Take();
+            var task_holder = _executor.TaskHolderPools.Take();
             task_holder.Task = task;
             _tasks.Add(task_holder);
         }
@@ -283,7 +283,7 @@ namespace Lotus.Core
                 }
             }
 
-            CTaskHolder task_holder = _executor.TaskHolderPools.Take();
+            var task_holder = _executor.TaskHolderPools.Take();
             task_holder.Task = task;
             task_holder.MethodMode = method;
             _tasks.Add(task_holder);
@@ -327,7 +327,7 @@ namespace Lotus.Core
                 if (_tasks[i].Task == task)
                 {
                     // 1) Возвращаем в пул
-                    CTaskHolder task_holder = _tasks[i];
+                    var task_holder = _tasks[i];
                     _executor.TaskHolderPools.Release(task_holder);
 
                     // 2) Удаляем
@@ -348,7 +348,7 @@ namespace Lotus.Core
                 if (_tasks[i].Name == taskName)
                 {
                     // 1) Возвращаем в пул
-                    CTaskHolder task_holder = _tasks[i];
+                    var task_holder = _tasks[i];
                     _executor.TaskHolderPools.Release(task_holder);
 
                     // 2) Удаляем
@@ -563,7 +563,7 @@ namespace Lotus.Core
             for (var i = 0; i < _tasks.Count; i++)
             {
                 // 1) Возвращаем в пул
-                CTaskHolder task_holder = _tasks[i];
+                var task_holder = _tasks[i];
                 _executor.TaskHolderPools.Release(task_holder);
             }
 

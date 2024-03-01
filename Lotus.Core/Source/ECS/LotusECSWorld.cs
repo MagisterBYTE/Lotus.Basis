@@ -214,7 +214,7 @@ namespace Lotus.Core
                 {
                     UpdateFilterComponentsForAdd(component_type);
 
-                    ref TComponent value = ref component_data_exist.AddEntity(entityId);
+                    ref var value = ref component_data_exist.AddEntity(entityId);
                     return ref value;
                 }
                 else
@@ -227,7 +227,7 @@ namespace Lotus.Core
                 var component_data_new = new CEcsComponentData<TComponent>();
                 component_data_new.World = this;
                 _componentsData.Add(component_type, component_data_new);
-                ref TComponent value = ref component_data_new.AddEntity(entityId);
+                ref var value = ref component_data_new.AddEntity(entityId);
                 return ref value;
             }
         }
@@ -250,12 +250,12 @@ namespace Lotus.Core
                 {
                     UpdateFilterComponentsForAdd(component_type);
 
-                    ref TComponent value = ref component_data_exist.AddEntity(entityId);
+                    ref var value = ref component_data_exist.AddEntity(entityId);
                     return ref value;
                 }
                 else
                 {
-                    ref TComponent value = ref component_data_exist.GetValue(entityId);
+                    ref var value = ref component_data_exist.GetValue(entityId);
                     return ref value;
                 }
             }
@@ -263,7 +263,7 @@ namespace Lotus.Core
             {
                 var component_data_new = new CEcsComponentData<TComponent>();
                 _componentsData.Add(component_type, component_data_new);
-                ref TComponent value = ref component_data_new.AddEntity(entityId);
+                ref var value = ref component_data_new.AddEntity(entityId);
                 return ref value;
             }
         }
@@ -299,7 +299,7 @@ namespace Lotus.Core
             if (_componentsData.TryGetValue(component_type, out component_data))
             {
                 var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
-                ref TComponent value = ref component_data_exist.GetValue(entityId);
+                ref var value = ref component_data_exist.GetValue(entityId);
                 return ref value;
             }
 

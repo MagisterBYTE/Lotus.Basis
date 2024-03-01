@@ -243,7 +243,7 @@ namespace Lotus.Core
         /// <returns>Текстовое представление.</returns>
         public string ToStringShort()
         {
-            string mode = "";
+            var mode = "";
             switch (_mode)
             {
                 case TBindingMode.ViewData:
@@ -268,7 +268,7 @@ namespace Lotus.Core
         /// <returns>Текстовое представление.</returns>
         public override string ToString()
         {
-            string mode = "";
+            var mode = "";
             switch (_mode)
             {
                 case TBindingMode.ViewData:
@@ -333,7 +333,7 @@ namespace Lotus.Core
         /// <returns>Член данных.</returns>
         protected MemberInfo? SetMemberType(object instance, string memberName, ref TBindingMemberType memberType)
         {
-            MemberInfo member = instance.GetType().GetMember(memberName)[0];
+            var member = instance.GetType().GetMember(memberName)[0];
             if (member != null)
             {
                 if (member.MemberType == MemberTypes.Property)

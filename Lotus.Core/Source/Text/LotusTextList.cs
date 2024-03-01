@@ -123,7 +123,7 @@ namespace Lotus.Core
         public void RemoveToLine(string lineTo)
         {
             var index = 0;
-            bool isFind = false;
+            var isFind = false;
             foreach (var item in _lines)
             {
                 if (item.RawString.Contains(lineTo))

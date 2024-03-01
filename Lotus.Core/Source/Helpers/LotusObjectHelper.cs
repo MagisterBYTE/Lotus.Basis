@@ -17,7 +17,7 @@ namespace Lotus.Core
         /// <param name="right">Второе значение.</param>
         public static void Swap<TType>(ref TType left, ref TType right)
         {
-            TType temp = left;
+            var temp = left;
             left = right;
             right = temp;
         }

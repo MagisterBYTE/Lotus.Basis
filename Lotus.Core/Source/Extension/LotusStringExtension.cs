@@ -1128,8 +1128,8 @@ namespace Lotus.Core
         /// <returns>Преобразованная строка.</returns>
         public static string ToProperCase(this string @this)
         {
-            CultureInfo culture_info = System.Threading.Thread.CurrentThread.CurrentCulture;
-            TextInfo text_info = culture_info.TextInfo;
+            var culture_info = System.Threading.Thread.CurrentThread.CurrentCulture;
+            var text_info = culture_info.TextInfo;
             return text_info.ToTitleCase(@this);
         }
 

@@ -159,8 +159,8 @@ namespace Lotus.Core
         {
             Clear();
 
-            DateTime current = startData;
-            TItemTimeable first_item = Activator.CreateInstance<TItemTimeable>();
+            var current = startData;
+            var first_item = Activator.CreateInstance<TItemTimeable>();
             first_item.Date = startData;
             Add(first_item);
             switch (_timeInterval)
@@ -173,7 +173,7 @@ namespace Lotus.Core
 
                             if (current <= endData)
                             {
-                                TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
+                                var current_item = Activator.CreateInstance<TItemTimeable>();
                                 current_item.Date = current;
                                 Add(current_item);
                             }
@@ -188,7 +188,7 @@ namespace Lotus.Core
 
                             if (current <= endData)
                             {
-                                TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
+                                var current_item = Activator.CreateInstance<TItemTimeable>();
                                 current_item.Date = current;
                                 Add(current_item);
                             }
@@ -203,7 +203,7 @@ namespace Lotus.Core
 
                             if (current <= endData)
                             {
-                                TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
+                                var current_item = Activator.CreateInstance<TItemTimeable>();
                                 current_item.Date = current;
                                 Add(current_item);
                             }
@@ -218,7 +218,7 @@ namespace Lotus.Core
 
                             if (current <= endData && current.DayOfWeek == DayOfWeek.Monday)
                             {
-                                TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
+                                var current_item = Activator.CreateInstance<TItemTimeable>();
                                 current_item.Date = current;
                                 Add(current_item);
                             }
@@ -233,7 +233,7 @@ namespace Lotus.Core
 
                             if (current <= endData && current.Day == 1)
                             {
-                                TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
+                                var current_item = Activator.CreateInstance<TItemTimeable>();
                                 current_item.Date = current;
                                 Add(current_item);
                             }
@@ -248,7 +248,7 @@ namespace Lotus.Core
 
                             if (current <= endData && current.DayOfYear == 1)
                             {
-                                TItemTimeable current_item = Activator.CreateInstance<TItemTimeable>();
+                                var current_item = Activator.CreateInstance<TItemTimeable>();
                                 current_item.Date = current;
                                 Add(current_item);
                             }
@@ -337,7 +337,7 @@ namespace Lotus.Core
 
             for (var i = 0; i < _count; i++)
             {
-                TItemTimeable item = _arrayOfItems[i]!;
+                var item = _arrayOfItems[i]!;
                 if (item.Date.DayOfWeek == DayOfWeek.Sunday || item.Date.DayOfWeek == DayOfWeek.Saturday)
                 {
                     count++;

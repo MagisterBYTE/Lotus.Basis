@@ -35,33 +35,33 @@ using System.Collections.Generic;
 
 namespace Poly2Tri.Triangulation.Delaunay.Sweep
 {
-	public class DTSweepPointComparator : IComparer<TriangulationPoint>
-	{
-		public int Compare(TriangulationPoint x, TriangulationPoint y)
-		{
-			if (x.Y < y.Y)
-			{
-				return -1;
-			}
-			else if (x.Y > y.Y)
-			{
-				return 1;
-			}
-			else
-			{
-				if (x.X < y.X)
-				{
-					return -1;
-				}
-				else if (x.X > y.X)
-				{
-					return 1;
-				}
-				else
-				{
-					return 0;
-				}
-			}
-		}
-	}
+    public class DTSweepPointComparator : IComparer<TriangulationPoint>
+    {
+        public int Compare(TriangulationPoint x, TriangulationPoint y)
+        {
+            if (x.Y < y.Y)
+            {
+                return -1;
+            }
+            else if (x.Y > y.Y)
+            {
+                return 1;
+            }
+            else
+            {
+                if (x.X < y.X)
+                {
+                    return -1;
+                }
+                else if (x.X > y.X)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+    }
 }

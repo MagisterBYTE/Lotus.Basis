@@ -33,16 +33,16 @@ using Poly2Tri.Utility;
 
 namespace Poly2Tri.Triangulation.Delaunay.Sweep
 {
-	public class DTSweepConstraint : TriangulationConstraint
-	{
-		/// <summary>
-		/// Give two points in any order. Will always be ordered so
-		/// that q.y > p.y and q.x > p.x if same y value 
-		/// </summary>
-		public DTSweepConstraint(Point2D p1, Point2D p2)
-			: base(p1, p2)
-		{
-			Q.AddEdge(this);
-		}
-	}
+    public class DTSweepConstraint : TriangulationConstraint
+    {
+        /// <summary>
+        /// Give two points in any order. Will always be ordered so
+        /// that q.y > p.y and q.x > p.x if same y value 
+        /// </summary>
+        public DTSweepConstraint(Point2D p1, Point2D p2)
+            : base(p1, p2)
+        {
+            Q.AddEdge(this);
+        }
+    }
 }

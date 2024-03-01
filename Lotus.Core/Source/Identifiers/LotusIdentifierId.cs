@@ -8,7 +8,7 @@ namespace Lotus.Core
     /// Шаблонный класс для простых сущностей поддерживающих идентификатор.
     /// </summary>
     /// <typeparam name="TKey">Тип идентификатор.</typeparam>
-    public class IdentifierDtoId<TKey> : ILotusIdentifierId<TKey> where TKey : 
+    public class IdentifierDtoId<TKey> : ILotusIdentifierId<TKey> where TKey :
         notnull, IEquatable<TKey>
     {
         /// <summary>
@@ -21,7 +21,7 @@ namespace Lotus.Core
     /// Шаблонный класс для сущностей поддерживающих идентификатор.
     /// </summary>
     /// <typeparam name="TKey">Тип идентификатор.</typeparam>
-    public class IdentifierId<TKey> : PropertyChangedBase, ILotusIdentifierId<TKey> 
+    public class IdentifierId<TKey> : PropertyChangedBase, ILotusIdentifierId<TKey>
         where TKey : notnull, IEquatable<TKey>
     {
         #region Fields

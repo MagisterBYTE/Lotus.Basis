@@ -93,7 +93,7 @@ namespace Lotus.Core
             }
             else
             {
-                foreach (TType item in _value!)
+                foreach (var item in _value!)
                 {
                     streamWriter.Write(item);
                     streamWriter.Write(",");

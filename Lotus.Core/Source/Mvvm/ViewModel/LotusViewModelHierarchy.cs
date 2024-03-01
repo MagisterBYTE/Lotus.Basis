@@ -141,7 +141,7 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static ViewModelHierarchy<TModel> Build(TModel rootModel, ILotusCollectionViewModelHierarchy owner)
         {
-            ViewModelHierarchy<TModel> node_root_view = Build(rootModel, null, owner);
+            var node_root_view = Build(rootModel, null, owner);
             return node_root_view;
         }
 
@@ -223,7 +223,7 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static ViewModelHierarchy<TModel> BuildFilter(TModel rootModel, Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
         {
-            ViewModelHierarchy<TModel> node_root_view = BuildFilter(rootModel, null, filter, owner);
+            var node_root_view = BuildFilter(rootModel, null, filter, owner);
             return node_root_view;
         }
 
@@ -900,7 +900,7 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    Type present_type = parameters.GetValueOfType<Type>();
+                    var present_type = parameters.GetValueOfType<Type>();
                     if (present_type != null)
                     {
 
@@ -920,7 +920,7 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    Type present_type = parameters.GetValueOfType<Type>();
+                    var present_type = parameters.GetValueOfType<Type>();
                     if (present_type != null)
                     {
 
@@ -1006,7 +1006,7 @@ namespace Lotus.Core
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        IList? new_models = args.NewItems;
+                        var new_models = args.NewItems;
                         if (new_models != null && new_models.Count > 0)
                         {
                             for (var i = 0; i < new_models.Count; i++)
@@ -1025,7 +1025,7 @@ namespace Lotus.Core
                                 if (is_dublicate == false)
                                 {
                                     var model = new_models[i] as TModel;
-                                    ILotusViewModelHierarchy view_model = this.CreateViewModelHierarchy(model!, null);
+                                    var view_model = this.CreateViewModelHierarchy(model!, null);
                                     view_model.IOwner = this.IOwner;
                                     view_model.IParent = this;
 
@@ -1042,7 +1042,7 @@ namespace Lotus.Core
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     {
-                        IList? old_models = args.OldItems;
+                        var old_models = args.OldItems;
                         if (old_models != null && old_models.Count > 0)
                         {
                             for (var i = 0; i < old_models.Count; i++)

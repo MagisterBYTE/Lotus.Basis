@@ -198,12 +198,12 @@ namespace Lotus.Core
 
                         if (_onConvertToView != null)
                         {
-                            TTypeModel valueModel = (valueRaw == null ? default : (TTypeModel)valueRaw)!;
+                            var valueModel = (valueRaw == null ? default : (TTypeModel)valueRaw)!;
                             _actionView(_onConvertToView(valueModel));
                         }
                         else
                         {
-                            TTypeView valueView = (valueRaw == null ? default : (TTypeView)valueRaw)!;
+                            var valueView = (valueRaw == null ? default : (TTypeView)valueRaw)!;
                             if (_isStringView)
                             {
                                 _actionView((TTypeView)(object)valueRaw!.ToString()!);

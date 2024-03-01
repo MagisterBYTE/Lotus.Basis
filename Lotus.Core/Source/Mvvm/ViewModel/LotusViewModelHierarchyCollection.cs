@@ -44,7 +44,7 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static TViewModelHierarchy Build(TModel rootModel, ILotusCollectionViewModelHierarchy owner)
         {
-            TViewModelHierarchy node_root_view = Build(rootModel, null, owner);
+            var node_root_view = Build(rootModel, null, owner);
             return node_root_view;
         }
 
@@ -187,7 +187,7 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static TViewModelHierarchy BuildFilter(TModel rootModel, Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
         {
-            TViewModelHierarchy node_root_view = BuildFilter(rootModel, null, filter, owner);
+            var node_root_view = BuildFilter(rootModel, null, filter, owner);
             return node_root_view;
         }
 
@@ -352,14 +352,14 @@ namespace Lotus.Core
             {
                 if (_isFiltered == false)
                 {
-                    TViewModelHierarchy view_item_hierarchy = Build(data, this);
+                    var view_item_hierarchy = Build(data, this);
                     Add(view_item_hierarchy);
                 }
                 else
                 {
                     if (_filter != null)
                     {
-                        TViewModelHierarchy view_item_hierarchy = BuildFilter(data, _filter, this);
+                        var view_item_hierarchy = BuildFilter(data, _filter, this);
                         Add(view_item_hierarchy);
                     }
                 }
@@ -370,7 +370,7 @@ namespace Lotus.Core
                 {
                     for (var i = 0; i < list_data.Count; i++)
                     {
-                        TViewModelHierarchy view_item_hierarchy = Build(list_data[i], this);
+                        var view_item_hierarchy = Build(list_data[i], this);
                         Add(view_item_hierarchy);
                     }
                 }

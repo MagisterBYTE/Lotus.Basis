@@ -201,7 +201,7 @@ namespace Lotus.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Exsist<TComponent>() where TComponent : struct
         {
-            Type component_type = typeof(TComponent);
+            var component_type = typeof(TComponent);
             return _includedComponents.Contains(component_type) || _excludedComponents.Contains(component_type);
         }
 
@@ -237,7 +237,7 @@ namespace Lotus.Core
         public ILotusEcsFilterComponent Exclude(Type componentType)
         {
             _excludedComponents.AddIfNotContains(componentType);
-            if (_world._componentsData.TryGetValue(componentType, out ILotusEcsComponentData? component_data))
+            if (_world._componentsData.TryGetValue(componentType, out var component_data))
             {
                 var exclude_entities = component_data.GetEntities();
                 _entities.RemoveValues(exclude_entities);
@@ -255,7 +255,7 @@ namespace Lotus.Core
             _entities.Clear();
             if (_includedComponents.Count > 1)
             {
-                Type first_type_filter = _includedComponents[0];
+                var first_type_filter = _includedComponents[0];
                 ILotusEcsComponentData? component_data;
                 if (_world._componentsData.TryGetValue(first_type_filter, out component_data))
                 {
@@ -266,7 +266,7 @@ namespace Lotus.Core
                         var find_count = 0;
                         for (var f = 1; f < _includedComponents.Count; f++)
                         {
-                            Type type_filter = _includedComponents[f];
+                            var type_filter = _includedComponents[f];
                             ILotusEcsComponentData? filter_data;
                             if (_world._componentsData.TryGetValue(type_filter, out filter_data))
                             {

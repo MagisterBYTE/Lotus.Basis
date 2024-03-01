@@ -201,7 +201,7 @@ namespace Lotus.Core
                 ResizePool();
             }
 
-            TPoolObject pool_object = _poolObjects.Pop()!;
+            var pool_object = _poolObjects.Pop()!;
             return pool_object;
         }
 
@@ -280,7 +280,7 @@ namespace Lotus.Core
                 ResizePool();
             }
 
-            TPoolObject pool_object = _poolObjects.Pop()!;
+            var pool_object = _poolObjects.Pop()!;
             pool_object.OnPoolTake();
             return pool_object;
         }

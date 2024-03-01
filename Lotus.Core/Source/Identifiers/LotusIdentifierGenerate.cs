@@ -34,7 +34,7 @@ namespace Lotus.Core
             }
             else
             {
-                DateTime current_date = DateTime.UtcNow;
+                var current_date = DateTime.UtcNow;
                 var elapsed_ticks = current_date.Ticks - StartDate.Ticks;
                 var elapsed_millisecond = elapsed_ticks / 100000;
 

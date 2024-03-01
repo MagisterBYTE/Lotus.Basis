@@ -19,8 +19,8 @@ namespace Lotus.Maths
             var vector3 = new Vector2Df(1.0f, 1.0f);
 
             // Act
-            bool equals1 = vector1 == vector2;
-            bool equals2 = vector1 == vector3;
+            var equals1 = vector1 == vector2;
+            var equals2 = vector1 == vector3;
 
             // ClassicAssert
             ClassicAssert.IsTrue(equals1);
@@ -36,8 +36,8 @@ namespace Lotus.Maths
             var vector3 = new Vector2Df(1.0f, 1.0f);
 
             // Act
-            bool notEquals1 = vector1 != vector3;
-            bool notEquals2 = vector1 != vector2;
+            var notEquals1 = vector1 != vector3;
+            var notEquals2 = vector1 != vector2;
 
             // ClassicAssert
             ClassicAssert.IsTrue(notEquals1);

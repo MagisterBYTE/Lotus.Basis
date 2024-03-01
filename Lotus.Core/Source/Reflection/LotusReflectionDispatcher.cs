@@ -277,14 +277,14 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static object? GetStaticDataFromType(string fullTypeNameMemberName)
         {
-            int last_dot = fullTypeNameMemberName.LastIndexOf(XChar.Dot);
+            var last_dot = fullTypeNameMemberName.LastIndexOf(XChar.Dot);
             if (last_dot > -1)
             {
-                string full_type_name = fullTypeNameMemberName.Substring(0, last_dot);
-                string member_name = fullTypeNameMemberName.Substring(last_dot + 1);
+                var full_type_name = fullTypeNameMemberName.Substring(0, last_dot);
+                var member_name = fullTypeNameMemberName.Substring(last_dot + 1);
 
                 // Проверяем наличие типа
-                if (Cached.TryGetValue(full_type_name, out CReflectedType? value))
+                if (Cached.TryGetValue(full_type_name, out var value))
                 {
                     // Проверяем наличие статического поля
                     if (value.ContainsField(member_name))
@@ -455,7 +455,7 @@ namespace Lotus.Core
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             // Проходим по всем сборкам
-            for (int ia = 0; ia < assemblies.Length; ia++)
+            for (var ia = 0; ia < assemblies.Length; ia++)
             {
                 // Сборка
                 var assemble = assemblies[ia];
@@ -466,7 +466,7 @@ namespace Lotus.Core
                     var types = assemble.GetTypes();
 
                     // Проходим по всем типам
-                    for (int it = 0; it < types.Length; it++)
+                    for (var it = 0; it < types.Length; it++)
                     {
                         // Получаем тип
                         var type = types[it];
@@ -476,7 +476,7 @@ namespace Lotus.Core
                         {
                             try
                             {
-                                object? instance = Activator.CreateInstance(type, true);
+                                var instance = Activator.CreateInstance(type, true);
                                 if (instance != null)
                                 {
                                     list.Add(instance);
@@ -569,8 +569,8 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         public static bool ContainsField(object instance, string fieldName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.ContainsField(fieldName);
             }
@@ -590,8 +590,8 @@ namespace Lotus.Core
         /// <returns>Метаданные поля или null если поля с таким именем не оказалось.</returns>
         public static FieldInfo? GetField(object instance, string fieldName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetField(fieldName);
             }
@@ -611,8 +611,8 @@ namespace Lotus.Core
         /// <returns>Тип поля или null если поля с таким именем не оказалось.</returns>
         public static Type? GetFieldType(object instance, string fieldName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetFieldType(fieldName);
             }
@@ -632,8 +632,8 @@ namespace Lotus.Core
         /// <returns>Имя типа поля или пустая строка если поля с таким именем не оказалось.</returns>
         public static string GetFieldTypeName(object instance, string fieldName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetFieldTypeName(fieldName);
             }
@@ -653,8 +653,8 @@ namespace Lotus.Core
         /// <returns>Список метаданных полей.</returns>
         public static List<FieldInfo> GetFieldsFromType<TType>(object instance)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetFieldsFromType<TType>();
             }
@@ -674,8 +674,8 @@ namespace Lotus.Core
         /// <returns>Список метаданных полей.</returns>
         public static List<FieldInfo> GetFieldsHasAttribute<TAttribute>(object instance) where TAttribute : Attribute
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetFieldsHasAttribute<TAttribute>();
             }
@@ -696,8 +696,8 @@ namespace Lotus.Core
         /// <returns>Атрибут поля или null.</returns>
         public static TAttribute? GetAttributeFromField<TAttribute>(object instance, string fieldName) where TAttribute : System.Attribute
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetAttributeFromField<TAttribute>(fieldName);
             }
@@ -717,8 +717,8 @@ namespace Lotus.Core
         /// <returns>Значение поля.</returns>
         public static object? GetFieldValue(object instance, string fieldName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetFieldValue(fieldName, instance);
             }
@@ -739,8 +739,8 @@ namespace Lotus.Core
         /// <returns>Значение поля.</returns>
         public static object? GetFieldValue(object instance, string fieldName, out FieldInfo? fieldInfoResult)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetFieldValue(fieldName, instance, out fieldInfoResult);
             }
@@ -761,8 +761,8 @@ namespace Lotus.Core
         /// <returns>Значение поля.</returns>
         public static object? GetFieldValue(object instance, string fieldName, int index)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetFieldValue(fieldName, instance, index);
             }
@@ -784,8 +784,8 @@ namespace Lotus.Core
         /// <returns>Значение поля.</returns>
         public static object? GetFieldValue(object instance, string fieldName, int index, out FieldInfo? fieldInfoResult)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetFieldValue(fieldName, instance, index, out fieldInfoResult);
             }
@@ -806,8 +806,8 @@ namespace Lotus.Core
         /// <returns> Статус успешности установки поля.</returns>
         public static bool SetFieldValue(object instance, string fieldName, object value)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? valueType))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var valueType))
             {
                 return valueType.SetFieldValue(fieldName, instance, value);
             }
@@ -829,8 +829,8 @@ namespace Lotus.Core
         /// <returns> Статус успешности установки поля.</returns>
         public static bool SetFieldValue(object instance, string fieldName, object value, int index)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? valueType))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var valueType))
             {
                 return valueType.SetFieldValue(fieldName, instance, value, index);
             }
@@ -852,8 +852,8 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         public static bool ContainsProperty(object instance, string propertyName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.ContainsProperty(propertyName);
             }
@@ -873,8 +873,8 @@ namespace Lotus.Core
         /// <returns>Метаданные свойства или null если свойства с таким именем не оказалось.</returns>
         public static PropertyInfo? GetProperty(object instance, string propertyName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetProperty(propertyName);
             }
@@ -894,8 +894,8 @@ namespace Lotus.Core
         /// <returns>Тип свойства или null если свойства с таким именем не оказалось.</returns>
         public static Type? GetPropertyType(object instance, string propertyName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetPropertyType(propertyName);
             }
@@ -915,8 +915,8 @@ namespace Lotus.Core
         /// <returns>Имя типа свойства или пустая строка если свойство с таким именем не оказалось.</returns>
         public static string GetPropertyTypeName(object instance, string propertyName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetPropertyTypeName(propertyName);
             }
@@ -936,8 +936,8 @@ namespace Lotus.Core
         /// <returns>Список метаданных свойств.</returns>
         public static List<PropertyInfo> GetPropertiesFromType<TType>(object instance)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetPropertiesFromType<TType>();
             }
@@ -957,8 +957,8 @@ namespace Lotus.Core
         /// <returns>Список метаданных свойств.</returns>
         public static List<PropertyInfo> GetPropertiesHasAttribute<TAttribute>(object instance) where TAttribute : Attribute
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetPropertiesHasAttribute<TAttribute>();
             }
@@ -979,8 +979,8 @@ namespace Lotus.Core
         /// <returns>Атрибут свойства или null.</returns>
         public static TAttribute? GetAttributeFromProperty<TAttribute>(object instance, string propertyName) where TAttribute : System.Attribute
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetAttributeFromProperty<TAttribute>(propertyName);
             }
@@ -1000,8 +1000,8 @@ namespace Lotus.Core
         /// <returns>Значение свойства.</returns>
         public static object? GetPropertyValue(object instance, string propertyName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetPropertyValue(propertyName, instance);
             }
@@ -1022,8 +1022,8 @@ namespace Lotus.Core
         /// <returns>Значение свойства.</returns>
         public static object? GetPropertyValue(object instance, string propertyName, int index)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetPropertyValue(propertyName, instance, index);
             }
@@ -1044,8 +1044,8 @@ namespace Lotus.Core
         /// <returns> Статус успешности установки свойства.</returns>
         public static bool SetPropertyValue(object instance, string propertyName, object value)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? valueType))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var valueType))
             {
                 return valueType.SetPropertyValue(propertyName, instance, value);
             }
@@ -1067,8 +1067,8 @@ namespace Lotus.Core
         /// <returns> Статус успешности установки свойства.</returns>
         public static bool SetPropertyValue(object instance, string propertyName, object value, int index)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? valueType))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var valueType))
             {
                 return valueType.SetPropertyValue(propertyName, instance, value, index);
             }
@@ -1090,8 +1090,8 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         public static bool ContainsMethod(object instance, string methodName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.ContainsMethod(methodName);
             }
@@ -1111,8 +1111,8 @@ namespace Lotus.Core
         /// <returns>Метаданные метода или null если метода с таким именем не оказалось.</returns>
         public static MethodInfo? GetMethod(object instance, string methodName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetMethod(methodName);
             }
@@ -1132,8 +1132,8 @@ namespace Lotus.Core
         /// <returns>Тип возвращаемого значения метода или null если метода с таким именем не оказалось.</returns>
         public static Type? GetMethodReturnType(object instance, string methodName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetMethodReturnType(methodName);
             }
@@ -1153,8 +1153,8 @@ namespace Lotus.Core
         /// <returns>Имя типа возвращаемого значения метода или пустая строка если метода с таким именем не оказалось.</returns>
         public static string GetMethodReturnTypeName(object instance, string methodName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetMethodReturnTypeName(methodName);
             }
@@ -1174,8 +1174,8 @@ namespace Lotus.Core
         /// <returns>Список метаданных методов.</returns>
         public static List<MethodInfo> GetMethodsHasAttribute<TAttribute>(object instance) where TAttribute : Attribute
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetMethodsHasAttribute<TAttribute>();
             }
@@ -1196,8 +1196,8 @@ namespace Lotus.Core
         /// <returns>Атрибут метода или null.</returns>
         public static TAttribute? GetAttributeFromMethod<TAttribute>(object instance, string methodName) where TAttribute : System.Attribute
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.GetAttributeFromMethod<TAttribute>(methodName);
             }
@@ -1217,8 +1217,8 @@ namespace Lotus.Core
         /// <returns>Значение метода.</returns>
         public static object? InvokeMethod(object instance, string methodName)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.InvokeMethod(methodName, instance);
             }
@@ -1239,8 +1239,8 @@ namespace Lotus.Core
         /// <returns>Значение метода.</returns>
         public static object? InvokeMethod(object instance, string methodName, object arg)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.InvokeMethod(methodName, instance, arg);
             }
@@ -1263,8 +1263,8 @@ namespace Lotus.Core
         public static object? InvokeMethod(object instance, string methodName, object arg1,
                 object arg2)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.InvokeMethod(methodName, instance, arg1, arg2);
             }
@@ -1288,8 +1288,8 @@ namespace Lotus.Core
         public static object? InvokeMethod(object instance, string methodName, object arg1,
                 object arg2, object arg3)
         {
-            Type type = instance.GetType();
-            if (Cached.TryGetValue(type.FullName!, out CReflectedType? value))
+            var type = instance.GetType();
+            if (Cached.TryGetValue(type.FullName!, out var value))
             {
                 return value.InvokeMethod(methodName, instance, arg1, arg2, arg3);
             }
@@ -1311,7 +1311,7 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         public static bool ContainsStaticField(string fullTypeName, string fieldName)
         {
-            if (Cached.TryGetValue(fullTypeName, out CReflectedType? value))
+            if (Cached.TryGetValue(fullTypeName, out var value))
             {
                 return value.ContainsField(fieldName);
             }
@@ -1329,7 +1329,7 @@ namespace Lotus.Core
         /// <returns>Значение поля.</returns>
         public static object? GetStaticFieldValue(string fullTypeName, string fieldName)
         {
-            if (Cached.TryGetValue(fullTypeName, out CReflectedType? value))
+            if (Cached.TryGetValue(fullTypeName, out var value))
             {
                 return value.GetFieldValue(fieldName, null);
             }
@@ -1349,7 +1349,7 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         public static bool ContainsStaticProperty(string fullTypeName, string propertyName)
         {
-            if (Cached.TryGetValue(fullTypeName, out CReflectedType? value))
+            if (Cached.TryGetValue(fullTypeName, out var value))
             {
                 return value.ContainsProperty(propertyName);
             }
@@ -1367,7 +1367,7 @@ namespace Lotus.Core
         /// <returns>Значение свойства.</returns>
         public static object? GetStaticPropertyValue(string fullTypeName, string propertyName)
         {
-            if (Cached.TryGetValue(fullTypeName, out CReflectedType? value))
+            if (Cached.TryGetValue(fullTypeName, out var value))
             {
                 return value.GetPropertyValue(propertyName, null);
             }

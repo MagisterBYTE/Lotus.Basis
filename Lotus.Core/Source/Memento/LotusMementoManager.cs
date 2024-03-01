@@ -183,7 +183,7 @@ namespace Lotus.Core
             }
 
             // Get the Command object to be undone
-            ILotusMementoState state = _historyStates[_nextUndo];
+            var state = _historyStates[_nextUndo];
 
             // Execute the Command object's undo method
             state.Undo();
@@ -208,7 +208,7 @@ namespace Lotus.Core
 
             // Get the Command object to redo
             var item_to_redo = _nextUndo + 1;
-            ILotusMementoState state = _historyStates[item_to_redo];
+            var state = _historyStates[item_to_redo];
 
             // Execute the Command object
             state.Redo();

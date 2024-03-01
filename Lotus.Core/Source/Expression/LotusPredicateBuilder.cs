@@ -52,7 +52,7 @@ namespace Lotus.Core
             LambdaExpression second,
             Func<Expression, Expression, Expression> merge)
         {
-            Expression expression = XPredicateBuilder.ParameterRebinder.ReplaceParameters(first.Parameters.Select(
+            var expression = XPredicateBuilder.ParameterRebinder.ReplaceParameters(first.Parameters.Select(
                 (f, i) => new
                 {
                     f = f,
@@ -95,7 +95,7 @@ namespace Lotus.Core
             //-----------------------------------------------------------------------------------------------------
             protected override Expression VisitParameter(ParameterExpression node)
             {
-                if (_map.TryGetValue(node, out ParameterExpression? parameterExpression))
+                if (_map.TryGetValue(node, out var parameterExpression))
                 {
                     node = parameterExpression;
                 }

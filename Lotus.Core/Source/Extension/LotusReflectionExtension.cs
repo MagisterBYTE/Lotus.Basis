@@ -195,7 +195,7 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                Type? base_type = @this.BaseType;
+                var base_type = @this.BaseType;
                 if (base_type != null)
                 {
                     status = base_type.IsGenericType && (base_type.Name == ICOLLECTION1 || base_type.Name == COLLECTION1);
@@ -240,7 +240,7 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                Type? base_type = @this.BaseType;
+                var base_type = @this.BaseType;
                 if (base_type != null)
                 {
                     status = base_type.IsGenericType && (base_type.Name == ILIST1 || base_type.Name == LIST1);
@@ -284,7 +284,7 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                Type? base_type = @this.BaseType;
+                var base_type = @this.BaseType;
                 if (base_type != null)
                 {
                     status = base_type.IsGenericType && base_type.Name == LIST_ARRAY1;
@@ -325,7 +325,7 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                Type? base_type = @this.BaseType;
+                var base_type = @this.BaseType;
                 if (base_type != null)
                 {
                     status = base_type.IsGenericType && base_type.Name == OBSERVABLE_COLLECTION1;
@@ -375,7 +375,7 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                Type? base_type = @this.BaseType;
+                var base_type = @this.BaseType;
                 if (base_type != null)
                 {
                     status = IsGenericCollectionType(base_type);
@@ -444,7 +444,7 @@ namespace Lotus.Core
                 else
                 {
                     // Пробуем проверить базовый тип
-                    Type? base_type = @this.BaseType;
+                    var base_type = @this.BaseType;
                     if (base_type != null)
                     {
                         if (IsGenericCollectionType(base_type))
@@ -511,7 +511,7 @@ namespace Lotus.Core
                 else
                 {
                     // Пробуем проверить базовый тип
-                    Type? base_type = @this.BaseType;
+                    var base_type = @this.BaseType;
                     if (base_type != null)
                     {
                         if (IsGenericCollectionType(base_type))
@@ -636,7 +636,7 @@ namespace Lotus.Core
         /// <returns>Значение поля.</returns>
         public static TValue? GetStaticFieldValue<TValue>(this Type @this, string fieldName)
         {
-            FieldInfo? field_info = @this.GetField(fieldName, BindingFlags.Public | BindingFlags.Static);
+            var field_info = @this.GetField(fieldName, BindingFlags.Public | BindingFlags.Static);
             if (field_info != null)
             {
                 return (TValue?)field_info.GetValue(null);
@@ -665,7 +665,7 @@ namespace Lotus.Core
         /// <returns>Значение свойства.</returns>
         public static TValue? GetStaticPropertyValue<TValue>(this Type @this, string propertyName)
         {
-            PropertyInfo? property_info = @this.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static);
+            var property_info = @this.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static);
             if (property_info != null)
             {
                 return (TValue?)property_info.GetValue(null, null);
@@ -1226,7 +1226,7 @@ namespace Lotus.Core
         /// <returns>Статус индексатора.</returns>
         public static bool IsIndexer(this PropertyInfo @this)
         {
-            ParameterInfo[] pia = @this.GetIndexParameters();
+            var pia = @this.GetIndexParameters();
             if (pia != null && pia.Length > 0)
             {
                 return true;

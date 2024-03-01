@@ -90,7 +90,7 @@ namespace Lotus.Core
         /// <returns>Описание либо имя перечисления.</returns>
         public static string? GetDescriptionOrName(this Enum enumValue)
         {
-            Type type_enum = enumValue.GetType();
+            var type_enum = enumValue.GetType();
             return XEnum.GetDescriptionOrName(type_enum, enumValue);
         }
 
@@ -101,7 +101,7 @@ namespace Lotus.Core
         /// <returns>Аббревиатура либо имя перечисления.</returns>
         public static string? GetAbbreviationOrName(this Enum enumValue)
         {
-            Type type_enum = enumValue.GetType();
+            var type_enum = enumValue.GetType();
             return XEnum.GetAbbreviationOrName(type_enum, enumValue);
         }
 

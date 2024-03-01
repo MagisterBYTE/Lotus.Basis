@@ -239,7 +239,7 @@ namespace Lotus.Core.Serialization
                         // Проверка на примитивный тип
                         if (type.HasAttribute<LotusSerializeAsPrimitiveAttribute>())
                         {
-                            MethodInfo? method_info = type.GetMethod(
+                            var method_info = type.GetMethod(
                                 LotusSerializeAsPrimitiveAttribute.SERIALIZE_TO_STRING,
                                 BindingFlags.Public | BindingFlags.Instance);
                             if (method_info != null)

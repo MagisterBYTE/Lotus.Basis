@@ -156,7 +156,7 @@ namespace Lotus.Core
         /// <param name="method">Способ выполнения задачи.</param>
         public virtual void AddTask(ILotusTask task, TTaskMethod method)
         {
-            CTaskHolder task_holder = _taskHolderPools.Take();
+            var task_holder = _taskHolderPools.Take();
             task_holder.Task = task;
             task_holder.MethodMode = method;
             _tasks.Add(task_holder);
@@ -170,7 +170,7 @@ namespace Lotus.Core
         /// <param name="method">Способ выполнения задачи.</param>
         public virtual void AddTask(ILotusTask task, string taskName, TTaskMethod method)
         {
-            CTaskHolder task_holder = _taskHolderPools.Take();
+            var task_holder = _taskHolderPools.Take();
             task_holder.Name = taskName;
             task_holder.Task = task;
             task_holder.MethodMode = method;
@@ -188,7 +188,7 @@ namespace Lotus.Core
                 if (_tasks[i].Task == task)
                 {
                     // 1) Возвращаем в пул
-                    CTaskHolder task_holder = _tasks[i];
+                    var task_holder = _tasks[i];
                     _taskHolderPools.Release(task_holder);
 
                     // 2) Удаляем
@@ -209,7 +209,7 @@ namespace Lotus.Core
                 if (_tasks[i].Name == taskName)
                 {
                     // 1) Возвращаем в пул
-                    CTaskHolder task_holder = _tasks[i];
+                    var task_holder = _tasks[i];
                     _taskHolderPools.Release(task_holder);
 
                     // 2) Удаляем

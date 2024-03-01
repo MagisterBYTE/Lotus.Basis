@@ -859,7 +859,7 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    Type present_type = parameters.GetValueOfType<Type>();
+                    var present_type = parameters.GetValueOfType<Type>();
                     if (present_type != null)
                     {
 
@@ -880,7 +880,7 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    Type present_type = parameters.GetValueOfType<Type>();
+                    var present_type = parameters.GetValueOfType<Type>();
                     if (present_type != null)
                     {
 
@@ -1354,7 +1354,7 @@ namespace Lotus.Core
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        IList? new_models = args.NewItems;
+                        var new_models = args.NewItems;
                         if (new_models != null && new_models.Count > 0)
                         {
                             for (var i = 0; i < new_models.Count; i++)
@@ -1397,7 +1397,7 @@ namespace Lotus.Core
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     {
-                        IList? old_models = args.OldItems;
+                        var old_models = args.OldItems;
                         if (old_models != null && old_models.Count > 0)
                         {
                             for (var i = 0; i < old_models.Count; i++)

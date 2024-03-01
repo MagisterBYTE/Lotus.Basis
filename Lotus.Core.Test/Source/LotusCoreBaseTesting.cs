@@ -252,7 +252,7 @@ namespace Lotus.Core
 
             var uid = XGenerateId.Generate(test);
 
-            DateTime date = XGenerateId.UnpackIdToDateTime(uid);
+            var date = XGenerateId.UnpackIdToDateTime(uid);
 
             var oh = test.GetHashCode() / 16 * 16;
             var rh = XGenerateId.UnpackIdToHashCode(uid);

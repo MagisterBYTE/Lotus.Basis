@@ -45,7 +45,7 @@ namespace Lotus.Core
         /// </summary>
         public override void AddDelimetrPart()
         {
-            CTextLine delimetr_part = DelimetrPart.Duplicate();
+            var delimetr_part = DelimetrPart.Duplicate();
             delimetr_part.Index = _lines.Count;
             delimetr_part.Owned = this;
             delimetr_part.Indent = _currentIndent;
@@ -57,7 +57,7 @@ namespace Lotus.Core
         /// </summary>
         public override void AddDelimetrSection()
         {
-            CTextLine delimetr_section = DelimetrSection.Duplicate();
+            var delimetr_section = DelimetrSection.Duplicate();
             delimetr_section.Index = _lines.Count;
             delimetr_section.Owned = this;
             delimetr_section.Indent = _currentIndent;
@@ -203,7 +203,7 @@ namespace Lotus.Core
             Add(signatureMethod);
             Add("{");
             CurrentIndent++;
-            foreach (string method in bodyMethods)
+            foreach (var method in bodyMethods)
             {
                 Add(method);
             }

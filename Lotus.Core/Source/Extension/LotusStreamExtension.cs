@@ -99,7 +99,7 @@ namespace Lotus.Core
         {
             if (primitives != null && primitives.Count > 0)
             {
-                Type type_item = typeof(TPrimitive);
+                var type_item = typeof(TPrimitive);
 
                 // Перечисление
                 if (type_item.IsEnum)
@@ -112,7 +112,7 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    TypeCode type_code = Type.GetTypeCode(type_item);
+                    var type_code = Type.GetTypeCode(type_item);
                     switch (type_code)
                     {
                         case TypeCode.Empty:
@@ -346,7 +346,7 @@ namespace Lotus.Core
         /// <returns>Массив примитивных данных.</returns>
         public static TPrimitive[] ReadPimitives<TPrimitive>(this BinaryReader reader, int count)
         {
-            Type type_item = typeof(TPrimitive);
+            var type_item = typeof(TPrimitive);
 
             // Создаем массив
             var primitives = new TPrimitive[count];
@@ -362,7 +362,7 @@ namespace Lotus.Core
             }
             else
             {
-                TypeCode type_code = Type.GetTypeCode(type_item);
+                var type_code = Type.GetTypeCode(type_item);
                 switch (type_code)
                 {
                     case TypeCode.Empty:

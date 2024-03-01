@@ -346,6 +346,16 @@ namespace Lotus.Core
             @this[newIndex] = temp;
             return @this;
         }
+
+        /// <summary>
+        /// Сортировка элементов списка.
+        /// </summary>
+        /// <param name="this">Список</param>
+        /// <param name="comparer">Компаратор для сравнивания элементов списка.</param>
+        public static void Sort(this IList @this, IComparer comparer)
+        {
+            ArrayList.Adapter(@this).Sort(comparer);
+        }
         #endregion
 
         #region IList<Type> 

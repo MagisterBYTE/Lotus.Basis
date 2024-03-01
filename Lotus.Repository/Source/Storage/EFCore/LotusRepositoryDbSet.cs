@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -24,9 +25,9 @@ namespace Lotus.Repository
         protected internal DbSet<TEntity> _list;
         protected internal DbContext _context;
 
-        public RepositoryDbSet(DbSet<TEntity> list, DbContext context)
+        public RepositoryDbSet(DbContext context)
         {
-            _list = list;
+            _list = context.Set<TEntity>();
             _context = context;
         }
 
@@ -205,24 +206,28 @@ namespace Lotus.Repository
         /// <inheritdoc/>
         public TEntity Update(TEntity entity)
         {
+            _context.ChangeTracker.Clear();
             return _list.Update(entity).Entity;
         }
 
         /// <inheritdoc/>
         public void UpdateRange(IEnumerable<TEntity> entities)
         {
+            _context.ChangeTracker.Clear();
             _list.UpdateRange(entities);
         }
 
         /// <inheritdoc/>
         public void Remove(TEntity entity)
         {
+            _context.ChangeTracker.Clear();
             _list.Remove(entity);
         }
 
         /// <inheritdoc/>
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
+            _context.ChangeTracker.Clear();
             _list.RemoveRange(entities);
         }
 

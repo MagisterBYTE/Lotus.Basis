@@ -1,4 +1,8 @@
-﻿namespace Lotus.Repository
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleToAttribute("Lotus.Repository.Test")]
+
+namespace Lotus.Repository
 {
     /**
      * \defgroup Repository Модуль репозитория

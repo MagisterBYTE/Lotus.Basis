@@ -25,6 +25,7 @@ namespace Lotus.Repository
         public DomainContext(DbContextOptions<DomainContext> options)
             : base(options)
         {
+            this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public void Initialize()

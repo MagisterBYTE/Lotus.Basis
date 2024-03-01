@@ -58,7 +58,7 @@ namespace Lotus.Repository
             var list = _context.Set<TEntity>();
             if (list != null)
             {
-                return new RepositoryDbSet<TEntity, TKey>(list, _context);
+                return new RepositoryDbSet<TEntity, TKey>(_context);
             }
 
             return null;

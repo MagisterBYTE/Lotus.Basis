@@ -1,4 +1,9 @@
-﻿namespace Lotus.Core
+﻿
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleToAttribute("Lotus.Core.Test")]
+
+namespace Lotus.Core
 {
     /**
      * \defgroup Core Модуль базового ядра

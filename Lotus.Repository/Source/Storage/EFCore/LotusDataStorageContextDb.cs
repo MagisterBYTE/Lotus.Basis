@@ -23,7 +23,7 @@ namespace Lotus.Repository
         /// </summary>
         /// <param name="context">Контекст БД.</param>
         public DataStorageContextDb(TContext context)
-            :base(context)
+            : base(context)
         {
         }
         #endregion

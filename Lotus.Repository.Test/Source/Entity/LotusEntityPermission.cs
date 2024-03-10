@@ -12,8 +12,8 @@ namespace Lotus.Repository
         public List<Role> Roles { get; set; } = new List<Role>();
 
         public Permission(int id, string name)
-            : base(id)
         {
+            Id = id;
             Name = name;
         }
     }

@@ -24,6 +24,16 @@ namespace Lotus.Repository
         string ConnectingData { get; set; }
 
         /// <summary>
+        /// Статус указывающий на то что хранилище необходимо сохранить.
+        /// </summary>
+        bool NeedSaved { get; set; }
+
+        /// <summary>
+        /// Структура хранилища
+        /// </summary>
+        ILotusStorageStructure IStructure { get; }
+
+        /// <summary>
         /// Получить репозиторий указанной сущности.
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности.</typeparam>

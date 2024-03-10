@@ -142,7 +142,7 @@ namespace Lotus.Core
             }
             else
             {
-                if (args.UserState is TLogMessage message)
+                if (args.UserState is LogMessage message)
                 {
                     XLogger.Log(message);
                 }
@@ -185,7 +185,7 @@ namespace Lotus.Core
             if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
             {
                 var text = info != null ? info.ToString()! : $"Persent: {percent}";
-                backgroundWorker.ReportProgress(percent, new TLogMessage(text, TLogType.Info));
+                backgroundWorker.ReportProgress(percent, new LogMessage(text, TLogType.Info));
             }
         }
 
@@ -202,7 +202,7 @@ namespace Lotus.Core
             if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
             {
                 var text = info != null ? info.ToString()! : $"Persent: {percent}";
-                backgroundWorker.ReportProgress(percent, new TLogMessage(moduleName, text, TLogType.Info));
+                backgroundWorker.ReportProgress(percent, new LogMessage(moduleName, text, TLogType.Info));
             }
         }
 
@@ -217,7 +217,7 @@ namespace Lotus.Core
             if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
             {
                 var text = error != null ? error.ToString()! : $"Persent: {percent}";
-                backgroundWorker.ReportProgress(percent, new TLogMessage(text, TLogType.Error));
+                backgroundWorker.ReportProgress(percent, new LogMessage(text, TLogType.Error));
             }
         }
 
@@ -234,7 +234,7 @@ namespace Lotus.Core
             if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
             {
                 var text = error != null ? error.ToString()! : $"Persent: {percent}";
-                backgroundWorker.ReportProgress(percent, new TLogMessage(moduleName, text, TLogType.Error));
+                backgroundWorker.ReportProgress(percent, new LogMessage(moduleName, text, TLogType.Error));
             }
         }
         #endregion

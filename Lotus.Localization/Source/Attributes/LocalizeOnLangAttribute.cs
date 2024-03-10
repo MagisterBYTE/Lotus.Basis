@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lotus.Localilzation
+namespace Lotus.Localization
 {
     /// <summary>
     /// Атрибут для локализации на конкретный язык.

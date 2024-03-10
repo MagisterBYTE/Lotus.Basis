@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace Lotus.Localilzation
+namespace Lotus.Localization
 {
     /// <summary>
     /// Класс для предоставления пустых локализованных данных.

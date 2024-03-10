@@ -49,12 +49,12 @@ namespace Lotus.Core
         Exception,
 
         /// <summary>
-        /// Информация об удачном выполнении задачи.
+        /// Информация об удачном выполнении задачи/операции.
         /// </summary>
         Succeed,
 
         /// <summary>
-        /// Информация об неудачном выполнении задачи.
+        /// Информация об неудачном выполнении задачи/операции.
         /// </summary>
         Failed
     }
@@ -62,7 +62,7 @@ namespace Lotus.Core
     /// <summary>
     /// Структура сообщения лога.
     /// </summary>
-    public struct TLogMessage
+    public class LogMessage
     {
         #region Fields
         /// <summary>
@@ -105,7 +105,7 @@ namespace Lotus.Core
         /// <summary>
         /// Краткая трассировка сообщения с указанием файла, строки и метода.
         /// </summary>
-        public readonly string TraceShort
+        public string TraceShort
         {
             get { return MemberName + " [" + Path.GetFileNameWithoutExtension(FilePath) + ":" + LineNumber.ToString() + "]"; }
         }
@@ -117,12 +117,12 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Имя сообщения.</param>
         /// <param name="type">Тип сообщения.</param>
-        public TLogMessage(string text, TLogType type)
+        public LogMessage(string text, TLogType type)
         {
-            Module = "";
+            Module = string.Empty;
             Text = text;
-            MemberName = "";
-            FilePath = "";
+            MemberName = string.Empty;
+            FilePath = string.Empty;
             LineNumber = 0;
             Time = 0;
             Type = type;
@@ -134,12 +134,12 @@ namespace Lotus.Core
         /// <param name="module">Имя модуля/подсистемы.</param>
         /// <param name="text">Имя сообщения.</param>
         /// <param name="type">Тип сообщения.</param>
-        public TLogMessage(string module, string text, TLogType type)
+        public LogMessage(string module, string text, TLogType type)
         {
             Module = module;
             Text = text;
-            MemberName = "";
-            FilePath = "";
+            MemberName = string.Empty;
+            FilePath = string.Empty;
             LineNumber = 0;
             Time = 0;
             Type = type;
@@ -236,7 +236,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="lineTrace">Строка трассировки.</param>
         /// <returns>Имя метода.</returns>
-        public readonly string ExtractMemberName(string lineTrace)
+        public string ExtractMemberName(string lineTrace)
         {
             // Находим имя файла
             var index_file = lineTrace.LastIndexOf('(');
@@ -272,7 +272,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="lineTrace">Строка трассировки.</param>
         /// <returns>Имя метода.</returns>
-        public readonly string ExtractFileName(string lineTrace)
+        public string ExtractFileName(string lineTrace)
         {
             // Находим имя файла
             var index_file = lineTrace.LastIndexOf('(');
@@ -294,7 +294,7 @@ namespace Lotus.Core
                 return file_path;
             }
 
-            return "";
+            return string.Empty;
         }
         #endregion
     }

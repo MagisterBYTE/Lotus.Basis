@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Lotus.Localilzation
+namespace Lotus.Localization
 {
     /// <summary>
     /// Интерфейс для предоставления локализованных данных.

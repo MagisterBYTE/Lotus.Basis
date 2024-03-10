@@ -2,6 +2,8 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
+using Lotus.Core;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -24,7 +26,7 @@ namespace Lotus.Repository
         /// <param name="builder">Построитель сущности.</param>
         /// <returns>Построитель сущности.</returns>
         public static EntityTypeBuilder<TEntity> AddKeyColumn<TEntity>(this EntityTypeBuilder<TEntity> builder)
-            where TEntity : class, ILotusRepositoryEntity<Guid>
+            where TEntity : class, ILotusIdentifierId<Guid>
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasColumnName("id");
@@ -41,7 +43,7 @@ namespace Lotus.Repository
         /// <returns>Построитель сущности.</returns>
         public static IndexBuilder<TEntity> HasNotDeletedPartialUniqueIndex<TEntity>(this EntityTypeBuilder<TEntity> builder,
             [NotNull] Expression<Func<TEntity, object>> indexExpression)
-            where TEntity : class, ILotusRepositorySoftDeletable
+            where TEntity : class, ILotusEntityDbSoftDeletable
         {
             return builder
                 .HasIndex(indexExpression!)
@@ -56,7 +58,7 @@ namespace Lotus.Repository
         /// <param name="builder">Построитель сущности.</param>
         /// <returns>Построитель сущности.</returns>
         public static EntityTypeBuilder<TEntity> SetDatesPolicy<TEntity>(this EntityTypeBuilder<TEntity> builder)
-            where TEntity : class, ILotusRepositoryEntity<Guid>
+            where TEntity : class, ILotusEntityDb<Guid>
         {
             builder
                 .Property(x => x.Created)
@@ -102,7 +104,7 @@ namespace Lotus.Repository
         /// <param name="builder">Построитель сущности.</param>
         /// <returns>Построитель сущности.</returns>
         public static EntityTypeBuilder<TEntity> SetSoftDeletePolicy<TEntity>(this EntityTypeBuilder<TEntity> builder)
-            where TEntity : class, ILotusRepositorySoftDeletable
+            where TEntity : class, ILotusEntityDbSoftDeletable
         {
             builder.Property(x => x.Deleted).HasColumnName("deleted");
 

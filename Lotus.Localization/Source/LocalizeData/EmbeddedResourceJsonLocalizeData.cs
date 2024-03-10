@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Lotus.Localilzation
+namespace Lotus.Localization
 {
     /// <summary>
     /// Класс для локализованных данных которые содержаться во встроенном ресурсе в файле формат Json.

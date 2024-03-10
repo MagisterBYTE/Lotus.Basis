@@ -17,8 +17,8 @@ namespace Lotus.Core
         /// <param name="filter">Предикат фильтрации.</param>
         /// <param name="transform">Метод трансформатор для создания узлов.</param>
         /// <returns>Новый узел.</returns>
-        private static ITreeNode? ByFilter(ITreeNode? parent, ITreeNode check,
-            Predicate<ITreeNode?> filter, Converter<ITreeNode, ITreeNode> transform)
+        private static ILotusTreeNode? ByFilter(ILotusTreeNode? parent, ILotusTreeNode check,
+            Predicate<ILotusTreeNode?> filter, Converter<ILotusTreeNode, ILotusTreeNode> transform)
         {
             var node_new = transform(check);
 
@@ -56,8 +56,8 @@ namespace Lotus.Core
         /// <param name="filter">Предикат фильтрации.</param>
         /// <param name="transform">Метод трансформатор для создания узлов.</param>
         /// <returns>Новый узел.</returns>
-        public static ITreeNode? ByFilter(ITreeNode rootNode, Predicate<ITreeNode?> filter,
-            Converter<ITreeNode, ITreeNode> transform)
+        public static ILotusTreeNode? ByFilter(ILotusTreeNode rootNode, Predicate<ILotusTreeNode?> filter,
+            Converter<ILotusTreeNode, ILotusTreeNode> transform)
         {
             var node_root = ByFilter(null, rootNode, filter, transform);
             return node_root;
@@ -70,8 +70,8 @@ namespace Lotus.Core
         /// <param name="list">Список.</param>
         /// <param name="transform">Метод трансформатор для преобразования узлов.</param>
         /// <param name="keySelectorParentId">Метод для получения родительского Id.</param>
-        public static void ByFlatList(ITreeNode rootNode, IEnumerable<ITreeNode> list,
-            Converter<ITreeNode, ITreeNode>? transform = null, Func<ITreeNode, Guid?>? keySelectorParentId = null)
+        public static void ByFlatList(ILotusTreeNode rootNode, IEnumerable<ILotusTreeNode> list,
+            Converter<ILotusTreeNode, ILotusTreeNode>? transform = null, Func<ILotusTreeNode, Guid?>? keySelectorParentId = null)
         {
             var sourceList = list;
 

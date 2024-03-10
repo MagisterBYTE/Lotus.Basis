@@ -22,7 +22,7 @@ namespace Lotus.Core
         /// Общее оповещение.
         /// </summary>
         /// <param name="message">Сообщение.</param>
-        void Log(TLogMessage message);
+        void Log(LogMessage message);
 
         /// <summary>
         /// Оповещение определённого модуля/подсистемы.

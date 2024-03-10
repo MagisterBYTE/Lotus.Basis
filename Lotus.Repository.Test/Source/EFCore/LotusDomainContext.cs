@@ -5,7 +5,7 @@ namespace Lotus.Repository
     /// <summary>
     /// Контекст базы данных для тестирования.
     /// </summary>
-    public class DomainContext : DbContext
+    public class DomainContext : ContextDbStorageStructure
     {
         public static DomainContext Create(string connectingString)
         {

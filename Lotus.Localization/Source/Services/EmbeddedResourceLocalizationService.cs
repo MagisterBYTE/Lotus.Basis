@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
-namespace Lotus.Localilzation
+namespace Lotus.Localization
 {
     /// <summary>
     /// Сервис реализующий локализацию данных из встроенного ресурса в файле формат Json.

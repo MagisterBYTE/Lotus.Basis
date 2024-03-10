@@ -5,19 +5,6 @@ namespace Lotus.Core
     /** \addtogroup CoreIdentifiers
     *@{*/
     /// <summary>
-    /// Шаблонный класс для простых сущностей поддерживающих идентификатор.
-    /// </summary>
-    /// <typeparam name="TKey">Тип идентификатор.</typeparam>
-    public class IdentifierDtoId<TKey> : ILotusIdentifierId<TKey> where TKey :
-        notnull, IEquatable<TKey>
-    {
-        /// <summary>
-        /// Ключ сущности.
-        /// </summary>
-        public TKey Id { get; set; } = default!;
-    }
-
-    /// <summary>
     /// Шаблонный класс для сущностей поддерживающих идентификатор.
     /// </summary>
     /// <typeparam name="TKey">Тип идентификатор.</typeparam>
@@ -84,13 +71,13 @@ namespace Lotus.Core
     /// Базовый класс реализующий идентификацию через уникальный числовой идентификатор.
     /// </summary>
     [Serializable]
-    public class CIdentifierInt : IdentifierId<int>, ILotusIdentifierInt
+    public class IdentifierInt : IdentifierId<int>, ILotusIdentifierInt
     {
         #region Constructors
         /// <summary>
         /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
         /// </summary>
-        public CIdentifierInt()
+        public IdentifierInt()
         {
 
         }
@@ -99,7 +86,7 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="id">Уникальный числовой идентификатор.</param>
-        public CIdentifierInt(int id)
+        public IdentifierInt(int id)
             : base(id)
         {
         }
@@ -110,13 +97,13 @@ namespace Lotus.Core
     /// Базовый класс реализующий идентификацию через уникальный числовой идентификатор.
     /// </summary>
     [Serializable]
-    public class CIdentifierLong : IdentifierId<long>, ILotusIdentifierLong
+    public class IdentifierLong : IdentifierId<long>, ILotusIdentifierLong
     {
         #region Constructors
         /// <summary>
         /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
         /// </summary>
-        public CIdentifierLong()
+        public IdentifierLong()
         {
 
         }
@@ -125,7 +112,33 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="id">Уникальный числовой идентификатор.</param>
-        public CIdentifierLong(long id)
+        public IdentifierLong(long id)
+            : base(id)
+        {
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// Базовый класс реализующий идентификацию через глобальный идентификатор.
+    /// </summary>
+    [Serializable]
+    public class IdentifierGuid : IdentifierId<Guid>, ILotusIdentifierGlobal
+    {
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
+        /// </summary>
+        public IdentifierGuid()
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="id">Глобальный идентификатор.</param>
+        public IdentifierGuid(Guid id)
             : base(id)
         {
         }

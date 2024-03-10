@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Resources;
 
-namespace Lotus.Localilzation
+namespace Lotus.Localization
 {
     /// <summary>
     /// Базовый сервис локализацию данных

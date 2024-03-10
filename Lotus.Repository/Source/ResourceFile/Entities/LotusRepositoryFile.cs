@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
+using Lotus.Core;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Lotus.Repository
@@ -10,7 +12,7 @@ namespace Lotus.Repository
     /// <summary>
     /// Класс для описания и представления отдельного файла.
     /// </summary>
-    public class ResourceFile : RepositoryEntityBase<Guid>, IComparable<ResourceFile>
+    public class ResourceFile : BaseEntityDb<Guid>, IComparable<ResourceFile>
     {
         #region Const
         /// <summary>

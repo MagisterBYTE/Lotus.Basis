@@ -12,7 +12,7 @@ namespace Lotus.Repository
     /// <summary>
     /// Класс для группы файла.
     /// </summary>
-    public class ResourceFileGroup : EntityDb<int>, IComparable<ResourceFileGroup>
+    public class ResourceFileGroup : BaseEntityDb<int>, IComparable<ResourceFileGroup>
     {
         #region Const
         /// <summary>

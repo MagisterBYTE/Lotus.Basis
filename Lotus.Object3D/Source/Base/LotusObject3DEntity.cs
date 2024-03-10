@@ -16,7 +16,7 @@ namespace Lotus.Object3D
     /// <summary>
     /// Базовая сущность в подсистеме 3D объекта для формирование иерархической структуры трехмерной сцены.
     /// </summary>
-    public class Entity3D : CNameableInt, ILotusViewModelOwner, ILotusViewModelBuilder
+    public class Entity3D : NameableInt, ILotusViewModelOwner, ILotusViewModelBuilder
     {
         #region Fields
         protected internal ILotusViewModel _ownerViewModel;

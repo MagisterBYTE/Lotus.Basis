@@ -28,7 +28,7 @@ namespace Lotus.Core
         /// <returns>Результат/ответ операции.</returns>
         public static ILotusResult GetResultDefault(this Exception exception)
         {
-            ILotusResult result = Result.Failed;
+            ILotusResult result = Result.Bad;
 
             if (exception == null)
             {
@@ -43,27 +43,27 @@ namespace Lotus.Core
             {
                 case NullReferenceException exc:
                     {
-                        result = XResult.Failed(exc.HResult, exc.Message, exc.Source);
+                        result = Result.Failed(exc.HResult, exc.Message, exc.Source);
                     }
                     break;
                 case ArgumentOutOfRangeException exc:
                     {
-                        result = XResult.Failed(exc.HResult, exc.Message, exc.ParamName);
+                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName);
                     }
                     break;
                 case ArgumentNullException exc:
                     {
-                        result = XResult.Failed(exc.HResult, exc.Message, exc.ParamName);
+                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName);
                     }
                     break;
                 case ArgumentException exc:
                     {
-                        result = XResult.Failed(exc.HResult, exc.Message, exc.ParamName);
+                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName);
                     }
                     break;
                 default:
                     {
-                        result = XResult.Failed(exception.HResult, exception.Message, exception.Source);
+                        result = Result.Failed(exception.HResult, exception.Message, exception.Source);
                     }
                     break;
             }

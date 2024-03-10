@@ -10,70 +10,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lotus.Repository
 {
-    /**
-     * \defgroup RepositoryEFCore Подсистема EF Core
-     * \ingroup Repository
-     * \brief Подсистема EF Core для работы с базами данных.
-     * @{
-     */
+    /** \addtogroup RepositoryEFCore
+    *@{*/
     /// <summary>
     /// Класс представляющий собой хранилища данных для EF Core.
     /// </summary>
-    public class DataStorageContextDb<TContext> : ILotusDataStorage where TContext : DbContext
+    public class DataStorageContextDb<TContext> : StorageBaseContextDb<TContext>, ILotusDataStorage where TContext : ContextDbStorageStructure
     {
-        #region Fields
-        protected readonly TContext _context;
-        protected readonly object[] _ids = new object[1];
-        protected internal string _connectingString;
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// Данные связвания хранилища с источником.
-        /// </summary>
-        public string ConnectingData
-        {
-            get { return _connectingString; }
-            set { _connectingString = value; }
-        }
-        #endregion
-
         #region Constructors
         /// <summary>
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="context">Контекст БД.</param>
         public DataStorageContextDb(TContext context)
+            :base(context)
         {
-            _context = context;
-        }
-        #endregion
-
-        #region ILotusStorage methods
-        /// <inheritdoc/>
-        public virtual ILotusRepository<TEntity, TKey>? GetRepository<TEntity, TKey>()
-            where TEntity : class, ILotusIdentifierId<TKey>, new()
-            where TKey : notnull, IEquatable<TKey>
-        {
-            var list = _context.Set<TEntity>();
-            if (list != null)
-            {
-                return new RepositoryDbSet<TEntity, TKey>(_context);
-            }
-
-            return null;
-        }
-
-        /// <inheritdoc/>
-        public virtual int SaveChanges()
-        {
-            return _context.SaveChanges();
-        }
-
-        /// <inheritdoc/>
-        public virtual async ValueTask<int> SaveChangesAsync(CancellationToken token = default)
-        {
-            return await _context.SaveChangesAsync(token);
         }
         #endregion
 

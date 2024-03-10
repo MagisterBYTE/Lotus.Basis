@@ -13,14 +13,14 @@ namespace Lotus.Repository
         public List<Permission> Permissions { get; set; } = new List<Permission>();
 
         public Role(int id, string name)
-            : base(id)
         {
+            Id = id;
             Name = name;
         }
 
         public Role(int id, string name, params Permission[] permissions)
-            : base(id)
         {
+            Id = id;
             Name = name;
             Permissions.AddRange(permissions);
         }

@@ -9,7 +9,7 @@ namespace Lotus.Core
     /// Элемент файловой системы представляющий собой директорию.
     /// </summary>
     [Serializable]
-    public class CFileSystemDirectory : CNameable, ILotusOwnerObject, ILotusFileSystemEntity,
+    public class CFileSystemDirectory : Nameable, ILotusOwnerObject, ILotusFileSystemEntity,
         ILotusViewModelBuilder, ILotusModelExpanded
     {
         #region Static methods

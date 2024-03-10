@@ -6,7 +6,7 @@ namespace Lotus.Core
     /// <summary>
     /// Определение интерфейса для объектов которые могут находиться в дереве.
     /// </summary>
-    public interface ITreeNode : ILotusIdentifierId<Guid>, ILotusCheckOne<ITreeNode>
+    public interface ILotusTreeNode : ILotusIdentifierId<Guid>, ILotusCheckOne<ILotusTreeNode>
     {
         /// <summary>
         /// Статус выбора узла.
@@ -31,11 +31,11 @@ namespace Lotus.Core
         /// <summary>
         /// Родительский узел.
         /// </summary>
-        ITreeNode? IParentTreeNode { get; set; }
+        ILotusTreeNode? IParentTreeNode { get; set; }
 
         /// <summary>
         /// Список дочерних узлов.
         /// </summary>
-        IEnumerable<ITreeNode>? IChildNodes { get; }
+        IEnumerable<ILotusTreeNode>? IChildNodes { get; }
     }
 }

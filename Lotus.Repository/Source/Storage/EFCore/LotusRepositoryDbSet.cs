@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -20,30 +19,42 @@ namespace Lotus.Repository
             where TEntity : class, ILotusIdentifierId<TKey>, new()
             where TKey : notnull, IEquatable<TKey>
     {
-        private readonly object[] _ids = new object[1];
+        protected readonly object[] _ids = new object[1];
 
         protected internal DbSet<TEntity> _list;
         protected internal DbContext _context;
 
+        /// <inheritdoc/>
+        public bool SaveEachOperation { get; set; }
+
         public RepositoryDbSet(DbContext context)
         {
-            _list = context.Set<TEntity>();
+            SaveEachOperation = true;
+
             _context = context;
+            if (_context is not null)
+            {
+                _list = context.Set<TEntity>();
+            }
         }
 
         /// <summary>
-        /// Установка списка сущностей.
+        /// Установка контекста базы данных.
         /// </summary>
-        /// <param name="list">Список сущностей.</param>
-        public void SetList(DbSet<TEntity> list)
+        /// <param name="context">Контекст базы данных.</param>
+        public virtual void SetContext(DbContext context)
         {
-            _list = list;
+            _context = context;
+            if (_context is not null)
+            {
+                _list = context.Set<TEntity>();
+            }
         }
 
         /// <inheritdoc/>
         public IQueryable<TEntity> Query()
         {
-            return _list.AsQueryable();
+            return _list;
         }
 
         /// <inheritdoc/>
@@ -148,6 +159,12 @@ namespace Lotus.Repository
                 };
 
                 var entry = _list.Add(entity);
+
+                if (SaveEachOperation)
+                {
+                    _context.SaveChanges();
+                }
+
                 return entry.Entity;
             }
             else
@@ -169,6 +186,12 @@ namespace Lotus.Repository
                 };
 
                 var entry = await _list.AddAsync(entity, token);
+
+                if (SaveEachOperation && _context is not null)
+                {
+                    await _context.SaveChangesAsync(token);
+                }
+
                 return entry.Entity;
             }
             else
@@ -181,6 +204,12 @@ namespace Lotus.Repository
         public TEntity Add(TEntity entity)
         {
             var entry = _list.Add(entity);
+
+            if (SaveEachOperation && _context is not null)
+            {
+                _context.SaveChanges();
+            }
+
             return entry.Entity;
         }
 
@@ -188,6 +217,12 @@ namespace Lotus.Repository
         public async ValueTask<TEntity> AddAsync(TEntity entity, CancellationToken token = default)
         {
             var entry = await _list.AddAsync(entity, token);
+
+            if (SaveEachOperation && _context is not null)
+            {
+                await _context.SaveChangesAsync(token);
+            }
+
             return entry.Entity;
         }
 
@@ -195,19 +230,36 @@ namespace Lotus.Repository
         public void AddRange(IEnumerable<TEntity> entities)
         {
             _list.AddRange(entities);
+
+            if (SaveEachOperation && _context is not null)
+            {
+                _context.SaveChanges();
+            }
         }
 
         /// <inheritdoc/>
         public async Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken token = default)
         {
             await _list.AddRangeAsync(entities, token);
+
+            if (SaveEachOperation && _context is not null)
+            {
+                await _context.SaveChangesAsync(token);
+            }
         }
 
         /// <inheritdoc/>
         public TEntity Update(TEntity entity)
         {
             _context.ChangeTracker.Clear();
-            return _list.Update(entity).Entity;
+            var entry = _list.Update(entity);
+
+            if (SaveEachOperation)
+            {
+                _context.SaveChanges();
+            }
+
+            return entry.Entity;
         }
 
         /// <inheritdoc/>
@@ -215,6 +267,11 @@ namespace Lotus.Repository
         {
             _context.ChangeTracker.Clear();
             _list.UpdateRange(entities);
+
+            if (SaveEachOperation)
+            {
+                _context.SaveChanges();
+            }
         }
 
         /// <inheritdoc/>
@@ -222,6 +279,11 @@ namespace Lotus.Repository
         {
             _context.ChangeTracker.Clear();
             _list.Remove(entity);
+
+            if (SaveEachOperation)
+            {
+                _context.SaveChanges();
+            }
         }
 
         /// <inheritdoc/>
@@ -229,6 +291,49 @@ namespace Lotus.Repository
         {
             _context.ChangeTracker.Clear();
             _list.RemoveRange(entities);
+
+            if (SaveEachOperation)
+            {
+                _context.SaveChanges();
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveId(TKey id)
+        {
+            _ids[0] = id;
+            var entity = _list.Find(_ids);
+            if (entity is not null)
+            {
+                _context.ChangeTracker.Clear();
+                _list.Remove(entity);
+
+                if (SaveEachOperation)
+                {
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveIdsRange(IEnumerable<TKey> ids)
+        {
+            var isRemoving = false;
+            foreach (var id in ids)
+            {
+                _ids[0] = id;
+                var entity = _list.Find(_ids);
+                if (entity is not null)
+                {
+                    _list.Remove(entity);
+                    isRemoving = true;
+                }
+            }
+
+            if (SaveEachOperation && isRemoving)
+            {
+                _context.SaveChanges();
+            }
         }
 
         /// <inheritdoc/>

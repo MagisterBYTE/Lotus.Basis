@@ -9,8 +9,8 @@ namespace Lotus.Core
     /// Базовый класс реализующий имя объекта.
     /// </summary>
     [Serializable]
-    public class CNameable : PropertyChangedBase, ILotusNameable, IComparable<ILotusNameable>,
-        IComparable<CNameable>
+    public class Nameable : PropertyChangedBase, ILotusNameable, IComparable<ILotusNameable>,
+        IComparable<Nameable>
     {
         #region Static fields
         //
@@ -48,7 +48,7 @@ namespace Lotus.Core
         /// <summary>
         /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
         /// </summary>
-        public CNameable()
+        public Nameable()
             : this(string.Empty)
         {
 
@@ -58,7 +58,7 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="name">Имя объекта.</param>
-        public CNameable(string name)
+        public Nameable(string name)
         {
             _name = name;
         }
@@ -82,7 +82,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="other">Сравниваемый объект.</param>
         /// <returns>Статус сравнения объектов.</returns>
-        public int CompareTo(CNameable? other)
+        public int CompareTo(Nameable? other)
         {
             if (other == null) return 0;
 
@@ -114,8 +114,8 @@ namespace Lotus.Core
     /// Базовый класс реализующий имя объекта и уникальный числовой идентификатор.
     /// </summary>
     [Serializable]
-    public class CNameableInt : PropertyChangedBase, ILotusNameable, ILotusIdentifierInt, IComparable<ILotusNameable>,
-        IComparable<CNameableInt>
+    public class NameableInt : PropertyChangedBase, ILotusNameable, ILotusIdentifierInt, IComparable<ILotusNameable>,
+        IComparable<NameableInt>
     {
         #region Static fields
         //
@@ -172,7 +172,7 @@ namespace Lotus.Core
         /// <summary>
         /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
         /// </summary>
-        public CNameableInt()
+        public NameableInt()
             : this(string.Empty)
         {
 
@@ -182,7 +182,7 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="name">Имя объекта.</param>
-        public CNameableInt(string name)
+        public NameableInt(string name)
         {
             _name = name;
         }
@@ -191,7 +191,7 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="id">Идентификатор объекта.</param>
-        public CNameableInt(int id)
+        public NameableInt(int id)
         {
             _id = id;
         }
@@ -215,7 +215,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="other">Сравниваемый объект.</param>
         /// <returns>Статус сравнения объектов.</returns>
-        public int CompareTo(CNameableInt? other)
+        public int CompareTo(NameableInt? other)
         {
             if (other == null) return 0;
 

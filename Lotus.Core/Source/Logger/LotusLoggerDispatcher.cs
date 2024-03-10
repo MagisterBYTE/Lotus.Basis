@@ -18,7 +18,7 @@ namespace Lotus.Core
     {
         #region Fields
         internal static ILotusLoggerView _logger;
-        internal static ListArray<TLogMessage> _messages;
+        internal static ListArray<LogMessage> _messages;
         #endregion
 
         #region Properties
@@ -34,13 +34,13 @@ namespace Lotus.Core
         /// <summary>
         /// Все сообщения.
         /// </summary>
-        public static ListArray<TLogMessage> Messages
+        public static ListArray<LogMessage> Messages
         {
             get
             {
                 if (_messages == null)
                 {
-                    _messages = new ListArray<TLogMessage>();
+                    _messages = new ListArray<LogMessage>();
                     _messages.IsNotify = true;
                 }
                 return _messages;
@@ -53,7 +53,7 @@ namespace Lotus.Core
         /// Оповещение.
         /// </summary>
         /// <param name="message">Сообщение.</param>
-        public static void Log(TLogMessage message)
+        public static void Log(LogMessage message)
         {
             Messages.Add(message);
             if (_logger != null)
@@ -101,7 +101,7 @@ namespace Lotus.Core
             {
                 var text = info.ToString() ?? string.Empty;
 
-                var message = new TLogMessage(text, TLogType.Info);
+                var message = new LogMessage(text, TLogType.Info);
                 message.MemberName = memberName;
                 message.FilePath = filePath;
                 message.LineNumber = lineNumber;
@@ -128,7 +128,7 @@ namespace Lotus.Core
             {
                 var text = info.ToString() ?? string.Empty;
 
-                var message = new TLogMessage(moduleName, text, TLogType.Info);
+                var message = new LogMessage(moduleName, text, TLogType.Info);
                 message.MemberName = memberName;
                 message.FilePath = filePath;
                 message.LineNumber = lineNumber;
@@ -148,7 +148,7 @@ namespace Lotus.Core
         {
             var text = string.Format(format, args);
 
-            var message = new TLogMessage(text, TLogType.Info);
+            var message = new LogMessage(text, TLogType.Info);
             Messages.Add(message);
 
             if (_logger != null) _logger.Log(text, TLogType.Info);
@@ -164,7 +164,7 @@ namespace Lotus.Core
         {
             var text = string.Format(format, args);
 
-            var message = new TLogMessage(moduleName, text, TLogType.Info);
+            var message = new LogMessage(moduleName, text, TLogType.Info);
             Messages.Add(message);
 
             if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Info);
@@ -188,7 +188,7 @@ namespace Lotus.Core
             {
                 var text = warning.ToString() ?? string.Empty;
 
-                var message = new TLogMessage(text, TLogType.Warning);
+                var message = new LogMessage(text, TLogType.Warning);
                 message.MemberName = memberName;
                 message.FilePath = filePath;
                 message.LineNumber = lineNumber;
@@ -216,7 +216,7 @@ namespace Lotus.Core
             {
                 var text = warning.ToString() ?? string.Empty;
 
-                var message = new TLogMessage(moduleName, text, TLogType.Warning);
+                var message = new LogMessage(moduleName, text, TLogType.Warning);
                 message.MemberName = memberName;
                 message.FilePath = filePath;
                 message.LineNumber = lineNumber;
@@ -236,7 +236,7 @@ namespace Lotus.Core
         {
             var text = string.Format(format, args);
 
-            var message = new TLogMessage(text, TLogType.Warning);
+            var message = new LogMessage(text, TLogType.Warning);
             Messages.Add(message);
 
             if (_logger != null) _logger.Log(text, TLogType.Warning);
@@ -252,7 +252,7 @@ namespace Lotus.Core
         {
             var text = string.Format(format, args);
 
-            var message = new TLogMessage(moduleName, text, TLogType.Warning);
+            var message = new LogMessage(moduleName, text, TLogType.Warning);
             Messages.Add(message);
 
             if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Warning);
@@ -276,7 +276,7 @@ namespace Lotus.Core
             {
                 var text = error.ToString() ?? string.Empty;
 
-                var message = new TLogMessage(text, TLogType.Error);
+                var message = new LogMessage(text, TLogType.Error);
                 message.MemberName = memberName;
                 message.FilePath = filePath;
                 message.LineNumber = lineNumber;
@@ -304,7 +304,7 @@ namespace Lotus.Core
             {
                 var text = error.ToString() ?? string.Empty;
 
-                var message = new TLogMessage(moduleName, text, TLogType.Error);
+                var message = new LogMessage(moduleName, text, TLogType.Error);
                 message.MemberName = memberName;
                 message.FilePath = filePath;
                 message.LineNumber = lineNumber;
@@ -324,7 +324,7 @@ namespace Lotus.Core
         {
             var text = string.Format(format, args);
 
-            var message = new TLogMessage(text, TLogType.Error);
+            var message = new LogMessage(text, TLogType.Error);
             Messages.Add(message);
 
             if (_logger != null) _logger.Log(text, TLogType.Error);
@@ -340,7 +340,7 @@ namespace Lotus.Core
         {
             var text = string.Format(format, args);
 
-            var message = new TLogMessage(moduleName, text, TLogType.Error);
+            var message = new LogMessage(moduleName, text, TLogType.Error);
             Messages.Add(message);
 
             if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Error);
@@ -360,7 +360,7 @@ namespace Lotus.Core
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            var message = new TLogMessage(exc.Message, TLogType.Exception);
+            var message = new LogMessage(exc.Message, TLogType.Exception);
             message.MemberName = memberName;
             message.FilePath = filePath;
             message.LineNumber = lineNumber;
@@ -383,7 +383,54 @@ namespace Lotus.Core
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            var message = new TLogMessage(moduleName, exc.Message, TLogType.Exception);
+            var message = new LogMessage(moduleName, exc.Message, TLogType.Exception);
+            message.MemberName = memberName;
+            message.FilePath = filePath;
+            message.LineNumber = lineNumber;
+
+            Messages.Add(message);
+
+            if (_logger != null) _logger.Log(message);
+        }
+        #endregion
+
+        #region Result methods
+        /// <summary>
+        /// Оповещение об результате операции.
+        /// </summary>
+        /// <param name="result">Результат.</param>
+        /// <param name="memberName">Имя метода (заполняется автоматически).</param>
+        /// <param name="filePath">Полный путь к файлу (заполняется автоматически).</param>
+        /// <param name="lineNumber">Номер строки в файле (заполняется автоматически).</param>
+        public static void LogResult(Result result,
+            [CallerMemberName] string memberName = "",
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0)
+        {
+            var message = new LogMessage(result.Message, result.Succeeded ? TLogType.Succeed : TLogType.Failed);
+            message.MemberName = memberName;
+            message.FilePath = filePath;
+            message.LineNumber = lineNumber;
+
+            Messages.Add(message);
+
+            if (_logger != null) _logger.Log(message);
+        }
+
+        /// <summary>
+        /// Оповещение об результате операции.
+        /// </summary>
+        /// <param name="moduleName">Имя модуля/подсистемы.</param>
+        /// <param name="result">Результат.</param>
+        /// <param name="memberName">Имя метода (заполняется автоматически).</param>
+        /// <param name="filePath">Полный путь к файлу (заполняется автоматически).</param>
+        /// <param name="lineNumber">Номер строки в файле (заполняется автоматически).</param>
+        public static void LogResultModule(string moduleName, Result result,
+            [CallerMemberName] string memberName = "",
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0)
+        {
+            var message = new LogMessage(moduleName, result.Message, result.Succeeded ? TLogType.Succeed : TLogType.Failed);
             message.MemberName = memberName;
             message.FilePath = filePath;
             message.LineNumber = lineNumber;

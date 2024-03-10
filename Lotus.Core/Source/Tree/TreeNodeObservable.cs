@@ -11,7 +11,7 @@ namespace Lotus.Core
     /// <summary>
     /// Реализация базового объекта для расположения в дереве.
     /// </summary>
-    public class TreeNodeObservable : ITreeNode, INotifyPropertyChanged
+    public class TreeNodeObservable : ILotusTreeNode, INotifyPropertyChanged
     {
         #region Fields
         protected internal string _text = string.Empty;
@@ -99,12 +99,12 @@ namespace Lotus.Core
         /// <summary>
         /// Родительский узел
         /// </summary>
-        public ITreeNode? IParentTreeNode { get; set; }
+        public ILotusTreeNode? IParentTreeNode { get; set; }
 
         /// <summary>
         /// Список дочерних узлов
         /// </summary>
-        public IEnumerable<ITreeNode>? IChildNodes
+        public IEnumerable<ILotusTreeNode>? IChildNodes
         {
             get { return _childNodes; }
         }
@@ -138,11 +138,11 @@ namespace Lotus.Core
             switch (args.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (ITreeNode item in args.NewItems!)
+                    foreach (ILotusTreeNode item in args.NewItems!)
                         item.IParentTreeNode = parent;
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (ITreeNode item in args.OldItems!)
+                    foreach (ILotusTreeNode item in args.OldItems!)
                         item.IParentTreeNode = null;
                     break;
             }
@@ -156,7 +156,7 @@ namespace Lotus.Core
         /// </remarks>
         /// <param name="match">Предикат проверки.</param>
         /// <returns>Статус проверки.</returns>
-        public virtual bool CheckOne(Predicate<ITreeNode?> match)
+        public virtual bool CheckOne(Predicate<ILotusTreeNode?> match)
         {
             if (match(this))
             {
@@ -187,8 +187,8 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Рекурсивно обновляет <see cref="ITreeNode.IsChecked"/> всех родителей текущего узла. 
-        /// Устанавливает <see cref="ITreeNode.IsChecked"/> в true, если все вложенные узлы отмечены. <br></br>
+        /// Рекурсивно обновляет <see cref="ILotusTreeNode.IsChecked"/> всех родителей текущего узла. 
+        /// Устанавливает <see cref="ILotusTreeNode.IsChecked"/> в true, если все вложенные узлы отмечены. <br></br>
         /// Null - если отмечен хотя бы один узел. <br></br>
         /// False - если не отмечен ни один узел.<br></br>
         /// Рекурсивно проходит вверх по дереву.

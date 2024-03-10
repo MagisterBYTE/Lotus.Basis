@@ -112,7 +112,7 @@ namespace Lotus.Core
     /// Шаблон определяющий минимальный ViewModel, который реализует основные параметры просмотра и управления.
     /// </summary>
     /// <typeparam name="TModel">Тип модели.</typeparam>
-    public class ViewModel<TModel> : CNameable, ILotusViewModel<TModel>
+    public class ViewModel<TModel> : Nameable, ILotusViewModel<TModel>
         where TModel : class
     {
         #region Const

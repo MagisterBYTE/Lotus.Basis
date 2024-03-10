@@ -9,7 +9,7 @@ namespace Lotus.Core
     /// Элемент файловой системы представляющий собой файл.
     /// </summary>
     [Serializable]
-    public class CFileSystemFile : CNameable, ILotusOwnedObject, ILotusFileSystemEntity
+    public class CFileSystemFile : Nameable, ILotusOwnedObject, ILotusFileSystemEntity
     {
         #region Fields
         protected internal ILotusOwnerObject _owner;

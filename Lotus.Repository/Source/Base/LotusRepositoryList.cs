@@ -8,8 +8,12 @@ using Lotus.Core;
 
 namespace Lotus.Repository
 {
-    /** \addtogroup RepositoryBase
-    *@{*/
+    /**
+     * \defgroup RepositoryBase Базовая подсистема
+     * \ingroup Repository
+     * \brief Базовая подсистема определяет основные сущности репозитория.
+     * @{
+     */
     /// <summary>
     /// Реализация репозитория <see cref="ILotusRepository{TEntity, TKey}"/> через простой список <see cref="List{T}"/>.
     /// </summary>
@@ -18,6 +22,9 @@ namespace Lotus.Repository
             where TKey : notnull, IEquatable<TKey>
     {
         protected internal List<TEntity> _list;
+
+        /// <inheritdoc/>
+        public bool SaveEachOperation { get; set; }
 
         public RepositoryList(List<TEntity> list)
         {
@@ -70,13 +77,13 @@ namespace Lotus.Repository
         /// <inheritdoc/>
         public TEntity? GetById(TKey id)
         {
-            return _list.Find((entity) => { return entity.Id.Equals(id); });
+            return _list.Find(x => x.Equals(id));
         }
 
         /// <inheritdoc/>
         public async ValueTask<TEntity?> GetByIdAsync(TKey id, CancellationToken token = default)
         {
-            var result = _list.Find((entity) => { return entity.Id.Equals(id); });
+            var result = _list.Find(x => x.Equals(id));
             return await ValueTask.FromResult(result);
         }
 
@@ -86,7 +93,7 @@ namespace Lotus.Repository
             var result = new List<TEntity?>();
             foreach (var id in ids)
             {
-                var entity = _list.Find((entity) => { return entity.Id.Equals(id); });
+                var entity = _list.Find(x => x.Equals(id));
                 if (entity is not null)
                 {
                     result.Add(entity);
@@ -231,6 +238,29 @@ namespace Lotus.Repository
             foreach (var entity in entities)
             {
                 _list.Remove(entity);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveId(TKey id)
+        {
+            var entity = _list.Find(x => x.Equals(id));
+            if(entity is not null)
+            {
+                _list.Remove(entity);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void RemoveIdsRange(IEnumerable<TKey> ids)
+        {
+            foreach (var id in ids)
+            {
+                var entity = _list.Find(x => x.Equals(id));
+                if (entity is not null)
+                {
+                    _list.Remove(entity);
+                }
             }
         }
 

@@ -7,7 +7,7 @@ using System.Linq;
 namespace Lotus.Core
 {
     /// <summary>
-    /// Статический класс реализующий методы расширения для типа <see cref="ITreeNode"/>.
+    /// Статический класс реализующий методы расширения для типа <see cref="ILotusTreeNode"/>.
     /// </summary>
     public static class TreeNodeExtension
     {
@@ -18,7 +18,7 @@ namespace Lotus.Core
         {
             public int Compare(object? x, object? y)
             {
-                if (x is ITreeNode xNode && y is ITreeNode yNode)
+                if (x is ILotusTreeNode xNode && y is ILotusTreeNode yNode)
                 {
                     return xNode.Order.CompareTo(yNode.Order);
                 }
@@ -35,7 +35,7 @@ namespace Lotus.Core
         /// Рекурсивное раскрытие всех узлов.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
-        public static void ExpandAll(this ITreeNode @this)
+        public static void ExpandAll(this ILotusTreeNode @this)
         {
             @this.IsExpanded = true;
 
@@ -51,7 +51,7 @@ namespace Lotus.Core
         /// Рекурсивное сворачивание всех узлов.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
-        public static void CollapseAll(this ITreeNode @this)
+        public static void CollapseAll(this ILotusTreeNode @this)
         {
             @this.IsExpanded = false;
 
@@ -67,7 +67,7 @@ namespace Lotus.Core
         /// Рекурсивное выделение всех узлов флажком.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
-        public static void CheckAll(this ITreeNode @this)
+        public static void CheckAll(this ILotusTreeNode @this)
         {
             @this.IsChecked = true;
 
@@ -83,7 +83,7 @@ namespace Lotus.Core
         /// Рекурсивное снятие флажка выделения.
         /// </summary>
         /// <param name="this">Текущий узел</param>
-        public static void UncheckAll(this ITreeNode @this)
+        public static void UncheckAll(this ILotusTreeNode @this)
         {
             @this.IsChecked = false;
 
@@ -96,14 +96,14 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Рекурсивно обновляет <see cref="ITreeNode.IsChecked"/> всех родителей текущего узла. 
-        /// Устанавливает <see cref="ITreeNode.IsChecked"/> в true, если все вложенные узлы отмечены. <br></br>
+        /// Рекурсивно обновляет <see cref="ILotusTreeNode.IsChecked"/> всех родителей текущего узла. 
+        /// Устанавливает <see cref="ILotusTreeNode.IsChecked"/> в true, если все вложенные узлы отмечены. <br></br>
         /// Null - если отмечен хотя бы один узел. <br></br>
         /// False - если не отмечен ни один узел.<br></br>
         /// Рекурсивно проходит вверх по дереву.
         /// </summary>
         /// <param name="this">Текущий узел</param>
-        public static void UpdateParentsCheck(this ITreeNode @this)
+        public static void UpdateParentsCheck(this ILotusTreeNode @this)
         {
             var parent = @this.IParentTreeNode;
             if (parent == null || parent == @this || parent.IChildNodes == null)
@@ -135,7 +135,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <returns>Индекс расположения или -1.</returns>
-        public static int GetIndexTreeNode(this ITreeNode @this)
+        public static int GetIndexTreeNode(this ILotusTreeNode @this)
         {
             if (@this.IParentTreeNode != null && @this.IParentTreeNode.IChildNodes is IList listNodes)
             {
@@ -150,7 +150,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="newIndex">Индекс расположения.</param>
-        public static void MoveTreeNode(this ITreeNode @this, int newIndex)
+        public static void MoveTreeNode(this ILotusTreeNode @this, int newIndex)
         {
             if (newIndex == -1) return;
 
@@ -167,10 +167,10 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Сортировка по свойству <see cref="ITreeNode.Order"/> только дочерних узлов.
+        /// Сортировка по свойству <see cref="ILotusTreeNode.Order"/> только дочерних узлов.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
-        public static void SortChilds(this ITreeNode @this)
+        public static void SortChilds(this ILotusTreeNode @this)
         {
             if (@this.IChildNodes == null) return;
 
@@ -185,7 +185,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел</param>
         /// <param name="list">Список.</param>
-        public static void ClearAndAddTreeNodes(this ITreeNode @this, IEnumerable<ITreeNode> list)
+        public static void ClearAndAddTreeNodes(this ILotusTreeNode @this, IEnumerable<ILotusTreeNode> list)
         {
             if (@this.IChildNodes == null) return;
 
@@ -205,7 +205,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="list">Список.</param>
-        public static void AddTreeNodes(this ITreeNode @this, IEnumerable<ITreeNode> list)
+        public static void AddTreeNodes(this ILotusTreeNode @this, IEnumerable<ILotusTreeNode> list)
         {
             if (@this.IChildNodes == null) return;
 
@@ -224,7 +224,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="list">Список.</param>
-        public static void RemoveTreeNodes(this ITreeNode @this, IEnumerable<ITreeNode> list)
+        public static void RemoveTreeNodes(this ILotusTreeNode @this, IEnumerable<ILotusTreeNode> list)
         {
             if (@this.IChildNodes == null) return;
 
@@ -243,7 +243,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="node">Добавляемый узел.</param>
-        public static void AddTreeNode(this ITreeNode @this, ITreeNode node)
+        public static void AddTreeNode(this ILotusTreeNode @this, ILotusTreeNode node)
         {
             if (@this.IChildNodes == null) return;
 
@@ -260,7 +260,7 @@ namespace Lotus.Core
         /// <param name="this">Текущий узел.</param>
         /// <param name="node">Вставляемый узел.</param>
         /// <param name="index">Индекс вставки.</param>
-        public static void InsertTreeNode(this ITreeNode @this, ITreeNode node, int index)
+        public static void InsertTreeNode(this ILotusTreeNode @this, ILotusTreeNode node, int index)
         {
             if (@this.IChildNodes == null) return;
 
@@ -276,7 +276,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="node">Удаляемый узел</param>
-        public static void RemoveTreeNode(this ITreeNode @this, ITreeNode node)
+        public static void RemoveTreeNode(this ILotusTreeNode @this, ILotusTreeNode node)
         {
             if (@this.IChildNodes == null) return;
 
@@ -293,9 +293,9 @@ namespace Lotus.Core
         /// <param name="this">Текущий узел.</param>
         /// <param name="list">Список.</param>
         /// <param name="transform">Метод трансформатор для преобразования узлов.</param>
-        private static void FillList<TTreeNode>(this ITreeNode @this, IList<TTreeNode> list,
-            Converter<ITreeNode, TTreeNode>? transform = null)
-            where TTreeNode : ITreeNode
+        private static void FillList<TTreeNode>(this ILotusTreeNode @this, IList<TTreeNode> list,
+            Converter<ILotusTreeNode, TTreeNode>? transform = null)
+            where TTreeNode : ILotusTreeNode
         {
             if (@this.IChildNodes == null) return;
 
@@ -319,9 +319,9 @@ namespace Lotus.Core
         /// <param name="this">Текущий узел.</param>
         /// <param name="transform">Метод трансформатор для преобразования узлов.</param>
         /// <returns>Линейный список узлов.</returns>
-        public static List<TTreeNode> ToFlatListDescendants<TTreeNode>(this ITreeNode @this,
-            Converter<ITreeNode, TTreeNode>? transform = null)
-            where TTreeNode : ITreeNode
+        public static List<TTreeNode> ToFlatListDescendants<TTreeNode>(this ILotusTreeNode @this,
+            Converter<ILotusTreeNode, TTreeNode>? transform = null)
+            where TTreeNode : ILotusTreeNode
         {
             var list = new List<TTreeNode>();
             if (@this.IChildNodes == null) return list;
@@ -348,9 +348,9 @@ namespace Lotus.Core
         /// <param name="this">Текущий узел.</param>
         /// <param name="transform">Метод трансформатор для преобразования узлов.</param>
         /// <returns>Линейный список узлов.</returns>
-        public static List<TTreeNode> ToFlatListSelfAndDescendants<TTreeNode>(this ITreeNode @this,
-            Converter<ITreeNode, TTreeNode>? transform = null)
-            where TTreeNode : ITreeNode
+        public static List<TTreeNode> ToFlatListSelfAndDescendants<TTreeNode>(this ILotusTreeNode @this,
+            Converter<ILotusTreeNode, TTreeNode>? transform = null)
+            where TTreeNode : ILotusTreeNode
         {
             var list = new List<TTreeNode>();
 
@@ -387,7 +387,7 @@ namespace Lotus.Core
         /// <param name="this">Текущий узел.</param>
         /// <param name="predicate">Предикат поиска.</param>
         /// <returns>Найденный узел или null</returns>
-        public static ITreeNode? FindDescendants(this ITreeNode @this, Predicate<ITreeNode> predicate)
+        public static ILotusTreeNode? FindDescendants(this ILotusTreeNode @this, Predicate<ILotusTreeNode> predicate)
         {
             if (predicate(@this))
             {
@@ -424,7 +424,7 @@ namespace Lotus.Core
         /// <param name="this">Текущий узел.</param>
         /// <param name="predicate">Предикат поиска.</param>
         /// <returns>Найденный узел или null.</returns>
-        public static ITreeNode? FindAncestors(this ITreeNode @this, Predicate<ITreeNode> predicate)
+        public static ILotusTreeNode? FindAncestors(this ILotusTreeNode @this, Predicate<ILotusTreeNode> predicate)
         {
             if (predicate(@this))
             {
@@ -441,7 +441,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="callback">Посетитель узла.</param>
-        public static void VisitDescendants(this ITreeNode @this, Action<ITreeNode> callback)
+        public static void VisitDescendants(this ILotusTreeNode @this, Action<ILotusTreeNode> callback)
         {
             if (@this.IChildNodes == null) return;
 
@@ -457,7 +457,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="callback">Посетитель узла.</param>
-        public static void VisitAncestors(this ITreeNode @this, Action<ITreeNode> callback)
+        public static void VisitAncestors(this ILotusTreeNode @this, Action<ILotusTreeNode> callback)
         {
             callback(@this);
 
@@ -470,7 +470,7 @@ namespace Lotus.Core
         /// Рекурсивное присваивание родителя каждому дочернему узла и его потомков.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
-        public static void UpdateParentsDescendants(this ITreeNode @this)
+        public static void UpdateParentsDescendants(this ILotusTreeNode @this)
         {
             if (@this.IChildNodes == null) return;
 
@@ -485,7 +485,7 @@ namespace Lotus.Core
         /// Рекурсивное присваивание каждому дочернему узла и его потомков индекса его расположения в списке.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
-        public static void UpdateOrderDescendants(this ITreeNode @this)
+        public static void UpdateOrderDescendants(this ILotusTreeNode @this)
         {
             if (@this.IChildNodes == null) return;
 
@@ -503,10 +503,10 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Сортировка по свойству <see cref="ITreeNode.Order"/> дочерних узлов и их потомков.
+        /// Сортировка по свойству <see cref="ILotusTreeNode.Order"/> дочерних узлов и их потомков.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
-        public static void SortDescendants(this ITreeNode @this)
+        public static void SortDescendants(this ILotusTreeNode @this)
         {
             if (@this.IChildNodes == null) return;
 

@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Lotus.Localilzation
+namespace Lotus.Localization
 {
     /// <summary>
     /// Глобальный класс для доступа к сервису локализации

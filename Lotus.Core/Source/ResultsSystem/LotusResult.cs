@@ -5,75 +5,6 @@ namespace Lotus.Core
     /** \addtogroup CoreResultsSystem
 	*@{*/
     /// <summary>
-    /// Статический класс для формирования ответа/результата выполнения операции.
-    /// </summary>
-    public static class XResult
-    {
-        #region Failed result
-        /// <summary>
-        /// Формирование результата/ответа о неуспешности выполнения операции.
-        /// </summary>
-        /// <typeparam name="TData">Тип объекта.</typeparam>
-        /// <param name="result">Результат/ответ операции.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Failed<TData>(Result result)
-        {
-            return new Result<TData>(result.Code, result.Message, default, false);
-        }
-
-        /// <summary>
-        /// Формирование результата/ответа о неуспешности выполнения операции.
-        /// </summary>
-        /// <typeparam name="TData">Тип объекта.</typeparam>
-        /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Failed<TData>(int code, string message)
-        {
-            return new Result<TData>(code, message, default, false);
-        }
-
-        /// <summary>
-        /// Формирование результата/ответа о неуспешности выполнения операции.
-        /// </summary>
-        /// <typeparam name="TData">Тип объекта.</typeparam>
-        /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Данные.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Failed<TData>(int code, string message, TData data)
-        {
-            return new Result<TData>(code, message, data, false);
-        }
-        #endregion
-
-        #region Succeed result
-        /// <summary>
-        /// Формирование результата о успешности выполнения операции.
-        /// </summary>
-        /// <typeparam name="TData">Тип объекта.</typeparam>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Succeed<TData>(TData data)
-        {
-            return new Result<TData>(data, true);
-        }
-
-        /// <summary>
-        /// Формирование результата о успешности выполнения операции.
-        /// </summary>
-        /// <typeparam name="TData">Тип объекта.</typeparam>
-        /// <param name="code">Код.</param>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Succeed<TData>(int code, TData data)
-        {
-            return new Result<TData>(code, data, true);
-        }
-        #endregion
-    }
-
-    /// <summary>
     /// Класс определяющий некий результат/ответ операции.
     /// </summary>
     public class Result : ILotusResult, ICloneable
@@ -87,7 +18,77 @@ namespace Lotus.Core
         /// <summary>
         /// Результат неуспешного выполнения операции.
         /// </summary>
-        public static readonly Result Failed = new Result(0, "Error", null, false);
+        public static readonly Result Bad = new Result(-1, "Error", null, false);
+        #endregion
+
+        #region Failed result methods
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result Failed(int code)
+        {
+            return new Result(code, "Error", default, false);
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result Failed(int code, string message)
+        {
+            return new Result(code, message, default, false);
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="data">Данные.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result Failed(int code, string message, object? data)
+        {
+            return new Result(code, message, data, false);
+        }
+        #endregion
+
+        #region Succeed result methods
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="data">Объект.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result Succeed(object data)
+        {
+            return new Result(0, data, true);
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="data">Объект.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result Succeed(int code, object? data)
+        {
+            return new Result(code, data, true);
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="data">Объект.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result Succeed(int code, string message, object? data)
+        {
+            return new Result(code, message, data, true);
+        }
         #endregion
 
         #region Properties
@@ -215,7 +216,82 @@ namespace Lotus.Core
         /// <summary>
         /// Результат успешного выполнения операции.
         /// </summary>
-        new public static readonly Result<TData> Ok = new Result<TData>(0, true);
+        public new static readonly Result<TData> Ok = new Result<TData>(0, true);
+
+        /// <summary>
+        /// Результат неуспешного выполнения операции.
+        /// </summary>
+        public new static readonly Result<TData> Bad = new Result<TData>(-1, "Error", default, false);
+        #endregion
+
+        #region Failed result methods
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public new static Result<TData> Failed(int code)
+        {
+            return new Result<TData>(code, "Error", default, false);
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public new static Result<TData> Failed(int code, string message)
+        {
+            return new Result<TData>(code, message, default, false);
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="data">Данные.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result<TData> Failed(int code, string message, TData data)
+        {
+            return new Result<TData>(code, message, data, false);
+        }
+        #endregion
+
+        #region Succeed result methods
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="data">Объект.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result<TData> Succeed(TData data)
+        {
+            return new Result<TData>(0, data, true);
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="data">Объект.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result<TData> Succeed(int code, TData? data)
+        {
+            return new Result<TData>(code, data, true);
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="data">Объект.</param>
+        /// <returns>Результат/ответ операции.</returns>
+        public static Result<TData> Succeed(int code, string message, TData? data)
+        {
+            return new Result<TData>(code, message, data, true);
+        }
         #endregion
 
         #region Properties

@@ -46,7 +46,7 @@ namespace Lotus.Core.Serialization
         #endregion
 
         #region Fields
-        protected internal JsonSerializer mSerializer;
+        protected internal JsonSerializer _serializer;
         #endregion
 
         #region Properties
@@ -57,7 +57,7 @@ namespace Lotus.Core.Serialization
         {
             get
             {
-                return mSerializer;
+                return _serializer;
             }
         }
         #endregion
@@ -68,7 +68,7 @@ namespace Lotus.Core.Serialization
         /// </summary>
         public CSerializerJson()
         {
-            mSerializer = JsonSerializer.CreateDefault();
+            _serializer = JsonSerializer.CreateDefault();
             AddDefaultConverters(false);
         }
 
@@ -78,7 +78,7 @@ namespace Lotus.Core.Serialization
         /// <param name="useTypeName">Использовать имя типа.</param>
         public CSerializerJson(bool useTypeName)
         {
-            mSerializer = JsonSerializer.CreateDefault();
+            _serializer = JsonSerializer.CreateDefault();
             AddDefaultConverters(useTypeName);
         }
 
@@ -90,7 +90,7 @@ namespace Lotus.Core.Serialization
         public CSerializerJson(string name, bool useTypeName = true)
             : base(name)
         {
-            mSerializer = JsonSerializer.CreateDefault();
+            _serializer = JsonSerializer.CreateDefault();
             AddDefaultConverters(useTypeName);
         }
         #endregion
@@ -102,7 +102,7 @@ namespace Lotus.Core.Serialization
         /// <param name="converter">Конвертер.</param>
         public void AddConverter(JsonConverter converter)
         {
-            mSerializer.Converters.Add(converter);
+            _serializer.Converters.Add(converter);
         }
 
         /// <summary>
@@ -111,21 +111,21 @@ namespace Lotus.Core.Serialization
         /// <param name="useTypeName">Использовать имя типа.</param>
         public void AddDefaultConverters(bool useTypeName)
         {
-            mSerializer.Converters.Add(ColorConverter.Instance);
+            _serializer.Converters.Add(ColorConverter.Instance);
 #if UNITY_2017_1_OR_NEWER
-			mSerializer.Converters.Add(CUnityColor32Converter.Instance);
-			mSerializer.Converters.Add(CUnityVector2Converter.Instance);
-			mSerializer.Converters.Add(CUnityVector2IntConverter.Instance);
-			mSerializer.Converters.Add(CUnityVector3Converter.Instance);
-			mSerializer.Converters.Add(CUnityVector3IntConverter.Instance);
-			mSerializer.Converters.Add(CUnityVector4Converter.Instance);
+			_serializer.Converters.Add(CUnityColor32Converter.Instance);
+			_serializer.Converters.Add(CUnityVector2Converter.Instance);
+			_serializer.Converters.Add(CUnityVector2IntConverter.Instance);
+			_serializer.Converters.Add(CUnityVector3Converter.Instance);
+			_serializer.Converters.Add(CUnityVector3IntConverter.Instance);
+			_serializer.Converters.Add(CUnityVector4Converter.Instance);
 #endif
-            mSerializer.Formatting = Formatting.Indented;
+            _serializer.Formatting = Formatting.Indented;
 
             if (useTypeName)
             {
-                mSerializer.TypeNameHandling = TypeNameHandling.Auto;
-                mSerializer.TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple;
+                _serializer.TypeNameHandling = TypeNameHandling.Auto;
+                _serializer.TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple;
             }
         }
         #endregion
@@ -189,7 +189,7 @@ namespace Lotus.Core.Serialization
                 before_save.OnBeforeSave(parameters);
             }
 
-            mSerializer.Serialize(textWriter, instance);
+            _serializer.Serialize(textWriter, instance);
 
             if (instance is ILotusAfterSave after_save)
             {
@@ -275,11 +275,11 @@ namespace Lotus.Core.Serialization
         /// <returns>Объект.</returns>
         public TResultType? LoadFrom<TResultType>(TextReader textReader, CParameters? parameters = null)
         {
-            TResultType? result = default;
+            TResultType? result;
 
             using (JsonReader reader = new JsonTextReader(textReader))
             {
-                result = mSerializer.Deserialize<TResultType>(reader);
+                result = _serializer.Deserialize<TResultType>(reader);
             }
 
             if (result is ILotusAfterLoad after_load)
@@ -348,7 +348,7 @@ namespace Lotus.Core.Serialization
         /// <param name="parameters">Параметры обновления.</param>
         public void UpdateFrom(object instance, TextReader textReader, CParameters? parameters = null)
         {
-
+            // Method intentionally left empty.
         }
         #endregion
     }

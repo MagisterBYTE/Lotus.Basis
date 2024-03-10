@@ -16,13 +16,13 @@ namespace Lotus.Core
         private static readonly DateTime StartDate = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         #endregion
 
-        #region ГЕНЕРАЦИИ methods
+        #region Generate methods
         /// <summary>
         /// Генерация уникального числового идентификатора указанного объекта.
         /// </summary>
         /// <remarks>
         /// В первые 28 бита - записывается хэш-код объекта деленный на 16
-        /// В остальные 36 - количество 10 миллисекунд прошедших с 1 января 2020 года
+        /// В остальные 36 - количество 10 миллисекунд прошедших с 1 января 2024 года
         /// </remarks>
         /// <param name="obj">Объект.</param>
         /// <returns>Уникальный числовой идентификатор.</returns>
@@ -48,6 +48,18 @@ namespace Lotus.Core
 
                 return result;
             }
+        }
+
+        /// <summary>
+        /// Генерация целочисленного идентификатора виде кол-ва 10 миллисекунд с 1 января 2024 года.
+        /// </summary>
+        /// <returns>Целочисленный идентификатор</returns>
+        public static int GenerateNext()
+        {
+            var current_date = DateTime.UtcNow;
+            var elapsed_ticks = current_date.Ticks - StartDate.Ticks;
+            var elapsed_millsecond = (int)(elapsed_ticks / 100000);
+            return elapsed_millsecond;
         }
 
         /// <summary>

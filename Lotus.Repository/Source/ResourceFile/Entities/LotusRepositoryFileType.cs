@@ -12,7 +12,7 @@ namespace Lotus.Repository
     /// <summary>
     /// Класс для типа файла.
     /// </summary>
-    public class ResourceFileType : EntityDb<int>, IComparable<ResourceFileType>
+    public class ResourceFileType : BaseEntityDb<int>, IComparable<ResourceFileType>
     {
         #region Const
         /// <summary>

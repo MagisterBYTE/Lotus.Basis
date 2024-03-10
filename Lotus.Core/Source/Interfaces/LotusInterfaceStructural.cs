@@ -28,7 +28,7 @@ namespace Lotus.Core
     /// Определение интерфейса для объектов поддерживающих дублирование.
     /// </summary>
     /// <typeparam name="TType">Тип объекта.</typeparam>
-    public interface ILotusDuplicate<TType>
+    public interface ILotusDuplicate<out TType>
     {
         /// <summary>
         /// Получение дубликата объекта.
@@ -36,6 +36,20 @@ namespace Lotus.Core
         /// <param name="parameters">Параметры дублирования объекта.</param>
         /// <returns>Дубликат объекта.</returns>
         TType Duplicate(CParameters? parameters = null);
+    }
+
+    /// <summary>
+    /// Определение интерфейса для идентификации типов объектов которые поддерживают иерархию.
+    /// </summary>
+    public interface ILotusDiscriminator
+    {
+        /// <summary>
+        /// Дискриминатор типа.
+        /// </summary>
+        /// <remarks>
+        /// Должен быть уникальным в пределах иерархии типов и одинаковым для каждого экземпляра типа.
+        /// </remarks>
+        string Discriminator { get; set; }
     }
     /**@}*/
 }

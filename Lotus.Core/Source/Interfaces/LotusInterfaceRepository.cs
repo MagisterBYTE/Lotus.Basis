@@ -4,11 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Lotus.Core;
-
-namespace Lotus.Repository
+namespace Lotus.Core
 {
-    /** \addtogroup RepositoryBase
+    /** \addtogroup CoreInterfaces
 	*@{*/
     /// <summary>
     /// Определение основного интерфейса репозитория данных.
@@ -19,6 +17,14 @@ namespace Lotus.Repository
         where TEntity : class, ILotusIdentifierId<TKey>, new()
         where TKey : notnull, IEquatable<TKey>
     {
+        /// <summary>
+        /// Выполнять сохранение после каждой операции
+        /// </summary>
+        /// <remarks>
+        /// По умолчанию данный режим включен 
+        /// </remarks>
+        bool SaveEachOperation { get; set; }
+
         /// <summary>
         /// Получить провайдер данных указанной сущности.
         /// </summary>
@@ -151,6 +157,18 @@ namespace Lotus.Repository
         /// </summary>
         /// <param name="entities">Список сущностей.</param>
         void RemoveRange(IEnumerable<TEntity> entities);
+
+        /// <summary>
+        /// Удалить указанную сущность по идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор сущности.</param>
+        void RemoveId(TKey id);
+
+        /// <summary>
+        /// Удалить указанные сущности по их идентификаторам.
+        /// </summary>
+        /// <param name="ids">Список идентификаторов сущностей.</param>
+        void RemoveIdsRange(IEnumerable<TKey> ids);
 
         /// <summary>
         /// Сохранить в хранилище все изменения.

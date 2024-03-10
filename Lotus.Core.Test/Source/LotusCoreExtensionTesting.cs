@@ -79,7 +79,7 @@ namespace Lotus.Core
 
             test = "/// <param name=\"begin\">String begin.</param>";
             var token = test.ExtractString(">", "<");
-            ClassicAssert.AreEqual(token, "String begin");
+            ClassicAssert.AreEqual(token, "String begin.");
 
             test = "222.3333";
             var before = test.SubstringTo(".", false);

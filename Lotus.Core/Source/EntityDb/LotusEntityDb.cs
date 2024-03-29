@@ -5,7 +5,7 @@ namespace Lotus.Core
     /** \addtogroup CoreEntityDb
     *@{*/
     /// <summary>
-    /// Интерфейс для определение сущности.
+    /// Интерфейс для определение сущности с поддержкой даты создания и обновления сущности.
     /// </summary>
     /// <typeparam name="TKey">Тип ключа(идентификатора).</typeparam>
     public interface ILotusEntityDb<TKey> : ILotusIdentifierId<TKey>
@@ -23,7 +23,8 @@ namespace Lotus.Core
     }
 
     /// <summary>
-    /// Шаблонный класс для сущностей поддерживающих идентификатор через первичный ключ.
+    /// Шаблонный класс для сущностей поддерживающих идентификатор через первичный ключ 
+    /// с поддержкой даты создания и обновления сущности.
     /// </summary>
     /// <typeparam name="TKey">Тип ключа(идентификатора).</typeparam>
     public class EntityDb<TKey> : BaseEntityDb<TKey>, ILotusEntityDb<TKey>

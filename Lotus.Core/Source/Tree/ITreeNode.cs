@@ -3,8 +3,15 @@ using System.Collections.Generic;
 
 namespace Lotus.Core
 {
+    /**
+     * \defgroup CoreTreeNode Подсистема иерархических данных
+     * \ingroup Core
+     * \brief Подсистема иерархических данных реализует универсальный тип узла дерева совокупность которых 
+        формирует иерархическое дерево.
+     * @{
+     */
     /// <summary>
-    /// Определение интерфейса для объектов которые могут находиться в дереве.
+    /// Определение интерфейса узла дерева.
     /// </summary>
     public interface ILotusTreeNode : ILotusIdentifierId<Guid>, ILotusCheckOne<ILotusTreeNode>
     {
@@ -38,4 +45,5 @@ namespace Lotus.Core
         /// </summary>
         IEnumerable<ILotusTreeNode>? IChildNodes { get; }
     }
+    /**@}*/
 }

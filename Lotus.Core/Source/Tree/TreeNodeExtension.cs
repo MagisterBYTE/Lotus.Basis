@@ -6,10 +6,12 @@ using System.Linq;
 
 namespace Lotus.Core
 {
+    /** \addtogroup CoreTreeNode
+    *@{*/
     /// <summary>
     /// Статический класс реализующий методы расширения для типа <see cref="ILotusTreeNode"/>.
     /// </summary>
-    public static class TreeNodeExtension
+    public static class XTreeNodeExtension
     {
         /// <summary>
         /// Класс реализующий стандартный компаратор для сравнения узлов по их индексу.
@@ -521,4 +523,5 @@ namespace Lotus.Core
             }
         }
     }
+    /**@}*/
 }

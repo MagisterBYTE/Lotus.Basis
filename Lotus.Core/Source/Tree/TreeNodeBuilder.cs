@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace Lotus.Core
 {
+    /** \addtogroup CoreTreeNode
+    *@{*/
     /// <summary>
     /// Статический класс для построения деревьев по различным критериям.
     /// </summary>
@@ -96,4 +98,5 @@ namespace Lotus.Core
             }
         }
     }
+    /**@}*/
 }

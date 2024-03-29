@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Lotus.Core
 {
@@ -13,12 +14,12 @@ namespace Lotus.Core
         /// <summary>
         /// Результат успешного выполнения операции.
         /// </summary>
-        public static readonly Result Ok = new Result(0, true);
+        public static readonly Result Ok = new(0, true);
 
         /// <summary>
         /// Результат неуспешного выполнения операции.
         /// </summary>
-        public static readonly Result Bad = new Result(-1, "Error", null, false);
+        public static readonly Result Bad = new(-1, "Error", null, false);
         #endregion
 
         #region Failed result methods
@@ -26,7 +27,7 @@ namespace Lotus.Core
         /// Формирование результата/ответа о неуспешности выполнения операции.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <returns>Результат/ответ операции.</returns>
+        /// <returns>Результат выполнения операции.</returns>
         public static Result Failed(int code)
         {
             return new Result(code, "Error", default, false);
@@ -37,7 +38,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="code">Код.</param>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <returns>Результат/ответ операции.</returns>
+        /// <returns>Результат выполнения операции.</returns>
         public static Result Failed(int code, string message)
         {
             return new Result(code, message, default, false);
@@ -48,11 +49,44 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="code">Код.</param>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Данные.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result Failed(int code, string message, object? data)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static Result Failed(int code, string message, object value)
         {
-            return new Result(code, message, data, false);
+            return new Result(code, message, value, false);
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result> FailedAsync(int code)
+        {
+            return ValueTask.FromResult(new Result(code, "Error", default, false));
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result> FailedAsync(int code, string message)
+        {
+            return ValueTask.FromResult(new Result(code, message, default, false));
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result> FailedAsync(int code, string message, object value)
+        {
+            return ValueTask.FromResult(new Result(code, message, value, false));
         }
         #endregion
 
@@ -60,22 +94,22 @@ namespace Lotus.Core
         /// <summary>
         /// Формирование результата о успешности выполнения операции.
         /// </summary>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result Succeed(object data)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static Result Succeed(object value)
         {
-            return new Result(0, data, true);
+            return new Result(0, value, true);
         }
 
         /// <summary>
         /// Формирование результата о успешности выполнения операции.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result Succeed(int code, object? data)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static Result Succeed(int code, object? value)
         {
-            return new Result(code, data, true);
+            return new Result(code, value, true);
         }
 
         /// <summary>
@@ -83,11 +117,44 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="code">Код.</param>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result Succeed(int code, string message, object? data)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static Result Succeed(int code, string message, object? value)
         {
-            return new Result(code, message, data, true);
+            return new Result(code, message, value, true);
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result> SucceedAsync(object value)
+        {
+            return ValueTask.FromResult(new Result(0, value, true));
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result> SucceedAsync(int code, object? value)
+        {
+            return ValueTask.FromResult(new Result(code, value, true));
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result> SucceedAsync(int code, string message, object? value)
+        {
+            return ValueTask.FromResult(new Result(code, message, value, true));
         }
         #endregion
 
@@ -108,9 +175,9 @@ namespace Lotus.Core
         public string Message { get; set; }
 
         /// <summary>
-        /// Дополнительные данные.
+        /// Результат выполнения операции.
         /// </summary>
-        public object? Data { get; set; }
+        public object? Value { get; set; }
         #endregion
 
         #region Constructors
@@ -147,12 +214,12 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <param name="data">Дополнительные данные.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <param name="status">Статус выполнения операции.</param>
-        public Result(int code, object? data, bool status)
+        public Result(int code, object? value, bool status)
         {
             Code = code;
-            Data = data;
+            Value = value;
             Succeeded = status;
         }
 
@@ -160,12 +227,12 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Дополнительные данные.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <param name="status">Статус выполнения операции.</param>
-        public Result(string message, object? data, bool status)
+        public Result(string message, object? value, bool status)
         {
             Message = message;
-            Data = data;
+            Value = value;
             Succeeded = status;
         }
 
@@ -174,13 +241,13 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="code">Код.</param>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Дополнительные данные.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <param name="status">Статус выполнения операции.</param>
-        public Result(int code, string message, object? data, bool status)
+        public Result(int code, string message, object? value, bool status)
         {
             Code = code;
             Message = message;
-            Data = data;
+            Value = value;
             Succeeded = status;
         }
         #endregion
@@ -207,21 +274,21 @@ namespace Lotus.Core
     }
 
     /// <summary>
-    /// Класс определяющий некий результат/ответ операции с типизированными дополнительным данными.
+    /// Класс определяющий некий результат/ответ операции с типизированным значением результата выполнения операции.
     /// </summary>
-    /// <typeparam name="TData">Тип данных.</typeparam>
-    public class Result<TData> : Result, ILotusResult<TData>
+    /// <typeparam name="TValue">Тип значения результата операции.</typeparam>
+    public class Result<TValue> : Result, ILotusResult<TValue>
     {
         #region Const
         /// <summary>
         /// Результат успешного выполнения операции.
         /// </summary>
-        public new static readonly Result<TData> Ok = new Result<TData>(0, true);
+        public new static readonly Result<TValue> Ok = new(0, true);
 
         /// <summary>
         /// Результат неуспешного выполнения операции.
         /// </summary>
-        public new static readonly Result<TData> Bad = new Result<TData>(-1, "Error", default, false);
+        public new static readonly Result<TValue> Bad = new(-1, "Error", default, false);
         #endregion
 
         #region Failed result methods
@@ -229,10 +296,10 @@ namespace Lotus.Core
         /// Формирование результата/ответа о неуспешности выполнения операции.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public new static Result<TData> Failed(int code)
+        /// <returns>Результат выполнения операции.</returns>
+        public new static Result<TValue> Failed(int code)
         {
-            return new Result<TData>(code, "Error", default, false);
+            return new Result<TValue>(code, "Error", default, false);
         }
 
         /// <summary>
@@ -240,10 +307,10 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="code">Код.</param>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public new static Result<TData> Failed(int code, string message)
+        /// <returns>Результат выполнения операции.</returns>
+        public new static Result<TValue> Failed(int code, string message)
         {
-            return new Result<TData>(code, message, default, false);
+            return new Result<TValue>(code, message, default, false);
         }
 
         /// <summary>
@@ -251,11 +318,44 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="code">Код.</param>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Данные.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Failed(int code, string message, TData data)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static Result<TValue> Failed(int code, string message, TValue value)
         {
-            return new Result<TData>(code, message, data, false);
+            return new Result<TValue>(code, message, value, false);
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public new static ValueTask<Result<TValue>> FailedAsync(int code)
+        {
+            return ValueTask.FromResult(new Result<TValue>(code, "Error", default, false));
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public new static ValueTask<Result<TValue>> FailedAsync(int code, string message)
+        {
+            return ValueTask.FromResult(new Result<TValue>(code, message, default, false));
+        }
+
+        /// <summary>
+        /// Формирование результата/ответа о неуспешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result<TValue>> FailedAsync(int code, string message, TValue value)
+        {
+            return ValueTask.FromResult(new Result<TValue>(code, message, value, false));
         }
         #endregion
 
@@ -263,22 +363,22 @@ namespace Lotus.Core
         /// <summary>
         /// Формирование результата о успешности выполнения операции.
         /// </summary>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Succeed(TData data)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static Result<TValue> Succeed(TValue value)
         {
-            return new Result<TData>(0, data, true);
+            return new Result<TValue>(0, value, true);
         }
 
         /// <summary>
         /// Формирование результата о успешности выполнения операции.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Succeed(int code, TData? data)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static Result<TValue> Succeed(int code, TValue? value)
         {
-            return new Result<TData>(code, data, true);
+            return new Result<TValue>(code, value, true);
         }
 
         /// <summary>
@@ -286,19 +386,52 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="code">Код.</param>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат/ответ операции.</returns>
-        public static Result<TData> Succeed(int code, string message, TData? data)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static Result<TValue> Succeed(int code, string message, TValue? value)
         {
-            return new Result<TData>(code, message, data, true);
+            return new Result<TValue>(code, message, value, true);
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result<TValue>> SucceedAsync(TValue value)
+        {
+            return ValueTask.FromResult(new Result<TValue>(0, value, true));
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result<TValue>> SucceedAsync(int code, TValue? value)
+        {
+            return ValueTask.FromResult(new Result<TValue>(code, value, true));
+        }
+
+        /// <summary>
+        /// Формирование результата о успешности выполнения операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Результат выполнения операции.</returns>
+        public static ValueTask<Result<TValue>> SucceedAsync(int code, string message, TValue? value)
+        {
+            return ValueTask.FromResult(new Result<TValue>(code, message, value, true));
         }
         #endregion
 
         #region Properties
         /// <summary>
-        /// Данные.
+        /// Значение результата выполнения операции.
         /// </summary>
-        new public TData? Data { get; set; }
+        new public TValue? Value { get; set; }
         #endregion
 
         #region Constructors
@@ -323,23 +456,23 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <param name="data">Дополнительные данные.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <param name="status">Статус выполнения операции.</param>
-        public Result(int code, TData? data, bool status)
-            : base(code, data, status)
+        public Result(int code, TValue? value, bool status)
+            : base(code, value, status)
         {
-            Data = data;
+            Value = value;
         }
 
         /// <summary>
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
-        /// <param name="data">Дополнительные данные.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <param name="status">Статус выполнения операции.</param>
-        public Result(TData data, bool status)
+        public Result(TValue value, bool status)
         {
-            base.Data = data;
-            Data = data;
+            base.Value = value;
+            Value = value;
             Succeeded = status;
         }
 
@@ -347,12 +480,12 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Дополнительные данные.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <param name="status">Статус выполнения операции.</param>
-        public Result(string message, TData? data, bool status)
-            : base(message, data, status)
+        public Result(string message, TValue? value, bool status)
+            : base(message, value, status)
         {
-            Data = data;
+            Value = value;
         }
 
         /// <summary>
@@ -360,12 +493,12 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="code">Код.</param>
         /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="data">Дополнительные данные.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <param name="status">Статус выполнения операции.</param>
-        public Result(int code, string message, TData? data, bool status)
-            : base(code, message, data, status)
+        public Result(int code, string message, TValue? value, bool status)
+            : base(code, message, value, status)
         {
-            Data = data;
+            Value = value;
         }
         #endregion
     }

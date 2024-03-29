@@ -43,27 +43,27 @@ namespace Lotus.Core
             {
                 case NullReferenceException exc:
                     {
-                        result = Result.Failed(exc.HResult, exc.Message, exc.Source);
+                        result = Result.Failed(exc.HResult, exc.Message, exc.Source ?? string.Empty);
                     }
                     break;
                 case ArgumentOutOfRangeException exc:
                     {
-                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName);
+                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName!);
                     }
                     break;
                 case ArgumentNullException exc:
                     {
-                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName);
+                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName!);
                     }
                     break;
                 case ArgumentException exc:
                     {
-                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName);
+                        result = Result.Failed(exc.HResult, exc.Message, exc.ParamName!);
                     }
                     break;
                 default:
                     {
-                        result = Result.Failed(exception.HResult, exception.Message, exception.Source);
+                        result = Result.Failed(exception.HResult, exception.Message, exception.Source ?? string.Empty);
                     }
                     break;
             }

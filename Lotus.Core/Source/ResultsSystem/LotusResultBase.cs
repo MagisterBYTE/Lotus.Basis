@@ -13,7 +13,7 @@ namespace Lotus.Core
     /// </summary>
     /// <remarks>
     /// Помимо основного назначения - характеристики успешности или неуспешности выполнения, 
-    /// может также нести дополнительную информацию 
+    /// может также нести дополнительную информацию.
     /// </remarks>
     public interface ILotusResult
     {
@@ -36,21 +36,22 @@ namespace Lotus.Core
         string Message { get; }
 
         /// <summary>
-        /// Дополнительные данные.
+        /// Значение результата выполнения операции.
         /// </summary>
-        object? Data { get; set; }
+        object? Value { get; set; }
     }
 
     /// <summary>
-    /// Определение интерфейса для представления ответа/результата операции с типизированными дополнительным данными.
+    /// Определение интерфейса для представления ответа/результата операции 
+    /// с типизированным значением результата выполнения операции.
     /// </summary>
-    /// <typeparam name="TData">Тип объекта.</typeparam>
-    public interface ILotusResult<TData> : ILotusResult
+    /// <typeparam name="TValue">Тип значения результата операции.</typeparam>
+    public interface ILotusResult<TValue> : ILotusResult
     {
         /// <summary>
-        /// Дополнительные данные.
+        /// Значение результата выполнения операции.
         /// </summary>
-        new TData? Data { get; set; }
+        new TValue? Value { get; set; }
     }
     /**@}*/
 }

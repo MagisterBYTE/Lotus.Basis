@@ -8,8 +8,10 @@ using System.Runtime.CompilerServices;
 
 namespace Lotus.Core
 {
+    /** \addtogroup CoreTreeNode
+    *@{*/
     /// <summary>
-    /// Реализация базового объекта для расположения в дереве.
+    /// Реализация базового наблюдаемого узла дерева.
     /// </summary>
     public class TreeNodeObservable : ILotusTreeNode, INotifyPropertyChanged
     {
@@ -312,4 +314,5 @@ namespace Lotus.Core
         }
         #endregion
     }
+    /**@}*/
 }

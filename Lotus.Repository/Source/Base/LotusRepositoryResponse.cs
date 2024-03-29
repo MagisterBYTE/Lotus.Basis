@@ -28,80 +28,6 @@ namespace Lotus.Repository
     }
 
     /// <summary>
-    /// Статический класс для формирования ответа.
-    /// </summary>
-    public static class XResponse
-    {
-        #region Failed methods 
-        /// <summary>
-        /// Формирование результата/ответа о неуспешности выполнения метода.
-        /// </summary>
-        /// <param name="result">Результат/ответ.</param>
-        /// <returns>Результат.</returns>
-        public static Response Failed(Result result)
-        {
-            return new Response(result);
-        }
-
-        /// <summary>
-        /// Формирование результата/ответа о неуспешности выполнения метода.
-        /// </summary>
-        /// <typeparam name="TPayload">Тип объекта.</typeparam>
-        /// <param name="result">Результат/ответ.</param>
-        /// <returns>Результат.</returns>
-        public static Response<TPayload> Failed<TPayload>(Result result)
-        {
-            return new Response<TPayload>(result);
-        }
-
-        /// <summary>
-        /// Формирование результата/ответа о неуспешности выполнения метода.
-        /// </summary>
-        /// <typeparam name="TPayload">Тип объекта.</typeparam>
-        /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения метода.</param>
-        /// <returns>Результат.</returns>
-        public static Response<TPayload> Failed<TPayload>(int code, string message)
-        {
-            return new Response<TPayload>(code, message);
-        }
-
-        /// <summary>
-        /// Формирование результата/ответа о неуспешности выполнения метода.
-        /// </summary>
-        /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения метода.</param>
-        /// <returns>Результат.</returns>
-        public static Response Failed(int code, string message)
-        {
-            return new Response(code, message);
-        }
-        #endregion
-
-        #region Succeed methods 
-        /// <summary>
-        /// Формирование результата о успешности выполнения метода.
-        /// </summary>
-        /// <returns>Результат.</returns>
-        public static Response Succeed()
-        {
-            return Response.Ok;
-        }
-
-        /// <summary>
-        /// Формирование результата о успешности выполнения метода.
-        /// </summary>
-        /// <typeparam name="TPayload">Тип объекта.</typeparam>
-        /// <param name="data">Объект.</param>
-        /// <returns>Результат.</returns>
-        public static Response<TPayload> Succeed<TPayload>(TPayload data)
-        {
-            return new Response<TPayload>(data);
-        }
-        #endregion
-    }
-
-    /// <summary>
     /// Класс для получения данных.
     /// </summary>
     public class Response : ILotusResponse
@@ -111,6 +37,51 @@ namespace Lotus.Repository
         /// Результат успешного выполнения.
         /// </summary>
         public static readonly Response Ok = new Response();
+        #endregion
+
+        #region Failed methods 
+        /// <summary>
+        /// Формирование данных в случае неуспешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="result">Результат/ответ.</param>
+        /// <returns>Данные.</returns>
+        public static Response Failed(Result result)
+        {
+            return new Response(result);
+        }
+
+        /// <summary>
+        /// Формирование данных в случае неуспешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения метода.</param>
+        /// <returns>Данные.</returns>
+        public static Response Failed(int code, string message)
+        {
+            return new Response(code, message);
+        }
+        #endregion
+
+        #region Succeed methods 
+        /// <summary>
+        /// Формирование данных в случае успешности выполнения метода/операции.
+        /// </summary>
+        /// <returns>Данные</returns>
+        public static Response Succeed()
+        {
+            return Response.Ok;
+        }
+
+        /// <summary>
+        /// Формирование данных в случае успешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения метода.</param>
+        /// <returns>Данные.</returns>
+        public static Response Succeed(int code, string message)
+        {
+            return new Response(code, message, default, true);
+        }
         #endregion
 
         #region Properties
@@ -146,6 +117,18 @@ namespace Lotus.Repository
         {
             Result = new Result(code, message, null, false);
         }
+
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <param name="status">Статус выполнения операции.</param>
+        public Response(int code, string message, object? value, bool status)
+        {
+            Result = new Result(code, message, value, status);
+        }
         #endregion
     }
 
@@ -155,6 +138,48 @@ namespace Lotus.Repository
     /// <typeparam name="TPayload">Тип данных.</typeparam>
     public class Response<TPayload> : Response, ILotusResponse<TPayload>
     {
+        #region Const
+        /// <summary>
+        /// Результат успешного выполнения.
+        /// </summary>
+        public new static readonly Response<TPayload> Ok = new Response<TPayload>();
+        #endregion
+
+        #region Failed methods 
+        /// <summary>
+        /// Формирование данных в случае неуспешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="result">Результат/ответ.</param>
+        /// <returns>Данные.</returns>
+        public new static Response<TPayload> Failed(Result result)
+        {
+            return new Response<TPayload>(result);
+        }
+
+        /// <summary>
+        /// Формирование данных в случае неуспешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="message">Сообщение о результате выполнения метода.</param>
+        /// <returns>Данные.</returns>
+        public new static Response<TPayload> Failed(int code, string message)
+        {
+            return new Response<TPayload>(code, message);
+        }
+        #endregion
+
+        #region Succeed methods 
+        /// <summary>
+        /// Формирование данных в случае успешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="data">Объект данных.</param>
+        /// <returns>Данные.</returns>
+        public static Response<TPayload> Succeed(TPayload data)
+        {
+            return new Response<TPayload>(data);
+        }
+        #endregion
+
         #region Properties
         /// <summary>
         /// Данные.

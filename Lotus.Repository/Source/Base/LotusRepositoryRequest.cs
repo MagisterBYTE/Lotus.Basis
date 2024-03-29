@@ -58,9 +58,13 @@ namespace Lotus.Repository
         /// <returns>Список целочисленных значений и функция фильтрации.</returns>
         public (int[], TFilterFunction) GetIdsByInteger(string propertName)
         {
-#pragma warning disable S6602 // "Find" method should be used instead of the "FirstOrDefault" extension
-            var filterProperty = Filtering?.FirstOrDefault(x => x.PropertyName == propertName);
-#pragma warning restore S6602 // "Find" method should be used instead of the "FirstOrDefault" extension
+            if(Filtering is null)
+            {
+                return (Array.Empty<int>(), TFilterFunction.Equals);
+            }
+
+            var filterProperty = Array.Find(Filtering, x => x.PropertyName == propertName);
+
             if (filterProperty != null && filterProperty.Values != null && filterProperty.Values.Length > 0)
             {
                 var ids = new int[filterProperty.Values.Length];

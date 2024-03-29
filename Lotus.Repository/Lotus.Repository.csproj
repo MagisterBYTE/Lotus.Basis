@@ -10,13 +10,13 @@
     <Authors>MagistrBYTE aka DanielDem</Authors>
     <Company>LotusPlatform</Company>
     <Copyright>MagistrBYTE aka DanielDem</Copyright>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
-    <Version>3.0.0</Version>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <FileVersion>3.0.1.0</FileVersion>
+    <Version>3.0.1</Version>
     <Title>Lotus.Repository</Title>
     <PackageTags></PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>Модуль репозитория определяет базовый интерфейс репозитория данных который содержит набор типовых методов для работы с коллекциями сущностей. Также модуль реализует репозиторий для базы данных, для отдельного файла и для отдельного страничного хранения данных</Description>
+    <Description>Модуль репозитория определяет базовый интерфейс репозитория, интерфейс для реализации хранилища данных, а также унифицированные механизмы получения и запроса данных. Также модуль реализует хранилище данных через базу данных и для отдельного файла</Description>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <PackageIcon>IconTemplate.png</PackageIcon>
     <PackageIconUrl />
@@ -37,7 +37,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Publish'">
-    <PackageReference Include="Lotus.Core" Version="3.0.0" />
+    <PackageReference Include="Lotus.Core" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' != 'Publish'">
@@ -46,9 +46,9 @@
 
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

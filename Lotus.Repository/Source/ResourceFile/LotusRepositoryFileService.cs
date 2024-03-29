@@ -55,7 +55,7 @@ namespace Lotus.Repository
 
                 var result = entity.ToFileDto();
 
-                return XResponse.Succeed<FileDto>(result);
+                return Response<FileDto>.Succeed(result);
             }
 
             if (fileCreate is FileCreateRawRequest requestRaw)
@@ -110,7 +110,7 @@ namespace Lotus.Repository
 
                 var result = entity.ToFileDto();
 
-                return XResponse.Succeed<FileDto>(result);
+                return Response<FileDto>.Succeed(result);
             }
 
             if (fileCreate is FileCreateStreamRequest requestStream)
@@ -169,7 +169,7 @@ namespace Lotus.Repository
                 await _dataStorage.SaveChangesAsync(token);
                 var result = entity.ToFileDto();
 
-                return XResponse.Succeed<FileDto>(result);
+                return Response<FileDto>.Succeed(result);
             }
 
             if (fileCreate is FileCreateBase64Request requestBase64)
@@ -224,10 +224,10 @@ namespace Lotus.Repository
 
                 var result = entity.ToFileDto();
 
-                return XResponse.Succeed<FileDto>(result);
+                return Response<FileDto>.Succeed(result);
             }
 
-            return XResponse.Failed<FileDto>(2000, "Неизвестный запрос");
+            return Response<FileDto>.Failed(2000, "Неизвестный запрос");
         }
 
         /// <inheritdoc/>
@@ -236,12 +236,12 @@ namespace Lotus.Repository
             var entity = await _dataStorage.GetByIdAsync<ResourceFile, Guid>(id, token);
             if (entity == null)
             {
-                return XResponse.Failed<FileBase64Dto>(XResourceFileErrors.NotFound);
+                return Response<FileBase64Dto>.Failed(XResourceFileErrors.NotFound);
             }
 
             var result = entity.ToFileBase64Dto();
 
-            return XResponse.Succeed(result);
+            return Response<FileBase64Dto>.Succeed(result);
         }
 
         /// <inheritdoc/>
@@ -285,13 +285,13 @@ namespace Lotus.Repository
             var entity = await _dataStorage.GetByIdAsync<ResourceFile, Guid>(id, token);
             if (entity == null)
             {
-                return XResponse.Failed(XResourceFileErrors.NotFound);
+                return Response.Failed(XResourceFileErrors.NotFound);
             }
 
             _dataStorage.Remove(entity!);
             await _dataStorage.SaveChangesAsync(token);
 
-            return XResponse.Succeed();
+            return Response.Succeed();
         }
         #endregion
     }

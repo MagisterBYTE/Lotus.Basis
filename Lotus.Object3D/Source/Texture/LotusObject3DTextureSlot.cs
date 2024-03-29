@@ -290,7 +290,7 @@ namespace Lotus.Object3D
 		/// Конструктор инициализирует объект класса указанными параметрами.
 		/// </summary>
 		/// <param name="assimp_texture_slot">Текстурный слот.</param>
-		public CTextureSlot(Assimp.TextureSlot assimp_texture_slot)
+		public TextureSlot(Assimp.TextureSlot assimp_texture_slot)
 		{
 			_assimpTextureSlot = assimp_texture_slot;
 		}
@@ -300,7 +300,7 @@ namespace Lotus.Object3D
 		/// </summary>
 		/// <param name="material">Материал.</param>
 		/// <param name="assimp_texture_slot">Текстурный слот.</param>
-		public CTextureSlot(CMaterial material, Assimp.TextureSlot assimp_texture_slot)
+		public TextureSlot(Material material, Assimp.TextureSlot assimp_texture_slot)
 		{
 			_ownerMaterial = material;
 			_assimpTextureSlot = assimp_texture_slot;

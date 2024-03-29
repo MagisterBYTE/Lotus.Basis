@@ -212,7 +212,7 @@ namespace Lotus.Object3D
 		/// </summary>
 		/// <param name="owner_scene">Сцена.</param>
 		/// <param name="assimp_node">Узел сцены.</param>
-		public CNode3D(CScene3D owner_scene, Assimp.Node assimp_node)
+		public Node3D(Scene3D owner_scene, Assimp.Node assimp_node)
 		{
 			InitData(owner_scene, null, assimp_node);
 
@@ -222,7 +222,7 @@ namespace Lotus.Object3D
 			{
 				for (var i = 0; i < _assimpNode.ChildCount; i++)
 				{
-					_children.Add(new CNode3D(owner_scene, this, _assimpNode.Children[i]));
+					_children.Add(new Node3D(owner_scene, this, _assimpNode.Children[i]));
 				}
 			}
 		}
@@ -233,7 +233,7 @@ namespace Lotus.Object3D
 		/// <param name="owner_scene">Сцена.</param>
 		/// <param name="parent_node">Родительский узел.</param>
 		/// <param name="assimp_node">Узел сцены.</param>
-		public CNode3D(CScene3D owner_scene, CNode3D parent_node, Assimp.Node assimp_node)
+		public Node3D(Scene3D owner_scene, Node3D parent_node, Assimp.Node assimp_node)
 		{
 			InitData(owner_scene, parent_node, assimp_node);
 
@@ -243,7 +243,7 @@ namespace Lotus.Object3D
 			{
 				for (var i = 0; i < _assimpNode.ChildCount; i++)
 				{
-					_children.Add(new CNode3D(owner_scene, this, _assimpNode.Children[i]));
+					_children.Add(new Node3D(owner_scene, this, _assimpNode.Children[i]));
 				}
 			}
 		}
@@ -429,7 +429,7 @@ namespace Lotus.Object3D
 		/// <param name="owner_scene">Сцена.</param>
 		/// <param name="parent_node">Родительский узел.</param>
 		/// <param name="assimp_node">Узел сцены.</param>
-		protected void InitData(CScene3D owner_scene, CNode3D parent_node, Assimp.Node assimp_node)
+		protected void InitData(Scene3D owner_scene, Node3D parent_node, Assimp.Node assimp_node)
 		{
 			_ownerScene = owner_scene;
 			_parentNode = parent_node;
@@ -459,7 +459,7 @@ namespace Lotus.Object3D
 				_nodeTransform.Children.Add(_scaleTransform);
 			}
 
-			_children = new List<CNode3D>();
+			_children = new List<Node3D>();
 			_helix3DModels = new List<Helix3D.MeshGeometryModel3D>();
 		}
 

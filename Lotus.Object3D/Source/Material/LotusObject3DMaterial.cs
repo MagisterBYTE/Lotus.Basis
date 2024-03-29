@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using Media3D = System.Windows.Media.Media3D;
+using System;
+
 #endif
 
 #if USE_HELIX
@@ -138,38 +140,38 @@ namespace Lotus.Object3D
 		/// </summary>
 		/// <param name="owner_scene">Сцена.</param>
 		/// <param name="assimp_material">Материал.</param>
-		public CMaterial(CScene3D owner_scene, Assimp.Material assimp_material)
+		public Material(Scene3D owner_scene, Assimp.Material assimp_material)
 		{
 			_ownerScene = owner_scene;
-			_textureSlots = new ListArray<CTextureSlot>();
+			_textureSlots = new ListArray<TextureSlot>();
 
 			_assimpMaterial = assimp_material;
 			_name = _assimpMaterial.Name;
 
 			if (_assimpMaterial.HasTextureAmbient)
 			{
-				_ambientSlot = new CTextureSlot(this, _assimpMaterial.TextureAmbient);
+				_ambientSlot = new TextureSlot(this, _assimpMaterial.TextureAmbient);
 				_ambientSlot.Name = "Ambient";
 				_textureSlots.Add(_ambientSlot);
 			}
 
 			if (_assimpMaterial.HasTextureDiffuse)
 			{
-				_diffuseSlot = new CTextureSlot(this, _assimpMaterial.TextureDiffuse);
+				_diffuseSlot = new TextureSlot(this, _assimpMaterial.TextureDiffuse);
 				_diffuseSlot.Name = "Diffuse";
 				_textureSlots.Add(_diffuseSlot);
 			}
 
 			if (_assimpMaterial.HasTextureNormal)
 			{
-				_normalSlot = new CTextureSlot(this, _assimpMaterial.TextureNormal);
+				_normalSlot = new TextureSlot(this, _assimpMaterial.TextureNormal);
 				_normalSlot.Name = "Normal";
 				_textureSlots.Add(_normalSlot);
 			}
 
 			if (_assimpMaterial.HasTextureHeight)
 			{
-				_heightSlot = new CTextureSlot(this, _assimpMaterial.TextureHeight);
+				_heightSlot = new TextureSlot(this, _assimpMaterial.TextureHeight);
 				_heightSlot.Name = "Height";
 				_textureSlots.Add(_heightSlot);
 			}
@@ -286,7 +288,7 @@ namespace Lotus.Object3D
 
 			catch (Exception exc)
 			{
-				XLogger.LogExceptionModule(nameof(CScene3D), exc);
+				XLogger.LogExceptionModule(nameof(Scene3D), exc);
 			}
 		}
 #endif
@@ -339,17 +341,17 @@ namespace Lotus.Object3D
 		/// </summary>
 		/// <param name="ownerScene">Сцена.</param>
 		/// <param name="assimp_scene">Сцена.</param>
-		public CMaterialSet(CScene3D ownerScene, Assimp.Scene assimp_scene)
+		public MaterialSet(Scene3D ownerScene, Assimp.Scene assimp_scene)
 		{
 			_ownerScene = ownerScene;
 			_name = "Материалы";
-			_materials = new ListArray<CMaterial>();
+			_materials = new ListArray<Material>();
 
 			// Устанавливаем материалы
 			for (var i = 0; i < assimp_scene.MaterialCount; i++)
 			{
 				Assimp.Material assimp_material = assimp_scene.Materials[i];
-				var material = new CMaterial(ownerScene, assimp_material);
+				var material = new Material(ownerScene, assimp_material);
 				_materials.Add(material);
 			}
 		}

@@ -211,12 +211,12 @@ namespace Lotus.Object3D
 		/// </summary>
 		/// <param name="mesh_name">Имя меша.</param>
 		/// <param name="assimp_mesh">Меш Assimp.</param>
-		public CMesh3Df(String mesh_name, Assimp.Mesh assimp_mesh)
+		public Mesh3Df(string mesh_name, Assimp.Mesh assimp_mesh)
 		{
 			_name = mesh_name;
-			_vertices = new CListVertex3D();
-			_triangles = new CListTriangle3D(_vertices);
-			_edges = new CListEdge3D(_vertices);
+			_vertices = new ListVertex3D();
+			_triangles = new ListTriangle3D(_vertices);
+			_edges = new ListEdge3D(_vertices);
 			_assimpMesh = assimp_mesh;
 			//CreateFromAs(unity_mesh);
 		}
@@ -613,7 +613,7 @@ namespace Lotus.Object3D
             _helixMesh.TriangleIndices = new IntCollection(total_index);
             for (var i = 0; i < _assimpMesh.FaceCount; i++)
             {
-                List<Int32> indices = _assimpMesh.Faces[i].Indices;
+                List<int> indices = _assimpMesh.Faces[i].Indices;
                 for (var j = 0; j < indices.Count; j++)
                 {
                     _helixMesh.TriangleIndices.Add(indices[j]);
@@ -950,17 +950,17 @@ namespace Lotus.Object3D
 		/// </summary>
 		/// <param name="ownerScene">Сцена Assimp.</param>
 		/// <param name="assimp_scene">Сцена Assimp.</param>
-		public CMeshSet(CScene3D ownerScene, Assimp.Scene assimp_scene)
+		public MeshSet(Scene3D ownerScene, Assimp.Scene assimp_scene)
 		{
 			_ownerScene = ownerScene;
 			_name = "Сетки";
-			_meshes = new ListArray<CMesh3Df>();
+			_meshes = new ListArray<Mesh3Df>();
 
 			// Устанавливаем меши
 			for (var i = 0; i < assimp_scene.MeshCount; i++)
 			{
 				Assimp.Mesh mesh = assimp_scene.Meshes[i];
-				_meshes.Add(new CMesh3Df("Mesh_" + i.ToString(), mesh));
+				_meshes.Add(new Mesh3Df("Mesh_" + i.ToString(), mesh));
 			}
 		}
 #endif

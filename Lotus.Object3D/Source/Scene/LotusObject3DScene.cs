@@ -1,15 +1,11 @@
 using System.Collections;
+using System.IO;
+using System;
 
 #if USE_WINDOWS
-using System.Windows;
-using System.Windows.Media;
-using Media3D = System.Windows.Media.Media3D;
 #endif
 
 #if USE_HELIX
-using HelixToolkit.Wpf;
-using HelixToolkit.Wpf.SharpDX;
-using HelixToolkit.SharpDX.Core;
 using HelixToolkit.SharpDX.Core.Model.Scene;
 #endif
 
@@ -34,76 +30,76 @@ namespace Lotus.Object3D
     {
         #region Static fields
 #if USE_ASSIMP
-		/// <summary>
-		/// Представляет контекст импорта/экспорта Assimp, который загружает или сохраняет модели с помощью неуправляемой библиотеки. 
-		/// Кроме того, предлагается функция преобразования для обхода загрузки данных модели в управляемую память.
-		/// </summary>
-		protected readonly static Assimp.AssimpContext AssimpContextDefault = new Assimp.AssimpContext();
+        /// <summary>
+        /// Представляет контекст импорта/экспорта Assimp, который загружает или сохраняет модели с помощью неуправляемой библиотеки. 
+        /// Кроме того, предлагается функция преобразования для обхода загрузки данных модели в управляемую память.
+        /// </summary>
+        protected readonly static Assimp.AssimpContext AssimpContextDefault = new Assimp.AssimpContext();
 #endif
         #endregion
 
         #region Static methods
 #if USE_ASSIMP
-		/// <summary>
-		/// Получение списка поддерживаемых экспортируемых файлов.
-		/// </summary>
-		/// <returns>Список обозначений экспортируемых файлов.</returns>
-		public static String[] GetSupportedExportFormats()
-		{
-			var items = AssimpContextDefault.GetSupportedExportFormats();
-			var formats = new String[items.Length];
-			for (var i = 0; i < items.Length; i++)
-			{
-				formats[i] = items[i].FormatId;
-			}
+        /// <summary>
+        /// Получение списка поддерживаемых экспортируемых файлов.
+        /// </summary>
+        /// <returns>Список обозначений экспортируемых файлов.</returns>
+        public static string[] GetSupportedExportFormats()
+        {
+            var items = AssimpContextDefault.GetSupportedExportFormats();
+            var formats = new string[items.Length];
+            for (var i = 0; i < items.Length; i++)
+            {
+                formats[i] = items[i].FormatId;
+            }
 
-			return formats;
-		}
+            return formats;
+        }
 
-		/// <summary>
-		/// Получение списка поддерживаемых импортируемых файлов.
-		/// </summary>
-		/// <returns>Список расширений импортируемых файлов.</returns>
-		public static String[] GetSupportedImportFormats()
-		{
-			return AssimpContextDefault.GetSupportedImportFormats();
-		}
+        /// <summary>
+        /// Получение списка поддерживаемых импортируемых файлов.
+        /// </summary>
+        /// <returns>Список расширений импортируемых файлов.</returns>
+        public static string[] GetSupportedImportFormats()
+        {
+            return AssimpContextDefault.GetSupportedImportFormats();
+        }
 
-		/// <summary>
-		/// Загрузка 3D контента по полному пути.
-		/// </summary>
-		/// <param name="file_name">Имя файла.</param>
-		/// <returns>Объект <see cref="CScene3D"/>.</returns>
-		public static CScene3D LoadFromFile(String file_name)
-		{
-			try
-			{
-				Assimp.PostProcessSteps step =
-					Assimp.PostProcessSteps.FindInstances |
-					Assimp.PostProcessSteps.OptimizeGraph |
-					Assimp.PostProcessSteps.ValidateDataStructure |
-					Assimp.PostProcessSteps.SortByPrimitiveType |
-					Assimp.PostProcessSteps.Triangulate |
-					Assimp.PostProcessSteps.FlipWindingOrder |
-					Assimp.PostProcessSteps.FlipUVs;
+        /// <summary>
+        /// Загрузка 3D контента по полному пути.
+        /// </summary>
+        /// <param name="file_name">Имя файла.</param>
+        /// <returns>Объект <see cref="Scene3D"/>.</returns>
+        public static Scene3D LoadFromFile(string file_name)
+        {
+            try
+            {
+                Assimp.PostProcessSteps step =
+                    Assimp.PostProcessSteps.FindInstances |
+                    Assimp.PostProcessSteps.OptimizeGraph |
+                    Assimp.PostProcessSteps.ValidateDataStructure |
+                    Assimp.PostProcessSteps.SortByPrimitiveType |
+                    Assimp.PostProcessSteps.Triangulate |
+                    Assimp.PostProcessSteps.FlipWindingOrder |
+                    Assimp.PostProcessSteps.FlipUVs;
 
-				//Assimp.PostProcessPreset
+                //Assimp.PostProcessPreset
 
-				Assimp.Scene assimp_scene = AssimpContextDefault.ImportFile(file_name, step);
-				if(assimp_scene != null)
-				{
-					var scene = new CScene3D(Path.GetFileNameWithoutExtension(file_name), assimp_scene);
-					scene.FileName = file_name;
-					return scene;
-				}
-			}
-			catch (Exception exc)
-			{
-				XLogger.LogExceptionModule(nameof(CScene3D), exc);
-			}
+                Assimp.Scene assimp_scene = AssimpContextDefault.ImportFile(file_name, step);
+                if (assimp_scene != null)
+                {
+                    var scene = new Scene3D(Path.GetFileNameWithoutExtension(file_name), assimp_scene);
+                    scene.FileName = file_name;
+                    return scene;
+                }
+            }
+            catch (Exception exc)
+            {
+                XLogger.LogExceptionModule(nameof(Scene3D), exc);
+            }
 
-			return null;
-		}
+            return null;
+        }
 #endif
         #endregion
 
@@ -128,10 +124,10 @@ namespace Lotus.Object3D
 
         // Платформенно-зависимая часть
 #if USE_ASSIMP
-		protected internal Assimp.Scene _assimpScene;
+        protected internal Assimp.Scene _assimpScene;
 #endif
 #if USE_HELIX
-		protected internal SceneNode _helixScene;
+        protected internal SceneNode _helixScene;
 #endif
 #if UNITY_2017_1_OR_NEWER
 		protected internal GameObject _unityScene;
@@ -246,13 +242,13 @@ namespace Lotus.Object3D
         // ПЛАТФОРМЕННО-ЗАВИСИМАЯ ЧАСТЬ
         //
 #if USE_HELIX
-		/// <summary>
-		/// Сцена Helix.
-		/// </summary>
-		public SceneNode HelixScene
-		{
-			get { return _helixScene; }
-		}
+        /// <summary>
+        /// Сцена Helix.
+        /// </summary>
+        public SceneNode HelixScene
+        {
+            get { return _helixScene; }
+        }
 #endif
 #if UNITY_2017_1_OR_NEWER
 		/// <summary>
@@ -296,38 +292,38 @@ namespace Lotus.Object3D
         }
 
 #if USE_HELIX
-		/// <summary>
-		/// Конструктор инициализирует объект класса указанными параметрами.
-		/// </summary>
-		/// <param name="name">Имя сцены.</param>
-		/// <param name="helix_scene">Сцена.</param>
-		public CScene3D(String name, SceneNode helix_scene)
-		{
-			_name = name;
-			_helixScene = helix_scene;
-			//CreateSceneFromHelixScene();
-			//_meshSet = new CMeshSet();
-			//_materialSet = new CMaterialSet();
-			//_rootNode = new CNode3D(this, _assimpScene.RootNode);
-			//ComputeBoundingBox();
-		}
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="name">Имя сцены.</param>
+        /// <param name="helix_scene">Сцена.</param>
+        public Scene3D(String name, SceneNode helix_scene)
+        {
+            _name = name;
+            _helixScene = helix_scene;
+            //CreateSceneFromHelixScene();
+            //_meshSet = new CMeshSet();
+            //_materialSet = new CMaterialSet();
+            //_rootNode = new CNode3D(this, _assimpScene.RootNode);
+            //ComputeBoundingBox();
+        }
 #endif
 
 #if USE_ASSIMP
-		/// <summary>
-		/// Конструктор инициализирует объект класса указанными параметрами.
-		/// </summary>
-		/// <param name="name">Имя сцены.</param>
-		/// <param name="assimp_scene">Сцена.</param>
-		public CScene3D(String name, Assimp.Scene assimp_scene)
-		{
-			_name = name;
-			_assimpScene = assimp_scene;
-			_meshSet = new CMeshSet(this, _assimpScene);
-			_materialSet = new CMaterialSet(this, _assimpScene);
-			_rootNode = new CNode3D(this, _assimpScene.RootNode);
-			ComputeBoundingBox();
-		}
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="name">Имя сцены.</param>
+        /// <param name="assimp_scene">Сцена.</param>
+        public Scene3D(String name, Assimp.Scene assimp_scene)
+        {
+            _name = name;
+            _assimpScene = assimp_scene;
+            _meshSet = new MeshSet(this, _assimpScene);
+            _materialSet = new MaterialSet(this, _assimpScene);
+            _rootNode = new Node3D(this, _assimpScene.RootNode);
+            ComputeBoundingBox();
+        }
 #endif
 #if UNITY_2017_1_OR_NEWER
 		/// <summary>

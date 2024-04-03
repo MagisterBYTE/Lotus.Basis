@@ -257,7 +257,7 @@ namespace Lotus.Maths
     /// </summary>
     public static class XIntersect2D
     {
-        #region МЕТОДЫ methods
+        #region Methods
 #if UNITY_2017_1_OR_NEWER
 		/// <summary>
 		/// Возвращение скалярного произведения с перпендикулярным вектором.

@@ -23,7 +23,7 @@ namespace Lotus.Core
         public const byte XOR_MASK = 0x53;
         #endregion
 
-        #region МЕТОДЫ 
+        #region Methods 
         /// <summary>
         /// Закодировать строку.
         /// </summary>

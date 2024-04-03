@@ -131,7 +131,7 @@ namespace Lotus.Core
     /// </remarks>
     public interface ILotusViewModelBuilder
     {
-        #region МЕТОДЫ 
+        #region Methods 
         /// <summary>
         /// Получение количества дочерних узлов.
         /// </summary>

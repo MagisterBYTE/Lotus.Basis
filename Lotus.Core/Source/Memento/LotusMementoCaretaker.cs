@@ -17,7 +17,7 @@ namespace Lotus.Core
         ILotusMementoOriginator MementoOriginator { get; set; }
         #endregion
 
-        #region МЕТОДЫ 
+        #region Methods 
         /// <summary>
         /// Сохранить состояние объекта.
         /// </summary>

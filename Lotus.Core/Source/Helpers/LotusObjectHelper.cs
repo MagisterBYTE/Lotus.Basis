@@ -7,7 +7,7 @@ namespace Lotus.Core
     /// <summary>
     /// Статический класс реализующий методы применяемые в целом для всех объектов платформы NET.
     /// </summary>
-    public static class XObject
+    public static class XObjectHelper
     {
         /// <summary>
         /// Обмен значениями двух объектов.

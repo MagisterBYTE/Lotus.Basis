@@ -27,7 +27,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static bool ToBoolean(string text)
         {
-            return XBoolean.Parse(text);
+            return XBooleanHelper.Parse(text);
         }
         #endregion
 
@@ -40,7 +40,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static int ToInt(string text, int defaultValue = 0)
         {
-            return XNumbers.ParseInt(text, defaultValue);
+            return XNumberHelper.ParseInt(text, defaultValue);
         }
         #endregion
 
@@ -53,7 +53,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static float ToSingle(string text, float defaultValue = 0)
         {
-            return XNumbers.ParseSingle(text, defaultValue);
+            return XNumberHelper.ParseSingle(text, defaultValue);
         }
         #endregion
 
@@ -66,29 +66,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static double ToDouble(string text, double defaultValue = 0)
         {
-            return XNumbers.ParseDouble(text, defaultValue);
-        }
-
-        /// <summary>
-        /// Преобразование форматированного текста в вещественное значение двойной точности.
-        /// </summary>
-        /// <param name="text">Текстовое значение.</param>
-        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
-        public static double ToDoubleFormat(string text, double defaultValue = 0)
-        {
-            return XNumbers.ParseDoubleFormat(text, defaultValue);
-        }
-
-        /// <summary>
-        /// Преобразование форматированного текста в вещественное значение двойной точности.
-        /// </summary>
-        /// <param name="text">Текст.</param>
-        /// <param name="result">Значение.</param>
-        /// <returns>Статус успешности преобразования.</returns>
-        public static bool ToDoubleFormat(string text, out double result)
-        {
-            return XNumbers.TryParseDoubleFormat(text, out result);
+            return XNumberHelper.ParseDouble(text, defaultValue);
         }
         #endregion
 
@@ -101,7 +79,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static decimal ParseDecimal(string text, decimal defaultValue = 0)
         {
-            return XNumbers.ParseDecimal(text, defaultValue);
+            return XNumberHelper.ParseDecimal(text, defaultValue);
         }
         #endregion
 
@@ -237,7 +215,7 @@ namespace Lotus.Core
         /// <returns>Объект перечисления.</returns>
         public static TEnum ToEnum<TEnum>(string text, TEnum? defaultValue = default(TEnum)) where TEnum : Enum
         {
-            return XEnum.ToEnum<TEnum>(text, defaultValue);
+            return XEnumHelper.ToEnum<TEnum>(text, defaultValue);
         }
 
         /// <summary>
@@ -249,7 +227,7 @@ namespace Lotus.Core
         /// <returns>Объект перечисления.</returns>
         public static TEnum ToEnum<TEnum>(int value, TEnum? defaultValue = default(TEnum)) where TEnum : Enum
         {
-            return XEnum.ToEnum<TEnum>(value, defaultValue);
+            return XEnumHelper.ToEnum<TEnum>(value, defaultValue);
         }
 
         /// <summary>
@@ -272,7 +250,7 @@ namespace Lotus.Core
         /// <returns>Объект перечисления.</returns>
         public static Enum ToEnumOfType(Type enumType, object value)
         {
-            return XEnum.ToEnumOfType(enumType, value)!;
+            return XEnumHelper.ToEnumOfType(enumType, value)!;
         }
 
         /// <summary>
@@ -284,7 +262,7 @@ namespace Lotus.Core
         /// <returns>Статус успешности преобразования.</returns>
         public static bool TryToEnum<TEnum>(object value, out TEnum result) where TEnum : Enum
         {
-            return XEnum.TryToEnum<TEnum>(value, out result);
+            return XEnumHelper.TryToEnum<TEnum>(value, out result);
         }
         #endregion
 
@@ -332,7 +310,7 @@ namespace Lotus.Core
                     break;
                 case TypeCode.Boolean:
                     {
-                        result = XBoolean.Parse(text);
+                        result = XBooleanHelper.Parse(text);
                     }
                     break;
                 case TypeCode.Char:
@@ -342,62 +320,62 @@ namespace Lotus.Core
                     break;
                 case TypeCode.SByte:
                     {
-                        result = (sbyte)XNumbers.ParseInt(text);
+                        result = (sbyte)XNumberHelper.ParseInt(text);
                     }
                     break;
                 case TypeCode.Byte:
                     {
-                        result = (byte)XNumbers.ParseInt(text);
+                        result = (byte)XNumberHelper.ParseInt(text);
                     }
                     break;
                 case TypeCode.Int16:
                     {
-                        result = (short)XNumbers.ParseInt(text);
+                        result = (short)XNumberHelper.ParseInt(text);
                     }
                     break;
                 case TypeCode.UInt16:
                     {
-                        result = (ushort)XNumbers.ParseInt(text);
+                        result = (ushort)XNumberHelper.ParseInt(text);
                     }
                     break;
                 case TypeCode.Int32:
                     {
-                        result = XNumbers.ParseInt(text);
+                        result = XNumberHelper.ParseInt(text);
                     }
                     break;
                 case TypeCode.UInt32:
                     {
-                        result = (uint)XNumbers.ParseInt(text);
+                        result = (uint)XNumberHelper.ParseInt(text);
                     }
                     break;
                 case TypeCode.Int64:
                     {
-                        result = XNumbers.ParseLong(text);
+                        result = XNumberHelper.ParseLong(text);
                     }
                     break;
                 case TypeCode.UInt64:
                     {
-                        result = (ulong)XNumbers.ParseLong(text);
+                        result = (ulong)XNumberHelper.ParseLong(text);
                     }
                     break;
                 case TypeCode.Single:
                     {
-                        result = XNumbers.ParseSingle(text);
+                        result = XNumberHelper.ParseSingle(text);
                     }
                     break;
                 case TypeCode.Double:
                     {
-                        result = XNumbers.ParseDouble(text);
+                        result = XNumberHelper.ParseDouble(text);
                     }
                     break;
                 case TypeCode.Decimal:
                     {
-                        result = XNumbers.ParseDecimal(text);
+                        result = XNumberHelper.ParseDecimal(text);
                     }
                     break;
                 case TypeCode.DateTime:
                     {
-                        result = DateTime.Parse(text);
+                        result = XDateTimeHelper.Parse(text);
                     }
                     break;
                 case TypeCode.String:

@@ -138,10 +138,10 @@ namespace Lotus.Maths
         {
             var quaternion = new Quaternion3D();
             var quaternion_data = data.Split(';');
-            quaternion.X = XMath.ParseDouble(quaternion_data[0]);
-            quaternion.Y = XMath.ParseDouble(quaternion_data[1]);
-            quaternion.Z = XMath.ParseDouble(quaternion_data[2]);
-            quaternion.W = XMath.ParseDouble(quaternion_data[3]);
+            quaternion.X = XNumberHelper.ParseDouble(quaternion_data[0]);
+            quaternion.Y = XNumberHelper.ParseDouble(quaternion_data[1]);
+            quaternion.Z = XNumberHelper.ParseDouble(quaternion_data[2]);
+            quaternion.W = XNumberHelper.ParseDouble(quaternion_data[3]);
             return quaternion;
         }
         #endregion
@@ -862,10 +862,10 @@ namespace Lotus.Maths
         {
             var quaternion = new Quaternion3Df();
             var quaternion_data = data.Split(';');
-            quaternion.X = XMath.ParseSingle(quaternion_data[0]);
-            quaternion.Y = XMath.ParseSingle(quaternion_data[1]);
-            quaternion.Z = XMath.ParseSingle(quaternion_data[2]);
-            quaternion.W = XMath.ParseSingle(quaternion_data[3]);
+            quaternion.X = XNumberHelper.ParseSingle(quaternion_data[0]);
+            quaternion.Y = XNumberHelper.ParseSingle(quaternion_data[1]);
+            quaternion.Z = XNumberHelper.ParseSingle(quaternion_data[2]);
+            quaternion.W = XNumberHelper.ParseSingle(quaternion_data[3]);
             return quaternion;
         }
         #endregion

@@ -302,12 +302,12 @@ namespace Lotus.Core
         /// </summary>
         public DateTime DateTimeValue
         {
-            get { return DateTime.Parse(_stringData); }
+            get { return XDateTimeHelper.Parse(_stringData); }
             set
             {
                 _stringData = value.ToString();
                 _valueType = TValueType.DateTime;
-                if (_owner != null) _owner.OnNotifyUpdated(this, DateTime.Parse(_stringData), nameof(DateTimeValue));
+                if (_owner != null) _owner.OnNotifyUpdated(this, XDateTimeHelper.Parse(_stringData), nameof(DateTimeValue));
             }
         }
 
@@ -1201,7 +1201,7 @@ namespace Lotus.Core
                     }
                 case TValueType.DateTime:
                     {
-                        return DateTime.Parse(_stringData);
+                        return XDateTimeHelper.Parse(_stringData);
                     }
                 case TValueType.String:
                     {

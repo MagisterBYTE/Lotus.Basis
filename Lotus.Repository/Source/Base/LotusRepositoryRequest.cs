@@ -70,7 +70,7 @@ namespace Lotus.Repository
                 var ids = new int[filterProperty.Values.Length];
                 for (var i = 0; i < filterProperty.Values.Length; i++)
                 {
-                    ids[i] = XNumbers.ParseInt(filterProperty.Values[i]);
+                    ids[i] = XNumberHelper.ParseInt(filterProperty.Values[i]);
                 }
                 return (ids, filterProperty.Function);
             }

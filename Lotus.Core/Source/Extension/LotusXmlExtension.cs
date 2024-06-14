@@ -285,7 +285,7 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                return XBoolean.Parse(value);
+                return XBooleanHelper.Parse(value);
             }
             return defaultValue;
         }
@@ -302,7 +302,7 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                return int.Parse(value);
+                return XNumberHelper.ParseInt(value, defaultValue);
             }
             return defaultValue;
         }
@@ -319,7 +319,7 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                return long.Parse(value);
+                return XNumberHelper.ParseLong(value, defaultValue);
             }
             return defaultValue;
         }
@@ -336,7 +336,7 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                return XNumbers.ParseSingle(value);
+                return XNumberHelper.ParseSingle(value);
             }
             return defaultValue;
         }
@@ -353,7 +353,7 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                return XNumbers.ParseDouble(value);
+                return XNumberHelper.ParseDouble(value);
             }
             return defaultValue;
         }
@@ -369,14 +369,14 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
+                var values = value.Split(XCharHelper.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
                 if (values.Length > 0)
                 {
                     var massive = new int[values.Length];
 
                     for (var i = 0; i < values.Length; i++)
                     {
-                        massive[i] = int.Parse(values[i]);
+                        massive[i] = XNumberHelper.ParseInt(values[i]);
                     }
 
                     return massive;
@@ -396,14 +396,14 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
+                var values = value.Split(XCharHelper.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
                 if (values.Length > 0)
                 {
                     var massive = new float[values.Length];
 
                     for (var i = 0; i < values.Length; i++)
                     {
-                        massive[i] = XNumbers.ParseSingle(values[i]);
+                        massive[i] = XNumberHelper.ParseSingle(values[i]);
                     }
 
                     return massive;
@@ -423,14 +423,14 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                var values = value.Split(XChar.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
+                var values = value.Split(XCharHelper.SeparatorComma, StringSplitOptions.RemoveEmptyEntries);
                 if (values.Length > 0)
                 {
                     var massive = new double[values.Length];
 
                     for (var i = 0; i < values.Length; i++)
                     {
-                        massive[i] = XNumbers.ParseDouble(values[i]);
+                        massive[i] = XNumberHelper.ParseDouble(values[i]);
                     }
 
                     return massive;
@@ -468,7 +468,7 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                return DateTime.Parse(value);
+                return XDateTimeHelper.Parse(value);
             }
 
             return DateTime.Now;
@@ -486,7 +486,7 @@ namespace Lotus.Core
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
             {
-                return DateTime.Parse(value);
+                return XDateTimeHelper.Parse(value);
             }
 
             return defaultValue;
@@ -614,7 +614,7 @@ namespace Lotus.Core
             if (@this.Attributes[attributeName] != null)
             {
                 var value = @this.Attributes[attributeName]!.Value;
-                return XBoolean.Parse(value);
+                return XBooleanHelper.Parse(value);
             }
             else
             {
@@ -622,7 +622,7 @@ namespace Lotus.Core
                 if (@this.Attributes[upper_name] != null)
                 {
                     var value = @this.Attributes[upper_name]!.Value;
-                    return XBoolean.Parse(value);
+                    return XBooleanHelper.Parse(value);
                 }
                 else
                 {
@@ -645,7 +645,7 @@ namespace Lotus.Core
             if (@this.Attributes[attributeName] != null)
             {
                 var value = @this.Attributes[attributeName]!.Value;
-                return int.Parse(value);
+                return XNumberHelper.ParseInt(value, defaultValue);
             }
             else
             {
@@ -653,7 +653,7 @@ namespace Lotus.Core
                 if (@this.Attributes[upper_name] != null)
                 {
                     var value = @this.Attributes[upper_name]!.Value;
-                    return int.Parse(value);
+                    return XNumberHelper.ParseInt(value, defaultValue);
                 }
                 else
                 {
@@ -676,7 +676,7 @@ namespace Lotus.Core
             if (@this.Attributes[attributeName] != null)
             {
                 var value = @this.Attributes[attributeName]!.Value;
-                return long.Parse(value);
+                return XNumberHelper.ParseLong(value, defaultValue);
             }
             else
             {
@@ -684,7 +684,7 @@ namespace Lotus.Core
                 if (@this.Attributes[upper_name] != null)
                 {
                     var value = @this.Attributes[upper_name]!.Value;
-                    return long.Parse(value);
+                    return XNumberHelper.ParseLong(value, defaultValue);
                 }
                 else
                 {
@@ -707,7 +707,7 @@ namespace Lotus.Core
             if (@this.Attributes[attributeName] != null)
             {
                 var value = @this.Attributes[attributeName]!.Value;
-                return XNumbers.ParseSingle(value, defaultValue);
+                return XNumberHelper.ParseSingle(value, defaultValue);
             }
             else
             {
@@ -715,7 +715,7 @@ namespace Lotus.Core
                 if (@this.Attributes[upper_name] != null)
                 {
                     var value = @this.Attributes[upper_name]!.Value;
-                    return XNumbers.ParseSingle(value, defaultValue);
+                    return XNumberHelper.ParseSingle(value, defaultValue);
                 }
                 else
                 {
@@ -738,7 +738,7 @@ namespace Lotus.Core
             if (@this.Attributes[attributeName] != null)
             {
                 var value = @this.Attributes[attributeName]!.Value;
-                return XNumbers.ParseDouble(value, defaultValue);
+                return XNumberHelper.ParseDouble(value, defaultValue);
             }
             else
             {
@@ -746,7 +746,7 @@ namespace Lotus.Core
                 if (@this.Attributes[upper_name] != null)
                 {
                     var value = @this.Attributes[upper_name]!.Value;
-                    return XNumbers.ParseDouble(value, defaultValue);
+                    return XNumberHelper.ParseDouble(value, defaultValue);
                 }
                 else
                 {
@@ -769,7 +769,7 @@ namespace Lotus.Core
             if (@this.Attributes[attributeName] != null)
             {
                 var value = @this.Attributes[attributeName]!.Value;
-                return XNumbers.ParseDecimal(value, defaultValue);
+                return XNumberHelper.ParseDecimal(value, defaultValue);
             }
             else
             {
@@ -777,7 +777,7 @@ namespace Lotus.Core
                 if (@this.Attributes[upper_name] != null)
                 {
                     var value = @this.Attributes[upper_name]!.Value;
-                    return XNumbers.ParseDecimal(value, defaultValue);
+                    return XNumberHelper.ParseDecimal(value, defaultValue);
                 }
                 else
                 {
@@ -833,7 +833,7 @@ namespace Lotus.Core
             if (@this.Attributes[attributeName] != null)
             {
                 var value = @this.Attributes[attributeName]!.Value;
-                return DateTime.Parse(value);
+                return XDateTimeHelper.Parse(value);
             }
             else
             {
@@ -841,7 +841,7 @@ namespace Lotus.Core
                 if (@this.Attributes[upper_name] != null)
                 {
                     var value = @this.Attributes[upper_name]!.Value;
-                    return DateTime.Parse(value);
+                    return XDateTimeHelper.Parse(value);
                 }
                 else
                 {

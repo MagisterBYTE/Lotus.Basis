@@ -263,7 +263,7 @@ namespace Lotus.Core.Inspector
             {
                 // У нас есть только строковые данные
                 // Если задана в строки имя типа и его член данных
-                if (memberName.IndexOf(XChar.Dot) > -1)
+                if (memberName.IndexOf(XCharHelper.Dot) > -1)
                 {
                     result = XReflection.GetStaticDataFromType(memberName);
                     return result;

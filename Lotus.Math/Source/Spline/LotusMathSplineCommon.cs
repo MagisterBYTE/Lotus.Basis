@@ -641,7 +641,7 @@ namespace Lotus.Maths
         /// <param name="updateSpline">Статус обновления сплайна.</param>
         public virtual void InsertControlPoint(int index, Vector2Df point, bool updateSpline = false)
         {
-            _controlPoints = XArray.InsertAt(_controlPoints, point, index);
+            _controlPoints = XArrayHelper.InsertAt(_controlPoints, point, index);
             if (updateSpline)
             {
                 this.OnUpdateSpline();
@@ -655,7 +655,7 @@ namespace Lotus.Maths
         /// <param name="updateSpline">Статус обновления сплайна.</param>
         public virtual void RemoveControlPoint(int index, bool updateSpline = false)
         {
-            _controlPoints = XArray.RemoveAt(_controlPoints, index);
+            _controlPoints = XArrayHelper.RemoveAt(_controlPoints, index);
             if (updateSpline)
             {
                 this.OnUpdateSpline();
@@ -673,7 +673,7 @@ namespace Lotus.Maths
             {
                 if (_controlPoints[i].Approximately(point))
                 {
-                    _controlPoints = XArray.RemoveAt(_controlPoints, i);
+                    _controlPoints = XArrayHelper.RemoveAt(_controlPoints, i);
                     if (updateSpline)
                     {
                         this.OnUpdateSpline();
@@ -1142,7 +1142,7 @@ namespace Lotus.Maths
         /// <param name="updateSpline">Статус обновления сплайна.</param>
         public virtual void InsertControlPoint(int index, Vector3Df point, bool updateSpline = false)
         {
-            _controlPoints = XArray.InsertAt(_controlPoints, point, index);
+            _controlPoints = XArrayHelper.InsertAt(_controlPoints, point, index);
             if (updateSpline)
             {
                 this.OnUpdateSpline();
@@ -1156,7 +1156,7 @@ namespace Lotus.Maths
         /// <param name="updateSpline">Статус обновления сплайна.</param>
         public virtual void RemoveControlPoint(int index, bool updateSpline = false)
         {
-            _controlPoints = XArray.RemoveAt(_controlPoints, index);
+            _controlPoints = XArrayHelper.RemoveAt(_controlPoints, index);
             if (updateSpline)
             {
                 this.OnUpdateSpline();
@@ -1174,7 +1174,7 @@ namespace Lotus.Maths
             {
                 if (_controlPoints[i].Approximately(point))
                 {
-                    _controlPoints = XArray.RemoveAt(_controlPoints, i);
+                    _controlPoints = XArrayHelper.RemoveAt(_controlPoints, i);
                     if (updateSpline)
                     {
                         this.OnUpdateSpline();

@@ -19,7 +19,7 @@ namespace Lotus.Core
         /// <returns>Объект.</returns>
         public static IntCalculated DeserializeFromString(string data)
         {
-            var int_value = XNumbers.ParseInt(data, 0);
+            var int_value = XNumberHelper.ParseInt(data, 0);
             return new IntCalculated(int_value);
         }
         #endregion

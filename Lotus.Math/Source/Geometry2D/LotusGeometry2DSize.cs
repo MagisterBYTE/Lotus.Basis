@@ -56,8 +56,8 @@ namespace Lotus.Maths
         {
             var size = new Size2D();
             var size_data = data.Split(';');
-            size.Width = XMath.ParseDouble(size_data[0]);
-            size.Height = XMath.ParseDouble(size_data[1]);
+            size.Width = XNumberHelper.ParseDouble(size_data[0]);
+            size.Height = XNumberHelper.ParseDouble(size_data[1]);
             return size;
         }
         #endregion
@@ -498,8 +498,8 @@ namespace Lotus.Maths
         {
             var size = new Size2Df();
             var size_data = data.Split(';');
-            size.Width = XMath.ParseSingle(size_data[0]);
-            size.Height = XMath.ParseSingle(size_data[1]);
+            size.Width = XNumberHelper.ParseSingle(size_data[0]);
+            size.Height = XNumberHelper.ParseSingle(size_data[1]);
             return size;
         }
         #endregion

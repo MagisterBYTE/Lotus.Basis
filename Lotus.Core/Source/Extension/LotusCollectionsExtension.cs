@@ -204,7 +204,7 @@ namespace Lotus.Core
                         builder.Append(separator);
                         if (useSpace)
                         {
-                            builder.Append(XChar.Space);
+                            builder.Append(XCharHelper.Space);
                         }
                     }
 
@@ -448,7 +448,7 @@ namespace Lotus.Core
             {
                 for (var i = 0; i < @this.Count; i++)
                 {
-                    if (XObject.ObjectEquals(@this[i], element))
+                    if (XObjectHelper.ObjectEquals(@this[i], element))
                     {
                         return i;
                     }
@@ -485,7 +485,7 @@ namespace Lotus.Core
                 {
                     for (var j = i + 1; j < @this.Count; j++)
                     {
-                        if (XObject.ObjectEquals(@this[i], @this[j]))
+                        if (XObjectHelper.ObjectEquals(@this[i], @this[j]))
                         {
                             return false;
                         }
@@ -519,7 +519,7 @@ namespace Lotus.Core
             {
                 for (var i = 0; i < @this.Count; i++)
                 {
-                    if (XObject.ObjectEquals(@this[i], element))
+                    if (XObjectHelper.ObjectEquals(@this[i], element))
                     {
                         return i;
                     }
@@ -556,7 +556,7 @@ namespace Lotus.Core
             {
                 for (var i = 0; i < @this.Count; i++)
                 {
-                    if (XObject.ObjectEquals(@this[i], other[i]) == false)
+                    if (XObjectHelper.ObjectEquals(@this[i], other[i]) == false)
                     {
                         return false;
                     }
@@ -790,7 +790,7 @@ namespace Lotus.Core
             var massive = new int[@this.Count];
             for (var i = 0; i < @this.Count; i++)
             {
-                massive[i] = XNumbers.ParseInt(@this[i], defaultValue);
+                massive[i] = XNumberHelper.ParseInt(@this[i], defaultValue);
             }
 
             return massive;
@@ -807,7 +807,7 @@ namespace Lotus.Core
             var massive = new float[@this.Count];
             for (var i = 0; i < @this.Count; i++)
             {
-                massive[i] = XNumbers.ParseSingle(@this[i], defaultValue);
+                massive[i] = XNumberHelper.ParseSingle(@this[i], defaultValue);
             }
 
             return massive;
@@ -824,7 +824,7 @@ namespace Lotus.Core
             var massive = new double[@this.Count];
             for (var i = 0; i < @this.Count; i++)
             {
-                massive[i] = XNumbers.ParseDouble(@this[i], defaultValue);
+                massive[i] = XNumberHelper.ParseDouble(@this[i], defaultValue);
             }
 
             return massive;

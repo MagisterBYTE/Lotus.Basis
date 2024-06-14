@@ -74,15 +74,14 @@ namespace Lotus.Maths
         /// </summary>
         /// <param name="data">Строка данных.</param>
         /// <returns>Прямоугольник.</returns>
-        //----------------------------------------------------------------------------------------------------------
         public static Rect2D DeserializeFromString(string data)
         {
             var rect = new Rect2D();
             var rect_data = data.Split(';');
-            rect.X = XMath.ParseDouble(rect_data[0]);
-            rect.Y = XMath.ParseDouble(rect_data[1]);
-            rect.Width = XMath.ParseDouble(rect_data[2]);
-            rect.Height = XMath.ParseDouble(rect_data[3]);
+            rect.X = XNumberHelper.ParseDouble(rect_data[0]);
+            rect.Y = XNumberHelper.ParseDouble(rect_data[1]);
+            rect.Width = XNumberHelper.ParseDouble(rect_data[2]);
+            rect.Height = XNumberHelper.ParseDouble(rect_data[3]);
             return rect;
         }
         #endregion
@@ -666,15 +665,14 @@ namespace Lotus.Maths
         /// </summary>
         /// <param name="data">Строка данных.</param>
         /// <returns>Прямоугольник.</returns>
-        //----------------------------------------------------------------------------------------------------------
         public static Rect2Df DeserializeFromString(string data)
         {
             var rect = new Rect2Df();
             var rect_data = data.Split(';');
-            rect.X = XMath.ParseSingle(rect_data[0]);
-            rect.Y = XMath.ParseSingle(rect_data[1]);
-            rect.Width = XMath.ParseSingle(rect_data[2]);
-            rect.Height = XMath.ParseSingle(rect_data[3]);
+            rect.X = XNumberHelper.ParseSingle(rect_data[0]);
+            rect.Y = XNumberHelper.ParseSingle(rect_data[1]);
+            rect.Width = XNumberHelper.ParseSingle(rect_data[2]);
+            rect.Height = XNumberHelper.ParseSingle(rect_data[3]);
             return rect;
         }
         #endregion

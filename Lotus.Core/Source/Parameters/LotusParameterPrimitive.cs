@@ -67,14 +67,14 @@ namespace Lotus.Core
         /// <param name="isArray">Статус массива.</param>
         public override void WriteToJson(StreamWriter streamWriter, int depth, bool isArray)
         {
-            streamWriter.Write(XChar.NewLine);
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XCharHelper.NewLine);
+            streamWriter.Write(XStringHelper.Depths[depth]);
 
             if (isArray == false)
             {
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
                 streamWriter.Write(Name);
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
 
                 streamWriter.Write(": ");
             }
@@ -143,14 +143,14 @@ namespace Lotus.Core
         /// <param name="isArray">Статус массива.</param>
         public override void WriteToJson(StreamWriter streamWriter, int depth, bool isArray)
         {
-            streamWriter.Write(XChar.NewLine);
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XCharHelper.NewLine);
+            streamWriter.Write(XStringHelper.Depths[depth]);
 
             if (isArray == false)
             {
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
                 streamWriter.Write(Name);
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
 
                 streamWriter.Write(": ");
             }
@@ -220,14 +220,14 @@ namespace Lotus.Core
         /// <param name="isArray">Статус массива.</param>
         public override void WriteToJson(StreamWriter streamWriter, int depth, bool isArray)
         {
-            streamWriter.Write(XChar.NewLine);
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XCharHelper.NewLine);
+            streamWriter.Write(XStringHelper.Depths[depth]);
 
             if (isArray == false)
             {
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
                 streamWriter.Write(Name);
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
 
                 streamWriter.Write(": ");
             }
@@ -298,14 +298,14 @@ namespace Lotus.Core
         /// <param name="isArray">Статус массива.</param>
         public override void WriteToJson(StreamWriter streamWriter, int depth, bool isArray)
         {
-            streamWriter.Write(XChar.NewLine);
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XCharHelper.NewLine);
+            streamWriter.Write(XStringHelper.Depths[depth]);
 
             if (isArray == false)
             {
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
                 streamWriter.Write(Name);
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
 
                 streamWriter.Write(": ");
             }
@@ -375,21 +375,21 @@ namespace Lotus.Core
         /// <param name="isArray">Статус массива.</param>
         public override void WriteToJson(StreamWriter streamWriter, int depth, bool isArray)
         {
-            streamWriter.Write(XChar.NewLine);
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XCharHelper.NewLine);
+            streamWriter.Write(XStringHelper.Depths[depth]);
 
             if (isArray == false)
             {
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
                 streamWriter.Write(Name);
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
 
                 streamWriter.Write(": ");
             }
 
-            streamWriter.Write(XChar.DoubleQuotes);
+            streamWriter.Write(XCharHelper.DoubleQuotes);
             streamWriter.Write(Value);
-            streamWriter.Write(XChar.DoubleQuotes);
+            streamWriter.Write(XCharHelper.DoubleQuotes);
         }
         #endregion
     }
@@ -455,21 +455,21 @@ namespace Lotus.Core
         /// <param name="isArray">Статус массива.</param>
         public override void WriteToJson(StreamWriter streamWriter, int depth, bool isArray)
         {
-            streamWriter.Write(XChar.NewLine);
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XCharHelper.NewLine);
+            streamWriter.Write(XStringHelper.Depths[depth]);
 
             if (isArray == false)
             {
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
                 streamWriter.Write(Name);
-                streamWriter.Write(XChar.DoubleQuotes);
+                streamWriter.Write(XCharHelper.DoubleQuotes);
 
                 streamWriter.Write(": ");
             }
 
-            streamWriter.Write(XChar.DoubleQuotes);
+            streamWriter.Write(XCharHelper.DoubleQuotes);
             streamWriter.Write(Value);
-            streamWriter.Write(XChar.DoubleQuotes);
+            streamWriter.Write(XCharHelper.DoubleQuotes);
         }
         #endregion
     }

@@ -188,7 +188,7 @@ namespace Lotus.Core
         {
             for (var i = 0; i < @this.Length; i++)
             {
-                if (@this[i] == XChar.Dot || @this[i] == XChar.Comma)
+                if (@this[i] == XCharHelper.Dot || @this[i] == XCharHelper.Comma)
                 {
                     return true;
                 }
@@ -230,7 +230,7 @@ namespace Lotus.Core
         /// <returns>Число.</returns>
         public static float ToFloat(this string @this)
         {
-            return float.Parse(@this, NumberFormatInfo);
+            return XNumberHelper.ParseInt(@this);
         }
 
         /// <summary>
@@ -466,7 +466,7 @@ namespace Lotus.Core
             var count = 0;
             for (var i = 0; i < @this.Length; i++)
             {
-                if (@this[i] == XChar.NewLine)
+                if (@this[i] == XCharHelper.NewLine)
                 {
                     count++;
                 }
@@ -485,7 +485,7 @@ namespace Lotus.Core
             var count = 0;
             for (var i = 0; i < @this.Length; i++)
             {
-                if (@this[i] == XChar.Tab)
+                if (@this[i] == XCharHelper.Tab)
                 {
                     count++;
                 }
@@ -690,7 +690,7 @@ namespace Lotus.Core
         /// <returns>Модифицированная строка.</returns>
         public static string RemoveExtension(this string @this)
         {
-            var index = @this.LastIndexOf(XChar.Dot);
+            var index = @this.LastIndexOf(XCharHelper.Dot);
             if (index > -1)
             {
                 return @this.Remove(index);
@@ -918,7 +918,7 @@ namespace Lotus.Core
                 }
             }
 
-            var result = XNumbers.ParseInt(number.ToString(), -1);
+            var result = XNumberHelper.ParseInt(number.ToString(), -1);
             return result;
         }
 
@@ -948,7 +948,7 @@ namespace Lotus.Core
                 }
             }
 
-            var result = XNumbers.ParseInt(number.ToString().GetReverseCopy(), -1);
+            var result = XNumberHelper.ParseInt(number.ToString().GetReverseCopy(), -1);
             return result;
         }
 
@@ -1089,13 +1089,13 @@ namespace Lotus.Core
             {
                 var current = @this[i];
 
-                if (current == XChar.Space) continue;
+                if (current == XCharHelper.Space) continue;
 
                 if (char.IsUpper(current))
                 {
                     if (i > 0)
                     {
-                        if (char.IsLower(@this[i - 1]) || (@this[i - 1] == XChar.Space))
+                        if (char.IsLower(@this[i - 1]) || (@this[i - 1] == XCharHelper.Space))
                         {
                             builder.Append('_');
                             builder.Append(current);

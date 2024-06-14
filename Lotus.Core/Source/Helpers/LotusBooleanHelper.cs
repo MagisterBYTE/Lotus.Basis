@@ -7,7 +7,7 @@ namespace Lotus.Core
     /// <summary>
     /// Статический класс реализующий дополнительные методы для работы с типом <see cref="bool"/>.
     /// </summary>
-    public static class XBoolean
+    public static class XBooleanHelper
     {
         /// <summary>
         /// Текстовые значение логического типа которые означает истинное значение.

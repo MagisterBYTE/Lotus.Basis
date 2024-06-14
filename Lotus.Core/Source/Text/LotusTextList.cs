@@ -97,7 +97,7 @@ namespace Lotus.Core
         /// </summary>
         public void AddNewLine()
         {
-            var line = new CTextLine(XString.NewLine);
+            var line = new CTextLine(XStringHelper.NewLine);
             line.Index = _lines.Count;
             line.Owned = this;
             line.Indent = _currentIndent;
@@ -310,7 +310,7 @@ namespace Lotus.Core
                         if (texts.Length > 1)
                         {
                             var tabs = _lines[i].GetTabsStart();
-                            _lines[i].RawString = XString.Depths[tabs] + $"#region {texts[1]} methods";
+                            _lines[i].RawString = XStringHelper.Depths[tabs] + $"#region {texts[1]} methods";
                         }
                     }
                 }

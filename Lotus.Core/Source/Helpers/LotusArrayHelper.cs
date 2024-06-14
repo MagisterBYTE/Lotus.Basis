@@ -15,7 +15,7 @@ namespace Lotus.Core
     /// Обратите внимание массив(исходный) переданный в качестве аргумента в методы всегда изменяется.
     /// Все методы возвращают результирующий массив
     /// </remarks>
-    public static class XArray
+    public static class XArrayHelper
     {
         /// <summary>
         /// Добавление элемента в конец массива.

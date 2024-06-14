@@ -43,7 +43,7 @@ namespace Lotus.Core
                 var count = GetTabsStart();
                 if (value > count)
                 {
-                    _rawString = _rawString.Insert(count, new string(XChar.Tab, value - count));
+                    _rawString = _rawString.Insert(count, new string(XCharHelper.Tab, value - count));
                 }
                 else
                 {
@@ -350,13 +350,13 @@ namespace Lotus.Core
             var find = false;
             for (var i = 0; i < _rawString.Length; i++)
             {
-                if (_rawString[i] != XChar.Tab)
+                if (_rawString[i] != XCharHelper.Tab)
                 {
                     if (i == 0) break;
                     if (find) break;
                 }
 
-                if (_rawString[i] == XChar.Tab)
+                if (_rawString[i] == XCharHelper.Tab)
                 {
                     count++;
                     find = true;
@@ -442,13 +442,13 @@ namespace Lotus.Core
             {
                 // Меняем табы на пробелы
                 _rawString = _rawString.Remove(0, count_tabs);
-                _rawString = _rawString.Insert(0, new string(XChar.Space, count_tabs * tabsEquiv));
+                _rawString = _rawString.Insert(0, new string(XCharHelper.Space, count_tabs * tabsEquiv));
 
                 SetLength(length);
 
                 // Меняем пробелы на табы
                 _rawString = _rawString.Remove(0, count_tabs * tabsEquiv);
-                _rawString = _rawString.Insert(0, new string(XChar.Tab, count_tabs));
+                _rawString = _rawString.Insert(0, new string(XCharHelper.Tab, count_tabs));
             }
             else
             {
@@ -472,13 +472,13 @@ namespace Lotus.Core
             {
                 // Меняем табы на пробелы
                 _rawString = _rawString.Remove(0, count_tabs);
-                _rawString = _rawString.Insert(0, new string(XChar.Space, count_tabs * tabsEquiv));
+                _rawString = _rawString.Insert(0, new string(XCharHelper.Space, count_tabs * tabsEquiv));
 
                 SetLength(length, symbol);
 
                 // Меняем пробелы на табы
                 _rawString = _rawString.Remove(0, count_tabs * tabsEquiv);
-                _rawString = _rawString.Insert(0, new string(XChar.Tab, count_tabs));
+                _rawString = _rawString.Insert(0, new string(XCharHelper.Tab, count_tabs));
             }
             else
             {

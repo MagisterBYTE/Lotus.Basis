@@ -10,9 +10,9 @@
     <Authors>MagistrBYTE aka DanielDem</Authors>
     <Company>LotusPlatform</Company>
     <Copyright>MagistrBYTE aka DanielDem</Copyright>
-    <AssemblyVersion>3.0.1.0</AssemblyVersion>
-    <FileVersion>3.0.1.0</FileVersion>
-    <Version>3.0.1</Version>
+    <AssemblyVersion>3.0.2.0</AssemblyVersion>
+    <FileVersion>3.0.2.0</FileVersion>
+    <Version>3.0.2</Version>
     <Title>Lotus.Repository</Title>
     <PackageTags></PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -37,7 +37,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Publish'">
-    <PackageReference Include="Lotus.Core" Version="3.0.1" />
+    <PackageReference Include="Lotus.Core" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' != 'Publish'">
@@ -46,9 +46,9 @@
 
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

@@ -69,15 +69,15 @@ namespace Lotus.Core
         /// <param name="isArray">Статус массива.</param>
         public override void WriteToJson(StreamWriter streamWriter, int depth, bool isArray)
         {
-            streamWriter.Write(XChar.NewLine);
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XCharHelper.NewLine);
+            streamWriter.Write(XStringHelper.Depths[depth]);
 
-            streamWriter.Write(XChar.DoubleQuotes);
+            streamWriter.Write(XCharHelper.DoubleQuotes);
             streamWriter.Write(Name);
-            streamWriter.Write(XChar.DoubleQuotes);
+            streamWriter.Write(XCharHelper.DoubleQuotes);
 
             streamWriter.Write(":\n");
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XStringHelper.Depths[depth]);
             streamWriter.Write("[");
 
             if (typeof(TType).IsSupportInterface<IParameterItem>())
@@ -101,7 +101,7 @@ namespace Lotus.Core
             }
 
             streamWriter.Write("\n");
-            streamWriter.Write(XString.Depths[depth]);
+            streamWriter.Write(XStringHelper.Depths[depth]);
             streamWriter.Write("]");
         }
         #endregion

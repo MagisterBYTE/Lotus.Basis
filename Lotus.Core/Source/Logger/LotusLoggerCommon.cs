@@ -153,7 +153,7 @@ namespace Lotus.Core
         /// <param name="trace">Строка трассировки.</param>
         public void ParseTrace(string trace)
         {
-            var items = trace.Split(XChar.SeparatorNewCarriageLine);
+            var items = trace.Split(XCharHelper.SeparatorNewCarriageLine);
             if (items.Length > 0)
             {
                 Text = items[0];
@@ -206,7 +206,7 @@ namespace Lotus.Core
         public void ParseStackTrace(string trace)
         {
             // Получаем список строк трассировки
-            var items = trace.Split(XChar.SeparatorNewCarriageLine, StringSplitOptions.RemoveEmptyEntries);
+            var items = trace.Split(XCharHelper.SeparatorNewCarriageLine, StringSplitOptions.RemoveEmptyEntries);
 
             if (items.Length > 1)
             {
@@ -224,7 +224,7 @@ namespace Lotus.Core
                     }
                     else
                     {
-                        MemberName += XString.HierarchySpaces[i] + ExtractMemberName(line_trace);
+                        MemberName += XStringHelper.HierarchySpaces[i] + ExtractMemberName(line_trace);
                         FilePath += "\n" + ExtractFileName(line_trace);
                     }
                 }

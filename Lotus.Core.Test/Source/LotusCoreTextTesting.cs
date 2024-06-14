@@ -57,7 +57,7 @@ namespace Lotus.Core
             ClassicAssert.AreEqual(textLine.Indent, 0);
             ClassicAssert.AreEqual(textLine.RawString, "4\t\t\t===");
 
-            textLine.CharFirst = XChar.Tab;
+            textLine.CharFirst = XCharHelper.Tab;
             textLine.CharSecond = '1';
             ClassicAssert.AreEqual(textLine.Indent, 1);
             ClassicAssert.AreEqual(textLine.RawString, "\t1\t\t===");

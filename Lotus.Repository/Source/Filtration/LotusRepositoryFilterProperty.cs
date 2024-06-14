@@ -164,27 +164,27 @@ namespace Lotus.Repository
             {
                 case TEntityPropertyType.Boolean:
                     {
-                        constantExpression = Expression.Constant(XBoolean.Parse(value));
+                        constantExpression = Expression.Constant(XBooleanHelper.Parse(value));
                     }
                     break;
                 case TEntityPropertyType.Integer:
                     {
-                        constantExpression = Expression.Constant(XNumbers.ParseInt(value));
+                        constantExpression = Expression.Constant(XNumberHelper.ParseInt(value));
                     }
                     break;
                 case TEntityPropertyType.Enum:
                     {
-                        constantExpression = Expression.Constant(XNumbers.ParseInt(value));
+                        constantExpression = Expression.Constant(XNumberHelper.ParseInt(value));
                     }
                     break;
                 case TEntityPropertyType.Float:
                     {
-                        constantExpression = Expression.Constant(XNumbers.ParseSingle(value));
+                        constantExpression = Expression.Constant(XNumberHelper.ParseSingle(value));
                     }
                     break;
                 case TEntityPropertyType.DateTime:
                     {
-                        constantExpression = Expression.Constant(DateTime.Parse(value));
+                        constantExpression = Expression.Constant(XDateTimeHelper.Parse(value));
                     }
                     break;
                 case TEntityPropertyType.String:

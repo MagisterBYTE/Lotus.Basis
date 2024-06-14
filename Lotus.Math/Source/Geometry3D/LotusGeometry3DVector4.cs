@@ -126,10 +126,10 @@ namespace Lotus.Maths
         {
             var vector = new Vector4D();
             var vector_data = data.Split(';');
-            vector.X = XMath.ParseDouble(vector_data[0]);
-            vector.Y = XMath.ParseDouble(vector_data[1]);
-            vector.Z = XMath.ParseDouble(vector_data[2]);
-            vector.W = XMath.ParseDouble(vector_data[3]);
+            vector.X = XNumberHelper.ParseDouble(vector_data[0]);
+            vector.Y = XNumberHelper.ParseDouble(vector_data[1]);
+            vector.Z = XNumberHelper.ParseDouble(vector_data[2]);
+            vector.W = XNumberHelper.ParseDouble(vector_data[3]);
             return vector;
         }
         #endregion
@@ -751,10 +751,10 @@ namespace Lotus.Maths
         {
             var vector = new Vector4Df();
             var vector_data = data.Split(';');
-            vector.X = XMath.ParseSingle(vector_data[0]);
-            vector.Y = XMath.ParseSingle(vector_data[1]);
-            vector.Z = XMath.ParseSingle(vector_data[2]);
-            vector.W = XMath.ParseSingle(vector_data[3]);
+            vector.X = XNumberHelper.ParseSingle(vector_data[0]);
+            vector.Y = XNumberHelper.ParseSingle(vector_data[1]);
+            vector.Z = XNumberHelper.ParseSingle(vector_data[2]);
+            vector.W = XNumberHelper.ParseSingle(vector_data[3]);
             return vector;
         }
         #endregion

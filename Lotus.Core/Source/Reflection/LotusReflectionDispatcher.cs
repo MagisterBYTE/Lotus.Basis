@@ -277,7 +277,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static object? GetStaticDataFromType(string fullTypeNameMemberName)
         {
-            var last_dot = fullTypeNameMemberName.LastIndexOf(XChar.Dot);
+            var last_dot = fullTypeNameMemberName.LastIndexOf(XCharHelper.Dot);
             if (last_dot > -1)
             {
                 var full_type_name = fullTypeNameMemberName.Substring(0, last_dot);

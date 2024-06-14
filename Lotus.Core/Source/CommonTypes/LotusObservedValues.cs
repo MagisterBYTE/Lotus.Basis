@@ -19,7 +19,7 @@ namespace Lotus.Core
         public static BoolObserved DeserializeFromString(string data)
         {
             var value = new BoolObserved();
-            value.SetValue(XBoolean.Parse(data));
+            value.SetValue(XBooleanHelper.Parse(data));
             return value;
         }
         #endregion
@@ -239,7 +239,7 @@ namespace Lotus.Core
         public static IntObserved DeserializeFromString(string data)
         {
             var value = new IntObserved();
-            value.SetValue(int.Parse(data));
+            value.SetValue(XNumberHelper.ParseInt(data));
             return value;
         }
         #endregion
@@ -459,7 +459,7 @@ namespace Lotus.Core
         public static SingleObserved DeserializeFromString(string data)
         {
             var value = new SingleObserved();
-            value.SetValue(XNumbers.ParseSingle(data));
+            value.SetValue(XNumberHelper.ParseSingle(data));
             return value;
         }
         #endregion

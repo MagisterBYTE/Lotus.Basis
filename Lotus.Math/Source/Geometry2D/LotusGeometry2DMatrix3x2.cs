@@ -854,9 +854,8 @@ namespace Lotus.Maths
         /// </summary>
         /// <param name="formatProvider">Интерфейс провайдера формата значения компонента.</param>
         /// <returns>
-        /// Текстовое представление матрицы с указание значений компонентов
+        /// Текстовое представление матрицы с указание значений компонентов.
         /// </returns>
-        //----------------------------------------------------------------------------------------------------------
         public readonly string ToString(IFormatProvider? formatProvider)
         {
             return string.Format(formatProvider, "[M11:{0} M12:{1}] [M21:{2} M22:{3}] [M31:{4} M32:{5}]",
@@ -871,9 +870,8 @@ namespace Lotus.Maths
         /// <param name="format">Формат отображения значения компонента.</param>
         /// <param name="formatProvider">Интерфейс провайдера формата значения компонента.</param>
         /// <returns>
-        /// Текстовое представление матрицы с указание значений компонентов
+        /// Текстовое представление матрицы с указание значений компонентов.
         /// </returns>
-        //----------------------------------------------------------------------------------------------------------
         public readonly string ToString(string? format, IFormatProvider? formatProvider)
         {
             if (format == null)

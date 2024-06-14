@@ -188,9 +188,9 @@ namespace Lotus.Core
 
             if (Path.HasExtension(result) == false)
             {
-                if (ext[0] != XChar.Dot)
+                if (ext[0] != XCharHelper.Dot)
                 {
-                    result = result + XChar.Dot + ext;
+                    result = result + XCharHelper.Dot + ext;
                 }
                 else
                 {

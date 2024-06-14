@@ -11,7 +11,7 @@ namespace Lotus.Core
     /// <summary>
     /// Статический класс реализующий дополнительные методы для работы с типом <see cref="Enum"/>.
     /// </summary>
-    public static class XEnum
+    public static class XEnumHelper
     {
         /// <summary>
         /// Получение списка описания элементов перечисления.
@@ -347,7 +347,7 @@ namespace Lotus.Core
 
             if (value == null) return string.Empty;
 
-            return XEnum.GetDescriptionOrName(type_enum, (value as Enum)!);
+            return XEnumHelper.GetDescriptionOrName(type_enum, (value as Enum)!);
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace Lotus.Core
 
             if (value == null) return string.Empty;
 
-            return XEnum.ConvertFromDescriptionOrName(type_enum, value.ToString()!);
+            return XEnumHelper.ConvertFromDescriptionOrName(type_enum, value.ToString()!);
         }
         #endregion
     }

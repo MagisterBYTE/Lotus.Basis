@@ -107,7 +107,7 @@ namespace Lotus.Core
             Add("// Проект: LotusPlatform");
             Add("// Раздел: " + moduleName);
             Add("// Подраздел: " + subsystemName);
-            Add("// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>");
+            Add("// Автор: MagisterBYTE aka DanielDem <dementevds@gmail.com>");
             AddDelimetrSection();
         }
 

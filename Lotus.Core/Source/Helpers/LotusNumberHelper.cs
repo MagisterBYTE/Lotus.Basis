@@ -98,7 +98,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static int ParseInt(string text, int defaultValue = 0)
         {
-            text = ParseableTextLong(text);
+            text = ParseableTextInt(text);
 
             if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var resultValue))
             {

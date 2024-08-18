@@ -59,7 +59,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <returns>Текст.</returns>
-        public static string ParseableTextInt(string text)
+        public static string ParsableTextInt(string text)
         {
             var number = new StringBuilder(text.Length);
 
@@ -98,7 +98,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static int ParseInt(string text, int defaultValue = 0)
         {
-            text = ParseableTextInt(text);
+            text = ParsableTextInt(text);
 
             if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var resultValue))
             {
@@ -117,7 +117,7 @@ namespace Lotus.Core
         /// <returns>Статус успешности преобразования.</returns>
         public static bool TryParseInt(string text, out int result)
         {
-            text = ParseableTextInt(text);
+            text = ParsableTextInt(text);
 
             if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out result))
             {
@@ -134,7 +134,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <returns>Текст.</returns>
-        public static string ParseableTextLong(string text)
+        public static string ParsableTextLong(string text)
         {
             var number = new StringBuilder(text.Length);
 
@@ -173,7 +173,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static long ParseLong(string text, long defaultValue = 0)
         {
-            text = ParseableTextLong(text);
+            text = ParsableTextLong(text);
 
             if (long.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var resultValue))
             {
@@ -191,7 +191,7 @@ namespace Lotus.Core
         /// <returns>Статус успешности преобразования.</returns>
         public static bool TryParseLong(string text, out long result)
         {
-            text = ParseableTextLong(text);
+            text = ParsableTextLong(text);
 
             if (long.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out result))
             {
@@ -208,7 +208,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <returns>Текст.</returns>
-        public static string ParseableTextSingle(string text)
+        public static string ParsableTextSingle(string text)
         {
             var number = new StringBuilder(text.Length);
 
@@ -249,7 +249,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static float ParseSingle(string text, float defaultValue = 0)
         {
-            text = ParseableTextSingle(text);
+            text = ParsableTextSingle(text);
 
             if (float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
             {
@@ -267,7 +267,7 @@ namespace Lotus.Core
         /// <returns>Статус успешности преобразования.</returns>
         public static bool TryParseSingle(string text, out float result)
         {
-            text = ParseableTextSingle(text);
+            text = ParsableTextSingle(text);
 
             if (float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
             {
@@ -284,7 +284,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <returns>Текст.</returns>
-        public static string ParseableTextDouble(string text)
+        public static string ParsableTextDouble(string text)
         {
             var number = new StringBuilder(text.Length);
 
@@ -325,7 +325,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static double ParseDouble(string text, double defaultValue = 0)
         {
-            text = ParseableTextDouble(text);
+            text = ParsableTextDouble(text);
 
             if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
             {
@@ -343,7 +343,7 @@ namespace Lotus.Core
         /// <returns>Статус успешности преобразования.</returns>
         public static bool TryParseDouble(string text, out double result)
         {
-            text = ParseableTextDouble(text);
+            text = ParsableTextDouble(text);
 
             if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
             {
@@ -360,7 +360,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <returns>Текст.</returns>
-        public static string ParseableTextDeciminal(string text)
+        public static string ParsableTextDeciminal(string text)
         {
             var number = new StringBuilder(text.Length);
 
@@ -401,7 +401,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static decimal ParseDecimal(string text, decimal defaultValue = 0)
         {
-            text = ParseableTextDeciminal(text);
+            text = ParsableTextDeciminal(text);
 
             if (decimal.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
             {
@@ -419,7 +419,7 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static decimal ParseCurrency(string text, decimal defaultValue = 0)
         {
-            text = ParseableTextDeciminal(text);
+            text = ParsableTextDeciminal(text);
 
             if (decimal.TryParse(text, NumberStyles.Currency, CultureInfo.InvariantCulture, out var resultValue))
             {

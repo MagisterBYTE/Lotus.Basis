@@ -1,4 +1,5 @@
 using System;
+
 namespace Lotus.Core
 {
     /** \addtogroup CoreAttribute

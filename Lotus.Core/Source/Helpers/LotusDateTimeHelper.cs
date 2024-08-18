@@ -16,7 +16,7 @@ namespace Lotus.Core
         /// <param name="text">Текст.</param>
         /// <param name="formatDate">Формат даты-времени.</param>
         /// <returns>Текст или null если сконвертировать невозможно.</returns>
-        public static string? ParseableText(string text, string formatDate)
+        public static string? ParsableText(string text, string formatDate)
         {
             string result = null;
             if (string.IsNullOrEmpty(text))
@@ -64,7 +64,7 @@ namespace Lotus.Core
                                     DateTime.Now.Month,
                                     DateTime.Now.Day,
                                     DateTime.Now.Hour,
-                                    ParseMunute(text),
+                                    ParseMinute(text),
                                     0,
                                     DateTimeKind.Unspecified).ToString(CultureInfo.CurrentCulture);
                             }
@@ -179,7 +179,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <returns>Значение минуты в пределах от 0 до 59.</returns>
-        public static int ParseMunute(string text)
+        public static int ParseMinute(string text)
         {
             var value = XNumberHelper.ParseInt(text);
             value = Math.Min(59, value);

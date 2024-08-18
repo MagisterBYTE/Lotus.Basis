@@ -547,9 +547,6 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="other">Сравниваемый цвет.</param>
         /// <returns>Статус равенства цветов.</returns>
-#if NET45 || UNITY_2017_1_OR_NEWER
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public readonly bool Equals(TColor other)
         {
             return R == other.R && G == other.G && B == other.B && A == other.A;

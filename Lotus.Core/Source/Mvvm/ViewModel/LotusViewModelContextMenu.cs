@@ -91,10 +91,12 @@ namespace Lotus.Core
         /// <returns>Дубликат объекта.</returns>
         public virtual CUIContextMenuItem Duplicate(CParameters? parameters = null)
         {
-            var item = new CUIContextMenuItem();
-            item.ViewModel = ViewModel;
-            item.OnAction = OnAction;
-            item.OnAfterAction = OnAfterAction;
+            var item = new CUIContextMenuItem
+            {
+                ViewModel = ViewModel,
+                OnAction = OnAction,
+                OnAfterAction = OnAfterAction
+            };
             return item;
         }
         #endregion
@@ -109,37 +111,37 @@ namespace Lotus.Core
         /// <summary>
         /// Элемент меню - загрузить объект из файла.
         /// </summary>
-        public readonly static CUIContextMenuItem Load = new CUIContextMenuItem("Загрузить...", OnLoadItemClick);
+        public readonly static CUIContextMenuItem Load = new("Загрузить...", OnLoadItemClick);
 
         /// <summary>
         /// Элемент меню - сохранить объект в файл.
         /// </summary>
-        public readonly static CUIContextMenuItem Save = new CUIContextMenuItem("Сохранить...", OnSaveItemClick);
+        public readonly static CUIContextMenuItem Save = new("Сохранить...", OnSaveItemClick);
 
         /// <summary>
         /// Элемент меню - удалить объект.
         /// </summary>
-        public readonly static CUIContextMenuItem Remove = new CUIContextMenuItem("Удалить", OnRemoveItemClick);
+        public readonly static CUIContextMenuItem Remove = new("Удалить", OnRemoveItemClick);
 
         /// <summary>
         /// Элемент меню - дублировать объект.
         /// </summary>
-        public readonly static CUIContextMenuItem Duplicate = new CUIContextMenuItem("Дублировать", OnDuplicateItemClick);
+        public readonly static CUIContextMenuItem Duplicate = new("Дублировать", OnDuplicateItemClick);
 
         /// <summary>
         /// Элемент меню - переместить объект вверх.
         /// </summary>
-        public readonly static CUIContextMenuItem MoveUp = new CUIContextMenuItem("Переместить вверх", OnMoveUpItemClick);
+        public readonly static CUIContextMenuItem MoveUp = new("Переместить вверх", OnMoveUpItemClick);
 
         /// <summary>
         /// Элемент меню - переместить объект вниз.
         /// </summary>
-        public readonly static CUIContextMenuItem MoveDown = new CUIContextMenuItem("Переместить вниз", OnMoveDownItemClick);
+        public readonly static CUIContextMenuItem MoveDown = new("Переместить вниз", OnMoveDownItemClick);
 
         /// <summary>
         /// Элемент меню - не учитывать объект в расчетах.
         /// </summary>
-        public readonly static CUIContextMenuItem NotCalculation = new CUIContextMenuItem("Не учитывать в расчетах", OnNotCalculationItemClick);
+        public readonly static CUIContextMenuItem NotCalculation = new("Не учитывать в расчетах", OnNotCalculationItemClick);
         #endregion
 
         #region Static methods

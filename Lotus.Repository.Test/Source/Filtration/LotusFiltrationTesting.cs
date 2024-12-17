@@ -17,16 +17,17 @@ namespace Lotus.Repository
         {
             var context = Fixture.CreateContext();
 
-            var propertyName = new FilterByProperty();
-            propertyName.PropertyName = nameof(Permission.Name);
-            propertyName.PropertyType = TEntityPropertyType.String;
+            var propertyName = new FilterByProperty
+            {
+                PropertyPath = nameof(Permission.Name),
 
-            //
-            // TFilterFunction.Equals
-            //
+                //
+                // TFilterFunction.Equals
+                //
 
-            propertyName.Value = "canEditUser";
-            propertyName.Function = TFilterFunction.Equals;
+                Value = "canEditUser",
+                Function = TFilterFunction.Equals
+            };
 
             var result = context.Permissions.Filter(propertyName).ToArray();
 
@@ -40,7 +41,7 @@ namespace Lotus.Repository
             propertyName.Value = "canEditUser";
             propertyName.Function = TFilterFunction.NotEqual;
 
-            result = context.Permissions.Filter(propertyName).ToArray();
+            result = [.. context.Permissions.Filter(propertyName)];
 
             Assert.Equal(8, result.Length);
 
@@ -50,7 +51,7 @@ namespace Lotus.Repository
             propertyName.Value = "can";
             propertyName.Function = TFilterFunction.Contains;
 
-            result = context.Permissions.Filter(propertyName).ToArray();
+            result = [.. context.Permissions.Filter(propertyName)];
 
             Assert.Equal(4, result.Length);
 
@@ -60,7 +61,7 @@ namespace Lotus.Repository
             propertyName.Value = "can";
             propertyName.Function = TFilterFunction.StartsWith;
 
-            result = context.Permissions.Filter(propertyName).ToArray();
+            result = [.. context.Permissions.Filter(propertyName)];
 
             Assert.Equal(4, result.Length);
 
@@ -70,7 +71,7 @@ namespace Lotus.Repository
             propertyName.Value = "User";
             propertyName.Function = TFilterFunction.EndsWith;
 
-            result = context.Permissions.Filter(propertyName).ToArray();
+            result = [.. context.Permissions.Filter(propertyName)];
 
             Assert.Equal(2, result.Length);
 
@@ -80,26 +81,27 @@ namespace Lotus.Repository
             propertyName.Value = "";
             propertyName.Function = TFilterFunction.NotEmpty;
 
-            result = context.Permissions.Filter(propertyName).ToArray();
+            result = [.. context.Permissions.Filter(propertyName)];
 
             Assert.Equal(7, result.Length);
         }
 
         [Fact]
-        public void TestFiltrationArrary()
+        public void TestFiltrationArray()
         {
             var context = Fixture.CreateContext();
 
-            var propertyName = new FilterByProperty();
-            propertyName.PropertyName = "PermissionIds";
-            propertyName.PropertyType = TEntityPropertyType.Integer;
+            var propertyName = new FilterByProperty
+            {
+                PropertyPath = "Permissions",
 
-            //
-            // TFilterFunction.IncludeAny
-            //
+                //
+                // TFilterFunction.IncludeAny
+                //
 
-            propertyName.Values = new string[] { "5" };
-            propertyName.Function = TFilterFunction.IncludeAny;
+                Values = ["5"],
+                Function = TFilterFunction.IncludeAny
+            };
 
             var result = context.Roles.Filter(propertyName).OrderBy(x => x.Id).ToArray();
 
@@ -109,10 +111,10 @@ namespace Lotus.Repository
             Assert.Equal("user", result[2].Name);
             Assert.Equal("guest", result[3].Name);
 
-            propertyName.Values = new string[] { "4", "2" };
+            propertyName.Values = ["4", "2"];
             propertyName.Function = TFilterFunction.IncludeAny;
 
-            result = context.Roles.Filter(propertyName).OrderBy(x => x.Id).ToArray();
+            result = [.. context.Roles.Filter(propertyName).OrderBy(x => x.Id)];
 
             Assert.Equal(3, result.Length);
             Assert.Equal("admin", result[0].Name);
@@ -123,17 +125,17 @@ namespace Lotus.Repository
             // TFilterFunction.IncludeEquals
             //
 
-            propertyName.Values = new string[] { "4", "5" };
+            propertyName.Values = ["4", "5"];
             propertyName.Function = TFilterFunction.IncludeEquals;
 
-            result = context.Roles.Filter(propertyName).OrderBy(x => x.Id).ToArray();
+            result = [.. context.Roles.Filter(propertyName).OrderBy(x => x.Id)];
 
             Assert.Single(result);
 
-            propertyName.Values = new string[] { "4" };
+            propertyName.Values = ["4"];
             propertyName.Function = TFilterFunction.IncludeEquals;
 
-            result = context.Roles.Filter(propertyName).OrderBy(x => x.Id).ToArray();
+            result = [.. context.Roles.Filter(propertyName).OrderBy(x => x.Id)];
 
             Assert.Empty(result);
 
@@ -141,19 +143,19 @@ namespace Lotus.Repository
             // TFilterFunction.IncludeNone
             //
 
-            propertyName.Values = new string[] { "4" };
+            propertyName.Values = ["4"];
             propertyName.Function = TFilterFunction.IncludeNone;
 
-            result = context.Roles.Filter(propertyName).OrderBy(x => x.Id).ToArray();
+            result = [.. context.Roles.Filter(propertyName).OrderBy(x => x.Id)];
 
             Assert.Equal(2, result.Length);
             Assert.Equal("editor", result[0].Name);
             Assert.Equal("user", result[1].Name);
 
-            propertyName.Values = new string[] { "4", "2" };
+            propertyName.Values = ["4", "2"];
             propertyName.Function = TFilterFunction.IncludeNone;
 
-            result = context.Roles.Filter(propertyName).OrderBy(x => x.Id).ToArray();
+            result = [.. context.Roles.Filter(propertyName).OrderBy(x => x.Id)];
 
             Assert.Single(result);
             Assert.Equal("user", result[0].Name);
@@ -164,16 +166,17 @@ namespace Lotus.Repository
         {
             var context = Fixture.CreateContext();
 
-            var propertyName = new FilterByProperty();
-            propertyName.PropertyName = nameof(Permission.Id);
-            propertyName.PropertyType = TEntityPropertyType.Integer;
+            var propertyName = new FilterByProperty
+            {
+                PropertyPath = nameof(Permission.Id),
 
-            //
-            // TFilterFunction.Equals
-            //
+                //
+                // TFilterFunction.Equals
+                //
 
-            propertyName.Value = "1";
-            propertyName.Function = TFilterFunction.Equals;
+                Value = "1",
+                Function = TFilterFunction.Equals
+            };
 
             var result = context.Permissions.Filter(propertyName).ToArray();
 
@@ -187,7 +190,7 @@ namespace Lotus.Repository
             propertyName.Value = "2";
             propertyName.Function = TFilterFunction.NotEqual;
 
-            result = context.Permissions.Filter(propertyName).ToArray();
+            result = [.. context.Permissions.Filter(propertyName)];
 
             Assert.Equal(8, result.Length);
 
@@ -197,17 +200,17 @@ namespace Lotus.Repository
             propertyName.Value = "3";
             propertyName.Function = TFilterFunction.LessThan;
 
-            result = context.Permissions.Filter(propertyName).ToArray();
+            result = [.. context.Permissions.Filter(propertyName)];
 
             Assert.Equal(2, result.Length);
 
             //
             // TFilterFunction.Between
             //
-            propertyName.Values = new string[] { "4", "8" };
+            propertyName.Values = ["4", "8"];
             propertyName.Function = TFilterFunction.Between;
 
-            result = context.Permissions.Filter(propertyName).ToArray();
+            result = [.. context.Permissions.Filter(propertyName)];
 
             Assert.Equal(3, result.Length);
         }

@@ -51,15 +51,15 @@ namespace Lotus.Core
         /// <summary>
         /// Список имен шаблонных коллекций.
         /// </summary>
-        public static readonly string[] COLLECTION_TEMPLATION_NAMES = new string[]
-        {
+        public static readonly string[] COLLECTION_TEMPLATE_NAMES =
+        [
             ICOLLECTION1,
             ILIST1,
             COLLECTION1,
             LIST1,
             LIST_ARRAY1,
             OBSERVABLE_COLLECTION1
-        };
+        ];
 
         /// <summary>
         /// Префикс имени для модулей и сборок платформы Lotus.
@@ -82,7 +82,30 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         public static bool IsPrimitiveType(this Type @this)
         {
-            return @this.IsPrimitive || @this.IsEnum || @this == typeof(string) || @this == typeof(Guid);
+            return @this.IsPrimitive 
+                || @this.IsEnum 
+                || @this == typeof(string) 
+                || @this == typeof(Guid)
+                || @this == typeof(DateTime);
+        }
+
+        /// <summary>
+        /// Проверка на примитивный тип или на Nullable примитивный тип.
+        /// </summary>
+        /// <param name="this">Тип.</param>
+        /// <returns>Статус проверки.</returns>
+        public static bool IsPrimitiveOrNullableType(this Type @this)
+        {
+            if (@this.IsPrimitiveType())
+            {
+                return true;
+            }
+
+            var underlyingType = Nullable.GetUnderlyingType(@this);
+
+            if (underlyingType == null) return false;
+
+            return underlyingType.IsPrimitiveType();
         }
 
         /// <summary>
@@ -175,7 +198,7 @@ namespace Lotus.Core
         /// <returns>Статус проверки.</returns>
         private static bool IsGenericCollectionType(Type type)
         {
-            return type.IsGenericType && COLLECTION_TEMPLATION_NAMES.Contains(type.Name);
+            return type.IsGenericType && COLLECTION_TEMPLATE_NAMES.Contains(type.Name);
         }
         #endregion
 
@@ -495,7 +518,7 @@ namespace Lotus.Core
         /// 6 - <see cref="ObservableCollection{T}"/> 
         /// </remarks>
         /// <param name="this">Тип.</param>
-        /// <returns>Тип элемента коллекции или или возврат текущего типа.</returns>
+        /// <returns>Тип элемента коллекции или возврат текущего типа.</returns>
         public static Type? GetClassicCollectionItemTypeOrThisType(this Type @this)
         {
             if (@this.IsArray)
@@ -970,7 +993,7 @@ namespace Lotus.Core
         /// </remarks>
         /// <param name="this">Метаданные члена объекта.</param>
         /// <returns>Соответствующий тип параметра метаданных члена объекта.</returns>
-        public static Type? GetParamaterType(this MemberInfo @this)
+        public static Type? GetParameterType(this MemberInfo @this)
         {
             Type? result = null;
 

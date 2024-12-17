@@ -19,7 +19,7 @@ namespace Lotus.Repository
     public interface ILotusStorage
     {
         /// <summary>
-        /// Данные связвания хранилища с источником.
+        /// Данные связывания хранилища с источником.
         /// </summary>
         string ConnectingData { get; set; }
 

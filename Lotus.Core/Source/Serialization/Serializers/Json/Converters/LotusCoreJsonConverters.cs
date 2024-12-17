@@ -15,7 +15,7 @@ namespace Lotus.Core.Serialization
         /// <summary>
         /// Глобальный экземпляр конвертера.
         /// </summary>
-        public static readonly ColorConverter Instance = new ColorConverter();
+        public static readonly ColorConverter Instance = new();
         #endregion
 
         #region Properties

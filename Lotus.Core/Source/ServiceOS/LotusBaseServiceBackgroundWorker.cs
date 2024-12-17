@@ -38,8 +38,10 @@ namespace Lotus.Core
             {
                 if (_default == null)
                 {
-                    _default = new BackgroundWorker();
-                    _default.WorkerReportsProgress = true;
+                    _default = new BackgroundWorker
+                    {
+                        WorkerReportsProgress = true
+                    };
                     _default.DoWork += OnBackgroundWorkerDoWork;
                     _default.ProgressChanged += OnBackgroundWorkerProgressWork;
                     _default.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;

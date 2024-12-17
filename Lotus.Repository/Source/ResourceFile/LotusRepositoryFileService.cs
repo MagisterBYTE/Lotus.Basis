@@ -10,12 +10,12 @@ namespace Lotus.Repository
     /** \addtogroup RepositoryResourceFile
 	*@{*/
     /// <summary>
-    /// Cервис для работы с файлами.
+    /// Сервис для работы с файлами.
     /// </summary>
     public class ResourceFileService : ILotusResourceFileService
     {
         #region Const
-        private static readonly Regex RegexReplace = new Regex(@"^[\w/\:.-]+;base64,");
+        private static readonly Regex RegexReplace = new(@"^[\w/\:.-]+;base64,");
         #endregion
 
         #region Fields

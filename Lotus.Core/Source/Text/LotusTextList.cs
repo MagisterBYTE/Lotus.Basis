@@ -97,10 +97,12 @@ namespace Lotus.Core
         /// </summary>
         public void AddNewLine()
         {
-            var line = new CTextLine(XStringHelper.NewLine);
-            line.Index = _lines.Count;
-            line.Owned = this;
-            line.Indent = _currentIndent;
+            var line = new CTextLine(XStringHelper.NewLine)
+            {
+                Index = _lines.Count,
+                Owned = this,
+                Indent = _currentIndent
+            };
             _lines.Add(line);
         }
 
@@ -109,10 +111,12 @@ namespace Lotus.Core
         /// </summary>
         public void AddEmptyLine()
         {
-            var line = new CTextLine(string.Empty);
-            line.Index = _lines.Count;
-            line.Owned = this;
-            line.Indent = _currentIndent;
+            var line = new CTextLine(string.Empty)
+            {
+                Index = _lines.Count,
+                Owned = this,
+                Indent = _currentIndent
+            };
             _lines.Add(line);
         }
 
@@ -448,7 +452,7 @@ namespace Lotus.Core
         /// </remarks>
         /// <param name="length">Длина строки.</param>
         /// <param name="tabsEquiv">Размер одного символа табуляции.</param>
-        public void SetLengthWithTabsOnlyDelimetrs(int length, int tabsEquiv = 4)
+        public void SetLengthWithTabsOnlyDelimiters(int length, int tabsEquiv = 4)
         {
             for (var i = 0; i < _lines.Count; i++)
             {

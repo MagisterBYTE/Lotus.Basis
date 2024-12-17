@@ -31,7 +31,7 @@ namespace Lotus.Core
         /// <summary>
         /// Глобальный компаратор для сравнения узлов по их индексу.
         /// </summary>
-        public static readonly TreeNodeOrderComprare ComprareByOrder = new TreeNodeOrderComprare();
+        public static readonly TreeNodeOrderComprare ComprareByOrder = new();
 
         /// <summary>
         /// Рекурсивное раскрытие всех узлов.
@@ -183,7 +183,7 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Отчисть и добавить дочерние узлы из списка.
+        /// Отчистить и добавить дочерние узлы из списка.
         /// </summary>
         /// <param name="this">Текущий узел</param>
         /// <param name="list">Список.</param>
@@ -316,7 +316,7 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Преобразовать в линейный список все дочернии узлы и их потомки.
+        /// Преобразовать в линейный список все дочерние узлы и их потомки.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="transform">Метод трансформатор для преобразования узлов.</param>
@@ -345,7 +345,7 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Преобразовать в линейный список текущий узел и все дочернии узлы и их потомки.
+        /// Преобразовать в линейный список текущий узел и все дочерние узлы и их потомки.
         /// </summary>
         /// <param name="this">Текущий узел.</param>
         /// <param name="transform">Метод трансформатор для преобразования узлов.</param>

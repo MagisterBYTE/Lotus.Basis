@@ -1,7 +1,5 @@
 using System;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -39,12 +37,12 @@ namespace Lotus.Repository
 
         #region Properties
         /// <summary>
-        /// Данные связвания хранилища с источником.
+        /// Данные связывания хранилища с источником.
         /// </summary>
         public string ConnectingData
         {
             get { return _fileName; }
-            set 
+            set
             {
                 _fileName = value;
                 OnPropertyChanged();
@@ -79,11 +77,13 @@ namespace Lotus.Repository
         /// </summary>
         public StorageFileBase()
         {
-            _serializerSettings = new JsonSerializerSettings();
-            _serializerSettings.Formatting = Formatting.Indented;
-            _serializerSettings.MetadataPropertyHandling = MetadataPropertyHandling.Default;
-            _serializerSettings.TypeNameHandling = TypeNameHandling.Auto;
-            _serializerSettings.Converters = [ColorConverter.Instance];
+            _serializerSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                MetadataPropertyHandling = MetadataPropertyHandling.Default,
+                TypeNameHandling = TypeNameHandling.Auto,
+                Converters = [ColorConverter.Instance]
+            };
         }
         #endregion
 
@@ -114,10 +114,10 @@ namespace Lotus.Repository
                 return 0;
             }
 
-            if(_fileName.EndsWith(JsonExtension, true, null))
+            if (_fileName.EndsWith(JsonExtension, true, null))
             {
                 var raw = JsonConvert.SerializeObject(IStructure, _serializerSettings);
-                
+
                 File.WriteAllText(_fileName, raw);
 
                 return 1;
@@ -126,7 +126,7 @@ namespace Lotus.Repository
             {
                 if (_fileName.EndsWith(BytesExtension, true, null))
                 {
-                    if(IStructure is ILotusSerializeToBinary serializeToBinary)
+                    if (IStructure is ILotusSerializeToBinary serializeToBinary)
                     {
                         using var fileStream = new FileStream(_fileName, FileMode.Create);
                         using var binaryWriter = new BinaryWriter(fileStream);
@@ -156,7 +156,7 @@ namespace Lotus.Repository
             {
                 var raw = JsonConvert.SerializeObject(IStructure, _serializerSettings);
 
-                await System.IO.File.WriteAllTextAsync(_fileName, raw);
+                await File.WriteAllTextAsync(_fileName, raw, token);
 
                 return 1;
             }

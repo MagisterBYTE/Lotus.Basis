@@ -146,11 +146,11 @@ namespace Lotus.Core
         //
         // Константы для информирования об изменении свойств
         //
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsSelected = new PropertyChangedEventArgs(nameof(IsSelected));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsEnabled = new PropertyChangedEventArgs(nameof(IsEnabled));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsChecked = new PropertyChangedEventArgs(nameof(IsChecked));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsPresented = new PropertyChangedEventArgs(nameof(IsPresented));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsEditMode = new PropertyChangedEventArgs(nameof(IsEditMode));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsSelected = new(nameof(IsSelected));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsEnabled = new(nameof(IsEnabled));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsChecked = new(nameof(IsChecked));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsPresented = new(nameof(IsPresented));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsEditMode = new(nameof(IsEditMode));
         #endregion
 
         #region Fields

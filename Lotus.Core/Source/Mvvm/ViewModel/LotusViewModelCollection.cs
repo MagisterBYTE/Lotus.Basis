@@ -158,7 +158,7 @@ namespace Lotus.Core
             /// <summary>
             /// Глобальный экземпляр.
             /// </summary>
-            public static readonly ComparerAscending Instance = new ComparerAscending();
+            public static readonly ComparerAscending Instance = new();
 
             //-----------------------------------------------------------------------------------------------------
             /// <summary>
@@ -182,7 +182,7 @@ namespace Lotus.Core
             /// <summary>
             /// Глобальный экземпляр.
             /// </summary>
-            public static readonly ComparerDescending Instance = new ComparerDescending();
+            public static readonly ComparerDescending Instance = new();
 
             //-----------------------------------------------------------------------------------------------------
             /// <summary>
@@ -241,18 +241,18 @@ namespace Lotus.Core
         // Константы для информирования об изменении свойств
         //
         // Идентификация
-        protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
-        protected static readonly PropertyChangedEventArgs PropertyArgsSelectedViewModel = new PropertyChangedEventArgs(nameof(SelectedViewModel));
-        protected static readonly PropertyChangedEventArgs PropertyArgsPresentedViewModel = new PropertyChangedEventArgs(nameof(PresentedViewModel));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsFiltered = new PropertyChangedEventArgs(nameof(IsFiltered));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsSorted = new PropertyChangedEventArgs(nameof(IsSorted));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsAscendingSorted = new PropertyChangedEventArgs(nameof(IsAscendingSorted));
+        protected static readonly PropertyChangedEventArgs PropertyArgsName = new(nameof(Name));
+        protected static readonly PropertyChangedEventArgs PropertyArgsSelectedViewModel = new(nameof(SelectedViewModel));
+        protected static readonly PropertyChangedEventArgs PropertyArgsPresentedViewModel = new(nameof(PresentedViewModel));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsFiltered = new(nameof(IsFiltered));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsSorted = new(nameof(IsSorted));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsAscendingSorted = new(nameof(IsAscendingSorted));
 
         // Множественный выбор
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsMultiSelected = new PropertyChangedEventArgs(nameof(IsMultiSelected));
-        protected static readonly PropertyChangedEventArgs PropertyArgsModeSelectAddRemove = new PropertyChangedEventArgs(nameof(ModeSelectAddRemove));
-        protected static readonly PropertyChangedEventArgs PropertyArgsAlwaysSelectedItem = new PropertyChangedEventArgs(nameof(AlwaysSelectedItem));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsEnabledUnselectingItem = new PropertyChangedEventArgs(nameof(IsEnabledUnselectingItem));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsMultiSelected = new(nameof(IsMultiSelected));
+        protected static readonly PropertyChangedEventArgs PropertyArgsModeSelectAddRemove = new(nameof(ModeSelectAddRemove));
+        protected static readonly PropertyChangedEventArgs PropertyArgsAlwaysSelectedItem = new(nameof(AlwaysSelectedItem));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsEnabledUnselectingItem = new(nameof(IsEnabledUnselectingItem));
 
         #endregion
 
@@ -724,8 +724,10 @@ namespace Lotus.Core
         /// <returns>Копия объекта.</returns>
         public virtual object Clone()
         {
-            var clone = new CollectionViewModel<TViewModel, TModel>();
-            clone.Name = _name;
+            var clone = new CollectionViewModel<TViewModel, TModel>
+            {
+                Name = _name
+            };
 
             for (var i = 0; i < _count; i++)
             {

@@ -18,7 +18,7 @@ namespace Lotus.Core
         /// <returns>Текст или null если сконвертировать невозможно.</returns>
         public static string? ParsableText(string text, string formatDate)
         {
-            string result = null;
+            string? result = null;
             if (string.IsNullOrEmpty(text))
             {
                 return null;

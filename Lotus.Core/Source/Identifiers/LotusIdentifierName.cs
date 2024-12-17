@@ -17,7 +17,7 @@ namespace Lotus.Core
         // Константы для информирования об изменении свойств
         //
         // Идентификация
-        protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
+        protected static readonly PropertyChangedEventArgs PropertyArgsName = new(nameof(Name));
         #endregion
 
         #region Fields
@@ -25,7 +25,7 @@ namespace Lotus.Core
 		[UnityEngine.SerializeField]
 		[LotusDisplayName(nameof(Name))]
 #endif
-        protected internal string _name = "";
+        protected internal string _name;
         #endregion
 
         #region Properties
@@ -122,8 +122,8 @@ namespace Lotus.Core
         // Константы для информирования об изменении свойств
         //
         // Идентификация
-        protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
-        protected static readonly PropertyChangedEventArgs PropertyArgsId = new PropertyChangedEventArgs(nameof(Id));
+        protected static readonly PropertyChangedEventArgs PropertyArgsName = new(nameof(Name));
+        protected static readonly PropertyChangedEventArgs PropertyArgsId = new(nameof(Id));
         #endregion
 
         #region Fields

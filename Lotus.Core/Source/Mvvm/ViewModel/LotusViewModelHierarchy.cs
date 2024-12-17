@@ -122,14 +122,14 @@ namespace Lotus.Core
         //
         // Константы для информирования об изменении свойств
         //
-        protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
-        protected static readonly PropertyChangedEventArgs PropertyArgsDataContext = new PropertyChangedEventArgs(nameof(Model));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsExpanded = new PropertyChangedEventArgs(nameof(IsExpanded));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsSelected = new PropertyChangedEventArgs(nameof(IsSelected));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsEnabled = new PropertyChangedEventArgs(nameof(IsEnabled));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsChecked = new PropertyChangedEventArgs(nameof(IsChecked));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsPresented = new PropertyChangedEventArgs(nameof(IsPresented));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsEditMode = new PropertyChangedEventArgs(nameof(IsEditMode));
+        protected static readonly PropertyChangedEventArgs PropertyArgsName = new(nameof(Name));
+        protected static readonly PropertyChangedEventArgs PropertyArgsDataContext = new(nameof(Model));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsExpanded = new(nameof(IsExpanded));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsSelected = new(nameof(IsSelected));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsEnabled = new(nameof(IsEnabled));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsChecked = new(nameof(IsChecked));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsPresented = new(nameof(IsPresented));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsEditMode = new(nameof(IsEditMode));
         #endregion
 
         #region Static methods
@@ -154,8 +154,10 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static ViewModelHierarchy<TModel> Build(TModel model, ILotusViewModelHierarchy? parent, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = new ViewModelHierarchy<TModel>(model, parent);
-            node_root_view.IOwner = owner;
+            var node_root_view = new ViewModelHierarchy<TModel>(model, parent)
+            {
+                IOwner = owner
+            };
             if (parent != null)
             {
                 node_root_view.Level = parent.Level + 1;
@@ -238,8 +240,10 @@ namespace Lotus.Core
         public static ViewModelHierarchy<TModel> BuildFilter(TModel model, ILotusViewModelHierarchy? parent,
             Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = new ViewModelHierarchy<TModel>(model, parent);
-            node_root_view.IOwner = owner;
+            var node_root_view = new ViewModelHierarchy<TModel>(model, parent)
+            {
+                IOwner = owner
+            };
             if (model is ILotusCheckOne<TModel> check)
             {
                 if (check.CheckOne(filter))

@@ -58,14 +58,14 @@ namespace Lotus.Core
         /// <summary>
         /// Производит поиск сущностей в БД или в хранилище по идентификаторам.
         /// </summary>
-        /// <param name="ids">Список идентифиакторов.</param>
+        /// <param name="ids">Список идентификаторов.</param>
         /// <returns>Список сущностей.</returns>
         IList<TEntity?> GetByIds(IEnumerable<TKey> ids);
 
         /// <summary>
         /// Производит поиск сущностей в БД или в хранилище по идентификаторам.
         /// </summary>
-        /// <param name="ids">Список идентифиакторов.</param>
+        /// <param name="ids">Список идентификаторов.</param>
         /// <param name="token">Токен отмены.</param>
         /// <returns>Список сущностей.</returns>
         ValueTask<IList<TEntity?>> GetByIdsAsync(IEnumerable<TKey> ids, CancellationToken token = default);

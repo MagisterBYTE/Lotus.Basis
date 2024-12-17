@@ -7,7 +7,7 @@ namespace Lotus.Repository
     /// <summary>
     /// Статический класс реализующий методы расширений для работы с интерфейсом <see cref="IQueryable"/>.
     /// </summary>
-    public static class XQueryableExtensionFilter
+    public static class XFilterQueryableExtension
     {
         /// <summary>
         /// Фильтрация данных запроса по указанным параметрам.
@@ -26,16 +26,12 @@ namespace Lotus.Repository
 
             foreach (var property in properties)
             {
-                if ((property.Function == TFilterFunction.IncludeAny
-                    || property.Function == TFilterFunction.IncludeAll
-                    || property.Function == TFilterFunction.IncludeEquals
-                    || property.Function == TFilterFunction.IncludeNone)
-                    && (property.Values == null || property.Values.Length == 0))
+                if (property.IsValid() == false)
                 {
                     continue;
                 }
 
-                var filter = XExpressionFilters.GetFilter<TEntity>(property);
+                var filter = XFilterExpression.GetFilter<TEntity>(property);
                 query = query.Where(filter);
             }
 

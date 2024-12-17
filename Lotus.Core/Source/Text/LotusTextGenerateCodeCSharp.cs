@@ -11,12 +11,12 @@ namespace Lotus.Core
         /// <summary>
         /// Разделитель для части.
         /// </summary>
-        public static readonly CTextLine DelimetrPart = new CTextLine("//", '=', 120);
+        public static readonly CTextLine DelimiterPart = new("//", '=', 120);
 
         /// <summary>
         /// Разделитель для секции.
         /// </summary>
-        public static readonly CTextLine DelimetrSection = new CTextLine("//", '-', 120);
+        public static readonly CTextLine DelimiterSection = new("//", '-', 120);
         #endregion
 
         #region Constructors
@@ -43,25 +43,25 @@ namespace Lotus.Core
         /// <summary>
         /// Добавление разделителя для части.
         /// </summary>
-        public override void AddDelimetrPart()
+        public override void AddDelimiterPart()
         {
-            var delimetr_part = DelimetrPart.Duplicate();
-            delimetr_part.Index = _lines.Count;
-            delimetr_part.Owned = this;
-            delimetr_part.Indent = _currentIndent;
-            _lines.Add(delimetr_part);
+            var delimiter_part = DelimiterPart.Duplicate();
+            delimiter_part.Index = _lines.Count;
+            delimiter_part.Owned = this;
+            delimiter_part.Indent = _currentIndent;
+            _lines.Add(delimiter_part);
         }
 
         /// <summary>
         /// Добавление разделителя для секции.
         /// </summary>
-        public override void AddDelimetrSection()
+        public override void AddDelimiterSection()
         {
-            var delimetr_section = DelimetrSection.Duplicate();
-            delimetr_section.Index = _lines.Count;
-            delimetr_section.Owned = this;
-            delimetr_section.Indent = _currentIndent;
-            _lines.Add(delimetr_section);
+            var delimiter_section = DelimiterSection.Duplicate();
+            delimiter_section.Index = _lines.Count;
+            delimiter_section.Owned = this;
+            delimiter_section.Indent = _currentIndent;
+            _lines.Add(delimiter_section);
         }
         #endregion
 
@@ -98,9 +98,6 @@ namespace Lotus.Core
         {
             Add("}");
         }
-        #endregion
-
-        #region ОПИСАНИЯ ФАЙЛА 
         #endregion
 
         #region File desc methods
@@ -250,21 +247,21 @@ namespace Lotus.Core
         /// <summary>
         /// Добавление стандартного краткого комментария XML.
         /// </summary>
-        /// <param name="delimetrSectionBefore">Статус добавления разделителя секции перед комментарием.</param>
+        /// <param name="delimiterSectionBefore">Статус добавления разделителя секции перед комментарием.</param>
         /// <param name="text">Текст комментария.</param>
-        /// <param name="delimetrSectionAfter">Статус добавления разделителя секции после комментария .</param>
-        public override void AddCommentSummary(bool delimetrSectionBefore, string text, bool delimetrSectionAfter)
+        /// <param name="delimiterSectionAfter">Статус добавления разделителя секции после комментария .</param>
+        public override void AddCommentSummary(bool delimiterSectionBefore, string text, bool delimiterSectionAfter)
         {
-            if (delimetrSectionBefore)
+            if (delimiterSectionBefore)
             {
-                AddDelimetrSection();
+                AddDelimiterSection();
             }
             Add("/// <summary>");
             Add("/// " + text);
             Add("/// </summary>");
-            if (delimetrSectionAfter)
+            if (delimiterSectionAfter)
             {
-                AddDelimetrSection();
+                AddDelimiterSection();
             }
         }
 

@@ -9,7 +9,7 @@ namespace Lotus.Repository
     /// <summary>
     /// Статический класс реализующий методы расширений для работы с интерфейсом <see cref="IQueryable"/>.
     /// </summary>
-    public static class XQueryableExtensionSorting
+    public static class XSortingQueryableExtension
     {
         #region Const
         /// <summary>
@@ -102,12 +102,12 @@ namespace Lotus.Repository
                 var method = string.Empty;
                 if (firstTime)
                 {
-                    method = (property.IsDesc == false) ? OrderBy : OrderByDescending;
+                    method = (property.IsDesc.GetValueOrDefault() == false) ? OrderBy : OrderByDescending;
                     firstTime = false;
                 }
                 else
                 {
-                    method = (property.IsDesc == false) ? ThenBy : ThenByDescending;
+                    method = (property.IsDesc.GetValueOrDefault() == false) ? ThenBy : ThenByDescending;
                 }
 
                 // itemType is the type of the TEntity

@@ -43,6 +43,50 @@ namespace Lotus.Core
             return Expression.Lambda<Func<TDestination, TReturn>>(Expression.Invoke(source, mapFrom.Body),
                 (IEnumerable<ParameterExpression>)mapFrom.Parameters);
         }
+
+        /// <summary>
+        /// Получить выражение parameter.propertyPath.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Для доступа к вложенным свойствам в качестве разделителя используется точка.
+        /// </para>
+        /// </remarks>
+        /// <param name="parameter">Параметр выражения.</param>
+        /// <param name="propertyPath">Путь/имя свойства/поля.</param>
+        /// <returns>Выражение доступа к свойству.</returns>
+        public static MemberExpression GetPropertyExpression(this ParameterExpression parameter, string propertyPath)
+        {
+            // Разделителя нет это одно свойство
+            if (propertyPath.Contains('.') == false)
+            {
+                var resultExpression = Expression.Property(parameter, propertyPath);
+                return resultExpression;
+            }
+            else
+            {
+                var propertiesName = propertyPath.Split('.', StringSplitOptions.RemoveEmptyEntries);
+                return GetPropertyExpression(parameter, propertiesName);
+            }
+        }
+
+        /// <summary>
+        /// Получить выражение parameter.propertiesName[0].propertiesName[1]...
+        /// </summary>
+        /// <param name="propertiesName">Список свойств.</param>
+        /// <param name="parameter">Параметр выражения.</param>
+        /// <returns>Выражение доступа к свойству.</returns>
+        public static MemberExpression GetPropertyExpression(this ParameterExpression parameter, string[] propertiesName)
+        {
+            var resultExpression = Expression.Property(parameter, propertiesName[0]);
+
+            for (int i = 1; i < propertiesName.Length; i++)
+            {
+                resultExpression = Expression.Property(resultExpression, propertiesName[i]);
+            }
+
+            return resultExpression;
+        }
     }
     /**@}*/
 }

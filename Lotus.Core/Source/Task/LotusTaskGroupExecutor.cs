@@ -230,8 +230,10 @@ namespace Lotus.Core
         /// <returns>Группа задач.</returns>
         public virtual GroupTask AddGroupTask(string groupName, TTaskExecuteMode executeMode, TTaskMethod method, params ILotusTask[] list)
         {
-            var task = new GroupTask(groupName, method, this, list);
-            task.ExecuteMode = executeMode;
+            var task = new GroupTask(groupName, method, this, list)
+            {
+                ExecuteMode = executeMode
+            };
             _groupTasks.Add(task);
             return task;
         }
@@ -270,8 +272,10 @@ namespace Lotus.Core
 
             if (group_task == null)
             {
-                group_task = new GroupTask(groupName, method, this, task);
-                group_task.ExecuteMode = executeMode;
+                group_task = new GroupTask(groupName, method, this, task)
+                {
+                    ExecuteMode = executeMode
+                };
                 _groupTasks.Add(group_task);
             }
 
@@ -324,8 +328,10 @@ namespace Lotus.Core
 
             if (group_task == null)
             {
-                group_task = new GroupTask(groupName, method, this, tasks);
-                group_task.ExecuteMode = executeMode;
+                group_task = new GroupTask(groupName, method, this, tasks)
+                {
+                    ExecuteMode = executeMode
+                };
                 _groupTasks.Add(group_task);
             }
 
@@ -366,8 +372,10 @@ namespace Lotus.Core
 
             if (group_task == null)
             {
-                group_task = new GroupTask(groupName, method, this, task);
-                group_task.ExecuteMode = executeMode;
+                group_task = new GroupTask(groupName, method, this, task)
+                {
+                    ExecuteMode = executeMode
+                };
                 _groupTasks.Add(group_task);
             }
             else
@@ -424,8 +432,10 @@ namespace Lotus.Core
 
             if (group_task == null)
             {
-                group_task = new GroupTask(groupName, method, this, tasks);
-                group_task.ExecuteMode = executeMode;
+                group_task = new GroupTask(groupName, method, this, tasks)
+                {
+                    ExecuteMode = executeMode
+                };
                 _groupTasks.Add(group_task);
             }
             else

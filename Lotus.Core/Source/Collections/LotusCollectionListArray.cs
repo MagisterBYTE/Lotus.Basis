@@ -165,11 +165,11 @@ namespace Lotus.Core
         #endregion
 
         #region Static fields
-        protected static readonly PropertyChangedEventArgs PropertyArgsCount = new PropertyChangedEventArgs(nameof(Count));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIndexer = new PropertyChangedEventArgs("Item[]");
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsEmpty = new PropertyChangedEventArgs(nameof(IsEmpty));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsFill = new PropertyChangedEventArgs(nameof(IsFill));
-        protected static readonly NotifyCollectionChangedEventArgs CollectionArgsReset = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
+        protected static readonly PropertyChangedEventArgs PropertyArgsCount = new(nameof(Count));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIndexer = new("Item[]");
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsEmpty = new(nameof(IsEmpty));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsFill = new(nameof(IsFill));
+        protected static readonly NotifyCollectionChangedEventArgs CollectionArgsReset = new(NotifyCollectionChangedAction.Reset);
         #endregion
 
         #region Fields
@@ -2228,7 +2228,7 @@ namespace Lotus.Core
             // Список групп
             var groups = new ListArray<ListArray<TItem>>();
 
-            // Cписок уникальных значений
+            // Список уникальных значений
             var unique_list = new ListArray<object>();
 
             if (IsNullable)
@@ -2236,7 +2236,7 @@ namespace Lotus.Core
                 // Будем получать свойство для каждого элемента так как возможно наследование
                 for (var i = 0; i < _count; i++)
                 {
-                    // Получем свойство
+                    // Получаем свойство
                     var property_info = _arrayOfItems[i]?.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
                     if (property_info != null)
@@ -2398,7 +2398,7 @@ namespace Lotus.Core
                 // Будем получать свойство и каждого элемента так как возможно наследование
                 for (var i = 0; i < _count; i++)
                 {
-                    // Получем свойство
+                    // Получаем свойство
                     var property_info = _arrayOfItems[i]?.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
                     if (property_info != null)
@@ -2451,7 +2451,7 @@ namespace Lotus.Core
         /// <summary>
         /// Получение списка элементов по указанному предикату.
         /// </summary>
-        /// <param name="match">Предикатор.</param>
+        /// <param name="match">Предиктор.</param>
         /// <returns>Список элементов.</returns>
         public ListArray<TItem> GetItemsWhere(Predicate<TItem?> match)
         {

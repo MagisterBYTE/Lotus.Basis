@@ -402,8 +402,10 @@ namespace Lotus.Core
         public virtual TResult GetListPeriod<TResult>(int startIndex, int endIndex)
             where TResult : ListTimeInterval<TItemTimeable>, new()
         {
-            var list = new TResult();
-            list.TimeInterval = _timeInterval;
+            var list = new TResult
+            {
+                TimeInterval = _timeInterval
+            };
 
             // Это не количество, а индекс поэтому и равно
             for (var i = startIndex; i <= endIndex; i++)
@@ -441,8 +443,10 @@ namespace Lotus.Core
         public virtual TResult DublicateListPeriod<TResult>(int startIndex, int endIndex)
             where TResult : ListTimeInterval<TItemTimeable>, new()
         {
-            var list = new TResult();
-            list.TimeInterval = _timeInterval;
+            var list = new TResult
+            {
+                TimeInterval = _timeInterval
+            };
 
             //Это не количество, а индекс поэтому и равно
             for (var i = startIndex; i <= endIndex; i++)
@@ -540,8 +544,10 @@ namespace Lotus.Core
                                 break;
                             case TTimeInterval.Weekly:
                                 {
-                                    list = new TResult();
-                                    list.TimeInterval = TTimeInterval.Weekly;
+                                    list = new TResult
+                                    {
+                                        TimeInterval = TTimeInterval.Weekly
+                                    };
 
                                     for (var i = 0; i < _count; i++)
                                     {
@@ -554,8 +560,10 @@ namespace Lotus.Core
                                 break;
                             case TTimeInterval.Monthly:
                                 {
-                                    list = new TResult();
-                                    list.TimeInterval = TTimeInterval.Monthly;
+                                    list = new TResult
+                                    {
+                                        TimeInterval = TTimeInterval.Monthly
+                                    };
 
                                     for (var i = 0; i < _count; i++)
                                     {
@@ -590,8 +598,10 @@ namespace Lotus.Core
                                 break;
                             case TTimeInterval.Monthly:
                                 {
-                                    list = new TResult();
-                                    list.TimeInterval = TTimeInterval.Monthly;
+                                    list = new TResult
+                                    {
+                                        TimeInterval = TTimeInterval.Monthly
+                                    };
 
                                     for (var i = 0; i < _count; i++)
                                     {

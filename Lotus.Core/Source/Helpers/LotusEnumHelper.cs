@@ -272,13 +272,13 @@ namespace Lotus.Core
 
             if (string.IsNullOrEmpty(valueEnum))
             {
-                return enums.ToArray();
+                return [.. enums];
             }
 
             var valueEnums = valueEnum.Split(',', StringSplitOptions.RemoveEmptyEntries);
             if (valueEnums.Length == 0)
             {
-                return enums.ToArray();
+                return [.. enums];
             }
 
             foreach (var item in valueEnums)
@@ -287,7 +287,7 @@ namespace Lotus.Core
                 enums.Add(enumVal);
             }
 
-            return enums.ToArray();
+            return [.. enums];
         }
     }
 

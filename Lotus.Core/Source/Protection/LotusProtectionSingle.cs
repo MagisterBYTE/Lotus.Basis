@@ -65,8 +65,10 @@ namespace Lotus.Core
         /// <returns>Структура-оболочка для защиты вещественного числа.</returns>
         public static implicit operator TProtectionSingle(float value)
         {
-            var protection = new TProtectionSingle();
-            protection._encryptValue = value;
+            var protection = new TProtectionSingle
+            {
+                _encryptValue = value
+            };
             protection._convertValue ^= XOR_MASK;
             return protection;
         }

@@ -54,9 +54,9 @@ namespace Lotus.Core
     public class CMementoManager : PropertyChangedBase, ILotusMementoManager
     {
         #region Static fields
-        protected static readonly PropertyChangedEventArgs PropertyArgsCanUndo = new PropertyChangedEventArgs(nameof(CanUndo));
-        protected static readonly PropertyChangedEventArgs PropertyArgsCanRedo = new PropertyChangedEventArgs(nameof(CanRedo));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsEnabled = new PropertyChangedEventArgs(nameof(IsEnabled));
+        protected static readonly PropertyChangedEventArgs PropertyArgsCanUndo = new(nameof(CanUndo));
+        protected static readonly PropertyChangedEventArgs PropertyArgsCanRedo = new(nameof(CanRedo));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsEnabled = new(nameof(IsEnabled));
         #endregion
 
         #region Fields

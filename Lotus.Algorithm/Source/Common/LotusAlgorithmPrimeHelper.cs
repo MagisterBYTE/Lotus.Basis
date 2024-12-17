@@ -16,8 +16,8 @@ namespace Lotus.Algorithm
         /// <summary>
         /// Набор простых чисел.
         /// </summary>
-        public static readonly int[] Primes = new int[]
-        {
+        public static readonly int[] Primes =
+        [
             3,
             7,
             11,
@@ -90,7 +90,7 @@ namespace Lotus.Algorithm
             4999559,
             5999471,
             7199369
-        };
+        ];
         #endregion
 
         #region Main methods

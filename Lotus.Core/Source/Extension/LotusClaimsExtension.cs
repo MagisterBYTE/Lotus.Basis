@@ -32,7 +32,7 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Поиск и получение cписка уникальный значения утверждения с указанным типом.
+        /// Поиск и получение списка уникальный значения утверждения с указанным типом.
         /// </summary>
         /// <param name="claims">Список утверждений.</param>
         /// <param name="claimType">Тип утверждения.</param>
@@ -44,7 +44,7 @@ namespace Lotus.Core
             var value = claims.FindFirstValue(claimType);
             if (string.IsNullOrEmpty(value) == false)
             {
-                var functions = value.Split(new[] { separatop }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+                var functions = value.Split([separatop], StringSplitOptions.RemoveEmptyEntries).ToArray();
                 return new HashSet<string>(functions, StringComparer.OrdinalIgnoreCase);
             }
 

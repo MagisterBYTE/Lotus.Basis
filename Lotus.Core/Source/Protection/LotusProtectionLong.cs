@@ -65,8 +65,10 @@ namespace Lotus.Core
         /// <returns>Структура-оболочка для защиты целого числа.</returns>
         public static implicit operator TProtectionLong(long value)
         {
-            var protection = new TProtectionLong();
-            protection._encryptValue = value;
+            var protection = new TProtectionLong
+            {
+                _encryptValue = value
+            };
             protection._convertValue ^= XOR_MASK;
             return protection;
         }

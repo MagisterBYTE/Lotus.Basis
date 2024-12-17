@@ -13,7 +13,7 @@ namespace Lotus.Repository
     public interface ILotusPageInfoRequest
     {
         /// <summary>
-        /// Номер старницы, отсчет от нуля.
+        /// Номер страницы, отсчет от нуля.
         /// </summary>
         int PageNumber { get; set; }
 
@@ -29,7 +29,7 @@ namespace Lotus.Repository
     public class PageInfoRequest : ILotusPageInfoRequest
     {
         /// <summary>
-        /// Номер старницы, отсчет от нуля.
+        /// Номер страницы, отсчет от нуля.
         /// </summary>
         public int PageNumber { get; set; }
 
@@ -45,7 +45,7 @@ namespace Lotus.Repository
     public interface ILotusPageInfoResponse
     {
         /// <summary>
-        /// Номер старницы, отсчет от нуля.
+        /// Номер страницы, отсчет от нуля.
         /// </summary>
         int PageNumber { get; set; }
 
@@ -71,7 +71,7 @@ namespace Lotus.Repository
     public class PageInfoResponse : ILotusPageInfoResponse
     {
         /// <summary>
-        /// Номер старницы, отсчет от нуля.
+        /// Номер страницы, отсчет от нуля.
         /// </summary>
         public int PageNumber { get; set; }
 

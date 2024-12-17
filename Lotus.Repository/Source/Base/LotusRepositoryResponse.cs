@@ -36,7 +36,7 @@ namespace Lotus.Repository
         /// <summary>
         /// Результат успешного выполнения.
         /// </summary>
-        public static readonly Response Ok = new Response();
+        public static readonly Response Ok = new();
         #endregion
 
         #region Failed methods 
@@ -142,7 +142,7 @@ namespace Lotus.Repository
         /// <summary>
         /// Результат успешного выполнения.
         /// </summary>
-        public new static readonly Response<TPayload> Ok = new Response<TPayload>();
+        public new static readonly Response<TPayload> Ok = new();
         #endregion
 
         #region Failed methods 

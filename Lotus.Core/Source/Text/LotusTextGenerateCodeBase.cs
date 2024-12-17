@@ -31,14 +31,14 @@ namespace Lotus.Core
         /// <summary>
         /// Добавление разделителя для части.
         /// </summary>
-        public virtual void AddDelimetrPart()
+        public virtual void AddDelimiterPart()
         {
         }
 
         /// <summary>
         /// Добавление разделителя для секции.
         /// </summary>
-        public virtual void AddDelimetrSection()
+        public virtual void AddDelimiterSection()
         {
         }
 
@@ -103,12 +103,12 @@ namespace Lotus.Core
         /// <param name="subsystemName">Имя подсистемы.</param>
         public virtual void AddFileHeader(string moduleName, string subsystemName)
         {
-            AddDelimetrPart();
+            AddDelimiterPart();
             Add("// Проект: LotusPlatform");
             Add("// Раздел: " + moduleName);
             Add("// Подраздел: " + subsystemName);
             Add("// Автор: MagisterBYTE aka DanielDem <dementevds@gmail.com>");
-            AddDelimetrSection();
+            AddDelimiterSection();
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Lotus.Core
             Add("/** \\file " + fileName);
             Add("*\t\t" + briefDesc);
             Add("*/");
-            AddDelimetrSection();
+            AddDelimiterSection();
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Lotus.Core
         {
             Add("// Версия: " + version);
             Add("// Последнее изменение от " + date);
-            AddDelimetrPart();
+            AddDelimiterPart();
         }
         #endregion
 
@@ -248,10 +248,10 @@ namespace Lotus.Core
         /// <summary>
         /// Добавление стандартного краткого комментария.
         /// </summary>
-        /// <param name="delimetrSectionBefore">Статус добавления разделителя секции перед комментарием.</param>
+        /// <param name="delimiterSectionBefore">Статус добавления разделителя секции перед комментарием.</param>
         /// <param name="text">Текст комментария.</param>
-        /// <param name="delimetrSectionAfter">Статус добавления разделителя секции после комментария .</param>
-        public virtual void AddCommentSummary(bool delimetrSectionBefore, string text, bool delimetrSectionAfter)
+        /// <param name="delimiterSectionAfter">Статус добавления разделителя секции после комментария .</param>
+        public virtual void AddCommentSummary(bool delimiterSectionBefore, string text, bool delimiterSectionAfter)
         {
 
         }
@@ -280,7 +280,7 @@ namespace Lotus.Core
         /// <param name="groupName">Имя группы.</param>
         public virtual void AddDoxygenAddToGroup(string groupName)
         {
-            AddDelimetrSection();
+            AddDelimiterSection();
             Add("//! \\addtogroup " + groupName);
             Add("*@{*/");
         }
@@ -290,9 +290,9 @@ namespace Lotus.Core
         /// </summary>
         public virtual void AddDoxygenEndGroup()
         {
-            AddDelimetrSection();
+            AddDelimiterSection();
             Add("/**@}*/");
-            AddDelimetrSection();
+            AddDelimiterSection();
         }
         #endregion
     }

@@ -101,7 +101,7 @@ namespace Lotus.Core
         /// <summary>
         /// Формат предоставления десятичных чисел.
         /// </summary>
-        public static readonly NumberFormatInfo NumberFormatInfo = new NumberFormatInfo
+        public static readonly NumberFormatInfo NumberFormatInfo = new()
         {
             NumberDecimalSeparator = "."
         };
@@ -109,12 +109,12 @@ namespace Lotus.Core
         /// <summary>
         /// Регулярное выражение для символов латиницы.
         /// </summary>
-        private static readonly Regex RegexLatin = new Regex(@"\p{IsBasicLatin}");
+        private static readonly Regex RegexLatin = new(@"\p{IsBasicLatin}");
 
         /// <summary>
         /// Регулярное выражение для символов кириллицы.
         /// </summary>
-        private static readonly Regex RegexCyrllics = new Regex(@"\p{IsCyrillic}");
+        private static readonly Regex RegexCyrllics = new(@"\p{IsCyrillic}");
         #endregion
 
         #region Check methods

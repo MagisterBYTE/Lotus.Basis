@@ -49,35 +49,6 @@ namespace Lotus.Repository
         /// </summary>
         public FilterByProperty[]? Filtering { get; set; }
         #endregion
-
-        #region Main methods
-        /// <summary>
-        /// Получение списка целочисленных значений указанного свойства.
-        /// </summary>
-        /// <param name="propertName">Свойство.</param>
-        /// <returns>Список целочисленных значений и функция фильтрации.</returns>
-        public (int[], TFilterFunction) GetIdsByInteger(string propertName)
-        {
-            if(Filtering is null)
-            {
-                return (Array.Empty<int>(), TFilterFunction.Equals);
-            }
-
-            var filterProperty = Array.Find(Filtering, x => x.PropertyName == propertName);
-
-            if (filterProperty != null && filterProperty.Values != null && filterProperty.Values.Length > 0)
-            {
-                var ids = new int[filterProperty.Values.Length];
-                for (var i = 0; i < filterProperty.Values.Length; i++)
-                {
-                    ids[i] = XNumberHelper.ParseInt(filterProperty.Values[i]);
-                }
-                return (ids, filterProperty.Function);
-            }
-
-            return (Array.Empty<int>(), TFilterFunction.Equals);
-        }
-        #endregion
     }
     /**@}*/
 }

@@ -179,13 +179,13 @@ namespace Lotus.Core
         // Константы для информирования об изменении свойств
         //
         // Основные параметры
-        protected static readonly PropertyChangedEventArgs PropertyArgsName = new PropertyChangedEventArgs(nameof(Name));
-        protected static readonly PropertyChangedEventArgs PropertyArgsId = new PropertyChangedEventArgs(nameof(Id));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIValue = new PropertyChangedEventArgs(nameof(Value));
-        protected static readonly PropertyChangedEventArgs PropertyArgsValue = new PropertyChangedEventArgs(nameof(Value));
-        protected static readonly PropertyChangedEventArgs PropertyArgsIsActive = new PropertyChangedEventArgs(nameof(IsActive));
-        protected static readonly PropertyChangedEventArgs PropertyArgsUserTag = new PropertyChangedEventArgs(nameof(UserTag));
-        protected static readonly PropertyChangedEventArgs PropertyArgsUserData = new PropertyChangedEventArgs(nameof(UserData));
+        protected static readonly PropertyChangedEventArgs PropertyArgsName = new(nameof(Name));
+        protected static readonly PropertyChangedEventArgs PropertyArgsId = new(nameof(Id));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIValue = new(nameof(Value));
+        protected static readonly PropertyChangedEventArgs PropertyArgsValue = new(nameof(Value));
+        protected static readonly PropertyChangedEventArgs PropertyArgsIsActive = new(nameof(IsActive));
+        protected static readonly PropertyChangedEventArgs PropertyArgsUserTag = new(nameof(UserTag));
+        protected static readonly PropertyChangedEventArgs PropertyArgsUserData = new(nameof(UserData));
         #endregion
 
         #region Fields

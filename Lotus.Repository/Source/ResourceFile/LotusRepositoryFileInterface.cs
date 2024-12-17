@@ -32,7 +32,7 @@ namespace Lotus.Repository
         /// </summary>
         /// <param name="filesRequest">Параметры получения списка.</param>
         /// <param name="token">Токен отмены.</param>
-        /// <returns>Cписок файлов в формате Base64.</returns>
+        /// <returns>Список файлов в формате Base64.</returns>
         Task<ResponsePage<FileBase64Dto>> GetAllBase64Async(FilesRequest filesRequest, CancellationToken token);
 
         /// <summary>

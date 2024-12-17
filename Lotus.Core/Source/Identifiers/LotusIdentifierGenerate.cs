@@ -13,7 +13,7 @@ namespace Lotus.Core
         /// <summary>
         /// 1 января 2024 года.
         /// </summary>
-        private static readonly DateTime StartDate = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime StartDate = new(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         #endregion
 
         #region Generate methods

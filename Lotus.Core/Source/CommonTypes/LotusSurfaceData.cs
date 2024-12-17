@@ -76,7 +76,7 @@ namespace Lotus.Core
         /// </summary>
         public SurfaceData()
         {
-            _data = new TNumber[] { default };
+            _data = [default];
             _width = 1;
             _height = 1;
             _rank = 1;

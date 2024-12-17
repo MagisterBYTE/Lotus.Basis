@@ -12,8 +12,8 @@ namespace Lotus.Core
         /// <summary>
         /// Текстовые значение логического типа которые означает истинное значение.
         /// </summary>
-        public static readonly string[] TrueValues = new string[]
-        {
+        public static readonly string[] TrueValues =
+        [
             "True",
             "true",
             "1",
@@ -23,7 +23,7 @@ namespace Lotus.Core
             "Истина",
             "да",
             "Да"
-        };
+        ];
 
         /// <summary>
         /// Преобразование текста в логическое значение.

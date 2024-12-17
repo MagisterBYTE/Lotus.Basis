@@ -14,7 +14,7 @@ namespace Lotus.Repository
     /// <summary>
     /// Статический класс реализующий методы расширения для работы с IQueryable.
     /// </summary>
-    public static class XQueryableExtensionsPageInfo
+    public static class XPageInfoQueryableExtensions
     {
         #region Const
         /// <summary>

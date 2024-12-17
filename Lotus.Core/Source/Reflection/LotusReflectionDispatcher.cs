@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Lotus.Core
 {
@@ -17,6 +18,7 @@ namespace Lotus.Core
         private static MethodInfo _stringContainsMethod;
         private static MethodInfo _stringStartsWithMethod;
         private static MethodInfo _stringEndsWithMethod;
+        private static MethodInfo _regexRegexMethod;
         private static Dictionary<Type, MethodInfo> _enumerableCountMethods;
         private static Dictionary<Type, MethodInfo> _enumerableContainsMethods;
         private static Dictionary<Type, MethodInfo> _enumerableAnyMethods;
@@ -91,6 +93,21 @@ namespace Lotus.Core
                     Init();
                 }
                 return _stringEndsWithMethod!;
+            }
+        }
+
+        /// <summary>
+        /// Метаданные метода <see cref="Regex.IsMatch(string)"/>.
+        /// </summary>
+        public static MethodInfo RegexIsMatchMethod
+        {
+            get
+            {
+                if (_regexRegexMethod == null)
+                {
+                    Init();
+                }
+                return _regexRegexMethod!;
             }
         }
 
@@ -226,6 +243,12 @@ namespace Lotus.Core
                     break;
                 }
             }
+
+            _regexRegexMethod = typeof(Regex).GetMethods()
+                .Where(x => x.Name == nameof(Regex.IsMatch))
+                .Single(x => x.GetParameters().Length == 3
+                    && x.GetParameters()[0].Name == "input"
+                    && x.GetParameters()[0].ParameterType == typeof(string));
         }
 
         /// <summary>
@@ -1081,7 +1104,7 @@ namespace Lotus.Core
         }
         #endregion
 
-        #region Methods methods 
+        #region Methods methodsInfo 
         /// <summary>
         /// Проверка на существование метода с указанным именем.
         /// </summary>

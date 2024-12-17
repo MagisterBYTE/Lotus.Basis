@@ -17,7 +17,7 @@ namespace Lotus.Algorithm
         /// <summary>
         /// Компаратор для точки пути алгоритма A-Star.
         /// </summary>
-        public static readonly TPathPointStar Comparer = new TPathPointStar();
+        public static readonly TPathPointStar Comparer = new();
         #endregion
 
         #region Fields

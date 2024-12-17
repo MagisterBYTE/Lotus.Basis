@@ -76,7 +76,7 @@ namespace Lotus.Repository
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности.</typeparam>
         /// <typeparam name="TKey">Тип идентификатора.</typeparam>
-        /// <param name="ids">Список идентифиакторов.</param>
+        /// <param name="ids">Список идентификаторов.</param>
         /// <returns>Список сущностей.</returns>
         public IList<TEntity?> GetByIds<TEntity, TKey>(IEnumerable<TKey> ids)
             where TEntity : class, ILotusIdentifierId<TKey>
@@ -90,7 +90,7 @@ namespace Lotus.Repository
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности.</typeparam>
         /// <typeparam name="TKey">Тип идентификатора.</typeparam>
-        /// <param name="ids">Список идентифиакторов.</param>
+        /// <param name="ids">Список идентификаторов.</param>
         /// <param name="token">Токен отмены.</param>
         /// <returns>Список сущностей.</returns>
         public async ValueTask<IList<TEntity?>> GetByIdsAsync<TEntity, TKey>(IEnumerable<TKey> ids, CancellationToken token = default)

@@ -76,11 +76,9 @@ namespace Lotus.Core
                 _map = map ?? new Dictionary<ParameterExpression, ParameterExpression>();
             }
 
-            //-----------------------------------------------------------------------------------------------------
             /// <summary>
             /// Заменить параметр.
             /// </summary>
-            //-----------------------------------------------------------------------------------------------------
             public static Expression ReplaceParameters(
                 Dictionary<ParameterExpression, ParameterExpression> map,
                 Expression exp)
@@ -88,11 +86,9 @@ namespace Lotus.Core
                 return new ParameterRebinder(map).Visit(exp);
             }
 
-            //-----------------------------------------------------------------------------------------------------
             /// <summary>
             /// Зайти в параметр с помощью ExpressionVisitor.
             /// </summary>
-            //-----------------------------------------------------------------------------------------------------
             protected override Expression VisitParameter(ParameterExpression node)
             {
                 if (_map.TryGetValue(node, out var parameterExpression))

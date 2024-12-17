@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -16,9 +15,9 @@ namespace Lotus.Repository
     public interface ILotusFilterProperty
     {
         /// <summary>
-        /// Имя свойства/поля по которому осуществляется фильтрация.
+        /// Имя/путь свойства/поля по которому осуществляется фильтрация.
         /// </summary>
-        string PropertyName { get; set; }
+        string PropertyPath { get; set; }
 
         /// <summary>
         /// Функция для фильтрации.
@@ -33,9 +32,9 @@ namespace Lotus.Repository
     public class Filter<TPropertyType> : ILotusFilterProperty where TPropertyType : IComparable<TPropertyType>
     {
         /// <summary>
-        /// Свойство/поле по которому идет фильтрация.
+        /// Имя/путь свойства/поля по которому осуществляется фильтрация.
         /// </summary>
-        public string PropertyName { get; set; } = default!;
+        public string PropertyPath { get; set; } = default!;
 
         /// <summary>
         /// Функция для фильтрации.
@@ -60,18 +59,11 @@ namespace Lotus.Repository
     /// </summary>
     public class FilterByProperty : ILotusFilterProperty
     {
-        #region Const
-        /// <summary>
-        /// Суффикс, сигнализирующий о том, что свойство относиться к массиву идентификаторов.
-        /// </summary>
-        public const string SuffixIds = "Ids";
-        #endregion
-
         #region Properties
         /// <summary>
-        /// Имя свойства/поля по которому осуществляется фильтрация.
+        /// Имя/путь свойства/поля по которому осуществляется фильтрация.
         /// </summary>
-        public string PropertyName { get; set; } = default!;
+        public string PropertyPath { get; set; } = default!;
 
         /// <summary>
         /// Функция для фильтрации.
@@ -79,19 +71,14 @@ namespace Lotus.Repository
         public TFilterFunction Function { get; set; }
 
         /// <summary>
-        /// Тип свойства.
+        /// Статус типа свойства Nullable.
         /// </summary>
-        public TEntityPropertyType PropertyType { get; set; }
-
-        /// <summary>
-        /// Статус типа свойства - массив.
-        /// </summary>
-        public bool? IsArray { get; set; }
+        public bool? IsNullable { get; set; }
 
         /// <summary>
         /// Учитывать регистр при фильтрации строк.
         /// </summary>
-        public bool? IsSensativeCase { get; set; }
+        public bool? IsSensitiveCase { get; set; }
 
         /// <summary>
         /// Значение.
@@ -120,134 +107,133 @@ namespace Lotus.Repository
         /// <returns>Текстовое представление.</returns>
         public override string ToString()
         {
-            return $"Name = {PropertyName}";
+            return $"Name = {PropertyPath}";
         }
         #endregion
 
         #region Main methods
         /// <summary>
-        /// Получить информацию о свойстве фильтрации.
+        /// Проверка на валидность фильтра по свойству.
         /// </summary>
-        /// <typeparam name="TItem">Тпи объекта.</typeparam>
-        /// <returns>Информация о свойстве.</returns>
-        public PropertyInfo GetPropertyInfo<TItem>()
+        /// <returns>Статус проверки.</returns>
+        public bool IsValid()
         {
-            if (PropertyName.Contains(SuffixIds))
+            if (Function == TFilterFunction.IncludeAny
+                || Function == TFilterFunction.IncludeAll
+                || Function == TFilterFunction.IncludeEquals
+                || Function == TFilterFunction.IncludeNone
+                || Function == TFilterFunction.Between)
             {
-                // Удаляем суффикс
-                var correctName = PropertyName.RemoveLastOccurrence(SuffixIds);
+                if (Values == null || Values.Length == 0)
+                {
+                    return false;
+                }
 
-                // Добавляем окончание множественности
-                correctName += "s";
-
-                var propertyInfo = typeof(TItem).GetProperties().First(property => property.Name == correctName);
-                return propertyInfo;
             }
             else
             {
-                var propertyInfo = typeof(TItem).GetProperties().First(property => property.Name == PropertyName);
-                return propertyInfo;
+                if (string.IsNullOrEmpty(Value) 
+                    && IsNullable == false 
+                    && (Function != TFilterFunction.Empty || Function != TFilterFunction.NotEmpty))
+                {
+                    return false;
+                }
             }
+
+            return true;
         }
 
         /// <summary>
         /// Получить константу дерева выражения для искомого значения.
         /// </summary>
+        /// <param name="propertyType">Тип свойства.</param>
         /// <param name="index">Индекс искомого значения. -1 значения по умолчанию.</param>
         /// <returns>Константа выражения.</returns>
-        public ConstantExpression GetConstantExpression(int index = -1)
+        public ConstantExpression GetConstantExpression(Type propertyType, int index = -1)
         {
             var value = index == -1 ? Value! : Values![index];
-
-            ConstantExpression? constantExpression = null;
-            switch (PropertyType)
-            {
-                case TEntityPropertyType.Boolean:
-                    {
-                        constantExpression = Expression.Constant(XBooleanHelper.Parse(value));
-                    }
-                    break;
-                case TEntityPropertyType.Integer:
-                    {
-                        constantExpression = Expression.Constant(XNumberHelper.ParseInt(value));
-                    }
-                    break;
-                case TEntityPropertyType.Enum:
-                    {
-                        constantExpression = Expression.Constant(XNumberHelper.ParseInt(value));
-                    }
-                    break;
-                case TEntityPropertyType.Float:
-                    {
-                        constantExpression = Expression.Constant(XNumberHelper.ParseSingle(value));
-                    }
-                    break;
-                case TEntityPropertyType.DateTime:
-                    {
-                        constantExpression = Expression.Constant(XDateTimeHelper.Parse(value));
-                    }
-                    break;
-                case TEntityPropertyType.String:
-                    {
-                        constantExpression = Expression.Constant(value);
-                    }
-                    break;
-            }
-
-            return constantExpression!;
+            return GetConstantExpression(propertyType, value)!;
         }
 
         /// <summary>
         /// Получить константу массива дерева выражения для искомого значения.
         /// </summary>
+        /// <param name="propertyType">Тип свойства.</param>
         /// <returns>Константа массива выражения.</returns>
-        public NewArrayExpression GetArrayExpression()
+        public NewArrayExpression GetArrayExpression(Type propertyType)
         {
             var constants = new List<Expression>();
 
-            if (PropertyType == TEntityPropertyType.Integer)
+            foreach (var value in Values!)
             {
-                var values = Values!.ToIntArray();
-                foreach (var value in values)
+                var constant = GetConstantExpression(propertyType, value);
+                if (constant != null)
                 {
-                    var constant = Expression.Constant(value);
                     constants.Add(constant);
                 }
-
-                var massive = Expression.NewArrayInit(typeof(int), constants);
-                return massive;
             }
-            else
-            {
-                foreach (var value in Values!)
-                {
-                    var constant = Expression.Constant(value);
-                    constants.Add(constant);
-                }
 
-                var massive = Expression.NewArrayInit(typeof(string), constants);
-                return massive;
-            }
+            var massive = Expression.NewArrayInit(propertyType, constants);
+            return massive;
+        }
+
+        /// <summary>
+        /// Получить выражение [o => Values.Contains(p)] для искомого значения.
+        /// </summary>
+        /// <param name="propertyType">Тип свойства.</param>
+        /// <param name="propertyExpression">Выражение для объекта p.</param>
+        /// <returns>Выражение вызова метода.</returns>
+        public MethodCallExpression GetContainsInExpression(Type propertyType, MemberExpression propertyExpression)
+        {
+            var containsMethod = XReflection.GetEnumerableContainsMethod(propertyType);
+
+            var constantIds = GetArrayExpression(propertyType);
+
+            var containsCall = Expression.Call(null, containsMethod, constantIds, propertyExpression);
+
+            return containsCall;
+        }
+
+        /// <summary>
+        /// Получить выражение [o => !(Values.Contains(p))] для искомого значения.
+        /// </summary>
+        /// <param name="propertyType">Тип свойства p.</param>
+        /// <param name="propertyExpression">Выражение для объекта p.</param>
+        /// <returns>Выражение.</returns>
+        public Expression GetNotContainsInExpression(Type propertyType, MemberExpression propertyExpression)
+        {
+            var containsMethod = XReflection.GetEnumerableContainsMethod(propertyType);
+
+            var constantIds = GetArrayExpression(propertyType);
+
+            var containsCall = Expression.Call(null, containsMethod, constantIds, propertyExpression);
+
+            var containsNot = Expression.Not(containsCall);
+
+            return containsNot;
         }
 
         /// <summary>
         /// Получить лямбду выражения [o => ids.Contains(p.Id)] для искомого значения.
         /// </summary>
         /// <param name="propertyType">Тип свойства p.</param>
+        /// <param name="propertyNameId">Имя свойства Id</param>
         /// <returns>Лямбда выражения.</returns>
-        public LambdaExpression GetContainsInPropertyExpression(Type propertyType)
+        public LambdaExpression GetContainsInPropertyExpression(Type propertyType, string propertyNameId = "Id")
         {
-            var parameter = Expression.Parameter(propertyType, "o");
+            var parameterExpression = Expression.Parameter(propertyType, "o");
 
-            var property = Expression.Property(parameter, $"Id");
+            var propertyExpression = Expression.Property(parameterExpression, propertyNameId);
 
-            var containsMethod = XExpressionFilters.GetEnumerableContainsMethod(PropertyType);
+            var propertyInfoId = (propertyExpression.Member as PropertyInfo)!;
 
-            var constantIds = GetArrayExpression();
+            var containsMethod = XReflection.GetEnumerableContainsMethod(propertyInfoId.PropertyType);
 
-            var containsCall = Expression.Call(null, containsMethod, constantIds, property);
+            var constantIds = GetArrayExpression(propertyInfoId.PropertyType);
 
-            var lambda = Expression.Lambda(containsCall, parameter);
+            var containsCall = Expression.Call(null, containsMethod, constantIds, propertyExpression);
+
+            var lambda = Expression.Lambda(containsCall, parameterExpression);
 
             return lambda;
         }
@@ -256,58 +242,92 @@ namespace Lotus.Repository
         /// Получить лямбду выражения [o => !(ids.Contains(p.Id))] для искомого значения.
         /// </summary>
         /// <param name="propertyType">Тип свойства p.</param>
+        /// <param name="propertyNameId">Имя свойства Id</param>
         /// <returns>Лямбда выражения.</returns>
-        public LambdaExpression GetNotContainsInPropertyExpression(Type propertyType)
+        public LambdaExpression GetNotContainsInPropertyExpression(Type propertyType, string propertyNameId = "Id")
         {
-            var parameter = Expression.Parameter(propertyType, "o");
+            var parameterExpression = Expression.Parameter(propertyType, "o");
 
-            var property = Expression.Property(parameter, $"Id");
+            var propertyExpression = Expression.Property(parameterExpression, propertyNameId);
 
-            var containsMethod = XExpressionFilters.GetEnumerableContainsMethod(PropertyType);
+            var propertyInfoId = (propertyExpression.Member as PropertyInfo)!;
 
-            var constantIds = GetArrayExpression();
+            var containsMethod = XReflection.GetEnumerableContainsMethod(propertyInfoId.PropertyType);
 
-            var containsCall = Expression.Call(null, containsMethod, constantIds, property);
+            var constantIds = GetArrayExpression(propertyInfoId.PropertyType);
+
+            var containsCall = Expression.Call(null, containsMethod, constantIds, propertyExpression);
 
             var containsNot = Expression.Not(containsCall);
 
-            var lambda = Expression.Lambda(containsNot, parameter);
+            var lambda = Expression.Lambda(containsNot, parameterExpression);
 
             return lambda;
         }
 
         /// <summary>
-        /// Получить выражение [o => ids.Contains(p)] для искомого значения.
+        /// Получить константу дерева выражения указанного значения в виде строки.
         /// </summary>
-        /// <param name="propertyExpression">Выражение для объекта p.</param>
-        /// <returns>Выражение.</returns>
-        public Expression GetContainsInObjectExpression(MemberExpression propertyExpression)
+        /// <param name="propertyType">Тип свойства.</param>
+        /// <param name="value">Значение.</param>
+        /// <returns>Константа выражения.</returns>
+        private static ConstantExpression? GetConstantExpression(Type propertyType, string value)
         {
-            var containsMethod = XExpressionFilters.GetEnumerableContainsMethod(PropertyType);
+            ConstantExpression? constantExpression = null;
 
-            var constantIds = GetArrayExpression();
+            // Не реализована полная совместимость c Nullable
 
-            var containsCall = Expression.Call(null, containsMethod, constantIds, propertyExpression);
+            if (propertyType.IsEnum)
+            {
+                constantExpression = Expression.Constant(Enum.ToObject(propertyType, Convert.ToInt32(value)), propertyType);
+                return constantExpression;
+            }
 
-            return containsCall;
-        }
+            var typeCode = Type.GetTypeCode(propertyType);
+            switch (typeCode)
+            {
+                case TypeCode.Boolean:
+                    constantExpression = Expression.Constant(XBooleanHelper.Parse(value), propertyType);
+                    break;
+                case TypeCode.Byte:
+                    constantExpression = Expression.Constant((byte)XNumberHelper.ParseInt(value), propertyType);
+                    break;
+                case TypeCode.Int16:
+                    constantExpression = Expression.Constant((short)XNumberHelper.ParseInt(value), propertyType);
+                    break;
+                case TypeCode.Int32:
+                    constantExpression = Expression.Constant(XNumberHelper.ParseInt(value), propertyType);
+                    break;
+                case TypeCode.Int64:
+                    constantExpression = Expression.Constant(XNumberHelper.ParseLong(value), propertyType);
+                    break;
+                case TypeCode.Single:
+                    constantExpression = Expression.Constant(XNumberHelper.ParseSingle(value), propertyType);
+                    break;
+                case TypeCode.Double:
+                    constantExpression = Expression.Constant(XNumberHelper.ParseDouble(value), propertyType);
+                    break;
+                case TypeCode.Decimal:
+                    constantExpression = Expression.Constant(XNumberHelper.ParseDecimal(value), propertyType);
+                    break;
+                case TypeCode.String:
+                    constantExpression = Expression.Constant(value, propertyType);
+                    break;
+                case TypeCode.DateTime:
+                    constantExpression = Expression.Constant(XDateTimeHelper.Parse(value).ToUniversalTime(), propertyType);
+                    break;
+            }
 
-        /// <summary>
-        /// Получить выражение [o => !(ids.Contains(p))] для искомого значения.
-        /// </summary>
-        /// <param name="propertyExpression">Выражение для объекта p.</param>
-        /// <returns>Выражение.</returns>
-        public Expression GetNotContainsInObjectExpression(MemberExpression propertyExpression)
-        {
-            var containsMethod = XExpressionFilters.GetEnumerableContainsMethod(PropertyType);
+            if (constantExpression is not null) return constantExpression;
 
-            var constantIds = GetArrayExpression();
+            // Специфичные типы
+            if (Guid.TryParse(value, out var guid))
+            {
+                constantExpression = Expression.Constant(guid, propertyType);
+                return constantExpression;
+            }
 
-            var containsCall = Expression.Call(null, containsMethod, constantIds, propertyExpression);
-
-            var containsNot = Expression.Not(containsCall);
-
-            return containsNot;
+            return constantExpression;
         }
         #endregion
     }

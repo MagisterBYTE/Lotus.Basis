@@ -33,7 +33,7 @@ namespace Lotus.Core
         public const BindingFlags BINDING_METHODS = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
         #endregion
 
-        #region СТАТИСТИЧЕСКИЕ ДАННЫЕ 
+        #region Static data 
         /// <summary>
         /// Массив списка аргументов для одного аргумента.
         /// </summary>

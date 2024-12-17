@@ -37,7 +37,7 @@ namespace Lotus.Algorithm
         /// <summary>
         /// Неопределенная точка карты.
         /// </summary>
-        public static readonly TMapPoint Undef = new TMapPoint(-1, -1);
+        public static readonly TMapPoint Undef = new(-1, -1);
         #endregion
 
         #region Fields

@@ -154,53 +154,53 @@ namespace Lotus.Core
         /// <summary>
         /// Массив символов разделителей (новая строка).
         /// </summary>
-        public static readonly string[] SeparatorNewLine = new string[] { "\n" };
+        public static readonly string[] SeparatorNewLine = ["\n"];
 
         /// <summary>
         /// Массив символов разделителей (новая строка и возврат каретки).
         /// </summary>
-        public static readonly string[] SeparatorNewCarriageLine = new string[] { "\n", "\r" };
+        public static readonly string[] SeparatorNewCarriageLine = ["\n", "\r"];
 
         /// <summary>
         /// Массив символов разделителей (запятая и новая строка).
         /// </summary>
-        public static readonly string[] SeparatorComma = new string[] { ",", "\n" };
+        public static readonly string[] SeparatorComma = [",", "\n"];
 
         /// <summary>
         /// Массив символов разделителей (точка запятая).
         /// </summary>
-        public static readonly string[] SeparatorDotComma = new string[] { ";" };
+        public static readonly string[] SeparatorDotComma = [";"];
 
         /// <summary>
         /// Массив символов разделителей (квадратные скобки).
         /// </summary>
-        public static readonly string[] SeparatorSquareBracket = new string[] { "[", "]" };
+        public static readonly string[] SeparatorSquareBracket = ["[", "]"];
 
         /// <summary>
         /// Массив символов разделителей (нижние подчеркивание).
         /// </summary>
-        public static readonly string[] SeparatorLowLine = new string[] { "_" };
+        public static readonly string[] SeparatorLowLine = ["_"];
 
         /// <summary>
         /// Массив символов разделителей (пробел).
         /// </summary>
-        public static readonly string[] SeparatorSpaces = new string[] { " " };
+        public static readonly string[] SeparatorSpaces = [" "];
 
         /// <summary>
         /// Массив символов разделителей (символ табуляции).
         /// </summary>
-        public static readonly string[] SeparatorTab = new string[] { "\t" };
+        public static readonly string[] SeparatorTab = ["\t"];
 
         /// <summary>
         /// Массив символов для разделение на предложения.
         /// </summary>
-        public static readonly string[] SeparatorSentences = new string[] { ".", "!", "?" };
+        public static readonly string[] SeparatorSentences = [".", "!", "?"];
 
         /// <summary>
         /// Массив символов табуляции.
         /// </summary>
-        public static readonly string[] Depths = new string[]
-        {
+        public static readonly string[] Depths =
+        [
             "",
             "\t",
             "\t\t",
@@ -216,13 +216,13 @@ namespace Lotus.Core
             "\t\t\t\t\t\t\t\t\t\t\t\t",
             "\t\t\t\t\t\t\t\t\t\t\t\t\t",
             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
-        };
+        ];
 
         /// <summary>
         /// Массив символов пробела.
         /// </summary>
-        public static readonly string[] Spaces = new string[]
-        {
+        public static readonly string[] Spaces =
+        [
             "",
             new string(XCharHelper.Space, 1),
             new string(XCharHelper.Space, 2),
@@ -239,7 +239,7 @@ namespace Lotus.Core
             new string(XCharHelper.Space, 13),
             new string(XCharHelper.Space, 14),
             new string(XCharHelper.Space, 15)
-        };
+        ];
 
         /// <summary>
         /// Массив символов пробела c начальным символом новой строки.
@@ -247,8 +247,8 @@ namespace Lotus.Core
         /// <remarks>
         /// При последовательном присвоение позволяет получить иерархически выглядящую строку.
         /// </remarks>
-        public static readonly string[] HierarchySpaces = new string[]
-        {
+        public static readonly string[] HierarchySpaces =
+        [
             "",
             new string(XCharHelper.Space, 1).Insert(0, XStringHelper.NewLine),
             new string(XCharHelper.Space, 2).Insert(0, XStringHelper.NewLine),
@@ -265,7 +265,7 @@ namespace Lotus.Core
             new string(XCharHelper.Space, 13).Insert(0, XStringHelper.NewLine),
             new string(XCharHelper.Space, 14).Insert(0, XStringHelper.NewLine),
             new string(XCharHelper.Space, 15).Insert(0, XStringHelper.NewLine)
-        };
+        ];
         #endregion
 
         #region Main methods 

@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 using Lotus.Core;
 
@@ -13,123 +12,8 @@ namespace Lotus.Repository
     /// <summary>
     /// Статический класс содержащий фильтры для запросов в виде деревьев выражений.
     /// </summary>
-    public static class XExpressionFilters
+    public static class XFilterExpression
     {
-        /// <summary>
-        /// Получить типизированную версию метода <see cref="Enumerable.Contains{TSource}(IEnumerable{TSource}, TSource)"/>.
-        /// </summary>
-        /// <param name="propertyType">Тип свойства.</param>
-        /// <returns>Типизированная версия метода.</returns>
-        public static MethodInfo GetEnumerableContainsMethod(TEntityPropertyType propertyType)
-        {
-            switch (propertyType)
-            {
-                case TEntityPropertyType.Boolean:
-                    break;
-                case TEntityPropertyType.Integer:
-                    {
-                        return XReflection.GetEnumerableContainsMethod(typeof(int));
-                    }
-                case TEntityPropertyType.Float:
-                    {
-                        return XReflection.GetEnumerableContainsMethod(typeof(float));
-                    }
-                case TEntityPropertyType.String:
-                    {
-                        return XReflection.GetEnumerableContainsMethod(typeof(string));
-                    }
-                case TEntityPropertyType.Enum:
-                    break;
-                case TEntityPropertyType.DateTime:
-                    {
-                        return XReflection.GetEnumerableContainsMethod(typeof(DateTime));
-                    }
-                case TEntityPropertyType.Guid:
-                    {
-                        return XReflection.GetEnumerableContainsMethod(typeof(Guid));
-                    }
-            }
-
-            return XReflection.GetEnumerableContainsMethod(typeof(byte));
-        }
-
-        /// <summary>
-        /// Получить типизированную версию метода <see cref="Enumerable.Any{TSource}(IEnumerable{TSource}, Func{TSource, bool})"/>.
-        /// </summary>
-        /// <param name="propertyType">Тип свойства.</param>
-        /// <returns>Типизированная версия метода.</returns>
-        public static MethodInfo GetEnumerableAnyMethod(TEntityPropertyType propertyType)
-        {
-            switch (propertyType)
-            {
-                case TEntityPropertyType.Boolean:
-                    break;
-                case TEntityPropertyType.Integer:
-                    {
-                        return XReflection.GetEnumerableAnyMethod(typeof(int));
-                    }
-                case TEntityPropertyType.Float:
-                    {
-                        return XReflection.GetEnumerableAnyMethod(typeof(float));
-                    }
-                case TEntityPropertyType.String:
-                    {
-                        return XReflection.GetEnumerableAnyMethod(typeof(string));
-                    }
-                case TEntityPropertyType.Enum:
-                    break;
-                case TEntityPropertyType.DateTime:
-                    {
-                        return XReflection.GetEnumerableAnyMethod(typeof(DateTime));
-                    }
-                case TEntityPropertyType.Guid:
-                    {
-                        return XReflection.GetEnumerableAnyMethod(typeof(Guid));
-                    }
-            }
-
-            return XReflection.GetEnumerableAnyMethod(typeof(byte));
-        }
-
-        /// <summary>
-        /// Получить типизированную версию метода <see cref="Enumerable.All{TSource}(IEnumerable{TSource}, Func{TSource, bool})"/>.
-        /// </summary>
-        /// <param name="propertyType">Тип свойства.</param>
-        /// <returns>Типизированная версия метода.</returns>
-        public static MethodInfo GetEnumerableAllMethod(TEntityPropertyType propertyType)
-        {
-            switch (propertyType)
-            {
-                case TEntityPropertyType.Boolean:
-                    break;
-                case TEntityPropertyType.Integer:
-                    {
-                        return XReflection.GetEnumerableAllMethod(typeof(int));
-                    }
-                case TEntityPropertyType.Float:
-                    {
-                        return XReflection.GetEnumerableAllMethod(typeof(float));
-                    }
-                case TEntityPropertyType.String:
-                    {
-                        return XReflection.GetEnumerableAllMethod(typeof(string));
-                    }
-                case TEntityPropertyType.Enum:
-                    break;
-                case TEntityPropertyType.DateTime:
-                    {
-                        return XReflection.GetEnumerableAllMethod(typeof(DateTime));
-                    }
-                case TEntityPropertyType.Guid:
-                    {
-                        return XReflection.GetEnumerableAllMethod(typeof(Guid));
-                    }
-
-            }
-
-            return XReflection.GetEnumerableAllMethod(typeof(byte));
-        }
-
         /// <summary>
         /// Получить выражение фильтра по данным фильтрации по свойству.
         /// </summary>
@@ -138,14 +22,11 @@ namespace Lotus.Repository
         /// <returns>Выражение фильтра.</returns>
         public static Expression<Func<TItem, bool>> GetFilter<TItem>(FilterByProperty filterProperty)
         {
-            // Создаем параметр дерева выражений
-            var parameter = Expression.Parameter(typeof(TItem), "x");
+            var parameterExpression = Expression.Parameter(typeof(TItem), "p");
 
-            // Получаем информацию о свойстве по которому будем фильтровать
-            var propertyInfo = filterProperty.GetPropertyInfo<TItem>();
-
-            // Создаем свойство дерева выражений
-            var property = Expression.Property(parameter, propertyInfo);
+            var propertyExpression = parameterExpression.GetPropertyExpression(filterProperty.PropertyPath);
+            var propertyInfo = (propertyExpression.Member as PropertyInfo)!;
+            var propertyType = propertyInfo.PropertyType;
 
             Expression? body = null;
 
@@ -153,114 +34,153 @@ namespace Lotus.Repository
             {
                 case TFilterFunction.Equals:
                     {
-                        body = Expression.Equal(property, filterProperty.GetConstantExpression());
+                        body = Expression.Equal(propertyExpression, filterProperty.GetConstantExpression(propertyType));
                     }
                     break;
                 case TFilterFunction.NotEqual:
                     {
-                        body = Expression.NotEqual(property, filterProperty.GetConstantExpression());
+                        body = Expression.NotEqual(propertyExpression, filterProperty.GetConstantExpression(propertyType));
                     }
                     break;
                 case TFilterFunction.LessThan:
                     {
-                        body = Expression.LessThan(property, filterProperty.GetConstantExpression());
+                        body = Expression.LessThan(propertyExpression, filterProperty.GetConstantExpression(propertyType));
                     }
                     break;
                 case TFilterFunction.LessThanOrEqual:
                     {
-                        body = Expression.LessThanOrEqual(property, filterProperty.GetConstantExpression());
+                        body = Expression.LessThanOrEqual(propertyExpression, filterProperty.GetConstantExpression(propertyType));
                     }
                     break;
                 case TFilterFunction.GreaterThan:
                     {
-                        body = Expression.GreaterThan(property, filterProperty.GetConstantExpression());
+                        body = Expression.GreaterThan(propertyExpression, filterProperty.GetConstantExpression(propertyType));
                     }
                     break;
                 case TFilterFunction.GreaterThanOrEqual:
                     {
-                        body = Expression.GreaterThanOrEqual(property, filterProperty.GetConstantExpression());
+                        body = Expression.GreaterThanOrEqual(propertyExpression, filterProperty.GetConstantExpression(propertyType));
                     }
                     break;
                 case TFilterFunction.Between:
                     {
-                        var first = Expression.GreaterThan(property, filterProperty.GetConstantExpression(0));
-                        var second = Expression.LessThan(property, filterProperty.GetConstantExpression(1));
+                        var first = Expression.GreaterThan(propertyExpression, filterProperty.GetConstantExpression(propertyType, 0));
+                        var second = Expression.LessThan(propertyExpression, filterProperty.GetConstantExpression(propertyType, 1));
                         body = Expression.And(first, second);
                     }
                     break;
                 case TFilterFunction.Contains:
                     {
-                        body = Expression.Call(property, XReflection.StringContainsMethod, filterProperty.GetConstantExpression());
+                        if (filterProperty.IsSensitiveCase.GetValueOrDefault())
+                        {
+                            body = Expression.Call(propertyExpression, XReflection.StringContainsMethod,
+                                filterProperty.GetConstantExpression(propertyType));
+                        }
+                        else
+                        {
+                            goto case TFilterFunction.Like;
+                        }
                     }
                     break;
                 case TFilterFunction.StartsWith:
                     {
-                        body = Expression.Call(property, XReflection.StringStartsWithMethod, filterProperty.GetConstantExpression());
+                        body = Expression.Call(propertyExpression, XReflection.StringStartsWithMethod,
+                            filterProperty.GetConstantExpression(propertyType));
                     }
                     break;
                 case TFilterFunction.EndsWith:
                     {
-                        body = Expression.Call(property, XReflection.StringEndsWithMethod, filterProperty.GetConstantExpression());
+                        body = Expression.Call(propertyExpression, XReflection.StringEndsWithMethod,
+                            filterProperty.GetConstantExpression(propertyType));
                     }
                     break;
                 case TFilterFunction.NotEmpty:
                     {
-                        var notNull = Expression.NotEqual(property, Expression.Constant(null));
-                        var notEmpty = Expression.NotEqual(property, Expression.Constant(string.Empty));
-                        body = Expression.And(notNull, notEmpty);
+                        if (propertyType == typeof(string))
+                        {
+                            var notNull = Expression.NotEqual(propertyExpression, Expression.Constant(null));
+                            var notEmpty = Expression.NotEqual(propertyExpression, Expression.Constant(string.Empty));
+                            body = Expression.And(notNull, notEmpty);
+                        }
+                        else
+                        {
+                            body = Expression.NotEqual(propertyExpression, Expression.Constant(null));
+                        }
+                    }
+                    break;
+                case TFilterFunction.Empty:
+                    {
+                        if (propertyType == typeof(string))
+                        {
+                            var notNull = Expression.Equal(propertyExpression, Expression.Constant(null));
+                            var notEmpty = Expression.Equal(propertyExpression, Expression.Constant(string.Empty));
+                            body = Expression.Or(notNull, notEmpty);
+                        }
+                        else
+                        {
+                            body = Expression.Equal(propertyExpression, Expression.Constant(null));
+                        }
+                    }
+                    break;
+                case TFilterFunction.Like:
+                    {
+                        var valueExpression = Expression.Constant(".*" + filterProperty.Value + ".*");
+                        var regexOptionExpression = Expression.Constant(RegexOptions.IgnoreCase);
+                        body = Expression.Call(XReflection.RegexIsMatchMethod, propertyExpression, valueExpression, regexOptionExpression);
                     }
                     break;
                 case TFilterFunction.IncludeAny:
                 case TFilterFunction.IncludeAll:
                     {
-                        var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
-                        if (propertyType != null && propertyType.IsPrimitiveType() == false)
+                        if (propertyType.IsPrimitiveOrNullableType())
                         {
-                            var lambdaContains = filterProperty.GetContainsInPropertyExpression(propertyType);
-
-                            var anyMethod = XReflection.GetEnumerableAnyMethod(propertyType);
-
-                            body = Expression.Call(null, anyMethod, property, lambdaContains);
+                            body = filterProperty.GetContainsInExpression(propertyType, propertyExpression);
                         }
                         else
                         {
-                            body = filterProperty.GetContainsInObjectExpression(property);
+                            var propertyTypeItem = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType()!;
+
+                            var lambdaExpression = filterProperty.GetContainsInPropertyExpression(propertyTypeItem);
+
+                            var anyMethod = XReflection.GetEnumerableAnyMethod(propertyTypeItem);
+
+                            body = Expression.Call(null, anyMethod, propertyExpression, lambdaExpression);
                         }
                     }
                     break;
                 case TFilterFunction.IncludeEquals:
                     {
-                        var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
-
-                        if (propertyType != null && propertyType.IsPrimitiveType() == false)
+                        if (propertyType.IsPrimitiveOrNullableType())
                         {
-                            var lambdaContains = filterProperty.GetContainsInPropertyExpression(propertyType);
-
-                            var allMethod = XReflection.GetEnumerableAllMethod(propertyType);
-
-                            body = Expression.Call(null, allMethod, property, lambdaContains);
+                            body = filterProperty.GetContainsInExpression(propertyType, propertyExpression);
                         }
                         else
                         {
-                            body = filterProperty.GetContainsInObjectExpression(property);
+                            var propertyTypeItem = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType()!;
+
+                            var lambdaExpression = filterProperty.GetContainsInPropertyExpression(propertyTypeItem);
+
+                            var anyMethod = XReflection.GetEnumerableAllMethod(propertyTypeItem);
+
+                            body = Expression.Call(null, anyMethod, propertyExpression, lambdaExpression);
                         }
                     }
                     break;
                 case TFilterFunction.IncludeNone:
                     {
-                        var propertyType = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType();
-
-                        if (propertyType != null && propertyType.IsPrimitiveType() == false)
+                        if (propertyType.IsPrimitiveOrNullableType())
                         {
-                            var lambdaNotContains = filterProperty.GetNotContainsInPropertyExpression(propertyType);
-
-                            var allMethod = XReflection.GetEnumerableAllMethod(propertyType);
-
-                            body = Expression.Call(null, allMethod, property, lambdaNotContains);
+                            body = filterProperty.GetNotContainsInExpression(propertyType, propertyExpression);
                         }
                         else
                         {
-                            body = filterProperty.GetNotContainsInObjectExpression(property);
+                            var propertyTypeItem = propertyInfo.PropertyType.GetClassicCollectionItemTypeOrThisType()!;
+
+                            var lambdaExpression = filterProperty.GetNotContainsInPropertyExpression(propertyTypeItem);
+
+                            var anyMethod = XReflection.GetEnumerableAllMethod(propertyTypeItem);
+
+                            body = Expression.Call(null, anyMethod, propertyExpression, lambdaExpression);
                         }
                     }
                     break;
@@ -269,7 +189,7 @@ namespace Lotus.Repository
             }
 
             // Получаем итоговую лямбду
-            var result = Expression.Lambda<Func<TItem, bool>>(body!, parameter);
+            var result = Expression.Lambda<Func<TItem, bool>>(body!, parameterExpression);
 
             return result;
         }

@@ -17,7 +17,7 @@ namespace Lotus.Core
         public static readonly Result Ok = new(0, true);
 
         /// <summary>
-        /// Результат неуспешного выполнения операции.
+        /// Результат не успешного выполнения операции.
         /// </summary>
         public static readonly Result Bad = new(-1, "Error", null, false);
         #endregion
@@ -286,7 +286,7 @@ namespace Lotus.Core
         public new static readonly Result<TValue> Ok = new(0, true);
 
         /// <summary>
-        /// Результат неуспешного выполнения операции.
+        /// Результат не успешного выполнения операции.
         /// </summary>
         public new static readonly Result<TValue> Bad = new(-1, "Error", default, false);
         #endregion

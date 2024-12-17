@@ -50,9 +50,11 @@ namespace Lotus.Core
         public static BindingReflection CreateReflection(string name, object model, string modelName, object view,
             string viewName, TBindingMode mode = TBindingMode.ViewData)
         {
-            var binding = new BindingReflection(model, modelName, view, viewName);
-            binding.Name = name;
-            binding.Mode = mode;
+            var binding = new BindingReflection(model, modelName, view, viewName)
+            {
+                Name = name,
+                Mode = mode
+            };
             Bindings.Add(binding);
             return binding;
         }
@@ -71,10 +73,12 @@ namespace Lotus.Core
         public static BindingReflection CreateReflection(string name, object model, string modelName, object view,
             string viewName, TBindingMode mode, Func<object, object> onConvertToView)
         {
-            var binding = new BindingReflection(model, modelName, view, viewName);
-            binding.Name = name;
-            binding.Mode = mode;
-            binding.OnConvertToView = onConvertToView;
+            var binding = new BindingReflection(model, modelName, view, viewName)
+            {
+                Name = name,
+                Mode = mode,
+                OnConvertToView = onConvertToView
+            };
             Bindings.Add(binding);
             return binding;
         }
@@ -95,11 +99,13 @@ namespace Lotus.Core
             string viewName, TBindingMode mode, Func<object, object> onConvertToView,
             Func<object, object> onConvertToModel)
         {
-            var binding = new BindingReflection(model, modelName, view, viewName);
-            binding.Name = name;
-            binding.Mode = mode;
-            binding.OnConvertToView = onConvertToView;
-            binding.OnConvertToModel = onConvertToModel;
+            var binding = new BindingReflection(model, modelName, view, viewName)
+            {
+                Name = name,
+                Mode = mode,
+                OnConvertToView = onConvertToView,
+                OnConvertToModel = onConvertToModel
+            };
             Bindings.Add(binding);
             return binding;
         }
@@ -119,9 +125,11 @@ namespace Lotus.Core
         public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(string name, object model, string modelName, object view,
             string viewName, TBindingMode mode = TBindingMode.ViewData)
         {
-            var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName);
-            binding.Name = name;
-            binding.Mode = mode;
+            var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName)
+            {
+                Name = name,
+                Mode = mode
+            };
             Bindings.Add(binding);
             return binding;
         }
@@ -142,10 +150,12 @@ namespace Lotus.Core
         public static BindingDelegate<TTypeModel, TTypeView> CreateDelegate<TTypeModel, TTypeView>(string name, object model, string modelName, object view,
             string viewName, TBindingMode mode, Func<TTypeModel, TTypeView> onConvertToView)
         {
-            var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName);
-            binding.Name = name;
-            binding.Mode = mode;
-            binding.OnConvertToView = onConvertToView;
+            var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName)
+            {
+                Name = name,
+                Mode = mode,
+                OnConvertToView = onConvertToView
+            };
             Bindings.Add(binding);
             return binding;
         }
@@ -168,11 +178,13 @@ namespace Lotus.Core
             string viewName, TBindingMode mode, Func<TTypeModel, TTypeView> onConvertToView,
             Func<TTypeView, TTypeModel> onConvertToModel)
         {
-            var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName);
-            binding.Name = name;
-            binding.Mode = mode;
-            binding.OnConvertToView = onConvertToView;
-            binding.OnConvertToModel = onConvertToModel;
+            var binding = new BindingDelegate<TTypeModel, TTypeView>(model, modelName, view, viewName)
+            {
+                Name = name,
+                Mode = mode,
+                OnConvertToView = onConvertToView,
+                OnConvertToModel = onConvertToModel
+            };
             Bindings.Add(binding);
             return binding;
         }

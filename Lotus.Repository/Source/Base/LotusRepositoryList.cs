@@ -245,7 +245,7 @@ namespace Lotus.Repository
         public void RemoveId(TKey id)
         {
             var entity = _list.Find(x => x.Equals(id));
-            if(entity is not null)
+            if (entity is not null)
             {
                 _list.Remove(entity);
             }

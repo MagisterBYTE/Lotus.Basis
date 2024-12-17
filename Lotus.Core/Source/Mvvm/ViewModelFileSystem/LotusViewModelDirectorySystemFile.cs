@@ -27,8 +27,10 @@ namespace Lotus.Core
         /// </summary>
         public virtual void SetContextMenu()
         {
-            _contextMenuUI = new CUIContextMenu();
-            _contextMenuUI.ViewModel = this;
+            _contextMenuUI = new CUIContextMenu
+            {
+                ViewModel = this
+            };
             _contextMenuUI.AddItem(CUIContextMenu.Remove.Duplicate());
         }
 

@@ -18,7 +18,7 @@ namespace Lotus.Core
 
         #region Properties
         /// <summary>
-        /// Родительский объект владелей.
+        /// Родительский объект владелец.
         /// </summary>
         public ILotusOwnerObject? IOwner
         {

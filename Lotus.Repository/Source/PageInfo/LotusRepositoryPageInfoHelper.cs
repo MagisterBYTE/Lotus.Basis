@@ -19,7 +19,7 @@ namespace Lotus.Repository
         {
             if (totalSize <= pageSize)
             {
-                return new[] { new PageInfoRequest { PageNumber = 0, PageSize = totalSize, } };
+                return [new PageInfoRequest { PageNumber = 0, PageSize = totalSize, }];
             }
 
             var countPage = totalSize / pageSize;
@@ -48,7 +48,7 @@ namespace Lotus.Repository
                 pageInfoRequests.Add(pageInfoRequest);
             }
 
-            return pageInfoRequests.ToArray();
+            return [.. pageInfoRequests];
         }
     }
     /**@}*/

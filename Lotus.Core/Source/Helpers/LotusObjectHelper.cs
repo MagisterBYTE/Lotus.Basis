@@ -85,7 +85,7 @@ namespace Lotus.Core
         /// <param name="left">Первый объект.</param>
         /// <param name="right">Второй объект.</param>
         /// <returns>Статус сравнения.</returns>
-        public static int ComprareOfAscending<TType>(in TType left, in TType right) where TType : class
+        public static int CompareOfAscending<TType>(in TType left, in TType right) where TType : class
         {
             if (left == null)
             {
@@ -131,9 +131,9 @@ namespace Lotus.Core
         /// <param name="left">Первый объект.</param>
         /// <param name="right">Второй объект.</param>
         /// <returns>Статус сравнения.</returns>
-        public static int ComprareOfDescending<TType>(in TType left, in TType right) where TType : class
+        public static int CompareOfDescending<TType>(in TType left, in TType right) where TType : class
         {
-            var result = ComprareOfAscending(left, right);
+            var result = CompareOfAscending(left, right);
             if (result == 1)
             {
                 return -1;

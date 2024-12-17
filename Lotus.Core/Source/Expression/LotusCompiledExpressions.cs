@@ -16,8 +16,7 @@ namespace Lotus.Core
         /// <summary>
         /// Кэш.
         /// </summary>
-        private static readonly ConcurrentDictionary<Expression<Func<TIn, TOut>>, Func<TIn, TOut>> Cache =
-            new ConcurrentDictionary<Expression<Func<TIn, TOut>>, Func<TIn, TOut>>();
+        private static readonly ConcurrentDictionary<Expression<Func<TIn, TOut>>, Func<TIn, TOut>> Cache = new();
 
         /// <summary>
         /// Скомпилировать дерево выражений или получить закэшированный делегат.

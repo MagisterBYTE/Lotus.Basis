@@ -14,57 +14,70 @@ namespace Lotus.Repository
         /// <summary>
         /// Равно аргументу.
         /// </summary>
-        Equals,
+        Equals = 0,
 
         /// <summary>
         /// Не равно аргументу.
         /// </summary>
-        NotEqual,
+        NotEqual = 1,
 
         /// <summary>
         /// Меньше аргумента.
         /// </summary>
-        LessThan,
+        LessThan = 2,
 
         /// <summary>
         /// Меньше или равно аргумента.
         /// </summary>
-        LessThanOrEqual,
+        LessThanOrEqual = 3,
 
         /// <summary>
         /// Больше аргумента.
         /// </summary>
-        GreaterThan,
+        GreaterThan = 4,
 
         /// <summary>
         /// Больше или равно аргумента.
         /// </summary>
-        GreaterThanOrEqual,
+        GreaterThanOrEqual = 5,
 
         /// <summary>
         /// Между первым аргументом (меньшим) и вторым аргументом (большим).
         /// </summary>
-        Between,
+        Between = 6,
 
         /// <summary>
-        /// Aргумент(строка) может находиться в любом месте c учетом регистра.
+        /// Аргумент(строка) может находиться в любом месте c учетом регистра.
+        /// Аргумент(иной) значение должно присутствовать в аргументе массива.
         /// </summary>
-        Contains,
+        Contains = 7,
 
         /// <summary>
-        /// Aргумент(строка) должна находится в начала c учетом регистра.
+        /// Аргумент(строка) должна находится в начала c учетом регистра.
         /// </summary>
-        StartsWith,
+        StartsWith = 8,
 
         /// <summary>
-        /// Aргумент(строка) должна находится в конце c учетом регистра.
+        /// Аргумент(строка) должна находится в конце c учетом регистра.
         /// </summary>
-        EndsWith,
+        EndsWith = 9,
 
         /// <summary>
-        /// Не равно пустой строке. Аргумент пустая строка.
+        /// Аргумент(строка) должна сравнивается с учетом оператора Like.
         /// </summary>
-        NotEmpty,
+        Like = 10,
+
+        /// <summary>
+        /// Не равно пустой или NULL строке. Аргумент НЕ требуется.
+        /// Не равно значению NULL для иных объектов.
+        /// </summary>
+        NotEmpty = 11,
+
+        /// <summary>
+        /// Равно пустой или NULL строке. Аргумент НЕ требуется.
+        /// Равно значению NULL для иных объектов.
+        /// </summary>
+        Empty = 12,
 
         /// <summary>
         /// Любой из проверяемых элементов списка должен находиться в массиве аргумента.
@@ -72,12 +85,12 @@ namespace Lotus.Repository
         /// <remarks>
         /// filter [1, 2]
         /// item01 [1,2,3] -> true
-        /// item01 [4,2,3] -> true
-        /// item01 [2,3]   -> true
-        /// item01 [1,2]   -> true
-        /// item01 [4,5]   -> true
+        /// item02 [4,2,3] -> true
+        /// item03 [2,3]   -> true
+        /// item04 [1,2]   -> true
+        /// item05 [4,5]   -> false
         /// </remarks>
-        IncludeAny,
+        IncludeAny = 13,
 
         /// <summary>
         /// Все из проверяемых элементов списка должен находиться в массиве аргумента.
@@ -85,12 +98,12 @@ namespace Lotus.Repository
         /// <remarks>
         /// filter [1, 2]
         /// item01 [1,2,3] -> true
-        /// item01 [4,2,3] -> false
-        /// item01 [2,3]   -> false
-        /// item01 [1,2]   -> true
-        /// item01 [4,5]   -> false
+        /// item02 [4,2,3] -> false
+        /// item03 [2,3]   -> false
+        /// item04 [1,2]   -> true
+        /// item05 [4,5]   -> false
         /// </remarks>
-        IncludeAll,
+        IncludeAll = 14,
 
         /// <summary>
         /// Проверяемые элементы списка должен быть равны массиву аргумента.
@@ -98,12 +111,12 @@ namespace Lotus.Repository
         /// <remarks>
         /// filter [1, 2]
         /// item01 [1,2,3] -> false
-        /// item01 [4,2,3] -> false
-        /// item01 [2,3]   -> false
-        /// item01 [1,2]   -> true
-        /// item01 [4,5]   -> false
+        /// item02 [4,2,3] -> false
+        /// item03 [2,3]   -> false
+        /// item04 [1,2]   -> true
+        /// item05 [4,5]   -> false
         /// </remarks>
-        IncludeEquals,
+        IncludeEquals = 15,
 
         /// <summary>
         /// Ни один из проверяемых элементов списка не должен находится в массиве аргумента.
@@ -111,12 +124,12 @@ namespace Lotus.Repository
         /// <remarks>
         /// filter [1, 2]
         /// item01 [1,2,3] -> false
-        /// item01 [4,2,3] -> false
-        /// item01 [2,3]   -> false
-        /// item01 [1,2]   -> false
-        /// item01 [4,5]   -> true
+        /// item02 [4,2,3] -> false
+        /// item03 [2,3]   -> false
+        /// item04 [1,2]   -> false
+        /// item05 [4,5]   -> true
         /// </remarks>
-        IncludeNone,
+        IncludeNone = 16,
     }
     /**@}*/
 }

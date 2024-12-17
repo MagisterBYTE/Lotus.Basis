@@ -27,7 +27,7 @@ namespace Lotus.Core
         protected internal int _maxCountEntity;
         protected internal int _currentIdEntity = 1;
         protected internal TEcsEntity[] _denseEntities;
-        protected internal TEcsEntity _dummyEntity = new TEcsEntity(-1);
+        protected internal TEcsEntity _dummyEntity = new(-1);
         protected internal int[] _sparseEntities;
         protected internal int[] _removedEntities;
         protected internal int _countRemovedEntity;
@@ -224,8 +224,10 @@ namespace Lotus.Core
             }
             else
             {
-                var component_data_new = new CEcsComponentData<TComponent>();
-                component_data_new.World = this;
+                var component_data_new = new CEcsComponentData<TComponent>
+                {
+                    World = this
+                };
                 _componentsData.Add(component_type, component_data_new);
                 ref var value = ref component_data_new.AddEntity(entityId);
                 return ref value;
@@ -383,8 +385,10 @@ namespace Lotus.Core
         /// <returns>Фильтр компонентов.</returns>
         public CEcsFilterComponent CreateFilterComponent()
         {
-            var filter_сomponent = new CEcsFilterComponent();
-            filter_сomponent.World = this;
+            var filter_сomponent = new CEcsFilterComponent
+            {
+                World = this
+            };
             _filterComponents.Add(filter_сomponent);
             return filter_сomponent;
         }

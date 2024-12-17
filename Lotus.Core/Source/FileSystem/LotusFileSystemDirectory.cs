@@ -102,8 +102,10 @@ namespace Lotus.Core
         {
             _info = new DirectoryInfo(fullPath);
             _name = _info.Name;
-            _entities = new ListArray<ILotusFileSystemEntity>();
-            _entities.IsNotify = true;
+            _entities = new ListArray<ILotusFileSystemEntity>
+            {
+                IsNotify = true
+            };
             if (_info != null)
             {
                 var path = Path.Combine(_info.FullName, "Info.json");
@@ -124,8 +126,10 @@ namespace Lotus.Core
             : base(displayName)
         {
             _info = directoryInfo;
-            _entities = new ListArray<ILotusFileSystemEntity>();
-            _entities.IsNotify = true;
+            _entities = new ListArray<ILotusFileSystemEntity>
+            {
+                IsNotify = true
+            };
 
             if (_info != null)
             {

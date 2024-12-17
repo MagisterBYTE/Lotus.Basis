@@ -31,8 +31,8 @@ namespace Lotus.Core
                 set;
             }
 
-            public readonly static CActivity[] Activities = new CActivity[]
-            {
+            public readonly static CActivity[] Activities =
+            [
                 new CActivity()
                 {
                     Vilage = "Андреевское",
@@ -93,7 +93,7 @@ namespace Lotus.Core
                     Programm = "Безопасность",
                     Price = 10
                 },
-            };
+            ];
 
             public override string ToString()
             {
@@ -144,10 +144,12 @@ namespace Lotus.Core
                 Vilage = "Бреды",
                 Programm = "Академия",
                 Price = 2000
-            });
-            view_item.IsEnabled = true;
-            view_item.IsSelected = true;
-            view_item.IsPresented = true;
+            })
+            {
+                IsEnabled = true,
+                IsSelected = true,
+                IsPresented = true
+            };
 
             ClassicAssert.AreEqual(true, ViewModelActivity.IsSupportIdentifierLong);
             ClassicAssert.AreEqual(false, ViewModelActivity.IsSupportNameable);
@@ -161,8 +163,10 @@ namespace Lotus.Core
         [Test]
         public static void TestCollectionView()
         {
-            var viewItems = new CollectionViewModelActivity();
-            viewItems.Source = CActivity.Activities;
+            var viewItems = new CollectionViewModelActivity
+            {
+                Source = CActivity.Activities
+            };
 
             // Общие данные
             ClassicAssert.AreEqual(10, viewItems.Count);

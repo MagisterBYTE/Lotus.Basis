@@ -17,7 +17,7 @@ namespace Lotus.Repository
         public string? Name { get; set; }
 
         /// <summary>
-        /// Размер изображения в байтах.
+        /// Размер файла в байтах.
         /// </summary>
         public int? SizeInBytes { get; set; }
     }

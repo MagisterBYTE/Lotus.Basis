@@ -40,8 +40,10 @@ namespace Lotus.Core
             {
                 if (_messages == null)
                 {
-                    _messages = new ListArray<LogMessage>();
-                    _messages.IsNotify = true;
+                    _messages = new ListArray<LogMessage>
+                    {
+                        IsNotify = true
+                    };
                 }
                 return _messages;
             }
@@ -101,10 +103,12 @@ namespace Lotus.Core
             {
                 var text = info.ToString() ?? string.Empty;
 
-                var message = new LogMessage(text, TLogType.Info);
-                message.MemberName = memberName;
-                message.FilePath = filePath;
-                message.LineNumber = lineNumber;
+                var message = new LogMessage(text, TLogType.Info)
+                {
+                    MemberName = memberName,
+                    FilePath = filePath,
+                    LineNumber = lineNumber
+                };
 
                 Messages.Add(message);
                 if (_logger != null) _logger.Log(message);
@@ -128,10 +132,12 @@ namespace Lotus.Core
             {
                 var text = info.ToString() ?? string.Empty;
 
-                var message = new LogMessage(moduleName, text, TLogType.Info);
-                message.MemberName = memberName;
-                message.FilePath = filePath;
-                message.LineNumber = lineNumber;
+                var message = new LogMessage(moduleName, text, TLogType.Info)
+                {
+                    MemberName = memberName,
+                    FilePath = filePath,
+                    LineNumber = lineNumber
+                };
 
                 Messages.Add(message);
 
@@ -188,10 +194,12 @@ namespace Lotus.Core
             {
                 var text = warning.ToString() ?? string.Empty;
 
-                var message = new LogMessage(text, TLogType.Warning);
-                message.MemberName = memberName;
-                message.FilePath = filePath;
-                message.LineNumber = lineNumber;
+                var message = new LogMessage(text, TLogType.Warning)
+                {
+                    MemberName = memberName,
+                    FilePath = filePath,
+                    LineNumber = lineNumber
+                };
 
                 Messages.Add(message);
 
@@ -216,10 +224,12 @@ namespace Lotus.Core
             {
                 var text = warning.ToString() ?? string.Empty;
 
-                var message = new LogMessage(moduleName, text, TLogType.Warning);
-                message.MemberName = memberName;
-                message.FilePath = filePath;
-                message.LineNumber = lineNumber;
+                var message = new LogMessage(moduleName, text, TLogType.Warning)
+                {
+                    MemberName = memberName,
+                    FilePath = filePath,
+                    LineNumber = lineNumber
+                };
 
                 Messages.Add(message);
 
@@ -276,10 +286,12 @@ namespace Lotus.Core
             {
                 var text = error.ToString() ?? string.Empty;
 
-                var message = new LogMessage(text, TLogType.Error);
-                message.MemberName = memberName;
-                message.FilePath = filePath;
-                message.LineNumber = lineNumber;
+                var message = new LogMessage(text, TLogType.Error)
+                {
+                    MemberName = memberName,
+                    FilePath = filePath,
+                    LineNumber = lineNumber
+                };
 
                 Messages.Add(message);
 
@@ -304,10 +316,12 @@ namespace Lotus.Core
             {
                 var text = error.ToString() ?? string.Empty;
 
-                var message = new LogMessage(moduleName, text, TLogType.Error);
-                message.MemberName = memberName;
-                message.FilePath = filePath;
-                message.LineNumber = lineNumber;
+                var message = new LogMessage(moduleName, text, TLogType.Error)
+                {
+                    MemberName = memberName,
+                    FilePath = filePath,
+                    LineNumber = lineNumber
+                };
 
                 Messages.Add(message);
 
@@ -360,10 +374,12 @@ namespace Lotus.Core
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            var message = new LogMessage(exc.Message, TLogType.Exception);
-            message.MemberName = memberName;
-            message.FilePath = filePath;
-            message.LineNumber = lineNumber;
+            var message = new LogMessage(exc.Message, TLogType.Exception)
+            {
+                MemberName = memberName,
+                FilePath = filePath,
+                LineNumber = lineNumber
+            };
 
             Messages.Add(message);
 
@@ -383,10 +399,12 @@ namespace Lotus.Core
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            var message = new LogMessage(moduleName, exc.Message, TLogType.Exception);
-            message.MemberName = memberName;
-            message.FilePath = filePath;
-            message.LineNumber = lineNumber;
+            var message = new LogMessage(moduleName, exc.Message, TLogType.Exception)
+            {
+                MemberName = memberName,
+                FilePath = filePath,
+                LineNumber = lineNumber
+            };
 
             Messages.Add(message);
 
@@ -407,10 +425,12 @@ namespace Lotus.Core
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            var message = new LogMessage(result.Message, result.Succeeded ? TLogType.Succeed : TLogType.Failed);
-            message.MemberName = memberName;
-            message.FilePath = filePath;
-            message.LineNumber = lineNumber;
+            var message = new LogMessage(result.Message, result.Succeeded ? TLogType.Succeed : TLogType.Failed)
+            {
+                MemberName = memberName,
+                FilePath = filePath,
+                LineNumber = lineNumber
+            };
 
             Messages.Add(message);
 
@@ -430,10 +450,12 @@ namespace Lotus.Core
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            var message = new LogMessage(moduleName, result.Message, result.Succeeded ? TLogType.Succeed : TLogType.Failed);
-            message.MemberName = memberName;
-            message.FilePath = filePath;
-            message.LineNumber = lineNumber;
+            var message = new LogMessage(moduleName, result.Message, result.Succeeded ? TLogType.Succeed : TLogType.Failed)
+            {
+                MemberName = memberName,
+                FilePath = filePath,
+                LineNumber = lineNumber
+            };
 
             Messages.Add(message);
 

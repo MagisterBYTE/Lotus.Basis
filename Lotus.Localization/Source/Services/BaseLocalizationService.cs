@@ -13,7 +13,7 @@ namespace Lotus.Localization
     public abstract class BaseLocalizationService : ILocalizationService
     {
         protected ILocalizeData _localizeData;
-        protected readonly List<ILocalizationService> _extraServices = new List<ILocalizationService>();
+        protected readonly List<ILocalizationService> _extraServices = new();
 
         /// <summary>
         /// Список локализованных данных данного сервиса.
@@ -87,7 +87,7 @@ namespace Lotus.Localization
                 }
             }
 
-            return values.Values.ToArray();
+            return [.. values.Values];
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Lotus.Localization
         /// <returns>Массив дополнительных сервисов локализации.</returns>
         public ILocalizationService[] GetExtraServices()
         {
-            return _extraServices.ToArray();
+            return [.. _extraServices];
         }
 
         /// <summary>

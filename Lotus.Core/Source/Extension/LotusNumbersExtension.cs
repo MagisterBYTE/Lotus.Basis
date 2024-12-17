@@ -14,7 +14,7 @@ namespace Lotus.Core
         /// <summary>
         /// Внутренний строковый буфер для быстрой конвертации.
         /// </summary>
-        internal static readonly StringBuilder FloatToStringBuffer = new StringBuilder(64);
+        internal static readonly StringBuilder FloatToStringBuffer = new(64);
         #endregion
 
         #region Int32 

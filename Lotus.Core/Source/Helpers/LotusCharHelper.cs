@@ -136,47 +136,47 @@ namespace Lotus.Core
         /// <summary>
         /// Массив символов разделителей (новая строка).
         /// </summary>
-        public static readonly char[] SeparatorNewLine = new char[] { '\n' };
+        public static readonly char[] SeparatorNewLine = ['\n'];
 
         /// <summary>
         /// Массив символов разделителей (новая строка и возврат каретки).
         /// </summary>
-        public static readonly char[] SeparatorNewCarriageLine = new char[] { '\n', '\r' };
+        public static readonly char[] SeparatorNewCarriageLine = ['\n', '\r'];
 
         /// <summary>
         /// Массив символов разделителей (запятая и новая строка).
         /// </summary>
-        public static readonly char[] SeparatorComma = new char[] { ',', '\n' };
+        public static readonly char[] SeparatorComma = [',', '\n'];
 
         /// <summary>
         /// Массив символов разделителей (точка запятая).
         /// </summary>
-        public static readonly char[] SeparatorDotComma = new char[] { ';' };
+        public static readonly char[] SeparatorDotComma = [';'];
 
         /// <summary>
         /// Массив символов разделителей (квадратные скобки).
         /// </summary>
-        public static readonly char[] SeparatorSquareBracket = new char[] { '[', ']' };
+        public static readonly char[] SeparatorSquareBracket = ['[', ']'];
 
         /// <summary>
         /// Массив символов разделителей (нижние подчеркивание).
         /// </summary>
-        public static readonly char[] SeparatorLowLine = new char[] { '_' };
+        public static readonly char[] SeparatorLowLine = ['_'];
 
         /// <summary>
         /// Массив символов разделителей (пробел).
         /// </summary>
-        public static readonly char[] SeparatorSpaces = new char[] { ' ' };
+        public static readonly char[] SeparatorSpaces = [' '];
 
         /// <summary>
         /// Массив символов разделителей (символ табуляции).
         /// </summary>
-        public static readonly char[] SeparatorTab = new char[] { '\t' };
+        public static readonly char[] SeparatorTab = ['\t'];
 
         /// <summary>
         /// Массив символов для разделение на предложения.
         /// </summary>
-        public static readonly char[] SeparatorSentences = new char[] { '.', '!', '?' };
+        public static readonly char[] SeparatorSentences = ['.', '!', '?'];
     }
     /**@}*/
 }

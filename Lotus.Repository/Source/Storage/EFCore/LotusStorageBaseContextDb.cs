@@ -26,7 +26,7 @@ namespace Lotus.Repository
 
         #region Properties
         /// <summary>
-        /// Данные связвания хранилища с источником.
+        /// Данные связывания хранилища с источником.
         /// </summary>
         public string ConnectingData
         {

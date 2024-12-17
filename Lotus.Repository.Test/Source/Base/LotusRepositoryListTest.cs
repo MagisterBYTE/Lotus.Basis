@@ -27,7 +27,7 @@ namespace Lotus.Repository
         public void SetList_SetsNewList()
         {
             // Arrange
-            var repository = new RepositoryList<MyEntity, Guid>(new List<MyEntity>());
+            var repository = new RepositoryList<MyEntity, Guid>([]);
             var newList = new List<MyEntity>();
 
             // Act
@@ -48,7 +48,7 @@ namespace Lotus.Repository
             var queryable = repository.Query();
 
             // Assert
-            Assert.Equal(list, queryable.ToList());
+            Assert.Equal(list, [.. queryable]);
         }
 
 
@@ -71,7 +71,7 @@ namespace Lotus.Repository
         public void FirstOrDefault_ReturnsNullWhenPredicateIsNullAndListIsEmpty()
         {
             // Arrange
-            var repository = new RepositoryList<MyEntity, Guid>(new List<MyEntity>());
+            var repository = new RepositoryList<MyEntity, Guid>([]);
 
             // Act
             var result = repository.FirstOrDefault(null);

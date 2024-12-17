@@ -308,8 +308,10 @@ namespace Lotus.Core
         /// <returns>Копия объекта.</returns>
         public override object Clone()
         {
-            var clone = new CollectionViewModelHierarchy<TViewModelHierarchy, TModel>();
-            clone.Name = _name;
+            var clone = new CollectionViewModelHierarchy<TViewModelHierarchy, TModel>
+            {
+                Name = _name
+            };
 
             for (var i = 0; i < _count; i++)
             {

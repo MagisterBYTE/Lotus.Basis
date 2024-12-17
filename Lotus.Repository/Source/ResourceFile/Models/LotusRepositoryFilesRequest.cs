@@ -5,7 +5,7 @@ namespace Lotus.Repository
     /** \addtogroup RepositoryResourceFile
         *@{*/
     /// <summary>
-    /// Класс для получения списка изображений с учетом фильтрации и сортировки.
+    /// Класс для получения списка файлов с учетом фильтрации и сортировки.
     /// </summary>
     public class FilesRequest : Request
     {

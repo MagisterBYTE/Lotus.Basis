@@ -203,10 +203,7 @@ namespace Lotus.Core
 
             foreach (var item in _value!)
             {
-                if (item != null)
-                {
-                    item.WriteToJson(streamWriter, depth + 1, false);
-                }
+                item?.WriteToJson(streamWriter, depth + 1, false);
             }
 
             streamWriter.Write("\n");

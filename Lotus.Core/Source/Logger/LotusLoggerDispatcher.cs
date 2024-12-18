@@ -58,10 +58,7 @@ namespace Lotus.Core
         public static void Log(LogMessage message)
         {
             Messages.Add(message);
-            if (_logger != null)
-            {
-                _logger.Log(message);
-            }
+            _logger?.Log(message);
         }
 
         /// <summary>
@@ -111,7 +108,7 @@ namespace Lotus.Core
                 };
 
                 Messages.Add(message);
-                if (_logger != null) _logger.Log(message);
+                _logger?.Log(message);
             }
         }
 
@@ -141,7 +138,7 @@ namespace Lotus.Core
 
                 Messages.Add(message);
 
-                if (_logger != null) _logger.Log(message);
+                _logger?.Log(message);
             }
         }
 
@@ -157,7 +154,7 @@ namespace Lotus.Core
             var message = new LogMessage(text, TLogType.Info);
             Messages.Add(message);
 
-            if (_logger != null) _logger.Log(text, TLogType.Info);
+            _logger?.Log(text, TLogType.Info);
         }
 
         /// <summary>
@@ -173,7 +170,7 @@ namespace Lotus.Core
             var message = new LogMessage(moduleName, text, TLogType.Info);
             Messages.Add(message);
 
-            if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Info);
+            _logger?.LogModule(moduleName, text, TLogType.Info);
         }
         #endregion
 
@@ -203,7 +200,7 @@ namespace Lotus.Core
 
                 Messages.Add(message);
 
-                if (_logger != null) _logger.Log(message);
+                _logger?.Log(message);
             }
         }
 
@@ -233,7 +230,7 @@ namespace Lotus.Core
 
                 Messages.Add(message);
 
-                if (_logger != null) _logger.Log(message);
+                _logger?.Log(message);
             }
         }
 
@@ -249,7 +246,7 @@ namespace Lotus.Core
             var message = new LogMessage(text, TLogType.Warning);
             Messages.Add(message);
 
-            if (_logger != null) _logger.Log(text, TLogType.Warning);
+            _logger?.Log(text, TLogType.Warning);
         }
 
         /// <summary>
@@ -265,7 +262,7 @@ namespace Lotus.Core
             var message = new LogMessage(moduleName, text, TLogType.Warning);
             Messages.Add(message);
 
-            if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Warning);
+            _logger?.LogModule(moduleName, text, TLogType.Warning);
         }
         #endregion
 
@@ -295,7 +292,7 @@ namespace Lotus.Core
 
                 Messages.Add(message);
 
-                if (_logger != null) _logger.Log(message);
+                _logger?.Log(message);
             }
         }
 
@@ -325,7 +322,7 @@ namespace Lotus.Core
 
                 Messages.Add(message);
 
-                if (_logger != null) _logger.Log(message);
+                _logger?.Log(message);
             }
         }
 
@@ -341,7 +338,7 @@ namespace Lotus.Core
             var message = new LogMessage(text, TLogType.Error);
             Messages.Add(message);
 
-            if (_logger != null) _logger.Log(text, TLogType.Error);
+            _logger?.Log(text, TLogType.Error);
         }
 
         /// <summary>
@@ -357,7 +354,7 @@ namespace Lotus.Core
             var message = new LogMessage(moduleName, text, TLogType.Error);
             Messages.Add(message);
 
-            if (_logger != null) _logger.LogModule(moduleName, text, TLogType.Error);
+            _logger?.LogModule(moduleName, text, TLogType.Error);
         }
         #endregion
 
@@ -383,7 +380,7 @@ namespace Lotus.Core
 
             Messages.Add(message);
 
-            if (_logger != null) _logger.Log(message);
+            _logger?.Log(message);
         }
 
         /// <summary>
@@ -408,7 +405,7 @@ namespace Lotus.Core
 
             Messages.Add(message);
 
-            if (_logger != null) _logger.Log(message);
+            _logger?.Log(message);
         }
         #endregion
 
@@ -434,7 +431,7 @@ namespace Lotus.Core
 
             Messages.Add(message);
 
-            if (_logger != null) _logger.Log(message);
+            _logger?.Log(message);
         }
 
         /// <summary>
@@ -459,7 +456,7 @@ namespace Lotus.Core
 
             Messages.Add(message);
 
-            if (_logger != null) _logger.Log(message);
+            _logger?.Log(message);
         }
         #endregion
     }

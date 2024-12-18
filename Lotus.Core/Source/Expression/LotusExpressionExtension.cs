@@ -80,7 +80,7 @@ namespace Lotus.Core
         {
             var resultExpression = Expression.Property(parameter, propertiesName[0]);
 
-            for (int i = 1; i < propertiesName.Length; i++)
+            for (var i = 1; i < propertiesName.Length; i++)
             {
                 resultExpression = Expression.Property(resultExpression, propertiesName[i]);
             }

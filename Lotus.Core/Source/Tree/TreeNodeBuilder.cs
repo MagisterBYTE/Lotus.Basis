@@ -31,11 +31,7 @@ namespace Lotus.Core
 
             if (check.CheckOne(filter))
             {
-                if (parent != null)
-                {
-                    parent.AddTreeNode(node_new);
-
-                }
+                parent?.AddTreeNode(node_new);
 
                 if (check.IChildNodes == null) return node_new;
 

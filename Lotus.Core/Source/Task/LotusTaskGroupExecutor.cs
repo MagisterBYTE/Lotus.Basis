@@ -726,10 +726,7 @@ namespace Lotus.Core
                 }
             }
 
-            if (group_task != null)
-            {
-                group_task.Stop();
-            }
+            group_task?.Stop();
         }
 
         /// <summary>

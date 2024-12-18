@@ -219,7 +219,7 @@ namespace Lotus.Core
             {
                 _name = value;
                 OnPropertyChanged(PropertyArgsName);
-                if (_owner != null) _owner.OnNotifyUpdated(this, _name, nameof(Name));
+                _owner?.OnNotifyUpdated(this, _name, nameof(Name));
             }
         }
 
@@ -250,7 +250,7 @@ namespace Lotus.Core
                     _value = (TValue)value;
                 }
                 OnPropertyChanged(PropertyArgsIValue);
-                if (_owner != null) _owner.OnNotifyUpdated(this, _value, nameof(Value));
+                _owner?.OnNotifyUpdated(this, _value, nameof(Value));
             }
         }
 
@@ -265,7 +265,7 @@ namespace Lotus.Core
             {
                 _value = value;
                 OnPropertyChanged(PropertyArgsValue);
-                if (_owner != null) _owner.OnNotifyUpdated(this, _value, nameof(Value));
+                _owner?.OnNotifyUpdated(this, _value, nameof(Value));
             }
         }
 
@@ -280,7 +280,7 @@ namespace Lotus.Core
             {
                 _id = value;
                 OnPropertyChanged(PropertyArgsId);
-                if (_owner != null) _owner.OnNotifyUpdated(this, Id, nameof(Id));
+                _owner?.OnNotifyUpdated(this, Id, nameof(Id));
             }
         }
 
@@ -298,7 +298,7 @@ namespace Lotus.Core
             {
                 _isActive = value;
                 OnPropertyChanged(PropertyArgsIsActive);
-                if (_owner != null) _owner.OnNotifyUpdated(this, IsActive, nameof(IsActive));
+                _owner?.OnNotifyUpdated(this, IsActive, nameof(IsActive));
             }
         }
 
@@ -313,7 +313,7 @@ namespace Lotus.Core
             {
                 _userTag = value;
                 OnPropertyChanged(PropertyArgsUserTag);
-                if (_owner != null) _owner.OnNotifyUpdated(this, UserTag, nameof(UserTag));
+                _owner?.OnNotifyUpdated(this, UserTag, nameof(UserTag));
             }
         }
 
@@ -328,7 +328,7 @@ namespace Lotus.Core
             {
                 _userData = value;
                 OnPropertyChanged(PropertyArgsUserData);
-                if (_owner != null) _owner.OnNotifyUpdated(this, UserData, nameof(UserData));
+                _owner?.OnNotifyUpdated(this, UserData, nameof(UserData));
             }
         }
 

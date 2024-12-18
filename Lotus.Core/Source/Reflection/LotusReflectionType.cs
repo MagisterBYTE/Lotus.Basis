@@ -156,20 +156,11 @@ namespace Lotus.Core
             // Освобождаем только управляемые ресурсы
             if (disposing)
             {
-                if (_fields != null)
-                {
-                    _fields.Clear();
-                }
+                _fields?.Clear();
 
-                if (_properties != null)
-                {
-                    _properties.Clear();
-                }
+                _properties?.Clear();
 
-                if (_methods != null)
-                {
-                    _methods.Clear();
-                }
+                _methods?.Clear();
             }
 
             // Освобождаем неуправляемые ресурсы

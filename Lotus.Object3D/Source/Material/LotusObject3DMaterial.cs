@@ -143,37 +143,45 @@ namespace Lotus.Object3D
 		public Material(Scene3D owner_scene, Assimp.Material assimp_material)
 		{
 			_ownerScene = owner_scene;
-			_textureSlots = new ListArray<TextureSlot>();
+			_textureSlots = [];
 
 			_assimpMaterial = assimp_material;
 			_name = _assimpMaterial.Name;
 
 			if (_assimpMaterial.HasTextureAmbient)
 			{
-				_ambientSlot = new TextureSlot(this, _assimpMaterial.TextureAmbient);
-				_ambientSlot.Name = "Ambient";
-				_textureSlots.Add(_ambientSlot);
+                _ambientSlot = new TextureSlot(this, _assimpMaterial.TextureAmbient)
+                {
+                    Name = "Ambient"
+                };
+                _textureSlots.Add(_ambientSlot);
 			}
 
 			if (_assimpMaterial.HasTextureDiffuse)
 			{
-				_diffuseSlot = new TextureSlot(this, _assimpMaterial.TextureDiffuse);
-				_diffuseSlot.Name = "Diffuse";
-				_textureSlots.Add(_diffuseSlot);
+                _diffuseSlot = new TextureSlot(this, _assimpMaterial.TextureDiffuse)
+                {
+                    Name = "Diffuse"
+                };
+                _textureSlots.Add(_diffuseSlot);
 			}
 
 			if (_assimpMaterial.HasTextureNormal)
 			{
-				_normalSlot = new TextureSlot(this, _assimpMaterial.TextureNormal);
-				_normalSlot.Name = "Normal";
-				_textureSlots.Add(_normalSlot);
+                _normalSlot = new TextureSlot(this, _assimpMaterial.TextureNormal)
+                {
+                    Name = "Normal"
+                };
+                _textureSlots.Add(_normalSlot);
 			}
 
 			if (_assimpMaterial.HasTextureHeight)
 			{
-				_heightSlot = new TextureSlot(this, _assimpMaterial.TextureHeight);
-				_heightSlot.Name = "Height";
-				_textureSlots.Add(_heightSlot);
+                _heightSlot = new TextureSlot(this, _assimpMaterial.TextureHeight)
+                {
+                    Name = "Height"
+                };
+                _textureSlots.Add(_heightSlot);
 			}
 		}
 #endif
@@ -267,24 +275,26 @@ namespace Lotus.Object3D
 		{
 			try
 			{
-				_helixMaterial = new Helix3D.PhongMaterial();
-				_helixMaterial.Name = _name;
+                _helixMaterial = new Helix3D.PhongMaterial
+                {
+                    Name = _name
+                };
 
-                    //if (_assimpMaterial.HasTextureDiffuse)
-                    //{
-                    //    _helixMaterial.DiffuseMap = _diffuseSlot.GetTextureSteam();
-                    //}
+                //if (_assimpMaterial.HasTextureDiffuse)
+                //{
+                //    _helixMaterial.DiffuseMap = _diffuseSlot.GetTextureSteam();
+                //}
 
-                    //if (_assimpMaterial.HasTextureNormal)
-                    //{
-                    //    _helixMaterial.NormalMap = _normalSlot.GetTextureSteam();
-                    //}
+                //if (_assimpMaterial.HasTextureNormal)
+                //{
+                //    _helixMaterial.NormalMap = _normalSlot.GetTextureSteam();
+                //}
 
-                    //if (_assimpMaterial.HasTextureHeight)
-                    //{
-                    //    _helixMaterial.DisplacementMap = _heightSlot.GetTextureSteam();
-                    //}
-                }
+                //if (_assimpMaterial.HasTextureHeight)
+                //{
+                //    _helixMaterial.DisplacementMap = _heightSlot.GetTextureSteam();
+                //}
+            }
 
 			catch (Exception exc)
 			{
@@ -345,12 +355,12 @@ namespace Lotus.Object3D
 		{
 			_ownerScene = ownerScene;
 			_name = "Материалы";
-			_materials = new ListArray<Material>();
+			_materials = [];
 
 			// Устанавливаем материалы
 			for (var i = 0; i < assimp_scene.MaterialCount; i++)
 			{
-				Assimp.Material assimp_material = assimp_scene.Materials[i];
+				var assimp_material = assimp_scene.Materials[i];
 				var material = new Material(ownerScene, assimp_material);
 				_materials.Add(material);
 			}

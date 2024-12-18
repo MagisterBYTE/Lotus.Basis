@@ -627,10 +627,7 @@ namespace Lotus.Core
                     break;
             }
 
-            if (list != null)
-            {
-                list.SetIndexElement();
-            }
+            list?.SetIndexElement();
             return list;
         }
 

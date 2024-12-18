@@ -34,7 +34,7 @@ namespace Lotus.Object3D
         /// Представляет контекст импорта/экспорта Assimp, который загружает или сохраняет модели с помощью неуправляемой библиотеки. 
         /// Кроме того, предлагается функция преобразования для обхода загрузки данных модели в управляемую память.
         /// </summary>
-        protected readonly static Assimp.AssimpContext AssimpContextDefault = new Assimp.AssimpContext();
+        protected readonly static Assimp.AssimpContext AssimpContextDefault = new();
 #endif
         #endregion
 
@@ -74,7 +74,7 @@ namespace Lotus.Object3D
         {
             try
             {
-                Assimp.PostProcessSteps step =
+                var step =
                     Assimp.PostProcessSteps.FindInstances |
                     Assimp.PostProcessSteps.OptimizeGraph |
                     Assimp.PostProcessSteps.ValidateDataStructure |
@@ -85,11 +85,13 @@ namespace Lotus.Object3D
 
                 //Assimp.PostProcessPreset
 
-                Assimp.Scene assimp_scene = AssimpContextDefault.ImportFile(file_name, step);
+                var assimp_scene = AssimpContextDefault.ImportFile(file_name, step);
                 if (assimp_scene != null)
                 {
-                    var scene = new Scene3D(Path.GetFileNameWithoutExtension(file_name), assimp_scene);
-                    scene.FileName = file_name;
+                    var scene = new Scene3D(Path.GetFileNameWithoutExtension(file_name), assimp_scene)
+                    {
+                        FileName = file_name
+                    };
                     return scene;
                 }
             }
@@ -278,7 +280,7 @@ namespace Lotus.Object3D
             _meshSet = new MeshSet(this);
             _materialSet = new MaterialSet(this);
             _textureSet = new TextureSet(this);
-            _allEntities = new ListArray<Entity3D>();
+            _allEntities = [];
         }
 
         /// <summary>

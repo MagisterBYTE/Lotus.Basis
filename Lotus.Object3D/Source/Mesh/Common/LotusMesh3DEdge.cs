@@ -322,7 +322,7 @@ namespace Lotus.Object3D
         /// </summary>
         public ListEdge3D()
         {
-            Vertices = new ListVertex3D();
+            Vertices = [];
         }
 
         /// <summary>

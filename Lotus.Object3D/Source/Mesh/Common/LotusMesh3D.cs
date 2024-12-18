@@ -200,7 +200,7 @@ namespace Lotus.Object3D
         /// </summary>
         public Mesh3Df()
         {
-            _vertices = new ListVertex3D();
+            _vertices = [];
             _triangles = new ListTriangle3D(_vertices);
             _edges = new ListEdge3D(_vertices);
         }
@@ -214,7 +214,7 @@ namespace Lotus.Object3D
 		public Mesh3Df(string mesh_name, Assimp.Mesh assimp_mesh)
 		{
 			_name = mesh_name;
-			_vertices = new ListVertex3D();
+			_vertices = [];
 			_triangles = new ListTriangle3D(_vertices);
 			_edges = new ListEdge3D(_vertices);
 			_assimpMesh = assimp_mesh;
@@ -575,10 +575,11 @@ namespace Lotus.Object3D
 		/// </summary>
 		public void CreateFromHelixMesh()
 		{
-            _helixMesh = new MeshGeometry3D();
-
-            // Вершины
-            _helixMesh.Positions = new Vector3Collection(_assimpMesh!.VertexCount);
+            _helixMesh = new MeshGeometry3D
+            {
+                // Вершины
+                Positions = new Vector3Collection(_assimpMesh!.VertexCount)
+            };
             for (var i = 0; i < _assimpMesh.VertexCount; i++)
             {
                 _helixMesh.Positions.Add(_assimpMesh.Vertices[i].ToShVector3D());
@@ -594,7 +595,7 @@ namespace Lotus.Object3D
             // Текстурные координаты
             if (_assimpMesh.TextureCoordinateChannels != null && _assimpMesh.TextureCoordinateChannels.Length > 0)
             {
-                List<Assimp.Vector3D> tex_coord_1 = _assimpMesh.TextureCoordinateChannels[0];
+                var tex_coord_1 = _assimpMesh.TextureCoordinateChannels[0];
                 _helixMesh.TextureCoordinates = new Vector2Collection(tex_coord_1.Count);
                 for (var i = 0; i < tex_coord_1.Count; i++)
                 {
@@ -613,7 +614,7 @@ namespace Lotus.Object3D
             _helixMesh.TriangleIndices = new IntCollection(total_index);
             for (var i = 0; i < _assimpMesh.FaceCount; i++)
             {
-                List<int> indices = _assimpMesh.Faces[i].Indices;
+                var indices = _assimpMesh.Faces[i].Indices;
                 for (var j = 0; j < indices.Count; j++)
                 {
                     _helixMesh.TriangleIndices.Add(indices[j]);
@@ -954,12 +955,12 @@ namespace Lotus.Object3D
 		{
 			_ownerScene = ownerScene;
 			_name = "Сетки";
-			_meshes = new ListArray<Mesh3Df>();
+			_meshes = [];
 
 			// Устанавливаем меши
 			for (var i = 0; i < assimp_scene.MeshCount; i++)
 			{
-				Assimp.Mesh mesh = assimp_scene.Meshes[i];
+				var mesh = assimp_scene.Meshes[i];
 				_meshes.Add(new Mesh3Df("Mesh_" + i.ToString(), mesh));
 			}
 		}

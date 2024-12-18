@@ -282,7 +282,7 @@ namespace Lotus.Object3D
         /// </summary>
         public ListTriangle3D()
         {
-            Vertices = new ListVertex3D();
+            Vertices = [];
         }
 
         /// <summary>

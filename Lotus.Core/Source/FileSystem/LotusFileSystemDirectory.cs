@@ -352,10 +352,7 @@ namespace Lotus.Core
             {
                 var dir_info = dirs_info[i];
                 var directory = AddDirectory(dir_info);
-                if (directory != null)
-                {
-                    directory.GetFileSystemItems();
-                }
+                directory?.GetFileSystemItems();
             }
 
             // Теперь файлы

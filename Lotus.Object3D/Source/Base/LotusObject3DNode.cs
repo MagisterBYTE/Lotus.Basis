@@ -148,7 +148,7 @@ namespace Lotus.Object3D
             {
                 if (_allEntities == null)
                 {
-                    _allEntities = new ListArray<Entity3D>();
+                    _allEntities = [];
                     for (var i = 0; i < Children.Count; i++)
                     {
                         _allEntities.Add(Children[i]);
@@ -180,8 +180,8 @@ namespace Lotus.Object3D
         public Node3D(Scene3D ownerScene)
         {
             _ownerScene = ownerScene;
-            _children = new List<Node3D>();
-            _allEntities = new ListArray<Entity3D>();
+            _children = [];
+            _allEntities = [];
         }
 
         /// <summary>
@@ -459,8 +459,8 @@ namespace Lotus.Object3D
 				_nodeTransform.Children.Add(_scaleTransform);
 			}
 
-			_children = new List<Node3D>();
-			_helix3DModels = new List<Helix3D.MeshGeometryModel3D>();
+			_children = [];
+			_helix3DModels = [];
 		}
 
 		/// <summary>

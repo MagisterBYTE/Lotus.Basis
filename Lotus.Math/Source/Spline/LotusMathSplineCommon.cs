@@ -267,8 +267,8 @@ namespace Lotus.Maths
         protected SplineBase2D(int count)
         {
             _controlPoints = new Vector2Df[count];
-            _drawingPoints = new List<Vector2Df>();
-            _segmentsPath = new List<TMoveSegment>();
+            _drawingPoints = [];
+            _segmentsPath = [];
         }
 
         /// <summary>
@@ -282,8 +282,8 @@ namespace Lotus.Maths
             _controlPoints[0] = startPoint;
             _controlPoints[1] = (startPoint + endPoint) / 2;
             _controlPoints[2] = endPoint;
-            _drawingPoints = new List<Vector2Df>();
-            _segmentsPath = new List<TMoveSegment>();
+            _drawingPoints = [];
+            _segmentsPath = [];
         }
 
         /// <summary>
@@ -294,8 +294,8 @@ namespace Lotus.Maths
         {
             _controlPoints = new Vector2Df[controlPoints.Length];
             Array.Copy(controlPoints, _controlPoints, controlPoints.Length);
-            _drawingPoints = new List<Vector2Df>();
-            _segmentsPath = new List<TMoveSegment>();
+            _drawingPoints = [];
+            _segmentsPath = [];
         }
         #endregion
 
@@ -813,8 +813,8 @@ namespace Lotus.Maths
         protected SplineBase3D(int count)
         {
             _controlPoints = new Vector3Df[count];
-            _drawingPoints = new List<Vector3Df>();
-            _segmentsPath = new List<TMoveSegment>();
+            _drawingPoints = [];
+            _segmentsPath = [];
         }
 
         /// <summary>
@@ -828,8 +828,8 @@ namespace Lotus.Maths
             _controlPoints[0] = startPoint;
             _controlPoints[1] = (startPoint + endPoint) / 2;
             _controlPoints[2] = endPoint;
-            _drawingPoints = new List<Vector3Df>();
-            _segmentsPath = new List<TMoveSegment>();
+            _drawingPoints = [];
+            _segmentsPath = [];
         }
 
         /// <summary>
@@ -840,8 +840,8 @@ namespace Lotus.Maths
         {
             _controlPoints = new Vector3Df[controlPoints.Length];
             Array.Copy(controlPoints, _controlPoints, controlPoints.Length);
-            _drawingPoints = new List<Vector3Df>();
-            _segmentsPath = new List<TMoveSegment>();
+            _drawingPoints = [];
+            _segmentsPath = [];
         }
         #endregion
 

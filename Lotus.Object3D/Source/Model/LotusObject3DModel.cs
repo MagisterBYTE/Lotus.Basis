@@ -318,7 +318,7 @@ namespace Lotus.Object3D
 		{
 			if (_helixModel != null)
 			{
-				SharpDX.BoundingBox bounding_box = _helixModel.BoundsWithTransform;
+				var bounding_box = _helixModel.BoundsWithTransform;
 
 				_minPosition = new Vector3D(bounding_box.Minimum.X, bounding_box.Minimum.Y, bounding_box.Minimum.Z);
 				_maxPosition = new Vector3D(bounding_box.Maximum.X, bounding_box.Maximum.Y, bounding_box.Maximum.Z);

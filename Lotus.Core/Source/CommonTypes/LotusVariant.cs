@@ -174,7 +174,7 @@ namespace Lotus.Core
             set
             {
                 _valueType = value;
-                if (_owner != null) _owner.OnNotifyUpdated(this, _valueType, nameof(ValueType));
+                _owner?.OnNotifyUpdated(this, _valueType, nameof(ValueType));
             }
         }
 
@@ -213,7 +213,7 @@ namespace Lotus.Core
                 }
 
                 _valueType = TValueType.Boolean;
-                if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.X == 1, nameof(BooleanValue));
+                _owner?.OnNotifyUpdated(this, _numberData.X == 1, nameof(BooleanValue));
             }
 #endif
         }
@@ -237,7 +237,7 @@ namespace Lotus.Core
             {
                 _numberData.X = value;
                 _valueType = TValueType.Integer;
-                if (_owner != null) _owner.OnNotifyUpdated(this, (int)_numberData.X, nameof(IntegerValue));
+                _owner?.OnNotifyUpdated(this, (int)_numberData.X, nameof(IntegerValue));
             }
 #endif
         }
@@ -269,7 +269,7 @@ namespace Lotus.Core
                 {
                     _stringData = _referenceData.GetType().Name;
                 }
-                if (_owner != null) _owner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
+                _owner?.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
             }
         }
 
@@ -292,7 +292,7 @@ namespace Lotus.Core
             {
                 _numberData.X = value;
                 _valueType = TValueType.Float;
-                if (_owner != null) _owner.OnNotifyUpdated(this, _numberData.X, nameof(FloatValue));
+                _owner?.OnNotifyUpdated(this, _numberData.X, nameof(FloatValue));
             }
 #endif
         }
@@ -307,7 +307,7 @@ namespace Lotus.Core
             {
                 _stringData = value.ToString();
                 _valueType = TValueType.DateTime;
-                if (_owner != null) _owner.OnNotifyUpdated(this, XDateTimeHelper.Parse(_stringData), nameof(DateTimeValue));
+                _owner?.OnNotifyUpdated(this, XDateTimeHelper.Parse(_stringData), nameof(DateTimeValue));
             }
         }
 
@@ -321,7 +321,7 @@ namespace Lotus.Core
             {
                 _stringData = value;
                 _valueType = TValueType.String;
-                if (_owner != null) _owner.OnNotifyUpdated(this, _stringData, nameof(StringValue));
+                _owner?.OnNotifyUpdated(this, _stringData, nameof(StringValue));
             }
         }
 
@@ -396,7 +396,7 @@ namespace Lotus.Core
                 _numberData.X = value.X;
                 _numberData.Y = value.Y;
                 _valueType = TValueType.Vector2D;
-                if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
+                _owner?.OnNotifyUpdated(this, Vector2DValue, nameof(Vector2DValue));
             }
         }
 
@@ -412,7 +412,7 @@ namespace Lotus.Core
                 _numberData.Y = value.Y;
                 _numberData.Z = value.Z;
                 _valueType = TValueType.Vector3D;
-                if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector3DValue));
+                _owner?.OnNotifyUpdated(this, Vector2DValue, nameof(Vector3DValue));
             }
         }
 
@@ -426,7 +426,7 @@ namespace Lotus.Core
             {
                 _numberData = value;
                 _valueType = TValueType.Vector4D;
-                if (_owner != null) _owner.OnNotifyUpdated(this, Vector2DValue, nameof(Vector4DValue));
+                _owner?.OnNotifyUpdated(this, Vector2DValue, nameof(Vector4DValue));
             }
         }
 
@@ -443,7 +443,7 @@ namespace Lotus.Core
                 _numberData.Z = value.B;
                 _numberData.W = value.A;
                 _valueType = TValueType.Color;
-                if (_owner != null) _owner.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
+                _owner?.OnNotifyUpdated(this, ColorValue, nameof(ColorValue));
             }
         }
 #endif
@@ -465,7 +465,7 @@ namespace Lotus.Core
                     _stringData = _referenceData.GetType().Name;
                 }
 
-                if (_owner != null) _owner.OnNotifyUpdated(this, _referenceData, nameof(SysObject));
+                _owner?.OnNotifyUpdated(this, _referenceData, nameof(SysObject));
             }
         }
 
@@ -911,7 +911,7 @@ namespace Lotus.Core
                         }
 #endif
                         _valueType = TValueType.Boolean;
-                        if (_owner != null) _owner.OnNotifyUpdated(this, BooleanValue, nameof(BooleanValue));
+                        _owner?.OnNotifyUpdated(this, BooleanValue, nameof(BooleanValue));
                     }
                     break;
                 case nameof(Int32):
@@ -922,7 +922,7 @@ namespace Lotus.Core
                         _numberData.X = (int)value;
 #endif
                         _valueType = TValueType.Integer;
-                        if (_owner != null) _owner.OnNotifyUpdated(this, IntegerValue, nameof(IntegerValue));
+                        _owner?.OnNotifyUpdated(this, IntegerValue, nameof(IntegerValue));
                     }
                     break;
                 case nameof(Single):
@@ -933,7 +933,7 @@ namespace Lotus.Core
                         _numberData.X = (float)value;
 #endif
                         _valueType = TValueType.Float;
-                        if (_owner != null) _owner.OnNotifyUpdated(this, FloatValue, nameof(FloatValue));
+                        _owner?.OnNotifyUpdated(this, FloatValue, nameof(FloatValue));
                     }
                     break;
                 case nameof(DateTime):
@@ -941,14 +941,14 @@ namespace Lotus.Core
                         var v = (DateTime)value;
                         _stringData = v.ToString();
                         _valueType = TValueType.DateTime;
-                        if (_owner != null) _owner.OnNotifyUpdated(this, DateTimeValue, nameof(DateTimeValue));
+                        _owner?.OnNotifyUpdated(this, DateTimeValue, nameof(DateTimeValue));
                     }
                     break;
                 case nameof(String):
                     {
                         _stringData = value.ToString()!;
                         _valueType = TValueType.String;
-                        if (_owner != null) _owner.OnNotifyUpdated(this, StringValue, nameof(StringValue));
+                        _owner?.OnNotifyUpdated(this, StringValue, nameof(StringValue));
                     }
                     break;
 #if UNITY_2017_1_OR_NEWER
@@ -995,7 +995,7 @@ namespace Lotus.Core
                         {
                             _referenceData = value;
                             _stringData = type.Name;
-                            if (_owner != null) _owner.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
+                            _owner?.OnNotifyUpdated(this, EnumValue, nameof(EnumValue));
                             break;
                         }
 
@@ -1048,7 +1048,7 @@ namespace Lotus.Core
                         _referenceData = value;
                         _valueType = TValueType.SysObject;
                         _stringData = type.Name;
-                        if (_owner != null) _owner.OnNotifyUpdated(this, SysObject, nameof(SysObject));
+                        _owner?.OnNotifyUpdated(this, SysObject, nameof(SysObject));
 
                     }
                     break;
@@ -1156,7 +1156,7 @@ namespace Lotus.Core
                     break;
             }
 
-            if (_owner != null) _owner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
+            _owner?.OnNotifyUpdated(this, ValueType, nameof(ValueType));
         }
 
         /// <summary>
@@ -1374,7 +1374,7 @@ namespace Lotus.Core
         public void Clear()
         {
             _valueType = TValueType.Void;
-            if (_owner != null) _owner.OnNotifyUpdated(this, ValueType, nameof(ValueType));
+            _owner?.OnNotifyUpdated(this, ValueType, nameof(ValueType));
         }
 
         /// <summary>

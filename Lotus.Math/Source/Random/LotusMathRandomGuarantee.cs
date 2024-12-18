@@ -96,7 +96,7 @@ namespace Lotus.Maths
         {
             _capacity = capacity;
             _data = new int[_capacity];
-            _probability = new List<int>();
+            _probability = [];
             _currentIndex = -1;
         }
         #endregion

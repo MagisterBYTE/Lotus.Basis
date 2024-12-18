@@ -48,10 +48,7 @@ namespace Lotus.Core
             set
             {
                 _value = value;
-                if (_owner != null)
-                {
-                    _owner.OnNotifyUpdated(this, _value, nameof(Value));
-                }
+                _owner?.OnNotifyUpdated(this, _value, nameof(Value));
 
                 OnPropertyChanged(nameof(Value));
                 OnPropertyChanged(nameof(CalculatedValue));
@@ -71,10 +68,7 @@ namespace Lotus.Core
             set
             {
                 _supplement = value;
-                if (_owner != null)
-                {
-                    _owner.OnNotifyUpdated(this, _supplement, nameof(Supplement));
-                }
+                _owner?.OnNotifyUpdated(this, _supplement, nameof(Supplement));
 
                 OnPropertyChanged(nameof(Supplement));
                 OnPropertyChanged(nameof(CalculatedValue));
@@ -103,10 +97,7 @@ namespace Lotus.Core
                 if (_notCalculation != true)
                 {
                     _value = value - _supplement;
-                    if (_owner != null)
-                    {
-                        _owner.OnNotifyUpdated(this, _value + _supplement, nameof(CalculatedValue));
-                    }
+                    _owner?.OnNotifyUpdated(this, _value + _supplement, nameof(CalculatedValue));
 
                     OnPropertyChanged(nameof(Value));
                     OnPropertyChanged(nameof(CalculatedValue));
@@ -137,10 +128,7 @@ namespace Lotus.Core
             {
                 _notCalculation = value;
 
-                if (_owner != null)
-                {
-                    _owner.OnNotifyUpdated(this, _notCalculation, nameof(NotCalculation));
-                }
+                _owner?.OnNotifyUpdated(this, _notCalculation, nameof(NotCalculation));
 
                 OnPropertyChanged(nameof(CalculatedValue));
                 OnPropertyChanged(nameof(NotCalculation));

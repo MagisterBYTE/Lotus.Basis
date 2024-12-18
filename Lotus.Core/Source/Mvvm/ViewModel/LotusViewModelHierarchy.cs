@@ -652,10 +652,7 @@ namespace Lotus.Core
         /// </summary>
         protected virtual void RaiseIsSelectedChanged()
         {
-            if (_owner != null)
-            {
-                _owner.OnNotifyUpdated(this, IsSelected, nameof(IsSelected));
-            }
+            _owner?.OnNotifyUpdated(this, IsSelected, nameof(IsSelected));
         }
 
         /// <summary>
@@ -664,10 +661,7 @@ namespace Lotus.Core
         /// </summary>
         protected virtual void RaiseIsEnabledChanged()
         {
-            if (_owner != null)
-            {
-                _owner.OnNotifyUpdated(this, IsEnabled, nameof(IsEnabled));
-            }
+            _owner?.OnNotifyUpdated(this, IsEnabled, nameof(IsEnabled));
         }
 
         /// <summary>
@@ -676,10 +670,7 @@ namespace Lotus.Core
         /// </summary>
         protected virtual void RaiseIsCheckedChanged()
         {
-            if (_owner != null)
-            {
-                _owner.OnNotifyUpdated(this, IsChecked, nameof(IsChecked));
-            }
+            _owner?.OnNotifyUpdated(this, IsChecked, nameof(IsChecked));
         }
 
         /// <summary>
@@ -688,10 +679,7 @@ namespace Lotus.Core
         /// </summary>
         protected virtual void RaiseIsPresentedChanged()
         {
-            if (_owner != null)
-            {
-                _owner.OnNotifyUpdated(this, IsPresented, nameof(IsPresented));
-            }
+            _owner?.OnNotifyUpdated(this, IsPresented, nameof(IsPresented));
         }
         #endregion
 
@@ -782,10 +770,7 @@ namespace Lotus.Core
         /// <param name="dataName">Имя данных.</param>
         public virtual void OnNotifyUpdated(ILotusOwnedObject ownedObject, object? data, string dataName)
         {
-            if (_owner != null)
-            {
-                _owner.OnNotifyUpdated(this, ownedObject, dataName);
-            }
+            _owner?.OnNotifyUpdated(this, ownedObject, dataName);
         }
         #endregion
 

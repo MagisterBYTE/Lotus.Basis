@@ -61,8 +61,7 @@ namespace Lotus.Core
         /// <param name="str">Строка.</param>
         public CTextList(string str)
         {
-            _lines = new ListArray<CTextLine>();
-            _lines.Add(str);
+            _lines = [str];
             _lines[0].Index = 0;
             _lines[0].Owned = this;
         }

@@ -34,7 +34,7 @@ namespace Lotus.Core
         /// </summary>
         public CParameterList()
         {
-            _value = new ListArray<TType>();
+            _value = [];
         }
 
         /// <summary>

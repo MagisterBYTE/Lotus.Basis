@@ -2255,10 +2255,11 @@ namespace Lotus.Core
                             unique_list.Add(property_info.GetValue(_arrayOfItems[i], null));
 
                             // Создаем группу
-                            var group = new ListArray<TItem>();
-
-                            // Добавляем туда данный элемент
-                            group.Add(_arrayOfItems[i]);
+                            var group = new ListArray<TItem>
+                            {
+                                // Добавляем туда данный элемент
+                                _arrayOfItems[i]
+                            };
 
                             // Добавляем саму группу
                             groups.Add(group);
@@ -2294,10 +2295,11 @@ namespace Lotus.Core
                         if (find_index == -1)
                         {
                             // Создаем группу
-                            var group = new ListArray<TItem>();
-
-                            // Добавляем туда данный элемент
-                            group.Add(_arrayOfItems[i]);
+                            var group = new ListArray<TItem>
+                            {
+                                // Добавляем туда данный элемент
+                                _arrayOfItems[i]
+                            };
 
                             // Добавляем саму группу
                             groups.Add(group);

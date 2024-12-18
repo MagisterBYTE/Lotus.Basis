@@ -328,7 +328,7 @@ namespace Lotus.Core
             }
             else
             {
-                Items = new List<CUIContextMenuItem>();
+                Items = [];
             }
         }
         #endregion

@@ -28,7 +28,7 @@ namespace Lotus.Core
             {
                 if (mBindings == null)
                 {
-                    mBindings = new List<BindingBase>();
+                    mBindings = [];
                 }
 
                 return mBindings;

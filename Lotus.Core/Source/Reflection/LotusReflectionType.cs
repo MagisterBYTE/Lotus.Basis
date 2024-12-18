@@ -184,7 +184,7 @@ namespace Lotus.Core
         {
             if (_fields == null)
             {
-                _fields = new Dictionary<string, FieldInfo>();
+                _fields = [];
 
                 var fields = _cachedType.GetFields(BINDING_FIELDS);
 
@@ -539,7 +539,7 @@ namespace Lotus.Core
         {
             if (_properties == null)
             {
-                _properties = new Dictionary<string, PropertyInfo>();
+                _properties = [];
 
                 var properties = _cachedType.GetProperties(BINDING_PROPERTIES);
 
@@ -782,7 +782,7 @@ namespace Lotus.Core
         {
             if (_methods == null)
             {
-                _methods = new Dictionary<string, MethodInfo>();
+                _methods = [];
 
                 foreach (var method in _cachedType.GetMethods(BINDING_METHODS))
                 {

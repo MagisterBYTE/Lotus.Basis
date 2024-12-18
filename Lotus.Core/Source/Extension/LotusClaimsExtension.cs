@@ -48,7 +48,7 @@ namespace Lotus.Core
                 return new HashSet<string>(functions, StringComparer.OrdinalIgnoreCase);
             }
 
-            return new HashSet<string>();
+            return [];
         }
     }
     /**@}*/

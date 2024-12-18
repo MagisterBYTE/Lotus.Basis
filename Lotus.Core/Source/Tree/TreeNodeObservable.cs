@@ -127,9 +127,9 @@ namespace Lotus.Core
 
         public TreeNodeObservable()
         {
-            _childNodes = new ObservableCollection<TreeNodeObservable>();
+            _childNodes = [];
             _childNodes.CollectionChanged += Items_CollectionChanged;
-            _attributes = new Dictionary<string, object>();
+            _attributes = [];
         }
 
         #region TreeNodes methods 

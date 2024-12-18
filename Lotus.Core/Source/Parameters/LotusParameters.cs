@@ -33,7 +33,7 @@ namespace Lotus.Core
         /// </summary>
         public CParameters()
         {
-            _value = new ListArray<IParameterItem>();
+            _value = [];
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Lotus.Core
             }
             else
             {
-                _value = new ListArray<IParameterItem>();
+                _value = [];
             }
         }
 
@@ -67,7 +67,7 @@ namespace Lotus.Core
         public CParameters(string parameterName)
             : base(parameterName)
         {
-            _value = new ListArray<IParameterItem>();
+            _value = [];
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Lotus.Core
             }
             else
             {
-                _value = new ListArray<IParameterItem>();
+                _value = [];
             }
         }
 
@@ -118,7 +118,7 @@ namespace Lotus.Core
             }
             else
             {
-                _value = new ListArray<IParameterItem>();
+                _value = [];
             }
         }
         #endregion

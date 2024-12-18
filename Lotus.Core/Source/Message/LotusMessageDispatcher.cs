@@ -66,8 +66,7 @@ namespace Lotus.Core
         {
             if (_publishers == null)
             {
-                _publishers = new ListArray<CPublisher>();
-                _publishers.Add(new CPublisher(DefaultName));
+                _publishers = [new CPublisher(DefaultName)];
             }
         }
 

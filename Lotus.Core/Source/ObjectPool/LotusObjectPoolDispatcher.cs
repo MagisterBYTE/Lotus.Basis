@@ -54,7 +54,7 @@ namespace Lotus.Core
         {
             if (_poolManagers == null)
             {
-                _poolManagers = new ListArray<ILotusPoolManager>();
+                _poolManagers = [];
             }
         }
         #endregion

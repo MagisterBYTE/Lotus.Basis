@@ -220,7 +220,7 @@ namespace Lotus.Core
         {
             _name = name;
             _executor = executor;
-            _tasks = new List<CTaskHolder>();
+            _tasks = [];
             AddList(method, list);
         }
         #endregion

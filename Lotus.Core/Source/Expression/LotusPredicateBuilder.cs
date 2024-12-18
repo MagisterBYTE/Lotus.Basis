@@ -73,7 +73,7 @@ namespace Lotus.Core
             private ParameterRebinder(
                 Dictionary<ParameterExpression, ParameterExpression> map)
             {
-                _map = map ?? new Dictionary<ParameterExpression, ParameterExpression>();
+                _map = map ?? [];
             }
 
             /// <summary>

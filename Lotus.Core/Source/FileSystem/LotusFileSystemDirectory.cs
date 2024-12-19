@@ -22,7 +22,7 @@ namespace Lotus.Core
         {
             var dir_info = new DirectoryInfo(path);
             var dir_model = new CFileSystemDirectory(dir_info);
-            dir_model.RecursiveFileSyste_info();
+            dir_model.RecursiveFileSysteInfo();
             return dir_model;
         }
         #endregion
@@ -397,16 +397,16 @@ namespace Lotus.Core
         /// <summary>
         /// Рекурсивное получение данных элементов файловой системы.
         /// </summary>
-        public void RecursiveFileSyste_info()
+        public void RecursiveFileSysteInfo()
         {
             _entities.Clear();
-            RecursiveFileSyste_info(this);
+            RecursiveFileSysteInfo(this);
         }
 
         /// <summary>
         /// Рекурсивное получение данных элементов файловой системы на 2 уровня ниже.
         /// </summary>
-        public void RecursiveFileSyste_infoTwoLevel()
+        public void RecursiveFileSysteInfoTwoLevel()
         {
             var dirs_info = Info.GetDirectories();
             var files_info = Info.GetFiles();
@@ -448,7 +448,7 @@ namespace Lotus.Core
         /// Рекурсивная обработка объектов файловой системы.
         /// </summary>
         /// <param name="parentDirectoryNode">Родительский узел директории.</param>
-        protected void RecursiveFileSyste_info(CFileSystemDirectory parentDirectoryNode)
+        protected void RecursiveFileSysteInfo(CFileSystemDirectory parentDirectoryNode)
         {
             var sub_directories = parentDirectoryNode.Info.GetDirectories();
             var files = parentDirectoryNode.Info.GetFiles();
@@ -463,7 +463,7 @@ namespace Lotus.Core
 
                 this._entities.Add(sub_directory_node);
 
-                sub_directory_node.RecursiveFileSyste_info(sub_directory_node);
+                sub_directory_node.RecursiveFileSysteInfo(sub_directory_node);
             }
 
             // Теперь файлы
@@ -627,7 +627,7 @@ namespace Lotus.Core
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
 
-            RecursiveFileSyste_info();
+            RecursiveFileSysteInfo();
         }
 
         /// <summary>

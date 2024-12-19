@@ -138,14 +138,14 @@ namespace Lotus.Object3D
 		/// <summary>
 		/// Конструктор инициализирует объект класса указанными параметрами.
 		/// </summary>
-		/// <param name="owner_scene">Сцена.</param>
-		/// <param name="assimp_material">Материал.</param>
-		public Material(Scene3D owner_scene, Assimp.Material assimp_material)
+		/// <param name="ownerScene">Сцена.</param>
+		/// <param name="assimpMaterial">Материал.</param>
+		public Material(Scene3D ownerScene, Assimp.Material assimpMaterial)
 		{
-			_ownerScene = owner_scene;
+			_ownerScene = ownerScene;
 			_textureSlots = [];
 
-			_assimpMaterial = assimp_material;
+			_assimpMaterial = assimpMaterial;
 			_name = _assimpMaterial.Name;
 
 			if (_assimpMaterial.HasTextureAmbient)
@@ -350,17 +350,17 @@ namespace Lotus.Object3D
 		/// Конструктор инициализирует объект класса указанными параметрами.
 		/// </summary>
 		/// <param name="ownerScene">Сцена.</param>
-		/// <param name="assimp_scene">Сцена.</param>
-		public MaterialSet(Scene3D ownerScene, Assimp.Scene assimp_scene)
+		/// <param name="assimpScene">Сцена.</param>
+		public MaterialSet(Scene3D ownerScene, Assimp.Scene assimpScene)
 		{
 			_ownerScene = ownerScene;
 			_name = "Материалы";
 			_materials = [];
 
 			// Устанавливаем материалы
-			for (var i = 0; i < assimp_scene.MaterialCount; i++)
+			for (var i = 0; i < assimpScene.MaterialCount; i++)
 			{
-				var assimp_material = assimp_scene.Materials[i];
+				var assimp_material = assimpScene.Materials[i];
 				var material = new Material(ownerScene, assimp_material);
 				_materials.Add(material);
 			}

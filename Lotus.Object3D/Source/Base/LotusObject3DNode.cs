@@ -210,11 +210,11 @@ namespace Lotus.Object3D
 		/// <summary>
 		/// Конструктор инициализирует объект класса указанными параметрами.
 		/// </summary>
-		/// <param name="owner_scene">Сцена.</param>
-		/// <param name="assimp_node">Узел сцены.</param>
-		public Node3D(Scene3D owner_scene, Assimp.Node assimp_node)
+		/// <param name="ownerScene">Сцена.</param>
+		/// <param name="assimpNode">Узел сцены.</param>
+		public Node3D(Scene3D ownerScene, Assimp.Node assimpNode)
 		{
-			InitData(owner_scene, null, assimp_node);
+			InitData(ownerScene, null, assimpNode);
 
 			InitModels();
 
@@ -222,7 +222,7 @@ namespace Lotus.Object3D
 			{
 				for (var i = 0; i < _assimpNode.ChildCount; i++)
 				{
-					_children.Add(new Node3D(owner_scene, this, _assimpNode.Children[i]));
+					_children.Add(new Node3D(ownerScene, this, _assimpNode.Children[i]));
 				}
 			}
 		}
@@ -230,12 +230,12 @@ namespace Lotus.Object3D
 		/// <summary>
 		/// Конструктор инициализирует объект класса указанными параметрами.
 		/// </summary>
-		/// <param name="owner_scene">Сцена.</param>
-		/// <param name="parent_node">Родительский узел.</param>
-		/// <param name="assimp_node">Узел сцены.</param>
-		public Node3D(Scene3D owner_scene, Node3D parent_node, Assimp.Node assimp_node)
+		/// <param name="ownerScene">Сцена.</param>
+		/// <param name="parentNode">Родительский узел.</param>
+		/// <param name="assimpNode">Узел сцены.</param>
+		public Node3D(Scene3D ownerScene, Node3D parentNode, Assimp.Node assimpNode)
 		{
-			InitData(owner_scene, parent_node, assimp_node);
+			InitData(ownerScene, parentNode, assimpNode);
 
 			InitModels();
 
@@ -243,7 +243,7 @@ namespace Lotus.Object3D
 			{
 				for (var i = 0; i < _assimpNode.ChildCount; i++)
 				{
-					_children.Add(new Node3D(owner_scene, this, _assimpNode.Children[i]));
+					_children.Add(new Node3D(ownerScene, this, _assimpNode.Children[i]));
 				}
 			}
 		}
@@ -426,17 +426,17 @@ namespace Lotus.Object3D
 		/// <summary>
 		/// Первичная инициализация объекта класса указанными параметрами.
 		/// </summary>
-		/// <param name="owner_scene">Сцена.</param>
-		/// <param name="parent_node">Родительский узел.</param>
-		/// <param name="assimp_node">Узел сцены.</param>
-		protected void InitData(Scene3D owner_scene, Node3D parent_node, Assimp.Node assimp_node)
+		/// <param name="ownerScene">Сцена.</param>
+		/// <param name="parentNode">Родительский узел.</param>
+		/// <param name="assimpNode">Узел сцены.</param>
+		protected void InitData(Scene3D ownerScene, Node3D parentNode, Assimp.Node assimpNode)
 		{
-			_ownerScene = owner_scene;
-			_parentNode = parent_node;
+			_ownerScene = ownerScene;
+			_parentNode = parentNode;
 
-			if (assimp_node != null)
+			if (assimpNode != null)
 			{
-				_assimpNode = assimp_node;
+				_assimpNode = assimpNode;
 				_name = _assimpNode.Name;
 
 				Assimp.Vector3D scale;

@@ -68,9 +68,9 @@ namespace Lotus.Object3D
         /// <summary>
         /// Загрузка 3D контента по полному пути.
         /// </summary>
-        /// <param name="file_name">Имя файла.</param>
+        /// <param name="fileName">Имя файла.</param>
         /// <returns>Объект <see cref="Scene3D"/>.</returns>
-        public static Scene3D LoadFromFile(string file_name)
+        public static Scene3D LoadFromFile(string fileName)
         {
             try
             {
@@ -85,12 +85,12 @@ namespace Lotus.Object3D
 
                 //Assimp.PostProcessPreset
 
-                var assimp_scene = AssimpContextDefault.ImportFile(file_name, step);
+                var assimp_scene = AssimpContextDefault.ImportFile(fileName, step);
                 if (assimp_scene != null)
                 {
-                    var scene = new Scene3D(Path.GetFileNameWithoutExtension(file_name), assimp_scene)
+                    var scene = new Scene3D(Path.GetFileNameWithoutExtension(fileName), assimp_scene)
                     {
-                        FileName = file_name
+                        FileName = fileName
                     };
                     return scene;
                 }
@@ -298,11 +298,11 @@ namespace Lotus.Object3D
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="name">Имя сцены.</param>
-        /// <param name="helix_scene">Сцена.</param>
-        public Scene3D(String name, SceneNode helix_scene)
+        /// <param name="helixScene">Сцена.</param>
+        public Scene3D(String name, SceneNode helixScene)
         {
             _name = name;
-            _helixScene = helix_scene;
+            _helixScene = helixScene;
             //CreateSceneFromHelixScene();
             //_meshSet = new CMeshSet();
             //_materialSet = new CMaterialSet();
@@ -316,11 +316,11 @@ namespace Lotus.Object3D
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="name">Имя сцены.</param>
-        /// <param name="assimp_scene">Сцена.</param>
-        public Scene3D(String name, Assimp.Scene assimp_scene)
+        /// <param name="assimpScene">Сцена.</param>
+        public Scene3D(String name, Assimp.Scene assimpScene)
         {
             _name = name;
-            _assimpScene = assimp_scene;
+            _assimpScene = assimpScene;
             _meshSet = new MeshSet(this, _assimpScene);
             _materialSet = new MaterialSet(this, _assimpScene);
             _rootNode = new Node3D(this, _assimpScene.RootNode);

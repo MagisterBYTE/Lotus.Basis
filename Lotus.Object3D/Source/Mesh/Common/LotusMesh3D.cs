@@ -209,15 +209,15 @@ namespace Lotus.Object3D
 		/// <summary>
 		/// Конструктор инициализирует объект класса указанными параметрами.
 		/// </summary>
-		/// <param name="mesh_name">Имя меша.</param>
-		/// <param name="assimp_mesh">Меш Assimp.</param>
-		public Mesh3Df(string mesh_name, Assimp.Mesh assimp_mesh)
+		/// <param name="meshName">Имя меша.</param>
+		/// <param name="assimpMesh">Меш Assimp.</param>
+		public Mesh3Df(string meshName, Assimp.Mesh assimpMesh)
 		{
-			_name = mesh_name;
+			_name = meshName;
 			_vertices = [];
 			_triangles = new ListTriangle3D(_vertices);
 			_edges = new ListEdge3D(_vertices);
-			_assimpMesh = assimp_mesh;
+			_assimpMesh = assimpMesh;
 			//CreateFromAs(unity_mesh);
 		}
 #endif
@@ -950,17 +950,17 @@ namespace Lotus.Object3D
 		/// Конструктор инициализирует объект класса указанными параметрами.
 		/// </summary>
 		/// <param name="ownerScene">Сцена Assimp.</param>
-		/// <param name="assimp_scene">Сцена Assimp.</param>
-		public MeshSet(Scene3D ownerScene, Assimp.Scene assimp_scene)
+		/// <param name="assimpScene">Сцена Assimp.</param>
+		public MeshSet(Scene3D ownerScene, Assimp.Scene assimpScene)
 		{
 			_ownerScene = ownerScene;
 			_name = "Сетки";
 			_meshes = [];
 
 			// Устанавливаем меши
-			for (var i = 0; i < assimp_scene.MeshCount; i++)
+			for (var i = 0; i < assimpScene.MeshCount; i++)
 			{
-				var mesh = assimp_scene.Meshes[i];
+				var mesh = assimpScene.Meshes[i];
 				_meshes.Add(new Mesh3Df("Mesh_" + i.ToString(), mesh));
 			}
 		}

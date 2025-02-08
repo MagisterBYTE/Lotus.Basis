@@ -230,7 +230,7 @@ namespace Lotus.Core
         /// <returns>Число.</returns>
         public static float ToFloat(this string @this)
         {
-            return XNumberHelper.ParseInt(@this);
+            return XNumberConverter.ParseInt(@this);
         }
 
         /// <summary>
@@ -918,7 +918,7 @@ namespace Lotus.Core
                 }
             }
 
-            var result = XNumberHelper.ParseInt(number.ToString(), -1);
+            var result = XNumberConverter.ParseInt(number.ToString(), -1);
             return result;
         }
 
@@ -948,7 +948,7 @@ namespace Lotus.Core
                 }
             }
 
-            var result = XNumberHelper.ParseInt(number.ToString().GetReverseCopy(), -1);
+            var result = XNumberConverter.ParseInt(number.ToString().GetReverseCopy(), -1);
             return result;
         }
 

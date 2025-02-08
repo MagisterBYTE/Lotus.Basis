@@ -12,7 +12,7 @@ namespace Lotus.Core
     /// </remarks>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
 #if UNITY_2017_1_OR_NEWER
-		public sealed class LotusDefaultValueAttribute : UnityEngine.PropertyAttribute
+	public sealed class LotusDefaultValueAttribute : UnityEngine.PropertyAttribute
 #else
     public sealed class LotusDefaultValueAttribute : Attribute
 #endif

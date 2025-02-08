@@ -790,7 +790,7 @@ namespace Lotus.Core
             var massive = new int[@this.Count];
             for (var i = 0; i < @this.Count; i++)
             {
-                massive[i] = XNumberHelper.ParseInt(@this[i], defaultValue);
+                massive[i] = XNumberConverter.ParseInt(@this[i], defaultValue);
             }
 
             return massive;
@@ -807,7 +807,7 @@ namespace Lotus.Core
             var massive = new float[@this.Count];
             for (var i = 0; i < @this.Count; i++)
             {
-                massive[i] = XNumberHelper.ParseSingle(@this[i], defaultValue);
+                massive[i] = XNumberConverter.ParseSingle(@this[i], defaultValue);
             }
 
             return massive;
@@ -824,7 +824,7 @@ namespace Lotus.Core
             var massive = new double[@this.Count];
             for (var i = 0; i < @this.Count; i++)
             {
-                massive[i] = XNumberHelper.ParseDouble(@this[i], defaultValue);
+                massive[i] = XNumberConverter.ParseDouble(@this[i], defaultValue);
             }
 
             return massive;

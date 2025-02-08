@@ -211,7 +211,7 @@ namespace Lotus.Core
         {
             if (_count > 0)
             {
-                return _arrayOfItems[_count - 1];
+                return _arrayOfItems[_startOffset + _count - 1];
             }
             else
             {

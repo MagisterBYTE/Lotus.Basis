@@ -302,12 +302,12 @@ namespace Lotus.Core
         /// </summary>
         public DateTime DateTimeValue
         {
-            get { return XDateTimeHelper.Parse(_stringData); }
+            get { return XDateTimeConverter.Parse(_stringData); }
             set
             {
                 _stringData = value.ToString();
                 _valueType = TValueType.DateTime;
-                _owner?.OnNotifyUpdated(this, XDateTimeHelper.Parse(_stringData), nameof(DateTimeValue));
+                _owner?.OnNotifyUpdated(this, XDateTimeConverter.Parse(_stringData), nameof(DateTimeValue));
             }
         }
 
@@ -1182,7 +1182,7 @@ namespace Lotus.Core
                 case TValueType.Integer:
                     {
 #if UNITY_2017_1_OR_NEWER
-							return (Int32)_numberData.x;
+						return (Int32)_numberData.x;
 #else
                         return (int)_numberData.X;
 #endif
@@ -1194,14 +1194,14 @@ namespace Lotus.Core
                 case TValueType.Float:
                     {
 #if UNITY_2017_1_OR_NEWER
-							return _numberData.x;
+						return _numberData.x;
 #else
                         return _numberData.X;
 #endif
                     }
                 case TValueType.DateTime:
                     {
-                        return XDateTimeHelper.Parse(_stringData);
+                        return XDateTimeConverter.Parse(_stringData);
                     }
                 case TValueType.String:
                     {

@@ -6,18 +6,16 @@ using UnityEditor;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Lotus.Core
+namespace Lotus.Core.Collections
 {
-    /// <summary>
-    /// Статический класс для тестирования подсистемы коллекций модуля базового ядра.
-    /// </summary>
-    public static class XCoreCollectionsTesting
+    [TestFixture]
+    public class ListArrayTests
     {
         /// <summary>
         /// Тестирование методов <see cref="ListArray{TItem}"/>.
         /// </summary>
         [Test]
-        public static void TestListArray()
+        public void AllMethods()
         {
             var sample = new ListArray<int>(20);
 
@@ -618,207 +616,6 @@ namespace Lotus.Core
             ClassicAssert.AreEqual(deferencs.Count, 2);
             ClassicAssert.AreEqual(deferencs[0], 2);
             ClassicAssert.AreEqual(deferencs[1], 5);
-        }
-
-        /// <summary>
-        /// Тестирование методов <see cref="QueueArray{TItem}"/>.
-        /// </summary>
-        [Test]
-        public static void TestQueueArray()
-        {
-            var queue = new QueueArray<int>();
-            queue.Enqueue(100);
-            queue.Enqueue(90);
-            queue.Enqueue(80);
-            queue.Enqueue(70);
-            queue.Enqueue(60);
-            queue.Enqueue(50);
-            queue.Enqueue(30);
-
-            ClassicAssert.AreEqual(queue.Dequeue(), 100);
-            ClassicAssert.AreEqual(queue.Dequeue(), 90);
-            ClassicAssert.AreEqual(queue.Dequeue(), 80);
-            ClassicAssert.AreEqual(queue.Dequeue(), 70);
-            ClassicAssert.AreEqual(queue.Dequeue(), 60);
-            ClassicAssert.AreEqual(queue.Dequeue(), 50);
-            ClassicAssert.AreEqual(queue.Dequeue(), 30);
-            ClassicAssert.AreEqual(queue.Count, 0);
-        }
-
-        /// <summary>
-        /// Тестирование методов <see cref="DequeArray{TItem}"/>.
-        /// </summary>
-        [Test]
-        public static void TestDequeArray()
-        {
-            var deque = new DequeArray<int>();
-
-            deque.AddFront(4);
-            deque.AddFront(3);
-            deque.AddFront(2);
-            deque.AddFront(1);
-            deque.AddBack(5);
-            deque.AddBack(6);
-            deque.AddBack(7);
-            deque.AddBack(8);
-
-            ClassicAssert.AreEqual(deque.GetElement(0), 1);
-            ClassicAssert.AreEqual(deque.GetElement(1), 2);
-            ClassicAssert.AreEqual(deque.GetElement(2), 3);
-            ClassicAssert.AreEqual(deque.GetElement(3), 4);
-            ClassicAssert.AreEqual(deque.GetElement(4), 5);
-            ClassicAssert.AreEqual(deque.GetElement(5), 6);
-            ClassicAssert.AreEqual(deque.GetElement(6), 7);
-            ClassicAssert.AreEqual(deque.GetElement(7), 8);
-            ClassicAssert.AreEqual(deque.Count, 8);
-
-
-            deque.AddFront(100);
-            deque.AddFront(200);
-            deque.AddBack(10000);
-
-            ClassicAssert.AreEqual(deque.GetElement(0), 200);
-            ClassicAssert.AreEqual(deque.GetElement(1), 100);
-            ClassicAssert.AreEqual(deque.GetElement(2), 1);
-            ClassicAssert.AreEqual(deque.GetElement(3), 2);
-            ClassicAssert.AreEqual(deque.GetElement(4), 3);
-            ClassicAssert.AreEqual(deque.GetElement(5), 4);
-            ClassicAssert.AreEqual(deque.GetElement(6), 5);
-            ClassicAssert.AreEqual(deque.GetElement(7), 6);
-            ClassicAssert.AreEqual(deque.GetElement(8), 7);
-            ClassicAssert.AreEqual(deque.GetElement(9), 8);
-            ClassicAssert.AreEqual(deque.GetElement(10), 10000);
-            ClassicAssert.AreEqual(deque.Count, 11);
-
-
-            deque.RemoveFront();
-            deque.RemoveFront();
-            deque.RemoveFront();
-            deque.RemoveFront();
-
-            ClassicAssert.AreEqual(deque.GetElement(0), 3);
-            ClassicAssert.AreEqual(deque.GetElement(1), 4);
-            ClassicAssert.AreEqual(deque.GetElement(2), 5);
-            ClassicAssert.AreEqual(deque.GetElement(3), 6);
-            ClassicAssert.AreEqual(deque.GetElement(4), 7);
-            ClassicAssert.AreEqual(deque.GetElement(5), 8);
-            ClassicAssert.AreEqual(deque.GetElement(6), 10000);
-            ClassicAssert.AreEqual(deque.Count, 7);
-
-
-            deque.RemoveBack();
-            deque.RemoveBack();
-
-            ClassicAssert.AreEqual(deque.GetElement(0), 3);
-            ClassicAssert.AreEqual(deque.GetElement(1), 4);
-            ClassicAssert.AreEqual(deque.GetElement(2), 5);
-            ClassicAssert.AreEqual(deque.GetElement(3), 6);
-            ClassicAssert.AreEqual(deque.GetElement(4), 7);
-            ClassicAssert.AreEqual(deque.Count, 5);
-
-
-            deque.AddFront(100);
-            deque.AddFront(200);
-            deque.AddBack(10000);
-
-            ClassicAssert.AreEqual(deque.GetElement(0), 200);
-            ClassicAssert.AreEqual(deque.GetElement(1), 100);
-            ClassicAssert.AreEqual(deque.GetElement(2), 3);
-            ClassicAssert.AreEqual(deque.GetElement(3), 4);
-            ClassicAssert.AreEqual(deque.GetElement(4), 5);
-            ClassicAssert.AreEqual(deque.GetElement(5), 6);
-            ClassicAssert.AreEqual(deque.GetElement(6), 7);
-            ClassicAssert.AreEqual(deque.GetElement(7), 10000);
-            ClassicAssert.AreEqual(deque.Count, 8);
-        }
-
-        /// <summary>
-        /// Тестирование методов <see cref="PriorityQueue{TItem}"/>.
-        /// </summary>
-        [Test]
-        public static void TestPriorityQueue()
-        {
-            var priority_queue = new PriorityQueue<int>();
-
-            priority_queue.Push(3);
-            priority_queue.Push(2);
-            priority_queue.Push(1);
-            priority_queue.Push(5);
-            priority_queue.Push(6);
-            priority_queue.Push(7);
-            priority_queue.Push(8);
-            priority_queue.Push(4);
-
-            ClassicAssert.AreEqual(priority_queue.Pop(), 1);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 2);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 3);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 4);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 5);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 6);
-
-            priority_queue.Push(60);
-            priority_queue.Push(70);
-            priority_queue.Push(80);
-            priority_queue.Push(40);
-
-            ClassicAssert.AreEqual(priority_queue.Pop(), 7);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 8);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 40);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 60);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 70);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 80);
-        }
-
-        /// <summary>
-        /// Тестирование методов <see cref="SparseSet"/>.
-        /// </summary>
-        [Test]
-        public static void TestSparseSet()
-        {
-            var sparse_set = new SparseSet(1024);
-            sparse_set.Add(15); // 0
-            sparse_set.Add(20); // 1
-            sparse_set.Add(25); // 2
-            sparse_set.Add(30); // 3
-
-            ClassicAssert.AreEqual(sparse_set.Contains(15), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(20), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(25), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(30), true);
-            ClassicAssert.AreEqual(sparse_set.Count, 4);
-            ClassicAssert.AreEqual(sparse_set.MaxCount, 1024);
-
-            sparse_set.Remove(20);
-
-            ClassicAssert.AreEqual(sparse_set.Contains(20), false);
-            ClassicAssert.AreEqual(sparse_set[0], 15);
-            ClassicAssert.AreEqual(sparse_set[1], 30);
-            ClassicAssert.AreEqual(sparse_set[2], 25);
-
-            ClassicAssert.AreEqual(sparse_set.Count, 3);
-            ClassicAssert.AreEqual(sparse_set.MaxCount, 1024);
-
-            sparse_set.Add(1024);
-            ClassicAssert.AreEqual(sparse_set.Contains(1024), true);
-            ClassicAssert.AreEqual(sparse_set.Count, 4);
-            ClassicAssert.AreEqual(sparse_set.MaxCount, 2048);
-
-            sparse_set.AddValues(233, 3666, 15, 5555, 66, 777);
-            ClassicAssert.AreEqual(sparse_set.Contains(233), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(3666), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(5555), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(15), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(66), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(777), true);
-            ClassicAssert.AreEqual(sparse_set.Count, 9);
-            ClassicAssert.AreEqual(sparse_set.MaxCount, 8192);
-
-            sparse_set.RemoveValues(233, 3666, 5555, 15, 66, 777);
-            ClassicAssert.AreEqual(sparse_set.Count, 3);
-            ClassicAssert.AreEqual(sparse_set.Contains(1024), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(25), true);
-            ClassicAssert.AreEqual(sparse_set.Contains(30), true);
-            ClassicAssert.AreEqual(sparse_set.MaxCount, 8192);
         }
     }
 }

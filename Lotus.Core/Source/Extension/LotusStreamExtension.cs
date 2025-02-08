@@ -357,7 +357,7 @@ namespace Lotus.Core
                 // Читаем данные по порядку
                 for (var i = 0; i < count; i++)
                 {
-                    primitives[i] = (TPrimitive)(object)XConverter.ToEnumOfType(type_item, reader.ReadInt32());
+                    primitives[i] = (TPrimitive)(object)XEnumConverter.ToEnumOfType(type_item, reader.ReadInt32());
                 }
             }
             else

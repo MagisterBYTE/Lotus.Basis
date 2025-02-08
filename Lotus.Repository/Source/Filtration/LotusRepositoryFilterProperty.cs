@@ -287,34 +287,34 @@ namespace Lotus.Repository
             switch (typeCode)
             {
                 case TypeCode.Boolean:
-                    constantExpression = Expression.Constant(XBooleanHelper.Parse(value), propertyType);
+                    constantExpression = Expression.Constant(XBooleanConverter.Parse(value), propertyType);
                     break;
                 case TypeCode.Byte:
-                    constantExpression = Expression.Constant((byte)XNumberHelper.ParseInt(value), propertyType);
+                    constantExpression = Expression.Constant((byte)XNumberConverter.ParseInt(value), propertyType);
                     break;
                 case TypeCode.Int16:
-                    constantExpression = Expression.Constant((short)XNumberHelper.ParseInt(value), propertyType);
+                    constantExpression = Expression.Constant((short)XNumberConverter.ParseInt(value), propertyType);
                     break;
                 case TypeCode.Int32:
-                    constantExpression = Expression.Constant(XNumberHelper.ParseInt(value), propertyType);
+                    constantExpression = Expression.Constant(XNumberConverter.ParseInt(value), propertyType);
                     break;
                 case TypeCode.Int64:
-                    constantExpression = Expression.Constant(XNumberHelper.ParseLong(value), propertyType);
+                    constantExpression = Expression.Constant(XNumberConverter.ParseLong(value), propertyType);
                     break;
                 case TypeCode.Single:
-                    constantExpression = Expression.Constant(XNumberHelper.ParseSingle(value), propertyType);
+                    constantExpression = Expression.Constant(XNumberConverter.ParseSingle(value), propertyType);
                     break;
                 case TypeCode.Double:
-                    constantExpression = Expression.Constant(XNumberHelper.ParseDouble(value), propertyType);
+                    constantExpression = Expression.Constant(XNumberConverter.ParseDouble(value), propertyType);
                     break;
                 case TypeCode.Decimal:
-                    constantExpression = Expression.Constant(XNumberHelper.ParseDecimal(value), propertyType);
+                    constantExpression = Expression.Constant(XNumberConverter.ParseDecimal(value), propertyType);
                     break;
                 case TypeCode.String:
                     constantExpression = Expression.Constant(value, propertyType);
                     break;
                 case TypeCode.DateTime:
-                    constantExpression = Expression.Constant(XDateTimeHelper.Parse(value).ToUniversalTime(), propertyType);
+                    constantExpression = Expression.Constant(XDateTimeConverter.Parse(value).ToUniversalTime(), propertyType);
                     break;
             }
 

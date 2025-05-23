@@ -124,7 +124,7 @@ namespace Lotus.UnitMeasurement
         Pound,
 
         /// <summary>
-        /// Центер.
+        /// Центнер.
         /// </summary>
         Centner,
 

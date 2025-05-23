@@ -511,7 +511,7 @@ namespace Lotus.Algorithm
         event Action OnPathFound;
         #endregion
 
-        #region МЕТОДЫ 
+        #region Methods 
         /// <summary>
         /// Поиск пути по предварительно установленным параметрам.
         /// </summary>

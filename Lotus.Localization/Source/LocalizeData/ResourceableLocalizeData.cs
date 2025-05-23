@@ -115,7 +115,7 @@ namespace Lotus.Localization
         /// <remarks>
         /// Название файла должно совпадать с названием языка/культуры в формате ISO 639-1 или ISO 639-3.
         /// </remarks>
-        /// <param name="uri">Путь длязагрузки ресурсов</param>
+        /// <param name="uri">Путь для загрузки ресурсов.</param>
         protected ResourceableLocalizeData(Uri uri)
         {
             var localPath = uri.IsAbsoluteUri ? uri.LocalPath : uri.OriginalString;

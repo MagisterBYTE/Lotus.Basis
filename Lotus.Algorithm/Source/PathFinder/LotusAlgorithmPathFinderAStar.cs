@@ -324,7 +324,7 @@ namespace Lotus.Algorithm
         }
         #endregion
 
-        #region МЕТОДЫ methods
+        #region Main methods
         /// <summary>
         /// Сброс данных о прохождении пути.
         /// </summary>

@@ -8,6 +8,6 @@ namespace Lotus.Repository
         /// <summary>
         /// Строка для подключения к тестовой базе данных.
         /// </summary>
-        public const string ConnectionString = "Host=localhost;Database=test_date;Username=plate_system_user;Password=12345";
+        public const string ConnectionString = "Host=localhost;Database=test_lotus;Username=postgres;Password=1234";
     }
 }

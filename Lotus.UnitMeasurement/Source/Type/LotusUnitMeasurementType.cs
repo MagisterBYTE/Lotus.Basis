@@ -13,7 +13,7 @@ namespace Lotus.UnitMeasurement
         Undefined = 0,
 
         /// <summary>
-        /// Единица измерения вещей/предметов/абстаркций <see cref="TUnitThing"/>.
+        /// Единица измерения вещей/предметов/абстракций <see cref="TUnitThing"/>.
         /// </summary>
         Thing,
 

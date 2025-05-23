@@ -19,7 +19,7 @@ namespace Lotus.Object3D
     /**
      * \defgroup Object3DTexture Подсистема текстур
      * \ingroup Object3D
-     * \brief Подсистема текстур определяет данные текстуры и праметров ее наложения.
+     * \brief Подсистема текстур определяет данные текстуры и параметров ее наложения.
      * @{
      */
     /// <summary>
@@ -38,7 +38,7 @@ namespace Lotus.Object3D
         Diffuse,
 
         /// <summary>
-        /// Тексутра для формирования бликов.
+        /// Текстура для формирования бликов.
         /// </summary>
         Specular,
 
@@ -135,7 +135,7 @@ namespace Lotus.Object3D
 
         #region Static methods
         /// <summary>
-        /// Загрузка тексутры в память по полному пути.
+        /// Загрузка текстуры в память по полному пути.
         /// </summary>
         /// <param name="fileName">Имя файла.</param>
         /// <returns>Объект <see cref="MemoryStream"/>.</returns>
@@ -377,7 +377,7 @@ namespace Lotus.Object3D
         }
 
         /// <summary>
-        /// Изменение статуса использования aльфа каналы текстуры как её прозрачности.
+        /// Изменение статуса использования альфа каналы текстуры как её прозрачности.
         /// Метод автоматически вызывается после установки соответствующего свойства.
         /// </summary>
         protected virtual void RaiseAlphaIsTransparencyChanged()
@@ -441,7 +441,7 @@ namespace Lotus.Object3D
         public TextureSet(Scene3D ownerScene)
         {
             _ownerScene = ownerScene;
-            _name = "Тексутры";
+            _name = "Текстуры";
             _textures = new ListArray<Texture>
             {
                 IsNotify = true

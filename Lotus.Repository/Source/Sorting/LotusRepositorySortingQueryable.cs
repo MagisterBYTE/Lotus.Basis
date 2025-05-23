@@ -86,7 +86,7 @@ namespace Lotus.Repository
             // The type that represents each row in the table
             var itemType = typeof(TEntity);
 
-            // Name the parameter passed into the lamda "x", of the type TEntity
+            // Name the parameter passed into the lambda "x", of the type TEntity
             var parameter = Expression.Parameter(itemType, "x");
 
             // Loop through the sorted columns to build the expression tree

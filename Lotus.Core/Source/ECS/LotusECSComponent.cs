@@ -15,14 +15,14 @@ namespace Lotus.Core
         /// <summary>
         /// Проверка наличия компонента для указанной сущности.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         /// <returns>Статус наличия компонента.</returns>
         bool HasEntity(int entityId);
 
         /// <summary>
         /// Удаление компонента для указанной сущности.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         void RemoveEntity(int entityId);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Lotus.Core
         protected internal SparseSet<TComponent> _components;
         #endregion
 
-        #region СВОЙСТВА 
+        #region Properties 
         /// <summary>
         /// Мир.
         /// </summary>
@@ -106,7 +106,7 @@ namespace Lotus.Core
         /// <summary>
         /// Добавить компонент для указанной сущности.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         /// <returns>Ссылка на созданный компонент.</returns>
         public ref TComponent AddEntity(int entityId)
         {
@@ -120,7 +120,7 @@ namespace Lotus.Core
         /// <summary>
         /// Получит или добавить компонент для указанной сущности.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         /// <returns>Ссылка на компонент.</returns>
         public ref TComponent GetOrAddEntity(int entityId)
         {
@@ -142,7 +142,7 @@ namespace Lotus.Core
         /// <summary>
         /// Проверка наличия компонента для указанной сущности.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         /// <returns>Статус наличия компонента.</returns>
         public bool HasEntity(int entityId)
         {
@@ -152,7 +152,7 @@ namespace Lotus.Core
         /// <summary>
         /// Удаление компонента для указанной сущности.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         public void RemoveEntity(int entityId)
         {
             _world.GetEntity(entityId)._componentCount--;
@@ -163,7 +163,7 @@ namespace Lotus.Core
         /// <summary>
         /// Получить компонент для указанной сущности.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         /// <returns>Ссылка на компонент.</returns>
         public ref TComponent GetValue(int entityId)
         {
@@ -173,7 +173,7 @@ namespace Lotus.Core
         /// <summary>
         /// Установить/обновить компонент для указанной сущности.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         /// <param name="value">Компонент.</param>
         public void SetValue(int entityId, in TComponent value)
         {

@@ -30,7 +30,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="value">Объект.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Логическое значение.</returns>
         public static bool ToBoolean(object value, bool defaultValue = false)
         {
             if (value == null) return defaultValue;
@@ -46,7 +46,7 @@ namespace Lotus.Core
         /// Преобразование текста в логическое значение.
         /// </summary>
         /// <param name="text">Текст.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Логическое значение.</returns>
         public static bool Parse(string text)
         {
             return Array.IndexOf(TrueValues, text) > -1;

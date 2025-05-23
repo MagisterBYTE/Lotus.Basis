@@ -5,18 +5,18 @@ using UnityEditor;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Lotus.Core
+namespace Lotus.Core.Protection
 {
     /// <summary>
     /// Статический класс для тестирования методов защиты модуля базового ядра.
     /// </summary>
-    public static class XCoreProtectionTesting
+    public static class ProtectionTests
     {
         /// <summary>
         /// Тестирование методов защиты.
         /// </summary>
         [Test]
-        public static void TestProtection()
+        public static void Encrypted_Decrypted()
         {
             TProtectionInt protect_ind = 6566;
             var encrypted_value = protect_ind.EncryptedValue;

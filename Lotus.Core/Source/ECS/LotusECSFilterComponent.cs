@@ -13,20 +13,20 @@ namespace Lotus.Core
         /// <summary>
         /// Добавить сущность к фильтру.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         void AddEntity(int entityId);
 
         /// <summary>
         /// Проверка наличия сущности в фильтре.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         /// <returns>Статус наличия сущности.</returns>
         bool HasEntity(int entityId);
 
         /// <summary>
         /// Удалить сущность из фильтра.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         void RemoveEntity(int entityId);
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Lotus.Core
         /// <summary>
         /// Добавить сущность к фильтру.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddEntity(int entityId)
         {
@@ -150,7 +150,7 @@ namespace Lotus.Core
         /// <summary>
         /// Проверка наличия сущности в фильтре.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         /// <returns>Статус наличия сущности.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool HasEntity(int entityId)
@@ -161,7 +161,7 @@ namespace Lotus.Core
         /// <summary>
         /// Удалить сущность из фильтра.
         /// </summary>
-        /// <param name="entityId">Индентификатор сущности.</param>
+        /// <param name="entityId">Идентификатор сущности.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void RemoveEntity(int entityId)
         {

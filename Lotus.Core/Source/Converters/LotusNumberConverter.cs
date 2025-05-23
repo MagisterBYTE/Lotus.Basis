@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace Lotus.Core
@@ -18,13 +19,73 @@ namespace Lotus.Core
     /// </summary>
     public static class XNumberConverter
     {
-        #region Int32 
+        #region Const
+        const NumberStyles RealNumberStyles = NumberStyles.AllowExponent
+                                              | NumberStyles.AllowDecimalPoint
+                                              | NumberStyles.AllowLeadingSign
+                                              | NumberStyles.Float
+                                              | NumberStyles.AllowThousands;
+        #endregion
+
+        #region Int32
+        /// <summary>
+        /// Преобразование в текст который можно сконвертировать в целый тип.
+        /// </summary>
+        /// <param name="text">Текст.</param>
+        /// <param name="max">Максимальное кол-во символов для анализа.</param>
+        /// <returns>Текст.</returns>
+        public static string ParsableTextInteger(string text, int max)
+        {
+            var number = new StringBuilder(text.Length);
+
+            var addMinus = false;
+            var hasNumber = false;
+            var enFormat = ((text.Contains(',') && text.Contains('.')) || text.Contains('.'));
+            var ruFormat = (text.Contains(',') && text.Contains('.') == false && text.Count(x => x == ',') == 1);
+            for (var i = 0; i < text.Length; i++)
+            {
+                var c = text[i];
+
+                if (c == '-' && (i != text.Length - 1) && addMinus == false)
+                {
+                    number.Append(c);
+                    addMinus = true;
+                    continue;
+                }
+
+                if (c is >= '0' and <= '9')
+                {
+                    hasNumber = true;
+                    number.Append(c);
+                }
+
+                // Не анализируем после точки
+                if (c == '.' && hasNumber && enFormat)
+                {
+                    break;
+                }
+
+                // Не анализируем после запятой
+                if (c == ',' && hasNumber && ruFormat)
+                {
+                    break;
+                }
+
+                if (number.Length > max)
+                {
+                    break;
+                }
+            }
+
+            return number.ToString();
+        }
+
         /// <summary>
         /// Преобразование объекта в целочисленное значение.
         /// </summary>
         /// <param name="value">Объект.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Целочисленное значение.</returns>
         public static int ToInt(object value, int defaultValue = 0)
         {
             if (value == null) return defaultValue;
@@ -43,33 +104,7 @@ namespace Lotus.Core
         /// <returns>Текст.</returns>
         public static string ParsableTextInt(string text)
         {
-            var number = new StringBuilder(text.Length);
-
-            var add_minus = false;
-            const int max = 11;
-            for (var i = 0; i < text.Length; i++)
-            {
-                var c = text[i];
-
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
-                {
-                    number.Append(c);
-                    add_minus = true;
-                    continue;
-                }
-
-                if (c is >= '0' and <= '9')
-                {
-                    number.Append(c);
-                }
-
-                if (number.Length > max)
-                {
-                    break;
-                }
-            }
-
-            return number.ToString();
+            return ParsableTextInteger(text, 11);
         }
 
         /// <summary>
@@ -77,7 +112,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Целочисленное значение.</returns>
         public static int ParseInt(string text, int defaultValue = 0)
         {
             text = ParsableTextInt(text);
@@ -116,7 +151,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="value">Объект.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Целочисленное значение.</returns>
         public static long ToLong(object value, long defaultValue = 0)
         {
             if (value == null) return defaultValue;
@@ -135,33 +170,7 @@ namespace Lotus.Core
         /// <returns>Текст.</returns>
         public static string ParsableTextLong(string text)
         {
-            var number = new StringBuilder(text.Length);
-
-            var add_minus = false;
-            const int max = 19;
-            for (var i = 0; i < text.Length; i++)
-            {
-                var c = text[i];
-
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
-                {
-                    number.Append(c);
-                    add_minus = true;
-                    continue;
-                }
-
-                if (c is >= '0' and <= '9')
-                {
-                    number.Append(c);
-                }
-
-                if (number.Length > max)
-                {
-                    break;
-                }
-            }
-
-            return number.ToString();
+            return ParsableTextInteger(text, 19);
         }
 
         /// <summary>
@@ -169,7 +178,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Целочисленное значение.</returns>
         public static long ParseLong(string text, long defaultValue = 0)
         {
             text = ParsableTextLong(text);
@@ -201,13 +210,69 @@ namespace Lotus.Core
         }
         #endregion
 
-        #region Single 
+        #region Single
+        public static string ParseableTextReal(string text)
+        {
+            var number = new StringBuilder(text.Length);
+
+            var add_minus = false;
+            var add_dot = false;
+            var add_e = -1;
+            var enFormat = ((text.Contains(',') && text.Contains('.')) || text.Contains('.'));
+            var ruFormat = (text.Contains(',') && text.Contains('.') == false && text.Count(x => x == ',') == 1);
+            for (var i = 0; i < text.Length; i++)
+            {
+                var c = text[i];
+
+                if (c == '-' && (i != text.Length - 1))
+                {
+                    // Добавляем перед E
+                    if (i == add_e + 1)
+                    {
+                        number.Append(c);
+                        continue;
+                    }
+                    else
+                    {
+                        if (add_minus == false)
+                        {
+                            number.Append(c);
+                            add_minus = true;
+                            continue;
+                        }
+                    }
+                }
+
+                if (((c == ',' && ruFormat) && (i != text.Length - 1) && add_dot == false) ||
+                    ((c == '.' && enFormat) && (i != text.Length - 1) && add_dot == false))
+                {
+                    number.Append('.');
+                    add_dot = true;
+                    continue;
+                }
+
+                if ((c is >= '0' and <= '9'))
+                {
+                    number.Append(c);
+                    continue;
+                }
+
+                if ((c == 'E' || c == 'e'))
+                {
+                    number.Append(c);
+                    add_e = i;
+                }
+            }
+
+            return number.ToString();
+        }
+
         /// <summary>
         /// Преобразование объекта в вещественное значение одинарной точности.
         /// </summary>
         /// <param name="value">Объект.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Вещественное значение одинарной точности.</returns>
         public static float ToSingle(object value, float defaultValue = 0)
         {
             if (value == null) return defaultValue;
@@ -226,35 +291,7 @@ namespace Lotus.Core
         /// <returns>Текст.</returns>
         public static string ParsableTextSingle(string text)
         {
-            var number = new StringBuilder(text.Length);
-
-            var add_minus = false;
-            var add_dot = false;
-            for (var i = 0; i < text.Length; i++)
-            {
-                var c = text[i];
-
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
-                {
-                    number.Append(c);
-                    add_minus = true;
-                    continue;
-                }
-
-                if ((c == ',' || c == '.') && (i != text.Length - 1) && add_dot == false)
-                {
-                    number.Append('.');
-                    add_dot = true;
-                    continue;
-                }
-
-                if (c is >= '0' and <= '9')
-                {
-                    number.Append(c);
-                }
-            }
-
-            return number.ToString();
+            return ParseableTextReal(text);
         }
 
         /// <summary>
@@ -262,12 +299,12 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Вещественное значение одинарной точности.</returns>
         public static float ParseSingle(string text, float defaultValue = 0)
         {
             text = ParsableTextSingle(text);
 
-            if (float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
+            if (float.TryParse(text, RealNumberStyles, CultureInfo.InvariantCulture, out var resultValue))
             {
                 return resultValue;
             }
@@ -285,7 +322,7 @@ namespace Lotus.Core
         {
             text = ParsableTextSingle(text);
 
-            if (float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
+            if (float.TryParse(text, RealNumberStyles, CultureInfo.InvariantCulture, out result))
             {
                 return true;
             }
@@ -300,7 +337,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="value">Объект.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Вещественное значение двойной точности.</returns>
         public static double ToDouble(object value, double defaultValue = 0)
         {
             if (value == null) return defaultValue;
@@ -319,35 +356,7 @@ namespace Lotus.Core
         /// <returns>Текст.</returns>
         public static string ParsableTextDouble(string text)
         {
-            var number = new StringBuilder(text.Length);
-
-            var add_minus = false;
-            var add_dot = false;
-            for (var i = 0; i < text.Length; i++)
-            {
-                var c = text[i];
-
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
-                {
-                    number.Append(c);
-                    add_minus = true;
-                    continue;
-                }
-
-                if ((c == ',' || c == '.') && (i != text.Length - 1) && add_dot == false)
-                {
-                    number.Append('.');
-                    add_dot = true;
-                    continue;
-                }
-
-                if (c is >= '0' and <= '9')
-                {
-                    number.Append(c);
-                }
-            }
-
-            return number.ToString();
+            return ParseableTextReal(text);
         }
 
         /// <summary>
@@ -355,12 +364,12 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Вещественное значение двойной точности.</returns>
         public static double ParseDouble(string text, double defaultValue = 0)
         {
             text = ParsableTextDouble(text);
 
-            if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
+            if (double.TryParse(text, RealNumberStyles, CultureInfo.InvariantCulture, out var resultValue))
             {
                 return resultValue;
             }
@@ -378,7 +387,7 @@ namespace Lotus.Core
         {
             text = ParsableTextDouble(text);
 
-            if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
+            if (double.TryParse(text, RealNumberStyles, CultureInfo.InvariantCulture, out result))
             {
                 return true;
             }
@@ -393,7 +402,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="value">Объект.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Вещественное значение.</returns>
         public static decimal ToDecimal(object value, decimal defaultValue = 0)
         {
             if (value == null) return defaultValue;
@@ -413,35 +422,7 @@ namespace Lotus.Core
         /// <returns>Текст.</returns>
         public static string ParsableTextDecimal(string text)
         {
-            var number = new StringBuilder(text.Length);
-
-            var add_minus = false;
-            var add_dot = false;
-            for (var i = 0; i < text.Length; i++)
-            {
-                var c = text[i];
-
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
-                {
-                    number.Append(c);
-                    add_minus = true;
-                    continue;
-                }
-
-                if ((c == ',' || c == '.') && (i != text.Length - 1) && add_dot == false)
-                {
-                    number.Append('.');
-                    add_dot = true;
-                    continue;
-                }
-
-                if (c is >= '0' and <= '9')
-                {
-                    number.Append(c);
-                }
-            }
-
-            return number.ToString();
+            return ParseableTextReal(text);
         }
 
         /// <summary>
@@ -449,12 +430,12 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Вещественное значение.</returns>
         public static decimal ParseDecimal(string text, decimal defaultValue = 0)
         {
             text = ParsableTextDecimal(text);
 
-            if (decimal.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
+            if (decimal.TryParse(text, RealNumberStyles, CultureInfo.InvariantCulture, out var resultValue))
             {
                 return resultValue;
             }
@@ -467,7 +448,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
-        /// <returns>Значение.</returns>
+        /// <returns>Вещественное значение.</returns>
         public static decimal ParseCurrency(string text, decimal defaultValue = 0)
         {
             text = ParsableTextDecimal(text);

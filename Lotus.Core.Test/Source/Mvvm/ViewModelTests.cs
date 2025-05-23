@@ -7,12 +7,12 @@ using UnityEditor;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Lotus.Core
+namespace Lotus.Core.Mvvm
 {
     /// <summary>
     /// Статический класс для тестирования подсистемы ViewModel модуля базового ядра.
     /// </summary>
-    public static class XCoreViewModelTesting
+    public static class ViewModelTests
     {
         /// <summary>
         /// Служебный класс для тестирования.

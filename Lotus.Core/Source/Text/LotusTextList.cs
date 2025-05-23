@@ -308,7 +308,7 @@ namespace Lotus.Core
                     _lines[i].RawString = current.Replace("=", "").Replace("  ", " ");
                     if (_lines[i].RawString.Contains("МЕТОДЫ"))
                     {
-                        var text = _lines[i].RawString.RemoveFirstOccurrence("#region");
+                        var text = _lines[i].RawString.RemoveFirstMatch("#region");
                         var texts = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                         if (texts.Length > 1)
                         {

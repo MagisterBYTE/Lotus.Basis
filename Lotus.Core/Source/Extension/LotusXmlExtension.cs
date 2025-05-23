@@ -102,7 +102,7 @@ namespace Lotus.Core
                     {
                         if (i % lengthString == 0)
                         {
-                            sb.Append("\n");
+                            sb.Append('\n');
                         }
                     }
 
@@ -136,7 +136,7 @@ namespace Lotus.Core
                     {
                         if (i % lengthString == 0)
                         {
-                            sb.Append("\n");
+                            sb.Append('\n');
                         }
                     }
 
@@ -170,7 +170,7 @@ namespace Lotus.Core
                     {
                         if (i % lengthString == 0)
                         {
-                            sb.Append("\n");
+                            sb.Append('\n');
                         }
                     }
 
@@ -447,7 +447,7 @@ namespace Lotus.Core
         /// <param name="name">Имя атрибута.</param>
         /// <param name="defaultValue">Значение по умолчанию в случает отсутствия атрибута.</param>
         /// <returns>Перечисление.</returns>
-        public static TEnum ReadEnumFromAttribute<TEnum>(this XmlReader xmlReader, string name, TEnum? defaultValue = default(TEnum))
+        public static TEnum ReadEnumFromAttribute<TEnum>(this XmlReader xmlReader, string name, TEnum? defaultValue = default)
         {
             string? value;
             if ((value = xmlReader.GetAttribute(name)) != null)
@@ -794,7 +794,7 @@ namespace Lotus.Core
         /// <param name="attributeName">Имя атрибута.</param>
         /// <param name="defaultValue">Значение по умолчанию.</param>
         /// <returns>Значение атрибута.</returns>
-        public static TEnum GetAttributeValueFromNameAsEnum<TEnum>(this XmlNode @this, string attributeName, TEnum? defaultValue = default(TEnum))
+        public static TEnum GetAttributeValueFromNameAsEnum<TEnum>(this XmlNode @this, string attributeName, TEnum? defaultValue = default)
         {
             if (@this.Attributes == null) return defaultValue!;
 
@@ -826,7 +826,7 @@ namespace Lotus.Core
         /// <param name="defaultValue">Значение по умолчанию.</param>
         /// <returns>Значение атрибута.</returns>
         public static DateTime GetAttributeValueFromNameAsDateTime(this XmlNode @this, string attributeName,
-            DateTime defaultValue = default(DateTime))
+            DateTime defaultValue = default)
         {
             if (@this.Attributes == null) return defaultValue;
 

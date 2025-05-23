@@ -170,7 +170,7 @@ namespace Lotus.Core.Inspector
         }
         #endregion
 
-        #region ПОЛУЧЕНИЯ methods
+        #region Static get methods
         /// <summary>
         /// Получение значения из декларированного значения в различных формах.
         /// </summary>

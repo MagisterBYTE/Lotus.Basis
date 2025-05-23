@@ -5,12 +5,12 @@ using UnityEditor;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Lotus.Core
+namespace Lotus.Core.Text
 {
     /// <summary>
     /// Статический класс для тестирования методов подсистемы текстовых данных базового ядра.
     /// </summary>
-    public static class XCoreTextTesting
+    public static class TextTests
     {
         /// <summary>
         /// Тестирование методов подсистемы текстовых данных.

@@ -230,7 +230,7 @@ namespace Lotus.Core
         /// <returns>Число.</returns>
         public static float ToFloat(this string @this)
         {
-            return XNumberConverter.ParseInt(@this);
+            return XNumberConverter.ParseSingle(@this);
         }
 
         /// <summary>
@@ -407,7 +407,7 @@ namespace Lotus.Core
                 if (@this.Length < length)
                 {
                     var count = length - @this.Length;
-                    return @this.Insert(@this.Length - 1, new string(symbol, count));
+                    return @this.Insert(@this.Length, new string(symbol, count));
                 }
                 else
                 {
@@ -657,7 +657,7 @@ namespace Lotus.Core
         /// <param name="this">Строка.</param>
         /// <param name="what">Заданная строка.</param>
         /// <returns>Модифицированная строка.</returns>
-        public static string RemoveFirstOccurrence(this string @this, string what)
+        public static string RemoveFirstMatch(this string @this, string what)
         {
             var index = @this.IndexOf(what);
             if (index > -1)
@@ -673,7 +673,7 @@ namespace Lotus.Core
         /// <param name="this">Строка.</param>
         /// <param name="what">Заданная строка.</param>
         /// <returns>Модифицированная строка.</returns>
-        public static string RemoveLastOccurrence(this string @this, string what)
+        public static string RemoveLastMatch(this string @this, string what)
         {
             var index = @this.LastIndexOf(what);
             if (index > -1)
@@ -1071,7 +1071,14 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    builder.Append(current);
+                    if (i == 0)
+                    {
+                        builder.Append(Char.ToUpper(current));
+                    }
+                    else
+                    {
+                        builder.Append(Char.ToLower(current));
+                    }
                 }
             }
             return builder.ToString();

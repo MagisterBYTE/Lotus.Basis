@@ -155,6 +155,8 @@ namespace Lotus.Core
         /// <returns>Массив.</returns>
         public static TType[] RemoveAt<TType>(TType[] array, int index)
         {
+            if (index < 0 || index >= array.Length) return array;
+
             return RemoveAt(array, index, 1);
         }
 

@@ -4,18 +4,18 @@ using UnityEditor;
 #endif
 using NUnit.Framework;
 
-namespace Lotus.Core
+namespace Lotus.Core.Parameters
 {
     /// <summary>
     /// Статический класс для тестирования подсистемы параметрических объектов модуля базового ядра.
     /// </summary>
-    public static class XCoreParametersTesting
+    public static class ParametersTests
     {
         /// <summary>
         /// Тестирование подсистемы параметрических объектов.
         /// </summary>
         [Test]
-        public static void TestParameters()
+        public static void Create()
         {
             // Просто объект
             // "Человек":

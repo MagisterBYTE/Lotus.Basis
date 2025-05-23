@@ -196,7 +196,7 @@ namespace Lotus.Core
         }
         #endregion
 
-        #region Methods methods
+        #region Constructor methods
         /// <summary>
         /// Добавление декларации конструктора.
         /// </summary>

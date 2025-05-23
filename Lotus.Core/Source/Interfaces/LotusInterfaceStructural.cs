@@ -10,7 +10,7 @@ namespace Lotus.Core
         /// <summary>
         /// Проверка возможности адаптации объекта к указанному типу.
         /// </summary>
-        /// <typeparam name="TType">Тип к корому нужно адаптироваться.</typeparam>
+        /// <typeparam name="TType">Тип к которому нужно адаптироваться.</typeparam>
         /// <param name="parameters">Параметры адаптации.</param>
         /// <returns>Статус адаптации.</returns>
         bool CheckAdaptedObject<TType>(CParameters? parameters = null);
@@ -18,7 +18,7 @@ namespace Lotus.Core
         /// <summary>
         /// Получение объекта адаптированного к указанному типу.
         /// </summary>
-        /// <typeparam name="TType">Тип к корому нужно адаптироваться.</typeparam>
+        /// <typeparam name="TType">Тип к которому нужно адаптироваться.</typeparam>
         /// <param name="parameters">Параметры адаптации.</param>
         /// <returns>Объект.</returns>
         TType GetAdaptedObject<TType>(CParameters? parameters = null);

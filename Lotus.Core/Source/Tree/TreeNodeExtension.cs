@@ -84,7 +84,7 @@ namespace Lotus.Core
         /// <summary>
         /// Рекурсивное снятие флажка выделения.
         /// </summary>
-        /// <param name="this">Текущий узел</param>
+        /// <param name="this">Текущий узел.</param>
         public static void UncheckAll(this ILotusTreeNode @this)
         {
             @this.IsChecked = false;
@@ -104,7 +104,7 @@ namespace Lotus.Core
         /// False - если не отмечен ни один узел.<br></br>
         /// Рекурсивно проходит вверх по дереву.
         /// </summary>
-        /// <param name="this">Текущий узел</param>
+        /// <param name="this">Текущий узел.</param>
         public static void UpdateParentsCheck(this ILotusTreeNode @this)
         {
             var parent = @this.IParentTreeNode;

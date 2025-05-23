@@ -344,7 +344,7 @@ namespace Lotus.Core
         /// <param name="reader">Средство чтения данных в бинарном формате.</param>
         /// <param name="count">Количество элементов.</param>
         /// <returns>Массив примитивных данных.</returns>
-        public static TPrimitive[] ReadPimitives<TPrimitive>(this BinaryReader reader, int count)
+        public static TPrimitive[] ReadPrimitives<TPrimitive>(this BinaryReader reader, int count)
         {
             var type_item = typeof(TPrimitive);
 
@@ -409,43 +409,43 @@ namespace Lotus.Core
                         break;
                     case TypeCode.Int32:
                         {
-                            var bytes = reader.ReadBytes(count * sizeof(ushort));
+                            var bytes = reader.ReadBytes(count * sizeof(int));
                             Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
                         }
                         break;
                     case TypeCode.UInt32:
                         {
-                            var bytes = reader.ReadBytes(count * sizeof(ushort));
+                            var bytes = reader.ReadBytes(count * sizeof(uint));
                             Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
                         }
                         break;
                     case TypeCode.Int64:
                         {
-                            var bytes = reader.ReadBytes(count * sizeof(ushort));
+                            var bytes = reader.ReadBytes(count * sizeof(long));
                             Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
                         }
                         break;
                     case TypeCode.UInt64:
                         {
-                            var bytes = reader.ReadBytes(count * sizeof(ushort));
+                            var bytes = reader.ReadBytes(count * sizeof(ulong));
                             Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
                         }
                         break;
                     case TypeCode.Single:
                         {
-                            var bytes = reader.ReadBytes(count * sizeof(ushort));
+                            var bytes = reader.ReadBytes(count * sizeof(float));
                             Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
                         }
                         break;
                     case TypeCode.Double:
                         {
-                            var bytes = reader.ReadBytes(count * sizeof(ushort));
+                            var bytes = reader.ReadBytes(count * sizeof(double));
                             Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
                         }
                         break;
                     case TypeCode.Decimal:
                         {
-                            var bytes = reader.ReadBytes(count * sizeof(ushort));
+                            var bytes = reader.ReadBytes(count * sizeof(decimal));
                             Buffer.BlockCopy(bytes, 0, primitives, 0, bytes.Length);
                         }
                         break;

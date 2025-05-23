@@ -10,10 +10,10 @@ namespace Lotus.Core
     /// </summary>
     public class CEcsWorldConfigs
     {
-        public int EntityCachSize = 1024;
-        public int ComponentCachSize = 1024;
-        public int PoolsCachSize = 128;
-        public int EntityTypesCachSize = 256;
+        public int EntityCacheSize = 1024;
+        public int ComponentCacheSize = 1024;
+        public int PoolsCacheSize = 128;
+        public int EntityTypesCacheSize = 256;
     }
 
     /// <summary>
@@ -80,18 +80,18 @@ namespace Lotus.Core
         /// <param name="configs">Конфигурация начальных настроек мира.</param>
         public CEcsWorld(CEcsWorldConfigs? configs = null)
         {
-            _maxCountEntity = configs is null ? 512 : configs.EntityCachSize;
+            _maxCountEntity = configs is null ? 512 : configs.EntityCacheSize;
             _denseEntities = new TEcsEntity[_maxCountEntity];
             _sparseEntities = new int[_maxCountEntity];
             _removedEntities = new int[_maxCountEntity];
 
-            _componentsData = new Dictionary<Type, ILotusEcsComponentData>(configs is null ? 512 : configs.ComponentCachSize);
+            _componentsData = new Dictionary<Type, ILotusEcsComponentData>(configs is null ? 512 : configs.ComponentCacheSize);
 
             _filterComponents = new ListArray<CEcsFilterComponent>(24);
         }
         #endregion
 
-        #region РАБОТЫ methods
+        #region Entity methods
         /// <summary>
         /// Создание новой сущности.
         /// </summary>
@@ -195,7 +195,7 @@ namespace Lotus.Core
         }
         #endregion
 
-        #region РАБОТЫ methods
+        #region Component methods
         /// <summary>
         /// Добавление к указанной сущности компонента указанного типа.
         /// </summary>
@@ -378,7 +378,7 @@ namespace Lotus.Core
         }
         #endregion
 
-        #region РАБОТЫ methods
+        #region Filter methods
         /// <summary>
         /// Создание пустого фильтра компонентов.
         /// </summary>

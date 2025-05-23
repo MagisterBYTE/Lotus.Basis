@@ -5,12 +5,12 @@ using UnityEditor;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Lotus.Core
+namespace Lotus.Core.ECS
 {
     /// <summary>
     /// Статический класс для тестирования методов подсистемы ECS базового ядра.
     /// </summary>
-    public static class XCoreECSTesting
+    public static class ECSTests
     {
         /// <summary>
         /// Служебный класс для тестирования.

@@ -7,7 +7,7 @@ using System.Reflection;
 namespace Lotus.Core
 {
     /** \addtogroup CoreHelpers
-	*@{*/
+    *@{*/
     /// <summary>
     /// Статический класс реализующий дополнительные методы для работы с типом <see cref="Enum"/>.
     /// </summary>

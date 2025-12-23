@@ -138,6 +138,24 @@ namespace Lotus.Core
         }
         #endregion
 
+        #region IEnumerable<ILotusNameable> 
+        /// <summary>
+        /// Проверка что коллекция содержит хотя бы один элемент со свойством name равным value.
+        /// </summary>
+        /// <param name="this">Коллекция.</param>
+        /// <param name="value">Искомое значение.</param>
+        /// <returns>Статус поиска.</returns>
+        public static bool ContainsName(this IEnumerable<ILotusNameable> @this, string value)
+        {
+            foreach (var item in @this)
+            {
+                if (item.Name == value) return true;
+            }
+
+            return false;
+        }
+        #endregion
+
         #region ICollection 
         /// <summary>
         /// Добавление элемента к коллекцию только в случае его отсутствия.

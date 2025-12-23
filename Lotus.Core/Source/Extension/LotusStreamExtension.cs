@@ -346,23 +346,31 @@ namespace Lotus.Core
         /// <returns>Массив примитивных данных.</returns>
         public static TPrimitive[] ReadPrimitives<TPrimitive>(this BinaryReader reader, int count)
         {
-            var type_item = typeof(TPrimitive);
+            var typeItem = typeof(TPrimitive);
 
             // Создаем массив
             var primitives = new TPrimitive[count];
 
             // Перечисление
-            if (type_item.IsEnum)
+            if (typeItem.IsEnum)
             {
                 // Читаем данные по порядку
                 for (var i = 0; i < count; i++)
                 {
-                    primitives[i] = (TPrimitive)(object)XEnumConverter.ToEnumOfType(type_item, reader.ReadInt32());
+                    var value = XEnumConverter.ToEnumOfType(typeItem, reader.ReadInt32());
+                    if (value is not null)
+                    {
+                        primitives[i] = (TPrimitive)(object)value;
+                    }
+                    else
+                    {
+                        primitives[i] = default;
+                    }
                 }
             }
             else
             {
-                var type_code = Type.GetTypeCode(type_item);
+                var type_code = Type.GetTypeCode(typeItem);
                 switch (type_code)
                 {
                     case TypeCode.Empty:

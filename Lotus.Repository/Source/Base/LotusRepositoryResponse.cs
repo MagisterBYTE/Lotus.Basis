@@ -54,11 +54,23 @@ namespace Lotus.Repository
         /// Формирование данных в случае неуспешности выполнения метода/операции.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения метода.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <returns>Данные.</returns>
-        public static Response Failed(int code, string message)
+        public static Response Failed(int? code = null, object? value = null)
         {
-            return new Response(code, message);
+            return new Response(false, code, value);
+        }
+
+        /// <summary>
+        /// Формирование данных в случае неуспешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Данные.</returns>
+        public static Response Failed(string message, int? code = null, object? value = null)
+        {
+            return new Response(false, message, code, value);
         }
         #endregion
 
@@ -66,21 +78,34 @@ namespace Lotus.Repository
         /// <summary>
         /// Формирование данных в случае успешности выполнения метода/операции.
         /// </summary>
+        /// <param name="result">Результат/ответ.</param>
         /// <returns>Данные</returns>
-        public static Response Succeed()
+        public static Response Succeed(Result result)
         {
-            return Response.Ok;
+            return new Response(result);
         }
 
         /// <summary>
         /// Формирование данных в случае успешности выполнения метода/операции.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения метода.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <returns>Данные.</returns>
-        public static Response Succeed(int code, string message)
+        public static Response Succeed(int? code = null, object? value = null)
         {
-            return new Response(code, message, default, true);
+            return new Response(true, code, value);
+        }
+
+        /// <summary>
+        /// Формирование данных в случае успешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Данные.</returns>
+        public static Response Succeed(string message, int? code = null, object? value = null)
+        {
+            return new Response(true, message, code, value);
         }
         #endregion
 
@@ -111,23 +136,24 @@ namespace Lotus.Repository
         /// <summary>
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
+        /// <param name="status">Статус выполнения операции.</param>
         /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения метода.</param>
-        public Response(int code, string message)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        public Response(bool status, int? code = null, object? value = null)
         {
-            Result = new Result(code, message, null, false);
+            Result = new Result(status, code, value);
         }
 
         /// <summary>
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
-        /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения операции.</param>
-        /// <param name="value">Значение результата выполнения операции.</param>
         /// <param name="status">Статус выполнения операции.</param>
-        public Response(int code, string message, object? value, bool status)
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        public Response(bool status, string message, int? code = null, object? value = null)
         {
-            Result = new Result(code, message, value, status);
+            Result = new Result(status, message, code, value);
         }
         #endregion
     }
@@ -160,11 +186,23 @@ namespace Lotus.Repository
         /// Формирование данных в случае неуспешности выполнения метода/операции.
         /// </summary>
         /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения метода.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
         /// <returns>Данные.</returns>
-        public new static Response<TPayload> Failed(int code, string message)
+        public new static Response<TPayload> Failed(int? code = null, object? value = null)
         {
-            return new Response<TPayload>(code, message);
+            return new Response<TPayload>(false, code, value);
+        }
+
+        /// <summary>
+        /// Формирование данных в случае неуспешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Данные.</returns>
+        public new static Response<TPayload> Failed(string message, int? code = null, object? value = null)
+        {
+            return new Response<TPayload>(false, message, code, value);
         }
         #endregion
 
@@ -172,11 +210,44 @@ namespace Lotus.Repository
         /// <summary>
         /// Формирование данных в случае успешности выполнения метода/операции.
         /// </summary>
-        /// <param name="data">Объект данных.</param>
-        /// <returns>Данные.</returns>
-        public static Response<TPayload> Succeed(TPayload data)
+        /// <param name="payload">Полезные данные.</param>
+        /// <returns>Данные</returns>
+        public static Response<TPayload> Succeed(TPayload payload)
         {
-            return new Response<TPayload>(data);
+            return new Response<TPayload>(payload);
+        }
+
+        /// <summary>
+        /// Формирование данных в случае успешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="result">Результат/ответ.</param>
+        /// <returns>Данные</returns>
+        public new static Response<TPayload> Succeed(Result result)
+        {
+            return new Response<TPayload>(result);
+        }
+
+        /// <summary>
+        /// Формирование данных в случае успешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Данные.</returns>
+        public new static Response<TPayload> Succeed(int? code = null, object? value = null)
+        {
+            return new Response<TPayload>(true, code, value);
+        }
+
+        /// <summary>
+        /// Формирование данных в случае успешности выполнения метода/операции.
+        /// </summary>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        /// <returns>Данные.</returns>
+        public new Response<TPayload> Succeed(string message, int? code = null, object? value = null)
+        {
+            return new Response<TPayload>(true, message, code, value);
         }
         #endregion
 
@@ -216,11 +287,24 @@ namespace Lotus.Repository
         /// <summary>
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
+        /// <param name="status">Статус выполнения операции.</param>
         /// <param name="code">Код.</param>
-        /// <param name="message">Сообщение о результате выполнения операции.</param>
-        public Response(int code, string message)
+        /// <param name="value">Значение результата выполнения операции.</param>
+        public Response(bool status, int? code = null, object? value = null)
         {
-            Result = new Result(code, message, null, false);
+            Result = new Result(status, code, value);
+        }
+
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="status">Статус выполнения операции.</param>
+        /// <param name="message">Сообщение о результате выполнения операции.</param>
+        /// <param name="code">Код.</param>
+        /// <param name="value">Значение результата выполнения операции.</param>
+        public Response(bool status, string message, int? code = null, object? value = null)
+        {
+            Result = new Result(status, message, code, value);
         }
         #endregion
     }

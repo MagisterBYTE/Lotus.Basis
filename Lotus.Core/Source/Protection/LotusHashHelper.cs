@@ -22,12 +22,10 @@ namespace Lotus.Core
         /// <returns>Хеш строки.</returns>
         public static string GetHash(string input)
         {
-            using var sha1Hash = SHA1.Create();
-
             // Convert the input string to a byte array and compute the hash.
-            var data = sha1Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            var data = SHA1.HashData(Encoding.UTF8.GetBytes(input));
 
-            // Create a new Stringbuilder to collect the bytes
+            // Create a new StringBuilder to collect the bytes
             // and create a string.
             var sBuilder = new StringBuilder();
 

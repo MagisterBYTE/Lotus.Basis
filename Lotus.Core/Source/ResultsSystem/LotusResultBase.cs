@@ -1,3 +1,5 @@
+using System.Net;
+
 namespace Lotus.Core
 {
     /**
@@ -28,7 +30,12 @@ namespace Lotus.Core
         /// <remarks>
         /// В зависимости от подсистемы коды могут по-разному интерпретироваться.
         /// </remarks>
-        int Code { get; }
+        int? Code { get; }
+
+        /// <summary>
+        /// Код статуса Http.
+        /// </summary>
+        public HttpStatusCode? HttpCode { get; set; }
 
         /// <summary>
         /// Сообщение о результате выполнения операции.

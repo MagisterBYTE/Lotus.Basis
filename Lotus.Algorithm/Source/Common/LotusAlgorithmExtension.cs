@@ -53,22 +53,22 @@ namespace Lotus.Algorithm
 
             ArgumentNullException.ThrowIfNull(visitorDelegate);
 
-            var length_x = massive.GetLength(0);
-            var length_y = massive.GetLength(1);
+            var lengthX = massive.GetLength(0);
+            var lengthY = massive.GetLength(1);
 
-            if (startX < 0 || startX >= length_x)
+            if (startX < 0 || startX >= lengthX)
             {
                 throw new ArgumentOutOfRangeException(nameof(startX));
             }
 
-            if (startY < 0 || startY >= length_y)
+            if (startY < 0 || startY >= lengthY)
             {
                 throw new ArgumentOutOfRangeException(nameof(startY));
             }
 
             comparer ??= EqualityComparer<TType>.Default;
 
-            var processed = new bool[length_x, length_y];
+            var processed = new bool[lengthX, lengthY];
             var value = massive[startX, startY];
 
             var queue = new Queue<Vector2Di>();
@@ -95,7 +95,7 @@ namespace Lotus.Algorithm
                 {
                     process(cell.X - 1, cell.Y);
                 }
-                if (cell.X + 1 < length_x)
+                if (cell.X + 1 < lengthX)
                 {
                     process(cell.X + 1, cell.Y);
                 }
@@ -103,7 +103,7 @@ namespace Lotus.Algorithm
                 {
                     process(cell.X, cell.Y - 1);
                 }
-                if (cell.Y + 1 < length_y)
+                if (cell.Y + 1 < lengthY)
                 {
                     process(cell.X, cell.Y + 1);
                 }
@@ -128,7 +128,7 @@ namespace Lotus.Algorithm
         public static void FloodVisit8<TType>(this TType[,] massive, Vector2Di start, Action<int, int> visitorDelegate,
             IEqualityComparer<TType>? comparer = null)
         {
-            FloodVisit4(massive, start.X, start.Y, visitorDelegate, comparer);
+            FloodVisit8(massive, start.X, start.Y, visitorDelegate, comparer);
         }
 
         /// <summary>
@@ -150,22 +150,22 @@ namespace Lotus.Algorithm
 
             ArgumentNullException.ThrowIfNull(visitorDelegate);
 
-            var length_x = massive.GetLength(0);
-            var length_y = massive.GetLength(1);
+            var lengthX = massive.GetLength(0);
+            var lengthY = massive.GetLength(1);
 
-            if (startX < 0 || startX >= length_x)
+            if (startX < 0 || startX >= lengthX)
             {
                 throw new ArgumentOutOfRangeException(nameof(startX));
             }
 
-            if (startY < 0 || startY >= length_y)
+            if (startY < 0 || startY >= lengthY)
             {
                 throw new ArgumentOutOfRangeException(nameof(startY));
             }
 
             comparer ??= EqualityComparer<TType>.Default;
 
-            var processed = new bool[length_x, length_y];
+            var processed = new bool[lengthX, lengthY];
             var value = massive[startX, startY];
 
             var queue = new Queue<Vector2Di>();
@@ -189,10 +189,10 @@ namespace Lotus.Algorithm
                 var cell = queue.Dequeue();
 
                 var xGreaterThanZero = cell.X > 0;
-                var xLessThanWidth = cell.X + 1 < length_x;
+                var xLessThanWidth = cell.X + 1 < lengthX;
 
                 var yGreaterThanZero = cell.Y > 0;
-                var yLessThanHeight = cell.Y + 1 < length_y;
+                var yLessThanHeight = cell.Y + 1 < lengthY;
 
                 if (yGreaterThanZero)
                 {

@@ -2,7 +2,6 @@ using System;
 
 namespace Lotus.Maths
 {
-
     /**
      * \defgroup MathCommon Общая подсистема
      * \ingroup Math

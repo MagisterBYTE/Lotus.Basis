@@ -562,10 +562,10 @@ namespace Lotus.Algorithm
 				for (Int32 iy = 0; iy < _mapHeight; iy++)
 				{
 					UnityEngine.Rect cell = new UnityEngine.Rect();
-					cell.x = mOffsetX + ix * mSizeCell;
-					cell.y = mOffsetY + iy * mSizeCell;
-					cell.width = mSizeCell;
-					cell.height = mSizeCell;
+					cell.x = _offsetX + ix * _sizeCell;
+					cell.y = _offsetY + iy * _sizeCell;
+					cell.width = _sizeCell;
+					cell.height = _sizeCell;
 
 					UnityEngine.GUI.Box(cell, "");
 				}
@@ -581,18 +581,18 @@ namespace Lotus.Algorithm
 		{
 			if (_start.X > -1 && _start.X < _mapWidth && _start.Y > -1 && _start.Y < _mapHeight)
 			{
-				UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
+				UnityEngine.Texture2D textureBox = UnityEngine.GUI.skin.box.normal.background;
 				UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
 
 				UnityEngine.Rect cell = new UnityEngine.Rect();
-				cell.x = mOffsetX + _start.X * mSizeCell + 2;
-				cell.y = mOffsetY + _start.Y * mSizeCell + 2;
-				cell.width = mSizeCell - 4;
-				cell.height = mSizeCell - 4;
+				cell.x = _offsetX + _start.X * _sizeCell + 2;
+				cell.y = _offsetY + _start.Y * _sizeCell + 2;
+				cell.width = _sizeCell - 4;
+				cell.height = _sizeCell - 4;
 				UnityEngine.GUI.backgroundColor = color;
 				UnityEngine.GUI.Box(cell, text);
 
-				UnityEngine.GUI.skin.box.normal.background = texture_box;
+				UnityEngine.GUI.skin.box.normal.background = textureBox;
 			}
 		}
 
@@ -605,18 +605,18 @@ namespace Lotus.Algorithm
 		{
 			if (_target.X > -1 && _target.X < _mapWidth && _target.Y > -1 && _target.Y < _mapHeight)
 			{
-				UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
+				UnityEngine.Texture2D textureBox = UnityEngine.GUI.skin.box.normal.background;
 				UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
 
 				UnityEngine.Rect cell = new UnityEngine.Rect();
-				cell.x = mOffsetX + _target.X * mSizeCell + 2;
-				cell.y = mOffsetY + _target.Y * mSizeCell + 2;
-				cell.width = mSizeCell - 4;
-				cell.height = mSizeCell - 4;
+				cell.x = _offsetX + _target.X * _sizeCell + 2;
+				cell.y = _offsetY + _target.Y * _sizeCell + 2;
+				cell.width = _sizeCell - 4;
+				cell.height = _sizeCell - 4;
 				UnityEngine.GUI.backgroundColor = color;
 				UnityEngine.GUI.Box(cell, text);
 
-				UnityEngine.GUI.skin.box.normal.background = texture_box;
+				UnityEngine.GUI.skin.box.normal.background = textureBox;
 			}
 		}
 
@@ -636,10 +636,10 @@ namespace Lotus.Algorithm
 					if (_map[ix, iy] >= XMapCode.EMPTY)
 					{
 						UnityEngine.Rect cell = new UnityEngine.Rect();
-						cell.x = mOffsetX + ix * mSizeCell + 2;
-						cell.y = mOffsetY + iy * mSizeCell + 2;
-						cell.width = mSizeCell - 4;
-						cell.height = mSizeCell - 4;
+						cell.x = _offsetX + ix * _sizeCell + 2;
+						cell.y = _offsetY + iy * _sizeCell + 2;
+						cell.width = _sizeCell - 4;
+						cell.height = _sizeCell - 4;
 						UnityEngine.GUI.backgroundColor = color;
 						UnityEngine.GUI.Box(cell, _map[ix, iy].ToString());
 					}
@@ -664,10 +664,10 @@ namespace Lotus.Algorithm
 					if (_map[ix, iy] == XMapCode.BLOCK)
 					{
 						UnityEngine.Rect cell = new UnityEngine.Rect();
-						cell.x = mOffsetX + ix * mSizeCell + 2;
-						cell.y = mOffsetY + iy * mSizeCell + 2;
-						cell.width = mSizeCell - 4;
-						cell.height = mSizeCell - 4;
+						cell.x = _offsetX + ix * _sizeCell + 2;
+						cell.y = _offsetY + iy * _sizeCell + 2;
+						cell.width = _sizeCell - 4;
+						cell.height = _sizeCell - 4;
 						UnityEngine.GUI.backgroundColor = color;
 						UnityEngine.GUI.Box(cell, _map[ix, iy].ToString());
 					}
@@ -689,15 +689,15 @@ namespace Lotus.Algorithm
 				for (Int32 iy = 0; iy < _mapHeight; iy++)
 				{
 					// Только если это препятствие
-					if (mWave[ix, iy] > 0)
+					if (_wave[ix, iy] > 0)
 					{
 						UnityEngine.Rect cell = new UnityEngine.Rect();
-						cell.x = mOffsetX + ix * mSizeCell + 2;
-						cell.y = mOffsetY + iy * mSizeCell + 2;
-						cell.width = mSizeCell - 4;
-						cell.height = mSizeCell - 4;
+						cell.x = _offsetX + ix * _sizeCell + 2;
+						cell.y = _offsetY + iy * _sizeCell + 2;
+						cell.width = _sizeCell - 4;
+						cell.height = _sizeCell - 4;
 						UnityEngine.GUI.backgroundColor = color;
-						UnityEngine.GUI.Box(cell, mWave[ix, iy].ToString());
+						UnityEngine.GUI.Box(cell, _wave[ix, iy].ToString());
 					}
 				}
 			}
@@ -712,19 +712,19 @@ namespace Lotus.Algorithm
 		{
 			if (_path != null)
 			{
-				UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
+				UnityEngine.Texture2D textureBox = UnityEngine.GUI.skin.box.normal.background;
 				UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
 				for (Int32 i = 0; i < _path.Count; i++)
 				{
 					UnityEngine.Rect cell = new UnityEngine.Rect();
-					cell.x = mOffsetX + _path[i].X * mSizeCell + 2;
-					cell.y = mOffsetY + _path[i].Y * mSizeCell + 2;
-					cell.width = mSizeCell - 4;
-					cell.height = mSizeCell - 4;
+					cell.x = _offsetX + _path[i].X * _sizeCell + 2;
+					cell.y = _offsetY + _path[i].Y * _sizeCell + 2;
+					cell.width = _sizeCell - 4;
+					cell.height = _sizeCell - 4;
 					UnityEngine.GUI.backgroundColor = color;
 					UnityEngine.GUI.Box(cell, i.ToString());
 				}
-				UnityEngine.GUI.skin.box.normal.background = texture_box;
+				UnityEngine.GUI.skin.box.normal.background = textureBox;
 			}
 		}
 #endif

@@ -441,30 +441,30 @@ namespace Lotus.Algorithm
                         }
                     }
 
-                    var found_in_open_index = -1;
+                    var foundInOpenIndex = -1;
                     for (var j = 0; j < _openList.Count; j++)
                     {
                         if (_openList[j].X == new_node.X && _openList[j].Y == new_node.Y)
                         {
-                            found_in_open_index = j;
+                            foundInOpenIndex = j;
                             break;
                         }
                     }
-                    if (found_in_open_index != -1 && _openList[found_in_open_index].PathLengthFromStart <= new_length)
+                    if (foundInOpenIndex != -1 && _openList[foundInOpenIndex].PathLengthFromStart <= new_length)
                     {
                         continue;
                     }
 
-                    var found_in_close_index = -1;
+                    var foundInCloseIndex = -1;
                     for (var j = 0; j < _closeList.Count; j++)
                     {
                         if (_closeList[j].X == new_node.X && _closeList[j].Y == new_node.Y)
                         {
-                            found_in_close_index = j;
+                            foundInCloseIndex = j;
                             break;
                         }
                     }
-                    if (found_in_close_index != -1 && (_reopenCloseNodes || _closeList[found_in_close_index].PathLengthFromStart <= new_length))
+                    if (foundInCloseIndex != -1 && (_reopenCloseNodes || _closeList[foundInCloseIndex].PathLengthFromStart <= new_length))
                     {
                         continue;
                     }
@@ -482,9 +482,9 @@ namespace Lotus.Algorithm
                             break;
                         case THeuristicFormula.DiagonalShortCut:
                             {
-                                var h_diagonal = Math.Min(Math.Abs(new_node.X - _target.X), Math.Abs(new_node.Y - _target.Y));
-                                var h_straight = Math.Abs(new_node.X - _target.X) + Math.Abs(new_node.Y - _target.Y);
-                                new_node.HeuristicEstimatePathLength = (_heuristicEstimate * 2 * h_diagonal) + (_heuristicEstimate * (h_straight - (2 * h_diagonal)));
+                                var hDiagonal = Math.Min(Math.Abs(new_node.X - _target.X), Math.Abs(new_node.Y - _target.Y));
+                                var hStraight = Math.Abs(new_node.X - _target.X) + Math.Abs(new_node.Y - _target.Y);
+                                new_node.HeuristicEstimatePathLength = (_heuristicEstimate * 2 * hDiagonal) + (_heuristicEstimate * (hStraight - (2 * hDiagonal)));
                             }
                             break;
                         case THeuristicFormula.Euclidean:
@@ -499,9 +499,9 @@ namespace Lotus.Algorithm
                             break;
                         case THeuristicFormula.Custom1:
                             var dxy = new TMapPoint(Math.Abs(_target.X - new_node.X), Math.Abs(_target.Y - new_node.Y));
-                            var Orthogonal = Math.Abs(dxy.X - dxy.Y);
-                            var Diagonal = Math.Abs((dxy.X + dxy.Y - Orthogonal) / 2);
-                            new_node.HeuristicEstimatePathLength = _heuristicEstimate * (Diagonal + Orthogonal + dxy.X + dxy.Y);
+                            var orthogonal = Math.Abs(dxy.X - dxy.Y);
+                            var diagonal = Math.Abs((dxy.X + dxy.Y - orthogonal) / 2);
+                            new_node.HeuristicEstimatePathLength = _heuristicEstimate * (diagonal + orthogonal + dxy.X + dxy.Y);
                             break;
                         default:
                             {

@@ -287,12 +287,12 @@ namespace Lotus.Algorithm
 		/// Аппроксимация равенства значений точки.
 		/// </summary>
 		/// <param name="vector">Точка.</param>
-		/// <param name="delta_x">Допуск по координате X.</param>
-		/// <param name="delta_y">Допуск по координате Y.</param>
+		/// <param name="deltaX">Допуск по координате X.</param>
+		/// <param name="deltaY">Допуск по координате Y.</param>
 		/// <returns>Статус равенства значений.</returns>
-		public Boolean ApproximatelyPoint(ref UnityEngine.Vector2 vector, Single delta_x, Single delta_y)
+		public Boolean ApproximatelyPoint(ref UnityEngine.Vector2 vector, Single deltaX, Single deltaY)
 		{
-			if (Math.Abs(Point.X - vector.x) < delta_x && Math.Abs(Point.Y - vector.y) < delta_y)
+			if (Math.Abs(Point.X - vector.x) < deltaX && Math.Abs(Point.Y - vector.y) < deltaY)
 			{
 				return true;
 			}
@@ -513,14 +513,14 @@ namespace Lotus.Algorithm
 		/// Поиск индекса ближайшей точки на основании позиции.
 		/// </summary>
 		/// <param name="vector">Точка.</param>
-		/// <param name="delta_x">Допуск по координате X.</param>
-		/// <param name="delta_y">Допуск по координате Y.</param>
+		/// <param name="deltaX">Допуск по координате X.</param>
+		/// <param name="deltaY">Допуск по координате Y.</param>
 		/// <returns>Найденный индекс или -1.</returns>
-		public Int32 FindIndexNearestFromPosition(UnityEngine.Vector2 vector, Single delta_x, Single delta_y)
+		public Int32 FindIndexNearestFromPosition(UnityEngine.Vector2 vector, Single deltaX, Single deltaY)
 		{
 			for (Int32 i = 0; i < _count; i++)
 			{
-				if (_arrayOfItems[i].ApproximatelyPoint(ref vector, delta_x, delta_y))
+				if (_arrayOfItems[i].ApproximatelyPoint(ref vector, deltaX, deltaY))
 				{
 					return (i);
 				}

@@ -29,7 +29,7 @@ namespace Lotus.Algorithm
         Action<ILotusFieldCell>? OnCellClick { get; set; }
         #endregion
 
-        #region МЕТОДЫ 
+        #region Methods 
         /// <summary>
         /// Получить ячейку поля по координатам.
         /// </summary>

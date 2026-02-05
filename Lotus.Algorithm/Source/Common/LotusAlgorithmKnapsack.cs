@@ -51,19 +51,19 @@ namespace Lotus.Algorithm
         /// <param name="keys">Список ключей.</param>
         /// <param name="remainder">Остаток.</param>
         /// <param name="knapsack">Заполненный словарь.</param>
-        /// <param name="start_index">Начальный индекс.</param>
+        /// <param name="startIndex">Начальный индекс.</param>
         /// <returns>Заполненный словарь.</returns>
         private static Dictionary<TElement, int> Knapsack<TElement>(Dictionary<TElement, float> set, List<TElement> keys, float remainder,
-            Dictionary<TElement, int> knapsack, int start_index) where TElement : notnull
+            Dictionary<TElement, int> knapsack, int startIndex) where TElement : notnull
         {
-            var smallest_key = keys[keys.Count - 1];
-            if (remainder < set[smallest_key])
+            var smallestKey = keys[keys.Count - 1];
+            if (remainder < set[smallestKey])
             {
-                knapsack[smallest_key] = 1;
+                knapsack[smallestKey] = 1;
                 return knapsack;
             }
             // Cycle through items and try to put them in knapsack
-            for (var i = start_index; i < keys.Count; i++)
+            for (var i = startIndex; i < keys.Count; i++)
             {
                 var key = keys[i];
                 var weight = set[key];
@@ -80,17 +80,17 @@ namespace Lotus.Algorithm
                     if (knapsack[key] != 0)
                     {
                         // Already tried every combination, return as is
-                        if (key.Equals(smallest_key))
+                        if (key.Equals(smallestKey))
                         {
                             return knapsack;
                         }
                         knapsack[key]--;
                         remainder += set[key];
-                        start_index = i + 1;
+                        startIndex = i + 1;
                         break;
                     }
                 }
-                knapsack = Knapsack(set, keys, remainder, knapsack, start_index);
+                knapsack = Knapsack(set, keys, remainder, knapsack, startIndex);
             }
             return knapsack;
         }

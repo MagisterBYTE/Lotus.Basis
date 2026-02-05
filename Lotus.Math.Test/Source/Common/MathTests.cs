@@ -10,7 +10,7 @@ namespace Lotus.Maths
     /// <summary>
     /// Статический класс для тестирования методов математического модуля.
     /// </summary>
-    public static class XMathTesting
+    public static class XMathTests
     {
         /// <summary>
         /// Тестирование методов <see cref="XMath"/>.

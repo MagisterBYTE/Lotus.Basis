@@ -27,7 +27,7 @@ namespace Lotus.Maths
         Point,
 
         /// <summary>
-        /// Пересечения представляет собой сегмент образованный двумя точками пересечение.
+        /// Пересечения представляет собой сегмент образованный двумя точками пересечения.
         /// </summary>
         Segment
     }
@@ -305,8 +305,8 @@ namespace Lotus.Maths
         /// <returns>Статус нахождения.</returns>
         public static bool PointLine(in Vector2Df point, in Vector2Df linePos, in Vector2Df lineDir)
         {
-            var perp_dot = Vector2Df.DotPerp(point - linePos, in lineDir);
-            return -XGeometry2D.Eplsilon_f < perp_dot && perp_dot < XGeometry2D.Eplsilon_f;
+            var perpDot = Vector2Df.DotPerp(point - linePos, in lineDir);
+            return -XGeometry2D.Epsilon_f < perpDot && perpDot < XGeometry2D.Epsilon_f;
         }
 
         /// <summary>
@@ -320,13 +320,13 @@ namespace Lotus.Maths
         public static bool PointLine(in Vector2Df point, in Vector2Df linePos,
             in Vector2Df lineDir, out int side)
         {
-            var perp_dot = Vector2Df.DotPerp(point - linePos, in lineDir);
-            if (perp_dot < -XGeometry2D.Eplsilon_f)
+            var perpDot = Vector2Df.DotPerp(point - linePos, in lineDir);
+            if (perpDot < -XGeometry2D.Epsilon_f)
             {
                 side = -1;
                 return false;
             }
-            if (perp_dot > XGeometry2D.Eplsilon_f)
+            if (perpDot > XGeometry2D.Epsilon_f)
             {
                 side = 1;
                 return false;
@@ -370,16 +370,16 @@ namespace Lotus.Maths
         public static bool PointRay(in Vector2Df point, in Vector2Df rayPos, in Vector2Df rayDir)
         {
             // Считаем вектор на точку
-            var to_point = point - rayPos;
+            var toPoint = point - rayPos;
 
-            // Считаем скалярное произвдение между векторам
-            // Чем ближе оно к нулю тем соответственно точки ближе прилегает к лучу
-            var perp_dot = Vector2Df.DotPerp(in to_point, in rayDir);
+            // Считаем скалярное произведение между векторами
+            // Чем ближе оно к нулю, тем соответственно точка ближе прилегает к лучу
+            var perpDot = Vector2Df.DotPerp(in toPoint, in rayDir);
 
-            if (XMath.Approximately(perp_dot, XGeometry2D.Eplsilon_f))
+            if (XMath.IsZero(perpDot) || XMath.Approximately(perpDot, XGeometry2D.Epsilon_f))
             {
                 // Если она прилегает
-                if (Vector2Df.Dot(in rayDir, in to_point) > -XGeometry2D.Eplsilon_f)
+                if (Vector2Df.Dot(in rayDir, in toPoint) > -XGeometry2D.Epsilon_f)
                 {
                     return true;
                 }
@@ -399,25 +399,25 @@ namespace Lotus.Maths
         public static bool PointRay(in Vector2Df point, in Vector2Df rayPos, in Vector2Df rayDir, out int side)
         {
             // Считаем вектор на точку
-            var to_point = point - rayPos;
+            var toPoint = point - rayPos;
 
-            // Считаем скалярное произвдение между векторам
-            // Чем ближе оно к нулю тем соответственно точки ближе прилегает к лучу
-            var perp_dot = Vector2Df.DotPerp(in to_point, in rayDir);
+            // Считаем скалярное произведение между векторами
+            // Чем ближе оно к нулю, тем соответственно точка ближе прилегает к лучу
+            var perpDot = Vector2Df.DotPerp(in toPoint, in rayDir);
 
-            if (perp_dot < -XGeometry2D.Eplsilon_f)
+            if (perpDot < -XGeometry2D.Epsilon_f)
             {
                 side = -1;
                 return false;
             }
-            if (perp_dot > XGeometry2D.Eplsilon_f)
+            if (perpDot > XGeometry2D.Epsilon_f)
             {
                 side = 1;
                 return false;
             }
             side = 0;
 
-            return Vector2Df.Dot(in rayDir, in to_point) > -XGeometry2D.Eplsilon_f;
+            return Vector2Df.Dot(in rayDir, in toPoint) > -XGeometry2D.Epsilon_f;
         }
         #endregion
 
@@ -648,22 +648,22 @@ namespace Lotus.Maths
         /// <returns>Статус нахождения.</returns>
         public static bool PointSegment(in Vector2Df point, in Vector2Df start, in Vector2Df end)
         {
-            var from_start_to_end = end - start;
-            var sqr_segment_length = from_start_to_end.SqrLength;
-            if (sqr_segment_length < XGeometry2D.Eplsilon_f)
+            var fromStartToEnd = end - start;
+            var sqrSegmentLength = fromStartToEnd.SqrLength;
+            if (sqrSegmentLength < XGeometry2D.Epsilon_f)
             {
                 // The segment is a point
                 return point == start;
             }
             // Normalized direction gives more stable results
-            var segment_direction = from_start_to_end.Normalized;
-            var to_point = point - start;
-            var perp_dot = Vector2Df.DotPerp(in to_point, in segment_direction);
-            if (-XGeometry2D.Eplsilon_f < perp_dot && perp_dot < XGeometry2D.Eplsilon_f)
+            var segmentDirection = fromStartToEnd.Normalized;
+            var toPoint = point - start;
+            var perpDot = Vector2Df.DotPerp(in toPoint, in segmentDirection);
+            if (-XGeometry2D.Epsilon_f < perpDot && perpDot < XGeometry2D.Epsilon_f)
             {
-                var point_projection = Vector2Df.Dot(in segment_direction, in to_point);
-                return point_projection > -XGeometry2D.Eplsilon_f &&
-                       point_projection < XMath.Sqrt(sqr_segment_length) + XGeometry2D.Eplsilon_f;
+                var pointProjection = Vector2Df.Dot(in segmentDirection, in toPoint);
+                return pointProjection > -XGeometry2D.Epsilon_f &&
+                       pointProjection < XMath.Sqrt(sqrSegmentLength) + XGeometry2D.Epsilon_f;
             }
             return false;
         }
@@ -679,55 +679,55 @@ namespace Lotus.Maths
         public static bool PointSegment(in Vector2Df point, in Vector2Df start, in Vector2Df end,
             out int side)
         {
-            var from_start_to_end = end - start;
-            var sqr_segment_length = from_start_to_end.SqrLength;
-            if (sqr_segment_length < XGeometry2D.Eplsilon_f)
+            var fromStartToEnd = end - start;
+            var sqrSegmentLength = fromStartToEnd.SqrLength;
+            if (sqrSegmentLength < XGeometry2D.Epsilon_f)
             {
                 // The segment is a point
                 side = 0;
                 return point == start;
             }
             // Normalized direction gives more stable results
-            var segment_direction = from_start_to_end.Normalized;
-            var to_point = point - start;
-            var perpDot = Vector2Df.DotPerp(in to_point, in segment_direction);
-            if (perpDot < -XGeometry2D.Eplsilon_f)
+            var segmentDirection = fromStartToEnd.Normalized;
+            var toPoint = point - start;
+            var perpDot = Vector2Df.DotPerp(in toPoint, in segmentDirection);
+            if (perpDot < -XGeometry2D.Epsilon_f)
             {
                 side = -1;
                 return false;
             }
-            if (perpDot > XGeometry2D.Eplsilon_f)
+            if (perpDot > XGeometry2D.Epsilon_f)
             {
                 side = 1;
                 return false;
             }
             side = 0;
-            var point_projection = Vector2Df.Dot(in segment_direction, in to_point);
-            return point_projection > -XGeometry2D.Eplsilon_f &&
-                   point_projection < XMath.Sqrt(sqr_segment_length) + XGeometry2D.Eplsilon_f;
+            var pointProjection = Vector2Df.Dot(in segmentDirection, in toPoint);
+            return pointProjection > -XGeometry2D.Epsilon_f &&
+                   pointProjection < XMath.Sqrt(sqrSegmentLength) + XGeometry2D.Epsilon_f;
         }
 
         /// <summary>
-        ///.
+        /// Проверка нахождения точки на отрезке.
         /// </summary>
         /// <param name="point">Проверяемая точка.</param>
         /// <param name="start">Начало отрезка.</param>
-        /// <param name="segment_direction">Направление отрезка.</param>
-        /// <param name="sqr_segment_length">Квадрат длины отрезка.</param>
+        /// <param name="segmentDirection">Направление отрезка.</param>
+        /// <param name="sqrSegmentLength">Квадрат длины отрезка.</param>
         /// <returns>Статус нахождения.</returns>
         private static bool PointSegment(in Vector2Df point, in Vector2Df start,
-            in Vector2Df segment_direction, float sqr_segment_length)
+            in Vector2Df segmentDirection, float sqrSegmentLength)
         {
-            var segment_direction_copy = segment_direction;
-            var segment_length = XMath.Sqrt(sqr_segment_length);
-            segment_direction_copy /= segment_length;
-            var to_point = point - start;
-            var perpDot = Vector2Df.DotPerp(in to_point, in segment_direction_copy);
-            if (-XGeometry2D.Eplsilon_f < perpDot && perpDot < XGeometry2D.Eplsilon_f)
+            var segmentDirectionCopy = segmentDirection;
+            var segmentLength = XMath.Sqrt(sqrSegmentLength);
+            segmentDirectionCopy /= segmentLength;
+            var toPoint = point - start;
+            var perpDot = Vector2Df.DotPerp(in toPoint, in segmentDirectionCopy);
+            if (-XGeometry2D.Epsilon_f < perpDot && perpDot < XGeometry2D.Epsilon_f)
             {
-                var point_projection = Vector2Df.Dot(in segment_direction_copy, in to_point);
-                return point_projection > -XGeometry2D.Eplsilon_f &&
-                       point_projection < segment_length + XGeometry2D.Eplsilon_f;
+                var pointProjection = Vector2Df.Dot(in segmentDirectionCopy, in toPoint);
+                return pointProjection > -XGeometry2D.Epsilon_f &&
+                       pointProjection < segmentLength + XGeometry2D.Epsilon_f;
             }
             return false;
         }
@@ -741,7 +741,7 @@ namespace Lotus.Maths
         /// <returns>Статус нахождения.</returns>
         public static bool PointSegmentCollinear(in Vector2Df start, in Vector2Df end, in Vector2Df point)
         {
-            if (Math.Abs(start.X - end.X) < XGeometry2D.Eplsilon_f)
+            if (Math.Abs(start.X - end.X) < XGeometry2D.Epsilon_f)
             {
                 // Vertical
                 if (start.Y <= point.Y && point.Y <= end.Y)
@@ -785,13 +785,13 @@ namespace Lotus.Maths
         /// Проверка на попадание точки в область окружности.
         /// </summary>
         /// <param name="point">Проверяемая точка.</param>
-        /// <param name="circleСenter">Центр окружности.</param>
+        /// <param name="circleCenter">Центр окружности.</param>
         /// <param name="circleRadius">Радиус окружности.</param>
         /// <returns>Статус попадания.</returns>
-        public static bool PointCircle(in Vector2Df point, in Vector2Df circleСenter, float circleRadius)
+        public static bool PointCircle(in Vector2Df point, in Vector2Df circleCenter, float circleRadius)
         {
             // For points on the circle's edge Length is more stable than SqrLength
-            return (point - circleСenter).Length < circleRadius + XGeometry2D.Eplsilon_f;
+            return (point - circleCenter).Length < circleRadius + XGeometry2D.Epsilon_f;
         }
         #endregion Point-Circle
 
@@ -845,15 +845,15 @@ namespace Lotus.Maths
         public static bool LineLine(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB,
             in Vector2Df dirB, out TIntersectHit2Df hit)
         {
-            var pos_b_to_a = posA - posB;
+            var posBToA = posA - posB;
             var denominator = Vector2Df.DotPerp(in dirA, in dirB);
-            var perp_dot_b = Vector2Df.DotPerp(in dirB, in pos_b_to_a);
+            var perpDotB = Vector2Df.DotPerp(in dirB, in posBToA);
 
-            if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
+            if (Math.Abs(denominator) < XGeometry2D.Epsilon_f)
             {
                 // Parallel
-                var perp_dot_a = Vector2Df.DotPerp(in dirA, in pos_b_to_a);
-                if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
+                var perpDotA = Vector2Df.DotPerp(in dirA, in posBToA);
+                if (Math.Abs(perpDotA) > XGeometry2D.Epsilon_f || Math.Abs(perpDotB) > XGeometry2D.Epsilon_f)
                 {
                     // Not collinear
                     hit = TIntersectHit2Df.None();
@@ -866,7 +866,7 @@ namespace Lotus.Maths
             }
 
             // Not parallel
-            hit = TIntersectHit2Df.Point(posA + (dirA * (perp_dot_b / denominator)));
+            hit = TIntersectHit2Df.Point(posA + (dirA * (perpDotB / denominator)));
             return true;
         }
 
@@ -896,30 +896,30 @@ namespace Lotus.Maths
         public static TIntersectType2D LineLine(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB,
             in Vector2Df dirB, out float distA, out float distB)
         {
-            var pos_b_to_a = posA - posB;
+            var posBToA = posA - posB;
             var denominator = Vector2Df.DotPerp(in dirA, in dirB);
-            var perp_dot_a = Vector2Df.DotPerp(in dirA, in pos_b_to_a);
-            var perp_bot_b = Vector2Df.DotPerp(in dirB, in pos_b_to_a);
+            var perpDotA = Vector2Df.DotPerp(in dirA, in posBToA);
+            var perpDotB = Vector2Df.DotPerp(in dirB, in posBToA);
 
-            if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
+            if (Math.Abs(denominator) < XGeometry2D.Epsilon_f)
             {
                 // Parallel
-                if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_bot_b) > XGeometry2D.Eplsilon_f)
+                if (Math.Abs(perpDotA) > XGeometry2D.Epsilon_f || Math.Abs(perpDotB) > XGeometry2D.Epsilon_f)
                 {
                     // Not collinear
                     distA = 0;
-                    distB = Vector2Df.Dot(in dirB, in pos_b_to_a);
+                    distB = Vector2Df.Dot(in dirB, in posBToA);
                     return TIntersectType2D.None;
                 }
                 // Collinear
                 distA = 0;
-                distB = Vector2Df.Dot(in dirB, in pos_b_to_a);
+                distB = Vector2Df.Dot(in dirB, in posBToA);
                 return TIntersectType2D.Parallel;
             }
 
             // Not parallel
-            distA = perp_bot_b / denominator;
-            distB = perp_dot_a / denominator;
+            distA = perpDotB / denominator;
+            distB = perpDotA / denominator;
             return TIntersectType2D.Point;
         }
         #endregion Line-Line
@@ -974,15 +974,15 @@ namespace Lotus.Maths
         public static bool LineRay(in Vector2Df linePos, in Vector2Df lineDir,
             in Vector2Df rayPos, in Vector2Df rayDir, out TIntersectHit2Df hit)
         {
-            var ray_pos_to_line_pos = linePos - rayPos;
+            var rayPosToLinePos = linePos - rayPos;
             var denominator = Vector2Df.DotPerp(in lineDir, in rayDir);
-            var perp_dot_a = Vector2Df.DotPerp(in lineDir, in ray_pos_to_line_pos);
+            var perpDotA = Vector2Df.DotPerp(in lineDir, in rayPosToLinePos);
 
-            if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
+            if (Math.Abs(denominator) < XGeometry2D.Epsilon_f)
             {
                 // Parallel
-                var perp_dot_b = Vector2Df.DotPerp(in rayDir, in ray_pos_to_line_pos);
-                if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
+                var perpDotB = Vector2Df.DotPerp(in rayDir, in rayPosToLinePos);
+                if (Math.Abs(perpDotA) > XGeometry2D.Epsilon_f || Math.Abs(perpDotB) > XGeometry2D.Epsilon_f)
                 {
                     // Not collinear
                     hit = TIntersectHit2Df.None();
@@ -995,10 +995,10 @@ namespace Lotus.Maths
             }
 
             // Not parallel
-            var ray_distance = perp_dot_a / denominator;
-            if (ray_distance > -XGeometry2D.Eplsilon_f)
+            var rayDistance = perpDotA / denominator;
+            if (rayDistance > -XGeometry2D.Epsilon_f)
             {
-                hit = TIntersectHit2Df.Point(rayPos + (rayDir * ray_distance), ray_distance);
+                hit = TIntersectHit2Df.Point(rayPos + (rayDir * rayDistance), rayDistance);
                 return true;
             }
 
@@ -1057,31 +1057,31 @@ namespace Lotus.Maths
         public static bool LineSegment(in Vector2Df linePos, in Vector2Df lineDir,
             in Vector2Df start, in Vector2Df end, out TIntersectHit2Df hit)
         {
-            var start_to_pos = linePos - start;
-            var segment_direction = end - start;
-            var denominator = Vector2Df.DotPerp(in lineDir, in segment_direction);
-            var perp_dot_start = Vector2Df.DotPerp(in lineDir, in start_to_pos);
+            var startToPos = linePos - start;
+            var segmentDirection = end - start;
+            var denominator = Vector2Df.DotPerp(in lineDir, in segmentDirection);
+            var perpDotStart = Vector2Df.DotPerp(in lineDir, in startToPos);
 
-            if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
+            if (Math.Abs(denominator) < XGeometry2D.Epsilon_f)
             {
                 // Parallel
                 // Normalized Direction gives more stable results 
-                var perp_dot_b = Vector2Df.DotPerp(segment_direction.Normalized, in start_to_pos);
-                if (Math.Abs(perp_dot_start) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
+                var perpDotB = Vector2Df.DotPerp(segmentDirection.Normalized, in startToPos);
+                if (Math.Abs(perpDotStart) > XGeometry2D.Epsilon_f || Math.Abs(perpDotB) > XGeometry2D.Epsilon_f)
                 {
                     // Not collinear
                     hit = TIntersectHit2Df.None();
                     return false;
                 }
                 // Collinear
-                var segment_is_start_point = segment_direction.SqrLength < XGeometry2D.Eplsilon_f;
-                if (segment_is_start_point)
+                var segmentIsStartPoint = segmentDirection.SqrLength < XGeometry2D.Epsilon_f;
+                if (segmentIsStartPoint)
                 {
                     hit = TIntersectHit2Df.Point(start);
                     return true;
                 }
 
-                var codirected = Vector2Df.Dot(in lineDir, in segment_direction) > 0;
+                var codirected = Vector2Df.Dot(in lineDir, in segmentDirection) > 0;
                 if (codirected)
                 {
                     hit = TIntersectHit2Df.Segment(in start, in end);
@@ -1094,10 +1094,10 @@ namespace Lotus.Maths
             }
 
             // Not parallel
-            var segment_distance = perp_dot_start / denominator;
-            if (segment_distance > -XGeometry2D.Eplsilon_f && segment_distance < 1 + XGeometry2D.Eplsilon_f)
+            var segmentDistance = perpDotStart / denominator;
+            if (segmentDistance > -XGeometry2D.Epsilon_f && segmentDistance < 1 + XGeometry2D.Epsilon_f)
             {
-                hit = TIntersectHit2Df.Point(start + (segment_direction * segment_distance));
+                hit = TIntersectHit2Df.Point(start + (segmentDirection * segmentDistance));
                 return true;
             }
             hit = TIntersectHit2Df.None();
@@ -1155,29 +1155,29 @@ namespace Lotus.Maths
         public static bool LineCircle(in Vector2Df linePos, in Vector2Df lineDir,
             in Vector2Df circleCenter, float circleRadius, out TIntersectHit2Df hit)
         {
-            var pos_to_center = circleCenter - linePos;
-            var center_projection = Vector2Df.Dot(in lineDir, in pos_to_center);
-            var sqr_dist_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
+            var posToCenter = circleCenter - linePos;
+            var centerProjection = Vector2Df.Dot(in lineDir, in posToCenter);
+            var sqrDistToLine = posToCenter.SqrLength - (centerProjection * centerProjection);
 
-            var sqr_dist_to_intersection = (circleRadius * circleRadius) - sqr_dist_to_line;
-            if (sqr_dist_to_intersection < -XGeometry2D.Eplsilon_f)
+            var sqrDistToIntersection = (circleRadius * circleRadius) - sqrDistToLine;
+            if (sqrDistToIntersection < -XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
             }
-            if (sqr_dist_to_intersection < XGeometry2D.Eplsilon_f)
+            if (sqrDistToIntersection < XGeometry2D.Epsilon_f)
             {
-                hit = TIntersectHit2Df.Point(linePos + (lineDir * center_projection));
+                hit = TIntersectHit2Df.Point(linePos + (lineDir * centerProjection));
                 return true;
             }
 
-            var distance_to_intersection = XMath.Sqrt(sqr_dist_to_intersection);
-            var dist_a = center_projection - distance_to_intersection;
-            var dist_b = center_projection + distance_to_intersection;
+            var distanceToIntersection = XMath.Sqrt(sqrDistToIntersection);
+            var distA = centerProjection - distanceToIntersection;
+            var distB = centerProjection + distanceToIntersection;
 
-            var point_a = linePos + (lineDir * dist_a);
-            var point_b = linePos + (lineDir * dist_b);
-            hit = TIntersectHit2Df.Segment(in point_a, in point_b);
+            var pointA = linePos + (lineDir * distA);
+            var pointB = linePos + (lineDir * distB);
+            hit = TIntersectHit2Df.Segment(in pointA, in pointB);
             return true;
         }
 
@@ -1200,18 +1200,18 @@ namespace Lotus.Maths
 
             var diff = rayPos2 - rayPos1;
 
-            var dot_perp_d1_d2 = rayDir1.DotPerp(in rayDir2);
+            var dotPerpD1D2 = rayDir1.DotPerp(in rayDir2);
 
-            if (Math.Abs(dot_perp_d1_d2) > XGeometry2D.Eplsilon_d)
+            if (Math.Abs(dotPerpD1D2) > XGeometry2D.Epsilon_d)
             {
                 // Segments intersect in a single point.
-                var inv_dot_perp_d1_d2 = 1 / dot_perp_d1_d2;
+                var invDotPerpD1D2 = 1 / dotPerpD1D2;
 
-                var diff_dot_perp_d1 = diff.DotPerp(rayDir1);
-                var diff_dot_perp_d2 = diff.DotPerp(rayDir2);
+                var diffDotPerpD1 = diff.DotPerp(rayDir1);
+                var diffDotPerpD2 = diff.DotPerp(rayDir2);
 
-                result.Distance1 = (float)(diff_dot_perp_d2 * inv_dot_perp_d1_d2);
-                result.Distance2 = (float)(diff_dot_perp_d1 * inv_dot_perp_d1_d2);
+                result.Distance1 = (float)(diffDotPerpD2 * invDotPerpD1D2);
+                result.Distance2 = (float)(diffDotPerpD1 * invDotPerpD1D2);
                 result.Point1 = rayPos1 + (rayDir1 * result.Distance1);
                 if (result.Distance1 > 0 && result.Distance2 > 0)
                 {
@@ -1228,8 +1228,8 @@ namespace Lotus.Maths
 
             // Segments are parallel
             diff.Normalize();
-            var diff_dot_perp_dir2 = diff.DotPerp(rayDir2);
-            if (Math.Abs(diff_dot_perp_dir2) <= XGeometry2D.Eplsilon_d)
+            var diffDotPerpDir2 = diff.DotPerp(rayDir2);
+            if (Math.Abs(diffDotPerpDir2) <= XGeometry2D.Epsilon_d)
             {
                 // Segments are colinear
                 hit = result;
@@ -1256,18 +1256,18 @@ namespace Lotus.Maths
 
             var diff = rayPos2 - rayPos1;
 
-            var dot_perp_d1_d2 = rayDir1.DotPerp(in rayDir2);
+            var dotPerpD1D2 = rayDir1.DotPerp(in rayDir2);
 
-            if (Math.Abs(dot_perp_d1_d2) > XGeometry2D.Eplsilon_d)
+            if (Math.Abs(dotPerpD1D2) > XGeometry2D.Epsilon_d)
             {
                 // Segments intersect in a single point.
-                double inv_dot_perp_d1_d2 = 1 / dot_perp_d1_d2;
+                double invDotPerpD1D2 = 1 / dotPerpD1D2;
 
-                double diff_dot_perp_d1 = diff.DotPerp(rayDir1);
-                double diff_dot_perp_d2 = diff.DotPerp(rayDir2);
+                double diffDotPerpD1 = diff.DotPerp(rayDir1);
+                double diffDotPerpD2 = diff.DotPerp(rayDir2);
 
-                result.Distance1 = (float)(diff_dot_perp_d2 * inv_dot_perp_d1_d2);
-                result.Distance2 = (float)(diff_dot_perp_d1 * inv_dot_perp_d1_d2);
+                result.Distance1 = (float)(diffDotPerpD2 * invDotPerpD1D2);
+                result.Distance2 = (float)(diffDotPerpD1 * invDotPerpD1D2);
                 result.Point1 = rayPos1 + (rayDir1 * result.Distance1);
                 if (result.Distance1 > 0 && result.Distance2 > 0)
                 {
@@ -1284,8 +1284,8 @@ namespace Lotus.Maths
 
             // Segments are parallel
             diff.Normalize();
-            var diff_dot_perp_dir2 = diff.DotPerp(rayDir2);
-            if (Math.Abs(diff_dot_perp_dir2) <= XGeometry2D.Eplsilon_d)
+            var diffDotPerpDir2 = diff.DotPerp(rayDir2);
+            if (diffDotPerpDir2 <= XGeometry2D.Epsilon_d)
             {
                 // Segments are colinear
                 hit = result;
@@ -1344,15 +1344,15 @@ namespace Lotus.Maths
         public static bool RayRay(in Vector2Df posA, in Vector2Df dirA, in Vector2Df posB,
             in Vector2Df dirB, out TIntersectHit2Df hit)
         {
-            var position_b_to_a = posA - posB;
+            var positionBToA = posA - posB;
             var denominator = Vector2Df.DotPerp(in dirA, in dirB);
-            var perp_dot_a = Vector2Df.DotPerp(in dirA, in position_b_to_a);
-            var perp_dot_b = Vector2Df.DotPerp(in dirB, in position_b_to_a);
+            var perpDotA = Vector2Df.DotPerp(in dirA, in positionBToA);
+            var perpDotB = Vector2Df.DotPerp(in dirB, in positionBToA);
 
-            if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
+            if (Math.Abs(denominator) < XGeometry2D.Epsilon_f)
             {
                 // Parallel
-                if (Math.Abs(perp_dot_a) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_b) > XGeometry2D.Eplsilon_f)
+                if (Math.Abs(perpDotA) > XGeometry2D.Epsilon_f || Math.Abs(perpDotB) > XGeometry2D.Epsilon_f)
                 {
                     // Not collinear
                     hit = TIntersectHit2Df.None();
@@ -1361,7 +1361,7 @@ namespace Lotus.Maths
 
                 // Collinear
                 var codirected = Vector2Df.Dot(in dirA, in dirB) > 0;
-                var position_b_projection = -Vector2Df.Dot(in dirA, in position_b_to_a);
+                var positionBProjection = -Vector2Df.Dot(in dirA, in positionBToA);
                 if (codirected)
                 {
                     hit = TIntersectHit2Df.Parallel();
@@ -1369,12 +1369,12 @@ namespace Lotus.Maths
                 }
                 else
                 {
-                    if (position_b_projection < -XGeometry2D.Eplsilon_f)
+                    if (positionBProjection < -XGeometry2D.Epsilon_f)
                     {
                         hit = TIntersectHit2Df.None();
                         return false;
                     }
-                    if (position_b_projection < XGeometry2D.Eplsilon_f)
+                    if (positionBProjection < XGeometry2D.Epsilon_f)
                     {
                         hit = TIntersectHit2Df.Point(posA);
                         return true;
@@ -1385,21 +1385,21 @@ namespace Lotus.Maths
             }
 
             // Not parallel
-            var dist_a = perp_dot_b / denominator;
-            if (dist_a < -XGeometry2D.Eplsilon_f)
+            var distA = perpDotB / denominator;
+            if (distA < -XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
             }
 
-            var dist_b = perp_dot_a / denominator;
-            if (dist_b < -XGeometry2D.Eplsilon_f)
+            var distB = perpDotA / denominator;
+            if (distB < -XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
             }
 
-            hit = TIntersectHit2Df.Point(posA + (dirA * dist_a));
+            hit = TIntersectHit2Df.Point(posA + (dirA * distA));
             return true;
         }
 
@@ -1433,18 +1433,18 @@ namespace Lotus.Maths
 		{
 			UnityEngine.Vector2 diff = ray_pos_2 - ray_pos_1;
 
-			var dot_perp_d1_d2 = ray_dir_1.DotPerp(in ray_dir_2);
+			var dotPerpD1D2 = ray_dir_1.DotPerp(in ray_dir_2);
 
-			if (Math.Abs(dot_perp_d1_d2) > XGeometry2D.Eplsilon_f)
+			if (Math.Abs(dotPerpD1D2) > XGeometry2D.Epsilon_f)
 			{
 				// Segments intersect in a single point.
-				var inv_dot_perp_d1_d2 = 1 / dot_perp_d1_d2;
+				var invDotPerpD1D2 = 1 / dotPerpD1D2;
 
-				var diff_dot_perp_d1 = diff.DotPerp(in ray_dir_1);
-				var diff_dot_perp_d2 = diff.DotPerp(in ray_dir_2);
+				var diffDotPerpD1 = diff.DotPerp(in ray_dir_1);
+				var diffDotPerpD2 = diff.DotPerp(in ray_dir_2);
 
-				hit.Distance1 = diff_dot_perp_d2 * inv_dot_perp_d1_d2;
-				hit.Distance2 = diff_dot_perp_d1 * inv_dot_perp_d1_d2;
+				hit.Distance1 = diffDotPerpD2 * invDotPerpD1D2;
+				hit.Distance2 = diffDotPerpD1 * invDotPerpD1D2;
 				UnityEngine.Vector2 p1 = ray_pos_1 + (ray_dir_1 * hit.Distance1);
 				hit.Point1 = new Vector2Df(p1.x, p1.y);
 				if (hit.Distance1 > 0 && hit.Distance2 > 0)
@@ -1460,8 +1460,8 @@ namespace Lotus.Maths
 
 			// Segments are parallel
 			diff.Normalize();
-			var diff_dot_perp_dir2 = diff.DotPerp(in ray_dir_2);
-			if (Math.Abs(diff_dot_perp_dir2) <= XGeometry2D.Eplsilon_f)
+			var diffDotPerpDir2 = diff.DotPerp(in ray_dir_2);
+			if (Math.Abs(diffDotPerpDir2) <= XGeometry2D.Epsilon_f)
 			{
 				// Segments are colinear
 				return TIntersectType2D.Parallel;
@@ -1498,18 +1498,18 @@ namespace Lotus.Maths
 			in UnityEngine.Vector2 ray_pos_2, in UnityEngine.Vector2 ray_dir_2)
 		{
 			UnityEngine.Vector2 diff = ray_pos_2 - ray_pos_1;
-			var dot_perp_d1_d2 = ray_dir_1.DotPerp(in ray_dir_2);
+			var dotPerpD1D2 = ray_dir_1.DotPerp(in ray_dir_2);
 
-			if (Math.Abs(dot_perp_d1_d2) > XGeometry2D.Eplsilon_f)
+			if (Math.Abs(dotPerpD1D2) > XGeometry2D.Epsilon_f)
 			{
 				// Segments intersect in a single point.
-				var inv_dot_perp_d1_d2 = 1.0f / dot_perp_d1_d2;
+				var invDotPerpD1D2 = 1.0f / dotPerpD1D2;
 
-				var diff_dot_perp_d1 = diff.DotPerp(in ray_dir_1);
-				var diff_dot_perp_d2 = diff.DotPerp(in ray_dir_2);
+				var diffDotPerpD1 = diff.DotPerp(in ray_dir_1);
+				var diffDotPerpD2 = diff.DotPerp(in ray_dir_2);
 
-				var distance1 = diff_dot_perp_d2 * inv_dot_perp_d1_d2;
-				var distance2 = diff_dot_perp_d1 * inv_dot_perp_d1_d2;
+				var distance1 = diffDotPerpD2 * invDotPerpD1D2;
+				var distance2 = diffDotPerpD1 * invDotPerpD1D2;
 				if (distance1 > 0 && distance2 > 0)
 				{
 					return true;
@@ -1571,19 +1571,19 @@ namespace Lotus.Maths
         public static bool RaySegment(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df start,
             in Vector2Df end, out TIntersectHit2Df hit)
         {
-            var segment_start_to_pos = rayPos - start;
-            var segment_dir = end - start;
+            var segmentStartToPos = rayPos - start;
+            var segmentDir = end - start;
 
-            var denominator = Vector2Df.DotPerp(in rayDir, in segment_dir);
-            var perp_dot_start = Vector2Df.DotPerp(in rayDir, in segment_start_to_pos);
+            var denominator = Vector2Df.DotPerp(in rayDir, in segmentDir);
+            var perpDotStart = Vector2Df.DotPerp(in rayDir, in segmentStartToPos);
 
             // Normalized direction gives more stable results 
-            var perp_dot_end = Vector2Df.DotPerp(segment_dir.Normalized, segment_start_to_pos);
+            var perpDotEnd = Vector2Df.DotPerp(segmentDir.Normalized, segmentStartToPos);
 
-            if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
+            if (Math.Abs(denominator) < XGeometry2D.Epsilon_f)
             {
                 // Parallel
-                if (Math.Abs(perp_dot_start) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_end) > XGeometry2D.Eplsilon_f)
+                if (Math.Abs(perpDotStart) > XGeometry2D.Epsilon_f || Math.Abs(perpDotEnd) > XGeometry2D.Epsilon_f)
                 {
                     // Not collinear
                     hit = TIntersectHit2Df.None();
@@ -1591,11 +1591,11 @@ namespace Lotus.Maths
                 }
                 // Collinear
 
-                var segment_is_start_point = segment_dir.SqrLength < XGeometry2D.Eplsilon_f;
-                var start_projection = Vector2Df.Dot(rayDir, start - rayPos);
-                if (segment_is_start_point)
+                var segmentIsStartPoint = segmentDir.SqrLength < XGeometry2D.Epsilon_f;
+                var startProjection = Vector2Df.Dot(rayDir, start - rayPos);
+                if (segmentIsStartPoint)
                 {
-                    if (start_projection > -XGeometry2D.Eplsilon_f)
+                    if (startProjection > -XGeometry2D.Epsilon_f)
                     {
                         hit = TIntersectHit2Df.Point(in start);
                         return true;
@@ -1605,11 +1605,11 @@ namespace Lotus.Maths
                 }
 
                 var endProjection = Vector2Df.Dot(rayDir, end - rayPos);
-                if (start_projection > -XGeometry2D.Eplsilon_f)
+                if (startProjection > -XGeometry2D.Epsilon_f)
                 {
-                    if (endProjection > -XGeometry2D.Eplsilon_f)
+                    if (endProjection > -XGeometry2D.Epsilon_f)
                     {
-                        if (endProjection > start_projection)
+                        if (endProjection > startProjection)
                         {
                             hit = TIntersectHit2Df.Segment(in start, in end);
                         }
@@ -1620,7 +1620,7 @@ namespace Lotus.Maths
                     }
                     else
                     {
-                        if (start_projection > XGeometry2D.Eplsilon_f)
+                        if (startProjection > XGeometry2D.Epsilon_f)
                         {
                             hit = TIntersectHit2Df.Segment(in rayPos, in start);
                         }
@@ -1631,9 +1631,9 @@ namespace Lotus.Maths
                     }
                     return true;
                 }
-                if (endProjection > -XGeometry2D.Eplsilon_f)
+                if (endProjection > -XGeometry2D.Epsilon_f)
                 {
-                    if (endProjection > XGeometry2D.Eplsilon_f)
+                    if (endProjection > XGeometry2D.Epsilon_f)
                     {
                         hit = TIntersectHit2Df.Segment(in rayPos, in end);
                     }
@@ -1648,12 +1648,12 @@ namespace Lotus.Maths
             }
 
             // Not parallel
-            var ray_distance = perp_dot_end / denominator;
-            var segment_distance = perp_dot_start / denominator;
-            if (ray_distance > -XGeometry2D.Eplsilon_f &&
-                segment_distance > -XGeometry2D.Eplsilon_f && segment_distance < 1 + XGeometry2D.Eplsilon_f)
+            var rayDistance = perpDotEnd / denominator;
+            var segmentDistance = perpDotStart / denominator;
+            if (rayDistance > -XGeometry2D.Epsilon_f &&
+                segmentDistance > -XGeometry2D.Epsilon_f && segmentDistance < 1 + XGeometry2D.Epsilon_f)
             {
-                hit = TIntersectHit2Df.Point(start + (segment_dir * segment_distance), segment_distance);
+                hit = TIntersectHit2Df.Point(start + (segmentDir * segmentDistance), segmentDistance);
                 return true;
             }
             hit = TIntersectHit2Df.None();
@@ -1711,51 +1711,51 @@ namespace Lotus.Maths
         public static bool RayCircle(in Vector2Df rayPos, in Vector2Df rayDir, in Vector2Df circleCenter,
                 float circleRadius, out TIntersectHit2Df hit)
         {
-            var position_to_center = circleCenter - rayPos;
-            var center_projection = Vector2Df.Dot(in rayDir, in position_to_center);
-            if (center_projection + circleRadius < -XGeometry2D.Eplsilon_f)
+            var positionToCenter = circleCenter - rayPos;
+            var centerProjection = Vector2Df.Dot(in rayDir, in positionToCenter);
+            if (centerProjection + circleRadius < -XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
             }
 
-            var sqr_distance_to_line = position_to_center.SqrLength - (center_projection * center_projection);
-            var sqr_distance_to_intersection = (circleRadius * circleRadius) - sqr_distance_to_line;
-            if (sqr_distance_to_intersection < -XGeometry2D.Eplsilon_f)
+            var sqrDistanceToLine = positionToCenter.SqrLength - (centerProjection * centerProjection);
+            var sqrDistanceToIntersection = (circleRadius * circleRadius) - sqrDistanceToLine;
+            if (sqrDistanceToIntersection < -XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
             }
-            if (sqr_distance_to_intersection < XGeometry2D.Eplsilon_f)
+            if (sqrDistanceToIntersection < XGeometry2D.Epsilon_f)
             {
-                if (center_projection < -XGeometry2D.Eplsilon_f)
+                if (centerProjection < -XGeometry2D.Epsilon_f)
                 {
                     hit = TIntersectHit2Df.None();
                     return false;
                 }
-                hit = TIntersectHit2Df.Point(rayPos + (rayDir * center_projection));
+                hit = TIntersectHit2Df.Point(rayPos + (rayDir * centerProjection));
                 return true;
             }
 
             // Line hit
-            var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-            var dist_a = center_projection - distance_to_intersection;
-            var dist_b = center_projection + distance_to_intersection;
+            var distanceToIntersection = XMath.Sqrt(sqrDistanceToIntersection);
+            var distA = centerProjection - distanceToIntersection;
+            var distB = centerProjection + distanceToIntersection;
 
-            if (dist_a < -XGeometry2D.Eplsilon_f)
+            if (distA < -XGeometry2D.Epsilon_f)
             {
-                if (dist_b < -XGeometry2D.Eplsilon_f)
+                if (distB < -XGeometry2D.Epsilon_f)
                 {
                     hit = TIntersectHit2Df.None();
                     return false;
                 }
-                hit = TIntersectHit2Df.Point(rayPos + (rayDir * dist_b));
+                hit = TIntersectHit2Df.Point(rayPos + (rayDir * distB));
                 return true;
             }
 
-            var point_a = rayPos + (rayDir * dist_a);
-            var point_b = rayPos + (rayDir * dist_b);
-            hit = TIntersectHit2Df.Segment(in point_a, in point_b);
+            var pointA = rayPos + (rayDir * distA);
+            var pointB = rayPos + (rayDir * distB);
+            hit = TIntersectHit2Df.Segment(in pointA, in pointB);
             return true;
         }
 
@@ -1819,7 +1819,7 @@ namespace Lotus.Maths
 
             // Проверяем параллельность
             var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
-            if (XMath.Approximately(d, 0, XGeometry2D.Eplsilon_d))
+            if (XMath.Approximately(d, 0, XGeometry2D.Epsilon_d))
             {
                 return false;
             }
@@ -1827,22 +1827,22 @@ namespace Lotus.Maths
             var qx = (((x1 * y2) - (y1 * x2)) * (x3 - x4)) - ((x1 - x2) * ((x3 * y4) - (y3 * x4)));
             var qy = (((x1 * y2) - (y1 * x2)) * (y3 - y4)) - ((y1 - y2) * ((x3 * y4) - (y3 * x4)));
 
-            var point_x = qx / d;
-            var point_y = qy / d;
+            var pointX = qx / d;
+            var pointY = qy / d;
 
             // Проверяем что бы эта точка попала в области отрезков
             var ddx = x2 - x1;
             double tx = 0.5f;
             if (!XMath.Approximately(ddx, 0))
             {
-                tx = (point_x - x1) / ddx;
+                tx = (pointX - x1) / ddx;
             }
 
             double ty = 0.5f;
             var ddy = y2 - y1;
             if (!XMath.Approximately(ddy, 0))
             {
-                ty = (point_y - y1) / ddy;
+                ty = (pointY - y1) / ddy;
             }
 
 
@@ -1879,7 +1879,7 @@ namespace Lotus.Maths
 
             // Проверяем параллельность
             var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
-            if (XMath.Approximately(d, 0, XGeometry2D.Eplsilon_d))
+            if (XMath.Approximately(d, 0, XGeometry2D.Epsilon_d))
             {
                 return false;
             }
@@ -1887,22 +1887,22 @@ namespace Lotus.Maths
             var qx = (((x1 * y2) - (y1 * x2)) * (x3 - x4)) - ((x1 - x2) * ((x3 * y4) - (y3 * x4)));
             var qy = (((x1 * y2) - (y1 * x2)) * (y3 - y4)) - ((y1 - y2) * ((x3 * y4) - (y3 * x4)));
 
-            var point_x = qx / d;
-            var point_y = qy / d;
+            var pointX = qx / d;
+            var pointY = qy / d;
 
             // Проверяем что бы эта точка попала в области отрезков
             var ddx = x2 - x1;
             var tx = 0.5f;
             if (!XMath.Approximately(ddx, 0))
             {
-                tx = (point_x - x1) / ddx;
+                tx = (pointX - x1) / ddx;
             }
 
             var ty = 0.5f;
             var ddy = y2 - y1;
             if (!XMath.Approximately(ddy, 0))
             {
-                ty = (point_y - y1) / ddy;
+                ty = (pointY - y1) / ddy;
             }
 
 
@@ -1954,7 +1954,7 @@ namespace Lotus.Maths
 
 			// Проверяем параллельность
 			var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
-			if (XMath.Approximately(d, 0, XGeometry2D.Eplsilon_f))
+			if (XMath.Approximately(d, 0, XGeometry2D.Epsilon_f))
 			{
 				return false;
 			}
@@ -1962,22 +1962,22 @@ namespace Lotus.Maths
 			var qx = (((x1 * y2) - (y1 * x2)) * (x3 - x4)) - ((x1 - x2) * ((x3 * y4) - (y3 * x4)));
 			var qy = (((x1 * y2) - (y1 * x2)) * (y3 - y4)) - ((y1 - y2) * ((x3 * y4) - (y3 * x4)));
 
-			var point_x = qx / d;
-			var point_y = qy / d;
+			var pointX = qx / d;
+			var pointY = qy / d;
 
 			// Проверяем что бы эта точка попала в области отрезков
 			var ddx = x2 - x1;
 			var tx = 0.5f;
 			if (!UnityEngine.Mathf.Approximately(ddx, 0))
 			{
-				tx = (point_x - x1) / ddx;
+				tx = (pointX - x1) / ddx;
 			}
 
 			var ty = 0.5f;
 			var ddy = y2 - y1;
 			if (!UnityEngine.Mathf.Approximately(ddy, 0))
 			{
-				ty = (point_y - y1) / ddy;
+				ty = (pointY - y1) / ddy;
 			}
 
 
@@ -2015,7 +2015,7 @@ namespace Lotus.Maths
 
 			// Проверяем параллельность
 			var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
-			if (XMath.Approximately(d, 0, XGeometry2D.Eplsilon_f))
+			if (XMath.Approximately(d, 0, XGeometry2D.Epsilon_f))
 			{
 				return TIntersectType2D.Parallel;
 			}
@@ -2023,22 +2023,22 @@ namespace Lotus.Maths
 			var qx = (((x1 * y2) - (y1 * x2)) * (x3 - x4)) - ((x1 - x2) * ((x3 * y4) - (y3 * x4)));
 			var qy = (((x1 * y2) - (y1 * x2)) * (y3 - y4)) - ((y1 - y2) * ((x3 * y4) - (y3 * x4)));
 
-			var point_x = qx / d;
-			var point_y = qy / d;
+			var pointX = qx / d;
+			var pointY = qy / d;
 
 			// Проверяем что бы эта точка попала в области отрезков
 			var ddx = x2 - x1;
 			var tx = 0.5f;
 			if (!UnityEngine.Mathf.Approximately(ddx, 0))
 			{
-				tx = (point_x - x1) / ddx;
+				tx = (pointX - x1) / ddx;
 			}
 
 			var ty = 0.5f;
 			var ddy = y2 - y1;
 			if (!UnityEngine.Mathf.Approximately(ddy, 0))
 			{
-				ty = (point_y - y1) / ddy;
+				ty = (pointY - y1) / ddy;
 			}
 
 
@@ -2102,15 +2102,15 @@ namespace Lotus.Maths
         public static bool SegmentSegment(in Vector2Df start1, in Vector2Df end1, in Vector2Df start2,
             in Vector2Df end2, out TIntersectHit2Df hit)
         {
-            var from_2_start_to_1_start = start1 - start2;
+            var from2StartTo1Start = start1 - start2;
             var direction1 = end1 - start1;
             var direction2 = end2 - start2;
 
-            var sqr_segment_1_length = direction1.SqrLength;
-            var sqr_segment_2_length = direction2.SqrLength;
-            var segment_1_is_point = sqr_segment_1_length < XGeometry2D.Eplsilon_f;
-            var segment_2_is_point = sqr_segment_2_length < XGeometry2D.Eplsilon_f;
-            if (segment_1_is_point && segment_2_is_point)
+            var sqrSegment1Length = direction1.SqrLength;
+            var sqrSegment2Length = direction2.SqrLength;
+            var segment1IsPoint = sqrSegment1Length < XGeometry2D.Epsilon_f;
+            var segment2IsPoint = sqrSegment2Length < XGeometry2D.Epsilon_f;
+            if (segment1IsPoint && segment2IsPoint)
             {
                 if (start1 == start2)
                 {
@@ -2120,9 +2120,9 @@ namespace Lotus.Maths
                 hit = TIntersectHit2Df.None();
                 return false;
             }
-            if (segment_1_is_point)
+            if (segment1IsPoint)
             {
-                if (PointSegment(in start1, in start2, in direction2, sqr_segment_2_length))
+                if (PointSegment(in start1, in start2, in direction2, sqrSegment2Length))
                 {
                     hit = TIntersectHit2Df.Point(in start1);
                     return true;
@@ -2130,9 +2130,9 @@ namespace Lotus.Maths
                 hit = TIntersectHit2Df.None();
                 return false;
             }
-            if (segment_2_is_point)
+            if (segment2IsPoint)
             {
-                if (PointSegment(in start2, in start1, in direction1, sqr_segment_1_length))
+                if (PointSegment(in start2, in start1, in direction1, sqrSegment1Length))
                 {
                     hit = TIntersectHit2Df.Point(start2);
                     return true;
@@ -2142,13 +2142,13 @@ namespace Lotus.Maths
             }
 
             var denominator = Vector2Df.DotPerp(in direction1, in direction2);
-            var perp_dot_1 = Vector2Df.DotPerp(in direction1, in from_2_start_to_1_start);
-            var perp_dot_2 = Vector2Df.DotPerp(in direction2, in from_2_start_to_1_start);
+            var perpDot1 = Vector2Df.DotPerp(in direction1, in from2StartTo1Start);
+            var perpDot2 = Vector2Df.DotPerp(in direction2, in from2StartTo1Start);
 
-            if (Math.Abs(denominator) < XGeometry2D.Eplsilon_f)
+            if (Math.Abs(denominator) < XGeometry2D.Epsilon_f)
             {
                 // Parallel
-                if (Math.Abs(perp_dot_1) > XGeometry2D.Eplsilon_f || Math.Abs(perp_dot_2) > XGeometry2D.Eplsilon_f)
+                if (Math.Abs(perpDot1) > XGeometry2D.Epsilon_f || Math.Abs(perpDot2) > XGeometry2D.Epsilon_f)
                 {
                     // Not collinear
                     hit = TIntersectHit2Df.None();
@@ -2160,49 +2160,49 @@ namespace Lotus.Maths
                 if (codirected)
                 {
                     // Codirected
-                    var segment2AProjection = -Vector2Df.Dot(in direction1, in from_2_start_to_1_start);
-                    if (segment2AProjection > -XGeometry2D.Eplsilon_f)
+                    var segment2AProjection = -Vector2Df.Dot(in direction1, in from2StartTo1Start);
+                    if (segment2AProjection > -XGeometry2D.Epsilon_f)
                     {
                         // 1A------1B
                         //     2A------2B
-                        return SegmentSegmentCollinear(in start1, in end1, sqr_segment_1_length, in start2, in end2, out hit);
+                        return SegmentSegmentCollinear(in start1, in end1, sqrSegment1Length, in start2, in end2, out hit);
                     }
                     else
                     {
                         //     1A------1B
                         // 2A------2B
-                        return SegmentSegmentCollinear(in start2, in end2, sqr_segment_2_length, in start1, in end1, out hit);
+                        return SegmentSegmentCollinear(in start2, in end2, sqrSegment2Length, in start1, in end1, out hit);
                     }
                 }
                 else
                 {
                     // Contradirected
                     var segment2BProjection = Vector2Df.Dot(direction1, end2 - start1);
-                    if (segment2BProjection > -XGeometry2D.Eplsilon_f)
+                    if (segment2BProjection > -XGeometry2D.Epsilon_f)
                     {
                         // 1A------1B
                         //     2B------2A
-                        return SegmentSegmentCollinear(in start1, in end1, sqr_segment_1_length, in end2, in start2, out hit);
+                        return SegmentSegmentCollinear(in start1, in end1, sqrSegment1Length, in end2, in start2, out hit);
                     }
                     else
                     {
                         //     1A------1B
                         // 2B------2A
-                        return SegmentSegmentCollinear(in end2, in start2, sqr_segment_2_length, in start1, in end1, out hit);
+                        return SegmentSegmentCollinear(in end2, in start2, sqrSegment2Length, in start1, in end1, out hit);
                     }
                 }
             }
 
             // Not parallel
-            var distance1 = perp_dot_2 / denominator;
-            if (distance1 < -XGeometry2D.Eplsilon_f || distance1 > 1 + XGeometry2D.Eplsilon_f)
+            var distance1 = perpDot2 / denominator;
+            if (distance1 < -XGeometry2D.Epsilon_f || distance1 > 1 + XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
             }
 
-            var distance2 = perp_dot_1 / denominator;
-            if (distance2 < -XGeometry2D.Eplsilon_f || distance2 > 1 + XGeometry2D.Eplsilon_f)
+            var distance2 = perpDot1 / denominator;
+            if (distance2 < -XGeometry2D.Epsilon_f || distance2 > 1 + XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
@@ -2225,9 +2225,9 @@ namespace Lotus.Maths
         private static bool SegmentSegmentCollinear(in Vector2Df left_a, in Vector2Df left_b, float sqr_left_length,
             in Vector2Df right_a, in Vector2Df right_b, out TIntersectHit2Df hit)
         {
-            var left_direction = left_b - left_a;
-            var right_a_projection = Vector2Df.Dot(in left_direction, right_a - left_b);
-            if (Math.Abs(right_a_projection) < XGeometry2D.Eplsilon_f)
+            var leftDirection = left_b - left_a;
+            var rightAProjection = Vector2Df.Dot(in leftDirection, right_a - left_b);
+            if (Math.Abs(rightAProjection) < XGeometry2D.Epsilon_f)
             {
                 // LB == RA
                 // LA------LB
@@ -2235,24 +2235,24 @@ namespace Lotus.Maths
                 hit = TIntersectHit2Df.Point(left_b);
                 return true;
             }
-            if (right_a_projection < 0)
+            if (rightAProjection < 0)
             {
                 // LB > RA
                 // LA------LB
                 //     RARB
                 //     RA--RB
                 //     RA------RB
-                Vector2Df point_b;
-                var right_b_projection = Vector2Df.Dot(in left_direction, right_b - left_a);
-                if (right_b_projection > sqr_left_length)
+                Vector2Df pointB;
+                var rightBProjection = Vector2Df.Dot(in leftDirection, right_b - left_a);
+                if (rightBProjection > sqr_left_length)
                 {
-                    point_b = left_b;
+                    pointB = left_b;
                 }
                 else
                 {
-                    point_b = right_b;
+                    pointB = right_b;
                 }
-                hit = TIntersectHit2Df.Segment(in right_a, in point_b);
+                hit = TIntersectHit2Df.Segment(in right_a, in pointB);
                 return true;
             }
             // LB < RA
@@ -2313,15 +2313,15 @@ namespace Lotus.Maths
         public static bool SegmentCircle(in Vector2Df start, in Vector2Df end, in Vector2Df circleCenter,
                 float circleRadius, out TIntersectHit2Df hit)
         {
-            var segment_start_to_center = circleCenter - start;
-            var from_start_to_end = end - start;
-            var segment_length = from_start_to_end.Length;
-            if (segment_length < XGeometry2D.Eplsilon_f)
+            var segmentStartToCenter = circleCenter - start;
+            var fromStartToEnd = end - start;
+            var segmentLength = fromStartToEnd.Length;
+            if (segmentLength < XGeometry2D.Epsilon_f)
             {
-                var distance_to_point = segment_start_to_center.Length;
-                if (distance_to_point < circleRadius + XGeometry2D.Eplsilon_f)
+                var distanceToPoint = segmentStartToCenter.Length;
+                if (distanceToPoint < circleRadius + XGeometry2D.Epsilon_f)
                 {
-                    if (distance_to_point > circleRadius - XGeometry2D.Eplsilon_f)
+                    if (distanceToPoint > circleRadius - XGeometry2D.Epsilon_f)
                     {
                         hit = TIntersectHit2Df.Point(start);
                         return true;
@@ -2333,69 +2333,69 @@ namespace Lotus.Maths
                 return false;
             }
 
-            var segment_direction = from_start_to_end.Normalized;
-            var center_projection = Vector2Df.Dot(in segment_direction, in segment_start_to_center);
-            if (center_projection + circleRadius < -XGeometry2D.Eplsilon_f ||
-                center_projection - circleRadius > segment_length + XGeometry2D.Eplsilon_f)
+            var segmentDirection = fromStartToEnd.Normalized;
+            var centerProjection = Vector2Df.Dot(in segmentDirection, in segmentStartToCenter);
+            if (centerProjection + circleRadius < -XGeometry2D.Epsilon_f ||
+                centerProjection - circleRadius > segmentLength + XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
             }
 
-            var sqr_distance_to_line = segment_start_to_center.SqrLength - (center_projection * center_projection);
-            var sqr_distance_to_intersection = (circleRadius * circleRadius) - sqr_distance_to_line;
-            if (sqr_distance_to_intersection < -XGeometry2D.Eplsilon_f)
+            var sqrDistanceToLine = segmentStartToCenter.SqrLength - (centerProjection * centerProjection);
+            var sqrDistanceToIntersection = (circleRadius * circleRadius) - sqrDistanceToLine;
+            if (sqrDistanceToIntersection < -XGeometry2D.Epsilon_f)
             {
                 hit = TIntersectHit2Df.None();
                 return false;
             }
 
-            if (sqr_distance_to_intersection < XGeometry2D.Eplsilon_f)
+            if (sqrDistanceToIntersection < XGeometry2D.Epsilon_f)
             {
-                if (center_projection < -XGeometry2D.Eplsilon_f ||
-                    center_projection > segment_length + XGeometry2D.Eplsilon_f)
+                if (centerProjection < -XGeometry2D.Epsilon_f ||
+                    centerProjection > segmentLength + XGeometry2D.Epsilon_f)
                 {
                     hit = TIntersectHit2Df.None();
                     return false;
                 }
-                hit = TIntersectHit2Df.Point(start + (segment_direction * center_projection));
+                hit = TIntersectHit2Df.Point(start + (segmentDirection * centerProjection));
                 return true;
             }
 
             // Line hit
-            var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-            var dist_a = center_projection - distance_to_intersection;
-            var dist_b = center_projection + distance_to_intersection;
+            var distanceToIntersection = XMath.Sqrt(sqrDistanceToIntersection);
+            var distA = centerProjection - distanceToIntersection;
+            var distB = centerProjection + distanceToIntersection;
 
-            var point_a_is_after_segment_start = dist_a > -XGeometry2D.Eplsilon_f;
-            var point_b_is_before_segment_end = dist_b < segment_length + XGeometry2D.Eplsilon_f;
+            var pointAIsAfterSegmentStart = distA > -XGeometry2D.Epsilon_f;
+            var pointBIsBeforeSegmentEnd = distB < segmentLength + XGeometry2D.Epsilon_f;
 
-            if (point_a_is_after_segment_start && point_b_is_before_segment_end)
+            if (pointAIsAfterSegmentStart && pointBIsBeforeSegmentEnd)
             {
-                var point_a = start + (segment_direction * dist_a);
-                var point_b = start + (segment_direction * dist_b);
-                hit = TIntersectHit2Df.Segment(in point_a, in point_b);
+                var pointA = start + (segmentDirection * distA);
+                var pointB = start + (segmentDirection * distB);
+                hit = TIntersectHit2Df.Segment(in pointA, in pointB);
                 return true;
             }
-            if (!point_a_is_after_segment_start && !point_b_is_before_segment_end)
+            if (!pointAIsAfterSegmentStart && !pointBIsBeforeSegmentEnd)
             {
                 // The segment is inside, but no hit
                 hit = TIntersectHit2Df.None();
                 return true;
             }
 
-            var point_a_is_before_segment_end = dist_a < segment_length + XGeometry2D.Eplsilon_f;
-            if (point_a_is_after_segment_start && point_a_is_before_segment_end)
+            var pointAIsBeforeSegmentEnd = distA < segmentLength + XGeometry2D.Epsilon_f;
+            if (pointAIsAfterSegmentStart && pointAIsBeforeSegmentEnd)
             {
                 // Point A hit
-                hit = TIntersectHit2Df.Point(start + (segment_direction * dist_a));
+                hit = TIntersectHit2Df.Point(start + (segmentDirection * distA));
                 return true;
             }
-            var point_b_is_after_segment_start = dist_b > -XGeometry2D.Eplsilon_f;
-            if (point_b_is_after_segment_start && point_b_is_before_segment_end)
+            var pointBIsAfterSegmentStart = distB > -XGeometry2D.Epsilon_f;
+            if (pointBIsAfterSegmentStart && pointBIsBeforeSegmentEnd)
             {
                 // Point B hit
-                hit = TIntersectHit2Df.Point(start + (segment_direction * dist_b));
+                hit = TIntersectHit2Df.Point(start + (segmentDirection * distB));
                 return true;
             }
 
@@ -2454,11 +2454,11 @@ namespace Lotus.Maths
         public static bool CircleCircle(in Vector2Df centerA, float radiusA, in Vector2Df centerB,
                 float radiusB, out TIntersectHit2Df hit)
         {
-            var from_b_to_a = centerA - centerB;
-            var distance_from_b_to_a_sqr = from_b_to_a.SqrLength;
-            if (distance_from_b_to_a_sqr < XGeometry2D.Eplsilon_f)
+            var fromBToA = centerA - centerB;
+            var distanceFromBToASqr = fromBToA.SqrLength;
+            if (distanceFromBToASqr < XGeometry2D.Epsilon_f)
             {
-                if (Math.Abs(radiusA - radiusB) < XGeometry2D.Eplsilon_f)
+                if (Math.Abs(radiusA - radiusB) < XGeometry2D.Epsilon_f)
                 {
                     // Circles are coincident
                     hit = TIntersectHit2Df.Parallel();
@@ -2470,31 +2470,31 @@ namespace Lotus.Maths
             }
 
             // For intersections on the circle's edge Length is more stable than SqrLength
-            var distance_from_b_to_a = XMath.Sqrt(distance_from_b_to_a_sqr);
+            var distanceFromBToA = XMath.Sqrt(distanceFromBToASqr);
 
-            var sum_of_radii = radiusA + radiusB;
-            if (Math.Abs(distance_from_b_to_a - sum_of_radii) < XGeometry2D.Eplsilon_f)
+            var sumOfRadii = radiusA + radiusB;
+            if (Math.Abs(distanceFromBToA - sumOfRadii) < XGeometry2D.Epsilon_f)
             {
                 // One hit outside
-                hit = TIntersectHit2Df.Point(centerB + (from_b_to_a * (radiusB / sum_of_radii)));
+                hit = TIntersectHit2Df.Point(centerB + (fromBToA * (radiusB / sumOfRadii)));
                 return true;
             }
-            if (distance_from_b_to_a > sum_of_radii)
+            if (distanceFromBToA > sumOfRadii)
             {
                 // No intersections, circles are separate
                 hit = TIntersectHit2Df.None();
                 return false;
             }
 
-            var difference_of_radii = radiusA - radiusB;
-            var difference_of_radii_abs = Math.Abs(difference_of_radii);
-            if (Math.Abs(distance_from_b_to_a - difference_of_radii_abs) < XGeometry2D.Eplsilon_f)
+            var differenceOfRadii = radiusA - radiusB;
+            var differenceOfRadiiAbs = Math.Abs(differenceOfRadii);
+            if (Math.Abs(distanceFromBToA - differenceOfRadiiAbs) < XGeometry2D.Epsilon_f)
             {
                 // One hit inside
-                hit = TIntersectHit2Df.Point(centerB - (from_b_to_a * (radiusB / difference_of_radii)));
+                hit = TIntersectHit2Df.Point(centerB - (fromBToA * (radiusB / differenceOfRadii)));
                 return true;
             }
-            if (distance_from_b_to_a < difference_of_radii_abs)
+            if (distanceFromBToA < differenceOfRadiiAbs)
             {
                 // One circle is contained within the other
                 hit = TIntersectHit2Df.None();
@@ -2502,12 +2502,12 @@ namespace Lotus.Maths
             }
 
             // Two intersections
-            var radius_a_sqr = radiusA * radiusA;
-            var distanceToMiddle = (0.5f * (radius_a_sqr - (radiusB * radiusB)) / distance_from_b_to_a_sqr) + 0.5f;
-            var middle = centerA - (from_b_to_a * distanceToMiddle);
+            var radiusASqr = radiusA * radiusA;
+            var distanceToMiddle = (0.5f * (radiusASqr - (radiusB * radiusB)) / distanceFromBToASqr) + 0.5f;
+            var middle = centerA - (fromBToA * distanceToMiddle);
 
-            var discriminant = (radius_a_sqr / distance_from_b_to_a_sqr) - (distanceToMiddle * distanceToMiddle);
-            var offset = from_b_to_a.PerpToCCW() * XMath.Sqrt(discriminant);
+            var discriminant = (radiusASqr / distanceFromBToASqr) - (distanceToMiddle * distanceToMiddle);
+            var offset = fromBToA.PerpToCCW() * XMath.Sqrt(discriminant);
 
             hit = TIntersectHit2Df.Segment(middle + offset, middle - offset);
             return true;

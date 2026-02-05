@@ -352,15 +352,15 @@ namespace Lotus.Maths
         /// <param name="result">The created scaling matrix.</param>
         public static void Scaling(float x, float y, in Vector2Df center, out Matrix3Dx2f result)
         {
-            Matrix3Dx2f local_result;
+            Matrix3Dx2f localResult;
 
-            local_result.M11 = x; local_result.M12 = 0.0f;
-            local_result.M21 = 0.0f; local_result.M22 = y;
+            localResult.M11 = x; localResult.M12 = 0.0f;
+            localResult.M21 = 0.0f; localResult.M22 = y;
 
-            local_result.M31 = center.X - (x * center.X);
-            local_result.M32 = center.Y - (y * center.Y);
+            localResult.M31 = center.X - (x * center.X);
+            localResult.M32 = center.Y - (y * center.Y);
 
-            result = local_result;
+            result = localResult;
         }
 
         /// <summary>
@@ -512,10 +512,10 @@ namespace Lotus.Maths
         /// <param name="result">The result of the transformation for the input vector.</param>
         public static void TransformPoint(in Matrix3Dx2f matrix, in Vector2Df point, out Vector2Df result)
         {
-            Vector2Df local_result;
-            local_result.X = (point.X * matrix.M11) + (point.Y * matrix.M21) + matrix.M31;
-            local_result.Y = (point.X * matrix.M12) + (point.Y * matrix.M22) + matrix.M32;
-            result = local_result;
+            Vector2Df localResult;
+            localResult.X = (point.X * matrix.M11) + (point.Y * matrix.M21) + matrix.M31;
+            localResult.Y = (point.X * matrix.M12) + (point.Y * matrix.M22) + matrix.M32;
+            result = localResult;
         }
 
 
@@ -583,16 +583,16 @@ namespace Lotus.Maths
             }
 
             var invdet = 1.0f / determinant;
-            var offset_x = value.M31;
-            var offset_y = value.M32;
+            var offsetX = value.M31;
+            var offsetY = value.M32;
 
             result = new Matrix3Dx2f(
                 value.M22 * invdet,
                 -value.M12 * invdet,
                 -value.M21 * invdet,
                 value.M11 * invdet,
-                ((value.M21 * offset_y) - (offset_x * value.M22)) * invdet,
-                ((offset_x * value.M12) - (value.M11 * offset_y)) * invdet);
+                ((value.M21 * offsetY) - (offsetX * value.M22)) * invdet,
+                ((offsetX * value.M12) - (value.M11 * offsetY)) * invdet);
         }
         #endregion
 
@@ -807,13 +807,13 @@ namespace Lotus.Maths
         {
             unchecked
             {
-                var hash_code = M11.GetHashCode();
-                hash_code = (hash_code * 397) ^ M12.GetHashCode();
-                hash_code = (hash_code * 397) ^ M21.GetHashCode();
-                hash_code = (hash_code * 397) ^ M22.GetHashCode();
-                hash_code = (hash_code * 397) ^ M31.GetHashCode();
-                hash_code = (hash_code * 397) ^ M32.GetHashCode();
-                return hash_code;
+                var hashCode = M11.GetHashCode();
+                hashCode = (hashCode * 397) ^ M12.GetHashCode();
+                hashCode = (hashCode * 397) ^ M21.GetHashCode();
+                hashCode = (hashCode * 397) ^ M22.GetHashCode();
+                hashCode = (hashCode * 397) ^ M31.GetHashCode();
+                hashCode = (hashCode * 397) ^ M32.GetHashCode();
+                return hashCode;
             }
         }
 

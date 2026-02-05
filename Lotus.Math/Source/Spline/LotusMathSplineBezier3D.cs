@@ -503,50 +503,50 @@ namespace Lotus.Maths
         /// <param name="index">Позиция(индекс) контрольной точки.</param>
         private void SetHandleMode(int index)
         {
-            var mode_index = (index + 1) / 3;
-            var mode = _handleModes[mode_index];
-            if (mode == TBezierHandleMode.Free || (!_isClosed && (mode_index == 0 || mode_index == _handleModes.Length - 1)))
+            var modeIndex = (index + 1) / 3;
+            var mode = _handleModes[modeIndex];
+            if (mode == TBezierHandleMode.Free || (!_isClosed && (modeIndex == 0 || modeIndex == _handleModes.Length - 1)))
             {
                 return;
             }
 
-            var middle_index = mode_index * 3;
-            int fixed_index, enforced_index;
-            if (index <= middle_index)
+            var middleIndex = modeIndex * 3;
+            int fixedIndex, enforcedIndex;
+            if (index <= middleIndex)
             {
-                fixed_index = middle_index - 1;
-                if (fixed_index < 0)
+                fixedIndex = middleIndex - 1;
+                if (fixedIndex < 0)
                 {
-                    fixed_index = _controlPoints.Length - 2;
+                    fixedIndex = _controlPoints.Length - 2;
                 }
-                enforced_index = middle_index + 1;
-                if (enforced_index >= _controlPoints.Length)
+                enforcedIndex = middleIndex + 1;
+                if (enforcedIndex >= _controlPoints.Length)
                 {
-                    enforced_index = 1;
+                    enforcedIndex = 1;
                 }
             }
             else
             {
-                fixed_index = middle_index + 1;
-                if (fixed_index >= _controlPoints.Length)
+                fixedIndex = middleIndex + 1;
+                if (fixedIndex >= _controlPoints.Length)
                 {
-                    fixed_index = 1;
+                    fixedIndex = 1;
                 }
-                enforced_index = middle_index - 1;
-                if (enforced_index < 0)
+                enforcedIndex = middleIndex - 1;
+                if (enforcedIndex < 0)
                 {
-                    enforced_index = _controlPoints.Length - 2;
+                    enforcedIndex = _controlPoints.Length - 2;
                 }
             }
 
-            var middle = _controlPoints[middle_index];
-            var enforced_tangent = middle - _controlPoints[fixed_index];
+            var middle = _controlPoints[middleIndex];
+            var enforcedTangent = middle - _controlPoints[fixedIndex];
             if (mode == TBezierHandleMode.Aligned)
             {
-                enforced_tangent = enforced_tangent.Normalized * Vector3Df.Distance(middle, _controlPoints[enforced_index]);
+                enforcedTangent = enforcedTangent.Normalized * Vector3Df.Distance(middle, _controlPoints[enforcedIndex]);
             }
 
-            _controlPoints[enforced_index] = middle + enforced_tangent;
+            _controlPoints[enforcedIndex] = middle + enforcedTangent;
         }
 
         /// <summary>
@@ -729,13 +729,13 @@ namespace Lotus.Maths
         /// <returns>Точка.</returns>
         public Vector3Df CalculateCurvePoint(int curveIndex, float time)
         {
-            var node_index = curveIndex * 3;
+            var nodeIndex = curveIndex * 3;
 
             return BezierCubic3D.CalculatePoint(time,
-                in _controlPoints[node_index],
-                in _controlPoints[node_index + 1],
-                in _controlPoints[node_index + 2],
-                in _controlPoints[node_index + 3]);
+                in _controlPoints[nodeIndex],
+                in _controlPoints[nodeIndex + 1],
+                in _controlPoints[nodeIndex + 2],
+                in _controlPoints[nodeIndex + 3]);
         }
 
         /// <summary>
@@ -794,16 +794,16 @@ namespace Lotus.Maths
         /// <param name="mode">Режим редактирования управляющей точки.</param>
         public void SetHandleMode(int index, TBezierHandleMode mode)
         {
-            var mode_index = (index + 1) / 3;
-            _handleModes[mode_index] = mode;
+            var modeIndex = (index + 1) / 3;
+            _handleModes[modeIndex] = mode;
 
             if (_isClosed)
             {
-                if (mode_index == 0)
+                if (modeIndex == 0)
                 {
                     _handleModes[_handleModes.Length - 1] = mode;
                 }
-                else if (mode_index == _handleModes.Length - 1)
+                else if (modeIndex == _handleModes.Length - 1)
                 {
                     _handleModes[0] = mode;
                 }

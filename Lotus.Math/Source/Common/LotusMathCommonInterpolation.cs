@@ -222,10 +222,10 @@ namespace Lotus.Maths
             var cx = x - centerX;
             var cy = y - centerY;
 
-            var component_x = cx * cx / (2 * sigmaX * sigmaX);
-            var component_y = cy * cy / (2 * sigmaY * sigmaY);
+            var componentX = cx * cx / (2 * sigmaX * sigmaX);
+            var componentY = cy * cy / (2 * sigmaY * sigmaY);
 
-            return amplitude * Math.Exp(-(component_x + component_y));
+            return amplitude * Math.Exp(-(componentX + componentY));
         }
 
         /// <summary>
@@ -248,10 +248,10 @@ namespace Lotus.Maths
             var cx = x - centerX;
             var cy = y - centerY;
 
-            var component_x = cx * cx / (2 * sigmaX * sigmaX);
-            var component_y = cy * cy / (2 * sigmaY * sigmaY);
+            var componentX = cx * cx / (2 * sigmaX * sigmaX);
+            var componentY = cy * cy / (2 * sigmaY * sigmaY);
 
-            return amplitude * (float)Math.Exp(-(component_x + component_y));
+            return amplitude * (float)Math.Exp(-(componentX + componentY));
         }
         #endregion
     }

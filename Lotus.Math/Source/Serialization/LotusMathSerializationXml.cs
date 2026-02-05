@@ -340,7 +340,7 @@ namespace Lotus.Maths
             {
                 return Vector3Df.DeserializeFromString(value);
             }
-            return Vector3Df.Zero;
+            return defaultValue;
         }
         #endregion
     }

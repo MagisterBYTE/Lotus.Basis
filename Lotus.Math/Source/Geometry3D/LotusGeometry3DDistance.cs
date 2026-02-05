@@ -129,14 +129,14 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float LineSphere(in Vector3Df linePos, in Vector3Df lineDir, in Vector3Df sphereCenter, float sphereRadius)
         {
-            var pos_to_center = sphereCenter - linePos;
-            var center_projection = Vector3Df.Dot(in lineDir, in pos_to_center);
-            var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
-            var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
-            if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
+            var posToCenter = sphereCenter - linePos;
+            var centerProjection = Vector3Df.Dot(in lineDir, in posToCenter);
+            var sqrDistanceToLine = posToCenter.SqrLength - (centerProjection * centerProjection);
+            var sqrDistanceToIntersection = (sphereRadius * sphereRadius) - sqrDistanceToLine;
+            if (sqrDistanceToIntersection < -XGeometry3D.Epsilon_f)
             {
                 // No intersection
-                return XMath.Sqrt(sqr_distance_to_line) - sphereRadius;
+                return XMath.Sqrt(sqrDistanceToLine) - sphereRadius;
             }
             return 0;
         }
@@ -164,48 +164,48 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float RaySphere(in Vector3Df rayPos, in Vector3Df rayDir, in Vector3Df sphereCenter, float sphereRadius)
         {
-            var pos_to_center = sphereCenter - rayPos;
-            var center_projection = Vector3Df.Dot(in rayDir, in pos_to_center);
-            if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f)
+            var posToCenter = sphereCenter - rayPos;
+            var centerProjection = Vector3Df.Dot(in rayDir, in posToCenter);
+            if (centerProjection + sphereRadius < -XGeometry3D.Epsilon_f)
             {
                 // No intersection
-                return XMath.Sqrt(pos_to_center.SqrLength) - sphereRadius;
+                return XMath.Sqrt(posToCenter.SqrLength) - sphereRadius;
             }
 
-            var sqr_distance_to_pos = pos_to_center.SqrLength;
-            var sqr_distance_to_line = sqr_distance_to_pos - (center_projection * center_projection);
-            var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
-            if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
+            var sqrDistanceToPos = posToCenter.SqrLength;
+            var sqrDistanceToLine = sqrDistanceToPos - (centerProjection * centerProjection);
+            var sqrDistanceToIntersection = (sphereRadius * sphereRadius) - sqrDistanceToLine;
+            if (sqrDistanceToIntersection < -XGeometry3D.Epsilon_f)
             {
                 // No intersection
-                if (center_projection < -XGeometry3D.Eplsilon_f)
+                if (centerProjection < -XGeometry3D.Epsilon_f)
                 {
-                    return XMath.Sqrt(sqr_distance_to_pos) - sphereRadius;
+                    return XMath.Sqrt(sqrDistanceToPos) - sphereRadius;
                 }
-                return XMath.Sqrt(sqr_distance_to_line) - sphereRadius;
+                return XMath.Sqrt(sqrDistanceToLine) - sphereRadius;
             }
-            if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
+            if (sqrDistanceToIntersection < XGeometry3D.Epsilon_f)
             {
-                if (center_projection < -XGeometry3D.Eplsilon_f)
+                if (centerProjection < -XGeometry3D.Epsilon_f)
                 {
                     // No intersection
-                    return XMath.Sqrt(sqr_distance_to_pos) - sphereRadius;
+                    return XMath.Sqrt(sqrDistanceToPos) - sphereRadius;
                 }
                 // Point intersection
                 return 0;
             }
 
             // Line intersection
-            var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-            var distance_a = center_projection - distance_to_intersection;
-            var distance_b = center_projection + distance_to_intersection;
+            var distanceToIntersection = XMath.Sqrt(sqrDistanceToIntersection);
+            var distanceA = centerProjection - distanceToIntersection;
+            var distanceB = centerProjection + distanceToIntersection;
 
-            if (distance_a < -XGeometry3D.Eplsilon_f)
+            if (distanceA < -XGeometry3D.Epsilon_f)
             {
-                if (distance_b < -XGeometry3D.Eplsilon_f)
+                if (distanceB < -XGeometry3D.Epsilon_f)
                 {
                     // No intersection
-                    return XMath.Sqrt(sqr_distance_to_pos) - sphereRadius;
+                    return XMath.Sqrt(sqrDistanceToPos) - sphereRadius;
                 }
 
                 // Point intersection;
@@ -239,52 +239,52 @@ namespace Lotus.Maths
         /// <returns>Расстояние.</returns>
         public static float SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphereCenter, float sphereRadius)
         {
-            var segment_start_to_center = sphereCenter - start;
-            var from_start_to_end = end - start;
-            var segment_length = from_start_to_end.Length;
-            if (segment_length < XGeometry3D.Eplsilon_f)
+            var segmentStartToCenter = sphereCenter - start;
+            var fromStartToEnd = end - start;
+            var segmentLength = fromStartToEnd.Length;
+            if (segmentLength < XGeometry3D.Epsilon_f)
             {
-                return segment_start_to_center.Length - sphereRadius;
+                return segmentStartToCenter.Length - sphereRadius;
             }
 
-            var segment_direction = from_start_to_end.Normalized;
-            var center_projection = Vector3Df.Dot(in segment_direction, in segment_start_to_center);
-            if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f ||
-                center_projection - sphereRadius > segment_length + XGeometry3D.Eplsilon_f)
+            var segmentDirection = fromStartToEnd.Normalized;
+            var centerProjection = Vector3Df.Dot(in segmentDirection, in segmentStartToCenter);
+            if (centerProjection + sphereRadius < -XGeometry3D.Epsilon_f ||
+                centerProjection - sphereRadius > segmentLength + XGeometry3D.Epsilon_f)
             {
                 // No intersection
-                if (center_projection < 0)
+                if (centerProjection < 0)
                 {
-                    return XMath.Sqrt(segment_start_to_center.SqrLength) - sphereRadius;
+                    return XMath.Sqrt(segmentStartToCenter.SqrLength) - sphereRadius;
                 }
                 return (sphereCenter - end).Length - sphereRadius;
             }
 
-            var sqr_distance_to_a = segment_start_to_center.SqrLength;
-            var sqr_distance_to_line = sqr_distance_to_a - (center_projection * center_projection);
-            var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
-            if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
+            var sqrDistanceToA = segmentStartToCenter.SqrLength;
+            var sqrDistanceToLine = sqrDistanceToA - (centerProjection * centerProjection);
+            var sqrDistanceToIntersection = (sphereRadius * sphereRadius) - sqrDistanceToLine;
+            if (sqrDistanceToIntersection < -XGeometry3D.Epsilon_f)
             {
                 // No intersection
-                if (center_projection < -XGeometry3D.Eplsilon_f)
+                if (centerProjection < -XGeometry3D.Epsilon_f)
                 {
-                    return XMath.Sqrt(sqr_distance_to_a) - sphereRadius;
+                    return XMath.Sqrt(sqrDistanceToA) - sphereRadius;
                 }
-                if (center_projection > segment_length + XGeometry3D.Eplsilon_f)
+                if (centerProjection > segmentLength + XGeometry3D.Epsilon_f)
                 {
                     return (sphereCenter - end).Length - sphereRadius;
                 }
-                return XMath.Sqrt(sqr_distance_to_line) - sphereRadius;
+                return XMath.Sqrt(sqrDistanceToLine) - sphereRadius;
             }
 
-            if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
+            if (sqrDistanceToIntersection < XGeometry3D.Epsilon_f)
             {
-                if (center_projection < -XGeometry3D.Eplsilon_f)
+                if (centerProjection < -XGeometry3D.Epsilon_f)
                 {
                     // No intersection
-                    return XMath.Sqrt(sqr_distance_to_a) - sphereRadius;
+                    return XMath.Sqrt(sqrDistanceToA) - sphereRadius;
                 }
-                if (center_projection > segment_length + XGeometry3D.Eplsilon_f)
+                if (centerProjection > segmentLength + XGeometry3D.Epsilon_f)
                 {
                     // No intersection
                     return (sphereCenter - end).Length - sphereRadius;
@@ -294,42 +294,42 @@ namespace Lotus.Maths
             }
 
             // Line intersection
-            var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-            var distance_a = center_projection - distance_to_intersection;
-            var distance_b = center_projection + distance_to_intersection;
+            var distanceToIntersection = XMath.Sqrt(sqrDistanceToIntersection);
+            var distanceA = centerProjection - distanceToIntersection;
+            var distanceB = centerProjection + distanceToIntersection;
 
-            var point_a_is_after_segment_start = distance_a > -XGeometry3D.Eplsilon_f;
-            var point_b_is_before_segment_end = distance_b < segment_length + XGeometry3D.Eplsilon_f;
+            var pointAIsAfterSegmentStart = distanceA > -XGeometry3D.Epsilon_f;
+            var pointBIsBeforeSegmentEnd = distanceB < segmentLength + XGeometry3D.Epsilon_f;
 
-            if (point_a_is_after_segment_start && point_b_is_before_segment_end)
+            if (pointAIsAfterSegmentStart && pointBIsBeforeSegmentEnd)
             {
                 // Two points intersection
                 return 0;
             }
-            if (!point_a_is_after_segment_start && !point_b_is_before_segment_end)
+            if (!pointAIsAfterSegmentStart && !pointBIsBeforeSegmentEnd)
             {
                 // The segment is inside, but no intersection
-                distance_b = -(distance_b - segment_length);
-                return distance_a > distance_b ? distance_a : distance_b;
+                distanceB = -(distanceB - segmentLength);
+                return distanceA > distanceB ? distanceA : distanceB;
             }
 
-            var point_a_is_before_segment_end = distance_a < segment_length + XGeometry3D.Eplsilon_f;
-            if (point_a_is_after_segment_start && point_a_is_before_segment_end)
+            var pointAIsBeforeSegmentEnd = distanceA < segmentLength + XGeometry3D.Epsilon_f;
+            if (pointAIsAfterSegmentStart && pointAIsBeforeSegmentEnd)
             {
                 // Point A intersection
                 return 0;
             }
-            var point_b_is_after_segment_start = distance_b > -XGeometry3D.Eplsilon_f;
-            if (point_b_is_after_segment_start && point_b_is_before_segment_end)
+            var pointBIsAfterSegmentStart = distanceB > -XGeometry3D.Epsilon_f;
+            if (pointBIsAfterSegmentStart && pointBIsBeforeSegmentEnd)
             {
                 // Point B intersection
                 return 0;
             }
 
             // No intersection
-            if (center_projection < 0)
+            if (centerProjection < 0)
             {
-                return XMath.Sqrt(sqr_distance_to_a) - sphereRadius;
+                return XMath.Sqrt(sqrDistanceToA) - sphereRadius;
             }
             return (sphereCenter - end).Length - sphereRadius;
         }

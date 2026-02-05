@@ -25,22 +25,22 @@ namespace Lotus.Maths
         /// <summary>
         /// Точность вещественного числа.
         /// </summary>
-        public const double Eplsilon_D = 0.00000001;
+        public const double Epsilon_D = 0.00000001;
 
         /// <summary>
         /// Точность вещественного числа.
         /// </summary>
-        public const float Eplsilon_F = 0.0000001f;
+        public const float Epsilon_F = 0.0000001f;
 
         /// <summary>
         /// Точность вещественного числа.
         /// </summary>
-        public const double Eplsilon3_D = 0.001;
+        public const double Epsilon3_D = 0.001;
 
         /// <summary>
         /// Точность вещественного числа.
         /// </summary>
-        public const float Eplsilon3_F = 0.001f;
+        public const float Epsilon3_F = 0.001f;
 
         /// <summary>
         /// Коэффициент для преобразования радианов в градусы.
@@ -306,7 +306,7 @@ namespace Lotus.Maths
         /// <returns>Статус равенства значений.</returns>
         public static bool Approximately(double a, double b)
         {
-            if (Math.Abs(a - b) < Eplsilon3_D)
+            if (Math.Abs(a - b) < Epsilon3_D)
             {
                 return true;
             }
@@ -322,7 +322,7 @@ namespace Lotus.Maths
         /// <returns>Статус равенства значений.</returns>
         public static bool Approximately(float a, float b)
         {
-            if (Math.Abs(a - b) < Eplsilon3_F)
+            if (Math.Abs(a - b) < Epsilon3_F)
             {
                 return true;
             }
@@ -601,18 +601,18 @@ namespace Lotus.Maths
         /// </summary>
         /// <typeparam name="TType">Тип элемента массива.</typeparam>
         /// <param name="array">Массив.</param>
-        /// <param name="current_count">Текущие количество элементов.</param>
+        /// <param name="currentCount">Текущие количество элементов.</param>
         /// <param name="item">Элемент.</param>
         /// <returns>Массив.</returns>
-        public static TType[] Add<TType>(TType[] array, ref int current_count, in TType item)
+        public static TType[] Add<TType>(TType[] array, ref int currentCount, in TType item)
         {
-            if (current_count == array.Length)
+            if (currentCount == array.Length)
             {
-                Array.Resize(ref array, current_count << 1);
+                Array.Resize(ref array, currentCount << 1);
             }
 
-            array[current_count] = item;
-            current_count++;
+            array[currentCount] = item;
+            currentCount++;
             return array;
         }
 
@@ -621,21 +621,21 @@ namespace Lotus.Maths
         /// </summary>
         /// <typeparam name="TType">Тип элемента массива.</typeparam>
         /// <param name="array">Массив.</param>
-        /// <param name="current_count">Текущие количество элементов.</param>
+        /// <param name="currentCount">Текущие количество элементов.</param>
         /// <param name="items">Список элементов.</param>
         /// <returns>Массив.</returns>
-        public static TType[] AddRange<TType>(TType[] array, ref int current_count, params TType[] items)
+        public static TType[] AddRange<TType>(TType[] array, ref int currentCount, params TType[] items)
         {
-            if (array.Length < current_count + items.Length)
+            if (array.Length < currentCount + items.Length)
             {
-                var max_size = current_count + items.Length;
-                var new_arary = new TType[max_size];
-                Array.Copy(array, new_arary, current_count);
-                array = items;
+                var maxSize = currentCount + items.Length;
+                var newArray = new TType[maxSize];
+                Array.Copy(array, newArray, currentCount);
+                array = newArray;
             }
 
-            Array.Copy(items, 0, array, current_count, items.Length);
-            current_count += items.Length;
+            Array.Copy(items, 0, array, currentCount, items.Length);
+            currentCount += items.Length;
             return array;
         }
 
@@ -827,46 +827,46 @@ namespace Lotus.Maths
         /// </summary>
         /// <typeparam name="TType">Тип элемента массива.</typeparam>
         /// <param name="array">Массив.</param>
-        /// <param name="start_index">Индекс элемент с которого начитается смещение.</param>
+        /// <param name="startIndex">Индекс элемент с которого начитается смещение.</param>
         /// <param name="offset">Количество смещения.</param>
         /// <param name="count">Количество смещаемых элементов.</param>
         /// <returns>Массив.</returns>
-        public static TType[] Shift<TType>(TType[] array, int start_index, int offset, int count)
+        public static TType[] Shift<TType>(TType[] array, int startIndex, int offset, int count)
         {
             var result = (TType[])array.Clone();
 
-            if (start_index >= result.Length)
+            if (startIndex >= result.Length)
             {
-                start_index = start_index < 0 ? 0 : (result.Length - 1);
+                startIndex = startIndex < 0 ? 0 : (result.Length - 1);
             }
             else
             {
-                start_index = start_index < 0 ? 0 : (start_index);
+                startIndex = startIndex < 0 ? 0 : (startIndex);
             }
-            if (start_index + count >= result.Length)
+            if (startIndex + count >= result.Length)
             {
-                count = count < 0 ? 0 : (result.Length - start_index - 1);
+                count = count < 0 ? 0 : (result.Length - startIndex - 1);
             }
             else
             {
                 count = count < 0 ? 0 : (count);
             }
-            if (start_index + count + offset >= result.Length)
+            if (startIndex + count + offset >= result.Length)
             {
-                offset = start_index + offset < 0 ? -start_index : (result.Length - start_index - count);
+                offset = startIndex + offset < 0 ? -startIndex : (result.Length - startIndex - count);
             }
             else
             {
-                offset = start_index + offset < 0 ? -start_index : (offset);
+                offset = startIndex + offset < 0 ? -startIndex : (offset);
             }
 
-            var abs_offset = Math.Abs(offset);
+            var absOffset = Math.Abs(offset);
             var items = new TType[count]; // What we want to move
-            var dec = new TType[abs_offset]; // What is going to replace the thing we move
-            Array.Copy(array, start_index, items, 0, count);
-            Array.Copy(array, start_index + (offset >= 0 ? count : offset), dec, 0, abs_offset);
-            Array.Copy(dec, 0, result, start_index + (offset >= 0 ? 0 : offset + count), abs_offset);
-            Array.Copy(items, 0, result, start_index + offset, count);
+            var dec = new TType[absOffset]; // What is going to replace the thing we move
+            Array.Copy(array, startIndex, items, 0, count);
+            Array.Copy(array, startIndex + (offset >= 0 ? count : offset), dec, 0, absOffset);
+            Array.Copy(dec, 0, result, startIndex + (offset >= 0 ? 0 : offset + count), absOffset);
+            Array.Copy(items, 0, result, startIndex + offset, count);
 
             return result;
         }
@@ -876,11 +876,11 @@ namespace Lotus.Maths
         /// </summary>
         /// <typeparam name="TType">Тип элемента массива.</typeparam>
         /// <param name="array">Массив.</param>
-        /// <param name="start_index">Индекс элемент с которого начитается смещение.</param>
+        /// <param name="startIndex">Индекс элемент с которого начитается смещение.</param>
         /// <returns>Массив.</returns>
-        public static TType[] ShiftRight<TType>(TType[] array, int start_index)
+        public static TType[] ShiftRight<TType>(TType[] array, int startIndex)
         {
-            return Shift(array, start_index, 1, 1);
+            return Shift(array, startIndex, 1, 1);
         }
 
         /// <summary>
@@ -888,11 +888,11 @@ namespace Lotus.Maths
         /// </summary>
         /// <typeparam name="TType">Тип элемента массива.</typeparam>
         /// <param name="array">Массив.</param>
-        /// <param name="start_index">Индекс элемент с которого начитается смещение.</param>
+        /// <param name="startIndex">Индекс элемент с которого начитается смещение.</param>
         /// <returns>Массив.</returns>
-        public static TType[] ShiftLeft<TType>(TType[] array, int start_index)
+        public static TType[] ShiftLeft<TType>(TType[] array, int startIndex)
         {
-            return Shift(array, start_index, -1, 1);
+            return Shift(array, startIndex, -1, 1);
         }
     }
 
@@ -953,16 +953,16 @@ namespace Lotus.Maths
         {
             var number = new StringBuilder(text.Length);
 
-            var add_minus = false;
+            var addMinus = false;
             const int max = 11;
             for (var i = 0; i < text.Length; i++)
             {
                 var c = text[i];
 
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
+                if (c == '-' && (i != text.Length - 1) && addMinus == false)
                 {
                     number.Append(c);
-                    add_minus = true;
+                    addMinus = true;
                     continue;
                 }
 
@@ -1028,16 +1028,16 @@ namespace Lotus.Maths
         {
             var number = new StringBuilder(text.Length);
 
-            var add_minus = false;
+            var addMinus = false;
             const int max = 19;
             for (var i = 0; i < text.Length; i++)
             {
                 var c = text[i];
 
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
+                if (c == '-' && (i != text.Length - 1) && addMinus == false)
                 {
                     number.Append(c);
-                    add_minus = true;
+                    addMinus = true;
                     continue;
                 }
 
@@ -1102,23 +1102,23 @@ namespace Lotus.Maths
         {
             var number = new StringBuilder(text.Length);
 
-            var add_minus = false;
-            var add_dot = false;
+            var addMinus = false;
+            var addDot = false;
             for (var i = 0; i < text.Length; i++)
             {
                 var c = text[i];
 
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
+                if (c == '-' && (i != text.Length - 1) && addMinus == false)
                 {
                     number.Append(c);
-                    add_minus = true;
+                    addMinus = true;
                     continue;
                 }
 
-                if ((c == ',' || c == '.') && (i != text.Length - 1) && add_dot == false)
+                if ((c == ',' || c == '.') && (i != text.Length - 1) && addDot == false)
                 {
                     number.Append('.');
-                    add_dot = true;
+                    addDot = true;
                     continue;
                 }
 
@@ -1178,23 +1178,23 @@ namespace Lotus.Maths
         {
             var number = new StringBuilder(text.Length);
 
-            var add_minus = false;
-            var add_dot = false;
+            var addMinus = false;
+            var addDot = false;
             for (var i = 0; i < text.Length; i++)
             {
                 var c = text[i];
 
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
+                if (c == '-' && (i != text.Length - 1) && addMinus == false)
                 {
                     number.Append(c);
-                    add_minus = true;
+                    addMinus = true;
                     continue;
                 }
 
-                if ((c == ',' || c == '.') && (i != text.Length - 1) && add_dot == false)
+                if ((c == ',' || c == '.') && (i != text.Length - 1) && addDot == false)
                 {
                     number.Append('.');
-                    add_dot = true;
+                    addDot = true;
                     continue;
                 }
 
@@ -1250,27 +1250,27 @@ namespace Lotus.Maths
         /// </summary>
         /// <param name="text">Текст.</param>
         /// <returns>Текст.</returns>
-        public static string ParseableTextDeciminal(string text)
+        public static string ParseableTextDecimal(string text)
         {
             var number = new StringBuilder(text.Length);
 
-            var add_minus = false;
-            var add_dot = false;
+            var addMinus = false;
+            var addDot = false;
             for (var i = 0; i < text.Length; i++)
             {
                 var c = text[i];
 
-                if (c == '-' && (i != text.Length - 1) && add_minus == false)
+                if (c == '-' && (i != text.Length - 1) && addMinus == false)
                 {
                     number.Append(c);
-                    add_minus = true;
+                    addMinus = true;
                     continue;
                 }
 
-                if ((c == ',' || c == '.') && (i != text.Length - 1) && add_dot == false)
+                if ((c == ',' || c == '.') && (i != text.Length - 1) && addDot == false)
                 {
                     number.Append('.');
-                    add_dot = true;
+                    addDot = true;
                     continue;
                 }
 
@@ -1291,7 +1291,7 @@ namespace Lotus.Maths
         /// <returns>Значение.</returns>
         public static decimal ParseDecimal(string text, decimal defaultValue = 0)
         {
-            text = ParseableTextDeciminal(text);
+            text = ParseableTextDecimal(text);
 
             if (decimal.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var resultValue))
             {
@@ -1309,7 +1309,7 @@ namespace Lotus.Maths
         /// <returns>Значение.</returns>
         public static decimal ParseCurrency(string text, decimal defaultValue = 0)
         {
-            text = ParseableTextDeciminal(text);
+            text = ParseableTextDecimal(text);
 
             if (decimal.TryParse(text, NumberStyles.Currency, CultureInfo.InvariantCulture, out var resultValue))
             {

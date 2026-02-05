@@ -383,7 +383,7 @@ namespace Lotus.Maths
                 if (point.Y > y_max) y_max = point.Y;
             }
 
-            var rect_area = new Rect2Df
+            var rectArea = new Rect2Df
             {
                 X = x_min,
                 Width = x_max - x_min,
@@ -391,7 +391,7 @@ namespace Lotus.Maths
                 Height = y_max - y_min
             };
 
-            return rect_area;
+            return rectArea;
         }
         #endregion
 
@@ -929,7 +929,7 @@ namespace Lotus.Maths
                 if (point.Y > y_max) y_max = point.Y;
             }
 
-            var rect_area = new Rect2Df
+            var rectArea = new Rect2Df
             {
                 X = x_min,
                 Width = x_max - x_min,
@@ -937,7 +937,7 @@ namespace Lotus.Maths
                 Height = y_max - y_min
             };
 
-            return rect_area;
+            return rectArea;
         }
         #endregion
 

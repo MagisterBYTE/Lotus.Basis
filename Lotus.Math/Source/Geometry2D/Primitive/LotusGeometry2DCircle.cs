@@ -37,10 +37,10 @@ namespace Lotus.Maths
         /// </summary>
         public float Circumference
         {
-            readonly get { return Radius * XMath.PI_2_F; }
+            readonly get { return Radius * XMath.PI2_F; }
             set
             {
-                Radius = value / XMath.PI_2_F;
+                Radius = value / XMath.PI2_F;
             }
         }
 
@@ -210,7 +210,7 @@ namespace Lotus.Maths
         public readonly bool Contains(in Vector2Df point)
         {
             var d = Vector2Df.Distance(in Center, in point);
-            return Math.Abs(d - Radius) < XGeometry2D.Eplsilon_f;
+            return Math.Abs(d - Radius) < XGeometry2D.Epsilon_f;
         }
         #endregion
     }

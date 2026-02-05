@@ -125,11 +125,11 @@ namespace Lotus.Maths
         public static Vector4D DeserializeFromString(string data)
         {
             var vector = new Vector4D();
-            var vector_data = data.Split(';');
-            vector.X = XNumberHelper.ParseDouble(vector_data[0]);
-            vector.Y = XNumberHelper.ParseDouble(vector_data[1]);
-            vector.Z = XNumberHelper.ParseDouble(vector_data[2]);
-            vector.W = XNumberHelper.ParseDouble(vector_data[3]);
+            var vectorData = data.Split(';');
+            vector.X = XNumberHelper.ParseDouble(vectorData[0]);
+            vector.Y = XNumberHelper.ParseDouble(vectorData[1]);
+            vector.Z = XNumberHelper.ParseDouble(vectorData[2]);
+            vector.W = XNumberHelper.ParseDouble(vectorData[3]);
             return vector;
         }
         #endregion
@@ -180,8 +180,8 @@ namespace Lotus.Maths
         {
             get
             {
-                var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
-                return new Vector4D(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh);
+                var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+                return new Vector4D(X * invLength, Y * invLength, Z * invLength);
             }
         }
         #endregion
@@ -253,19 +253,26 @@ namespace Lotus.Maths
             }
             else
             {
-                if (X == other.X && Y > other.Y)
+                if (XMath.Approximately(X, other.X) && Y > other.Y)
                 {
                     return 1;
                 }
                 else
                 {
-                    if (X == other.X && Y == other.Y && Z > other.Z)
+                    if (XMath.Approximately(X, other.X) && XMath.Approximately(Y, other.Y) && Z > other.Z)
                     {
-                        return -1;
+                        return 1;
                     }
                     else
                     {
-                        return 0;
+                        if (XMath.Approximately(X, other.X) && XMath.Approximately(Y, other.Y) && XMath.Approximately(Z, other.Z))
+                        {
+                            return W.CompareTo(other.W);
+                        }
+                        else
+                        {
+                            return -1;
+                        }
                     }
                 }
             }
@@ -591,10 +598,10 @@ namespace Lotus.Maths
             X = (left.Y * right.Z) - (left.Z * right.Y);
             Y = (left.Z * right.X) - (left.X * right.Z);
             Z = (left.X * right.Y) - (left.Y * right.X);
-            var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
-            X *= inv_length;
-            Y *= inv_length;
-            Z *= inv_length;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+            X *= invLength;
+            Y *= invLength;
+            Z *= invLength;
         }
 
         /// <summary>
@@ -750,11 +757,11 @@ namespace Lotus.Maths
         public static Vector4Df DeserializeFromString(string data)
         {
             var vector = new Vector4Df();
-            var vector_data = data.Split(';');
-            vector.X = XNumberHelper.ParseSingle(vector_data[0]);
-            vector.Y = XNumberHelper.ParseSingle(vector_data[1]);
-            vector.Z = XNumberHelper.ParseSingle(vector_data[2]);
-            vector.W = XNumberHelper.ParseSingle(vector_data[3]);
+            var vectorData = data.Split(';');
+            vector.X = XNumberHelper.ParseSingle(vectorData[0]);
+            vector.Y = XNumberHelper.ParseSingle(vectorData[1]);
+            vector.Z = XNumberHelper.ParseSingle(vectorData[2]);
+            vector.W = XNumberHelper.ParseSingle(vectorData[3]);
             return vector;
         }
         #endregion
@@ -805,8 +812,8 @@ namespace Lotus.Maths
         {
             get
             {
-                var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
-                return new Vector4Df(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh);
+                var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+                return new Vector4Df(X * invLength, Y * invLength, Z * invLength);
             }
         }
         #endregion
@@ -886,7 +893,7 @@ namespace Lotus.Maths
                 {
                     if (X == other.X && Y == other.Y && Z > other.Z)
                     {
-                        return -1;
+                        return 1;
                     }
                     else
                     {
@@ -1152,10 +1159,10 @@ namespace Lotus.Maths
         /// </summary>
         public void Normalize()
         {
-            var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
-            X *= inv_lentgh;
-            Y *= inv_lentgh;
-            Z *= inv_lentgh;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+            X *= invLength;
+            Y *= invLength;
+            Z *= invLength;
         }
 
         /// <summary>
@@ -1216,10 +1223,10 @@ namespace Lotus.Maths
             X = (left.Y * right.Z) - (left.Z * right.Y);
             Y = (left.Z * right.X) - (left.X * right.Z);
             Z = (left.X * right.Y) - (left.Y * right.X);
-            var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
-            X *= inv_length;
-            Y *= inv_length;
-            Z *= inv_length;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+            X *= invLength;
+            Y *= invLength;
+            Z *= invLength;
         }
 
         /// <summary>

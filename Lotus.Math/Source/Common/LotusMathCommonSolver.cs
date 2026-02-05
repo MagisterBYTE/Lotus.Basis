@@ -1,3 +1,5 @@
+using System;
+
 namespace Lotus.Maths
 {
     /** \addtogroup MathCommon
@@ -36,14 +38,15 @@ namespace Lotus.Maths
             {
                 if (XMath.Approximately(d, 0.0))
                 {
-                    x1 = -b / 2 * a;
+                    x1 = -b / (2 * a);
                     x2 = x1;
                     return 0;
                 }
                 else
                 {
-                    x1 = (-b + d) / 2 * a;
-                    x2 = (-b - d) / 2 * a;
+                    var sqrtD = Math.Sqrt(d);
+                    x1 = (-b + sqrtD) / (2 * a);
+                    x2 = (-b - sqrtD) / (2 * a);
                     return 1;
                 }
             }

@@ -1779,16 +1779,16 @@ namespace Lotus.Maths
         {
             unchecked
             {
-                var hash_code = M11.GetHashCode();
-                hash_code = (hash_code * 397) ^ M12.GetHashCode();
-                hash_code = (hash_code * 397) ^ M13.GetHashCode();
-                hash_code = (hash_code * 397) ^ M21.GetHashCode();
-                hash_code = (hash_code * 397) ^ M22.GetHashCode();
-                hash_code = (hash_code * 397) ^ M23.GetHashCode();
-                hash_code = (hash_code * 397) ^ M31.GetHashCode();
-                hash_code = (hash_code * 397) ^ M32.GetHashCode();
-                hash_code = (hash_code * 397) ^ M33.GetHashCode();
-                return hash_code;
+                var hashCode = M11.GetHashCode();
+                hashCode = (hashCode * 397) ^ M12.GetHashCode();
+                hashCode = (hashCode * 397) ^ M13.GetHashCode();
+                hashCode = (hashCode * 397) ^ M21.GetHashCode();
+                hashCode = (hashCode * 397) ^ M22.GetHashCode();
+                hashCode = (hashCode * 397) ^ M23.GetHashCode();
+                hashCode = (hashCode * 397) ^ M31.GetHashCode();
+                hashCode = (hashCode * 397) ^ M32.GetHashCode();
+                hashCode = (hashCode * 397) ^ M33.GetHashCode();
+                return hashCode;
             }
         }
 
@@ -2259,7 +2259,7 @@ namespace Lotus.Maths
         {
             //Scaling is the length of the rows. ( just take one row since this is a uniform matrix)
             scale = (float)Math.Sqrt((M11 * M11) + (M12 * M12) + (M13 * M13));
-            var inv_scale = 1f / scale;
+            var invScale = 1f / scale;
 
             //If any of the scaling factors are zero, then the rotation matrix can not exist.
             if (Math.Abs(scale) < XMath.ZeroTolerance_F)
@@ -2271,17 +2271,17 @@ namespace Lotus.Maths
             //The rotation is the left over matrix after dividing out the scaling.
             var rotationmatrix = new Matrix3Dx3f
             {
-                M11 = M11 * inv_scale,
-                M12 = M12 * inv_scale,
-                M13 = M13 * inv_scale,
+                M11 = M11 * invScale,
+                M12 = M12 * invScale,
+                M13 = M13 * invScale,
 
-                M21 = M21 * inv_scale,
-                M22 = M22 * inv_scale,
-                M23 = M23 * inv_scale,
+                M21 = M21 * invScale,
+                M22 = M22 * invScale,
+                M23 = M23 * invScale,
 
-                M31 = M31 * inv_scale,
-                M32 = M32 * inv_scale,
-                M33 = M33 * inv_scale
+                M31 = M31 * invScale,
+                M32 = M32 * invScale,
+                M33 = M33 * invScale
             };
 
             Quaternion3Df.RotationMatrix(in rotationmatrix, out rotation);

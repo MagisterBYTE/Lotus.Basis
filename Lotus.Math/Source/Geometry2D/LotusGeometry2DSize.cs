@@ -55,9 +55,9 @@ namespace Lotus.Maths
         public static Size2D DeserializeFromString(string data)
         {
             var size = new Size2D();
-            var size_data = data.Split(';');
-            size.Width = XNumberHelper.ParseDouble(size_data[0]);
-            size.Height = XNumberHelper.ParseDouble(size_data[1]);
+            var sizeData = data.Split(';');
+            size.Width = XNumberHelper.ParseDouble(sizeData[0]);
+            size.Height = XNumberHelper.ParseDouble(sizeData[1]);
             return size;
         }
         #endregion
@@ -497,9 +497,9 @@ namespace Lotus.Maths
         public static Size2Df DeserializeFromString(string data)
         {
             var size = new Size2Df();
-            var size_data = data.Split(';');
-            size.Width = XNumberHelper.ParseSingle(size_data[0]);
-            size.Height = XNumberHelper.ParseSingle(size_data[1]);
+            var sizeData = data.Split(';');
+            size.Width = XNumberHelper.ParseSingle(sizeData[0]);
+            size.Height = XNumberHelper.ParseSingle(sizeData[1]);
             return size;
         }
         #endregion

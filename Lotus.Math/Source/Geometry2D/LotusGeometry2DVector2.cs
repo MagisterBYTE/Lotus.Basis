@@ -234,9 +234,9 @@ namespace Lotus.Maths
         public static Vector2D DeserializeFromString(string data)
         {
             var vector = new Vector2D();
-            var vector_data = data.Split(';');
-            vector.X = XNumberHelper.ParseDouble(vector_data[0]);
-            vector.Y = XNumberHelper.ParseDouble(vector_data[1]);
+            var vectorData = data.Split(';');
+            vector.X = XNumberHelper.ParseDouble(vectorData[0]);
+            vector.Y = XNumberHelper.ParseDouble(vectorData[1]);
             return vector;
         }
         #endregion
@@ -277,8 +277,8 @@ namespace Lotus.Maths
         {
             get
             {
-                var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
-                return new Vector2D(X * inv_lentgh, Y * inv_lentgh);
+                var invLength = XMath.InvSqrt((X * X) + (Y * Y));
+                return new Vector2D(X * invLength, Y * invLength);
             }
         }
         #endregion
@@ -678,9 +678,9 @@ namespace Lotus.Maths
         /// </summary>
         public void Normalize()
         {
-            var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
-            X *= inv_lentgh;
-            Y *= inv_lentgh;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y));
+            X *= invLength;
+            Y *= invLength;
         }
 
         /// <summary>
@@ -1087,9 +1087,9 @@ namespace Lotus.Maths
         public static Vector2Df DeserializeFromString(string data)
         {
             var vector = new Vector2Df();
-            var vector_data = data.Split(';');
-            vector.X = XNumberHelper.ParseSingle(vector_data[0]);
-            vector.Y = XNumberHelper.ParseSingle(vector_data[1]);
+            var vectorData = data.Split(';');
+            vector.X = XNumberHelper.ParseSingle(vectorData[0]);
+            vector.Y = XNumberHelper.ParseSingle(vectorData[1]);
             return vector;
         }
         #endregion
@@ -1130,8 +1130,8 @@ namespace Lotus.Maths
         {
             get
             {
-                var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
-                return new Vector2Df(X * inv_lentgh, Y * inv_lentgh);
+                var invLength = XMath.InvSqrt((X * X) + (Y * Y));
+                return new Vector2Df(X * invLength, Y * invLength);
             }
         }
         #endregion
@@ -1584,9 +1584,9 @@ namespace Lotus.Maths
         /// </summary>
         public void Normalize()
         {
-            var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y));
-            X *= inv_lentgh;
-            Y *= inv_lentgh;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y));
+            X *= invLength;
+            Y *= invLength;
         }
 
         /// <summary>
@@ -1988,9 +1988,9 @@ namespace Lotus.Maths
         public static Vector2Di DeserializeFromString(string data)
         {
             var vector = new Vector2Di();
-            var vector_data = data.Split(';');
-            vector.X = XNumberHelper.ParseInt(vector_data[0]);
-            vector.Y = XNumberHelper.ParseInt(vector_data[1]);
+            var vectorData = data.Split(';');
+            vector.X = XNumberHelper.ParseInt(vectorData[0]);
+            vector.Y = XNumberHelper.ParseInt(vectorData[1]);
             return vector;
         }
         #endregion

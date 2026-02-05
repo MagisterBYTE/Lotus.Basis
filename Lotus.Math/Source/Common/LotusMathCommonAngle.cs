@@ -24,12 +24,12 @@ namespace Lotus.Maths
         /// <returns>Нормализованный угол в пределах от 0 до 360.</returns>
         public static double NormalizationFull(double angle)
         {
-            var degree_norm = angle;
+            var degreeNorm = angle;
             if (angle >= 360.0 || angle < 0.0)
             {
-                degree_norm -= Math.Floor(angle / 360.0) * 360.0;
+                degreeNorm -= Math.Floor(angle / 360.0) * 360.0;
             }
-            return degree_norm;
+            return degreeNorm;
         }
 
         /// <summary>
@@ -39,12 +39,12 @@ namespace Lotus.Maths
         /// <returns>Нормализованный угол в пределах от 0 до 360.</returns>
         public static float NormalizationFull(float angle)
         {
-            var degree_norm = angle;
+            var degreeNorm = angle;
             if (angle >= 360.0f || angle < 0.0f)
             {
-                degree_norm -= (float)Math.Floor(angle / 360.0f) * 360.0f;
+                degreeNorm -= (float)Math.Floor(angle / 360.0f) * 360.0f;
             }
-            return degree_norm;
+            return degreeNorm;
         }
 
         /// <summary>
@@ -54,16 +54,16 @@ namespace Lotus.Maths
         /// <returns>Нормализованный угол в пределах от -180 до 180.</returns>
         public static double NormalizationHalf(double angle)
         {
-            var degree_norm = angle;
+            var degreeNorm = angle;
             if (angle >= 360.0 || angle < 0.0)
             {
-                degree_norm -= Math.Floor(angle / 360.0) * 360.0;
+                degreeNorm -= Math.Floor(angle / 360.0) * 360.0;
             }
-            if (degree_norm > 180.0)
+            if (degreeNorm > 180.0)
             {
-                degree_norm -= 360.0;
+                degreeNorm -= 360.0;
             }
-            return degree_norm;
+            return degreeNorm;
         }
 
         /// <summary>
@@ -73,16 +73,16 @@ namespace Lotus.Maths
         /// <returns>Нормализованный угол в пределах от -180 до 180.</returns>
         public static float NormalizationHalf(float angle)
         {
-            var degree_norm = angle;
+            var degreeNorm = angle;
             if (angle >= 360.0f || angle < 0.0f)
             {
-                degree_norm -= (float)Math.Floor(angle / 360.0f) * 360.0f;
+                degreeNorm -= (float)Math.Floor(angle / 360.0f) * 360.0f;
             }
-            if (degree_norm > 180.0f)
+            if (degreeNorm > 180.0f)
             {
-                degree_norm -= 360.0f;
+                degreeNorm -= 360.0f;
             }
-            return degree_norm;
+            return degreeNorm;
         }
 
         /// <summary>

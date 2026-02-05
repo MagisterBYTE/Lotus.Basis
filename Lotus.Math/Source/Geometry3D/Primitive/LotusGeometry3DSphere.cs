@@ -16,7 +16,7 @@ namespace Lotus.Maths
         /// <summary>
         /// Текстовый формат отображения параметров сферы.
         /// </summary>
-        public static string ToStringFormat = "Center = {0:0.00}, {1:0.00}; Radius = {3:0.00}";
+        public static string ToStringFormat = "Center = {0:0.00}, {1:0.00}; {2:0.00}; Radius = {3:0.00}";
         #endregion
 
         #region Fields
@@ -110,7 +110,7 @@ namespace Lotus.Maths
         /// <returns>Текстовое представление сферы с указанием значений.</returns>
         public override readonly string ToString()
         {
-            return string.Format(ToStringFormat, Center.X, Center.Y, Radius);
+            return string.Format(ToStringFormat, Center.X, Center.Y, Center.Z, Radius);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Lotus.Maths
         public readonly bool Contains(in Vector3Df point)
         {
             var d = Vector3Df.Distance(in Center, in point);
-            return Math.Abs(d - Radius) < XGeometry3D.Eplsilon_f;
+            return Math.Abs(d - Radius) < XGeometry3D.Epsilon_f;
         }
         #endregion
     }

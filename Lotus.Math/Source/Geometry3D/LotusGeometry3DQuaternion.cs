@@ -33,13 +33,13 @@ namespace Lotus.Maths
         {
             var v = axis.Normalized;
 
-            var half_angle = angle * 0.5;
-            var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
+            var halfAngle = angle * 0.5;
+            var sinA = Math.Sin(halfAngle * XMath.DegreeToRadian_D);
 
-            result.X = v.X * sin_a;
-            result.Y = v.Y * sin_a;
-            result.Z = v.Z * sin_a;
-            result.W = Math.Cos(half_angle * XMath.DegreeToRadian_D);
+            result.X = v.X * sinA;
+            result.Y = v.Y * sinA;
+            result.Z = v.Z * sinA;
+            result.W = Math.Cos(halfAngle * XMath.DegreeToRadian_D);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Lotus.Maths
             result.W += 1.0;
 
             // angle close to PI
-            if (result.W <= XMath.Eplsilon_D)
+            if (result.W <= XMath.Epsilon_D)
             {
                 if (fromDirection.Z * fromDirection.Z > fromDirection.X * fromDirection.X)
                 {
@@ -137,11 +137,11 @@ namespace Lotus.Maths
         public static Quaternion3D DeserializeFromString(string data)
         {
             var quaternion = new Quaternion3D();
-            var quaternion_data = data.Split(';');
-            quaternion.X = XNumberHelper.ParseDouble(quaternion_data[0]);
-            quaternion.Y = XNumberHelper.ParseDouble(quaternion_data[1]);
-            quaternion.Z = XNumberHelper.ParseDouble(quaternion_data[2]);
-            quaternion.W = XNumberHelper.ParseDouble(quaternion_data[3]);
+            var quaternionData = data.Split(';');
+            quaternion.X = XNumberHelper.ParseDouble(quaternionData[0]);
+            quaternion.Y = XNumberHelper.ParseDouble(quaternionData[1]);
+            quaternion.Z = XNumberHelper.ParseDouble(quaternionData[2]);
+            quaternion.W = XNumberHelper.ParseDouble(quaternionData[3]);
             return quaternion;
         }
         #endregion
@@ -192,8 +192,8 @@ namespace Lotus.Maths
         {
             get
             {
-                var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
-                return new Quaternion3D(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh, W * inv_lentgh);
+                var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+                return new Quaternion3D(X * invLength, Y * invLength, Z * invLength, W * invLength);
             }
         }
 
@@ -215,8 +215,8 @@ namespace Lotus.Maths
         {
             get
             {
-                var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
-                return new Quaternion3D(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh, W * inv_lentgh * -1.0);
+                var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+                return new Quaternion3D(X * invLength, Y * invLength, Z * invLength, W * invLength * -1.0);
             }
         }
         #endregion
@@ -258,13 +258,13 @@ namespace Lotus.Maths
         {
             var v = axis.Normalized;
 
-            var half_angle = angle * 0.5;
-            var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
+            var halfAngle = angle * 0.5;
+            var sinA = Math.Sin(halfAngle * XMath.DegreeToRadian_D);
 
-            X = v.X * sin_a;
-            Y = v.Y * sin_a;
-            Z = v.Z * sin_a;
-            W = Math.Cos(half_angle * XMath.DegreeToRadian_D);
+            X = v.X * sinA;
+            Y = v.Y * sinA;
+            Z = v.Z * sinA;
+            W = Math.Cos(halfAngle * XMath.DegreeToRadian_D);
         }
         #endregion
 
@@ -487,11 +487,11 @@ namespace Lotus.Maths
         /// </summary>
         public void Normalize()
         {
-            var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
-            X *= inv_lentgh;
-            Y *= inv_lentgh;
-            Z *= inv_lentgh;
-            W *= inv_lentgh;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+            X *= invLength;
+            Y *= invLength;
+            Z *= invLength;
+            W *= invLength;
         }
 
         /// <summary>
@@ -509,11 +509,11 @@ namespace Lotus.Maths
         /// </summary>
         public void Inverse()
         {
-            var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
-            X *= inv_length;
-            Y *= inv_length;
-            Z *= inv_length;
-            W *= -1.0f * inv_length;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+            X *= invLength;
+            Y *= invLength;
+            Z *= invLength;
+            W *= -1.0f * invLength;
         }
 
         /// <summary>
@@ -540,13 +540,13 @@ namespace Lotus.Maths
         {
             var v = axis.Normalized;
 
-            var half_angle = angle * 0.5;
-            var sin_a = Math.Sin(half_angle * XMath.DegreeToRadian_D);
+            var halfAngle = angle * 0.5;
+            var sinA = Math.Sin(halfAngle * XMath.DegreeToRadian_D);
 
-            X = v.X * sin_a;
-            Y = v.Y * sin_a;
-            Z = v.Z * sin_a;
-            W = Math.Cos(half_angle * XMath.DegreeToRadian_D);
+            X = v.X * sinA;
+            Y = v.Y * sinA;
+            Z = v.Z * sinA;
+            W = Math.Cos(halfAngle * XMath.DegreeToRadian_D);
         }
 
         /// <summary>
@@ -566,7 +566,7 @@ namespace Lotus.Maths
             W += 1.0;
 
             // angle close to PI
-            if (W <= XMath.Eplsilon_D)
+            if (W <= XMath.Epsilon_D)
             {
                 if (fromDirection.Z * fromDirection.Z > fromDirection.X * fromDirection.X)
                 {
@@ -665,13 +665,13 @@ namespace Lotus.Maths
         {
             var v = axis.Normalized;
 
-            var half_angle = angle * 0.5f;
-            var sin_a = (float)Math.Sin(half_angle * XMath.DegreeToRadian_D);
+            var halfAngle = angle * 0.5f;
+            var sinA = (float)Math.Sin(halfAngle * XMath.DegreeToRadian_D);
 
-            result.X = v.X * sin_a;
-            result.Y = v.Y * sin_a;
-            result.Z = v.Z * sin_a;
-            result.W = (float)Math.Cos(half_angle * XMath.DegreeToRadian_D);
+            result.X = v.X * sinA;
+            result.Y = v.Y * sinA;
+            result.Z = v.Z * sinA;
+            result.W = (float)Math.Cos(halfAngle * XMath.DegreeToRadian_D);
         }
 
         /// <summary>
@@ -695,7 +695,7 @@ namespace Lotus.Maths
             result.W += 1.0f;
 
             // angle close to PI
-            if (result.W <= XMath.Eplsilon_D)
+            if (result.W <= XMath.Epsilon_D)
             {
                 if (fromDirection.Z * fromDirection.Z > fromDirection.X * fromDirection.X)
                 {
@@ -806,21 +806,21 @@ namespace Lotus.Maths
         /// <param name="result">When the method completes, contains the newly created quaternion.</param>
         public static void RotationYawPitchRoll(float yaw, float pitch, float roll, out Quaternion3Df result)
         {
-            var half_roll = roll * 0.5f;
-            var half_pitch = pitch * 0.5f;
-            var half_yaw = yaw * 0.5f;
+            var halfRoll = roll * 0.5f;
+            var halfPitch = pitch * 0.5f;
+            var halfYaw = yaw * 0.5f;
 
-            var sin_roll = (float)Math.Sin(half_roll);
-            var cos_roll = (float)Math.Cos(half_roll);
-            var sin_pitch = (float)Math.Sin(half_pitch);
-            var cos_pitch = (float)Math.Cos(half_pitch);
-            var sin_yaw = (float)Math.Sin(half_yaw);
-            var cos_yaw = (float)Math.Cos(half_yaw);
+            var sinRoll = (float)Math.Sin(halfRoll);
+            var cosRoll = (float)Math.Cos(halfRoll);
+            var sinPitch = (float)Math.Sin(halfPitch);
+            var cosPitch = (float)Math.Cos(halfPitch);
+            var sinYaw = (float)Math.Sin(halfYaw);
+            var cosYaw = (float)Math.Cos(halfYaw);
 
-            result.X = (cos_yaw * sin_pitch * cos_roll) + (sin_yaw * cos_pitch * sin_roll);
-            result.Y = (sin_yaw * cos_pitch * cos_roll) - (cos_yaw * sin_pitch * sin_roll);
-            result.Z = (cos_yaw * cos_pitch * sin_roll) - (sin_yaw * sin_pitch * cos_roll);
-            result.W = (cos_yaw * cos_pitch * cos_roll) + (sin_yaw * sin_pitch * sin_roll);
+            result.X = (cosYaw * sinPitch * cosRoll) + (sinYaw * cosPitch * sinRoll);
+            result.Y = (sinYaw * cosPitch * cosRoll) - (cosYaw * sinPitch * sinRoll);
+            result.Z = (cosYaw * cosPitch * sinRoll) - (sinYaw * sinPitch * cosRoll);
+            result.W = (cosYaw * cosPitch * cosRoll) + (sinYaw * sinPitch * sinRoll);
         }
 
         /// <summary>
@@ -861,11 +861,11 @@ namespace Lotus.Maths
         public static Quaternion3Df DeserializeFromString(string data)
         {
             var quaternion = new Quaternion3Df();
-            var quaternion_data = data.Split(';');
-            quaternion.X = XNumberHelper.ParseSingle(quaternion_data[0]);
-            quaternion.Y = XNumberHelper.ParseSingle(quaternion_data[1]);
-            quaternion.Z = XNumberHelper.ParseSingle(quaternion_data[2]);
-            quaternion.W = XNumberHelper.ParseSingle(quaternion_data[3]);
+            var quaternionData = data.Split(';');
+            quaternion.X = XNumberHelper.ParseSingle(quaternionData[0]);
+            quaternion.Y = XNumberHelper.ParseSingle(quaternionData[1]);
+            quaternion.Z = XNumberHelper.ParseSingle(quaternionData[2]);
+            quaternion.W = XNumberHelper.ParseSingle(quaternionData[3]);
             return quaternion;
         }
         #endregion
@@ -916,8 +916,8 @@ namespace Lotus.Maths
         {
             get
             {
-                var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
-                return new Quaternion3Df(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh, W * inv_lentgh);
+                var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+                return new Quaternion3Df(X * invLength, Y * invLength, Z * invLength, W * invLength);
             }
         }
 
@@ -939,8 +939,8 @@ namespace Lotus.Maths
         {
             get
             {
-                var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
-                return new Quaternion3Df(X * inv_lentgh, Y * inv_lentgh, Z * inv_lentgh, W * inv_lentgh * -1.0f);
+                var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+                return new Quaternion3Df(X * invLength, Y * invLength, Z * invLength, W * invLength * -1.0f);
             }
         }
         #endregion
@@ -982,13 +982,13 @@ namespace Lotus.Maths
         {
             var v = axis.Normalized;
 
-            var half_angle = angle * 0.5f;
-            var sin_a = (float)Math.Sin(half_angle * XMath.DegreeToRadian_D);
+            var halfAngle = angle * 0.5f;
+            var sinA = (float)Math.Sin(halfAngle * XMath.DegreeToRadian_D);
 
-            X = v.X * sin_a;
-            Y = v.Y * sin_a;
-            Z = v.Z * sin_a;
-            W = (float)Math.Cos(half_angle * XMath.DegreeToRadian_D);
+            X = v.X * sinA;
+            Y = v.Y * sinA;
+            Z = v.Z * sinA;
+            W = (float)Math.Cos(halfAngle * XMath.DegreeToRadian_D);
         }
         #endregion
 
@@ -1211,11 +1211,11 @@ namespace Lotus.Maths
         /// </summary>
         public void Normalize()
         {
-            var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
-            X *= inv_lentgh;
-            Y *= inv_lentgh;
-            Z *= inv_lentgh;
-            W *= inv_lentgh;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+            X *= invLength;
+            Y *= invLength;
+            Z *= invLength;
+            W *= invLength;
         }
 
         /// <summary>
@@ -1233,11 +1233,11 @@ namespace Lotus.Maths
         /// </summary>
         public void Inverse()
         {
-            var inv_length = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
-            X *= inv_length;
-            Y *= inv_length;
-            Z *= inv_length;
-            W *= -1.0f * inv_length;
+            var invLength = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
+            X *= invLength;
+            Y *= invLength;
+            Z *= invLength;
+            W *= -1.0f * invLength;
         }
 
         /// <summary>
@@ -1264,13 +1264,13 @@ namespace Lotus.Maths
         {
             var v = axis.Normalized;
 
-            var half_angle = angle * 0.5f;
-            var sin_a = (float)Math.Sin(half_angle * XMath.DegreeToRadian_D);
+            var halfAngle = angle * 0.5f;
+            var sinA = (float)Math.Sin(halfAngle * XMath.DegreeToRadian_D);
 
-            X = v.X * sin_a;
-            Y = v.Y * sin_a;
-            Z = v.Z * sin_a;
-            W = (float)Math.Cos(half_angle * XMath.DegreeToRadian_D);
+            X = v.X * sinA;
+            Y = v.Y * sinA;
+            Z = v.Z * sinA;
+            W = (float)Math.Cos(halfAngle * XMath.DegreeToRadian_D);
         }
 
         /// <summary>

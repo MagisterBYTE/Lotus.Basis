@@ -22,7 +22,7 @@ namespace Lotus.Maths
         /// <remarks>
         /// Это не константа, её можно регулировать для обеспечения нужной точности вычислений.
         /// </remarks>
-        public static float Eplsilon_f = 0.001f;
+        public static float Epsilon_f = 0.001f;
 
         /// <summary>
         /// Точность вещественного числа используемого при операция поиска/пересечения геометрических примитивов.
@@ -30,7 +30,7 @@ namespace Lotus.Maths
         /// <remarks>
         /// Это не константа, её можно регулировать для обеспечения нужной точности вычислений.
         /// </remarks>
-        public static float Eplsilon_d = 0.00f;
+        public static float Epsilon_d = 0.00f;
 
         //
         // Здесь приняты текстурные координаты как в OpenGL - начало координат нижний-левый угол
@@ -91,8 +91,8 @@ namespace Lotus.Maths
         /// <returns>Точка.</returns>
         public static Vector2Df PointOnCircle(float radius, float angle)
         {
-            var angle_in_radians = angle * XMath.DegreeToRadian_F;
-            return new Vector2Df(radius * XMath.Sin(angle_in_radians), radius * XMath.Cos(angle_in_radians));
+            var angleInRadians = angle * XMath.DegreeToRadian_F;
+            return new Vector2Df(radius * XMath.Sin(angleInRadians), radius * XMath.Cos(angleInRadians));
         }
 
         /// <summary>
@@ -103,13 +103,13 @@ namespace Lotus.Maths
         /// <returns>Список точек.</returns>
         public static List<Vector2Df> PointsOnCircle(float radius, int segments)
         {
-            var segment_angle = 360f / segments;
-            float current_angle = 0;
+            var segmentAngle = 360f / segments;
+            float currentAngle = 0;
             var ring = new List<Vector2Df>(segments);
             for (var i = 0; i < segments; i++)
             {
-                ring.Add(PointOnCircle(radius, current_angle));
-                current_angle += segment_angle;
+                ring.Add(PointOnCircle(radius, currentAngle));
+                currentAngle += segmentAngle;
             }
             return ring;
         }

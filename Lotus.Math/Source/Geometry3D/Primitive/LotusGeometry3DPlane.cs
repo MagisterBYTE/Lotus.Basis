@@ -116,11 +116,11 @@ namespace Lotus.Maths
         /// </summary>
         public void Normalize()
         {
-            var inv_length = XMath.InvSqrt((Normal.X * Normal.X) + (Normal.Y * Normal.Y) + (Normal.Z * Normal.Z));
-            Normal.X *= inv_length;
-            Normal.Y *= inv_length;
-            Normal.Z *= inv_length;
-            Distance *= inv_length;
+            var invLength = XMath.InvSqrt((Normal.X * Normal.X) + (Normal.Y * Normal.Y) + (Normal.Z * Normal.Z));
+            Normal.X *= invLength;
+            Normal.Y *= invLength;
+            Normal.Z *= invLength;
+            Distance *= invLength;
         }
         #endregion
     }
@@ -398,11 +398,11 @@ namespace Lotus.Maths
         /// </summary>
         public void Normalize()
         {
-            var inv_length = XMath.InvSqrt((Normal.X * Normal.X) + (Normal.Y * Normal.Y) + (Normal.Z * Normal.Z));
-            Normal.X *= inv_length;
-            Normal.Y *= inv_length;
-            Normal.Z *= inv_length;
-            Distance *= inv_length;
+            var invLength = XMath.InvSqrt((Normal.X * Normal.X) + (Normal.Y * Normal.Y) + (Normal.Z * Normal.Z));
+            Normal.X *= invLength;
+            Normal.Y *= invLength;
+            Normal.Z *= invLength;
+            Distance *= invLength;
         }
         #endregion
     }

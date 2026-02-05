@@ -207,7 +207,7 @@ namespace Lotus.Maths
         /// <returns>Статус нахождения.</returns>
         public static bool PointLine(Vector3Df point, Vector3Df linePos, Vector3Df lineDir)
         {
-            return XDistance3D.PointLine(point, linePos, lineDir) < XGeometry3D.Eplsilon_f;
+            return XDistance3D.PointLine(point, linePos, lineDir) < XGeometry3D.Epsilon_f;
         }
         #endregion
 
@@ -258,7 +258,7 @@ namespace Lotus.Maths
         /// <returns>Статус нахождения.</returns>
         public static bool PointRay(Vector3Df point, Vector3Df rayPos, Vector3Df rayDir)
         {
-            return XDistance3D.PointRay(point, rayPos, rayDir) < XGeometry3D.Eplsilon_f;
+            return XDistance3D.PointRay(point, rayPos, rayDir) < XGeometry3D.Epsilon_f;
         }
         #endregion
 
@@ -283,7 +283,7 @@ namespace Lotus.Maths
         /// <returns>Статус нахождения.</returns>
         public static bool PointSegment(in Vector3Df point, in Vector3Df start, in Vector3Df end)
         {
-            return XDistance3D.PointSegment(point, start, end) < XGeometry3D.Eplsilon_f;
+            return XDistance3D.PointSegment(point, start, end) < XGeometry3D.Epsilon_f;
         }
         #endregion
 
@@ -309,7 +309,7 @@ namespace Lotus.Maths
         public static bool PointSphere(in Vector3Df point, in Vector3Df sphereCenter, float sphereRadius)
         {
             // For points on the sphere's surface magnitude is more stable than SqrLength
-            return (point - sphereCenter).Length < (sphereRadius * sphereRadius) + XGeometry3D.Eplsilon_f;
+            return (point - sphereCenter).SqrLength < (sphereRadius * sphereRadius) + XGeometry3D.Epsilon_f;
         }
         #endregion
 
@@ -362,38 +362,38 @@ namespace Lotus.Maths
         public static bool LineLine(in Vector3Df posA, in Vector3Df dirA, in Vector3Df posB, in Vector3Df dirB,
             out Vector3Df hit)
         {
-            var sqr_length_a = dirA.SqrLength;
-            var sqr_length_b = dirB.SqrLength;
-            var dot_a_b = Vector3Df.Dot(in dirA, in dirB);
+            var sqrLengthA = dirA.SqrLength;
+            var sqrLengthB = dirB.SqrLength;
+            var dotAB = Vector3Df.Dot(in dirA, in dirB);
 
-            var denominator = (sqr_length_a * sqr_length_b) - (dot_a_b * dot_a_b);
-            var pos_b_to_a = posA - posB;
-            var a = Vector3Df.Dot(in dirA, in pos_b_to_a);
-            var b = Vector3Df.Dot(in dirB, in pos_b_to_a);
+            var denominator = (sqrLengthA * sqrLengthB) - (dotAB * dotAB);
+            var posBToA = posA - posB;
+            var a = Vector3Df.Dot(in dirA, in posBToA);
+            var b = Vector3Df.Dot(in dirB, in posBToA);
 
-            Vector3Df closest_point_a;
-            Vector3Df closest_point_b;
-            if (Math.Abs(denominator) < XGeometry3D.Eplsilon_f)
+            Vector3Df closestPointA;
+            Vector3Df closestPointB;
+            if (Math.Abs(denominator) < XGeometry3D.Epsilon_f)
             {
                 // Parallel
-                var distance_b = dot_a_b > sqr_length_b ? a / dot_a_b : b / sqr_length_b;
+                var distanceB = dotAB > sqrLengthB ? a / dotAB : b / sqrLengthB;
 
-                closest_point_a = posA;
-                closest_point_b = posB + (dirB * distance_b);
+                closestPointA = posA;
+                closestPointB = posB + (dirB * distanceB);
             }
             else
             {
                 // Not parallel
-                var distance_a = ((sqr_length_a * b) - (dot_a_b * a)) / denominator;
-                var distance_b = ((dot_a_b * b) - (sqr_length_b * a)) / denominator;
+                var distanceA = ((sqrLengthA * b) - (dotAB * a)) / denominator;
+                var distanceB = ((dotAB * b) - (sqrLengthB * a)) / denominator;
 
-                closest_point_a = posA + (dirA * distance_a);
-                closest_point_b = posB + (dirB * distance_b);
+                closestPointA = posA + (dirA * distanceA);
+                closestPointB = posB + (dirB * distanceB);
             }
 
-            if ((closest_point_b - closest_point_a).SqrLength < XGeometry3D.Eplsilon_f)
+            if ((closestPointB - closestPointA).SqrLength < XGeometry3D.Epsilon_f)
             {
-                hit = closest_point_a;
+                hit = closestPointA;
                 return true;
             }
             hit = Vector3Df.Zero;
@@ -450,29 +450,29 @@ namespace Lotus.Maths
         public static bool LineSphere(in Vector3Df linePos, in Vector3Df lineDir, in Vector3Df sphereCenter, float sphereRadius,
             out TIntersectHit3Df hit)
         {
-            var pos_to_center = sphereCenter - linePos;
-            var center_projection = Vector3Df.Dot(in lineDir, in pos_to_center);
-            var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
+            var posToCenter = sphereCenter - linePos;
+            var centerProjection = Vector3Df.Dot(in lineDir, in posToCenter);
+            var sqrDistanceToLine = posToCenter.SqrLength - (centerProjection * centerProjection);
 
-            var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
-            if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
+            var sqrDistanceToIntersection = (sphereRadius * sphereRadius) - sqrDistanceToLine;
+            if (sqrDistanceToIntersection < -XGeometry3D.Epsilon_f)
             {
                 hit = TIntersectHit3Df.None();
                 return false;
             }
-            if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
+            if (sqrDistanceToIntersection < XGeometry3D.Epsilon_f)
             {
-                hit = TIntersectHit3Df.Point(linePos + (lineDir * center_projection));
+                hit = TIntersectHit3Df.Point(linePos + (lineDir * centerProjection));
                 return true;
             }
 
-            var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-            var distance_a = center_projection - distance_to_intersection;
-            var distance_b = center_projection + distance_to_intersection;
+            var distanceToIntersection = XMath.Sqrt(sqrDistanceToIntersection);
+            var distanceA = centerProjection - distanceToIntersection;
+            var distanceB = centerProjection + distanceToIntersection;
 
-            var point_a = linePos + (lineDir * distance_a);
-            var point_b = linePos + (lineDir * distance_b);
-            hit = TIntersectHit3Df.Segment(point_a, point_b);
+            var pointA = linePos + (lineDir * distanceA);
+            var pointB = linePos + (lineDir * distanceB);
+            hit = TIntersectHit3Df.Segment(pointA, pointB);
             return true;
         }
         #endregion Line-Sphere
@@ -518,7 +518,7 @@ namespace Lotus.Maths
             point = Vector3D.Zero;
 
             // А может на луч лежит плоскости
-            if (XMath.Approximately(distance, XGeometry3D.Eplsilon_d))
+            if (XMath.Approximately(distance, XGeometry3D.Epsilon_d))
             {
                 return TIntersectType3D.Line;
             }
@@ -657,51 +657,51 @@ namespace Lotus.Maths
         public static bool RaySphere(in Vector3Df rayPos, in Vector3Df rayDir, in Vector3Df sphereCenter, float sphereRadius,
             out TIntersectHit3Df hit)
         {
-            var pos_to_center = sphereCenter - rayPos;
-            var center_projection = Vector3Df.Dot(in rayDir, in pos_to_center);
-            if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f)
+            var posToCenter = sphereCenter - rayPos;
+            var centerProjection = Vector3Df.Dot(in rayDir, in posToCenter);
+            if (centerProjection + sphereRadius < -XGeometry3D.Epsilon_f)
             {
                 hit = TIntersectHit3Df.None();
                 return false;
             }
 
-            var sqr_distance_to_line = pos_to_center.SqrLength - (center_projection * center_projection);
-            var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
-            if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
+            var sqrDistanceToLine = posToCenter.SqrLength - (centerProjection * centerProjection);
+            var sqrDistanceToIntersection = (sphereRadius * sphereRadius) - sqrDistanceToLine;
+            if (sqrDistanceToIntersection < -XGeometry3D.Epsilon_f)
             {
                 hit = TIntersectHit3Df.None();
                 return false;
             }
-            if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
+            if (sqrDistanceToIntersection < XGeometry3D.Epsilon_f)
             {
-                if (center_projection < -XGeometry3D.Eplsilon_f)
+                if (centerProjection < -XGeometry3D.Epsilon_f)
                 {
                     hit = TIntersectHit3Df.None();
                     return false;
                 }
-                hit = TIntersectHit3Df.Point(rayPos + (rayDir * center_projection));
+                hit = TIntersectHit3Df.Point(rayPos + (rayDir * centerProjection));
                 return true;
             }
 
             // Line hit
-            var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-            var distance_a = center_projection - distance_to_intersection;
-            var distance_b = center_projection + distance_to_intersection;
+            var distanceToIntersection = XMath.Sqrt(sqrDistanceToIntersection);
+            var distanceA = centerProjection - distanceToIntersection;
+            var distanceB = centerProjection + distanceToIntersection;
 
-            if (distance_a < -XGeometry3D.Eplsilon_f)
+            if (distanceA < -XGeometry3D.Epsilon_f)
             {
-                if (distance_b < -XGeometry3D.Eplsilon_f)
+                if (distanceB < -XGeometry3D.Epsilon_f)
                 {
                     hit = TIntersectHit3Df.None();
                     return false;
                 }
-                hit = TIntersectHit3Df.Point(rayPos + (rayDir * distance_b));
+                hit = TIntersectHit3Df.Point(rayPos + (rayDir * distanceB));
                 return true;
             }
 
-            var point_a = rayPos + (rayDir * distance_a);
-            var point_b = rayPos + (rayDir * distance_b);
-            hit = TIntersectHit3Df.Segment(point_a, point_b);
+            var pointA = rayPos + (rayDir * distanceA);
+            var pointB = rayPos + (rayDir * distanceB);
+            hit = TIntersectHit3Df.Segment(pointA, pointB);
             return true;
         }
         #endregion
@@ -742,7 +742,7 @@ namespace Lotus.Maths
                 det = -det;
             }
 
-            if (det < XGeometry3D.Eplsilon_d)
+            if (det < XGeometry3D.Epsilon_d)
             {
                 return TIntersectType3D.None;
             }
@@ -766,10 +766,10 @@ namespace Lotus.Maths
 
             // Calculate t, scale parameters, ray intersects triangle
             var t = Vector3D.Dot(in edge2, in qvec);
-            var invert_t = 1.0 / det;
-            t *= invert_t;
-            u *= invert_t;
-            v *= invert_t;
+            var invertT = 1.0 / det;
+            t *= invertT;
+            u *= invertT;
+            v *= invertT;
 
             // Сохраняем данные
             rayHit.IntersectType = TIntersectType3D.Point;
@@ -830,15 +830,15 @@ namespace Lotus.Maths
         public static bool SegmentSphere(in Vector3Df start, in Vector3Df end, in Vector3Df sphereCenter, float sphereRadius,
             out TIntersectHit3Df hit)
         {
-            var segment_start_to_center = sphereCenter - start;
-            var from_start_to_end = end - start;
-            var segment_length = from_start_to_end.Length;
-            if (segment_length < XGeometry3D.Eplsilon_f)
+            var segmentStartToCenter = sphereCenter - start;
+            var fromStartToEnd = end - start;
+            var segmentLength = fromStartToEnd.Length;
+            if (segmentLength < XGeometry3D.Epsilon_f)
             {
-                var distanceToPoint = segment_start_to_center.Length;
-                if (distanceToPoint < sphereRadius + XGeometry3D.Eplsilon_f)
+                var distanceToPoint = segmentStartToCenter.Length;
+                if (distanceToPoint < sphereRadius + XGeometry3D.Epsilon_f)
                 {
-                    if (distanceToPoint > sphereRadius - XGeometry3D.Eplsilon_f)
+                    if (distanceToPoint > sphereRadius - XGeometry3D.Epsilon_f)
                     {
                         hit = TIntersectHit3Df.Point(start);
                         return true;
@@ -850,69 +850,69 @@ namespace Lotus.Maths
                 return false;
             }
 
-            var segment_direction = from_start_to_end.Normalized;
-            var center_projection = Vector3Df.Dot(segment_direction, segment_start_to_center);
-            if (center_projection + sphereRadius < -XGeometry3D.Eplsilon_f ||
-                center_projection - sphereRadius > segment_length + XGeometry3D.Eplsilon_f)
+            var segmentDirection = fromStartToEnd.Normalized;
+            var centerProjection = Vector3Df.Dot(segmentDirection, segmentStartToCenter);
+            if (centerProjection + sphereRadius < -XGeometry3D.Epsilon_f ||
+                centerProjection - sphereRadius > segmentLength + XGeometry3D.Epsilon_f)
             {
                 hit = TIntersectHit3Df.None();
                 return false;
             }
 
-            var sqr_distance_to_line = segment_start_to_center.SqrLength - (center_projection * center_projection);
-            var sqr_distance_to_intersection = (sphereRadius * sphereRadius) - sqr_distance_to_line;
-            if (sqr_distance_to_intersection < -XGeometry3D.Eplsilon_f)
+            var sqrDistanceToLine = segmentStartToCenter.SqrLength - (centerProjection * centerProjection);
+            var sqrDistanceToIntersection = (sphereRadius * sphereRadius) - sqrDistanceToLine;
+            if (sqrDistanceToIntersection < -XGeometry3D.Epsilon_f)
             {
                 hit = TIntersectHit3Df.None();
                 return false;
             }
 
-            if (sqr_distance_to_intersection < XGeometry3D.Eplsilon_f)
+            if (sqrDistanceToIntersection < XGeometry3D.Epsilon_f)
             {
-                if (center_projection < -XGeometry3D.Eplsilon_f ||
-                    center_projection > segment_length + XGeometry3D.Eplsilon_f)
+                if (centerProjection < -XGeometry3D.Epsilon_f ||
+                    centerProjection > segmentLength + XGeometry3D.Epsilon_f)
                 {
                     hit = TIntersectHit3Df.None();
                     return false;
                 }
-                hit = TIntersectHit3Df.Point(start + (segment_direction * center_projection));
+                hit = TIntersectHit3Df.Point(start + (segmentDirection * centerProjection));
                 return true;
             }
 
             // Line hit
-            var distance_to_intersection = XMath.Sqrt(sqr_distance_to_intersection);
-            var distance_a = center_projection - distance_to_intersection;
-            var distance_b = center_projection + distance_to_intersection;
+            var distanceToIntersection = XMath.Sqrt(sqrDistanceToIntersection);
+            var distanceA = centerProjection - distanceToIntersection;
+            var distanceB = centerProjection + distanceToIntersection;
 
-            var point_a_is_after_segment_start = distance_a > -XGeometry3D.Eplsilon_f;
-            var point_b_is_before_segment_end = distance_b < segment_length + XGeometry3D.Eplsilon_f;
+            var pointAIsAfterSegmentStart = distanceA > -XGeometry3D.Epsilon_f;
+            var pointBIsBeforeSegmentEnd = distanceB < segmentLength + XGeometry3D.Epsilon_f;
 
-            if (point_a_is_after_segment_start && point_b_is_before_segment_end)
+            if (pointAIsAfterSegmentStart && pointBIsBeforeSegmentEnd)
             {
-                var point_a = start + (segment_direction * distance_a);
-                var point_b = start + (segment_direction * distance_b);
-                hit = TIntersectHit3Df.Segment(in point_a, in point_b);
+                var pointA = start + (segmentDirection * distanceA);
+                var pointB = start + (segmentDirection * distanceB);
+                hit = TIntersectHit3Df.Segment(in pointA, in pointB);
                 return true;
             }
-            if (!point_a_is_after_segment_start && !point_b_is_before_segment_end)
+            if (!pointAIsAfterSegmentStart && !pointBIsBeforeSegmentEnd)
             {
                 // The segment is inside, but no hit
                 hit = TIntersectHit3Df.None();
                 return true;
             }
 
-            var point_a_is_before_segment_end = distance_a < segment_length + XGeometry3D.Eplsilon_f;
-            if (point_a_is_after_segment_start && point_a_is_before_segment_end)
+            var pointAIsBeforeSegmentEnd = distanceA < segmentLength + XGeometry3D.Epsilon_f;
+            if (pointAIsAfterSegmentStart && pointAIsBeforeSegmentEnd)
             {
                 // Point A hit
-                hit = TIntersectHit3Df.Point(start + (segment_direction * distance_a));
+                hit = TIntersectHit3Df.Point(start + (segmentDirection * distanceA));
                 return true;
             }
-            var point_b_is_after_segment_start = distance_b > -XGeometry3D.Eplsilon_f;
-            if (point_b_is_after_segment_start && point_b_is_before_segment_end)
+            var pointBIsAfterSegmentStart = distanceB > -XGeometry3D.Epsilon_f;
+            if (pointBIsAfterSegmentStart && pointBIsBeforeSegmentEnd)
             {
                 // Point B hit
-                hit = TIntersectHit3Df.Point(start + (segment_direction * distance_b));
+                hit = TIntersectHit3Df.Point(start + (segmentDirection * distanceB));
                 return true;
             }
 

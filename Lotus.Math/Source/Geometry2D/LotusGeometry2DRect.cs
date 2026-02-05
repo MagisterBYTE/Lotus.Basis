@@ -77,11 +77,11 @@ namespace Lotus.Maths
         public static Rect2D DeserializeFromString(string data)
         {
             var rect = new Rect2D();
-            var rect_data = data.Split(';');
-            rect.X = XNumberHelper.ParseDouble(rect_data[0]);
-            rect.Y = XNumberHelper.ParseDouble(rect_data[1]);
-            rect.Width = XNumberHelper.ParseDouble(rect_data[2]);
-            rect.Height = XNumberHelper.ParseDouble(rect_data[3]);
+            var rectData = data.Split(';');
+            rect.X = XNumberHelper.ParseDouble(rectData[0]);
+            rect.Y = XNumberHelper.ParseDouble(rectData[1]);
+            rect.Width = XNumberHelper.ParseDouble(rectData[2]);
+            rect.Height = XNumberHelper.ParseDouble(rectData[3]);
             return rect;
         }
         #endregion
@@ -624,6 +624,7 @@ namespace Lotus.Maths
                 result.Y = y1;
                 result.Width = x2 - x1;
                 result.Height = y2 - y1;
+                return;
             }
 
             result = Empty;
@@ -668,11 +669,11 @@ namespace Lotus.Maths
         public static Rect2Df DeserializeFromString(string data)
         {
             var rect = new Rect2Df();
-            var rect_data = data.Split(';');
-            rect.X = XNumberHelper.ParseSingle(rect_data[0]);
-            rect.Y = XNumberHelper.ParseSingle(rect_data[1]);
-            rect.Width = XNumberHelper.ParseSingle(rect_data[2]);
-            rect.Height = XNumberHelper.ParseSingle(rect_data[3]);
+            var rectData = data.Split(';');
+            rect.X = XNumberHelper.ParseSingle(rectData[0]);
+            rect.Y = XNumberHelper.ParseSingle(rectData[1]);
+            rect.Width = XNumberHelper.ParseSingle(rectData[2]);
+            rect.Height = XNumberHelper.ParseSingle(rectData[3]);
             return rect;
         }
         #endregion

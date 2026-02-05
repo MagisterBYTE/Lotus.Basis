@@ -264,8 +264,8 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(cachedType);
-                Cached.Add(cachedType.FullName!, reflected_type);
+                var reflectedType = new CReflectedType(cachedType);
+                Cached.Add(cachedType.FullName!, reflectedType);
                 return true;
             }
         }
@@ -284,8 +284,8 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(cachedType, extractMembers);
-                Cached.Add(cachedType.FullName!, reflected_type);
+                var reflectedType = new CReflectedType(cachedType, extractMembers);
+                Cached.Add(cachedType.FullName!, reflectedType);
                 return true;
             }
         }
@@ -300,26 +300,26 @@ namespace Lotus.Core
         /// <returns>Значение.</returns>
         public static object? GetStaticDataFromType(string fullTypeNameMemberName)
         {
-            var last_dot = fullTypeNameMemberName.LastIndexOf(XCharHelper.Dot);
-            if (last_dot > -1)
+            var lastDot = fullTypeNameMemberName.LastIndexOf(XCharHelper.Dot);
+            if (lastDot > -1)
             {
-                var full_type_name = fullTypeNameMemberName.Substring(0, last_dot);
-                var member_name = fullTypeNameMemberName.Substring(last_dot + 1);
+                var fullTypeName = fullTypeNameMemberName.Substring(0, lastDot);
+                var memberName = fullTypeNameMemberName.Substring(lastDot + 1);
 
                 // Проверяем наличие типа
-                if (Cached.TryGetValue(full_type_name, out var value))
+                if (Cached.TryGetValue(fullTypeName, out var value))
                 {
                     // Проверяем наличие статического поля
-                    if (value.ContainsField(member_name))
+                    if (value.ContainsField(memberName))
                     {
-                        return value.GetFieldValue(member_name, null);
+                        return value.GetFieldValue(memberName, null);
                     }
                     else
                     {
                         // Проверяем наличие статического свойства
-                        if (value.ContainsProperty(member_name))
+                        if (value.ContainsProperty(memberName))
                         {
-                            return value.GetPropertyValue(member_name, null);
+                            return value.GetPropertyValue(memberName, null);
                         }
                         else
                         {
@@ -407,8 +407,8 @@ namespace Lotus.Core
 			if(type == typeof(UnityEngine.GameObject))
 			{
 				// Создаем игровой объект
-				var game_object = new UnityEngine.GameObject("create_from_instance");
-				return game_object;
+				var gameObject = new UnityEngine.GameObject("create_from_instance");
+				return gameObject;
 			}
 			else
 			{
@@ -599,9 +599,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.ContainsField(fieldName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.ContainsField(fieldName);
             }
         }
 
@@ -620,9 +620,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetField(fieldName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetField(fieldName);
             }
         }
 
@@ -641,9 +641,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetFieldType(fieldName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetFieldType(fieldName);
             }
         }
 
@@ -662,9 +662,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetFieldTypeName(fieldName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetFieldTypeName(fieldName);
             }
         }
 
@@ -683,9 +683,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetFieldsFromType<TType>();
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetFieldsFromType<TType>();
             }
         }
 
@@ -704,9 +704,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetFieldsHasAttribute<TAttribute>();
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetFieldsHasAttribute<TAttribute>();
             }
         }
 
@@ -726,9 +726,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetAttributeFromField<TAttribute>(fieldName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetAttributeFromField<TAttribute>(fieldName);
             }
         }
 
@@ -747,9 +747,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetFieldValue(fieldName, instance);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetFieldValue(fieldName, instance);
             }
         }
 
@@ -769,9 +769,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetFieldValue(fieldName, instance, out fieldInfoResult);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetFieldValue(fieldName, instance, out fieldInfoResult);
             }
         }
 
@@ -791,9 +791,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetFieldValue(fieldName, instance, index);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetFieldValue(fieldName, instance, index);
             }
         }
 
@@ -814,9 +814,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetFieldValue(fieldName, instance, index, out fieldInfoResult);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetFieldValue(fieldName, instance, index, out fieldInfoResult);
             }
         }
 
@@ -836,9 +836,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.SetFieldValue(fieldName, instance, value);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.SetFieldValue(fieldName, instance, value);
             }
         }
 
@@ -859,9 +859,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Fields);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.SetFieldValue(fieldName, instance, value, index);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Fields);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.SetFieldValue(fieldName, instance, value, index);
             }
         }
         #endregion
@@ -882,9 +882,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.ContainsProperty(propertyName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.ContainsProperty(propertyName);
             }
         }
 
@@ -903,9 +903,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetProperty(propertyName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetProperty(propertyName);
             }
         }
 
@@ -924,9 +924,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetPropertyType(propertyName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetPropertyType(propertyName);
             }
         }
 
@@ -945,9 +945,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetPropertyTypeName(propertyName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetPropertyTypeName(propertyName);
             }
         }
 
@@ -966,9 +966,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetPropertiesFromType<TType>();
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetPropertiesFromType<TType>();
             }
         }
 
@@ -987,9 +987,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetPropertiesHasAttribute<TAttribute>();
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetPropertiesHasAttribute<TAttribute>();
             }
         }
 
@@ -1009,9 +1009,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetAttributeFromProperty<TAttribute>(propertyName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetAttributeFromProperty<TAttribute>(propertyName);
             }
         }
 
@@ -1030,9 +1030,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetPropertyValue(propertyName, instance);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetPropertyValue(propertyName, instance);
             }
         }
 
@@ -1052,9 +1052,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetPropertyValue(propertyName, instance, index);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetPropertyValue(propertyName, instance, index);
             }
         }
 
@@ -1074,9 +1074,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.SetPropertyValue(propertyName, instance, value);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.SetPropertyValue(propertyName, instance, value);
             }
         }
 
@@ -1097,9 +1097,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Properties);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.SetPropertyValue(propertyName, instance, value, index);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Properties);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.SetPropertyValue(propertyName, instance, value, index);
             }
         }
         #endregion
@@ -1120,9 +1120,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.ContainsMethod(methodName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.ContainsMethod(methodName);
             }
         }
 
@@ -1141,9 +1141,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetMethod(methodName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetMethod(methodName);
             }
         }
 
@@ -1162,9 +1162,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetMethodReturnType(methodName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetMethodReturnType(methodName);
             }
         }
 
@@ -1183,9 +1183,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetMethodReturnTypeName(methodName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetMethodReturnTypeName(methodName);
             }
         }
 
@@ -1204,9 +1204,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetMethodsHasAttribute<TAttribute>();
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetMethodsHasAttribute<TAttribute>();
             }
         }
 
@@ -1226,9 +1226,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.GetAttributeFromMethod<TAttribute>(methodName);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.GetAttributeFromMethod<TAttribute>(methodName);
             }
         }
 
@@ -1247,9 +1247,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.InvokeMethod(methodName, instance);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.InvokeMethod(methodName, instance);
             }
         }
 
@@ -1269,9 +1269,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.InvokeMethod(methodName, instance, arg);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.InvokeMethod(methodName, instance, arg);
             }
         }
 
@@ -1293,9 +1293,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.InvokeMethod(methodName, instance, arg1, arg2);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.InvokeMethod(methodName, instance, arg1, arg2);
             }
         }
 
@@ -1318,9 +1318,9 @@ namespace Lotus.Core
             }
             else
             {
-                var reflected_type = new CReflectedType(type, TExtractMembers.Methods);
-                Cached.Add(type.FullName!, reflected_type);
-                return reflected_type.InvokeMethod(methodName, instance, arg1, arg2, arg3);
+                var reflectedType = new CReflectedType(type, TExtractMembers.Methods);
+                Cached.Add(type.FullName!, reflectedType);
+                return reflectedType.InvokeMethod(methodName, instance, arg1, arg2, arg3);
             }
         }
         #endregion

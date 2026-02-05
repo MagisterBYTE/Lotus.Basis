@@ -128,14 +128,8 @@ namespace Lotus.Core
             }
             else
             {
-#if UNITY_2017_1_OR_NEWER
-					UnityEngine.Debug.LogError("Not element in queue!!!");
-#else
-                XLogger.LogError("Not element in queue!!!");
-#endif
-                return default;
+                throw new InvalidOperationException("Cannot dequeue element from empty queue");
             }
-
         }
 
         /// <summary>
@@ -150,14 +144,8 @@ namespace Lotus.Core
             }
             else
             {
-#if UNITY_2017_1_OR_NEWER
-					UnityEngine.Debug.LogError("Not element in queue!!!");
-#else
-                XLogger.LogError("Not element in queue!!!");
-#endif
-                return default;
+                throw new InvalidOperationException("Cannot peek element from empty queue");
             }
-
         }
 
         /// <summary>
@@ -172,7 +160,8 @@ namespace Lotus.Core
 
             while (count-- > 0)
             {
-                if (_arrayOfItems[index]!.Equals(item))
+                var currentItem = _arrayOfItems[index];
+                if (currentItem != null && currentItem.Equals(item))
                 {
                     return true;
                 }

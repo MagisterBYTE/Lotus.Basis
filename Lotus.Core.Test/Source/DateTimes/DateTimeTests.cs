@@ -56,7 +56,7 @@ namespace Lotus.Core.DateTimes
                 var count_minut = 35;
                 var to_minut = new DateTime(2014, 1, 2, 12, count_minut, 0, DateTimeKind.Utc);
                 var list_minutes = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Minutely, 30);
-                list_minutes.AssingTimePeriod(from, to_minut);
+                list_minutes.AssignTimePeriod(from, to_minut);
 
                 ClassicAssert.AreEqual(list_minutes.Count, count_minut + 1 - 17);
                 ClassicAssert.AreEqual(list_minutes.CountMinutes, count_minut - 17);
@@ -67,7 +67,7 @@ namespace Lotus.Core.DateTimes
                 var count_hour = 22;
                 var to_hour = new DateTime(2014, 1, 2, count_hour, 22, 0, DateTimeKind.Utc);
                 var list_houres = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Hourly, 30);
-                list_houres.AssingTimePeriod(from, to_hour);
+                list_houres.AssignTimePeriod(from, to_hour);
 
                 ClassicAssert.AreEqual(list_houres.Count, count_hour + 1 - 12);
                 ClassicAssert.AreEqual(list_houres.CountHours, count_hour - 12);
@@ -78,7 +78,7 @@ namespace Lotus.Core.DateTimes
                 var count_day = 17;
                 var to_day = new DateTime(2014, 1, count_day, 12, 17, 0, DateTimeKind.Utc);
                 var list_days = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
-                list_days.AssingTimePeriod(from, to_day);
+                list_days.AssignTimePeriod(from, to_day);
 
                 ClassicAssert.AreEqual(list_days.Count, count_day + 1 - 2);
                 ClassicAssert.AreEqual(list_days.CountDay, count_day - 2);
@@ -86,7 +86,7 @@ namespace Lotus.Core.DateTimes
                 // Проверка недель
                 var to_week = new DateTime(2016, 1, 6, 12, 17, 0, DateTimeKind.Utc);
                 var list_week = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Weekly, 30);
-                list_week.AssingTimePeriod(from, to_week);
+                list_week.AssignTimePeriod(from, to_week);
 
                 ClassicAssert.AreEqual(list_week.Count, list_week.CountWeek + 1);
             }
@@ -98,7 +98,7 @@ namespace Lotus.Core.DateTimes
                 var from_index = new DateTime(2012, 1, 6, 12, 17, 0, DateTimeKind.Utc);
                 var to_index = new DateTime(2019, 1, 6, 12, 17, 0, DateTimeKind.Utc);
                 var list_index = new ListTimeInterval<TestTimePeriod>(TTimeInterval.Daily, 30);
-                list_index.AssingTimePeriod(from_index, to_index);
+                list_index.AssignTimePeriod(from_index, to_index);
 
                 var weekends = list_index.CountWeekends();
                 ClassicAssert.AreEqual(weekends, list_index.RemoveWeekends());
@@ -151,19 +151,19 @@ namespace Lotus.Core.DateTimes
                 ClassicAssert.AreEqual(list.Count, 0);
 
                 // Удаляем до конечной даты (но ее не удаляем)
-                list.AssingTimePeriod(start_date, end_date);
+                list.AssignTimePeriod(start_date, end_date);
                 count = list.Count;
                 ClassicAssert.AreEqual(list.TrimStart(end_date, false), count - 1);
                 ClassicAssert.AreEqual(list.DateFirst.Value.Day, 18);
 
                 // Удаляем до 15 числа
-                list.AssingTimePeriod(start_date, end_date);
+                list.AssignTimePeriod(start_date, end_date);
                 count = list.Count;
                 ClassicAssert.AreEqual(list.TrimStart(new DateTime(2019, 1, 15, 0, 0, 0, DateTimeKind.Utc), true), 10);
                 ClassicAssert.AreEqual(list.DateFirst.Value.Day, 16);
 
                 // Удаляем до 15 числа (но его не удаляем)
-                list.AssingTimePeriod(start_date, end_date);
+                list.AssignTimePeriod(start_date, end_date);
                 count = list.Count;
                 ClassicAssert.AreEqual(list.TrimStart(new DateTime(2019, 1, 15, 0, 0, 0, DateTimeKind.Utc), false), 9);
                 ClassicAssert.AreEqual(list.DateFirst.Value.Day, 15);
@@ -171,7 +171,7 @@ namespace Lotus.Core.DateTimes
                 // Удаляем выходные
                 start_date = new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc);
                 end_date = new DateTime(2019, 7, 18, 0, 0, 0, DateTimeKind.Utc);
-                list.AssingTimePeriod(start_date, end_date);
+                list.AssignTimePeriod(start_date, end_date);
                 ClassicAssert.AreEqual(list[0].Date, new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc)); // Суббота
                 ClassicAssert.AreEqual(list[1].Date, new DateTime(2019, 6, 2, 0, 0, 0, DateTimeKind.Utc)); // Воскресенье
                 ClassicAssert.AreEqual(list[2].Date, new DateTime(2019, 6, 3, 0, 0, 0, DateTimeKind.Utc)); // Понедельник
@@ -219,16 +219,16 @@ namespace Lotus.Core.DateTimes
                 ClassicAssert.AreEqual(list.TrimEnd(start_date, true), count);
 
                 // Удаляем все за исключением первого элемента
-                list.AssingTimePeriod(start_date, end_date);
+                list.AssignTimePeriod(start_date, end_date);
                 count = list.Count;
                 ClassicAssert.AreEqual(list.TrimEnd(start_date, false), count - 1);
 
-                list.AssingTimePeriod(start_date, end_date);
+                list.AssignTimePeriod(start_date, end_date);
                 count = list.Count;
                 ClassicAssert.AreEqual(list.TrimEnd(new DateTime(2020, 2, 25, 0, 0, 0, DateTimeKind.Utc)), 5);
                 ClassicAssert.AreEqual(list.DateLast.Value.Day, 24);
 
-                list.AssingTimePeriod(start_date, end_date);
+                list.AssignTimePeriod(start_date, end_date);
                 count = list.Count;
                 ClassicAssert.AreEqual(list.TrimEnd(new DateTime(2020, 2, 20, 0, 0, 0, DateTimeKind.Utc), false), 9);
                 ClassicAssert.AreEqual(list.DateLast.Value.Day, 20);

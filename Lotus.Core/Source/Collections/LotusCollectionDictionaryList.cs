@@ -76,16 +76,16 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Удаление элемента в списке значение.
+        /// Удаление первого вхождения элемента в списке значение.
         /// </summary>
         /// <param name="item">Элемент.</param>
         /// <returns>Статус успешности удаления.</returns>
-        public bool RemoveValue(in TValue item)
+        public bool RemoveValueFirst(in TValue item)
         {
-            var result = false;
-
-            foreach (var list in Values)
+            // Оптимизированный поиск: перебираем ключи напрямую вместо FirstOrDefault
+            foreach (var kvp in this)
             {
+                var list = kvp.Value;
                 var index = list.IndexOf(item);
                 if (index > -1)
                 {
@@ -94,29 +94,28 @@ namespace Lotus.Core
                     // Если это последний элемент то удаляем сам список и ключ
                     if (list.Count == 0)
                     {
-                        var key = this.FirstOrDefault(x => x.Value == list).Key;
-                        Remove(key);
+                        Remove(kvp.Key);
                     }
 
                     return true;
                 }
             }
 
-            return result;
+            return false;
         }
 
         /// <summary>
         /// Удаление элемента в списке значение.
         /// </summary>
-        /// <param name="key">Ключ.</param>
         /// <param name="item">Элемент.</param>
         /// <returns>Статус успешности удаления.</returns>
-        public bool RemoveValue(in TKey key, in TValue item)
+        public bool RemoveValueAll(in TValue item)
         {
-            var result = false;
-
-            foreach (var list in Values)
+            // Оптимизированный поиск: перебираем ключи напрямую вместо FirstOrDefault
+            bool result = false;
+            foreach (var kvp in this)
             {
+                var list = kvp.Value;
                 var index = list.IndexOf(item);
                 if (index > -1)
                 {
@@ -125,10 +124,10 @@ namespace Lotus.Core
                     // Если это последний элемент то удаляем сам список и ключ
                     if (list.Count == 0)
                     {
-                        Remove(key);
+                        Remove(kvp.Key);
                     }
 
-                    return true;
+                    result = true;
                 }
             }
 

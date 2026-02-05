@@ -62,7 +62,15 @@ namespace Lotus.Core
         /// <returns>Элемент очереди.</returns>
         new public TItem this[int index]
         {
-            get { return _arrayOfItems[(_startOffset + index) % _maxCount]!; }
+            get
+            {
+                var item = _arrayOfItems[(_startOffset + index) % _maxCount];
+                if (item == null)
+                {
+                    throw new InvalidOperationException("Item at index is null");
+                }
+                return item;
+            }
             set
             {
                 _arrayOfItems[(_startOffset + index) % _maxCount] = value;
@@ -78,7 +86,12 @@ namespace Lotus.Core
         /// <returns>Элемент очереди.</returns>
         public TItem GetElement(int index)
         {
-            return _arrayOfItems[(_startOffset + index) % _maxCount]!;
+            var item = _arrayOfItems[(_startOffset + index) % _maxCount];
+            if (item == null)
+            {
+                throw new InvalidOperationException("Item at index is null");
+            }
+            return item;
         }
 
         /// <summary>
@@ -147,12 +160,7 @@ namespace Lotus.Core
             }
             else
             {
-#if UNITY_2017_1_OR_NEWER
-				UnityEngine.Debug.LogError("Not element in deque!!!");
-#else
-                XLogger.LogError("Not element in deque!!!");
-#endif
-                return default;
+                throw new InvalidOperationException("Cannot remove element from empty deque");
             }
         }
 
@@ -172,12 +180,7 @@ namespace Lotus.Core
             }
             else
             {
-#if UNITY_2017_1_OR_NEWER
-				UnityEngine.Debug.LogError("Not element in deque!!!");
-#else
-                XLogger.LogError("Not element in deque!!!");
-#endif
-                return default;
+                throw new InvalidOperationException("Cannot remove element from empty deque");
             }
         }
 
@@ -193,14 +196,8 @@ namespace Lotus.Core
             }
             else
             {
-#if UNITY_2017_1_OR_NEWER
-				UnityEngine.Debug.LogError("Not element in deque!!!");
-#else
-                XLogger.LogError("Not element in deque!!!");
-#endif
-                return default;
+                throw new InvalidOperationException("Cannot peek element from empty deque");
             }
-
         }
 
         /// <summary>
@@ -215,14 +212,8 @@ namespace Lotus.Core
             }
             else
             {
-#if UNITY_2017_1_OR_NEWER
-				UnityEngine.Debug.LogError("Not element in deque!!!");
-#else
-                XLogger.LogError("Not element in deque!!!");
-#endif
-                return default;
+                throw new InvalidOperationException("Cannot peek element from empty deque");
             }
-
         }
 
         /// <summary>
@@ -237,7 +228,8 @@ namespace Lotus.Core
 
             while (count-- > 0)
             {
-                if (_arrayOfItems[index]!.Equals(item))
+                var currentItem = _arrayOfItems[index];
+                if (currentItem != null && currentItem.Equals(item))
                 {
                     return true;
                 }

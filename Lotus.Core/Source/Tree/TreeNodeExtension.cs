@@ -16,7 +16,7 @@ namespace Lotus.Core
         /// <summary>
         /// Класс реализующий стандартный компаратор для сравнения узлов по их индексу.
         /// </summary>
-        public class TreeNodeOrderComprare : IComparer
+        public class TreeNodeOrderCompare : IComparer
         {
             public int Compare(object? x, object? y)
             {
@@ -31,7 +31,7 @@ namespace Lotus.Core
         /// <summary>
         /// Глобальный компаратор для сравнения узлов по их индексу.
         /// </summary>
-        public static readonly TreeNodeOrderComprare ComprareByOrder = new();
+        public static readonly TreeNodeOrderCompare CompareByOrder = new();
 
         /// <summary>
         /// Рекурсивное раскрытие всех узлов.
@@ -178,12 +178,12 @@ namespace Lotus.Core
 
             if (@this.IChildNodes is IList listNodes)
             {
-                listNodes.Sort(ComprareByOrder);
+                listNodes.Sort(CompareByOrder);
             }
         }
 
         /// <summary>
-        /// Отчистить и добавить дочерние узлы из списка.
+        /// Очистить и добавить дочерние узлы из списка.
         /// </summary>
         /// <param name="this">Текущий узел</param>
         /// <param name="list">Список.</param>
@@ -514,7 +514,7 @@ namespace Lotus.Core
 
             if (@this.IChildNodes is IList listNodes)
             {
-                listNodes.Sort(ComprareByOrder);
+                listNodes.Sort(CompareByOrder);
             }
 
             foreach (var node in @this.IChildNodes)

@@ -236,7 +236,6 @@ namespace Lotus.Core
             _tag = 0;
             _group = 0;
             _marked = 0;
-            _marked = 0;
             _componentCount = 0;
             _isDestroyed = false;
         }

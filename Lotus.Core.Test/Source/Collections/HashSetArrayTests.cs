@@ -100,6 +100,52 @@ namespace Lotus.Core.Collections
             ClassicAssert.IsTrue(_hashSet.Contains(2));
         }
 
+        /// <summary>
+        /// Тест метода IntersectWith - проверка исправления дублирования кода.
+        /// </summary>
+        [Test]
+        public void IntersectWith_WithHashSetArray_WorksCorrectly()
+        {
+            var otherCollection = new HashSetArray<int> { 2, 3, 4 };
+            _hashSet.Add(1);
+            _hashSet.Add(2);
+            _hashSet.Add(3);
+            _hashSet.IntersectWith(otherCollection);
+            ClassicAssert.AreEqual(2, _hashSet.Count);
+            ClassicAssert.IsTrue(_hashSet.Contains(2));
+            ClassicAssert.IsTrue(_hashSet.Contains(3));
+            ClassicAssert.IsFalse(_hashSet.Contains(1));
+        }
+
+        /// <summary>
+        /// Тест метода IntersectWith - с пустой коллекцией.
+        /// </summary>
+        [Test]
+        public void IntersectWith_WithEmptyCollection_ClearsSet()
+        {
+            var otherCollection = new HashSetArray<int>();
+            _hashSet.Add(1);
+            _hashSet.Add(2);
+            _hashSet.IntersectWith(otherCollection);
+            ClassicAssert.AreEqual(0, _hashSet.Count);
+        }
+
+        /// <summary>
+        /// Тест метода IntersectWith - с List.
+        /// </summary>
+        [Test]
+        public void IntersectWith_WithList_WorksCorrectly()
+        {
+            var otherCollection = new List<int> { 2, 3 };
+            _hashSet.Add(1);
+            _hashSet.Add(2);
+            _hashSet.Add(3);
+            _hashSet.IntersectWith(otherCollection);
+            ClassicAssert.AreEqual(2, _hashSet.Count);
+            ClassicAssert.IsTrue(_hashSet.Contains(2));
+            ClassicAssert.IsTrue(_hashSet.Contains(3));
+        }
+
         [Test]
         public void ExceptWith_RemovesItemsFromOtherCollection()
         {

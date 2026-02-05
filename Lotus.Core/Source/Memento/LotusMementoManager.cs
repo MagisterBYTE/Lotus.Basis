@@ -207,8 +207,8 @@ namespace Lotus.Core
             }
 
             // Get the Command object to redo
-            var item_to_redo = _nextUndo + 1;
-            var state = _historyStates[item_to_redo];
+            var itemToRedo = _nextUndo + 1;
+            var state = _historyStates[itemToRedo];
 
             // Execute the Command object
             state.Redo();

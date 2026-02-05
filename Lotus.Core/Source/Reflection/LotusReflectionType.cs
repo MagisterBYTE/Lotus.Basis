@@ -205,9 +205,9 @@ namespace Lotus.Core
         public FieldInfo? GetField(string fieldName)
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
-                return field_info;
+                return fieldInfo;
             }
 
             return null;
@@ -221,9 +221,9 @@ namespace Lotus.Core
         public Type? GetFieldType(string fieldName)
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
-                return field_info.FieldType;
+                return fieldInfo.FieldType;
             }
 
             return null;
@@ -237,9 +237,9 @@ namespace Lotus.Core
         public string GetFieldTypeName(string fieldName)
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
-                return field_info.FieldType.Name;
+                return fieldInfo.FieldType.Name;
             }
 
             return string.Empty;
@@ -255,11 +255,11 @@ namespace Lotus.Core
             var fields = new List<FieldInfo>();
 
             GetFields();
-            foreach (var field_info in _fields.Values)
+            foreach (var fieldInfo in _fields.Values)
             {
-                if (field_info.FieldType == typeof(TType))
+                if (fieldInfo.FieldType == typeof(TType))
                 {
-                    fields.Add(field_info);
+                    fields.Add(fieldInfo);
                 }
             }
 
@@ -276,11 +276,11 @@ namespace Lotus.Core
             var fields = new List<FieldInfo>();
 
             GetFields();
-            foreach (var field_info in _fields.Values)
+            foreach (var fieldInfo in _fields.Values)
             {
-                if (Attribute.IsDefined(field_info, typeof(TAttribute)))
+                if (Attribute.IsDefined(fieldInfo, typeof(TAttribute)))
                 {
-                    fields.Add(field_info);
+                    fields.Add(fieldInfo);
                 }
             }
 
@@ -296,11 +296,11 @@ namespace Lotus.Core
         public TAttribute? GetAttributeFromField<TAttribute>(string fieldName) where TAttribute : System.Attribute
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
-                if (Attribute.IsDefined(field_info, typeof(TAttribute)))
+                if (Attribute.IsDefined(fieldInfo, typeof(TAttribute)))
                 {
-                    return Attribute.GetCustomAttribute(field_info, typeof(TAttribute)) as TAttribute;
+                    return Attribute.GetCustomAttribute(fieldInfo, typeof(TAttribute)) as TAttribute;
                 }
             }
 
@@ -316,15 +316,15 @@ namespace Lotus.Core
         public object? GetFieldValue(string fieldName, object? instance)
         {
             GetFields();
-            if (_fields!.TryGetValue(fieldName, out var field_info))
+            if (_fields!.TryGetValue(fieldName, out var fieldInfo))
             {
-                if (field_info.IsStatic)
+                if (fieldInfo.IsStatic)
                 {
-                    return field_info.GetValue(null);
+                    return fieldInfo.GetValue(null);
                 }
                 else
                 {
-                    return field_info.GetValue(instance);
+                    return fieldInfo.GetValue(instance);
                 }
             }
 
@@ -341,16 +341,16 @@ namespace Lotus.Core
         public object? GetFieldValue(string fieldName, object instance, out FieldInfo? fieldInfoResult)
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
-                fieldInfoResult = field_info;
-                if (field_info.IsStatic)
+                fieldInfoResult = fieldInfo;
+                if (fieldInfo.IsStatic)
                 {
-                    return field_info.GetValue(null);
+                    return fieldInfo.GetValue(null);
                 }
                 else
                 {
-                    return field_info.GetValue(instance);
+                    return fieldInfo.GetValue(instance);
                 }
             }
 
@@ -368,16 +368,16 @@ namespace Lotus.Core
         public object? GetFieldValue(string fieldName, object instance, int index)
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
                 object? collection = null;
-                if (field_info.IsStatic)
+                if (fieldInfo.IsStatic)
                 {
-                    collection = field_info.GetValue(null);
+                    collection = fieldInfo.GetValue(null);
                 }
                 else
                 {
-                    collection = field_info.GetValue(instance);
+                    collection = fieldInfo.GetValue(instance);
                 }
 
                 if (collection != null)
@@ -419,17 +419,17 @@ namespace Lotus.Core
         public object? GetFieldValue(string fieldName, object instance, int index, out FieldInfo? fieldInfoResult)
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
-                fieldInfoResult = field_info;
+                fieldInfoResult = fieldInfo;
                 object? collection = null;
-                if (field_info.IsStatic)
+                if (fieldInfo.IsStatic)
                 {
-                    collection = field_info.GetValue(null);
+                    collection = fieldInfo.GetValue(null);
                 }
                 else
                 {
-                    collection = field_info.GetValue(instance);
+                    collection = fieldInfo.GetValue(instance);
                 }
 
                 if (collection != null)
@@ -471,15 +471,15 @@ namespace Lotus.Core
         public bool SetFieldValue(string fieldName, object? instance, object value)
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
-                if (field_info.IsStatic)
+                if (fieldInfo.IsStatic)
                 {
-                    field_info.SetValue(null, value);
+                    fieldInfo.SetValue(null, value);
                 }
                 else
                 {
-                    field_info.SetValue(instance, value);
+                    fieldInfo.SetValue(instance, value);
                 }
 
                 return true;
@@ -499,16 +499,16 @@ namespace Lotus.Core
         public bool SetFieldValue(string fieldName, object? instance, object value, int index)
         {
             GetFields();
-            if (_fields.TryGetValue(fieldName, out var field_info))
+            if (_fields.TryGetValue(fieldName, out var fieldInfo))
             {
                 IList? list = null;
-                if (field_info.IsStatic)
+                if (fieldInfo.IsStatic)
                 {
-                    list = field_info.GetValue(null) as IList;
+                    list = fieldInfo.GetValue(null) as IList;
                 }
                 else
                 {
-                    list = field_info.GetValue(instance) as IList;
+                    list = fieldInfo.GetValue(instance) as IList;
                 }
 
                 if (list != null)
@@ -561,9 +561,9 @@ namespace Lotus.Core
         {
             GetProperties();
 
-            if (_properties.TryGetValue(propertyName, out var property_info))
+            if (_properties.TryGetValue(propertyName, out var propertyInfo))
             {
-                return property_info;
+                return propertyInfo;
             }
 
             return null;
@@ -577,9 +577,9 @@ namespace Lotus.Core
         public Type? GetPropertyType(string propertyName)
         {
             GetProperties();
-            if (_properties.TryGetValue(propertyName, out var property_info))
+            if (_properties.TryGetValue(propertyName, out var propertyInfo))
             {
-                return property_info.PropertyType;
+                return propertyInfo.PropertyType;
             }
 
             return null;
@@ -593,9 +593,9 @@ namespace Lotus.Core
         public string GetPropertyTypeName(string propertyName)
         {
             GetProperties();
-            if (_properties.TryGetValue(propertyName, out var property_info))
+            if (_properties.TryGetValue(propertyName, out var propertyInfo))
             {
-                return property_info.PropertyType.Name;
+                return propertyInfo.PropertyType.Name;
             }
 
             return string.Empty;
@@ -610,11 +610,11 @@ namespace Lotus.Core
         {
             var properties = new List<PropertyInfo>();
             GetProperties();
-            foreach (var property_info in _properties.Values)
+            foreach (var propertyInfo in _properties.Values)
             {
-                if (property_info.PropertyType == typeof(TType))
+                if (propertyInfo.PropertyType == typeof(TType))
                 {
-                    properties.Add(property_info);
+                    properties.Add(propertyInfo);
                 }
             }
 
@@ -631,11 +631,11 @@ namespace Lotus.Core
             var properties = new List<PropertyInfo>();
 
             GetProperties();
-            foreach (var property_info in _properties.Values)
+            foreach (var propertyInfo in _properties.Values)
             {
-                if (Attribute.IsDefined(property_info, typeof(TAttribute)))
+                if (Attribute.IsDefined(propertyInfo, typeof(TAttribute)))
                 {
-                    properties.Add(property_info);
+                    properties.Add(propertyInfo);
                 }
             }
 
@@ -651,11 +651,11 @@ namespace Lotus.Core
         public TAttribute? GetAttributeFromProperty<TAttribute>(string propertyName) where TAttribute : System.Attribute
         {
             GetProperties();
-            if (_properties.TryGetValue(propertyName, out var property_info))
+            if (_properties.TryGetValue(propertyName, out var propertyInfo))
             {
-                if (Attribute.IsDefined(property_info, typeof(TAttribute)))
+                if (Attribute.IsDefined(propertyInfo, typeof(TAttribute)))
                 {
-                    return Attribute.GetCustomAttribute(property_info, typeof(TAttribute)) as TAttribute;
+                    return Attribute.GetCustomAttribute(propertyInfo, typeof(TAttribute)) as TAttribute;
                 }
             }
 
@@ -671,9 +671,9 @@ namespace Lotus.Core
         public object? GetPropertyValue(string propertyName, object? instance)
         {
             GetProperties();
-            if (_properties.TryGetValue(propertyName, out var property_info))
+            if (_properties.TryGetValue(propertyName, out var propertyInfo))
             {
-                return property_info.GetValue(instance);
+                return propertyInfo.GetValue(instance);
             }
 
             return null;
@@ -689,9 +689,9 @@ namespace Lotus.Core
         public object? GetPropertyValue(string propertyName, object instance, int index)
         {
             GetProperties();
-            if (_properties.TryGetValue(propertyName, out var property_info))
+            if (_properties.TryGetValue(propertyName, out var propertyInfo))
             {
-                var collection = property_info.GetValue(instance);
+                var collection = propertyInfo.GetValue(instance);
 
                 if (collection != null)
                 {
@@ -731,9 +731,9 @@ namespace Lotus.Core
         public bool SetPropertyValue(string propertyName, object instance, object value)
         {
             GetProperties();
-            if (_properties.TryGetValue(propertyName, out var property_info))
+            if (_properties.TryGetValue(propertyName, out var propertyInfo))
             {
-                property_info.SetValue(instance, value);
+                propertyInfo.SetValue(instance, value);
                 return true;
             }
 
@@ -751,9 +751,9 @@ namespace Lotus.Core
         public bool SetPropertyValue(string propertyName, object instance, object value, int index)
         {
             GetProperties();
-            if (_properties.TryGetValue(propertyName, out var property_info))
+            if (_properties.TryGetValue(propertyName, out var propertyInfo))
             {
-                var list = property_info.GetValue(instance) as IList;
+                var list = propertyInfo.GetValue(instance) as IList;
                 if (list != null)
                 {
                     list[index] = value;
@@ -804,9 +804,9 @@ namespace Lotus.Core
         public MethodInfo? GetMethod(string methodName)
         {
             GetMethods();
-            if (_methods.TryGetValue(methodName, out var method_info))
+            if (_methods.TryGetValue(methodName, out var methodInfo))
             {
-                return method_info;
+                return methodInfo;
             }
 
             return null;
@@ -820,9 +820,9 @@ namespace Lotus.Core
         public Type? GetMethodReturnType(string methodName)
         {
             GetMethods();
-            if (_methods.TryGetValue(methodName, out var method_info))
+            if (_methods.TryGetValue(methodName, out var methodInfo))
             {
-                return method_info.ReturnType;
+                return methodInfo.ReturnType;
             }
 
             return null;
@@ -836,9 +836,9 @@ namespace Lotus.Core
         public string GetMethodReturnTypeName(string methodName)
         {
             GetMethods();
-            if (_methods.TryGetValue(methodName, out var method_info))
+            if (_methods.TryGetValue(methodName, out var methodInfo))
             {
-                return method_info.ReturnType.Name;
+                return methodInfo.ReturnType.Name;
             }
 
             return string.Empty;
@@ -854,11 +854,11 @@ namespace Lotus.Core
             var methods = new List<MethodInfo>();
 
             GetMethods();
-            foreach (var method_info in _methods.Values)
+            foreach (var methodInfo in _methods.Values)
             {
-                if (Attribute.IsDefined(method_info, typeof(TAttribute)))
+                if (Attribute.IsDefined(methodInfo, typeof(TAttribute)))
                 {
-                    methods.Add(method_info);
+                    methods.Add(methodInfo);
                 }
             }
 
@@ -874,11 +874,11 @@ namespace Lotus.Core
         public TAttribute? GetAttributeFromMethod<TAttribute>(string methodName) where TAttribute : System.Attribute
         {
             GetMethods();
-            if (_methods.TryGetValue(methodName, out var method_info))
+            if (_methods.TryGetValue(methodName, out var methodInfo))
             {
-                if (Attribute.IsDefined(method_info, typeof(TAttribute)))
+                if (Attribute.IsDefined(methodInfo, typeof(TAttribute)))
                 {
-                    return Attribute.GetCustomAttribute(method_info, typeof(TAttribute)) as TAttribute;
+                    return Attribute.GetCustomAttribute(methodInfo, typeof(TAttribute)) as TAttribute;
                 }
             }
 
@@ -894,15 +894,15 @@ namespace Lotus.Core
         public object? InvokeMethod(string methodName, object? instance)
         {
             GetMethods();
-            if (_methods.TryGetValue(methodName, out var method_info))
+            if (_methods.TryGetValue(methodName, out var methodInfo))
             {
-                if (method_info.IsStatic)
+                if (methodInfo.IsStatic)
                 {
-                    return method_info.Invoke(null, null);
+                    return methodInfo.Invoke(null, null);
                 }
                 else
                 {
-                    return method_info.Invoke(instance, null);
+                    return methodInfo.Invoke(instance, null);
                 }
             }
 
@@ -920,15 +920,15 @@ namespace Lotus.Core
         {
             GetMethods();
             ArgList1[0] = arg;
-            if (_methods.TryGetValue(methodName, out var method_info))
+            if (_methods.TryGetValue(methodName, out var methodInfo))
             {
-                if (method_info.IsStatic)
+                if (methodInfo.IsStatic)
                 {
-                    return method_info.Invoke(null, ArgList1);
+                    return methodInfo.Invoke(null, ArgList1);
                 }
                 else
                 {
-                    return method_info.Invoke(instance, ArgList1);
+                    return methodInfo.Invoke(instance, ArgList1);
                 }
             }
 
@@ -949,15 +949,15 @@ namespace Lotus.Core
             GetMethods();
             ArgList2[0] = arg1;
             ArgList2[1] = arg2;
-            if (_methods.TryGetValue(methodName, out var method_info))
+            if (_methods.TryGetValue(methodName, out var methodInfo))
             {
-                if (method_info.IsStatic)
+                if (methodInfo.IsStatic)
                 {
-                    return method_info.Invoke(null, ArgList2);
+                    return methodInfo.Invoke(null, ArgList2);
                 }
                 else
                 {
-                    return method_info.Invoke(instance, ArgList2);
+                    return methodInfo.Invoke(instance, ArgList2);
                 }
             }
 
@@ -979,16 +979,16 @@ namespace Lotus.Core
             GetMethods();
             ArgList3[0] = arg1;
             ArgList3[1] = arg2;
-            ArgList3[3] = arg3;
-            if (_methods.TryGetValue(methodName, out var method_info))
+            ArgList3[2] = arg3;
+            if (_methods.TryGetValue(methodName, out var methodInfo))
             {
-                if (method_info.IsStatic)
+                if (methodInfo.IsStatic)
                 {
-                    return method_info.Invoke(null, ArgList3);
+                    return methodInfo.Invoke(null, ArgList3);
                 }
                 else
                 {
-                    return method_info.Invoke(instance, ArgList3);
+                    return methodInfo.Invoke(instance, ArgList3);
                 }
             }
 

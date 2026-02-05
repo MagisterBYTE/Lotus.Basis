@@ -163,33 +163,33 @@ namespace Lotus.Core
                     var data = items[1];
 
                     // Находим имя файла
-                    var index_file = data.IndexOf("(at");
-                    if (index_file > -1)
+                    var indexFile = data.IndexOf("(at");
+                    if (indexFile > -1)
                     {
                         // Формируем имя метода
-                        MemberName = data.Remove(index_file);
+                        MemberName = data.Remove(indexFile);
 
                         // Находим последнюю точку
-                        var index_dot = MemberName.LastIndexOf('.');
-                        if (index_dot > -1)
+                        var indexDot = MemberName.LastIndexOf('.');
+                        if (indexDot > -1)
                         {
                             // Удаляем названия пространства имен
-                            MemberName = MemberName.Remove(0, index_dot);
+                            MemberName = MemberName.Remove(0, indexDot);
                         }
 
                         MemberName = MemberName.Trim();
 
                         // Формируем имя файла
-                        FilePath = data.Remove(0, index_file);
+                        FilePath = data.Remove(0, indexFile);
 
                         // Удаляем префикс "(at"
                         FilePath = FilePath.Remove(0, 3);
 
                         // Находим двоеточие и удаляем до него
-                        var index_colon = FilePath.LastIndexOf(':');
-                        if (index_colon > -1)
+                        var indexColon = FilePath.LastIndexOf(':');
+                        if (indexColon > -1)
                         {
-                            FilePath = FilePath.Remove(index_colon);
+                            FilePath = FilePath.Remove(indexColon);
                             FilePath = Path.GetFileNameWithoutExtension(FilePath);
                         }
 
@@ -215,17 +215,17 @@ namespace Lotus.Core
 
                 for (var i = 0; i < items.Length - 1; i++)
                 {
-                    var line_trace = items[i];
+                    var lineTrace = items[i];
 
                     if (i == 0)
                     {
-                        MemberName = ExtractMemberName(line_trace);
-                        FilePath = ExtractFileName(line_trace);
+                        MemberName = ExtractMemberName(lineTrace);
+                        FilePath = ExtractFileName(lineTrace);
                     }
                     else
                     {
-                        MemberName += XStringHelper.HierarchySpaces[i] + ExtractMemberName(line_trace);
-                        FilePath += "\n" + ExtractFileName(line_trace);
+                        MemberName += XStringHelper.HierarchySpaces[i] + ExtractMemberName(lineTrace);
+                        FilePath += "\n" + ExtractFileName(lineTrace);
                     }
                 }
             }
@@ -239,29 +239,29 @@ namespace Lotus.Core
         public string ExtractMemberName(string lineTrace)
         {
             // Находим имя файла
-            var index_file = lineTrace.LastIndexOf('(');
-            if (index_file > -1)
+            var indexFile = lineTrace.LastIndexOf('(');
+            if (indexFile > -1)
             {
                 // Формируем имя метода
-                var member_name = lineTrace.Remove(index_file);
+                var memberName = lineTrace.Remove(indexFile);
 
                 // Находим последнюю точку
-                var index_dot = member_name.LastIndexOf('.');
-                if (index_dot > -1)
+                var indexDot = memberName.LastIndexOf('.');
+                if (indexDot > -1)
                 {
                     // Удаляем названия пространства имен
-                    member_name = member_name.Remove(0, index_dot + 1);
+                    memberName = memberName.Remove(0, indexDot + 1);
                 }
 
                 // Удаляем все аргументы
-                var start = member_name.IndexOf('(');
-                var end = member_name.IndexOf(')');
+                var start = memberName.IndexOf('(');
+                var end = memberName.IndexOf(')');
                 if (end - start > 1)
                 {
-                    member_name = member_name.Remove(start + 1, end - start);
+                    memberName = memberName.Remove(start + 1, end - start);
                 }
 
-                return member_name.Trim('\n', ' ');
+                return memberName.Trim('\n', ' ');
             }
 
             return "";
@@ -275,23 +275,23 @@ namespace Lotus.Core
         public string ExtractFileName(string lineTrace)
         {
             // Находим имя файла
-            var index_file = lineTrace.LastIndexOf('(');
-            if (index_file > -1)
+            var indexFile = lineTrace.LastIndexOf('(');
+            if (indexFile > -1)
             {
                 // Формируем имя файла
-                var file_path = lineTrace.Remove(0, index_file);
+                var filePath = lineTrace.Remove(0, indexFile);
 
                 // Находим двоеточие и удаляем до него
-                var index_colon = file_path.LastIndexOf(':');
-                if (index_colon > -1)
+                var indexColon = filePath.LastIndexOf(':');
+                if (indexColon > -1)
                 {
-                    file_path = file_path.Remove(index_colon);
-                    file_path = Path.GetFileName(file_path);
+                    filePath = filePath.Remove(indexColon);
+                    filePath = Path.GetFileName(filePath);
                 }
 
-                file_path = file_path.Trim('\n', ' ', '(', ')');
+                filePath = filePath.Trim('\n', ' ', '(', ')');
 
-                return file_path;
+                return filePath;
             }
 
             return string.Empty;

@@ -364,7 +364,7 @@ namespace Lotus.Core
                     }
                     else
                     {
-                        primitives[i] = default;
+                        primitives[i] = default!;
                     }
                 }
             }

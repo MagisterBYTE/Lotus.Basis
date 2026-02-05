@@ -85,9 +85,9 @@ namespace Lotus.Core
 
                 while (_index < _set._lastIndex)
                 {
-                    if (_set._slots[_index].hashCode >= 0)
+                    if (_set._slots[_index]._hashCode >= 0)
                     {
-                        _current = _set._slots[_index].value;
+                        _current = _set._slots[_index]._value;
                         _index++;
                         return true;
                     }
@@ -119,9 +119,9 @@ namespace Lotus.Core
         /// </summary>
         protected internal struct Slot
         {
-            internal int hashCode;      // Lower 31 bits of hash code, -1 if unused
-            internal int next;          // Index of next entry, -1 if last
-            internal TItem value;
+            internal int _hashCode;      // Lower 31 bits of hash code, -1 if unused
+            internal int _next;          // Index of next entry, -1 if last
+            internal TItem _value;
         }
         #endregion
 
@@ -298,11 +298,11 @@ namespace Lotus.Core
         {
             if (_buckets != null)
             {
-                var hashCode = InternalGetHashCode(item);
+                var _hashCode = InternalGetHashCode(item);
                 // see note at "HashSetArray" level describing why "- 1" appears in for loop
-                for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
+                for (var i = _buckets[_hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i]._next)
                 {
-                    if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, item))
+                    if (_slots[i]._hashCode == _hashCode && _comparer.Equals(_slots[i]._value, item))
                     {
                         return true;
                     }
@@ -331,26 +331,26 @@ namespace Lotus.Core
         {
             if (_buckets != null)
             {
-                var hashCode = InternalGetHashCode(item);
-                var bucket = hashCode % _buckets.Length;
+                var _hashCode = InternalGetHashCode(item);
+                var bucket = _hashCode % _buckets.Length;
                 var last = -1;
-                for (var i = _buckets[bucket] - 1; i >= 0; last = i, i = _slots[i].next)
+                for (var i = _buckets[bucket] - 1; i >= 0; last = i, i = _slots[i]._next)
                 {
-                    if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, item))
+                    if (_slots[i]._hashCode == _hashCode && _comparer.Equals(_slots[i]._value, item))
                     {
                         if (last < 0)
                         {
                             // first iteration; update buckets
-                            _buckets[bucket] = _slots[i].next + 1;
+                            _buckets[bucket] = _slots[i]._next + 1;
                         }
                         else
                         {
                             // subsequent iterations; update 'next' pointers
-                            _slots[last].next = _slots[i].next;
+                            _slots[last]._next = _slots[i]._next;
                         }
-                        _slots[i].hashCode = -1;
-                        _slots[i].value = default!;
-                        _slots[i].next = _freeList;
+                        _slots[i]._hashCode = -1;
+                        _slots[i]._value = default!;
+                        _slots[i]._next = _freeList;
 
                         _count--;
                         _version++;
@@ -430,7 +430,7 @@ namespace Lotus.Core
                 var i = InternalIndexOf(equalValue);
                 if (i >= 0)
                 {
-                    actualValue = _slots[i].value;
+                    actualValue = _slots[i]._value;
                     return true;
                 }
             }
@@ -493,10 +493,36 @@ namespace Lotus.Core
                 if (otherAsSet != null && AreEqualityComparersEqual(this, otherAsSet))
                 {
                     IntersectWithHashSetWithSameEC(otherAsSet);
+                    return;
                 }
             }
 
-            //IntersectWithEnumerable(other);
+            IntersectWithEnumerable(other);
+        }
+
+        /// <summary>
+        /// Intersect with enumerable. Used when other is not a hashset or uses different equality comparer.
+        /// </summary>
+        /// <param name="other">Enumerable to intersect with.</param>
+        private void IntersectWithEnumerable(IEnumerable<TItem> other)
+        {
+            // Create a hashset from other for O(1) lookup
+            var otherSet = new HashSet<TItem>(other, _comparer);
+            
+            // Remove items from this set that are not in other
+            var itemsToRemove = new List<TItem>();
+            foreach (var item in this)
+            {
+                if (!otherSet.Contains(item))
+                {
+                    itemsToRemove.Add(item);
+                }
+            }
+            
+            foreach (var item in itemsToRemove)
+            {
+                Remove(item);
+            }
         }
 
         /// <summary>
@@ -557,7 +583,48 @@ namespace Lotus.Core
             }
             else
             {
-                //SymmetricExceptWithEnumerable(other);
+                SymmetricExceptWithEnumerable(other);
+            }
+        }
+
+        /// <summary>
+        /// Symmetric except with enumerable. Used when other is not a hashset or uses different equality comparer.
+        /// </summary>
+        /// <param name="other">Enumerable for symmetric except operation.</param>
+        private void SymmetricExceptWithEnumerable(IEnumerable<TItem> other)
+        {
+            var otherSet = new HashSet<TItem>(other, _comparer);
+            var itemsToRemove = new List<TItem>();
+            var itemsToAdd = new List<TItem>();
+            
+            // Find items in this set that are not in other (to be removed)
+            foreach (var item in this)
+            {
+                if (otherSet.Contains(item))
+                {
+                    itemsToRemove.Add(item);
+                }
+            }
+            
+            // Find items in other that are not in this set (to be added)
+            foreach (var item in otherSet)
+            {
+                if (!Contains(item))
+                {
+                    itemsToAdd.Add(item);
+                }
+            }
+            
+            // Remove items that are in both sets
+            foreach (var item in itemsToRemove)
+            {
+                Remove(item);
+            }
+            
+            // Add items that are only in other
+            foreach (var item in itemsToAdd)
+            {
+                Add(item);
             }
         }
 
@@ -600,9 +667,16 @@ namespace Lotus.Core
             }
             else
             {
-                //ElementCount result = CheckUniqueAndUnfoundElements(other, false);
-                //return (result.uniqueCount == _count && result.unfoundCount >= 0);
-                return false;
+                // Check if all elements in this set are in other
+                var otherSet = new HashSet<TItem>(other, _comparer);
+                foreach (var item in this)
+                {
+                    if (!otherSet.Contains(item))
+                    {
+                        return false;
+                    }
+                }
+                return true;
             }
         }
 
@@ -645,9 +719,21 @@ namespace Lotus.Core
                 }
             }
 
-            //ElementCount result = CheckUniqueAndUnfoundElements(other, false);
-            //return (result.uniqueCount == _count && result.unfoundCount > 0);
-            return false;
+            // Check if this is a proper subset (all elements in this are in other, and other has more)
+            var otherSet = new HashSet<TItem>(other, _comparer);
+            if (otherSet.Count <= _count)
+            {
+                return false;
+            }
+            
+            foreach (var item in this)
+            {
+                if (!otherSet.Contains(item))
+                {
+                    return false;
+                }
+            }
+            return true;
 
         }
 
@@ -740,9 +826,21 @@ namespace Lotus.Core
                 }
             }
             // couldn't fall out in the above cases; do it the long way
-            //ElementCount result = CheckUniqueAndUnfoundElements(other, true);
-            //return (result.uniqueCount < _count && result.unfoundCount == 0);
-            return false;
+            // Check if this is a proper superset (all elements in other are in this, and this has more)
+            var otherSet = new HashSet<TItem>(other, _comparer);
+            if (_count <= otherSet.Count)
+            {
+                return false;
+            }
+            
+            foreach (var item in otherSet)
+            {
+                if (!Contains(item))
+                {
+                    return false;
+                }
+            }
+            return true;
 
         }
 
@@ -802,9 +900,21 @@ namespace Lotus.Core
                         return false;
                     }
                 }
-                //ElementCount result = CheckUniqueAndUnfoundElements(other, true);
-                //return (result.uniqueCount == _count && result.unfoundCount == 0);
-                return false;
+                // Check if sets are equal (same elements, ignoring duplicates and order)
+                var otherSet = new HashSet<TItem>(other, _comparer);
+                if (_count != otherSet.Count)
+                {
+                    return false;
+                }
+                
+                foreach (var item in this)
+                {
+                    if (!otherSet.Contains(item))
+                    {
+                        return false;
+                    }
+                }
+                return true;
             }
         }
 
@@ -848,9 +958,9 @@ namespace Lotus.Core
             var numCopied = 0;
             for (var i = 0; i < _lastIndex && numCopied < count; i++)
             {
-                if (_slots[i].hashCode >= 0)
+                if (_slots[i]._hashCode >= 0)
                 {
-                    array[arrayIndex + numCopied] = _slots[i].value;
+                    array[arrayIndex + numCopied] = _slots[i]._value;
                     numCopied++;
                 }
             }
@@ -866,10 +976,10 @@ namespace Lotus.Core
             var numRemoved = 0;
             for (var i = 0; i < _lastIndex; i++)
             {
-                if (_slots[i].hashCode >= 0)
+                if (_slots[i]._hashCode >= 0)
                 {
                     // cache value in case delegate removes it
-                    var value = _slots[i].value;
+                    var value = _slots[i]._value;
                     if (match(value))
                     {
                         // check again that remove actually removed it
@@ -930,13 +1040,13 @@ namespace Lotus.Core
                 var newIndex = 0;
                 for (var i = 0; i < _lastIndex; i++)
                 {
-                    if (_slots[i].hashCode >= 0)
+                    if (_slots[i]._hashCode >= 0)
                     {
                         newSlots[newIndex] = _slots[i];
 
                         // rehash
-                        var bucket = newSlots[newIndex].hashCode % newSize;
-                        newSlots[newIndex].next = newBuckets[bucket] - 1;
+                        var bucket = newSlots[newIndex]._hashCode % newSize;
+                        newSlots[newIndex]._next = newBuckets[bucket] - 1;
                         newBuckets[bucket] = newIndex + 1;
 
                         newIndex++;
@@ -987,10 +1097,10 @@ namespace Lotus.Core
                 var index = 0;
                 for (var i = 0; i < lastIndex; ++i)
                 {
-                    var hashCode = slots[i].hashCode;
-                    if (hashCode >= 0)
+                    var _hashCode = slots[i]._hashCode;
+                    if (_hashCode >= 0)
                     {
-                        AddValue(index, hashCode, slots[i].value);
+                        AddValue(index, _hashCode, slots[i]._value);
                         ++index;
                     }
                 }
@@ -1047,9 +1157,9 @@ namespace Lotus.Core
             {
                 for (var i = 0; i < _lastIndex; i++)
                 {
-                    if (newSlots[i].hashCode != -1)
+                    if (newSlots[i]._hashCode != -1)
                     {
-                        newSlots[i].hashCode = InternalGetHashCode(newSlots[i].value);
+                        newSlots[i]._hashCode = InternalGetHashCode(newSlots[i]._value);
                     }
                 }
             }
@@ -1057,8 +1167,8 @@ namespace Lotus.Core
             var newBuckets = new int[newSize];
             for (var i = 0; i < _lastIndex; i++)
             {
-                var bucket = newSlots[i].hashCode % newSize;
-                newSlots[i].next = newBuckets[bucket] - 1;
+                var bucket = newSlots[i]._hashCode % newSize;
+                newSlots[i]._next = newBuckets[bucket] - 1;
                 newBuckets[bucket] = i + 1;
             }
             _slots = newSlots;
@@ -1078,12 +1188,12 @@ namespace Lotus.Core
                 Initialize(0);
             }
 
-            var hashCode = InternalGetHashCode(value);
-            var bucket = hashCode % _buckets!.Length;
+            var _hashCode = InternalGetHashCode(value);
+            var bucket = _hashCode % _buckets!.Length;
 
-            for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
+            for (var i = _buckets[_hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i]._next)
             {
-                if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, value))
+                if (_slots[i]._hashCode == _hashCode && _comparer.Equals(_slots[i]._value, value))
                 {
                     return false;
                 }
@@ -1093,7 +1203,7 @@ namespace Lotus.Core
             if (_freeList >= 0)
             {
                 index = _freeList;
-                _freeList = _slots[index].next;
+                _freeList = _slots[index]._next;
             }
             else
             {
@@ -1101,14 +1211,14 @@ namespace Lotus.Core
                 {
                     IncreaseCapacity();
                     // this will change during resize
-                    bucket = hashCode % _buckets.Length;
+                    bucket = _hashCode % _buckets.Length;
                 }
                 index = _lastIndex;
                 _lastIndex++;
             }
-            _slots[index].hashCode = hashCode;
-            _slots[index].value = value;
-            _slots[index].next = _buckets[bucket] - 1;
+            _slots[index]._hashCode = _hashCode;
+            _slots[index]._value = value;
+            _slots[index]._next = _buckets[bucket] - 1;
             _buckets[bucket] = index + 1;
             _count++;
             _version++;
@@ -1121,15 +1231,15 @@ namespace Lotus.Core
         /// when constructing from another HashSetArray.
         /// </summary>
         /// <param name="index"></param>
-        /// <param name="hashCode"></param>
+        /// <param name="_hashCode"></param>
         /// <param name="value"></param>
-        private void AddValue(int index, int hashCode, in TItem value)
+        private void AddValue(int index, int _hashCode, in TItem value)
         {
-            var bucket = hashCode % _buckets.Length;
+            var bucket = _hashCode % _buckets.Length;
 
-            _slots[index].hashCode = hashCode;
-            _slots[index].value = value;
-            _slots[index].next = _buckets[bucket] - 1;
+            _slots[index]._hashCode = _hashCode;
+            _slots[index]._value = value;
+            _slots[index]._next = _buckets[bucket] - 1;
             _buckets[bucket] = index + 1;
         }
 
@@ -1187,9 +1297,9 @@ namespace Lotus.Core
         {
             for (var i = 0; i < _lastIndex; i++)
             {
-                if (_slots[i].hashCode >= 0)
+                if (_slots[i]._hashCode >= 0)
                 {
-                    var item = _slots[i].value;
+                    var item = _slots[i]._value;
                     if (!other.Contains(item))
                     {
                         Remove(item);
@@ -1206,10 +1316,10 @@ namespace Lotus.Core
         /// <returns></returns>
         private int InternalIndexOf(in TItem item)
         {
-            var hashCode = InternalGetHashCode(item);
-            for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
+            var _hashCode = InternalGetHashCode(item);
+            for (var i = _buckets[_hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i]._next)
             {
-                if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, item))
+                if (_slots[i]._hashCode == _hashCode && _comparer.Equals(_slots[i]._value, item))
                 {
                     return i;
                 }
@@ -1249,11 +1359,11 @@ namespace Lotus.Core
         /// <returns></returns>
         private bool AddOrGetLocation(in TItem value, out int location)
         {
-            var hashCode = InternalGetHashCode(value);
-            var bucket = hashCode % _buckets.Length;
-            for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
+            var _hashCode = InternalGetHashCode(value);
+            var bucket = _hashCode % _buckets.Length;
+            for (var i = _buckets[_hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i]._next)
             {
-                if (_slots[i].hashCode == hashCode && _comparer.Equals(_slots[i].value, value))
+                if (_slots[i]._hashCode == _hashCode && _comparer.Equals(_slots[i]._value, value))
                 {
                     location = i;
                     return false; //already present
@@ -1263,7 +1373,7 @@ namespace Lotus.Core
             if (_freeList >= 0)
             {
                 index = _freeList;
-                _freeList = _slots[index].next;
+                _freeList = _slots[index]._next;
             }
             else
             {
@@ -1271,14 +1381,14 @@ namespace Lotus.Core
                 {
                     IncreaseCapacity();
                     // this will change during resize
-                    bucket = hashCode % _buckets.Length;
+                    bucket = _hashCode % _buckets.Length;
                 }
                 index = _lastIndex;
                 _lastIndex++;
             }
-            _slots[index].hashCode = hashCode;
-            _slots[index].value = value;
-            _slots[index].next = _buckets[bucket] - 1;
+            _slots[index]._hashCode = _hashCode;
+            _slots[index]._value = value;
+            _slots[index]._next = _buckets[bucket] - 1;
             _buckets[bucket] = index + 1;
             _count++;
             _version++;

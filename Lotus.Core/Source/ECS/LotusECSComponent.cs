@@ -99,6 +99,7 @@ namespace Lotus.Core
         public CEcsComponentData(CEcsWorldConfigs? configs = null)
         {
             _components = new SparseSet<TComponent>(24);
+            _world = null!; // Will be set when added to world
         }
         #endregion
 

@@ -58,8 +58,8 @@ namespace Lotus.Core
         {
             var current_date = DateTime.UtcNow;
             var elapsed_ticks = current_date.Ticks - StartDate.Ticks;
-            var elapsed_millsecond = (int)(elapsed_ticks / 100000);
-            return elapsed_millsecond;
+            var elapsed_millisecond = (int)(elapsed_ticks / 100000);
+            return elapsed_millisecond;
         }
 
         /// <summary>

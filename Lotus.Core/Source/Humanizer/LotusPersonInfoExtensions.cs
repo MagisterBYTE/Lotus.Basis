@@ -104,11 +104,11 @@ namespace Lotus.Core
             };
 
             // Обрабатываем отчество в зависимости от флага
-            bool hasPatronymic = !string.IsNullOrWhiteSpace(personInfo.Patronymic);
+            var hasPatronymic = !string.IsNullOrWhiteSpace(personInfo.Patronymic);
 
             if (hasPatronymic)
             {
-                parts.Add(personInfo.Patronymic.Trim());
+                parts.Add(personInfo.Patronymic!.Trim());
             }
             else if (!skipMiddleNameIfEmpty)
             {

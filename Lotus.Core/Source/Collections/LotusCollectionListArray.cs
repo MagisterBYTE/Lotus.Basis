@@ -70,7 +70,7 @@ namespace Lotus.Core
             {
                 _list = list;
                 _index = 0;
-                _current = _list[0];
+                _current = list.Count > 0 ? list[0] : default;
             }
             #endregion
 
@@ -108,7 +108,7 @@ namespace Lotus.Core
             public void Reset()
             {
                 _index = 0;
-                _current = _list[0];
+                _current = _list.Count > 0 ? _list[0] : default;
             }
             #endregion
         }
@@ -296,29 +296,47 @@ namespace Lotus.Core
         /// <summary>
         /// Второй элемент.
         /// </summary>
+        /// <exception cref="IndexOutOfRangeException">Выбрасывается, если в коллекции меньше 2 элементов.</exception>
         public TItem? ItemSecond
         {
             get
             {
-                return _arrayOfItems[0];
+                if (_count < 2)
+                {
+                    throw new IndexOutOfRangeException("Collection must contain at least 2 elements to access ItemSecond");
+                }
+                return _arrayOfItems[1];
             }
             set
             {
-                _arrayOfItems[0] = value;
+                if (_count < 2)
+                {
+                    throw new IndexOutOfRangeException("Collection must contain at least 2 elements to set ItemSecond");
+                }
+                _arrayOfItems[1] = value;
             }
         }
 
         /// <summary>
         /// Предпоследний элемент.
         /// </summary>
+        /// <exception cref="IndexOutOfRangeException">Выбрасывается, если в коллекции меньше 2 элементов.</exception>
         public TItem? ItemPenultimate
         {
             get
             {
+                if (_count < 2)
+                {
+                    throw new IndexOutOfRangeException("Collection must contain at least 2 elements to access ItemPenultimate");
+                }
                 return _arrayOfItems[_count - 2];
             }
             set
             {
+                if (_count < 2)
+                {
+                    throw new IndexOutOfRangeException("Collection must contain at least 2 elements to set ItemPenultimate");
+                }
                 _arrayOfItems[_count - 2] = value;
             }
         }
@@ -1135,23 +1153,45 @@ namespace Lotus.Core
         /// <returns>Количество удаленных элементов.</returns>
         public int RemoveItems(params TItem[] items)
         {
+            // Оптимизация: используем HashSet для быстрого поиска элементов для удаления
+            var itemsToRemove = new HashSet<TItem?>(items);
             var count = 0;
-            for (var i = 0; i < items.Length; i++)
-            {
-                var index = Array.IndexOf(_arrayOfItems, items[i], 0, _count);
-                if (index != -1)
-                {
-                    _count--;
-                    Array.Copy(_arrayOfItems, index + 1, _arrayOfItems, index, _count - index);
-                    _arrayOfItems[_count] = default;
-                    count++;
+            var writeIndex = 0;
 
+            for (var readIndex = 0; readIndex < _count; readIndex++)
+            {
+                var item = _arrayOfItems[readIndex];
+                if (!itemsToRemove.Contains(item))
+                {
+                    // Сохраняем элемент, если он не должен быть удален
+                    if (writeIndex != readIndex)
+                    {
+                        _arrayOfItems[writeIndex] = item;
+                    }
+                    writeIndex++;
+                }
+                else
+                {
+                    // Элемент удаляется
+                    count++;
                     if (_isNotify)
                     {
                         PropertyChanged?.Invoke(this, PropertyArgsIndexer);
-                        NotifyCollectionChanged(NotifyCollectionChangedAction.Remove, items[i], index);
+                        NotifyCollectionChanged(NotifyCollectionChangedAction.Remove, item, readIndex);
                     }
                 }
+            }
+
+            // Очищаем оставшиеся элементы
+            for (var i = writeIndex; i < _count; i++)
+            {
+                _arrayOfItems[i] = default;
+            }
+
+            _count = writeIndex;
+            if (_isNotify && count > 0)
+            {
+                PropertyChanged?.Invoke(this, PropertyArgsCount);
             }
 
             return count;
@@ -1164,24 +1204,45 @@ namespace Lotus.Core
         /// <returns>Количество удаленных элементов.</returns>
         public int RemoveItems(IList<TItem> items)
         {
+            // Оптимизация: используем HashSet для быстрого поиска элементов для удаления
+            var itemsToRemove = new HashSet<TItem?>(items);
             var count = 0;
-            for (var i = 0; i < items.Count; i++)
-            {
-                var index = Array.IndexOf(_arrayOfItems, items[i], 0, _count);
-                if (index != -1)
-                {
-                    _count--;
-                    Array.Copy(_arrayOfItems, index + 1, _arrayOfItems, index, _count - index);
-                    _arrayOfItems[_count] = default;
-                    count++;
+            var writeIndex = 0;
 
+            for (var readIndex = 0; readIndex < _count; readIndex++)
+            {
+                var item = _arrayOfItems[readIndex];
+                if (!itemsToRemove.Contains(item))
+                {
+                    // Сохраняем элемент, если он не должен быть удален
+                    if (writeIndex != readIndex)
+                    {
+                        _arrayOfItems[writeIndex] = item;
+                    }
+                    writeIndex++;
+                }
+                else
+                {
+                    // Элемент удаляется
+                    count++;
                     if (_isNotify)
                     {
-                        PropertyChanged?.Invoke(this, PropertyArgsCount);
                         PropertyChanged?.Invoke(this, PropertyArgsIndexer);
-                        NotifyCollectionChanged(NotifyCollectionChangedAction.Remove, items[i], index);
+                        NotifyCollectionChanged(NotifyCollectionChangedAction.Remove, item, readIndex);
                     }
                 }
+            }
+
+            // Очищаем оставшиеся элементы
+            for (var i = writeIndex; i < _count; i++)
+            {
+                _arrayOfItems[i] = default;
+            }
+
+            _count = writeIndex;
+            if (_isNotify && count > 0)
+            {
+                PropertyChanged?.Invoke(this, PropertyArgsCount);
             }
 
             return count;
@@ -1206,35 +1267,17 @@ namespace Lotus.Core
         {
             if (index < 0)
             {
-#if UNITY_2017_1_OR_NEWER
-					UnityEngine.Debug.LogErrorFormat("Index is less than zero: <{0}> (Return)", index);
-					index = 0;
-#else
-                XLogger.LogErrorFormat("Index is less than zero: <{0}> (Return)", index);
-                index = 0;
-#endif
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index cannot be negative.");
             }
 
             if (count < 1)
             {
-#if UNITY_2017_1_OR_NEWER
-					UnityEngine.Debug.LogErrorFormat("Count is less than one: <{0}> (Return)", count);
-					count = 1;
-#else
-                XLogger.LogErrorFormat("Count is less than one: <{0}> (Return)", count);
-                count = 1;
-#endif
+                throw new ArgumentOutOfRangeException(nameof(count), count, "Count must be greater than zero.");
             }
 
             if (_count - index < count)
             {
-#if UNITY_2017_1_OR_NEWER
-					UnityEngine.Debug.LogErrorFormat("The index <{0}> + count <{1}> is greater than the number of elements: <2> (Return)", index, count, _count);
-					return;
-#else
-                XLogger.LogErrorFormat("The index <{0}> + count <{1}> is greater than the number of elements: <2> (Return)", index, count, _count);
-                return;
-#endif
+                throw new ArgumentException($"The index {index} + count {count} is greater than the number of elements {_count}.", nameof(count));
             }
 
             _count -= count;
@@ -1262,24 +1305,12 @@ namespace Lotus.Core
         {
             if (index < 0)
             {
-#if UNITY_2017_1_OR_NEWER
-					UnityEngine.Debug.LogErrorFormat("Index is less than zero: <{0}> (Return)", index);
-					return;
-#else
-                XLogger.LogErrorFormat("Index is less than zero: <{0}> (Return)", index);
-                return;
-#endif
+                throw new ArgumentOutOfRangeException(nameof(index), index, "Index cannot be negative.");
             }
 
             if (index > LastIndex)
             {
-#if UNITY_2017_1_OR_NEWER
-					UnityEngine.Debug.LogErrorFormat("The index is greater than the number of elements: <{0}> (Return)", index);
-					return;
-#else
-                XLogger.LogErrorFormat("The index is greater than the number of elements: <{0}> (Return)", index);
-                return;
-#endif
+                throw new ArgumentOutOfRangeException(nameof(index), index, $"Index {index} is greater than the number of elements {_count}.");
             }
 
             if (_isNotify)
@@ -1327,13 +1358,14 @@ namespace Lotus.Core
         /// <returns>Количество дубликатов элементов.</returns>
         public int RemoveDuplicates()
         {
+            // Оптимизация: используем HashSet для O(1) поиска вместо O(n) Array.IndexOf
+            var seen = new HashSet<TItem?>();
             var unique = new TItem?[_count];
             var count = 0;
             for (var i = 0; i < _count; i++)
             {
                 var item = _arrayOfItems[i];
-                var index = Array.IndexOf(unique, item);
-                if (index == -1)
+                if (seen.Add(item))
                 {
                     unique[count] = item;
                     count++;
@@ -1588,15 +1620,21 @@ namespace Lotus.Core
         /// <param name="items">Элементы.</param>
         public void UnionItems(params TItem[] items)
         {
-            Reserve(items.Length);
-            for (var i = 0; i < items.Length; i++)
+            // Оптимизация: используем HashSet для O(1) поиска вместо O(n) Array.IndexOf
+            var existingItems = new HashSet<TItem?>();
+            for (var i = 0; i < _count; i++)
             {
-                if (Array.IndexOf(_arrayOfItems, items[i]) == -1)
+                existingItems.Add(_arrayOfItems[i]);
+            }
+            Reserve(items.Length);
+            foreach (var item in items)
+            {
+                if (!existingItems.Contains(item))
                 {
-                    Add(items[i]);
+                    Add(item);
+                    existingItems.Add(item);
                 }
             }
-            _count = items.Length;
         }
 
         /// <summary>
@@ -1608,15 +1646,21 @@ namespace Lotus.Core
         /// <param name="items">Элементы.</param>
         public void UnionItems(IList<TItem> items)
         {
-            Reserve(items.Count);
-            for (var i = 0; i < items.Count; i++)
+            // Оптимизация: используем HashSet для O(1) поиска вместо O(n) Array.IndexOf
+            var existingItems = new HashSet<TItem?>();
+            for (var i = 0; i < _count; i++)
             {
-                if (Array.IndexOf(_arrayOfItems, items[i]) == -1)
+                existingItems.Add(_arrayOfItems[i]);
+            }
+            Reserve(items.Count);
+            foreach (var item in items)
+            {
+                if (!existingItems.Contains(item))
                 {
-                    Add(items[i]);
+                    Add(item);
+                    existingItems.Add(item);
                 }
             }
-            _count = items.Count;
         }
 
         /// <summary>

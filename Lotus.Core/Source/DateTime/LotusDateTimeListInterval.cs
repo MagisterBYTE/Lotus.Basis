@@ -145,7 +145,7 @@ namespace Lotus.Core
             : base(capacity)
         {
             _timeInterval = timeInterval;
-            AssingTimePeriod(startData, endData);
+            AssignTimePeriod(startData, endData);
         }
         #endregion
 
@@ -155,7 +155,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="startData">Дата начала периода.</param>
         /// <param name="endData">Дата окончания периода.</param>
-        public void AssingTimePeriod(DateTime startData, DateTime endData)
+        public void AssignTimePeriod(DateTime startData, DateTime endData)
         {
             Clear();
 
@@ -440,7 +440,7 @@ namespace Lotus.Core
         /// <param name="startIndex">Начальный индекс периода.</param>
         /// <param name="endIndex">Конечный индекс периода.</param>
         /// <returns>Список.</returns>
-        public virtual TResult DublicateListPeriod<TResult>(int startIndex, int endIndex)
+        public virtual TResult DuplicateListPeriod<TResult>(int startIndex, int endIndex)
             where TResult : ListTimeInterval<TItemTimeable>, new()
         {
             var list = new TResult
@@ -465,13 +465,13 @@ namespace Lotus.Core
         /// <param name="startDate">Дата начала периода.</param>
         /// <param name="endData">Дата окончания периода.</param>
         /// <returns>Список.</returns>
-        public virtual TResult? DublicateListPeriod<TResult>(DateTime startDate, DateTime endData)
+        public virtual TResult? DuplicateListPeriod<TResult>(DateTime startDate, DateTime endData)
             where TResult : ListTimeInterval<TItemTimeable>, new()
         {
             var start_index = GetIndexFromDate(startDate);
             var end_index = GetIndexFromDate(endData);
 
-            return DublicateListPeriod<TResult>(start_index, end_index);
+            return DuplicateListPeriod<TResult>(start_index, end_index);
         }
 
         /// <summary>

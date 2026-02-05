@@ -125,11 +125,25 @@ namespace Lotus.Core
         /// <returns>Универсальный тип данных.</returns>
         public static CVariant DeserializeFromString(string data)
         {
-            //
-            // TODO
-            // 
-            var variant = new CVariant();
-            return variant;
+            if (string.IsNullOrEmpty(data))
+            {
+                return new CVariant();
+            }
+
+            // Парсим формат "[TValueType]" из SerializeToString
+            if (data.StartsWith("[") && data.EndsWith("]"))
+            {
+                var typeName = data.Substring(1, data.Length - 2);
+                if (Enum.TryParse<TValueType>(typeName, out var valueType))
+                {
+                    var variant = new CVariant();
+                    variant._valueType = valueType;
+                    return variant;
+                }
+            }
+
+            // Если формат не распознан, возвращаем пустой вариант
+            return new CVariant();
         }
         #endregion
 
@@ -412,7 +426,7 @@ namespace Lotus.Core
                 _numberData.Y = value.Y;
                 _numberData.Z = value.Z;
                 _valueType = TValueType.Vector3D;
-                _owner?.OnNotifyUpdated(this, Vector2DValue, nameof(Vector3DValue));
+                _owner?.OnNotifyUpdated(this, Vector3DValue, nameof(Vector3DValue));
             }
         }
 
@@ -426,7 +440,7 @@ namespace Lotus.Core
             {
                 _numberData = value;
                 _valueType = TValueType.Vector4D;
-                _owner?.OnNotifyUpdated(this, Vector2DValue, nameof(Vector4DValue));
+                _owner?.OnNotifyUpdated(this, Vector4DValue, nameof(Vector4DValue));
             }
         }
 
@@ -677,7 +691,7 @@ namespace Lotus.Core
         /// <returns>Хеш-код.</returns>
         public override int GetHashCode()
         {
-            return this.GetHashCode() ^ _numberData.GetHashCode() ^ _stringData.GetHashCode();
+            return HashCode.Combine(_valueType, _numberData, _stringData, _referenceData);
         }
 
         /// <summary>

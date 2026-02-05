@@ -93,7 +93,7 @@ namespace Lotus.Core
             {
                 if (_map.TryGetValue(node, out var parameterExpression))
                 {
-                    node = parameterExpression;
+                    return parameterExpression;
                 }
                 return base.VisitParameter(node);
             }

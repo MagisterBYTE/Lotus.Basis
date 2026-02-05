@@ -15,7 +15,7 @@ namespace Lotus.Core
 #endif
     {
         #region Fields
-        internal readonly Type mSourceType;
+        internal readonly Type _sourceType;
         internal readonly string _memberName;
         internal readonly TInspectorMemberType _memberType;
         #endregion
@@ -24,26 +24,17 @@ namespace Lotus.Core
         /// <summary>
         /// Тип объекта.
         /// </summary>
-        public Type SourceType
-        {
-            get { return mSourceType; }
-        }
+        public Type SourceType => _sourceType;
 
         /// <summary>
         /// Имя члена объекта осуществляющего конвертацию из строки в числовое значение.
         /// </summary>
-        public string MemberName
-        {
-            get { return _memberName; }
-        }
+        public string MemberName => _memberName;
 
         /// <summary>
         /// Тип члена объекта.
         /// </summary>
-        public TInspectorMemberType MemberType
-        {
-            get { return _memberType; }
-        }
+        public TInspectorMemberType MemberType => _memberType;
         #endregion
 
         #region Constructors
@@ -66,7 +57,7 @@ namespace Lotus.Core
         /// <param name="memberType">Тип члена объекта.</param>
         public LotusIndexToStringAttribute(Type type, string memberName, TInspectorMemberType memberType)
         {
-            mSourceType = type;
+            _sourceType = type;
             _memberName = memberName;
             _memberType = memberType;
         }

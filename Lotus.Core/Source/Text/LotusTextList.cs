@@ -62,8 +62,11 @@ namespace Lotus.Core
         public CTextList(string str)
         {
             _lines = [str];
-            _lines[0].Index = 0;
-            _lines[0].Owned = this;
+            if (_lines.Count > 0)
+            {
+                _lines[0].Index = 0;
+                _lines[0].Owned = this;
+            }
         }
 
         /// <summary>
@@ -73,8 +76,11 @@ namespace Lotus.Core
         public CTextList(IEnumerable<string> strings)
         {
             _lines = [.. strings];
-            _lines[0].Index = 0;
-            _lines[0].Owned = this;
+            if (_lines.Count > 0)
+            {
+                _lines[0].Index = 0;
+                _lines[0].Owned = this;
+            }
         }
         #endregion
 
@@ -482,17 +488,17 @@ namespace Lotus.Core
             var path = XFilePath.GetFileName(Environment.CurrentDirectory, fileName, ".cs");
 #endif
             // Создаем поток для записи
-            var stream_writer = new StreamWriter(path);
+            var streamWriter = new StreamWriter(path);
 
             // Записываем данные
             for (var i = 0; i < _lines.Count - 1; i++)
             {
-                stream_writer.WriteLine(_lines[i].RawString);
+                streamWriter.WriteLine(_lines[i].RawString);
             }
 
-            stream_writer.Write(_lines.ItemLast!.RawString);
+            streamWriter.Write(_lines.ItemLast!.RawString);
 
-            stream_writer.Close();
+            streamWriter.Close();
 
 #if UNITY_EDITOR
 			// Обновляем в редакторе

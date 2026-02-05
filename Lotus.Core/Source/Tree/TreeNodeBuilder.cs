@@ -22,29 +22,29 @@ namespace Lotus.Core
         private static ILotusTreeNode? ByFilter(ILotusTreeNode? parent, ILotusTreeNode check,
             Predicate<ILotusTreeNode?> filter, Converter<ILotusTreeNode, ILotusTreeNode> transform)
         {
-            var node_new = transform(check);
+            var nodeNew = transform(check);
 
-            if (node_new == null)
+            if (nodeNew == null)
             {
                 return null;
             }
 
             if (check.CheckOne(filter))
             {
-                parent?.AddTreeNode(node_new);
+                parent?.AddTreeNode(nodeNew);
 
-                if (check.IChildNodes == null) return node_new;
+                if (check.IChildNodes == null) return nodeNew;
 
                 foreach (var node in check.IChildNodes)
                 {
                     if (node != null)
                     {
-                        ByFilter(node_new, node!, filter, transform);
+                        ByFilter(nodeNew, node!, filter, transform);
                     }
                 }
             }
 
-            return node_new;
+            return nodeNew;
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace Lotus.Core
         public static ILotusTreeNode? ByFilter(ILotusTreeNode rootNode, Predicate<ILotusTreeNode?> filter,
             Converter<ILotusTreeNode, ILotusTreeNode> transform)
         {
-            var node_root = ByFilter(null, rootNode, filter, transform);
-            return node_root;
+            var nodeRoot = ByFilter(null, rootNode, filter, transform);
+            return nodeRoot;
         }
 
         /// <summary>

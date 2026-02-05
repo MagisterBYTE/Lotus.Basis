@@ -72,17 +72,13 @@ namespace Lotus.Core.Collections
         [Test]
         public void Pop_ReturnsDefaultWhenStackIsEmpty()
         {
-            var result = _stack.Pop();
-
-            ClassicAssert.AreEqual(default(int), result);
+            Assert.Throws<InvalidOperationException>(() => _stack.Pop());
         }
 
         [Test]
         public void Peek_ReturnsDefaultWhenStackIsEmpty()
         {
-            var result = _stack.Peek();
-
-            ClassicAssert.AreEqual(default(int), result);
+            Assert.Throws<InvalidOperationException>(() => _stack.Peek());
         }
 
         [Test]

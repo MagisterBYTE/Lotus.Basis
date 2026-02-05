@@ -132,6 +132,13 @@ namespace Lotus.Core
             _attributes = [];
         }
 
+        #region System methods
+        public override string ToString()
+        {
+            return string.IsNullOrEmpty(_text) ? base.ToString()! : _text;
+        }
+        #endregion
+
         #region TreeNodes methods 
         private void Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
         {
@@ -203,34 +210,25 @@ namespace Lotus.Core
                 return;
             }
 
-            if (parent.IChildNodes.Any(c => c.IsChecked != false))
+            if (parent is TreeNodeObservable parentVm)
             {
-                if (parent.IChildNodes.All(c => c.IsChecked == true))
+                if (parent.IChildNodes.Any(c => c.IsChecked != false))
                 {
-                    if (parent is TreeNodeObservable parentVm)
+                    if (parent.IChildNodes.All(c => c.IsChecked == true))
                     {
                         parentVm.SetCheckedStatus(true);
+                    }
+                    else
+                    {
+                        parentVm.SetCheckedStatus(null);
                     }
                 }
                 else
                 {
-                    if (parent is TreeNodeObservable parentVm1)
-                    {
-                        parentVm1.SetCheckedStatus(null);
-                    }
+                    parentVm.SetCheckedStatus(false);
                 }
-            }
-            else
-            {
-                if (parent is TreeNodeObservable parentVm2)
-                {
-                    parentVm2.SetCheckedStatus(false);
-                }
-            }
 
-            if (parent is TreeNodeObservable parentVm3)
-            {
-                parentVm3.UpdateParentsCheckedStatus();
+                parentVm.UpdateParentsCheckedStatus();
             }
         }
 

@@ -184,7 +184,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="executor">Исполнитель группы задач.</param>
         public GroupTask(TaskGroupExecutor executor)
-            : this("Без имение", TTaskMethod.EachFrame, executor, null)
+            : this("Без имени", TTaskMethod.EachFrame, executor, null)
         {
         }
 
@@ -257,9 +257,9 @@ namespace Lotus.Core
                 }
             }
 
-            var task_holder = _executor.TaskHolderPools.Take();
-            task_holder.Task = task;
-            _tasks.Add(task_holder);
+            var taskHolder = _executor.TaskHolderPools.Take();
+            taskHolder.Task = task;
+            _tasks.Add(taskHolder);
         }
 
         /// <summary>
@@ -283,10 +283,10 @@ namespace Lotus.Core
                 }
             }
 
-            var task_holder = _executor.TaskHolderPools.Take();
-            task_holder.Task = task;
-            task_holder.MethodMode = method;
-            _tasks.Add(task_holder);
+            var taskHolder = _executor.TaskHolderPools.Take();
+            taskHolder.Task = task;
+            taskHolder.MethodMode = method;
+            _tasks.Add(taskHolder);
         }
 
         /// <summary>
@@ -327,8 +327,8 @@ namespace Lotus.Core
                 if (_tasks[i].Task == task)
                 {
                     // 1) Возвращаем в пул
-                    var task_holder = _tasks[i];
-                    _executor.TaskHolderPools.Release(task_holder);
+                    var taskHolder = _tasks[i];
+                    _executor.TaskHolderPools.Release(taskHolder);
 
                     // 2) Удаляем
                     _tasks.RemoveAt(i);
@@ -348,8 +348,8 @@ namespace Lotus.Core
                 if (_tasks[i].Name == taskName)
                 {
                     // 1) Возвращаем в пул
-                    var task_holder = _tasks[i];
-                    _executor.TaskHolderPools.Release(task_holder);
+                    var taskHolder = _tasks[i];
+                    _executor.TaskHolderPools.Release(taskHolder);
 
                     // 2) Удаляем
                     _tasks.RemoveAt(i);
@@ -363,6 +363,13 @@ namespace Lotus.Core
         /// </summary>
         public void Run()
         {
+            if (_tasks.Count == 0)
+            {
+                _isCompleted = true;
+                _isRunning = false;
+                return;
+            }
+
             _currentTaskIndex = 0;
             _currentTask = _tasks[_currentTaskIndex];
             _isRunning = true;
@@ -439,21 +446,21 @@ namespace Lotus.Core
             else
             {
                 // Если
-                var is_completed = true;
-                var is_all_completed = true;
+                var isCompleted = true;
+                var isAllCompleted = true;
 
                 for (var i = 0; i < _tasks.Count; i++)
                 {
                     // Проверка на исполнение задачи
-                    is_completed = _tasks[i].IsTaskCompleted;
+                    isCompleted = _tasks[i].IsTaskCompleted;
 
                     // Проверяем на то что все задачи точно выполнены
-                    if (is_all_completed)
+                    if (isAllCompleted)
                     {
-                        is_all_completed = is_completed;
+                        isAllCompleted = isCompleted;
                     }
 
-                    if (is_completed)
+                    if (isCompleted)
                     {
                         _countTaskExecute++;
 
@@ -466,14 +473,14 @@ namespace Lotus.Core
                             }
                         }
                     }
-                    if (!is_completed && _isRunning && _isPause == false)
+                    if (!isCompleted && _isRunning && _isPause == false)
                     {
                         _tasks[i].ExecuteTask();
                     }
                 }
 
                 // Все задачи выполнены
-                if (is_all_completed)
+                if (isAllCompleted)
                 {
                     _isCompleted = true;
                     _isRunning = false;
@@ -563,8 +570,8 @@ namespace Lotus.Core
             for (var i = 0; i < _tasks.Count; i++)
             {
                 // 1) Возвращаем в пул
-                var task_holder = _tasks[i];
-                _executor.TaskHolderPools.Release(task_holder);
+                var taskHolder = _tasks[i];
+                _executor.TaskHolderPools.Release(taskHolder);
             }
 
             _tasks.Clear();

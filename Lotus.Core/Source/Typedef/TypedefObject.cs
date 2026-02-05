@@ -76,7 +76,7 @@ namespace Lotus.Core
                 return x.Equals(y);
             }
 
-            return true;
+            return y is null;
         }
 
         /// <summary>

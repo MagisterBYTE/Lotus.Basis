@@ -298,7 +298,7 @@ namespace Lotus.Core
         }
         #endregion
 
-        #region СВОЙСТВА ILotusTask 
+        #region Properties ILotusTask 
         /// <summary>
         /// Статус завершение задачи.
         /// </summary>
@@ -309,7 +309,7 @@ namespace Lotus.Core
         {
             get
             {
-                return _isCompleted;
+                return _task.IsTaskCompleted;
             }
         }
         #endregion

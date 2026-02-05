@@ -3,7 +3,7 @@ using System.Reflection;
 namespace Lotus.Core.Serialization
 {
     /** \addtogroup CoreSerialization
-	*@{*/
+    *@{*/
     /// <summary>
     /// Вспомогательный класс хранящий данные для связывания поля/свойства типа ссылочного объекта.
     /// </summary>

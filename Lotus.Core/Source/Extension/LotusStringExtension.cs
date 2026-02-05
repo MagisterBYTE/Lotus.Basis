@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Lotus.Core
@@ -1287,6 +1288,44 @@ namespace Lotus.Core
         public static string ToDrawColor(this string @this, TColor color)
         {
             return "<color=#" + color.ToStringHEX() + ">" + @this + "</color>";
+        }
+        #endregion
+
+        #region Decode methods
+        /// <summary>
+        /// Декодирование unicode escape-последовательности в обычную строку
+        /// </summary>
+        /// <param name="this">Строка.</param>
+        /// <returns>Декодированная строка</returns>
+        public static string DecodeUnicode(this string @this)
+        {
+            if (string.IsNullOrEmpty(@this) || !@this.Contains("\\u"))
+                return @this;
+
+            try
+            {
+                return JsonSerializer.Deserialize<string>($"\"{@this!}\"")!;
+            }
+            catch
+            {
+                // Fallback: ручное декодирование
+                var sb = new StringBuilder();
+                for (int i = 0; i < @this.Length; i++)
+                {
+                    if (@this[i] == '\\' && i + 5 < @this.Length && @this[i + 1] == 'u')
+                    {
+                        var hex = @this.Substring(i + 2, 4);
+                        if (int.TryParse(hex, NumberStyles.HexNumber, null, out var code))
+                        {
+                            sb.Append(char.ConvertFromUtf32(code));
+                            i += 5;
+                            continue;
+                        }
+                    }
+                    sb.Append(@this[i]);
+                }
+                return sb.ToString();
+            }
         }
         #endregion
     }

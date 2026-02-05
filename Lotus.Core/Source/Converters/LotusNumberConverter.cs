@@ -195,6 +195,24 @@ namespace Lotus.Core
         /// Преобразование текста в число.
         /// </summary>
         /// <param name="text">Текст.</param>
+        /// <param name="defaultValue">Значение по умолчанию если преобразовать не удалось.</param>
+        /// <returns>Целочисленное значение.</returns>
+        public static ulong ParseUlong(string text, ulong defaultValue = 0)
+        {
+            text = ParsableTextLong(text);
+
+            if (ulong.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var resultValue))
+            {
+                return resultValue;
+            }
+
+            return defaultValue;
+        }
+
+        /// <summary>
+        /// Преобразование текста в число.
+        /// </summary>
+        /// <param name="text">Текст.</param>
         /// <param name="result">Значение.</param>
         /// <returns>Статус успешности преобразования.</returns>
         public static bool TryParseLong(string text, out long result)

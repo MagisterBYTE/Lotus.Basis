@@ -112,16 +112,16 @@ namespace Lotus.Core
     {
         #region Fields
         // Список миров
-        protected internal ListArray<CEcsWorld> mWorlds;
+        protected internal ListArray<CEcsWorld> _worlds;
 
         // Подсистемы логики
-        protected internal ListArray<IEcsLotusPreInitSystem> mPreInitSystems;
+        protected internal ListArray<IEcsLotusPreInitSystem> _preInitSystems;
         protected internal ListArray<IEcsLotusInitSystem> _initSystems;
         protected internal ListArray<IEcsLotusUpdateSystem> _updateSystems;
         protected internal ListArray<IEcsLotusLateUpdateSystem> _lateUpdateSystems;
-        protected internal ListArray<IEcsLotusFixedUpdateSystem> mFixedUpdateSystems;
-        protected internal ListArray<IEcsDestroySystem> mDestroySystems;
-        protected internal ListArray<IEcsPostDestroySystem> mPostDestroySystems;
+        protected internal ListArray<IEcsLotusFixedUpdateSystem> _fixedUpdateSystems;
+        protected internal ListArray<IEcsDestroySystem> _destroySystems;
+        protected internal ListArray<IEcsPostDestroySystem> _postDestroySystems;
         #endregion
 
         #region Properties
@@ -130,7 +130,7 @@ namespace Lotus.Core
         /// </summary>
         public ListArray<CEcsWorld> Worlds
         {
-            get { return mWorlds; }
+            get { return _worlds; }
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Lotus.Core
         /// </summary>
         public ListArray<IEcsLotusPreInitSystem> PreInitSystems
         {
-            get { return mPreInitSystems; }
+            get { return _preInitSystems; }
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Lotus.Core
         /// </summary>
         public ListArray<IEcsLotusFixedUpdateSystem> FixedUpdateSystems
         {
-            get { return mFixedUpdateSystems; }
+            get { return _fixedUpdateSystems; }
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Lotus.Core
         /// </summary>
         public ListArray<IEcsDestroySystem> DestroySystems
         {
-            get { return mDestroySystems; }
+            get { return _destroySystems; }
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Lotus.Core
         /// </summary>
         public ListArray<IEcsPostDestroySystem> PostDestroySystems
         {
-            get { return mPostDestroySystems; }
+            get { return _postDestroySystems; }
         }
         #endregion
 
@@ -196,15 +196,15 @@ namespace Lotus.Core
         /// </summary>
         public CEcsSystems()
         {
-            mWorlds = new ListArray<CEcsWorld>(2);
+            _worlds = new ListArray<CEcsWorld>(2);
 
-            mPreInitSystems = new ListArray<IEcsLotusPreInitSystem>(24);
+            _preInitSystems = new ListArray<IEcsLotusPreInitSystem>(24);
             _initSystems = new ListArray<IEcsLotusInitSystem>(24);
             _updateSystems = new ListArray<IEcsLotusUpdateSystem>(24);
             _lateUpdateSystems = new ListArray<IEcsLotusLateUpdateSystem>(24);
-            mFixedUpdateSystems = new ListArray<IEcsLotusFixedUpdateSystem>(24);
-            mDestroySystems = new ListArray<IEcsDestroySystem>(24);
-            mPostDestroySystems = new ListArray<IEcsPostDestroySystem>(24);
+            _fixedUpdateSystems = new ListArray<IEcsLotusFixedUpdateSystem>(24);
+            _destroySystems = new ListArray<IEcsDestroySystem>(24);
+            _postDestroySystems = new ListArray<IEcsPostDestroySystem>(24);
         }
         #endregion
 
@@ -214,11 +214,11 @@ namespace Lotus.Core
         /// </summary>
         public void OnPreInitSystems()
         {
-            for (var i = 0; i < mPreInitSystems.Count; i++)
+            for (var i = 0; i < _preInitSystems.Count; i++)
             {
-                if (mPreInitSystems[i].IsDisabled == false)
+                if (_preInitSystems[i].IsDisabled == false)
                 {
-                    mPreInitSystems[i].PreInit(this);
+                    _preInitSystems[i].PreInit(this);
                 }
             }
         }
@@ -270,11 +270,11 @@ namespace Lotus.Core
         /// </summary>
         public void OnFixedUpdateSystems()
         {
-            for (var i = 0; i < mFixedUpdateSystems.Count; i++)
+            for (var i = 0; i < _fixedUpdateSystems.Count; i++)
             {
-                if (mFixedUpdateSystems[i].IsDisabled == false)
+                if (_fixedUpdateSystems[i].IsDisabled == false)
                 {
-                    mFixedUpdateSystems[i].FixedUpdate(this);
+                    _fixedUpdateSystems[i].FixedUpdate(this);
                 }
             }
         }
@@ -284,11 +284,11 @@ namespace Lotus.Core
         /// </summary>
         public void OnDestroySystems()
         {
-            for (var i = 0; i < mDestroySystems.Count; i++)
+            for (var i = 0; i < _destroySystems.Count; i++)
             {
-                if (mDestroySystems[i].IsDisabled == false)
+                if (_destroySystems[i].IsDisabled == false)
                 {
-                    mDestroySystems[i].Destroy(this);
+                    _destroySystems[i].Destroy(this);
                 }
             }
         }
@@ -298,11 +298,11 @@ namespace Lotus.Core
         /// </summary>
         public void OnPostDestroySystems()
         {
-            for (var i = 0; i < mPostDestroySystems.Count; i++)
+            for (var i = 0; i < _postDestroySystems.Count; i++)
             {
-                if (mPostDestroySystems[i].IsDisabled == false)
+                if (_postDestroySystems[i].IsDisabled == false)
                 {
-                    mPostDestroySystems[i].PostDestroy(this);
+                    _postDestroySystems[i].PostDestroy(this);
                 }
             }
         }

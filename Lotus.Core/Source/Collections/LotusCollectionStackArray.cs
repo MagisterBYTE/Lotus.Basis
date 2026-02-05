@@ -60,12 +60,7 @@ namespace Lotus.Core
             }
             else
             {
-#if UNITY_2017_1_OR_NEWER
-				UnityEngine.Debug.LogError("Not element in stack!!!");
-#else
-                XLogger.LogError("Not element in stack!!!");
-#endif
-                return default;
+                throw new InvalidOperationException("Cannot pop element from empty stack");
             }
         }
 
@@ -81,12 +76,7 @@ namespace Lotus.Core
             }
             else
             {
-#if UNITY_2017_1_OR_NEWER
-				UnityEngine.Debug.LogError("Not element in stack!!!");
-#else
-                XLogger.LogError("Not element in stack!!!");
-#endif
-                return default;
+                throw new InvalidOperationException("Cannot peek element from empty stack");
             }
         }
         #endregion

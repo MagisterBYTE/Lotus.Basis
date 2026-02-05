@@ -661,17 +661,17 @@ namespace Lotus.Core
         {
             if (_value == default) return;
 
-            var file_stream = new FileStream(fileName, FileMode.Create);
-            var stream_writer = new StreamWriter(file_stream, System.Text.Encoding.UTF8);
+            var fileStream = new FileStream(fileName, FileMode.Create);
+            var streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8);
 
-            stream_writer.Write("{");
+            streamWriter.Write("{");
 
-            WriteToJson(stream_writer, 1, false);
+            WriteToJson(streamWriter, 1, false);
 
-            stream_writer.Write("\n}");
+            streamWriter.Write("\n}");
 
-            stream_writer.Close();
-            file_stream.Close();
+            streamWriter.Close();
+            fileStream.Close();
         }
         #endregion
     }

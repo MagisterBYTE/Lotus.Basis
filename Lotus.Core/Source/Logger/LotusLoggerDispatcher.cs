@@ -62,23 +62,23 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Сохраннее сообщений текстовый файл.
+        /// Сохранение сообщений в текстовый файл.
         /// </summary>
         /// <param name="fileName">Имя файла.</param>
         public static void SaveToText(string fileName)
         {
             if (_messages != null)
             {
-                var file_stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-                var stream_writer = new StreamWriter(file_stream);
+                var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                var streamWriter = new StreamWriter(fileStream);
 
                 for (var i = 0; i < _messages.Count; i++)
                 {
-                    stream_writer.WriteLine(_messages[i].Text);
+                    streamWriter.WriteLine(_messages[i].Text);
                 }
 
-                stream_writer.Close();
-                file_stream.Close();
+                streamWriter.Close();
+                fileStream.Close();
             }
         }
         #endregion

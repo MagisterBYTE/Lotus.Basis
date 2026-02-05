@@ -22,7 +22,7 @@ namespace Lotus.Core
         {
             var dir_info = new DirectoryInfo(path);
             var dir_model = new CFileSystemDirectory(dir_info);
-            dir_model.RecursiveFileSysteInfo();
+            dir_model.RecursiveFileSystemInfo();
             return dir_model;
         }
         #endregion
@@ -280,7 +280,7 @@ namespace Lotus.Core
         {
             if (directoryInfo == null) return null;
 
-            // Не создаем не нежные директории
+            // Не создаем ненужные директории
             if (directoryInfo.Name.Contains(".git")) return null;
             if (directoryInfo.Name.Contains(".vs")) return null;
 
@@ -288,7 +288,7 @@ namespace Lotus.Core
             var directory = new CFileSystemDirectory(directoryInfo);
 
             // Добавляем
-            this._entities.Add(directory);
+            _entities.Add(directory);
 
             return directory;
         }
@@ -307,7 +307,7 @@ namespace Lotus.Core
             var file = new CFileSystemFile(fileInfo);
 
             // Добавляем
-            this._entities.Add(file);
+            _entities.Add(file);
 
             return file;
         }
@@ -397,16 +397,16 @@ namespace Lotus.Core
         /// <summary>
         /// Рекурсивное получение данных элементов файловой системы.
         /// </summary>
-        public void RecursiveFileSysteInfo()
+        public void RecursiveFileSystemInfo()
         {
             _entities.Clear();
-            RecursiveFileSysteInfo(this);
+            RecursiveFileSystemInfo(this);
         }
 
         /// <summary>
         /// Рекурсивное получение данных элементов файловой системы на 2 уровня ниже.
         /// </summary>
-        public void RecursiveFileSysteInfoTwoLevel()
+        public void RecursiveFileSystemInfoTwoLevel()
         {
             var dirs_info = Info.GetDirectories();
             var files_info = Info.GetFiles();
@@ -448,7 +448,7 @@ namespace Lotus.Core
         /// Рекурсивная обработка объектов файловой системы.
         /// </summary>
         /// <param name="parentDirectoryNode">Родительский узел директории.</param>
-        protected void RecursiveFileSysteInfo(CFileSystemDirectory parentDirectoryNode)
+        protected void RecursiveFileSystemInfo(CFileSystemDirectory parentDirectoryNode)
         {
             var sub_directories = parentDirectoryNode.Info.GetDirectories();
             var files = parentDirectoryNode.Info.GetFiles();
@@ -461,9 +461,9 @@ namespace Lotus.Core
                 if (sub_directory_node.Name.Contains(".git")) continue;
                 if (sub_directory_node.Name.Contains(".vs")) continue;
 
-                this._entities.Add(sub_directory_node);
+                _entities.Add(sub_directory_node);
 
-                sub_directory_node.RecursiveFileSysteInfo(sub_directory_node);
+                sub_directory_node.RecursiveFileSystemInfo(sub_directory_node);
             }
 
             // Теперь файлы
@@ -474,7 +474,7 @@ namespace Lotus.Core
                 if (file_info.Extension == ".meta") continue;
 
                 var file_node = new CFileSystemFile(file_info);
-                this._entities.Add(file_node);
+                _entities.Add(file_node);
             }
         }
 
@@ -627,7 +627,7 @@ namespace Lotus.Core
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
 
-            RecursiveFileSysteInfo();
+            RecursiveFileSystemInfo();
         }
 
         /// <summary>

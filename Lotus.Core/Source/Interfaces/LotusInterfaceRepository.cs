@@ -99,9 +99,9 @@ namespace Lotus.Core
         /// Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр.
         /// Если сущность отсутствует то она будет создана с указанным идентификатором.
         /// </summary>
-        /// <param name="id">Идентификатор сущност.и.</param>
+        /// <param name="id">Идентификатор сущности.</param>
         /// <param name="token">Токен отмены.</param>
-        /// <returns>Найденная сущность или или созданная сущность.</returns>
+        /// <returns>Найденная сущность или созданная сущность.</returns>
         ValueTask<TEntity> GetOrAddAsync(TKey id, CancellationToken token = default);
 
         /// <summary>

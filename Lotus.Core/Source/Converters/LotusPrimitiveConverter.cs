@@ -87,7 +87,7 @@ namespace Lotus.Core
                     break;
                 case TypeCode.UInt32:
                     {
-                        result = (uint)XNumberConverter.ParseInt(text);
+                        result = (uint)XNumberConverter.ParseLong(text);
                     }
                     break;
                 case TypeCode.Int64:
@@ -97,7 +97,7 @@ namespace Lotus.Core
                     break;
                 case TypeCode.UInt64:
                     {
-                        result = (ulong)XNumberConverter.ParseLong(text);
+                        result = XNumberConverter.ParseUlong(text);
                     }
                     break;
                 case TypeCode.Single:

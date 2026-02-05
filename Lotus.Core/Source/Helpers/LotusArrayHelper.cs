@@ -64,9 +64,9 @@ namespace Lotus.Core
             if (array.Length < currentCount + items.Length)
             {
                 var max_size = currentCount + items.Length;
-                var new_arary = new TType[max_size];
-                Array.Copy(array, new_arary, currentCount);
-                array = items;
+                var new_array = new TType[max_size];
+                Array.Copy(array, new_array, currentCount);
+                array = new_array;
             }
 
             Array.Copy(items, 0, array, currentCount, items.Length);

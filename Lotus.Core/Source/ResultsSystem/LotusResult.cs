@@ -292,7 +292,7 @@ namespace Lotus.Core
         /// <returns>Текстовое представление объекта.</returns>
         public override string ToString()
         {
-            return $"OK: {Succeeded} | Message: {Message}";
+            return $"OK: {Succeeded} | Message: {Message ?? string.Empty}";
         }
         #endregion
     }
@@ -564,7 +564,7 @@ namespace Lotus.Core
         /// <returns>Текстовое представление объекта.</returns>
         public override string ToString()
         {
-            return $"OK: {Succeeded} | Message: {Message}";
+            return $"OK: {Succeeded} | Message: {Message ?? string.Empty}";
         }
         #endregion
     }

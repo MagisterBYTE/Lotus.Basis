@@ -298,6 +298,9 @@ namespace Lotus.Core
                     }
                     break;
                 default:
+                    {
+                        value = Linear(start, end, time);
+                    }
                     break;
             }
 

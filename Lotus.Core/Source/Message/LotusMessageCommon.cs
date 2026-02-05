@@ -186,6 +186,7 @@ namespace Lotus.Core
         public CMessageArgs(string name, int id, object sender, bool isPool = false)
         {
             _name = name;
+            _id = id;
             _sender = sender;
             _isPoolObject = isPool;
         }

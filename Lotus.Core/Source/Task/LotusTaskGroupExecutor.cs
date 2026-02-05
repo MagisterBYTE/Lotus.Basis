@@ -108,17 +108,17 @@ namespace Lotus.Core
             // Выполняем отдельные группы задачи каждый кадр
             for (var i = 0; i < _groupTasks.Count; i++)
             {
-                var group_task = _groupTasks[i];
+                var groupTask = _groupTasks[i];
 
-                if (!group_task.IsCompleted)
+                if (!groupTask.IsCompleted)
                 {
-                    if (group_task.ExecuteMode == TTaskExecuteMode.Parallel)
+                    if (groupTask.ExecuteMode == TTaskExecuteMode.Parallel)
                     {
-                        group_task.ExecuteInParallel();
+                        groupTask.ExecuteInParallel();
                     }
                     else
                     {
-                        group_task.ExecuteSequentially();
+                        groupTask.ExecuteSequentially();
                     }
                 }
             }
@@ -259,27 +259,27 @@ namespace Lotus.Core
         /// <returns>Группа задач.</returns>
         public virtual GroupTask GetGroupTaskExistsTask(string groupName, TTaskExecuteMode executeMode, TTaskMethod method, ILotusTask task)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
 
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            if (group_task == null)
+            if (groupTask == null)
             {
-                group_task = new GroupTask(groupName, method, this, task)
+                groupTask = new GroupTask(groupName, method, this, task)
                 {
                     ExecuteMode = executeMode
                 };
-                _groupTasks.Add(group_task);
+                _groupTasks.Add(groupTask);
             }
 
-            return group_task;
+            return groupTask;
         }
 
         /// <summary>
@@ -315,27 +315,27 @@ namespace Lotus.Core
         /// <returns>Группа задач.</returns>
         public virtual GroupTask GetGroupTaskExistsTasks(string groupName, TTaskExecuteMode executeMode, TTaskMethod method, params ILotusTask[] tasks)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
 
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            if (group_task == null)
+            if (groupTask == null)
             {
-                group_task = new GroupTask(groupName, method, this, tasks)
+                groupTask = new GroupTask(groupName, method, this, tasks)
                 {
                     ExecuteMode = executeMode
                 };
-                _groupTasks.Add(group_task);
+                _groupTasks.Add(groupTask);
             }
 
-            return group_task;
+            return groupTask;
         }
 
         /// <summary>
@@ -359,31 +359,31 @@ namespace Lotus.Core
         /// <returns>Группа задач.</returns>
         public virtual GroupTask AddGroupTaskExistsTask(string groupName, TTaskExecuteMode executeMode, TTaskMethod method, ILotusTask task)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
 
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            if (group_task == null)
+            if (groupTask == null)
             {
-                group_task = new GroupTask(groupName, method, this, task)
+                groupTask = new GroupTask(groupName, method, this, task)
                 {
                     ExecuteMode = executeMode
                 };
-                _groupTasks.Add(group_task);
+                _groupTasks.Add(groupTask);
             }
             else
             {
-                group_task.Add(task);
+                groupTask.Add(task);
             }
 
-            return group_task;
+            return groupTask;
         }
 
         /// <summary>
@@ -419,33 +419,33 @@ namespace Lotus.Core
         /// <returns>Группа задач.</returns>
         public virtual GroupTask AddGroupTaskExistsTasks(string groupName, TTaskExecuteMode executeMode, TTaskMethod method, params ILotusTask[] tasks)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
 
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            if (group_task == null)
+            if (groupTask == null)
             {
-                group_task = new GroupTask(groupName, method, this, tasks)
+                groupTask = new GroupTask(groupName, method, this, tasks)
                 {
                     ExecuteMode = executeMode
                 };
-                _groupTasks.Add(group_task);
+                _groupTasks.Add(groupTask);
             }
             else
             {
-                group_task.AddList(tasks);
-                group_task.ExecuteMode = executeMode;
-                group_task.SetMethodMode(method);
+                groupTask.AddList(tasks);
+                groupTask.ExecuteMode = executeMode;
+                groupTask.SetMethodMode(method);
             }
 
-            return group_task;
+            return groupTask;
         }
 
         /// <summary>
@@ -570,35 +570,35 @@ namespace Lotus.Core
         /// <returns>Запущенная группа задач или null.</returns>
         public virtual GroupTask RunGroupTask(string groupName, float delayStart, Action? onCompleted)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            if (group_task != null)
+            if (groupTask != null)
             {
                 if (onCompleted != null)
                 {
-                    if (_groupTaskHandlersCompleted.ContainsKey(group_task.Name))
+                    if (_groupTaskHandlersCompleted.ContainsKey(groupTask.Name))
                     {
-                        _groupTaskHandlersCompleted[group_task.Name] = onCompleted;
+                        _groupTaskHandlersCompleted[groupTask.Name] = onCompleted;
                     }
                     else
                     {
-                        _groupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
+                        _groupTaskHandlersCompleted.Add(groupTask.Name, onCompleted);
                     }
                 }
 
-                group_task.DelayStart = delayStart;
-                group_task.Run();
+                groupTask.DelayStart = delayStart;
+                groupTask.Run();
             }
 
-            return group_task!;
+            return groupTask!;
         }
 
         /// <summary>
@@ -611,36 +611,36 @@ namespace Lotus.Core
         /// <returns>Запущенная группа задач или null.</returns>
         public virtual GroupTask RunGroupTask(string groupName, TTaskExecuteMode executeMode, float delayStart, Action? onCompleted)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            if (group_task != null)
+            if (groupTask != null)
             {
                 if (onCompleted != null)
                 {
-                    if (_groupTaskHandlersCompleted.ContainsKey(group_task.Name))
+                    if (_groupTaskHandlersCompleted.ContainsKey(groupTask.Name))
                     {
-                        _groupTaskHandlersCompleted[group_task.Name] = onCompleted;
+                        _groupTaskHandlersCompleted[groupTask.Name] = onCompleted;
                     }
                     else
                     {
-                        _groupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
+                        _groupTaskHandlersCompleted.Add(groupTask.Name, onCompleted);
                     }
                 }
 
-                group_task.ExecuteMode = executeMode;
-                group_task.DelayStart = delayStart;
-                group_task.Run();
+                groupTask.ExecuteMode = executeMode;
+                groupTask.DelayStart = delayStart;
+                groupTask.Run();
             }
 
-            return group_task!;
+            return groupTask!;
         }
 
         /// <summary>
@@ -654,37 +654,37 @@ namespace Lotus.Core
         /// <returns>Запущенная группа задач или null.</returns>
         public virtual GroupTask RunGroupTask(string groupName, TTaskExecuteMode executeMode, TTaskMethod method, float delayStart, Action? onCompleted)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            if (group_task != null)
+            if (groupTask != null)
             {
                 if (onCompleted != null)
                 {
-                    if (_groupTaskHandlersCompleted.ContainsKey(group_task.Name))
+                    if (_groupTaskHandlersCompleted.ContainsKey(groupTask.Name))
                     {
-                        _groupTaskHandlersCompleted[group_task.Name] = onCompleted;
+                        _groupTaskHandlersCompleted[groupTask.Name] = onCompleted;
                     }
                     else
                     {
-                        _groupTaskHandlersCompleted.Add(group_task.Name, onCompleted);
+                        _groupTaskHandlersCompleted.Add(groupTask.Name, onCompleted);
                     }
                 }
 
-                group_task.SetMethodMode(method);
-                group_task.ExecuteMode = executeMode;
-                group_task.DelayStart = delayStart;
-                group_task.Run();
+                groupTask.SetMethodMode(method);
+                groupTask.ExecuteMode = executeMode;
+                groupTask.DelayStart = delayStart;
+                groupTask.Run();
             }
 
-            return group_task!;
+            return groupTask!;
         }
 
         /// <summary>
@@ -694,19 +694,19 @@ namespace Lotus.Core
         /// <param name="pause">Статус паузы.</param>
         public virtual void PauseGroupTask(string groupName, bool pause)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            if (group_task != null)
+            if (groupTask != null)
             {
-                group_task.IsPause = pause;
+                groupTask.IsPause = pause;
             }
         }
 
@@ -716,17 +716,17 @@ namespace Lotus.Core
         /// <param name="groupName">Имя группы задач.</param>
         public virtual void StopGroupTask(string groupName)
         {
-            GroupTask? group_task = null;
+            GroupTask? groupTask = null;
             for (var i = 0; i < _groupTasks.Count; i++)
             {
                 if (_groupTasks[i].Name == groupName)
                 {
-                    group_task = _groupTasks[i];
+                    groupTask = _groupTasks[i];
                     break;
                 }
             }
 
-            group_task?.Stop();
+            groupTask?.Stop();
         }
 
         /// <summary>

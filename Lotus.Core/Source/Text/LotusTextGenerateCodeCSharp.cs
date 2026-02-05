@@ -45,11 +45,11 @@ namespace Lotus.Core
         /// </summary>
         public override void AddDelimiterPart()
         {
-            var delimiter_part = DelimiterPart.Duplicate();
-            delimiter_part.Index = _lines.Count;
-            delimiter_part.Owned = this;
-            delimiter_part.Indent = _currentIndent;
-            _lines.Add(delimiter_part);
+            var delimiterPart = DelimiterPart.Duplicate();
+            delimiterPart.Index = _lines.Count;
+            delimiterPart.Owned = this;
+            delimiterPart.Indent = _currentIndent;
+            _lines.Add(delimiterPart);
         }
 
         /// <summary>
@@ -57,11 +57,11 @@ namespace Lotus.Core
         /// </summary>
         public override void AddDelimiterSection()
         {
-            var delimiter_section = DelimiterSection.Duplicate();
-            delimiter_section.Index = _lines.Count;
-            delimiter_section.Owned = this;
-            delimiter_section.Indent = _currentIndent;
-            _lines.Add(delimiter_section);
+            var delimiterSection = DelimiterSection.Duplicate();
+            delimiterSection.Index = _lines.Count;
+            delimiterSection.Owned = this;
+            delimiterSection.Indent = _currentIndent;
+            _lines.Add(delimiterSection);
         }
         #endregion
 

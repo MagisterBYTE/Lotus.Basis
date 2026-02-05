@@ -87,7 +87,10 @@ namespace Lotus.Core
         /// <returns>Результирующий цвет.</returns>
         public static TColor Add(TColor a, TColor b)
         {
-            return new TColor(a.R + b.R, a.G + b.G, a.B + b.B, a.A + b.A);
+            return new TColor((byte)Math.Clamp(a.R + b.R, 0, 255),
+                (byte)Math.Clamp(a.G + b.G, 0, 255),
+                (byte)Math.Clamp(a.B + b.B, 0, 255),
+                (byte)Math.Clamp(a.A + b.A, 0, 255));
         }
 
         /// <summary>
@@ -112,7 +115,10 @@ namespace Lotus.Core
         /// <returns>Результирующий цвет.</returns>
         public static TColor Subtract(TColor a, TColor b)
         {
-            return new TColor(a.R - b.R, a.G - b.G, a.B - b.B, a.A - b.A);
+            return new TColor((byte)Math.Clamp(a.R - b.R, 0, 255),
+                (byte)Math.Clamp(a.G - b.G, 0, 255),
+                (byte)Math.Clamp(a.B - b.B, 0, 255),
+                (byte)Math.Clamp(a.A - b.A, 0, 255));
         }
 
         /// <summary>
@@ -137,7 +143,10 @@ namespace Lotus.Core
         /// <returns>Результирующий цвет.</returns>
         public static TColor Modulate(TColor a, TColor b)
         {
-            return new TColor(a.R * b.R, a.G * b.G, a.B * b.B, a.A * b.A);
+            return new TColor((byte)Math.Clamp((a.R * b.R) / 255, 0, 255),
+                (byte)Math.Clamp((a.G * b.G) / 255, 0, 255),
+                (byte)Math.Clamp((a.B * b.B) / 255, 0, 255),
+                (byte)Math.Clamp((a.A * b.A) / 255, 0, 255));
         }
 
         /// <summary>
@@ -162,7 +171,10 @@ namespace Lotus.Core
         /// <returns>Результирующий цвет.</returns>
         public static TColor Scale(TColor value, float scale)
         {
-            return new TColor((byte)(value.R * scale), (byte)(value.G * scale), (byte)(value.B * scale), (byte)(value.A * scale));
+            return new TColor((byte)Math.Clamp(value.R * scale, 0, 255),
+                (byte)Math.Clamp(value.G * scale, 0, 255),
+                (byte)Math.Clamp(value.B * scale, 0, 255),
+                (byte)Math.Clamp(value.A * scale, 0, 255));
         }
 
         /// <summary>
@@ -185,7 +197,10 @@ namespace Lotus.Core
         /// <returns>Результирующий цвет.</returns>
         public static TColor Negate(TColor value)
         {
-            return new TColor(255 - value.R, 255 - value.G, 255 - value.B, 255 - value.A);
+            return new TColor((byte)Math.Clamp(255 - value.R, 0, 255),
+                (byte)Math.Clamp(255 - value.G, 0, 255),
+                (byte)Math.Clamp(255 - value.B, 0, 255),
+                (byte)Math.Clamp(255 - value.A, 0, 255));
         }
 
         /// <summary>
@@ -223,7 +238,12 @@ namespace Lotus.Core
         /// <returns>Цвет.</returns>
         public static TColor FromBGRA(int color)
         {
-            return new TColor((byte)((color >> 16) & 255), (byte)((color >> 8) & 255), (byte)(color & 255), (byte)((color >> 24) & 255));
+            var b = (byte)(color >> 24);
+            var g = (byte)(color >> 16);
+            var r = (byte)(color >> 8);
+            var a = (byte)(color & 0xFF);
+
+            return new TColor(r, g, b, a);
         }
 
         /// <summary>
@@ -233,7 +253,12 @@ namespace Lotus.Core
         /// <returns>Цвет.</returns>
         public static TColor FromBGRA(uint color)
         {
-            return new TColor((byte)((color >> 16) & 255), (byte)((color >> 8) & 255), (byte)(color & 255), (byte)((color >> 24) & 255));
+            var b = (byte)(color >> 24);
+            var g = (byte)(color >> 16);
+            var r = (byte)(color >> 8);
+            var a = (byte)(color & 0xFF);
+
+            return new TColor(r, g, b, a);
         }
 
         /// <summary>
@@ -243,7 +268,28 @@ namespace Lotus.Core
         /// <returns>Цвет.</returns>
         public static TColor FromABGR(int color)
         {
-            return new TColor((byte)(color >> 24), (byte)(color >> 16), (byte)(color >> 8), (byte)color);
+            var a = (byte)(color >> 24);
+            var b = (byte)(color >> 16);
+            var g = (byte)(color >> 8);
+            var r = (byte)(color & 0xFF);
+
+            return new TColor(r, g, b, a);
+        }
+
+
+        /// <summary>
+        /// Формирование цвет из упакованного формата ARGB целого числа.
+        /// </summary>
+        /// <param name="color">Значение цвета в ARGB формате целого числа.</param>
+        /// <returns>Цвет.</returns>
+        public static TColor FromARGB(int color)
+        {
+            var a = (byte)(color >> 24);
+            var r = (byte)(color >> 16);
+            var g = (byte)(color >> 8);
+            var b = (byte)(color & 0xFF);
+
+            return new TColor(r, g, b, a);
         }
 
         /// <summary>
@@ -253,7 +299,12 @@ namespace Lotus.Core
         /// <returns>Цвет.</returns>
         public static TColor FromRGBA(int color)
         {
-            return new TColor(color);
+            var r = (byte)(color >> 24);
+            var g = (byte)(color >> 16);
+            var b = (byte)(color >> 8);
+            var a = (byte)(color & 0xFF);
+
+            return new TColor(r, g, b, a);
         }
 
         /// <summary>
@@ -327,7 +378,7 @@ namespace Lotus.Core
         /// <returns>Статус равенства значений цвета.</returns>
         public static bool Approximately(in TColor a, in TColor b, int epsilon = 1)
         {
-            return Math.Abs(a.R - b.G) <= epsilon &&
+            return Math.Abs(a.R - b.R) <= epsilon &&
                    Math.Abs(a.G - b.G) <= epsilon &&
                    Math.Abs(a.B - b.B) <= epsilon;
         }

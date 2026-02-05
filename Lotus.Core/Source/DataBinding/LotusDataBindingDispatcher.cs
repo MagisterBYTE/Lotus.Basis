@@ -15,7 +15,7 @@ namespace Lotus.Core
     public static class XBindingDispatcher
     {
         #region Fields
-        private static List<BindingBase> mBindings;
+        private static List<BindingBase> _bindings;
         #endregion
 
         #region Properties
@@ -26,12 +26,12 @@ namespace Lotus.Core
         {
             get
             {
-                if (mBindings == null)
+                if (_bindings == null)
                 {
-                    mBindings = [];
+                    _bindings = [];
                 }
 
-                return mBindings;
+                return _bindings;
             }
         }
         #endregion

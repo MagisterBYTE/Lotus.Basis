@@ -4,7 +4,7 @@ using System;
 namespace Lotus.Localization
 {
     /// <summary>
-    /// Глобальный класс для доступа к сервису локализации
+    /// Глобальный класс для доступа к сервису локализации.
     /// </summary>
     public static class LocalizationServiceSingleton
     {
@@ -14,7 +14,7 @@ namespace Lotus.Localization
         /// <summary>
         /// Сервис локализации.
         /// </summary>
-        public static ILocalizationService Default
+        public static ILocalizationService? Default
         {
             get
             {
@@ -31,7 +31,7 @@ namespace Lotus.Localization
                     }
                     else
                     {
-                        return _default!;
+                        return null;
                     }
                 }
             }

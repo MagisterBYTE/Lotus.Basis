@@ -23,12 +23,23 @@ namespace Lotus.Localization
         /// </summary>
         public string? TargetName { get; set; }
 
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="lang">Название языка/культуры.</param>
+        /// <param name="text">Текст на соответствующем языке.</param>
         public LocalizeOnLangAttribute(string lang, string text)
         {
             Lang = lang;
             Text = text;
         }
 
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="lang">Название языка/культуры.</param>
+        /// <param name="text">Текст на соответствующем языке.</param>
+        /// <param name="targetName">Имя целевого элемента.</param>
         public LocalizeOnLangAttribute(string lang, string text, string targetName)
         {
             Lang = lang;

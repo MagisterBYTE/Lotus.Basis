@@ -18,8 +18,8 @@ namespace Lotus.Localization
         /// <remarks>
         /// Название файлов языка/культуры должно быть в формате ISO 639-1 или ISO 639-3.
         /// </remarks>
-        /// <param name="fileNames">Список файлов</param>
-        /// <param name="assemblyName">Имя сборки</param>
+        /// <param name="fileNames">Список файлов.</param>
+        /// <param name="assemblyName">Имя сборки.</param>
         public EmbeddedResourceJsonLocalizationService(string[] fileNames, string? assemblyName)
         {
             foreach (var fileName in fileNames)
@@ -45,7 +45,7 @@ namespace Lotus.Localization
                 {
                     var value = service[key];
 
-                    if (string.IsNullOrEmpty(value) == false && value != key)
+                    if (!string.IsNullOrEmpty(value) && value != key)
                     {
                         return value;
                     }

@@ -11,7 +11,7 @@ namespace Lotus.Localization
         /// <summary>
         /// Текущие локализованные данные.
         /// </summary>
-        ILocalizeData CultureData { get; }
+        ILocalizeData? CultureData { get; }
 
         /// <summary>
         /// Событие изменение культуры.
@@ -33,7 +33,7 @@ namespace Lotus.Localization
         ILocalizeData[] GetCultures();
 
         /// <summary>
-        /// Выбор текущей языка/культуры по имени
+        /// Выбор текущей языка/культуры по имени.
         /// </summary>
         /// <param name="cultureName">Название языка/культуры в формате ISO 639-1 или ISO 639-3.</param>
         void SelectCulture(string cultureName);

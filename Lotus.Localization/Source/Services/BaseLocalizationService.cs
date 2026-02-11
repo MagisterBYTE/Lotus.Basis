@@ -8,11 +8,11 @@ using System.Resources;
 namespace Lotus.Localization
 {
     /// <summary>
-    /// Базовый сервис локализацию данных
+    /// Базовый сервис локализации данных.
     /// </summary>
     public abstract class BaseLocalizationService : ILocalizationService
     {
-        protected ILocalizeData _localizeData;
+        protected ILocalizeData? _localizeData;
         protected readonly List<ILocalizationService> _extraServices = new();
 
         /// <summary>
@@ -21,13 +21,17 @@ namespace Lotus.Localization
         public List<ILocalizeData> Cultures { get; } = new List<ILocalizeData>();
 
         /// <summary>
-        /// Текущие локализованные данные
+        /// Текущие локализованные данные.
         /// </summary>
-        public ILocalizeData CultureData
+        public ILocalizeData? CultureData
         {
             get { return _localizeData; }
             set
             {
+                if (value == null)
+                {
+                    return;
+                }
                 _localizeData = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ILocalizeData)));
 
@@ -150,7 +154,7 @@ namespace Lotus.Localization
 
         #region Interface INotifyPropertyChanged
         /// <summary>
-        /// Событие срабатывает ПОСЛЕ изменения свойства
+        /// Событие срабатывает ПОСЛЕ изменения свойства.
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
         #endregion

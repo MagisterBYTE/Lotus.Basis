@@ -18,7 +18,7 @@ namespace Lotus.Localization
         /// <summary>
         /// Путь для загрузки локализованных данных.
         /// </summary>
-        /// <remarks>Не используется</remarks>
+        /// <remarks>Не используется.</remarks>
         public Uri Path { get; private set; }
 
         /// <summary>

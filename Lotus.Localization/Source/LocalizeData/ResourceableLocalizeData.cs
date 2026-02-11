@@ -46,12 +46,12 @@ namespace Lotus.Localization
         }
 
         /// <summary>
-        /// Получить токен
+        /// Получение токена.
         /// </summary>
-        /// <param name="line">Строка</param>
-        /// <param name="startPos">Начальная позиция</param>
-        /// <param name="endPos">Конечная позиция</param>
-        /// <returns>Токен</returns>
+        /// <param name="line">Строка.</param>
+        /// <param name="startPos">Начальная позиция.</param>
+        /// <param name="endPos">Конечная позиция.</param>
+        /// <returns>Токен.</returns>
         private static string? PickStringToken(string line, int startPos, out int endPos)
         {
             var begin = -1;
@@ -90,7 +90,7 @@ namespace Lotus.Localization
         #endregion
 
         /// <summary>
-        /// Словарь локализованных данных
+        /// Словарь локализованных данных.
         /// </summary>
         protected Dictionary<string, string>? LocalTexts = null;
 

@@ -8,7 +8,7 @@ using System.Resources;
 namespace Lotus.Localization
 {
     /// <summary>
-    /// Сервис реализующий локализацию данных из стандартного ресурса <see cref="ResourceManager"/>
+    /// Сервис реализующий локализацию данных из стандартного ресурса <see cref="ResourceManager"/>.
     /// </summary>
     public class ResourceLocalizationService : BaseLocalizationService
     {
@@ -20,8 +20,8 @@ namespace Lotus.Localization
         /// <remarks>
         /// Название языка/культуры должно быть в формате ISO 639-1 или ISO 639-3.
         /// </remarks>
-        /// <param name="resourceManager">Ресурс менеджер</param>
-        /// <param name="cultures">Массив названия языка/культур</param>
+        /// <param name="resourceManager">Ресурс менеджер.</param>
+        /// <param name="cultures">Массив названия языка/культур.</param>
         public ResourceLocalizationService(ResourceManager resourceManager, params string[] cultures)
         {
             _resourceManager = resourceManager;
@@ -48,14 +48,19 @@ namespace Lotus.Localization
                 {
                     var value = service[key];
 
-                    if (string.IsNullOrEmpty(value) == false && value != key)
+                    if (!string.IsNullOrEmpty(value) && value != key)
                     {
                         return value;
                     }
                 }
 
+                if (_localizeData == null)
+                {
+                    return key;
+                }
+
                 var text = _resourceManager.GetString(key, _localizeData.Culture);
-                if (string.IsNullOrEmpty(text) == false)
+                if (!string.IsNullOrEmpty(text))
                 {
                     return text;
                 }

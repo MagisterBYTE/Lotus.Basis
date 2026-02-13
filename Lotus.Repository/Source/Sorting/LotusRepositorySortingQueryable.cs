@@ -15,22 +15,22 @@ namespace Lotus.Repository
         /// <summary>
         /// Имя метода сортировки для первого свойства по возрастанию.
         /// </summary>
-        private const string OrderBy = "OrderBy";
+        private const string _OrderBy = "OrderBy";
 
         /// <summary>
         /// Имя метода сортировки для первого свойства по убыванию.
         /// </summary>
-        private const string OrderByDescending = "OrderByDescending";
+        private const string _OrderByDescending = "OrderByDescending";
 
         /// <summary>
         /// Имя метода сортировки для последующего свойства по возрастанию.
         /// </summary>
-        private const string ThenBy = "ThenBy";
+        private const string _ThenBy = "ThenBy";
 
         /// <summary>
         /// Имя метода сортировки для последующего свойства по убыванию.
         /// </summary>
-        private const string ThenByDescending = "ThenByDescending";
+        private const string _ThenByDescending = "ThenByDescending";
         #endregion
 
         /// <summary>
@@ -39,27 +39,28 @@ namespace Lotus.Repository
         /// <typeparam name="TEntity">Тип сущности.</typeparam>
         /// <param name="query">Запрос.</param>
         /// <param name="propertyName">Имя свойства.</param>
-        /// <param name="isDecs">Статус сортировки по убыванию.</param>
+        /// <param name="isDesc">Статус сортировки по убыванию.</param>
         /// <returns>Запрос.</returns>
         public static IOrderedQueryable<TEntity> OrderByProperty<TEntity>(this IQueryable<TEntity> query,
-                string propertyName, bool isDecs)
+                string propertyName, bool isDesc)
         {
-            // Результат p
+            // Результат p.
             var param = Expression.Parameter(typeof(TEntity), "p");
 
-            // Результат: p.sortColumn
+            // Результат: p.sortColumn.
             var prop = Expression.Property(param, propertyName);
 
-            // Результат: p => о.sortColumn
+            // Результат: p => p.sortColumn.
             var exp = Expression.Lambda(prop, param);
 
-            var method = isDecs ? OrderByDescending : OrderBy;
+            var method = isDesc ? _OrderByDescending : _OrderBy;
 
             var types = new[] { query.ElementType, exp.Body.Type };
 
             var mce = Expression.Call(typeof(Queryable), method, types, query.Expression, exp);
 
-            return (query.Provider.CreateQuery<TEntity>(mce) as IOrderedQueryable<TEntity>)!;
+            var orderedQuery = query.Provider.CreateQuery<TEntity>(mce) as IOrderedQueryable<TEntity>;
+            return orderedQuery ?? throw new InvalidOperationException("CreateQuery did not return IOrderedQueryable.");
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace Lotus.Repository
             }
             if (properties.Length == 1)
             {
-                return query.OrderByProperty(properties[0].PropertyName, properties[0].IsDesc.GetValueOrDefault());
+                return query.OrderByProperty(properties[0].PropertyPath, properties[0].IsDesc.GetValueOrDefault());
             }
 
             var firstTime = true;
@@ -93,7 +94,7 @@ namespace Lotus.Repository
             foreach (var property in properties)
             {
                 // Get the property from the TEntity, based on the key
-                var prop = Expression.Property(parameter, property.PropertyName);
+                var prop = Expression.Property(parameter, property.PropertyPath);
 
                 // Build something like x => x.Cassette or x => x.SlotNumber
                 var exp = Expression.Lambda(prop, parameter);
@@ -102,12 +103,12 @@ namespace Lotus.Repository
                 var method = string.Empty;
                 if (firstTime)
                 {
-                    method = (property.IsDesc.GetValueOrDefault() == false) ? OrderBy : OrderByDescending;
+                    method = (property.IsDesc.GetValueOrDefault() == false) ? _OrderBy : _OrderByDescending;
                     firstTime = false;
                 }
                 else
                 {
-                    method = (property.IsDesc.GetValueOrDefault() == false) ? ThenBy : ThenByDescending;
+                    method = (property.IsDesc.GetValueOrDefault() == false) ? _ThenBy : _ThenByDescending;
                 }
 
                 // itemType is the type of the TEntity
@@ -145,8 +146,8 @@ namespace Lotus.Repository
                 return query.OrderBy(keySelector);
             }
 
-            var queryOrder = (Sort(query, properties) as IOrderedQueryable<TEntity>)!;
-            return queryOrder;
+            var queryOrder = Sort(query, properties) as IOrderedQueryable<TEntity>;
+            return queryOrder ?? query.OrderBy(keySelector);
         }
     }
     /**@}*/

@@ -7,7 +7,7 @@ namespace Lotus.Repository
     /** \addtogroup RepositoryEFCore
     *@{*/
     /// <summary>
-    /// Базовый класс контекста базы данных для структуры базы данных хранилища
+    /// Базовый класс контекста базы данных для структуры базы данных хранилища.
     /// </summary>
     public class ContextDbStorageStructure : DbContext, ILotusStorageStructure
     {
@@ -21,8 +21,8 @@ namespace Lotus.Repository
         /// </summary>
         public string ConnectingData
         {
-            get { return _connectingString; }
-            set { _connectingString = value; }
+            get => _connectingString;
+            set => _connectingString = value;
         }
         #endregion
 

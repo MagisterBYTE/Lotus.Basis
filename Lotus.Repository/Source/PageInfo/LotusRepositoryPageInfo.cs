@@ -4,11 +4,11 @@ namespace Lotus.Repository
      * \defgroup RepositoryPageInfo Подсистема постраничного разделения
      * \ingroup Repository
      * \brief Подсистема постраничного разделения определяет однотипный унифицированный набор типов для 
-		постраничного разделения данных и формирования соответствующих запросов.
+        постраничного разделения данных и формирования соответствующих запросов.
      * @{
      */
     /// <summary>
-    /// Интерфейса для постраничного запроса данных.
+    /// Интерфейс для постраничного запроса данных.
     /// </summary>
     public interface ILotusPageInfoRequest
     {
@@ -60,7 +60,7 @@ namespace Lotus.Repository
         int CurrentPageSize { get; set; }
 
         /// <summary>
-        /// Общие количество данных по данному запросу.
+        /// Общее количество данных по данному запросу.
         /// </summary>
         int TotalCount { get; set; }
     }
@@ -86,7 +86,7 @@ namespace Lotus.Repository
         public int CurrentPageSize { get; set; }
 
         /// <summary>
-        /// Общие количество данных по данному запросу.
+        /// Общее количество данных по данному запросу.
         /// </summary>
         public int TotalCount { get; set; }
     }

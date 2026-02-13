@@ -79,7 +79,7 @@ namespace Lotus.Repository
         /// Формирование данных в случае успешности выполнения метода/операции.
         /// </summary>
         /// <param name="result">Результат/ответ.</param>
-        /// <returns>Данные</returns>
+        /// <returns>Данные.</returns>
         public static Response Succeed(Result result)
         {
             return new Response(result);
@@ -211,7 +211,7 @@ namespace Lotus.Repository
         /// Формирование данных в случае успешности выполнения метода/операции.
         /// </summary>
         /// <param name="payload">Полезные данные.</param>
-        /// <returns>Данные</returns>
+        /// <returns>Данные.</returns>
         public static Response<TPayload> Succeed(TPayload payload)
         {
             return new Response<TPayload>(payload);
@@ -221,7 +221,7 @@ namespace Lotus.Repository
         /// Формирование данных в случае успешности выполнения метода/операции.
         /// </summary>
         /// <param name="result">Результат/ответ.</param>
-        /// <returns>Данные</returns>
+        /// <returns>Данные.</returns>
         public new static Response<TPayload> Succeed(Result result)
         {
             return new Response<TPayload>(result);

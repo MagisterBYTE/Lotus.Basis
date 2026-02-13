@@ -15,26 +15,35 @@ namespace Lotus.Repository
     /// Реализация репозитория <see cref="ILotusRepository{TEntity, TKey}"/> через простой список <see cref="List{T}"/>.
     /// </summary>
     public class RepositoryFileList<TEntity, TKey> : ILotusRepository<TEntity, TKey>
-            where TEntity : class, ILotusIdentifierId<TKey>, new ()
+            where TEntity : class, ILotusIdentifierId<TKey>, new()
             where TKey : notnull, IEquatable<TKey>
     {
         protected internal List<TEntity> _list;
-        protected internal StorageFileBase _fileStorage;
+        protected internal StorageFileBase? _fileStorage;
 
         /// <inheritdoc/>
         public bool SaveEachOperation { get; set; }
 
+        /// <summary>
+        /// Конструктор для работы только с списком без сохранения в файл.
+        /// </summary>
+        /// <param name="list">Список сущностей.</param>
         public RepositoryFileList(List<TEntity> list)
         {
             SaveEachOperation = true;
-            _list = list;
+            _list = list ?? throw new ArgumentNullException(nameof(list));
         }
 
+        /// <summary>
+        /// Конструктор для работы со списком и сохранением в файловое хранилище.
+        /// </summary>
+        /// <param name="list">Список сущностей.</param>
+        /// <param name="fileStorage">Файловое хранилище.</param>
         public RepositoryFileList(List<TEntity> list, StorageFileBase fileStorage)
         {
             SaveEachOperation = true;
-            _list = list;
-            _fileStorage = fileStorage;
+            _list = list ?? throw new ArgumentNullException(nameof(list));
+            _fileStorage = fileStorage ?? throw new ArgumentNullException(nameof(fileStorage));
         }
 
         /// <summary>
@@ -43,7 +52,17 @@ namespace Lotus.Repository
         /// <param name="list">Список сущностей.</param>
         public void SetList(List<TEntity> list)
         {
-            _list = list;
+            _list = list ?? throw new ArgumentNullException(nameof(list));
+        }
+
+        private StorageFileBase GetFileStorage()
+        {
+            if (_fileStorage == null)
+            {
+                throw new InvalidOperationException("File storage is required for this operation. Use the constructor that accepts StorageFileBase.");
+            }
+
+            return _fileStorage;
         }
 
         /// <inheritdoc/>
@@ -166,13 +185,13 @@ namespace Lotus.Repository
 
                 _list.Add(result);
 
-                if(SaveEachOperation) 
+                if (SaveEachOperation)
                 {
-                    _fileStorage.SaveChanges();
+                    GetFileStorage().SaveChanges();
                 }
                 else
                 {
-                    _fileStorage.NeedSaved = true;
+                    GetFileStorage().NeedSaved = true;
                 }
 
                 return result;
@@ -198,11 +217,11 @@ namespace Lotus.Repository
 
                 if (SaveEachOperation)
                 {
-                    await _fileStorage.SaveChangesAsync(token);
+                    await GetFileStorage().SaveChangesAsync(token);
                 }
                 else
                 {
-                    _fileStorage.NeedSaved = true;
+                    GetFileStorage().NeedSaved = true;
                 }
 
                 return await ValueTask.FromResult(result);
@@ -220,11 +239,11 @@ namespace Lotus.Repository
 
             if (SaveEachOperation)
             {
-                _fileStorage.SaveChanges();
+                GetFileStorage().SaveChanges();
             }
             else
             {
-                _fileStorage.NeedSaved = true;
+                GetFileStorage().NeedSaved = true;
             }
 
             return entity;
@@ -237,11 +256,11 @@ namespace Lotus.Repository
 
             if (SaveEachOperation)
             {
-                await _fileStorage.SaveChangesAsync(token);
+                await GetFileStorage().SaveChangesAsync(token);
             }
             else
             {
-                _fileStorage.NeedSaved = true;
+                GetFileStorage().NeedSaved = true;
             }
 
             return await ValueTask.FromResult(entity);
@@ -254,11 +273,11 @@ namespace Lotus.Repository
 
             if (SaveEachOperation)
             {
-                _fileStorage.SaveChanges();
+                GetFileStorage().SaveChanges();
             }
             else
             {
-                _fileStorage.NeedSaved = true;
+                GetFileStorage().NeedSaved = true;
             }
         }
 
@@ -269,11 +288,11 @@ namespace Lotus.Repository
 
             if (SaveEachOperation)
             {
-                await _fileStorage.SaveChangesAsync(token);
+                await GetFileStorage().SaveChangesAsync(token);
             }
             else
             {
-                _fileStorage.NeedSaved = true;
+                GetFileStorage().NeedSaved = true;
             }
 
             await Task.CompletedTask;
@@ -298,11 +317,11 @@ namespace Lotus.Repository
 
             if (SaveEachOperation)
             {
-                _fileStorage.SaveChanges();
+                GetFileStorage().SaveChanges();
             }
             else
             {
-                _fileStorage.NeedSaved = true;
+                GetFileStorage().NeedSaved = true;
             }
         }
 
@@ -316,11 +335,11 @@ namespace Lotus.Repository
 
             if (SaveEachOperation)
             {
-                _fileStorage.SaveChanges();
+                GetFileStorage().SaveChanges();
             }
             else
             {
-                _fileStorage.NeedSaved = true;
+                GetFileStorage().NeedSaved = true;
             }
         }
 
@@ -334,11 +353,11 @@ namespace Lotus.Repository
 
                 if (SaveEachOperation)
                 {
-                    _fileStorage.SaveChanges();
+                    GetFileStorage().SaveChanges();
                 }
                 else
                 {
-                    _fileStorage.NeedSaved = true;
+                    GetFileStorage().NeedSaved = true;
                 }
             }
         }
@@ -361,11 +380,11 @@ namespace Lotus.Repository
             {
                 if (SaveEachOperation)
                 {
-                    _fileStorage.SaveChanges();
+                    GetFileStorage().SaveChanges();
                 }
                 else
                 {
-                    _fileStorage.NeedSaved = true;
+                    GetFileStorage().NeedSaved = true;
                 }
             }
         }
@@ -373,15 +392,17 @@ namespace Lotus.Repository
         /// <inheritdoc/>
         public void Flush()
         {
-            _fileStorage.SaveChanges();
-            _fileStorage.NeedSaved = false;
+            var storage = GetFileStorage();
+            storage.SaveChanges();
+            storage.NeedSaved = false;
         }
 
         /// <inheritdoc/>
         public async Task FlushAsync(CancellationToken token = default)
         {
-            await _fileStorage.SaveChangesAsync(token);
-            _fileStorage.NeedSaved = false;
+            var storage = GetFileStorage();
+            await storage.SaveChangesAsync(token);
+            storage.NeedSaved = false;
         }
     }
     /**@}*/

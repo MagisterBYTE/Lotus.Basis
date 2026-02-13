@@ -29,7 +29,7 @@ namespace Lotus.Repository
         bool NeedSaved { get; set; }
 
         /// <summary>
-        /// Структура хранилища
+        /// Структура хранилища.
         /// </summary>
         ILotusStorageStructure IStructure { get; }
 

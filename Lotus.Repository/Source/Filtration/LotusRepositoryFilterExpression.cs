@@ -124,7 +124,7 @@ namespace Lotus.Repository
                     break;
                 case TFilterFunction.Like:
                     {
-                        var valueExpression = Expression.Constant(".*" + filterProperty.Value + ".*");
+                        var valueExpression = Expression.Constant(".*" + (filterProperty.Value ?? string.Empty) + ".*");
                         var regexOptionExpression = Expression.Constant(RegexOptions.IgnoreCase);
                         body = Expression.Call(XReflection.RegexIsMatchMethod, propertyExpression, valueExpression, regexOptionExpression);
                     }
@@ -185,6 +185,7 @@ namespace Lotus.Repository
                     }
                     break;
                 default:
+                    body = Expression.Constant(false);
                     break;
             }
 

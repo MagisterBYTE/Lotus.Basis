@@ -134,7 +134,7 @@ namespace Lotus.Repository
             {
                 if (string.IsNullOrEmpty(Value) 
                     && IsNullable == false 
-                    && (Function != TFilterFunction.Empty || Function != TFilterFunction.NotEmpty))
+                    && (Function != TFilterFunction.Empty && Function != TFilterFunction.NotEmpty))
                 {
                     return false;
                 }
@@ -151,8 +151,22 @@ namespace Lotus.Repository
         /// <returns>Константа выражения.</returns>
         public ConstantExpression GetConstantExpression(Type propertyType, int index = -1)
         {
-            var value = index == -1 ? Value! : Values![index];
-            return GetConstantExpression(propertyType, value)!;
+            string value;
+            if (index == -1)
+            {
+                value = Value ?? throw new InvalidOperationException("Value is required for this filter.");
+            }
+            else
+            {
+                if (Values == null || index < 0 || index >= Values.Length)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range for Values.");
+                }
+                value = Values[index];
+            }
+
+            var constant = GetConstantExpression(propertyType, value);
+            return constant ?? throw new InvalidOperationException($"Unable to create constant expression for value and type {propertyType}.");
         }
 
         /// <summary>
@@ -162,9 +176,14 @@ namespace Lotus.Repository
         /// <returns>Константа массива выражения.</returns>
         public NewArrayExpression GetArrayExpression(Type propertyType)
         {
+            if (Values == null || Values.Length == 0)
+            {
+                throw new InvalidOperationException("Values are required for this filter.");
+            }
+
             var constants = new List<Expression>();
 
-            foreach (var value in Values!)
+            foreach (var value in Values)
             {
                 var constant = GetConstantExpression(propertyType, value);
                 if (constant != null)

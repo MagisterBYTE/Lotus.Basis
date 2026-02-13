@@ -30,12 +30,8 @@ namespace Lotus.Repository
         public RepositoryDbSet(DbContext context)
         {
             SaveEachOperation = true;
-
-            _context = context;
-            if (_context is not null)
-            {
-                _list = context.Set<TEntity>();
-            }
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _list = context.Set<TEntity>();
         }
 
         /// <summary>
@@ -44,11 +40,8 @@ namespace Lotus.Repository
         /// <param name="context">Контекст базы данных.</param>
         public virtual void SetContext(DbContext context)
         {
-            _context = context;
-            if (_context is not null)
-            {
-                _list = context.Set<TEntity>();
-            }
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _list = context.Set<TEntity>();
         }
 
         /// <inheritdoc/>

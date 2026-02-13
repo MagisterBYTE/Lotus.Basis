@@ -19,12 +19,12 @@ namespace Lotus.Repository
     {
         #region Const
         /// <summary>
-        /// Расширение для формата Json
+        /// Расширение для формата Json.
         /// </summary>
         public const string JsonExtension = ".json";
 
         /// <summary>
-        /// Расширение для бинарного формата
+        /// Расширение для бинарного формата.
         /// </summary>
         public const string BytesExtension = ".bytes";
         #endregion
@@ -41,7 +41,7 @@ namespace Lotus.Repository
         /// </summary>
         public string ConnectingData
         {
-            get { return _fileName; }
+            get => _fileName;
             set
             {
                 _fileName = value;
@@ -54,7 +54,7 @@ namespace Lotus.Repository
         /// </summary>
         public bool NeedSaved
         {
-            get { return _needSaved; }
+            get => _needSaved;
             set
             {
                 _needSaved = value;
@@ -63,12 +63,9 @@ namespace Lotus.Repository
         }
 
         /// <summary>
-        /// Структура данных файла.
+        /// Структура данных файла. В базовом классе возвращает null; переопределите в наследнике.
         /// </summary>
-        public virtual ILotusStorageStructure IStructure
-        {
-            get { return null!; }
-        }
+        public virtual ILotusStorageStructure IStructure => null!;
         #endregion
 
         #region Constructors
@@ -93,7 +90,11 @@ namespace Lotus.Repository
             where TEntity : class, ILotusIdentifierId<TKey>, new()
             where TKey : notnull, IEquatable<TKey>
         {
-            var fileStructure = (IStructure as ILotusFileStorageStructure)!;
+            if (IStructure is not ILotusFileStorageStructure fileStructure)
+            {
+                return null;
+            }
+
             var list = fileStructure.GetEntitiesList<TEntity>();
             if (list != null)
             {
@@ -152,11 +153,23 @@ namespace Lotus.Repository
                 return await ValueTask.FromResult(0);
             }
 
-            if (_fileName.EndsWith(XFileExtension.JSON, true, null))
+            if (_fileName.EndsWith(JsonExtension, StringComparison.OrdinalIgnoreCase))
             {
                 var raw = JsonConvert.SerializeObject(IStructure, _serializerSettings);
 
                 await File.WriteAllTextAsync(_fileName, raw, token);
+
+                return 1;
+            }
+
+            if (_fileName.EndsWith(BytesExtension, StringComparison.OrdinalIgnoreCase)
+                && IStructure is ILotusSerializeToBinary serializeToBinary)
+            {
+                await using var fileStream = new FileStream(_fileName, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize: 4096, useAsync: true);
+                using (var binaryWriter = new BinaryWriter(fileStream))
+                {
+                    await Task.Run(() => serializeToBinary.WriteToBinary(binaryWriter), token);
+                }
 
                 return 1;
             }

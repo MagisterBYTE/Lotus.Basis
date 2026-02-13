@@ -196,6 +196,7 @@ namespace Lotus.Repository
         /// <returns>Добавленная сущность.</returns>
         public TEntity Add<TEntity>(TEntity entity) where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(entity);
             var entry = _context.Add(entity);
             return entry.Entity;
         }
@@ -210,6 +211,7 @@ namespace Lotus.Repository
         public async ValueTask<TEntity> AddAsync<TEntity>(TEntity entity, CancellationToken token = default)
                 where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(entity);
             var entry = await _context.AddAsync(entity, token);
             return entry.Entity;
         }
@@ -221,6 +223,7 @@ namespace Lotus.Repository
         /// <param name="entities">Список сущностей.</param>
         public void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(entities);
             _context.AddRange(entities);
         }
 
@@ -234,6 +237,7 @@ namespace Lotus.Repository
         public async Task AddRangeAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken token = default)
             where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(entities);
             await _context.AddRangeAsync(entities, token);
         }
 
@@ -246,6 +250,7 @@ namespace Lotus.Repository
         public TEntity Update<TEntity>(TEntity entity)
             where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(entity);
             return _context.Update(entity).Entity;
         }
 
@@ -257,6 +262,7 @@ namespace Lotus.Repository
         public void UpdateRange<TEntity>(IEnumerable<TEntity> entities)
             where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(entities);
             _context.UpdateRange(entities);
         }
 
@@ -268,6 +274,7 @@ namespace Lotus.Repository
         public void Remove<TEntity>(TEntity entity)
             where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(entity);
             _context.Remove(entity);
         }
 
@@ -279,6 +286,7 @@ namespace Lotus.Repository
         public void RemoveRange<TEntity>(IEnumerable<TEntity> entities)
             where TEntity : class
         {
+            ArgumentNullException.ThrowIfNull(entities);
             _context.RemoveRange(entities);
         }
 

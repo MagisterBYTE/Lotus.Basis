@@ -3,7 +3,7 @@ using System;
 namespace Lotus.Repository
 {
     /** \addtogroup RepositoryResourceFile
-        *@{*/
+    *@{*/
     /// <summary>
     /// Класс для получения списка файлов с учетом фильтрации и сортировки.
     /// </summary>

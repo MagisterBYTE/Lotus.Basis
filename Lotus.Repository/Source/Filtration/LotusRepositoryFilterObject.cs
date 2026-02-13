@@ -1,3 +1,5 @@
+using System;
+
 namespace Lotus.Repository
 {
     /** \addtogroup RepositoryFilter
@@ -5,9 +7,8 @@ namespace Lotus.Repository
     /// <summary>
     /// Базовый интерфейс для фильтрации данных.
     /// </summary>
-    public class ILotusFilterObject
+    public interface ILotusFilterObject
     {
-
     }
 
     /// <summary>
@@ -34,9 +35,9 @@ namespace Lotus.Repository
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="filters">Список фильтров.</param>
-        public FilterObject(params FilterByProperty[] filters)
+        public FilterObject(params FilterByProperty[]? filters)
         {
-            Filters = filters;
+            Filters = filters ?? Array.Empty<FilterByProperty>();
         }
         #endregion
     }

@@ -15,7 +15,7 @@ namespace Lotus.Repository
     public class ResourceFileService : ILotusResourceFileService
     {
         #region Const
-        private static readonly Regex RegexReplace = new(@"^[\w/\:.-]+;base64,");
+        private static readonly Regex _regexReplace = new(@"^[\w/\:.-]+;base64,");
         #endregion
 
         #region Fields
@@ -60,171 +60,43 @@ namespace Lotus.Repository
 
             if (fileCreate is FileCreateRawRequest requestRaw)
             {
-                var entity = new ResourceFile
+                var entity = CreateResourceFile(requestRaw.Name, requestRaw.AuthorId, requestRaw.FileTypeId, requestRaw.GroupId);
+                if (requestRaw.Target == TResourceFileStorage.Database)
                 {
-                    Name = requestRaw.Name,
-                    AuthorId = requestRaw.AuthorId,
-                    FileTypeId = requestRaw.FileTypeId,
-                    GroupId = requestRaw.GroupId
-                };
-
-                switch (requestRaw.Target)
-                {
-                    case TResourceFileStorage.Local:
-                        break;
-                    case TResourceFileStorage.Server:
-                        {
-                        }
-                        break;
-                    case TResourceFileStorage.Database:
-                        {
-                            entity.StorageType = TResourceFileStorage.Database;
-                            switch (requestRaw.SaveFormat)
-                            {
-                                case TResourceFileSaveFormat.Base64:
-                                    {
-                                        var data = Convert.ToBase64String(requestRaw.Data!);
-                                        entity.SaveFormat = TResourceFileSaveFormat.Base64;
-                                        entity.LoadPath = data;
-                                        entity.SizeInBytes = requestRaw.Data!.Length;
-                                    }
-                                    break;
-                                case TResourceFileSaveFormat.Raw:
-                                    {
-                                        entity.SaveFormat = TResourceFileSaveFormat.Raw;
-                                        entity.Data = requestRaw.Data!;
-                                        entity.SizeInBytes = requestRaw.Data!.Length;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    default:
-                        break;
+                    ApplyDatabaseStorage(entity, requestRaw.SaveFormat, requestRaw.Data, null);
                 }
 
                 await _dataStorage.AddAsync(entity, token);
                 await _dataStorage.SaveChangesAsync(token);
-
-                var result = entity.ToFileDto();
-
-                return Response<FileDto>.Succeed(result);
+                return Response<FileDto>.Succeed(entity.ToFileDto());
             }
 
             if (fileCreate is FileCreateStreamRequest requestStream)
             {
-                var entity = new ResourceFile
+                var entity = CreateResourceFile(requestStream.Name, requestStream.AuthorId, requestStream.FileTypeId, requestStream.GroupId);
+                if (requestStream.Target == TResourceFileStorage.Database)
                 {
-                    Name = requestStream.Name,
-                    AuthorId = requestStream.AuthorId,
-                    FileTypeId = requestStream.FileTypeId,
-                    GroupId = requestStream.GroupId
-                };
-
-                switch (requestStream.Target)
-                {
-                    case TResourceFileStorage.Local:
-                        break;
-                    case TResourceFileStorage.Server:
-                        {
-                        }
-                        break;
-                    case TResourceFileStorage.Database:
-                        {
-                            using var binaryReader = new BinaryReader(requestStream.ReadStream);
-                            var bytes = binaryReader.ReadBytes((int)requestStream.ReadStream.Length);
-                            entity.StorageType = TResourceFileStorage.Database;
-
-                            switch (requestStream.SaveFormat)
-                            {
-                                case TResourceFileSaveFormat.Base64:
-                                    {
-                                        var data = Convert.ToBase64String(bytes);
-                                        entity.SaveFormat = TResourceFileSaveFormat.Base64;
-                                        entity.LoadPath = data;
-                                        entity.SizeInBytes = bytes.Length;
-                                    }
-                                    break;
-                                case TResourceFileSaveFormat.Raw:
-                                    {
-                                        entity.SaveFormat = TResourceFileSaveFormat.Raw;
-                                        entity.Data = bytes;
-                                        entity.SizeInBytes = bytes.Length;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-
-                            binaryReader.Close();
-                        }
-                        break;
-                    default:
-                        break;
+                    using var binaryReader = new BinaryReader(requestStream.ReadStream);
+                    var bytes = binaryReader.ReadBytes((int)requestStream.ReadStream.Length);
+                    ApplyDatabaseStorage(entity, requestStream.SaveFormat, bytes, null);
                 }
 
                 await _dataStorage.AddAsync(entity, token);
                 await _dataStorage.SaveChangesAsync(token);
-                var result = entity.ToFileDto();
-
-                return Response<FileDto>.Succeed(result);
+                return Response<FileDto>.Succeed(entity.ToFileDto());
             }
 
             if (fileCreate is FileCreateBase64Request requestBase64)
             {
-                var entity = new ResourceFile
+                var entity = CreateResourceFile(requestBase64.Name, requestBase64.AuthorId, requestBase64.FileTypeId, requestBase64.GroupId);
+                if (requestBase64.Target == TResourceFileStorage.Database)
                 {
-                    Name = requestBase64.Name,
-                    AuthorId = requestBase64.AuthorId,
-                    FileTypeId = requestBase64.FileTypeId,
-                    GroupId = requestBase64.GroupId
-                };
-
-                switch (requestBase64.Target)
-                {
-                    case TResourceFileStorage.Local:
-                        break;
-                    case TResourceFileStorage.Server:
-                        {
-                        }
-                        break;
-                    case TResourceFileStorage.Database:
-                        {
-                            entity.StorageType = TResourceFileStorage.Database;
-                            switch (requestBase64.SaveFormat)
-                            {
-                                case TResourceFileSaveFormat.Base64:
-                                    {
-                                        entity.SaveFormat = TResourceFileSaveFormat.Base64;
-                                        entity.LoadPath = requestBase64.Data;
-                                    }
-                                    break;
-                                case TResourceFileSaveFormat.Raw:
-                                    {
-                                        var fileData = RegexReplace.Replace(requestBase64.Data, string.Empty);
-                                        var bytes = Convert.FromBase64String(fileData);
-                                        entity.SaveFormat = TResourceFileSaveFormat.Raw;
-                                        entity.Data = bytes;
-                                        entity.SizeInBytes = bytes.Length;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    default:
-                        break;
+                    ApplyDatabaseStorage(entity, requestBase64.SaveFormat, null, requestBase64.Data);
                 }
 
                 await _dataStorage.AddAsync(entity, token);
                 await _dataStorage.SaveChangesAsync(token);
-
-                var result = entity.ToFileDto();
-
-                return Response<FileDto>.Succeed(result);
+                return Response<FileDto>.Succeed(entity.ToFileDto());
             }
 
             return Response<FileDto>.Failed(2000, "Неизвестный запрос");
@@ -292,6 +164,54 @@ namespace Lotus.Repository
             await _dataStorage.SaveChangesAsync(token);
 
             return Response.Succeed();
+        }
+        #endregion
+
+        #region Private helpers
+        private static ResourceFile CreateResourceFile(string? name, Guid? authorId, int? fileTypeId, int? groupId)
+        {
+            return new ResourceFile
+            {
+                Name = name,
+                AuthorId = authorId,
+                FileTypeId = fileTypeId,
+                GroupId = groupId
+            };
+        }
+
+        private void ApplyDatabaseStorage(ResourceFile entity, TResourceFileSaveFormat saveFormat, byte[]? rawBytes, string? base64String)
+        {
+            entity.StorageType = TResourceFileStorage.Database;
+            entity.SaveFormat = saveFormat;
+
+            switch (saveFormat)
+            {
+                case TResourceFileSaveFormat.Base64:
+                    if (rawBytes != null)
+                    {
+                        entity.LoadPath = Convert.ToBase64String(rawBytes);
+                        entity.SizeInBytes = rawBytes.Length;
+                    }
+                    else if (base64String != null)
+                    {
+                        entity.LoadPath = base64String;
+                    }
+                    break;
+                case TResourceFileSaveFormat.Raw:
+                    if (rawBytes != null)
+                    {
+                        entity.Data = rawBytes;
+                        entity.SizeInBytes = rawBytes.Length;
+                    }
+                    else if (base64String != null)
+                    {
+                        var fileData = _regexReplace.Replace(base64String, string.Empty);
+                        var bytes = Convert.FromBase64String(fileData);
+                        entity.Data = bytes;
+                        entity.SizeInBytes = bytes.Length;
+                    }
+                    break;
+            }
         }
         #endregion
     }

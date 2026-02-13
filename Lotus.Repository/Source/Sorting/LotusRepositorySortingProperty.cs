@@ -12,9 +12,9 @@ namespace Lotus.Repository
     public interface ILotusSortProperty
     {
         /// <summary>
-        /// Имя свойства/поля по которому идет сортировка.
+        /// Имя/путь свойства/поля по которому идет сортировка.
         /// </summary>
-        string PropertyName { get; set; }
+        string PropertyPath { get; set; }
 
         /// <summary>
         /// Статус сортировки по убыванию.
@@ -31,9 +31,9 @@ namespace Lotus.Repository
     public class SortByProperty : ILotusSortProperty
     {
         /// <summary>
-        /// Имя свойства/поля по которому идет сортировка.
+        /// Имя/путь свойства/поля по которому идет сортировка.
         /// </summary>
-        public string PropertyName { get; set; } = default!;
+        public string PropertyPath { get; set; } = default!;
 
         /// <summary>
         /// Статус сортировки по убыванию.

@@ -27,14 +27,10 @@ namespace Lotus.Repository
 
             if (status == default)
             {
-                if (string.IsNullOrEmpty(desc))
-                {
-                    throw new Exception("При сохранении БД произошла ошибка");
-                }
-                else
-                {
-                    throw new Exception(desc);
-                }
+                var message = string.IsNullOrEmpty(desc)
+                    ? "Ожидалось сохранение хотя бы одной записи в БД, но изменений не было."
+                    : desc;
+                throw new InvalidOperationException(message);
             }
         }
     }

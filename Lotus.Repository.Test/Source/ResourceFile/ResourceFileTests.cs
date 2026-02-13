@@ -3,11 +3,11 @@ namespace Lotus.Repository
     /// <summary>
     /// Тестирование методов работы с файлами.
     /// </summary>
-    public class ResourceFileTesting : IClassFixture<DomainContextFixture>
+    public class ResourceFileTests : IClassFixture<DomainContextFixture>
     {
         public DomainContextFixture Fixture { get; }
 
-        public ResourceFileTesting(DomainContextFixture fixture)
+        public ResourceFileTests(DomainContextFixture fixture)
         {
             Fixture = fixture;
         }

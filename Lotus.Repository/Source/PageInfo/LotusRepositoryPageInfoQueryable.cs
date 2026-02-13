@@ -20,7 +20,7 @@ namespace Lotus.Repository
         /// <summary>
         /// Максимальный размер страницы.
         /// </summary>
-        private const int MaxPageSize = 9999;
+        private const int _MaxPageSize = 9999;
         #endregion
 
         /// <summary>
@@ -38,17 +38,17 @@ namespace Lotus.Repository
 
             if (pageNumber < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(pageNumber), "Value should be equal or more 0");
+                throw new ArgumentOutOfRangeException(nameof(pageNumber), "Value should be greater than or equal to 0.");
             }
 
             if (pageSize < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(pageSize), "Value should be equal or more 0");
+                throw new ArgumentOutOfRangeException(nameof(pageSize), "Value should be greater than or equal to 0.");
             }
 
-            if (pageSize == 0 || pageSize > MaxPageSize)
+            if (pageSize == 0 || pageSize > _MaxPageSize)
             {
-                pageSize = MaxPageSize;
+                pageSize = _MaxPageSize;
             }
 
             return query.Skip(pageNumber * pageSize).Take(pageSize);

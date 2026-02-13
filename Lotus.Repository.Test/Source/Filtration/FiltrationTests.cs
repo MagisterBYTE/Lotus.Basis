@@ -3,11 +3,11 @@ namespace Lotus.Repository
     /// <summary>
     /// Класс для тестирования методов фильтрации.
     /// </summary>
-    public class FiltrationTesting : IClassFixture<DomainContextFixture>
+    public class FiltrationTests : IClassFixture<DomainContextFixture>
     {
         public DomainContextFixture Fixture { get; }
 
-        public FiltrationTesting(DomainContextFixture fixture)
+        public FiltrationTests(DomainContextFixture fixture)
         {
             Fixture = fixture;
         }

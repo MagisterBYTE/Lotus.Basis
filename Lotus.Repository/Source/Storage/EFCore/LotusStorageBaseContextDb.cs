@@ -30,7 +30,7 @@ namespace Lotus.Repository
         /// </summary>
         public string ConnectingData
         {
-            get { return _connectingString; }
+            get => _connectingString;
             set
             {
                 _connectingString = value;
@@ -43,7 +43,7 @@ namespace Lotus.Repository
         /// </summary>
         public bool NeedSaved
         {
-            get { return _needSaved; }
+            get => _needSaved;
             set
             {
                 _needSaved = value;
@@ -54,10 +54,7 @@ namespace Lotus.Repository
         /// <summary>
         /// Структура базы данных.
         /// </summary>
-        public ILotusStorageStructure IStructure
-        {
-            get { return _context; }
-        }
+        public ILotusStorageStructure IStructure => _context;
         #endregion
 
         #region Constructors

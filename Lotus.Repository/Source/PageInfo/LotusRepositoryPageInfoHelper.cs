@@ -31,7 +31,7 @@ namespace Lotus.Repository
             {
                 var pageInfoRequest = new PageInfoRequest()
                 {
-                    PageNumber = i * pageSize,
+                    PageNumber = i,
                     PageSize = pageSize,
                 };
                 pageInfoRequests.Add(pageInfoRequest);
@@ -41,7 +41,7 @@ namespace Lotus.Repository
             {
                 var pageInfoRequest = new PageInfoRequest()
                 {
-                    PageNumber = countPage * pageSize,
+                    PageNumber = countPage,
                     PageSize = residue,
                 };
 

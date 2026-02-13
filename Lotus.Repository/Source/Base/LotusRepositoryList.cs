@@ -28,7 +28,7 @@ namespace Lotus.Repository
 
         public RepositoryList(List<TEntity> list)
         {
-            _list = list;
+            _list = list ?? throw new ArgumentNullException(nameof(list));
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Lotus.Repository
         /// <param name="list">Список сущностей.</param>
         public void SetList(List<TEntity> list)
         {
-            _list = list;
+            _list = list ?? throw new ArgumentNullException(nameof(list));
         }
 
         /// <inheritdoc/>

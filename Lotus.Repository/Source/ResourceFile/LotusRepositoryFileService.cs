@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Lotus.Repository
 {
     /** \addtogroup RepositoryResourceFile
-	*@{*/
+    *@{*/
     /// <summary>
     /// Сервис для работы с файлами.
     /// </summary>

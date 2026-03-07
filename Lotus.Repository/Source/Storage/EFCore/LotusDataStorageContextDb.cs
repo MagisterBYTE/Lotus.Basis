@@ -140,7 +140,7 @@ namespace Lotus.Repository
         {
             _ids[0] = id;
             var entity = _context.Find<TEntity>(_ids);
-            if (entity == null)
+            if (entity is null)
             {
                 entity = new TEntity
                 {
@@ -172,7 +172,7 @@ namespace Lotus.Repository
         {
             _ids[0] = id;
             var entity = await _context.FindAsync<TEntity>(_ids, token);
-            if (entity == null)
+            if (entity is null)
             {
                 entity = new TEntity
                 {
@@ -214,6 +214,63 @@ namespace Lotus.Repository
             ArgumentNullException.ThrowIfNull(entity);
             var entry = await _context.AddAsync(entity, token);
             return entry.Entity;
+        }
+
+        /// <summary>
+        /// Добавляем или обновляет сущность.
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <typeparam name="TKey">Тип идентификатора.</typeparam>
+        /// <param name="entity">Сущность.</param>
+        /// <returns>Созданная или обновленная сущность.</returns>
+        public TEntity AddOrUpdate<TEntity, TKey>(TEntity entity)
+            where TEntity : class, ILotusIdentifierId<TKey>, new()
+            where TKey : struct, IEquatable<TKey>
+        {
+            _ids[0] = entity.Id;
+            var existEntity = _context.Find<TEntity>(_ids);
+            if (existEntity is null)
+            {
+                // Добавляем
+                var entry = _context.Add(entity);
+                return entry.Entity;
+            }
+            else
+            {
+                // Обновляем
+                // Копируем значения из пришедшей сущности в найденную в базе
+                _context.Entry(existEntity).CurrentValues.SetValues(entity);
+                return existEntity;
+            }
+        }
+
+        /// <summary>
+        /// Добавляем или обновляет сущность.
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <typeparam name="TKey">Тип идентификатора.</typeparam>
+        /// <param name="entity">Сущность.</param>
+        /// <param name="token">Токен отмены.</param>
+        /// <returns>Созданная или обновленная сущность.</returns>
+        public async ValueTask<TEntity> AddOrUpdateAsync<TEntity, TKey>(TEntity entity, CancellationToken token = default)
+            where TEntity : class, ILotusIdentifierId<TKey>, new()
+            where TKey : struct, IEquatable<TKey>
+        {
+            _ids[0] = entity.Id;
+            var existEntity = await _context.FindAsync<TEntity>(_ids, token);
+            if (existEntity is null)
+            {
+                // Добавляем
+                var entry = await _context.AddAsync(entity, token);
+                return entry.Entity;
+            }
+            else
+            {
+                // Обновляем
+                // Копируем значения из пришедшей сущности в найденную в базе
+                _context.Entry(existEntity).CurrentValues.SetValues(entity);
+                return existEntity;
+            }
         }
 
         /// <summary>
@@ -288,6 +345,59 @@ namespace Lotus.Repository
         {
             ArgumentNullException.ThrowIfNull(entities);
             _context.RemoveRange(entities);
+        }
+
+        /// <summary>
+        /// Синхронизирует коллекцию связанных объектов. Добавляет новые объекты (есть в новой коллекции и отсутствует в старой) 
+        /// и удаляет старые (есть в старой коллекции и отсутствует в новой).
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <typeparam name="TKey">Тип идентификатора.</typeparam>
+        /// <param name="entities">Список сущностей.</param>
+        public void SyncRelatedCollections<TEntity, TKey>(IEnumerable<TEntity> entities)
+            where TEntity : class, ILotusIdentifierId<TKey>, new()
+            where TKey : struct, IEquatable<TKey>
+        {
+            // 1. Получаем ID всех входящих сущностей для быстрого поиска
+            var newEntities = entities.ToList();
+            var newIds = newEntities.Select(x => x.Id).ToHashSet();
+
+            // 2. Получаем текущие сущности из БД (Local + Database)
+            // ВАЖНО: Если это коллекция конкретного владельца, здесь должен быть фильтр по Foreign Key!
+            var dbSet = _context.Set<TEntity>();
+            var trackedEntities = dbSet.Local.ToList();
+
+            // Если Local пуст или не полон, подтягиваем из базы те, что не в Local, но имеют те же ID или принадлежат контексту
+            // Но чаще всего в Sync передают уже отфильтрованный список "старых" данных.
+            // Предположим, мы работаем со всем набором этого типа:
+            var oldEntities = dbSet.ToList();
+
+            // 3. Удаляем те, которых нет в новом списке
+            foreach (var oldItem in oldEntities)
+            {
+                if (!newIds.Contains(oldItem.Id))
+                {
+                    dbSet.Remove(oldItem);
+                }
+            }
+
+            // 4. Добавляем новые или обновляем существующие
+            foreach (var newItem in newEntities)
+            {
+                var existing = oldEntities.FirstOrDefault(x => x.Id.Equals(newItem.Id));
+
+                if (existing == null)
+                {
+                    // Полностью новый объект
+                    dbSet.Add(newItem);
+                }
+                else
+                {
+                    // Объект уже есть — обновляем его значения из пришедшей модели
+                    // Это решает проблему "another instance with the same key is already being tracked"
+                    _context.Entry(existing).CurrentValues.SetValues(newItem);
+                }
+            }
         }
 
         /// <summary>

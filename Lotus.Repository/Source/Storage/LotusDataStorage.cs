@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using Lotus.Core;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Lotus.Repository
 {
     /** \addtogroup RepositoryStorage
@@ -132,6 +134,29 @@ namespace Lotus.Repository
                 where TEntity : class;
 
         /// <summary>
+        /// Добавляем или обновляет сущность.
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <typeparam name="TKey">Тип идентификатора.</typeparam>
+        /// <param name="entity">Сущность.</param>
+        /// <returns>Созданная или обновленная сущность.</returns>
+        TEntity AddOrUpdate<TEntity, TKey>(TEntity entity)
+            where TEntity : class, ILotusIdentifierId<TKey>, new()
+            where TKey : struct, IEquatable<TKey>;
+
+        /// <summary>
+        /// Добавляем или обновляет сущность.
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <typeparam name="TKey">Тип идентификатора.</typeparam>
+        /// <param name="entity">Сущность.</param>
+        /// <param name="token">Токен отмены.</param>
+        /// <returns>Созданная или обновленная сущность.</returns>
+        ValueTask<TEntity> AddOrUpdateAsync<TEntity, TKey>(TEntity entity, CancellationToken token = default)
+            where TEntity : class, ILotusIdentifierId<TKey>, new()
+            where TKey : struct, IEquatable<TKey>;
+
+        /// <summary>
         /// Добавить список сущностей.
         /// </summary>
         /// <typeparam name="TEntity">Тип сущности.</typeparam>
@@ -180,6 +205,17 @@ namespace Lotus.Repository
         /// <param name="entities">Список сущностей.</param>
         void RemoveRange<TEntity>(IEnumerable<TEntity> entities)
             where TEntity : class;
+
+        /// <summary>
+        /// Синхронизирует коллекцию связанных объектов. Добавляет новые объекты (есть в новой коллекции и отсутствует в старой) 
+        /// и удаляет старые (есть в старой коллекции и отсутствует в новой).
+        /// </summary>
+        /// <typeparam name="TEntity">Тип сущности.</typeparam>
+        /// <typeparam name="TKey">Тип идентификатора.</typeparam>
+        /// <param name="entities">Список сущностей.</param>
+        void SyncRelatedCollections<TEntity, TKey>(IEnumerable<TEntity> entities)
+            where TEntity : class, ILotusIdentifierId<TKey>, new()
+            where TKey : struct, IEquatable<TKey>;
     }
     /**@}*/
 }

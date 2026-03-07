@@ -1,0 +1,38 @@
+{
+	"folders": [
+    {
+      "path": "Lotus.Core"
+    },
+    {
+      "path": "Lotus.Core.Test"
+    },
+    {
+      "path": "Lotus.Math"
+    },
+    {
+      "path": "Lotus.Math.Test"
+    },
+    {
+      "path": "Lotus.Algorithm"
+    },
+    {
+      "path": "Lotus.Algorithm.Test"
+    },
+    {
+      "path": "Lotus.Localization"
+    },
+    {
+      "path": "Lotus.Object3D"
+    },
+    {
+      "path": "Lotus.UnitMeasurement"
+    },
+    {
+      "path": "Lotus.Repository"
+    },
+    {
+      "path": "Lotus.Repository.Test"
+    }
+  ],
+  "settings": {}
+}

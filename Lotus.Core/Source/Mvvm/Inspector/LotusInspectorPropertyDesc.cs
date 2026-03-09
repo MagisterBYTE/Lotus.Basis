@@ -407,7 +407,7 @@ namespace Lotus.Core.Inspector
         // ПАРАМЕТРЫ УПРАВЛЕНИЯ
         //
         /// <summary>
-        /// Свойство скрыто для отображения в инспекторе свойств.
+        /// Свойство только для чтения.
         /// </summary>
         public bool IsReadOnly
         {
@@ -419,7 +419,7 @@ namespace Lotus.Core.Inspector
         }
 
         /// <summary>
-        /// Свойство только для чтения.
+        /// Свойство скрыто для отображения в инспекторе свойств.
         /// </summary>
         public bool IsHideInspector
         {

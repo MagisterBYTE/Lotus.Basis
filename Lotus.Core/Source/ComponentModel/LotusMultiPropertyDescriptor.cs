@@ -40,22 +40,6 @@ namespace Lotus.Core
         /// Возвращает тип данных свойства.
         /// </summary>
         public override Type PropertyType => _baseProp.PropertyType;
-
-        /// <summary>
-        /// Возвращает преобразователь типов. Если свойство является Enum, 
-        /// возвращает кастомный <see cref="EnumDescriptionConverter"/>.
-        /// </summary>
-        public override TypeConverter Converter
-        {
-            get
-            {
-                if (_baseProp.PropertyType.IsEnum)
-                {
-                    return new EnumDescriptionConverter(_baseProp.PropertyType);
-                }
-                return base.Converter;
-            }
-        }
         #endregion
 
         #region Constructor

@@ -13,14 +13,14 @@ namespace Lotus.Core
     /// Преобразователь типов для перечислений, который использует атрибут <see cref="DescriptionAttribute"/> 
     /// для отображения понятных пользователю имен в интерфейсе.
     /// </summary>
-    public class EnumDescriptionConverter : EnumConverter
+    public class EnumDescriptionConverter<TEnum> : EnumConverter where TEnum : Enum
     {
         #region Constructor
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="EnumDescriptionConverter"/>.
+        /// Инициализирует новый экземпляр класса <see cref="EnumDescriptionConverter{TEnum}"/>.
         /// </summary>
-        /// <param name="type">Тип перечисления, для которого требуется преобразование.</param>
-        public EnumDescriptionConverter(Type type) : base(type) { }
+        public EnumDescriptionConverter() 
+            : base(typeof(TEnum)) { }
         #endregion
 
         #region Override properties

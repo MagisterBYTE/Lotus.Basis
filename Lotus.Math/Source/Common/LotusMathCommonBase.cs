@@ -1240,6 +1240,11 @@ namespace Lotus.Maths
                 return true;
             }
 
+            if (double.TryParse(text, NumberStyles.Float, CultureInfo.CurrentUICulture, out result))
+            {
+                return true;
+            }
+
             return false;
         }
         #endregion

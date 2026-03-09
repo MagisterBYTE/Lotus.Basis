@@ -8,7 +8,7 @@ namespace Lotus.Core
     /// <summary>
     /// Опции поиска в строке другой подстроки.
     /// </summary>
-    [TypeConverter(typeof(EnumToStringConverter<TStringSearchOption>))]
+    [TypeConverter(typeof(EnumDescriptionConverter<TTimeInterval>))]
     public enum TStringSearchOption
     {
         /// <summary>

@@ -19,6 +19,7 @@ namespace Lotus.Core
         public static DateTime ToDateTime(object value, DateTime defaultValue)
         {
             if (value == null) return defaultValue;
+            if (value is DateTime dateTimeValue) return dateTimeValue;
             if (value is int intValue) return FromTimestamp(intValue);
             if (value is long longValue) return FromTimestamp(longValue);
             if (value is float floatValue) return FromTimestamp(floatValue);

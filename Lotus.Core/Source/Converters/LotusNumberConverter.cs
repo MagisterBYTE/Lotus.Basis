@@ -359,10 +359,10 @@ namespace Lotus.Core
         public static double ToDouble(object value, double defaultValue = 0)
         {
             if (value == null) return defaultValue;
+            if (value is double doubleValue) return doubleValue;
             if (value is int intValue) return (double)intValue;
             if (value is long longValue) return (double)longValue;
             if (value is float floatValue) return (double)floatValue;
-            if (value is double doubleValue) return doubleValue;
             if (value is string stringValue) return ParseDouble(stringValue, defaultValue);
             return defaultValue;
         }

@@ -107,7 +107,7 @@ namespace Lotus.Core
     /// Он может характеризовать, как и реальные временные интервалы, так и некие абстрактные игровые интервалы 
     /// привязанные к настоящим временным интервалам 
     /// </remarks>
-    [TypeConverter(typeof(EnumToStringConverter<TTimeInterval>))]
+    [TypeConverter(typeof(EnumDescriptionConverter<TTimeInterval>))]
     public enum TTimeInterval
     {
         /// <summary>

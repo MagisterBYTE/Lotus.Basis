@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32328.378
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11519.219 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Core", "Lotus.Core\Lotus.Core.csproj", "{828B0D9A-0810-46CD-B93D-860CDA3F11A2}"
 EndProject
@@ -22,15 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Object3D", "Lotus.Object3D\Lotus.Object3D.csproj", "{804039DD-E3BA-42D1-A736-01A048DAC94C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Repository", "Lotus.Repository\Lotus.Repository.csproj", "{02DBD9E2-35E0-4798-9CE1-B045DE866634}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Repository.Test", "Lotus.Repository.Test\Lotus.Repository.Test.csproj", "{83B020FE-958C-4BBC-9796-CCF09809F0BB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssimpNet", "Lotus.Object3D.Depends\Assimp.Net\AssimpNet\AssimpNet.csproj", "{00F60498-2D53-491D-89C0-EEF7FBC3FA10}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Depends", "Depends", "{A506857C-0835-4CC2-8452-1570FCB8E1CD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lotus.Algorithm.Test", "Lotus.Algorithm.Test\Lotus.Algorithm.Test.csproj", "{9D0756F7-C002-41A0-A538-56928B8FC150}"
 EndProject
@@ -79,12 +73,6 @@ Global
 		{D8FA50A2-1013-4901-B70E-A9E0EEAEC5EB}.Publish|Any CPU.Build.0 = Publish|Any CPU
 		{D8FA50A2-1013-4901-B70E-A9E0EEAEC5EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8FA50A2-1013-4901-B70E-A9E0EEAEC5EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
-		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Publish|Any CPU.Build.0 = Publish|Any CPU
-		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{804039DD-E3BA-42D1-A736-01A048DAC94C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02DBD9E2-35E0-4798-9CE1-B045DE866634}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
@@ -97,12 +85,6 @@ Global
 		{83B020FE-958C-4BBC-9796-CCF09809F0BB}.Publish|Any CPU.Build.0 = Publish|Any CPU
 		{83B020FE-958C-4BBC-9796-CCF09809F0BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83B020FE-958C-4BBC-9796-CCF09809F0BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
-		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Publish|Any CPU.Build.0 = Debug|Any CPU
-		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00F60498-2D53-491D-89C0-EEF7FBC3FA10}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D0756F7-C002-41A0-A538-56928B8FC150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D0756F7-C002-41A0-A538-56928B8FC150}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D0756F7-C002-41A0-A538-56928B8FC150}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
@@ -118,9 +100,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{00F60498-2D53-491D-89C0-EEF7FBC3FA10} = {A506857C-0835-4CC2-8452-1570FCB8E1CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE718856-AFBB-4705-B856-572D342FE084}

@@ -111,7 +111,7 @@ namespace Lotus.Core
         /// <summary>
         /// API Key Yandex
         /// </summary>
-        private const string APIKey = "trnsl.1.1.20161030T093331Z.f7191ea6c7fb08cd.c3d7f862a7e8200bb9f4f397fc059c6584f8f2e2";
+        private const string APIKey = "test";
         #endregion
 
         #region Main methods

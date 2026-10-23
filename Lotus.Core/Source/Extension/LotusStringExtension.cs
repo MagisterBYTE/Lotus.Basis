@@ -297,7 +297,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Строка.</param>
 		/// <returns>Цвет.</returns>
-		public static UnityEngine.Color ToColor24(this String @this)
+		public static UnityEngine.Color ToColor24(this string @this)
 		{
 			try
 			{
@@ -319,7 +319,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Строка.</param>
 		/// <returns>Цвет.</returns>
-		public static UnityEngine.Color ToColor32(this String @this)
+		public static UnityEngine.Color ToColor32(this string @this)
 		{
 			try
 			{
@@ -1074,11 +1074,11 @@ namespace Lotus.Core
                 {
                     if (i == 0)
                     {
-                        builder.Append(Char.ToUpper(current));
+                        builder.Append(char.ToUpper(current));
                     }
                     else
                     {
-                        builder.Append(Char.ToLower(current));
+                        builder.Append(char.ToLower(current));
                     }
                 }
             }

@@ -526,7 +526,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="obj">Проверяемый объект.</param>
 		/// <returns>Тип объекта в системе Unity.</returns>
-		public static TUnityObjectType GetUnityObjectType(System.Object obj)
+		public static TUnityObjectType GetUnityObjectType(object obj)
 		{
 			// Получаем тип
 			Type type = obj.GetType();

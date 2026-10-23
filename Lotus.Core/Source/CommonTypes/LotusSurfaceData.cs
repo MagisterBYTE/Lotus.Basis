@@ -1,5 +1,7 @@
 using System;
+#if !UNITY_2017_1_OR_NEWER
 using System.Numerics;
+#endif
 
 namespace Lotus.Core
 {
@@ -12,11 +14,12 @@ namespace Lotus.Core
     /// Одна из основных функций поверхности - интерполяция данных при изменении ее размеров.
     /// </remarks>
     /// <typeparam name="TNumber">Тип данных поверхности.</typeparam>
-    public class SurfaceData<TNumber> where TNumber : struct,
-        IEquatable<TNumber>,
-        IAdditionOperators<TNumber, TNumber, TNumber>,
+    public class SurfaceData<TNumber> where TNumber : struct, IEquatable<TNumber>
+#if !UNITY_2017_1_OR_NEWER
+        , IAdditionOperators<TNumber, TNumber, TNumber>,
         ISubtractionOperators<TNumber, TNumber, TNumber>,
         IMultiplyOperators<TNumber, TNumber, TNumber>
+#endif
     {
         #region Fields
         protected internal TNumber[] _data;
@@ -218,6 +221,11 @@ namespace Lotus.Core
             var factor_x = _width / (double)newWidth;
             var factor_y = _height / (double)newHeight;
 
+#if UNITY_2017_1_OR_NEWER
+            _ = useBilinear; // Bilinear unavailable without generic math operators.
+#endif
+
+#if !UNITY_2017_1_OR_NEWER
             if (useBilinear)
             {
                 double fraction_x, fraction_y, one_minus_x, one_minus_y;
@@ -264,7 +272,9 @@ namespace Lotus.Core
                 }
             }
             else
+#endif
             {
+                // Under Unity bilinear path is unavailable (no generic math operators).
                 for (var x = 0; x < newWidth; ++x)
                 {
                     for (var y = 0; y < newHeight; ++y)
@@ -386,7 +396,7 @@ namespace Lotus.Core
 				}
 				else
 				{
-					_data = new TColor[] { TColor.White };
+					_data = new TColor[] { TColor.FromBGRA(0xFFFFFFFF) };
 					_width = 1;
 					_height = 1;
 					_rank = 1;

@@ -105,7 +105,7 @@ namespace Lotus.Core
 		/// <summary>
 		/// Путь по умолчанию для сохранения файлов.
 		/// </summary>
-		public static String DefaultPath = XCoreSettings.ASSETS_PATH;
+		public static string DefaultPath = XCoreSettings.ASSETS_PATH;
 #else
 		/// <summary>
 		/// Путь по умолчанию для сохранения файлов.
@@ -133,7 +133,7 @@ namespace Lotus.Core
 		/// <summary>
 		/// Реализация сервиса для диалогового окна открытия/сохранения файлов.
 		/// </summary>
-		public static ILotusFileDialogs FileDialogs = new CFileDialogsUnity();
+		public static ILotusFileDialogs FileDialogs = new FileDialogsUnity();
 #else
         /// <summary>
         /// Реализация сервиса для диалогового окна открытия/сохранения файлов.

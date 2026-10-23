@@ -90,7 +90,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result> FailedAsync(int? code = null, object? value = null)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result>(new Result(false, "Error", code, value));
+#else
             return ValueTask.FromResult(new Result(false, "Error", code, value));
+#endif
         }
 
         /// <summary>
@@ -102,7 +106,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result> FailedAsync(string message, int? code = null, object? value = null)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result>(new Result(false, message, code, value));
+#else
             return ValueTask.FromResult(new Result(false, message, code, value));
+#endif
         }
 
         /// <summary>
@@ -115,7 +123,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result> FailedAsync(HttpStatusCode? httpCode, string message, int? code = null, object? value = null)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result>(new Result(httpCode, false, message, code, value));
+#else
             return ValueTask.FromResult(new Result(httpCode, false, message, code, value));
+#endif
         }
         #endregion
 
@@ -166,7 +178,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result> SucceedAsync(int? code = null, object? value = null)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result>(new Result(true, code, value));
+#else
             return ValueTask.FromResult(new Result(true, code, value));
+#endif
         }
 
         /// <summary>
@@ -178,7 +194,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result> SucceedAsync(string message, int? code = null, object? value = null)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result>(new Result(true, message, code, value));
+#else
             return ValueTask.FromResult(new Result(true, message, code, value));
+#endif
         }
 
         /// <summary>
@@ -191,7 +211,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result> SucceedAsync(HttpStatusCode? httpCode, string message, int? code = null, object? value = null)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result>(new Result(httpCode, true, message, code, value));
+#else
             return ValueTask.FromResult(new Result(httpCode, true, message, code, value));
+#endif
         }
         #endregion
 
@@ -382,7 +406,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result<TValue>> FailedAsync(int? code = null, TValue? value = default)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result<TValue>>(new Result<TValue>(false, "Error", code, value));
+#else
             return ValueTask.FromResult(new Result<TValue>(false, "Error", code, value));
+#endif
         }
 
         /// <summary>
@@ -394,7 +422,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result<TValue>> FailedAsync(string message, int? code = null, TValue? value = default)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result<TValue>>(new Result<TValue>(false, message, code, value));
+#else
             return ValueTask.FromResult(new Result<TValue>(false, message, code, value));
+#endif
         }
 
         /// <summary>
@@ -407,7 +439,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result<TValue>> FailedAsync(HttpStatusCode? httpCode, string message, int? code = null, TValue? value = default)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result<TValue>>(new Result<TValue>(httpCode, false, message, code, value));
+#else
             return ValueTask.FromResult(new Result<TValue>(httpCode, false, message, code, value));
+#endif
         }
         #endregion
 
@@ -458,7 +494,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result<TValue>> SucceedAsync(int? code = null, TValue? value = default)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result<TValue>>(new Result<TValue>(true, code, value));
+#else
             return ValueTask.FromResult(new Result<TValue>(true, code, value));
+#endif
         }
 
         /// <summary>
@@ -470,7 +510,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result<TValue>> SucceedAsync(string message, int? code = null, TValue? value = default)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result<TValue>>(new Result<TValue>(true, message, code, value));
+#else
             return ValueTask.FromResult(new Result<TValue>(true, message, code, value));
+#endif
         }
 
         /// <summary>
@@ -483,7 +527,11 @@ namespace Lotus.Core
         /// <returns>Результат выполнения операции.</returns>
         public static ValueTask<Result<TValue>> SucceedAsync(HttpStatusCode? httpCode, string message, int? code = null, TValue? value = default)
         {
+#if UNITY_2017_1_OR_NEWER
+            return new ValueTask<Result<TValue>>(new Result<TValue>(httpCode, true, message, code, value));
+#else
             return ValueTask.FromResult(new Result<TValue>(httpCode, true, message, code, value));
+#endif
         }
         #endregion
 

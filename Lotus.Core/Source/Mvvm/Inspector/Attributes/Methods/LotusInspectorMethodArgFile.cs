@@ -79,7 +79,7 @@ namespace Lotus.Core.Inspector
         {
             _defaultName = "File";
 #if UNITY_2017_1_OR_NEWER
-		    _defaultPath = XCoreSettings.ASSETS_PATH;
+		    _defaultPath = Lotus.Core.XCoreSettings.ASSETS_PATH;
 #else
             _defaultPath = "";
 #endif
@@ -95,7 +95,7 @@ namespace Lotus.Core.Inspector
         public LotusMethodArgFileAttribute(string extension, string defaultName = "File",
             string defaultPath =
 #if UNITY_2017_1_OR_NEWER
-		    XCoreSettings.ASSETS_PATH)
+		    Lotus.Core.XCoreSettings.ASSETS_PATH)
 #else
             "")
 #endif

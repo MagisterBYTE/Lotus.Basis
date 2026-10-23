@@ -1,5 +1,7 @@
 using System;
+#if !UNITY_2017_1_OR_NEWER
 using System.Numerics;
+#endif
 using System.Runtime.InteropServices;
 
 namespace Lotus.Core
@@ -18,12 +20,14 @@ namespace Lotus.Core
     /// </remarks>
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Size = 4)]
-    public struct TColor : IComparable<TColor>, IEquatable<TColor>, ICloneable,
-        IAdditionOperators<TColor, TColor, TColor>,
+    public struct TColor : IComparable<TColor>, IEquatable<TColor>, ICloneable
+#if !UNITY_2017_1_OR_NEWER
+        , IAdditionOperators<TColor, TColor, TColor>,
         ISubtractionOperators<TColor, TColor, TColor>,
         IMultiplyOperators<TColor, TColor, TColor>,
         IMultiplyOperators<TColor, float, TColor>,
         IMultiplyOperators<TColor, double, TColor>
+#endif
     {
         #region Const
         /// <summary>
@@ -518,10 +522,10 @@ namespace Lotus.Core
 			/// <param name="color">Цвет UnityEngine.</param>
 			public TColor(UnityEngine.Color color)
 			{
-				R = (Byte)(color.r * 255);
-				G = (Byte)(color.g * 255);
-				B = (Byte)(color.b * 255);
-				A = (Byte)(color.a * 255);
+				R = (byte)(color.r * 255);
+				G = (byte)(color.g * 255);
+				B = (byte)(color.b * 255);
+				A = (byte)(color.a * 255);
 			}
 
 			/// <summary>
@@ -713,13 +717,13 @@ namespace Lotus.Core
 
         #region Operators conversion 
 #if UNITY_2017_1_OR_NEWER
-			/// <summary>
-			/// Неявное преобразование в объект типа <see cref="UnityEngine.Color32">.
-			/// </summary>
-			/// <param name="color">Цвет.</param>
-			/// <returns>Объект <see cref="UnityEngine.Color32">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			public static implicit operator UnityEngine.Color32(TColor color)
+            /// <summary>
+            /// Неявное преобразование в объект типа <see cref="UnityEngine.Color32">.
+            /// </summary>
+            /// <param name="color">Цвет.</param>
+            /// <returns>Объект <see cref="UnityEngine.Color32">.</returns>
+            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public static implicit operator UnityEngine.Color32(TColor color)
 			{
 				return new UnityEngine.Color32(color.R, color.G, color.B, color.A);
 			}
@@ -729,7 +733,7 @@ namespace Lotus.Core
 			/// </summary>
 			/// <param name="color">Цвет.</param>
 			/// <returns>Объект <see cref="UnityEngine.Color">.</returns>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 			public static implicit operator UnityEngine.Color(TColor color)
 			{
 				return new UnityEngine.Color((color.R / 255.0f), (color.G / 255.0f), 

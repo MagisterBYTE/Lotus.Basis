@@ -38,15 +38,15 @@ namespace Lotus.Core.Inspector
 		/// <param name="count">Количество элементов.</param>
 		/// <param name="percents">Список процентов ширины для каждого поля.</param>
 		/// <returns>Массив прямоугольников.</returns>
-		public UnityEngine.Rect[] GetRectsFromPercent(Int32 count, params Single[] percents)
+		public UnityEngine.Rect[] GetRectsFromPercent(int count, params float[] percents)
 		{
 			UnityEngine.Rect[] rects = null;
 			if (count > 0)
 			{
 				rects = new UnityEngine.Rect[percents.Length + 1];
 
-				// Считать будем от ширины с минусом по единицы на каждую колонку и минус ширина для вывода индекса
-				Single index_width = 12;
+                // Считать будем от ширины с минусом по единицы на каждую колонку и минус ширина для вывода индекса
+                float index_width = 12;
 				if (count > 9)
 				{
 					index_width = 16;

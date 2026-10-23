@@ -214,7 +214,7 @@ namespace Lotus.Repository
         /// <returns>Данные.</returns>
         public static Response<TPayload> Succeed(TPayload payload)
         {
-            return new Response<TPayload>(payload);
+            return new Response<TPayload>(payload, Lotus.Core.Result.Ok);
         }
 
         /// <summary>
@@ -281,6 +281,17 @@ namespace Lotus.Repository
         /// <param name="result">Ответ/результат операции.</param>
         public Response(ILotusResult result)
         {
+            Result = result;
+        }
+
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами.
+        /// </summary>
+        /// <param name="payload">Данные.</param>
+        /// <param name="result">Ответ/результат операции.</param>
+        public Response(TPayload payload, ILotusResult result)
+        {
+            Payload = payload;
             Result = result;
         }
 

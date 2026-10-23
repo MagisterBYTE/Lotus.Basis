@@ -1,5 +1,7 @@
 using System;
+#if !UNITY_2017_1_OR_NEWER
 using System.ComponentModel.DataAnnotations;
+#endif
 
 namespace Lotus.Core
 {
@@ -20,8 +22,10 @@ namespace Lotus.Core
         /// <summary>
         /// Ключ сущности.
         /// </summary>
+#if !UNITY_2017_1_OR_NEWER
         [Key]
         [Required]
+#endif
         public TKey Id { get; set; }
         #endregion
 

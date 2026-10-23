@@ -124,10 +124,10 @@ namespace Lotus.Core
 #if UNITY_EDITOR
 			if (_info != null)
 			{
-				String new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, newFileName);
+                string new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, newFileName);
 				_info = new FileInfo(new_path);
 				_name = _info.Name;
-				NotifyPropertyChanged(PropertyArgsName);
+				OnPropertyChanged(PropertyArgsName);
 				RaiseNameChanged();
 			}
 #else

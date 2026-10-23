@@ -1,6 +1,6 @@
 using System;
-
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Lotus.Core.Serialization
 {
@@ -18,62 +18,45 @@ namespace Lotus.Core.Serialization
         public static readonly ColorConverter Instance = new();
         #endregion
 
-        #region Properties
-        /// <summary>
-        /// Возможность прочитать свойство.
-        /// </summary>
-        public override bool CanRead
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// Возможность записать свойство.
-        /// </summary>
-        public override bool CanWrite
-        {
-            get
-            {
-                return true;
-            }
-        }
-        #endregion
-
         #region Methods 
-        /// <summary>
-        /// Запись свойства.
-        /// </summary>
-        /// <param name="writer">Писатель Json.</param>
-        /// <param name="value">Значение свойства.</param>
-        /// <param name="serializer">Сериализатор Json.</param>
-        public override void WriteJson(JsonWriter writer, TColor value, JsonSerializer serializer)
-        {
-            writer.WriteValue(value.SerializeToString());
-        }
 
         /// <summary>
         /// Чтение свойства.
         /// </summary>
         /// <param name="reader">Читатель Json.</param>
-        /// <param name="objectType">Тип объекта.</param>
-        /// <param name="existingValue">Статус существования значение.</param>
-        /// <param name="hasExistingValue">Статус существования значение.</param>
-        /// <param name="serializer">Сериализатор Json.</param>
+        /// <param name="typeToConvert">Тип объекта.</param>
+        /// <param name="options">Опции сериализатора Json.</param>
         /// <returns>Значение свойства.</returns>
-        public override TColor ReadJson(JsonReader reader, Type objectType, TColor existingValue,
-                bool hasExistingValue, JsonSerializer serializer)
+        public override TColor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.Value != null)
+            // Если токен равен null, возвращаем значение по умолчанию (аналог existingValue в старой реализации)
+            if (reader.TokenType == JsonTokenType.Null)
             {
-                return TColor.DeserializeFromString(reader.Value.ToString()!);
+                return default;
             }
 
-            return existingValue;
+            // Получаем строковое значение из JSON
+            var value = reader.GetString();
 
+            if (!string.IsNullOrEmpty(value))
+            {
+                return TColor.DeserializeFromString(value);
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// Запись свойства.
+        /// </summary>
+        /// <param name="writer">Писатель Json.</param>
+        /// <param name="value">Значение свойства.</param>
+        /// <param name="options">Опции сериализатора Json.</param>
+        public override void Write(Utf8JsonWriter writer, TColor value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value.SerializeToString());
         }
         #endregion
     }
+    /**@}*/
 }

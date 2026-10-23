@@ -50,7 +50,7 @@ namespace Lotus.Core
         /// <param name="endRange">Окончание диапазона.</param>
         /// <returns>Статус проверки.</returns>
 #if UNITY_2017_1_OR_NEWER
-		public static Boolean CheckDateInRange(DateTime check, DateTime beginRange, DateTime endRange)
+		public static bool CheckDateInRange(DateTime check, DateTime beginRange, DateTime endRange)
 		{
 			return check >= beginRange && check <= endRange;
 		}
@@ -69,7 +69,7 @@ namespace Lotus.Core
         /// <param name="endRange">Окончание диапазона.</param>
         /// <returns>Статус проверки.</returns>
 #if UNITY_2017_1_OR_NEWER
-		public static Boolean CheckDateRangeInRange(DateTime beginCheck, DateTime? endCheck,
+		public static bool CheckDateRangeInRange(DateTime beginCheck, DateTime? endCheck,
 			DateTime beginRange, DateTime endRange)
 #else
         public static bool? CheckDateRangeInRange(DateOnly beginCheck, DateOnly? endCheck,

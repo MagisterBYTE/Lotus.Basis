@@ -2,8 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 
-using Newtonsoft.Json.Linq;
-
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using NUnit.Framework.Legacy;

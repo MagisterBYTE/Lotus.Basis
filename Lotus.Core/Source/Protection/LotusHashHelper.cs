@@ -23,7 +23,15 @@ namespace Lotus.Core
         public static string GetHash(string input)
         {
             // Convert the input string to a byte array and compute the hash.
+#if UNITY_2017_1_OR_NEWER
+            byte[] data;
+            using (var sha1 = SHA1.Create())
+            {
+                data = sha1.ComputeHash(Encoding.UTF8.GetBytes(input));
+            }
+#else
             var data = SHA1.HashData(Encoding.UTF8.GetBytes(input));
+#endif
 
             // Create a new StringBuilder to collect the bytes
             // and create a string.

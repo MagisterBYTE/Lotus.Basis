@@ -238,12 +238,12 @@ namespace Lotus.Core
         public int IntegerValue
         {
 #if UNITY_2017_1_OR_NEWER
-			get { return (Int32)_numberData.x; }
+			get { return (int)_numberData.x; }
 			set
 			{
 				_numberData.x = value;
 				_valueType = TValueType.Integer;
-				if (_owner != null) _owner.OnNotifyUpdated(this, (Int32)_numberData.x, nameof(IntegerValue));
+				if (_owner != null) _owner.OnNotifyUpdated(this, (int)_numberData.x, nameof(IntegerValue));
 			}
 #else
             get { return (int)_numberData.X; }
@@ -670,7 +670,7 @@ namespace Lotus.Core
 							UnityEngine.Object unity_object_other = other._unityData;
 							if(unity_object_this != null && unity_object_other != null)
 							{
-								result = String.CompareOrdinal(unity_object_this.name, unity_object_other.name);
+								result = string.CompareOrdinal(unity_object_this.name, unity_object_other.name);
 							}
 						}
 						break;
@@ -931,7 +931,7 @@ namespace Lotus.Core
                 case nameof(Int32):
                     {
 #if UNITY_2017_1_OR_NEWER
-							_numberData.x = (Int32)value;
+							_numberData.x = (int)value;
 #else
                         _numberData.X = (int)value;
 #endif
@@ -942,7 +942,7 @@ namespace Lotus.Core
                 case nameof(Single):
                     {
 #if UNITY_2017_1_OR_NEWER
-							_numberData.x = (Single)value;
+							_numberData.x = (float)value;
 #else
                         _numberData.X = (float)value;
 #endif
@@ -1196,7 +1196,7 @@ namespace Lotus.Core
                 case TValueType.Integer:
                     {
 #if UNITY_2017_1_OR_NEWER
-						return (Int32)_numberData.x;
+						return (int)_numberData.x;
 #else
                         return (int)_numberData.X;
 #endif
@@ -1293,7 +1293,7 @@ namespace Lotus.Core
                 case TValueType.Integer:
                     {
 #if UNITY_2017_1_OR_NEWER
-							return ((Int32)_numberData.x).ToString();
+							return ((int)_numberData.x).ToString();
 #else
                         return ((int)_numberData.X).ToString();
 #endif

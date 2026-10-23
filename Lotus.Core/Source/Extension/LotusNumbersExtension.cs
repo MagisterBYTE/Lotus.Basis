@@ -32,7 +32,7 @@ namespace Lotus.Core
             if (@this >= 1000000000)
             {
 #if UNITY_2017_1_OR_NEWER
-				return String.Format("{0}mB", UnityEngine.Mathf.Floor(@this / 10000000f) / 10f);
+				return string.Format("{0}mB", UnityEngine.Mathf.Floor(@this / 10000000f) / 10f);
 #else
                 return string.Format("{0}mB", Math.Floor(@this / 10000000f) / 10f);
 #endif
@@ -40,7 +40,7 @@ namespace Lotus.Core
             if (@this >= 1000000)
             {
 #if UNITY_2017_1_OR_NEWER
-				return String.Format("{0}kB", UnityEngine.Mathf.Floor(@this / 100000f) / 10f);
+				return string.Format("{0}kB", UnityEngine.Mathf.Floor(@this / 100000f) / 10f);
 #else
                 return string.Format("{0}kB", Math.Floor(@this / 100000f) / 10f);
 #endif
@@ -48,7 +48,7 @@ namespace Lotus.Core
             if (@this >= 1000)
             {
 #if UNITY_2017_1_OR_NEWER
-				return String.Format("{0}B", UnityEngine.Mathf.Floor(@this / 100f) / 10f);
+				return string.Format("{0}B", UnityEngine.Mathf.Floor(@this / 100f) / 10f);
 #else
                 return string.Format("{0}B", Math.Floor(@this / 100f) / 10f);
 #endif
@@ -75,13 +75,13 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Цвет в формате RGBA.</param>
 		/// <returns>32-битное цветовое значение.</returns>
-		public static UnityEngine.Color32 ToColor32(this Int32 @this)
+		public static UnityEngine.Color32 ToColor32(this int @this)
 		{
 			var color_value = new UnityEngine.Color32();
-			color_value.r = (Byte)(@this >> 24);
-			color_value.g = (Byte)(@this >> 16);
-			color_value.b = (Byte)(@this >> 8);
-			color_value.a = (Byte)(@this >> 0);
+			color_value.r = (byte)(@this >> 24);
+			color_value.g = (byte)(@this >> 16);
+			color_value.b = (byte)(@this >> 8);
+			color_value.a = (byte)(@this >> 0);
 
 			return color_value;
 		}
@@ -91,14 +91,14 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Цвет в формате RGBA.</param>
 		/// <returns>Цветовое значение.</returns>
-		public static UnityEngine.Color ToColor(this Int32 @this)
+		public static UnityEngine.Color ToColor(this int @this)
 		{
-			const Single factor = 1.0f / 255.0f;
+			const float factor = 1.0f / 255.0f;
 			var color_value = new UnityEngine.Color();
-			color_value.r = factor * (Byte)(@this >> 24);
-			color_value.g = factor * (Byte)(@this >> 16);
-			color_value.b = factor * (Byte)(@this >> 8);
-			color_value.a = factor * (Byte)(@this >> 0);
+			color_value.r = factor * (byte)(@this >> 24);
+			color_value.g = factor * (byte)(@this >> 16);
+			color_value.b = factor * (byte)(@this >> 8);
+			color_value.a = factor * (byte)(@this >> 0);
 
 			return color_value;
 		}
@@ -112,13 +112,13 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Цвет в формате RGBA.</param>
 		/// <returns>32-битное цветовое значение.</returns>
-		public static UnityEngine.Color32 ToColor32(this UInt32 @this)
+		public static UnityEngine.Color32 ToColor32(this uint @this)
 		{
 			var color_value = new UnityEngine.Color32();
-			color_value.r = (Byte)(@this >> 24);
-			color_value.g = (Byte)(@this >> 16);
-			color_value.b = (Byte)(@this >> 8);
-			color_value.a = (Byte)(@this >> 0);
+			color_value.r = (byte)(@this >> 24);
+			color_value.g = (byte)(@this >> 16);
+			color_value.b = (byte)(@this >> 8);
+			color_value.a = (byte)(@this >> 0);
 
 			return color_value;
 		}
@@ -128,14 +128,14 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Цвет в формате RGBA.</param>
 		/// <returns>Цветовое значение.</returns>
-		public static UnityEngine.Color ToColor(this UInt32 @this)
+		public static UnityEngine.Color ToColor(this uint @this)
 		{
-			const Single factor = 1.0f / 255.0f;
+			const float factor = 1.0f / 255.0f;
 			var color_value = new UnityEngine.Color();
-			color_value.r = factor * (Byte)(@this >> 24);
-			color_value.g = factor * (Byte)(@this >> 16);
-			color_value.b = factor * (Byte)(@this >> 8);
-			color_value.a = factor * (Byte)(@this >> 0);
+			color_value.r = factor * (byte)(@this >> 24);
+			color_value.g = factor * (byte)(@this >> 16);
+			color_value.b = factor * (byte)(@this >> 8);
+			color_value.a = factor * (byte)(@this >> 0);
 
 			return color_value;
 		}

@@ -70,7 +70,7 @@ namespace Lotus.Core
 		/// <summary>
 		/// Префикс имени для модулей и сборок Unity.
 		/// </summary>
-		public const String UNITY_PREFIX = "UnityEngine";
+		public const string UNITY_PREFIX = "UnityEngine";
 #endif
         #endregion
 
@@ -556,7 +556,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Тип.</param>
 		/// <returns>Статус проверки.</returns>
-		public static Boolean IsUnityModule(this Type @this)
+		public static bool IsUnityModule(this Type @this)
 		{
 			return (@this.FullName.Contains(UNITY_PREFIX));
 		}
@@ -566,7 +566,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Тип.</param>
 		/// <returns>Статус проверки.</returns>
-		public static Boolean IsUnityStructType(this Type @this)
+		public static bool IsUnityStructType(this Type @this)
 		{
 			if (@this.FullName.Contains(UNITY_PREFIX))
 			{
@@ -580,7 +580,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Тип.</param>
 		/// <returns>Статус проверки.</returns>
-		public static Boolean IsUnityClassType(this Type @this)
+		public static bool IsUnityClassType(this Type @this)
 		{
 			if (@this.FullName.Contains(UNITY_PREFIX))
 			{
@@ -595,7 +595,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Тип.</param>
 		/// <returns>Статус проверки.</returns>
-		public static Boolean IsUnityObjectType(this Type @this)
+		public static bool IsUnityObjectType(this Type @this)
 		{
 			return @this.IsSubclassOf(typeof(UnityEngine.Object));
 		}
@@ -605,7 +605,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Тип.</param>
 		/// <returns>Статус принадлежности.</returns>
-		public static Boolean IsUnityGameObjectType(this Type @this)
+		public static bool IsUnityGameObjectType(this Type @this)
 		{
 			return (@this == typeof(UnityEngine.GameObject));
 		}
@@ -615,7 +615,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Тип.</param>
 		/// <returns>Статус принадлежности.</returns>
-		public static Boolean IsUnityComponentType(this Type @this)
+		public static bool IsUnityComponentType(this Type @this)
 		{
 			return (@this.IsSubclassOf(typeof(UnityEngine.Component)));
 		}
@@ -625,7 +625,7 @@ namespace Lotus.Core
 		/// </summary>
 		/// <param name="this">Тип.</param>
 		/// <returns>Статус принадлежности.</returns>
-		public static Boolean IsUnityResourceType(this Type @this)
+		public static bool IsUnityResourceType(this Type @this)
 		{
 			if (@this.IsSubclassOf(typeof(UnityEngine.Object)) && 
 				@this != typeof(UnityEngine.GameObject) && !@this.IsSubclassOf(typeof(UnityEngine.Component)))

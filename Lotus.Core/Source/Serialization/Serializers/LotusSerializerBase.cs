@@ -70,7 +70,7 @@ namespace Lotus.Core.Serialization
         protected internal Dictionary<long, ILotusSerializableObject> _serializableObjects;
 
 #if UNITY_2017_1_OR_NEWER
-		protected internal List<CSerializeReferenceUnity> _serializeReferences;
+		protected internal List<SerializeReferenceUnity> _serializeReferences;
 #endif
         #endregion
 
@@ -114,7 +114,7 @@ namespace Lotus.Core.Serialization
 		/// <summary>
 		/// Список объект для связывания данных.
 		/// </summary>
-		public virtual List<CSerializeReferenceUnity> SerializeReferences
+		public virtual List<SerializeReferenceUnity> SerializeReferences
 		{
 			get
 			{
@@ -143,7 +143,7 @@ namespace Lotus.Core.Serialization
             _name = name;
             _serializableObjects = new Dictionary<long, ILotusSerializableObject>(100);
 #if UNITY_2017_1_OR_NEWER
-			_serializeReferences = new List<CSerializeReferenceUnity>();
+			_serializeReferences = new List<SerializeReferenceUnity>();
 #endif
         }
         #endregion

@@ -316,7 +316,7 @@ namespace Lotus.Core
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <param name="easing_type">Тип функции скорости.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 Interpolation(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time, TEasingType easing_type)
+		public static UnityEngine.Vector2 Interpolation(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time, TEasingType easing_type)
 		{
 			UnityEngine.Vector2 value = UnityEngine.Vector2.zero;
 			switch (easing_type)
@@ -431,7 +431,7 @@ namespace Lotus.Core
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <param name="easing_type">Тип функции скорости.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 Interpolation(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time, TEasingType easing_type)
+		public static UnityEngine.Vector2 Interpolation(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time, TEasingType easing_type)
 		{
 			UnityEngine.Vector2 value = UnityEngine.Vector2.zero;
 			switch (easing_type)
@@ -546,7 +546,7 @@ namespace Lotus.Core
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <param name="easing_type">Тип функции скорости.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 Interpolation(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time, TEasingType easing_type)
+		public static UnityEngine.Vector3 Interpolation(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time, TEasingType easing_type)
 		{
 			UnityEngine.Vector3 value = UnityEngine.Vector3.zero;
 			switch (easing_type)
@@ -661,7 +661,7 @@ namespace Lotus.Core
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <param name="easing_type">Тип функции скорости.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 Interpolation(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time, TEasingType easing_type)
+		public static UnityEngine.Vector3 Interpolation(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time, TEasingType easing_type)
 		{
 			UnityEngine.Vector3 value = UnityEngine.Vector3.zero;
 			switch (easing_type)
@@ -805,7 +805,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 Linear(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 Linear(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			return start + ((end - start) * time);
 		}
@@ -817,7 +817,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 Linear(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 Linear(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			return start + ((end - start) * time);
 		}
@@ -829,7 +829,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 Linear(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 Linear(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			return start + ((end - start) * time);
 		}
@@ -841,7 +841,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 Linear(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 Linear(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			return start + ((end - start) * time);
 		}
@@ -883,7 +883,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 QuadIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 QuadIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = time * time;
 
@@ -898,7 +898,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 QuadIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 QuadIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = time * time;
 
@@ -913,7 +913,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 QuadIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 QuadIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = time * time;
 
@@ -929,7 +929,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 QuadIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 QuadIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = time * time;
 
@@ -974,7 +974,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 QuadOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 QuadOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = 1.0f - ((1 - time) * (1 - time));
 
@@ -990,7 +990,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 QuadOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 QuadOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = 1.0f - ((1 - time) * (1 - time));
 
@@ -1006,7 +1006,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 QuadOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 QuadOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = 1.0f - ((1 - time) * (1 - time));
 
@@ -1023,7 +1023,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 QuadOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 QuadOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = 1.0f - ((1 - time) * (1 - time));
 
@@ -1088,7 +1088,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 QuadInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 QuadInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -1114,7 +1114,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 QuadInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 QuadInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -1140,7 +1140,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 QuadInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 QuadInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -1167,7 +1167,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 QuadInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 QuadInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			if(time < 0.5f)
 			{
@@ -1224,7 +1224,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 CubeIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 CubeIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = time * time * time;
 
@@ -1239,7 +1239,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 CubeIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 CubeIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = time * time * time;
 
@@ -1254,7 +1254,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 CubeIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 CubeIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = time * time * time;
 
@@ -1270,7 +1270,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 CubeIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 CubeIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = time * time * time;
 
@@ -1316,7 +1316,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 CubeOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 CubeOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = 1.0f - ((1 - time) * (1 - time) * (1 - time));
 
@@ -1332,7 +1332,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 CubeOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 CubeOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = 1.0f - ((1 - time) * (1 - time) * (1 - time));
 
@@ -1348,7 +1348,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 CubeOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 CubeOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = 1.0f - ((1 - time) * (1 - time) * (1 - time));
 
@@ -1365,7 +1365,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 CubeOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 CubeOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = 1.0f - ((1 - time) * (1 - time) * (1 - time));
 
@@ -1432,7 +1432,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 CubeInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 CubeInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -1458,7 +1458,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 CubeInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 CubeInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -1484,7 +1484,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 CubeInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 CubeInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -1511,7 +1511,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 CubeInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 CubeInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -1571,7 +1571,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BackIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BackIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
 
@@ -1586,7 +1586,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BackIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BackIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
 
@@ -1601,7 +1601,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BackIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BackIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
 
@@ -1617,7 +1617,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BackIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BackIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
 
@@ -1666,7 +1666,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BackOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BackOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = 1.0f - time;
 			time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
@@ -1684,7 +1684,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BackOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BackOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = 1.0f - time;
 			time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
@@ -1702,7 +1702,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BackOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BackOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = 1.0f - time;
 			time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
@@ -1721,7 +1721,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BackOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BackOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = 1.0f - time;
 			time = time * time * ((CoefficientBack1 * time) - CoefficientBack2);
@@ -1789,7 +1789,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BackInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BackInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time /= .5f;
 			if (time < 1)
@@ -1815,7 +1815,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BackInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BackInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time /= .5f;
 			if (time < 1)
@@ -1841,7 +1841,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BackInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BackInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time /= .5f;
 			if (time < 1)
@@ -1868,7 +1868,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BackInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BackInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time /= .5f;
 			if (time < 1)
@@ -1931,7 +1931,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ExpoIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ExpoIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = UnityEngine.Mathf.Pow(CoefficientExpoBasis, CoefficientExpo * (time - 1));
 
@@ -1946,7 +1946,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ExpoIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ExpoIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = UnityEngine.Mathf.Pow(CoefficientExpoBasis, CoefficientExpo * (time - 1));
 
@@ -1961,7 +1961,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ExpoIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ExpoIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = UnityEngine.Mathf.Pow(CoefficientExpoBasis, CoefficientExpo * (time - 1));
 
@@ -1977,7 +1977,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ExpoIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ExpoIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = UnityEngine.Mathf.Pow(CoefficientExpoBasis, CoefficientExpo * (time - 1));
 
@@ -2026,7 +2026,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ExpoOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ExpoOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 
@@ -2042,7 +2042,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ExpoOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ExpoOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 
@@ -2058,7 +2058,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ExpoOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ExpoOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 
@@ -2075,7 +2075,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ExpoOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ExpoOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = -UnityEngine.Mathf.Pow(CoefficientExpoBasis, -CoefficientExpo * time) + 1;
 
@@ -2150,7 +2150,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ExpoInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ExpoInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time /= .5f;
 			if (time < 1)
@@ -2176,7 +2176,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ExpoInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ExpoInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time /= .5f;
 			if (time < 1)
@@ -2202,7 +2202,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ExpoInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ExpoInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time /= .5f;
 			if (time < 1)
@@ -2229,7 +2229,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ExpoInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ExpoInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time /= .5f;
 			if (time < 1)
@@ -2292,7 +2292,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 SineIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 SineIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = -UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI / 2 * time) + 1.0f;
 
@@ -2307,7 +2307,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 SineIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 SineIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = -UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI / 2 * time) + 1.0f;
 
@@ -2322,7 +2322,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 SineIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 SineIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = -UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI / 2 * time) + 1.0f;
 
@@ -2338,7 +2338,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 SineIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 SineIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = -UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI / 2 * time) + 1.0f;
 
@@ -2387,7 +2387,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 SineOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 SineOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 
@@ -2403,7 +2403,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 SineOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 SineOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 
@@ -2419,7 +2419,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 SineOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 SineOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 
@@ -2436,7 +2436,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 SineOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 SineOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = UnityEngine.Mathf.Sin(UnityEngine.Mathf.PI / 2 * time);
 
@@ -2486,7 +2486,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 SineInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 SineInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 
@@ -2503,7 +2503,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 SineInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 SineInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 
@@ -2520,7 +2520,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 SineInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 SineInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 
@@ -2538,7 +2538,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 SineInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 SineInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = (-UnityEngine.Mathf.Cos(UnityEngine.Mathf.PI * time) / 2) + 0.5f;
 
@@ -2596,7 +2596,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ElasticIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ElasticIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = 1 - time;
 			time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
@@ -2613,7 +2613,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ElasticIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ElasticIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = 1 - time;
 			time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
@@ -2630,7 +2630,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ElasticIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ElasticIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = 1 - time;
 			time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
@@ -2648,7 +2648,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ElasticIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ElasticIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = 1 - time;
 			time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
@@ -2699,7 +2699,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ElasticOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ElasticOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 
@@ -2715,7 +2715,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ElasticOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ElasticOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 
@@ -2731,7 +2731,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ElasticOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ElasticOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 
@@ -2748,7 +2748,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ElasticOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ElasticOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = (UnityEngine.Mathf.Pow(CoefficientElasticBasis, -CoefficientElastic * time) * UnityEngine.Mathf.Sin((time - 0.075f) * (2 * UnityEngine.Mathf.PI) / 0.3f)) + 1;
 
@@ -2828,7 +2828,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ElasticInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ElasticInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -2857,7 +2857,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 ElasticInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 ElasticInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -2886,7 +2886,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ElasticInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ElasticInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -2916,7 +2916,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 ElasticInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 ElasticInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -3020,7 +3020,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BounceIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BounceIn(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			time = 1 - time;
 			if (time < 1 / 2.75f)
@@ -3055,7 +3055,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BounceIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BounceIn(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			time = 1 - time;
 			if (time < 1 / 2.75f)
@@ -3090,7 +3090,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BounceIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BounceIn(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			time = 1 - time;
 			if (time < 1 / 2.75f)
@@ -3126,7 +3126,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BounceIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BounceIn(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			time = 1 - time;
 			if (time < 1 / 2.75f)
@@ -3229,7 +3229,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BounceOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BounceOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			if (time < 1 / 2.75f)
 			{
@@ -3263,7 +3263,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BounceOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BounceOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			if (time < 1 / 2.75f)
 			{
@@ -3297,7 +3297,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BounceOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BounceOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			if (time < 1 / 2.75f)
 			{
@@ -3332,7 +3332,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BounceOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BounceOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			if (time < 1 / 2.75f)
 			{
@@ -3502,7 +3502,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BounceInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BounceInOut(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -3571,7 +3571,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 BounceInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, Single time)
+		public static UnityEngine.Vector2 BounceInOut(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -3640,7 +3640,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BounceInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BounceInOut(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time)
 		{
 			if (time < 0.5f)
 			{
@@ -3710,7 +3710,7 @@ namespace Lotus.Core
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 BounceInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, Single time)
+		public static UnityEngine.Vector3 BounceInOut(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time)
 		{
 			if (time < 0.5f)
 			{

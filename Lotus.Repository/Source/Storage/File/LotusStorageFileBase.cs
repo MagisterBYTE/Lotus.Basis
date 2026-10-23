@@ -1,12 +1,12 @@
 using System;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
 using Lotus.Core;
 using Lotus.Core.Serialization;
-
-using Newtonsoft.Json;
 
 namespace Lotus.Repository
 {
@@ -32,7 +32,7 @@ namespace Lotus.Repository
         #region Fields
         protected internal string _fileName;
         protected internal bool _needSaved;
-        protected internal JsonSerializerSettings _serializerSettings;
+        protected internal JsonSerializerOptions _serializerOptions;
         #endregion
 
         #region Properties
@@ -74,12 +74,18 @@ namespace Lotus.Repository
         /// </summary>
         public StorageFileBase()
         {
-            _serializerSettings = new JsonSerializerSettings
+            _serializerOptions = new JsonSerializerOptions
             {
-                Formatting = Formatting.Indented,
-                MetadataPropertyHandling = MetadataPropertyHandling.Default,
-                TypeNameHandling = TypeNameHandling.Auto,
-                Converters = [ColorConverter.Instance]
+                // Аналог Formatting.Indented
+                WriteIndented = true,
+
+                // Аналог TypeNameHandling.Auto
+                // В System.Text.Json это работает через иерархию атрибутов [JsonDerivedType] 
+                // у базового класса, либо через настройку TypeInfoResolver.
+                UnknownTypeHandling = JsonUnknownTypeHandling.JsonElement,
+
+                // Кастомные конвертеры добавляются так же
+                Converters = { ColorConverter.Instance }
             };
         }
         #endregion
@@ -117,7 +123,7 @@ namespace Lotus.Repository
 
             if (_fileName.EndsWith(JsonExtension, true, null))
             {
-                var raw = JsonConvert.SerializeObject(IStructure, _serializerSettings);
+                var raw = JsonSerializer.Serialize(IStructure, _serializerOptions);
 
                 File.WriteAllText(_fileName, raw);
 
@@ -155,7 +161,7 @@ namespace Lotus.Repository
 
             if (_fileName.EndsWith(JsonExtension, StringComparison.OrdinalIgnoreCase))
             {
-                var raw = JsonConvert.SerializeObject(IStructure, _serializerSettings);
+                var raw = JsonSerializer.Serialize(IStructure, _serializerOptions);
 
                 await File.WriteAllTextAsync(_fileName, raw, token);
 

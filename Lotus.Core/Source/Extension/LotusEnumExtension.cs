@@ -116,7 +116,11 @@ namespace Lotus.Core
             where TOutEnum : struct, Enum
             where TInEnum : struct, Enum
         {
+#if UNITY_2017_1_OR_NEWER
+            return ((TOutEnum[])Enum.GetValues(typeof(TOutEnum))).First(v => v.ToString() == enumValue.ToString());
+#else
             return Enum.GetValues<TOutEnum>().First(v => v.ToString() == enumValue.ToString());
+#endif
         }
 
         /// <summary>

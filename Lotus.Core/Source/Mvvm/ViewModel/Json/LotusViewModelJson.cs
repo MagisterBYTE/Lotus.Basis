@@ -1,6 +1,5 @@
 using System;
-
-using Newtonsoft.Json.Linq;
+using System.Text.Json.Nodes;
 
 namespace Lotus.Core
 {
@@ -9,7 +8,7 @@ namespace Lotus.Core
     /// <summary>
     /// Класс реализующий минимальный элемент ViewModel данных формата JSON.
     /// </summary>
-    public class CViewModelJson : ViewModelHierarchy<JObject>
+    public class CViewModelJson : ViewModelHierarchy<JsonObject>
     {
         #region Constructors
         /// <summary>
@@ -17,7 +16,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="model">Модель.</param>
         /// <param name="parentItem">Родительский узел.</param>
-        public CViewModelJson(JObject model, ILotusViewModelHierarchy? parentItem)
+        public CViewModelJson(JsonObject model, ILotusViewModelHierarchy? parentItem)
             : base(model, parentItem)
         {
         }
@@ -32,7 +31,7 @@ namespace Lotus.Core
         /// <returns>ViewModel.</returns>
         public override ILotusViewModelHierarchy CreateViewModelHierarchy(object model, ILotusViewModelHierarchy? parent)
         {
-            if (model is JObject jobject)
+            if (model is JsonObject jobject)
             {
                 return new CViewModelJson(jobject, parent);
             }
@@ -57,7 +56,7 @@ namespace Lotus.Core
     /// Данная коллекции позволяет управлять видимостью данных, обеспечивает их сортировку, группировку, фильтрацию, 
     /// позволяет выбирать данные и производить над ними операции
     /// </remarks>
-    public class CCollectionViewJson : CollectionViewModelHierarchy<CViewModelJson, JObject>
+    public class CCollectionViewJson : CollectionViewModelHierarchy<CViewModelJson, JsonObject>
     {
         #region Constructors
         /// <summary>
@@ -83,7 +82,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="name">Имя коллекции.</param>
         /// <param name="source">Источник данных.</param>
-        public CCollectionViewJson(string name, JObject source)
+        public CCollectionViewJson(string name, JsonObject source)
             : base(name, source)
         {
         }

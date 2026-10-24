@@ -1,441 +1,381 @@
-
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusInspectorMethodHolder.cs
-*		Определение структур данных для отображения атрибута вызова метода через инспектор свойств.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
+#if UNITY_EDITOR
 using System;
 using System.Reflection;
+
+using Lotus.Core;
+using Lotus.Core.Inspector;
+
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
 
-namespace Lotus
+namespace Lotus.Editor
 {
-	namespace Editor
-	{
+    /// <summary>
+    /// Данные для вызова метода без аргумента
+    /// </summary>
+    public class CMethodHolder : IComparable<CMethodHolder>
+    {
+        #region Fields
+        /// <summary>
+        /// Атрибут вызова метода
+        /// </summary>
+        public LotusMethodCallAttribute MethodAttribute;
 
-		/// <summary>
-		/// Данные для вызова метода без аргумента
-		/// </summary>
+        /// <summary>
+        /// Вызываемый метод
+        /// </summary>
+        public MethodInfo Method;
 
-		public class CMethodHolder : IComparable<CMethodHolder>
-		{
-			#region Fields
-			/// <summary>
-			/// Атрибут вызова метода
-			/// </summary>
-			public LotusMethodCallAttribute MethodAttribute;
+        /// <summary>
+        /// Экземпляр объекта
+        /// </summary>
+        public object Instance;
+        #endregion
 
-			/// <summary>
-			/// Вызываемый метод
-			/// </summary>
-			public MethodInfo Method;
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
+        /// </summary>
+        public CMethodHolder()
+        {
+        }
+        #endregion
 
-			/// <summary>
-			/// Экземпляр объекта
-			/// </summary>
-			public System.Object Instance;
-			#endregion
+        #region System methods
+        /// <summary>
+        /// Сравнение объектов для упорядочивания
+        /// </summary>
+        /// <param name="other">Сравниваемый объект</param>
+        /// <returns>Статус сравнения</returns>
+        public int CompareTo(CMethodHolder other)
+        {
+            return MethodAttribute.DrawOrder.CompareTo(other.MethodAttribute.DrawOrder);
+        }
+        #endregion
 
-			#region Constructors
-			
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			
-			public CMethodHolder()
-			{
-			}
-			#endregion
+        #region Main methods
+        /// <summary>
+        /// Получение сигнатуры метода
+        /// </summary>
+        /// <returns>Сигнатура метода</returns>
+        protected virtual string GetSignatureMethod()
+        {
+            return " ()";
+        }
 
-			#region ======================================= СИСТЕМНЫЕ МЕТОДЫ ==========================================
-			
-			/// <summary>
-			/// Сравнение объектов для упорядочивания
-			/// </summary>
-			/// <param name="other">Сравниваемый объект</param>
-			/// <returns>Статус сравнения</returns>
-			
-			public Int32 CompareTo(CMethodHolder other)
-			{
-				return (MethodAttribute.DrawOrder.CompareTo(other.MethodAttribute.DrawOrder));
-			}
-			#endregion
+        /// <summary>
+        /// Вызов метода
+        /// </summary>
+        protected virtual void InvokeMethod()
+        {
+            if (Method.IsStatic)
+            {
+                Method.Invoke(null, null);
+            }
+            else
+            {
+                Method.Invoke(Instance, null);
+            }
+        }
 
-			#region Main methods
-			
-			/// <summary>
-			/// Получение сигнатуры метода
-			/// </summary>
-			/// <returns>Сигнатура метода</returns>
-			
-			protected virtual String GetSignatureMethod()
-			{
-				return (" ()");
-			}
+        /// <summary>
+        /// Рисование элементов для установки аргументов
+        /// </summary>
+        protected virtual void DrawArguments()
+        {
+        }
 
-			
-			/// <summary>
-			/// Вызов метода
-			/// </summary>
-			
-			protected virtual void InvokeMethod()
-			{
-				if (Method.IsStatic)
-				{
-					Method.Invoke(null, null);
-				}
-				else
-				{
-					Method.Invoke(Instance, null);
-				}
-			}
+        /// <summary>
+        /// Получение имени метода для отображения
+        /// </summary>
+        /// <returns>Имя метода</returns>
+        protected string GetMethodDisplay()
+        {
+            if (MethodAttribute.DisplayName.IsExists())
+            {
+                if (MethodAttribute.IsSignature)
+                {
+                    return MethodAttribute.DisplayName + GetSignatureMethod();
+                }
 
-			
-			/// <summary>
-			/// Рисование элементов для установки аргументов
-			/// </summary>
-			
-			protected virtual void DrawArguments()
-			{
+                return MethodAttribute.DisplayName;
+            }
 
-			}
+            if (MethodAttribute.IsSignature)
+            {
+                return Method.Name + GetSignatureMethod();
+            }
 
-			
-			/// <summary>
-			/// Получение имени метода для отображения
-			/// </summary>
-			/// <returns>Имя метода</returns>
-			
-			protected String GetMethodDisplay()
-			{
-				if (MethodAttribute.DisplayName.IsExists())
-				{
-					if (MethodAttribute.IsSignature)
-					{
-						return (MethodAttribute.DisplayName + GetSignatureMethod());
-					}
-					else
-					{
-						return (MethodAttribute.DisplayName);
-					}
-				}
-				else
-				{
-					if (MethodAttribute.IsSignature)
-					{
-						return (Method.Name + GetSignatureMethod());
-					}
-					else
-					{
-						return (Method.Name);
-					}
-				}
-			}
+            return Method.Name;
+        }
 
-			
-			/// <summary>
-			/// Рисование элементов управления для вызова метода
-			/// </summary>
-			
-			public virtual void Draw()
-			{
-				XEditorInspector.DrawDecorateAttributes(Method);
+        /// <summary>
+        /// Рисование элементов управления для вызова метода
+        /// </summary>
+        public virtual void Draw()
+        {
+            XEditorInspector.DrawDecorateAttributes(Method);
 
-				if (EditorApplication.isPlaying)
-				{
-					GUI.enabled = !(MethodAttribute.Mode == TMethodCallMode.OnlyEditor);
-				}
-				else
-				{
-					GUI.enabled = !(MethodAttribute.Mode == TMethodCallMode.OnlyPlay);
-				}
+            if (EditorApplication.isPlaying)
+            {
+                GUI.enabled = MethodAttribute.Mode != TMethodCallMode.OnlyEditor;
+            }
+            else
+            {
+                GUI.enabled = MethodAttribute.Mode != TMethodCallMode.OnlyPlay;
+            }
 
-				Rect rect_button = EditorGUILayout.BeginHorizontal(GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
-				{
-					EditorGUILayout.PrefixLabel("");
+            var rectButton = EditorGUILayout.BeginHorizontal(GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
+            {
+                EditorGUILayout.PrefixLabel(string.Empty);
 
-					if (Event.current.type != EventType.Layout)
-					{
-						if (GUI.Button(rect_button, GetMethodDisplay()))
-						{
-							if (Instance != null)
-							{
-								InvokeMethod();
-							}
-							
-						}
-					}
-				}
-				EditorGUILayout.EndHorizontal();
+                if (Event.current.type != EventType.Layout)
+                {
+                    if (GUI.Button(rectButton, GetMethodDisplay()))
+                    {
+                        if (Instance != null)
+                        {
+                            InvokeMethod();
+                        }
+                    }
+                }
+            }
+            EditorGUILayout.EndHorizontal();
 
-				GUI.enabled = true;
-			}
-			#endregion
-		}
+            GUI.enabled = true;
+        }
+        #endregion
+    }
 
+    /// <summary>
+    /// Данные для вызова метода с одним аргументом
+    /// </summary>
+    public class CMethodHolderArg1 : CMethodHolder
+    {
+        #region Fields
+        /// <summary>
+        /// Имя первого аргумента
+        /// </summary>
+        public string FirstArgumentName;
 
-		/// <summary>
-		/// Данные для вызова метода с одним аргументов
-		/// </summary>
+        /// <summary>
+        /// Имя типа первого аргумента
+        /// </summary>
+        public string FirstArgumentTypeName;
 
-		public class CMethodHolderArg1 : CMethodHolder
-		{
-			#region Fields
-			/// <summary>
-			/// Имя первого аргумента
-			/// </summary>
-			public String FirstArgumentName;
+        /// <summary>
+        /// Первый аргумент
+        /// </summary>
+        public CVariant FirstArgument;
+        #endregion
 
-			/// <summary>
-			/// Имя типа первого аргумента
-			/// </summary>
-			public String FirstArgumentTypeName;
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
+        /// </summary>
+        public CMethodHolderArg1()
+        {
+            FirstArgument = new CVariant();
+        }
+        #endregion
 
-			/// <summary>
-			/// Первый аргумент
-			/// </summary>
-			public CVariant FirstArgument;
-			#endregion
+        #region Main methods
+        /// <summary>
+        /// Получение сигнатуры метода
+        /// </summary>
+        /// <returns>Сигнатура метода</returns>
+        protected override string GetSignatureMethod()
+        {
+            return " (" + FirstArgumentTypeName + " " + FirstArgumentName + ")";
+        }
 
-			#region Constructors
-			
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			
-			public CMethodHolderArg1()
-			{
-				FirstArgument = new CVariant();
-			}
-			#endregion
+        /// <summary>
+        /// Вызов метода
+        /// </summary>
+        protected override void InvokeMethod()
+        {
+            CReflectedType.ArgList1[0] = FirstArgument.Get();
 
-			#region Main methods
-			
-			/// <summary>
-			/// Получение сигнатуры метода
-			/// </summary>
-			/// <returns>Сигнатура метода</returns>
-			
-			protected override String GetSignatureMethod()
-			{
-				return (" (" + FirstArgumentTypeName + " " + FirstArgumentName + ")");
-			}
+            if (Method.IsStatic)
+            {
+                Method.Invoke(null, CReflectedType.ArgList1);
+            }
+            else
+            {
+                Method.Invoke(Instance, CReflectedType.ArgList1);
+            }
+        }
 
-			
-			/// <summary>
-			/// Вызов метода
-			/// </summary>
-			
-			protected override void InvokeMethod()
-			{
-				CReflectedType.ArgList1[0] = FirstArgument.Get();
+        /// <summary>
+        /// Рисование элементов для установки аргументов
+        /// </summary>
+        protected override void DrawArguments()
+        {
+            EditorGUILayout.BeginHorizontal();
+            {
+                EditorGUI.indentLevel++;
+                LotusVariantDrawer.DrawLayoutVariant(FirstArgumentName, FirstArgument);
+                EditorGUI.indentLevel--;
 
-				if (Method.IsStatic)
-				{
-					Method.Invoke(null, CReflectedType.ArgList1);
-				}
-				else
-				{
-					Method.Invoke(Instance, CReflectedType.ArgList1);
-				}
-			}
+                //if (MethodAttribute is LotusMethodArgFileAttribute)
+                //{
+                //    LotusMethodArgFileAttribute argFile = MethodAttribute as LotusMethodArgFileAttribute;
+                //
+                //    if (GUILayout.Button("...", EditorStyles.miniButtonRight,
+                //        GUILayout.Width(XInspectorViewParams.BUTTON_MINI_WIDTH)))
+                //    {
+                //        string fileName = string.Empty;
+                //        if (argFile.IsOpenFile)
+                //        {
+                //            fileName = XFileDialog.Open("Открыть", argFile.DefaultPath, argFile.Extension);
+                //        }
+                //        else
+                //        {
+                //            fileName = XFileDialog.Save("Сохранить", argFile.DefaultPath, argFile.DefaultName, argFile.Extension);
+                //        }
+                //
+                //        if (fileName.IsExists())
+                //        {
+                //            FirstArgument.StringValue = fileName.RemoveToWith(XEditorSettings.ASSETS_PATH);
+                //        }
+                //    }
+                //}
+            }
+            EditorGUILayout.EndHorizontal();
+        }
 
-			
-			/// <summary>
-			/// Рисование элементов для установки аргументов
-			/// </summary>
-			
-			protected override void DrawArguments()
-			{
-				EditorGUILayout.BeginHorizontal();
-				{
-					EditorGUI.indentLevel++;
-					LotusVariantDrawer.DrawLayoutVariant(FirstArgumentName, FirstArgument);
-					EditorGUI.indentLevel--;
+        /// <summary>
+        /// Рисование элементов управления для вызова метода
+        /// </summary>
+        public override void Draw()
+        {
+            XEditorInspector.DrawDecorateAttributes(Method);
 
-					//if(MethodAttribute is LotusMethodArgFileAttribute)
-					//{
-					//	LotusMethodArgFileAttribute arg_file = MethodAttribute as LotusMethodArgFileAttribute;
+            if (EditorApplication.isPlaying)
+            {
+                GUI.enabled = MethodAttribute.Mode != TMethodCallMode.OnlyEditor;
+            }
+            else
+            {
+                GUI.enabled = MethodAttribute.Mode != TMethodCallMode.OnlyPlay;
+            }
 
-					//	if (GUILayout.Button("...", EditorStyles.miniButtonRight, 
-					//		GUILayout.Width(XInspectorViewParams.BUTTON_MINI_WIDTH)))
-					//	{
-					//		String file_name = "";
-					//		if(arg_file.IsOpenFile)
-					//		{
-					//			file_name = XFileDialog.Open("Открыть", arg_file.DefaultPath, arg_file.Extension);
-					//		}
-					//		else
-					//		{
-					//			file_name = XFileDialog.Save("Сохранить", arg_file.DefaultPath, arg_file.DefaultName, arg_file.Extension);
-					//		}
+            var rectButton = EditorGUILayout.BeginHorizontal(GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
+            {
+                EditorGUILayout.PrefixLabel(string.Empty);
 
-					//		if (file_name.IsExists())
-					//		{
-					//			FirstArgument.StringValue = file_name.RemoveToWith(XEditorSettings.ASSETS_PATH);
-					//		}
-					//	}
-					//}
-				}
-				EditorGUILayout.EndHorizontal();
-			}
+                if (Event.current.type != EventType.Layout)
+                {
+                    if (GUI.Button(rectButton, GetMethodDisplay()))
+                    {
+                        if (Instance != null)
+                        {
+                            InvokeMethod();
+                        }
+                    }
+                }
+            }
+            EditorGUILayout.EndHorizontal();
 
-			
-			/// <summary>
-			/// Рисование элементов управления для вызова метода
-			/// </summary>
-			
-			public override void Draw()
-			{
-				XEditorInspector.DrawDecorateAttributes(Method);
+            var rectBox = EditorGUILayout.BeginVertical();
+            {
+                if (Event.current.type != EventType.Layout)
+                {
+                    rectBox.x += XInspectorViewParams.OFFSET_INDENT;
+                    rectBox.width -= XInspectorViewParams.OFFSET_INDENT;
+                    rectBox.height += 2;
+                    if (rectBox.height > XInspectorViewParams.CONTROL_HEIGHT)
+                    {
+                        GUI.Box(rectBox, GUIContent.none, XEditorStyles.BOX_SHURIKEN);
+                    }
+                }
+                DrawArguments();
+            }
+            EditorGUILayout.EndVertical();
 
-				if (EditorApplication.isPlaying)
-				{
-					GUI.enabled = !(MethodAttribute.Mode == TMethodCallMode.OnlyEditor);
-				}
-				else
-				{
-					GUI.enabled = !(MethodAttribute.Mode == TMethodCallMode.OnlyPlay);
-				}
+            GUI.enabled = true;
+        }
+        #endregion
+    }
 
-				Rect rect_button = EditorGUILayout.BeginHorizontal(GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
-				{
-					EditorGUILayout.PrefixLabel("");
+    /// <summary>
+    /// Данные для вызова метода с двумя аргументами
+    /// </summary>
+    public class CMethodHolderArg2 : CMethodHolderArg1
+    {
+        #region Fields
+        /// <summary>
+        /// Имя второго аргумента
+        /// </summary>
+        public string SecondArgumentName;
 
-					if (Event.current.type != EventType.Layout)
-					{
-						if (GUI.Button(rect_button, GetMethodDisplay()))
-						{
-							if (Instance != null)
-							{
-								InvokeMethod();
-							}
+        /// <summary>
+        /// Имя типа второго аргумента
+        /// </summary>
+        public string SecondArgumentTypeName;
 
-						}
-					}
-				}
-				EditorGUILayout.EndHorizontal();
+        /// <summary>
+        /// Второй аргумент
+        /// </summary>
+        public CVariant SecondArgument;
+        #endregion
 
-				Rect rect_box = EditorGUILayout.BeginVertical();
-				{
-					if (Event.current.type != EventType.Layout)
-					{
-						rect_box.x += XInspectorViewParams.OFFSET_INDENT;
-						rect_box.width -= XInspectorViewParams.OFFSET_INDENT;
-						rect_box.height += 2;
-						if (rect_box.height > XInspectorViewParams.CONTROL_HEIGHT)
-						{
-							GUI.Box(rect_box, "", XEditorStyles.BOX_SHURIKEN);
-						}
-					}
-					DrawArguments();
-				}
-				EditorGUILayout.EndVertical();
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
+        /// </summary>
+        public CMethodHolderArg2()
+        {
+            FirstArgument = new CVariant();
+            SecondArgument = new CVariant();
+        }
+        #endregion
 
-				GUI.enabled = true;
-			}
-			#endregion
-		}
+        #region Main methods
+        /// <summary>
+        /// Получение сигнатуры метода
+        /// </summary>
+        /// <returns>Сигнатура метода</returns>
+        protected override string GetSignatureMethod()
+        {
+            return " (" + FirstArgumentTypeName + " " + FirstArgumentName + ", " +
+                SecondArgumentTypeName + " " + SecondArgumentName + ")";
+        }
 
+        /// <summary>
+        /// Вызов метода
+        /// </summary>
+        protected override void InvokeMethod()
+        {
+            CReflectedType.ArgList2[0] = FirstArgument.Get();
+            CReflectedType.ArgList2[1] = SecondArgument.Get();
 
-		/// <summary>
-		/// Данные для вызова метода с двумя аргументами
-		/// </summary>
+            if (Method.IsStatic)
+            {
+                Method.Invoke(null, CReflectedType.ArgList2);
+            }
+            else
+            {
+                Method.Invoke(Instance, CReflectedType.ArgList2);
+            }
+        }
 
-		public class CMethodHolderArg2 : CMethodHolderArg1
-		{
-			#region Fields
-			/// <summary>
-			/// Имя второго аргумента
-			/// </summary>
-			public String SecondArgumentName;
+        /// <summary>
+        /// Рисование элементов для установки аргументов
+        /// </summary>
+        protected override void DrawArguments()
+        {
+            base.DrawArguments();
 
-			/// <summary>
-			/// Имя типа второго аргумента
-			/// </summary>
-			public String SecondArgumentTypeName;
-
-			/// <summary>
-			/// Второй аргумент
-			/// </summary>
-			public CVariant SecondArgument;
-			#endregion
-
-			#region Constructors
-			
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			
-			public CMethodHolderArg2()
-			{
-				FirstArgument = new CVariant();
-				SecondArgument = new CVariant();
-			}
-			#endregion
-
-			#region Main methods
-			
-			/// <summary>
-			/// Получение сигнатуры метода
-			/// </summary>
-			/// <returns>Сигнатура метода</returns>
-			
-			protected override String GetSignatureMethod()
-			{
-				var signature = " (" + FirstArgumentTypeName + " " + FirstArgumentName + ", " +
-					SecondArgumentTypeName + " " + SecondArgumentName + ")";
-
-				return (signature);
-			}
-
-			
-			/// <summary>
-			/// Вызов метода
-			/// </summary>
-			
-			protected override void InvokeMethod()
-			{
-				CReflectedType.ArgList2[0] = FirstArgument.Get();
-				CReflectedType.ArgList2[1] = SecondArgument.Get();
-
-				if (Method.IsStatic)
-				{
-					Method.Invoke(null, CReflectedType.ArgList2);
-				}
-				else
-				{
-					Method.Invoke(Instance, CReflectedType.ArgList2);
-				}
-			}
-
-			
-			/// <summary>
-			/// Рисование элементов для установки аргументов
-			/// </summary>
-			
-			protected override void DrawArguments()
-			{
-				base.DrawArguments();
-
-				EditorGUILayout.BeginHorizontal();
-				{
-					EditorGUI.indentLevel++;
-					LotusVariantDrawer.DrawLayoutVariant(SecondArgumentName, SecondArgument);
-					EditorGUI.indentLevel--;
-				}
-				EditorGUILayout.EndHorizontal();
-			}
-			#endregion
-		}
-	}
+            EditorGUILayout.BeginHorizontal();
+            {
+                EditorGUI.indentLevel++;
+                LotusVariantDrawer.DrawLayoutVariant(SecondArgumentName, SecondArgument);
+                EditorGUI.indentLevel--;
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+        #endregion
+    }
 }
+#endif

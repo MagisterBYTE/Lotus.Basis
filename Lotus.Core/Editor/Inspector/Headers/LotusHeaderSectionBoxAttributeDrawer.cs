@@ -1,85 +1,74 @@
+#if UNITY_EDITOR
+using Lotus.Core;
+using Lotus.Core.Inspector;
 
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusHeaderSectionBoxAttributeDrawer.cs
-*		Редактор атрибута HeaderSectionBox.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
-using System;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор атрибута HeaderSectionBox
-/// </summary>
-------------
-[CustomPropertyDrawer(typeof(LotusHeaderSectionBoxAttribute), true)]
-public class LotusHeaderSectionBoxAttributeDrawer : DecoratorDrawer
+namespace Lotus.Editor
 {
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Получение высоты декоративного элемента
-	/// </summary>
-	/// <returns>Высота декоративного элемента</returns>
-	--------
-	public override Single GetHeight()
-	{
-		return (base.GetHeight() + (EditorStyles.helpBox.border.top + 
-			EditorStyles.helpBox.border.bottom + EditorGUIUtility.standardVerticalSpacing));
-	}
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор атрибута LotusHeaderSectionBoxAttribute
+    /// </summary>
+    [CustomPropertyDrawer(typeof(LotusHeaderSectionBoxAttribute), true)]
+    public class LotusHeaderSectionBoxAttributeDrawer : DecoratorDrawer
+    {
+        #region Unity events
+        /// <summary>
+        /// Получение высоты декоративного элемента
+        /// </summary>
+        /// <returns>Высота декоративного элемента</returns>
+        public override float GetHeight()
+        {
+            return base.GetHeight() + (EditorStyles.helpBox.border.top +
+                EditorStyles.helpBox.border.bottom + EditorGUIUtility.standardVerticalSpacing);
+        }
 
-	--------
-	/// <summary>
-	/// Рисование параметров декоративного элемента
-	/// </summary>
-	/// <param name="position">Прямоугольник для отображения</param>
-	--------
-	public override void OnGUI(Rect position)
-	{
-		var section_attribute = attribute as LotusHeaderSectionBoxAttribute;
+        /// <summary>
+        /// Рисование параметров декоративного элемента
+        /// </summary>
+        /// <param name="position">Прямоугольник для отображения</param>
+        public override void OnGUI(Rect position)
+        {
+            var sectionAttribute = attribute as LotusHeaderSectionBoxAttribute;
+            var style = EditorStyles.boldLabel;
 
-		GUIStyle style = EditorStyles.boldLabel;
+            // Старые параметры
+            var oldColor = style.normal.textColor;
+            var oldAnchor = style.alignment;
+            style.fontSize++;
 
-		// Старые параметры
-		Color old_color = style.normal.textColor;
-		TextAnchor old_anchor = style.alignment;
-		style.fontSize++;
+            if (sectionAttribute.TextColor == XColors.Zero)
+            {
+                sectionAttribute.TextColor = new TColor(XEditorStyles.ColorHeaderSection);
+            }
 
-		if (section_attribute.TextColor == TColor.Zero)
-		{
-			section_attribute.TextColor = new TColor(XEditorStyles.ColorHeaderSection);
-		}
+            // Новые параметры
+            style.normal.textColor = sectionAttribute.TextColor;
+            style.alignment = XEnumConverter.ToEnum<TextAnchor>(sectionAttribute.TextAlignment);
 
-		// Новые параметры
-		style.normal.textColor = section_attribute.TextColor;
-		style.alignment = XEnum.ToEnum<TextAnchor>(section_attribute.TextAlignment);
+            // Рисуем
+            position.height -= EditorGUIUtility.standardVerticalSpacing;
+            GUI.Box(position, GUIContent.none, EditorStyles.helpBox);
 
-		// Рисуем
-		position.height -= EditorGUIUtility.standardVerticalSpacing;
-		GUI.Box(position, "", EditorStyles.helpBox);
-		if (section_attribute.TextAlignment == "UpperLeft" ||
-			section_attribute.TextAlignment == "MiddleLeft" ||
-			section_attribute.TextAlignment == "LowerLeft")
-		{
-			position.x += EditorGUIUtility.standardVerticalSpacing * 2;
-		}
-		GUI.Label(position, section_attribute.Name, style);
+            if (sectionAttribute.TextAlignment == "UpperLeft" ||
+                sectionAttribute.TextAlignment == "MiddleLeft" ||
+                sectionAttribute.TextAlignment == "LowerLeft")
+            {
+                position.x += EditorGUIUtility.standardVerticalSpacing * 2;
+            }
 
-		// Восстанавливаем старые параметры
-		style.normal.textColor = old_color;
-		style.alignment = old_anchor;
-		style.fontSize--;
-	}
-	#endregion
+            GUI.Label(position, sectionAttribute.Name, style);
+
+            // Восстанавливаем старые параметры
+            style.normal.textColor = oldColor;
+            style.alignment = oldAnchor;
+            style.fontSize--;
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

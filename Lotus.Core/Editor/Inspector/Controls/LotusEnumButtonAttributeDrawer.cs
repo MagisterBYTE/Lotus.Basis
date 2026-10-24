@@ -1,75 +1,62 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusEnumButtonAttributeDrawer.cs
-*		Редактор атрибута LotusEnumButtonAttribute.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
+﻿#if UNITY_EDITOR
+using Lotus.Core.Inspector;
 
-using System;
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор атрибута LotusEnumButtonAttribute
-/// </summary>
-------------
-[CustomPropertyDrawer(typeof(LotusEnumButtonAttribute), true)]
-public class LotusEnumButtonAttributeDrawer : PropertyDrawer
+namespace Lotus.Editor
 {
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Получение высоты редактируемого свойства элемента
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	/// <returns>Высота свойства элемента</returns>
-	--------
-	public override Single GetPropertyHeight(SerializedProperty property, GUIContent label)
-	{
-		return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
-	}
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор атрибута LotusEnumButtonAttribute
+    /// </summary>
+    [CustomPropertyDrawer(typeof(LotusEnumButtonAttribute), true)]
+    public class LotusEnumButtonAttributeDrawer : PropertyDrawer
+    {
+        #region Unity events
+        /// <summary>
+        /// Получение высоты редактируемого свойства элемента
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        /// <returns>Высота свойства элемента</returns>
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
+        }
 
-	--------
-	/// <summary>
-	/// Рисование сериализуемого свойства
-	/// </summary>
-	/// <param name="position">Прямоугольник для отображения</param>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	--------
-	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-	{
-		var attr = this.attribute as LotusEnumButtonAttribute;
+        /// <summary>
+        /// Рисование сериализуемого свойства
+        /// </summary>
+        /// <param name="position">Прямоугольник для отображения</param>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.BeginProperty(position, label, property);
+            {
+                var indent = EditorGUI.IndentedRect(position);
+                var rectLabel = new Rect(indent.x, indent.y, EditorGUIUtility.labelWidth, indent.height);
+                EditorGUI.LabelField(rectLabel, label);
 
-		property.serializedObject.Update();
+                var rectToolbar = new Rect(rectLabel.xMax, indent.y,
+                    indent.width - rectLabel.width, indent.height);
 
-		var indent = EditorGUI.IndentedRect(position);
-		var rect_label = new Rect(indent.x, indent.y, EditorGUIUtility.labelWidth, indent.height);
-		EditorGUI.LabelField(rect_label, label);
-
-		var rect_toolbar = new Rect(rect_label.xMax, indent.y,
-			indent.width - rect_label.width, indent.height);
-
-		EditorGUI.BeginChangeCheck();
-		{
-			property.enumValueIndex = GUI.Toolbar(rect_toolbar,
-				property.enumValueIndex, property.enumDisplayNames);
-		}
-
-		if (EditorGUI.EndChangeCheck())
-		{
-			property.serializedObject.ApplyModifiedProperties();
-		}
-	}
-	#endregion
+                EditorGUI.BeginChangeCheck();
+                {
+                    property.enumValueIndex = GUI.Toolbar(rectToolbar,
+                        property.enumValueIndex, property.enumDisplayNames);
+                }
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.serializedObject.ApplyModifiedProperties();
+                }
+            }
+            EditorGUI.EndProperty();
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

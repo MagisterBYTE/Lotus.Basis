@@ -8,7 +8,7 @@ namespace Lotus.Core
     /// <summary>
     /// Класс реализующий минимальный элемент ViewModel данных формата JSON.
     /// </summary>
-    public class CViewModelJson : ViewModelHierarchy<JsonObject>
+    public class ViewModelJson : ViewModelHierarchy<JsonObject>
     {
         #region Constructors
         /// <summary>
@@ -16,7 +16,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="model">Модель.</param>
         /// <param name="parentItem">Родительский узел.</param>
-        public CViewModelJson(JsonObject model, ILotusViewModelHierarchy? parentItem)
+        public ViewModelJson(JsonObject model, ILotusViewModelHierarchy? parentItem)
             : base(model, parentItem)
         {
         }
@@ -33,7 +33,7 @@ namespace Lotus.Core
         {
             if (model is JsonObject jobject)
             {
-                return new CViewModelJson(jobject, parent);
+                return new ViewModelJson(jobject, parent);
             }
 
             throw new NotImplementedException("Model must be type <JObject>");
@@ -56,13 +56,13 @@ namespace Lotus.Core
     /// Данная коллекции позволяет управлять видимостью данных, обеспечивает их сортировку, группировку, фильтрацию, 
     /// позволяет выбирать данные и производить над ними операции
     /// </remarks>
-    public class CCollectionViewJson : CollectionViewModelHierarchy<CViewModelJson, JsonObject>
+    public class CollectionViewJson : CollectionViewModelHierarchy<ViewModelJson, JsonObject>
     {
         #region Constructors
         /// <summary>
         /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями.
         /// </summary>
-        public CCollectionViewJson()
+        public CollectionViewJson()
             : base(string.Empty)
         {
 
@@ -72,7 +72,7 @@ namespace Lotus.Core
         /// Конструктор инициализирует объект класса указанными параметрами.
         /// </summary>
         /// <param name="name">Имя коллекции.</param>
-        public CCollectionViewJson(string name)
+        public CollectionViewJson(string name)
             : base(name)
         {
         }
@@ -82,7 +82,7 @@ namespace Lotus.Core
         /// </summary>
         /// <param name="name">Имя коллекции.</param>
         /// <param name="source">Источник данных.</param>
-        public CCollectionViewJson(string name, JsonObject source)
+        public CollectionViewJson(string name, JsonObject source)
             : base(name, source)
         {
         }

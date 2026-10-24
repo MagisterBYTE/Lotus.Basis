@@ -1,348 +1,298 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusLocalizationDispatcherEditor.cs
-*		Редактор центрального диспетчера для локализации ресурсов.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
+﻿#if UNITY_EDITOR
 using System;
 using System.IO;
+
+using Lotus.Core;
+
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор центрального диспетчера для локализации ресурсов
-/// </summary>
-------------
-[CustomEditor(typeof(LotusLocalizationDispatcher))]
-public class LotusLocalizationDispatcherEditor : Editor
+namespace Lotus.Editor
 {
-	#region =============================================== СТАТИЧЕСКИЕ ДАННЫЕ ========================================
-	private static readonly GUIContent mContentRemove = new GUIContent("X");
-	private static readonly GUIContent mContentAdd = new GUIContent("+");
-	#endregion
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор центрального диспетчера для локализации ресурсов
+    /// </summary>
+    [CustomEditor(typeof(LotusLocalizationDispatcher))]
+    public class LotusLocalizationDispatcherEditor : UnityEditor.Editor
+    {
+        #region Constants
+        /// <summary>
+        /// Контент кнопки удаления
+        /// </summary>
+        private static readonly GUIContent ContentRemove = new GUIContent("X");
 
-	#region =============================================== СТАТИЧЕСКИЕ МЕТОДЫ ========================================
-	--------
-	/// <summary>
-	/// Создания основного сервиса для локализации текстовых данных
-	/// </summary>
-	--------
-	[MenuItem(XCoreSettingsEditor.MenuPathLocalization + "Create Localization Dispatcher", false, XCoreSettingsEditor.MenuOrderLocalization)]
-	public static void Create()
-	{
-#pragma warning disable 0219
-		LotusLocalizationDispatcher localization_service = LotusLocalizationDispatcher.Instance;
-#pragma warning restore 0219
-	}
-	#endregion
+        /// <summary>
+        /// Контент кнопки добавления
+        /// </summary>
+        private static readonly GUIContent ContentAdd = new GUIContent("+");
+        #endregion
 
-	#region =============================================== ДАННЫЕ ====================================================
-	private LotusLocalizationDispatcher mDispatcher;
-	private Int32 mSelectedLangName;
-	private String mPathFileName = "Assets";
-	private Vector2 mScrollAll;
-	private CTranslatorYandex mTranslator;
-	#endregion
+        #region Static methods
+        /// <summary>
+        /// Создание основного сервиса для локализации текстовых данных
+        /// </summary>
+        [MenuItem(XCoreSettingsEditor.MenuPathLocalization + "Create Localization Dispatcher", false,
+            XCoreSettingsEditor.MenuOrderLocalization)]
+        public static void Create()
+        {
+            _ = LotusLocalizationDispatcher.Instance;
+        }
+        #endregion
 
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Включение скрипта в инспекторе объектов
-	/// </summary>
-	--------
-	public void OnEnable()
-	{
-		mDispatcher = this.target as LotusLocalizationDispatcher;
-		mTranslator = new CTranslatorYandex();
-	}
+        #region Fields
+        // Основные параметры
+        private LotusLocalizationDispatcher _dispatcher;
+        private int _selectedLangName;
+        private string _pathFileName = "Assets";
 
-	--------
-	/// <summary>
-	/// Рисование в инспекторе объектов
-	/// </summary>
-	--------
-	public override void OnInspectorGUI()
-	{
-		EditorGUI.BeginChangeCheck();
-		{
-			GUILayout.Space(4.0f);
-			XEditorInspector.DrawGroup("Singleton settings");
-			{
-				GUILayout.Space(2.0f);
-				mDispatcher.IsMainInstance = XEditorInspector.PropertyBoolean(nameof(mDispatcher.IsMainInstance), mDispatcher.IsMainInstance);
+        [Obsolete("Используется только в отключённой секции DrawTranslation")]
+        private Vector2 _scrollAll;
 
-				GUILayout.Space(2.0f);
-				EditorGUI.BeginDisabledGroup(mDispatcher.IsMainInstance);
-				{
-					mDispatcher.DestroyMode = XEditorInspector.PropertyEnum(nameof(mDispatcher.DestroyMode), mDispatcher.DestroyMode);
-				}
-				EditorGUI.EndDisabledGroup();
+#pragma warning disable CS0618
+        [Obsolete("Yandex Translate API v1.5 отключён. Используйте новый провайдер перевода вместо CTranslatorYandex")]
+        private CTranslatorYandex _translator;
+#pragma warning restore CS0618
+        #endregion
 
-				GUILayout.Space(2.0f);
-				mDispatcher.IsDontDestroy = XEditorInspector.PropertyBoolean(nameof(mDispatcher.IsDontDestroy), mDispatcher.IsDontDestroy);
-			}
+        #region Unity events
+        /// <summary>
+        /// Включение скрипта в инспекторе объектов
+        /// </summary>
+        public void OnEnable()
+        {
+            _dispatcher = target as LotusLocalizationDispatcher;
+#pragma warning disable CS0618
+            _translator = new CTranslatorYandex();
+#pragma warning restore CS0618
+        }
 
-			// Рисование языков
-			DrawLanguages();
+        /// <summary>
+        /// Рисование в инспекторе объектов
+        /// </summary>
+        public override void OnInspectorGUI()
+        {
+            EditorGUI.BeginChangeCheck();
+            {
+                GUILayout.Space(4.0f);
+                XEditorInspector.DrawGroup("Singleton settings");
+                {
+                    GUILayout.Space(2.0f);
+                    _dispatcher.IsMainInstance = XEditorInspector.PropertyBoolean(
+                        nameof(_dispatcher.IsMainInstance), _dispatcher.IsMainInstance);
 
-			// Рисование всех текстовых данных и автоматический перевод
-			DrawTranslation();
+                    GUILayout.Space(2.0f);
+                    EditorGUI.BeginDisabledGroup(_dispatcher.IsMainInstance);
+                    {
+                        _dispatcher.DestroyMode = XEditorInspector.PropertyEnum(
+                            nameof(_dispatcher.DestroyMode), _dispatcher.DestroyMode);
+                    }
+                    EditorGUI.EndDisabledGroup();
 
-			// Рисование тестирование переводчика
-			DrawTranslator();
-		}
-		if (EditorGUI.EndChangeCheck())
-		{
-			serializedObject.Save();
-		}
+                    GUILayout.Space(2.0f);
+                    _dispatcher.IsDontDestroy = XEditorInspector.PropertyBoolean(
+                        nameof(_dispatcher.IsDontDestroy), _dispatcher.IsDontDestroy);
+                }
 
-		GUILayout.Space(2.0f);
-	}
-	#endregion
+                // Рисование языков
+                DrawLanguages();
 
-	#region =============================================== ОБЩИЕ МЕТОДЫ ==============================================
-	--------
-	/// <summary>
-	/// Перевод всех данных
-	/// </summary>
-	--------
-	private void TranslateAllData()
-	{
-		mTranslator.AbbrsFrom = mDispatcher.DefaultLanguage.Abbreviation;
-		mTranslator.AbbrsTo = CLanguageInfo.LanguageAbbrs[mSelectedLangName];
+                // Рисование тестирования переводчика
+                DrawTranslator();
+            }
+            if (EditorGUI.EndChangeCheck())
+            {
+                serializedObject.Save();
+            }
 
-		for (var j = 0; j < mDispatcher.mListTranslate.Count; j++)
-		{
-			mTranslator.OriginalText = mDispatcher.mListTranslate[j].Default;
+            GUILayout.Space(2.0f);
+        }
+        #endregion
 
-			mTranslator.Translate();
+        #region Main methods
+        /// <summary>
+        /// Перевод всех данных
+        /// </summary>
+        [Obsolete("Зависит от устаревшего CTranslatorYandex — Yandex Translate API v1.5 отключён")]
+        private void TranslateAllData()
+        {
+#pragma warning disable CS0618
+            _translator.AbbrsFrom = _dispatcher.DefaultLanguage.Abbreviation;
+            _translator.AbbrsTo = CLanguageInfo.LanguageAbbrs[_selectedLangName];
 
-			mDispatcher.mListTranslate[j].Translate = mTranslator.TranslateText;
+            for (var j = 0; j < _dispatcher._listTranslate.Count; j++)
+            {
+                _translator.OriginalText = _dispatcher._listTranslate[j].Default;
 
-			EditorUtility.DisplayCancelableProgressBar("Translate", mTranslator.OriginalText, (j + 1) / (Single)mDispatcher.mListTranslate.Count);
-		}
+                _translator.Translate();
 
-		EditorUtility.ClearProgressBar();
-	}
-	#endregion
+                _dispatcher._listTranslate[j].Translate = _translator.TranslateText;
 
-	#region =============================================== МЕТОДЫ РИСОВАНИЯ ==========================================
-	--------
-	/// <summary>
-	/// Рисование языков
-	/// </summary>
-	--------
-	public void DrawLanguages()
-	{
-		GUILayout.Space(4.0f);
-		mDispatcher.mExpandedLanguages = XEditorInspector.DrawSectionFoldout("Languages", mDispatcher.mExpandedLanguages);
-		if (mDispatcher.mExpandedLanguages)
-		{
-			// Перебираем список
-			XEditorInspector.DrawGroup("Items:");
+                EditorUtility.DisplayCancelableProgressBar("Translate", _translator.OriginalText,
+                    (j + 1) / (float)_dispatcher._listTranslate.Count);
+            }
+#pragma warning restore CS0618
 
-			for (var i = 0; i < mDispatcher.Languages.Count; i++)
-			{
-				GUILayout.Space(4.0f);
-				CLanguageInfo lang = mDispatcher.Languages[i];
-				{
-					// Заголовок
-					if (i == 0)
-					{
-						EditorGUILayout.BeginHorizontal();
-						{
-							EditorGUILayout.LabelField("Name");
-							EditorGUILayout.LabelField("File");
-						}
-						EditorGUILayout.EndHorizontal();
-						GUILayout.Space(4.0f);
-					}
+            EditorUtility.ClearProgressBar();
+        }
+        #endregion
 
-					EditorGUI.BeginChangeCheck();
-					EditorGUILayout.BeginHorizontal();
-					{
-						lang.Name = XEditorInspector.SelectorValue(lang.Name, CLanguageInfo.LanguageNames);
-						lang.FileData = (TextAsset)EditorGUILayout.ObjectField(lang.FileData, typeof(TextAsset), false);
+        #region Draw methods
+        /// <summary>
+        /// Рисование языков
+        /// </summary>
+        public void DrawLanguages()
+        {
+            GUILayout.Space(4.0f);
+            _dispatcher._expandedLanguages = XEditorInspector.DrawSectionFoldout("Languages",
+                _dispatcher._expandedLanguages);
+            if (_dispatcher._expandedLanguages)
+            {
+                // Перебираем список
+                XEditorInspector.DrawGroup("Items:");
 
-						if (GUILayout.Button(mContentRemove, XEditorStyles.ButtonMiniDefaultRedRightStyle))
-						{
-							if (i > 0)
-							{
-								mDispatcher.Languages.RemoveAt(i);
-								EditorGUILayout.EndHorizontal();
-								EditorGUI.indentLevel--;
+                for (var i = 0; i < _dispatcher.Languages.Count; i++)
+                {
+                    GUILayout.Space(4.0f);
+                    var lang = _dispatcher.Languages[i];
+                    {
+                        // Заголовок
+                        if (i == 0)
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            {
+                                EditorGUILayout.LabelField("Name");
+                                EditorGUILayout.LabelField("File");
+                            }
+                            EditorGUILayout.EndHorizontal();
+                            GUILayout.Space(4.0f);
+                        }
 
-								mDispatcher.SaveInEditor();
-								break;
-							}
-							else
-							{
-								mDispatcher.DefaultLanguage.Name = "";
-								mDispatcher.DefaultLanguage.FileData = null;
-							}
-						}
-					}
-					EditorGUILayout.EndHorizontal();
-					if(EditorGUI.EndChangeCheck())
-					{
-						mDispatcher.SaveInEditor();
-					}
+                        EditorGUI.BeginChangeCheck();
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            lang.Name = XEditorInspector.SelectorValue(lang.Name, CLanguageInfo.LanguageNames);
+                            lang.FileData = (TextAsset)EditorGUILayout.ObjectField(lang.FileData, typeof(TextAsset), false);
 
-				}
-			}
+                            if (GUILayout.Button(ContentRemove, XEditorStyles.ButtonMiniDefaultRedRightStyle))
+                            {
+                                if (i > 0)
+                                {
+                                    _dispatcher.Languages.RemoveAt(i);
+                                    EditorGUILayout.EndHorizontal();
 
-			GUILayout.Space(2.0f);
-			if (GUILayout.Button(mContentAdd, XEditorStyles.ButtonMiniHeaderMiddleStyle, GUILayout.Width(XInspectorViewParams.BUTTON_MINI_WIDTH)))
-			{
-				mDispatcher.AddLang("Default");
-			}
+                                    _dispatcher.SaveInEditor();
+                                    break;
+                                }
 
-			GUILayout.Space(4.0f);
-			XEditorInspector.DrawGroup("Operations:");
+                                _dispatcher.DefaultLanguage.Name = "";
+                                _dispatcher.DefaultLanguage.FileData = null;
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            _dispatcher.SaveInEditor();
+                        }
+                    }
+                }
 
-			// Генерация основного файла
-			GUILayout.Space(4.0f);
-			EditorGUILayout.BeginHorizontal();
-			{
-				if (GUILayout.Button("Generate base"))
-				{
-					// Путь к сохранению
-					mPathFileName = EditorUtility.OpenFolderPanel("Set path localization data", mPathFileName, "Lang");
-					var lang_name = CLanguageInfo.LanguageNames[mSelectedLangName];
-					var path = Path.Combine(mPathFileName, lang_name) + ".bytes";
+                GUILayout.Space(2.0f);
+                if (GUILayout.Button(ContentAdd, XEditorStyles.ButtonMiniHeaderMiddleStyle,
+                    GUILayout.Width(XInspectorViewParams.BUTTON_MINI_WIDTH)))
+                {
+                    _dispatcher.AddLang("Default");
+                }
 
-					// Корректируем путь
-					path = path.Remove(0, path.IndexOf("Assets"));
-					path = path.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                GUILayout.Space(4.0f);
+                XEditorInspector.DrawGroup("Operations:");
 
-					// Создаем файл
-					mDispatcher.CreateLocalizeFileDefault(path);
+                // Генерация основного файла
+                GUILayout.Space(4.0f);
+                EditorGUILayout.BeginHorizontal();
+                {
+                    if (GUILayout.Button("Generate base"))
+                    {
+                        // Путь к сохранению
+                        _pathFileName = EditorUtility.OpenFolderPanel("Set path localization data", _pathFileName, "Lang");
+                        var langName = CLanguageInfo.LanguageNames[_selectedLangName];
+                        var path = Path.Combine(_pathFileName, langName) + ".bytes";
 
-					// Делаем его по умолчанию
-					mDispatcher.DefaultLanguage.Name = lang_name;
-					mDispatcher.DefaultLanguage.Abbreviation = CLanguageInfo.LanguageAbbrs[mSelectedLangName];
-					mDispatcher.DefaultLanguage.FileData = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
-				}
+                        // Корректируем путь
+                        var assetsIndex = path.IndexOf("Assets", StringComparison.Ordinal);
+                        if (assetsIndex >= 0)
+                        {
+                            path = path.Remove(0, assetsIndex);
+                            path = path.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
-				mSelectedLangName = XEditorInspector.SelectorIndex(mSelectedLangName, CLanguageInfo.LanguageNames);
-			}
-			EditorGUILayout.EndHorizontal();
+                            // Создаем файл
+                            _dispatcher.CreateLocalizeFileDefault(path);
 
-			GUILayout.Space(2.0f);
-			if (GUILayout.Button("Clear"))
-			{
-				mDispatcher.ClearLangs();
-			}
-		}
-	}
+                            // Делаем его по умолчанию
+                            _dispatcher.DefaultLanguage.Name = langName;
+                            _dispatcher.DefaultLanguage.Abbreviation = CLanguageInfo.LanguageAbbrs[_selectedLangName];
+                            _dispatcher.DefaultLanguage.FileData = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
+                        }
+                    }
 
-	--------
-	/// <summary>
-	/// Рисование всех текстовых данных и автоматический перевод
-	/// </summary>
-	--------
-	public void DrawTranslation()
-	{
-		//GUILayout.Space(4.0f);
-		//mLocalizationDispatcher.mExpandedTranslation = EditorGUILayout.Foldout("Translation", mLocalizationDispatcher.mExpandedTranslation);
-		//if (mLocalizationDispatcher.mExpandedTranslation)
-		//{
-		//	if (mLocalizationDispatcher.mListTranslate.Count > 10)
-		//	{
-		//		mScrollAll = GUILayout.BeginScrollView(mScrollAll, 
-		//			GUILayout.Height((EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 10 + 4));
-		//	}
+                    _selectedLangName = XEditorInspector.SelectorIndex(_selectedLangName, CLanguageInfo.LanguageNames);
+                }
+                EditorGUILayout.EndHorizontal();
 
-		//	for (Int32 i = 0; i < mLocalizationDispatcher.mListTranslate.Count; i++)
-		//	{
-		//		CTextTranslate tt = mLocalizationDispatcher.mListTranslate[i];
-		//		EditorGUILayout.BeginHorizontal();
-		//		{
-		//			tt.Default = XEditorInspector.PropertyString(tt.Default, XEditorInspector.TextLeftStyle);
-		//			tt.Translate = XEditorInspector.PropertyString(tt.Translate, XEditorInspector.TextRightStyle);
-		//		}
-		//		EditorGUILayout.EndHorizontal();
-		//	}
+                GUILayout.Space(2.0f);
+                if (GUILayout.Button("Clear"))
+                {
+                    _dispatcher.ClearLangs();
+                }
+            }
+        }
 
-		//	if (mLocalizationDispatcher.mListTranslate.Count > 10)
-		//	{
-		//		GUILayout.EndScrollView();
-		//	}
+        /// <summary>
+        /// Рисование всех текстовых данных и автоматический перевод
+        /// </summary>
+        [Obsolete("Секция Translation отключена — UI не реализован. Ранее использовал CTranslatorYandex")]
+        public void DrawTranslation()
+        {
+        }
 
-		//	GUILayout.Space(4.0f);
-		//	XEditorInspector.DrawHeader("Operations:", XEditorInspector.ColorInfo, TextAnchor.MiddleLeft);
+        /// <summary>
+        /// Рисование тестирования переводчика
+        /// </summary>
+        public void DrawTranslator()
+        {
+            GUILayout.Space(4.0f);
+            _dispatcher._expandedTestTranslator = XEditorInspector.DrawSectionFoldout("Test Translator",
+                _dispatcher._expandedTestTranslator);
+            if (_dispatcher._expandedTestTranslator)
+            {
+                EditorGUILayout.HelpBox(
+                    "CTranslatorYandex устарел: Yandex Translate API v1.5 отключён. Требуется новый провайдер перевода.",
+                    MessageType.Warning);
 
-		//	GUILayout.Space(2.0f);
-		//	if (GUILayout.Button("Get All Data"))
-		//	{
-		//		mLocalizationDispatcher.GetAllLocalizeData();
-		//	}
+#pragma warning disable CS0618
+                GUILayout.Space(2.0f);
+                _translator.AbbrsFrom = XEditorInspector.PropertyString("Abbrs From", _translator.AbbrsFrom);
 
-		//	GUILayout.Space(2.0f);
-		//	EditorGUILayout.BeginHorizontal();
-		//	{
-		//		if (GUILayout.Button("Translate To"))
-		//		{
-		//			TranslateAllData();
-		//		}
+                GUILayout.Space(2.0f);
+                _translator.AbbrsTo = XEditorInspector.PropertyString("Abbrs To", _translator.AbbrsTo);
 
-		//		mSelectedLangName = EditorGUILayout.Popup(mSelectedLangName, CLanguageInfo.LanguageNames);
-		//	}
-		//	EditorGUILayout.EndHorizontal();
+                GUILayout.Space(2.0f);
+                _translator.OriginalText = XEditorInspector.PropertyString("OriginalText", _translator.OriginalText);
 
-		//	GUILayout.Space(2.0f);
-		//	if (GUILayout.Button("Save translate"))
-		//	{
-		//		mLocalizationDispatcher.GetAllLocalizeData();
-		//	}
-		//}
-	}
+                GUILayout.Space(2.0f);
+                _translator.TranslateText = XEditorInspector.PropertyString("TranslateText", _translator.TranslateText);
 
-	--------
-	/// <summary>
-	/// Рисование тестирование переводчика
-	/// </summary>
-	--------
-	public void DrawTranslator()
-	{
-		GUILayout.Space(4.0f);
-		mDispatcher.mExpandedTestTranslator = XEditorInspector.DrawSectionFoldout("Test Translator", mDispatcher.mExpandedTestTranslator);
-		if (mDispatcher.mExpandedTestTranslator)
-		{
-			GUILayout.Space(2.0f);
-			mTranslator.AbbrsFrom = XEditorInspector.PropertyString("Abbrs From", mTranslator.AbbrsFrom);
-
-			GUILayout.Space(2.0f);
-			mTranslator.AbbrsTo = XEditorInspector.PropertyString("Abbrs To", mTranslator.AbbrsTo);
-
-			GUILayout.Space(2.0f);
-			mTranslator.OriginalText = XEditorInspector.PropertyString("Original Text", mTranslator.OriginalText);
-
-			GUILayout.Space(2.0f);
-			mTranslator.TranslateText = XEditorInspector.PropertyString("Translate Text", mTranslator.TranslateText);
-
-			GUILayout.Space(2.0f);
-			if (GUILayout.Button("Translate"))
-			{
-				mTranslator.Translate();
-			}
-
-			GUILayout.Space(2.0f);
-			if (GUILayout.Button("Get All Translate"))
-			{
-				//mLocalizationDispatcher.CreateLocalizeFileDefault();
-			}
-		}
-	}
-	#endregion
+                GUILayout.Space(2.0f);
+                if (GUILayout.Button("Translate"))
+                {
+                    _translator.Translate();
+                }
+#pragma warning restore CS0618
+            }
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

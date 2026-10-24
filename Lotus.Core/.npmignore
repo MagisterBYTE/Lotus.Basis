@@ -1,0 +1,10 @@
+bin/
+obj/
+*.user
+*.suo
+
+
+# Игнорировать служебные файлы VS
+.vs/
+*.sln
+Directory.Build.props

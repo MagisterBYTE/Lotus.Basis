@@ -1,73 +1,64 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusSerializationComponentEditor.cs
-*		Редактор компонента для сериализации данных.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
+﻿#if UNITY_EDITOR
+using Lotus.Core;
 
-using System;
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор компонента для сериализации данных
-/// </summary>
-------------
-[CustomEditor(typeof(LotusSerializationComponent))]
-public class LotusSerializationComponentEditor : Editor
+namespace Lotus.Editor
 {
-	#region =============================================== ДАННЫЕ ====================================================
-	private LotusSerializationComponent mSerialization;
-	#endregion
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор компонента для сериализации данных
+    /// </summary>
+    [CustomEditor(typeof(LotusSerializationComponent))]
+    public class LotusSerializationComponentEditor : UnityEditor.Editor
+    {
+        #region Fields
+        private LotusSerializationComponent _serialization;
+        #endregion
 
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Включение скрипта в инспекторе объектов
-	/// </summary>
-	--------
-	public void OnEnable()
-	{
-		mSerialization = this.target as LotusSerializationComponent;
-	}
+        #region Unity events
+        /// <summary>
+        /// Включение скрипта в инспекторе объектов
+        /// </summary>
+        public void OnEnable()
+        {
+            _serialization = target as LotusSerializationComponent;
+        }
 
-	--------
-	/// <summary>
-	/// Рисование в инспекторе объектов
-	/// </summary>
-	--------
-	public override void OnInspectorGUI()
-	{
-		GUILayout.Space(4.0f);
-		EditorGUI.BeginChangeCheck();
-		{
-			GUILayout.Space(2.0f);
-			EditorGUILayout.BeginHorizontal();
-			XEditorInspector.DrawGroup("IDSerialKey = " + mSerialization.IDKeySerial.ToString());
-			if (GUILayout.Button("Generate"))
-			{
-				mSerialization.IDKeySerial = XGenerateId.Generate(mSerialization);
-			}
-			EditorGUILayout.EndHorizontal();
+        /// <summary>
+        /// Рисование в инспекторе объектов
+        /// </summary>
+        public override void OnInspectorGUI()
+        {
+            GUILayout.Space(4.0f);
+            EditorGUI.BeginChangeCheck();
+            {
+                GUILayout.Space(2.0f);
+                EditorGUILayout.BeginHorizontal();
+                {
+                    XEditorInspector.DrawGroup("IDSerialKey = " + _serialization.IDKeySerial.ToString());
+                    if (GUILayout.Button("Generate"))
+                    {
+                        _serialization.IDKeySerial = XGenerateId.Generate(_serialization);
+                    }
+                }
+                EditorGUILayout.EndHorizontal();
 
-			GUILayout.Space(4.0f);
-			mSerialization.SerializationVolume = (TSerializationVolume)XEditorInspector.PropertyFlags("SerialVolume", mSerialization.SerializationVolume);
-		}
-		if (EditorGUI.EndChangeCheck())
-		{
-			serializedObject.Save();
-		}
+                GUILayout.Space(4.0f);
+                _serialization.SerializationVolume = (TSerializationVolume)XEditorInspector.PropertyFlags(
+                    "SerialVolume", _serialization.SerializationVolume);
+            }
+            if (EditorGUI.EndChangeCheck())
+            {
+                serializedObject.Save();
+            }
 
-		GUILayout.Space(2.0f);
-	}
-	#endregion
+            GUILayout.Space(2.0f);
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <!-- Вырезает любые .meta файлы из дерева проекта Visual Studio -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);**/*.meta</DefaultItemExcludes>
+
+
+    <!-- Перенаправляем папки генерации MSBuild-->
+    <BaseIntermediateOutputPath>..\Output\obj\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>..\Output\obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+</Project>

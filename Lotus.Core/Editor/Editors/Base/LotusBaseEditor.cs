@@ -1,308 +1,279 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusBaseEditor.cs
-*		Базовый редактор для редактирования свойств в инспекторе объектов.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
+﻿#if UNITY_EDITOR
 using System;
-using System.Reflection;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-------------
+using System.Reflection;
+
 using Lotus.Core;
-using Lotus.Editor;
+using Lotus.Core.Inspector;
 
-------------
-/// <summary>
-/// Базовый редактор для редактирования свойств в инспекторе объектов
-/// </summary>
-------------
-public class LotusInspectorBaseEditor : Editor, IDisposable
+using UnityEditor;
+using UnityEngine;
+
+namespace Lotus.Editor
 {
-	#region =============================================== ДАННЫЕ ====================================================
-	protected Dictionary<String, CReorderableList> mReorderableLists;
-	protected List<CMethodHolder> mMethodHolders;
-	#endregion
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Базовый редактор для редактирования свойств в инспекторе объектов
+    /// </summary>
+    public class LotusInspectorBaseEditor : UnityEditor.Editor, IDisposable
+    {
+        #region Fields
+        protected Dictionary<string, CReorderableList> _reorderableLists;
+        protected List<CMethodHolder> _methodHolders;
+        #endregion
 
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Включение скрипта в инспекторе объектов
-	/// </summary>
-	--------
-	protected virtual void OnEnable()
-	{
-		mReorderableLists = new Dictionary<String, CReorderableList>();
+        #region Unity events
+        /// <summary>
+        /// Включение скрипта в инспекторе объектов
+        /// </summary>
+        protected virtual void OnEnable()
+        {
+            _reorderableLists = new Dictionary<string, CReorderableList>();
 
-		// Работа с методами
-		mMethodHolders = new List<CMethodHolder>();
-		GetMethodHolders();
-	}
+            // Работа с методами
+            _methodHolders = new List<CMethodHolder>();
+            GetMethodHolders();
+        }
 
-	--------
-	/// <summary>
-	/// Отключение скрипта в инспекторе объектов
-	/// </summary>
-	--------
-	protected virtual void OnDisable()
-	{
-		XEditorCachedData.ClearEditors();
-	}
+        /// <summary>
+        /// Отключение скрипта в инспекторе объектов
+        /// </summary>
+        protected virtual void OnDisable()
+        {
+            XEditorCachedData.ClearEditors();
+        }
 
-	--------
-	/// <summary>
-	/// Рисование в инспекторе объектов
-	/// </summary>
-	--------
-	public override void OnInspectorGUI()
-	{
-		EditorGUILayout.LabelField("Custom Inspector Lotus", EditorStyles.centeredGreyMiniLabel);
+        /// <summary>
+        /// Рисование в инспекторе объектов
+        /// </summary>
+        public override void OnInspectorGUI()
+        {
+            EditorGUILayout.LabelField("Custom Inspector Lotus", EditorStyles.centeredGreyMiniLabel);
 
-		// Проверяем на нулевой ссылку
-		if (serializedObject.targetObject == null)
-		{
-			EditorGUILayout.LabelField("Error: Script not found", EditorStyles.centeredGreyMiniLabel);
+            // Проверяем на нулевой ссылку
+            if (serializedObject.targetObject == null)
+            {
+                EditorGUILayout.LabelField("Error: Script not found", EditorStyles.centeredGreyMiniLabel);
 
-			serializedObject.Update();
-			{
-				SerializedProperty property_script = serializedObject.FindProperty("m_Script");
-				EditorGUILayout.PropertyField(property_script);
-			}
-			serializedObject.ApplyModifiedProperties();
-		}
-		else
-		{
-			LotusDescriptionTypeAttribute description_type = target.GetType().GetAttribute<LotusDescriptionTypeAttribute>();
-			if (description_type != null)
-			{
-				EditorGUILayout.HelpBox(description_type.Description, MessageType.Info);
-			}
+                serializedObject.Update();
+                {
+                    var propertyScript = serializedObject.FindProperty("m_Script");
+                    EditorGUILayout.PropertyField(propertyScript);
+                }
+                serializedObject.ApplyModifiedProperties();
+            }
+            else
+            {
+                var descriptionType = target.GetType().GetAttribute<LotusDescriptionTypeAttribute>();
+                if (descriptionType != null)
+                {
+                    EditorGUILayout.HelpBox(descriptionType.Description, MessageType.Info);
+                }
 
-			serializedObject.Update();
-			{
-				var property = serializedObject.GetIterator();
-				var next = property.NextVisible(true);
-				if (next)
-					do
-					{
-						DisplayingProperty(property);
-					}
-					while (property.NextVisible(false));
-			}
-			serializedObject.ApplyModifiedProperties();
+                serializedObject.Update();
+                {
+                    var property = serializedObject.GetIterator();
+                    var next = property.NextVisible(true);
+                    if (next)
+                    {
+                        do
+                        {
+                            DisplayingProperty(property);
+                        }
+                        while (property.NextVisible(false));
+                    }
+                }
+                serializedObject.ApplyModifiedProperties();
 
-			if (mMethodHolders.Count > 0)
-			{
-				DrawMethodHolders();
-			}
-		}
-	}
-	#endregion
+                if (_methodHolders.Count > 0)
+                {
+                    DrawMethodHolders();
+                }
+            }
+        }
+        #endregion
 
-	#region =============================================== МЕТОДЫ IDisposable ========================================
-	--------
-	/// <summary>
-	/// Освобождение управляемых ресурсов
-	/// </summary>
-	--------
-	public void Dispose()
-	{
-		Dispose(true);
-		GC.SuppressFinalize(this);
-	}
+        #region IDisposable methods
+        /// <summary>
+        /// Освобождение управляемых ресурсов
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-	--------
-	/// <summary>
-	/// Освобождение управляемых ресурсов
-	/// </summary>
-	/// <param name="disposing">Статус освобождения</param>
-	--------
-	protected virtual void Dispose(Boolean disposing)
-	{
-		// Освобождаем только управляемые ресурсы
-		if (disposing)
-		{
-			if (mReorderableLists != null)
-			{
-				foreach (var item in mReorderableLists.Values)
-				{
-					item.Dispose();
-				}
+        /// <summary>
+        /// Освобождение управляемых ресурсов
+        /// </summary>
+        /// <param name="disposing">Статус освобождения</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            // Освобождаем только управляемые ресурсы
+            if (disposing)
+            {
+                if (_reorderableLists != null)
+                {
+                    foreach (var item in _reorderableLists.Values)
+                    {
+                        item.Dispose();
+                    }
 
-				mReorderableLists.Clear();
+                    _reorderableLists.Clear();
+                    _reorderableLists = null;
+                }
+            }
 
-				mReorderableLists = null;
-			}
-		}
+            // Освобождаем неуправляемые ресурсы
+        }
+        #endregion
 
-		// Освобождаем неуправляемые ресурсы
-	}
-	#endregion
+        #region Main methods
+        /// <summary>
+        /// Получение и отображение свойства
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        protected void DisplayingProperty(SerializedProperty property)
+        {
+            // Для ссылки на свой скрипт выключаем доступность
+            if (property.IsScript())
+            {
+                GUI.enabled = false;
+                EditorGUILayout.PropertyField(property, property.isExpanded);
+            }
+            else
+            {
+                GUI.enabled = true;
 
-	#region =============================================== ОБЩИЕ МЕТОДЫ ==============================================
-	--------
-	/// <summary>
-	/// Получение и отображение свойства
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	--------
-	protected void DisplayingProperty(SerializedProperty property)
-	{
-		// Для ссылки на свой скрипт выключаем доступность
-		if(property.IsScript())
-		{
-			GUI.enabled = false;
-			EditorGUILayout.PropertyField(property, property.isExpanded);
-		}
-		else
-		{
-			GUI.enabled = true;
+                if (property.IsLotusCollection() ||
+                    (property.IsStandardCollection() && property.GetAttribute<LotusReorderableAttribute>() != null))
+                {
+                    // Коллекция Lotus отображаемая в списке
+                    DisplayingCollection(property);
+                }
+                else
+                {
+                    if (property.GetAttribute<LotusInGroupAttribute>() == null)
+                    {
+                        XEditorInspector.PrepareContent(property);
+                        EditorGUILayout.PropertyField(property, XEditorInspector.Content, property.isExpanded);
+                    }
+                }
+            }
+        }
 
+        /// <summary>
+        /// Получение и отображение коллекции
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        protected void DisplayingCollection(SerializedProperty property)
+        {
+            XEditorInspector.DrawDecorateAttributes(property);
 
-			if (property.IsLotusCollection() || (property.IsStandardCollection() && property.GetAttribute<LotusReorderableAttribute>() != null))
-			{
-				// Коллекция Lotus отображаемая в списке
-				this.DisplayingCollection(property);
-			}
-			else
-			{
-				if (property.GetAttribute<LotusInGroupAttribute>() == null)
-				{
-					XEditorInspector.PrepareContent(property);
-					EditorGUILayout.PropertyField(property, XEditorInspector.Content, property.isExpanded);
-				}
-			}
-		}
-	}
+            var listData = Get(property);
+            listData.IsExpanded = property.isExpanded;
+            listData.DrawLayout();
+        }
 
-	--------
-	/// <summary>
-	/// Получение и отображение коллекции
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	--------
-	protected void DisplayingCollection(SerializedProperty property)
-	{
-		XEditorInspector.DrawDecorateAttributes(property);
+        /// <summary>
+        /// Получение управляемого списка для указанного свойства
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <returns>Управляемый список</returns>
+        public CReorderableList Get(SerializedProperty property)
+        {
+            if (_reorderableLists.TryGetValue(property.propertyPath, out var result))
+            {
+                result.Reset(property);
+                return result;
+            }
 
-		var list_data = Get(property);
+            result = new CReorderableList(property);
+            _reorderableLists.Add(property.propertyPath, result);
+            return result;
+        }
+        #endregion
 
-		list_data.IsExpanded = property.isExpanded;
+        #region Method holders
+        /// <summary>
+        /// Получение данных методов которые доступны для вызова из инспектора свойств
+        /// </summary>
+        public void GetMethodHolders()
+        {
+            var type = target.GetType();
+            var allMethods = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
-		list_data.DrawLayout();
-	}
+            for (var i = 0; i < allMethods.Length; i++)
+            {
+                var methodCalls = Attribute.GetCustomAttribute(allMethods[i],
+                    typeof(LotusMethodCallAttribute)) as LotusMethodCallAttribute;
+                if (methodCalls != null)
+                {
+                    var method = allMethods[i];
+                    var args = method.GetParameters();
+                    switch (args.Length)
+                    {
+                        case 0:
+                            {
+                                var methodHolder = new CMethodHolder();
+                                methodHolder.MethodAttribute = methodCalls;
+                                methodHolder.Method = method;
+                                methodHolder.Instance = target;
+                                _methodHolders.Add(methodHolder);
+                            }
+                            break;
+                        case 1:
+                            {
+                                var methodHolder = new CMethodHolderArg1();
+                                methodHolder.MethodAttribute = methodCalls;
+                                methodHolder.Method = method;
+                                methodHolder.Instance = target;
+                                methodHolder.FirstArgumentName = args[0].Name;
+                                methodHolder.FirstArgumentTypeName = args[0].ParameterType.Name;
+                                methodHolder.FirstArgument.Set(args[0].ParameterType);
+                                _methodHolders.Add(methodHolder);
+                            }
+                            break;
+                        case 2:
+                            {
+                                var methodHolder = new CMethodHolderArg2();
+                                methodHolder.MethodAttribute = methodCalls;
+                                methodHolder.Method = method;
+                                methodHolder.Instance = target;
+                                methodHolder.FirstArgumentName = args[0].Name;
+                                methodHolder.FirstArgumentTypeName = args[0].ParameterType.Name;
+                                methodHolder.FirstArgument.Set(args[0].ParameterType);
+                                methodHolder.SecondArgumentName = args[1].Name;
+                                methodHolder.SecondArgumentTypeName = args[1].ParameterType.Name;
+                                methodHolder.SecondArgument.Set(args[1].ParameterType);
+                                _methodHolders.Add(methodHolder);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
 
-	--------
-	/// <summary>
-	/// Получение управляемого списка для указанного свойства
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <returns>Управляемый список</returns>
-	--------
-	public CReorderableList Get(SerializedProperty property)
-	{
-		CReorderableList result = null;
-		if (mReorderableLists.TryGetValue(property.propertyPath, out result))
-		{
-			result.Reset(property);
-			return (result);
-		}
+            _methodHolders.Sort((x, y) =>
+            {
+                return x.MethodAttribute.DrawOrder.CompareTo(y.MethodAttribute.DrawOrder);
+            });
+        }
 
-		result = new CReorderableList(property);
-		mReorderableLists.Add(property.propertyPath, result);
-		return (result);
-	}
-	#endregion
-
-	#region =============================================== РАБОТА С МЕТОДАМИ ==========================================
-	--------
-	/// <summary>
-	/// Получение данных методов которые доступны для вызова из инспектора свойств
-	/// </summary>
-	--------
-	public void GetMethodHolders()
-	{
-		Type type = this.target.GetType();
-
-		MethodInfo[] all_methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-		for (var i = 0; i < all_methods.Length; i++)
-		{
-			var method_calls = Attribute.GetCustomAttribute(all_methods[i],
-				typeof(LotusMethodCallAttribute)) as LotusMethodCallAttribute;
-			if (method_calls != null)
-			{
-				MethodInfo method = all_methods[i];
-				ParameterInfo[] args = method.GetParameters();
-				switch (args.Length)
-				{
-					case 0:
-						{
-							var method_holder = new CMethodHolder();
-							method_holder.MethodAttribute = method_calls;
-							method_holder.Method = method;
-							method_holder.Instance = this.target;
-							mMethodHolders.Add(method_holder);
-						}
-						break;
-					case 1:
-						{
-							var method_holder = new CMethodHolderArg1();
-							method_holder.MethodAttribute = method_calls;
-							method_holder.Method = method;
-							method_holder.Instance = this.target;
-							method_holder.FirstArgumentName = args[0].Name;
-							method_holder.FirstArgumentTypeName = args[0].ParameterType.Name;
-							method_holder.FirstArgument.Set(args[0].ParameterType);
-							mMethodHolders.Add(method_holder);
-						}
-						break;
-					case 2:
-						{
-							var method_holder = new CMethodHolderArg2();
-							method_holder.MethodAttribute = method_calls;
-							method_holder.Method = method;
-							method_holder.Instance = this.target;
-							method_holder.FirstArgumentName = args[0].Name;
-							method_holder.FirstArgumentTypeName = args[0].ParameterType.Name;
-							method_holder.FirstArgument.Set(args[0].ParameterType);
-							method_holder.SecondArgumentName = args[1].Name;
-							method_holder.SecondArgumentTypeName = args[1].ParameterType.Name;
-							method_holder.SecondArgument.Set(args[1].ParameterType);
-							mMethodHolders.Add(method_holder);
-						}
-						break;
-					default:
-						break;
-				}
-			}
-		}
-
-		mMethodHolders.Sort((CMethodHolder x, CMethodHolder y) =>
-		{
-			return (x.MethodAttribute.DrawOrder.CompareTo(y.MethodAttribute.DrawOrder));
-		});
-	}
-
-	
-	/// <summary>
-	/// Рисование кнопок
-	/// </summary>
-	
-	public void DrawMethodHolders()
-	{
-		for (var i = 0; i < mMethodHolders.Count; i++)
-		{
-			mMethodHolders[i].Draw();
-			//GUILayout.Space(2);
-		}
-	}
-	#endregion
+        /// <summary>
+        /// Рисование кнопок
+        /// </summary>
+        public void DrawMethodHolders()
+        {
+            for (var i = 0; i < _methodHolders.Count; i++)
+            {
+                _methodHolders[i].Draw();
+            }
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

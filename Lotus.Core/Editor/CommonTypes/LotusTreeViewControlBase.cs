@@ -1,406 +1,372 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusTreeViewControlBase.cs
-*		Базовый шаблон элемента для отображения дерева для редактора Unity.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
+﻿#if UNITY_EDITOR
 using System;
-using UnityEngine;
-using UnityEditor;
-------------
+
 using Lotus.Core;
-using System.IO;
 
-namespace Lotus
+using UnityEditor;
+using UnityEngine;
+
+namespace Lotus.Editor
 {
-	namespace Editor
-	{
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Базовый шаблон элемента для отображения дерева для редактора Unity
+    /// </summary>
+    public class TreeViewControlBase<TCollection, TViewItem, TData>
+        where TData : class
+        where TViewItem : class, ILotusViewModelHierarchy
+        where TCollection : CollectionViewModelHierarchy<TViewItem, TData>
+    {
+        #region Fields
+        // Основные параметры
+        protected internal TCollection _root;
+        protected internal object _rootData;
+        protected internal TViewItem _selectedNode;
 
-		/** \addtogroup CoreUnityEditor
-		*@{*/
+        // Параметры фильтрации
+        protected internal string _searchString;
+        protected internal TStringSearchOption _searchOption;
 
-		/// <summary>
-		/// Базовый шаблон элемента для отображения дерева для редактора Unity
-		/// </summary>
+        // Параметры отображения
+        protected internal bool _isCheckableView;
+        protected internal bool _isIconableView;
+        protected internal Func<TViewItem, Texture> _iconDelegate;
 
-		public class TreeViewControlBase<TCollection, TViewItem, TData>
-			where TData : class
-			where TViewItem : class, ILotusViewModelHierarchy, new()
-			where TCollection : CollectionViewHierarchy<TViewItem, TData>
-		{
-			#region Fields
-			// Основные параметры
-			protected internal TCollection mRoot;
-			protected internal System.Object mRootData;
-			protected internal TViewItem mSelectedNode;
+        // События
+        protected internal Action<TViewItem> _onSelectedNode;
 
-			// Параметры фильтрации
-			protected internal String mSearchString;
-			protected internal TStringSearchOption mSearchOption;
+        // Служебные данные для отрисовки
+        protected internal Rect _controlRect;
+        protected internal float _startDrawY;
+        protected internal float _height;
+        protected internal int _controlID;
+        #endregion
 
-			// Параметры отображения
-			protected internal Boolean mIsCheckableView;
-			protected internal Boolean mIsIconableView;
-			protected internal Func<TViewItem, Texture> mIconDelegate;
+        #region Properties
+        //
+        // ОСНОВНЫЕ ПАРАМЕТРЫ
+        //
+        /// <summary>
+        /// Корневой узел дерева
+        /// </summary>
+        public TCollection Root
+        {
+            get { return _root; }
+            set
+            {
+                _root = value;
+                if (_root != null)
+                {
+                    _rootData = _root.Source;
+                }
+            }
+        }
 
-			// События
-			protected internal Action<TViewItem> mOnSelectedNode;
+        /// <summary>
+        /// Текущий выбранный узел отображения
+        /// </summary>
+        public TViewItem SelectedNode
+        {
+            get { return _selectedNode; }
+        }
 
-			// Служебные данные для отрисовки
-			protected internal Rect mControlRect;
-			protected internal Single mStartDrawY;
-			protected internal Single mHeight;
-			protected internal Int32 mControlID;
-			#endregion
+        //
+        // ПАРАМЕТРЫ ФИЛЬТРАЦИИ
+        //
+        /// <summary>
+        /// Строка для фильтрования и поиска узлов по имени
+        /// </summary>
+        public string SearchString
+        {
+            get { return _searchString; }
+            set
+            {
+                if (_searchString != value)
+                {
+                    _searchString = value;
+                    OnFiltered();
+                }
+            }
+        }
 
-			#region Properties
-			//
-			// ОСНОВНЫЕ ПАРАМЕТРЫ
-			//
-			/// <summary>
-			/// Корневой узел дерева
-			/// </summary>
-			public TCollection Root
-			{
-				get { return (mRoot); }
-				set 
-				{ 
-					mRoot = value;
-					if (mRoot != null)
-					{
-						mRootData = mRoot.Source;
-					}
-				}
-			}
+        /// <summary>
+        /// Опции поиска узлов по имени
+        /// </summary>
+        public TStringSearchOption SearchOption
+        {
+            get { return _searchOption; }
+            set
+            {
+                if (_searchOption != value)
+                {
+                    _searchOption = value;
+                    OnFiltered();
+                }
+            }
+        }
 
-			/// <summary>
-			/// Текущий выбранный узел отображения
-			/// </summary>
-			public TViewItem SelectedNode
-			{
-				get { return (mSelectedNode); }
-			}
+        //
+        // ПАРАМЕТРЫ ОТОБРАЖЕНИЯ
+        //
+        /// <summary>
+        /// Отображение флажка выбора элемента узла
+        /// </summary>
+        public bool IsCheckableView
+        {
+            get { return _isCheckableView; }
+            set
+            {
+                if (_isCheckableView != value)
+                {
+                    _isCheckableView = value;
+                }
+            }
+        }
 
-			//
-			// ПАРАМЕТРЫ ФИЛЬТРАЦИИ
-			//
-			/// <summary>
-			/// Строка для фильтрования и поиска узлов по имени
-			/// </summary>
-			public String SearchString
-			{
-				get { return (mSearchString); }
-				set
-				{
-					if (mSearchString != value)
-					{
-						mSearchString = value;
-						OnFiltered();
-					}
-				}
-			}
+        /// <summary>
+        /// Отображение иконки элемента узла
+        /// </summary>
+        public bool IsIconableView
+        {
+            get { return _isIconableView; }
+            set
+            {
+                if (_isIconableView != value)
+                {
+                    _isIconableView = value;
+                }
+            }
+        }
 
-			/// <summary>
-			/// Опции поиска узлов по имени
-			/// </summary>
-			public TStringSearchOption SearchOption
-			{
-				get { return (mSearchOption); }
-				set
-				{
-					if (mSearchOption != value)
-					{
-						mSearchOption = value;
-						OnFiltered();
-					}
-				}
-			}
+        /// <summary>
+        /// Делегат для представления иконки в зависимости от типа узла отображения
+        /// </summary>
+        public Func<TViewItem, Texture> IconDelegate
+        {
+            get { return _iconDelegate; }
+            set
+            {
+                if (_iconDelegate != value)
+                {
+                    _iconDelegate = value;
+                }
+            }
+        }
 
-			//
-			// ПАРАМЕТРЫ ОТОБРАЖЕНИЯ
-			//
-			/// <summary>
-			/// Отображение флажка выбора элемента узла
-			/// </summary>
-			public Boolean IsCheckableView
-			{
-				get { return (mIsCheckableView); }
-				set
-				{
-					if (mIsCheckableView != value)
-					{
-						mIsCheckableView = value;
-					}
-				}
-			}
+        //
+        // СОБЫТИЯ
+        //
+        /// <summary>
+        /// Событие выбор элемента узла
+        /// </summary>
+        public Action<TViewItem> OnSelectedNode
+        {
+            get { return _onSelectedNode; }
+            set
+            {
+                if (_onSelectedNode != value)
+                {
+                    _onSelectedNode = value;
+                }
+            }
+        }
+        #endregion
 
-			/// <summary>
-			/// Отображение иконки элемента узла
-			/// </summary>
-			public Boolean IsIconableView
-			{
-				get { return (mIsIconableView); }
-				set
-				{
-					if (mIsIconableView != value)
-					{
-						mIsIconableView = value;
-					}
-				}
-			}
+        #region Constructors
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами
+        /// </summary>
+        /// <param name="root">Корневой узел</param>
+        public TreeViewControlBase(TCollection root)
+        {
+            Root = root;
+        }
 
-			/// <summary>
-			/// Делегат для представления иконки в зависимости от типа узла отображения
-			/// </summary>
-			public Func<TViewItem, Texture> IconDelegate
-			{
-				get { return (mIconDelegate); }
-				set
-				{
-					if (mIconDelegate != value)
-					{
-						mIconDelegate = value;
-					}
-				}
-			}
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами
+        /// </summary>
+        /// <param name="root">Корневой узел</param>
+        /// <param name="data">Данные корневого узла</param>
+        public TreeViewControlBase(TCollection root, TData data)
+        {
+            Root = root;
+            Root.Source = data;
+        }
+        #endregion
 
-			//
-			// СОБЫТИЯ
-			//
-			/// <summary>
-			/// Событие выбор элемента узла
-			/// </summary>
-			public Action<TViewItem> OnSelectedNode
-			{
-				get { return (mOnSelectedNode); }
-				set
-				{
-					if (mOnSelectedNode != value)
-					{
-						mOnSelectedNode = value;
-					}
-				}
-			}
-			#endregion
+        #region Main methods
+        /// <summary>
+        /// Рисование дерева в автоматическом макете
+        /// </summary>
+        public virtual void DrawTreeLayout()
+        {
+            if (_root != null)
+            {
+                _height = 0;
+                _startDrawY = 0;
+                _root.Visit(match: OnGetLayoutHeight);
 
-			#region Constructors
-			
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="root">Корневой узел</param>
-			
-			public TreeViewControlBase(TCollection root)
-			{
-				Root = root;
-			}
+                _controlRect = EditorGUILayout.GetControlRect(false, _height);
+                _controlID = GUIUtility.GetControlID(FocusType.Passive, _controlRect);
+                _root.Visit(match: OnDrawRow);
+            }
+        }
 
-			
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="root">Корневой узел</param>
-			/// <param name="data">Данные корневого узла</param>
-			
-			public TreeViewControlBase(TCollection root, TData data)
-			{
-				Root = root;
-				Root.Source = data;
-			}
-			#endregion
+        /// <summary>
+        /// Фильтрация узлов
+        /// </summary>
+        protected virtual void OnFiltered()
+        {
+        }
 
-			#region Main methods
-			
-			/// <summary>
-			/// Рисование дерева в автоматическом макете
-			/// </summary>
-			
-			public virtual void DrawTreeLayout()
-			{
-				if (mRoot != null)
-				{
-					mHeight = 0;
-					mStartDrawY = 0;
-					mRoot.Visit(match: OnGetLayoutHeight);
+        /// <summary>
+        /// Удаление текущего выбранного узла
+        /// </summary>
+        public virtual void Delete()
+        {
+            var deleted = _selectedNode;
+            _selectedNode = default;
 
-					mControlRect = EditorGUILayout.GetControlRect(false, mHeight);
-					mControlID = GUIUtility.GetControlID(FocusType.Passive, mControlRect);
-					mRoot.Visit(match: OnDrawRow);
-				}
-			}
+            deleted.IParent.DetachOwnedObject(deleted, true);
+        }
+        #endregion
 
-			
-			/// <summary>
-			/// Фильтрация узлов
-			/// </summary>
-			
-			protected virtual void OnFiltered()
-			{
+        #region Draw methods
+        /// <summary>
+        /// Получение высоты узла дерева
+        /// </summary>
+        /// <param name="nodeView">Узел дерева</param>
+        /// <returns>Высота</returns>
+        protected virtual float GetRowHeight(ILotusViewModelHierarchy nodeView)
+        {
+            return EditorGUIUtility.singleLineHeight + 2;
+        }
 
-			}
+        /// <summary>
+        /// Вычисление высоты дерева
+        /// </summary>
+        /// <param name="nodeView">Узел дерева</param>
+        /// <returns>Статус продолжения вычисления высоты дерева</returns>
+        protected virtual bool OnGetLayoutHeight(ILotusViewModelHierarchy nodeView)
+        {
+            if (nodeView is TViewItem nodeObject)
+            {
+                if (nodeObject.Model == null)
+                {
+                    return true;
+                }
+            }
 
-			
-			/// <summary>
-			/// Удаление текущего выбранного узла
-			/// </summary>
-			
-			public virtual void Delete()
-			{
-				var deleted = mSelectedNode;
-				mSelectedNode = default;
+            _height += GetRowHeight(nodeView);
+            return nodeView.IsExpanded;
+        }
 
-				deleted.IParent.DetachOwnedObject(deleted, true);
-			}
-			#endregion
+        /// <summary>
+        /// Рисование узла дерева
+        /// </summary>
+        /// <param name="nodeView">Узел дерева</param>
+        /// <returns>Статус раскрытия данного узла</returns>
+        protected virtual bool OnDrawRow(ILotusViewModelHierarchy nodeView)
+        {
+            if (nodeView is TViewItem nodeObject)
+            {
+                if (nodeObject.Model == null)
+                {
+                    return true;
+                }
+            }
 
-			#region ======================================= МЕТОДЫ РИСОВАНИЯ ==========================================
-			
-			/// <summary>
-			/// Получение высоты узла дерева
-			/// </summary>
-			/// <param name="node_view">Узел дерева</param>
-			/// <returns>Высота</returns>
-			
-			protected virtual Single GetRowHeight(ILotusViewItemHierarchy node_view)
-			{
-				return (EditorGUIUtility.singleLineHeight + 2);
-			}
+            var rowIndent = 16 * nodeView.Level;
+            var rowHeight = GetRowHeight(nodeView);
 
-			
-			/// <summary>
-			/// Вычисление высоты дерева
-			/// </summary>
-			/// <param name="node_view">Узел дерева</param>
-			/// <returns>Статус продолжения вычисления высоты дерева</returns>
-			
-			protected virtual Boolean OnGetLayoutHeight(ILotusViewItemHierarchy node_view)
-			{
-				if(node_view is TViewItem node_object)
-				{
-					if (node_object.DataContext == null) return true;
-				}
+            var rowRect = new Rect(2, _controlRect.y + _startDrawY, _controlRect.width, rowHeight);
+            var indentRect = new Rect(rowIndent, _controlRect.y + _startDrawY, _controlRect.width - rowIndent, rowHeight);
 
-				mHeight += GetRowHeight(node_view);
-				return (node_view.IsExpanded);
-			}
+            // render
+            if (_selectedNode == (nodeView as TViewItem))
+            {
+                GUI.Box(rowRect, GUIContent.none, XEditorStyles.BOX_FLOW_NODE_0_ON);
+            }
 
-			
-			/// <summary>
-			/// Рисование узла дерева
-			/// </summary>
-			/// <param name="node_view">Узел дерева</param>
-			/// <returns>Статус раскрытия данного узла</returns>
-			
-			protected virtual Boolean OnDrawRow(ILotusViewItemHierarchy node_view)
-			{
-				if (node_view is TViewItem node_object)
-				{
-					if (node_object.DataContext == null) return true;
-				}
+            OnDrawTreeNode(indentRect, nodeView as TViewItem, _selectedNode == nodeView, false);
 
-				Single row_indent = 16 * node_view.Level;
-				var row_height = GetRowHeight(node_view);
+            // test for events
+            var eventType = Event.current.GetTypeForControl(_controlID);
+            if (eventType == EventType.MouseUp && rowRect.Contains(Event.current.mousePosition))
+            {
+                _selectedNode = nodeView as TViewItem;
+                _root.SelectedViewModel = _selectedNode;
 
-				var row_rect = new Rect(2, mControlRect.y + mStartDrawY, mControlRect.width, row_height);
-				var indent_rect = new Rect(row_indent, mControlRect.y + mStartDrawY, mControlRect.width - row_indent, row_height);
+                _onSelectedNode?.Invoke(_selectedNode);
 
-				// render
-				if (mSelectedNode == (node_view as TViewItem))
-				{
-					GUI.Box(row_rect, GUIContent.none, XEditorStyles.BOX_FLOW_NODE_0_ON);
-				}
+                GUI.changed = true;
+                Event.current.Use();
+            }
 
-				OnDrawTreeNode(indent_rect, node_view as TViewItem, mSelectedNode == node_view, false);
+            _startDrawY += rowHeight;
+            return nodeView.IsExpanded;
+        }
 
-				// test for events
-				EventType event_type = Event.current.GetTypeForControl(mControlID);
-				if (event_type == EventType.MouseUp && row_rect.Contains(Event.current.mousePosition))
-				{
-					mSelectedNode = node_view as TViewItem;
-					mRoot.SelectedViewItem = mSelectedNode;
+        /// <summary>
+        /// Рисование данных узла дерева
+        /// </summary>
+        /// <param name="rect">Прямоугольник вывода</param>
+        /// <param name="nodeView">Узел дерева</param>
+        /// <param name="selected">Статус выбора узла</param>
+        /// <param name="focus">Статус фокуса узла</param>
+        protected virtual void OnDrawTreeNode(Rect rect, TViewItem nodeView, bool selected, bool focus)
+        {
+            var labelContent = new GUIContent(nodeView.Model.ToString());
 
-					if (mOnSelectedNode != null) mOnSelectedNode(mSelectedNode);
+            if (_isIconableView && _iconDelegate != null)
+            {
+                labelContent.image = _iconDelegate(nodeView);
+            }
+            else
+            {
+                // Специальные случае
+                if (nodeView.Model is CFileSystemDirectory)
+                {
+                    labelContent.image = EditorGUIUtility.IconContent(XEditorStyles.ICON_FOLDER).image;
+                }
+                else if (nodeView.Model is CFileSystemFile systemFile)
+                {
+                    labelContent.image = XEditorInspector.GetIconForFile(systemFile.Info.Extension);
+                }
+            }
 
-					GUI.changed = true;
-					Event.current.Use();
-				}
+            if (!nodeView.IsLeaf)
+            {
+                var rectFoldout = new Rect(rect.x, rect.y, 12, rect.height);
+                nodeView.IsExpanded = EditorGUI.Foldout(rectFoldout, nodeView.IsExpanded, GUIContent.none);
+            }
 
-				mStartDrawY += row_height;
-				return node_view.IsExpanded;
-			}
+            if (_isCheckableView)
+            {
+                var rectChecked = new Rect(rect.x + 12, rect.y + 1, 12, rect.height);
+                if (nodeView.IsChecked.HasValue)
+                {
+                    nodeView.IsChecked = EditorGUI.ToggleLeft(rectChecked, GUIContent.none, nodeView.IsChecked.Value);
+                }
+                else
+                {
+                    EditorGUI.showMixedValue = true;
+                    EditorGUI.ToggleLeft(rectChecked, GUIContent.none, false);
+                    EditorGUI.showMixedValue = false;
+                }
 
-			
-			/// <summary>
-			/// Рисование данных узла дерева
-			/// </summary>
-			/// <param name="rect">Прямоугольник вывода</param>
-			/// <param name="node_view">Узел дерева</param>
-			/// <param name="selected">Статус выбора узла</param>
-			/// <param name="focus">Статус фокуса узла</param>
-			
-			protected virtual void OnDrawTreeNode(Rect rect, TViewItem node_view, Boolean selected, Boolean focus)
-			{
-				var label_сontent = new GUIContent(node_view.DataContext.ToString());
-
-				if(mIsIconableView && mIconDelegate != null)
-				{
-					label_сontent.image = mIconDelegate(node_view);
-				}
-				else
-				{
-					// Специальные случае
-					if (node_view.DataContext is CFileSystemDirectory)
-					{
-						label_сontent.image = EditorGUIUtility.IconContent(XEditorStyles.ICON_FOLDER).image;
-					}
-					else
-					{
-						if (node_view.DataContext is CFileSystemFile system_file)
-						{
-							label_сontent.image = XEditorInspector.GetIconForFile(system_file.Info.Extension);
-						}
-					}
-				}
-
-				if (!node_view.IsLeaf)
-				{
-					var rect_foldout = new Rect(rect.x, rect.y, 12, rect.height);
-					node_view.IsExpanded = EditorGUI.Foldout(rect_foldout, node_view.IsExpanded, GUIContent.none);
-				}
-
-				if(mIsCheckableView)
-				{
-					var rect_checked = new Rect(rect.x + 12, rect.y + 1, 12, rect.height);
-					if (node_view.IsChecked.HasValue)
-					{
-						node_view.IsChecked = EditorGUI.ToggleLeft(rect_checked, GUIContent.none, node_view.IsChecked.Value);
-					}
-					else
-					{
-						EditorGUI.showMixedValue = true;
-						EditorGUI.ToggleLeft(rect_checked, GUIContent.none, node_view.IsChecked.Value);
-						EditorGUI.showMixedValue = false;
-					}
-
-					var rect_value = new Rect(rect.x + 26, rect.y, rect.width - 24, rect.height);
-					EditorGUI.LabelField(rect_value, label_сontent, selected ? EditorStyles.whiteBoldLabel : EditorStyles.label);
-				}
-				else
-				{
-					var rect_value = new Rect(rect.x + 14, rect.y, rect.width - 14, rect.height);
-					EditorGUI.LabelField(rect_value, label_сontent, selected ? EditorStyles.whiteBoldLabel : EditorStyles.label);
-				}
-			}
-			#endregion
-		}
-
-		/**@}*/
-
-	}
+                var rectValue = new Rect(rect.x + 26, rect.y, rect.width - 24, rect.height);
+                EditorGUI.LabelField(rectValue, labelContent, selected ? EditorStyles.whiteBoldLabel : EditorStyles.label);
+            }
+            else
+            {
+                var rectValue = new Rect(rect.x + 14, rect.y, rect.width - 14, rect.height);
+                EditorGUI.LabelField(rectValue, labelContent, selected ? EditorStyles.whiteBoldLabel : EditorStyles.label);
+            }
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

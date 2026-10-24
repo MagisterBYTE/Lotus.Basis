@@ -1,0 +1,14 @@
+{
+    "name": "Lotus.Core.Editor",
+    "rootNamespace": "Lotus.Core.Editor",
+    "references": ["Lotus.Core"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

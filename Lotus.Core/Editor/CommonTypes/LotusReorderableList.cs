@@ -23,32 +23,32 @@ namespace Lotus.Editor
     {
         #region Fields
         // Основные параметры
-        internal Type mTypeItem;
-        internal IList mCollection;
-        internal UnityEditorInternal.ReorderableList mList;
-        internal UnityEditor.SerializedProperty mProperty;
-        internal UnityEditor.SerializedProperty mItemsProperty;
-        internal UnityEditor.SerializedObject mSerializedObject;
-        internal String mPropertyPath;
-        internal Boolean mIsStandardCollection;
-        internal GUIContent mContentItem;
+        internal Type _typeItem;
+        internal IList _collection;
+        internal UnityEditorInternal.ReorderableList _list;
+        internal UnityEditor.SerializedProperty _property;
+        internal UnityEditor.SerializedProperty _itemsProperty;
+        internal UnityEditor.SerializedObject _serializedObject;
+        internal string _propertyPath;
+        internal bool _isStandardCollection;
+        internal GUIContent _contentItem;
 
         // Работа с атрибутами
-        internal LotusReorderableAttribute mReorderAttribute;
-        internal List<LotusColumnAttribute> mColumnsAttribute;
-        internal Boolean mIsDrawInline;
+        internal LotusReorderableAttribute _reorderAttribute;
+        internal List<LotusColumnAttribute> _columnsAttribute;
+        internal bool _isDrawInline;
 
         // Обратные вызовы
-        internal Action mOnAddItem;
-        internal Action<Int32> mOnRemoveItem;
-        internal Func<Int32, Boolean> mOnCanRemoveItem;
-        internal Action<Int32, Int32> mOnReorderItem;
-        internal Func<Int32, Single> mOnHeightItem;
-        internal Action<Rect> mOnDrawHeader;
-        internal Func<Boolean, String> mOnContentHeader;
+        internal Action _onAddItem;
+        internal Action<int> _onRemoveItem;
+        internal Func<int, bool> _onCanRemoveItem;
+        internal Action<int, int> _onReorderItem;
+        internal Func<int, float> _onHeightItem;
+        internal Action<Rect> _onDrawHeader;
+        internal Func<bool, string> _onContentHeader;
 
         // Внутренние данные
-        internal Action mInternalContextMenu;
+        internal Action _internalContextMenu;
         #endregion
 
         #region Properties
@@ -58,22 +58,22 @@ namespace Lotus.Editor
         /// <summary>
         /// Статус раскрытия/закрытия списка
         /// </summary>
-        public Boolean IsExpanded { get; set; }
+        public bool IsExpanded { get; set; }
 
         /// <summary>
         /// Связанное со списком сериализируемое свойство
         /// </summary>
         public UnityEditor.SerializedProperty Property
         {
-            get { return (mProperty); }
+            get { return _property; }
         }
 
         /// <summary>
         /// Статус стандартной коллекции
         /// </summary>
-        public Boolean IsStandardCollection
+        public bool IsStandardCollection
         {
-            get { return (mIsStandardCollection); }
+            get { return _isStandardCollection; }
         }
 
         /// <summary>
@@ -83,12 +83,12 @@ namespace Lotus.Editor
         {
             get
             {
-                if (mTypeItem == null)
+                if (_typeItem == null)
                 {
-                    mTypeItem = Collection.GetType().GetClassicCollectionItemType();
+                    _typeItem = Collection.GetType().GetClassicCollectionItemType();
                 }
 
-                return (mTypeItem);
+                return _typeItem;
             }
         }
 
@@ -99,33 +99,33 @@ namespace Lotus.Editor
         {
             get
             {
-                if (mCollection == null)
+                if (_collection == null)
                 {
-                    mCollection = mProperty.GetValue<IList>();
+                    _collection = _property.GetValue<IList>();
                 }
-                return (mCollection);
+                return _collection;
             }
         }
 
         /// <summary>
         /// Количество элементов в коллекции
         /// </summary>
-        public Int32 CountItems
+        public int CountItems
         {
             get
             {
                 if (IsStandardCollection)
                 {
-                    return (mProperty.arraySize);
+                    return _property.arraySize;
                 }
                 else
                 {
-                    if (mCollection == null)
+                    if (_collection == null)
                     {
-                        mCollection = mProperty.GetValue<IList>();
+                        _collection = _property.GetValue<IList>();
                     }
 
-                    return (mCollection.Count);
+                    return _collection.Count;
                 }
             }
         }
@@ -137,7 +137,7 @@ namespace Lotus.Editor
         {
             get
             {
-                return (mList);
+                return _list;
             }
         }
 
@@ -149,44 +149,44 @@ namespace Lotus.Editor
         /// </summary>
         public Action OnAddItem
         {
-            get { return (mOnAddItem); }
-            set { mOnAddItem = value; }
+            get { return _onAddItem; }
+            set { _onAddItem = value; }
         }
 
         /// <summary>
         /// Делегат для удаления элемента
         /// </summary>
-        public Action<Int32> OnRemoveItem
+        public Action<int> OnRemoveItem
         {
-            get { return (mOnRemoveItem); }
-            set { mOnRemoveItem = value; }
+            get { return _onRemoveItem; }
+            set { _onRemoveItem = value; }
         }
 
         /// <summary>
         /// Функтор для определения возможности удаления элемента
         /// </summary>
-        public Func<Int32, Boolean> OnCanRemoveItem
+        public Func<int, bool> OnCanRemoveItem
         {
-            get { return (mOnCanRemoveItem); }
-            set { mOnCanRemoveItem = value; }
+            get { return _onCanRemoveItem; }
+            set { _onCanRemoveItem = value; }
         }
 
         /// <summary>
         /// Делегат для информирования об изменение порядка элемента
         /// </summary>
-        public Action<Int32, Int32> OnReorderItem
+        public Action<int, int> OnReorderItem
         {
-            get { return (mOnReorderItem); }
-            set { mOnReorderItem = value; }
+            get { return _onReorderItem; }
+            set { _onReorderItem = value; }
         }
 
         /// <summary>
         /// Делегат для вычисления высоты элемента
         /// </summary>
-        public Func<Int32, Single> OnHeightItem
+        public Func<int, float> OnHeightItem
         {
-            get { return (mOnHeightItem); }
-            set { mOnHeightItem = value; }
+            get { return _onHeightItem; }
+            set { _onHeightItem = value; }
         }
 
         //
@@ -197,114 +197,106 @@ namespace Lotus.Editor
         /// </summary>
         public Action<Rect> OnDrawHeader
         {
-            get { return (mOnDrawHeader); }
-            set { mOnDrawHeader = value; }
+            get { return _onDrawHeader; }
+            set { _onDrawHeader = value; }
         }
 
         /// <summary>
         /// Делегат предоставления надписи заголовка
         /// </summary>
-        public Func<Boolean, String> OnContentHeader
+        public Func<bool, string> OnContentHeader
         {
-            get { return (mOnContentHeader); }
-            set { mOnContentHeader = value; }
+            get { return _onContentHeader; }
+            set { _onContentHeader = value; }
         }
         #endregion
 
         #region Constructors
-
         /// <summary>
         /// Конструктор инициализирует объект класса указанными параметрами
         /// </summary>
         /// <param name="property">Сериализируемое свойство</param>
-
         public CReorderableList(UnityEditor.SerializedProperty property)
         {
-            Boolean dragable = true, header = true, add = true, remove = true;
+            bool draggable = true, header = true, add = true, remove = true;
             IsExpanded = property.isExpanded;
-            mProperty = property;
+            _property = property;
 
             // Это обычная коллекция Array или List
-            if (mProperty.IsStandardCollection())
+            if (_property.IsStandardCollection())
             {
-                mList = new UnityEditorInternal.ReorderableList(mProperty.serializedObject, mProperty, dragable, header, add, remove);
-                mIsStandardCollection = true;
+                _list = new UnityEditorInternal.ReorderableList(_property.serializedObject, _property, draggable, header, add, remove);
+                _isStandardCollection = true;
             }
             else
             {
                 // Получаем коллекцию
-                mItemsProperty = mProperty.GetLotusInnerCollection();
-                mCollection = mProperty.GetValue<IList>();
-                mTypeItem = mCollection.GetType().GetClassicCollectionItemType();
-                mList = new UnityEditorInternal.ReorderableList(mCollection, mTypeItem, dragable, header, add, remove);
-                mIsStandardCollection = false;
+                _itemsProperty = _property.GetLotusInnerCollection();
+                _collection = _property.GetValue<IList>();
+                _typeItem = _collection.GetType().GetClassicCollectionItemType();
+                _list = new UnityEditorInternal.ReorderableList(_collection, _typeItem, draggable, header, add, remove);
+                _isStandardCollection = false;
             }
 
             Init();
         }
-
 
         /// <summary>
         /// Конструктор инициализирует объект класса указанными параметрами
         /// </summary>
         /// <param name="property">Сериализируемое свойство</param>
         /// <param name="list">Обобщенная коллекция</param>
-        /// <param name="type_item">Тип элемента коллекции</param>
-
-        public CReorderableList(UnityEditor.SerializedProperty property, IList list, Type type_item)
+        /// <param name="typeItem">Тип элемента коллекции</param>
+        public CReorderableList(UnityEditor.SerializedProperty property, IList list, Type typeItem)
         {
-            Boolean dragable = true, header = true, add = true, remove = true;
+            bool draggable = true, header = true, add = true, remove = true;
             IsExpanded = property.isExpanded;
-            mProperty = property;
+            _property = property;
 
-            mIsStandardCollection = true;
-            mCollection = list;
-            mTypeItem = type_item;
+            _isStandardCollection = true;
+            _collection = list;
+            _typeItem = typeItem;
 
-            mList = new UnityEditorInternal.ReorderableList(mCollection, mTypeItem, dragable, header, add, remove);
+            _list = new UnityEditorInternal.ReorderableList(_collection, _typeItem, draggable, header, add, remove);
 
             Init();
         }
         #endregion
 
         #region IDisposable methods
-
         /// <summary>
         /// Освобождение управляемых ресурсов
         /// </summary>
-
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-
         /// <summary>
         /// Освобождение управляемых ресурсов
         /// </summary>
         /// <param name="disposing">Статус освобождения</param>
-
-        private void Dispose(Boolean disposing)
+        private void Dispose(bool disposing)
         {
             // Освобождаем только управляемые ресурсы
             if (disposing)
             {
 #if UNITY_EDITOR
-					mList = null;
-					mCollection = null;
-					mTypeItem = null;
-					if (mProperty != null)
-					{
-						mProperty.Dispose();
-						mProperty = null;
-					}
+                _list = null;
+                _collection = null;
+                _typeItem = null;
+                if (_property != null)
+                {
+                    _property.Dispose();
+                    _property = null;
+                }
 
-					if (mItemsProperty != null)
-					{
-						mItemsProperty.Dispose();
-						mItemsProperty = null;
-					}
+                if (_itemsProperty != null)
+                {
+                    _itemsProperty.Dispose();
+                    _itemsProperty = null;
+                }
 #endif
             }
 
@@ -313,193 +305,182 @@ namespace Lotus.Editor
         #endregion
 
         #region Main methods
-
         /// <summary>
         /// Дополнительная инициализация списка
         /// </summary>
-
         private void Init()
         {
-            mContentItem = new GUIContent("");
+            _contentItem = new GUIContent(string.Empty);
 
-            mList.onAddCallback = OnAddItemDefault;
-            mList.onChangedCallback = OnChangedItemDefault;
-            mList.onRemoveCallback = OnRemoveItemDefault;
-            mList.onCanRemoveCallback = OnCanRemoveItemDefault;
-            mList.onReorderCallbackWithDetails = OnReorderItemDefault;
-            mList.drawHeaderCallback = OnDrawHeaderDefaultOpened;
-            mList.drawElementCallback = OnDrawItemDefault;
-            mList.elementHeightCallback = OnHeightItemDefault;
+            _list.onAddCallback = OnAddItemDefault;
+            _list.onChangedCallback = OnChangedItemDefault;
+            _list.onRemoveCallback = OnRemoveItemDefault;
+            _list.onCanRemoveCallback = OnCanRemoveItemDefault;
+            _list.onReorderCallbackWithDetails = OnReorderItemDefault;
+            _list.drawHeaderCallback = OnDrawHeaderDefaultOpened;
+            _list.drawElementCallback = OnDrawItemDefault;
+            _list.elementHeightCallback = OnHeightItemDefault;
 
-            if (mProperty != null)
+            if (_property != null)
             {
-                mReorderAttribute = mProperty.GetAttribute<LotusReorderableAttribute>();
-                if (mReorderAttribute != null)
+                _reorderAttribute = _property.GetAttribute<LotusReorderableAttribute>();
+                if (_reorderAttribute != null)
                 {
                     // Изменение
-                    if (mReorderAttribute.ItemsChangedMethodName.IsExists())
+                    if (_reorderAttribute.ItemsChangedMethodName.IsExists())
                     {
                     }
-                    if (mReorderAttribute.ContextMenuMethodName.IsExists())
+                    if (_reorderAttribute.ContextMenuMethodName.IsExists())
                     {
-                        mList.onAddDropdownCallback = OnContextMenuDefault;
+                        _list.onAddDropdownCallback = OnContextMenuDefault;
                     }
 
                     // Сортировка
-                    if (mReorderAttribute.SortAscendingMethodName.IsExists())
+                    if (_reorderAttribute.SortAscendingMethodName.IsExists())
                     {
                     }
-                    if (mReorderAttribute.SortDescendingMethodName.IsExists())
+                    if (_reorderAttribute.SortDescendingMethodName.IsExists())
                     {
                     }
-                    if (mReorderAttribute.ReorderItemChangedMethodName.IsExists())
+                    if (_reorderAttribute.ReorderItemChangedMethodName.IsExists())
                     {
                     }
 
                     // Рисование
-                    if (mReorderAttribute.DrawItemMethodName.IsExists())
+                    if (_reorderAttribute.DrawItemMethodName.IsExists())
                     {
                     }
-                    if (mReorderAttribute.HeightItemMethodName.IsExists())
+                    if (_reorderAttribute.HeightItemMethodName.IsExists())
                     {
                     }
                 }
 
-                if (mProperty.propertyType == UnityEditor.SerializedPropertyType.Generic)
+                if (_property.propertyType == UnityEditor.SerializedPropertyType.Generic)
                 {
-                    if (XEditorCachedData.GetAttribute<LotusInLineAttribute>(mProperty) != null)
+                    if (XEditorCachedData.GetAttribute<LotusInLineAttribute>(_property) != null)
                     {
-                        mIsDrawInline = true;
+                        _isDrawInline = true;
                     }
                 }
             }
         }
-
 
         /// <summary>
         /// Получение высоты отображения списка
         /// </summary>
         /// <returns>Высота отображения списка</returns>
-
-        public Single GetHeight()
+        public float GetHeight()
         {
             if (IsExpanded)
             {
-                return (mList.GetHeight());
+                return _list.GetHeight();
             }
             else
             {
-                return (XInspectorViewParams.CONTROL_HEIGHT_SPACE + XInspectorViewParams.SPACE);
+                return XInspectorViewParams.CONTROL_HEIGHT_SPACE + XInspectorViewParams.SPACE;
             }
         }
-
 
         /// <summary>
         /// Рисование управляющих кнопок
         /// </summary>
         /// <param name="position">Прямоугольник для отображения</param>
-
         private void DrawControlButton(Rect position)
         {
             var count = 2;
-            if (mReorderAttribute.SortAscendingMethodName.IsExists()) count++;
-            if (mReorderAttribute.SortDescendingMethodName.IsExists()) count++;
-            var width_default = (position.width - 2) / count;
+            if (_reorderAttribute.SortAscendingMethodName.IsExists()) count++;
+            if (_reorderAttribute.SortDescendingMethodName.IsExists()) count++;
+            var widthDefault = (position.width - 2) / count;
 
             //
             // Ascending/descending
             //
-            Rect rect_button_sort_descending = Rect.zero;
-            rect_button_sort_descending.x = position.xMax;
-            if (mReorderAttribute.SortDescendingMethodName.IsExists())
+            Rect rectButtonSortDescending = Rect.zero;
+            rectButtonSortDescending.x = position.xMax;
+            if (_reorderAttribute.SortDescendingMethodName.IsExists())
             {
-                rect_button_sort_descending.x = position.xMax - width_default;
-                rect_button_sort_descending.y = position.y;
-                rect_button_sort_descending.width = width_default;
-                rect_button_sort_descending.height = mList.headerHeight - 2;
-                if (GUI.Button(rect_button_sort_descending, "Sort " + XString.TriangleDown, UnityEditor.EditorStyles.miniButtonMid))
+                rectButtonSortDescending.x = position.xMax - widthDefault;
+                rectButtonSortDescending.y = position.y;
+                rectButtonSortDescending.width = widthDefault;
+                rectButtonSortDescending.height = _list.headerHeight - 2;
+                if (GUI.Button(rectButtonSortDescending, "Sort " + XStringHelper.TriangleDown, UnityEditor.EditorStyles.miniButtonMid))
                 {
-                    mProperty.Invoke(mReorderAttribute.SortDescendingMethodName);
+                    _property.Invoke(_reorderAttribute.SortDescendingMethodName);
                 }
             }
 
-            Rect rect_button_sort_ascending = Rect.zero;
-            rect_button_sort_ascending.y = position.y;
-            rect_button_sort_ascending.width = width_default;
-            rect_button_sort_ascending.height = mList.headerHeight - 2;
-            if (mReorderAttribute.SortAscendingMethodName.IsExists())
+            Rect rectButtonSortAscending = Rect.zero;
+            rectButtonSortAscending.y = position.y;
+            rectButtonSortAscending.width = widthDefault;
+            rectButtonSortAscending.height = _list.headerHeight - 2;
+            if (_reorderAttribute.SortAscendingMethodName.IsExists())
             {
-                rect_button_sort_ascending.x = rect_button_sort_descending.x - width_default;
-                if (GUI.Button(rect_button_sort_ascending, "Sort " + XString.TriangleUp, UnityEditor.EditorStyles.miniButtonMid))
+                rectButtonSortAscending.x = rectButtonSortDescending.x - widthDefault;
+                if (GUI.Button(rectButtonSortAscending, "Sort " + XStringHelper.TriangleUp, UnityEditor.EditorStyles.miniButtonMid))
                 {
-                    mProperty.Invoke(mReorderAttribute.SortAscendingMethodName);
+                    _property.Invoke(_reorderAttribute.SortAscendingMethodName);
                 }
             }
         }
 
-
         /// <summary>
         /// Рисование списка в автоматическом макете
         /// </summary>
-
         public void DrawLayout()
         {
             if (IsExpanded)
             {
-                mList.DoLayoutList();
+                _list.DoLayoutList();
             }
             else
             {
-                XEditorInspector.PrepareContent(mProperty);
+                XEditorInspector.PrepareContent(_property);
 
                 Rect rect = UnityEditor.EditorGUILayout.BeginHorizontal();
                 {
                     // Рисуем фон простым прямоугольником
-                    GUI.Box(rect, "");
+                    GUI.Box(rect, string.Empty);
 
                     // Смещаем надпись свойства в область списка
                     GUILayout.Space(12);
                     var name = XEditorInspector.Content.text + " (" + CountItems.ToString() + ")";
-                    mProperty.isExpanded = UnityEditor.EditorGUILayout.Foldout(mProperty.isExpanded, name, true);
-                    IsExpanded = mProperty.isExpanded;
+                    _property.isExpanded = UnityEditor.EditorGUILayout.Foldout(_property.isExpanded, name, true);
+                    IsExpanded = _property.isExpanded;
                 }
                 UnityEditor.EditorGUILayout.EndHorizontal();
             }
         }
 
-
         /// <summary>
         /// Рисование списка
         /// </summary>
         /// <param name="position">Прямоугольник для отображения</param>
-
         public void Draw(Rect position)
         {
             if (IsExpanded)
             {
-                mList.DoList(position);
+                _list.DoList(position);
             }
             else
             {
-                XEditorInspector.PrepareContent(mProperty);
+                XEditorInspector.PrepareContent(_property);
 
                 // Рисуем фон простым прямоугольником
-                GUI.Box(position, "");
+                GUI.Box(position, string.Empty);
 
                 // Смещаем надпись свойства в область списка
                 position.x += 12;
                 var name = XEditorInspector.Content.text + " (" + CountItems.ToString() + ")";
 
-                if (mOnContentHeader != null)
+                if (_onContentHeader != null)
                 {
-                    name = mOnContentHeader(false);
+                    name = _onContentHeader(false);
                 }
 
-                mProperty.isExpanded = UnityEditor.EditorGUI.Foldout(position, mProperty.isExpanded, name, true);
-                IsExpanded = mProperty.isExpanded;
+                _property.isExpanded = UnityEditor.EditorGUI.Foldout(position, _property.isExpanded, name, true);
+                IsExpanded = _property.isExpanded;
             }
         }
-
 
         /// <summary>
         /// Рисование элемента по умолчанию
@@ -507,8 +488,7 @@ namespace Lotus.Editor
         /// <param name="item">Сериализируемое свойство</param>
         /// <param name="position">Прямоугольник для отображения</param>
         /// <param name="index">Индекс элемента</param>
-
-        public void DrawItemDefault(UnityEditor.SerializedProperty item, Rect position, Int32 index)
+        public void DrawItemDefault(UnityEditor.SerializedProperty item, Rect position, int index)
         {
             // Для сложного свойства используем более подробное описание 
             if (item.propertyType == UnityEditor.SerializedPropertyType.Generic)
@@ -516,43 +496,42 @@ namespace Lotus.Editor
                 position.xMin += 8;
                 position.y += 2;
 
-                mContentItem.text = "Item " + index.ToString();
+                _contentItem.text = "Item " + index.ToString();
 
-                if (mReorderAttribute != null && mReorderAttribute.TitleFieldName.IsExists())
+                if (_reorderAttribute != null && _reorderAttribute.TitleFieldName.IsExists())
                 {
-                    UnityEditor.SerializedProperty inner_property = item.FindPropertyRelative(mReorderAttribute.TitleFieldName);
-                    if (inner_property != null && inner_property.propertyType == UnityEditor.SerializedPropertyType.String)
+                    UnityEditor.SerializedProperty innerProperty = item.FindPropertyRelative(_reorderAttribute.TitleFieldName);
+                    if (innerProperty != null && innerProperty.propertyType == UnityEditor.SerializedPropertyType.String)
                     {
-                        if (inner_property.stringValue.IsExists())
+                        if (innerProperty.stringValue.IsExists())
                         {
-                            mContentItem.text = inner_property.stringValue + '[' + index.ToString() + ']';
+                            _contentItem.text = innerProperty.stringValue + '[' + index.ToString() + ']';
                         }
                     }
                 }
             }
             else
             {
-                mContentItem.text = "Item " + index.ToString();
+                _contentItem.text = "Item " + index.ToString();
             }
 
             UnityEditor.EditorGUI.BeginChangeCheck();
             {
-                UnityEditor.EditorGUI.PropertyField(position, item, mContentItem, item.isExpanded);
+                UnityEditor.EditorGUI.PropertyField(position, item, _contentItem, item.isExpanded);
             }
             if (UnityEditor.EditorGUI.EndChangeCheck())
             {
                 if (UnityEditor.EditorApplication.isPlaying)
                 {
-                    //if (mCollection is ILotusNotifyCollectionChanged)
+                    //if (_collection is ILotusNotifyCollectionChanged)
                     //{
-                    //	item.Save();
-                    //	ILotusNotifyCollectionChanged collection_changed = mCollection as ILotusNotifyCollectionChanged;
-                    //	collection_changed.OnCollectionChanged?.Invoke(TNotifyCollectionChangedAction.Replace, mCollection[index], index, 1);
+                    //  item.Save();
+                    //  ILotusNotifyCollectionChanged collectionChanged = _collection as ILotusNotifyCollectionChanged;
+                    //  collectionChanged.OnCollectionChanged?.Invoke(TNotifyCollectionChangedAction.Replace, _collection[index], index, 1);
                     //}
                 }
             }
         }
-
 
         /// <summary>
         /// Рисование элемента (всех его дочерних элементов) в одну линию
@@ -560,49 +539,48 @@ namespace Lotus.Editor
         /// <param name="item">Сериализируемое свойство</param>
         /// <param name="position">Прямоугольник для отображения</param>
         /// <param name="index">Индекс элемента</param>
-
-        public void DrawItemInLine(UnityEditor.SerializedProperty item, Rect position, Int32 index)
+        public void DrawItemInLine(UnityEditor.SerializedProperty item, Rect position, int index)
         {
             UnityEditor.EditorGUI.BeginChangeCheck();
             {
                 List<UnityEditor.SerializedProperty> childs = item.GetChildrenProperties();
 
                 // Получаем информацию о столбцах
-                if (mColumnsAttribute == null)
+                if (_columnsAttribute == null)
                 {
-                    mColumnsAttribute = new List<LotusColumnAttribute>();
+                    _columnsAttribute = new List<LotusColumnAttribute>();
                     for (var i = 0; i < childs.Count; i++)
                     {
-                        LotusColumnAttribute column_attribute = XEditorCachedData.GetAttribute<LotusColumnAttribute>(childs[i]);
-                        mColumnsAttribute.Add(column_attribute);
+                        LotusColumnAttribute columnAttribute = XEditorCachedData.GetAttribute<LotusColumnAttribute>(childs[i]);
+                        _columnsAttribute.Add(columnAttribute);
                     }
                 }
 
                 // Считать будем от ширины с минусом по единицы на каждую колонку и минус ширина для вывода индекса
-                Single index_width = 12;
+                float indexWidth = 12;
                 if (CountItems > 9)
                 {
-                    index_width = 16;
+                    indexWidth = 16;
                 }
-                var total_width = position.width - childs.Count - index_width;
+                var totalWidth = position.width - childs.Count - indexWidth;
 
                 // На первом элементе отображаем заголовки
                 if (index == 0)
                 {
-                    Rect rect_header = position;
-                    rect_header.x += index_width;
-                    rect_header.height = XInspectorViewParams.CONTROL_HEIGHT_SPACE;
+                    Rect rectHeader = position;
+                    rectHeader.x += indexWidth;
+                    rectHeader.height = XInspectorViewParams.CONTROL_HEIGHT_SPACE;
                     for (var i = 0; i < childs.Count; i++)
                     {
-                        if (mColumnsAttribute[i] != null)
+                        if (_columnsAttribute[i] != null)
                         {
-                            rect_header.width = Mathf.Ceil(mColumnsAttribute[i].Percent / 100 * total_width);
+                            rectHeader.width = Mathf.Ceil(_columnsAttribute[i].Percent / 100 * totalWidth);
 
                             XEditorInspector.PrepareContent(childs[i]);
 
-                            UnityEditor.EditorGUI.LabelField(rect_header, XEditorInspector.Content, UnityEditor.EditorStyles.boldLabel);
+                            UnityEditor.EditorGUI.LabelField(rectHeader, XEditorInspector.Content, UnityEditor.EditorStyles.boldLabel);
 
-                            rect_header.x += rect_header.width + 1;
+                            rectHeader.x += rectHeader.width + 1;
                         }
                     }
 
@@ -610,24 +588,24 @@ namespace Lotus.Editor
                 }
 
                 // Выводим индекс
-                Rect rect_index = position;
+                Rect rectIndex = position;
 
                 // При нулевом индексе корректируем высоту
                 if (index == 0)
                 {
-                    rect_index.y -= XInspectorViewParams.CONTROL_HEIGHT_SPACE / 2;
+                    rectIndex.y -= XInspectorViewParams.CONTROL_HEIGHT_SPACE / 2;
                 }
 
-                rect_index.width = index_width;
-                UnityEditor.EditorGUI.LabelField(rect_index, index.ToString());
-                position.x += index_width;
+                rectIndex.width = indexWidth;
+                UnityEditor.EditorGUI.LabelField(rectIndex, index.ToString());
+                position.x += indexWidth;
 
                 for (var i = 0; i < childs.Count; i++)
                 {
-                    if (mColumnsAttribute[i] != null)
+                    if (_columnsAttribute[i] != null)
                     {
-                        position.height = UnityEditor.EditorGUI.GetPropertyHeight(childs[i], mContentItem, childs[i].isExpanded);
-                        position.width = Mathf.Ceil(mColumnsAttribute[i].Percent / 100 * total_width);
+                        position.height = UnityEditor.EditorGUI.GetPropertyHeight(childs[i], _contentItem, childs[i].isExpanded);
+                        position.width = Mathf.Ceil(_columnsAttribute[i].Percent / 100 * totalWidth);
 
                         UnityEditor.EditorGUI.PropertyField(position, childs[i], GUIContent.none, childs[i].isExpanded);
 
@@ -639,31 +617,29 @@ namespace Lotus.Editor
             {
                 if (UnityEditor.EditorApplication.isPlaying)
                 {
-                    //if (mCollection is ILotusNotifyCollectionChanged)
+                    //if (_collection is ILotusNotifyCollectionChanged)
                     //{
-                    //	item.Save();
-                    //	ILotusNotifyCollectionChanged collection_changed = mCollection as ILotusNotifyCollectionChanged;
-                    //	collection_changed.OnCollectionChanged?.Invoke(TNotifyCollectionChangedAction.Replace, mCollection[index], index, 1);
+                    //  item.Save();
+                    //  ILotusNotifyCollectionChanged collectionChanged = _collection as ILotusNotifyCollectionChanged;
+                    //  collectionChanged.OnCollectionChanged?.Invoke(TNotifyCollectionChangedAction.Replace, _collection[index], index, 1);
                     //}
                 }
             }
         }
 
-
         /// <summary>
         /// Переустановка параметров списка
         /// </summary>
         /// <param name="property">Сериализируемое свойство</param>
-
         public void Reset(UnityEditor.SerializedProperty property)
         {
-            mProperty = property;
+            _property = property;
 
             // Это обычная коллекция Array или List
             if (property.IsStandardCollection())
             {
-                mList.serializedProperty = mProperty;
-                mIsStandardCollection = true;
+                _list.serializedProperty = _property;
+                _isStandardCollection = true;
 
                 if (property.serializedObject == null)
                 {
@@ -673,42 +649,40 @@ namespace Lotus.Editor
             else
             {
                 // Получаем коллекцию
-                mItemsProperty = property.GetLotusInnerCollection();
-                mCollection = property.GetValue<IList>();
-                mTypeItem = mCollection.GetType().GetClassicCollectionItemType();
-                mList.list = mCollection;
-                mIsStandardCollection = false;
+                _itemsProperty = property.GetLotusInnerCollection();
+                _collection = property.GetValue<IList>();
+                _typeItem = _collection.GetType().GetClassicCollectionItemType();
+                _list.list = _collection;
+                _isStandardCollection = false;
             }
 
             Init();
         }
         #endregion
 
-        #region Event handling
-
+        #region Event handlers
         /// <summary>
         /// Добавление элемента в список
         /// </summary>
         /// <param name="list">Список</param>
-
         private void OnAddItemDefault(UnityEditorInternal.ReorderableList list)
         {
-            if (mIsStandardCollection)
+            if (_isStandardCollection)
             {
-                if (mOnAddItem != null)
+                if (_onAddItem != null)
                 {
-                    mOnAddItem();
+                    _onAddItem();
                 }
                 else
                 {
-                    mProperty.arraySize++;
+                    _property.arraySize++;
                 }
             }
             else
             {
-                if (mOnAddItem != null)
+                if (_onAddItem != null)
                 {
-                    mOnAddItem();
+                    _onAddItem();
                 }
                 else
                 {
@@ -717,44 +691,40 @@ namespace Lotus.Editor
             }
         }
 
-
         /// <summary>
         /// Изменение элемента списка
         /// </summary>
         /// <param name="list">Список</param>
-
         private void OnChangedItemDefault(UnityEditorInternal.ReorderableList list)
         {
-            if (mReorderAttribute != null && mReorderAttribute.ItemsChangedMethodName.IsExists())
+            if (_reorderAttribute != null && _reorderAttribute.ItemsChangedMethodName.IsExists())
             {
-                mProperty.Invoke(mReorderAttribute.ItemsChangedMethodName);
+                _property.Invoke(_reorderAttribute.ItemsChangedMethodName);
             }
         }
-
 
         /// <summary>
         /// Удаление элемента из списка
         /// </summary>
         /// <param name="list">Список</param>
-
         private void OnRemoveItemDefault(UnityEditorInternal.ReorderableList list)
         {
-            if (mIsStandardCollection)
+            if (_isStandardCollection)
             {
-                if (mOnRemoveItem != null)
+                if (_onRemoveItem != null)
                 {
-                    mOnRemoveItem(list.index);
+                    _onRemoveItem(list.index);
                 }
                 else
                 {
-                    mProperty.DeleteArrayElementAtIndex(list.index);
+                    _property.DeleteArrayElementAtIndex(list.index);
                 }
             }
             else
             {
-                if (mOnRemoveItem != null)
+                if (_onRemoveItem != null)
                 {
-                    mOnRemoveItem(list.index);
+                    _onRemoveItem(list.index);
                 }
                 else
                 {
@@ -763,69 +733,63 @@ namespace Lotus.Editor
             }
         }
 
-
         /// <summary>
         /// Возможность удаление элемента из списка
         /// </summary>
         /// <param name="list">Список</param>
         /// <returns>Статус удаления</returns>
-
-        private Boolean OnCanRemoveItemDefault(UnityEditorInternal.ReorderableList list)
+        private bool OnCanRemoveItemDefault(UnityEditorInternal.ReorderableList list)
         {
-            if (mOnCanRemoveItem != null)
+            if (_onCanRemoveItem != null)
             {
-                return (mOnCanRemoveItem(list.index));
+                return _onCanRemoveItem(list.index);
             }
             else
             {
-                return (list.count > 0);
+                return list.count > 0;
             }
         }
-
 
         /// <summary>
         /// Изменение позиции элемента из списка
         /// </summary>
         /// <param name="list">Список</param>
-        /// <param name="old_index">Старый индекс</param>
-        /// <param name="new_index">Новый индекс</param>
-
-        private void OnReorderItemDefault(UnityEditorInternal.ReorderableList list, Int32 old_index, Int32 new_index)
+        /// <param name="oldIndex">Старый индекс</param>
+        /// <param name="newIndex">Новый индекс</param>
+        private void OnReorderItemDefault(UnityEditorInternal.ReorderableList list, int oldIndex, int newIndex)
         {
-            if (mOnReorderItem != null)
+            if (_onReorderItem != null)
             {
-                mOnReorderItem(old_index, new_index);
+                _onReorderItem(oldIndex, newIndex);
             }
 
-            if (mReorderAttribute != null && mReorderAttribute.ReorderItemChangedMethodName.IsExists())
+            if (_reorderAttribute != null && _reorderAttribute.ReorderItemChangedMethodName.IsExists())
             {
-                mProperty.Invoke(mReorderAttribute.ReorderItemChangedMethodName, old_index, new_index);
+                _property.Invoke(_reorderAttribute.ReorderItemChangedMethodName, oldIndex, newIndex);
             }
 
             if (UnityEditor.EditorApplication.isPlaying)
             {
-                //if (mCollection is ILotusNotifyCollectionChanged)
+                //if (_collection is ILotusNotifyCollectionChanged)
                 //{
-                //	ILotusNotifyCollectionChanged collection_changed = mCollection as ILotusNotifyCollectionChanged;
-                //	collection_changed.OnCollectionChanged?.Invoke(TNotifyCollectionChangedAction.Move, null, old_index, new_index);
+                //  ILotusNotifyCollectionChanged collectionChanged = _collection as ILotusNotifyCollectionChanged;
+                //  collectionChanged.OnCollectionChanged?.Invoke(TNotifyCollectionChangedAction.Move, null, oldIndex, newIndex);
                 //}
             }
         }
-
 
         /// <summary>
         /// Отображение контекстного меню
         /// </summary>
         /// <param name="position">Позиция контекстного меню</param>
         /// <param name="list">Список</param>
-
         private void OnContextMenuDefault(Rect position, UnityEditorInternal.ReorderableList list)
         {
-            var collection = (IList)mProperty.Invoke(mReorderAttribute.ContextMenuMethodName);
+            var collection = (IList)_property.Invoke(_reorderAttribute.ContextMenuMethodName);
             if (collection != null)
             {
-                mSerializedObject = mProperty.serializedObject;
-                mPropertyPath = mProperty.propertyPath;
+                _serializedObject = _property.serializedObject;
+                _propertyPath = _property.propertyPath;
                 var menu = new UnityEditor.GenericMenu();
                 for (var i = 0; i < collection.Count; i++)
                 {
@@ -838,35 +802,33 @@ namespace Lotus.Editor
             }
         }
 
-
         /// <summary>
         /// Выбор элемента контекстного меню
         /// </summary>
-        /// <param name="menu_item">Элемент контекстного меню</param>
-
-        private void OnContextMenuItemSelect(System.Object menu_item)
+        /// <param name="menuItem">Элемент контекстного меню</param>
+        private void OnContextMenuItemSelect(object menuItem)
         {
-            if (mIsStandardCollection)
+            if (_isStandardCollection)
             {
                 try
                 {
-                    mSerializedObject.Update();
-                    UnityEditor.SerializedProperty property = mSerializedObject.FindProperty(mPropertyPath);
+                    _serializedObject.Update();
+                    UnityEditor.SerializedProperty property = _serializedObject.FindProperty(_propertyPath);
                     if (property != null)
                     {
                         var index = property.arraySize;
                         property.arraySize++;
-                        mSerializedObject.ApplyModifiedProperties();
+                        _serializedObject.ApplyModifiedProperties();
 
-                        mList.index = index;
+                        _list.index = index;
                         var item = property.GetArrayElementAtIndex(index);
                         if (item != null)
                         {
-                            item.SetValue(menu_item);
+                            item.SetValue(menuItem);
                         }
                     }
 
-                    mSerializedObject.ApplyModifiedProperties();
+                    _serializedObject.ApplyModifiedProperties();
                 }
                 catch (Exception exc)
                 {
@@ -876,48 +838,46 @@ namespace Lotus.Editor
             else
             {
                 Collection.Add(XReflection.CreateInstance(TypeItem));
-                mCollection[mCollection.Count - 1] = menu_item;
+                _collection[_collection.Count - 1] = menuItem;
             }
 
-            if (mReorderAttribute != null && mReorderAttribute.ItemsChangedMethodName.IsExists())
+            if (_reorderAttribute != null && _reorderAttribute.ItemsChangedMethodName.IsExists())
             {
-                mProperty.Invoke(mReorderAttribute.ItemsChangedMethodName);
+                _property.Invoke(_reorderAttribute.ItemsChangedMethodName);
             }
         }
-
 
         /// <summary>
         /// Рисование заголовка списка (когда он раскрыт)
         /// </summary>
         /// <param name="position">Прямоугольник для отображения</param>
-
         private void OnDrawHeaderDefaultOpened(Rect position)
         {
-            if (mOnDrawHeader != null)
+            if (_onDrawHeader != null)
             {
-                mOnDrawHeader(position);
+                _onDrawHeader(position);
             }
             else
             {
-                XEditorInspector.PrepareContent(mProperty);
+                XEditorInspector.PrepareContent(_property);
                 position.x += 12;
                 Vector2 size = UnityEditor.EditorStyles.label.CalcSize(XEditorInspector.Content);
-                Rect rect_label = position;
-                rect_label.width = size.x + 2;
+                Rect rectLabel = position;
+                rectLabel.width = size.x + 2;
 
-                if (mOnContentHeader != null)
+                if (_onContentHeader != null)
                 {
-                    XEditorInspector.Content.text = mOnContentHeader(true);
+                    XEditorInspector.Content.text = _onContentHeader(true);
                 }
 
-                mProperty.isExpanded = UnityEditor.EditorGUI.Foldout(rect_label, mProperty.isExpanded, XEditorInspector.Content, false);
-                IsExpanded = mProperty.isExpanded;
+                _property.isExpanded = UnityEditor.EditorGUI.Foldout(rectLabel, _property.isExpanded, XEditorInspector.Content, false);
+                IsExpanded = _property.isExpanded;
             }
 
-            if (mReorderAttribute != null)
+            if (_reorderAttribute != null)
             {
-                if (mReorderAttribute.SortAscendingMethodName.IsExists() ||
-                    mReorderAttribute.SortDescendingMethodName.IsExists())
+                if (_reorderAttribute.SortAscendingMethodName.IsExists() ||
+                    _reorderAttribute.SortDescendingMethodName.IsExists())
                 {
                     position.width -= 6;
                     DrawControlButton(position);
@@ -925,82 +885,85 @@ namespace Lotus.Editor
             }
         }
 
-
         /// <summary>
         /// Получение высоты элемента по его индексу
         /// </summary>
         /// <param name="index">Индекс элемента</param>
         /// <returns>Высота элемента</returns>
-
-        private Single OnHeightItemDefault(Int32 index)
+        private float OnHeightItemDefault(int index)
         {
-            if (mOnHeightItem != null)
+            if (_onHeightItem != null)
             {
-                return (mOnHeightItem(index));
+                return _onHeightItem(index);
             }
             else
             {
-                if (mReorderAttribute != null && mReorderAttribute.HeightItemMethodName.IsExists())
+                if (_reorderAttribute != null && _reorderAttribute.HeightItemMethodName.IsExists())
                 {
-                    return ((Single)mProperty.Invoke(mReorderAttribute.HeightItemMethodName, index));
+                    return (float)_property.Invoke(_reorderAttribute.HeightItemMethodName, index);
                 }
                 else
                 {
                     UnityEditor.SerializedProperty item = null;
-                    if (mIsStandardCollection)
+                    if (_isStandardCollection)
                     {
-                        item = mProperty.GetArrayElementAtIndex(index);
+                        item = _property.GetArrayElementAtIndex(index);
                     }
                     else
                     {
-                        if (mItemsProperty == null) mItemsProperty = mProperty.GetLotusInnerCollection();
-                        if (mItemsProperty != null)
+                        if (_itemsProperty == null)
                         {
-                            if (index > mItemsProperty.arraySize - 1) index = mItemsProperty.arraySize - 1;
-                            item = mItemsProperty.GetArrayElementAtIndex(index);
+                            _itemsProperty = _property.GetLotusInnerCollection();
+                        }
+                        if (_itemsProperty != null)
+                        {
+                            if (index > _itemsProperty.arraySize - 1)
+                            {
+                                index = _itemsProperty.arraySize - 1;
+                            }
+                            item = _itemsProperty.GetArrayElementAtIndex(index);
 
                         }
                     }
 
                     if (item != null)
                     {
-                        if (mIsDrawInline)
+                        if (_isDrawInline)
                         {
-                            var max_height = XInspectorViewParams.CONTROL_HEIGHT_SPACE;
+                            var maxHeight = XInspectorViewParams.CONTROL_HEIGHT_SPACE;
                             List<UnityEditor.SerializedProperty> childs = item.GetChildrenProperties();
 
                             for (var i = 0; i < childs.Count; i++)
                             {
                                 var height = UnityEditor.EditorGUI.GetPropertyHeight(childs[i]);
-                                if (height > max_height)
+                                if (height > maxHeight)
                                 {
-                                    max_height = height + XInspectorViewParams.SPACE;
+                                    maxHeight = height + XInspectorViewParams.SPACE;
                                 }
                             }
 
                             if (index == 0)
                             {
-                                max_height += XInspectorViewParams.CONTROL_HEIGHT_SPACE;
+                                maxHeight += XInspectorViewParams.CONTROL_HEIGHT_SPACE;
                             }
 
-                            return (max_height);
+                            return maxHeight;
                         }
                         else
                         {
-                            var default_height = XInspectorViewParams.CONTROL_HEIGHT;
-                            var compute_height = UnityEditor.EditorGUI.GetPropertyHeight(item, GUIContent.none, true);
+                            var defaultHeight = XInspectorViewParams.CONTROL_HEIGHT;
+                            var computeHeight = UnityEditor.EditorGUI.GetPropertyHeight(item, GUIContent.none, true);
 
-                            return Mathf.Max(default_height, compute_height) + XInspectorViewParams.SPACE;
+                            return Mathf.Max(defaultHeight, computeHeight) + XInspectorViewParams.SPACE;
                         }
                     }
                     else
                     {
-                        return (XInspectorViewParams.CONTROL_HEIGHT_SPACE);
+                        return XInspectorViewParams.CONTROL_HEIGHT_SPACE;
                     }
                 }
             }
         }
-
 
         /// <summary>
         /// Рисование элемента списка
@@ -1009,27 +972,32 @@ namespace Lotus.Editor
         /// <param name="index">Индекс элемента</param>
         /// <param name="active">Статус активности элемента</param>
         /// <param name="focused">Статус фокуса элемента</param>
-
-        private void OnDrawItemDefault(Rect position, Int32 index, Boolean active, Boolean focused)
+        private void OnDrawItemDefault(Rect position, int index, bool active, bool focused)
         {
-            if (mReorderAttribute != null && mReorderAttribute.DrawItemMethodName.IsExists())
+            if (_reorderAttribute != null && _reorderAttribute.DrawItemMethodName.IsExists())
             {
-                mProperty.Invoke(mReorderAttribute.DrawItemMethodName, position, index);
+                _property.Invoke(_reorderAttribute.DrawItemMethodName, position, index);
             }
             else
             {
                 UnityEditor.SerializedProperty item = null;
-                if (mIsStandardCollection)
+                if (_isStandardCollection)
                 {
-                    item = mProperty.GetArrayElementAtIndex(index);
+                    item = _property.GetArrayElementAtIndex(index);
                 }
                 else
                 {
-                    if (mItemsProperty == null) mItemsProperty = mProperty.GetLotusInnerCollection();
-                    if (mItemsProperty != null)
+                    if (_itemsProperty == null)
                     {
-                        if (index > mItemsProperty.arraySize - 1) index = mItemsProperty.arraySize - 1;
-                        item = mItemsProperty.GetArrayElementAtIndex(index);
+                        _itemsProperty = _property.GetLotusInnerCollection();
+                    }
+                    if (_itemsProperty != null)
+                    {
+                        if (index > _itemsProperty.arraySize - 1)
+                        {
+                            index = _itemsProperty.arraySize - 1;
+                        }
+                        item = _itemsProperty.GetArrayElementAtIndex(index);
                     }
                 }
 
@@ -1038,7 +1006,7 @@ namespace Lotus.Editor
 
                 if (item != null)
                 {
-                    if (mIsDrawInline)
+                    if (_isDrawInline)
                     {
                         DrawItemInLine(item, position, index);
                     }
@@ -1056,56 +1024,51 @@ namespace Lotus.Editor
         #endregion
     }
 
-
     /// <summary>
     /// Статический класс содержащий словарь всех управляемых списков
     /// </summary>
-
     public static class XReorderableList
     {
         #region Fields
-        public static Dictionary<String, CReorderableList> mReorderableLists = new Dictionary<String, CReorderableList>();
+        public static Dictionary<string, CReorderableList> _reorderableLists = new Dictionary<string, CReorderableList>();
         #endregion
 
         #region Properties
         /// <summary>
         /// Словарь списков
         /// </summary>
-        public static Dictionary<String, CReorderableList> ReorderableLists
+        public static Dictionary<string, CReorderableList> ReorderableLists
         {
             get
             {
-                if (mReorderableLists == null)
+                if (_reorderableLists == null)
                 {
-                    mReorderableLists = new Dictionary<String, CReorderableList>();
+                    _reorderableLists = new Dictionary<string, CReorderableList>();
                 }
 
-                return (mReorderableLists);
+                return _reorderableLists;
             }
         }
         #endregion
 
         #region Main methods
-
         /// <summary>
         /// Получение управляемого списка для указанного свойства
         /// </summary>
         /// <param name="property">Сериализируемое свойство</param>
         /// <returns>Управляемый список список</returns>
-
         public static CReorderableList Get(UnityEditor.SerializedProperty property)
         {
             var key = property.GetHashNameInstance();
-            CReorderableList result = null;
-            if (ReorderableLists.TryGetValue(key, out result))
+            if (ReorderableLists.TryGetValue(key, out var result))
             {
                 result.Reset(property);
-                return (result);
+                return result;
             }
 
             result = new CReorderableList(property);
             ReorderableLists.Add(key, result);
-            return (result);
+            return result;
         }
         #endregion
     }

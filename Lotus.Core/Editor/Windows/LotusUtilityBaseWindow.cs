@@ -1,332 +1,298 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Window утилиты Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusUtilityBaseWindow.cs
-*		Базовая панель(окно) утилиты для представления панели редактирования платформы Lotus.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
-using System;
+﻿#if UNITY_EDITOR
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-------------
+using System.IO;
+
 using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Базовая панель(окно) утилиты для представления панели редактирования платформы Lotus
-/// </summary>
-/// <remarks>
-/// Используется в качестве базовой панели(окна) для остальных панелей(окон).
-/// Поддерживает различные режимы и струтуру отображения.
-/// Автоматически может загружать описание структурной части панели из текстового файла
-/// </remarks>
-------------
-public class LotusUtilityBaseWindow : EditorWindow
+using UnityEditor;
+
+using UnityEngine;
+
+namespace Lotus.Editor
 {
-	#region =============================================== СТАТИЧЕСКИЕ МЕТОДЫ ========================================
-	--------
-	/// <summary>
-	/// Показать окно базового редактора Lotus
-	/// </summary>
-	--------
-	[MenuItem(XCoreSettingsEditor.MenuPathUtility + "Base Window Utility", false, XCoreSettingsEditor.MenuOrderUtility + 1)]
-	public static void ShowUtilityBase()
-	{
-		var window = GetWindow<LotusUtilityBaseWindow>();
-		window.titleContent.text = "Base Window Utility";
+    /// <summary>
+    /// Базовая панель(окно) утилиты для представления панели редактирования платформы Lotus
+    /// </summary>
+    /// <remarks>
+    /// Используется в качестве базовой панели(окна) для остальных панелей(окон).
+    /// Поддерживает различные режимы и структуру отображения.
+    /// Автоматически может загружать описание структурной части панели из текстового файла
+    /// </remarks>
+    public class LotusUtilityBaseWindow : EditorWindow
+    {
+        #region Static methods
+        /// <summary>
+        /// Показать окно базового редактора Lotus
+        /// </summary>
+        [MenuItem(XCoreSettingsEditor.MenuPathUtility + "Base Window Utility", false, XCoreSettingsEditor.MenuOrderUtility + 1)]
+        public static void ShowUtilityBase()
+        {
+            var window = GetWindow<LotusUtilityBaseWindow>();
+            window.titleContent.text = "Base Window Utility";
+            window.Show();
+        }
+        #endregion
 
-		window.Show();
-	}
-	#endregion
+        #region Fields
+        // Служебные данные для рисования
+        protected LotusEditorSplitView _splitViewMain = new LotusEditorSplitView(true, 0.25f);
+        protected LotusEditorSplitView _splitViewExplore = new LotusEditorSplitView(false, 0.8f);
+        protected LotusEditorSplitView _splitViewContent = new LotusEditorSplitView(false, 0.9f);
 
-	#region =============================================== ДАННЫЕ ====================================================
-	// Служебные данные для рисования
-	protected LotusEditorSplitView mSplitViewMain = new LotusEditorSplitView(true, 0.25f);
-	protected LotusEditorSplitView mSplitViewExplore = new LotusEditorSplitView(false, 0.8f);
-	protected LotusEditorSplitView mSplitViewContent = new LotusEditorSplitView(false, 0.9f);
+        // Статус отображения отдельных панелей
+        protected bool _isToolbar = true;
+        protected bool _isOutput = true;
+        protected bool _isExplore = true;
+        protected bool _isManager = true;
 
-	// Статус отображения отдельных панелей
-	protected Boolean mIsToolbar = true;
-	protected Boolean mIsOutput = true;
-	protected Boolean mIsExplore = true;
-	protected Boolean mIsManager = true;
+        // Выбранная вкладка
+        protected int _selectedTab;
+        protected string[] _tabs = new string[1];
+        protected string[] _desc = new string[1];
+        #endregion
 
-	// Выбранная вкладка
-	protected Int32 mSelectedTab;
-	protected String[] mTabs = new String[1];
-	protected String[] mDesc = new String[1];
-	#endregion
+        #region Properties
+        /// <summary>
+        /// Статус отображения панели инструментов
+        /// </summary>
+        public bool IsToolbar
+        {
+            get { return _isToolbar; }
+            set { _isToolbar = value; }
+        }
 
-	#region =============================================== СВОЙСТВА ==================================================
-	/// <summary>
-	/// Статус отображения панели инструментов
-	/// </summary>
-	public Boolean IsToolbar
-	{
-		get { return (mIsToolbar); }
-		set { mIsToolbar = value; }
-	}
+        /// <summary>
+        /// Статус отображения панели вывода
+        /// </summary>
+        public bool IsOutput
+        {
+            get { return _isOutput; }
+            set { _isOutput = value; }
+        }
 
-	/// <summary>
-	/// Статус отображения панели вывода
-	/// </summary>
-	public Boolean IsOutput
-	{
-		get { return (mIsOutput); }
-		set { mIsOutput = value; }
-	}
+        /// <summary>
+        /// Статус отображения панели обозревателя
+        /// </summary>
+        public bool IsExplore
+        {
+            get { return _isExplore; }
+            set { _isExplore = value; }
+        }
 
-	/// <summary>
-	/// Статус отображения панели обозревателя
-	/// </summary>
-	public Boolean IsExplore
-	{
-		get { return (mIsExplore); }
-		set { mIsExplore = value; }
-	}
+        /// <summary>
+        /// Статус отображения панели управления
+        /// </summary>
+        public bool IsManager
+        {
+            get { return _isManager; }
+            set { _isManager = value; }
+        }
+        #endregion
 
-	/// <summary>
-	/// Статус отображения панели управления
-	/// </summary>
-	public Boolean IsManager
-	{
-		get { return (mIsManager); }
-		set { mIsManager = value; }
-	}
-	#endregion
+        #region Unity events
+        /// <summary>
+        /// Рисование UnityGUI
+        /// </summary>
+        public virtual void OnGUI()
+        {
+            EditorGUILayout.BeginVertical();
+            {
+                EditorGUILayout.BeginHorizontal(GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
+                {
+                    if (_isToolbar)
+                    {
+                        if (_tabs != null && _tabs.Length > 1)
+                        {
+                            GUILayout.Space(2.0f);
+                            _selectedTab = GUILayout.Toolbar(_selectedTab, _tabs, GUILayout.ExpandWidth(true),
+                                GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
+                        }
+                    }
 
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Рисование UnityGUI
-	/// </summary>
-	--------
-	public virtual void OnGUI()
-	{
-		EditorGUILayout.BeginVertical();
-		{
-			EditorGUILayout.BeginHorizontal(GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
-			{
-				if (mIsToolbar)
-				{
-					if (mTabs != null && mTabs.Length > 1)
-					{
-						GUILayout.Space(2.0f);
-						mSelectedTab = GUILayout.Toolbar(mSelectedTab, mTabs, GUILayout.ExpandWidth(true),
-							GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
-					}
-					else
-					{
+                    GUILayout.FlexibleSpace();
 
-					}
-				}
+                    GUILayout.Space(2.0f);
+                    _isToolbar = GUILayout.Toggle(_isToolbar, "Toolbar", EditorStyles.miniButtonLeft,
+                        GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
 
-				GUILayout.FlexibleSpace();
+                    _isOutput = GUILayout.Toggle(_isOutput, "Output", EditorStyles.miniButtonMid,
+                        GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
 
-				GUILayout.Space(2.0f);
-				mIsToolbar = GUILayout.Toggle(mIsToolbar, "Toolbar", EditorStyles.miniButtonLeft, GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
+                    _isExplore = GUILayout.Toggle(_isExplore, "Explore", EditorStyles.miniButtonMid,
+                        GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
 
-				//GUILayout.Space(2.0f);
-				mIsOutput = GUILayout.Toggle(mIsOutput, "Output", EditorStyles.miniButtonMid, GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
+                    _isManager = GUILayout.Toggle(_isManager, "Manager", EditorStyles.miniButtonRight,
+                        GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
+                }
+                EditorGUILayout.EndHorizontal();
 
-				//GUILayout.Space(2.0f);
-				mIsExplore = GUILayout.Toggle(mIsExplore, "Explore", EditorStyles.miniButtonMid, GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
+                if (_isExplore)
+                {
+                    _splitViewMain.BeginSplitView();
+                    {
+                        if (_isManager)
+                        {
+                            _splitViewExplore.BeginSplitView();
+                            {
+                                DrawExplore();
+                                _splitViewExplore.Split(0, 0);
+                                DrawManager();
+                            }
+                            _splitViewExplore.EndSplitView();
+                        }
+                        else
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            GUILayout.Space(4.0f);
+                            EditorGUILayout.BeginVertical();
+                            DrawExplore();
+                            EditorGUILayout.EndVertical();
+                            GUILayout.Space(6.0f);
+                            EditorGUILayout.EndHorizontal();
+                        }
 
-				//GUILayout.Space(2.0f);
-				mIsManager = GUILayout.Toggle(mIsManager, "Manager", EditorStyles.miniButtonRight, GUILayout.Height(XInspectorViewParams.HEADER_HEIGHT));
-			}
-			EditorGUILayout.EndHorizontal();
+                        _splitViewMain.Split(-2, 0);
+                        if (_isOutput)
+                        {
+                            _splitViewContent.BeginSplitView();
+                            {
+                                DrawContent();
+                                _splitViewContent.Split(0, 22);
+                                DrawOutput();
+                            }
+                            _splitViewContent.EndSplitView();
+                        }
+                        else
+                        {
+                            GUILayout.BeginVertical();
+                            DrawContent();
+                            GUILayout.EndVertical();
+                        }
+                    }
+                    _splitViewMain.EndSplitView();
+                }
+                else
+                {
+                    if (_isOutput)
+                    {
+                        _splitViewContent.BeginSplitView();
+                        {
+                            DrawContent();
+                            _splitViewContent.Split(0, 22);
+                            DrawOutput();
+                        }
+                        _splitViewContent.EndSplitView();
+                    }
+                    else
+                    {
+                        DrawContent();
+                    }
+                }
+            }
+            EditorGUILayout.EndVertical();
+            Repaint();
 
+            BeginWindows();
+            {
+                DrawWindows();
+            }
+            EndWindows();
+        }
+        #endregion
 
-			if (mIsExplore)
-			{
-				mSplitViewMain.BeginSplitView();
-				{
-					if (mIsManager)
-					{
-						mSplitViewExplore.BeginSplitView();
-						{
-							DrawExplore();
-							mSplitViewExplore.Split(0, 0);
-							DrawManager();
-						}
-						mSplitViewExplore.EndSplitView();
-					}
-					else
-					{
-						EditorGUILayout.BeginHorizontal();
-						GUILayout.Space(4.0f);
-						EditorGUILayout.BeginVertical();
-						DrawExplore();
-						EditorGUILayout.EndVertical();
-						GUILayout.Space(6.0f);
-						EditorGUILayout.EndHorizontal();
-					}
+        #region Main methods
+        /// <summary>
+        /// Добавление вкладок
+        /// </summary>
+        /// <param name="tabs">Набор вкладок</param>
+        public void AddTabs(params string[] tabs)
+        {
+            if (tabs != null && tabs.Length > 0)
+            {
+                _tabs = new string[tabs.Length];
+                for (var i = 0; i < tabs.Length; i++)
+                {
+                    _tabs[i] = tabs[i];
+                }
+            }
+        }
 
-					mSplitViewMain.Split(-2, 0);
-					if (mIsOutput)
-					{
-						mSplitViewContent.BeginSplitView();
-						{
-							DrawContent();
-							mSplitViewContent.Split(0, 22);
-							DrawOutput();
-						}
-						mSplitViewContent.EndSplitView();
-					}
-					else
-					{
-						GUILayout.BeginVertical();
-						DrawContent();
-						GUILayout.EndVertical();
-					}
+        /// <summary>
+        /// Загрузка информации по вкладкам
+        /// </summary>
+        public void LoadTabAndDesc()
+        {
+            var path = AssetDatabase.GetAssetPath(MonoScript.FromScriptableObject(this));
+            path = path.RemoveExtension();
+            path += "Desc.txt";
+            List<KeyValuePair<string, string>> data = XStringHelper.ConvertLinesToGroupLines(File.ReadAllLines(path), XStringHelper.SeparatorFileData);
 
-				}
-				mSplitViewMain.EndSplitView();
-			}
-			else
-			{
-				if (mIsOutput)
-				{
-					mSplitViewContent.BeginSplitView();
-					{
-						DrawContent();
-						mSplitViewContent.Split(0, 22);
-						DrawOutput();
-					}
-					mSplitViewContent.EndSplitView();
-				}
-				else
-				{
-					DrawContent();
-				}
-			}
-		}
-		EditorGUILayout.EndVertical();
-		Repaint();
+            if (data != null && data.Count > 0)
+            {
+                _tabs = new string[data.Count];
+                _desc = new string[data.Count];
+                for (var i = 0; i < data.Count; i++)
+                {
+                    _tabs[i] = data[i].Key.Trim('#');
+                    _desc[i] = data[i].Value;
+                }
+            }
+        }
+        #endregion
 
+        #region Draw methods
+        /// <summary>
+        /// Рисование основной панели
+        /// </summary>
+        public virtual void DrawContent()
+        {
+            GUILayout.Box("RectContent", GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
+        }
 
-		BeginWindows();
-		{
-			DrawWindows();
-		}
-		EndWindows();
-	}
-	#endregion
+        /// <summary>
+        /// Рисование панели обозревателя
+        /// </summary>
+        public virtual void DrawExplore()
+        {
+            GUILayout.Box("RectExplore", GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
+        }
 
-	#region =============================================== ОБЩИЕ МЕТОДЫ ==============================================
-	--------
-	/// <summary>
-	/// Добавление вкладок
-	/// </summary>
-	/// <param name="tabs">Набор вкладок</param>
-	--------
-	public void AddTabs(params String[] tabs)
-	{
-		if(tabs != null && tabs.Length > 0)
-		{
-			mTabs = new String[tabs.Length];
-			for (var i = 0; i < tabs.Length; i++)
-			{
-				mTabs[i] = tabs[i];
-			}
-		}
-	}
-	
-	--------
-	/// <summary>
-	/// Загрузка информации по вкладкам
-	/// </summary>
-	--------
-	public void LoadTabAndDesc()
-	{
-		var path = AssetDatabase.GetAssetPath(MonoScript.FromScriptableObject(this));
-		path = path.RemoveExtension();
-		path += "Desc.txt";
-		List <KeyValuePair<String, String>> data = XString.ConvertLinesToGroupLines(System.IO.File.ReadAllLines(path), XString.SeparatorFileData);
+        /// <summary>
+        /// Рисование панели управления
+        /// </summary>
+        public virtual void DrawManager()
+        {
+            GUILayout.Box("RectManager", GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
+        }
 
-		if (data != null && data.Count > 0)
-		{
-			mTabs = new String[data.Count];
-			mDesc = new String[data.Count];
-			for (var i = 0; i < data.Count; i++)
-			{
-				mTabs[i] = data[i].Key.Trim('#');
-				mDesc[i] = data[i].Value;
-			}
-		}
-	}
-	#endregion
+        /// <summary>
+        /// Рисование панели вывода информации
+        /// </summary>
+        public virtual void DrawOutput()
+        {
+            if (_desc.Length > 1 && _selectedTab != -1 && _selectedTab < _desc.Length)
+            {
+                if (_desc[_selectedTab].IsExists())
+                {
+                    var fontSize = EditorStyles.helpBox.fontSize;
+                    EditorStyles.helpBox.fontSize = 12;
+                    EditorGUILayout.HelpBox(_desc[_selectedTab], MessageType.Info);
+                    EditorStyles.helpBox.fontSize = fontSize;
+                }
+            }
+            else
+            {
+                GUILayout.Box("RectOutput", GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
+            }
+        }
 
-	#region =============================================== МЕТОДЫ РИСОВАНИЯ ==========================================
-	--------
-	/// <summary>
-	/// Рисование основной панели
-	/// </summary>
-	--------
-	public virtual void DrawContent()
-	{
-		GUILayout.Box("RectContent", GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
-	}
-
-	--------
-	/// <summary>
-	/// Рисование панели обозревателя
-	/// </summary>
-	--------
-	public virtual void DrawExplore()
-	{
-		GUILayout.Box("RectExplore", GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
-	}
-
-	--------
-	/// <summary>
-	/// Рисование панели управления
-	/// </summary>
-	--------
-	public virtual void DrawManager()
-	{
-		GUILayout.Box("RectManager", GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
-	}
-
-	--------
-	/// <summary>
-	/// Рисование панели вывода информации
-	/// </summary>
-	--------
-	public virtual void DrawOutput()
-	{
-		if (mDesc.Length > 1 && mSelectedTab != -1 && mSelectedTab < mDesc.Length)
-		{
-			if (mDesc[mSelectedTab].IsExists())
-			{
-				var font_size = EditorStyles.helpBox.fontSize;
-				EditorStyles.helpBox.fontSize = 12;
-				EditorGUILayout.HelpBox(mDesc[mSelectedTab], MessageType.Info);
-				EditorStyles.helpBox.fontSize = font_size;
-			}
-		}
-		else
-		{
-			GUILayout.Box("RectOutput", GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
-		}
-	}
-
-	--------
-	/// <summary>
-	/// Рисование окон
-	/// </summary>
-	--------
-	public virtual void DrawWindows()
-	{
-
-	}
-	#endregion
+        /// <summary>
+        /// Рисование окон
+        /// </summary>
+        public virtual void DrawWindows()
+        {
+        }
+        #endregion
+    }
 }
+#endif

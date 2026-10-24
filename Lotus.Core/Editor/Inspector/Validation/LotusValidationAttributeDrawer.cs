@@ -1,105 +1,107 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusValidationAttributeDrawer.cs
-*		Редактор атрибута LotusValidationAttribute.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
+﻿#if UNITY_EDITOR
+using Lotus.Core;
+using Lotus.Core.Inspector;
 
-using System;
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор атрибута LotusValidationAttribute
-/// </summary>
-------------
-[CustomPropertyDrawer(typeof(LotusValidationAttribute), true)]
-public class LotusValidationAttributeDrawer : PropertyDrawer
+namespace Lotus.Editor
 {
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Получение высоты редактируемого свойства элемента
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	/// <returns>Высота свойства элемента</returns>
-	--------
-	public override Single GetPropertyHeight(SerializedProperty property, GUIContent label)
-	{
-		var attr = this.attribute as LotusValidationAttribute;
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор атрибута LotusValidationAttribute
+    /// </summary>
+    [CustomPropertyDrawer(typeof(LotusValidationAttribute), true)]
+    public class LotusValidationAttributeDrawer : PropertyDrawer
+    {
+        #region Unity events
+        /// <summary>
+        /// Получение высоты редактируемого свойства элемента
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        /// <returns>Высота свойства элемента</returns>
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            var attr = attribute as LotusValidationAttribute;
+            var height = EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
 
-		// Получаем статус валидации от метода
-		var status = (Boolean)property.Invoke(attr.ValidationMethodName, property.GetValueDirect());
+            // Если элемент не прошел валидацию то добавляем место под сообщение
+            if (!IsValid(property, attr))
+            {
+                height += (XInspectorViewParams.CONTROL_HEIGHT * 2) + EditorGUIUtility.standardVerticalSpacing;
+            }
 
-		// Если элемент не прошел валидацию то выводим сообщение
-		if (status != true)
-		{
-			return EditorGUI.GetPropertyHeight(property, label, property.isExpanded) + 
-				(XInspectorViewParams.CONTROL_HEIGHT * 2) + EditorGUIUtility.standardVerticalSpacing;
-		}
+            return height;
+        }
 
-		return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
-	}
+        /// <summary>
+        /// Рисование сериализуемого свойства
+        /// </summary>
+        /// <param name="position">Прямоугольник для отображения</param>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            var attr = attribute as LotusValidationAttribute;
 
-	--------
-	/// <summary>
-	/// Рисование сериализуемого свойства
-	/// </summary>
-	/// <param name="position">Прямоугольник для отображения</param>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	--------
-	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-	{
-		var attr = this.attribute as LotusValidationAttribute;
+            EditorGUI.BeginProperty(position, label, property);
+            {
+                position.height = EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
+                EditorGUI.PropertyField(position, property, label, property.isExpanded);
 
-		position.height = EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
-		EditorGUI.PropertyField(position, property, label, property.isExpanded);
+                // Если элемент не прошел валидацию то выводим сообщение
+                if (!IsValid(property, attr))
+                {
+                    var indent = EditorGUI.IndentedRect(position);
+                    var rectBox = indent;
+                    rectBox.y += position.height + EditorGUIUtility.standardVerticalSpacing;
+                    rectBox.height = XInspectorViewParams.CONTROL_HEIGHT * 2;
 
-		// Получаем статус валидации от метода
-		var status = (Boolean)property.Invoke(attr.ValidationMethodName, property.GetValueDirect());
+                    EditorGUI.HelpBox(rectBox, attr.Message, ConvertToMessageType(attr.MessageType));
+                }
+            }
+            EditorGUI.EndProperty();
+        }
+        #endregion
 
-		// Если элемент не прошел валидацию то выводим сообщение
-		if (status != true)
-		{
-			var indent = EditorGUI.IndentedRect(position);
-			Rect rect_box = indent;
-			rect_box.y += position.height + EditorGUIUtility.standardVerticalSpacing;
-			rect_box.height = XInspectorViewParams.CONTROL_HEIGHT * 2;
+        #region Main methods
+        /// <summary>
+        /// Проверка валидации свойства
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="attr">Атрибут валидации</param>
+        /// <returns>Статус успешной валидации</returns>
+        private static bool IsValid(SerializedProperty property, LotusValidationAttribute attr)
+        {
+            var result = property.Invoke(attr.ValidationMethodName, property.GetValueDirect());
+            return result is bool status && status;
+        }
 
-			EditorGUI.HelpBox(rect_box, attr.Message, ConvertToMessageType(attr.MessageType));
-		}
-	}
-	
-	/// <summary>
-	/// Конвертация из типа сообщения лога в тип сообщения
-	/// </summary>
-	/// <param name="log_type">Тип сообщения лога</param>
-	/// <returns>Тип сообщения</returns>
-	
-	public static MessageType ConvertToMessageType(TLogType log_type)
-	{
-		switch (log_type)
-		{
-			case TLogType.Info: return MessageType.Info;
-			case TLogType.Warning: return MessageType.Warning;
-			case TLogType.Error: return MessageType.Error;
-			case TLogType.Exception: return MessageType.Error;
-			default:
-				break;
-		}
-
-		return (MessageType.None);
-	}
-	#endregion
+        /// <summary>
+        /// Конвертация из типа сообщения лога в тип сообщения
+        /// </summary>
+        /// <param name="logType">Тип сообщения лога</param>
+        /// <returns>Тип сообщения</returns>
+        public static MessageType ConvertToMessageType(TLogType logType)
+        {
+            switch (logType)
+            {
+                case TLogType.Info:
+                    return MessageType.Info;
+                case TLogType.Warning:
+                    return MessageType.Warning;
+                case TLogType.Error:
+                    return MessageType.Error;
+                case TLogType.Exception:
+                    return MessageType.Error;
+                default:
+                    return MessageType.None;
+            }
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

@@ -1,229 +1,209 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusSerializationServiceWindow.cs
-*		Редактор основного сервиса для сериализации данных в редакторе Unity.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
+﻿#if UNITY_EDITOR
 using System;
 using System.IO;
+
+using Lotus.Core;
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор основного сервиса для сериализации данных в редакторе Unity
-/// </summary>
-------------
-public class LotusSerializationServiceWindow : EditorWindow
+namespace Lotus.Editor
 {
-	#region =============================================== СТАТИЧЕСКИЕ МЕТОДЫ ========================================
-	--------
-	/// <summary>
-	/// Показать окно базового редактора Lotus
-	/// </summary>
-	--------
-	[MenuItem(XCoreSettingsEditor.MenuPathSerialization + "Service", false, XCoreSettingsEditor.MenuOrderSerialization + 1)]
-	public static void ShowServiceWindow()
-	{
-		var window = GetWindow<LotusSerializationServiceWindow>();
-		window.titleContent.text = "Serialization Service";
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор основного сервиса для сериализации данных в редакторе Unity
+    /// </summary>
+    public class LotusSerializationServiceWindow : EditorWindow
+    {
+        #region Static methods
+        /// <summary>
+        /// Показать окно сервиса сериализации
+        /// </summary>
+        [MenuItem(XCoreSettingsEditor.MenuPathSerialization + "Service", false, XCoreSettingsEditor.MenuOrderSerialization + 1)]
+        public static void ShowServiceWindow()
+        {
+            var window = GetWindow<LotusSerializationServiceWindow>();
+            window.titleContent.text = "Serialization Service";
+            window.Show();
+        }
 
-		window.Show();
-	}
+        /// <summary>
+        /// Сохранение выбранного игрового объекта в файл
+        /// </summary>
+        [Obsolete("XSerializationDispatcherUnity удалён — SaveToXml не подключён. Используйте XSerializationDispatcher")]
+        [MenuItem(XEditorSettings.MenuPlace + "Save/SaveSelectedGameObject", false, XEditorSettings.MenuOrderLast + 2)]
+        public static void SaveSelectedGameObject()
+        {
+            if (Selection.activeGameObject == null)
+            {
+                return;
+            }
 
-	--------
-	/// <summary>
-	/// Сохранение выбранного игрового объекта в файл
-	/// </summary>
-	--------
-	[MenuItem(XEditorSettings.MenuPlace + "Save/SaveSelectedGameObject", false, XEditorSettings.MenuOrderLast + 2)]
-	public static void SaveSelectedGameObject()
-	{
-		if(Selection.activeGameObject != null)
-		{
-			// Создаем при необходимости директорию
-			if (!Directory.Exists(XEditorSettings.AutoSavePath)) Directory.CreateDirectory(XEditorSettings.AutoSavePath);
+            if (!Directory.Exists(XEditorSettings.AutoSavePath))
+            {
+                Directory.CreateDirectory(XEditorSettings.AutoSavePath);
+            }
 
-			// Имя файла для сохранения
-			var file_name = Selection.activeGameObject.name + "_" + XDateTime.GetStrDateTimeShort();
+            var fileName = Selection.activeGameObject.name + "_" + XDateTime.GetStrDateTimeShort();
+            _ = Path.Combine(XEditorSettings.AutoSavePath, fileName);
+        }
 
-			// Путь
-			var path = Path.Combine(XEditorSettings.AutoSavePath, file_name);
+        /// <summary>
+        /// Сохранение всей сцены в файл
+        /// </summary>
+        [Obsolete("XSerializationDispatcherUnity удалён — SaveToXml не подключён. Используйте XSerializationDispatcher")]
+        [MenuItem(XEditorSettings.MenuPlace + "Save/SaveScene", false, XEditorSettings.MenuOrderLast + 3)]
+        public static void SaveScene()
+        {
+            if (!Directory.Exists(XEditorSettings.AutoSavePath))
+            {
+                Directory.CreateDirectory(XEditorSettings.AutoSavePath);
+            }
 
-			// Сохраняем
-			//XSerializationDispatcherUnity.SaveToXml(path, Selection.activeGameObject, true);
-		}
-	}
+            var currentScene = SceneManager.GetActiveScene();
+            var fileName = (currentScene.name.IsExists() ? currentScene.name : "Noname") + "_" +
+                XDateTime.GetStrDateTimeShort();
+            _ = Path.Combine(XEditorSettings.AutoSavePath, fileName);
+        }
 
-	--------
-	/// <summary>
-	/// Сохранение всей сцены в файл
-	/// </summary>
-	--------
-	[MenuItem(XEditorSettings.MenuPlace + "Save/SaveScene", false, XEditorSettings.MenuOrderLast + 3)]
-	public static void SaveScene()
-	{
-		// Создаем при необходимости директорию
-		if (!Directory.Exists(XEditorSettings.AutoSavePath)) Directory.CreateDirectory(XEditorSettings.AutoSavePath);
+        /// <summary>
+        /// Загрузка игровых объектов из файла
+        /// </summary>
+        [Obsolete("XSerializationDispatcherUnity удалён — LoadFromXml не подключён. Используйте XSerializationDispatcher")]
+        [MenuItem(XEditorSettings.MenuPlace + "Load/LoadFromFile", false, XEditorSettings.MenuOrderLast + 4)]
+        public static void LoadFromFile()
+        {
+        }
+        #endregion
 
-		Scene current_scene = SceneManager.GetActiveScene();
+        #region Fields
+        private readonly string _descriptionService = "Основной сервис для сериализации данных";
+        private Vector2 _scrollPos;
+        private string _fileNameDesignXml;
+        private TextAsset _fileAssetDesignXml;
+        private TSerializationEditorPolicy _editorPolicy;
+        private TSerializationEditorVolume _editorVolume;
+        private bool _isSerializableChild;
 
-		// Имя файла для сохранения
-		var file_name = (current_scene.name.IsExists() ? current_scene.name : "Noname") + "_" + XDateTime.GetStrDateTimeShort();
+        [Obsolete("Не используется в текущем UI окна")]
+        private string _fileNameGameXml;
 
-		// Путь
-		var path = Path.Combine(XEditorSettings.AutoSavePath, file_name);
+        [Obsolete("Не используется в текущем UI окна")]
+        private TextAsset _fileAssetGameXml;
 
-		// Сохраняем
-		//XSerializationDispatcherUnity.SaveToXml(path, current_scene.GetRootGameObjects(), true);
-	}
+        [Obsolete("Не используется в текущем UI окна")]
+        private bool _expandedEditorSave;
 
-	--------
-	/// <summary>
-	/// Загрузка игровых объектов из файла
-	/// </summary>
-	--------
-	[MenuItem(XEditorSettings.MenuPlace + "Load/LoadFromFile", false, XEditorSettings.MenuOrderLast + 4)]
-	public static void LoadFromFile()
-	{
-		//String file_name = XFileDialog.Open("Открыть файл для загрузки", XEditorSettings.AutoSavePath, 
-		//	//XSerializationDispatcherUnity.DEFAULT_EXT.Remove(0, 1));
-		//if (file_name.IsExists())
-		//{
-		//	//XSerializationDispatcherUnity.LoadFromXml(file_name);
-		//}
-	}
-	#endregion
+        [Obsolete("Не используется в текущем UI окна")]
+        private bool _expandedGameSave;
+        #endregion
 
-	#region =============================================== ДАННЫЕ ====================================================
-	private String mDescriptionService = "Основной сервис для сериализации данных";
-	private Vector2 mScrollPos;
-	private String mFileNameDesignXML;
-	private String mFileNameGameXML;
-	private TextAsset mFileAssetGameXML;
-	private TextAsset mFileAssetDesignXML;
-	private Boolean mExpandedEditorSave;
-	private TSerializationEditorPolicy mEditorPolicy;
-	private TSerializationEditorVolume mEditorVolume;
-	private Boolean mIsSerializableChild;
-	private Boolean mExpandedGameSave;
-	#endregion
+        #region Unity events
+        /// <summary>
+        /// Рисование UnityGUI
+        /// </summary>
+        public void OnGUI()
+        {
+            GUILayout.Space(4.0f);
+            EditorGUILayout.HelpBox(_descriptionService, MessageType.Info);
 
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Рисование UnityGUI
-	/// </summary>
-	--------
-	public void OnGUI()
-	{
-		GUILayout.Space(4.0f);
-		EditorGUILayout.HelpBox(mDescriptionService, MessageType.Info);
+            GUILayout.Space(4.0f);
+            _editorPolicy = XEditorInspector.PropertyEnum("Policy", _editorPolicy);
 
-		GUILayout.Space(4.0f);
-		mEditorPolicy = XEditorInspector.PropertyEnum("Policy", mEditorPolicy);
+            GUILayout.Space(4.0f);
+            _editorVolume = XEditorInspector.PropertyEnum("Volume", _editorVolume);
 
-		GUILayout.Space(4.0f);
-		mEditorVolume = XEditorInspector.PropertyEnum("Volume", mEditorVolume);
+            if (_editorVolume == TSerializationEditorVolume.Game)
+            {
+                GUILayout.Space(2.0f);
+                XEditorInspector.DrawGroup("Not supported in this release", XEditorStyles.ColorRed, TextAnchor.MiddleCenter);
+            }
 
-		if (mEditorVolume == TSerializationEditorVolume.Game)
-		{
-			GUILayout.Space(2.0f);
-			XEditorInspector.DrawGroup("Not supported in this release", XEditorStyles.ColorRed, TextAnchor.MiddleCenter);
-		}
+            if (_editorVolume == TSerializationEditorVolume.Selected)
+            {
+                GUILayout.Space(2.0f);
+                _isSerializableChild = XEditorInspector.PropertyBoolean("IsSerializableChild", _isSerializableChild);
 
-		if (mEditorVolume == TSerializationEditorVolume.Selected)
-		{
-			GUILayout.Space(2.0f);
-			mIsSerializableChild = XEditorInspector.PropertyBoolean("IsSerializableChild", mIsSerializableChild);
+                GUILayout.Space(2.0f);
+                GUILayout.Label("Selected Object:", EditorStyles.boldLabel);
 
-			GUILayout.Space(2.0f);
-			GUILayout.Label("Selected Object:", EditorStyles.boldLabel);
+                var height = Selection.gameObjects.Length * XInspectorViewParams.CONTROL_HEIGHT_SPACE;
+                if (height < XInspectorViewParams.CONTROL_HEIGHT_SPACE)
+                {
+                    height = XInspectorViewParams.CONTROL_HEIGHT_SPACE * 2;
+                }
+                if (height > XInspectorViewParams.CONTROL_HEIGHT_SPACE * 4)
+                {
+                    height = XInspectorViewParams.CONTROL_HEIGHT_SPACE * 4;
+                }
 
-			var h = Selection.gameObjects.Length * XInspectorViewParams.CONTROL_HEIGHT_SPACE;
-			if (h < XInspectorViewParams.CONTROL_HEIGHT_SPACE) h = XInspectorViewParams.CONTROL_HEIGHT_SPACE * 2;
-			if (h > XInspectorViewParams.CONTROL_HEIGHT_SPACE * 4) h = XInspectorViewParams.CONTROL_HEIGHT_SPACE * 4;
-			mScrollPos = GUILayout.BeginScrollView(mScrollPos, GUILayout.Height(h));
-			{
-				for (var i = 0; i < Selection.gameObjects.Length; i++)
-				{
-					GUILayout.Label(Selection.gameObjects[i].name, EditorStyles.whiteLabel);
-				}
-			}
-			GUILayout.EndScrollView();
-		}
+                _scrollPos = GUILayout.BeginScrollView(_scrollPos, GUILayout.Height(height));
+                {
+                    for (var i = 0; i < Selection.gameObjects.Length; i++)
+                    {
+                        GUILayout.Label(Selection.gameObjects[i].name, EditorStyles.whiteLabel);
+                    }
+                }
+                GUILayout.EndScrollView();
+            }
 
-		GUILayout.Space(4.0f);
-		EditorGUILayout.BeginHorizontal();
-		{
-			mFileNameDesignXML = XEditorInspector.PropertyString("Name XML", mFileNameDesignXML);
-			if (GUILayout.Button("Save"))
-			{
-				switch (mEditorVolume)
-				{
-					case TSerializationEditorVolume.Scene:
-						{
-							Scene current_scene = SceneManager.GetActiveScene();
-							//XSerializationDispatcherUnity.SaveToXml(mFileNameDesignXML, current_scene.GetRootGameObjects(), true);
-						}
-						break;
-					case TSerializationEditorVolume.Selected:
-						{
-							//XSerializationDispatcherUnity.SaveToXml(mFileNameDesignXML, Selection.activeGameObject, mIsSerializableChild);
-						}
-						break;
-					case TSerializationEditorVolume.Game:
-						break;
-					default:
-						break;
-				}
-			}
-			if (GUILayout.Button("Auto Save"))
-			{
-				SaveScene();
-			}
-		}
-		EditorGUILayout.EndHorizontal();
+            GUILayout.Space(4.0f);
+            EditorGUILayout.BeginHorizontal();
+            {
+                _fileNameDesignXml = XEditorInspector.PropertyString("Name XML", _fileNameDesignXml);
+                if (GUILayout.Button("Save"))
+                {
+                    Debug.LogWarning(
+                        "SaveToXml недоступен: XSerializationDispatcherUnity удалён. Используйте XSerializationDispatcher.");
+                }
+                if (GUILayout.Button("Auto Save"))
+                {
+#pragma warning disable CS0618
+                    SaveScene();
+#pragma warning restore CS0618
+                }
+            }
+            EditorGUILayout.EndHorizontal();
 
-		GUILayout.Space(4.0f);
-		EditorGUILayout.BeginHorizontal();
-		{
-			mFileAssetDesignXML = XEditorInspector.PropertyResource("Asset XML", mFileAssetDesignXML);
-			if (GUILayout.Button("Load"))
-			{
-				//XSerializationDispatcherUnity.LoadFromXml(mFileAssetDesignXML);
-			}
-			if (GUILayout.Button("Auto Load", XEditorStyles.BUTTON_DROP_DOWN_1))
-			{
-				var files = Directory.GetFiles(XEditorSettings.AutoSavePath);
-				var menu = new GenericMenu();
-				for (var i = 0; i < files.Length; i++)
-				{
-					//if (Path.GetExtension(files[i]) == XSerializationDispatcherUnity.DEFAULT_EXT)
-					//{
-					//	menu.AddItem(new GUIContent(Path.GetFileNameWithoutExtension(files[i])), false, (System.Object file_name) =>
-					//	{
-					//		XSerializationDispatcherUnity.LoadFromXml(file_name.ToString());
-					//	}, files[i]);
-					//}
-				}
+            GUILayout.Space(4.0f);
+            EditorGUILayout.BeginHorizontal();
+            {
+                _fileAssetDesignXml = XEditorInspector.PropertyResource("Asset XML", _fileAssetDesignXml);
+                if (GUILayout.Button("Load"))
+                {
+                    Debug.LogWarning(
+                        "LoadFromXml недоступен: XSerializationDispatcherUnity удалён. Используйте XSerializationDispatcher.");
+                }
+                if (GUILayout.Button("Auto Load", XEditorStyles.BUTTON_DROP_DOWN_1))
+                {
+                    if (!Directory.Exists(XEditorSettings.AutoSavePath))
+                    {
+                        Directory.CreateDirectory(XEditorSettings.AutoSavePath);
+                    }
 
-				menu.ShowAsContext();
-			}
-		}
-		EditorGUILayout.EndHorizontal();
+                    var files = Directory.GetFiles(XEditorSettings.AutoSavePath);
+                    var menu = new GenericMenu();
+                    for (var i = 0; i < files.Length; i++)
+                    {
+                        var filePath = files[i];
+                        menu.AddItem(new GUIContent(Path.GetFileNameWithoutExtension(filePath)), false, (object selectedFile) =>
+                        {
+                            Debug.LogWarning(
+                                "LoadFromXml недоступен: XSerializationDispatcherUnity удалён. File: " + selectedFile);
+                        }, filePath);
+                    }
 
-		GUILayout.Space(2.0f);
-	}
-	#endregion
+                    menu.ShowAsContext();
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+
+            GUILayout.Space(2.0f);
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

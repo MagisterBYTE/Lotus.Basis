@@ -1,162 +1,120 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusPreviewAttributeDrawer.cs
-*		Редактор атрибута LotusPreviewAttribute.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
+﻿#if UNITY_EDITOR
+using Lotus.Core.Inspector;
 
-using System;
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор атрибута LotusPreviewAttribute
-/// </summary>
-------------
-[CustomPropertyDrawer(typeof(LotusPreviewAttribute), true)]
-public class LotusPreviewAttributeDrawer : PropertyDrawer
+namespace Lotus.Editor
 {
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Получение высоты редактируемого свойства элемента
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	/// <returns>Высота свойства элемента</returns>
-	--------
-	public override Single GetPropertyHeight(SerializedProperty property, GUIContent label)
-	{
-		if (property.propertyType == SerializedPropertyType.ObjectReference)
-		{
-			Texture2D previewTexture = GetAssetPreview(property);
-			if (previewTexture != null)
-			{
-				return EditorGUI.GetPropertyHeight(property, label, property.isExpanded) + GetAssetPreviewSize(property).y;
-			}
-			else
-			{
-				return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
-			}
-		}
-		else
-		{
-			return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
-		}
-	}
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор атрибута LotusPreviewAttribute
+    /// </summary>
+    [CustomPropertyDrawer(typeof(LotusPreviewAttribute), true)]
+    public class LotusPreviewAttributeDrawer : PropertyDrawer
+    {
+        #region Unity events
+        /// <summary>
+        /// Получение высоты редактируемого свойства элемента
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        /// <returns>Высота свойства элемента</returns>
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            var height = EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
 
-	--------
-	/// <summary>
-	/// Рисование сериализуемого свойства
-	/// </summary>
-	/// <param name="position">Прямоугольник для отображения</param>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	--------
-	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-	{
-		var attr = this.attribute as LotusPreviewAttribute;
+            if (property.propertyType == SerializedPropertyType.ObjectReference)
+            {
+                var previewTexture = GetAssetPreview(property);
+                if (previewTexture != null)
+                {
+                    height += GetAssetPreviewSize(property).y;
+                }
+            }
 
-		EditorGUI.BeginProperty(position, label, property);
+            return height;
+        }
 
-		if (property.propertyType == SerializedPropertyType.ObjectReference)
-		{
-			var propertyRect = new Rect()
-			{
-				x = position.x,
-				y = position.y,
-				width = position.width,
-				height = EditorGUIUtility.singleLineHeight
-			};
+        /// <summary>
+        /// Рисование сериализуемого свойства
+        /// </summary>
+        /// <param name="position">Прямоугольник для отображения</param>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.BeginProperty(position, label, property);
+            {
+                if (property.propertyType == SerializedPropertyType.ObjectReference)
+                {
+                    var propertyRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+                    EditorGUI.PropertyField(propertyRect, property, label);
 
-			EditorGUI.PropertyField(propertyRect, property, label);
+                    var previewTexture = GetAssetPreview(property);
+                    if (previewTexture != null)
+                    {
+                        var previewSize = GetAssetPreviewSize(property);
+                        var previewRect = new Rect(position.x + 2, position.y + EditorGUIUtility.singleLineHeight,
+                            position.width, previewSize.y);
+                        GUI.Label(previewRect, previewTexture);
+                    }
+                }
+                else
+                {
+                    EditorGUI.PropertyField(position, property, label, property.isExpanded);
+                }
+            }
+            EditorGUI.EndProperty();
+        }
+        #endregion
 
-			Texture2D previewTexture = GetAssetPreview(property);
-			if (previewTexture != null)
-			{
-				var previewRect = new Rect()
-				{
-					x = position.x + 2,
-					y = position.y + EditorGUIUtility.singleLineHeight,
-					width = position.width,
-					height = GetAssetPreviewSize(property).y
-				};
+        #region Main methods
+        /// <summary>
+        /// Получение текстуры предпросмотра у сериализуемого свойства
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <returns>Текстура или null</returns>
+        private Texture2D GetAssetPreview(SerializedProperty property)
+        {
+            if (property.propertyType != SerializedPropertyType.ObjectReference)
+            {
+                return null;
+            }
 
-				GUI.Label(previewRect, previewTexture);
-			}
-		}
-		else
-		{
-			//string message = property.name + " doesn't have an asset preview";
-			//DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
-		}
+            if (property.objectReferenceValue == null)
+            {
+                return null;
+            }
 
-		EditorGUI.EndProperty();
-	}
+            return AssetPreview.GetAssetPreview(property.objectReferenceValue);
+        }
 
-	--------
-	/// <summary>
-	/// Получение текстуры предпросмотра у сериализуемого свойства
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <returns>Текстура или null</returns>
-	--------
-	private Texture2D GetAssetPreview(SerializedProperty property)
-	{
-		if (property.propertyType == SerializedPropertyType.ObjectReference)
-		{
-			if (property.objectReferenceValue != null)
-			{
-				Texture2D previewTexture = AssetPreview.GetAssetPreview(property.objectReferenceValue);
-				return previewTexture;
-			}
+        /// <summary>
+        /// Получение размера текстуры предпросмотра у сериализуемого свойства
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <returns>Размер текстуры</returns>
+        private Vector2 GetAssetPreviewSize(SerializedProperty property)
+        {
+            var previewTexture = GetAssetPreview(property);
+            if (previewTexture == null)
+            {
+                return Vector2.zero;
+            }
 
-			return null;
-		}
+            var attr = attribute as LotusPreviewAttribute;
+            var targetHeight = attr != null ? attr.PreviewHeight : 200f;
+            var targetWidth = targetHeight;
 
-		return null;
-	}
+            var width = Mathf.Clamp(targetWidth, 0, previewTexture.width);
+            var height = Mathf.Clamp(targetHeight, 0, previewTexture.height);
 
-	--------
-	/// <summary>
-	/// Получение размера текстуры предпросмотра у сериализуемого свойства
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <returns>Размер текстуры</returns>
-	--------
-	private Vector2 GetAssetPreviewSize(SerializedProperty property)
-	{
-		Texture2D previewTexture = GetAssetPreview(property);
-		if (previewTexture == null)
-		{
-			return Vector2.zero;
-		}
-		else
-		{
-			var targetWidth = 256; // ShowAssetPreviewAttribute.DefaultWidth;
-			var targetHeight = 256; // ShowAssetPreviewAttribute.DefaultHeight;
-
-			//ShowAssetPreviewAttribute showAssetPreviewAttribute = PropertyUtility.GetAttribute<ShowAssetPreviewAttribute>(property);
-			//if (showAssetPreviewAttribute != null)
-			//{
-			//	targetWidth = showAssetPreviewAttribute.Width;
-			//	targetHeight = showAssetPreviewAttribute.Height;
-			//}
-
-			var width = Mathf.Clamp(targetWidth, 0, previewTexture.width);
-			var height = Mathf.Clamp(targetHeight, 0, previewTexture.height);
-
-			return new Vector2(width, height);
-		}
-	}
-	#endregion
+            return new Vector2(width, height);
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

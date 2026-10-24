@@ -1,103 +1,90 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusTweenDispatcherEditor.cs
-*		Редактор центрального диспетчера для хранения и управления ресурсами анимации.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
+﻿#if UNITY_EDITOR
+using Lotus.Core;
 
-using System;
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор центрального диспетчера для хранения и управления ресурсами анимации
-/// </summary>
-------------
-[CustomEditor(typeof(LotusTweenDispatcher))]
-public class LotusTweenDispatcherEditor : Editor
+namespace Lotus.Editor
 {
-	#region =============================================== СТАТИЧЕСКИЕ МЕТОДЫ ========================================
-	--------
-	/// <summary>
-	/// Создания основного сервиса для локализации текстовых данных
-	/// </summary>
-	--------
-	[MenuItem(XCoreSettingsEditor.MenuPathTween + "Create Tween Dispatcher", false, XCoreSettingsEditor.MenuOrderTween)]
-	public static void Create()
-	{
-#pragma warning disable 0219
-		LotusTweenDispatcher tween_dispatcher = LotusTweenDispatcher.Instance;
-#pragma warning restore 0219
-	}
-	#endregion
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор центрального диспетчера для хранения и управления ресурсами анимации
+    /// </summary>
+    [CustomEditor(typeof(LotusTweenDispatcher))]
+    public class LotusTweenDispatcherEditor : UnityEditor.Editor
+    {
+        #region Static methods
+        /// <summary>
+        /// Создание основного сервиса для хранения и управления ресурсами анимации
+        /// </summary>
+        [MenuItem(XCoreSettingsEditor.MenuPathTween + "Create Tween Dispatcher", false, XCoreSettingsEditor.MenuOrderTween)]
+        public static void Create()
+        {
+            _ = LotusTweenDispatcher.Instance;
+        }
+        #endregion
 
-	#region =============================================== ДАННЫЕ ====================================================
-	private LotusTweenDispatcher mDispatcher;
-	#endregion
+        #region Fields
+        private LotusTweenDispatcher _dispatcher;
+        #endregion
 
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Включение скрипта в инспекторе объектов
-	/// </summary>
-	--------
-	public void OnEnable()
-	{
-		mDispatcher = this.target as LotusTweenDispatcher;
-	}
+        #region Unity events
+        /// <summary>
+        /// Включение скрипта в инспекторе объектов
+        /// </summary>
+        public void OnEnable()
+        {
+            _dispatcher = target as LotusTweenDispatcher;
+        }
 
-	--------
-	/// <summary>
-	/// Рисование в инспекторе объектов
-	/// </summary>
-	--------
-	public override void OnInspectorGUI()
-	{
-		EditorGUI.BeginChangeCheck();
-		{
-			GUILayout.Space(4.0f);
-			XEditorInspector.DrawGroup("Singleton settings");
-			{
-				GUILayout.Space(2.0f);
-				mDispatcher.IsMainInstance = XEditorInspector.PropertyBoolean(nameof(mDispatcher.IsMainInstance), mDispatcher.IsMainInstance);
+        /// <summary>
+        /// Рисование в инспекторе объектов
+        /// </summary>
+        public override void OnInspectorGUI()
+        {
+            EditorGUI.BeginChangeCheck();
+            {
+                GUILayout.Space(4.0f);
+                XEditorInspector.DrawGroup("Singleton settings");
+                {
+                    GUILayout.Space(2.0f);
+                    _dispatcher.IsMainInstance = XEditorInspector.PropertyBoolean(
+                        nameof(_dispatcher.IsMainInstance), _dispatcher.IsMainInstance);
 
-				GUILayout.Space(2.0f);
-				EditorGUI.BeginDisabledGroup(mDispatcher.IsMainInstance);
-				{
-					mDispatcher.DestroyMode = XEditorInspector.PropertyEnum(nameof(mDispatcher.DestroyMode), mDispatcher.DestroyMode);
-				}
-				EditorGUI.EndDisabledGroup();
+                    GUILayout.Space(2.0f);
+                    EditorGUI.BeginDisabledGroup(_dispatcher.IsMainInstance);
+                    {
+                        _dispatcher.DestroyMode = XEditorInspector.PropertyEnum(
+                            nameof(_dispatcher.DestroyMode), _dispatcher.DestroyMode);
+                    }
+                    EditorGUI.EndDisabledGroup();
 
-				GUILayout.Space(2.0f);
-				mDispatcher.IsDontDestroy = XEditorInspector.PropertyBoolean(nameof(mDispatcher.IsDontDestroy), mDispatcher.IsDontDestroy);
-			}
+                    GUILayout.Space(2.0f);
+                    _dispatcher.IsDontDestroy = XEditorInspector.PropertyBoolean(
+                        nameof(_dispatcher.IsDontDestroy), _dispatcher.IsDontDestroy);
+                }
 
-			XEditorInspector.DrawGroup("Tween settings");
-			{
-				GUILayout.Space(2.0f);
-				mDispatcher._curveStorage = XEditorInspector.PropertyResource(nameof(LotusTweenDispatcher.CurveStorage), 
-					mDispatcher._curveStorage);
+                XEditorInspector.DrawGroup("Tween settings");
+                {
+                    GUILayout.Space(2.0f);
+                    _dispatcher._curveStorage = XEditorInspector.PropertyResource(
+                        nameof(LotusTweenDispatcher.CurveStorage), _dispatcher._curveStorage);
 
-				GUILayout.Space(2.0f);
-				mDispatcher._spriteStorage = XEditorInspector.PropertyResource(nameof(LotusTweenDispatcher.SpriteStorage),
-					mDispatcher._spriteStorage);
-			}
-		}
-		if (EditorGUI.EndChangeCheck())
-		{
-			mDispatcher.SaveInEditor();
-		}
+                    GUILayout.Space(2.0f);
+                    _dispatcher._spriteStorage = XEditorInspector.PropertyResource(
+                        nameof(LotusTweenDispatcher.SpriteStorage), _dispatcher._spriteStorage);
+                }
+            }
+            if (EditorGUI.EndChangeCheck())
+            {
+                _dispatcher.SaveInEditor();
+            }
 
-		GUILayout.Space(2.0f);
-	}
-	#endregion
+            GUILayout.Space(2.0f);
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

@@ -1,166 +1,133 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusSerializedObjectExtension.cs
-*		Методы расширений класса SerializedObject.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
+﻿#if UNITY_EDITOR
 using System;
-using UnityEngine;
-using UnityEditor;
-------------
+
 using Lotus.Core;
 
-namespace Lotus
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+
+namespace Lotus.Editor
 {
-	namespace Editor
-	{
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Статический класс реализующий методы расширения класса SerializedObject
+    /// </summary>
+    /// <remarks>
+    /// Только для режима редактора Unity
+    /// </remarks>
+    public static class XSerializedObjectExtension
+    {
+        #region Main methods
+        /// <summary>
+        /// Сохранение сериализуемого объекта
+        /// </summary>
+        /// <remarks>
+        /// Помечает объект и сцену как изменённые для возможности сохранить данные на диск
+        /// </remarks>
+        /// <param name="serializedObject">Сериализируемый объект</param>
+        public static void Save(this SerializedObject serializedObject)
+        {
+            EditorUtility.SetDirty(serializedObject.targetObject);
+            if (!EditorApplication.isPlaying && serializedObject.targetObject is Component component)
+            {
+                EditorSceneManager.MarkSceneDirty(component.gameObject.scene);
+            }
+        }
 
-		/** \addtogroup CoreUnityEditor
-		*@{*/
+        /// <summary>
+        /// Получение значения указанного члена данных
+        /// </summary>
+        /// <typeparam name="TValue">Тип значения</typeparam>
+        /// <param name="serializedObject">Сериализируемый объект</param>
+        /// <param name="memberName">Имя члена данных</param>
+        /// <param name="memberType">Тип члена объекта для атрибутов поддержки инспектора свойств</param>
+        /// <returns>Значение члена данных</returns>
+        public static TValue GetValueFromMember<TValue>(this SerializedObject serializedObject, string memberName,
+            TInspectorMemberType memberType)
+        {
+            object instance = serializedObject.targetObject;
+            object result = null;
 
-		/// <summary>
-		/// Статический класс реализующий методы расширения класса SerializedObject
-		/// </summary>
-		/// <remarks>
-		/// Только для режима редактора Unity
-		/// </remarks>
+            switch (memberType)
+            {
+                case TInspectorMemberType.Field:
+                    {
+                        result = XReflection.GetFieldValue(instance, memberName);
+                    }
+                    break;
+                case TInspectorMemberType.Property:
+                    {
+                        result = XReflection.GetPropertyValue(instance, memberName);
+                    }
+                    break;
+                case TInspectorMemberType.Method:
+                    {
+                        result = XReflection.InvokeMethod(instance, memberName);
+                    }
+                    break;
+                default:
+                    break;
+            }
 
-		public static class XSerializedObjectExtension
-		{
-			#region Main methods
-			
-			/// <summary>
-			/// Сохранение сериализуемого объекта
-			/// </summary>
-			/// <remarks>
-			/// Эта старая методика для информирования об изменении данных - информирование об этом сцены для возможности 
-			/// сохранить данные на диск
-			/// </remarks>
-			/// <param name="serializedObject">Сериализируемый объект</param>
-			
-			public static void Save(this SerializedObject serializedObject)
-			{
-				UnityEditor.EditorUtility.SetDirty(serializedObject.targetObject);
-				if (UnityEditor.EditorApplication.isPlaying == false)
-				{
-                    var component = serializedObject.targetObject as MonoBehaviour;
-					if (component != null)
-					{
-						UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(component.gameObject.scene);
-					}
-				}
-			}
+            if (result is TValue value)
+            {
+                return value;
+            }
 
-			
-			/// <summary>
-			/// Получение значения указанного члена данных
-			/// </summary>
-			/// <typeparam name="TValue">Тип значения</typeparam>
-			/// <param name="serializedObject">Сериализируемый объект</param>
-			/// <param name="member_name">Имя члена данных</param>
-			/// <param name="member_type">Тип члена объекта для атрибутов поддержки инспектора свойств</param>
-			/// <returns></returns>
-			
-			public static TValue GetValueFromMember<TValue>(this SerializedObject serializedObject, String member_name, TInspectorMemberType member_type)
-			{
-				System.Object instance = serializedObject.targetObject;
+            Debug.LogErrorFormat("Could not cast type {0} to the correct type for data member {1}",
+                typeof(TValue).Name, memberName);
+            return default;
+        }
+        #endregion
 
-				System.Object result = null;
-				switch (member_type)
-				{
-					case TInspectorMemberType.Field:
-						{
-							result = XReflection.GetFieldValue(instance, member_name);
-						}
-						break;
-					case TInspectorMemberType.Property:
-						{
-							result = XReflection.GetPropertyValue(instance, member_name);
-						}
-						break;
-					case TInspectorMemberType.Method:
-						{
-							result = XReflection.InvokeMethod(instance, member_name);
-						}
-						break;
-					default:
-						break;
-				}
+        #region Editor prefs methods
+        /// <summary>
+        /// Получение имени свойства привязанного к конкретному компоненту (игровому объекту)
+        /// </summary>
+        /// <param name="obj">Сериализируемый объект</param>
+        /// <returns>Уникальное имя</returns>
+        public static string GetHashNameInstance(this SerializedObject obj)
+        {
+            return obj.targetObject.GetEntityId().ToString();
+        }
 
-				if (result is TValue)
-				{
-					return (TValue)(result);
-				}
-				else
-				{
-					Debug.LogErrorFormat("Could not cast type {0} to the correct type for data member {1}", typeof(TValue).Name,
-						member_name);
-					return default(TValue);
-				}
-			}
-			#endregion
+        /// <summary>
+        /// Получение имени свойства привязанного к типу
+        /// </summary>
+        /// <param name="obj">Сериализируемый объект</param>
+        /// <returns>Уникальное имя</returns>
+        [Obsolete("Не используется. Для SerializedProperty используйте XSerializedPropertyExtension.GetHashNameType")]
+        public static string GetHashNameType(this SerializedObject obj)
+        {
+            return obj.targetObject.GetType().FullName;
+        }
 
-			#region ======================================= РАБОТА С СОХРАНЕНИЕМ/ЗАГРУЗКОЙ ЗНАЧЕНИЯ ===================
-			
-			/// <summary>
-			/// Получение имени свойства привязанного к конкретному компоненту (игровому объекту)
-			/// </summary>
-			/// <param name="obj">Сериализируемый объект</param>
-			/// <returns>Уникальное имя</returns>
-			
-			public static String GetHashNameInstance(this SerializedObject obj)
-			{
-				return (obj.targetObject.GetInstanceID().ToString());
-			}
+        /// <summary>
+        /// Сохранение значения по имени свойства привязанного к конкретному компоненту (игровому объекту)
+        /// </summary>
+        /// <param name="obj">Сериализируемый объект</param>
+        /// <param name="prefix">Префикс имени</param>
+        /// <param name="value">Значение</param>
+        public static void SaveBoolEditor(this SerializedObject obj, string prefix, bool value)
+        {
+            EditorPrefs.SetBool(obj.GetHashNameInstance() + prefix, value);
+        }
 
-			
-			/// <summary>
-			/// Получение имени свойства привязанного к типу
-			/// </summary>
-			/// <param name="obj">Сериализируемый объект</param>
-			/// <returns>Уникальное имя</returns>
-			
-			public static String GetHashNameType(this SerializedObject obj)
-			{
-				return (obj.targetObject.GetType().FullName);
-			}
-
-			
-			/// <summary>
-			/// Сохранение значение по имени свойства привязанного к конкретному компоненту (игровому объекту)
-			/// </summary>
-			/// <param name="obj">Сериализируемый объект</param>
-			/// <param name="prefix">Префикс имени</param>
-			/// <param name="value">Значение</param>
-			
-			public static void SaveBoolEditor(this SerializedObject obj, String prefix, Boolean value)
-			{
-				UnityEditor.EditorPrefs.SetBool(obj.GetHashNameInstance() + prefix, value);
-			}
-
-			
-			/// <summary>
-			/// Загрузка значение по имени свойства привязанного к конкретному компоненту (игровому объекту)
-			/// </summary>
-			/// <param name="obj">Сериализируемый объект</param>
-			/// <param name="prefix">Префикс имени</param>
-			/// <param name="default_value">Значение по умолчанию</param>
-			/// <returns>Значение</returns>
-			
-			public static Boolean LoadEditorBool(this SerializedObject obj, String prefix, Boolean default_value = true)
-			{
-				return (UnityEditor.EditorPrefs.GetBool(obj.GetHashNameInstance() + prefix, default_value));
-			}
-			#endregion
-		}
-
-		/**@}*/
-
-	}
+        /// <summary>
+        /// Загрузка значения по имени свойства привязанного к конкретному компоненту (игровому объекту)
+        /// </summary>
+        /// <param name="obj">Сериализируемый объект</param>
+        /// <param name="prefix">Префикс имени</param>
+        /// <param name="defaultValue">Значение по умолчанию</param>
+        /// <returns>Значение</returns>
+        public static bool LoadEditorBool(this SerializedObject obj, string prefix, bool defaultValue = true)
+        {
+            return EditorPrefs.GetBool(obj.GetHashNameInstance() + prefix, defaultValue);
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

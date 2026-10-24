@@ -1,401 +1,377 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Window утилиты Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusViewerEditorStylesWindow.cs
-*		Редактор для просмотра стилей редактора Unity.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
-using System;
+﻿#if UNITY_EDITOR
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-------------
+
 using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор для просмотра стилей редактора Unity
-/// </summary>
-/// <remarks>
-/// За основу взята реализация:
-/// https://forum.unity.com/threads/advanced-editor-styles-viewer-free.284148/
-/// </remarks>
-------------
-public class LotusViewerEditorStylesWindow : EditorWindow
+using UnityEditor;
+using UnityEngine;
+
+namespace Lotus.Editor
 {
-	#region =============================================== СТАТИЧЕСКИЕ МЕТОДЫ ========================================
-	--------
-	/// <summary>
-	/// Показать для просмотра стилей редактора Unity
-	/// </summary>
-	--------
-	[MenuItem(XCoreSettingsEditor.MenuPathUtility + "Viewer Editor Styles", false, XCoreSettingsEditor.MenuOrderUtility + 20)]
-	public static void ShowViewerEditorStyles()
-	{
-		var window = GetWindow<LotusViewerEditorStylesWindow>();
-		window.titleContent.text = "Viewer Editor Styles";
+    /// <summary>
+    /// Редактор для просмотра стилей редактора Unity
+    /// </summary>
+    /// <remarks>
+    /// За основу взята реализация:
+    /// https://forum.unity.com/threads/advanced-editor-styles-viewer-free.284148/
+    /// </remarks>
+    public class LotusViewerEditorStylesWindow : EditorWindow
+    {
+        #region Nested types
+        /// <summary>
+        /// Параметры отображения стиля
+        /// </summary>
+        public class StylePref
+        {
+            public int Height;
+            public int Width;
+            public bool NpActive;
+            public bool PActive;
+            public bool Enabled = true;
+            public Color BgColor = Color.white;
+            public Color ContentColor = Color.white;
+            public bool DisplayText;
+            public string Text = "ABC";
+        }
+        #endregion
 
-		window.minSize = new Vector2(335, 400);
-		window.Show();
-	}
-	#endregion
+        #region Static methods
+        /// <summary>
+        /// Показать для просмотра стилей редактора Unity
+        /// </summary>
+        [MenuItem(XCoreSettingsEditor.MenuPathUtility + "Viewer Editor Styles", false, XCoreSettingsEditor.MenuOrderUtility + 20)]
+        public static void ShowViewerEditorStyles()
+        {
+            var window = GetWindow<LotusViewerEditorStylesWindow>();
+            window.titleContent.text = "Viewer Editor Styles";
 
-	#region =============================================== ДАННЫЕ ====================================================
-	// Основные данные
-	private Vector2 scrollPos;
-	private Int32 countSize = 0;
-	private Int32 initialCount = 0;
-	private List<GUIStyle> eStyles = new List<GUIStyle>();
-	private Int32 selSearchParam = 2;
-	private Int32 selOption = 0;
-	private Int32 selSkin = 1;
+            window.minSize = new Vector2(335, 400);
+            window.Show();
+        }
+        #endregion
 
-	public GenericMenu optionsMenu = new GenericMenu();
-	public GenericMenu searchMenu = new GenericMenu();
+        #region Fields
+        private Vector2 _scrollPos;
+        private int _countSize;
+        private int _initialCount;
+        private readonly List<GUIStyle> _editorStyles = new List<GUIStyle>();
+        private int _selSearchParam = 2;
+        private int _selOption;
+        private int _selSkin = 1;
 
-	public readonly List<StylePref> stylePrefs = new List<StylePref>();
-	public Int32 totalSizeofView = 0;
-	public EditorSkin eSkin;
-	public List<GUISkin> projectSkins = new List<GUISkin>();
-	public List<GUISkin> usableSkins = new List<GUISkin>();
+        private GenericMenu _optionsMenu = new GenericMenu();
+        private readonly List<StylePref> _stylePrefs = new List<StylePref>();
+        private int _totalSizeOfView;
+        private readonly List<GUISkin> _projectSkins = new List<GUISkin>();
+        private readonly List<GUISkin> _usableSkins = new List<GUISkin>();
+        private readonly List<string> _guiSkins = new List<string>();
 
-	public List<String> guiSkins = new List<String>();
+        private readonly string[] _searchParams = new string[]
+        {
+            "StartsWith",
+            "EndsWith",
+            "Contains"
+        };
 
-	public String[] SearchParams = new String[]
-	{
-		"StartsWith",
-		"EndsWith",
-		"Contains"
-	};
+        private int _totalSizeOfStyles;
+        private string _lastCopy = string.Empty;
+        private string _searchText = string.Empty;
 
-	private Int32 totalSizeOfStyles = 0;
-	private String lastCopy = "";
-	private String searchText = "";
+        [System.Obsolete("Не используется в текущем UI окна")]
+        public EditorSkin ESkin;
+        #endregion
 
-	public class StylePref
-	{
-		public Int32 H = 0;
-		public Int32 W = 0;
-		public Boolean npActive = false;
-		public Boolean pActive = false;
-		public Boolean enabled = true;
-		public Color bgColor = Color.white;
-		public Color cColor = Color.white;
-		public Boolean displayText = false;
-		public String text = "ABC";
-	}
-	#endregion
+        #region Unity events
+        /// <summary>
+        /// Активация окна
+        /// </summary>
+        private void OnEnable()
+        {
+            _totalSizeOfStyles = 0;
 
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Активация окна
-	/// </summary>
-	--------
-	private void OnEnable()
-	{
-		totalSizeOfStyles = 0;
+            _usableSkins.Clear();
+            _projectSkins.Clear();
+            _guiSkins.Clear();
 
-		usableSkins.Clear();
-		projectSkins.Clear();
-		guiSkins.Clear();
+            _projectSkins.AddRange(XEditorAssetDatabase.GetAssetsFromFolder<GUISkin>(XEditorSettings.ASSETS_PATH));
+            _usableSkins.Add(EditorGUIUtility.GetBuiltinSkin(EditorSkin.Game));
+            _usableSkins.Add(EditorGUIUtility.GetBuiltinSkin(EditorSkin.Inspector));
 
-		projectSkins = XEditorAssetDatabase.GetAssetsFromFolder<GUISkin>(XEditorSettings.ASSETS_PATH);
-		usableSkins.Add(EditorGUIUtility.GetBuiltinSkin(EditorSkin.Game));
-		usableSkins.Add(EditorGUIUtility.GetBuiltinSkin(EditorSkin.Inspector));
+            foreach (GUISkin skin in _projectSkins)
+            {
+                _usableSkins.Add(skin);
+            }
 
-		foreach (GUISkin s in projectSkins)
-		{
-			usableSkins.Add(s);
-		}
+            foreach (GUISkin skin in _usableSkins)
+            {
+                _guiSkins.Add(skin.name);
+            }
 
-		foreach (GUISkin s in usableSkins)
-		{
-			guiSkins.Add(s.name);
-		}
+            _guiSkins[1] = "InspectorSkin";
 
-		guiSkins[1] = "InspectorSkin";
+            LoadSkin(_usableSkins[_selSkin]);
+        }
 
-		LoadSkin(usableSkins[selSkin]);
-	}
+        /// <summary>
+        /// Рисование UnityGUI
+        /// </summary>
+        private void OnGUI()
+        {
+            wantsMouseMove = true;
+            GUI.Box(new Rect(0, 0, position.width, 17), GUIContent.none, EditorStyles.toolbar);
+            GUI.Label(new Rect(5, 0, 500, 14), "Count : " + _countSize);
 
-	--------
-	/// <summary>
-	/// Рисование UnityGUI
-	/// </summary>
-	--------
-	private void OnGUI()
-	{
-		wantsMouseMove = true;
-		GUI.Box(new Rect(0, 0, position.width, 17), "", EditorStyles.toolbar);
-		GUI.Label(new Rect(5, 0, 500, 14), "Count : " + countSize);
+            _selSkin = EditorGUI.Popup(new Rect(position.width - 220, 0, 90, 14), string.Empty, _selSkin,
+                _guiSkins.ToArray(), EditorStyles.toolbarDropDown);
+            if (GUI.changed)
+            {
+                LoadSkin(_usableSkins[_selSkin]);
+            }
 
-		selSkin = EditorGUI.Popup(new Rect(position.width - 220, 0, 90, 14), "", selSkin, guiSkins.ToArray(), EditorStyles.toolbarDropDown);
-		if (GUI.changed)
-		{
-			LoadSkin(usableSkins[selSkin]);
-		}
+            GUI.BeginGroup(new Rect(position.width - 102, 2, 86, 14));
+            _searchText = GUI.TextField(new Rect(-16, 0, 102, 14), _searchText, EditorStyles.toolbarSearchField);
+            GUI.EndGroup();
 
-		GUI.BeginGroup(new Rect(position.width - 102, 2, 86, 14));
-		
-		searchText = GUI.TextField(new Rect(-16, 0, 102, 14), searchText, EditorStyles.toolbarSearchField);
-		GUI.EndGroup();
-		selSearchParam = EditorGUI.Popup(new Rect(position.width - 118, 2, 16, 16), "", selSearchParam, SearchParams, XEditorStyles.SEARCH_FIELD_POPUP);
+            _selSearchParam = EditorGUI.Popup(new Rect(position.width - 118, 2, 16, 16), string.Empty, _selSearchParam,
+                _searchParams, XEditorStyles.SEARCH_FIELD_POPUP);
 
-		if (GUI.Button(new Rect(position.width - 16, 2, 16, 14), "", XEditorStyles.SEARCH_FIELD_CANCEL))
-		{
-			searchText = "";
-			Repaint();
-		}
+            if (GUI.Button(new Rect(position.width - 16, 2, 16, 14), GUIContent.none, XEditorStyles.SEARCH_FIELD_CANCEL))
+            {
+                _searchText = string.Empty;
+                Repaint();
+            }
 
-		if (GUI.changed)
-		{
-			UpdateListSize();
-		}
-		GUI.Box(new Rect(0, position.height - 17, position.width, 17), "", "OL Title");
-		float lastY = 0;
-		var count = 0;
+            if (GUI.changed)
+            {
+                UpdateListSize();
+            }
 
-		scrollPos = GUI.BeginScrollView(new Rect(0, 18, position.width, position.height - 35), scrollPos, new Rect(0, 0, position.width - 16, totalSizeofView + 10));
-		for (var i = 0; i < initialCount; i++)
-		{
-			GUIStyle s = eStyles[i];
-			if (CanShow(s.name))
-			{
-				StylePref sP = stylePrefs[i];
-				float aHeight = sP.H;
-				var newY = lastY + (5 * count);
-				GUI.Box(new Rect(5, newY + 5, position.width - 26, aHeight + 54), "", EditorStyles.toolbar);
-				var area = new Rect(5, newY + 5, position.width - 26, aHeight + 50);
-				GUI.BeginGroup(area);
-				GUI.Box(new Rect(0, 0, area.width - 1, 17), "", "CN Box");
-				GUI.Box(new Rect(0, 18, area.width - 1, 17), "", "OL Title");
+            GUI.Box(new Rect(0, position.height - 17, position.width, 17), GUIContent.none, "OL Title");
+            float lastY = 0;
+            var count = 0;
 
-				GUI.TextField(new Rect(0, 2, area.width - 10, 16),
-					i + " : " + s.name);
+            _scrollPos = GUI.BeginScrollView(new Rect(0, 18, position.width, position.height - 35), _scrollPos,
+                new Rect(0, 0, position.width - 16, _totalSizeOfView + 10));
+            for (var i = 0; i < _initialCount; i++)
+            {
+                GUIStyle style = _editorStyles[i];
+                if (CanShow(style.name))
+                {
+                    StylePref stylePref = _stylePrefs[i];
+                    float areaHeight = stylePref.Height;
+                    var newY = lastY + (5 * count);
+                    GUI.Box(new Rect(5, newY + 5, position.width - 26, areaHeight + 54), GUIContent.none, EditorStyles.toolbar);
+                    var area = new Rect(5, newY + 5, position.width - 26, areaHeight + 50);
+                    GUI.BeginGroup(area);
+                    GUI.Box(new Rect(0, 0, area.width - 1, 17), GUIContent.none, "CN Box");
+                    GUI.Box(new Rect(0, 18, area.width - 1, 17), GUIContent.none, "OL Title");
 
-				if (GUI.Button(new Rect(0, 18, 60, 14), "Options", "OL Title"))
-				{
-					selOption = i;
-					optionsMenu = new GenericMenu();
-					optionsMenu.AddItem(new GUIContent("Copy"), false, CopyItem);
-					optionsMenu.AddItem(new GUIContent("Display Sample Text"), stylePrefs[selOption].displayText, ShowSampleText);
-					optionsMenu.AddItem(new GUIContent("Enable or Disable"), stylePrefs[selOption].enabled, ToggleDisabled);
-					optionsMenu.DropDown(new Rect(0, 22, 30, 14));
-				}
+                    GUI.TextField(new Rect(0, 2, area.width - 10, 16),
+                        i + " : " + style.name);
 
-				GUI.color = Color.gray;
-				GUI.Box(new Rect(4, 38, area.width - 8, area.height - 38), "", "GroupBox");
-				GUI.color = Color.white;
+                    if (GUI.Button(new Rect(0, 18, 60, 14), "Options", "OL Title"))
+                    {
+                        _selOption = i;
+                        _optionsMenu = new GenericMenu();
+                        _optionsMenu.AddItem(new GUIContent("Copy"), false, CopyItem);
+                        _optionsMenu.AddItem(new GUIContent("Display Sample Text"), _stylePrefs[_selOption].DisplayText, ShowSampleText);
+                        _optionsMenu.AddItem(new GUIContent("Enable or Disable"), _stylePrefs[_selOption].Enabled, ToggleDisabled);
+                        _optionsMenu.DropDown(new Rect(0, 22, 30, 14));
+                    }
 
-				if (stylePrefs[i].displayText)
-				{
-					stylePrefs[i].text = GUI.TextField(new Rect(62, 20, 40, 14), stylePrefs[i].text);
-					var colorGroup = new Rect(new Rect(104, 20, position.width - 125, 14));
-					GUI.BeginGroup(colorGroup);
-					stylePrefs[i].bgColor = EditorGUI.ColorField(new Rect(0, 0, (colorGroup.width / 2) - 5, 14),
-						stylePrefs[i].bgColor);
-					GUI.color = stylePrefs[i].bgColor.Inverted();
-					GUI.Label(new Rect(0, 0, 120, 14), "BG Color");
-					GUI.color = Color.white;
+                    GUI.color = Color.gray;
+                    GUI.Box(new Rect(4, 38, area.width - 8, area.height - 38), GUIContent.none, "GroupBox");
+                    GUI.color = Color.white;
 
-					stylePrefs[i].cColor =
-						EditorGUI.ColorField(new Rect(colorGroup.width / 2, 0, (colorGroup.width / 2) - 8, 14),
-							stylePrefs[i].cColor);
+                    if (_stylePrefs[i].DisplayText)
+                    {
+                        _stylePrefs[i].Text = GUI.TextField(new Rect(62, 20, 40, 14), _stylePrefs[i].Text);
+                        var colorGroup = new Rect(new Rect(104, 20, position.width - 125, 14));
+                        GUI.BeginGroup(colorGroup);
+                        _stylePrefs[i].BgColor = EditorGUI.ColorField(new Rect(0, 0, (colorGroup.width / 2) - 5, 14),
+                            _stylePrefs[i].BgColor);
+                        GUI.color = _stylePrefs[i].BgColor.Inverted();
+                        GUI.Label(new Rect(0, 0, 120, 14), "BG Color");
+                        GUI.color = Color.white;
 
-					GUI.color = stylePrefs[i].cColor.Inverted();
-					GUI.Label(new Rect(colorGroup.width / 2, 0, 120, 14), "Text Color");
-					GUI.color = Color.white;
+                        _stylePrefs[i].ContentColor =
+                            EditorGUI.ColorField(new Rect(colorGroup.width / 2, 0, (colorGroup.width / 2) - 8, 14),
+                                _stylePrefs[i].ContentColor);
 
-					GUI.EndGroup();
-					GUI.enabled = stylePrefs[i].enabled;
-					GUI.backgroundColor = stylePrefs[i].bgColor;
-					GUI.contentColor = stylePrefs[i].cColor;
-					Vector2 size = s.CalcSize(new GUIContent(stylePrefs[i].text));
-					stylePrefs[i].npActive = GUI.Toggle(new Rect(10, 41, (sP.W / 2) + size.x, size.y), stylePrefs[i].npActive, stylePrefs[i].text, s);
+                        GUI.color = _stylePrefs[i].ContentColor.Inverted();
+                        GUI.Label(new Rect(colorGroup.width / 2, 0, 120, 14), "Text Color");
+                        GUI.color = Color.white;
 
-					if (EditorGUIUtility.isProSkin && selSkin == 1)
-					{
-						stylePrefs[i].pActive = GUI.Toggle(new Rect(30 + (sP.W / 2) + size.x, 41, (sP.W / 2) + size.x, size.y), stylePrefs[i].pActive,
-							stylePrefs[i].text, s.name);
-					}
-					GUI.contentColor = Color.white;
-					GUI.backgroundColor = Color.white;
-				}
-				else
-				{
-					GUI.enabled = stylePrefs[i].enabled;
-					stylePrefs[i].npActive = GUI.Toggle(new Rect(10, 41, sP.W, sP.H), stylePrefs[i].npActive, "", s);
+                        GUI.EndGroup();
+                        GUI.enabled = _stylePrefs[i].Enabled;
+                        GUI.backgroundColor = _stylePrefs[i].BgColor;
+                        GUI.contentColor = _stylePrefs[i].ContentColor;
+                        Vector2 size = style.CalcSize(new GUIContent(_stylePrefs[i].Text));
+                        _stylePrefs[i].NpActive = GUI.Toggle(new Rect(10, 41, (stylePref.Width / 2) + size.x, size.y),
+                            _stylePrefs[i].NpActive, _stylePrefs[i].Text, style);
 
-					if (EditorGUIUtility.isProSkin && selSkin == 1)
-					{
-						stylePrefs[i].pActive = GUI.Toggle(new Rect(30 + sP.W, 41, sP.W, sP.H), stylePrefs[i].pActive,
-							"", s.name);
-					}
-				}
-				GUI.enabled = true;
-				GUI.EndGroup();
-				lastY =
-					newY - (5 * count)
-					+
-					(aHeight + 54);
-				count++;
-			}
-		}
-		GUI.EndScrollView();
-		GUI.Label(new Rect(5, position.height - 16, position.width, 16), "Last style copied : " + lastCopy);
-		Repaint();
-	}
-	#endregion
+                        if (EditorGUIUtility.isProSkin && _selSkin == 1)
+                        {
+                            _stylePrefs[i].PActive = GUI.Toggle(
+                                new Rect(30 + (stylePref.Width / 2) + size.x, 41, (stylePref.Width / 2) + size.x, size.y),
+                                _stylePrefs[i].PActive, _stylePrefs[i].Text, style.name);
+                        }
+                        GUI.contentColor = Color.white;
+                        GUI.backgroundColor = Color.white;
+                    }
+                    else
+                    {
+                        GUI.enabled = _stylePrefs[i].Enabled;
+                        _stylePrefs[i].NpActive = GUI.Toggle(new Rect(10, 41, stylePref.Width, stylePref.Height),
+                            _stylePrefs[i].NpActive, string.Empty, style);
 
-	#region =============================================== ОБШИЕ МЕТОДЫ ==============================================
-	--------
-	/// <summary>
-	/// Загрузка скина
-	/// </summary>
-	/// <param name="skin">Скин</param>
-	--------
-	private void LoadSkin(GUISkin skin)
-	{
-		stylePrefs.Clear();
-		eStyles.Clear();
-		foreach (GUIStyle s in skin)
-		{
-			stylePrefs.Add(new StylePref());
-			eStyles.Add(s);
-		}
-		initialCount = stylePrefs.Count;
-		UpdateListSize();
-	}
+                        if (EditorGUIUtility.isProSkin && _selSkin == 1)
+                        {
+                            _stylePrefs[i].PActive = GUI.Toggle(new Rect(30 + stylePref.Width, 41, stylePref.Width, stylePref.Height),
+                                _stylePrefs[i].PActive, string.Empty, style.name);
+                        }
+                    }
+                    GUI.enabled = true;
+                    GUI.EndGroup();
+                    lastY = newY - (5 * count) + (areaHeight + 54);
+                    count++;
+                }
+            }
+            GUI.EndScrollView();
+            GUI.Label(new Rect(5, position.height - 16, position.width, 16), "Last style copied : " + _lastCopy);
+            Repaint();
+        }
+        #endregion
 
-	--------
-	/// <summary>
-	/// Показать текст
-	/// </summary>
-	--------
-	public void ShowSampleText()
-	{
-		stylePrefs[selOption].displayText = !stylePrefs[selOption].displayText;
-	}
+        #region Main methods
+        /// <summary>
+        /// Загрузка скина
+        /// </summary>
+        /// <param name="skin">Скин</param>
+        private void LoadSkin(GUISkin skin)
+        {
+            _stylePrefs.Clear();
+            _editorStyles.Clear();
+            foreach (GUIStyle style in skin)
+            {
+                _stylePrefs.Add(new StylePref());
+                _editorStyles.Add(style);
+            }
+            _initialCount = _stylePrefs.Count;
+            UpdateListSize();
+        }
 
-	--------
-	/// <summary>
-	/// Скопировать в буфер
-	/// </summary>
-	--------
-	public void CopyItem()
-	{
-		GUIStyle s = eStyles[selOption];
-		EditorGUIUtility.systemCopyBuffer = '"' + s.name + '"';
-		lastCopy = '"' + s.name + '"';
-		Repaint();
-	}
+        /// <summary>
+        /// Показать текст
+        /// </summary>
+        public void ShowSampleText()
+        {
+            _stylePrefs[_selOption].DisplayText = !_stylePrefs[_selOption].DisplayText;
+        }
 
-	--------
-	/// <summary>
-	/// Установить статус недоступности визуального стиля
-	/// </summary>
-	--------
-	public void ToggleDisabled()
-	{
-		stylePrefs[selOption].enabled = !stylePrefs[selOption].enabled;
-		Repaint();
-	}
+        /// <summary>
+        /// Скопировать в буфер
+        /// </summary>
+        public void CopyItem()
+        {
+            GUIStyle style = _editorStyles[_selOption];
+            EditorGUIUtility.systemCopyBuffer = '"' + style.name + '"';
+            _lastCopy = '"' + style.name + '"';
+            Repaint();
+        }
 
-	--------
-	/// <summary>
-	/// Обновление списка
-	/// </summary>
-	--------
-	public void UpdateListSize()
-	{
-		var lastY = 0;
-		var newY = 0;
-		var count = 0;
-		for (var i = 0; i < initialCount; i++)
-		{
-			GUIStyle s = eStyles[i];
+        /// <summary>
+        /// Установить статус недоступности визуального стиля
+        /// </summary>
+        public void ToggleDisabled()
+        {
+            _stylePrefs[_selOption].Enabled = !_stylePrefs[_selOption].Enabled;
+            Repaint();
+        }
 
-			if (CanShow(s.name))
-			{
-				stylePrefs[i] = new StylePref();
-				var height = 16;
-				var width = 16;
-				newY = lastY + (5 * count);
-				if (s.active.background != null)
-				{
-					height = s.active.background.height;
-					width = s.active.background.width;
-				}
+        /// <summary>
+        /// Обновление списка
+        /// </summary>
+        public void UpdateListSize()
+        {
+            var lastY = 0;
+            var newY = 0;
+            var count = 0;
+            for (var i = 0; i < _initialCount; i++)
+            {
+                GUIStyle style = _editorStyles[i];
 
-				if (s.hover.background != null)
-				{
-					height = s.hover.background.height;
-					width = s.hover.background.width;
-				}
+                if (CanShow(style.name))
+                {
+                    _stylePrefs[i] = new StylePref();
+                    var height = 16;
+                    var width = 16;
+                    newY = lastY + (5 * count);
+                    if (style.active.background != null)
+                    {
+                        height = style.active.background.height;
+                        width = style.active.background.width;
+                    }
 
-				if (s.normal.background != null)
-				{
-					height = s.normal.background.height;
-					width = s.normal.background.width;
-				}
+                    if (style.hover.background != null)
+                    {
+                        height = style.hover.background.height;
+                        width = style.hover.background.width;
+                    }
 
-				if (height < 8 || width < 8)
-				{
-					height = 8;
-					width = 8;
-				}
+                    if (style.normal.background != null)
+                    {
+                        height = style.normal.background.height;
+                        width = style.normal.background.width;
+                    }
 
-				totalSizeOfStyles += height;
-				stylePrefs[i].H = height;
-				stylePrefs[i].W = width;
-				lastY =
-					newY - (5 * count)
-					+
-					(stylePrefs[i].H + 54);
-				count++;
-			}
-		}
-		totalSizeofView = lastY + ((count - 1) * 5);
-		countSize = count;
-	}
+                    if (height < 8 || width < 8)
+                    {
+                        height = 8;
+                        width = 8;
+                    }
 
-	--------
-	/// <summary>
-	/// Проверка на видимость объект по вхождению строки поиска
-	/// </summary>
-	/// <param name="search_string">Строка поиска</param>
-	/// <returns>Статус видимости объекта</returns>
-	--------
-	private Boolean CanShow(String search_string)
-	{
-		var can_show = false;
+                    _totalSizeOfStyles += height;
+                    _stylePrefs[i].Height = height;
+                    _stylePrefs[i].Width = width;
+                    lastY = newY - (5 * count) + (_stylePrefs[i].Height + 54);
+                    count++;
+                }
+            }
+            _totalSizeOfView = lastY + ((count - 1) * 5);
+            _countSize = count;
+        }
 
-		switch (selSearchParam)
-		{
-			case 0:
-				if (search_string.ToLower().StartsWith(searchText.ToLower()))
-					can_show = true;
-				break;
+        /// <summary>
+        /// Проверка на видимость объект по вхождению строки поиска
+        /// </summary>
+        /// <param name="searchString">Строка поиска</param>
+        /// <returns>Статус видимости объекта</returns>
+        private bool CanShow(string searchString)
+        {
+            var canShow = false;
 
-			case 1:
-				if (search_string.ToLower().EndsWith(searchText.ToLower()))
-					can_show = true;
-				break;
+            switch (_selSearchParam)
+            {
+                case 0:
+                    if (searchString.ToLower().StartsWith(_searchText.ToLower()))
+                        canShow = true;
+                    break;
 
-			case 2:
-				if (search_string.ToLower().Contains(searchText.ToLower()))
-					can_show = true;
-				break;
-		}
+                case 1:
+                    if (searchString.ToLower().EndsWith(_searchText.ToLower()))
+                        canShow = true;
+                    break;
 
-		return can_show;
-	}
-	#endregion
+                case 2:
+                    if (searchString.ToLower().Contains(_searchText.ToLower()))
+                        canShow = true;
+                    break;
+            }
+
+            return canShow;
+        }
+        #endregion
+    }
 }
+#endif

@@ -1,55 +1,51 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusInGroupAttributeDrawer.cs
-*		Редактор атрибута LotusInGroupAttribute.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
+﻿#if UNITY_EDITOR
+using Lotus.Core.Inspector;
 
-using System;
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор атрибута LotusInGroupAttribute
-/// </summary>
-------------
-[CustomPropertyDrawer(typeof(LotusInGroupAttribute), true)]
-public class LotusInGroupAttributeDrawer : PropertyDrawer
+namespace Lotus.Editor
 {
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Получение высоты редактируемого свойства элемента
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	/// <returns>Высота свойства элемента</returns>
-	--------
-	public override Single GetPropertyHeight(SerializedProperty property, GUIContent label)
-	{
-		return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
-	}
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор атрибута LotusInGroupAttribute
+    /// </summary>
+    /// <remarks>
+    /// В кастомном инспекторе Lotus элементы с этим атрибутом рисуются через
+    /// <see cref="LotusGroupingAttributeDrawer"/>. Drawer оставлен для стандартного инспектора Unity.
+    /// </remarks>
+    [CustomPropertyDrawer(typeof(LotusInGroupAttribute), true)]
+    public class LotusInGroupAttributeDrawer : PropertyDrawer
+    {
+        #region Unity events
+        /// <summary>
+        /// Получение высоты редактируемого свойства элемента
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        /// <returns>Высота свойства элемента</returns>
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
+        }
 
-	--------
-	/// <summary>
-	/// Рисование сериализуемого свойства
-	/// </summary>
-	/// <param name="position">Прямоугольник для отображения</param>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	--------
-	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-	{
-		EditorGUI.PropertyField(position, property, label, property.isExpanded);
-	}
-	#endregion
+        /// <summary>
+        /// Рисование сериализуемого свойства
+        /// </summary>
+        /// <param name="position">Прямоугольник для отображения</param>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.BeginProperty(position, label, property);
+            {
+                EditorGUI.PropertyField(position, property, label, property.isExpanded);
+            }
+            EditorGUI.EndProperty();
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

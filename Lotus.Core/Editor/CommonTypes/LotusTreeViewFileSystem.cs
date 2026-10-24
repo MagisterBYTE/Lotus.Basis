@@ -1,130 +1,104 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusTreeViewControl.cs
-*		Элемент для отображения дерева файловой системы для редактора Unity.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
-
+﻿#if UNITY_EDITOR
 using System;
-using UnityEngine;
-using UnityEditor;
-------------
+
 using Lotus.Core;
 
-namespace Lotus
+using UnityEngine;
+
+namespace Lotus.Editor
 {
-	namespace Editor
-	{
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Элемент для отображения дерева файловой системы для редактора Unity
+    /// </summary>
+    public class CTreeViewFileSystem : TreeViewControlBase<CollectionViewModelFileSystem,
+        ILotusViewModelHierarchy, ILotusFileSystemEntity>
+    {
+        #region Fields
+        #endregion
 
-		/** \addtogroup CoreUnityEditor
-		*@{*/
+        #region Properties
+        //
+        // ОСНОВНЫЕ ПАРАМЕТРЫ
+        //
+        /// <summary>
+        /// Текущий выбранный узел отображения как директория
+        /// </summary>
+        public CFileSystemDirectory SelectedDirectory
+        {
+            get { return _selectedNode?.Model as CFileSystemDirectory; }
+        }
 
-		/// <summary>
-		/// Элемент для отображения дерева файловой системы для редактора Unity
-		/// </summary>
+        /// <summary>
+        /// Текущий выбранный узел отображения как файл
+        /// </summary>
+        public CFileSystemFile SelectedFile
+        {
+            get { return _selectedNode?.Model as CFileSystemFile; }
+        }
+        #endregion
 
-		public class CTreeViewFileSystem : TreeViewControlBase<CollectionViewModelFileSystem,
-			ILotusViewModelHierarchy, ILotusFileSystemEntity>
-		{
-			#region Fields
-			#endregion
+        #region Constructors
+        /// <summary>
+        /// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
+        /// </summary>
+        public CTreeViewFileSystem()
+            : base(new CollectionViewModelFileSystem())
+        {
+        }
 
-			#region Properties
-			//
-			// ОСНОВНЫЕ ПАРАМЕТРЫ
-			//
-			/// <summary>
-			/// Текущий выбранный узел отображения как директория
-			/// </summary>
-			public CFileSystemDirectory SelectedDirectory
-			{
-				get { return mSelectedNode?.DataContext as CFileSystemDirectory; }
-			}
+        /// <summary>
+        /// Конструктор инициализирует объект класса указанными параметрами
+        /// </summary>
+        /// <param name="data">Данные корневого узла</param>
+        public CTreeViewFileSystem(ILotusFileSystemEntity data)
+            : base(new CollectionViewModelFileSystem(), data)
+        {
+        }
+        #endregion
 
-			/// <summary>
-			/// Текущий выбранный узел отображения как файл
-			/// </summary>
-			public CFileSystemFile SelectedFile
-			{
-				get { return mSelectedNode?.DataContext as CFileSystemFile; }
-			}
-			#endregion
+        #region Main methods
+        /// <summary>
+        /// Фильтрация узлов
+        /// </summary>
+        protected override void OnFiltered()
+        {
+            if (string.IsNullOrEmpty(_searchString) && _rootData != null)
+            {
+                _root.IsFiltered = false;
+                _root.ResetSource();
+            }
+            else
+            {
+                _root.IsFiltered = true;
+                _root.Filter = (ILotusFileSystemEntity data) =>
+                {
+                    return data != null && data.Name != null && data.Name.Contains(_searchString);
+                };
 
-			#region Constructors
-			
-			/// <summary>
-			/// Конструктор по умолчанию инициализирует объект класса предустановленными значениями
-			/// </summary>
-			
-			public CTreeViewFileSystem()
-				: base(new CCollectionViewHierarchyFileSystem())
-			{
-			}
+                _root.ResetSource();
+                _root.Expanded();
+            }
+        }
 
-			
-			/// <summary>
-			/// Конструктор инициализирует объект класса указанными параметрами
-			/// </summary>
-			/// <param name="data">Данные корневого узла</param>
-			
-			public CTreeViewFileSystem(ILotusFileSystemEntity data)
-				: base(new CCollectionViewHierarchyFileSystem(), data)
-			{
-			}
-			#endregion
+        /// <summary>
+        /// Удаление текущего выбранного узла
+        /// </summary>
+        public override void Delete()
+        {
+            var deleted = _selectedNode;
+            _selectedNode = null;
 
-			#region Main methods
-			
-			/// <summary>
-			/// Фильтрация узлов
-			/// </summary>
-			
-			protected override void OnFiltered()
-			{
-				if (String.IsNullOrEmpty(mSearchString) && mRootData != null)
-				{
-					mRoot.IsFiltered = false;
-					mRoot.ResetSource();
-				}
-				else
-				{
-					mRoot.IsFiltered = true;
-					mRoot.Filter =(ILotusFileSystemEntity data)=>
-					{
-						return data.Name.Contains(mSearchString);
-					};
+            if (deleted?.Model is ILotusFileSystemEntity fileSystemEntity)
+            {
+                fileSystemEntity.Delete();
+            }
 
-					mRoot.ResetSource();
-					mRoot.Expanded();
-				}
-			}
-
-			
-			/// <summary>
-			/// Удаление текущего выбранного узла
-			/// </summary>
-			
-			public override void Delete()
-			{
-				var deleted = mSelectedNode;
-				mSelectedNode = null;
-
-				if(deleted.Model is ILotusFileSystemEntity fileSystemEntity)
-				{
-					fileSystemEntity.Delete();
-				}
-
-				deleted.IParent.DetachOwnedObject(deleted, true);
-			}
-			#endregion
-		}
-
-		/**@}*/
-
-	}
+            deleted?.IParent?.DetachOwnedObject(deleted, true);
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

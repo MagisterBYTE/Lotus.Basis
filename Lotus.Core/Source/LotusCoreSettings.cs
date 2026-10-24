@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 // Обеспечивает дружественность для сборки редакторов
 [assembly: InternalsVisibleToAttribute("Assembly-CSharp-Editor")]
-[assembly: InternalsVisibleToAttribute("Lotus.Unity.Core.Editor")]
+[assembly: InternalsVisibleToAttribute("Lotus.Core.Editor")]
 namespace Lotus.Core
 {
     /** \addtogroup Core

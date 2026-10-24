@@ -1,108 +1,91 @@
-﻿
-// Проект: Модуль базового ядра Unity
-// Раздел: Подсистема расширения функциональности редактора Unity
-// Автор: MagistrBYTE aka DanielDem <dementevds@gmail.com>
-------------
-/** \file LotusEnumFlagsButtonAttributeDrawer.cs
-*		Редактор атрибута LotusEnumFlagsButtonAttribute.
-*/
-------------
-// Версия: 1.0.0.0
-// Последнее изменение от 30.04.2023
+﻿#if UNITY_EDITOR
+using Lotus.Core.Inspector;
 
-using System;
 using UnityEditor;
 using UnityEngine;
-------------
-using Lotus.Core;
-using Lotus.Editor;
 
-------------
-/// <summary>
-/// Редактор атрибута LotusEnumFlagsButtonAttribute
-/// </summary>
-------------
-[CustomPropertyDrawer(typeof(LotusEnumFlagsButtonAttribute), true)]
-public class LotusEnumFlagsButtonAttributeDrawer : PropertyDrawer
+namespace Lotus.Editor
 {
-	#region =============================================== СОБЫТИЯ UNITY =============================================
-	--------
-	/// <summary>
-	/// Получение высоты редактируемого свойства элемента
-	/// </summary>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	/// <returns>Высота свойства элемента</returns>
-	--------
-	public override Single GetPropertyHeight(SerializedProperty property, GUIContent label)
-	{
-		return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
-	}
+    /** \addtogroup CoreUnityEditor
+    *@{*/
+    /// <summary>
+    /// Редактор атрибута LotusEnumFlagsButtonAttribute
+    /// </summary>
+    [CustomPropertyDrawer(typeof(LotusEnumFlagsButtonAttribute), true)]
+    public class LotusEnumFlagsButtonAttributeDrawer : PropertyDrawer
+    {
+        #region Unity events
+        /// <summary>
+        /// Получение высоты редактируемого свойства элемента
+        /// </summary>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        /// <returns>Высота свойства элемента</returns>
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, property.isExpanded);
+        }
 
-	--------
-	/// <summary>
-	/// Рисование сериализуемого свойства
-	/// </summary>
-	/// <param name="position">Прямоугольник для отображения</param>
-	/// <param name="property">Сериализируемое свойство</param>
-	/// <param name="label">Надпись</param>
-	--------
-	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-	{
-		var attr = this.attribute as LotusEnumFlagsButtonAttribute;
+        /// <summary>
+        /// Рисование сериализуемого свойства
+        /// </summary>
+        /// <param name="position">Прямоугольник для отображения</param>
+        /// <param name="property">Сериализируемое свойство</param>
+        /// <param name="label">Надпись</param>
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.BeginProperty(position, label, property);
+            {
+                var buttonsIntValue = 0;
+                var enumLength = property.enumNames.Length;
+                var buttonPressed = new bool[enumLength];
+                var buttonWidth = (position.width - EditorGUIUtility.labelWidth) / enumLength;
 
-		property.serializedObject.Update();
+                var indent = EditorGUI.IndentedRect(position);
+                var rectLabel = new Rect(indent.x, indent.y, EditorGUIUtility.labelWidth, indent.height);
+                EditorGUI.LabelField(rectLabel, label);
 
-		var buttons_int_value = 0;
-		var enum_length = property.enumNames.Length;
-		var button_pressed = new Boolean[enum_length];
-		var button_width = (position.width - EditorGUIUtility.labelWidth) / enum_length;
+                EditorGUI.BeginChangeCheck();
+                {
+                    for (var i = 0; i < enumLength; i++)
+                    {
+                        if ((property.intValue & (1 << i)) == 1 << i)
+                        {
+                            buttonPressed[i] = true;
+                        }
 
-		var indent = EditorGUI.IndentedRect(position);
-		var rect_label = new Rect(indent.x, indent.y, EditorGUIUtility.labelWidth, indent.height);
-        EditorGUI.LabelField(rect_label, label);
+                        var rectButton = new Rect(indent.x + EditorGUIUtility.labelWidth + (buttonWidth * i),
+                            indent.y, buttonWidth, indent.height);
 
-        EditorGUI.BeginChangeCheck();
-		{
-			for (var i = 0; i < enum_length; i++)
-			{
-				// Check if the button is/was pressed 
-				if ((property.intValue & (1 << i)) == 1 << i)
-				{
-					button_pressed[i] = true;
-				}
+                        var style = EditorStyles.miniButtonMid;
+                        if (i == 0)
+                        {
+                            style = EditorStyles.miniButtonLeft;
+                        }
+                        else if (i == enumLength - 1)
+                        {
+                            style = EditorStyles.miniButtonRight;
+                        }
 
-                var rect_button = new Rect(indent.x + EditorGUIUtility.labelWidth +
-					(button_width * i), indent.y, button_width, indent.height);
+                        buttonPressed[i] = GUI.Toggle(rectButton, buttonPressed[i],
+                            property.enumNames[i], style);
 
-                GUIStyle style = EditorStyles.miniButtonMid;
-				if (i == 0)
-				{
-					style = EditorStyles.miniButtonLeft;
-				}
-				else
-				{
-					if (i == enum_length - 1)
-					{
-						style = EditorStyles.miniButtonRight;
-					}
-				}
-
-				button_pressed[i] = GUI.Toggle(rect_button, button_pressed[i],
-					property.enumNames[i], style);
-
-				if (button_pressed[i])
-				{
-					buttons_int_value += 1 << i;
-				}
-			}
-		}
-
-		if (EditorGUI.EndChangeCheck())
-		{
-			property.intValue = buttons_int_value;
-			property.serializedObject.ApplyModifiedProperties();
-		}
-	}
-	#endregion
+                        if (buttonPressed[i])
+                        {
+                            buttonsIntValue += 1 << i;
+                        }
+                    }
+                }
+                if (EditorGUI.EndChangeCheck())
+                {
+                    property.intValue = buttonsIntValue;
+                    property.serializedObject.ApplyModifiedProperties();
+                }
+            }
+            EditorGUI.EndProperty();
+        }
+        #endregion
+    }
+    /**@}*/
 }
+#endif

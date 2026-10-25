@@ -3,9 +3,10 @@
     <!-- Вырезает любые .meta файлы из дерева проекта Visual Studio -->
     <DefaultItemExcludes>$(DefaultItemExcludes);**/*.meta</DefaultItemExcludes>
 
-
-    <!-- Перенаправляем папки генерации MSBuild-->
-    <BaseIntermediateOutputPath>..\Output\obj\</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>..\Output\obj\$(Configuration)\</IntermediateOutputPath>
+    <!-- obj нельзя делать общим: NuGet пишет в BaseIntermediateOutputPath файл
+         project.assets.json без имени проекта, и параллельный restore/сборка
+         тестовых проектов затирает пакеты (NUnit, testhost) чужими зависимостями.
+         IntermediateOutputPath не задаём — SDK сам добавит Configuration и TFM. -->
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)Output\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
   </PropertyGroup>
 </Project>

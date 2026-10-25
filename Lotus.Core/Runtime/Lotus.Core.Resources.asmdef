@@ -1,0 +1,8 @@
+{
+    "name": "Lotus.Core.Resources",
+    "rootNamespace": "Lotus.Core.Resources",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "autoReferenced": true
+}

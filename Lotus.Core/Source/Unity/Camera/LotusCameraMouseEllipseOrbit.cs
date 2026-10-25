@@ -383,8 +383,8 @@ namespace Lotus.Core
         {
             if (_target)
             {
-                _angleX += Input.GetAxis(XCameraInput.AxisHorizontalName) * _rotationSpeedX * 0.02f;
-                _angleY -= Input.GetAxis(XCameraInput.AxisVerticalName) * _rotationSpeedY * 0.02f;
+                _angleX += XInputDispatcher.GetAxis(XCameraInput.AxisHorizontalName) * _rotationSpeedX * 0.02f;
+                _angleY -= XInputDispatcher.GetAxis(XCameraInput.AxisVerticalName) * _rotationSpeedY * 0.02f;
 
                 var y = Clamp(_angleY, _minLimitY, _maxLimitY);
                 var rotation = Quaternion.Euler(y, _angleX, 0);
@@ -422,7 +422,7 @@ namespace Lotus.Core
         /// </summary>
         private void Snap()
         {
-            Ray ray = _currentCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _currentCamera.ScreenPointToRay(XInputDispatcher.MousePosition);
             var hit = new RaycastHit();
             if (Physics.Raycast(ray, out hit, 4000, ~_panningLayer))
             {
@@ -437,24 +437,24 @@ namespace Lotus.Core
         private void Scroll()
         {
             // приблизить
-            if ((Input.GetAxis(XCameraInput.AxisOrbitName)) > 0)
+            if ((XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName)) > 0)
             {
                 if (_distance >= _scrollMinDistance)
                 {
                     var dist1 = _distance;
-                    _distance += -(Input.GetAxis(XCameraInput.AxisOrbitName)) * _scrollSpeed;
+                    _distance += -(XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName)) * _scrollSpeed;
                     var k = dist1 / _distance;
                     _radiusEllipseA = _radiusEllipseA / k;
                     _radiusEllipseB = _radiusEllipseB / k;
                 }
             }
             //отдалить
-            if ((Input.GetAxis(XCameraInput.AxisOrbitName)) < 0)
+            if ((XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName)) < 0)
             {
                 if (_distance <= _scrollMaxDistance)
                 {
                     var dist1 = _distance;
-                    _distance += -(Input.GetAxis(XCameraInput.AxisOrbitName)) * _scrollSpeed;
+                    _distance += -(XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName)) * _scrollSpeed;
                     var k = dist1 / _distance;
                     _radiusEllipseA = _radiusEllipseA / k;
                     _radiusEllipseB = _radiusEllipseB / k;

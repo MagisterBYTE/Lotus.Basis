@@ -79,9 +79,9 @@ namespace Lotus.Core
         /// </summary>
         public void LateUpdate()
         {
-            var mouse_pos = Input.mousePosition;
+            var mouse_pos = XInputDispatcher.MousePosition;
 
-            var mouse_btn = Input.GetMouseButton(0);
+            var mouse_btn = XInputDispatcher.GetMouseButton(0);
             if (mouse_btn)
             {
                 if (_lastMousePosition.HasValue)

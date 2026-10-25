@@ -144,34 +144,34 @@ namespace Lotus.Core
         /// </summary>
         public void ManagerToDesktop()
         {
-            if (Input.GetKey(_keyMoveForward))
+            if (XInputDispatcher.GetKey(_keyMoveForward))
             {
                 _thisTransform.position += _thisTransform.forward * Time.deltaTime * _speed;
             }
-            if (Input.GetKey(_keyMoveBackward))
+            if (XInputDispatcher.GetKey(_keyMoveBackward))
             {
                 _thisTransform.position += -_thisTransform.forward * Time.deltaTime * _speed;
             }
-            if (Input.GetKey(_keyMoveLeft))
+            if (XInputDispatcher.GetKey(_keyMoveLeft))
             {
                 _thisTransform.position += -_thisTransform.right * Time.deltaTime * _speed;
             }
-            if (Input.GetKey(_keyMoveRight))
+            if (XInputDispatcher.GetKey(_keyMoveRight))
             {
                 _thisTransform.position += _thisTransform.right * Time.deltaTime * _speed;
             }
-            if (Input.GetKey(_keyMoveUp))
+            if (XInputDispatcher.GetKey(_keyMoveUp))
             {
                 _thisTransform.position += _thisTransform.up * Time.deltaTime * _speed;
             }
-            if (Input.GetKey(_keyMoveDown))
+            if (XInputDispatcher.GetKey(_keyMoveDown))
             {
                 _thisTransform.position += -_thisTransform.up * Time.deltaTime * _speed;
             }
 
-            if (Input.GetMouseButton(0))
+            if (XInputDispatcher.GetMouseButton(0))
             {
-                _thisTransform.Rotate(Vector3.up, Input.GetAxis(XCameraInput.AxisHorizontalName));
+                _thisTransform.Rotate(Vector3.up, XInputDispatcher.GetAxis(XCameraInput.AxisHorizontalName));
             }
         }
 

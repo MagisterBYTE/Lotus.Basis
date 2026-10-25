@@ -3,5 +3,8 @@
     "version": "5.2.0",
     "displayName": "Lotus Core",
     "description": "Модуль, содержащий код, развивающий в целом платформу NET и реализующий дополнительную базовую функциональность на уровне среды NET",
-    "unity": "2026.1"
+    "unity": "2026.1",
+    "dependencies": {
+        "com.unity.inputsystem": "1.14.0"
+    }
 }

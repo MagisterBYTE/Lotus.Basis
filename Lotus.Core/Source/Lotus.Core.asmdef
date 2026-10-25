@@ -1,7 +1,9 @@
 {
     "name": "Lotus.Core",
     "rootNamespace": "Lotus.Core",
-    "references": [],
+    "references": [
+        "Unity.InputSystem"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,

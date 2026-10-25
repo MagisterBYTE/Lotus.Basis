@@ -126,39 +126,39 @@ namespace Lotus.Core
         public void ManagerToDesktop()
         {
             // Нажата средняя кнопка мыши
-            if (Input.GetMouseButton(2))
+            if (XInputDispatcher.GetMouseButton(2))
             {
-                _thisTransform.position += _thisTransform.right * _speed * Input.GetAxis(XCameraInput.AxisHorizontalName) * Time.deltaTime;
-                _thisTransform.position += Vector3.up * _speed * Input.GetAxis(XCameraInput.AxisVerticalName) * Time.deltaTime;
+                _thisTransform.position += _thisTransform.right * _speed * XInputDispatcher.GetAxis(XCameraInput.AxisHorizontalName) * Time.deltaTime;
+                _thisTransform.position += Vector3.up * _speed * XInputDispatcher.GetAxis(XCameraInput.AxisVerticalName) * Time.deltaTime;
             }
             else
             {
-                if (Input.GetMouseButton(1))
+                if (XInputDispatcher.GetMouseButton(1))
                 {
-                    _rotation.y += Input.GetAxis(XCameraInput.AxisHorizontalName);
-                    _rotation.x += Input.GetAxis(XCameraInput.AxisVerticalName);
+                    _rotation.y += XInputDispatcher.GetAxis(XCameraInput.AxisHorizontalName);
+                    _rotation.x += XInputDispatcher.GetAxis(XCameraInput.AxisVerticalName);
                     _thisTransform.eulerAngles = _rotation;
 
-                    if (Input.GetKey(_keyMoveForward))
+                    if (XInputDispatcher.GetKey(_keyMoveForward))
                     {
                         _thisTransform.position += _thisTransform.forward * Time.deltaTime * _speed;
                     }
-                    if (Input.GetKey(_keyMoveBackward))
+                    if (XInputDispatcher.GetKey(_keyMoveBackward))
                     {
                         _thisTransform.position += -_thisTransform.forward * Time.deltaTime * _speed;
                     }
-                    if (Input.GetKey(_keyMoveLeft))
+                    if (XInputDispatcher.GetKey(_keyMoveLeft))
                     {
                         _thisTransform.position += -_thisTransform.right * Time.deltaTime * _speed;
                     }
-                    if (Input.GetKey(_keyMoveRight))
+                    if (XInputDispatcher.GetKey(_keyMoveRight))
                     {
                         _thisTransform.position += _thisTransform.right * Time.deltaTime * _speed;
                     }
                 }
             }
 
-            _thisTransform.position += _thisTransform.forward * Input.GetAxis(XCameraInput.AxisOrbitName);
+            _thisTransform.position += _thisTransform.forward * XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
         }
 
 

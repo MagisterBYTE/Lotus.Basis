@@ -219,11 +219,11 @@ namespace Lotus.Core
             {
                 if (_isSupportOrbit)
                 {
-                    if (Input.GetMouseButtonDown(1))
+                    if (XInputDispatcher.GetMouseButtonDown(1))
                     {
                         _isOrbit = true;
                     }
-                    if (Input.GetMouseButtonUp(1))
+                    if (XInputDispatcher.GetMouseButtonUp(1))
                     {
                         _isOrbit = false;
                     }
@@ -257,8 +257,8 @@ namespace Lotus.Core
                 _currentX = _thisTransform.eulerAngles.y;
                 _currentY = _thisTransform.eulerAngles.x;
 
-                _currentX += Input.GetAxis(XCameraInput.AxisHorizontalName) * _speedXOrbit * Time.deltaTime;
-                _currentY -= Input.GetAxis(XCameraInput.AxisVerticalName) * _speedYOrbit * Time.deltaTime;
+                _currentX += XInputDispatcher.GetAxis(XCameraInput.AxisHorizontalName) * _speedXOrbit * Time.deltaTime;
+                _currentY -= XInputDispatcher.GetAxis(XCameraInput.AxisVerticalName) * _speedYOrbit * Time.deltaTime;
 
                 var rotation = Quaternion.Euler(_currentY, _currentX, 0);
                 Vector3 position = (rotation * new Vector3(0.0f, 0.0f, -_orbitDistance)) + _target.position;
@@ -269,7 +269,7 @@ namespace Lotus.Core
                 // Приближение камеры
                 if (_isZoom)
                 {
-                    _orbitDistance += Input.GetAxis(XCameraInput.AxisOrbitName);
+                    _orbitDistance += XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
                 }
 
                 ComputeDistance();
@@ -283,19 +283,19 @@ namespace Lotus.Core
                 {
                     Vector3 dir = _target.position - _thisTransform.position;
                     _orbitDistance = dir.magnitude;
-                    _thisTransform.position += dir * Input.GetAxis(XCameraInput.AxisOrbitName);
+                    _thisTransform.position += dir * XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
                 }
 
                 ComputeDistance();
             }
 
             // Смещения высоты камеры
-            if (Input.GetKey(_keyHeightUp))
+            if (XInputDispatcher.GetKey(_keyHeightUp))
             {
                 _height += 0.05f;
             }
 
-            if (Input.GetKey(_keyHeightDown))
+            if (XInputDispatcher.GetKey(_keyHeightDown))
             {
                 _height -= 0.05f;
             }

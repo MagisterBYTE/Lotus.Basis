@@ -136,12 +136,12 @@ namespace Lotus.Core
         {
             if (_isControl)
             {
-                if (Input.GetMouseButtonDown(1))
+                if (XInputDispatcher.GetMouseButtonDown(1))
                 {
                     _isOrbit = true;
                     _orbitDistance = _distance.magnitude;
                 }
-                if (Input.GetMouseButtonUp(1))
+                if (XInputDispatcher.GetMouseButtonUp(1))
                 {
                     _isOrbit = false;
                 }
@@ -171,7 +171,7 @@ namespace Lotus.Core
             if (_isOrbit)
             {
                 // Приближение камеры
-                var delta_zoom = Input.GetAxis(XCameraInput.AxisOrbitName);
+                var delta_zoom = XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
                 if (Mathf.Approximately(delta_zoom, 0) == false && _isZoom)
                 {
                     _orbitDistance += delta_zoom;
@@ -183,8 +183,8 @@ namespace Lotus.Core
 
                 float dx = 0;
                 float dy = 0;
-                dx = Input.GetAxis(XCameraInput.AxisHorizontalName);
-                dy = Input.GetAxis(XCameraInput.AxisVerticalName);
+                dx = XInputDispatcher.GetAxis(XCameraInput.AxisHorizontalName);
+                dy = XInputDispatcher.GetAxis(XCameraInput.AxisVerticalName);
 
                 _currentX += dx * _speedXOrbit * Time.deltaTime;
                 _currentY -= dy * _speedYOrbit * Time.deltaTime;
@@ -200,7 +200,7 @@ namespace Lotus.Core
             else
             {
                 // Приближение камеры
-                var delta_zoom = Input.GetAxis(XCameraInput.AxisOrbitName);
+                var delta_zoom = XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
                 if (Mathf.Approximately(delta_zoom, 0) == false && _isZoom)
                 {
                     Vector3 dir = _target.position - _thisTransform.position;

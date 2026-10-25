@@ -935,16 +935,6 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Отмена регистрации подписки на обработку события нажатия
-        /// </summary>
-        /// <param name="pointerDown">Интерфейс нажатия</param>
-        [Obsolete("Опечатка в имени. Используйте UnregisterPointerDown")]
-        public static void UnRegisterPointerDown(ILotusPointerDown pointerDown)
-        {
-            UnregisterPointerDown(pointerDown);
-        }
-
-        /// <summary>
         /// Отмена регистрации подписки на обработку события удерживания
         /// </summary>
         /// <param name="pointerPress">Интерфейс удерживания</param>
@@ -973,32 +963,12 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Отмена регистрации подписки на обработку события перемещения
-        /// </summary>
-        /// <param name="pointerMove">Интерфейс перемещения</param>
-        [Obsolete("Опечатка в имени. Используйте UnregisterPointerMove")]
-        public static void UnRegisterPointerMove(ILotusPointerMove pointerMove)
-        {
-            UnregisterPointerMove(pointerMove);
-        }
-
-        /// <summary>
         /// Отмена регистрации на обработку события отпускания
         /// </summary>
         /// <param name="pointerUp">Интерфейс отпускания</param>
         public static void UnregisterPointerUp(ILotusPointerUp pointerUp)
         {
             PointersUp.Remove(pointerUp);
-        }
-
-        /// <summary>
-        /// Отмена регистрации на обработку события отпускания
-        /// </summary>
-        /// <param name="pointerUp">Интерфейс отпускания</param>
-        [Obsolete("Опечатка в имени. Используйте UnregisterPointerUp")]
-        public static void UnRegisterPointerUp(ILotusPointerUp pointerUp)
-        {
-            UnregisterPointerUp(pointerUp);
         }
 
         /// <summary>

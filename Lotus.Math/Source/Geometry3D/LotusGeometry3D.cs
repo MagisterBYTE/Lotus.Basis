@@ -57,92 +57,92 @@ namespace Lotus.Maths
         }
 
 #if UNITY_2017_1_OR_NEWER
-		/// <summary>
-		/// Проекция угла между двумя векторами на выбранную ось.
-		/// </summary>
-		/// <param name="dirA">Вектор А.</param>
-		/// <param name="dirB">Вектор B.</param>
-		/// <param name="axis">Ось проекции.</param>
-		/// <returns>Угол в градусах.</returns>
-		public static Single AngleAroundAxis(UnityEngine.Vector3 dirA, UnityEngine.Vector3 dirB, in UnityEngine.Vector3 axis)
-		{
-			// TODO Project A and B onto the plane orthogonal target axis
-			dirA = dirA - UnityEngine.Vector3.Project(dirA, axis);
-			dirB = dirB - UnityEngine.Vector3.Project(dirB, axis);
+        /// <summary>
+        /// Проекция угла между двумя векторами на выбранную ось.
+        /// </summary>
+        /// <param name="dirA">Вектор А.</param>
+        /// <param name="dirB">Вектор B.</param>
+        /// <param name="axis">Ось проекции.</param>
+        /// <returns>Угол в градусах.</returns>
+        public static float AngleAroundAxis(UnityEngine.Vector3 dirA, UnityEngine.Vector3 dirB, in UnityEngine.Vector3 axis)
+        {
+            // TODO Project A and B onto the plane orthogonal target axis
+            dirA = dirA - UnityEngine.Vector3.Project(dirA, axis);
+            dirB = dirB - UnityEngine.Vector3.Project(dirB, axis);
 
-			// Find (positive) angle between A and B
-			var angle = UnityEngine.Vector3.Angle(dirA, dirB);
+            // Find (positive) angle between A and B
+            var angle = UnityEngine.Vector3.Angle(dirA, dirB);
 
-			// Return angle multiplied with 1 or -1
-			return angle * (UnityEngine.Vector3.Dot(axis, UnityEngine.Vector3.Cross(dirA, dirB)) < 0 ? -1 : 1);
-		}
+            // Return angle multiplied with 1 or -1
+            return angle * (UnityEngine.Vector3.Dot(axis, UnityEngine.Vector3.Cross(dirA, dirB)) < 0 ? -1 : 1);
+        }
 
-		/// <summary>
-		/// Вращение единичного вектора на окружности в плоскости XZ (Top - вид сверху).
-		/// </summary>
-		/// <remarks>
-		/// Вращение осуществляется против часовой стрелки
-		/// При проекции:
-		/// Горизонтальной ось становиться координата X
-		/// Вертикальной осью становиться координата Z
-		/// </remarks>
-		/// <param name="radius">Радиус окружности.</param>
-		/// <param name="angle">Угол в градусах.</param>
-		/// <returns>Вектор.</returns>
-		public static UnityEngine.Vector3 RotationVectorXZ(Single radius, Single angle)
-		{
-			Single angleInRadians = angle * XMath.DegreeToRadian_F;
-			var x = radius * XMath.Cos(angleInRadians);
-			var y = radius * XMath.Sin(angleInRadians);
-			var result = new UnityEngine.Vector3(x, 0, y);
+        /// <summary>
+        /// Вращение единичного вектора на окружности в плоскости XZ (Top - вид сверху).
+        /// </summary>
+        /// <remarks>
+        /// Вращение осуществляется против часовой стрелки
+        /// При проекции:
+        /// Горизонтальной ось становиться координата X
+        /// Вертикальной осью становиться координата Z
+        /// </remarks>
+        /// <param name="radius">Радиус окружности.</param>
+        /// <param name="angle">Угол в градусах.</param>
+        /// <returns>Вектор.</returns>
+        public static UnityEngine.Vector3 RotationVectorXZ(float radius, float angle)
+        {
+            float angleInRadians = angle * XMath.DegreeToRadian_F;
+            var x = radius * XMath.Cos(angleInRadians);
+            var y = radius * XMath.Sin(angleInRadians);
+            var result = new UnityEngine.Vector3(x, 0, y);
 
-			return (result);
-		}
+            return (result);
+        }
 
-		/// <summary>
-		/// Вращение единичного вектора на окружности в плоскости ZY (Right - вид справа).
-		/// </summary>
-		/// <remarks>
-		/// Вращение осуществляется против часовой стрелки
-		/// При проекции:
-		/// Горизонтальной ось становиться координата Z
-		/// Вертикальной осью становиться координата Y
-		/// </remarks>
-		/// <param name="radius">Радиус окружности.</param>
-		/// <param name="angle">Угол в градусах.</param>
-		/// <returns>Вектор.</returns>
-		public static UnityEngine.Vector3 RotationVectorZY(Single radius, Single angle)
-		{
-			Single angleInRadians = angle * XMath.DegreeToRadian_F;
-			var x = radius * XMath.Cos(angleInRadians);
-			var y = radius * XMath.Sin(angleInRadians);
-			var result = new UnityEngine.Vector3(0, y, x);
+        /// <summary>
+        /// Вращение единичного вектора на окружности в плоскости ZY (Right - вид справа).
+        /// </summary>
+        /// <remarks>
+        /// Вращение осуществляется против часовой стрелки
+        /// При проекции:
+        /// Горизонтальной ось становиться координата Z
+        /// Вертикальной осью становиться координата Y
+        /// </remarks>
+        /// <param name="radius">Радиус окружности.</param>
+        /// <param name="angle">Угол в градусах.</param>
+        /// <returns>Вектор.</returns>
+        public static UnityEngine.Vector3 RotationVectorZY(float radius, float angle)
+        {
+            float angleInRadians = angle * XMath.DegreeToRadian_F;
+            var x = radius * XMath.Cos(angleInRadians);
+            var y = radius * XMath.Sin(angleInRadians);
+            var result = new UnityEngine.Vector3(0, y, x);
 
-			return (result);
-		}
+            return (result);
+        }
 
-		/// <summary>
-		/// Вращение единичного вектора на окружности в плоскости XY (Back - вид с сзади).
-		/// </summary>
-		/// <remarks>
-		/// Вращение осуществляется против часовой стрелки
-		/// При проекции:
-		/// Горизонтальной ось становиться координата X
-		/// Вертикальной осью становиться координата Y
-		/// </remarks>
-		/// <param name="radius">Радиус окружности.</param>
-		/// <param name="angle">Угол в градусах.</param>
-		/// <returns>Вектор.</returns>
-		public static UnityEngine.Vector3 RotationVectorXY(Single radius, Single angle)
-		{
-			Single angleInRadians = angle * XMath.DegreeToRadian_F;
-			var x = radius * XMath.Cos(angleInRadians);
-			var y = radius * XMath.Sin(angleInRadians);
+        /// <summary>
+        /// Вращение единичного вектора на окружности в плоскости XY (Back - вид с сзади).
+        /// </summary>
+        /// <remarks>
+        /// Вращение осуществляется против часовой стрелки
+        /// При проекции:
+        /// Горизонтальной ось становиться координата X
+        /// Вертикальной осью становиться координата Y
+        /// </remarks>
+        /// <param name="radius">Радиус окружности.</param>
+        /// <param name="angle">Угол в градусах.</param>
+        /// <returns>Вектор.</returns>
+        public static UnityEngine.Vector3 RotationVectorXY(float radius, float angle)
+        {
+            float angleInRadians = angle * XMath.DegreeToRadian_F;
+            var x = radius * XMath.Cos(angleInRadians);
+            var y = radius * XMath.Sin(angleInRadians);
 
-			var result = new UnityEngine.Vector3(x, y, 0);
+            var result = new UnityEngine.Vector3(x, y, 0);
 
-			return (result);
-		}
+            return (result);
+        }
 #endif
         #endregion
 

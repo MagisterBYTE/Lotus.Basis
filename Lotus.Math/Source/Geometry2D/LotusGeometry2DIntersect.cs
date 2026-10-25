@@ -2047,7 +2047,7 @@ namespace Lotus.Maths
 				return TIntersectType2D.None;
 			}
 
-			hit.Point1 = new Vector2Df(point_x, point_y);
+			hit.Point1 = new Vector2Df(pointX, pointY);
 
 			return TIntersectType2D.Point;
 		}

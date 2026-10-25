@@ -31,5 +31,18 @@
       "path": "Lotus.Repository.Test"
     }
   ],
-  "settings": {}
+  "settings": {
+    "dotrush.roslyn.projectOrSolutionFiles": [
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Algorithm\\Lotus.Algorithm.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Algorithm.Test\\Lotus.Algorithm.Test.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Core\\Lotus.Core.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Core.Test\\Lotus.Core.Test.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Localization\\Lotus.Localization.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Math\\Lotus.Math.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Math.Test\\Lotus.Math.Test.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Repository\\Lotus.Repository.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.Repository.Test\\Lotus.Repository.Test.csproj",
+      "d:\\CODE\\LotusPlatform\\Lotus.Basis\\Lotus.UnitMeasurement\\Lotus.UnitMeasurement.csproj"
+    ]
+  }
 }

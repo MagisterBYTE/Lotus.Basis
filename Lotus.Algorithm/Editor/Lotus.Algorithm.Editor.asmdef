@@ -1,0 +1,19 @@
+{
+    "name": "Lotus.Algorithm.Editor",
+    "rootNamespace": "Lotus.Algorithm.Editor",
+    "references": [
+        "Lotus.Algorithm",
+        "Lotus.Math",
+        "Lotus.Core",
+        "Lotus.Core.Editor"
+    ],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

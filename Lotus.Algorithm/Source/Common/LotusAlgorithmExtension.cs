@@ -49,10 +49,6 @@ namespace Lotus.Algorithm
         public static void FloodVisit4<TType>(this TType[,] massive, int startX, int startY, Action<int, int> visitorDelegate,
             IEqualityComparer<TType>? comparer = null)
         {
-            ArgumentNullException.ThrowIfNull(massive);
-
-            ArgumentNullException.ThrowIfNull(visitorDelegate);
-
             var lengthX = massive.GetLength(0);
             var lengthY = massive.GetLength(1);
 
@@ -146,10 +142,6 @@ namespace Lotus.Algorithm
         public static void FloodVisit8<TType>(this TType[,] massive, int startX, int startY, Action<int, int> visitorDelegate,
             IEqualityComparer<TType>? comparer = null)
         {
-            ArgumentNullException.ThrowIfNull(massive);
-
-            ArgumentNullException.ThrowIfNull(visitorDelegate);
-
             var lengthX = massive.GetLength(0);
             var lengthY = massive.GetLength(1);
 
@@ -268,10 +260,6 @@ namespace Lotus.Algorithm
         /// <param name="visitorDelegate">Делегат вызываемый при посещении точки.</param>
         public static void Visit4<TType>(this TType[,] massive, int x, int y, Action<int, int> visitorDelegate)
         {
-            ArgumentNullException.ThrowIfNull(massive);
-
-            ArgumentNullException.ThrowIfNull(visitorDelegate);
-
             if (x > 0)
             {
                 visitorDelegate(x - 1, y);
@@ -318,10 +306,6 @@ namespace Lotus.Algorithm
         /// <param name="visitorDelegate">Делегат вызываемый при посещении точки.</param>
         public static void Visit4Unbounded<TType>(this TType[,] massive, int x, int y, Action<int, int> visitorDelegate)
         {
-            ArgumentNullException.ThrowIfNull(massive);
-
-            ArgumentNullException.ThrowIfNull(visitorDelegate);
-
             visitorDelegate(x - 1, y);
             visitorDelegate(x + 1, y);
             visitorDelegate(x, y - 1);
@@ -358,10 +342,6 @@ namespace Lotus.Algorithm
         /// <param name="visitorDelegate">Делегат вызываемый при посещении точки.</param>
         public static void Visit8<TType>(this TType[,] massive, int x, int y, Action<int, int> visitorDelegate)
         {
-            ArgumentNullException.ThrowIfNull(massive);
-
-            ArgumentNullException.ThrowIfNull(visitorDelegate);
-
             var xGreaterThanZero = x > 0;
             var xLessThanWidth = x + 1 < massive.GetLength(0);
 
@@ -437,10 +417,6 @@ namespace Lotus.Algorithm
         /// <param name="visitorDelegate">Делегат вызываемый при посещении точки.</param>
         public static void Visit8Unbounded<TType>(this TType[,] massive, int x, int y, Action<int, int> visitorDelegate)
         {
-            ArgumentNullException.ThrowIfNull(massive);
-
-            ArgumentNullException.ThrowIfNull(visitorDelegate);
-
             visitorDelegate(x - 1, y - 1);
             visitorDelegate(x, y - 1);
             visitorDelegate(x + 1, y - 1);

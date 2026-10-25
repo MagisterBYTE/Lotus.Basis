@@ -1,0 +1,14 @@
+{
+    "name": "Lotus.Algorithm",
+    "rootNamespace": "Lotus.Algorithm",
+    "references": ["Lotus.Core", "Lotus.Math"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

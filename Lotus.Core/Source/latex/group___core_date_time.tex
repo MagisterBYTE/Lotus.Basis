@@ -1,0 +1,81 @@
+\doxysubsection{Подсистема работы с датой и временем}
+\hypertarget{group___core_date_time}{}\label{group___core_date_time}\index{Подсистема работы с датой и временем@{Подсистема работы с датой и временем}}
+
+
+Подсистема работы с датой и временем обеспечивает дополнительные функциональные возможности для работы с временным интервалом и временным периодом.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Lotus.\+Core.\+XDate\+Time}
+\begin{DoxyCompactList}\small\item\em Статический класс реализующий дополнительные методы для работы с типом Date\+Time. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_date_timeable}{Lotus.\+Core.\+ILotus\+Date\+Timeable}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для объектов которые имеют временной признак. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XDate\+Formats}
+\begin{DoxyCompactList}\small\item\em Статический класс для форматов даты. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XTime\+Formats}
+\begin{DoxyCompactList}\small\item\em Статический класс для форматов времени. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval$<$ TItem\+Timeable $>$}}
+\begin{DoxyCompactList}\small\item\em Коллекция содержащая объекты реализующие интерфейс ILotus\+Date\+Timeable с определённым временным интервалом. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_date_period}{Lotus.\+Core.\+ILotus\+Date\+Period}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для объектов которые поддерживают период. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XDate\+Period\+Extension}
+\begin{DoxyCompactList}\small\item\em Статический класс реализующий дополнительные методы для работы с типом ILotus\+Date\+Period. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{Lotus.\+Core.\+TTime\+Interval}} \{ \newline
+\mbox{\hyperlink{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea5a2e4c5ff98e1e25b1133f1ecf6f7dab}{Lotus.\+Core.\+TTime\+Interval.\+Minutely}}
+, \mbox{\hyperlink{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea769cb50c95fd3a43c659aa73aba99e5b}{Lotus.\+Core.\+TTime\+Interval.\+Hourly}}
+, \mbox{\hyperlink{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eeac512b685438f41daa7386329a3b8f8d3}{Lotus.\+Core.\+TTime\+Interval.\+Daily}}
+, \mbox{\hyperlink{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea6c25e6a6da95b3d583c6ec4c3f82ed4d}{Lotus.\+Core.\+TTime\+Interval.\+Weekly}}
+, \newline
+\mbox{\hyperlink{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea9030e39f00132d583da4122532e509e9}{Lotus.\+Core.\+TTime\+Interval.\+Monthly}}
+, \mbox{\hyperlink{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eeacf5ea7953dc47105e0eb179dbefaaf46}{Lotus.\+Core.\+TTime\+Interval.\+Yearly}}
+ \}
+\begin{DoxyCompactList}\small\item\em Временной интервал. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема работы с датой и временем обеспечивает дополнительные функциональные возможности для работы с временным интервалом и временным периодом. 
+
+
+
+\doxysubsubsection{Enumeration Type Documentation}
+\Hypertarget{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}\label{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee} 
+\index{Подсистема работы с датой и временем@{Подсистема работы с датой и временем}!TTimeInterval@{TTimeInterval}}
+\index{TTimeInterval@{TTimeInterval}!Подсистема работы с датой и временем@{Подсистема работы с датой и временем}}
+\doxysubsubsubsection{\texorpdfstring{TTimeInterval}{TTimeInterval}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{Lotus.\+Core.\+TTime\+Interval}}}
+
+
+
+Временной интервал. 
+
+Временной интервал это некая абстракция для выполнения действие через фиксированные интервал времени. Он может характеризовать, как и реальные временные интервалы, так и некие абстрактные игровые интервалы привязанные к настоящим временным интервалам \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Minutely@{Minutely}!Подсистема работы с датой и временем@{Подсистема работы с датой и временем}}\index{Подсистема работы с датой и временем@{Подсистема работы с датой и временем}!Minutely@{Minutely}}}\Hypertarget{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea5a2e4c5ff98e1e25b1133f1ecf6f7dab}\label{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea5a2e4c5ff98e1e25b1133f1ecf6f7dab} 
+Minutely&Минутный. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hourly@{Hourly}!Подсистема работы с датой и временем@{Подсистема работы с датой и временем}}\index{Подсистема работы с датой и временем@{Подсистема работы с датой и временем}!Hourly@{Hourly}}}\Hypertarget{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea769cb50c95fd3a43c659aa73aba99e5b}\label{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea769cb50c95fd3a43c659aa73aba99e5b} 
+Hourly&Часовой. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Daily@{Daily}!Подсистема работы с датой и временем@{Подсистема работы с датой и временем}}\index{Подсистема работы с датой и временем@{Подсистема работы с датой и временем}!Daily@{Daily}}}\Hypertarget{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eeac512b685438f41daa7386329a3b8f8d3}\label{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eeac512b685438f41daa7386329a3b8f8d3} 
+Daily&Дневной. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Weekly@{Weekly}!Подсистема работы с датой и временем@{Подсистема работы с датой и временем}}\index{Подсистема работы с датой и временем@{Подсистема работы с датой и временем}!Weekly@{Weekly}}}\Hypertarget{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea6c25e6a6da95b3d583c6ec4c3f82ed4d}\label{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea6c25e6a6da95b3d583c6ec4c3f82ed4d} 
+Weekly&Недельный. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Monthly@{Monthly}!Подсистема работы с датой и временем@{Подсистема работы с датой и временем}}\index{Подсистема работы с датой и временем@{Подсистема работы с датой и временем}!Monthly@{Monthly}}}\Hypertarget{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea9030e39f00132d583da4122532e509e9}\label{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eea9030e39f00132d583da4122532e509e9} 
+Monthly&Месячный. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Yearly@{Yearly}!Подсистема работы с датой и временем@{Подсистема работы с датой и временем}}\index{Подсистема работы с датой и временем@{Подсистема работы с датой и временем}!Yearly@{Yearly}}}\Hypertarget{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eeacf5ea7953dc47105e0eb179dbefaaf46}\label{group___core_date_time_gga652a771fe918cb336a4cb244d6b548eeacf5ea7953dc47105e0eb179dbefaaf46} 
+Yearly&Годовой. \\
+\hline
+
+\end{DoxyEnumFields}

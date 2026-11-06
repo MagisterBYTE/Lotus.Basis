@@ -1,0 +1,80 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Logger\+View Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_logger_view}{}\label{interface_lotus_1_1_core_1_1_i_lotus_logger_view}\index{Lotus.Core.ILotusLoggerView@{Lotus.Core.ILotusLoggerView}}
+
+
+Интерфейс регистратора(логгера) для визуального отображения оповещений.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_logger_view_acdf399495d0f99f4647b46a54b0304c4}{Log}} (string text, \mbox{\hyperlink{group___core_logger_ga151c81b5514dadccbc0dc7194f951cbb}{TLog\+Type}} type)
+\begin{DoxyCompactList}\small\item\em Общее оповещение. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_logger_view_a6376b2e1557480ff4c14d55c581082c2}{Log}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_log_message}{Log\+Message}} message)
+\begin{DoxyCompactList}\small\item\em Общее оповещение. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_logger_view_abfd46ae55b37623c53649d00e135e3fc}{Log\+Module}} (string module\+Name, string text, \mbox{\hyperlink{group___core_logger_ga151c81b5514dadccbc0dc7194f951cbb}{TLog\+Type}} type)
+\begin{DoxyCompactList}\small\item\em Оповещение определённого модуля/подсистемы. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Интерфейс регистратора(логгера) для визуального отображения оповещений. 
+
+Основная задача интерфейса представить механизм для визуального отображения оповещений. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_logger_view_a6376b2e1557480ff4c14d55c581082c2}\label{interface_lotus_1_1_core_1_1_i_lotus_logger_view_a6376b2e1557480ff4c14d55c581082c2} 
+\index{Lotus.Core.ILotusLoggerView@{Lotus.Core.ILotusLoggerView}!Log@{Log}}
+\index{Log@{Log}!Lotus.Core.ILotusLoggerView@{Lotus.Core.ILotusLoggerView}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Logger\+View.\+Log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_log_message}{Log\+Message}}}]{message }\end{DoxyParamCaption})}
+
+
+
+Общее оповещение. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Сообщение.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_logger_view_acdf399495d0f99f4647b46a54b0304c4}\label{interface_lotus_1_1_core_1_1_i_lotus_logger_view_acdf399495d0f99f4647b46a54b0304c4} 
+\index{Lotus.Core.ILotusLoggerView@{Lotus.Core.ILotusLoggerView}!Log@{Log}}
+\index{Log@{Log}!Lotus.Core.ILotusLoggerView@{Lotus.Core.ILotusLoggerView}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Logger\+View.\+Log (\begin{DoxyParamCaption}\item[{string}]{text,  }\item[{\mbox{\hyperlink{group___core_logger_ga151c81b5514dadccbc0dc7194f951cbb}{TLog\+Type}}}]{type }\end{DoxyParamCaption})}
+
+
+
+Общее оповещение. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Имя сообщения.\\
+\hline
+{\em type} & Тип сообщения.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_logger_view_abfd46ae55b37623c53649d00e135e3fc}\label{interface_lotus_1_1_core_1_1_i_lotus_logger_view_abfd46ae55b37623c53649d00e135e3fc} 
+\index{Lotus.Core.ILotusLoggerView@{Lotus.Core.ILotusLoggerView}!LogModule@{LogModule}}
+\index{LogModule@{LogModule}!Lotus.Core.ILotusLoggerView@{Lotus.Core.ILotusLoggerView}}
+\doxysubsubsection{\texorpdfstring{LogModule()}{LogModule()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Logger\+View.\+Log\+Module (\begin{DoxyParamCaption}\item[{string}]{module\+Name,  }\item[{string}]{text,  }\item[{\mbox{\hyperlink{group___core_logger_ga151c81b5514dadccbc0dc7194f951cbb}{TLog\+Type}}}]{type }\end{DoxyParamCaption})}
+
+
+
+Оповещение определённого модуля/подсистемы. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em module\+Name} & Имя модуля/подсистемы.\\
+\hline
+{\em text} & Имя сообщения.\\
+\hline
+{\em type} & Тип сообщения.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Logger/Lotus\+Logger\+View.\+cs\end{DoxyCompactItemize}

@@ -99,10 +99,10 @@ namespace Lotus.Core
         {
             if (primitives != null && primitives.Count > 0)
             {
-                var type_item = typeof(TPrimitive);
+                var typeItem = typeof(TPrimitive);
 
                 // Перечисление
-                if (type_item.IsEnum)
+                if (typeItem.IsEnum)
                 {
                     // Записываем данные по порядку
                     for (var i = 0; i < primitives.Count; i++)
@@ -112,8 +112,8 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    var type_code = Type.GetTypeCode(type_item);
-                    switch (type_code)
+                    var typeCode = Type.GetTypeCode(typeItem);
+                    switch (typeCode)
                     {
                         case TypeCode.Empty:
                             break;
@@ -370,8 +370,8 @@ namespace Lotus.Core
             }
             else
             {
-                var type_code = Type.GetTypeCode(typeItem);
-                switch (type_code)
+                var typeCode = Type.GetTypeCode(typeItem);
+                switch (typeCode)
                 {
                     case TypeCode.Empty:
                         break;

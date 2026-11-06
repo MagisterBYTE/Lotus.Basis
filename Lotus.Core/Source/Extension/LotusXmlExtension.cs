@@ -588,10 +588,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    return @this.Attributes[upper_name]!.Value;
+                    return @this.Attributes[upperName]!.Value;
                 }
                 else
                 {
@@ -618,10 +618,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    var value = @this.Attributes[upper_name]!.Value;
+                    var value = @this.Attributes[upperName]!.Value;
                     return XBooleanConverter.Parse(value);
                 }
                 else
@@ -649,10 +649,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    var value = @this.Attributes[upper_name]!.Value;
+                    var value = @this.Attributes[upperName]!.Value;
                     return XNumberConverter.ParseInt(value, defaultValue);
                 }
                 else
@@ -680,10 +680,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    var value = @this.Attributes[upper_name]!.Value;
+                    var value = @this.Attributes[upperName]!.Value;
                     return XNumberConverter.ParseLong(value, defaultValue);
                 }
                 else
@@ -711,10 +711,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    var value = @this.Attributes[upper_name]!.Value;
+                    var value = @this.Attributes[upperName]!.Value;
                     return XNumberConverter.ParseSingle(value, defaultValue);
                 }
                 else
@@ -742,10 +742,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    var value = @this.Attributes[upper_name]!.Value;
+                    var value = @this.Attributes[upperName]!.Value;
                     return XNumberConverter.ParseDouble(value, defaultValue);
                 }
                 else
@@ -773,10 +773,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    var value = @this.Attributes[upper_name]!.Value;
+                    var value = @this.Attributes[upperName]!.Value;
                     return XNumberConverter.ParseDecimal(value, defaultValue);
                 }
                 else
@@ -805,10 +805,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    var value = @this.Attributes[upper_name]!.Value;
+                    var value = @this.Attributes[upperName]!.Value;
                     return (TEnum)Enum.Parse(typeof(TEnum), value);
                 }
                 else
@@ -837,10 +837,10 @@ namespace Lotus.Core
             }
             else
             {
-                var upper_name = attributeName.ToUpper();
-                if (@this.Attributes[upper_name] != null)
+                var upperName = attributeName.ToUpper();
+                if (@this.Attributes[upperName] != null)
                 {
-                    var value = @this.Attributes[upper_name]!.Value;
+                    var value = @this.Attributes[upperName]!.Value;
                     return XDateTimeConverter.Parse(value);
                 }
                 else

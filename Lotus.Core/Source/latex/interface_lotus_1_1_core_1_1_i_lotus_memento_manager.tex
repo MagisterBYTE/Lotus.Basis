@@ -1,0 +1,136 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Memento\+Manager Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_manager}{}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_manager}\index{Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}}
+
+
+Интерфейс менеджера для отмены/повторения действия.  
+
+
+Inheritance diagram for Lotus.\+Core.\+ILotus\+Memento\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_lotus_1_1_core_1_1_i_lotus_memento_manager}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a16d6ca685b91435ad916e59faaf0ec05}{Undo}} ()
+\begin{DoxyCompactList}\small\item\em Отмена последнего действия. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_af10d329ddc61a8a3be1dff4add7fc2d8}{Redo}} ()
+\begin{DoxyCompactList}\small\item\em Повторение последнего действия. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a094929f1a7f17a836cac7a7d29e6ded6}{Add\+State\+To\+History}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_state}{ILotus\+Memento\+State}} state)
+\begin{DoxyCompactList}\small\item\em Добавление нового состояния элемента в историю действий. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_ad6054cc73258d82c84960abf318923e3}{Can\+Undo}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возможность отмены действия. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a7654d7af2f2b7a57799f5225a18bcfb4}{Can\+Redo}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возможность повтора действия. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a82e1141fd1bd595056b7132b15f810a8}{Is\+Enabled}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Доступность менеджера. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Интерфейс менеджера для отмены/повторения действия. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a094929f1a7f17a836cac7a7d29e6ded6}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a094929f1a7f17a836cac7a7d29e6ded6} 
+\index{Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}!AddStateToHistory@{AddStateToHistory}}
+\index{AddStateToHistory@{AddStateToHistory}!Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}}
+\doxysubsubsection{\texorpdfstring{AddStateToHistory()}{AddStateToHistory()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Memento\+Manager.\+Add\+State\+To\+History (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_state}{ILotus\+Memento\+State}}}]{state }\end{DoxyParamCaption})}
+
+
+
+Добавление нового состояния элемента в историю действий. 
+
+Вызывается клиентом после выполнения некоторых действий. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Состояние объекта.\\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_manager_a14b46542e159fba25b781b566af02f79}{Lotus.\+Core.\+CMemento\+Manager}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_af10d329ddc61a8a3be1dff4add7fc2d8}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_af10d329ddc61a8a3be1dff4add7fc2d8} 
+\index{Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}!Redo@{Redo}}
+\index{Redo@{Redo}!Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}}
+\doxysubsubsection{\texorpdfstring{Redo()}{Redo()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Memento\+Manager.\+Redo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Повторение последнего действия. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_manager_ae15d3dbc66b522244d9d611dba8866a7}{Lotus.\+Core.\+CMemento\+Manager}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a16d6ca685b91435ad916e59faaf0ec05}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a16d6ca685b91435ad916e59faaf0ec05} 
+\index{Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}!Undo@{Undo}}
+\index{Undo@{Undo}!Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}}
+\doxysubsubsection{\texorpdfstring{Undo()}{Undo()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Memento\+Manager.\+Undo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Отмена последнего действия. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_manager_a8e28e92b549d903b029114699f432371}{Lotus.\+Core.\+CMemento\+Manager}}.
+
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a7654d7af2f2b7a57799f5225a18bcfb4}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a7654d7af2f2b7a57799f5225a18bcfb4} 
+\index{Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}!CanRedo@{CanRedo}}
+\index{CanRedo@{CanRedo}!Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}}
+\doxysubsubsection{\texorpdfstring{CanRedo}{CanRedo}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+ILotus\+Memento\+Manager.\+Can\+Redo\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Возможность повтора действия. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_manager_a38a7fbda7942dc13a40942bc8f0176df}{Lotus.\+Core.\+CMemento\+Manager}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_ad6054cc73258d82c84960abf318923e3}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_ad6054cc73258d82c84960abf318923e3} 
+\index{Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}!CanUndo@{CanUndo}}
+\index{CanUndo@{CanUndo}!Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}}
+\doxysubsubsection{\texorpdfstring{CanUndo}{CanUndo}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+ILotus\+Memento\+Manager.\+Can\+Undo\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Возможность отмены действия. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_manager_a8f3d3832bde9a1a8f34bea14fa6d92db}{Lotus.\+Core.\+CMemento\+Manager}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a82e1141fd1bd595056b7132b15f810a8}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_manager_a82e1141fd1bd595056b7132b15f810a8} 
+\index{Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}!IsEnabled@{IsEnabled}}
+\index{IsEnabled@{IsEnabled}!Lotus.Core.ILotusMementoManager@{Lotus.Core.ILotusMementoManager}}
+\doxysubsubsection{\texorpdfstring{IsEnabled}{IsEnabled}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+ILotus\+Memento\+Manager.\+Is\+Enabled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Доступность менеджера. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_manager_accca38542846a187be7ce3a7199854df}{Lotus.\+Core.\+CMemento\+Manager}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Memento/Lotus\+Memento\+Manager.\+cs\end{DoxyCompactItemize}

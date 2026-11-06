@@ -655,26 +655,26 @@ namespace Lotus.Core
                 condition = () => i >= 0;
             }
 
-            var element_to_move = @this[start];
+            var elementToMove = @this[start];
             for (i = start; condition(); i += sign)
             {
                 // - get the next element's atIndex
-                int next_index;
+                int nextIndex;
                 if (forward)
                 {
-                    next_index = (i + 1) % length;
+                    nextIndex = (i + 1) % length;
                 }
                 else
                 {
-                    next_index = i - 1;
-                    if (next_index < 0) next_index = length - 1;
+                    nextIndex = i - 1;
+                    if (nextIndex < 0) nextIndex = length - 1;
                 }
                 // - save next element in a temp variable
-                var next_element = @this[next_index];
+                var nextElement = @this[nextIndex];
                 // - copy the current element over the next
-                @this[next_index] = element_to_move;
+                @this[nextIndex] = elementToMove;
                 // - update element to move, to the next element
-                element_to_move = next_element;
+                elementToMove = nextElement;
             }
             return @this;
         }
@@ -702,9 +702,9 @@ namespace Lotus.Core
             {
                 if (value < @this[i])
                 {
-                    var prev_delta = Math.Abs(value - @this[i - 1]);
-                    var curr_delta = Math.Abs(@this[i] - value);
-                    if (prev_delta < curr_delta)
+                    var prevDelta = Math.Abs(value - @this[i - 1]);
+                    var currDelta = Math.Abs(@this[i] - value);
+                    if (prevDelta < currDelta)
                     {
                         return i - 1;
                     }
@@ -768,9 +768,9 @@ namespace Lotus.Core
             {
                 if (value < @this[i])
                 {
-                    var prev_delta = Math.Abs(value - @this[i - 1]);
-                    var curr_delta = Math.Abs(@this[i] - value);
-                    if (prev_delta < curr_delta)
+                    var prevDelta = Math.Abs(value - @this[i - 1]);
+                    var currDelta = Math.Abs(@this[i] - value);
+                    if (prevDelta < currDelta)
                     {
                         return i - 1;
                     }
@@ -1072,18 +1072,18 @@ namespace Lotus.Core
         /// <returns>Количество удаленных элементов.</returns>
         public static int TrimStart<TItem>(this List<TItem> @this, in TItem item, bool included = true) where TItem : IComparable<TItem>
         {
-            var comprare_first = item.CompareTo(@this[0]);
-            var comprare_last = item.CompareTo(@this[@this.Count - 1]);
+            var comprareFirst = item.CompareTo(@this[0]);
+            var comprareLast = item.CompareTo(@this[@this.Count - 1]);
 
             // Элемент находиться за пределами списка
-            if (comprare_first <= 0)
+            if (comprareFirst <= 0)
             {
                 return 0;
             }
             else
             {
                 // Удаляем все элементы
-                if (comprare_last > 0)
+                if (comprareLast > 0)
                 {
                     var count = @this.Count;
                     @this.Clear();
@@ -1092,7 +1092,7 @@ namespace Lotus.Core
                 else
                 {
                     // Удаляем либо до последнего элемента, либо все элементы
-                    if (comprare_last == 0)
+                    if (comprareLast == 0)
                     {
                         if (included)
                         {
@@ -1109,8 +1109,8 @@ namespace Lotus.Core
                     }
                     else
                     {
-                        var max_count = @this.Count - 1;
-                        for (var i = 1; i < max_count; i++)
+                        var maxCount = @this.Count - 1;
+                        for (var i = 1; i < maxCount; i++)
                         {
                             if (@this[i].CompareTo(item) == 0)
                             {

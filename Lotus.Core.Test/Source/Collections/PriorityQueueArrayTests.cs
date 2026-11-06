@@ -101,35 +101,35 @@ namespace Lotus.Core.Collections
         [Test]
         public void AllMethods()
         {
-            var priority_queue = new PriorityQueue<int>();
+            var priorityQueue = new PriorityQueue<int>();
 
-            priority_queue.Push(3);
-            priority_queue.Push(2);
-            priority_queue.Push(1);
-            priority_queue.Push(5);
-            priority_queue.Push(6);
-            priority_queue.Push(7);
-            priority_queue.Push(8);
-            priority_queue.Push(4);
+            priorityQueue.Push(3);
+            priorityQueue.Push(2);
+            priorityQueue.Push(1);
+            priorityQueue.Push(5);
+            priorityQueue.Push(6);
+            priorityQueue.Push(7);
+            priorityQueue.Push(8);
+            priorityQueue.Push(4);
 
-            ClassicAssert.AreEqual(priority_queue.Pop(), 1);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 2);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 3);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 4);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 5);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 6);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 1);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 2);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 3);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 4);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 5);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 6);
 
-            priority_queue.Push(60);
-            priority_queue.Push(70);
-            priority_queue.Push(80);
-            priority_queue.Push(40);
+            priorityQueue.Push(60);
+            priorityQueue.Push(70);
+            priorityQueue.Push(80);
+            priorityQueue.Push(40);
 
-            ClassicAssert.AreEqual(priority_queue.Pop(), 7);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 8);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 40);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 60);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 70);
-            ClassicAssert.AreEqual(priority_queue.Pop(), 80);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 7);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 8);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 40);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 60);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 70);
+            ClassicAssert.AreEqual(priorityQueue.Pop(), 80);
         }
     }
 }

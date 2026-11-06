@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Lotus.Core;
+
 using Mapster;
 
 using Microsoft.EntityFrameworkCore;

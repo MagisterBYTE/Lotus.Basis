@@ -18,10 +18,10 @@ namespace Lotus.Core.Protection
         [Test]
         public static void Encrypted_Decrypted()
         {
-            TProtectionInt protect_ind = 6566;
-            var encrypted_value = protect_ind.EncryptedValue;
-            int decrypted_value = protect_ind;
-            ClassicAssert.AreEqual(6566, decrypted_value);
+            TProtectionInt protectInd = 6566;
+            var encryptedValue = protectInd.EncryptedValue;
+            int decryptedValue = protectInd;
+            ClassicAssert.AreEqual(6566, decryptedValue);
         }
     }
 }

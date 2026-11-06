@@ -1,0 +1,322 @@
+\doxysection{Lotus.\+Core.\+String\+Observed Struct Reference}
+\hypertarget{struct_lotus_1_1_core_1_1_string_observed}{}\label{struct_lotus_1_1_core_1_1_string_observed}\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+
+
+Строковый тип который информирует об изменении своего значения.  
+
+
+Inheritance diagram for Lotus.\+Core.\+String\+Observed\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.830065cm]{struct_lotus_1_1_core_1_1_string_observed}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_ac99d82bf11a72a865f1104194a2b00bc}{String\+Observed}} (string value)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a734dc4c39a67f3184d46370fb666b5ae}{String\+Observed}} (string value, Action$<$ string $>$ on\+Changed)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+override readonly bool \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_ad244b854c656c97f322072b579836308}{Equals}} (object? obj)
+\begin{DoxyCompactList}\small\item\em Проверяет равен ли текущий объект другому объекту того же типа. \end{DoxyCompactList}\item 
+readonly bool \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a0754137229f31c5525ff2cf5994c9b40}{Equals}} (\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} other)
+\begin{DoxyCompactList}\small\item\em Проверка равенства объектов по значению. \end{DoxyCompactList}\item 
+readonly int \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a1b57d59ba18c43350b445cfde526b2c6}{Compare\+To}} (\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} other)
+\begin{DoxyCompactList}\small\item\em Сравнение объектов для упорядочивания. \end{DoxyCompactList}\item 
+override readonly int \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a0014f310052ce1f2ef84e85a56956571}{Get\+Hash\+Code}} ()
+\begin{DoxyCompactList}\small\item\em Получение хеш-\/кода объекта. \end{DoxyCompactList}\item 
+readonly object \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a0ad16713017d3c9bcc1130df0c424f24}{Clone}} ()
+\begin{DoxyCompactList}\small\item\em Полное копирование объекта. \end{DoxyCompactList}\item 
+override readonly string \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a595e1ce72049ea5858422134a38e8e0f}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a379b1ae2930e196c30bdc378c5333469}{Set\+Value}} (string value)
+\begin{DoxyCompactList}\small\item\em Непосредственная установка значения без информирования. \end{DoxyCompactList}\item 
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a6b50c40a7aab77dd40e04502fbf298e7}\label{struct_lotus_1_1_core_1_1_string_observed_a6b50c40a7aab77dd40e04502fbf298e7} 
+readonly void {\bfseries Changed\+Value} ()
+\begin{DoxyCompactList}\small\item\em Информирование об изменение значения. \end{DoxyCompactList}\item 
+readonly string \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a3f43ebf5916853e8308d29449dd0ccae}{Serialize\+To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Сериализация объекта в строку. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_ad56b1a064e4c31e4fe32b04d833162f4}{Deserialize\+From\+String}} (string data)
+\begin{DoxyCompactList}\small\item\em Десереализация объекта из строки. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a1fc8c425785b7ce0ed77e29a0e7ba08b}{operator==}} (\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} left, \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} right)
+\begin{DoxyCompactList}\small\item\em Сравнение объектов на равенство. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_afd8e02b16e1c488b6dbd4ae07d2a78f7}{operator!=}} (\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} left, \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} right)
+\begin{DoxyCompactList}\small\item\em Сравнение объектов на неравенство. \end{DoxyCompactList}\item 
+static implicit \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a65cdd8c386bc1e173aaf58e009c4cd4b}{operator string}} (\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} value)
+\begin{DoxyCompactList}\small\item\em Неявное преобразование в объект типа string. \end{DoxyCompactList}\item 
+static implicit \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed_a20348b55525a2b2f86e9f2f3817b07d3}{operator String\+Observed}} (string value)
+\begin{DoxyCompactList}\small\item\em Неявное преобразование в объект типа String\+Observed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_ab22043abd86f508b0e9de54ea2934d78}\label{struct_lotus_1_1_core_1_1_string_observed_ab22043abd86f508b0e9de54ea2934d78} 
+string {\bfseries Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Значение. \end{DoxyCompactList}\item 
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a91613f2a693f8ead5bc0956739a3d851}\label{struct_lotus_1_1_core_1_1_string_observed_a91613f2a693f8ead5bc0956739a3d851} 
+Action$<$ string $>$? {\bfseries On\+Changed}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации об изменении значения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Строковый тип который информирует об изменении своего значения. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_ac99d82bf11a72a865f1104194a2b00bc}\label{struct_lotus_1_1_core_1_1_string_observed_ac99d82bf11a72a865f1104194a2b00bc} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!StringObserved@{StringObserved}}
+\index{StringObserved@{StringObserved}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{StringObserved()}{StringObserved()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+String\+Observed.\+String\+Observed (\begin{DoxyParamCaption}\item[{string}]{value }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a734dc4c39a67f3184d46370fb666b5ae}\label{struct_lotus_1_1_core_1_1_string_observed_a734dc4c39a67f3184d46370fb666b5ae} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!StringObserved@{StringObserved}}
+\index{StringObserved@{StringObserved}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{StringObserved()}{StringObserved()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+String\+Observed.\+String\+Observed (\begin{DoxyParamCaption}\item[{string}]{value,  }\item[{Action$<$ string $>$}]{on\+Changed }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+{\em on\+Changed} & Обработчик события изменения значения.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a0ad16713017d3c9bcc1130df0c424f24}\label{struct_lotus_1_1_core_1_1_string_observed_a0ad16713017d3c9bcc1130df0c424f24} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!Clone@{Clone}}
+\index{Clone@{Clone}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily readonly object Lotus.\+Core.\+String\+Observed.\+Clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Полное копирование объекта. 
+
+\begin{DoxyReturn}{Returns}
+Копия объекта.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a1b57d59ba18c43350b445cfde526b2c6}\label{struct_lotus_1_1_core_1_1_string_observed_a1b57d59ba18c43350b445cfde526b2c6} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!CompareTo@{CompareTo}}
+\index{CompareTo@{CompareTo}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{CompareTo()}{CompareTo()}}
+{\footnotesize\ttfamily readonly int Lotus.\+Core.\+String\+Observed.\+Compare\+To (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}}}]{other }\end{DoxyParamCaption})}
+
+
+
+Сравнение объектов для упорядочивания. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Сравниваемый объект.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус сравнения объектов.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_ad56b1a064e4c31e4fe32b04d833162f4}\label{struct_lotus_1_1_core_1_1_string_observed_ad56b1a064e4c31e4fe32b04d833162f4} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!DeserializeFromString@{DeserializeFromString}}
+\index{DeserializeFromString@{DeserializeFromString}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{DeserializeFromString()}{DeserializeFromString()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} Lotus.\+Core.\+String\+Observed.\+Deserialize\+From\+String (\begin{DoxyParamCaption}\item[{string}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Десереализация объекта из строки. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Строка данных.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Объект.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_ad244b854c656c97f322072b579836308}\label{struct_lotus_1_1_core_1_1_string_observed_ad244b854c656c97f322072b579836308} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!Equals@{Equals}}
+\index{Equals@{Equals}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily override readonly bool Lotus.\+Core.\+String\+Observed.\+Equals (\begin{DoxyParamCaption}\item[{object?}]{obj }\end{DoxyParamCaption})}
+
+
+
+Проверяет равен ли текущий объект другому объекту того же типа. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Сравниваемый объект.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус равенства объектов.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a0754137229f31c5525ff2cf5994c9b40}\label{struct_lotus_1_1_core_1_1_string_observed_a0754137229f31c5525ff2cf5994c9b40} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!Equals@{Equals}}
+\index{Equals@{Equals}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily readonly bool Lotus.\+Core.\+String\+Observed.\+Equals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}}}]{other }\end{DoxyParamCaption})}
+
+
+
+Проверка равенства объектов по значению. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Сравниваемый объект.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус равенства объектов.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a0014f310052ce1f2ef84e85a56956571}\label{struct_lotus_1_1_core_1_1_string_observed_a0014f310052ce1f2ef84e85a56956571} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily override readonly int Lotus.\+Core.\+String\+Observed.\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получение хеш-\/кода объекта. 
+
+\begin{DoxyReturn}{Returns}
+Хеш-\/код объекта.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a65cdd8c386bc1e173aaf58e009c4cd4b}\label{struct_lotus_1_1_core_1_1_string_observed_a65cdd8c386bc1e173aaf58e009c4cd4b} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!operator string@{operator string}}
+\index{operator string@{operator string}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{operator string()}{operator string()}}
+{\footnotesize\ttfamily static implicit Lotus.\+Core.\+String\+Observed.\+operator string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}}}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Неявное преобразование в объект типа string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Объект string.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a20348b55525a2b2f86e9f2f3817b07d3}\label{struct_lotus_1_1_core_1_1_string_observed_a20348b55525a2b2f86e9f2f3817b07d3} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!operator StringObserved@{operator StringObserved}}
+\index{operator StringObserved@{operator StringObserved}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{operator StringObserved()}{operator StringObserved()}}
+{\footnotesize\ttfamily static implicit Lotus.\+Core.\+String\+Observed.\+operator \mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}} (\begin{DoxyParamCaption}\item[{string}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Неявное преобразование в объект типа String\+Observed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Объект String\+Observed.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_afd8e02b16e1c488b6dbd4ae07d2a78f7}\label{struct_lotus_1_1_core_1_1_string_observed_afd8e02b16e1c488b6dbd4ae07d2a78f7} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily static bool Lotus.\+Core.\+String\+Observed.\+operator!= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}}}]{left,  }\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}}}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Сравнение объектов на неравенство. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & Первый объект.\\
+\hline
+{\em right} & Второй объект.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус неравенство.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a1fc8c425785b7ce0ed77e29a0e7ba08b}\label{struct_lotus_1_1_core_1_1_string_observed_a1fc8c425785b7ce0ed77e29a0e7ba08b} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!operator==@{operator==}}
+\index{operator==@{operator==}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily static bool Lotus.\+Core.\+String\+Observed.\+operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}}}]{left,  }\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_string_observed}{String\+Observed}}}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Сравнение объектов на равенство. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & Первый объект.\\
+\hline
+{\em right} & Второй объект.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус равенства.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a3f43ebf5916853e8308d29449dd0ccae}\label{struct_lotus_1_1_core_1_1_string_observed_a3f43ebf5916853e8308d29449dd0ccae} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!SerializeToString@{SerializeToString}}
+\index{SerializeToString@{SerializeToString}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{SerializeToString()}{SerializeToString()}}
+{\footnotesize\ttfamily readonly string Lotus.\+Core.\+String\+Observed.\+Serialize\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Сериализация объекта в строку. 
+
+\begin{DoxyReturn}{Returns}
+Строка данных.
+\end{DoxyReturn}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a379b1ae2930e196c30bdc378c5333469}\label{struct_lotus_1_1_core_1_1_string_observed_a379b1ae2930e196c30bdc378c5333469} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+String\+Observed.\+Set\+Value (\begin{DoxyParamCaption}\item[{string}]{value }\end{DoxyParamCaption})}
+
+
+
+Непосредственная установка значения без информирования. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{struct_lotus_1_1_core_1_1_string_observed_a595e1ce72049ea5858422134a38e8e0f}\label{struct_lotus_1_1_core_1_1_string_observed_a595e1ce72049ea5858422134a38e8e0f} 
+\index{Lotus.Core.StringObserved@{Lotus.Core.StringObserved}!ToString@{ToString}}
+\index{ToString@{ToString}!Lotus.Core.StringObserved@{Lotus.Core.StringObserved}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily override readonly string Lotus.\+Core.\+String\+Observed.\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Преобразование к текстовому представлению. 
+
+\begin{DoxyReturn}{Returns}
+Текстовое представление объекта.
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Common\+Types/Lotus\+Observed\+Values.\+cs\end{DoxyCompactItemize}

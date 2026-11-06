@@ -126,7 +126,7 @@ namespace Lotus.Core.Reflection
         }
 
         /// <summary>
-        /// Тест GetField - корректная работа с исправленными именами переменных (fieldInfo вместо field_info).
+        /// Тест GetField - корректная работа с исправленными именами переменных (fieldInfo вместо fieldInfo).
         /// </summary>
         [Test]
         public void GetField_WithValidFieldName_ReturnsFieldInfo()
@@ -143,7 +143,7 @@ namespace Lotus.Core.Reflection
         }
 
         /// <summary>
-        /// Тест GetProperty - корректная работа с исправленными именами переменных (propertyInfo вместо property_info).
+        /// Тест GetProperty - корректная работа с исправленными именами переменных (propertyInfo вместо propertyInfo).
         /// </summary>
         [Test]
         public void GetProperty_WithValidPropertyName_ReturnsPropertyInfo()
@@ -160,7 +160,7 @@ namespace Lotus.Core.Reflection
         }
 
         /// <summary>
-        /// Тест GetMethod - корректная работа с исправленными именами переменных (methodInfo вместо method_info).
+        /// Тест GetMethod - корректная работа с исправленными именами переменных (methodInfo вместо methodInfo).
         /// </summary>
         [Test]
         public void GetMethod_WithValidMethodName_ReturnsMethodInfo()

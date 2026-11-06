@@ -1,0 +1,180 @@
+\doxysection{Lotus.\+Core.\+IParameter\+Item\texorpdfstring{$<$}{<} TValue \texorpdfstring{$>$}{>} Interface Template Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_parameter_item}{}\label{interface_lotus_1_1_core_1_1_i_parameter_item}\index{Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}}
+
+
+Определение интерфейса для представления параметра -\/ объекта который содержит данные в формате имя=значения.  
+
+
+Inheritance diagram for Lotus.\+Core.\+IParameter\+Item\texorpdfstring{$<$}{<} TValue \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.690566cm]{interface_lotus_1_1_core_1_1_i_parameter_item}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item_a985e3f53478fd7cd88d9cf04824e6a21}{Write\+To\+Json}} (Stream\+Writer stream\+Writer, int depth, bool is\+Array)
+\begin{DoxyCompactList}\small\item\em Запись в строковый поток в формате Json. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_parameters_ga187e165224a3b1ab40b2f0718a65bb73}{TParameter\+Value\+Type}} \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item_aea55453e2caf9fc143dfff3122ef8ea9}{Value\+Type}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Тип данных значения. \end{DoxyCompactList}\item 
+object? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item_a4e8d3fddcd4c8eda859c7fb01a3027b7}{Value}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Значение параметра. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item_a0866af15cdb2c5d31cdc7dddc15b6c09}{Is\+Active}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Активность параметра. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item_aa12fe808c06c05c6a44eb5101c396a27}{User\+Tag}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Пользовательский тэг данных. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item_a0e9bcad63f32f2b014485c6aaf83f662}{User\+Data}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Пользовательский тип данных. \end{DoxyCompactList}\item 
+new? TValue \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item_a86622ee0ccd12c46af69caa44a664d3b}{Value}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Значение параметра. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable}{Lotus.\+Core.\+ILotus\+Nameable}}}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable_ad2ca45840374478662bd5bd2966d36e7}{Name}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имя объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_id}{Lotus.\+Core.\+ILotus\+Identifier\+Id$<$ long $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ключ сущности. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{Lotus.\+Core.\+ILotus\+Owned\+Object$<$ TOwner $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object_aa387fe4af4fcfaad4583624d00fcb271}{IOwner}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец объекта. \end{DoxyCompactList}\item 
+TOwner? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object_a28b52590e38754d81d756a0b98a767af}{Owner}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Определение интерфейса для представления параметра -\/ объекта который содержит данные в формате имя=значения. 
+
+Определение интерфейса для представления параметра -\/ объекта который содержит данные в формате имя=значения. с конкретным типом данных.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TValue} & Тип значения.\\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_parameter_item_a985e3f53478fd7cd88d9cf04824e6a21}\label{interface_lotus_1_1_core_1_1_i_parameter_item_a985e3f53478fd7cd88d9cf04824e6a21} 
+\index{Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}!WriteToJson@{WriteToJson}}
+\index{WriteToJson@{WriteToJson}!Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}}
+\doxysubsubsection{\texorpdfstring{WriteToJson()}{WriteToJson()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item}{Lotus.\+Core.\+IParameter\+Item}}$<$ TValue $>$.Write\+To\+Json (\begin{DoxyParamCaption}\item[{Stream\+Writer}]{stream\+Writer,  }\item[{int}]{depth,  }\item[{bool}]{is\+Array }\end{DoxyParamCaption})}
+
+
+
+Запись в строковый поток в формате Json. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream\+Writer} & Строковый поток.\\
+\hline
+{\em depth} & Текущая глубина вложенности.\\
+\hline
+{\em is\+Array} & Статус массива.\\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_af323428e01555763cf263364b6c8b15b}{Lotus.\+Core.\+Parameter\+Item$<$ TValue $>$}}.
+
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_parameter_item_a0866af15cdb2c5d31cdc7dddc15b6c09}\label{interface_lotus_1_1_core_1_1_i_parameter_item_a0866af15cdb2c5d31cdc7dddc15b6c09} 
+\index{Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}!IsActive@{IsActive}}
+\index{IsActive@{IsActive}!Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}}
+\doxysubsubsection{\texorpdfstring{IsActive}{IsActive}}
+{\footnotesize\ttfamily bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item}{Lotus.\+Core.\+IParameter\+Item}}$<$ TValue $>$.Is\+Active\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Активность параметра. 
+
+Условная активность параметра -\/ на усмотрение пользователя. 
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_ada7e9e415f416be87c49f716cd89bf8b}{Lotus.\+Core.\+Parameter\+Item$<$ TValue $>$}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_parameter_item_a0e9bcad63f32f2b014485c6aaf83f662}\label{interface_lotus_1_1_core_1_1_i_parameter_item_a0e9bcad63f32f2b014485c6aaf83f662} 
+\index{Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}!UserData@{UserData}}
+\index{UserData@{UserData}!Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}}
+\doxysubsubsection{\texorpdfstring{UserData}{UserData}}
+{\footnotesize\ttfamily byte \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item}{Lotus.\+Core.\+IParameter\+Item}}$<$ TValue $>$.User\+Data\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Пользовательский тип данных. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_a6c5a9e0902fe9597244b1fe5b13c7bb9}{Lotus.\+Core.\+Parameter\+Item$<$ TValue $>$}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_parameter_item_aa12fe808c06c05c6a44eb5101c396a27}\label{interface_lotus_1_1_core_1_1_i_parameter_item_aa12fe808c06c05c6a44eb5101c396a27} 
+\index{Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}!UserTag@{UserTag}}
+\index{UserTag@{UserTag}!Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}}
+\doxysubsubsection{\texorpdfstring{UserTag}{UserTag}}
+{\footnotesize\ttfamily byte \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item}{Lotus.\+Core.\+IParameter\+Item}}$<$ TValue $>$.User\+Tag\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Пользовательский тэг данных. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_aa4c2f9f5636d4067ee6bbb80f1b3be44}{Lotus.\+Core.\+Parameter\+Item$<$ TValue $>$}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_parameter_item_a4e8d3fddcd4c8eda859c7fb01a3027b7}\label{interface_lotus_1_1_core_1_1_i_parameter_item_a4e8d3fddcd4c8eda859c7fb01a3027b7} 
+\index{Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}!Value@{Value}}
+\index{Value@{Value}!Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Value}{Value}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily object? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item}{Lotus.\+Core.\+IParameter\+Item}}$<$ TValue $>$.Value\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Значение параметра. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_aa6cbd0dfca6442ff8a95cf1239e35b0f}{Lotus.\+Core.\+Parameter\+Item$<$ TValue $>$}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_parameter_item_a86622ee0ccd12c46af69caa44a664d3b}\label{interface_lotus_1_1_core_1_1_i_parameter_item_a86622ee0ccd12c46af69caa44a664d3b} 
+\index{Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}!Value@{Value}}
+\index{Value@{Value}!Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Value}{Value}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily new? TValue \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item}{Lotus.\+Core.\+IParameter\+Item}}$<$ TValue $>$.Value\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Значение параметра. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_aa6cbd0dfca6442ff8a95cf1239e35b0f}{Lotus.\+Core.\+Parameter\+Item$<$ TValue $>$}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_parameter_item_aea55453e2caf9fc143dfff3122ef8ea9}\label{interface_lotus_1_1_core_1_1_i_parameter_item_aea55453e2caf9fc143dfff3122ef8ea9} 
+\index{Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}!ValueType@{ValueType}}
+\index{ValueType@{ValueType}!Lotus.Core.IParameterItem$<$ TValue $>$@{Lotus.Core.IParameterItem$<$ TValue $>$}}
+\doxysubsubsection{\texorpdfstring{ValueType}{ValueType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group___core_parameters_ga187e165224a3b1ab40b2f0718a65bb73}{TParameter\+Value\+Type}} \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item}{Lotus.\+Core.\+IParameter\+Item}}$<$ TValue $>$.Value\+Type\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Тип данных значения. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_a28da2f486eb37ccb0c883cbad2f4d17e}{Lotus.\+Core.\+Parameter\+Item$<$ TValue $>$}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Parameters/Lotus\+Parameter\+Item.\+cs\end{DoxyCompactItemize}

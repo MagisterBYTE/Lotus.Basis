@@ -1,0 +1,72 @@
+\doxysection{Lotus.\+Core.\+ILotus\+View\+Model\+Builder Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder}{}\label{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder}\index{Lotus.Core.ILotusViewModelBuilder@{Lotus.Core.ILotusViewModelBuilder}}
+
+
+Определение интерфейса для посторенния View\+Model согласно модели данных.  
+
+
+Inheritance diagram for Lotus.\+Core.\+ILotus\+View\+Model\+Builder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder_ac2719bdd68942008b17f0786bc729392}{Get\+Count\+Children\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Получение количества дочерних узлов. \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder_af74f80fc65b6d6b8201e975cd4f600f2}{Get\+Children\+Node}} (int index)
+\begin{DoxyCompactList}\small\item\em Получение дочернего узла по индексу. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Определение интерфейса для посторенния View\+Model согласно модели данных. 
+
+Реализация данного интерфейса позволяет построить определённым образом или плоскую View\+Model или иерархическую View\+Model 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder_af74f80fc65b6d6b8201e975cd4f600f2}\label{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder_af74f80fc65b6d6b8201e975cd4f600f2} 
+\index{Lotus.Core.ILotusViewModelBuilder@{Lotus.Core.ILotusViewModelBuilder}!GetChildrenNode@{GetChildrenNode}}
+\index{GetChildrenNode@{GetChildrenNode}!Lotus.Core.ILotusViewModelBuilder@{Lotus.Core.ILotusViewModelBuilder}}
+\doxysubsubsection{\texorpdfstring{GetChildrenNode()}{GetChildrenNode()}}
+{\footnotesize\ttfamily object Lotus.\+Core.\+ILotus\+View\+Model\+Builder.\+Get\+Children\+Node (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Получение дочернего узла по индексу. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Индекс дочернего узла.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Дочерней узел.
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_file_system_directory_ac0a6f1d1046b8cf1e8a11f24d66718e7}{Lotus.\+Core.\+CFile\+System\+Directory}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder_ac2719bdd68942008b17f0786bc729392}\label{interface_lotus_1_1_core_1_1_i_lotus_view_model_builder_ac2719bdd68942008b17f0786bc729392} 
+\index{Lotus.Core.ILotusViewModelBuilder@{Lotus.Core.ILotusViewModelBuilder}!GetCountChildrenNode@{GetCountChildrenNode}}
+\index{GetCountChildrenNode@{GetCountChildrenNode}!Lotus.Core.ILotusViewModelBuilder@{Lotus.Core.ILotusViewModelBuilder}}
+\doxysubsubsection{\texorpdfstring{GetCountChildrenNode()}{GetCountChildrenNode()}}
+{\footnotesize\ttfamily int Lotus.\+Core.\+ILotus\+View\+Model\+Builder.\+Get\+Count\+Children\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получение количества дочерних узлов. 
+
+\begin{DoxyReturn}{Returns}
+Количество дочерних узлов.
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_file_system_directory_a069d1572fe94f52807ea2e13a46943d0}{Lotus.\+Core.\+CFile\+System\+Directory}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mvvm/\+View\+Model/Lotus\+View\+Model\+Common.\+cs\end{DoxyCompactItemize}

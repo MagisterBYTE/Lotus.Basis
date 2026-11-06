@@ -130,11 +130,11 @@ namespace Lotus.Core
         /// <summary>
         /// Неявное преобразование в объект типа String.
         /// </summary>
-        /// <param name="text_line">Строка текстовых данных.</param>
+        /// <param name="textLine">Строка текстовых данных.</param>
         /// <returns>Строка.</returns>
-        public static implicit operator string(CTextLine text_line)
+        public static implicit operator string(CTextLine textLine)
         {
-            return text_line.RawString;
+            return textLine.RawString;
         }
 
         /// <summary>

@@ -40,7 +40,7 @@ namespace Lotus.Core.Inspector
         public static CPropertyDesc OverrideDisplayNameAndDescription<TType>(string propertyName, string displayName,
                 string? description = null)
         {
-            var property_desc = new CPropertyDesc();
+            var propertyDesc = new CPropertyDesc();
 
             // Проверяем
             if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -48,11 +48,11 @@ namespace Lotus.Core.Inspector
                 XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
             }
 
-            property_desc.PropertyName = propertyName;
-            property_desc.DisplayName = displayName;
-            property_desc.Description = description ?? string.Empty;
+            propertyDesc.PropertyName = propertyName;
+            propertyDesc.DisplayName = displayName;
+            propertyDesc.Description = description ?? string.Empty;
 
-            return property_desc;
+            return propertyDesc;
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Lotus.Core.Inspector
         /// <returns>Описатель свойств.</returns>
         public static CPropertyDesc OverrideCategory<TType>(string propertyName, string category)
         {
-            var property_desc = new CPropertyDesc();
+            var propertyDesc = new CPropertyDesc();
 
             // Проверяем
             if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -72,10 +72,10 @@ namespace Lotus.Core.Inspector
                 XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
             }
 
-            property_desc.PropertyName = propertyName;
-            property_desc.Category = category;
+            propertyDesc.PropertyName = propertyName;
+            propertyDesc.Category = category;
 
-            return property_desc;
+            return propertyDesc;
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Lotus.Core.Inspector
         /// <returns>Описатель свойств.</returns>
         public static CPropertyDesc OverrideHide<TType>(string propertyName)
         {
-            var property_desc = new CPropertyDesc();
+            var propertyDesc = new CPropertyDesc();
 
             // Проверяем
             if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -94,10 +94,10 @@ namespace Lotus.Core.Inspector
                 XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
             }
 
-            property_desc.PropertyName = propertyName;
-            property_desc.IsHideInspector = true;
+            propertyDesc.PropertyName = propertyName;
+            propertyDesc.IsHideInspector = true;
 
-            return property_desc;
+            return propertyDesc;
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Lotus.Core.Inspector
         /// <returns>Описатель свойств.</returns>
         public static CPropertyDesc OverrideOrder<TType>(string propertyName, int order)
         {
-            var property_desc = new CPropertyDesc();
+            var propertyDesc = new CPropertyDesc();
 
             // Проверяем
             if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -117,10 +117,10 @@ namespace Lotus.Core.Inspector
                 XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
             }
 
-            property_desc.PropertyName = propertyName;
-            property_desc.PropertyOrder = order;
+            propertyDesc.PropertyName = propertyName;
+            propertyDesc.PropertyOrder = order;
 
-            return property_desc;
+            return propertyDesc;
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Lotus.Core.Inspector
         /// <returns>Описатель свойств.</returns>
         public static CPropertyDesc OverrideDefaultValue<TType>(string propertyName, object defaultValue)
         {
-            var property_desc = new CPropertyDesc();
+            var propertyDesc = new CPropertyDesc();
 
             // Проверяем
             if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -140,10 +140,10 @@ namespace Lotus.Core.Inspector
                 XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
             }
 
-            property_desc.PropertyName = propertyName;
-            property_desc.DefaultValue = defaultValue;
+            propertyDesc.PropertyName = propertyName;
+            propertyDesc.DefaultValue = defaultValue;
 
-            return property_desc;
+            return propertyDesc;
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Lotus.Core.Inspector
         /// <returns>Описатель свойств.</returns>
         public static CPropertyDesc OverrideListValues<TType>(string propertyName, object listValues)
         {
-            var property_desc = new CPropertyDesc();
+            var propertyDesc = new CPropertyDesc();
 
             // Проверяем
             if (typeof(TType).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public) == null)
@@ -163,10 +163,10 @@ namespace Lotus.Core.Inspector
                 XLogger.LogErrorFormat("Не найдено свойство <{0}> в типе <{1}>", propertyName, typeof(TType).Name);
             }
 
-            property_desc.PropertyName = propertyName;
-            property_desc.ListValues = listValues;
+            propertyDesc.PropertyName = propertyName;
+            propertyDesc.ListValues = listValues;
 
-            return property_desc;
+            return propertyDesc;
         }
         #endregion
 

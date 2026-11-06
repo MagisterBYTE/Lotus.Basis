@@ -63,10 +63,10 @@ namespace Lotus.Core
         {
             if (array.Length < currentCount + items.Length)
             {
-                var max_size = currentCount + items.Length;
-                var new_array = new TType[max_size];
-                Array.Copy(array, new_array, currentCount);
-                array = new_array;
+                var maxSize = currentCount + items.Length;
+                var newArray = new TType[maxSize];
+                Array.Copy(array, newArray, currentCount);
+                array = newArray;
             }
 
             Array.Copy(items, 0, array, currentCount, items.Length);
@@ -276,12 +276,12 @@ namespace Lotus.Core
             count = count < 0 ? 0 : (startIndex + count >= result.Length ? result.Length - startIndex - 1 : count);
             offset = startIndex + offset < 0 ? -startIndex : (startIndex + count + offset >= result.Length ? result.Length - startIndex - count : offset);
 
-            var abs_offset = Math.Abs(offset);
+            var absOffset = Math.Abs(offset);
             var items = new TType[count]; // What we want to move
-            var dec = new TType[abs_offset]; // What is going to replace the thing we move
+            var dec = new TType[absOffset]; // What is going to replace the thing we move
             Array.Copy(array, startIndex, items, 0, count);
-            Array.Copy(array, startIndex + (offset >= 0 ? count : offset), dec, 0, abs_offset);
-            Array.Copy(dec, 0, result, startIndex + (offset >= 0 ? 0 : offset + count), abs_offset);
+            Array.Copy(array, startIndex + (offset >= 0 ? count : offset), dec, 0, absOffset);
+            Array.Copy(dec, 0, result, startIndex + (offset >= 0 ? 0 : offset + count), absOffset);
             Array.Copy(items, 0, result, startIndex + offset, count);
 
             return result;

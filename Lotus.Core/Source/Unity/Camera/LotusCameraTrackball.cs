@@ -1,4 +1,4 @@
-﻿#if UNITY_2017_1_OR_NEWER
+#if UNITY_2017_1_OR_NEWER
 using System;
 
 using UnityEngine;
@@ -67,8 +67,8 @@ namespace Lotus.Core
         /// </summary>
         public void Awake()
         {
-            var start_pos = (this.transform.position - _target.transform.position).normalized * _distance;
-            var position = start_pos + _target.transform.position;
+            var startPos = (this.transform.position - _target.transform.position).normalized * _distance;
+            var position = startPos + _target.transform.position;
             transform.position = position;
             transform.LookAt(_target.transform.position);
         }
@@ -79,10 +79,10 @@ namespace Lotus.Core
         /// </summary>
         public void LateUpdate()
         {
-            var mouse_pos = XInputDispatcher.MousePosition;
+            var mousePos = XInputDispatcher.MousePosition;
 
-            var mouse_btn = XInputDispatcher.GetMouseButton(0);
-            if (mouse_btn)
+            var mouseBtn = XInputDispatcher.GetMouseButton(0);
+            if (mouseBtn)
             {
                 if (_lastMousePosition.HasValue)
                 {
@@ -98,18 +98,18 @@ namespace Lotus.Core
                                             mousePos.x,
                                             mousePos.y );
                     */
-                    var rotation = FigureOutAxisAngleRotation(_lastMousePosition.Value, mouse_pos);
+                    var rotation = FigureOutAxisAngleRotation(_lastMousePosition.Value, mousePos);
 
                     var vecPos = (targetPos - lastPos).normalized * -_distance;
 
                     this.transform.position = (rotation * vecPos) + targetPos;
                     this.transform.LookAt(targetPos);
 
-                    _lastMousePosition = mouse_pos;
+                    _lastMousePosition = mousePos;
                 }
                 else
                 {
-                    _lastMousePosition = mouse_pos;
+                    _lastMousePosition = mousePos;
                 }
             }
             else
@@ -123,19 +123,19 @@ namespace Lotus.Core
         /// <summary>
         /// Получение кватерниона вращения по разнице позиции курсора
         /// </summary>
-        /// <param name="last_mouse_pos">Прошлая позиция курсора</param>
-        /// <param name="current_mouse_pos">Текущая позиция курсора</param>
+        /// <param name="lastMousePos">Прошлая позиция курсора</param>
+        /// <param name="currentMousePos">Текущая позиция курсора</param>
         /// <returns>Кватернион вращения </returns>
-        private Quaternion FigureOutAxisAngleRotation(Vector3 last_mouse_pos, Vector3 current_mouse_pos)
+        private Quaternion FigureOutAxisAngleRotation(Vector3 lastMousePos, Vector3 currentMousePos)
         {
-            if (last_mouse_pos.x == current_mouse_pos.x && last_mouse_pos.y == current_mouse_pos.y)
+            if (lastMousePos.x == currentMousePos.x && lastMousePos.y == currentMousePos.y)
             {
                 return Quaternion.identity;
             }
 
             var near = new Vector3(0, 0, Camera.main.nearClipPlane);
-            Vector3 p1 = Camera.main.ScreenToWorldPoint(last_mouse_pos + near);
-            Vector3 p2 = Camera.main.ScreenToWorldPoint(current_mouse_pos + near);
+            Vector3 p1 = Camera.main.ScreenToWorldPoint(lastMousePos + near);
+            Vector3 p2 = Camera.main.ScreenToWorldPoint(currentMousePos + near);
 
             //WriteLine("## {0} {1}", p1,p2);
             var axisOfRotation = Vector3.Cross(p2, p1);

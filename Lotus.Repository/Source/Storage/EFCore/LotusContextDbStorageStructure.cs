@@ -1,5 +1,7 @@
 using System.Linq;
 
+using Lotus.Core;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Lotus.Repository

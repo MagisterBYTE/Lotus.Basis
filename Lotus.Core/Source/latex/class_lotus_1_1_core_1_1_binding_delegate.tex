@@ -1,0 +1,318 @@
+\doxysection{Lotus.\+Core.\+Binding\+Delegate\texorpdfstring{$<$}{<} TType\+Model, TType\+View \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_binding_delegate}{}\label{class_lotus_1_1_core_1_1_binding_delegate}\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+
+
+Класс реализующий привязку данных между свойством/методом объекта модели и объекта представления.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Binding\+Delegate\texorpdfstring{$<$}{<} TType\+Model, TType\+View \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.441860cm]{class_lotus_1_1_core_1_1_binding_delegate}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_ab38f1735b91618b43f5ad34dc3652e99}\label{class_lotus_1_1_core_1_1_binding_delegate_ab38f1735b91618b43f5ad34dc3652e99} 
+{\bfseries Binding\+Delegate} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_a822035b070969f506865fb6da9bf1571}{Binding\+Delegate}} (object model\+Instance, string model\+Member\+Name, object view\+Instance, string view\+Member\+Name)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_ab4a039c3342050e788e91dc4f73610e2}{Set\+Model}} (object model\+Instance)
+\begin{DoxyCompactList}\small\item\em Установка объекта модели. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_a0f22030e64c7d65dd33adcbf6a0685d0}{Set\+Model}} (object model\+Instance, string member\+Name)
+\begin{DoxyCompactList}\small\item\em Установка объекта модели. \end{DoxyCompactList}\item 
+override object \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_a35cb4282adefc36a640f813103e9ca80}{Get\+Model\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Получение значения привязанного свойства/метода объекта модели. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_a6f4c268ffab2460daf9e836336c6ecb8}{Set\+View}} (object view\+Instance)
+\begin{DoxyCompactList}\small\item\em Установка объекта представления. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_a7de4ba5de03bbd9b5b1e50a6ee190b91}{Set\+View}} (object view\+Instance, string member\+Name)
+\begin{DoxyCompactList}\small\item\em Установка объекта представления. \end{DoxyCompactList}\item 
+override object \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_a779ea338a05757412110f5ba5d42ed69}{Get\+View\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Получение значения привязанного свойства/метода объекта представления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base}{Lotus.\+Core.\+Binding\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Binding\+Base} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a31ae2fedc9799e6275b85e4480220901}{Compare\+To}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base}{Binding\+Base}}? other)
+\begin{DoxyCompactList}\small\item\em Сравнение объектов для упорядочивания. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a18a66bea22dc85b18e3c9552a9889b50}{To\+String\+Short}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a6d7e84f7868a8cc8e2c62e3b36a789d5}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Освобождение управляемых ресурсов. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_a4c96796a06fc3b98f462fb10e1fe5398}{Update\+Model\+Property}} (object? sender, Property\+Changed\+Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Обновление данных объекта модели. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate_a4def0aa1ff96959b514234e97e069384}{Update\+View\+Property}} (object? sender, Property\+Changed\+Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Обновление данных объекта представления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base}{Lotus.\+Core.\+Binding\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_af58edc12c9ec4f0b9704845ed43b388e}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Освобождение управляемых ресурсов. \end{DoxyCompactList}\item 
+Member\+Info? \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a7d2e6e8e73e19887d464a2422a2807d5}{Set\+Member\+Type}} (object instance, string member\+Name, ref \mbox{\hyperlink{group___core_data_binding_gae483a30d36a13af86887f140a14c37b6}{TBinding\+Member\+Type}} member\+Type)
+\begin{DoxyCompactList}\small\item\em Установка типа члена объекта. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a384dd984faf8ced692a80b322aee2eae}{Reset\+Model}} (object model\+Instance)
+\begin{DoxyCompactList}\small\item\em Переустановка объекта модели. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a2ba77978f001a9bba025572427c84052}{Reset\+View}} (object view\+Instance)
+\begin{DoxyCompactList}\small\item\em Переустановка объекта представления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a70a04a25bc6823fc15bfd23b46b0112d}\label{class_lotus_1_1_core_1_1_binding_delegate_a70a04a25bc6823fc15bfd23b46b0112d} 
+Action$<$ TType\+Model $>$ {\bfseries Action\+Model}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Делегат для установки значений объекту модели. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a983dff3f6b8ab281d95ace50bedaeb7c}\label{class_lotus_1_1_core_1_1_binding_delegate_a983dff3f6b8ab281d95ace50bedaeb7c} 
+Action$<$ TType\+View $>$ {\bfseries Action\+View}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Делегат для установки значений объекту представления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a710b752947e6e7ee3ddbb852fa3c70c9}\label{class_lotus_1_1_core_1_1_binding_delegate_a710b752947e6e7ee3ddbb852fa3c70c9} 
+Func$<$ TType\+View, TType\+Model $>$ {\bfseries On\+Convert\+To\+Model}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Делегат для преобразования объекта представления в объект модели. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_aad3a4434a6981766ee61486c53ccadda}\label{class_lotus_1_1_core_1_1_binding_delegate_aad3a4434a6981766ee61486c53ccadda} 
+Func$<$ TType\+Model, TType\+View $>$ {\bfseries On\+Convert\+To\+View}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Делегат для преобразования объекта модели в объект представления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base}{Lotus.\+Core.\+Binding\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_ad33ad39bbc50a6b14c7f3deb83f40a14}{Name}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имя привязки данных. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a4deeb6ba3069f5044eed5625d73064df}{Is\+Enabled}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус включенности привязки данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_data_binding_ga7806bf900066c4791844b60e5757a770}{TBinding\+Mode}} {\bfseries Mode}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Режим связывания данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_data_binding_gaeeee7f49bd1b9affb870157f688fb5ff}{TBinding\+Mode\+Changed}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a74aded01d8fd8be457238a3764f87a06}{Mode\+Changed}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Режим изменения свойства объекта представления. \end{DoxyCompactList}\item 
+string {\bfseries Model\+Member\+Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имя члена объекта привязки со стороны модели. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_data_binding_gae483a30d36a13af86887f140a14c37b6}{TBinding\+Member\+Type}} {\bfseries Model\+Member\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Тип члена объекта привязки со стороны модели. \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a16c4eb4c13f1cb3bb684d5b33879186b}{Model\+Instance}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Экземпляр модели. \end{DoxyCompactList}\item 
+INotify\+Property\+Changed? {\bfseries Model\+Property\+Changed}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Интерфейс объекта модели для нотификации об изменении данных. \end{DoxyCompactList}\item 
+string {\bfseries View\+Member\+Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имя члена объекта привязки со стороны представления. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_data_binding_gae483a30d36a13af86887f140a14c37b6}{TBinding\+Member\+Type}} {\bfseries View\+Member\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Тип члена объекта привязки со стороны представления. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a8768879cb5ad1542b405d7bdf413da55}{Is\+String\+View}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус строкового отображения. \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a630972024d83e70d05cf6257837e3e3d}{View\+Instance}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Экземпляр представления. \end{DoxyCompactList}\item 
+INotify\+Property\+Changed? {\bfseries View\+Property\+Changed}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Интерфейс объекта представления для нотификации об изменении данных. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс реализующий привязку данных между свойством/методом объекта модели и объекта представления. 
+
+Реализация класса для связывания данных. Для связывания параметров используется технология Delegate.\+Create\+Delegate(\+Type, object, string) что обеспечивает более быстрое обновление свойств и полей. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TType\+Model} & Тип члена объекта модели.\\
+\hline
+{\em TType\+View} & Тип члена объекта представления.\\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a822035b070969f506865fb6da9bf1571}\label{class_lotus_1_1_core_1_1_binding_delegate_a822035b070969f506865fb6da9bf1571} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!BindingDelegate@{BindingDelegate}}
+\index{BindingDelegate@{BindingDelegate}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{BindingDelegate()}{BindingDelegate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Binding\+Delegate}} (\begin{DoxyParamCaption}\item[{object}]{model\+Instance,  }\item[{string}]{model\+Member\+Name,  }\item[{object}]{view\+Instance,  }\item[{string}]{view\+Member\+Name }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Instance} & Экземпляр объекта модели.\\
+\hline
+{\em model\+Member\+Name} & Имя члена объекта модели.\\
+\hline
+{\em view\+Instance} & Экземпляр объекта представления.\\
+\hline
+{\em view\+Member\+Name} & Имя члена объекта представления.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a35cb4282adefc36a640f813103e9ca80}\label{class_lotus_1_1_core_1_1_binding_delegate_a35cb4282adefc36a640f813103e9ca80} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!GetModelValue@{GetModelValue}}
+\index{GetModelValue@{GetModelValue}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{GetModelValue()}{GetModelValue()}}
+{\footnotesize\ttfamily override object \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.Get\+Model\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение значения привязанного свойства/метода объекта модели. 
+
+Хотя мы всегда должны знать о значении свойства, на которые подписались, однако иногда надо принудительно его запросить, например, во время присоединения 
+
+\begin{DoxyReturn}{Returns}
+Значение привязанного свойства/метода объекта модели.
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a29419ecb4f174afd5e847dec00a66710}{Lotus.\+Core.\+Binding\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a779ea338a05757412110f5ba5d42ed69}\label{class_lotus_1_1_core_1_1_binding_delegate_a779ea338a05757412110f5ba5d42ed69} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!GetViewValue@{GetViewValue}}
+\index{GetViewValue@{GetViewValue}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{GetViewValue()}{GetViewValue()}}
+{\footnotesize\ttfamily override object \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.Get\+View\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение значения привязанного свойства/метода объекта представления. 
+
+Хотя мы всегда должны знать о значении свойства, на которые подписались, однако иногда надо принудительно его запросить, например, во время присоединения 
+
+\begin{DoxyReturn}{Returns}
+Значение привязанного свойства/метода объекта представления.
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a03ca972be6f3e45f26105c0a21621dde}{Lotus.\+Core.\+Binding\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_ab4a039c3342050e788e91dc4f73610e2}\label{class_lotus_1_1_core_1_1_binding_delegate_ab4a039c3342050e788e91dc4f73610e2} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!SetModel@{SetModel}}
+\index{SetModel@{SetModel}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{SetModel()}{SetModel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.Set\+Model (\begin{DoxyParamCaption}\item[{object}]{model\+Instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Установка объекта модели. 
+
+Предполагается что остальные параметры привязки со стороны объекта модели уже корректно настроены. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Instance} & Экземпляр объекта модели.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a2cba8cdcc28e4cfecbf90a22ec5ac4b2}{Lotus.\+Core.\+Binding\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a0f22030e64c7d65dd33adcbf6a0685d0}\label{class_lotus_1_1_core_1_1_binding_delegate_a0f22030e64c7d65dd33adcbf6a0685d0} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!SetModel@{SetModel}}
+\index{SetModel@{SetModel}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{SetModel()}{SetModel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.Set\+Model (\begin{DoxyParamCaption}\item[{object}]{model\+Instance,  }\item[{string}]{member\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Установка объекта модели. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Instance} & Экземпляр объекта модели.\\
+\hline
+{\em member\+Name} & Имя члена объекта модели.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a318cc47b88bcb1e70f1635f98c0fc19e}{Lotus.\+Core.\+Binding\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a6f4c268ffab2460daf9e836336c6ecb8}\label{class_lotus_1_1_core_1_1_binding_delegate_a6f4c268ffab2460daf9e836336c6ecb8} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!SetView@{SetView}}
+\index{SetView@{SetView}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{SetView()}{SetView()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.Set\+View (\begin{DoxyParamCaption}\item[{object}]{view\+Instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Установка объекта представления. 
+
+Предполагается что остальные параметры привязки со стороны объекта представления уже корректно настроены. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Instance} & Экземпляр объекта представления.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_abb5ad4c5c08384ff68a9d24a9f71ab10}{Lotus.\+Core.\+Binding\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a7de4ba5de03bbd9b5b1e50a6ee190b91}\label{class_lotus_1_1_core_1_1_binding_delegate_a7de4ba5de03bbd9b5b1e50a6ee190b91} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!SetView@{SetView}}
+\index{SetView@{SetView}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{SetView()}{SetView()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.Set\+View (\begin{DoxyParamCaption}\item[{object}]{view\+Instance,  }\item[{string}]{member\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Установка объекта представления. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Instance} & Экземпляр объекта представления.\\
+\hline
+{\em member\+Name} & Имя члена объекта представления.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_a855c444a5003dfdb8d2bdc06d5e84ebb}{Lotus.\+Core.\+Binding\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a4c96796a06fc3b98f462fb10e1fe5398}\label{class_lotus_1_1_core_1_1_binding_delegate_a4c96796a06fc3b98f462fb10e1fe5398} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!UpdateModelProperty@{UpdateModelProperty}}
+\index{UpdateModelProperty@{UpdateModelProperty}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{UpdateModelProperty()}{UpdateModelProperty()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.Update\+Model\+Property (\begin{DoxyParamCaption}\item[{object?}]{sender,  }\item[{Property\+Changed\+Event\+Args}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Обновление данных объекта модели. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Источник события.\\
+\hline
+{\em args} & Аргументы события.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_ad4370fcb3f587f0263000178baa06943}{Lotus.\+Core.\+Binding\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_binding_delegate_a4def0aa1ff96959b514234e97e069384}\label{class_lotus_1_1_core_1_1_binding_delegate_a4def0aa1ff96959b514234e97e069384} 
+\index{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}!UpdateViewProperty@{UpdateViewProperty}}
+\index{UpdateViewProperty@{UpdateViewProperty}!Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$@{Lotus.Core.BindingDelegate$<$ TTypeModel, TTypeView $>$}}
+\doxysubsubsection{\texorpdfstring{UpdateViewProperty()}{UpdateViewProperty()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate}}$<$ TType\+Model, TType\+View $>$.Update\+View\+Property (\begin{DoxyParamCaption}\item[{object?}]{sender,  }\item[{Property\+Changed\+Event\+Args}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Обновление данных объекта представления. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Источник события.\\
+\hline
+{\em args} & Аргументы события.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base_aa35b6a8e3f2a61b2f1d3e8c47587da6a}{Lotus.\+Core.\+Binding\+Base}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Data\+Binding/Lotus\+Data\+Binding\+Delegate.\+cs\end{DoxyCompactItemize}

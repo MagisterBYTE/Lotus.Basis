@@ -1,0 +1,83 @@
+\doxysection{Lotus.\+Core.\+Entity\+Db\texorpdfstring{$<$}{<} TKey \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_entity_db}{}\label{class_lotus_1_1_core_1_1_entity_db}\index{Lotus.Core.EntityDb$<$ TKey $>$@{Lotus.Core.EntityDb$<$ TKey $>$}}
+
+
+Шаблонный класс для сущностей поддерживающих идентификатор через первичный ключ с поддержкой даты создания и обновления сущности.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Entity\+Db\texorpdfstring{$<$}{<} TKey \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{class_lotus_1_1_core_1_1_entity_db}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_entity_db_ab221efb92e627bcb84a4e3b1235f16d6}{Created}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Дата создания сущности. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_entity_db_afddbed4c1f53e176993d7593583e7288}{Modified}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Дата последней модификации сущности. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_base_entity_db}{Lotus.\+Core.\+Base\+Entity\+Db$<$ TKey $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_base_entity_db_a34e0345274fb77e053c0fda7f77dfa60}{Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ключ сущности. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_id}{Lotus.\+Core.\+ILotus\+Identifier\+Id$<$ TKey $>$}}}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_entity_db}{Lotus.\+Core.\+ILotus\+Entity\+Db$<$ TKey $>$}}}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_base_entity_db}{Lotus.\+Core.\+Base\+Entity\+Db$<$ TKey $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+override? string \mbox{\hyperlink{class_lotus_1_1_core_1_1_base_entity_db_a18a2bb8969ebc6b1a23a40f88e2d860f}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Шаблонный класс для сущностей поддерживающих идентификатор через первичный ключ с поддержкой даты создания и обновления сущности. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TKey} & Тип ключа(идентификатора).\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TKey} : {\em struct}]\item[{\em TKey} : {\em IEquatable$<$\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}}$>$}]\end{description}
+\end{Desc}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_entity_db_ab221efb92e627bcb84a4e3b1235f16d6}\label{class_lotus_1_1_core_1_1_entity_db_ab221efb92e627bcb84a4e3b1235f16d6} 
+\index{Lotus.Core.EntityDb$<$ TKey $>$@{Lotus.Core.EntityDb$<$ TKey $>$}!Created@{Created}}
+\index{Created@{Created}!Lotus.Core.EntityDb$<$ TKey $>$@{Lotus.Core.EntityDb$<$ TKey $>$}}
+\doxysubsubsection{\texorpdfstring{Created}{Created}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_entity_db}{Lotus.\+Core.\+Entity\+Db}}$<$ \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Created\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Дата создания сущности. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_entity_db_a1a738ae2b2a66fce8e1bdf18f64741b8}{Lotus.\+Core.\+ILotus\+Entity\+Db$<$ TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_entity_db_afddbed4c1f53e176993d7593583e7288}\label{class_lotus_1_1_core_1_1_entity_db_afddbed4c1f53e176993d7593583e7288} 
+\index{Lotus.Core.EntityDb$<$ TKey $>$@{Lotus.Core.EntityDb$<$ TKey $>$}!Modified@{Modified}}
+\index{Modified@{Modified}!Lotus.Core.EntityDb$<$ TKey $>$@{Lotus.Core.EntityDb$<$ TKey $>$}}
+\doxysubsubsection{\texorpdfstring{Modified}{Modified}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_entity_db}{Lotus.\+Core.\+Entity\+Db}}$<$ \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Modified\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Дата последней модификации сущности. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_entity_db_a53092505e1245cae2fe193c068f58aa2}{Lotus.\+Core.\+ILotus\+Entity\+Db$<$ TKey $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Entity\+Db/Lotus\+Entity\+Db.\+cs\end{DoxyCompactItemize}

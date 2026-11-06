@@ -1,0 +1,241 @@
+\doxysection{Lotus.\+Core.\+Filter\+By\+Property Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_filter_by_property}{}\label{class_lotus_1_1_core_1_1_filter_by_property}\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+
+
+Универсальный класс для фильтрации по свойству/полю объекта.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Filter\+By\+Property\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_filter_by_property}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_a56638eecc7dd884495a6dc35f21f6633}\label{class_lotus_1_1_core_1_1_filter_by_property_a56638eecc7dd884495a6dc35f21f6633} 
+{\bfseries Filter\+By\+Property} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_a67d1464809a471517d7b497a98283e51}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_aecaad2a25f1ecf786965e919ba4c2255}{Is\+Valid}} ()
+\begin{DoxyCompactList}\small\item\em Проверка на валидность фильтра по свойству. \end{DoxyCompactList}\item 
+Constant\+Expression \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_a8f7fe83c94c2ceae6b022115fb068ebd}{Get\+Constant\+Expression}} (Type property\+Type, int index=-\/1)
+\begin{DoxyCompactList}\small\item\em Получить константу дерева выражения для искомого значения. \end{DoxyCompactList}\item 
+New\+Array\+Expression \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_a1e1f7fe5fbc96563a562475cc0de9809}{Get\+Array\+Expression}} (Type property\+Type)
+\begin{DoxyCompactList}\small\item\em Получить константу массива дерева выражения для искомого значения. \end{DoxyCompactList}\item 
+Method\+Call\+Expression \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_aecabeea188d5179902f678c9cdca2c23}{Get\+Contains\+In\+Expression}} (Type property\+Type, Member\+Expression property\+Expression)
+\begin{DoxyCompactList}\small\item\em Получить выражение \mbox{[}o =\texorpdfstring{$>$}{>} Values.\+Contains(p)\mbox{]} для искомого значения. \end{DoxyCompactList}\item 
+Expression \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_ae05f2cf32832bb8d8a1f21dab7a2c9f2}{Get\+Not\+Contains\+In\+Expression}} (Type property\+Type, Member\+Expression property\+Expression)
+\begin{DoxyCompactList}\small\item\em Получить выражение \mbox{[}o =\texorpdfstring{$>$}{>} !(Values.\+Contains(p))\mbox{]} для искомого значения. \end{DoxyCompactList}\item 
+Lambda\+Expression \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_a89a30ea7625acd8d5217502d84dad77d}{Get\+Contains\+In\+Property\+Expression}} (Type property\+Type, string property\+Name\+Id="{}Id"{})
+\begin{DoxyCompactList}\small\item\em Получить лямбду выражения \mbox{[}o =\texorpdfstring{$>$}{>} ids.\+Contains(p.\+Id)\mbox{]} для искомого значения. \end{DoxyCompactList}\item 
+Lambda\+Expression \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_ad6b05923ea9dd1c1a981c244e396c133}{Get\+Not\+Contains\+In\+Property\+Expression}} (Type property\+Type, string property\+Name\+Id="{}Id"{})
+\begin{DoxyCompactList}\small\item\em Получить лямбду выражения \mbox{[}o =\texorpdfstring{$>$}{>} !(ids.\+Contains(p.\+Id))\mbox{]} для искомого значения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_aa01655b1d08bee9274a34bbb443dd6e9}{Property\+Path}} = default!\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имя/путь свойства/поля по которому осуществляется фильтрация. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_request_and_response_ga485339556871124c4e82e87b350c1c87}{TFilter\+Function}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_filter_by_property_ac36f2c8f662d8cf83e10c154a85ef15b}{Function}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Функция для фильтрации. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_affeebabbba513a27ac27ad4c9d81444a}\label{class_lotus_1_1_core_1_1_filter_by_property_affeebabbba513a27ac27ad4c9d81444a} 
+bool? {\bfseries Is\+Nullable}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус типа свойства Nullable. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_a9f5db9d46c87a05b27b99f564b5b7a78}\label{class_lotus_1_1_core_1_1_filter_by_property_a9f5db9d46c87a05b27b99f564b5b7a78} 
+bool? {\bfseries Is\+Sensitive\+Case}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Учитывать регистр при фильтрации строк. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_a7d1b0942813c9b5497d70049f64875ed}\label{class_lotus_1_1_core_1_1_filter_by_property_a7d1b0942813c9b5497d70049f64875ed} 
+string? {\bfseries Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Значение. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_aa3b0eb71baea21157cf2fd7e79a6369d}\label{class_lotus_1_1_core_1_1_filter_by_property_aa3b0eb71baea21157cf2fd7e79a6369d} 
+string?\mbox{[}$\,$\mbox{]} {\bfseries Values}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Массив значений. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_filter_property}{Lotus.\+Core.\+ILotus\+Filter\+Property}}}
+
+
+\doxysubsection{Detailed Description}
+Универсальный класс для фильтрации по свойству/полю объекта. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_a1e1f7fe5fbc96563a562475cc0de9809}\label{class_lotus_1_1_core_1_1_filter_by_property_a1e1f7fe5fbc96563a562475cc0de9809} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!GetArrayExpression@{GetArrayExpression}}
+\index{GetArrayExpression@{GetArrayExpression}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{GetArrayExpression()}{GetArrayExpression()}}
+{\footnotesize\ttfamily New\+Array\+Expression Lotus.\+Core.\+Filter\+By\+Property.\+Get\+Array\+Expression (\begin{DoxyParamCaption}\item[{Type}]{property\+Type }\end{DoxyParamCaption})}
+
+
+
+Получить константу массива дерева выражения для искомого значения. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em property\+Type} & Тип свойства.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Константа массива выражения.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_a8f7fe83c94c2ceae6b022115fb068ebd}\label{class_lotus_1_1_core_1_1_filter_by_property_a8f7fe83c94c2ceae6b022115fb068ebd} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!GetConstantExpression@{GetConstantExpression}}
+\index{GetConstantExpression@{GetConstantExpression}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{GetConstantExpression()}{GetConstantExpression()}}
+{\footnotesize\ttfamily Constant\+Expression Lotus.\+Core.\+Filter\+By\+Property.\+Get\+Constant\+Expression (\begin{DoxyParamCaption}\item[{Type}]{property\+Type,  }\item[{int}]{index = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Получить константу дерева выражения для искомого значения. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em property\+Type} & Тип свойства.\\
+\hline
+{\em index} & Индекс искомого значения. -\/1 значения по умолчанию.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Константа выражения.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_aecabeea188d5179902f678c9cdca2c23}\label{class_lotus_1_1_core_1_1_filter_by_property_aecabeea188d5179902f678c9cdca2c23} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!GetContainsInExpression@{GetContainsInExpression}}
+\index{GetContainsInExpression@{GetContainsInExpression}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{GetContainsInExpression()}{GetContainsInExpression()}}
+{\footnotesize\ttfamily Method\+Call\+Expression Lotus.\+Core.\+Filter\+By\+Property.\+Get\+Contains\+In\+Expression (\begin{DoxyParamCaption}\item[{Type}]{property\+Type,  }\item[{Member\+Expression}]{property\+Expression }\end{DoxyParamCaption})}
+
+
+
+Получить выражение \mbox{[}o =\texorpdfstring{$>$}{>} Values.\+Contains(p)\mbox{]} для искомого значения. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em property\+Type} & Тип свойства.\\
+\hline
+{\em property\+Expression} & Выражение для объекта p.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Выражение вызова метода.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_a89a30ea7625acd8d5217502d84dad77d}\label{class_lotus_1_1_core_1_1_filter_by_property_a89a30ea7625acd8d5217502d84dad77d} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!GetContainsInPropertyExpression@{GetContainsInPropertyExpression}}
+\index{GetContainsInPropertyExpression@{GetContainsInPropertyExpression}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{GetContainsInPropertyExpression()}{GetContainsInPropertyExpression()}}
+{\footnotesize\ttfamily Lambda\+Expression Lotus.\+Core.\+Filter\+By\+Property.\+Get\+Contains\+In\+Property\+Expression (\begin{DoxyParamCaption}\item[{Type}]{property\+Type,  }\item[{string}]{property\+Name\+Id = {\ttfamily "{}Id"{}} }\end{DoxyParamCaption})}
+
+
+
+Получить лямбду выражения \mbox{[}o =\texorpdfstring{$>$}{>} ids.\+Contains(p.\+Id)\mbox{]} для искомого значения. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em property\+Type} & Тип свойства p.\\
+\hline
+{\em property\+Name\+Id} & Имя свойства Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Лямбда выражения.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_ae05f2cf32832bb8d8a1f21dab7a2c9f2}\label{class_lotus_1_1_core_1_1_filter_by_property_ae05f2cf32832bb8d8a1f21dab7a2c9f2} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!GetNotContainsInExpression@{GetNotContainsInExpression}}
+\index{GetNotContainsInExpression@{GetNotContainsInExpression}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{GetNotContainsInExpression()}{GetNotContainsInExpression()}}
+{\footnotesize\ttfamily Expression Lotus.\+Core.\+Filter\+By\+Property.\+Get\+Not\+Contains\+In\+Expression (\begin{DoxyParamCaption}\item[{Type}]{property\+Type,  }\item[{Member\+Expression}]{property\+Expression }\end{DoxyParamCaption})}
+
+
+
+Получить выражение \mbox{[}o =\texorpdfstring{$>$}{>} !(Values.\+Contains(p))\mbox{]} для искомого значения. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em property\+Type} & Тип свойства p.\\
+\hline
+{\em property\+Expression} & Выражение для объекта p.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Выражение.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_ad6b05923ea9dd1c1a981c244e396c133}\label{class_lotus_1_1_core_1_1_filter_by_property_ad6b05923ea9dd1c1a981c244e396c133} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!GetNotContainsInPropertyExpression@{GetNotContainsInPropertyExpression}}
+\index{GetNotContainsInPropertyExpression@{GetNotContainsInPropertyExpression}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{GetNotContainsInPropertyExpression()}{GetNotContainsInPropertyExpression()}}
+{\footnotesize\ttfamily Lambda\+Expression Lotus.\+Core.\+Filter\+By\+Property.\+Get\+Not\+Contains\+In\+Property\+Expression (\begin{DoxyParamCaption}\item[{Type}]{property\+Type,  }\item[{string}]{property\+Name\+Id = {\ttfamily "{}Id"{}} }\end{DoxyParamCaption})}
+
+
+
+Получить лямбду выражения \mbox{[}o =\texorpdfstring{$>$}{>} !(ids.\+Contains(p.\+Id))\mbox{]} для искомого значения. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em property\+Type} & Тип свойства p.\\
+\hline
+{\em property\+Name\+Id} & Имя свойства Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Лямбда выражения.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_aecaad2a25f1ecf786965e919ba4c2255}\label{class_lotus_1_1_core_1_1_filter_by_property_aecaad2a25f1ecf786965e919ba4c2255} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+Filter\+By\+Property.\+Is\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Проверка на валидность фильтра по свойству. 
+
+\begin{DoxyReturn}{Returns}
+Статус проверки.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_a67d1464809a471517d7b497a98283e51}\label{class_lotus_1_1_core_1_1_filter_by_property_a67d1464809a471517d7b497a98283e51} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!ToString@{ToString}}
+\index{ToString@{ToString}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily override string Lotus.\+Core.\+Filter\+By\+Property.\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Преобразование к текстовому представлению. 
+
+\begin{DoxyReturn}{Returns}
+Текстовое представление.
+\end{DoxyReturn}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_ac36f2c8f662d8cf83e10c154a85ef15b}\label{class_lotus_1_1_core_1_1_filter_by_property_ac36f2c8f662d8cf83e10c154a85ef15b} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!Function@{Function}}
+\index{Function@{Function}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{Function}{Function}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group___core_request_and_response_ga485339556871124c4e82e87b350c1c87}{TFilter\+Function}} Lotus.\+Core.\+Filter\+By\+Property.\+Function\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Функция для фильтрации. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_filter_property_ae1883a1dda8439d420d05d617fb96791}{Lotus.\+Core.\+ILotus\+Filter\+Property}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_filter_by_property_aa01655b1d08bee9274a34bbb443dd6e9}\label{class_lotus_1_1_core_1_1_filter_by_property_aa01655b1d08bee9274a34bbb443dd6e9} 
+\index{Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}!PropertyPath@{PropertyPath}}
+\index{PropertyPath@{PropertyPath}!Lotus.Core.FilterByProperty@{Lotus.Core.FilterByProperty}}
+\doxysubsubsection{\texorpdfstring{PropertyPath}{PropertyPath}}
+{\footnotesize\ttfamily string Lotus.\+Core.\+Filter\+By\+Property.\+Property\+Path = default!\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Имя/путь свойства/поля по которому осуществляется фильтрация. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_filter_property_addfc92b7364132ea3be7617edd1d43ab}{Lotus.\+Core.\+ILotus\+Filter\+Property}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Rn\+R/\+Filtration/Lotus\+Filter\+Property.\+cs\end{DoxyCompactItemize}

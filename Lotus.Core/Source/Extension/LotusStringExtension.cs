@@ -244,22 +244,22 @@ namespace Lotus.Core
         /// <returns>Число.</returns>
         public static float ToFloatUnchecked(this string @this)
         {
-            var ret_val1 = 0f;
-            var ret_val2 = 0f;
+            var retVal1 = 0f;
+            var retVal2 = 0f;
             var sign = 1f;
             if (@this != null)
             {
                 var dir = 10f;
                 int i;
-                var i_max = @this.Length;
+                var iMax = @this.Length;
                 char c;
-                for (i = 0; i < i_max; i++)
+                for (i = 0; i < iMax; i++)
                 {
                     c = @this[i];
                     if (c >= '0' && c <= '9')
                     {
-                        ret_val1 *= dir;
-                        ret_val1 += c - '0';
+                        retVal1 *= dir;
+                        retVal1 += c - '0';
                     }
                     else
                     {
@@ -278,17 +278,17 @@ namespace Lotus.Core
                 }
                 i++;
                 dir = 0.1f;
-                for (; i < i_max; i++)
+                for (; i < iMax; i++)
                 {
                     c = @this[i];
                     if (c >= '0' && c <= '9')
                     {
-                        ret_val2 += (c - '0') * dir;
+                        retVal2 += (c - '0') * dir;
                         dir *= 0.1f;
                     }
                 }
             }
-            return sign * (ret_val1 + ret_val2);
+            return sign * (retVal1 + retVal2);
         }
 
 #if UNITY_2017_1_OR_NEWER
@@ -372,9 +372,9 @@ namespace Lotus.Core
         /// <returns>Модифицированная строка.</returns>
         public static string GetReverseCopy(this string @this)
         {
-            var char_array = @this.ToCharArray();
-            Array.Reverse(char_array);
-            return new string(char_array);
+            var charArray = @this.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
         }
 
         /// <summary>
@@ -727,27 +727,27 @@ namespace Lotus.Core
         {
             var builder = new StringBuilder(@this.Length);
 
-            var is_opened = false;
-            var is_pre_opened = false;
+            var isOpened = false;
+            var isPreOpened = false;
             for (var i = 0; i < @this.Length; i++)
             {
-                if (is_pre_opened)
+                if (isPreOpened)
                 {
-                    is_opened = true;
+                    isOpened = true;
                 }
 
                 if (@this[i] == left)
                 {
-                    is_pre_opened = true;
+                    isPreOpened = true;
                 }
 
                 if (@this[i] == right)
                 {
-                    is_opened = false;
-                    is_pre_opened = false;
+                    isOpened = false;
+                    isPreOpened = false;
                 }
 
-                if (is_opened == false)
+                if (isOpened == false)
                 {
                     builder.Append(@this[i]);
                 }
@@ -767,27 +767,27 @@ namespace Lotus.Core
         {
             var builder = new StringBuilder(@this.Length);
 
-            var is_opened = false;
-            var is_pre_opened = false;
+            var isOpened = false;
+            var isPreOpened = false;
             for (var i = 0; i < @this.Length; i++)
             {
                 if (@this[i] == left)
                 {
-                    is_opened = true;
-                    is_pre_opened = true;
+                    isOpened = true;
+                    isPreOpened = true;
                 }
 
-                if (is_pre_opened == false)
+                if (isPreOpened == false)
                 {
-                    is_opened = false;
+                    isOpened = false;
                 }
 
                 if (@this[i] == right)
                 {
-                    is_pre_opened = false;
+                    isPreOpened = false;
                 }
 
-                if (is_opened == false)
+                if (isOpened == false)
                 {
                     builder.Append(@this[i]);
                 }
@@ -962,14 +962,14 @@ namespace Lotus.Core
         /// <returns>Извлеченная строка.</returns>
         public static string ExtractString(this string @this, string begin, string end)
         {
-            var pos_begin = @this.IndexOf(begin);
-            if (pos_begin > -1)
+            var posBegin = @this.IndexOf(begin);
+            if (posBegin > -1)
             {
-                var pos_end = @this.IndexOf(end, pos_begin);
-                var start = pos_begin + begin.Length;
-                if (pos_end > start)
+                var posEnd = @this.IndexOf(end, posBegin);
+                var start = posBegin + begin.Length;
+                if (posEnd > start)
                 {
-                    var l = pos_end - start;
+                    var l = posEnd - start;
                     return @this.Substring(start, l);
                 }
             }
@@ -986,12 +986,12 @@ namespace Lotus.Core
         /// <returns>Извлеченная строка.</returns>
         public static string ExtractStringLast(this string @this, string begin, string end)
         {
-            var pos_begin = @this.LastIndexOf(begin);
-            var pos_end = @this.LastIndexOf(end);
-            var start = pos_begin + begin.Length;
-            if (pos_end > start)
+            var posBegin = @this.LastIndexOf(begin);
+            var posEnd = @this.LastIndexOf(end);
+            var start = posBegin + begin.Length;
+            if (posEnd > start)
             {
-                var l = pos_end - start;
+                var l = posEnd - start;
                 return @this.Substring(start, l);
             }
 
@@ -1136,9 +1136,9 @@ namespace Lotus.Core
         /// <returns>Преобразованная строка.</returns>
         public static string ToProperCase(this string @this)
         {
-            var culture_info = System.Threading.Thread.CurrentThread.CurrentCulture;
-            var text_info = culture_info.TextInfo;
-            return text_info.ToTitleCase(@this);
+            var cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            var textInfo = cultureInfo.TextInfo;
+            return textInfo.ToTitleCase(@this);
         }
 
         /// <summary>

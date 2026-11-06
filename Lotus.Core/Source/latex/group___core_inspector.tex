@@ -1,0 +1,35 @@
+\doxysubsection{Подсистема поддержки инспектора свойств}
+\hypertarget{group___core_inspector}{}\label{group___core_inspector}\index{Подсистема поддержки инспектора свойств@{Подсистема поддержки инспектора свойств}}
+
+
+Подсистема поддержки инспектора свойств обеспечивает расширенное описание и управление свойствами/полями объекта.  
+
+
+\doxysubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_inspector_attribute}{Атрибуты для инспектора свойств}}
+\begin{DoxyCompactList}\small\item\em Атрибуты для инспектора свойств управляют отдельным аспектами отображения свойства и расширяют его управления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_inspector_1_1_i_lotus_property_inspector}{Lotus.\+Core.\+Inspector.\+ILotus\+Property\+Inspector}}
+\begin{DoxyCompactList}\small\item\em Базовый интерфейса для реализации пользовательского инспектора свойств. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_inspector_1_1_c_property_desc}{Lotus.\+Core.\+Inspector.\+CProperty\+Desc}}
+\begin{DoxyCompactList}\small\item\em Описание свойства объекта для его актуального описания, отображения и редактирования пользователем. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_inspector_1_1_i_lotus_support_view_inspector}{Lotus.\+Core.\+Inspector.\+ILotus\+Support\+View\+Inspector}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для определения просмотра общей информации объекта в инспекторе свойств. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_inspector_1_1_i_lotus_support_edit_inspector}{Lotus.\+Core.\+Inspector.\+ILotus\+Support\+Edit\+Inspector}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для определения расширенной поддержки редактирования объекта в инспекторе свойств. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_inspector_1_1_lotus_inspector_type_editor}{Lotus.\+Core.\+Inspector.\+Lotus\+Inspector\+Type\+Editor}}
+\begin{DoxyCompactList}\small\item\em Атрибут для определения редактора для свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема поддержки инспектора свойств обеспечивает расширенное описание и управление свойствами/полями объекта. 
+
+Инспектор свойств (или инспектор объектов) представляет собой элемент управления, который позволяет управлять объектом посредством изменения его свойств (и не только свойств).
+
+При этом этот элемент управления используется как в режиме разработки приложения, так и может использоваться в готовом приложении.
+
+Данная подсистема прежде всего направлена на расширение возможностей инспектора свойств Unity и инспектора свойств \doxylink{namespace_lotus}{Lotus}. Поддержка стандартного инспектора свойств IDE при разработке обычных приложений не предусмотрена.\input{group___core_inspector_attribute}

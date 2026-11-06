@@ -66,29 +66,29 @@ namespace Lotus.Core.ECS
             world.AddComponent<THealth>(igor.Id);
             world.AddComponent<TPlayer>(igor.Id);
 
-            var filter_health = world.CreateFilterComponent();
-            filter_health.Include<THealth>().Include<TPlayer>();
+            var filterHealth = world.CreateFilterComponent();
+            filterHealth.Include<THealth>().Include<TPlayer>();
 
-            var filter_entities = filter_health.GetEntities();
-            ClassicAssert.AreEqual(filter_health.CountEntities, 2);
-            for (var i = 0; i < filter_health.CountEntities; i++)
+            var filterEntities = filterHealth.GetEntities();
+            ClassicAssert.AreEqual(filterHealth.CountEntities, 2);
+            for (var i = 0; i < filterHealth.CountEntities; i++)
             {
-                ref var health = ref world.GetComponent<THealth>(filter_entities[i]);
+                ref var health = ref world.GetComponent<THealth>(filterEntities[i]);
                 health.Live = 325;
 
-                ref var player = ref world.GetComponent<TPlayer>(filter_entities[i]);
+                ref var player = ref world.GetComponent<TPlayer>(filterEntities[i]);
                 player.Id = 17;
             }
 
-            filter_health.Include<TDeadStatus>();
-            filter_entities = filter_health.GetEntities();
-            ClassicAssert.AreEqual(filter_health.CountEntities, 0);
-            for (var i = 0; i < filter_health.CountEntities; i++)
+            filterHealth.Include<TDeadStatus>();
+            filterEntities = filterHealth.GetEntities();
+            ClassicAssert.AreEqual(filterHealth.CountEntities, 0);
+            for (var i = 0; i < filterHealth.CountEntities; i++)
             {
-                ref var health = ref world.GetComponent<THealth>(filter_entities[i]);
+                ref var health = ref world.GetComponent<THealth>(filterEntities[i]);
                 health.Live = 325;
 
-                ref var player = ref world.GetComponent<TPlayer>(filter_entities[i]);
+                ref var player = ref world.GetComponent<TPlayer>(filterEntities[i]);
                 player.Id = 17;
             }
 

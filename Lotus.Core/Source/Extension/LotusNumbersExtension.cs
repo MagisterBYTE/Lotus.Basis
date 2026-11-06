@@ -77,13 +77,13 @@ namespace Lotus.Core
 		/// <returns>32-битное цветовое значение.</returns>
 		public static UnityEngine.Color32 ToColor32(this int @this)
 		{
-			var color_value = new UnityEngine.Color32();
-			color_value.r = (byte)(@this >> 24);
-			color_value.g = (byte)(@this >> 16);
-			color_value.b = (byte)(@this >> 8);
-			color_value.a = (byte)(@this >> 0);
+			var colorValue = new UnityEngine.Color32();
+			colorValue.r = (byte)(@this >> 24);
+			colorValue.g = (byte)(@this >> 16);
+			colorValue.b = (byte)(@this >> 8);
+			colorValue.a = (byte)(@this >> 0);
 
-			return color_value;
+			return colorValue;
 		}
 
 		/// <summary>
@@ -94,13 +94,13 @@ namespace Lotus.Core
 		public static UnityEngine.Color ToColor(this int @this)
 		{
 			const float factor = 1.0f / 255.0f;
-			var color_value = new UnityEngine.Color();
-			color_value.r = factor * (byte)(@this >> 24);
-			color_value.g = factor * (byte)(@this >> 16);
-			color_value.b = factor * (byte)(@this >> 8);
-			color_value.a = factor * (byte)(@this >> 0);
+			var colorValue = new UnityEngine.Color();
+			colorValue.r = factor * (byte)(@this >> 24);
+			colorValue.g = factor * (byte)(@this >> 16);
+			colorValue.b = factor * (byte)(@this >> 8);
+			colorValue.a = factor * (byte)(@this >> 0);
 
-			return color_value;
+			return colorValue;
 		}
 #endif
         #endregion
@@ -114,13 +114,13 @@ namespace Lotus.Core
 		/// <returns>32-битное цветовое значение.</returns>
 		public static UnityEngine.Color32 ToColor32(this uint @this)
 		{
-			var color_value = new UnityEngine.Color32();
-			color_value.r = (byte)(@this >> 24);
-			color_value.g = (byte)(@this >> 16);
-			color_value.b = (byte)(@this >> 8);
-			color_value.a = (byte)(@this >> 0);
+			var colorValue = new UnityEngine.Color32();
+			colorValue.r = (byte)(@this >> 24);
+			colorValue.g = (byte)(@this >> 16);
+			colorValue.b = (byte)(@this >> 8);
+			colorValue.a = (byte)(@this >> 0);
 
-			return color_value;
+			return colorValue;
 		}
 
 		/// <summary>
@@ -131,13 +131,13 @@ namespace Lotus.Core
 		public static UnityEngine.Color ToColor(this uint @this)
 		{
 			const float factor = 1.0f / 255.0f;
-			var color_value = new UnityEngine.Color();
-			color_value.r = factor * (byte)(@this >> 24);
-			color_value.g = factor * (byte)(@this >> 16);
-			color_value.b = factor * (byte)(@this >> 8);
-			color_value.a = factor * (byte)(@this >> 0);
+			var colorValue = new UnityEngine.Color();
+			colorValue.r = factor * (byte)(@this >> 24);
+			colorValue.g = factor * (byte)(@this >> 16);
+			colorValue.b = factor * (byte)(@this >> 8);
+			colorValue.a = factor * (byte)(@this >> 0);
 
-			return color_value;
+			return colorValue;
 		}
 #endif
         #endregion
@@ -155,21 +155,21 @@ namespace Lotus.Core
         {
             lock (FloatToStringBuffer)
             {
-                const int prec_mul = 100000;
+                const int precMul = 100000;
                 FloatToStringBuffer.Length = 0;
-                var is_neg = @this < 0f;
-                if (is_neg)
+                var isNeg = @this < 0f;
+                if (isNeg)
                 {
                     @this = -@this;
                 }
                 var v0 = (uint)@this;
-                var diff = (@this - v0) * prec_mul;
+                var diff = (@this - v0) * precMul;
                 var v1 = (uint)diff;
                 diff -= v1;
                 if (diff > 0.5f)
                 {
                     v1++;
-                    if (v1 >= prec_mul)
+                    if (v1 >= precMul)
                     {
                         v1 = 0;
                         v0++;
@@ -211,7 +211,7 @@ namespace Lotus.Core
                     v0 /= 10;
                 }
                 while (v0 > 0);
-                if (is_neg)
+                if (isNeg)
                 {
                     FloatToStringBuffer.Append('-');
                 }

@@ -1,0 +1,185 @@
+\doxysection{Lotus.\+Core.\+Int\+Calculated Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_int_calculated}{}\label{class_lotus_1_1_core_1_1_int_calculated}\index{Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}}
+
+
+Класс содержащий целое значение и дополнительные свойства для его управления.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Int\+Calculated\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.584906cm]{class_lotus_1_1_core_1_1_int_calculated}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated_aa6d75eb61fb6a835cd2a42e3ee2c59bc}{Int\+Calculated}} (int value)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated_a00c8846d341d1151660b7e4cc174633c}{Int\+Calculated}} (int value, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}} owner\+Object)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated_a56c3e3fc0da5576ab027e4c6ee296a03}{Clone}} ()
+\begin{DoxyCompactList}\small\item\em Полное копирование объекта. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated_aff7625dd98ba693b410b7185b5ecec56}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base}{Lotus.\+Core.\+Property\+Changed\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base_aeedef6782cf8c61599513af983b5742e}{On\+Property\+Changed}} (\mbox{[}Caller\+Member\+Name\mbox{]} string? property\+Name=null)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base_acccfdc166e6dfcc9e99c290dc38331e5}{On\+Property\+Changed}} (Property\+Changed\+Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated}{Int\+Calculated}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated_a90d63eb0a360c404c2058a421df33aae}{Deserialize\+From\+String}} (string data)
+\begin{DoxyCompactList}\small\item\em Десереализация объекта из строки. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_a830e22b1167e2a18dc1e12201876414a}\label{class_lotus_1_1_core_1_1_int_calculated_a830e22b1167e2a18dc1e12201876414a} 
+int {\bfseries Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Базовое значение. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_a10dd7e89077927e28106136d611a8f1d}\label{class_lotus_1_1_core_1_1_int_calculated_a10dd7e89077927e28106136d611a8f1d} 
+int {\bfseries Supplement}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Смещение базового значения. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_ad04bf8f8dec98195f85c839d950b2fe0}\label{class_lotus_1_1_core_1_1_int_calculated_ad04bf8f8dec98195f85c839d950b2fe0} 
+int {\bfseries Calculated\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Вычисленное значение. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated_ac1aa3dd8531f9424c9cd92f3aeda8b57}{IOwner}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец объекта. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated_aba56f928f50f7f4a744c1f6b586e46f4}{Not\+Calculation}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Не учитывать параметр в расчетах. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{Lotus.\+Core.\+ILotus\+Owned\+Object$<$ TOwner $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+TOwner? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object_a28b52590e38754d81d756a0b98a767af}{Owner}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_not_calculation}{Lotus.\+Core.\+ILotus\+Not\+Calculation}}}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Events inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base}{Lotus.\+Core.\+Property\+Changed\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+Property\+Changed\+Event\+Handler? {\bfseries Property\+Changed}
+\begin{DoxyCompactList}\small\item\em Событие срабатывает ПОСЛЕ изменения свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс содержащий целое значение и дополнительные свойства для его управления. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_aa6d75eb61fb6a835cd2a42e3ee2c59bc}\label{class_lotus_1_1_core_1_1_int_calculated_aa6d75eb61fb6a835cd2a42e3ee2c59bc} 
+\index{Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}!IntCalculated@{IntCalculated}}
+\index{IntCalculated@{IntCalculated}!Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}}
+\doxysubsubsection{\texorpdfstring{IntCalculated()}{IntCalculated()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+Int\+Calculated.\+Int\+Calculated (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_a00c8846d341d1151660b7e4cc174633c}\label{class_lotus_1_1_core_1_1_int_calculated_a00c8846d341d1151660b7e4cc174633c} 
+\index{Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}!IntCalculated@{IntCalculated}}
+\index{IntCalculated@{IntCalculated}!Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}}
+\doxysubsubsection{\texorpdfstring{IntCalculated()}{IntCalculated()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+Int\+Calculated.\+Int\+Calculated (\begin{DoxyParamCaption}\item[{int}]{value,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}}]{owner\+Object }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+{\em owner\+Object} & Владелец значения.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_a56c3e3fc0da5576ab027e4c6ee296a03}\label{class_lotus_1_1_core_1_1_int_calculated_a56c3e3fc0da5576ab027e4c6ee296a03} 
+\index{Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}!Clone@{Clone}}
+\index{Clone@{Clone}!Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily object Lotus.\+Core.\+Int\+Calculated.\+Clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Полное копирование объекта. 
+
+\begin{DoxyReturn}{Returns}
+Копия объекта.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_a90d63eb0a360c404c2058a421df33aae}\label{class_lotus_1_1_core_1_1_int_calculated_a90d63eb0a360c404c2058a421df33aae} 
+\index{Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}!DeserializeFromString@{DeserializeFromString}}
+\index{DeserializeFromString@{DeserializeFromString}!Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}}
+\doxysubsubsection{\texorpdfstring{DeserializeFromString()}{DeserializeFromString()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_int_calculated}{Int\+Calculated}} Lotus.\+Core.\+Int\+Calculated.\+Deserialize\+From\+String (\begin{DoxyParamCaption}\item[{string}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Десереализация объекта из строки. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Строка данных.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Объект.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_aff7625dd98ba693b410b7185b5ecec56}\label{class_lotus_1_1_core_1_1_int_calculated_aff7625dd98ba693b410b7185b5ecec56} 
+\index{Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}!ToString@{ToString}}
+\index{ToString@{ToString}!Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily override string Lotus.\+Core.\+Int\+Calculated.\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Преобразование к текстовому представлению. 
+
+\begin{DoxyReturn}{Returns}
+Текстовое представление объекта.
+\end{DoxyReturn}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_ac1aa3dd8531f9424c9cd92f3aeda8b57}\label{class_lotus_1_1_core_1_1_int_calculated_ac1aa3dd8531f9424c9cd92f3aeda8b57} 
+\index{Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}!IOwner@{IOwner}}
+\index{IOwner@{IOwner}!Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}}
+\doxysubsubsection{\texorpdfstring{IOwner}{IOwner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}? Lotus.\+Core.\+Int\+Calculated.\+IOwner\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Владелец объекта. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object_aa387fe4af4fcfaad4583624d00fcb271}{Lotus.\+Core.\+ILotus\+Owned\+Object$<$ TOwner $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_int_calculated_aba56f928f50f7f4a744c1f6b586e46f4}\label{class_lotus_1_1_core_1_1_int_calculated_aba56f928f50f7f4a744c1f6b586e46f4} 
+\index{Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}!NotCalculation@{NotCalculation}}
+\index{NotCalculation@{NotCalculation}!Lotus.Core.IntCalculated@{Lotus.Core.IntCalculated}}
+\doxysubsubsection{\texorpdfstring{NotCalculation}{NotCalculation}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+Int\+Calculated.\+Not\+Calculation\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Не учитывать параметр в расчетах. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_not_calculation_a6d966a3d2ae8efb3cb3ef722ca85344b}{Lotus.\+Core.\+ILotus\+Not\+Calculation}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Common\+Types/Lotus\+Calculated\+Values.\+cs\end{DoxyCompactItemize}

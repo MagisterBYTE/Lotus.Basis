@@ -148,12 +148,12 @@ namespace Lotus.Core
             if (saveOldData)
             {
                 var data = new TNumber[count];
-                var count_copy = count;
+                var countCopy = count;
                 if (count > Count)
                 {
-                    count_copy = Count;
+                    countCopy = Count;
                 }
-                for (var i = 0; i < count_copy; i++)
+                for (var i = 0; i < countCopy; i++)
                 {
                     data[i] = _data[i];
                 }
@@ -186,23 +186,23 @@ namespace Lotus.Core
         /// <param name="newHeight">Новая высота.</param>
         public void Resize(int newWidth, int newHeight)
         {
-            var temp_data = new TNumber[newWidth * newHeight];
+            var tempData = new TNumber[newWidth * newHeight];
 
-            var factor_x = _width / (double)newWidth;
-            var factor_y = _height / (double)newHeight;
+            var factorX = _width / (double)newWidth;
+            var factorY = _height / (double)newHeight;
 
             for (var x = 0; x < newWidth; ++x)
             {
                 for (var y = 0; y < newHeight; ++y)
                 {
-                    var gx = (int)Math.Floor(x * factor_x);
-                    var gy = (int)Math.Floor(y * factor_y);
+                    var gx = (int)Math.Floor(x * factorX);
+                    var gy = (int)Math.Floor(y * factorY);
                     var val = this[gx, gy];
-                    temp_data[x + (y * newWidth)] = val;
+                    tempData[x + (y * newWidth)] = val;
                 }
             }
 
-            _data = temp_data;
+            _data = tempData;
             _width = newWidth;
             _height = newHeight;
             _rank = 2;
@@ -216,10 +216,10 @@ namespace Lotus.Core
         /// <param name="useBilinear">Использовать билинейную интерполяцию.</param>
         public void Resize(int newWidth, int newHeight, bool useBilinear)
         {
-            var temp_data = new TNumber[newWidth * newHeight];
+            var tempData = new TNumber[newWidth * newHeight];
 
-            var factor_x = _width / (double)newWidth;
-            var factor_y = _height / (double)newHeight;
+            var factorX = _width / (double)newWidth;
+            var factorY = _height / (double)newHeight;
 
 #if UNITY_2017_1_OR_NEWER
             _ = useBilinear; // Bilinear unavailable without generic math operators.
@@ -228,8 +228,8 @@ namespace Lotus.Core
 #if !UNITY_2017_1_OR_NEWER
             if (useBilinear)
             {
-                double fraction_x, fraction_y, one_minus_x, one_minus_y;
-                int ceil_x, ceil_y, floor_x, floor_y;
+                double fractionX, fractionY, oneMinusX, oneMinusY;
+                int ceilX, ceilY, floorX, floorY;
                 TNumber c1, c2, c3, c4;
                 TNumber b1, b2;
 
@@ -238,36 +238,36 @@ namespace Lotus.Core
                     for (var y = 0; y < newHeight; ++y)
                     {
                         // Setup
-                        floor_x = (int)Math.Floor(x * factor_x);
-                        floor_y = (int)Math.Floor(y * factor_y);
+                        floorX = (int)Math.Floor(x * factorX);
+                        floorY = (int)Math.Floor(y * factorY);
 
-                        ceil_x = floor_x + 1;
-                        if (ceil_x >= _width)
+                        ceilX = floorX + 1;
+                        if (ceilX >= _width)
                         {
-                            ceil_x = floor_x;
+                            ceilX = floorX;
                         }
 
-                        ceil_y = floor_y + 1;
-                        if (ceil_y >= _height)
+                        ceilY = floorY + 1;
+                        if (ceilY >= _height)
                         {
-                            ceil_y = floor_y;
+                            ceilY = floorY;
                         }
 
-                        fraction_x = (x * factor_x) - floor_x;
-                        fraction_y = (y * factor_y) - floor_y;
-                        one_minus_x = 1.0 - fraction_x;
-                        one_minus_y = 1.0 - fraction_y;
+                        fractionX = (x * factorX) - floorX;
+                        fractionY = (y * factorY) - floorY;
+                        oneMinusX = 1.0 - fractionX;
+                        oneMinusY = 1.0 - fractionY;
 
-                        c1 = this[floor_x, floor_y];
-                        c2 = this[ceil_x, floor_y];
-                        c3 = this[floor_x, ceil_y];
-                        c4 = this[ceil_x, ceil_y];
+                        c1 = this[floorX, floorY];
+                        c2 = this[ceilX, floorY];
+                        c3 = this[floorX, ceilY];
+                        c4 = this[ceilX, ceilY];
 
-                        b1 = (GetScale(c1, one_minus_x) + GetScale(c2, fraction_x));
-                        b2 = (GetScale(c3, one_minus_x) + GetScale(c4, fraction_x));
-                        var val = (GetScale(b1, one_minus_y) + GetScale(b2, fraction_y));
+                        b1 = (GetScale(c1, oneMinusX) + GetScale(c2, fractionX));
+                        b2 = (GetScale(c3, oneMinusX) + GetScale(c4, fractionX));
+                        var val = (GetScale(b1, oneMinusY) + GetScale(b2, fractionY));
 
-                        temp_data[x + (y * newWidth)] = val;
+                        tempData[x + (y * newWidth)] = val;
                     }
                 }
             }
@@ -279,15 +279,15 @@ namespace Lotus.Core
                 {
                     for (var y = 0; y < newHeight; ++y)
                     {
-                        var gx = (int)Math.Floor(x * factor_x);
-                        var gy = (int)Math.Floor(y * factor_y);
+                        var gx = (int)Math.Floor(x * factorX);
+                        var gy = (int)Math.Floor(y * factorY);
                         var val = this[gx, gy];
-                        temp_data[x + (y * newWidth)] = val;
+                        tempData[x + (y * newWidth)] = val;
                     }
                 }
             }
 
-            _data = temp_data;
+            _data = tempData;
             _width = newWidth;
             _height = newHeight;
             _rank = 2;

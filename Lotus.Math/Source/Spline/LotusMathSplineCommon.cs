@@ -372,23 +372,23 @@ namespace Lotus.Maths
         /// <returns>Прямоугольник.</returns>
         public virtual Rect2Df GetArea()
         {
-            float x_min = StartPoint.X, x_max = EndPoint.X, y_min = StartPoint.Y, y_max = EndPoint.Y;
+            float xMin = StartPoint.X, xMax = EndPoint.X, yMin = StartPoint.Y, yMax = EndPoint.Y;
 
             for (var i = 0; i < _drawingPoints.Count; i++)
             {
                 var point = _drawingPoints[i];
-                if (point.X < x_min) x_min = point.X;
-                if (point.X > x_max) x_max = point.X;
-                if (point.Y < y_min) y_min = point.Y;
-                if (point.Y > y_max) y_max = point.Y;
+                if (point.X < xMin) xMin = point.X;
+                if (point.X > xMax) xMax = point.X;
+                if (point.Y < yMin) yMin = point.Y;
+                if (point.Y > yMax) yMax = point.Y;
             }
 
             var rectArea = new Rect2Df
             {
-                X = x_min,
-                Width = x_max - x_min,
-                Y = y_min,
-                Height = y_max - y_min
+                X = xMin,
+                Width = xMax - xMin,
+                Y = yMin,
+                Height = yMax - yMin
             };
 
             return rectArea;
@@ -526,13 +526,13 @@ namespace Lotus.Maths
 		/// <param name="material">Материал.</param>
 		/// <param name="color">Цвет сплайна.</param>
 		/// <param name="alternative">Альтернативный цвет сплайна на нечетных сегментах.</param>
-		/// <param name="is_alternative">Статус использования альтернативного цвета.</param>
-		public virtual void OnDrawSplineGL(Material material, Color color, Color alternative, Boolean is_alternative = true)
+		/// <param name="isAlternative">Статус использования альтернативного цвета.</param>
+		public virtual void OnDrawSplineGL(Material material, Color color, Color alternative, Boolean isAlternative = true)
 		{
 			GL.PushMatrix();
 			GL.LoadPixelMatrix();
 			material.SetPass(0);
-			if (is_alternative == false)
+			if (isAlternative == false)
 			{
 				GL.Color(color);
 			}
@@ -543,7 +543,7 @@ namespace Lotus.Maths
 					var p1 = new Vector2Df(_drawingPoints[i - 1].X, Screen.height - _drawingPoints[i - 1].Y);
 					var p2 = new Vector2Df(_drawingPoints[i].X, Screen.height - _drawingPoints[i].Y);
 
-					if (is_alternative)
+					if (isAlternative)
 					{
 						if (i % 2 == 0)
 						{
@@ -918,23 +918,23 @@ namespace Lotus.Maths
         /// <returns>Прямоугольник.</returns>
         public virtual Rect2Df GetArea()
         {
-            float x_min = StartPoint.X, x_max = EndPoint.X, y_min = StartPoint.Y, y_max = EndPoint.Y;
+            float xMin = StartPoint.X, xMax = EndPoint.X, yMin = StartPoint.Y, yMax = EndPoint.Y;
 
             for (var i = 0; i < _drawingPoints.Count; i++)
             {
                 var point = _drawingPoints[i];
-                if (point.X < x_min) x_min = point.X;
-                if (point.X > x_max) x_max = point.X;
-                if (point.Y < y_min) y_min = point.Y;
-                if (point.Y > y_max) y_max = point.Y;
+                if (point.X < xMin) xMin = point.X;
+                if (point.X > xMax) xMax = point.X;
+                if (point.Y < yMin) yMin = point.Y;
+                if (point.Y > yMax) yMax = point.Y;
             }
 
             var rectArea = new Rect2Df
             {
-                X = x_min,
-                Width = x_max - x_min,
-                Y = y_min,
-                Height = y_max - y_min
+                X = xMin,
+                Width = xMax - xMin,
+                Y = yMin,
+                Height = yMax - yMin
             };
 
             return rectArea;

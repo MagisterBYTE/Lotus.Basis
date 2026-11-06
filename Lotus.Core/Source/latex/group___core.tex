@@ -1,0 +1,134 @@
+\doxysection{Модуль базового ядра}
+\hypertarget{group___core}{}\label{group___core}\index{Модуль базового ядра@{Модуль базового ядра}}
+
+
+Модуль, содержащий код, развивающий в целом платформу NET и реализующий дополнительную базовую функциональность на уровне среды NET. Большинство реализаций модуля кроссплатформенно. Является основой для построения других подсистем и модулей.  
+
+
+\doxysubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_attribute}{Подсистема атрибутов}}
+\begin{DoxyCompactList}\small\item\em Подсистема атрибутов содержит необходимые атрибуты для расширения функциональности и добавления новых характеристик к свойствам, методам и классам. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_collections}{Подсистема коллекций}}
+\begin{DoxyCompactList}\small\item\em Дополнительные коллекции данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_common_types}{Подсистема общих типов}}
+\begin{DoxyCompactList}\small\item\em Подсистема общих типов реализует общие кроссплатформенные типы данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_component_model}{Подсистема компонентной модели}}
+\begin{DoxyCompactList}\small\item\em Подсистема компонентной модели реализует типы и структуры данных для адаптации к пользовательскому интерфейсу. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_converters}{Подсистема конвертации данных}}
+\begin{DoxyCompactList}\small\item\em Подсистема конвертации и преобразования данных обеспечивает единый механизм и точку входа для преобразования объекта в нужный тип. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_data_binding}{Подсистема связывания данных}}
+\begin{DoxyCompactList}\small\item\em Подсистема связывания данных определяет тип и характер связанности между источником данных и приемником данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_date_time}{Подсистема работы с датой и временем}}
+\begin{DoxyCompactList}\small\item\em Подсистема работы с датой и временем обеспечивает дополнительные функциональные возможности для работы с временным интервалом и временным периодом. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_easing}{Подсистема функций плавности}}
+\begin{DoxyCompactList}\small\item\em Определение функций плавности изменения скорости для создания более реалистичных анимации. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_e_c_s}{Подсистема ECS}}
+\begin{DoxyCompactList}\small\item\em Подсистема ECS -\/ это архитектурный шаблон представления объектов как правило игрового мира. ECS состоит из сущностей, к которым прикреплены компоненты содержащие данные, и системами, которые работают с компонентами сущностей. Компонент является носителем только данных и недолжен, как правило,содержать никакой логики. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_entity_db}{Подсистема сущностей}}
+\begin{DoxyCompactList}\small\item\em Подсистема сущностей поддерживающих идентификатор через первичный ключ. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_expression}{Подсистема деревьев выражений}}
+\begin{DoxyCompactList}\small\item\em Подсистема деревьев выражений определяет паттерн «Спецификация» и построитель выражений. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_extension}{Методы расширений}}
+\begin{DoxyCompactList}\small\item\em Общие методы расширения для базовых типов платформы NET. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_file_system}{Подсистема файловой системы}}
+\begin{DoxyCompactList}\small\item\em Подсистема файловой системы реализует концепцию элементов файловой системы как иерархическую модель данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_helpers}{Вспомогательная подсистема}}
+\begin{DoxyCompactList}\small\item\em Вспомогательная подсистема содержит хелперы расширяющие возможности базовых типов платформы NET. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_humanizer}{Подсистема гуманизации текста}}
+\begin{DoxyCompactList}\small\item\em Вспомогательная подсистема для преобразования некоторых данных в человеческий формат. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_identifiers}{Подсистема идентификаторов}}
+\begin{DoxyCompactList}\small\item\em Подсистема идентификаторов определяет базовые понятия об идентификации и классы идентификации объектов. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_interfaces}{Подсистема интерфейсов}}
+\begin{DoxyCompactList}\small\item\em Подсистема интерфейсов содержит базовые интерфейсы которые определяют различные аспекты работы с объектами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_logger}{Подсистема логирования}}
+\begin{DoxyCompactList}\small\item\em Подсистема логирования представляет собой подсистему, предназначенную для трассировки, диагностики, отладки и логирования процесса работы приложения. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_memento}{Подсистема хранения состояний}}
+\begin{DoxyCompactList}\small\item\em Подсистема хранения состояний обеспечивает сохранения состояния объекта/системы и возможность его последующего восстановления. Является основой для шаблона проектирования повторении и отмены действия. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_message}{Подсистема сообщений}}
+\begin{DoxyCompactList}\small\item\em Централизованная подсистема сообщений. Подсистема сообщений предназначена для уведомления всех подписчиков о произошедшем событии посредством соответствующих издателей. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_inspector}{Подсистема поддержки инспектора свойств}}
+\begin{DoxyCompactList}\small\item\em Подсистема поддержки инспектора свойств обеспечивает расширенное описание и управление свойствами/полями объекта. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_notify_interfaces}{Интерфейсы уведомления}}
+\begin{DoxyCompactList}\small\item\em Подсистема для определение дополнительных интерфейсов по уведомлению об изменении свойств объектов и данных коллекций. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_view_model}{Подсистема View\+Model}}
+\begin{DoxyCompactList}\small\item\em Подсистема \doxylink{class_lotus_1_1_core_1_1_view_model}{View\+Model} является мощной, гибкой, промежуточной подсистемой между реальными данными(слой логики -\/ модели данных) и элементами пользовательского интерфейса которые эти данные отображают. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_object_pool}{Подсистема объектного пула}}
+\begin{DoxyCompactList}\small\item\em Объектный пул -\/ порождающий шаблон проектирования, набор инициализированных и готовых к использованию объектов. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_parameters}{Подсистема параметрических объектов}}
+\begin{DoxyCompactList}\small\item\em Подсистема параметрических объектов обеспечивает представление и хранение информации в документоориентированном стиле. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_protection}{Подсистема защиты}}
+\begin{DoxyCompactList}\small\item\em Подсистема защиты представляет собой подсистему работы с криптографическим средствами, работу с утверждениями, а несложные механизмы защиты (шифрования/декодирование) для примитивных типов данных, где используются простые методы -\/ манипулирование и операции с битами и циклические сдвиги. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_reflection}{Подсистема рефлексии}}
+\begin{DoxyCompactList}\small\item\em Подсистема рефлексии для кэширования данных отражения. Подсистема реализует методы предназначение для упрощения работы с рефлексией данных, проверки типов, а также содержит ряд вспомогательных объектов связанных с рефлексией данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_repository}{Подсистема репозитория}}
+\begin{DoxyCompactList}\small\item\em Подсистема репозитория определяет базовый интерфейс репозитория. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_results_system}{Подсистема результата операции}}
+\begin{DoxyCompactList}\small\item\em Подсистема результата операции реализует общую схему ответа/результата выполнения различных операций(вызов метода, дополнительные данные в ответе и т.\+д) от различных подсистем и определяет успешность/не успешность ответа, а также вспомогательную информацию. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_request_and_response}{Подсистема запроса и ответа}}
+\begin{DoxyCompactList}\small\item\em Подсистема запроса и ответа определяет однотипный унифицированный набор типов для получения фильтрованных/сортированных/сгруппированных данных с разделением на страницы и формирования соответствующих запросов. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_serialization}{Подсистема сериализации}}
+\begin{DoxyCompactList}\small\item\em Подсистема сериализации данных обеспечивает расширенный механизм сериализации данных в различные форматы данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_service_o_s}{Подсистема сервисов OS}}
+\begin{DoxyCompactList}\small\item\em Подсистема вспомогательных сервисов обеспечивает дополнительную рабочую функциональность, связанную с платформо-\/зависимыми реализациями и особенностями отдельных системных элементов. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_storage}{Хранилища данных}}
+\begin{DoxyCompactList}\small\item\em Хранилища данных представляет собой совокупность всех доступных репозиториев и определяет место и способ хранения данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_task}{Подсистема задач}}
+\begin{DoxyCompactList}\small\item\em Подсистема задач (не потоки) предназначена для формирования задачи или группы задачи которая может выполняться последовательно или параллельно, с определенным режимом выполнения, а также с возможностью приостановки и дальнейшего выполнения. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_text}{Подсистема текстовых данных}}
+\begin{DoxyCompactList}\small\item\em Подсистема текстовых данных реализуется базовый механизм для автоматической генерации текстовых данных, их семантического и синтаксического редактирования, включая кодогенерацию и расширенное редактирование текстовых файлов. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_tree_node}{Подсистема иерархических данных}}
+\begin{DoxyCompactList}\small\item\em Подсистема иерархических данных реализует универсальный тип узла дерева совокупность которых формирует иерархическое дерево. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_typedef}{Подсистема константных типов}}
+\begin{DoxyCompactList}\small\item\em Подсистема константных типов реализует тип, объекты которого создаются один раз и сравниваются по значению. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_utilities}{Подсистема утилит}}
+\begin{DoxyCompactList}\small\item\em Подсистема утилит содержит различные вспомогательные утилиты которые не относиться к другим подсистемам. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Lotus.\+Core.\+XCore\+Settings}
+\begin{DoxyCompactList}\small\item\em Статический класс для определения настроек модуля базового ядра \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Модуль, содержащий код, развивающий в целом платформу NET и реализующий дополнительную базовую функциональность на уровне среды NET. Большинство реализаций модуля кроссплатформенно. Является основой для построения других подсистем и модулей. 
+
+Модуль это прежде всего кроссплатформенный набор инструментов для решения повседневных задач\+: большая библиотека расширений, реализации коллекций на основе массива, гибкая и универсальная подсистема задач, подсистема сообщений и многое другое.\input{group___core_attribute}
+\input{group___core_collections}
+\input{group___core_common_types}
+\input{group___core_component_model}
+\input{group___core_converters}
+\input{group___core_data_binding}
+\input{group___core_date_time}
+\input{group___core_easing}
+\input{group___core_e_c_s}
+\input{group___core_entity_db}
+\input{group___core_expression}
+\input{group___core_extension}
+\input{group___core_file_system}
+\input{group___core_helpers}
+\input{group___core_humanizer}
+\input{group___core_identifiers}
+\input{group___core_interfaces}
+\input{group___core_logger}
+\input{group___core_memento}
+\input{group___core_message}
+\input{group___core_inspector}
+\input{group___core_notify_interfaces}
+\input{group___core_view_model}
+\input{group___core_object_pool}
+\input{group___core_parameters}
+\input{group___core_protection}
+\input{group___core_reflection}
+\input{group___core_repository}
+\input{group___core_results_system}
+\input{group___core_request_and_response}
+\input{group___core_serialization}
+\input{group___core_service_o_s}
+\input{group___core_storage}
+\input{group___core_task}
+\input{group___core_text}
+\input{group___core_tree_node}
+\input{group___core_typedef}
+\input{group___core_utilities}

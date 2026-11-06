@@ -12,7 +12,7 @@ namespace Lotus.Core.Text
     public class TextCriticalTests
     {
         /// <summary>
-        /// Тест CTextGenerateCodeCSharp - корректная работа с исправленными именами переменных (delimiterPart вместо delimiter_part).
+        /// Тест CTextGenerateCodeCSharp - корректная работа с исправленными именами переменных (delimiterPart вместо delimiterPart).
         /// </summary>
         [Test]
         public void CTextGenerateCodeCSharp_AddDelimiterPart_ShouldUseCorrectVariableNames()
@@ -29,7 +29,7 @@ namespace Lotus.Core.Text
         }
 
         /// <summary>
-        /// Тест CTextGenerateCodeCSharp - корректная работа с исправленными именами переменных (delimiterSection вместо delimiter_section).
+        /// Тест CTextGenerateCodeCSharp - корректная работа с исправленными именами переменных (delimiterSection вместо delimiterSection).
         /// </summary>
         [Test]
         public void CTextGenerateCodeCSharp_AddDelimiterSection_ShouldUseCorrectVariableNames()
@@ -46,7 +46,7 @@ namespace Lotus.Core.Text
         }
 
         /// <summary>
-        /// Тест CTextList - корректная работа с исправленными именами переменных (streamWriter вместо stream_writer).
+        /// Тест CTextList - корректная работа с исправленными именами переменных (streamWriter вместо streamWriter).
         /// </summary>
         [Test]
         public void CTextList_Save_ShouldUseCorrectVariableNames()
@@ -80,7 +80,7 @@ namespace Lotus.Core.Text
         }
 
         /// <summary>
-        /// Тест CTextBase - корректная работа с исправленными именами переменных (countTabs вместо count_tabs).
+        /// Тест CTextBase - корректная работа с исправленными именами переменных (countTabs вместо countTabs).
         /// </summary>
         [Test]
         public void CTextBase_SetLengthWithTabs_ShouldUseCorrectVariableNames()

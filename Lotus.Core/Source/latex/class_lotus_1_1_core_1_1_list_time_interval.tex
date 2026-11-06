@@ -1,0 +1,773 @@
+\doxysection{Lotus.\+Core.\+List\+Time\+Interval\texorpdfstring{$<$}{<} TItem\+Timeable \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_list_time_interval}{}\label{class_lotus_1_1_core_1_1_list_time_interval}\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+
+
+Коллекция содержащая объекты реализующие интерфейс ILotus\+Date\+Timeable с определённым временным интервалом.  
+
+
+Inheritance diagram for Lotus.\+Core.\+List\+Time\+Interval\texorpdfstring{$<$}{<} TItem\+Timeable \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_list_time_interval}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a1d10f014c15b6f11e1dbd1a05018a7b4}\label{class_lotus_1_1_core_1_1_list_time_interval_a1d10f014c15b6f11e1dbd1a05018a7b4} 
+{\bfseries List\+Time\+Interval} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_ad9b6013749bcc1f850c7f8050f718677}{List\+Time\+Interval}} (int capacity)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_ac48ffbeeeb8b0a3a66088b070b0434a1}{List\+Time\+Interval}} (\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}} time\+Interval, int capacity=120)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a46802d7d9e751cd9eb5d2a09bc221542}{List\+Time\+Interval}} (\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}} time\+Interval, \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} start\+Data, \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} end\+Data, int capacity=120)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a8919b8758e83e16da848332853c18157}{Assign\+Time\+Period}} (\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} start\+Data, \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} end\+Data)
+\begin{DoxyCompactList}\small\item\em Присвоение указанного временного периода. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_ac6354d5ef33a3edc4ed6648fd4280e8c}{Get\+Index\+From\+Date}} (int year, int month, int day)
+\begin{DoxyCompactList}\small\item\em Получение индекса элемента по указанным параметрам даты. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a187d54093ebed4a0858a9c2c68c63fff}{Get\+Index\+From\+Date}} (\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} date)
+\begin{DoxyCompactList}\small\item\em Получение индекса элемента по дате. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a37430d13544cc3086fe665698b8bf265}{Get\+Interpolated\+Date}} (float index)
+\begin{DoxyCompactList}\small\item\em Получение интерполированного значение даты указанному вещественному индексу. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a6bb476f9e06fef484ab39c5af0dd81e6}{Count\+Weekends}} ()
+\begin{DoxyCompactList}\small\item\em Подсчет количество выходных дней. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_af84a723026f79d44fbcfc12162248226}{Remove\+Weekends}} ()
+\begin{DoxyCompactList}\small\item\em Удаление выходных дней. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a285df73c3c4dbfef6ccd042d3c8fd62a}{Trim\+Start}} (\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} date, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список сначала до указанной даты. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a60310b476ae0fb5ddcff2dba970cbd0c}{Trim\+End}} (\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} date, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список с конца до указанной даты. \end{DoxyCompactList}\item 
+virtual TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a50630f41718b249f3fc0f844acd30257}{Get\+List\+Period$<$ TResult $>$}} (int start\+Index, int end\+Index)
+\begin{DoxyCompactList}\small\item\em Получение списка с указанным периодом. \end{DoxyCompactList}\item 
+virtual TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a94a3072043241d213495f773d5b74b51}{Get\+List\+Period$<$ TResult $>$}} (\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} start\+Date, \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} end\+Data)
+\begin{DoxyCompactList}\small\item\em Получение списка с указанным периодом. \end{DoxyCompactList}\item 
+virtual TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_aabe3f9a5bc75574d6eca96212e71a121}{Duplicate\+List\+Period$<$ TResult $>$}} (int start\+Index, int end\+Index)
+\begin{DoxyCompactList}\small\item\em Дублирование списка с указанным периодом. \end{DoxyCompactList}\item 
+virtual ? TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a37bbc81bdd91b4dd8b87893ab8e1e7db}{Duplicate\+List\+Period$<$ TResult $>$}} (\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} start\+Date, \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} end\+Data)
+\begin{DoxyCompactList}\small\item\em Дублирование списка с указанным периодом. \end{DoxyCompactList}\item 
+virtual ? TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a792b84c3b0d0eaed10cc3d1cad9434e2}{Get\+Converted\+List\+Interval$<$ TResult $>$}} (\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}} time\+Interval)
+\begin{DoxyCompactList}\small\item\em Получение списка с указанным временным интервалом. \end{DoxyCompactList}\item 
+virtual ? TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_ad7b792873d19b05efe0ef7ddaccba52e}{Get\+Converted\+List\+Period\+And\+Interval$<$ TResult $>$}} (\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}} time\+Interval, int start\+Index, int end\+Index)
+\begin{DoxyCompactList}\small\item\em Получение списка с указанным временным интервалом и указанным временным периодом. \end{DoxyCompactList}\item 
+virtual ? TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_ab37ffdf86628e77b9087db98fc0213dc}{Get\+Converted\+List\+Period\+And\+Interval$<$ TResult $>$}} (\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}} time\+Interval, \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} start\+Date, \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} end\+Data)
+\begin{DoxyCompactList}\small\item\em Получение списка с указанным временным интервалом и указанным временным периодом. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem\+Timeable $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries List\+Array} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные списка предустановленными данными. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_acadd5141cf424088ebd4f11ea8ff4afc}{List\+Array}} (int capacity)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные списка указанными данными. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab12191bb9a81b2d975cda41f62eb1544}{List\+Array}} (IList$<$ TItem?$>$ items)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные списка указанными данными. \end{DoxyCompactList}\item 
+IEnumerator$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab7203258c75c3a1a4b95cd9be8adc246}{Get\+Enumerator}} ()
+\begin{DoxyCompactList}\small\item\em Получение перечислителя. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a2d02ad841faf1e1a44316d876224b3a2}{Add}} (object? value)
+\begin{DoxyCompactList}\small\item\em Добавление элемента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a6c2a02e5d8b90ee1fcdf2aee48e97573}{Add}} (TItem? item)
+\begin{DoxyCompactList}\small\item\em Добавление элемента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a99794686cf87d3f7399b10d57b34a3dc}{Add}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Добавление элемента. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aeb632588c977b7f68fd88f869cecdf88}{Contains}} (object? value)
+\begin{DoxyCompactList}\small\item\em Проверка на наличие элемента в списке. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a9c6a025aa778d7afc90bea6952639a9f}{Contains}} (TItem? item)
+\begin{DoxyCompactList}\small\item\em Проверка на наличие элемента в списке. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ae0eb25fd59b42683302772085ece4cb9}{Contains}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Проверка на наличие элемента в списке. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a4e6ce23da68f2c19783b5f8e80ddb082}{Index\+Of}} (object? value)
+\begin{DoxyCompactList}\small\item\em Получение индекса элемента в списке. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a991c36f5e2359b9712c8a77de51f2669}{Index\+Of}} (TItem? item)
+\begin{DoxyCompactList}\small\item\em Получение индекса элемента в списке. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a8f5542438a76f676ea32f10022d19336}{Index\+Of}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Поиск с начала списка индекса указанного элемента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aa2b72a44ccdb4902a2e20d5a7f12aaed}{Insert}} (int index, object? value)
+\begin{DoxyCompactList}\small\item\em Вставка элемента в указанную позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a9b0c8ab4f5049f6f1e029b8a7e9b55fa}{Insert}} (int index, TItem? item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента в указанную позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a7a7af5dd80a1d05908b9b45a7144934e}{Insert}} (int index, in TItem? item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента в указанную позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a1b36ef475b11602ee38bf2b6c29b2719}{Remove}} (object? value)
+\begin{DoxyCompactList}\small\item\em Удаление элемента. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a56d1edf0975d43e9fed41981a321f28c}{Remove}} (TItem? item)
+\begin{DoxyCompactList}\small\item\em Удаление элемента. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a5da84025b130b5bee973f23f9dd97093}{Remove}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Удаление элемента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a19864e5b47fdd6f60e2b17aca526e042}{Copy\+To}} (Array array, int index)
+\begin{DoxyCompactList}\small\item\em Копирование элементов в указанный массив. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a2b8148302a94d9bffd433a0dc2d57cc4}{Copy\+To}} (TItem\mbox{[}$\,$\mbox{]} array, int array\+Index)
+\begin{DoxyCompactList}\small\item\em Копирование элементов в указанный массив. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a39bb415c271535081d8b08f6608e7fce}{Set\+At}} (int index, in TItem element)
+\begin{DoxyCompactList}\small\item\em Установка элемента списка по индексу с автоматическим увеличением размера при необходимости. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ade139e96ce29f147c54edda561063bec}{Get\+At}} (int index)
+\begin{DoxyCompactList}\small\item\em Получение элемента списка по индексу. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a3cde027ee09dbfb839a73bc82a87dfb9}{Reserve}} (int count)
+\begin{DoxyCompactList}\small\item\em Резервирование места на определённое количество элементов с учетом существующих. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab333b5a209694c73f467d9c2d65ae803}{Resize}} (int new\+Max\+Count)
+\begin{DoxyCompactList}\small\item\em Изменение максимального количества элементов которая может вместить коллекция. \end{DoxyCompactList}\item 
+void {\bfseries Trim\+Excess} ()
+\begin{DoxyCompactList}\small\item\em Определение емкости, равную фактическому числу элементов в списке, если это число меньше порогового значения. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a64f9fe389a14cd917cc49e5baeb3908f}{Set\+Data}} (TItem\mbox{[}$\,$\mbox{]} data, int count)
+\begin{DoxyCompactList}\small\item\em Установка данных на прямую. \end{DoxyCompactList}\item 
+TItem?\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a74c7deb6b0e053d75cb12467c3cfd434}{Get\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Получение непосредственно данных. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a117e068575f49058a8fd0d285553f16e}{Set\+Index\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Установка индекса для элементов. \end{DoxyCompactList}\item 
+void {\bfseries Notify\+Collection\+Reset} ()
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации о переустановке коллекции. \end{DoxyCompactList}\item 
+void {\bfseries Notify\+Collection\+Clear} ()
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации об очистки коллекции. \end{DoxyCompactList}\item 
+void {\bfseries Add\+Duplicate\+Last\+Item} ()
+\begin{DoxyCompactList}\small\item\em Дублирование последнего элемента и его добавление. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a7982ce9156c5e1f63f53f27c3fd9b142}{Add\+Items}} (params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Добавление элементов. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a95ca16417a20c8fcfbe8f31f7aa804f2}{Add\+Items}} (IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Добавление элементов. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aeeda4e2307f1c068fece9591f5584e1c}{Insert\+After}} (in TItem original, in TItem item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента после указанного элемента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aa2c53ebb8dbc18724b6d7370eff87c40}{Insert\+Before}} (in TItem original, in TItem item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента перед указанным элементом. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af72b260b5ae6c697fed9452b3d82b7aa}{Insert\+Items}} (int index, params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Вставка элементов в указанную позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a590ff37f82c8e75c22efbe55d5642274}{Insert\+Items}} (int index, IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Вставка элементов в указанную позицию. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af19155eb59308f45e84187ad261fbaf2}{Remove\+Items}} (params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Удаление элементов. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_abfc7751f873246004674b4a11c36a427}{Remove\+Items}} (IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Удаление элементов. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af17c482cce121434c7b7398fca75c299}{Remove\+Items\+End}} (int index)
+\begin{DoxyCompactList}\small\item\em Удаление элементов с указанного индекса и до конца коллекции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a85d0c91446b0287290b6c550245a45b2}{Remove\+Range}} (int index, int count)
+\begin{DoxyCompactList}\small\item\em Удаление элементов с определенного диапазона. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a5393b500afd6f11827545d53588b80ee}{Remove\+At}} (int index)
+\begin{DoxyCompactList}\small\item\em Удаление элемента. \end{DoxyCompactList}\item 
+void {\bfseries Remove\+First} ()
+\begin{DoxyCompactList}\small\item\em Удаление первого элемента. \end{DoxyCompactList}\item 
+void {\bfseries Remove\+Last} ()
+\begin{DoxyCompactList}\small\item\em Удаление последнего элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a876feab7be5e0ecd924421c9dcd6c7cb}{Remove\+Duplicates}} ()
+\begin{DoxyCompactList}\small\item\em Удаление дубликатов элементов. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab155f8ae32d0d7894be0e2d02adc7522}{Remove\+All}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Удаление всех элементов, удовлетворяющих условиям указанного предиката. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a2c5a7758055ce43c0698a3d84ee6f658}{Trim\+Start}} (in TItem item, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список сначала до указанного элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab5bd93860316736d2291b46f6a52bb6f}{Trim\+End}} (in TItem item, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список с конца до указанного элемента. \end{DoxyCompactList}\item 
+void {\bfseries Clear} ()
+\begin{DoxyCompactList}\small\item\em Очистка списка. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ac82b6245924e543888704a7a1e7af471}{Assign\+Items}} (params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Присвоение новых элементов списку. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a4f91cfaab4b8431dbd5947672e8791ad}{Assign\+Items}} (IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Присвоение новых элементов списку. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a101664b4312274148b630bbe18532ce4}{Union\+Items}} (params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Объединение элементов и существующих элементов списка. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a99dbd5429111afcdd2ee97bef95c22a9}{Union\+Items}} (IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Объединение элементов и существующих элементов списка. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_adce4634b5094eadacaefced352786189}{Difference\+Items}} (IList$<$ TItem?$>$ items)
+\begin{DoxyCompactList}\small\item\em Разница между элементами списка и элементами указанного списка. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ad1f4973d7a517492b7d33716c7ad7e43}{Difference\+Items}} (params TItem?\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Разница между элементами списка и элементами указанного списка. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a06f912856cddf585a0ffe3d939b1669a}{Last\+Index\+Of}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Поиск с конца списка индекса указанного элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a4476af1b9bf7a478c642f6f7dbbd57ef}{Find}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Поиск с начала списка индекса элемента удовлетворяющему указанному предикату. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a986f8f904a8aaeabf5bf3d1582bb6ea0}{Find\+Last}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Поиск с конца списка индекса элемента удовлетворяющему указанному предикату. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ae04aa027c9132b9e44427d48fe7aa9df}{Search}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Поиск с начала списка элемента удовлетворяющему указанному предикату. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a3453e1ed450884b877667c09f06fdea6}{Search\+Last}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Поиск с конца списка элемента удовлетворяющему указанному предикату. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a45f53dde12c324d2aab13ad1febcf4dc}{Check\+All}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Проверка элементов списка на удовлетворение указанного предиката. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ac5b6c5eba8cc142de500ac40bfebb3fb}{Check\+One}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Проверка элементов списка на удовлетворение указанного предиката. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ad270417db7647ece01b6d9e6f6a980a3}{Visit}} (Action$<$ TItem?$>$ on\+Visitor)
+\begin{DoxyCompactList}\small\item\em Посещение элементов списка указанным посетителем. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ad61385069a48d063f089d6aa3e6b4ccd}{Swap}} (int old\+Index, int new\+Index)
+\begin{DoxyCompactList}\small\item\em Обмен местами элементов списка. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a118acf14a81176b22bfd900b4e30136f}{Move}} (int old\+Index, int new\+Index)
+\begin{DoxyCompactList}\small\item\em Перемещение элемента в новую позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a270ca27c67c735279a448ff02b675b05}{Move\+Down}} (int element\+Index)
+\begin{DoxyCompactList}\small\item\em Перемещение элемента списка вниз. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ad530f93110e771d36555b863e7eb627f}{Move\+Up}} (int element\+Index)
+\begin{DoxyCompactList}\small\item\em Перемещение элемента списка вверх. \end{DoxyCompactList}\item 
+void {\bfseries Shift\+Down} ()
+\begin{DoxyCompactList}\small\item\em Циклическое смещение элементов списка вниз. \end{DoxyCompactList}\item 
+void {\bfseries Shift\+Up} ()
+\begin{DoxyCompactList}\small\item\em Циклическое смещение элементов списка вверх. \end{DoxyCompactList}\item 
+void {\bfseries Shuffle} ()
+\begin{DoxyCompactList}\small\item\em Перетасовка элементов списка. \end{DoxyCompactList}\item 
+virtual void {\bfseries Sort\+Ascending} ()
+\begin{DoxyCompactList}\small\item\em Сортировка списка по возрастанию. \end{DoxyCompactList}\item 
+virtual void {\bfseries Sort\+Descending} ()
+\begin{DoxyCompactList}\small\item\em Сортировка списка по убыванию. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a7d1d37cecc2f3b02630dff4b75a695e4}{Sort}} (IComparer$<$ TItem $>$ comparer)
+\begin{DoxyCompactList}\small\item\em Сортировка элементов списка посредством делегата. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aa344b2b4410a5bbb47a5f9f5f9f4706a}{Sort}} (Comparison$<$ TItem $>$ comparison)
+\begin{DoxyCompactList}\small\item\em Сортировка элементов списка посредством делегата. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a0ef4938176e844b28c9788fe034c4b8f}{Get\+Closest\+Index}} (in TItem item)
+\begin{DoxyCompactList}\small\item\em Поиск ближайшего индекса элемента по его значению, не больше указанного значения. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ae4b6f3a590b0d969c4848a5e9b824110}{Trim\+Closest\+Start}} (in TItem item, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список сначала до ближайшего указанного элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_accbbf78a70b76426948a3aac53d30f16}{Trim\+Closest\+End}} (in TItem item, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список с конца до ближайшего указанного элемента. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a25bb1ad7898b855dd497fec0fc9d77c7}{Get\+Grouped\+By\+Property}} (string property\+Name)
+\begin{DoxyCompactList}\small\item\em Получение списка групп элементов сгруппированных по указанному свойству. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a1291c66efd484067a474598b47e7fad0}{Get\+Items\+Duplicate}} ()
+\begin{DoxyCompactList}\small\item\em Получение дубликата коллекции. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aba789d859917ffa920df87f904b50c10}{Get\+Items\+Distinct}} ()
+\begin{DoxyCompactList}\small\item\em Получение различающихся (уникальных) элементов списка. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ object $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_afeb486970c20379547b45266de811f1c}{Get\+Distinct\+Value\+From\+Property\+Name}} (string property\+Name)
+\begin{DoxyCompactList}\small\item\em Получение списка уникальных значений указанного свойства. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a5705b4b062f79641467c8ce046341e3f}{Get\+Items\+Where}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Получение списка элементов по указанному предикату. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a20898d7c904954883c4a702e4fb99f09}{Notify\+Property\+Changed}} (string property\+Name="{}"{})
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_acbc383b6b33a8c27ff46750532924408}{Notify\+Property\+Changed}} (Property\+Changed\+Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval_a7954ea533e0624ee55f7089e3586d022}{Time\+Interval}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Временной интервал. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_af8dbfc2d196c677f8efbbbd6f34e54cb}\label{class_lotus_1_1_core_1_1_list_time_interval_af8dbfc2d196c677f8efbbbd6f34e54cb} 
+int {\bfseries Count\+Minutes}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество минут временного периода. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_afa5aac7f372e39cfecb9fe804cb55ecf}\label{class_lotus_1_1_core_1_1_list_time_interval_afa5aac7f372e39cfecb9fe804cb55ecf} 
+int {\bfseries Count\+Hours}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество часов временного периода. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a5fd5c2e87ffa11844f25e8adfc404ecf}\label{class_lotus_1_1_core_1_1_list_time_interval_a5fd5c2e87ffa11844f25e8adfc404ecf} 
+int {\bfseries Count\+Day}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество дней временного периода. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_aa88565f0f15dfcc392319639ccb16e41}\label{class_lotus_1_1_core_1_1_list_time_interval_aa88565f0f15dfcc392319639ccb16e41} 
+int {\bfseries Count\+Week}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество недель временного периода. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a19af8657a1794b5da98cb6fb4fa9e465}\label{class_lotus_1_1_core_1_1_list_time_interval_a19af8657a1794b5da98cb6fb4fa9e465} 
+\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}? {\bfseries Date\+First}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Первый объект даты-\/времени. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a5850b3c2e2bc811f8c339758592b4bc2}\label{class_lotus_1_1_core_1_1_list_time_interval_a5850b3c2e2bc811f8c339758592b4bc2} 
+\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}? {\bfseries Date\+Penultimate}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Предпоследний объект даты-\/времени. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a3af6ab43b2e0cebb7a3a16fb624591d2}\label{class_lotus_1_1_core_1_1_list_time_interval_a3af6ab43b2e0cebb7a3a16fb624591d2} 
+\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}? {\bfseries Date\+Last}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Последний объект даты-\/времени. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem\+Timeable $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af1f88f71e1f208492ba9a40044bc38f6}{Max\+Count}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Максимальное количество элементов. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Empty}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус пустой коллекции. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af0b7be6e9589288f7f9c2b4657583fdb}{Is\+Fill}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус заполненной коллекции. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Notify}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус включения уведомлений коллекции о своих изменениях. \end{DoxyCompactList}\item 
+int {\bfseries Last\+Index}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индекс последнего элемента. \end{DoxyCompactList}\item 
+TItem?\mbox{[}$\,$\mbox{]} {\bfseries Serialize\+Items}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Данные массива для сериализации. \end{DoxyCompactList}\item 
+TItem? {\bfseries Item\+First}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Первый элемент. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a478b4ba33737a59f3fded510c49d704a}{Item\+Second}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Второй элемент. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af3de0facb68e98103cf53bca8acc4f4b}{Item\+Penultimate}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Предпоследний элемент. \end{DoxyCompactList}\item 
+TItem? {\bfseries Item\+Last}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Последний элемент. \end{DoxyCompactList}\item 
+int {\bfseries Count}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество элементов. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Read\+Only}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус коллекции только для чтения. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Fixed\+Size}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус фиксированной коллекции. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Synchronized}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус синхронизации коллекции. \end{DoxyCompactList}\item 
+object {\bfseries Sync\+Root}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Объект синхронизации. \end{DoxyCompactList}\item 
+TItem \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a3e7287fe7981d8dfa91de2f17b2cedef}{this\mbox{[}int index\mbox{]}}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индексация списка. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem\+Timeable $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+const int {\bfseries INIT\+\_\+\+MAX\+\_\+\+COUNT}
+\begin{DoxyCompactList}\small\item\em Максимальное количество элементов на начальном этапе. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Nullable}
+\begin{DoxyCompactList}\small\item\em Статус ссылочного типа элемента коллекции. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Indexable}
+\begin{DoxyCompactList}\small\item\em Статус поддержки типом элемента интерфейса ILotus\+Indexable. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Duplicatable}
+\begin{DoxyCompactList}\small\item\em Статус поддержки типом элемента интерфейса ILotus\+Duplicate. \end{DoxyCompactList}\item 
+static readonly Equality\+Comparer$<$ TItem $>$ {\bfseries Equality\+Comparer\+Default}
+\begin{DoxyCompactList}\small\item\em Компаратор поддержки операций сравнения объектов в отношении равенства. \end{DoxyCompactList}\item 
+static readonly Comparer$<$ TItem $>$ {\bfseries Comparer\+Default}
+\begin{DoxyCompactList}\small\item\em Компаратор поддержки операций сравнения объектов при упорядочении. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem\+Timeable $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a121a458b4c59d16ddbbfda2af0a25c46}{Notify\+Collection\+Changed}} (Notify\+Collection\+Changed\+Action action, object? item, int index)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений коллекции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab01c5a3e81812e6415637a7078d24d40}{Notify\+Collection\+Changed}} (Notify\+Collection\+Changed\+Action action, object? item, int index, int old\+Index)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений коллекции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab296dcdf9884e66047c0ced898e83cac}{Notify\+Collection\+Changed}} (Notify\+Collection\+Changed\+Action action, object? old\+Item, object? new\+Item, int index)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений коллекции. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem\+Timeable $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Count}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Indexer}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Empty}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Fill}
+\item 
+static readonly Notify\+Collection\+Changed\+Event\+Args {\bfseries Collection\+Args\+Reset}
+\end{DoxyCompactItemize}
+\doxysubsection*{Events inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem\+Timeable $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+Property\+Changed\+Event\+Handler? {\bfseries Property\+Changed}
+\begin{DoxyCompactList}\small\item\em Событие срабатывает ПОСЛЕ изменения свойства. \end{DoxyCompactList}\item 
+Notify\+Collection\+Changed\+Event\+Handler? {\bfseries Collection\+Changed}
+\begin{DoxyCompactList}\small\item\em Событие для информирование событий коллекций. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Коллекция содержащая объекты реализующие интерфейс ILotus\+Date\+Timeable с определённым временным интервалом. 
+
+Сама коллекция образует определённый временной период, элементы которой расположены в соответствии с временным интервалом. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TItem\+Timeable} & Тип элемента списка.\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TItem\+Timeable} : {\em \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_date_timeable}{ILotus\+Date\+Timeable}}}]\end{description}
+\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_ad9b6013749bcc1f850c7f8050f718677}\label{class_lotus_1_1_core_1_1_list_time_interval_ad9b6013749bcc1f850c7f8050f718677} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!ListTimeInterval@{ListTimeInterval}}
+\index{ListTimeInterval@{ListTimeInterval}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{ListTimeInterval()}{ListTimeInterval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{List\+Time\+Interval}} (\begin{DoxyParamCaption}\item[{int}]{capacity }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & Начальная максимальная емкость списка.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_ac48ffbeeeb8b0a3a66088b070b0434a1}\label{class_lotus_1_1_core_1_1_list_time_interval_ac48ffbeeeb8b0a3a66088b070b0434a1} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!ListTimeInterval@{ListTimeInterval}}
+\index{ListTimeInterval@{ListTimeInterval}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{ListTimeInterval()}{ListTimeInterval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{List\+Time\+Interval}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}}}]{time\+Interval,  }\item[{int}]{capacity = {\ttfamily 120} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Interval} & Временной интервал.\\
+\hline
+{\em capacity} & Начальная максимальная емкость списка.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a46802d7d9e751cd9eb5d2a09bc221542}\label{class_lotus_1_1_core_1_1_list_time_interval_a46802d7d9e751cd9eb5d2a09bc221542} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!ListTimeInterval@{ListTimeInterval}}
+\index{ListTimeInterval@{ListTimeInterval}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{ListTimeInterval()}{ListTimeInterval()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{List\+Time\+Interval}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}}}]{time\+Interval,  }\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{start\+Data,  }\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{end\+Data,  }\item[{int}]{capacity = {\ttfamily 120} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Interval} & Временной интервал.\\
+\hline
+{\em start\+Data} & Дата начала периода.\\
+\hline
+{\em end\+Data} & Дата окончания периода.\\
+\hline
+{\em capacity} & Начальная максимальная емкость списка.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a8919b8758e83e16da848332853c18157}\label{class_lotus_1_1_core_1_1_list_time_interval_a8919b8758e83e16da848332853c18157} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!AssignTimePeriod@{AssignTimePeriod}}
+\index{AssignTimePeriod@{AssignTimePeriod}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{AssignTimePeriod()}{AssignTimePeriod()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Assign\+Time\+Period (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{start\+Data,  }\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{end\+Data }\end{DoxyParamCaption})}
+
+
+
+Присвоение указанного временного периода. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Data} & Дата начала периода.\\
+\hline
+{\em end\+Data} & Дата окончания периода.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a6bb476f9e06fef484ab39c5af0dd81e6}\label{class_lotus_1_1_core_1_1_list_time_interval_a6bb476f9e06fef484ab39c5af0dd81e6} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!CountWeekends@{CountWeekends}}
+\index{CountWeekends@{CountWeekends}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{CountWeekends()}{CountWeekends()}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Count\+Weekends (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Подсчет количество выходных дней. 
+
+\begin{DoxyReturn}{Returns}
+Количество выходных дней.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a37bbc81bdd91b4dd8b87893ab8e1e7db}\label{class_lotus_1_1_core_1_1_list_time_interval_a37bbc81bdd91b4dd8b87893ab8e1e7db} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!DuplicateListPeriod$<$ TResult $>$@{DuplicateListPeriod$<$ TResult $>$}}
+\index{DuplicateListPeriod$<$ TResult $>$@{DuplicateListPeriod$<$ TResult $>$}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{DuplicateListPeriod$<$ TResult $>$()}{DuplicateListPeriod< TResult >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual ? TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Duplicate\+List\+Period$<$ TResult $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{start\+Date,  }\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{end\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Дублирование списка с указанным периодом. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TResult} & Тип списка.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Date} & Дата начала периода.\\
+\hline
+{\em end\+Data} & Дата окончания периода.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TResult} : {\em List\+Time\+Interval$<$TItem\+Timeable$>$}]\item[{\em TResult} : {\em new()}]\end{description}
+\end{Desc}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_aabe3f9a5bc75574d6eca96212e71a121}\label{class_lotus_1_1_core_1_1_list_time_interval_aabe3f9a5bc75574d6eca96212e71a121} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!DuplicateListPeriod$<$ TResult $>$@{DuplicateListPeriod$<$ TResult $>$}}
+\index{DuplicateListPeriod$<$ TResult $>$@{DuplicateListPeriod$<$ TResult $>$}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{DuplicateListPeriod$<$ TResult $>$()}{DuplicateListPeriod< TResult >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Duplicate\+List\+Period$<$ TResult $>$ (\begin{DoxyParamCaption}\item[{int}]{start\+Index,  }\item[{int}]{end\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Дублирование списка с указанным периодом. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TResult} & Тип списка.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Index} & Начальный индекс периода.\\
+\hline
+{\em end\+Index} & Конечный индекс периода.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TResult} : {\em List\+Time\+Interval$<$TItem\+Timeable$>$}]\item[{\em TResult} : {\em new()}]\end{description}
+\end{Desc}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a792b84c3b0d0eaed10cc3d1cad9434e2}\label{class_lotus_1_1_core_1_1_list_time_interval_a792b84c3b0d0eaed10cc3d1cad9434e2} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!GetConvertedListInterval$<$ TResult $>$@{GetConvertedListInterval$<$ TResult $>$}}
+\index{GetConvertedListInterval$<$ TResult $>$@{GetConvertedListInterval$<$ TResult $>$}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{GetConvertedListInterval$<$ TResult $>$()}{GetConvertedListInterval< TResult >()}}
+{\footnotesize\ttfamily virtual ? TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Get\+Converted\+List\+Interval$<$ TResult $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}}}]{time\+Interval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение списка с указанным временным интервалом. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TResult} & Тип списка.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Interval} & Временной интервал.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TResult} : {\em List\+Time\+Interval$<$TItem\+Timeable$>$}]\item[{\em TResult} : {\em new()}]\end{description}
+\end{Desc}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_ab37ffdf86628e77b9087db98fc0213dc}\label{class_lotus_1_1_core_1_1_list_time_interval_ab37ffdf86628e77b9087db98fc0213dc} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!GetConvertedListPeriodAndInterval$<$ TResult $>$@{GetConvertedListPeriodAndInterval$<$ TResult $>$}}
+\index{GetConvertedListPeriodAndInterval$<$ TResult $>$@{GetConvertedListPeriodAndInterval$<$ TResult $>$}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{GetConvertedListPeriodAndInterval$<$ TResult $>$()}{GetConvertedListPeriodAndInterval< TResult >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual ? TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Get\+Converted\+List\+Period\+And\+Interval$<$ TResult $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}}}]{time\+Interval,  }\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{start\+Date,  }\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{end\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение списка с указанным временным интервалом и указанным временным периодом. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TResult} & Тип списка.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Interval} & Временной интервал.\\
+\hline
+{\em start\+Date} & Дата начала периода.\\
+\hline
+{\em end\+Data} & Дата окончания периода.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TResult} : {\em List\+Time\+Interval$<$TItem\+Timeable$>$}]\item[{\em TResult} : {\em new()}]\end{description}
+\end{Desc}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_ad7b792873d19b05efe0ef7ddaccba52e}\label{class_lotus_1_1_core_1_1_list_time_interval_ad7b792873d19b05efe0ef7ddaccba52e} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!GetConvertedListPeriodAndInterval$<$ TResult $>$@{GetConvertedListPeriodAndInterval$<$ TResult $>$}}
+\index{GetConvertedListPeriodAndInterval$<$ TResult $>$@{GetConvertedListPeriodAndInterval$<$ TResult $>$}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{GetConvertedListPeriodAndInterval$<$ TResult $>$()}{GetConvertedListPeriodAndInterval< TResult >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual ? TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Get\+Converted\+List\+Period\+And\+Interval$<$ TResult $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}}}]{time\+Interval,  }\item[{int}]{start\+Index,  }\item[{int}]{end\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение списка с указанным временным интервалом и указанным временным периодом. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TResult} & Тип списка.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Interval} & Временной интервал.\\
+\hline
+{\em start\+Index} & Начальный индекс периода.\\
+\hline
+{\em end\+Index} & Конечный индекс периода.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TResult} : {\em List\+Time\+Interval$<$TItem\+Timeable$>$}]\item[{\em TResult} : {\em new()}]\end{description}
+\end{Desc}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a187d54093ebed4a0858a9c2c68c63fff}\label{class_lotus_1_1_core_1_1_list_time_interval_a187d54093ebed4a0858a9c2c68c63fff} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!GetIndexFromDate@{GetIndexFromDate}}
+\index{GetIndexFromDate@{GetIndexFromDate}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{GetIndexFromDate()}{GetIndexFromDate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Get\+Index\+From\+Date (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{date }\end{DoxyParamCaption})}
+
+
+
+Получение индекса элемента по дате. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & Дата.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Индекс элемента.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_ac6354d5ef33a3edc4ed6648fd4280e8c}\label{class_lotus_1_1_core_1_1_list_time_interval_ac6354d5ef33a3edc4ed6648fd4280e8c} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!GetIndexFromDate@{GetIndexFromDate}}
+\index{GetIndexFromDate@{GetIndexFromDate}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{GetIndexFromDate()}{GetIndexFromDate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Get\+Index\+From\+Date (\begin{DoxyParamCaption}\item[{int}]{year,  }\item[{int}]{month,  }\item[{int}]{day }\end{DoxyParamCaption})}
+
+
+
+Получение индекса элемента по указанным параметрам даты. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em year} & Год.\\
+\hline
+{\em month} & Месяц.\\
+\hline
+{\em day} & День.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Индекс элемента.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a37430d13544cc3086fe665698b8bf265}\label{class_lotus_1_1_core_1_1_list_time_interval_a37430d13544cc3086fe665698b8bf265} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!GetInterpolatedDate@{GetInterpolatedDate}}
+\index{GetInterpolatedDate@{GetInterpolatedDate}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{GetInterpolatedDate()}{GetInterpolatedDate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Get\+Interpolated\+Date (\begin{DoxyParamCaption}\item[{float}]{index }\end{DoxyParamCaption})}
+
+
+
+Получение интерполированного значение даты указанному вещественному индексу. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Индекс.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Дата.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a94a3072043241d213495f773d5b74b51}\label{class_lotus_1_1_core_1_1_list_time_interval_a94a3072043241d213495f773d5b74b51} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!GetListPeriod$<$ TResult $>$@{GetListPeriod$<$ TResult $>$}}
+\index{GetListPeriod$<$ TResult $>$@{GetListPeriod$<$ TResult $>$}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{GetListPeriod$<$ TResult $>$()}{GetListPeriod< TResult >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Get\+List\+Period$<$ TResult $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{start\+Date,  }\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{end\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение списка с указанным периодом. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TResult} & Тип списка.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Date} & Дата начала периода.\\
+\hline
+{\em end\+Data} & Дата окончания периода.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TResult} : {\em List\+Time\+Interval$<$TItem\+Timeable$>$}]\item[{\em TResult} : {\em new()}]\end{description}
+\end{Desc}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a50630f41718b249f3fc0f844acd30257}\label{class_lotus_1_1_core_1_1_list_time_interval_a50630f41718b249f3fc0f844acd30257} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!GetListPeriod$<$ TResult $>$@{GetListPeriod$<$ TResult $>$}}
+\index{GetListPeriod$<$ TResult $>$@{GetListPeriod$<$ TResult $>$}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{GetListPeriod$<$ TResult $>$()}{GetListPeriod< TResult >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual TResult \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Get\+List\+Period$<$ TResult $>$ (\begin{DoxyParamCaption}\item[{int}]{start\+Index,  }\item[{int}]{end\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение списка с указанным периодом. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TResult} & Тип списка.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Index} & Начальный индекс периода.\\
+\hline
+{\em end\+Index} & Конечный индекс периода.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TResult} : {\em List\+Time\+Interval$<$TItem\+Timeable$>$}]\item[{\em TResult} : {\em new()}]\end{description}
+\end{Desc}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_af84a723026f79d44fbcfc12162248226}\label{class_lotus_1_1_core_1_1_list_time_interval_af84a723026f79d44fbcfc12162248226} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!RemoveWeekends@{RemoveWeekends}}
+\index{RemoveWeekends@{RemoveWeekends}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveWeekends()}{RemoveWeekends()}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Remove\+Weekends (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Удаление выходных дней. 
+
+\begin{DoxyReturn}{Returns}
+Количество удаленных дней.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a60310b476ae0fb5ddcff2dba970cbd0c}\label{class_lotus_1_1_core_1_1_list_time_interval_a60310b476ae0fb5ddcff2dba970cbd0c} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!TrimEnd@{TrimEnd}}
+\index{TrimEnd@{TrimEnd}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{TrimEnd()}{TrimEnd()}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Trim\+End (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{date,  }\item[{bool}]{included = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Обрезать список с конца до указанной даты. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & Дата.\\
+\hline
+{\em included} & Включать указанную дату в удаление.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Количество удаленных элементов.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a285df73c3c4dbfef6ccd042d3c8fd62a}\label{class_lotus_1_1_core_1_1_list_time_interval_a285df73c3c4dbfef6ccd042d3c8fd62a} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!TrimStart@{TrimStart}}
+\index{TrimStart@{TrimStart}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{TrimStart()}{TrimStart()}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Trim\+Start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}}}]{date,  }\item[{bool}]{included = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Обрезать список сначала до указанной даты. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & Дата.\\
+\hline
+{\em included} & Включать указанную дату в удаление.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Количество удаленных элементов.
+\end{DoxyReturn}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_list_time_interval_a7954ea533e0624ee55f7089e3586d022}\label{class_lotus_1_1_core_1_1_list_time_interval_a7954ea533e0624ee55f7089e3586d022} 
+\index{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}!TimeInterval@{TimeInterval}}
+\index{TimeInterval@{TimeInterval}!Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$@{Lotus.Core.ListTimeInterval$<$ TItemTimeable $>$}}
+\doxysubsubsection{\texorpdfstring{TimeInterval}{TimeInterval}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group___core_date_time_ga652a771fe918cb336a4cb244d6b548ee}{TTime\+Interval}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_time_interval}{Lotus.\+Core.\+List\+Time\+Interval}}$<$ TItem\+Timeable $>$.Time\+Interval\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Временной интервал. 
+
+Временной интервал обозначает что свойство ILotus\+Date\+Timeable.\+Date элементов списка отличаются ни кратную величин интервала 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Date\+Time/Lotus\+Date\+Time\+List\+Interval.\+cs\end{DoxyCompactItemize}

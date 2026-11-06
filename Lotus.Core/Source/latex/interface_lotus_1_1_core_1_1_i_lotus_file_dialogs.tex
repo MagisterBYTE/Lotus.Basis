@@ -1,0 +1,71 @@
+\doxysection{Lotus.\+Core.\+ILotus\+File\+Dialogs Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_file_dialogs}{}\label{interface_lotus_1_1_core_1_1_i_lotus_file_dialogs}\index{Lotus.Core.ILotusFileDialogs@{Lotus.Core.ILotusFileDialogs}}
+
+
+Интерфейс сервиса для диалогового окна открытия/сохранения файлов.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+string? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_file_dialogs_a81bc38b143a5c686b82d3e28aa058e16}{Open}} (string title, string directory, string? extension)
+\begin{DoxyCompactList}\small\item\em Показ диалога для открытия файла. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_file_dialogs_a6b5582af2d15ab6daaf2a35a533eff1f}{Save}} (string title, string directory, string default\+Name, string? extension)
+\begin{DoxyCompactList}\small\item\em Показ диалога для сохранения файла. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Интерфейс сервиса для диалогового окна открытия/сохранения файлов. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_file_dialogs_a81bc38b143a5c686b82d3e28aa058e16}\label{interface_lotus_1_1_core_1_1_i_lotus_file_dialogs_a81bc38b143a5c686b82d3e28aa058e16} 
+\index{Lotus.Core.ILotusFileDialogs@{Lotus.Core.ILotusFileDialogs}!Open@{Open}}
+\index{Open@{Open}!Lotus.Core.ILotusFileDialogs@{Lotus.Core.ILotusFileDialogs}}
+\doxysubsubsection{\texorpdfstring{Open()}{Open()}}
+{\footnotesize\ttfamily string? Lotus.\+Core.\+ILotus\+File\+Dialogs.\+Open (\begin{DoxyParamCaption}\item[{string}]{title,  }\item[{string}]{directory,  }\item[{string?}]{extension }\end{DoxyParamCaption})}
+
+
+
+Показ диалога для открытия файла. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & Заголовок диалога.\\
+\hline
+{\em directory} & Директория для открытия файла.\\
+\hline
+{\em extension} & Расширение файла без точки или список расширений или null.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Полное имя существующего файла или null.
+\end{DoxyReturn}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_file_dialogs_a6b5582af2d15ab6daaf2a35a533eff1f}\label{interface_lotus_1_1_core_1_1_i_lotus_file_dialogs_a6b5582af2d15ab6daaf2a35a533eff1f} 
+\index{Lotus.Core.ILotusFileDialogs@{Lotus.Core.ILotusFileDialogs}!Save@{Save}}
+\index{Save@{Save}!Lotus.Core.ILotusFileDialogs@{Lotus.Core.ILotusFileDialogs}}
+\doxysubsubsection{\texorpdfstring{Save()}{Save()}}
+{\footnotesize\ttfamily string? Lotus.\+Core.\+ILotus\+File\+Dialogs.\+Save (\begin{DoxyParamCaption}\item[{string}]{title,  }\item[{string}]{directory,  }\item[{string}]{default\+Name,  }\item[{string?}]{extension }\end{DoxyParamCaption})}
+
+
+
+Показ диалога для сохранения файла. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & Заголовок диалога.\\
+\hline
+{\em directory} & Директория для сохранения файла.\\
+\hline
+{\em default\+Name} & Имя файла по умолчанию.\\
+\hline
+{\em extension} & Расширение файла без точки.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Полное имя файла или null.
+\end{DoxyReturn}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Service\+OS/Lotus\+Base\+Service\+File\+Dialogs.\+cs\end{DoxyCompactItemize}

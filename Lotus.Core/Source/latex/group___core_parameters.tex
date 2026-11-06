@@ -1,0 +1,131 @@
+\doxysubsection{Подсистема параметрических объектов}
+\hypertarget{group___core_parameters}{}\label{group___core_parameters}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}}
+
+
+Подсистема параметрических объектов обеспечивает представление и хранение информации в документоориентированном стиле.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_parameter_item}{Lotus.\+Core.\+IParameter\+Item$<$ TValue $>$}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для представления параметра -\/ объекта который содержит данные в формате имя=значения. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item}{Lotus.\+Core.\+Parameter\+Item$<$ TValue $>$}}
+\begin{DoxyCompactList}\small\item\em Базовый класс для представления параметра -\/ объекта который содержит данные в формате имя=значения. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list}{Lotus.\+Core.\+CParameter\+List$<$ TType $>$}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет собой список указанного типа. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_object}{Lotus.\+Core.\+CParameter\+Object}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет собой базовый объект. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_bool}{Lotus.\+Core.\+CParameter\+Bool}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет собой логический тип. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_integer}{Lotus.\+Core.\+CParameter\+Integer}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет собой целый тип. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_real}{Lotus.\+Core.\+CParameter\+Real}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет собой вещественный тип. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_datetime}{Lotus.\+Core.\+CParameter\+Datetime}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет собой тип даты-\/времени. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_string}{Lotus.\+Core.\+CParameter\+String}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет собой строковый тип. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_enum}{Lotus.\+Core.\+CParameter\+Enum$<$ TEnum $>$}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет собой тип перечисления. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameters}{Lotus.\+Core.\+CParameters}}
+\begin{DoxyCompactList}\small\item\em Класс для представления параметра значения которого представляет список параметров. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group___core_parameters_ga187e165224a3b1ab40b2f0718a65bb73}{Lotus.\+Core.\+TParameter\+Value\+Type}} \{ \newline
+\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73abbb93ef26e3c101ff11cdd21cab08a94}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Null}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a27226c864bac7454a8504f8edb15d95b}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Boolean}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73aa0faef0851b4294c06f2b94bb1cb2044}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Integer}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a7f80fcc452c2f1ed2bb51b39d0864df1}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Real}}
+, \newline
+\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a8cf10d2341ed01492506085688270c1e}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Date\+Time}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a27118326006d3829667a400ad23d5d98}{Lotus.\+Core.\+TParameter\+Value\+Type.\+String}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73acf20423ed48998082c20099488a0917c}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Enum}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{Lotus.\+Core.\+TParameter\+Value\+Type.\+List}}
+, \newline
+\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a497031794414a552435f90151ac3b54b}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Object}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a3225a10b07f1580f10dee4abc3779e6c}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Parameters}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73acb5feb1b7314637725a2e73bdc9f7295}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Color}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4d3bc1733d8e5810f06604007e787bb2}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Vector2D}}
+, \newline
+\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a11d6d4839c41bcd39255a062482c2628}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Vector3D}}
+, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73abdc2c9d49edae49f4811be7a74093702}{Lotus.\+Core.\+TParameter\+Value\+Type.\+Vector4D}}
+ \}
+\begin{DoxyCompactList}\small\item\em Определение допустимых типов значения для параметра. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема параметрических объектов обеспечивает представление и хранение информации в документоориентированном стиле. 
+
+Основной объект подсистемы — это параметрический объект который хранит список записей в формате имя=значения. При этом сама запись также может представлена в виде параметрического объекта. Это обеспечивает представления иерархических структур данных.
+
+\doxysubsubsection{Enumeration Type Documentation}
+\Hypertarget{group___core_parameters_ga187e165224a3b1ab40b2f0718a65bb73}\label{group___core_parameters_ga187e165224a3b1ab40b2f0718a65bb73} 
+\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!TParameterValueType@{TParameterValueType}}
+\index{TParameterValueType@{TParameterValueType}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}
+\doxysubsubsubsection{\texorpdfstring{TParameterValueType}{TParameterValueType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group___core_parameters_ga187e165224a3b1ab40b2f0718a65bb73}{Lotus.\+Core.\+TParameter\+Value\+Type}}}
+
+
+
+Определение допустимых типов значения для параметра. 
+
+Определение стандартных типов данных значения в контексте использования параметра. Типы значений спроектированы с учетом поддержки и реализации в современных документоориентированных СУБД. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Null@{Null}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Null@{Null}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73abbb93ef26e3c101ff11cdd21cab08a94}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73abbb93ef26e3c101ff11cdd21cab08a94} 
+Null&Отсутствие определенного значения. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Boolean@{Boolean}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Boolean@{Boolean}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a27226c864bac7454a8504f8edb15d95b}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a27226c864bac7454a8504f8edb15d95b} 
+Boolean&Логический тип. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Integer@{Integer}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Integer@{Integer}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73aa0faef0851b4294c06f2b94bb1cb2044}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73aa0faef0851b4294c06f2b94bb1cb2044} 
+Integer&Целый тип. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Real@{Real}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Real@{Real}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a7f80fcc452c2f1ed2bb51b39d0864df1}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a7f80fcc452c2f1ed2bb51b39d0864df1} 
+Real&Вещественный тип. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DateTime@{DateTime}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!DateTime@{DateTime}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a8cf10d2341ed01492506085688270c1e}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a8cf10d2341ed01492506085688270c1e} 
+Date\+Time&Тип даты-\/времени. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{String@{String}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!String@{String}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a27118326006d3829667a400ad23d5d98}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a27118326006d3829667a400ad23d5d98} 
+String&Строковый тип. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Enum@{Enum}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Enum@{Enum}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73acf20423ed48998082c20099488a0917c}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73acf20423ed48998082c20099488a0917c} 
+Enum&Перечисление. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{List@{List}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!List@{List}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135} 
+List&Список объектов определённого типа. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Object@{Object}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Object@{Object}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a497031794414a552435f90151ac3b54b}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a497031794414a552435f90151ac3b54b} 
+Object&Базовый объект. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Parameters@{Parameters}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Parameters@{Parameters}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a3225a10b07f1580f10dee4abc3779e6c}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a3225a10b07f1580f10dee4abc3779e6c} 
+Parameters&Список параметрических объектов. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Color@{Color}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Color@{Color}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73acb5feb1b7314637725a2e73bdc9f7295}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73acb5feb1b7314637725a2e73bdc9f7295} 
+Color&Цвет. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Vector2D@{Vector2D}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Vector2D@{Vector2D}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4d3bc1733d8e5810f06604007e787bb2}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4d3bc1733d8e5810f06604007e787bb2} 
+Vector2D&Двухмерный объект данных. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Vector3D@{Vector3D}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Vector3D@{Vector3D}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a11d6d4839c41bcd39255a062482c2628}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a11d6d4839c41bcd39255a062482c2628} 
+Vector3D&Трехмерный объект данных. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Vector4D@{Vector4D}!Подсистема параметрических объектов@{Подсистема параметрических объектов}}\index{Подсистема параметрических объектов@{Подсистема параметрических объектов}!Vector4D@{Vector4D}}}\Hypertarget{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73abdc2c9d49edae49f4811be7a74093702}\label{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73abdc2c9d49edae49f4811be7a74093702} 
+Vector4D&Четырехмерный объект данных. \\
+\hline
+
+\end{DoxyEnumFields}

@@ -233,9 +233,9 @@ namespace Lotus.Core
         {
             var number = new StringBuilder(text.Length);
 
-            var add_minus = false;
-            var add_dot = false;
-            var add_e = -1;
+            var addMinus = false;
+            var addDot = false;
+            var addE = -1;
             var enFormat = ((text.Contains(',') && text.Contains('.')) || text.Contains('.'));
             var ruFormat = (text.Contains(',') && text.Contains('.') == false && text.Count(x => x == ',') == 1);
             for (var i = 0; i < text.Length; i++)
@@ -245,27 +245,27 @@ namespace Lotus.Core
                 if (c == '-' && (i != text.Length - 1))
                 {
                     // Добавляем перед E
-                    if (i == add_e + 1)
+                    if (i == addE + 1)
                     {
                         number.Append(c);
                         continue;
                     }
                     else
                     {
-                        if (add_minus == false)
+                        if (addMinus == false)
                         {
                             number.Append(c);
-                            add_minus = true;
+                            addMinus = true;
                             continue;
                         }
                     }
                 }
 
-                if (((c == ',' && ruFormat) && (i != text.Length - 1) && add_dot == false) ||
-                    ((c == '.' && enFormat) && (i != text.Length - 1) && add_dot == false))
+                if (((c == ',' && ruFormat) && (i != text.Length - 1) && addDot == false) ||
+                    ((c == '.' && enFormat) && (i != text.Length - 1) && addDot == false))
                 {
                     number.Append('.');
-                    add_dot = true;
+                    addDot = true;
                     continue;
                 }
 
@@ -278,7 +278,7 @@ namespace Lotus.Core
                 if ((c == 'E' || c == 'e'))
                 {
                     number.Append(c);
-                    add_e = i;
+                    addE = i;
                 }
             }
 
@@ -489,8 +489,8 @@ namespace Lotus.Core
         /// <returns>Числовое значение.</returns>
         public static object ToNumber(Type targetType, double value)
         {
-            var type_name = targetType.Name;
-            switch (type_name)
+            var typeName = targetType.Name;
+            switch (typeName)
             {
                 case nameof(Byte):
                     {
@@ -549,8 +549,8 @@ namespace Lotus.Core
         /// <returns>Числовое значение.</returns>
         public static object ToNumber(Type targetType, decimal value)
         {
-            var type_name = targetType.Name;
-            switch (type_name)
+            var typeName = targetType.Name;
+            switch (typeName)
             {
                 case nameof(Byte):
                     {

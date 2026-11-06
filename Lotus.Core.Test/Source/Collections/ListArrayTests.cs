@@ -109,8 +109,8 @@ namespace Lotus.Core.Collections
             ClassicAssert.AreEqual(sample[8], 4587); // Duplicate 4587
 
             // Удаление дубликатов
-            var count_dublicate = sample.RemoveDuplicates();
-            ClassicAssert.AreEqual(count_dublicate, 2);
+            var countDublicate = sample.RemoveDuplicates();
+            ClassicAssert.AreEqual(countDublicate, 2);
             ClassicAssert.AreEqual(sample.Count, 7);
             ClassicAssert.AreEqual(sample[0], 23);
             ClassicAssert.AreEqual(sample[1], 87);
@@ -609,10 +609,10 @@ namespace Lotus.Core.Collections
             //
             // Операции множеств
             //
-            var deferencs_source = new ListArray<int>();
-            deferencs_source.AddItems(0, 2, 4, 7, 5);
+            var deferencsSource = new ListArray<int>();
+            deferencsSource.AddItems(0, 2, 4, 7, 5);
 
-            var deferencs = deferencs_source.DifferenceItems(0, 4, 7, 12, 15, 7);
+            var deferencs = deferencsSource.DifferenceItems(0, 4, 7, 12, 15, 7);
             ClassicAssert.AreEqual(deferencs.Count, 2);
             ClassicAssert.AreEqual(deferencs[0], 2);
             ClassicAssert.AreEqual(deferencs[1], 5);

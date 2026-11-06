@@ -1,0 +1,221 @@
+\doxysection{Lotus.\+Core.\+Surface\+Data\texorpdfstring{$<$}{<} TNumber \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_surface_data}{}\label{class_lotus_1_1_core_1_1_surface_data}\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+
+
+Класс реализующий поверхность как двухмерный массив данных.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_ab4f6fe12e38eacfef8aa155b52c025b9}\label{class_lotus_1_1_core_1_1_surface_data_ab4f6fe12e38eacfef8aa155b52c025b9} 
+{\bfseries Surface\+Data} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные поверхности предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_aaa59c48966ad6b3eb294b83fb8211535}{Surface\+Data}} (TNumber\mbox{[}$\,$\mbox{]} data)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные поверхности указанными значениями. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_aacd8f71c8acb6c9c247f1a81d97d6340}{Set}} (int count, bool save\+Old\+Data)
+\begin{DoxyCompactList}\small\item\em Установка данных. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_a13d8004d712abeceafe80be29ceffec5}{Set\+From\+Data}} (TNumber\mbox{[}$\,$\mbox{]} data)
+\begin{DoxyCompactList}\small\item\em Установка данных из источника. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_af00e42f2d819fd62d7e43ffbe48b5b97}{Resize}} (int new\+Width, int new\+Height)
+\begin{DoxyCompactList}\small\item\em Линейная интерполяция значений поверхности. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_ae53909ea2fc6d4925f6a1544b8a03377}{Resize}} (int new\+Width, int new\+Height, bool use\+Bilinear)
+\begin{DoxyCompactList}\small\item\em Линейная интерполяция значений поверхности. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_abf1b8b9f01cfcf19d01a57afdca0227b}{Get\+Scale}} (TNumber value, double scale)
+\begin{DoxyCompactList}\small\item\em Получить масштабированное значение. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_a608e7a1f6d2af934398547fd99dd0cdb}\label{class_lotus_1_1_core_1_1_surface_data_a608e7a1f6d2af934398547fd99dd0cdb} 
+TNumber\mbox{[}$\,$\mbox{]} {\bfseries Data}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Данные поверхности. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_ae1f894e1c0db7ebc0fdf9f50091bb80d}\label{class_lotus_1_1_core_1_1_surface_data_ae1f894e1c0db7ebc0fdf9f50091bb80d} 
+int {\bfseries Count}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество элементов в поверхности. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_a0fed8f028424be41f5fa8733c4ef4a87}\label{class_lotus_1_1_core_1_1_surface_data_a0fed8f028424be41f5fa8733c4ef4a87} 
+int {\bfseries Width}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ширина поверхности при двухмерной организации данных. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_a8788ac1839be7638716bdde30dfadb46}\label{class_lotus_1_1_core_1_1_surface_data_a8788ac1839be7638716bdde30dfadb46} 
+int {\bfseries Height}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Высота поверхности при двухмерной организации данных. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_adaac131d4c4339d4cc3617e1f36a5378}\label{class_lotus_1_1_core_1_1_surface_data_adaac131d4c4339d4cc3617e1f36a5378} 
+int {\bfseries Rank}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Размерность поверхности. \end{DoxyCompactList}\item 
+TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_ad8ef51540bae1ef92f7b2cbb0428aa98}{this\mbox{[}int index\mbox{]}}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индексация элементов поверхности. \end{DoxyCompactList}\item 
+TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_a105150d7e3d23586145cbb40b60b46fb}{this\mbox{[}int x, int y\mbox{]}}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индексация элементов поверхности при двухмерной организации. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс реализующий поверхность как двухмерный массив данных. 
+
+Одна из основных функций поверхности -\/ интерполяция данных при изменении ее размеров. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TNumber} & Тип данных поверхности.\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TNumber} : {\em struct}]\item[{\em TNumber} : {\em IEquatable$<$TNumber$>$}]\item[{\em TNumber} : {\em IAddition\+Operators}]\item[{\em TNumber} : {\em TNumber}]\item[{\em TNumber} : {\em TNumber}]\item[{\em TNumber} : {\em TNumber}]\item[{\em TNumber} : {\em ISubtraction\+Operators}]\item[{\em TNumber} : {\em TNumber}]\item[{\em TNumber} : {\em TNumber}]\item[{\em TNumber} : {\em TNumber}]\item[{\em TNumber} : {\em IMultiply\+Operators}]\item[{\em TNumber} : {\em TNumber}]\item[{\em TNumber} : {\em TNumber}]\item[{\em TNumber} : {\em TNumber}]\end{description}
+\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_aaa59c48966ad6b3eb294b83fb8211535}\label{class_lotus_1_1_core_1_1_surface_data_aaa59c48966ad6b3eb294b83fb8211535} 
+\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}!SurfaceData@{SurfaceData}}
+\index{SurfaceData@{SurfaceData}!Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+\doxysubsubsection{\texorpdfstring{SurfaceData()}{SurfaceData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data}}$<$ TNumber $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Surface\+Data}} (\begin{DoxyParamCaption}\item[{TNumber\mbox{[}$\,$\mbox{]}}]{data }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует данные поверхности указанными значениями. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Данные.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_abf1b8b9f01cfcf19d01a57afdca0227b}\label{class_lotus_1_1_core_1_1_surface_data_abf1b8b9f01cfcf19d01a57afdca0227b} 
+\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}!GetScale@{GetScale}}
+\index{GetScale@{GetScale}!Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+\doxysubsubsection{\texorpdfstring{GetScale()}{GetScale()}}
+{\footnotesize\ttfamily virtual TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data}}$<$ TNumber $>$.Get\+Scale (\begin{DoxyParamCaption}\item[{TNumber}]{value,  }\item[{double}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Получить масштабированное значение. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+{\em scale} & Масштаб.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Масштабированное значение.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_af00e42f2d819fd62d7e43ffbe48b5b97}\label{class_lotus_1_1_core_1_1_surface_data_af00e42f2d819fd62d7e43ffbe48b5b97} 
+\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}!Resize@{Resize}}
+\index{Resize@{Resize}!Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data}}$<$ TNumber $>$.Resize (\begin{DoxyParamCaption}\item[{int}]{new\+Width,  }\item[{int}]{new\+Height }\end{DoxyParamCaption})}
+
+
+
+Линейная интерполяция значений поверхности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Width} & Новая ширина.\\
+\hline
+{\em new\+Height} & Новая высота.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_ae53909ea2fc6d4925f6a1544b8a03377}\label{class_lotus_1_1_core_1_1_surface_data_ae53909ea2fc6d4925f6a1544b8a03377} 
+\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}!Resize@{Resize}}
+\index{Resize@{Resize}!Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data}}$<$ TNumber $>$.Resize (\begin{DoxyParamCaption}\item[{int}]{new\+Width,  }\item[{int}]{new\+Height,  }\item[{bool}]{use\+Bilinear }\end{DoxyParamCaption})}
+
+
+
+Линейная интерполяция значений поверхности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Width} & Новая ширина.\\
+\hline
+{\em new\+Height} & Новая высота.\\
+\hline
+{\em use\+Bilinear} & Использовать билинейную интерполяцию.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_aacd8f71c8acb6c9c247f1a81d97d6340}\label{class_lotus_1_1_core_1_1_surface_data_aacd8f71c8acb6c9c247f1a81d97d6340} 
+\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}!Set@{Set}}
+\index{Set@{Set}!Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data}}$<$ TNumber $>$.Set (\begin{DoxyParamCaption}\item[{int}]{count,  }\item[{bool}]{save\+Old\+Data }\end{DoxyParamCaption})}
+
+
+
+Установка данных. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & Количество элементов.\\
+\hline
+{\em save\+Old\+Data} & Сохранять ли старые данные.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_a13d8004d712abeceafe80be29ceffec5}\label{class_lotus_1_1_core_1_1_surface_data_a13d8004d712abeceafe80be29ceffec5} 
+\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}!SetFromData@{SetFromData}}
+\index{SetFromData@{SetFromData}!Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+\doxysubsubsection{\texorpdfstring{SetFromData()}{SetFromData()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data}}$<$ TNumber $>$.Set\+From\+Data (\begin{DoxyParamCaption}\item[{TNumber\mbox{[}$\,$\mbox{]}}]{data }\end{DoxyParamCaption})}
+
+
+
+Установка данных из источника. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Данные.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_ad8ef51540bae1ef92f7b2cbb0428aa98}\label{class_lotus_1_1_core_1_1_surface_data_ad8ef51540bae1ef92f7b2cbb0428aa98} 
+\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}!this\mbox{[}int index\mbox{]}@{this[int index]}}
+\index{this\mbox{[}int index\mbox{]}@{this[int index]}!Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+\doxysubsubsection{\texorpdfstring{this[int index]}{this[int index]}}
+{\footnotesize\ttfamily TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data}}$<$ TNumber $>$.this\mbox{[}int index\mbox{]}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Индексация элементов поверхности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Индекс элемента.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Элемент поверхности.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_surface_data_a105150d7e3d23586145cbb40b60b46fb}\label{class_lotus_1_1_core_1_1_surface_data_a105150d7e3d23586145cbb40b60b46fb} 
+\index{Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}!this\mbox{[}int x, int y\mbox{]}@{this[int x, int y]}}
+\index{this\mbox{[}int x, int y\mbox{]}@{this[int x, int y]}!Lotus.Core.SurfaceData$<$ TNumber $>$@{Lotus.Core.SurfaceData$<$ TNumber $>$}}
+\doxysubsubsection{\texorpdfstring{this[int x, int y]}{this[int x, int y]}}
+{\footnotesize\ttfamily TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data}}$<$ TNumber $>$.this\mbox{[}int x, int y\mbox{]}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Индексация элементов поверхности при двухмерной организации. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Индекс элемента по x.\\
+\hline
+{\em y} & Индекс элемента по y.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Элемент поверхности.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Common\+Types/Lotus\+Surface\+Data.\+cs\end{DoxyCompactItemize}

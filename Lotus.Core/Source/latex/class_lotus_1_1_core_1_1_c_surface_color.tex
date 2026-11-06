@@ -1,0 +1,113 @@
+\doxysection{Lotus.\+Core.\+CSurface\+Color Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_surface_color}{}\label{class_lotus_1_1_core_1_1_c_surface_color}\index{Lotus.Core.CSurfaceColor@{Lotus.Core.CSurfaceColor}}
+
+
+Поверхность данных для цвета.  
+
+
+Inheritance diagram for Lotus.\+Core.\+CSurface\+Color\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_c_surface_color}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_surface_color_a92f21e8c3d733afb97ac422f03c21f76}\label{class_lotus_1_1_core_1_1_c_surface_color_a92f21e8c3d733afb97ac422f03c21f76} 
+{\bfseries CSurface\+Color} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные поверхности предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_surface_color_a4c8863237914e3f1de9f3223cd17917e}{CSurface\+Color}} (\mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}}\mbox{[}$\,$\mbox{]} data)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные поверхности указанными значениями. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data$<$ TColor $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Surface\+Data} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные поверхности предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_aaa59c48966ad6b3eb294b83fb8211535}{Surface\+Data}} (TNumber\mbox{[}$\,$\mbox{]} data)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные поверхности указанными значениями. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_aacd8f71c8acb6c9c247f1a81d97d6340}{Set}} (int count, bool save\+Old\+Data)
+\begin{DoxyCompactList}\small\item\em Установка данных. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_a13d8004d712abeceafe80be29ceffec5}{Set\+From\+Data}} (TNumber\mbox{[}$\,$\mbox{]} data)
+\begin{DoxyCompactList}\small\item\em Установка данных из источника. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_af00e42f2d819fd62d7e43ffbe48b5b97}{Resize}} (int new\+Width, int new\+Height)
+\begin{DoxyCompactList}\small\item\em Линейная интерполяция значений поверхности. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_ae53909ea2fc6d4925f6a1544b8a03377}{Resize}} (int new\+Width, int new\+Height, bool use\+Bilinear)
+\begin{DoxyCompactList}\small\item\em Линейная интерполяция значений поверхности. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_surface_color_aeec12290571cae648580b06a8c0197ae}{Get\+Scale}} (\mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}} value, double scale)
+\begin{DoxyCompactList}\small\item\em Получить масштабированное значение. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data$<$ TColor $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_abf1b8b9f01cfcf19d01a57afdca0227b}{Get\+Scale}} (TNumber value, double scale)
+\begin{DoxyCompactList}\small\item\em Получить масштабированное значение. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data}{Lotus.\+Core.\+Surface\+Data$<$ TColor $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+TNumber\mbox{[}$\,$\mbox{]} {\bfseries Data}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Данные поверхности. \end{DoxyCompactList}\item 
+int {\bfseries Count}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество элементов в поверхности. \end{DoxyCompactList}\item 
+int {\bfseries Width}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ширина поверхности при двухмерной организации данных. \end{DoxyCompactList}\item 
+int {\bfseries Height}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Высота поверхности при двухмерной организации данных. \end{DoxyCompactList}\item 
+int {\bfseries Rank}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Размерность поверхности. \end{DoxyCompactList}\item 
+TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_ad8ef51540bae1ef92f7b2cbb0428aa98}{this\mbox{[}int index\mbox{]}}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индексация элементов поверхности. \end{DoxyCompactList}\item 
+TNumber \mbox{\hyperlink{class_lotus_1_1_core_1_1_surface_data_a105150d7e3d23586145cbb40b60b46fb}{this\mbox{[}int x, int y\mbox{]}}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индексация элементов поверхности при двухмерной организации. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Поверхность данных для цвета. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_surface_color_a4c8863237914e3f1de9f3223cd17917e}\label{class_lotus_1_1_core_1_1_c_surface_color_a4c8863237914e3f1de9f3223cd17917e} 
+\index{Lotus.Core.CSurfaceColor@{Lotus.Core.CSurfaceColor}!CSurfaceColor@{CSurfaceColor}}
+\index{CSurfaceColor@{CSurfaceColor}!Lotus.Core.CSurfaceColor@{Lotus.Core.CSurfaceColor}}
+\doxysubsubsection{\texorpdfstring{CSurfaceColor()}{CSurfaceColor()}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CSurface\+Color.\+CSurface\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}}\mbox{[}$\,$\mbox{]}}]{data }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует данные поверхности указанными значениями. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Данные.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_surface_color_aeec12290571cae648580b06a8c0197ae}\label{class_lotus_1_1_core_1_1_c_surface_color_aeec12290571cae648580b06a8c0197ae} 
+\index{Lotus.Core.CSurfaceColor@{Lotus.Core.CSurfaceColor}!GetScale@{GetScale}}
+\index{GetScale@{GetScale}!Lotus.Core.CSurfaceColor@{Lotus.Core.CSurfaceColor}}
+\doxysubsubsection{\texorpdfstring{GetScale()}{GetScale()}}
+{\footnotesize\ttfamily override \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}} Lotus.\+Core.\+CSurface\+Color.\+Get\+Scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}}}]{value,  }\item[{double}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Получить масштабированное значение. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+{\em scale} & Масштаб.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Масштабированное значение.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Common\+Types/Lotus\+Surface\+Data.\+cs\end{DoxyCompactItemize}

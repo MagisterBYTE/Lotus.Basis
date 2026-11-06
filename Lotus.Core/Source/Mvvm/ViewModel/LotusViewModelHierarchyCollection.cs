@@ -44,8 +44,8 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static TViewModelHierarchy Build(TModel rootModel, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = Build(rootModel, null, owner);
-            return node_root_view;
+            var nodeRootView = Build(rootModel, null, owner);
+            return nodeRootView;
         }
 
         /// <summary>
@@ -57,33 +57,33 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static TViewModelHierarchy Build(TModel model, ILotusViewModelHierarchy? parent, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_view = owner.CreateViewModelHierarchy(model, parent);
-            node_view.IParent = parent;
-            node_view.IOwner = owner;
+            var nodeView = owner.CreateViewModelHierarchy(model, parent);
+            nodeView.IParent = parent;
+            nodeView.IOwner = owner;
 
-            if (model is ILotusViewModelOwner view_item_owner)
+            if (model is ILotusViewModelOwner viewItemOwner)
             {
-                view_item_owner.OwnerViewModel = node_view;
+                viewItemOwner.OwnerViewModel = nodeView;
             }
 
             if (parent != null)
             {
-                node_view.Level = parent.Level + 1;
-                parent.IViewModels.Add(node_view);
-                node_view.IOwner = owner;
+                nodeView.Level = parent.Level + 1;
+                parent.IViewModels.Add(nodeView);
+                nodeView.IOwner = owner;
             }
 
             // 1) Проверяем в порядке приоритета
             // Если есть поддержка интерфеса для построения используем его
-            if (model is ILotusViewModelBuilder view_builder)
+            if (model is ILotusViewModelBuilder viewBuilder)
             {
-                var count_child = view_builder.GetCountChildrenNode();
-                for (var i = 0; i < count_child; i++)
+                var countChild = viewBuilder.GetCountChildrenNode();
+                for (var i = 0; i < countChild; i++)
                 {
-                    var node_data = (TModel)view_builder.GetChildrenNode(i);
-                    if (node_data != null)
+                    var nodeData = (TModel)viewBuilder.GetChildrenNode(i);
+                    if (nodeData != null)
                     {
-                        Build(node_data, node_view, owner);
+                        Build(nodeData, nodeView, owner);
                     }
                 }
             }
@@ -92,12 +92,12 @@ namespace Lotus.Core
                 // 2) Проверяем на обобщенный список
                 if (model is IList list)
                 {
-                    var count_child = list.Count;
-                    for (var i = 0; i < count_child; i++)
+                    var countChild = list.Count;
+                    for (var i = 0; i < countChild; i++)
                     {
-                        if (list[i] is TModel node_data)
+                        if (list[i] is TModel nodeData)
                         {
-                            Build(node_data, node_view, owner);
+                            Build(nodeData, nodeView, owner);
                         }
                     }
                 }
@@ -108,16 +108,16 @@ namespace Lotus.Core
                     {
                         foreach (var item in enumerable)
                         {
-                            if (item is TModel node_data)
+                            if (item is TModel nodeData)
                             {
-                                Build(node_data, node_view, owner);
+                                Build(nodeData, nodeView, owner);
                             }
                         }
                     }
                 }
             }
 
-            return (TViewModelHierarchy)node_view;
+            return (TViewModelHierarchy)nodeView;
         }
 
         /// <summary>
@@ -134,15 +134,15 @@ namespace Lotus.Core
 
                 // 1) Проверяем в порядке приоритета
                 // Если есть поддержка интерфеса для построения используем его
-                if (data is ILotusViewModelBuilder view_builder)
+                if (data is ILotusViewModelBuilder viewBuilder)
                 {
-                    var count_child = view_builder.GetCountChildrenNode();
-                    for (var i = 0; i < count_child; i++)
+                    var countChild = viewBuilder.GetCountChildrenNode();
+                    for (var i = 0; i < countChild; i++)
                     {
-                        var node_data = (TModel)view_builder.GetChildrenNode(i);
-                        if (node_data != null)
+                        var nodeData = (TModel)viewBuilder.GetChildrenNode(i);
+                        if (nodeData != null)
                         {
-                            Build(node_data, parent, owner);
+                            Build(nodeData, parent, owner);
                         }
                     }
                 }
@@ -151,12 +151,12 @@ namespace Lotus.Core
                     // 2) Проверяем на обобщенный список
                     if (data is IList list)
                     {
-                        var count_child = list.Count;
-                        for (var i = 0; i < count_child; i++)
+                        var countChild = list.Count;
+                        for (var i = 0; i < countChild; i++)
                         {
-                            if (list[i] is TModel node_data)
+                            if (list[i] is TModel nodeData)
                             {
-                                Build(node_data, parent, owner);
+                                Build(nodeData, parent, owner);
                             }
                         }
                     }
@@ -167,9 +167,9 @@ namespace Lotus.Core
                         {
                             foreach (var item in enumerable)
                             {
-                                if (item is TModel node_data)
+                                if (item is TModel nodeData)
                                 {
-                                    Build(node_data, parent, owner);
+                                    Build(nodeData, parent, owner);
                                 }
                             }
                         }
@@ -187,8 +187,8 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static TViewModelHierarchy BuildFilter(TModel rootModel, Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = BuildFilter(rootModel, null, filter, owner);
-            return node_root_view;
+            var nodeRootView = BuildFilter(rootModel, null, filter, owner);
+            return nodeRootView;
         }
 
         /// <summary>
@@ -202,36 +202,36 @@ namespace Lotus.Core
         public static TViewModelHierarchy BuildFilter(TModel model, ILotusViewModelHierarchy? parent,
             Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = owner.CreateViewModelHierarchy(model, parent);
-            node_root_view.IParent = parent;
-            node_root_view.IOwner = owner;
+            var nodeRootView = owner.CreateViewModelHierarchy(model, parent);
+            nodeRootView.IParent = parent;
+            nodeRootView.IOwner = owner;
             if (model is ILotusCheckOne<TModel> check)
             {
                 if (check.CheckOne(filter))
                 {
-                    if (model is ILotusViewModelOwner view_item_owner)
+                    if (model is ILotusViewModelOwner viewItemOwner)
                     {
-                        view_item_owner.OwnerViewModel = node_root_view;
+                        viewItemOwner.OwnerViewModel = nodeRootView;
                     }
 
                     if (parent != null)
                     {
-                        node_root_view.Level = parent.Level + 1;
-                        parent.IViewModels.Add(node_root_view);
-                        node_root_view.IOwner = owner;
+                        nodeRootView.Level = parent.Level + 1;
+                        parent.IViewModels.Add(nodeRootView);
+                        nodeRootView.IOwner = owner;
                     }
 
                     // 1) Проверяем в порядке приоритета
                     // Если есть поддержка интерфеса для построения используем его
-                    if (model is ILotusViewModelBuilder view_builder)
+                    if (model is ILotusViewModelBuilder viewBuilder)
                     {
-                        var count_child = view_builder.GetCountChildrenNode();
-                        for (var i = 0; i < count_child; i++)
+                        var countChild = viewBuilder.GetCountChildrenNode();
+                        for (var i = 0; i < countChild; i++)
                         {
-                            var node_data = (TModel)view_builder.GetChildrenNode(i);
-                            if (node_data != null)
+                            var nodeData = (TModel)viewBuilder.GetChildrenNode(i);
+                            if (nodeData != null)
                             {
-                                BuildFilter(node_data, node_root_view, filter, owner);
+                                BuildFilter(nodeData, nodeRootView, filter, owner);
                             }
                         }
                     }
@@ -240,12 +240,12 @@ namespace Lotus.Core
                         // 2) Проверяем на обобщенный список
                         if (model is IList list)
                         {
-                            var count_child = list.Count;
-                            for (var i = 0; i < count_child; i++)
+                            var countChild = list.Count;
+                            for (var i = 0; i < countChild; i++)
                             {
-                                if (list[i] is TModel node_data)
+                                if (list[i] is TModel nodeData)
                                 {
-                                    BuildFilter(node_data, node_root_view, filter, owner);
+                                    BuildFilter(nodeData, nodeRootView, filter, owner);
                                 }
                             }
                         }
@@ -256,9 +256,9 @@ namespace Lotus.Core
                             {
                                 foreach (var item in enumerable)
                                 {
-                                    if (item is TModel node_data)
+                                    if (item is TModel nodeData)
                                     {
-                                        BuildFilter(node_data, node_root_view, filter, owner);
+                                        BuildFilter(nodeData, nodeRootView, filter, owner);
                                     }
                                 }
                             }
@@ -267,7 +267,7 @@ namespace Lotus.Core
                 }
             }
 
-            return (TViewModelHierarchy)node_root_view;
+            return (TViewModelHierarchy)nodeRootView;
         }
         #endregion
 
@@ -354,26 +354,26 @@ namespace Lotus.Core
             {
                 if (_isFiltered == false)
                 {
-                    var view_item_hierarchy = Build(data, this);
-                    Add(view_item_hierarchy);
+                    var viewItemHierarchy = Build(data, this);
+                    Add(viewItemHierarchy);
                 }
                 else
                 {
                     if (_filter != null)
                     {
-                        var view_item_hierarchy = BuildFilter(data, _filter, this);
-                        Add(view_item_hierarchy);
+                        var viewItemHierarchy = BuildFilter(data, _filter, this);
+                        Add(viewItemHierarchy);
                     }
                 }
             }
             else
             {
-                if (Source is IList<TModel> list_data)
+                if (Source is IList<TModel> listData)
                 {
-                    for (var i = 0; i < list_data.Count; i++)
+                    for (var i = 0; i < listData.Count; i++)
                     {
-                        var view_item_hierarchy = Build(list_data[i], this);
-                        Add(view_item_hierarchy);
+                        var viewItemHierarchy = Build(listData[i], this);
+                        Add(viewItemHierarchy);
                     }
                 }
             }

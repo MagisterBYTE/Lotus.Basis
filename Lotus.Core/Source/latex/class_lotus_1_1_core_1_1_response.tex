@@ -1,0 +1,538 @@
+\doxysection{Lotus.\+Core.\+Response\texorpdfstring{$<$}{<} TPayload \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_response}{}\label{class_lotus_1_1_core_1_1_response}\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+
+
+Класс для получения данных.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Response\texorpdfstring{$<$}{<} TPayload \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.196079cm]{class_lotus_1_1_core_1_1_response}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_response_a87dc46bea2370a1d39c8831cdc7e8f2d}\label{class_lotus_1_1_core_1_1_response_a87dc46bea2370a1d39c8831cdc7e8f2d} 
+{\bfseries Response} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные поверхности предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a3f6aa00d7ea74b72446d0ea4fcf47512}{Response}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{ILotus\+Result}} result)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_response_afa22faa815b3e3b74c9a1346179019f3}{Response}} (bool status, int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a0bd3cc12cc6d664288eda004645ac9df}{Response}} (bool status, string message, int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_ab33e9caee4c0385ba4369fde42b15c3f}{Succeed}} (string message, int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае успешности выполнения метода/операции. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_response_a87dc46bea2370a1d39c8831cdc7e8f2d}\label{class_lotus_1_1_core_1_1_response_a87dc46bea2370a1d39c8831cdc7e8f2d} 
+{\bfseries Response} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные поверхности предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_response_aa78fcf34b88bf3c5cbc9958bef087a93}{Response}} (TPayload payload)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a3f6aa00d7ea74b72446d0ea4fcf47512}{Response}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{ILotus\+Result}} result)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_response_adcd87edd848726bd708512ceb535da12}{Response}} (TPayload payload, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{ILotus\+Result}} result)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_response_afa22faa815b3e3b74c9a1346179019f3}{Response}} (bool status, int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a0bd3cc12cc6d664288eda004645ac9df}{Response}} (bool status, string message, int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a5c2b25272f5869223ca7f793e941fd1d}{Failed}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}} result)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае неуспешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_ab2a453ecfbf608441369f896ccde3927}{Failed}} (int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае неуспешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a7128bacc8183d0947d2e255b074ca0ac}{Failed}} (string message, int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае неуспешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a26850ae75bf02eebe9892a82cbd52a16}{Succeed}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}} result)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае успешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a9465a0486c6f64bb3f5801d3e99e9dbb}{Succeed}} (int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае успешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a1f3d6c2228e08fc547cfd13afd87edd8}{Succeed}} (string message, int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае успешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a4f25611e443a889f1f1a20b35367675d}{Failed}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}} result)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае неуспешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_acce389a9500986fb1400ad7c5d356281}{Failed}} (int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае неуспешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a744fa63eebfe7e9037d1b91e07a444f3}{Failed}} (string message, int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае неуспешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a9017853dde445600a8408b3e80ba527b}{Succeed}} (TPayload payload)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае успешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_ad142ba9d750869d0665febafa093a0af}{Succeed}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}} result)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае успешности выполнения метода/операции. \end{DoxyCompactList}\item 
+static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_acc82bdd728f7dc928bc4f841b3b12177}{Succeed}} (int? code=null, object? value=null)
+\begin{DoxyCompactList}\small\item\em Формирование данных в случае успешности выполнения метода/операции. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_response_a365b313d3e8e4379090424f35977b346}\label{class_lotus_1_1_core_1_1_response_a365b313d3e8e4379090424f35977b346} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} {\bfseries Ok} = new()
+\begin{DoxyCompactList}\small\item\em Результат успешного выполнения. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_response_af2af137ee4d44988f33f799b18d819b2}\label{class_lotus_1_1_core_1_1_response_af2af137ee4d44988f33f799b18d819b2} 
+static new readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ {\bfseries Ok} = new()
+\begin{DoxyCompactList}\small\item\em Результат успешного выполнения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{ILotus\+Result}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_ae277fc0aa7b5a894e091691547d6db90}{Result}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Результат получения данных. \end{DoxyCompactList}\item 
+TPayload \mbox{\hyperlink{class_lotus_1_1_core_1_1_response_a5dd734db52c46d9f7b5118ab3bae88da}{Payload}} = default!\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Данные. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_response}{Lotus.\+Core.\+ILotus\+Response$<$ TPayload $>$}}}
+
+
+\doxysubsection{Detailed Description}
+Класс для получения данных. 
+
+Класс для получения типизированных данных.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TPayload} & Тип данных.\\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a3f6aa00d7ea74b72446d0ea4fcf47512}\label{class_lotus_1_1_core_1_1_response_a3f6aa00d7ea74b72446d0ea4fcf47512} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Response@{Response}}
+\index{Response@{Response}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{ILotus\+Result}}}]{result }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & Данные.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_response_afa22faa815b3e3b74c9a1346179019f3}\label{class_lotus_1_1_core_1_1_response_afa22faa815b3e3b74c9a1346179019f3} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Response@{Response}}
+\index{Response@{Response}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} (\begin{DoxyParamCaption}\item[{bool}]{status,  }\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & Статус выполнения операции.\\
+\hline
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a0bd3cc12cc6d664288eda004645ac9df}\label{class_lotus_1_1_core_1_1_response_a0bd3cc12cc6d664288eda004645ac9df} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Response@{Response}}
+\index{Response@{Response}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} (\begin{DoxyParamCaption}\item[{bool}]{status,  }\item[{string}]{message,  }\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & Статус выполнения операции.\\
+\hline
+{\em message} & Сообщение о результате выполнения операции.\\
+\hline
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_response_aa78fcf34b88bf3c5cbc9958bef087a93}\label{class_lotus_1_1_core_1_1_response_aa78fcf34b88bf3c5cbc9958bef087a93} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Response@{Response}}
+\index{Response@{Response}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} (\begin{DoxyParamCaption}\item[{TPayload}]{payload }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & Данные.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a3f6aa00d7ea74b72446d0ea4fcf47512}\label{class_lotus_1_1_core_1_1_response_a3f6aa00d7ea74b72446d0ea4fcf47512} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Response@{Response}}
+\index{Response@{Response}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{ILotus\+Result}}}]{result }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & Ответ/результат операции.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_response_adcd87edd848726bd708512ceb535da12}\label{class_lotus_1_1_core_1_1_response_adcd87edd848726bd708512ceb535da12} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Response@{Response}}
+\index{Response@{Response}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} (\begin{DoxyParamCaption}\item[{TPayload}]{payload,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{ILotus\+Result}}}]{result }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & Данные.\\
+\hline
+{\em result} & Ответ/результат операции.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_response_afa22faa815b3e3b74c9a1346179019f3}\label{class_lotus_1_1_core_1_1_response_afa22faa815b3e3b74c9a1346179019f3} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Response@{Response}}
+\index{Response@{Response}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} (\begin{DoxyParamCaption}\item[{bool}]{status,  }\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & Статус выполнения операции.\\
+\hline
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a0bd3cc12cc6d664288eda004645ac9df}\label{class_lotus_1_1_core_1_1_response_a0bd3cc12cc6d664288eda004645ac9df} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Response@{Response}}
+\index{Response@{Response}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} (\begin{DoxyParamCaption}\item[{bool}]{status,  }\item[{string}]{message,  }\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & Статус выполнения операции.\\
+\hline
+{\em message} & Сообщение о результате выполнения операции.\\
+\hline
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_response_ab2a453ecfbf608441369f896ccde3927}\label{class_lotus_1_1_core_1_1_response_ab2a453ecfbf608441369f896ccde3927} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Failed@{Failed}}
+\index{Failed@{Failed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Failed()}{Failed()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Failed (\begin{DoxyParamCaption}\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае неуспешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_acce389a9500986fb1400ad7c5d356281}\label{class_lotus_1_1_core_1_1_response_acce389a9500986fb1400ad7c5d356281} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Failed@{Failed}}
+\index{Failed@{Failed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Failed()}{Failed()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Failed (\begin{DoxyParamCaption}\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае неуспешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a5c2b25272f5869223ca7f793e941fd1d}\label{class_lotus_1_1_core_1_1_response_a5c2b25272f5869223ca7f793e941fd1d} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Failed@{Failed}}
+\index{Failed@{Failed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Failed()}{Failed()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Failed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}}}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае неуспешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & Результат/ответ.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a4f25611e443a889f1f1a20b35367675d}\label{class_lotus_1_1_core_1_1_response_a4f25611e443a889f1f1a20b35367675d} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Failed@{Failed}}
+\index{Failed@{Failed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Failed()}{Failed()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Failed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}}}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае неуспешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & Результат/ответ.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a7128bacc8183d0947d2e255b074ca0ac}\label{class_lotus_1_1_core_1_1_response_a7128bacc8183d0947d2e255b074ca0ac} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Failed@{Failed}}
+\index{Failed@{Failed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Failed()}{Failed()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Failed (\begin{DoxyParamCaption}\item[{string}]{message,  }\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае неуспешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Сообщение о результате выполнения операции.\\
+\hline
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a744fa63eebfe7e9037d1b91e07a444f3}\label{class_lotus_1_1_core_1_1_response_a744fa63eebfe7e9037d1b91e07a444f3} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Failed@{Failed}}
+\index{Failed@{Failed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Failed()}{Failed()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Failed (\begin{DoxyParamCaption}\item[{string}]{message,  }\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае неуспешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Сообщение о результате выполнения операции.\\
+\hline
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a9465a0486c6f64bb3f5801d3e99e9dbb}\label{class_lotus_1_1_core_1_1_response_a9465a0486c6f64bb3f5801d3e99e9dbb} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Succeed@{Succeed}}
+\index{Succeed@{Succeed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Succeed()}{Succeed()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Succeed (\begin{DoxyParamCaption}\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае успешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_acc82bdd728f7dc928bc4f841b3b12177}\label{class_lotus_1_1_core_1_1_response_acc82bdd728f7dc928bc4f841b3b12177} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Succeed@{Succeed}}
+\index{Succeed@{Succeed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Succeed()}{Succeed()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Succeed (\begin{DoxyParamCaption}\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае успешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a26850ae75bf02eebe9892a82cbd52a16}\label{class_lotus_1_1_core_1_1_response_a26850ae75bf02eebe9892a82cbd52a16} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Succeed@{Succeed}}
+\index{Succeed@{Succeed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Succeed()}{Succeed()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Succeed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}}}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае успешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & Результат/ответ.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_ad142ba9d750869d0665febafa093a0af}\label{class_lotus_1_1_core_1_1_response_ad142ba9d750869d0665febafa093a0af} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Succeed@{Succeed}}
+\index{Succeed@{Succeed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Succeed()}{Succeed()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily static new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Succeed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}}}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае успешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & Результат/ответ.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a1f3d6c2228e08fc547cfd13afd87edd8}\label{class_lotus_1_1_core_1_1_response_a1f3d6c2228e08fc547cfd13afd87edd8} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Succeed@{Succeed}}
+\index{Succeed@{Succeed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Succeed()}{Succeed()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Succeed (\begin{DoxyParamCaption}\item[{string}]{message,  }\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае успешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Сообщение о результате выполнения операции.\\
+\hline
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_ab33e9caee4c0385ba4369fde42b15c3f}\label{class_lotus_1_1_core_1_1_response_ab33e9caee4c0385ba4369fde42b15c3f} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Succeed@{Succeed}}
+\index{Succeed@{Succeed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Succeed()}{Succeed()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily new \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Succeed (\begin{DoxyParamCaption}\item[{string}]{message,  }\item[{int?}]{code = {\ttfamily null},  }\item[{object?}]{value = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Формирование данных в случае успешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Сообщение о результате выполнения операции.\\
+\hline
+{\em code} & Код.\\
+\hline
+{\em value} & Значение результата выполнения операции.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a9017853dde445600a8408b3e80ba527b}\label{class_lotus_1_1_core_1_1_response_a9017853dde445600a8408b3e80ba527b} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Succeed@{Succeed}}
+\index{Succeed@{Succeed}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Succeed()}{Succeed()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Response}}$<$ TPayload $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Succeed (\begin{DoxyParamCaption}\item[{TPayload}]{payload }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Формирование данных в случае успешности выполнения метода/операции. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & Полезные данные.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Данные.
+\end{DoxyReturn}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_response_a5dd734db52c46d9f7b5118ab3bae88da}\label{class_lotus_1_1_core_1_1_response_a5dd734db52c46d9f7b5118ab3bae88da} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Payload@{Payload}}
+\index{Payload@{Payload}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Payload}{Payload}}
+{\footnotesize\ttfamily TPayload \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.Payload = default!\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Данные. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_response_ab6272ba5e4be1a3a8907793fee68ccf0}{Lotus.\+Core.\+ILotus\+Response$<$ TPayload $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_response_ae277fc0aa7b5a894e091691547d6db90}\label{class_lotus_1_1_core_1_1_response_ae277fc0aa7b5a894e091691547d6db90} 
+\index{Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}!Result@{Result}}
+\index{Result@{Result}!Lotus.Core.Response$<$ TPayload $>$@{Lotus.Core.Response$<$ TPayload $>$}}
+\doxysubsubsection{\texorpdfstring{Result}{Result}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{ILotus\+Result}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_response}{Lotus.\+Core.\+Response}}$<$ TPayload $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Result}}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Результат получения данных. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_response_aa3931800df0b6ade2080d74482d1f800}{Lotus.\+Core.\+ILotus\+Response$<$ TPayload $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Rn\+R/\+Base/Lotus\+Response.\+cs\end{DoxyCompactItemize}

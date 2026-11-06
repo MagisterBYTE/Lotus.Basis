@@ -210,12 +210,12 @@ namespace Lotus.Core
             {
                 if (_isSelected != value)
                 {
-                    if (_model is ILotusModelSelected view_selected)
+                    if (_model is ILotusModelSelected viewSelected)
                     {
-                        if (view_selected.CanModelSelected(this))
+                        if (viewSelected.CanModelSelected(this))
                         {
                             _isSelected = value;
-                            view_selected.SetModelSelected(this, value);
+                            viewSelected.SetModelSelected(this, value);
                             OnPropertyChanged(PropertyArgsIsSelected);
                             RaiseIsSelectedChanged();
                         }
@@ -240,10 +240,10 @@ namespace Lotus.Core
             {
                 if (_isEnabled != value)
                 {
-                    if (_model is ILotusModelEnabled view_enabled)
+                    if (_model is ILotusModelEnabled viewEnabled)
                     {
                         _isEnabled = value;
-                        view_enabled.SetModelEnabled(this, value);
+                        viewEnabled.SetModelEnabled(this, value);
                         OnPropertyChanged(PropertyArgsIsEnabled);
                         RaiseIsEnabledChanged();
                     }
@@ -284,10 +284,10 @@ namespace Lotus.Core
             {
                 if (_isPresented != value)
                 {
-                    if (_model is ILotusModelPresented view_presented)
+                    if (_model is ILotusModelPresented viewPresented)
                     {
                         _isPresented = value;
-                        view_presented.SetModelPresented(this, value);
+                        viewPresented.SetModelPresented(this, value);
                         OnPropertyChanged(PropertyArgsIsPresented);
                         RaiseIsPresentedChanged();
                     }
@@ -438,9 +438,9 @@ namespace Lotus.Core
                 }
             }
 
-            if (_model is ILotusViewModelOwner view_item_owner)
+            if (_model is ILotusViewModelOwner viewItemOwner)
             {
-                view_item_owner.OwnerViewModel = this;
+                viewItemOwner.OwnerViewModel = this;
             }
         }
 

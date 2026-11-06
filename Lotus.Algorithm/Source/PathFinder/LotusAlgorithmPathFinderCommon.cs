@@ -151,9 +151,9 @@ namespace Lotus.Algorithm
         /// <returns>Статус равенства объектов.</returns>
         public override readonly bool Equals(object? obj)
         {
-            if (obj is TPathPoint path_point)
+            if (obj is TPathPoint pathPoint)
             {
-                return Equals(path_point);
+                return Equals(pathPoint);
             }
             return base.Equals(obj);
         }

@@ -150,11 +150,11 @@ namespace Lotus.Core.Serialization
             var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
 
             // Создаем поток для записи
-            using (var stream_writer = new StreamWriter(path, false, Encoding.UTF8))
+            using (var streamWriter = new StreamWriter(path, false, Encoding.UTF8))
             {
-                SaveTo(stream_writer, instance, parameters);
+                SaveTo(streamWriter, instance, parameters);
             }
-            // stream_writer.Close(); // Используем using, закрытие происходит автоматически
+            // streamWriter.Close(); // Используем using, закрытие происходит автоматически
 
 #if UNITY_EDITOR
             // Обновляем в редакторе
@@ -175,16 +175,16 @@ namespace Lotus.Core.Serialization
             if (parameters == null) parameters = new CParameters("SerializerJson");
             parameters.AddObject(this.Name, this, false);
 
-            if (instance is ILotusBeforeSave before_save)
+            if (instance is ILotusBeforeSave beforeSave)
             {
-                before_save.OnBeforeSave(parameters);
+                beforeSave.OnBeforeSave(parameters);
             }
 
             var result = JsonSerializer.Serialize(instance, _options);
 
-            if (instance is ILotusAfterSave after_save)
+            if (instance is ILotusAfterSave afterSave)
             {
-                after_save.OnAfterSave(parameters);
+                afterSave.OnAfterSave(parameters);
             }
 
             return result;
@@ -202,9 +202,9 @@ namespace Lotus.Core.Serialization
             if (parameters == null) parameters = new CParameters("SerializerJson");
             parameters.AddObject(this.Name, this, false);
 
-            if (instance is ILotusBeforeSave before_save)
+            if (instance is ILotusBeforeSave beforeSave)
             {
-                before_save.OnBeforeSave(parameters);
+                beforeSave.OnBeforeSave(parameters);
             }
 
             // JsonSerializer не умеет писать напрямую в TextWriter, только в Stream или string.
@@ -212,9 +212,9 @@ namespace Lotus.Core.Serialization
             var json = JsonSerializer.Serialize(instance, _options);
             textWriter.Write(json);
 
-            if (instance is ILotusAfterSave after_save)
+            if (instance is ILotusAfterSave afterSave)
             {
-                after_save.OnAfterSave(parameters);
+                afterSave.OnAfterSave(parameters);
             }
         }
         #endregion
@@ -232,10 +232,10 @@ namespace Lotus.Core.Serialization
             var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
 
             // Читаем данные
-            var string_json = File.ReadAllText(path);
+            var stringJson = File.ReadAllText(path);
 
             // Читаем объект
-            var result = LoadFromString(string_json, parameters);
+            var result = LoadFromString(stringJson, parameters);
 
             return result;
         }
@@ -272,13 +272,13 @@ namespace Lotus.Core.Serialization
             // Читаем объект (аналог JsonConvert.DeserializeObject)
             var result = JsonSerializer.Deserialize(stringJson, typeof(object), _options);
 
-            if (result is ILotusAfterLoad after_load)
+            if (result is ILotusAfterLoad afterLoad)
             {
                 // Добавляем себя в качестве параметра
                 parameters ??= new CParameters("SerializerJson");
                 parameters.AddObject(this.Name, this, false);
 
-                after_load.OnAfterLoad(parameters);
+                afterLoad.OnAfterLoad(parameters);
             }
 
             return result;
@@ -291,13 +291,13 @@ namespace Lotus.Core.Serialization
         {
             var result = JsonSerializer.Deserialize<TResultType>(stringJson, _options);
 
-            if (result is ILotusAfterLoad after_load)
+            if (result is ILotusAfterLoad afterLoad)
             {
                 // Добавляем себя в качестве параметра
                 if (parameters == null) parameters = new CParameters("SerializerJson");
                 parameters.AddObject(this.Name, this, false);
 
-                after_load.OnAfterLoad(parameters);
+                afterLoad.OnAfterLoad(parameters);
             }
 
             return result;
@@ -316,13 +316,13 @@ namespace Lotus.Core.Serialization
             var stringJson = textReader.ReadToEnd();
             var result = JsonSerializer.Deserialize<TResultType>(stringJson, _options);
 
-            if (result is ILotusAfterLoad after_load)
+            if (result is ILotusAfterLoad afterLoad)
             {
                 // Добавляем себя в качестве параметра
                 if (parameters == null) parameters = new CParameters("SerializerJson");
                 parameters.AddObject(this.Name, this, false);
 
-                after_load.OnAfterLoad(parameters);
+                afterLoad.OnAfterLoad(parameters);
             }
 
             return result;
@@ -342,10 +342,10 @@ namespace Lotus.Core.Serialization
             var path = XFilePath.GetFileName(DefaultPath, fileName, DefaultExt);
 
             // Читаем данные
-            var string_json = File.ReadAllText(path);
+            var stringJson = File.ReadAllText(path);
 
             // Обновляем объект
-            UpdateFromString(instance, string_json, parameters);
+            UpdateFromString(instance, stringJson, parameters);
         }
 
         /// <summary>
@@ -360,9 +360,9 @@ namespace Lotus.Core.Serialization
             if (parameters == null) parameters = new CParameters("SerializerJson");
             parameters.AddObject(this.Name, this, false);
 
-            if (instance is ILotusBeforeLoad before_load)
+            if (instance is ILotusBeforeLoad beforeLoad)
             {
-                before_load.OnBeforeLoad(parameters);
+                beforeLoad.OnBeforeLoad(parameters);
             }
 
             // В System.Text.Json НЕТ встроенного метода PopulateObject (заполнение существующего объекта).
@@ -383,9 +383,9 @@ namespace Lotus.Core.Serialization
                 // Обработка ошибок десериализации
             }
 
-            if (instance is ILotusAfterLoad after_load)
+            if (instance is ILotusAfterLoad afterLoad)
             {
-                after_load.OnAfterLoad(parameters);
+                afterLoad.OnAfterLoad(parameters);
             }
         }
 

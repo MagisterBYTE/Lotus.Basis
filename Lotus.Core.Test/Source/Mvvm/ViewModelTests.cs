@@ -139,7 +139,7 @@ namespace Lotus.Core.Mvvm
         [Test]
         public static void TestView()
         {
-            var view_item = new ViewModelActivity(new CActivity()
+            var viewItem = new ViewModelActivity(new CActivity()
             {
                 Vilage = "Бреды",
                 Programm = "Академия",

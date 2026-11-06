@@ -923,14 +923,14 @@ namespace Lotus.Maths
         /// <summary>
         /// Вычисление расстояние между самыми близкими точками на отрезках.
         /// </summary>
-        /// <param name="left_a">Начало отрезка слева.</param>
-        /// <param name="left_b">Конец отрезка слева.</param>
-        /// <param name="right_a">Начало отрезка справа.</param>
+        /// <param name="leftA">Начало отрезка слева.</param>
+        /// <param name="leftB">Конец отрезка слева.</param>
+        /// <param name="rightA">Начало отрезка справа.</param>
         /// <returns>Расстояние.</returns>
-        private static float SegmentSegmentCollinear(in Vector2Df left_a, in Vector2Df left_b, in Vector2Df right_a)
+        private static float SegmentSegmentCollinear(in Vector2Df leftA, in Vector2Df leftB, in Vector2Df rightA)
         {
-            var leftDirection = left_b - left_a;
-            var rightAProjection = Vector2Df.Dot(leftDirection.Normalized, right_a - left_b);
+            var leftDirection = leftB - leftA;
+            var rightAProjection = Vector2Df.Dot(leftDirection.Normalized, rightA - leftB);
             if (Math.Abs(rightAProjection) < XGeometry2D.Epsilon_f)
             {
                 // LB == RA

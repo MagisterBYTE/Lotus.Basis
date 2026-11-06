@@ -548,7 +548,7 @@ namespace Lotus.Maths
                     {
                         if (originBProjection > -XGeometry2D.Epsilon_f)
                         {
-                            // Projection of pos_a is on ray_b
+                            // Projection of posA is on rayB
                             pointA = posA;
                             pointB = posB + (dirA * originBProjection);
                             return;
@@ -570,7 +570,7 @@ namespace Lotus.Maths
                         }
                         else
                         {
-                            // Projection of pos_a is on ray_b
+                            // Projection of posA is on rayB
                             pointA = posA;
                             pointB = posB + (dirA * originBProjection);
                             return;
@@ -584,7 +584,7 @@ namespace Lotus.Maths
                     // Ray intersection
                     if (originBProjection > -XGeometry2D.Epsilon_f)
                     {
-                        // Projection of pos_a is on ray_b
+                        // Projection of posA is on rayB
                         pointA = pointB = posA;
                         return;
                     }
@@ -1226,16 +1226,16 @@ namespace Lotus.Maths
         /// <summary>
         /// Поиск ближайших точек проекции двух отрезков.
         /// </summary>
-        /// <param name="left_a">Начало отрезка слева.</param>
-        /// <param name="left_b">Конец отрезка слева.</param>
-        /// <param name="right_a">Начало отрезка справа.</param>
-        /// <param name="left_point">Точка проекции на отрезке слева.</param>
-        /// <param name="right_point">Точка проекции на отрезке справа.</param>
-        private static void SegmentSegmentCollinear(in Vector2Df left_a, in Vector2Df left_b, in Vector2Df right_a,
-            out Vector2Df left_point, out Vector2Df right_point)
+        /// <param name="leftA">Начало отрезка слева.</param>
+        /// <param name="leftB">Конец отрезка слева.</param>
+        /// <param name="rightA">Начало отрезка справа.</param>
+        /// <param name="leftPoint">Точка проекции на отрезке слева.</param>
+        /// <param name="rightPoint">Точка проекции на отрезке справа.</param>
+        private static void SegmentSegmentCollinear(in Vector2Df leftA, in Vector2Df leftB, in Vector2Df rightA,
+            out Vector2Df leftPoint, out Vector2Df rightPoint)
         {
-            var leftDirection = left_b - left_a;
-            var rightAProjection = Vector2Df.Dot(leftDirection.Normalized, right_a - left_b);
+            var leftDirection = leftB - leftA;
+            var rightAProjection = Vector2Df.Dot(leftDirection.Normalized, rightA - leftB);
             if (Math.Abs(rightAProjection) < XGeometry2D.Epsilon_f)
             {
                 // LB == RA
@@ -1243,7 +1243,7 @@ namespace Lotus.Maths
                 //         RA------RB
 
                 // Point intersection
-                left_point = right_point = left_b;
+                leftPoint = rightPoint = leftB;
                 return;
             }
             if (rightAProjection < 0)
@@ -1255,7 +1255,7 @@ namespace Lotus.Maths
                 //     RA------RB
 
                 // Segment intersection
-                left_point = right_point = right_a;
+                leftPoint = rightPoint = rightA;
                 return;
             }
             // LB < RA
@@ -1263,8 +1263,8 @@ namespace Lotus.Maths
             //             RA------RB
 
             // No intersection
-            left_point = left_b;
-            right_point = right_a;
+            leftPoint = leftB;
+            rightPoint = rightA;
         }
         #endregion Segment-Segment
 

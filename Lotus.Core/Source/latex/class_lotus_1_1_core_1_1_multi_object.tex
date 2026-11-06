@@ -1,0 +1,65 @@
+\doxysection{Lotus.\+Core.\+Multi\+Object Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_multi_object}{}\label{class_lotus_1_1_core_1_1_multi_object}\index{Lotus.Core.MultiObject@{Lotus.Core.MultiObject}}
+
+
+Представляет агрегатор для нескольких объектов, позволяющий редактировать их общие свойства одновременно и собирать ошибки валидации.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Multi\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_multi_object}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_object_a559c212670a037278be7fd1c44eacbeb}\label{class_lotus_1_1_core_1_1_multi_object_a559c212670a037278be7fd1c44eacbeb} 
+{\bfseries Multi\+Object} (IEnumerable$<$ object $>$ targets)
+\begin{DoxyCompactList}\small\item\em Инициализирует новый экземпляр Multi\+Object на основе перечисления объектов. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_object_a3264964ed114ca60da2a5912f2a955b6}\label{class_lotus_1_1_core_1_1_multi_object_a3264964ed114ca60da2a5912f2a955b6} 
+{\bfseries Multi\+Object} (IList targets)
+\begin{DoxyCompactList}\small\item\em Инициализирует новый экземпляр Multi\+Object на основе списка (удобно для Win\+Forms/\+WPF коллекций). \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_object_a59f28bd94a3adfd8a5e018672678d4f9}\label{class_lotus_1_1_core_1_1_multi_object_a59f28bd94a3adfd8a5e018672678d4f9} 
+override Property\+Descriptor\+Collection {\bfseries Get\+Properties} (Attribute\mbox{[}$\,$\mbox{]}? attributes)
+\begin{DoxyCompactList}\small\item\em Динамически формирует список свойств, которые являются общими для всех объектов в списке. Свойства считаются идентичными, если совпадают их имена и типы данных. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_object_a6e065e57eff732928f220ac1e6cd8764}\label{class_lotus_1_1_core_1_1_multi_object_a6e065e57eff732928f220ac1e6cd8764} 
+override Property\+Descriptor\+Collection {\bfseries Get\+Properties} ()
+\begin{DoxyCompactList}\small\item\em Динамически формирует список свойств, которые являются общими для всех объектов в списке. Свойства считаются идентичными, если совпадают их имена и типы данных. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_object_a7f8c7828d4b92278ad48cd7ee15dbcdc}\label{class_lotus_1_1_core_1_1_multi_object_a7f8c7828d4b92278ad48cd7ee15dbcdc} 
+override object {\bfseries Get\+Property\+Owner} (Property\+Descriptor? pd)
+\begin{DoxyCompactList}\small\item\em Указывает, что владельцем свойств является текущий объект-\/дескриптор. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_object_aa003363ad46d30192275da955471b500}\label{class_lotus_1_1_core_1_1_multi_object_aa003363ad46d30192275da955471b500} 
+string {\bfseries Error}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Реализация IData\+Error\+Info. Возвращает общую ошибку по объекту. В данной реализации всегда null. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_multi_object_a7f9b6f9db3af7539d0ff5de01380fb7b}{this\mbox{[}string column\+Name\mbox{]}}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возвращает агрегированную строку ошибок для указанного свойства со всех целевых объектов. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Представляет агрегатор для нескольких объектов, позволяющий редактировать их общие свойства одновременно и собирать ошибки валидации. 
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_multi_object_a7f9b6f9db3af7539d0ff5de01380fb7b}\label{class_lotus_1_1_core_1_1_multi_object_a7f9b6f9db3af7539d0ff5de01380fb7b} 
+\index{Lotus.Core.MultiObject@{Lotus.Core.MultiObject}!this\mbox{[}string columnName\mbox{]}@{this[string columnName]}}
+\index{this\mbox{[}string columnName\mbox{]}@{this[string columnName]}!Lotus.Core.MultiObject@{Lotus.Core.MultiObject}}
+\doxysubsubsection{\texorpdfstring{this[string columnName]}{this[string columnName]}}
+{\footnotesize\ttfamily string Lotus.\+Core.\+Multi\+Object.\+this\mbox{[}string column\+Name\mbox{]}\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Возвращает агрегированную строку ошибок для указанного свойства со всех целевых объектов. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em column\+Name} & Имя проверяемого свойства.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Component\+Model/Lotus\+Multi\+Object.\+cs\end{DoxyCompactItemize}

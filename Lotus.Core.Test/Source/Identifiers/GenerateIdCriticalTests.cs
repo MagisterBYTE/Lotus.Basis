@@ -5,13 +5,13 @@ using NUnit.Framework.Legacy;
 namespace Lotus.Core.Identifiers
 {
     /// <summary>
-    /// Тесты для критических участков GenerateId (исправление опечатки elapsed_millisecond).
+    /// Тесты для критических участков GenerateId (исправление опечатки elapsedMillisecond).
     /// </summary>
     [TestFixture]
     public class GenerateIdCriticalTests
     {
         /// <summary>
-        /// Тест GenerateNext - исправленная опечатка (было elapsed_millsecond).
+        /// Тест GenerateNext - исправленная опечатка (было elapsedMillsecond).
         /// </summary>
         [Test]
         public void GenerateNext_ReturnsCorrectMillisecondValue()
@@ -47,7 +47,7 @@ namespace Lotus.Core.Identifiers
         }
 
         /// <summary>
-        /// Тест Generate - корректная работа с elapsed_millisecond (исправленная опечатка).
+        /// Тест Generate - корректная работа с elapsedMillisecond (исправленная опечатка).
         /// </summary>
         [Test]
         public void Generate_UsesCorrectMillisecondCalculation()

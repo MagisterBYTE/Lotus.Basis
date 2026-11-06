@@ -1,0 +1,828 @@
+\doxysection{Lotus.\+Core.\+Repository\+List\texorpdfstring{$<$}{<} TEntity, TKey \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_repository_list}{}\label{class_lotus_1_1_core_1_1_repository_list}\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+
+
+Реализация репозитория ILotus\+Repository$<$\+TEntity, TKey$>$ через простой список List$<$\+T$>$.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Repository\+List\texorpdfstring{$<$}{<} TEntity, TKey \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_repository_list}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_ab220729f9666ec7db53f7f28887defec}\label{class_lotus_1_1_core_1_1_repository_list_ab220729f9666ec7db53f7f28887defec} 
+{\bfseries Repository\+List} (\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{List}}$<$ TEntity $>$ list)
+\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_acb848881e46daf71aaf9f3adcdd802f3}{Set\+List}} (\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{List}}$<$ TEntity $>$ list)
+\begin{DoxyCompactList}\small\item\em Установка списка сущностей. \end{DoxyCompactList}\item 
+IQueryable$<$ TEntity $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_ac2a9b60ec6d230963b18414eea952d79}{Query}} ()
+\begin{DoxyCompactList}\small\item\em Получить провайдер данных указанной сущности.
+
+\begin{DoxyReturn}{Returns}
+Провайдер данных.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+TEntity? \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a19e96f1df45e92b52b807f2fcdc30cc9}{First\+Or\+Default}} (Func$<$ TEntity?, bool $>$? predicate)
+\begin{DoxyCompactList}\small\item\em Получить первую сущность или значение по умолчанию удовлетворяющий указанному предикату.
+
+
+\begin{DoxyParams}{Parameters}
+{\em predicate} & Предикат.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Первая сущность или значение по умолчанию.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+TEntity? \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_ab331394534404215204250bbeedc1bdb}{Get\+By\+Id}} (\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} id)
+\begin{DoxyCompactList}\small\item\em Производит поиск сущности в БД или в хранилище по идентификатору. Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или null.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+async Value\+Task$<$ TEntity?$>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_ad21a60f2aca4c6c1dc59d960e23e504c}{Get\+By\+Id\+Async}} (\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} id, Cancellation\+Token token=default)
+\begin{DoxyCompactList}\small\item\em Производит поиск сущности в БД или в хранилище по идентификатору. Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или null.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+IList$<$ TEntity?$>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_ab1907e96a2cc0f920c294c5947e0f50b}{Get\+By\+Ids}} (IEnumerable$<$ \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$ ids)
+\begin{DoxyCompactList}\small\item\em Производит поиск сущностей в БД или в хранилище по идентификаторам.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ids} & Список идентификаторов.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список сущностей.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+async Value\+Task$<$ IList$<$ TEntity?$>$ $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a249a316c2ed32a20b42ec5831d90ae00}{Get\+By\+Ids\+Async}} (IEnumerable$<$ \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$ ids, Cancellation\+Token token=default)
+\begin{DoxyCompactList}\small\item\em Производит поиск сущностей в БД или в хранилище по идентификаторам.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ids} & Список идентификаторов.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список сущностей.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+TEntity? \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a111c899ff3a39a7ac4c29c3e15e63c39}{Get\+By\+Name}} (string name)
+\begin{DoxyCompactList}\small\item\em Производит поиск сущности в БД или в хранилище по ее имени.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или null.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+async Value\+Task$<$ TEntity?$>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a6aa2f41bfeb80098be130e9d2fb6f41d}{Get\+By\+Name\+Async}} (string name, Cancellation\+Token token=default)
+\begin{DoxyCompactList}\small\item\em Производит поиск сущности в БД или в хранилище по ее имени.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя сущности.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или null.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+TEntity \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_aeafc298371fd4d34478fc166d8050ae8}{Get\+Or\+Add}} (\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} id)
+\begin{DoxyCompactList}\small\item\em Производит поиск сущности в БД или в хранилище по идентификатору. Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр. Если сущность отсутствует то она будет создана с указанным идентификатором.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или созданная сущность.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+async Value\+Task$<$ TEntity $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_ae497b0560b6333e918dd339ce464dbe8}{Get\+Or\+Add\+Async}} (\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} id, Cancellation\+Token token=default)
+\begin{DoxyCompactList}\small\item\em Производит поиск сущности в БД или в хранилище по идентификатору. Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр. Если сущность отсутствует то она будет создана с указанным идентификатором.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или созданная сущность.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+TEntity \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a93aa77e1bf1a51cf602a9edec1c9fe3f}{Add}} (TEntity entity)
+\begin{DoxyCompactList}\small\item\em Добавить сущность.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Сущность.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Добавленная сущность.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+async Value\+Task$<$ TEntity $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a4fcbefcb6b5ea823dfa7aa13f69150ee}{Add\+Async}} (TEntity entity, Cancellation\+Token token=default)
+\begin{DoxyCompactList}\small\item\em Добавить сущность.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Сущность.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Добавленная сущность.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_afdeabb0c4c4c7b28a665dda917b049f4}{Add\+Range}} (IEnumerable$<$ TEntity $>$ entities)
+\begin{DoxyCompactList}\small\item\em Добавить список сущностей.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entities} & Список сущностей.\\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_aadc3d370f64c4c4cd2a4b5f1991495ce}{Add\+Range\+Async}} (IEnumerable$<$ TEntity $>$ entities, Cancellation\+Token token=default)
+\begin{DoxyCompactList}\small\item\em Добавить список сущностей.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entities} & Список сущностей.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Задача.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+TEntity \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a162d7022057f501017ebf4c4b3312034}{Update}} (TEntity entity)
+\begin{DoxyCompactList}\small\item\em Обновить указанную сущность.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Сущность.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Обновленная сущность.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a9313eb001c4ea75743757bb10395d3a5}{Update\+Range}} (IEnumerable$<$ TEntity $>$ entities)
+\begin{DoxyCompactList}\small\item\em Обновить указанные сущности.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entities} & Список сущностей.\\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a533fb9afbe27aeb1c8f01402d2204645}{Remove}} (TEntity entity)
+\begin{DoxyCompactList}\small\item\em Удалить указанную сущность.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Сущность.\\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a0899344168a06e04353fdb024e4ca872}{Remove\+Range}} (IEnumerable$<$ TEntity $>$ entities)
+\begin{DoxyCompactList}\small\item\em Удалить указанные сущности.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entities} & Список сущностей.\\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_aa8185b6bc0c8867a7a5a59c04f97f79c}{Remove\+Id}} (\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} id)
+\begin{DoxyCompactList}\small\item\em Удалить указанную сущность по идентификатору.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a0e309efd45e9e9a577d3b80858c89661}{Remove\+Ids\+Range}} (IEnumerable$<$ \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$ ids)
+\begin{DoxyCompactList}\small\item\em Удалить указанные сущности по их идентификаторам.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ids} & Список идентификаторов сущностей.\\
+\hline
+\end{DoxyParams}
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_ac0fa10a14841ba4da5504e4f3dec8705}{Flush}} ()
+\begin{DoxyCompactList}\small\item\em Сохранить в хранилище все изменения. \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_a66c118b8ede0a283e23f886190c418c4}{Flush\+Async}} (Cancellation\+Token token=default)
+\begin{DoxyCompactList}\small\item\em Сохранить в хранилище все изменения.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Задача.
+\end{DoxyReturn}
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list_ae6ca61f983fc7ccc2942bc5d4db07a42}{Save\+Each\+Operation}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Выполнять сохранение после каждой операции
+
+По умолчанию данный режим включен  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}}
+
+
+\doxysubsection{Detailed Description}
+Реализация репозитория ILotus\+Repository$<$\+TEntity, TKey$>$ через простой список List$<$\+T$>$. \begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TEntity} : {\em class}]\item[{\em TEntity} : {\em \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_id}{ILotus\+Identifier\+Id}}$<$\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}}$>$}]\item[{\em TEntity} : {\em new()}]\item[{\em TKey} : {\em notnull}]\item[{\em TKey} : {\em IEquatable$<$\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}}$>$}]\end{description}
+\end{Desc}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a93aa77e1bf1a51cf602a9edec1c9fe3f}\label{class_lotus_1_1_core_1_1_repository_list_a93aa77e1bf1a51cf602a9edec1c9fe3f} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!Add@{Add}}
+\index{Add@{Add}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily TEntity \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Add (\begin{DoxyParamCaption}\item[{TEntity}]{entity }\end{DoxyParamCaption})}
+
+
+
+Добавить сущность.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Сущность.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Добавленная сущность.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_aa648ec0e3fd2faf305c8fe0e717c5359}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a4fcbefcb6b5ea823dfa7aa13f69150ee}\label{class_lotus_1_1_core_1_1_repository_list_a4fcbefcb6b5ea823dfa7aa13f69150ee} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!AddAsync@{AddAsync}}
+\index{AddAsync@{AddAsync}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{AddAsync()}{AddAsync()}}
+{\footnotesize\ttfamily async Value\+Task$<$ TEntity $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Add\+Async (\begin{DoxyParamCaption}\item[{TEntity}]{entity,  }\item[{Cancellation\+Token}]{token = {\ttfamily default} }\end{DoxyParamCaption})}
+
+
+
+Добавить сущность.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Сущность.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Добавленная сущность.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a1de4b94b399a426313f42d76feb7806a}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_afdeabb0c4c4c7b28a665dda917b049f4}\label{class_lotus_1_1_core_1_1_repository_list_afdeabb0c4c4c7b28a665dda917b049f4} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!AddRange@{AddRange}}
+\index{AddRange@{AddRange}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{AddRange()}{AddRange()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Add\+Range (\begin{DoxyParamCaption}\item[{IEnumerable$<$ TEntity $>$}]{entities }\end{DoxyParamCaption})}
+
+
+
+Добавить список сущностей.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entities} & Список сущностей.\\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_aca9b283d748b7f9b050a2a057005633b}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_aadc3d370f64c4c4cd2a4b5f1991495ce}\label{class_lotus_1_1_core_1_1_repository_list_aadc3d370f64c4c4cd2a4b5f1991495ce} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!AddRangeAsync@{AddRangeAsync}}
+\index{AddRangeAsync@{AddRangeAsync}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{AddRangeAsync()}{AddRangeAsync()}}
+{\footnotesize\ttfamily async Task \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Add\+Range\+Async (\begin{DoxyParamCaption}\item[{IEnumerable$<$ TEntity $>$}]{entities,  }\item[{Cancellation\+Token}]{token = {\ttfamily default} }\end{DoxyParamCaption})}
+
+
+
+Добавить список сущностей.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entities} & Список сущностей.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Задача.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a81f1a9637693720ddaca4f48f1cda0ab}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a19e96f1df45e92b52b807f2fcdc30cc9}\label{class_lotus_1_1_core_1_1_repository_list_a19e96f1df45e92b52b807f2fcdc30cc9} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!FirstOrDefault@{FirstOrDefault}}
+\index{FirstOrDefault@{FirstOrDefault}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{FirstOrDefault()}{FirstOrDefault()}}
+{\footnotesize\ttfamily TEntity? \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.First\+Or\+Default (\begin{DoxyParamCaption}\item[{Func$<$ TEntity?, bool $>$?}]{predicate }\end{DoxyParamCaption})}
+
+
+
+Получить первую сущность или значение по умолчанию удовлетворяющий указанному предикату.
+
+
+\begin{DoxyParams}{Parameters}
+{\em predicate} & Предикат.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Первая сущность или значение по умолчанию.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_af8dd13793a2d8bfe9d4d2ce308fdffd2}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_ac0fa10a14841ba4da5504e4f3dec8705}\label{class_lotus_1_1_core_1_1_repository_list_ac0fa10a14841ba4da5504e4f3dec8705} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!Flush@{Flush}}
+\index{Flush@{Flush}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{Flush()}{Flush()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Сохранить в хранилище все изменения. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_ab7021cb254d239b8010cb0cd8011bf0a}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a66c118b8ede0a283e23f886190c418c4}\label{class_lotus_1_1_core_1_1_repository_list_a66c118b8ede0a283e23f886190c418c4} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!FlushAsync@{FlushAsync}}
+\index{FlushAsync@{FlushAsync}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{FlushAsync()}{FlushAsync()}}
+{\footnotesize\ttfamily async Task \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Flush\+Async (\begin{DoxyParamCaption}\item[{Cancellation\+Token}]{token = {\ttfamily default} }\end{DoxyParamCaption})}
+
+
+
+Сохранить в хранилище все изменения.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Задача.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a04e4c3f7a0776f0e27b5f382ffff6124}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_ab331394534404215204250bbeedc1bdb}\label{class_lotus_1_1_core_1_1_repository_list_ab331394534404215204250bbeedc1bdb} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!GetById@{GetById}}
+\index{GetById@{GetById}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{GetById()}{GetById()}}
+{\footnotesize\ttfamily TEntity? \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Get\+By\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}}}]{id }\end{DoxyParamCaption})}
+
+
+
+Производит поиск сущности в БД или в хранилище по идентификатору. Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или null.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a89d69290d840edc3474125cd79876709}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_ad21a60f2aca4c6c1dc59d960e23e504c}\label{class_lotus_1_1_core_1_1_repository_list_ad21a60f2aca4c6c1dc59d960e23e504c} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!GetByIdAsync@{GetByIdAsync}}
+\index{GetByIdAsync@{GetByIdAsync}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{GetByIdAsync()}{GetByIdAsync()}}
+{\footnotesize\ttfamily async Value\+Task$<$ TEntity?$>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Get\+By\+Id\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}}}]{id,  }\item[{Cancellation\+Token}]{token = {\ttfamily default} }\end{DoxyParamCaption})}
+
+
+
+Производит поиск сущности в БД или в хранилище по идентификатору. Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или null.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_ad870a206851c91d664d542af9113e2b5}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_ab1907e96a2cc0f920c294c5947e0f50b}\label{class_lotus_1_1_core_1_1_repository_list_ab1907e96a2cc0f920c294c5947e0f50b} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!GetByIds@{GetByIds}}
+\index{GetByIds@{GetByIds}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{GetByIds()}{GetByIds()}}
+{\footnotesize\ttfamily IList$<$ TEntity?$>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Get\+By\+Ids (\begin{DoxyParamCaption}\item[{IEnumerable$<$ \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$}]{ids }\end{DoxyParamCaption})}
+
+
+
+Производит поиск сущностей в БД или в хранилище по идентификаторам.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ids} & Список идентификаторов.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список сущностей.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a88d3280cfdee815651fdf49b8a7eb3e4}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a249a316c2ed32a20b42ec5831d90ae00}\label{class_lotus_1_1_core_1_1_repository_list_a249a316c2ed32a20b42ec5831d90ae00} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!GetByIdsAsync@{GetByIdsAsync}}
+\index{GetByIdsAsync@{GetByIdsAsync}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{GetByIdsAsync()}{GetByIdsAsync()}}
+{\footnotesize\ttfamily async Value\+Task$<$ IList$<$ TEntity?$>$ $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Get\+By\+Ids\+Async (\begin{DoxyParamCaption}\item[{IEnumerable$<$ \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$}]{ids,  }\item[{Cancellation\+Token}]{token = {\ttfamily default} }\end{DoxyParamCaption})}
+
+
+
+Производит поиск сущностей в БД или в хранилище по идентификаторам.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ids} & Список идентификаторов.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Список сущностей.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_ab033339b495cbdbd33bf79ef94871d63}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a111c899ff3a39a7ac4c29c3e15e63c39}\label{class_lotus_1_1_core_1_1_repository_list_a111c899ff3a39a7ac4c29c3e15e63c39} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!GetByName@{GetByName}}
+\index{GetByName@{GetByName}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{GetByName()}{GetByName()}}
+{\footnotesize\ttfamily TEntity? \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Get\+By\+Name (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Производит поиск сущности в БД или в хранилище по ее имени.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или null.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a7dfb6796824521788a94683b70c6dd6a}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a6aa2f41bfeb80098be130e9d2fb6f41d}\label{class_lotus_1_1_core_1_1_repository_list_a6aa2f41bfeb80098be130e9d2fb6f41d} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!GetByNameAsync@{GetByNameAsync}}
+\index{GetByNameAsync@{GetByNameAsync}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{GetByNameAsync()}{GetByNameAsync()}}
+{\footnotesize\ttfamily async Value\+Task$<$ TEntity?$>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Get\+By\+Name\+Async (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{Cancellation\+Token}]{token = {\ttfamily default} }\end{DoxyParamCaption})}
+
+
+
+Производит поиск сущности в БД или в хранилище по ее имени.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя сущности.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или null.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a86c092776d7798374189b0e64c8d78b5}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_aeafc298371fd4d34478fc166d8050ae8}\label{class_lotus_1_1_core_1_1_repository_list_aeafc298371fd4d34478fc166d8050ae8} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!GetOrAdd@{GetOrAdd}}
+\index{GetOrAdd@{GetOrAdd}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{GetOrAdd()}{GetOrAdd()}}
+{\footnotesize\ttfamily TEntity \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Get\+Or\+Add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}}}]{id }\end{DoxyParamCaption})}
+
+
+
+Производит поиск сущности в БД или в хранилище по идентификатору. Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр. Если сущность отсутствует то она будет создана с указанным идентификатором.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или созданная сущность.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a7c745f0d21c17378eb707d959c6d6793}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_ae497b0560b6333e918dd339ce464dbe8}\label{class_lotus_1_1_core_1_1_repository_list_ae497b0560b6333e918dd339ce464dbe8} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!GetOrAddAsync@{GetOrAddAsync}}
+\index{GetOrAddAsync@{GetOrAddAsync}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{GetOrAddAsync()}{GetOrAddAsync()}}
+{\footnotesize\ttfamily async Value\+Task$<$ TEntity $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Get\+Or\+Add\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}}}]{id,  }\item[{Cancellation\+Token}]{token = {\ttfamily default} }\end{DoxyParamCaption})}
+
+
+
+Производит поиск сущности в БД или в хранилище по идентификатору. Если сущность еще не добавлена в БД, но добавлена в хранилище вернет экземпляр. Если сущность отсутствует то она будет создана с указанным идентификатором.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная сущность или созданная сущность.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a4dbef305f72109ac67193075f73853e6}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_ac2a9b60ec6d230963b18414eea952d79}\label{class_lotus_1_1_core_1_1_repository_list_ac2a9b60ec6d230963b18414eea952d79} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!Query@{Query}}
+\index{Query@{Query}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{Query()}{Query()}}
+{\footnotesize\ttfamily IQueryable$<$ TEntity $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Query (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получить провайдер данных указанной сущности.
+
+\begin{DoxyReturn}{Returns}
+Провайдер данных.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_ab3c373c91f246b2806871323faef4c7d}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a533fb9afbe27aeb1c8f01402d2204645}\label{class_lotus_1_1_core_1_1_repository_list_a533fb9afbe27aeb1c8f01402d2204645} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!Remove@{Remove}}
+\index{Remove@{Remove}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Remove (\begin{DoxyParamCaption}\item[{TEntity}]{entity }\end{DoxyParamCaption})}
+
+
+
+Удалить указанную сущность.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Сущность.\\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a52914da1882231be1139f9a5bc613b56}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_aa8185b6bc0c8867a7a5a59c04f97f79c}\label{class_lotus_1_1_core_1_1_repository_list_aa8185b6bc0c8867a7a5a59c04f97f79c} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!RemoveId@{RemoveId}}
+\index{RemoveId@{RemoveId}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveId()}{RemoveId()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Remove\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}}}]{id }\end{DoxyParamCaption})}
+
+
+
+Удалить указанную сущность по идентификатору.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_adec247fa100e66df78c456e7c3f4a996}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a0e309efd45e9e9a577d3b80858c89661}\label{class_lotus_1_1_core_1_1_repository_list_a0e309efd45e9e9a577d3b80858c89661} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!RemoveIdsRange@{RemoveIdsRange}}
+\index{RemoveIdsRange@{RemoveIdsRange}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveIdsRange()}{RemoveIdsRange()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Remove\+Ids\+Range (\begin{DoxyParamCaption}\item[{IEnumerable$<$ \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$}]{ids }\end{DoxyParamCaption})}
+
+
+
+Удалить указанные сущности по их идентификаторам.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ids} & Список идентификаторов сущностей.\\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a5dc49f83d3b9ed0e0470a516416c2b3f}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a0899344168a06e04353fdb024e4ca872}\label{class_lotus_1_1_core_1_1_repository_list_a0899344168a06e04353fdb024e4ca872} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!RemoveRange@{RemoveRange}}
+\index{RemoveRange@{RemoveRange}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveRange()}{RemoveRange()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Remove\+Range (\begin{DoxyParamCaption}\item[{IEnumerable$<$ TEntity $>$}]{entities }\end{DoxyParamCaption})}
+
+
+
+Удалить указанные сущности.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entities} & Список сущностей.\\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_ad22014cd3b332742790c3c194f157519}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_acb848881e46daf71aaf9f3adcdd802f3}\label{class_lotus_1_1_core_1_1_repository_list_acb848881e46daf71aaf9f3adcdd802f3} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!SetList@{SetList}}
+\index{SetList@{SetList}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{SetList()}{SetList()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Set\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{List}}$<$ TEntity $>$}]{list }\end{DoxyParamCaption})}
+
+
+
+Установка списка сущностей. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & Список сущностей.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a162d7022057f501017ebf4c4b3312034}\label{class_lotus_1_1_core_1_1_repository_list_a162d7022057f501017ebf4c4b3312034} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!Update@{Update}}
+\index{Update@{Update}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily TEntity \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Update (\begin{DoxyParamCaption}\item[{TEntity}]{entity }\end{DoxyParamCaption})}
+
+
+
+Обновить указанную сущность.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & Сущность.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Обновленная сущность.
+\end{DoxyReturn}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a7cce1b2d8ff2dcc1fc985f783cbe17ec}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_a9313eb001c4ea75743757bb10395d3a5}\label{class_lotus_1_1_core_1_1_repository_list_a9313eb001c4ea75743757bb10395d3a5} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!UpdateRange@{UpdateRange}}
+\index{UpdateRange@{UpdateRange}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{UpdateRange()}{UpdateRange()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Update\+Range (\begin{DoxyParamCaption}\item[{IEnumerable$<$ TEntity $>$}]{entities }\end{DoxyParamCaption})}
+
+
+
+Обновить указанные сущности.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entities} & Список сущностей.\\
+\hline
+\end{DoxyParams}
+ 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_a9fe92d5a61242d0509fa16396538e4af}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_repository_list_ae6ca61f983fc7ccc2942bc5d4db07a42}\label{class_lotus_1_1_core_1_1_repository_list_ae6ca61f983fc7ccc2942bc5d4db07a42} 
+\index{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}!SaveEachOperation@{SaveEachOperation}}
+\index{SaveEachOperation@{SaveEachOperation}!Lotus.Core.RepositoryList$<$ TEntity, TKey $>$@{Lotus.Core.RepositoryList$<$ TEntity, TKey $>$}}
+\doxysubsubsection{\texorpdfstring{SaveEachOperation}{SaveEachOperation}}
+{\footnotesize\ttfamily bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_repository_list}{Lotus.\+Core.\+Repository\+List}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$.Save\+Each\+Operation\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Выполнять сохранение после каждой операции
+
+По умолчанию данный режим включен  
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository_af8de7c873dad7463aca192a413b01fbf}{Lotus.\+Core.\+ILotus\+Repository$<$ TEntity, TKey $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Repository/Lotus\+Repository\+List.\+cs\end{DoxyCompactItemize}

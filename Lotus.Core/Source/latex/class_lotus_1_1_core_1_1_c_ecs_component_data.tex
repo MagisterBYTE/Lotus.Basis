@@ -1,0 +1,233 @@
+\doxysection{Lotus.\+Core.\+CEcs\+Component\+Data\texorpdfstring{$<$}{<} TComponent \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data}{}\label{class_lotus_1_1_core_1_1_c_ecs_component_data}\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+
+
+Класс для хранения взаимосвязанного списка сущностей и компонента определённого типа.  
+
+
+Inheritance diagram for Lotus.\+Core.\+CEcs\+Component\+Data\texorpdfstring{$<$}{<} TComponent \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_c_ecs_component_data}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_a66a2779490342140a2242dfa142d2319}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_a66a2779490342140a2242dfa142d2319} 
+{\bfseries CEcs\+Component\+Data} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_ae74778cca39bf406728e55b1277f3054}{CEcs\+Component\+Data}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_world_configs}{CEcs\+World\+Configs}}? configs=null)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+ref TComponent \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_a3edaa53a127c0e3e2bb530df2eedbc90}{Add\+Entity}} (int entity\+Id)
+\begin{DoxyCompactList}\small\item\em Добавить компонент для указанной сущности. \end{DoxyCompactList}\item 
+ref TComponent \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_afdbc668e3fa5642d397863f0f5aaab41}{Get\+Or\+Add\+Entity}} (int entity\+Id)
+\begin{DoxyCompactList}\small\item\em Получит или добавить компонент для указанной сущности. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_a1c613c25eafacced6ea84a579fefb523}{Has\+Entity}} (int entity\+Id)
+\begin{DoxyCompactList}\small\item\em Проверка наличия компонента для указанной сущности. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_a09848e4b95589986de5fa945080506e3}{Remove\+Entity}} (int entity\+Id)
+\begin{DoxyCompactList}\small\item\em Удаление компонента для указанной сущности. \end{DoxyCompactList}\item 
+ref TComponent \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_abfbc1170073a8b472c12295fad390b9b}{Get\+Value}} (int entity\+Id)
+\begin{DoxyCompactList}\small\item\em Получить компонент для указанной сущности. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_a498b1d2ec21621df249f0cdc98947f29}{Set\+Value}} (int entity\+Id, in TComponent value)
+\begin{DoxyCompactList}\small\item\em Установить/обновить компонент для указанной сущности. \end{DoxyCompactList}\item 
+int\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_a4f388f4bc5c409040330586cc3c63bb4}{Get\+Entities}} ()
+\begin{DoxyCompactList}\small\item\em Получить список идентификатор сущностей для данного компонента. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_ae37a5c91dcc90e22b3093ca0d73ba2f7}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_ae37a5c91dcc90e22b3093ca0d73ba2f7} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_world}{CEcs\+World}} {\bfseries World}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Мир. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data_a87ae90c1e75ec1bb2a5a460df4e43947}{Count}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Текущие количество компонентов. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_a59e3fb6fdb83c05607eeb854c32fa03c}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_a59e3fb6fdb83c05607eeb854c32fa03c} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_sparse_set}{Sparse\+Set}}$<$ TComponent $>$ {\bfseries Components}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список компонентов. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_component_data}{Lotus.\+Core.\+ILotus\+Ecs\+Component\+Data}}}
+
+
+\doxysubsection{Detailed Description}
+Класс для хранения взаимосвязанного списка сущностей и компонента определённого типа. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TComponent} & Тип компонента.\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TComponent} : {\em struct}]\end{description}
+\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_ae74778cca39bf406728e55b1277f3054}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_ae74778cca39bf406728e55b1277f3054} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!CEcsComponentData@{CEcsComponentData}}
+\index{CEcsComponentData@{CEcsComponentData}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{CEcsComponentData()}{CEcsComponentData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{CEcs\+Component\+Data}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_world_configs}{CEcs\+World\+Configs}}?}]{configs = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configs} & Конфигурация начальных настроек мира.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_a3edaa53a127c0e3e2bb530df2eedbc90}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_a3edaa53a127c0e3e2bb530df2eedbc90} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!AddEntity@{AddEntity}}
+\index{AddEntity@{AddEntity}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{AddEntity()}{AddEntity()}}
+{\footnotesize\ttfamily ref TComponent \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.Add\+Entity (\begin{DoxyParamCaption}\item[{int}]{entity\+Id }\end{DoxyParamCaption})}
+
+
+
+Добавить компонент для указанной сущности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity\+Id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Ссылка на созданный компонент.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_a4f388f4bc5c409040330586cc3c63bb4}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_a4f388f4bc5c409040330586cc3c63bb4} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!GetEntities@{GetEntities}}
+\index{GetEntities@{GetEntities}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{GetEntities()}{GetEntities()}}
+{\footnotesize\ttfamily int\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.Get\+Entities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получить список идентификатор сущностей для данного компонента. 
+
+\begin{DoxyReturn}{Returns}
+Список идентификатор сущностей.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_component_data_a6b49171b215bcfddafcbe783d45c727f}{Lotus.\+Core.\+ILotus\+Ecs\+Component\+Data}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_afdbc668e3fa5642d397863f0f5aaab41}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_afdbc668e3fa5642d397863f0f5aaab41} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!GetOrAddEntity@{GetOrAddEntity}}
+\index{GetOrAddEntity@{GetOrAddEntity}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{GetOrAddEntity()}{GetOrAddEntity()}}
+{\footnotesize\ttfamily ref TComponent \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.Get\+Or\+Add\+Entity (\begin{DoxyParamCaption}\item[{int}]{entity\+Id }\end{DoxyParamCaption})}
+
+
+
+Получит или добавить компонент для указанной сущности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity\+Id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Ссылка на компонент.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_abfbc1170073a8b472c12295fad390b9b}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_abfbc1170073a8b472c12295fad390b9b} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily ref TComponent \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.Get\+Value (\begin{DoxyParamCaption}\item[{int}]{entity\+Id }\end{DoxyParamCaption})}
+
+
+
+Получить компонент для указанной сущности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity\+Id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Ссылка на компонент.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_a1c613c25eafacced6ea84a579fefb523}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_a1c613c25eafacced6ea84a579fefb523} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!HasEntity@{HasEntity}}
+\index{HasEntity@{HasEntity}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{HasEntity()}{HasEntity()}}
+{\footnotesize\ttfamily bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.Has\+Entity (\begin{DoxyParamCaption}\item[{int}]{entity\+Id }\end{DoxyParamCaption})}
+
+
+
+Проверка наличия компонента для указанной сущности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity\+Id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус наличия компонента.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_component_data_a90c7c95a3134e1fb159b7ad31717ba8d}{Lotus.\+Core.\+ILotus\+Ecs\+Component\+Data}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_a09848e4b95589986de5fa945080506e3}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_a09848e4b95589986de5fa945080506e3} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!RemoveEntity@{RemoveEntity}}
+\index{RemoveEntity@{RemoveEntity}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveEntity()}{RemoveEntity()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.Remove\+Entity (\begin{DoxyParamCaption}\item[{int}]{entity\+Id }\end{DoxyParamCaption})}
+
+
+
+Удаление компонента для указанной сущности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity\+Id} & Идентификатор сущности.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_component_data_acd90c08af6558adc7aefeaa90752905c}{Lotus.\+Core.\+ILotus\+Ecs\+Component\+Data}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_a498b1d2ec21621df249f0cdc98947f29}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_a498b1d2ec21621df249f0cdc98947f29} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.Set\+Value (\begin{DoxyParamCaption}\item[{int}]{entity\+Id,  }\item[{in TComponent}]{value }\end{DoxyParamCaption})}
+
+
+
+Установить/обновить компонент для указанной сущности. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity\+Id} & Идентификатор сущности.\\
+\hline
+{\em value} & Компонент.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_component_data_a87ae90c1e75ec1bb2a5a460df4e43947}\label{class_lotus_1_1_core_1_1_c_ecs_component_data_a87ae90c1e75ec1bb2a5a460df4e43947} 
+\index{Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}!Count@{Count}}
+\index{Count@{Count}!Lotus.Core.CEcsComponentData$<$ TComponent $>$@{Lotus.Core.CEcsComponentData$<$ TComponent $>$}}
+\doxysubsubsection{\texorpdfstring{Count}{Count}}
+{\footnotesize\ttfamily int \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_component_data}{Lotus.\+Core.\+CEcs\+Component\+Data}}$<$ TComponent $>$.Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Текущие количество компонентов. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_component_data_a5af596370da5eff48880dff2f9e1c216}{Lotus.\+Core.\+ILotus\+Ecs\+Component\+Data}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ECS/Lotus\+ECSComponent.\+cs\end{DoxyCompactItemize}

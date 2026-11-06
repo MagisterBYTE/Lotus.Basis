@@ -1,0 +1,119 @@
+\doxysubsection{Подсистема связывания данных}
+\hypertarget{group___core_data_binding}{}\label{group___core_data_binding}\index{Подсистема связывания данных@{Подсистема связывания данных}}
+
+
+Подсистема связывания данных определяет тип и характер связанности между источником данных и приемником данных.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_base}{Lotus.\+Core.\+Binding\+Base}}
+\begin{DoxyCompactList}\small\item\em Базовый класс реализующий привязку данных между свойством/методом объекта модели и объекта представления. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_delegate}{Lotus.\+Core.\+Binding\+Delegate$<$ TType\+Model, TType\+View $>$}}
+\begin{DoxyCompactList}\small\item\em Класс реализующий привязку данных между свойством/методом объекта модели и объекта представления. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XBinding\+Dispatcher}
+\begin{DoxyCompactList}\small\item\em Диспетчер привязок данных для хранения и управления всем привязками данных. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_binding_reflection}{Lotus.\+Core.\+Binding\+Reflection}}
+\begin{DoxyCompactList}\small\item\em Класс реализующий привязку данных между свойством/методом объекта модели и объекта представления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group___core_data_binding_ga7806bf900066c4791844b60e5757a770}{Lotus.\+Core.\+TBinding\+Mode}} \{ \mbox{\hyperlink{group___core_data_binding_gga7806bf900066c4791844b60e5757a770a7717910152ff91a2d80bad956e4d1370}{Lotus.\+Core.\+TBinding\+Mode.\+View\+Data}}
+, \mbox{\hyperlink{group___core_data_binding_gga7806bf900066c4791844b60e5757a770ab6477701276dc03ed8b14c8be2dbc930}{Lotus.\+Core.\+TBinding\+Mode.\+Data\+Manager}}
+, \mbox{\hyperlink{group___core_data_binding_gga7806bf900066c4791844b60e5757a770a6c267346f8ebb889610a5a90838be815}{Lotus.\+Core.\+TBinding\+Mode.\+Two\+Way}}
+ \}
+\begin{DoxyCompactList}\small\item\em Режим связывания данных между объектом модели и объектом представления. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{group___core_data_binding_gae483a30d36a13af86887f140a14c37b6}{Lotus.\+Core.\+TBinding\+Member\+Type}} \{ \mbox{\hyperlink{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a6f16a5f8ff5d75ab84c018adacdfcbb7}{Lotus.\+Core.\+TBinding\+Member\+Type.\+Field}}
+, \mbox{\hyperlink{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a5ad234cb2cde4266195252a23ca7d84e}{Lotus.\+Core.\+TBinding\+Member\+Type.\+Property}}
+, \mbox{\hyperlink{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a4c3880bb027f159e801041b1021e88e8}{Lotus.\+Core.\+TBinding\+Member\+Type.\+Method}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип члена объекта для связывания данных. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{group___core_data_binding_gaeeee7f49bd1b9affb870157f688fb5ff}{Lotus.\+Core.\+TBinding\+Mode\+Changed}} \{ \mbox{\hyperlink{group___core_data_binding_ggaeeee7f49bd1b9affb870157f688fb5ffa43f6615bbb2c40a5306ff804094420b1}{Lotus.\+Core.\+TBinding\+Mode\+Changed.\+Immediate}}
+, \mbox{\hyperlink{group___core_data_binding_ggaeeee7f49bd1b9affb870157f688fb5ffaa76d4ef5f3f6a672bbfab2865563e530}{Lotus.\+Core.\+TBinding\+Mode\+Changed.\+Time}}
+ \}
+\begin{DoxyCompactList}\small\item\em Режим изменения свойств объекта представления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема связывания данных определяет тип и характер связанности между источником данных и приемником данных. 
+
+Связывания данных -\/ концепция, основанная на взаимной связи между источником данных(объектом логики или модели) и приемником данных, который, как правило отображает ее свойства и позволяет ими управлять -\/ объекта представления.
+
+В зависимости от режима связывания обновление свойств источника приводит к немедленному обновлению свойств объекта представления.
+
+Определение объекта представления (он же целевой объект) и объекта модели (он же объект источник) зависят только от контекста использования и режима связывания. Это разделение условно, предназначено в первую очередь для того чтобы просто идентифицировать данные в определении класса.
+
+Здесь и далее используете понятие «объект логики» и «объект представления» если говорится о чистых сущностях. Т.\+е. объект логики представляет собой чистые данные (например ответ от базы данных), а объект представления только отображает данные. На практике, как правило, часть функциональности одного объекта может быть передана другому. Исходя из этого употребляется термин {\bfseries{«объект модели»}} или просто модель. Это объект, который содержит данные логики, и может содержать, а в некоторых случаях должен содержать, функциональность связанную с его представлением.
+
+Для связывания данных используется стандартная технология рефлексии данных что не очень быстро и эффективно, но зато универсально, и технология Delegate.\+Create\+Delegate которая обеспечивает более быстрое обновление свойств и методов.
+
+\doxysubsubsection{Enumeration Type Documentation}
+\Hypertarget{group___core_data_binding_gae483a30d36a13af86887f140a14c37b6}\label{group___core_data_binding_gae483a30d36a13af86887f140a14c37b6} 
+\index{Подсистема связывания данных@{Подсистема связывания данных}!TBindingMemberType@{TBindingMemberType}}
+\index{TBindingMemberType@{TBindingMemberType}!Подсистема связывания данных@{Подсистема связывания данных}}
+\doxysubsubsubsection{\texorpdfstring{TBindingMemberType}{TBindingMemberType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group___core_data_binding_gae483a30d36a13af86887f140a14c37b6}{Lotus.\+Core.\+TBinding\+Member\+Type}}}
+
+
+
+Тип члена объекта для связывания данных. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Field@{Field}!Подсистема связывания данных@{Подсистема связывания данных}}\index{Подсистема связывания данных@{Подсистема связывания данных}!Field@{Field}}}\Hypertarget{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a6f16a5f8ff5d75ab84c018adacdfcbb7}\label{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a6f16a5f8ff5d75ab84c018adacdfcbb7} 
+Field&Поле. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Property@{Property}!Подсистема связывания данных@{Подсистема связывания данных}}\index{Подсистема связывания данных@{Подсистема связывания данных}!Property@{Property}}}\Hypertarget{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a5ad234cb2cde4266195252a23ca7d84e}\label{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a5ad234cb2cde4266195252a23ca7d84e} 
+Property&Свойство. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Method@{Method}!Подсистема связывания данных@{Подсистема связывания данных}}\index{Подсистема связывания данных@{Подсистема связывания данных}!Method@{Method}}}\Hypertarget{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a4c3880bb027f159e801041b1021e88e8}\label{group___core_data_binding_ggae483a30d36a13af86887f140a14c37b6a4c3880bb027f159e801041b1021e88e8} 
+Method&Метод. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{group___core_data_binding_ga7806bf900066c4791844b60e5757a770}\label{group___core_data_binding_ga7806bf900066c4791844b60e5757a770} 
+\index{Подсистема связывания данных@{Подсистема связывания данных}!TBindingMode@{TBindingMode}}
+\index{TBindingMode@{TBindingMode}!Подсистема связывания данных@{Подсистема связывания данных}}
+\doxysubsubsubsection{\texorpdfstring{TBindingMode}{TBindingMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group___core_data_binding_ga7806bf900066c4791844b60e5757a770}{Lotus.\+Core.\+TBinding\+Mode}}}
+
+
+
+Режим связывания данных между объектом модели и объектом представления. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ViewData@{ViewData}!Подсистема связывания данных@{Подсистема связывания данных}}\index{Подсистема связывания данных@{Подсистема связывания данных}!ViewData@{ViewData}}}\Hypertarget{group___core_data_binding_gga7806bf900066c4791844b60e5757a770a7717910152ff91a2d80bad956e4d1370}\label{group___core_data_binding_gga7806bf900066c4791844b60e5757a770a7717910152ff91a2d80bad956e4d1370} 
+View\+Data&Объект представления лишь отображает данные модели. Изменение данных объекта модели влечет автоматическое изменение соответствующих данных объекта представления. С объектом представления может быть связано только одно свойство/метод модели. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DataManager@{DataManager}!Подсистема связывания данных@{Подсистема связывания данных}}\index{Подсистема связывания данных@{Подсистема связывания данных}!DataManager@{DataManager}}}\Hypertarget{group___core_data_binding_gga7806bf900066c4791844b60e5757a770ab6477701276dc03ed8b14c8be2dbc930}\label{group___core_data_binding_gga7806bf900066c4791844b60e5757a770ab6477701276dc03ed8b14c8be2dbc930} 
+Data\+Manager&Только объект представления управляет данными модели. Поведение объекта представления неопределенно при внешнем изменении данных объекта модели. С объектом представления может быть связано несколько свойств/методов модели. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TwoWay@{TwoWay}!Подсистема связывания данных@{Подсистема связывания данных}}\index{Подсистема связывания данных@{Подсистема связывания данных}!TwoWay@{TwoWay}}}\Hypertarget{group___core_data_binding_gga7806bf900066c4791844b60e5757a770a6c267346f8ebb889610a5a90838be815}\label{group___core_data_binding_gga7806bf900066c4791844b60e5757a770a6c267346f8ebb889610a5a90838be815} 
+Two\+Way&Взаимное обновление данными между моделью и объектом представления. Поведение объект представления неопределенно при внешнем изменении данных объекта модели. С объектом представления может быть связано только одно свойство/метод модели. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{group___core_data_binding_gaeeee7f49bd1b9affb870157f688fb5ff}\label{group___core_data_binding_gaeeee7f49bd1b9affb870157f688fb5ff} 
+\index{Подсистема связывания данных@{Подсистема связывания данных}!TBindingModeChanged@{TBindingModeChanged}}
+\index{TBindingModeChanged@{TBindingModeChanged}!Подсистема связывания данных@{Подсистема связывания данных}}
+\doxysubsubsubsection{\texorpdfstring{TBindingModeChanged}{TBindingModeChanged}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group___core_data_binding_gaeeee7f49bd1b9affb870157f688fb5ff}{Lotus.\+Core.\+TBinding\+Mode\+Changed}}}
+
+
+
+Режим изменения свойств объекта представления. 
+
+Запланировано для будущих реализаций. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Immediate@{Immediate}!Подсистема связывания данных@{Подсистема связывания данных}}\index{Подсистема связывания данных@{Подсистема связывания данных}!Immediate@{Immediate}}}\Hypertarget{group___core_data_binding_ggaeeee7f49bd1b9affb870157f688fb5ffa43f6615bbb2c40a5306ff804094420b1}\label{group___core_data_binding_ggaeeee7f49bd1b9affb870157f688fb5ffa43f6615bbb2c40a5306ff804094420b1} 
+Immediate&Свойство изменяется непосредственно -\/ режим по умолчанию. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Time@{Time}!Подсистема связывания данных@{Подсистема связывания данных}}\index{Подсистема связывания данных@{Подсистема связывания данных}!Time@{Time}}}\Hypertarget{group___core_data_binding_ggaeeee7f49bd1b9affb870157f688fb5ffaa76d4ef5f3f6a672bbfab2865563e530}\label{group___core_data_binding_ggaeeee7f49bd1b9affb870157f688fb5ffaa76d4ef5f3f6a672bbfab2865563e530} 
+Time&Свойство изменяется со временем. Применяется только для числовых свойств. В основном для визуального эффекта. \\
+\hline
+
+\end{DoxyEnumFields}

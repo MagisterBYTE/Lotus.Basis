@@ -1,0 +1,41 @@
+\doxysection{Lotus.\+Core.\+Serialization.\+ILotus\+Serializable\+Object Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serializable_object}{}\label{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serializable_object}\index{Lotus.Core.Serialization.ILotusSerializableObject@{Lotus.Core.Serialization.ILotusSerializableObject}}
+
+
+Интерфейс для объектов которым необходима поддержка поиска и связывания на этапе загрузки.  
+
+
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+long \mbox{\hyperlink{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serializable_object_ae354ba1ef5ed84d6ee5f452fc908c920}{IDKey\+Serial}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Сериализуемый ключ объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Интерфейс для объектов которым необходима поддержка поиска и связывания на этапе загрузки. 
+
+Обычно при загрузки данных существующие данные удаляются и заменяются вновь загруженными данными. Хотя часто требуется лишь обновить существующие объекты, а иногда создание полностью объекта просто невозможно (или невозможно заменить объект сохранив всего связи). 
+
+Если в процесс сохранения каждый объект существует и нет проблем сохранить нужный объем информации, то в процесс загрузки возникает проблема при взаимной идентификации загружаемого объекта и его оригинала который уже существуют в приложении. 
+
+Таким образом нам нужно дополнительно сохранять идентификатор объекта чтобы потом его можно было найти в приложении и если он есть, то тогда не создавать новый объект, а лишь обновить данные существующего. 
+
+Данный интерфейс для сериализации данных требует, от класса(пользовательского скрипта) который его реализует, определение корректного, уникального и постоянного для данного объекта сериализуемого идентификационного ключа. Данный ключ является основным для идентификации объекта и используется во многих других подсистемах 
+
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serializable_object_ae354ba1ef5ed84d6ee5f452fc908c920}\label{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serializable_object_ae354ba1ef5ed84d6ee5f452fc908c920} 
+\index{Lotus.Core.Serialization.ILotusSerializableObject@{Lotus.Core.Serialization.ILotusSerializableObject}!IDKeySerial@{IDKeySerial}}
+\index{IDKeySerial@{IDKeySerial}!Lotus.Core.Serialization.ILotusSerializableObject@{Lotus.Core.Serialization.ILotusSerializableObject}}
+\doxysubsubsection{\texorpdfstring{IDKeySerial}{IDKeySerial}}
+{\footnotesize\ttfamily long Lotus.\+Core.\+Serialization.\+ILotus\+Serializable\+Object.\+IDKey\+Serial\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Сериализуемый ключ объекта. 
+
+Должен оставаться постоянным и уникальным на всей протяженности жизни объекта. В случае если объект создается повторно (вследствие загрузки данных) то ключ должен инициализироваться существующим значением 
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Serialization/Lotus\+Serialization\+Base.\+cs\end{DoxyCompactItemize}

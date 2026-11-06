@@ -1,0 +1,61 @@
+\doxysection{Lotus.\+Core.\+Serialization.\+ILotus\+Serialize\+To\+Xml Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml}{}\label{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml}\index{Lotus.Core.Serialization.ILotusSerializeToXml@{Lotus.Core.Serialization.ILotusSerializeToXml}}
+
+
+Интерфейс для сериализации данных который обеспечивает сохраннее/загрузку данных самостоятельно объектом. в формат XML.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml_ae21efcb2729e49e406a44dac22c7573c}{Write\+To\+Xml}} (Xml\+Writer xml\+Writer)
+\begin{DoxyCompactList}\small\item\em Запись данных объекта в формат данных XML. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml_ae45d009d45f62b7d786c749ed515cc37}{Read\+From\+Xml}} (Xml\+Reader xml\+Reader)
+\begin{DoxyCompactList}\small\item\em Чтение данных объекта из данных в формате XML. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Интерфейс для сериализации данных который обеспечивает сохраннее/загрузку данных самостоятельно объектом. в формат XML. 
+
+Реализация интерфейса требуется если нужно как-\/то специфично записать/прочитать данные и классическая модель чтения/записи свойств и полей не подходит. 
+
+Кроме этого реализация интерфейса позволяет меньше использовать рефлексию данных что положительно сказывается на общей скорости работы. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml_ae45d009d45f62b7d786c749ed515cc37}\label{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml_ae45d009d45f62b7d786c749ed515cc37} 
+\index{Lotus.Core.Serialization.ILotusSerializeToXml@{Lotus.Core.Serialization.ILotusSerializeToXml}!ReadFromXml@{ReadFromXml}}
+\index{ReadFromXml@{ReadFromXml}!Lotus.Core.Serialization.ILotusSerializeToXml@{Lotus.Core.Serialization.ILotusSerializeToXml}}
+\doxysubsubsection{\texorpdfstring{ReadFromXml()}{ReadFromXml()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Serialization.\+ILotus\+Serialize\+To\+Xml.\+Read\+From\+Xml (\begin{DoxyParamCaption}\item[{Xml\+Reader}]{xml\+Reader }\end{DoxyParamCaption})}
+
+
+
+Чтение данных объекта из данных в формате XML. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xml\+Reader} & Средство чтения данных формата XML.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml_ae21efcb2729e49e406a44dac22c7573c}\label{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml_ae21efcb2729e49e406a44dac22c7573c} 
+\index{Lotus.Core.Serialization.ILotusSerializeToXml@{Lotus.Core.Serialization.ILotusSerializeToXml}!WriteToXml@{WriteToXml}}
+\index{WriteToXml@{WriteToXml}!Lotus.Core.Serialization.ILotusSerializeToXml@{Lotus.Core.Serialization.ILotusSerializeToXml}}
+\doxysubsubsection{\texorpdfstring{WriteToXml()}{WriteToXml()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Serialization.\+ILotus\+Serialize\+To\+Xml.\+Write\+To\+Xml (\begin{DoxyParamCaption}\item[{Xml\+Writer}]{xml\+Writer }\end{DoxyParamCaption})}
+
+
+
+Запись данных объекта в формат данных XML. 
+
+Здесь должна быть реализована запись только данных элемента. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xml\+Writer} & Средство записи данных в формат XML.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Serialization/Lotus\+Serialization\+Interfaces.\+cs\end{DoxyCompactItemize}

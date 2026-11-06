@@ -1,0 +1,49 @@
+\doxysection{Lotus.\+Core.\+Serialization Namespace Reference}
+\hypertarget{namespace_lotus_1_1_core_1_1_serialization}{}\label{namespace_lotus_1_1_core_1_1_serialization}\index{Lotus.Core.Serialization@{Lotus.Core.Serialization}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer}{CBase\+Serializer}}
+\begin{DoxyCompactList}\small\item\em Базовый сериализатор. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_color_converter}{Color\+Converter}}
+\begin{DoxyCompactList}\small\item\em Реализация конвертера для типа TColor. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_serialize_reference}{CSerialize\+Reference}}
+\begin{DoxyCompactList}\small\item\em Вспомогательный класс хранящий данные для связывания поля/свойства типа ссылочного объекта. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_serializer_json}{CSerializer\+Json}}
+\begin{DoxyCompactList}\small\item\em Cериализатор для сохранения/загрузки объектов в формат Json. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_serializer_xml}{CSerializer\+Xml}}
+\begin{DoxyCompactList}\small\item\em Cериализатор для сохранения/загрузки объектов в формат Xml. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serializable_object}{ILotus\+Serializable\+Object}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для объектов которым необходима поддержка поиска и связывания на этапе загрузки. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serializer}{ILotus\+Serializer}}
+\begin{DoxyCompactList}\small\item\em Интерфейс сериализатор данных. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_binary}{ILotus\+Serialize\+To\+Binary}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для сериализации данных который обеспечивает сохраннее/загрузку данных самостоятельно объектом. в бинарный формат. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serialize_to_xml}{ILotus\+Serialize\+To\+Xml}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для сериализации данных который обеспечивает сохраннее/загрузку данных самостоятельно объектом. в формат XML. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_lotus_serialize_alias_type_attribute}{Lotus\+Serialize\+Alias\+Type\+Attribute}}
+\begin{DoxyCompactList}\small\item\em Атрибут для определения псевдонима имени типа. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_lotus_serialize_as_primitive_attribute}{Lotus\+Serialize\+As\+Primitive\+Attribute}}
+\begin{DoxyCompactList}\small\item\em Атрибут для информирование о том что тип сериализуется как примитивный. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_lotus_serialize_data_attribute}{Lotus\+Serialize\+Data\+Attribute}}
+\begin{DoxyCompactList}\small\item\em Атрибут для указания того что тип самостоятельно предоставит данные для сериализации. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_lotus_serialize_disable_attribute}{Lotus\+Serialize\+Disable\+Attribute}}
+\begin{DoxyCompactList}\small\item\em Атрибут для исключения автоматической сериализации объекта. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_lotus_serialize_member_as_reference_attribute}{Lotus\+Serialize\+Member\+As\+Reference\+Attribute}}
+\begin{DoxyCompactList}\small\item\em Атрибут для определения сериализации свойства/поля как ссылки. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_lotus_serialize_member_attribute}{Lotus\+Serialize\+Member\+Attribute}}
+\begin{DoxyCompactList}\small\item\em Атрибут для определения сериализации свойства/поля. \end{DoxyCompactList}\item 
+class {\bfseries XSerialization\+Dispatcher}
+\begin{DoxyCompactList}\small\item\em Диспетчер подсистемы сериализации данных для сохранения/загрузки объектов в различных форматах. \end{DoxyCompactList}\item 
+class {\bfseries XSerializator\+Binary\+Primitive}
+\begin{DoxyCompactList}\small\item\em Статический класс реализующий сериализацию примитивных данных в бинарный поток. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_x_serializer_json_extension}{XSerializer\+Json\+Extension}}
+\begin{DoxyCompactList}\small\item\em Статический класc для реализации методов расширения Json сериализации. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group___core_serialization_ga116a29262879a368684fe781b5408fe4}{TSerialization\+Format}} \{ \mbox{\hyperlink{group___core_serialization_gga116a29262879a368684fe781b5408fe4a6ce976e8f061b2b5cfe4d0c50c3405dd}{TSerialization\+Format.\+Binary}}
+, \mbox{\hyperlink{group___core_serialization_gga116a29262879a368684fe781b5408fe4a9ec8e4e3ab4c7eeba097f27d7364d743}{TSerialization\+Format.\+Xml}}
+, \mbox{\hyperlink{group___core_serialization_gga116a29262879a368684fe781b5408fe4aeed8d85b888a6c015834240885ee6333}{TSerialization\+Format.\+Json}}
+ \}
+\begin{DoxyCompactList}\small\item\em Формат сериализации данных. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -189,46 +189,46 @@ namespace Lotus.Maths
         /// <returns>Позиция точки на сплайне.</returns>
         public override Vector2Df CalculatePoint(float time)
         {
-            int index_curve;
+            int indexCurve;
             if (time >= 1f)
             {
                 time = 1f;
-                index_curve = _controlPoints.Length - 1;
+                indexCurve = _controlPoints.Length - 1;
             }
             else
             {
                 time = XMath.Clamp01(time) * CurveCount;
-                index_curve = (int)time;
-                time -= index_curve;
-                index_curve *= 1;
+                indexCurve = (int)time;
+                time -= indexCurve;
+                indexCurve *= 1;
             }
 
             if (_isClosed)
             {
                 // Получаем индексы точек
-                var ip_0 = ClampPosition(index_curve - 1);
-                var ip_1 = ClampPosition(index_curve);
-                var ip_2 = ClampPosition(index_curve + 1);
-                var ip_3 = ClampPosition(index_curve + 2);
+                var ip0 = ClampPosition(indexCurve - 1);
+                var ip1 = ClampPosition(indexCurve);
+                var ip2 = ClampPosition(indexCurve + 1);
+                var ip3 = ClampPosition(indexCurve + 2);
 
-                var point = CalculatePoint(time, _controlPoints[ip_0],
-                    _controlPoints[ip_1], _controlPoints[ip_2], _controlPoints[ip_3]);
+                var point = CalculatePoint(time, _controlPoints[ip0],
+                    _controlPoints[ip1], _controlPoints[ip2], _controlPoints[ip3]);
 
                 return point;
             }
             else
             {
                 // Получаем индексы точек
-                var ip_0 = index_curve - 1 < 0 ? 0 : index_curve - 1;
-                var ip_1 = index_curve;
-                var ip_2 = index_curve + 1 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : index_curve + 1;
-                var ip_3 = index_curve + 2 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : index_curve + 2;
+                var ip0 = indexCurve - 1 < 0 ? 0 : indexCurve - 1;
+                var ip1 = indexCurve;
+                var ip2 = indexCurve + 1 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : indexCurve + 1;
+                var ip3 = indexCurve + 2 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : indexCurve + 2;
 
                 var point = CalculatePoint(time,
-                    ref _controlPoints[ip_0],
-                    ref _controlPoints[ip_1],
-                    ref _controlPoints[ip_2],
-                    ref _controlPoints[ip_3]);
+                    ref _controlPoints[ip0],
+                    ref _controlPoints[ip1],
+                    ref _controlPoints[ip2],
+                    ref _controlPoints[ip3]);
 
                 return point;
             }
@@ -249,17 +249,17 @@ namespace Lotus.Maths
                 for (var ip = 0; ip < _controlPoints.Length; ip++)
                 {
                     // Получаем индексы точек
-                    var ip_0 = ClampPosition(ip - 1);
-                    var ip_1 = ClampPosition(ip);
-                    var ip_2 = ClampPosition(ip + 1);
-                    var ip_3 = ClampPosition(ip + 2);
+                    var ip0 = ClampPosition(ip - 1);
+                    var ip1 = ClampPosition(ip);
+                    var ip2 = ClampPosition(ip + 1);
+                    var ip3 = ClampPosition(ip + 2);
 
-                    var prev = CalculatePoint(0, ip_0, ip_1, ip_2, ip_3);
+                    var prev = CalculatePoint(0, ip0, ip1, ip2, ip3);
                     _drawingPoints.Add(prev);
                     for (var i = 1; i < _segmentsSpline; i++)
                     {
                         var time = (float)i / _segmentsSpline;
-                        var point = CalculatePoint(time, ip_0, ip_1, ip_2, ip_3);
+                        var point = CalculatePoint(time, ip0, ip1, ip2, ip3);
 
                         // Добавляем если длина больше 1,4
                         if ((point - prev).SqrLength > 2)
@@ -277,17 +277,17 @@ namespace Lotus.Maths
                 for (var ip = 0; ip < _controlPoints.Length - 1; ip++)
                 {
                     // Получаем индексы точек
-                    var ip_0 = ip - 1 < 0 ? 0 : ip - 1;
-                    var ip_1 = ip;
-                    var ip_2 = ip + 1 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : ip + 1;
-                    var ip_3 = ip + 2 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : ip + 2;
+                    var ip0 = ip - 1 < 0 ? 0 : ip - 1;
+                    var ip1 = ip;
+                    var ip2 = ip + 1 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : ip + 1;
+                    var ip3 = ip + 2 > _controlPoints.Length - 1 ? _controlPoints.Length - 1 : ip + 2;
 
-                    var prev = CalculatePoint(0, ip_0, ip_1, ip_2, ip_3);
+                    var prev = CalculatePoint(0, ip0, ip1, ip2, ip3);
                     _drawingPoints.Add(prev);
                     for (var i = 1; i < _segmentsSpline; i++)
                     {
                         var time = (float)i / _segmentsSpline;
-                        var point = CalculatePoint(time, ip_0, ip_1, ip_2, ip_3);
+                        var point = CalculatePoint(time, ip0, ip1, ip2, ip3);
 
                         // Добавляем если длина больше 1,4
                         if ((point - prev).SqrLength > 2)

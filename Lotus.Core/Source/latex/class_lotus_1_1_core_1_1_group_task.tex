@@ -1,0 +1,301 @@
+\doxysection{Lotus.\+Core.\+Group\+Task Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_group_task}{}\label{class_lotus_1_1_core_1_1_group_task}\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+
+
+Класс для реализации группы задач.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a4cc198182b57777c6fdf78dfde5ec49a}{Group\+Task}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}} executor)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a93909f255bd651bca4d1cd253cec20ec}{Group\+Task}} (string name, \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}} executor)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_ad146ba304ecbb628efa082b01fbd5ce8}{Group\+Task}} (string name, \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}} executor, params \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}\mbox{[}$\,$\mbox{]} list)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a6ffd83997265e04d731341dbf1d6501f}{Group\+Task}} (string name, \mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}} method, \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}} executor, params \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}\mbox{[}$\,$\mbox{]}? list)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a57d0b9bdb5f0b4c58f97fa3cb49bb3e5}{Set\+Method\+Mode}} (\mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}} method\+Mode)
+\begin{DoxyCompactList}\small\item\em Установка способа выполнения всех задач в группе. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a048d6cdfdf69ca5052f6a3351725bc94}{Add}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}} task)
+\begin{DoxyCompactList}\small\item\em Добавление задачи в группу. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a4b626f435dbf2c6925d3aebe509c2345}{Add}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}} task, \mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}} method)
+\begin{DoxyCompactList}\small\item\em Добавление задачи в группу. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_ae4b3ef17d3d2cda027208e3e9f86fe5f}{Add\+List}} (params \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}\mbox{[}$\,$\mbox{]} list)
+\begin{DoxyCompactList}\small\item\em Добавление списка задач в группу. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a1b121e613f5cc543a3024ad51c4e2f00}{Add\+List}} (\mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}} method, params \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}\mbox{[}$\,$\mbox{]}? list)
+\begin{DoxyCompactList}\small\item\em Добавление списка задач в группу. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a179fd3a4b4eeca77c7efa184f503dfb9}{Remove}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}} task)
+\begin{DoxyCompactList}\small\item\em Удаление задачи. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a68669b4cf564aa4f76b90dec62a4ef26}{Remove}} (string task\+Name)
+\begin{DoxyCompactList}\small\item\em Удаление задачи. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a820f2c07df20b50bdb92ffb8d22f375a}\label{class_lotus_1_1_core_1_1_group_task_a820f2c07df20b50bdb92ffb8d22f375a} 
+void {\bfseries Run} ()
+\begin{DoxyCompactList}\small\item\em Запуск выполнения группы задач. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_abaef0c53d4ee8e1555ad7790de945494}\label{class_lotus_1_1_core_1_1_group_task_abaef0c53d4ee8e1555ad7790de945494} 
+void {\bfseries Stop} ()
+\begin{DoxyCompactList}\small\item\em Принудительная остановка выполнения всех задач. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_abb35ce1ac3434269406c0842f675038f}\label{class_lotus_1_1_core_1_1_group_task_abb35ce1ac3434269406c0842f675038f} 
+void {\bfseries Reset} ()
+\begin{DoxyCompactList}\small\item\em Переустановка данных всех задач группы. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a55c0deb8ada39a8f0d9c440d53840c21}\label{class_lotus_1_1_core_1_1_group_task_a55c0deb8ada39a8f0d9c440d53840c21} 
+void {\bfseries Execute\+In\+Parallel} ()
+\begin{DoxyCompactList}\small\item\em Выполнение задач параллельно. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_aeede920a292480d7333909baf5f498e8}\label{class_lotus_1_1_core_1_1_group_task_aeede920a292480d7333909baf5f498e8} 
+void {\bfseries Execute\+Sequentially} ()
+\begin{DoxyCompactList}\small\item\em Выполнение задач последовательно. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a5f9a8505dfe7a749f020eb30d90f3d5e}\label{class_lotus_1_1_core_1_1_group_task_a5f9a8505dfe7a749f020eb30d90f3d5e} 
+void {\bfseries Clear} ()
+\begin{DoxyCompactList}\small\item\em Очистка списка задач от всех задач. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a4cfc03d227dd4b08fdbf33ae8661a70c}\label{class_lotus_1_1_core_1_1_group_task_a4cfc03d227dd4b08fdbf33ae8661a70c} 
+string {\bfseries Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имя группы задачи. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a3683061b3f9bd2c0b8f1f60a58a815de}\label{class_lotus_1_1_core_1_1_group_task_a3683061b3f9bd2c0b8f1f60a58a815de} 
+\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{List}}$<$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_task_holder}{CTask\+Holder}} $>$ {\bfseries Tasks}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список задач группы. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_ae0d7def09260bf64ccbbf6c2defaab0c}\label{class_lotus_1_1_core_1_1_group_task_ae0d7def09260bf64ccbbf6c2defaab0c} 
+\mbox{\hyperlink{group___core_task_ga244a3b151abf09a5e1b22d5bd4c6c8a8}{TTask\+Execute\+Mode}} {\bfseries Execute\+Mode}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Режим выполнения задач группы. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a33a2238e537a751066ad31f811c91d16}\label{class_lotus_1_1_core_1_1_group_task_a33a2238e537a751066ad31f811c91d16} 
+float {\bfseries Delay\+Start}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Задержка в секундах при выполнение группы задач. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task_a0993576b3815d2e9abe259487d0a2a6a}{Is\+Each\+Task\+Completed\+Handler}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус наличия обработчика завершения каждой задачи. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_afecb673f0b70817cc4ac3d6e48040e4a}\label{class_lotus_1_1_core_1_1_group_task_afecb673f0b70817cc4ac3d6e48040e4a} 
+bool {\bfseries Is\+Completed}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус завершения всех задач группы. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_abf362c7559cdc8e110dd21af391c9887}\label{class_lotus_1_1_core_1_1_group_task_abf362c7559cdc8e110dd21af391c9887} 
+bool {\bfseries Is\+Running}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус выполнения задач группы. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_acf9c7e0cdb9de14340b4bfba6e1e3266}\label{class_lotus_1_1_core_1_1_group_task_acf9c7e0cdb9de14340b4bfba6e1e3266} 
+bool {\bfseries Is\+Pause}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Пауза выполнения задач группы. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_ac13396cb0d57b546c6501c20808cfa1d}\label{class_lotus_1_1_core_1_1_group_task_ac13396cb0d57b546c6501c20808cfa1d} 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}} {\bfseries Current\+Task}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Текущая исполняемая задача. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a2985c72868fed77681fa2f6edbc8c400}\label{class_lotus_1_1_core_1_1_group_task_a2985c72868fed77681fa2f6edbc8c400} 
+int {\bfseries Current\+Task\+Index}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индекс текущей исполняемой задачи. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a38826ef8583ac6ec8bcc41330f994735}\label{class_lotus_1_1_core_1_1_group_task_a38826ef8583ac6ec8bcc41330f994735} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}} {\bfseries Executor}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Исполнитель группы задач. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a66ba261b13cd9772b636de87aa56a8c5}\label{class_lotus_1_1_core_1_1_group_task_a66ba261b13cd9772b636de87aa56a8c5} 
+Action$<$ string $>$ {\bfseries On\+Group\+Task\+Started}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации о начале выполнения всех задач группы. Аргумент -\/ имя группы задач. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a71ac0356ea1c37ea4fb26d673ff4bddd}\label{class_lotus_1_1_core_1_1_group_task_a71ac0356ea1c37ea4fb26d673ff4bddd} 
+Action$<$ string $>$ {\bfseries On\+Group\+Task\+Completed}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации об окончании выполнения всех задач группы. Аргумент -\/ имя группы задач. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс для реализации группы задач. 
+
+Под группой задач понимается несколько задач выполняемых параллельно или последовательно определённым способом с возможностью задержки начала выполнения задач, паузой, информирования об окончании выполнения всех задач группы, и принудительной остановкой выполнения группы задачи. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a4cc198182b57777c6fdf78dfde5ec49a}\label{class_lotus_1_1_core_1_1_group_task_a4cc198182b57777c6fdf78dfde5ec49a} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!GroupTask@{GroupTask}}
+\index{GroupTask@{GroupTask}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{GroupTask()}{GroupTask()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+Group\+Task.\+Group\+Task (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}}}]{executor }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em executor} & Исполнитель группы задач.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a93909f255bd651bca4d1cd253cec20ec}\label{class_lotus_1_1_core_1_1_group_task_a93909f255bd651bca4d1cd253cec20ec} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!GroupTask@{GroupTask}}
+\index{GroupTask@{GroupTask}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{GroupTask()}{GroupTask()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+Group\+Task.\+Group\+Task (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}}}]{executor }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя группы задачи.\\
+\hline
+{\em executor} & Исполнитель группы задач.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_ad146ba304ecbb628efa082b01fbd5ce8}\label{class_lotus_1_1_core_1_1_group_task_ad146ba304ecbb628efa082b01fbd5ce8} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!GroupTask@{GroupTask}}
+\index{GroupTask@{GroupTask}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{GroupTask()}{GroupTask()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+Group\+Task.\+Group\+Task (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}}}]{executor,  }\item[{params \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}\mbox{[}$\,$\mbox{]}}]{list }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя группы задачи.\\
+\hline
+{\em executor} & Исполнитель группы задач.\\
+\hline
+{\em list} & Список задач.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a6ffd83997265e04d731341dbf1d6501f}\label{class_lotus_1_1_core_1_1_group_task_a6ffd83997265e04d731341dbf1d6501f} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!GroupTask@{GroupTask}}
+\index{GroupTask@{GroupTask}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{GroupTask()}{GroupTask()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+Group\+Task.\+Group\+Task (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{\mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}}}]{method,  }\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Task\+Group\+Executor}}}]{executor,  }\item[{params \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}?\mbox{[}$\,$\mbox{]}}]{list }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя группы задачи.\\
+\hline
+{\em method} & Способ выполнения задачи.\\
+\hline
+{\em executor} & Исполнитель группы задач.\\
+\hline
+{\em list} & Список задач.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a048d6cdfdf69ca5052f6a3351725bc94}\label{class_lotus_1_1_core_1_1_group_task_a048d6cdfdf69ca5052f6a3351725bc94} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!Add@{Add}}
+\index{Add@{Add}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Group\+Task.\+Add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}}]{task }\end{DoxyParamCaption})}
+
+
+
+Добавление задачи в группу. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & Задача.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a4b626f435dbf2c6925d3aebe509c2345}\label{class_lotus_1_1_core_1_1_group_task_a4b626f435dbf2c6925d3aebe509c2345} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!Add@{Add}}
+\index{Add@{Add}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Group\+Task.\+Add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}}]{task,  }\item[{\mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}}}]{method }\end{DoxyParamCaption})}
+
+
+
+Добавление задачи в группу. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & Задача.\\
+\hline
+{\em method} & Способ выполнения задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_ae4b3ef17d3d2cda027208e3e9f86fe5f}\label{class_lotus_1_1_core_1_1_group_task_ae4b3ef17d3d2cda027208e3e9f86fe5f} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!AddList@{AddList}}
+\index{AddList@{AddList}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{AddList()}{AddList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Group\+Task.\+Add\+List (\begin{DoxyParamCaption}\item[{params \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}\mbox{[}$\,$\mbox{]}}]{list }\end{DoxyParamCaption})}
+
+
+
+Добавление списка задач в группу. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & Список задач.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a1b121e613f5cc543a3024ad51c4e2f00}\label{class_lotus_1_1_core_1_1_group_task_a1b121e613f5cc543a3024ad51c4e2f00} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!AddList@{AddList}}
+\index{AddList@{AddList}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{AddList()}{AddList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Group\+Task.\+Add\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}}}]{method,  }\item[{params \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}?\mbox{[}$\,$\mbox{]}}]{list }\end{DoxyParamCaption})}
+
+
+
+Добавление списка задач в группу. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & Способ выполнения задачи.\\
+\hline
+{\em list} & Список задач.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a179fd3a4b4eeca77c7efa184f503dfb9}\label{class_lotus_1_1_core_1_1_group_task_a179fd3a4b4eeca77c7efa184f503dfb9} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!Remove@{Remove}}
+\index{Remove@{Remove}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Group\+Task.\+Remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}}]{task }\end{DoxyParamCaption})}
+
+
+
+Удаление задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & Задача.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a68669b4cf564aa4f76b90dec62a4ef26}\label{class_lotus_1_1_core_1_1_group_task_a68669b4cf564aa4f76b90dec62a4ef26} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!Remove@{Remove}}
+\index{Remove@{Remove}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Group\+Task.\+Remove (\begin{DoxyParamCaption}\item[{string}]{task\+Name }\end{DoxyParamCaption})}
+
+
+
+Удаление задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a57d0b9bdb5f0b4c58f97fa3cb49bb3e5}\label{class_lotus_1_1_core_1_1_group_task_a57d0b9bdb5f0b4c58f97fa3cb49bb3e5} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!SetMethodMode@{SetMethodMode}}
+\index{SetMethodMode@{SetMethodMode}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{SetMethodMode()}{SetMethodMode()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+Group\+Task.\+Set\+Method\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}}}]{method\+Mode }\end{DoxyParamCaption})}
+
+
+
+Установка способа выполнения всех задач в группе. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method\+Mode} & Способ выполнения задачи.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_group_task_a0993576b3815d2e9abe259487d0a2a6a}\label{class_lotus_1_1_core_1_1_group_task_a0993576b3815d2e9abe259487d0a2a6a} 
+\index{Lotus.Core.GroupTask@{Lotus.Core.GroupTask}!IsEachTaskCompletedHandler@{IsEachTaskCompletedHandler}}
+\index{IsEachTaskCompletedHandler@{IsEachTaskCompletedHandler}!Lotus.Core.GroupTask@{Lotus.Core.GroupTask}}
+\doxysubsubsection{\texorpdfstring{IsEachTaskCompletedHandler}{IsEachTaskCompletedHandler}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+Group\+Task.\+Is\+Each\+Task\+Completed\+Handler\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Статус наличия обработчика завершения каждой задачи. 
+
+Обработчик события окончания каждой задачи должен располагаться в словаре Task\+Group\+Executor.\+Group\+Task\+Handlers\+Each\+Task\+Completed. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Task/Lotus\+Task\+Group.\+cs\end{DoxyCompactItemize}

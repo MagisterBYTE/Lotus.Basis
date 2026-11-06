@@ -239,160 +239,160 @@ namespace Lotus.Core.Utilities
         public void PackedInteger()
         {
             //
-            // Запись 28 бит с начала
+            // Р—Р°РїРёСЃСЊ 28 Р±РёС‚ СЃ РЅР°С‡Р°Р»Р°
             //
             var uid = 3153600;
 
-            var pack_0 = 0;
-            XPacked.PackInteger(ref pack_0, 0, 28, uid);
+            var pack0 = 0;
+            XPacked.PackInteger(ref pack0, 0, 28, uid);
 
-            var un_pack_0 = XPacked.UnpackInteger(pack_0, 0, 28);
+            var unPack0 = XPacked.UnpackInteger(pack0, 0, 28);
 
-            ClassicAssert.AreEqual(un_pack_0, uid);
+            ClassicAssert.AreEqual(unPack0, uid);
 
             //
-            // Запись 15 бит с 4 бита
+            // Р—Р°РїРёСЃСЊ 15 Р±РёС‚ СЃ 4 Р±РёС‚Р°
             //
-            var pack_4 = 0;
+            var pack4 = 0;
             uid = 25000;
-            XPacked.PackInteger(ref pack_4, 4, 15, uid);
+            XPacked.PackInteger(ref pack4, 4, 15, uid);
 
-            var un_pack_4 = XPacked.UnpackInteger(pack_4, 4, 15);
+            var unPack4 = XPacked.UnpackInteger(pack4, 4, 15);
 
-            ClassicAssert.AreEqual(un_pack_4, uid);
+            ClassicAssert.AreEqual(unPack4, uid);
 
             //
-            // Запись 27 бит с 4 бита
+            // Р—Р°РїРёСЃСЊ 27 Р±РёС‚ СЃ 4 Р±РёС‚Р°
             //
-            var pack_27 = 0;
+            var pack27 = 0;
             uid = 25000022;
-            XPacked.PackInteger(ref pack_27, 4, 27, uid);
+            XPacked.PackInteger(ref pack27, 4, 27, uid);
 
-            var un_pack_27 = XPacked.UnpackInteger(pack_27, 4, 27);
+            var unPack27 = XPacked.UnpackInteger(pack27, 4, 27);
 
-            ClassicAssert.AreEqual(un_pack_27, uid);
+            ClassicAssert.AreEqual(unPack27, uid);
 
 
             //
-            // Запись 4 бит с 20 бита
+            // Р—Р°РїРёСЃСЊ 4 Р±РёС‚ СЃ 20 Р±РёС‚Р°
             //
-            var pack_4_20 = 0;
+            var pack420 = 0;
             uid = 12;
-            XPacked.PackInteger(ref pack_4_20, 4, 27, uid);
+            XPacked.PackInteger(ref pack420, 4, 27, uid);
 
-            var un_pack_4_20 = XPacked.UnpackInteger(pack_4_20, 4, 27);
+            var unPack420 = XPacked.UnpackInteger(pack420, 4, 27);
 
-            ClassicAssert.AreEqual(un_pack_4_20, uid);
+            ClassicAssert.AreEqual(unPack420, uid);
         }
 
         [Test]
         public void PackedLong()
         {
             //
-            // Запись 28 бит с начала
+            // Р—Р°РїРёСЃСЊ 28 Р±РёС‚ СЃ РЅР°С‡Р°Р»Р°
             //
             long uid = 3153600;
 
-            long pack_0 = 0;
-            XPacked.PackLong(ref pack_0, 0, 28, uid);
+            long pack0 = 0;
+            XPacked.PackLong(ref pack0, 0, 28, uid);
 
-            var un_pack_0 = XPacked.UnpackLong(pack_0, 0, 28);
+            var unPack0 = XPacked.UnpackLong(pack0, 0, 28);
 
-            ClassicAssert.AreEqual(un_pack_0, uid);
+            ClassicAssert.AreEqual(unPack0, uid);
 
             //
-            // Запись 15 бит с 4 бита
+            // Р—Р°РїРёСЃСЊ 15 Р±РёС‚ СЃ 4 Р±РёС‚Р°
             //
-            long pack_4 = 0;
+            long pack4 = 0;
             uid = 25000;
-            XPacked.PackLong(ref pack_4, 4, 15, uid);
+            XPacked.PackLong(ref pack4, 4, 15, uid);
 
-            var un_pack_4 = XPacked.UnpackLong(pack_4, 4, 15);
+            var unPack4 = XPacked.UnpackLong(pack4, 4, 15);
 
-            ClassicAssert.AreEqual(un_pack_4, uid);
+            ClassicAssert.AreEqual(unPack4, uid);
 
             //
-            // Запись 27 бит с 4 бита
+            // Р—Р°РїРёСЃСЊ 27 Р±РёС‚ СЃ 4 Р±РёС‚Р°
             //
-            long pack_27 = 0;
+            long pack27 = 0;
             uid = 25000022;
-            XPacked.PackLong(ref pack_27, 4, 27, uid);
+            XPacked.PackLong(ref pack27, 4, 27, uid);
 
-            var un_pack_27 = XPacked.UnpackLong(pack_27, 4, 27);
+            var unPack27 = XPacked.UnpackLong(pack27, 4, 27);
 
-            ClassicAssert.AreEqual(un_pack_27, uid);
+            ClassicAssert.AreEqual(unPack27, uid);
 
 
             //
-            // Запись 4 бит с 20 бита
+            // Р—Р°РїРёСЃСЊ 4 Р±РёС‚ СЃ 20 Р±РёС‚Р°
             //
-            long pack_4_20 = 0;
+            long pack420 = 0;
             uid = 12;
-            XPacked.PackLong(ref pack_4_20, 20, 4, uid);
+            XPacked.PackLong(ref pack420, 20, 4, uid);
 
-            var un_pack_4_20 = XPacked.UnpackLong(pack_4_20, 20, 4);
+            var unPack420 = XPacked.UnpackLong(pack420, 20, 4);
 
-            ClassicAssert.AreEqual(un_pack_4_20, uid);
+            ClassicAssert.AreEqual(unPack420, uid);
 
             //
-            // Запись 24 бит с 0 бита
+            // Р—Р°РїРёСЃСЊ 24 Р±РёС‚ СЃ 0 Р±РёС‚Р°
             //
-            long pack_24_0 = 0;
+            long pack240 = 0;
             uid = 16777213;
-            XPacked.PackLong(ref pack_24_0, 0, 24, uid);
+            XPacked.PackLong(ref pack240, 0, 24, uid);
 
-            var un_pack_24_0 = XPacked.UnpackLong(pack_24_0, 0, 24);
+            var unPack240 = XPacked.UnpackLong(pack240, 0, 24);
 
-            ClassicAssert.AreEqual(un_pack_24_0, uid);
+            ClassicAssert.AreEqual(unPack240, uid);
 
             //
-            // Запись 16 бит с 40 бита
+            // Р—Р°РїРёСЃСЊ 16 Р±РёС‚ СЃ 40 Р±РёС‚Р°
             //
-            long pack_16_40 = 0;
+            long pack1640 = 0;
             uid = 1677;
-            XPacked.PackLong(ref pack_16_40, 40, 16, uid);
+            XPacked.PackLong(ref pack1640, 40, 16, uid);
 
-            var un_pack_16_40 = XPacked.UnpackLong(pack_16_40, 40, 16);
+            var unPack1640 = XPacked.UnpackLong(pack1640, 40, 16);
 
-            ClassicAssert.AreEqual(un_pack_16_40, uid);
+            ClassicAssert.AreEqual(unPack1640, uid);
 
             //
-            // Запись 24 бит с 40 бита
+            // Р—Р°РїРёСЃСЊ 24 Р±РёС‚ СЃ 40 Р±РёС‚Р°
             //
-            long pack_24_40 = 0;
+            long pack2440 = 0;
             uid = 16770044;
-            XPacked.PackLong(ref pack_24_40, 40, 24, uid);
+            XPacked.PackLong(ref pack2440, 40, 24, uid);
 
-            var un_pack_24_40 = XPacked.UnpackLong(pack_24_40, 40, 24);
+            var unPack2440 = XPacked.UnpackLong(pack2440, 40, 24);
 
-            ClassicAssert.AreEqual(un_pack_24_40, uid);
+            ClassicAssert.AreEqual(unPack2440, uid);
 
             //
-            // Запись 40 бит с 24 бита
+            // Р—Р°РїРёСЃСЊ 40 Р±РёС‚ СЃ 24 Р±РёС‚Р°
             //
-            long pack_40_24 = 0;
+            long pack4024 = 0;
             uid = 31536000000L;
-            XPacked.PackLong(ref pack_40_24, 24, 40, uid);
+            XPacked.PackLong(ref pack4024, 24, 40, uid);
 
-            var un_pack_40_24 = XPacked.UnpackLong(pack_40_24, 24, 40);
+            var unPack4024 = XPacked.UnpackLong(pack4024, 24, 40);
 
-            ClassicAssert.AreEqual(un_pack_40_24, uid);
+            ClassicAssert.AreEqual(unPack4024, uid);
 
             //
-            // Упаковка
+            // РЈРїР°РєРѕРІРєР°
             //
-            var hash_code = 3231545;
-            var date_time = 31536000000L;
+            var hashCode = 3231545;
+            var dateTime = 31536000000L;
 
-            long pack_uid = 0;
-            XPacked.PackLong(ref pack_uid, 0, 24, hash_code);
-            XPacked.PackLong(ref pack_uid, 24, 40, date_time);
+            long packUid = 0;
+            XPacked.PackLong(ref packUid, 0, 24, hashCode);
+            XPacked.PackLong(ref packUid, 24, 40, dateTime);
 
-            var un_hash_code = (int)XPacked.UnpackLong(pack_uid, 0, 24);
-            ClassicAssert.AreEqual(un_hash_code, hash_code);
+            var unHashCode = (int)XPacked.UnpackLong(packUid, 0, 24);
+            ClassicAssert.AreEqual(unHashCode, hashCode);
 
-            var un_date_time = XPacked.UnpackLong(pack_uid, 24, 40);
-            ClassicAssert.AreEqual(un_date_time, date_time);
+            var unDateTime = XPacked.UnpackLong(packUid, 24, 40);
+            ClassicAssert.AreEqual(unDateTime, dateTime);
         }
 
         #endregion

@@ -141,8 +141,8 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static ViewModelHierarchy<TModel> Build(TModel rootModel, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = Build(rootModel, null, owner);
-            return node_root_view;
+            var nodeRootView = Build(rootModel, null, owner);
+            return nodeRootView;
         }
 
         /// <summary>
@@ -154,32 +154,32 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static ViewModelHierarchy<TModel> Build(TModel model, ILotusViewModelHierarchy? parent, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = new ViewModelHierarchy<TModel>(model, parent)
+            var nodeRootView = new ViewModelHierarchy<TModel>(model, parent)
             {
                 IOwner = owner
             };
             if (parent != null)
             {
-                node_root_view.Level = parent.Level + 1;
-                parent.IViewModels.Add(node_root_view);
-                node_root_view.IOwner = owner;
-                if (model is ILotusViewModelOwner view_item_owner)
+                nodeRootView.Level = parent.Level + 1;
+                parent.IViewModels.Add(nodeRootView);
+                nodeRootView.IOwner = owner;
+                if (model is ILotusViewModelOwner viewItemOwner)
                 {
-                    view_item_owner.OwnerViewModel = node_root_view;
+                    viewItemOwner.OwnerViewModel = nodeRootView;
                 }
             }
 
             // 1) Проверяем в порядке приоритета
             // Если есть поддержка интерфеса для построения используем его
-            if (model is ILotusViewModelBuilder view_builder)
+            if (model is ILotusViewModelBuilder viewBuilder)
             {
-                var count_child = view_builder.GetCountChildrenNode();
-                for (var i = 0; i < count_child; i++)
+                var countChild = viewBuilder.GetCountChildrenNode();
+                for (var i = 0; i < countChild; i++)
                 {
-                    var node_data = (TModel)view_builder.GetChildrenNode(i);
-                    if (node_data != null)
+                    var nodeData = (TModel)viewBuilder.GetChildrenNode(i);
+                    if (nodeData != null)
                     {
-                        Build(node_data, node_root_view, owner);
+                        Build(nodeData, nodeRootView, owner);
                     }
                 }
             }
@@ -188,12 +188,12 @@ namespace Lotus.Core
                 // 2) Проверяем на обобщенный список
                 if (model is IList list)
                 {
-                    var count_child = list.Count;
-                    for (var i = 0; i < count_child; i++)
+                    var countChild = list.Count;
+                    for (var i = 0; i < countChild; i++)
                     {
-                        if (list[i] is TModel node_data)
+                        if (list[i] is TModel nodeData)
                         {
-                            Build(node_data, node_root_view, owner);
+                            Build(nodeData, nodeRootView, owner);
                         }
                     }
                 }
@@ -204,16 +204,16 @@ namespace Lotus.Core
                     {
                         foreach (var item in enumerable)
                         {
-                            if (item is TModel node_data)
+                            if (item is TModel nodeData)
                             {
-                                Build(node_data, node_root_view, owner);
+                                Build(nodeData, nodeRootView, owner);
                             }
                         }
                     }
                 }
             }
 
-            return node_root_view;
+            return nodeRootView;
         }
 
         /// <summary>
@@ -225,8 +225,8 @@ namespace Lotus.Core
         /// <returns>Элемент ViewModel.</returns>
         public static ViewModelHierarchy<TModel> BuildFilter(TModel rootModel, Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = BuildFilter(rootModel, null, filter, owner);
-            return node_root_view;
+            var nodeRootView = BuildFilter(rootModel, null, filter, owner);
+            return nodeRootView;
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace Lotus.Core
         public static ViewModelHierarchy<TModel> BuildFilter(TModel model, ILotusViewModelHierarchy? parent,
             Predicate<TModel?> filter, ILotusCollectionViewModelHierarchy owner)
         {
-            var node_root_view = new ViewModelHierarchy<TModel>(model, parent)
+            var nodeRootView = new ViewModelHierarchy<TModel>(model, parent)
             {
                 IOwner = owner
             };
@@ -250,26 +250,26 @@ namespace Lotus.Core
                 {
                     if (parent != null)
                     {
-                        node_root_view.Level = parent.Level + 1;
-                        parent.IViewModels.Add(node_root_view);
-                        node_root_view.IOwner = owner;
-                        if (model is ILotusViewModelOwner view_item_owner)
+                        nodeRootView.Level = parent.Level + 1;
+                        parent.IViewModels.Add(nodeRootView);
+                        nodeRootView.IOwner = owner;
+                        if (model is ILotusViewModelOwner viewItemOwner)
                         {
-                            view_item_owner.OwnerViewModel = node_root_view;
+                            viewItemOwner.OwnerViewModel = nodeRootView;
                         }
                     }
 
                     // 1) Проверяем в порядке приоритета
                     // Если есть поддержка интерфеса для построения используем его
-                    if (model is ILotusViewModelBuilder view_builder)
+                    if (model is ILotusViewModelBuilder viewBuilder)
                     {
-                        var count_child = view_builder.GetCountChildrenNode();
-                        for (var i = 0; i < count_child; i++)
+                        var countChild = viewBuilder.GetCountChildrenNode();
+                        for (var i = 0; i < countChild; i++)
                         {
-                            var node_data = (TModel)view_builder.GetChildrenNode(i);
-                            if (node_data != null)
+                            var nodeData = (TModel)viewBuilder.GetChildrenNode(i);
+                            if (nodeData != null)
                             {
-                                BuildFilter(node_data, node_root_view, filter, owner);
+                                BuildFilter(nodeData, nodeRootView, filter, owner);
                             }
                         }
                     }
@@ -278,12 +278,12 @@ namespace Lotus.Core
                         // 2) Проверяем на обобщенный список
                         if (model is IList list)
                         {
-                            var count_child = list.Count;
-                            for (var i = 0; i < count_child; i++)
+                            var countChild = list.Count;
+                            for (var i = 0; i < countChild; i++)
                             {
-                                if (list[i] is TModel node_data)
+                                if (list[i] is TModel nodeData)
                                 {
-                                    BuildFilter(node_data, node_root_view, filter, owner);
+                                    BuildFilter(nodeData, nodeRootView, filter, owner);
                                 }
                             }
                         }
@@ -294,9 +294,9 @@ namespace Lotus.Core
                             {
                                 foreach (var item in enumerable)
                                 {
-                                    if (item is TModel node_data)
+                                    if (item is TModel nodeData)
                                     {
-                                        BuildFilter(node_data, node_root_view, filter, owner);
+                                        BuildFilter(nodeData, nodeRootView, filter, owner);
                                     }
                                 }
                             }
@@ -305,7 +305,7 @@ namespace Lotus.Core
                 }
             }
 
-            return node_root_view;
+            return nodeRootView;
         }
         #endregion
 
@@ -419,9 +419,9 @@ namespace Lotus.Core
             {
                 if (_isExpanded != value)
                 {
-                    if (_model is ILotusModelExpanded view_expaneded)
+                    if (_model is ILotusModelExpanded viewExpaneded)
                     {
-                        view_expaneded.SetModelExpanded(this, value);
+                        viewExpaneded.SetModelExpanded(this, value);
                     }
 
                     _isExpanded = value;
@@ -440,12 +440,12 @@ namespace Lotus.Core
             {
                 if (_isSelected != value)
                 {
-                    if (_model is ILotusModelSelected view_selected)
+                    if (_model is ILotusModelSelected viewSelected)
                     {
-                        if (view_selected.CanModelSelected(this))
+                        if (viewSelected.CanModelSelected(this))
                         {
                             _isSelected = value;
-                            view_selected.SetModelSelected(this, value);
+                            viewSelected.SetModelSelected(this, value);
                             NotifyPropertyChanged(PropertyArgsIsSelected);
                             RaiseIsSelectedChanged();
                         }
@@ -470,10 +470,10 @@ namespace Lotus.Core
             {
                 if (_isEnabled != value)
                 {
-                    if (_model is ILotusModelEnabled view_enabled)
+                    if (_model is ILotusModelEnabled viewEnabled)
                     {
                         _isEnabled = value;
-                        view_enabled.SetModelEnabled(this, value);
+                        viewEnabled.SetModelEnabled(this, value);
                         NotifyPropertyChanged(PropertyArgsIsEnabled);
                         RaiseIsEnabledChanged();
                     }
@@ -522,10 +522,10 @@ namespace Lotus.Core
             {
                 if (_isPresented != value)
                 {
-                    if (_model is ILotusModelPresented view_presented)
+                    if (_model is ILotusModelPresented viewPresented)
                     {
                         _isPresented = value;
-                        view_presented.SetModelPresented(this, value);
+                        viewPresented.SetModelPresented(this, value);
                         NotifyPropertyChanged(PropertyArgsIsPresented);
                         RaiseIsPresentedChanged();
                     }
@@ -692,7 +692,7 @@ namespace Lotus.Core
         public virtual void AttachOwnedObject(ILotusOwnedObject ownedObject, bool add)
         {
             // Присоединять можем только объекты
-            if (ownedObject is ILotusViewModel view_model)
+            if (ownedObject is ILotusViewModel viewModel)
             {
                 // Если владелец есть
                 if (ownedObject.IOwner != null)
@@ -707,8 +707,8 @@ namespace Lotus.Core
 
                 if (add)
                 {
-                    view_model.IOwner = this;
-                    Add(view_model);
+                    viewModel.IOwner = this;
+                    Add(viewModel);
                 }
             }
         }
@@ -721,14 +721,14 @@ namespace Lotus.Core
         public virtual void DetachOwnedObject(ILotusOwnedObject ownedObject, bool remove)
         {
             // Отсоединять можем только объекты
-            if (ownedObject is ILotusViewModel view_model)
+            if (ownedObject is ILotusViewModel viewModel)
             {
                 ownedObject.IOwner = null;
 
                 if (remove)
                 {
                     // Ищем его
-                    var index = IndexOf(view_model);
+                    var index = IndexOf(viewModel);
                     if (index != -1)
                     {
                         // Удаляем
@@ -889,8 +889,8 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    var present_type = parameters.GetValueOfType<Type>();
-                    if (present_type != null)
+                    var presentType = parameters.GetValueOfType<Type>();
+                    if (presentType != null)
                     {
 
                     }
@@ -909,8 +909,8 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    var present_type = parameters.GetValueOfType<Type>();
-                    if (present_type != null)
+                    var presentType = parameters.GetValueOfType<Type>();
+                    if (presentType != null)
                     {
 
                     }
@@ -960,14 +960,14 @@ namespace Lotus.Core
                 }
             }
 
-            if (_model is ILotusViewModelOwner view_item_owner)
+            if (_model is ILotusViewModelOwner viewItemOwner)
             {
-                view_item_owner.OwnerViewModel = this;
+                viewItemOwner.OwnerViewModel = this;
             }
 
-            if (_model is INotifyCollectionChanged collection_changed)
+            if (_model is INotifyCollectionChanged collectionChanged)
             {
-                collection_changed.CollectionChanged += OnCollectionChangedHandler;
+                collectionChanged.CollectionChanged += OnCollectionChangedHandler;
             }
         }
 
@@ -976,9 +976,9 @@ namespace Lotus.Core
         /// </summary>
         public virtual void UnsetModel()
         {
-            if (_model is INotifyCollectionChanged collection_changed)
+            if (_model is INotifyCollectionChanged collectionChanged)
             {
-                collection_changed.CollectionChanged -= OnCollectionChangedHandler;
+                collectionChanged.CollectionChanged -= OnCollectionChangedHandler;
             }
         }
         #endregion
@@ -995,35 +995,35 @@ namespace Lotus.Core
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        var new_models = args.NewItems;
-                        if (new_models != null && new_models.Count > 0)
+                        var newModels = args.NewItems;
+                        if (newModels != null && newModels.Count > 0)
                         {
-                            for (var i = 0; i < new_models.Count; i++)
+                            for (var i = 0; i < newModels.Count; i++)
                             {
                                 // Проверяем на дубликаты
-                                var is_dublicate = false;
+                                var isDublicate = false;
                                 for (var j = 0; j < Count; j++)
                                 {
-                                    if (_arrayOfItems[j]!.Model == new_models[i])
+                                    if (_arrayOfItems[j]!.Model == newModels[i])
                                     {
-                                        is_dublicate = true;
+                                        isDublicate = true;
                                         break;
                                     }
                                 }
 
-                                if (is_dublicate == false)
+                                if (isDublicate == false)
                                 {
-                                    var model = new_models[i] as TModel;
-                                    var view_model = this.CreateViewModelHierarchy(model!, null);
-                                    view_model.IOwner = this.IOwner;
-                                    view_model.IParent = this;
+                                    var model = newModels[i] as TModel;
+                                    var viewModel = this.CreateViewModelHierarchy(model!, null);
+                                    viewModel.IOwner = this.IOwner;
+                                    viewModel.IParent = this;
 
-                                    if (model is ILotusViewModelOwner view_item_owner)
+                                    if (model is ILotusViewModelOwner viewItemOwner)
                                     {
-                                        view_item_owner.OwnerViewModel = view_model;
+                                        viewItemOwner.OwnerViewModel = viewModel;
                                     }
 
-                                    this.Add(view_model);
+                                    this.Add(viewModel);
                                 }
                             }
                         }
@@ -1031,15 +1031,15 @@ namespace Lotus.Core
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     {
-                        var old_models = args.OldItems;
-                        if (old_models != null && old_models.Count > 0)
+                        var oldModels = args.OldItems;
+                        if (oldModels != null && oldModels.Count > 0)
                         {
-                            for (var i = 0; i < old_models.Count; i++)
+                            for (var i = 0; i < oldModels.Count; i++)
                             {
-                                var model = old_models[i] as TModel;
+                                var model = oldModels[i] as TModel;
 
                                 // Находим элемент с данным контекстом
-                                ILotusViewModelHierarchy? view_model = this.Search((item) =>
+                                ILotusViewModelHierarchy? viewModel = this.Search((item) =>
                                 {
                                     if (Object.ReferenceEquals(item!.Model, model))
                                     {
@@ -1051,9 +1051,9 @@ namespace Lotus.Core
                                     }
                                 });
 
-                                if (view_model != null)
+                                if (viewModel != null)
                                 {
-                                    this.Remove(view_model);
+                                    this.Remove(viewModel);
                                 }
                             }
                         }
@@ -1066,9 +1066,9 @@ namespace Lotus.Core
                     break;
                 case NotifyCollectionChangedAction.Move:
                     {
-                        var old_index = args.OldStartingIndex;
-                        var new_index = args.NewStartingIndex;
-                        Move(old_index, new_index);
+                        var oldIndex = args.OldStartingIndex;
+                        var newIndex = args.NewStartingIndex;
+                        Move(oldIndex, newIndex);
                     }
                     break;
                 case NotifyCollectionChangedAction.Reset:

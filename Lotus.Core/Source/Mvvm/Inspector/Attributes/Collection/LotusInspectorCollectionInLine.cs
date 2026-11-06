@@ -46,15 +46,15 @@ namespace Lotus.Core.Inspector
 				rects = new UnityEngine.Rect[percents.Length + 1];
 
                 // Считать будем от ширины с минусом по единицы на каждую колонку и минус ширина для вывода индекса
-                float index_width = 12;
+                float indexWidth = 12;
 				if (count > 9)
 				{
-					index_width = 16;
+					indexWidth = 16;
 				}
 
 				rects[0].x = 0;
 				rects[0].y = 0;
-				rects[0].width = index_width;
+				rects[0].width = indexWidth;
 				rects[0].height = 18;
 				for (var i = 0; i < percents.Length; i++)
 				{

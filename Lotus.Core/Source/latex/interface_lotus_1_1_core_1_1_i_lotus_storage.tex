@@ -1,0 +1,100 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Storage Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_storage}{}\label{interface_lotus_1_1_core_1_1_i_lotus_storage}\index{Lotus.Core.ILotusStorage@{Lotus.Core.ILotusStorage}}
+
+
+Определение интерфейса для реализации хранилища данных (паттерн Unit of Work).  
+
+
+Inheritance diagram for Lotus.\+Core.\+ILotus\+Storage\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_lotus_1_1_core_1_1_i_lotus_storage}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository}{ILotus\+Repository}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_storage_a4a2daed5fdc713b895b8064473d0bb5c}{Get\+Repository$<$ TEntity, TKey $>$}} ()
+\begin{DoxyCompactList}\small\item\em Получить репозиторий указанной сущности. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_storage_ae10dc7b4e421fdeaf7b98b4e9794ad37}{Save\+Changes}} ()
+\begin{DoxyCompactList}\small\item\em Сохранить все изменения в хранилище. \end{DoxyCompactList}\item 
+Value\+Task$<$ int $>$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_storage_a42ae1e7cd27a05eb5b88ff3ca5740a35}{Save\+Changes\+Async}} (Cancellation\+Token token=default)
+\begin{DoxyCompactList}\small\item\em Сохранить все изменения в хранилище. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_storage_a59a1f96197ed78bbf7d6095f48d404a0}\label{interface_lotus_1_1_core_1_1_i_lotus_storage_a59a1f96197ed78bbf7d6095f48d404a0} 
+string {\bfseries Connecting\+Data}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Данные связывания хранилища с источником. \end{DoxyCompactList}\item 
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_storage_a125eae776a060fe4694a084d25211743}\label{interface_lotus_1_1_core_1_1_i_lotus_storage_a125eae776a060fe4694a084d25211743} 
+bool {\bfseries Need\+Saved}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус указывающий на то что хранилище необходимо сохранить. \end{DoxyCompactList}\item 
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_storage_ab544aee402627f901a350b62121b6be6}\label{interface_lotus_1_1_core_1_1_i_lotus_storage_ab544aee402627f901a350b62121b6be6} 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_storage_structure}{ILotus\+Storage\+Structure}} {\bfseries IStructure}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Структура хранилища. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Определение интерфейса для реализации хранилища данных (паттерн Unit of Work). 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_storage_a4a2daed5fdc713b895b8064473d0bb5c}\label{interface_lotus_1_1_core_1_1_i_lotus_storage_a4a2daed5fdc713b895b8064473d0bb5c} 
+\index{Lotus.Core.ILotusStorage@{Lotus.Core.ILotusStorage}!GetRepository$<$ TEntity, TKey $>$@{GetRepository$<$ TEntity, TKey $>$}}
+\index{GetRepository$<$ TEntity, TKey $>$@{GetRepository$<$ TEntity, TKey $>$}!Lotus.Core.ILotusStorage@{Lotus.Core.ILotusStorage}}
+\doxysubsubsection{\texorpdfstring{GetRepository$<$ TEntity, TKey $>$()}{GetRepository< TEntity, TKey >()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_repository}{ILotus\+Repository}}$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$? Lotus.\+Core.\+ILotus\+Storage.\+Get\+Repository$<$ TEntity, \mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получить репозиторий указанной сущности. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TEntity} & Тип сущности.\\
+\hline
+{\em TKey} & Тип ключа сущности.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+Репозиторий или null если указанная сущность не найдена.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TEntity} : {\em class}]\item[{\em TEntity} : {\em ILotus\+Identifier\+Id$<$TKey$>$}]\item[{\em TEntity} : {\em new()}]\item[{\em TKey} : {\em notnull}]\item[{\em TKey} : {\em IEquatable$<$TKey$>$}]\end{description}
+\end{Desc}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_storage_ae10dc7b4e421fdeaf7b98b4e9794ad37}\label{interface_lotus_1_1_core_1_1_i_lotus_storage_ae10dc7b4e421fdeaf7b98b4e9794ad37} 
+\index{Lotus.Core.ILotusStorage@{Lotus.Core.ILotusStorage}!SaveChanges@{SaveChanges}}
+\index{SaveChanges@{SaveChanges}!Lotus.Core.ILotusStorage@{Lotus.Core.ILotusStorage}}
+\doxysubsubsection{\texorpdfstring{SaveChanges()}{SaveChanges()}}
+{\footnotesize\ttfamily int Lotus.\+Core.\+ILotus\+Storage.\+Save\+Changes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Сохранить все изменения в хранилище. 
+
+\begin{DoxyReturn}{Returns}
+Количество сохранённых изменений.
+\end{DoxyReturn}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_storage_a42ae1e7cd27a05eb5b88ff3ca5740a35}\label{interface_lotus_1_1_core_1_1_i_lotus_storage_a42ae1e7cd27a05eb5b88ff3ca5740a35} 
+\index{Lotus.Core.ILotusStorage@{Lotus.Core.ILotusStorage}!SaveChangesAsync@{SaveChangesAsync}}
+\index{SaveChangesAsync@{SaveChangesAsync}!Lotus.Core.ILotusStorage@{Lotus.Core.ILotusStorage}}
+\doxysubsubsection{\texorpdfstring{SaveChangesAsync()}{SaveChangesAsync()}}
+{\footnotesize\ttfamily Value\+Task$<$ int $>$ Lotus.\+Core.\+ILotus\+Storage.\+Save\+Changes\+Async (\begin{DoxyParamCaption}\item[{Cancellation\+Token}]{token = {\ttfamily default} }\end{DoxyParamCaption})}
+
+
+
+Сохранить все изменения в хранилище. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & Токен отмены.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Количество сохранённых изменений.
+\end{DoxyReturn}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Storage/Lotus\+Storage.\+cs\end{DoxyCompactItemize}

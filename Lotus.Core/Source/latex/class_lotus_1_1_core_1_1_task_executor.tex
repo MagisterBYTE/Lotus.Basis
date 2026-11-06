@@ -1,0 +1,325 @@
+\doxysection{Lotus.\+Core.\+Task\+Executor Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_task_executor}{}\label{class_lotus_1_1_core_1_1_task_executor}\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+
+
+Исполнитель задачи.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Task\+Executor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_lotus_1_1_core_1_1_task_executor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a09d89d54c2eb896b12af4d26f80c927a}\label{class_lotus_1_1_core_1_1_task_executor_a09d89d54c2eb896b12af4d26f80c927a} 
+{\bfseries Task\+Executor} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a02eaea80f6af996f4bcd405b8d7dfdf1}{Task\+Executor}} (string name)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a65b35fb262c39da1c55e58cb65f92162}\label{class_lotus_1_1_core_1_1_task_executor_a65b35fb262c39da1c55e58cb65f92162} 
+void {\bfseries On\+Update} ()
+\begin{DoxyCompactList}\small\item\em Обновление центрального диспетчера выполнения задач каждый кадр. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a9dc18526d092a576e70f35d51dafd938}{Get\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Текущий статус. \end{DoxyCompactList}\item 
+virtual ? \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_task_holder}{CTask\+Holder}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_ab45b763ecd666be25b02db36dbffb108}{Get\+Task}} (string task\+Name)
+\begin{DoxyCompactList}\small\item\em Получение задачи по имени. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a802dbdade604a85f12a8ce4e4dfc4609}{Add\+Task}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}} task, \mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}} method)
+\begin{DoxyCompactList}\small\item\em Добавление новой задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_ac004f21745b29fff09fd3e3f1649fa2e}{Add\+Task}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}} task, string task\+Name, \mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}} method)
+\begin{DoxyCompactList}\small\item\em Добавление новой задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a2ffbba8b35afe8f461782ccf34d59277}{Remove\+Task}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}} task)
+\begin{DoxyCompactList}\small\item\em Удаление задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_aae33753ddf11afdbc24a34c3ea8cd61a}{Remove\+Task}} (string task\+Name)
+\begin{DoxyCompactList}\small\item\em Удаление задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_ac012cdeb5c50864b2c227d2e83a5df9f}{Run\+Task}} (string task\+Name)
+\begin{DoxyCompactList}\small\item\em Запуск выполнения задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a0bc5e892713a67b6f6c922ce9fa4d82c}{Run\+Task}} (string task\+Name, float delay\+Start)
+\begin{DoxyCompactList}\small\item\em Запуск выполнения задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_ab9260abc4a5497fa420c943d0b042de8}{Run\+Task}} (string task\+Name, float delay\+Start, Action? on\+Completed)
+\begin{DoxyCompactList}\small\item\em Запуск выполнения задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a74f7655b830d5f2ebb5cc94fcd5405cf}{Run\+Task}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}} task, float delay\+Start)
+\begin{DoxyCompactList}\small\item\em Запуск выполнения задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a80627efc05a1697f51d8331f485bbad9}{Pause\+Task}} (string task\+Name, bool pause)
+\begin{DoxyCompactList}\small\item\em Пауза выполнения задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a874e564e19361fd8d24755ce1e739b39}{Stop\+Task}} (string task\+Name)
+\begin{DoxyCompactList}\small\item\em Принудительная остановка выполнения задачи. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_abf0d7af4c0197299dee266d0e33bd1e3}{Reset\+Task}} (string task\+Name)
+\begin{DoxyCompactList}\small\item\em Переустановка данных задачи. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor_a8da5cbb5eaacac320129465d08c843df}{Name}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имя исполнителя задач. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a474278b4ef5aee677290d4a57bd22299}\label{class_lotus_1_1_core_1_1_task_executor_a474278b4ef5aee677290d4a57bd22299} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_pool_manager}{Pool\+Manager}}$<$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_task_holder}{CTask\+Holder}} $>$ {\bfseries Task\+Holder\+Pools}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Пул объектов типа оболочки для хранения задачи. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a2d372ac8ef8991931a0ca980d44e9223}\label{class_lotus_1_1_core_1_1_task_executor_a2d372ac8ef8991931a0ca980d44e9223} 
+\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{List}}$<$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_task_holder}{CTask\+Holder}} $>$ {\bfseries Tasks}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список всех одиночных задач. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a4853e8fb5032504f41b27ff842b3a9dc}\label{class_lotus_1_1_core_1_1_task_executor_a4853e8fb5032504f41b27ff842b3a9dc} 
+Dictionary$<$ string, Action $>$ {\bfseries Task\+Handlers\+Completed}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Словарь всех обработчиков события окончания выполнения задачи. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable}{Lotus.\+Core.\+ILotus\+Nameable}}}
+
+
+\doxysubsection{Detailed Description}
+Исполнитель задачи. 
+
+Реализация исполнителя для управления процессом выполнения задачи. Метод исполнителя нужно вызывать вручную в соответствующих местах. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a02eaea80f6af996f4bcd405b8d7dfdf1}\label{class_lotus_1_1_core_1_1_task_executor_a02eaea80f6af996f4bcd405b8d7dfdf1} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!TaskExecutor@{TaskExecutor}}
+\index{TaskExecutor@{TaskExecutor}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{TaskExecutor()}{TaskExecutor()}}
+{\footnotesize\ttfamily Lotus.\+Core.\+Task\+Executor.\+Task\+Executor (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя исполнителя задач.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_ac004f21745b29fff09fd3e3f1649fa2e}\label{class_lotus_1_1_core_1_1_task_executor_ac004f21745b29fff09fd3e3f1649fa2e} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!AddTask@{AddTask}}
+\index{AddTask@{AddTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{AddTask()}{AddTask()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Add\+Task (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}}]{task,  }\item[{string}]{task\+Name,  }\item[{\mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}}}]{method }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление новой задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & Задача.\\
+\hline
+{\em task\+Name} & Имя задачи.\\
+\hline
+{\em method} & Способ выполнения задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a802dbdade604a85f12a8ce4e4dfc4609}\label{class_lotus_1_1_core_1_1_task_executor_a802dbdade604a85f12a8ce4e4dfc4609} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!AddTask@{AddTask}}
+\index{AddTask@{AddTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{AddTask()}{AddTask()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Add\+Task (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}}]{task,  }\item[{\mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{TTask\+Method}}}]{method }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление новой задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & Задача.\\
+\hline
+{\em method} & Способ выполнения задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a9dc18526d092a576e70f35d51dafd938}\label{class_lotus_1_1_core_1_1_task_executor_a9dc18526d092a576e70f35d51dafd938} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!GetStatus@{GetStatus}}
+\index{GetStatus@{GetStatus}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{GetStatus()}{GetStatus()}}
+{\footnotesize\ttfamily string Lotus.\+Core.\+Task\+Executor.\+Get\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Текущий статус. 
+
+\begin{DoxyReturn}{Returns}
+Статус всех задач сформированных в текстовое представление.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_ab45b763ecd666be25b02db36dbffb108}\label{class_lotus_1_1_core_1_1_task_executor_ab45b763ecd666be25b02db36dbffb108} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!GetTask@{GetTask}}
+\index{GetTask@{GetTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{GetTask()}{GetTask()}}
+{\footnotesize\ttfamily virtual ? \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_task_holder}{CTask\+Holder}} Lotus.\+Core.\+Task\+Executor.\+Get\+Task (\begin{DoxyParamCaption}\item[{string}]{task\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение задачи по имени. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Найденная задача или null.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a80627efc05a1697f51d8331f485bbad9}\label{class_lotus_1_1_core_1_1_task_executor_a80627efc05a1697f51d8331f485bbad9} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!PauseTask@{PauseTask}}
+\index{PauseTask@{PauseTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{PauseTask()}{PauseTask()}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Pause\+Task (\begin{DoxyParamCaption}\item[{string}]{task\+Name,  }\item[{bool}]{pause }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Пауза выполнения задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+{\em pause} & Статус паузы.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a2ffbba8b35afe8f461782ccf34d59277}\label{class_lotus_1_1_core_1_1_task_executor_a2ffbba8b35afe8f461782ccf34d59277} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!RemoveTask@{RemoveTask}}
+\index{RemoveTask@{RemoveTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{RemoveTask()}{RemoveTask()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Remove\+Task (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}}]{task }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Удаление задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & Задача.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_aae33753ddf11afdbc24a34c3ea8cd61a}\label{class_lotus_1_1_core_1_1_task_executor_aae33753ddf11afdbc24a34c3ea8cd61a} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!RemoveTask@{RemoveTask}}
+\index{RemoveTask@{RemoveTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{RemoveTask()}{RemoveTask()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Remove\+Task (\begin{DoxyParamCaption}\item[{string}]{task\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Удаление задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_abf0d7af4c0197299dee266d0e33bd1e3}\label{class_lotus_1_1_core_1_1_task_executor_abf0d7af4c0197299dee266d0e33bd1e3} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!ResetTask@{ResetTask}}
+\index{ResetTask@{ResetTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{ResetTask()}{ResetTask()}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Reset\+Task (\begin{DoxyParamCaption}\item[{string}]{task\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Переустановка данных задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a74f7655b830d5f2ebb5cc94fcd5405cf}\label{class_lotus_1_1_core_1_1_task_executor_a74f7655b830d5f2ebb5cc94fcd5405cf} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!RunTask@{RunTask}}
+\index{RunTask@{RunTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{RunTask()}{RunTask()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Run\+Task (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{ILotus\+Task}}}]{task,  }\item[{float}]{delay\+Start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Запуск выполнения задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & Задача.\\
+\hline
+{\em delay\+Start} & Время задержки запуска выполнения задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_ac012cdeb5c50864b2c227d2e83a5df9f}\label{class_lotus_1_1_core_1_1_task_executor_ac012cdeb5c50864b2c227d2e83a5df9f} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!RunTask@{RunTask}}
+\index{RunTask@{RunTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{RunTask()}{RunTask()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Run\+Task (\begin{DoxyParamCaption}\item[{string}]{task\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Запуск выполнения задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a0bc5e892713a67b6f6c922ce9fa4d82c}\label{class_lotus_1_1_core_1_1_task_executor_a0bc5e892713a67b6f6c922ce9fa4d82c} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!RunTask@{RunTask}}
+\index{RunTask@{RunTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{RunTask()}{RunTask()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Run\+Task (\begin{DoxyParamCaption}\item[{string}]{task\+Name,  }\item[{float}]{delay\+Start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Запуск выполнения задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+{\em delay\+Start} & Время задержки запуска выполнения задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_ab9260abc4a5497fa420c943d0b042de8}\label{class_lotus_1_1_core_1_1_task_executor_ab9260abc4a5497fa420c943d0b042de8} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!RunTask@{RunTask}}
+\index{RunTask@{RunTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{RunTask()}{RunTask()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Run\+Task (\begin{DoxyParamCaption}\item[{string}]{task\+Name,  }\item[{float}]{delay\+Start,  }\item[{Action?}]{on\+Completed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Запуск выполнения задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+{\em delay\+Start} & Время задержки запуска выполнения задачи.\\
+\hline
+{\em on\+Completed} & Обработчик события окончания выполнения задачи.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a874e564e19361fd8d24755ce1e739b39}\label{class_lotus_1_1_core_1_1_task_executor_a874e564e19361fd8d24755ce1e739b39} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!StopTask@{StopTask}}
+\index{StopTask@{StopTask}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{StopTask()}{StopTask()}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+Task\+Executor.\+Stop\+Task (\begin{DoxyParamCaption}\item[{string}]{task\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Принудительная остановка выполнения задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Name} & Имя задачи.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_task_executor_a8da5cbb5eaacac320129465d08c843df}\label{class_lotus_1_1_core_1_1_task_executor_a8da5cbb5eaacac320129465d08c843df} 
+\index{Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}!Name@{Name}}
+\index{Name@{Name}!Lotus.Core.TaskExecutor@{Lotus.Core.TaskExecutor}}
+\doxysubsubsection{\texorpdfstring{Name}{Name}}
+{\footnotesize\ttfamily string Lotus.\+Core.\+Task\+Executor.\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Имя исполнителя задач. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable_ad2ca45840374478662bd5bd2966d36e7}{Lotus.\+Core.\+ILotus\+Nameable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Task/Lotus\+Task\+Executor.\+cs\end{DoxyCompactItemize}

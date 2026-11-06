@@ -1,0 +1,78 @@
+\doxysection{Lotus.\+Core.\+Serialization.\+Color\+Converter Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_serialization_1_1_color_converter}{}\label{class_lotus_1_1_core_1_1_serialization_1_1_color_converter}\index{Lotus.Core.Serialization.ColorConverter@{Lotus.Core.Serialization.ColorConverter}}
+
+
+Реализация конвертера для типа TColor.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Serialization.\+Color\+Converter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_serialization_1_1_color_converter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_color_converter_aa206fcb876a9f05c2448315f5efc49ad}{Read}} (ref Utf8\+Json\+Reader reader, Type type\+To\+Convert, Json\+Serializer\+Options options)
+\begin{DoxyCompactList}\small\item\em Чтение свойства. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_color_converter_aa4c33f869b67dce06666cf4d2c8eb5c9}{Write}} (Utf8\+Json\+Writer writer, \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}} value, Json\+Serializer\+Options options)
+\begin{DoxyCompactList}\small\item\em Запись свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_serialization_1_1_color_converter_a29bb4e51d418c736c3af066b9ca74aca}\label{class_lotus_1_1_core_1_1_serialization_1_1_color_converter_a29bb4e51d418c736c3af066b9ca74aca} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_color_converter}{Color\+Converter}} {\bfseries Instance} = new()
+\begin{DoxyCompactList}\small\item\em Глобальный экземпляр конвертера. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Реализация конвертера для типа TColor. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_serialization_1_1_color_converter_aa206fcb876a9f05c2448315f5efc49ad}\label{class_lotus_1_1_core_1_1_serialization_1_1_color_converter_aa206fcb876a9f05c2448315f5efc49ad} 
+\index{Lotus.Core.Serialization.ColorConverter@{Lotus.Core.Serialization.ColorConverter}!Read@{Read}}
+\index{Read@{Read}!Lotus.Core.Serialization.ColorConverter@{Lotus.Core.Serialization.ColorConverter}}
+\doxysubsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily override \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}} Lotus.\+Core.\+Serialization.\+Color\+Converter.\+Read (\begin{DoxyParamCaption}\item[{ref Utf8\+Json\+Reader}]{reader,  }\item[{Type}]{type\+To\+Convert,  }\item[{Json\+Serializer\+Options}]{options }\end{DoxyParamCaption})}
+
+
+
+Чтение свойства. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & Читатель Json.\\
+\hline
+{\em type\+To\+Convert} & Тип объекта.\\
+\hline
+{\em options} & Опции сериализатора Json.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Значение свойства.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_serialization_1_1_color_converter_aa4c33f869b67dce06666cf4d2c8eb5c9}\label{class_lotus_1_1_core_1_1_serialization_1_1_color_converter_aa4c33f869b67dce06666cf4d2c8eb5c9} 
+\index{Lotus.Core.Serialization.ColorConverter@{Lotus.Core.Serialization.ColorConverter}!Write@{Write}}
+\index{Write@{Write}!Lotus.Core.Serialization.ColorConverter@{Lotus.Core.Serialization.ColorConverter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+Serialization.\+Color\+Converter.\+Write (\begin{DoxyParamCaption}\item[{Utf8\+Json\+Writer}]{writer,  }\item[{\mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}}}]{value,  }\item[{Json\+Serializer\+Options}]{options }\end{DoxyParamCaption})}
+
+
+
+Запись свойства. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & Писатель Json.\\
+\hline
+{\em value} & Значение свойства.\\
+\hline
+{\em options} & Опции сериализатора Json.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Serialization/\+Serializers/\+Json/\+Converters/Lotus\+Core\+Json\+Converters.\+cs\end{DoxyCompactItemize}

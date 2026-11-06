@@ -500,11 +500,11 @@ namespace Lotus.Core
             {
                 if (_isNotify)
                 {
-                    var original_item = _arrayOfItems[index];
+                    var originalItem = _arrayOfItems[index];
                     _arrayOfItems[index] = value;
 
                     NotifyPropertyChanged(PropertyArgsIndexer);
-                    NotifyCollectionChanged(NotifyCollectionChangedAction.Replace, original_item, value, index);
+                    NotifyCollectionChanged(NotifyCollectionChangedAction.Replace, originalItem, value, index);
                 }
                 else
                 {
@@ -586,9 +586,9 @@ namespace Lotus.Core
         /// <param name="value">Элемент.</param>
         public void Insert(int index, object? value)
         {
-            if (value is TItem item_type)
+            if (value is TItem itemType)
             {
-                Insert(index, item_type);
+                Insert(index, itemType);
             }
         }
 
@@ -598,9 +598,9 @@ namespace Lotus.Core
         /// <param name="value">Элемент.</param>
         public void Remove(object? value)
         {
-            if (value is TItem item_type)
+            if (value is TItem itemType)
             {
-                Remove(item_type);
+                Remove(itemType);
             }
         }
 
@@ -721,11 +721,11 @@ namespace Lotus.Core
         public void Reserve(int count)
         {
             if (count <= 0) return;
-            var new_count = _count + count;
+            var newCount = _count + count;
 
-            if (new_count > _maxCount)
+            if (newCount > _maxCount)
             {
-                while (_maxCount < new_count)
+                while (_maxCount < newCount)
                 {
                     _maxCount <<= 1;
                 }
@@ -737,7 +737,7 @@ namespace Lotus.Core
                 // Проходим по всем объектам и если надо создаем объект
                 if (IsNullable)
                 {
-                    for (var i = _count; i < new_count; i++)
+                    for (var i = _count; i < newCount; i++)
                     {
                         if (_arrayOfItems[i] == null)
                         {
@@ -964,10 +964,10 @@ namespace Lotus.Core
             {
                 PropertyChanged?.Invoke(this, PropertyArgsCount);
                 PropertyChanged?.Invoke(this, PropertyArgsIndexer);
-                var original_count = _count - items.Length;
+                var originalCount = _count - items.Length;
                 for (var i = 0; i < items.Length; i++)
                 {
-                    NotifyCollectionChanged(NotifyCollectionChangedAction.Add, items[i], original_count + i);
+                    NotifyCollectionChanged(NotifyCollectionChangedAction.Add, items[i], originalCount + i);
                 }
             }
         }
@@ -989,10 +989,10 @@ namespace Lotus.Core
             {
                 PropertyChanged?.Invoke(this, PropertyArgsCount);
                 PropertyChanged?.Invoke(this, PropertyArgsIndexer);
-                var original_count = _count - items.Count;
+                var originalCount = _count - items.Count;
                 for (var i = 0; i < items.Count; i++)
                 {
-                    NotifyCollectionChanged(NotifyCollectionChangedAction.Add, items[i], original_count + i);
+                    NotifyCollectionChanged(NotifyCollectionChangedAction.Add, items[i], originalCount + i);
                 }
             }
         }
@@ -1403,13 +1403,13 @@ namespace Lotus.Core
         /// <returns>Количество удаленных элементов.</returns>
         public int RemoveAll(Predicate<TItem?> match)
         {
-            var free_index = 0;   // the first free slot in items array
+            var freeIndex = 0;   // the first free slot in items array
 
             // Find the first item which needs to be removed.
-            while (free_index < _count && !match(_arrayOfItems[free_index])) free_index++;
-            if (free_index >= _count) return 0;
+            while (freeIndex < _count && !match(_arrayOfItems[freeIndex])) freeIndex++;
+            if (freeIndex >= _count) return 0;
 
-            var current = free_index + 1;
+            var current = freeIndex + 1;
             while (current < _count)
             {
                 // Find the first item which needs to be kept.
@@ -1418,13 +1418,13 @@ namespace Lotus.Core
                 if (current < _count)
                 {
                     // copy item to the free slot.
-                    _arrayOfItems[free_index++] = _arrayOfItems[current++];
+                    _arrayOfItems[freeIndex++] = _arrayOfItems[current++];
                 }
             }
 
-            Array.Clear(_arrayOfItems, free_index, _count - free_index);
-            var result = _count - free_index;
-            _count = free_index;
+            Array.Clear(_arrayOfItems, freeIndex, _count - freeIndex);
+            var result = _count - freeIndex;
+            _count = freeIndex;
 
             if (_isNotify)
             {
@@ -2102,14 +2102,14 @@ namespace Lotus.Core
         /// <returns>Количество удаленных элементов.</returns>
         public int TrimClosestStart(in TItem item, bool included = true)
         {
-            var comprare_first = ComparerDefault.Compare(item, ItemFirst);
-            var comprare_last = ComparerDefault.Compare(item, ItemLast);
+            var comprareFirst = ComparerDefault.Compare(item, ItemFirst);
+            var comprareLast = ComparerDefault.Compare(item, ItemLast);
 
             // Элемент находиться за пределами списка - в начале
-            if (comprare_first <= 0)
+            if (comprareFirst <= 0)
             {
                 // Удаляем первый элемент если он включен и равен
-                if (comprare_first == 0 && included)
+                if (comprareFirst == 0 && included)
                 {
                     RemoveFirst();
                     return 1;
@@ -2121,10 +2121,10 @@ namespace Lotus.Core
             }
 
             // Элемент находиться за пределами списка - в конце 
-            if (comprare_last >= 0)
+            if (comprareLast >= 0)
             {
                 // Если он совпал последним элементом и при этом его не надо удалять
-                if (comprare_last == 0 && included == false)
+                if (comprareLast == 0 && included == false)
                 {
                     // Удаляем элементы до последнего
                     var count = Count - 1;
@@ -2141,8 +2141,8 @@ namespace Lotus.Core
             }
 
             // Элемент находиться в пределах списка
-            var max_count = Count - 1;
-            for (var i = 1; i < max_count; i++)
+            var maxCount = Count - 1;
+            for (var i = 1; i < maxCount; i++)
             {
                 var status = ComparerDefault.Compare(item, _arrayOfItems[i]);
 
@@ -2186,14 +2186,14 @@ namespace Lotus.Core
         /// <returns>Количество удаленных элементов.</returns>
         public int TrimClosestEnd(in TItem item, bool included = true)
         {
-            var comprare_first = ComparerDefault.Compare(item, ItemFirst);
-            var comprare_last = ComparerDefault.Compare(item, ItemLast);
+            var comprareFirst = ComparerDefault.Compare(item, ItemFirst);
+            var comprareLast = ComparerDefault.Compare(item, ItemLast);
 
             // Элемент находиться за пределами списка - в начале
-            if (comprare_first <= 0)
+            if (comprareFirst <= 0)
             {
                 // Удаляем до первого элементы если он выключен и совпадает
-                if (comprare_first == 0 && included == false)
+                if (comprareFirst == 0 && included == false)
                 {
                     var count = Count - 1;
                     RemoveRange(1, count);
@@ -2209,10 +2209,10 @@ namespace Lotus.Core
             }
 
             // Элемент находиться за пределами списка - в конце 
-            if (comprare_last >= 0)
+            if (comprareLast >= 0)
             {
                 // Если он совпал последним элементом и при этом его надо удалять
-                if (comprare_last == 0 && included)
+                if (comprareLast == 0 && included)
                 {
                     // Удаляем последний элемент
                     RemoveLast();
@@ -2273,7 +2273,7 @@ namespace Lotus.Core
             var groups = new ListArray<ListArray<TItem>>();
 
             // Список уникальных значений
-            var unique_list = new ListArray<object>();
+            var uniqueList = new ListArray<object>();
 
             if (IsNullable)
             {
@@ -2281,22 +2281,22 @@ namespace Lotus.Core
                 for (var i = 0; i < _count; i++)
                 {
                     // Получаем свойство
-                    var property_info = _arrayOfItems[i]?.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                    var propertyInfo = _arrayOfItems[i]?.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
-                    if (property_info != null)
+                    if (propertyInfo != null)
                     {
                         // Ищем совпадение в существующем списке
-                        var find_index = unique_list.Find((object? value) =>
+                        var findIndex = uniqueList.Find((object? value) =>
                         {
-                            var findValue = property_info.GetValue(_arrayOfItems[i], null);
+                            var findValue = propertyInfo.GetValue(_arrayOfItems[i], null);
                             return Object.ReferenceEquals(value, findValue);
                         });
 
                         // Совпадение не нашли значит это уникальный элемент
-                        if (find_index == -1)
+                        if (findIndex == -1)
                         {
                             // Добавляем в уникальные значений
-                            unique_list.Add(property_info.GetValue(_arrayOfItems[i], null));
+                            uniqueList.Add(propertyInfo.GetValue(_arrayOfItems[i], null));
 
                             // Создаем группу
                             var group = new ListArray<TItem>
@@ -2312,7 +2312,7 @@ namespace Lotus.Core
                         {
                             // Это не уникальный элемент, а значит группа такая уже есть
                             // Получаем группу
-                            var group = groups[find_index];
+                            var group = groups[findIndex];
 
                             // Добавляем туда данный элемент
                             group.Add(_arrayOfItems[i]);
@@ -2323,20 +2323,20 @@ namespace Lotus.Core
             else
             {
                 // Получаем свойство 1 раз
-                var property_info = typeof(TItem).GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-                if (property_info != null)
+                var propertyInfo = typeof(TItem).GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                if (propertyInfo != null)
                 {
                     for (var i = 0; i < _count; i++)
                     {
                         // Ищем совпадение в существующем списке
-                        var find_index = unique_list.Find((object? value) =>
+                        var findIndex = uniqueList.Find((object? value) =>
                         {
-                            var findValue = property_info.GetValue(_arrayOfItems[i], null);
+                            var findValue = propertyInfo.GetValue(_arrayOfItems[i], null);
                             return value!.Equals(findValue);
                         });
 
                         // Совпадение не нашли значит это уникальный элемент
-                        if (find_index == -1)
+                        if (findIndex == -1)
                         {
                             // Создаем группу
                             var group = new ListArray<TItem>
@@ -2352,7 +2352,7 @@ namespace Lotus.Core
                         {
                             // Это не уникальный элемент, а значит группа такая уже есть
                             // Получаем группу
-                            var group = groups[find_index];
+                            var group = groups[findIndex];
 
                             // Добавляем туда данный элемент
                             group.Add(_arrayOfItems[i]);
@@ -2385,23 +2385,23 @@ namespace Lotus.Core
         /// <returns>Список различающихся(уникальных) элементов списка.</returns>
         public ListArray<TItem> GetItemsDistinct()
         {
-            var unique_list = new ListArray<TItem>();
+            var uniqueList = new ListArray<TItem>();
 
             if (IsNullable)
             {
                 for (var i = 0; i < _count; i++)
                 {
                     // Ищем совпадение в существующем списке
-                    var find_index = unique_list.Find((TItem? value) =>
+                    var findIndex = uniqueList.Find((TItem? value) =>
                     {
                         return Object.ReferenceEquals(value, _arrayOfItems[i]);
                     });
 
                     // Совпадение не нашли значит это уникальный элемент
-                    if (find_index == -1)
+                    if (findIndex == -1)
                     {
                         // Добавляем в уникальные значений
-                        unique_list.Add(_arrayOfItems[i]);
+                        uniqueList.Add(_arrayOfItems[i]);
                     }
                 }
             }
@@ -2410,21 +2410,21 @@ namespace Lotus.Core
                 for (var i = 0; i < _count; i++)
                 {
                     // Ищем совпадение в существующем списке
-                    var find_index = unique_list.Find((TItem? value) =>
+                    var findIndex = uniqueList.Find((TItem? value) =>
                     {
                         return value!.Equals(_arrayOfItems[i]);
                     });
 
                     // Совпадение не нашли значит это уникальный элемент
-                    if (find_index == -1)
+                    if (findIndex == -1)
                     {
                         // Добавляем в уникальные значений
-                        unique_list.Add(_arrayOfItems[i]);
+                        uniqueList.Add(_arrayOfItems[i]);
                     }
                 }
             }
 
-            return unique_list;
+            return uniqueList;
         }
 
         /// <summary>
@@ -2437,7 +2437,7 @@ namespace Lotus.Core
         /// <returns>Список уникальных свойств.</returns>
         public ListArray<object> GetDistinctValueFromPropertyName(string propertyName)
         {
-            var unique_list = new ListArray<object>();
+            var uniqueList = new ListArray<object>();
 
             if (IsNullable)
             {
@@ -2445,22 +2445,22 @@ namespace Lotus.Core
                 for (var i = 0; i < _count; i++)
                 {
                     // Получаем свойство
-                    var property_info = _arrayOfItems[i]?.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                    var propertyInfo = _arrayOfItems[i]?.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
-                    if (property_info != null)
+                    if (propertyInfo != null)
                     {
                         // Ищем совпадение в существующем списке
-                        var find_index = unique_list.Find((object? value) =>
+                        var findIndex = uniqueList.Find((object? value) =>
                         {
-                            var findValue = property_info.GetValue(_arrayOfItems[i], null);
+                            var findValue = propertyInfo.GetValue(_arrayOfItems[i], null);
                             return Object.ReferenceEquals(value, findValue);
                         });
 
                         // Совпадение не нашли значит это уникальный элемент
-                        if (find_index == -1)
+                        if (findIndex == -1)
                         {
                             // Добавляем в уникальные значений
-                            unique_list.Add(property_info.GetValue(_arrayOfItems[i], null));
+                            uniqueList.Add(propertyInfo.GetValue(_arrayOfItems[i], null));
                         }
                     }
                 }
@@ -2468,30 +2468,30 @@ namespace Lotus.Core
             else
             {
                 // Получаем свойство 1 раз
-                var property_info = typeof(TItem).GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-                if (property_info != null)
+                var propertyInfo = typeof(TItem).GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+                if (propertyInfo != null)
                 {
                     for (var i = 0; i < _count; i++)
                     {
                         // Ищем совпадение в существующем списке
-                        var find_index = unique_list.Find((object? value) =>
+                        var findIndex = uniqueList.Find((object? value) =>
                         {
-                            var findValue = property_info.GetValue(_arrayOfItems[i], null);
+                            var findValue = propertyInfo.GetValue(_arrayOfItems[i], null);
                             return value!.Equals(findValue);
                         });
 
                         // Совпадение не нашли значит это уникальный элемент
-                        if (find_index == -1)
+                        if (findIndex == -1)
                         {
                             // Добавляем в уникальные значений
-                            unique_list.Add(property_info.GetValue(_arrayOfItems[i], null));
+                            uniqueList.Add(propertyInfo.GetValue(_arrayOfItems[i], null));
                         }
 
                     }
                 }
             }
 
-            return unique_list;
+            return uniqueList;
         }
 
         /// <summary>

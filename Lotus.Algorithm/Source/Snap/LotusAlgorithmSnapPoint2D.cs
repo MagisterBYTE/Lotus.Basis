@@ -98,9 +98,9 @@ namespace Lotus.Algorithm
         /// <returns>Статус равенства объектов.</returns>
         public override readonly bool Equals(object? obj)
         {
-            if (obj is TSnapPoint2D snap_point)
+            if (obj is TSnapPoint2D snapPoint)
             {
-                return Equals(snap_point);
+                return Equals(snapPoint);
             }
             return base.Equals(obj);
         }

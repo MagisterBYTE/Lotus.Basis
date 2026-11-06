@@ -2063,11 +2063,11 @@ namespace Lotus.Maths
 		/// <summary>
 		/// Конструктор инициализирует вектор указанным вектором.
 		/// </summary>
-		/// <param name="unity_vector">Вектор.</param>
-		public Vector2Di(UnityEngine.Vector2 unity_vector)
+		/// <param name="unityVector">Вектор.</param>
+		public Vector2Di(UnityEngine.Vector2 unityVector)
 		{
-			X = (Int32)unity_vector.x;
-			Y = (Int32)unity_vector.y;
+			X = (Int32)unityVector.x;
+			Y = (Int32)unityVector.y;
 		}
 #endif
 

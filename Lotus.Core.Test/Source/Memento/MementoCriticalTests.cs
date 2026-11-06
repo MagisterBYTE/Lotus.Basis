@@ -33,7 +33,7 @@ namespace Lotus.Core.Memento
         }
 
         /// <summary>
-        /// Тест Redo - корректная работа с исправленным именем переменной (itemToRedo вместо item_to_redo).
+        /// Тест Redo - корректная работа с исправленным именем переменной (itemToRedo вместо itemToRedo).
         /// </summary>
         [Test]
         public void Redo_WithValidState_ExecutesCorrectly()

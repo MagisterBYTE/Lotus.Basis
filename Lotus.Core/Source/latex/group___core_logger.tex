@@ -1,0 +1,81 @@
+\doxysubsection{Подсистема логирования}
+\hypertarget{group___core_logger}{}\label{group___core_logger}\index{Подсистема логирования@{Подсистема логирования}}
+
+
+Подсистема логирования представляет собой подсистему, предназначенную для трассировки, диагностики, отладки и логирования процесса работы приложения.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_log_message}{Lotus.\+Core.\+Log\+Message}}
+\begin{DoxyCompactList}\small\item\em Структура сообщения лога. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XLogger}
+\begin{DoxyCompactList}\small\item\em Центральный диспетчер для трассировки, диагностики, отладки и логирования процесса работы приложения. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_logger_view}{Lotus.\+Core.\+ILotus\+Logger\+View}}
+\begin{DoxyCompactList}\small\item\em Интерфейс регистратора(логгера) для визуального отображения оповещений. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group___core_logger_ga151c81b5514dadccbc0dc7194f951cbb}{Lotus.\+Core.\+TLog\+Type}} \{ \newline
+\mbox{\hyperlink{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba4059b0251f66a18cb56f544728796875}{Lotus.\+Core.\+TLog\+Type.\+Info}}
+, \mbox{\hyperlink{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba0eaadb4fcb48a0a0ed7bc9868be9fbaa}{Lotus.\+Core.\+TLog\+Type.\+Warning}}
+, \mbox{\hyperlink{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba902b0d55fddef6f8d651fe1035b7d4bd}{Lotus.\+Core.\+TLog\+Type.\+Error}}
+, \mbox{\hyperlink{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbab0d4998a26f5b5742ad38c4af8817e32}{Lotus.\+Core.\+TLog\+Type.\+Exception}}
+, \newline
+\mbox{\hyperlink{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbaa6c3f75313c0227d7828d5c0ece9fa7d}{Lotus.\+Core.\+TLog\+Type.\+Succeed}}
+, \mbox{\hyperlink{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbad7c8c85bf79bbe1b7188497c32c3b0ca}{Lotus.\+Core.\+TLog\+Type.\+Failed}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип сообщения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема логирования представляет собой подсистему, предназначенную для трассировки, диагностики, отладки и логирования процесса работы приложения. 
+
+\hypertarget{group___core_logger_autotoc_md0}{}\doxysubsubsubsection{\texorpdfstring{Описание}{Описание}}\label{group___core_logger_autotoc_md0}
+Центральный диспетчер подсистемы логирования Lotus.\+Core.\+XLogger применяется для трассировки, диагностики, отладки и логирования процесса работы приложения и обеспечивает хранение и регистрацию как всех системных/межплатформенных сообщений, так и всех сообщений от бизнес-\/логики приложения.
+
+Сама подсистема лишь хранит все оповещения приложения, но не отображает их, так как отображение зависит от конечной платформы. Интерфейс регистратора(логгера) для отображения оповещений позволяет определить конкретный механизм отображения в зависимости от платформы и иных целей.\hypertarget{group___core_logger_autotoc_md1}{}\doxysubsubsubsection{\texorpdfstring{Использование}{Использование}}\label{group___core_logger_autotoc_md1}
+
+\begin{DoxyEnumerate}
+\item Реализовать интерфейс(логгер) \doxylink{interface_lotus_1_1_core_1_1_i_lotus_logger_view}{Lotus.\+Core.\+ILotus\+Logger\+View} для вывода и отображения сообщений
+\item Присоединить объект-\/логгер к свойству Lotus.\+Core.\+XLogger.\+Logger
+\end{DoxyEnumerate}
+
+\doxysubsubsection{Enumeration Type Documentation}
+\Hypertarget{group___core_logger_ga151c81b5514dadccbc0dc7194f951cbb}\label{group___core_logger_ga151c81b5514dadccbc0dc7194f951cbb} 
+\index{Подсистема логирования@{Подсистема логирования}!TLogType@{TLogType}}
+\index{TLogType@{TLogType}!Подсистема логирования@{Подсистема логирования}}
+\doxysubsubsubsection{\texorpdfstring{TLogType}{TLogType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group___core_logger_ga151c81b5514dadccbc0dc7194f951cbb}{Lotus.\+Core.\+TLog\+Type}}}
+
+
+
+Тип сообщения. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Info@{Info}!Подсистема логирования@{Подсистема логирования}}\index{Подсистема логирования@{Подсистема логирования}!Info@{Info}}}\Hypertarget{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba4059b0251f66a18cb56f544728796875}\label{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba4059b0251f66a18cb56f544728796875} 
+Info&Информационное сообщение. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Warning@{Warning}!Подсистема логирования@{Подсистема логирования}}\index{Подсистема логирования@{Подсистема логирования}!Warning@{Warning}}}\Hypertarget{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba0eaadb4fcb48a0a0ed7bc9868be9fbaa}\label{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba0eaadb4fcb48a0a0ed7bc9868be9fbaa} 
+Warning&Предупреждающие сообщение. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Error@{Error}!Подсистема логирования@{Подсистема логирования}}\index{Подсистема логирования@{Подсистема логирования}!Error@{Error}}}\Hypertarget{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba902b0d55fddef6f8d651fe1035b7d4bd}\label{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbba902b0d55fddef6f8d651fe1035b7d4bd} 
+Error&Сообщение об ошибке. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Exception@{Exception}!Подсистема логирования@{Подсистема логирования}}\index{Подсистема логирования@{Подсистема логирования}!Exception@{Exception}}}\Hypertarget{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbab0d4998a26f5b5742ad38c4af8817e32}\label{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbab0d4998a26f5b5742ad38c4af8817e32} 
+Exception&Исключение. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Succeed@{Succeed}!Подсистема логирования@{Подсистема логирования}}\index{Подсистема логирования@{Подсистема логирования}!Succeed@{Succeed}}}\Hypertarget{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbaa6c3f75313c0227d7828d5c0ece9fa7d}\label{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbaa6c3f75313c0227d7828d5c0ece9fa7d} 
+Succeed&Информация об удачном выполнении задачи/операции. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Failed@{Failed}!Подсистема логирования@{Подсистема логирования}}\index{Подсистема логирования@{Подсистема логирования}!Failed@{Failed}}}\Hypertarget{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbad7c8c85bf79bbe1b7188497c32c3b0ca}\label{group___core_logger_gga151c81b5514dadccbc0dc7194f951cbbad7c8c85bf79bbe1b7188497c32c3b0ca} 
+Failed&Информация об неудачном выполнении задачи/операции. \\
+\hline
+
+\end{DoxyEnumFields}

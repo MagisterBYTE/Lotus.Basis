@@ -33,7 +33,7 @@ namespace Lotus.Core.ObjectPool
         }
 
         /// <summary>
-        /// Тест Take - корректная работа с исправленным именем переменной (poolObject вместо pool_object).
+        /// Тест Take - корректная работа с исправленным именем переменной (poolObject вместо poolObject).
         /// </summary>
         [Test]
         public void Take_WithPoolObjects_ReturnsCorrectObject()

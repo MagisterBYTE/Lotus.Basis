@@ -1,0 +1,66 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Model\+Selected Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_model_selected}{}\label{interface_lotus_1_1_core_1_1_i_lotus_model_selected}\index{Lotus.Core.ILotusModelSelected@{Lotus.Core.ILotusModelSelected}}
+
+
+Определение интерфейса для объекта(модели) который может быть выбран.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_model_selected_a24dd40e16f375f0bb6e960bc8ebe2a2f}{Set\+Model\+Selected}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model, bool selected)
+\begin{DoxyCompactList}\small\item\em Установка статуса выбора объекта(модели). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_model_selected_a8bb048855ad8860d4680a0cb4697ece1}{Can\+Model\+Selected}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model)
+\begin{DoxyCompactList}\small\item\em Возможность выбора объекта(модели). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Определение интерфейса для объекта(модели) который может быть выбран. 
+
+Обычно логика пользовательского интерфейса должно быть отделена от основной логики приложения, однако иногда бывает необходимость определять некоторые типовые действия в элементах пользовательского интерфейса и правильно на них реагировать. 
+
+Благодаря реализации данному интерфейсу объект(модель) может реагировать когда он подлежит выбору, а также корректно реагировать на этот выбор. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_model_selected_a8bb048855ad8860d4680a0cb4697ece1}\label{interface_lotus_1_1_core_1_1_i_lotus_model_selected_a8bb048855ad8860d4680a0cb4697ece1} 
+\index{Lotus.Core.ILotusModelSelected@{Lotus.Core.ILotusModelSelected}!CanModelSelected@{CanModelSelected}}
+\index{CanModelSelected@{CanModelSelected}!Lotus.Core.ILotusModelSelected@{Lotus.Core.ILotusModelSelected}}
+\doxysubsubsection{\texorpdfstring{CanModelSelected()}{CanModelSelected()}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+ILotus\+Model\+Selected.\+Can\+Model\+Selected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model }\end{DoxyParamCaption})}
+
+
+
+Возможность выбора объекта(модели). 
+
+Имеется виду возможность выбора объекта(модели) в данный момент. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент View\+Model.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Возможность выбора.
+\end{DoxyReturn}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_model_selected_a24dd40e16f375f0bb6e960bc8ebe2a2f}\label{interface_lotus_1_1_core_1_1_i_lotus_model_selected_a24dd40e16f375f0bb6e960bc8ebe2a2f} 
+\index{Lotus.Core.ILotusModelSelected@{Lotus.Core.ILotusModelSelected}!SetModelSelected@{SetModelSelected}}
+\index{SetModelSelected@{SetModelSelected}!Lotus.Core.ILotusModelSelected@{Lotus.Core.ILotusModelSelected}}
+\doxysubsubsection{\texorpdfstring{SetModelSelected()}{SetModelSelected()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Model\+Selected.\+Set\+Model\+Selected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model,  }\item[{bool}]{selected }\end{DoxyParamCaption})}
+
+
+
+Установка статуса выбора объекта(модели). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент View\+Model.\\
+\hline
+{\em selected} & Статус выбора объекта.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mvvm/\+View\+Model/Lotus\+View\+Model\+Common.\+cs\end{DoxyCompactItemize}

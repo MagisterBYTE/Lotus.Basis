@@ -34,9 +34,9 @@ namespace Lotus.Core
             }
             else
             {
-                var current_date = DateTime.UtcNow;
-                var elapsed_ticks = current_date.Ticks - StartDate.Ticks;
-                var elapsed_millisecond = elapsed_ticks / 100000;
+                var currentDate = DateTime.UtcNow;
+                var elapsedTicks = currentDate.Ticks - StartDate.Ticks;
+                var elapsedMillisecond = elapsedTicks / 100000;
 
                 long result = 0;
 
@@ -44,7 +44,7 @@ namespace Lotus.Core
                 XPacked.PackLong(ref result, 0, 28, obj.GetHashCode() / 16);
 
                 // Пакуем дату
-                XPacked.PackLong(ref result, 28, 36, elapsed_millisecond);
+                XPacked.PackLong(ref result, 28, 36, elapsedMillisecond);
 
                 return result;
             }
@@ -56,10 +56,10 @@ namespace Lotus.Core
         /// <returns>Целочисленный идентификатор</returns>
         public static int GenerateNext()
         {
-            var current_date = DateTime.UtcNow;
-            var elapsed_ticks = current_date.Ticks - StartDate.Ticks;
-            var elapsed_millisecond = (int)(elapsed_ticks / 100000);
-            return elapsed_millisecond;
+            var currentDate = DateTime.UtcNow;
+            var elapsedTicks = currentDate.Ticks - StartDate.Ticks;
+            var elapsedMillisecond = (int)(elapsedTicks / 100000);
+            return elapsedMillisecond;
         }
 
         /// <summary>
@@ -79,9 +79,9 @@ namespace Lotus.Core
         /// <returns>Дата создания.</returns>
         public static DateTime UnpackIdToDateTime(long id)
         {
-            var elapsed_millisecond = XPacked.UnpackLong(id, 28, 36);
-            var elapsed_ticks = elapsed_millisecond * 100000;
-            var result = new DateTime(StartDate.Ticks + elapsed_ticks, DateTimeKind.Utc);
+            var elapsedMillisecond = XPacked.UnpackLong(id, 28, 36);
+            var elapsedTicks = elapsedMillisecond * 100000;
+            var result = new DateTime(StartDate.Ticks + elapsedTicks, DateTimeKind.Utc);
             return result;
         }
         #endregion

@@ -433,10 +433,10 @@ namespace Lotus.Maths
         /// </summary>
         /// <remarks>
         /// Под другому это можно интерпретировать как пересечение по Y вертикальной линии отрезка проходящего через точки:
-        /// - x1 = dest_start
-        /// - x2 = dest_end
-        /// - y1 = source_start
-        /// - y2 = source_end
+        /// - x1 = destStart
+        /// - x2 = destEnd
+        /// - y1 = sourceStart
+        /// - y2 = sourceEnd
         /// - px = value
         /// </remarks>
         /// <param name="destStart">Начала целевого интервала.</param>
@@ -466,10 +466,10 @@ namespace Lotus.Maths
         /// </summary>
         /// <remarks>
         /// Под другому это можно интерпретировать как пересечение по Y вертикальной линии отрезка проходящего через точки:
-        /// - x1 = dest_start
-        /// - x2 = dest_end
-        /// - y1 = source_start
-        /// - y2 = source_end
+        /// - x1 = destStart
+        /// - x2 = destEnd
+        /// - y1 = sourceStart
+        /// - y2 = sourceEnd
         /// - px = value
         /// </remarks>
         /// <param name="destStart">Начала целевого интервала.</param>

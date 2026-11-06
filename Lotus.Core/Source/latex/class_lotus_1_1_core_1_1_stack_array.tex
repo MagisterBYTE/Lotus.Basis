@@ -1,0 +1,374 @@
+\doxysection{Lotus.\+Core.\+Stack\+Array\texorpdfstring{$<$}{<} TItem \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_stack_array}{}\label{class_lotus_1_1_core_1_1_stack_array}\index{Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}}
+
+
+Стек на основе массива.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Stack\+Array\texorpdfstring{$<$}{<} TItem \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.034483cm]{class_lotus_1_1_core_1_1_stack_array}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_stack_array_aca31a4fe5cb08362a699a90e0c5fefc0}\label{class_lotus_1_1_core_1_1_stack_array_aca31a4fe5cb08362a699a90e0c5fefc0} 
+{\bfseries Stack\+Array} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные стека предустановленными данными. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array_a0087304f7ed3bfdbee70cf12fbfd1d8b}{Stack\+Array}} (int max\+Count)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные стека указанными данными. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array_af852ec4adfb918d72db0b9eba2ba9f8a}{Push}} (in TItem item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента в вершину стека. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array_a3b5bea5bf30b49303058b753b19926be}{Pop}} ()
+\begin{DoxyCompactList}\small\item\em Вытолкнуть(удалить) элемент из вершины стека. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array_af1abc2ff71572cde4ef389f94af10e30}{Peek}} ()
+\begin{DoxyCompactList}\small\item\em Взять элемент из вершины стека, но не выталкивать его(не удалять). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries List\+Array} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные списка предустановленными данными. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_acadd5141cf424088ebd4f11ea8ff4afc}{List\+Array}} (int capacity)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные списка указанными данными. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab12191bb9a81b2d975cda41f62eb1544}{List\+Array}} (IList$<$ TItem?$>$ items)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные списка указанными данными. \end{DoxyCompactList}\item 
+IEnumerator$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab7203258c75c3a1a4b95cd9be8adc246}{Get\+Enumerator}} ()
+\begin{DoxyCompactList}\small\item\em Получение перечислителя. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a2d02ad841faf1e1a44316d876224b3a2}{Add}} (object? value)
+\begin{DoxyCompactList}\small\item\em Добавление элемента. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aeb632588c977b7f68fd88f869cecdf88}{Contains}} (object? value)
+\begin{DoxyCompactList}\small\item\em Проверка на наличие элемента в списке. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a4e6ce23da68f2c19783b5f8e80ddb082}{Index\+Of}} (object? value)
+\begin{DoxyCompactList}\small\item\em Получение индекса элемента в списке. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aa2b72a44ccdb4902a2e20d5a7f12aaed}{Insert}} (int index, object? value)
+\begin{DoxyCompactList}\small\item\em Вставка элемента в указанную позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a1b36ef475b11602ee38bf2b6c29b2719}{Remove}} (object? value)
+\begin{DoxyCompactList}\small\item\em Удаление элемента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a19864e5b47fdd6f60e2b17aca526e042}{Copy\+To}} (Array array, int index)
+\begin{DoxyCompactList}\small\item\em Копирование элементов в указанный массив. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a6c2a02e5d8b90ee1fcdf2aee48e97573}{Add}} (TItem? item)
+\begin{DoxyCompactList}\small\item\em Добавление элемента. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a9c6a025aa778d7afc90bea6952639a9f}{Contains}} (TItem? item)
+\begin{DoxyCompactList}\small\item\em Проверка на наличие элемента в списке. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a991c36f5e2359b9712c8a77de51f2669}{Index\+Of}} (TItem? item)
+\begin{DoxyCompactList}\small\item\em Получение индекса элемента в списке. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a9b0c8ab4f5049f6f1e029b8a7e9b55fa}{Insert}} (int index, TItem? item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента в указанную позицию. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a56d1edf0975d43e9fed41981a321f28c}{Remove}} (TItem? item)
+\begin{DoxyCompactList}\small\item\em Удаление элемента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a39bb415c271535081d8b08f6608e7fce}{Set\+At}} (int index, in TItem element)
+\begin{DoxyCompactList}\small\item\em Установка элемента списка по индексу с автоматическим увеличением размера при необходимости. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ade139e96ce29f147c54edda561063bec}{Get\+At}} (int index)
+\begin{DoxyCompactList}\small\item\em Получение элемента списка по индексу. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a3cde027ee09dbfb839a73bc82a87dfb9}{Reserve}} (int count)
+\begin{DoxyCompactList}\small\item\em Резервирование места на определённое количество элементов с учетом существующих. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab333b5a209694c73f467d9c2d65ae803}{Resize}} (int new\+Max\+Count)
+\begin{DoxyCompactList}\small\item\em Изменение максимального количества элементов которая может вместить коллекция. \end{DoxyCompactList}\item 
+void {\bfseries Trim\+Excess} ()
+\begin{DoxyCompactList}\small\item\em Определение емкости, равную фактическому числу элементов в списке, если это число меньше порогового значения. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a2b8148302a94d9bffd433a0dc2d57cc4}{Copy\+To}} (TItem\mbox{[}$\,$\mbox{]} array, int array\+Index)
+\begin{DoxyCompactList}\small\item\em Копирование элементов в указанный массив. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a64f9fe389a14cd917cc49e5baeb3908f}{Set\+Data}} (TItem\mbox{[}$\,$\mbox{]} data, int count)
+\begin{DoxyCompactList}\small\item\em Установка данных на прямую. \end{DoxyCompactList}\item 
+TItem?\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a74c7deb6b0e053d75cb12467c3cfd434}{Get\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Получение непосредственно данных. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a117e068575f49058a8fd0d285553f16e}{Set\+Index\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Установка индекса для элементов. \end{DoxyCompactList}\item 
+void {\bfseries Notify\+Collection\+Reset} ()
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации о переустановке коллекции. \end{DoxyCompactList}\item 
+void {\bfseries Notify\+Collection\+Clear} ()
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации об очистки коллекции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a99794686cf87d3f7399b10d57b34a3dc}{Add}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Добавление элемента. \end{DoxyCompactList}\item 
+void {\bfseries Add\+Duplicate\+Last\+Item} ()
+\begin{DoxyCompactList}\small\item\em Дублирование последнего элемента и его добавление. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a7982ce9156c5e1f63f53f27c3fd9b142}{Add\+Items}} (params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Добавление элементов. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a95ca16417a20c8fcfbe8f31f7aa804f2}{Add\+Items}} (IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Добавление элементов. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a7a7af5dd80a1d05908b9b45a7144934e}{Insert}} (int index, in TItem? item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента в указанную позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aeeda4e2307f1c068fece9591f5584e1c}{Insert\+After}} (in TItem original, in TItem item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента после указанного элемента. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aa2c53ebb8dbc18724b6d7370eff87c40}{Insert\+Before}} (in TItem original, in TItem item)
+\begin{DoxyCompactList}\small\item\em Вставка элемента перед указанным элементом. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af72b260b5ae6c697fed9452b3d82b7aa}{Insert\+Items}} (int index, params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Вставка элементов в указанную позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a590ff37f82c8e75c22efbe55d5642274}{Insert\+Items}} (int index, IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Вставка элементов в указанную позицию. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a5da84025b130b5bee973f23f9dd97093}{Remove}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Удаление элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af19155eb59308f45e84187ad261fbaf2}{Remove\+Items}} (params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Удаление элементов. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_abfc7751f873246004674b4a11c36a427}{Remove\+Items}} (IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Удаление элементов. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af17c482cce121434c7b7398fca75c299}{Remove\+Items\+End}} (int index)
+\begin{DoxyCompactList}\small\item\em Удаление элементов с указанного индекса и до конца коллекции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a85d0c91446b0287290b6c550245a45b2}{Remove\+Range}} (int index, int count)
+\begin{DoxyCompactList}\small\item\em Удаление элементов с определенного диапазона. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a5393b500afd6f11827545d53588b80ee}{Remove\+At}} (int index)
+\begin{DoxyCompactList}\small\item\em Удаление элемента. \end{DoxyCompactList}\item 
+void {\bfseries Remove\+First} ()
+\begin{DoxyCompactList}\small\item\em Удаление первого элемента. \end{DoxyCompactList}\item 
+void {\bfseries Remove\+Last} ()
+\begin{DoxyCompactList}\small\item\em Удаление последнего элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a876feab7be5e0ecd924421c9dcd6c7cb}{Remove\+Duplicates}} ()
+\begin{DoxyCompactList}\small\item\em Удаление дубликатов элементов. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab155f8ae32d0d7894be0e2d02adc7522}{Remove\+All}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Удаление всех элементов, удовлетворяющих условиям указанного предиката. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a2c5a7758055ce43c0698a3d84ee6f658}{Trim\+Start}} (in TItem item, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список сначала до указанного элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab5bd93860316736d2291b46f6a52bb6f}{Trim\+End}} (in TItem item, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список с конца до указанного элемента. \end{DoxyCompactList}\item 
+void {\bfseries Clear} ()
+\begin{DoxyCompactList}\small\item\em Очистка списка. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ac82b6245924e543888704a7a1e7af471}{Assign\+Items}} (params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Присвоение новых элементов списку. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a4f91cfaab4b8431dbd5947672e8791ad}{Assign\+Items}} (IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Присвоение новых элементов списку. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a101664b4312274148b630bbe18532ce4}{Union\+Items}} (params TItem\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Объединение элементов и существующих элементов списка. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a99dbd5429111afcdd2ee97bef95c22a9}{Union\+Items}} (IList$<$ TItem $>$ items)
+\begin{DoxyCompactList}\small\item\em Объединение элементов и существующих элементов списка. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_adce4634b5094eadacaefced352786189}{Difference\+Items}} (IList$<$ TItem?$>$ items)
+\begin{DoxyCompactList}\small\item\em Разница между элементами списка и элементами указанного списка. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ad1f4973d7a517492b7d33716c7ad7e43}{Difference\+Items}} (params TItem?\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Разница между элементами списка и элементами указанного списка. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ae0eb25fd59b42683302772085ece4cb9}{Contains}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Проверка на наличие элемента в списке. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a8f5542438a76f676ea32f10022d19336}{Index\+Of}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Поиск с начала списка индекса указанного элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a06f912856cddf585a0ffe3d939b1669a}{Last\+Index\+Of}} (in TItem? item)
+\begin{DoxyCompactList}\small\item\em Поиск с конца списка индекса указанного элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a4476af1b9bf7a478c642f6f7dbbd57ef}{Find}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Поиск с начала списка индекса элемента удовлетворяющему указанному предикату. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a986f8f904a8aaeabf5bf3d1582bb6ea0}{Find\+Last}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Поиск с конца списка индекса элемента удовлетворяющему указанному предикату. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ae04aa027c9132b9e44427d48fe7aa9df}{Search}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Поиск с начала списка элемента удовлетворяющему указанному предикату. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a3453e1ed450884b877667c09f06fdea6}{Search\+Last}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Поиск с конца списка элемента удовлетворяющему указанному предикату. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a45f53dde12c324d2aab13ad1febcf4dc}{Check\+All}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Проверка элементов списка на удовлетворение указанного предиката. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ac5b6c5eba8cc142de500ac40bfebb3fb}{Check\+One}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Проверка элементов списка на удовлетворение указанного предиката. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ad270417db7647ece01b6d9e6f6a980a3}{Visit}} (Action$<$ TItem?$>$ on\+Visitor)
+\begin{DoxyCompactList}\small\item\em Посещение элементов списка указанным посетителем. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ad61385069a48d063f089d6aa3e6b4ccd}{Swap}} (int old\+Index, int new\+Index)
+\begin{DoxyCompactList}\small\item\em Обмен местами элементов списка. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a118acf14a81176b22bfd900b4e30136f}{Move}} (int old\+Index, int new\+Index)
+\begin{DoxyCompactList}\small\item\em Перемещение элемента в новую позицию. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a270ca27c67c735279a448ff02b675b05}{Move\+Down}} (int element\+Index)
+\begin{DoxyCompactList}\small\item\em Перемещение элемента списка вниз. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ad530f93110e771d36555b863e7eb627f}{Move\+Up}} (int element\+Index)
+\begin{DoxyCompactList}\small\item\em Перемещение элемента списка вверх. \end{DoxyCompactList}\item 
+void {\bfseries Shift\+Down} ()
+\begin{DoxyCompactList}\small\item\em Циклическое смещение элементов списка вниз. \end{DoxyCompactList}\item 
+void {\bfseries Shift\+Up} ()
+\begin{DoxyCompactList}\small\item\em Циклическое смещение элементов списка вверх. \end{DoxyCompactList}\item 
+void {\bfseries Shuffle} ()
+\begin{DoxyCompactList}\small\item\em Перетасовка элементов списка. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aed85fdd8f1fc7487c741367ee5786f41}{Sort\+Ascending}} ()
+\begin{DoxyCompactList}\small\item\em Сортировка списка по возрастанию. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a60d1babd9ef610424746ffd83daa07bd}{Sort\+Descending}} ()
+\begin{DoxyCompactList}\small\item\em Сортировка списка по убыванию. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a7d1d37cecc2f3b02630dff4b75a695e4}{Sort}} (IComparer$<$ TItem $>$ comparer)
+\begin{DoxyCompactList}\small\item\em Сортировка элементов списка посредством делегата. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aa344b2b4410a5bbb47a5f9f5f9f4706a}{Sort}} (Comparison$<$ TItem $>$ comparison)
+\begin{DoxyCompactList}\small\item\em Сортировка элементов списка посредством делегата. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a0ef4938176e844b28c9788fe034c4b8f}{Get\+Closest\+Index}} (in TItem item)
+\begin{DoxyCompactList}\small\item\em Поиск ближайшего индекса элемента по его значению, не больше указанного значения. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ae4b6f3a590b0d969c4848a5e9b824110}{Trim\+Closest\+Start}} (in TItem item, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список сначала до ближайшего указанного элемента. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_accbbf78a70b76426948a3aac53d30f16}{Trim\+Closest\+End}} (in TItem item, bool included=true)
+\begin{DoxyCompactList}\small\item\em Обрезать список с конца до ближайшего указанного элемента. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a25bb1ad7898b855dd497fec0fc9d77c7}{Get\+Grouped\+By\+Property}} (string property\+Name)
+\begin{DoxyCompactList}\small\item\em Получение списка групп элементов сгруппированных по указанному свойству. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a1291c66efd484067a474598b47e7fad0}{Get\+Items\+Duplicate}} ()
+\begin{DoxyCompactList}\small\item\em Получение дубликата коллекции. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_aba789d859917ffa920df87f904b50c10}{Get\+Items\+Distinct}} ()
+\begin{DoxyCompactList}\small\item\em Получение различающихся (уникальных) элементов списка. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ object $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_afeb486970c20379547b45266de811f1c}{Get\+Distinct\+Value\+From\+Property\+Name}} (string property\+Name)
+\begin{DoxyCompactList}\small\item\em Получение списка уникальных значений указанного свойства. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ TItem $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a5705b4b062f79641467c8ce046341e3f}{Get\+Items\+Where}} (Predicate$<$ TItem?$>$ match)
+\begin{DoxyCompactList}\small\item\em Получение списка элементов по указанному предикату. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a20898d7c904954883c4a702e4fb99f09}{Notify\+Property\+Changed}} (string property\+Name="{}"{})
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_acbc383b6b33a8c27ff46750532924408}{Notify\+Property\+Changed}} (Property\+Changed\+Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_check_one}{Lotus.\+Core.\+ILotus\+Check\+One$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_check_one_a92964ee187ee3d4bdf24c985bcec6463}{Check\+One}} (Predicate$<$ TType?$>$ match)
+\begin{DoxyCompactList}\small\item\em Проверка объекта на удовлетворение указанного предиката. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_check_all}{Lotus.\+Core.\+ILotus\+Check\+All$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_check_all_a3b00f934e5ea5843478d58f754df23ab}{Check\+All}} (Predicate$<$ TType?$>$ match)
+\begin{DoxyCompactList}\small\item\em Проверка объекта на удовлетворение указанного предиката. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_visit}{Lotus.\+Core.\+ILotus\+Visit$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_visit_a560afcad5508bb90a83313e22b9fd2f0}{Visit}} (Action$<$ TType?$>$ on\+Visitor)
+\begin{DoxyCompactList}\small\item\em Посещение элементов списка указанным посетителем. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+const int {\bfseries INIT\+\_\+\+MAX\+\_\+\+COUNT} = 8
+\begin{DoxyCompactList}\small\item\em Максимальное количество элементов на начальном этапе. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Nullable} = !typeof(TItem).Is\+Value\+Type \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} Nullable.\+Get\+Underlying\+Type(typeof(TItem)) != null
+\begin{DoxyCompactList}\small\item\em Статус ссылочного типа элемента коллекции. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Indexable} = typeof(TItem).Is\+Support\+Interface$<$\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_indexable}{ILotus\+Indexable}}$>$()
+\begin{DoxyCompactList}\small\item\em Статус поддержки типом элемента интерфейса ILotus\+Indexable. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Duplicatable} = typeof(TItem).Is\+Support\+Interface$<$\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_duplicate}{ILotus\+Duplicate}}$<$TItem$>$$>$()
+\begin{DoxyCompactList}\small\item\em Статус поддержки типом элемента интерфейса ILotus\+Duplicate. \end{DoxyCompactList}\item 
+static readonly Equality\+Comparer$<$ TItem $>$ {\bfseries Equality\+Comparer\+Default} = Equality\+Comparer$<$TItem$>$.Default
+\begin{DoxyCompactList}\small\item\em Компаратор поддержки операций сравнения объектов в отношении равенства. \end{DoxyCompactList}\item 
+static readonly Comparer$<$ TItem $>$ {\bfseries Comparer\+Default} = Comparer$<$TItem$>$.Default
+\begin{DoxyCompactList}\small\item\em Компаратор поддержки операций сравнения объектов при упорядочении. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a121a458b4c59d16ddbbfda2af0a25c46}{Notify\+Collection\+Changed}} (Notify\+Collection\+Changed\+Action action, object? item, int index)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений коллекции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab01c5a3e81812e6415637a7078d24d40}{Notify\+Collection\+Changed}} (Notify\+Collection\+Changed\+Action action, object? item, int index, int old\+Index)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений коллекции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_ab296dcdf9884e66047c0ced898e83cac}{Notify\+Collection\+Changed}} (Notify\+Collection\+Changed\+Action action, object? old\+Item, object? new\+Item, int index)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений коллекции. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Count} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a01d43c161b99fe98973998c1532377be}{Count}}))
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Indexer} = new("{}Item\mbox{[}$\,$\mbox{]}"{})
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Empty} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a31e245a06a20384d12352a01c5db090e}{Is\+Empty}}))
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Fill} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af0b7be6e9589288f7f9c2b4657583fdb}{Is\+Fill}}))
+\item 
+static readonly Notify\+Collection\+Changed\+Event\+Args {\bfseries Collection\+Args\+Reset} = new(Notify\+Collection\+Changed\+Action.\+Reset)
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af1f88f71e1f208492ba9a40044bc38f6}{Max\+Count}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Максимальное количество элементов. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Empty}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус пустой коллекции. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af0b7be6e9589288f7f9c2b4657583fdb}{Is\+Fill}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус заполненной коллекции. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Notify}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус включения уведомлений коллекции о своих изменениях. \end{DoxyCompactList}\item 
+int {\bfseries Last\+Index}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индекс последнего элемента. \end{DoxyCompactList}\item 
+TItem?\mbox{[}$\,$\mbox{]} {\bfseries Serialize\+Items}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Данные массива для сериализации. \end{DoxyCompactList}\item 
+TItem? {\bfseries Item\+First}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Первый элемент. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a478b4ba33737a59f3fded510c49d704a}{Item\+Second}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Второй элемент. \end{DoxyCompactList}\item 
+TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_af3de0facb68e98103cf53bca8acc4f4b}{Item\+Penultimate}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Предпоследний элемент. \end{DoxyCompactList}\item 
+TItem? {\bfseries Item\+Last}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Последний элемент. \end{DoxyCompactList}\item 
+int {\bfseries Count}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество элементов. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Read\+Only}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус коллекции только для чтения. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Fixed\+Size}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус фиксированной коллекции. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Synchronized}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус синхронизации коллекции. \end{DoxyCompactList}\item 
+object {\bfseries Sync\+Root}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Объект синхронизации. \end{DoxyCompactList}\item 
+TItem \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array_a3e7287fe7981d8dfa91de2f17b2cedef}{this\mbox{[}int index\mbox{]}}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Индексация списка. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Events inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+Property\+Changed\+Event\+Handler? {\bfseries Property\+Changed}
+\begin{DoxyCompactList}\small\item\em Событие срабатывает ПОСЛЕ изменения свойства. \end{DoxyCompactList}\item 
+Notify\+Collection\+Changed\+Event\+Handler? {\bfseries Collection\+Changed}
+\begin{DoxyCompactList}\small\item\em Событие для информирование событий коллекций. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Стек на основе массива. 
+
+Реализация стека на основе массива, с полной поддержкой функциональности List\+Array$<$\+TItem$>$ с учетом особенности реализации стека 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TItem} & Тип элемента стека.\\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_stack_array_a0087304f7ed3bfdbee70cf12fbfd1d8b}\label{class_lotus_1_1_core_1_1_stack_array_a0087304f7ed3bfdbee70cf12fbfd1d8b} 
+\index{Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}!StackArray@{StackArray}}
+\index{StackArray@{StackArray}!Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}}
+\doxysubsubsection{\texorpdfstring{StackArray()}{StackArray()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array}{Lotus.\+Core.\+Stack\+Array}}$<$ TItem $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array}{Stack\+Array}} (\begin{DoxyParamCaption}\item[{int}]{max\+Count }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует данные стека указанными данными. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Count} & Максимальное количество элементов.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_stack_array_af1abc2ff71572cde4ef389f94af10e30}\label{class_lotus_1_1_core_1_1_stack_array_af1abc2ff71572cde4ef389f94af10e30} 
+\index{Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}!Peek@{Peek}}
+\index{Peek@{Peek}!Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}}
+\doxysubsubsection{\texorpdfstring{Peek()}{Peek()}}
+{\footnotesize\ttfamily TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array}{Lotus.\+Core.\+Stack\+Array}}$<$ TItem $>$.Peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Взять элемент из вершины стека, но не выталкивать его(не удалять). 
+
+\begin{DoxyReturn}{Returns}
+Элемент.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_stack_array_a3b5bea5bf30b49303058b753b19926be}\label{class_lotus_1_1_core_1_1_stack_array_a3b5bea5bf30b49303058b753b19926be} 
+\index{Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}!Pop@{Pop}}
+\index{Pop@{Pop}!Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}}
+\doxysubsubsection{\texorpdfstring{Pop()}{Pop()}}
+{\footnotesize\ttfamily TItem? \mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array}{Lotus.\+Core.\+Stack\+Array}}$<$ TItem $>$.Pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Вытолкнуть(удалить) элемент из вершины стека. 
+
+\begin{DoxyReturn}{Returns}
+Элемент.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_stack_array_af852ec4adfb918d72db0b9eba2ba9f8a}\label{class_lotus_1_1_core_1_1_stack_array_af852ec4adfb918d72db0b9eba2ba9f8a} 
+\index{Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}!Push@{Push}}
+\index{Push@{Push}!Lotus.Core.StackArray$<$ TItem $>$@{Lotus.Core.StackArray$<$ TItem $>$}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array}{Lotus.\+Core.\+Stack\+Array}}$<$ TItem $>$.Push (\begin{DoxyParamCaption}\item[{in TItem}]{item }\end{DoxyParamCaption})}
+
+
+
+Вставка элемента в вершину стека. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & Элемент.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Collections/Lotus\+Collection\+Stack\+Array.\+cs\end{DoxyCompactItemize}

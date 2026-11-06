@@ -104,9 +104,9 @@ namespace Lotus.Algorithm
         /// <returns>Статус равенства объектов.</returns>
         public override readonly bool Equals(object? obj)
         {
-            if (obj is TMapPoint map_point)
+            if (obj is TMapPoint mapPoint)
             {
-                return Equals(map_point);
+                return Equals(mapPoint);
             }
             return base.Equals(obj);
         }
@@ -626,7 +626,7 @@ namespace Lotus.Algorithm
 		/// <param name="color">Цвет ячейки.</param>
 		public void DrawPassability(UnityEngine.Color color)
 		{
-			UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
+			UnityEngine.Texture2D textureBox = UnityEngine.GUI.skin.box.normal.background;
 			UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
 			for (Int32 ix = 0; ix < _mapWidth; ix++)
 			{
@@ -645,7 +645,7 @@ namespace Lotus.Algorithm
 					}
 				}
 			}
-			UnityEngine.GUI.skin.box.normal.background = texture_box;
+			UnityEngine.GUI.skin.box.normal.background = textureBox;
 		}
 
 		/// <summary>
@@ -654,7 +654,7 @@ namespace Lotus.Algorithm
 		/// <param name="color">Цвет ячейки.</param>
 		public void DrawBlock(UnityEngine.Color color)
 		{
-			UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
+			UnityEngine.Texture2D textureBox = UnityEngine.GUI.skin.box.normal.background;
 			UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
 			for (Int32 ix = 0; ix < _mapWidth; ix++)
 			{
@@ -673,7 +673,7 @@ namespace Lotus.Algorithm
 					}
 				}
 			}
-			UnityEngine.GUI.skin.box.normal.background = texture_box;
+			UnityEngine.GUI.skin.box.normal.background = textureBox;
 		}
 
 		/// <summary>
@@ -682,7 +682,7 @@ namespace Lotus.Algorithm
 		/// <param name="color">Цвет ячейки.</param>
 		public void DrawWave(UnityEngine.Color color)
 		{
-			UnityEngine.Texture2D texture_box = UnityEngine.GUI.skin.box.normal.background;
+			UnityEngine.Texture2D textureBox = UnityEngine.GUI.skin.box.normal.background;
 			UnityEngine.GUI.skin.box.normal.background = UnityEngine.Texture2D.whiteTexture;
 			for (Int32 ix = 0; ix < _mapWidth; ix++)
 			{
@@ -701,7 +701,7 @@ namespace Lotus.Algorithm
 					}
 				}
 			}
-			UnityEngine.GUI.skin.box.normal.background = texture_box;
+			UnityEngine.GUI.skin.box.normal.background = textureBox;
 		}
 
 		/// <summary>

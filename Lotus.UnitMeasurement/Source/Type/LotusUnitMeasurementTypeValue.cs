@@ -62,11 +62,11 @@ namespace Lotus.UnitMeasurement
         {
             //String number = data.Substring(0, data.IndexOf('{'));
 
-            //String measurement_str = data.ExtractString("{", "}");
-            //TMeasurementType measurement = XExtensionMeasurementType.Parse(measurement_str);
+            //String measurementStr = data.ExtractString("{", "}");
+            //TMeasurementType measurement = XExtensionMeasurementType.Parse(measurementStr);
 
-            //String unit_str = data.ExtractString("[", "]");
-            //Enum unit = measurement.GetUnitValueFromString(unit_str);
+            //String unitStr = data.ExtractString("[", "]");
+            //Enum unit = measurement.GetUnitValueFromString(unitStr);
 
             //TMeasurementValue value = new TMeasurementValue(XNumbers.ParseDouble(number), measurement, unit);
             var value = new TMeasurementValue();

@@ -78,8 +78,8 @@ namespace Lotus.Core
         public static TType? GetAttributeOfType<TType>(this Enum enumValue) where TType : Attribute
         {
             var type = enumValue.GetType();
-            var member_info = type.GetMember(enumValue.ToString());
-            var attributes = member_info[0].GetCustomAttributes(typeof(TType), false);
+            var memberInfo = type.GetMember(enumValue.ToString());
+            var attributes = memberInfo[0].GetCustomAttributes(typeof(TType), false);
             return attributes.Length > 0 ? (TType)attributes[0] : null;
         }
 
@@ -90,8 +90,8 @@ namespace Lotus.Core
         /// <returns>Описание либо имя перечисления.</returns>
         public static string? GetDescriptionOrName(this Enum enumValue)
         {
-            var type_enum = enumValue.GetType();
-            return XEnumHelper.GetDescriptionOrName(type_enum, enumValue);
+            var typeEnum = enumValue.GetType();
+            return XEnumHelper.GetDescriptionOrName(typeEnum, enumValue);
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace Lotus.Core
         /// <returns>Аббревиатура либо имя перечисления.</returns>
         public static string? GetAbbreviationOrName(this Enum enumValue)
         {
-            var type_enum = enumValue.GetType();
-            return XEnumHelper.GetAbbreviationOrName(type_enum, enumValue);
+            var typeEnum = enumValue.GetType();
+            return XEnumHelper.GetAbbreviationOrName(typeEnum, enumValue);
         }
 
         /// <summary>

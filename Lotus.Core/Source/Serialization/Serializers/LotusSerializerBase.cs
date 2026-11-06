@@ -217,9 +217,9 @@ namespace Lotus.Core.Serialization
                 var parameters = new CParameters(new CParameterObject(this.Name, this));
                 foreach (var item in SerializableObjects.Values)
                 {
-                    if (item is ILotusBeforeSave before_save)
+                    if (item is ILotusBeforeSave beforeSave)
                     {
-                        before_save.OnBeforeSave(parameters);
+                        beforeSave.OnBeforeSave(parameters);
                     }
                 }
             }
@@ -235,9 +235,9 @@ namespace Lotus.Core.Serialization
                 var parameters = new CParameters(new CParameterObject(this.Name, this));
                 foreach (var item in SerializableObjects.Values)
                 {
-                    if (item is ILotusAfterSave after_save)
+                    if (item is ILotusAfterSave afterSave)
                     {
-                        after_save.OnAfterSave(parameters);
+                        afterSave.OnAfterSave(parameters);
                     }
                 }
             }
@@ -253,9 +253,9 @@ namespace Lotus.Core.Serialization
                 var parameters = new CParameters(new CParameterObject(this.Name, this));
                 foreach (var item in SerializableObjects.Values)
                 {
-                    if (item is ILotusBeforeLoad before_load)
+                    if (item is ILotusBeforeLoad beforeLoad)
                     {
-                        before_load.OnBeforeLoad(parameters);
+                        beforeLoad.OnBeforeLoad(parameters);
                     }
                 }
             }
@@ -271,9 +271,9 @@ namespace Lotus.Core.Serialization
                 var parameters = new CParameters(new CParameterObject(this.Name, this));
                 foreach (var item in SerializableObjects.Values)
                 {
-                    if (item is ILotusAfterLoad after_load)
+                    if (item is ILotusAfterLoad afterLoad)
                     {
-                        after_load.OnAfterLoad(parameters);
+                        afterLoad.OnAfterLoad(parameters);
                     }
                 }
             }

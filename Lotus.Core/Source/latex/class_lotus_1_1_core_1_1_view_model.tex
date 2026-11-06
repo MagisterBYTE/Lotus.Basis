@@ -1,0 +1,282 @@
+\doxysection{Lotus.\+Core.\+View\+Model\texorpdfstring{$<$}{<} TModel \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_view_model}{}\label{class_lotus_1_1_core_1_1_view_model}\index{Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}}
+
+
+Шаблон определяющий минимальный View\+Model, который реализует основные параметры просмотра и управления.  
+
+
+Inheritance diagram for Lotus.\+Core.\+View\+Model\texorpdfstring{$<$}{<} TModel \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.408805cm]{class_lotus_1_1_core_1_1_view_model}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_aaec54e6b7e460763bac0a9eab1c5fcf1}{View\+Model}} (TModel model, string name="{}"{})
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_af17301b4d32f1c74827dd28ab5d38f2c}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_aaec48dcae7ec4689034e9d2c1bd8d612}{Open\+Context\+Menu}} (object context\+Menu)
+\begin{DoxyCompactList}\small\item\em Открытие контекстного меню. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a4981b0b00abe34f36b35f47d0eceb292}\label{class_lotus_1_1_core_1_1_view_model_a4981b0b00abe34f36b35f47d0eceb292} 
+virtual void {\bfseries Set\+Data\+Context} ()
+\begin{DoxyCompactList}\small\item\em Установка данных. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a48a35e73421034c6b9195855190aee95}\label{class_lotus_1_1_core_1_1_view_model_a48a35e73421034c6b9195855190aee95} 
+virtual void {\bfseries Unset\+Data\+Context} ()
+\begin{DoxyCompactList}\small\item\em Очистка данных. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable}{Lotus.\+Core.\+Nameable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Nameable} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable_afb9fdc4ac4de4cbf26c5dcc04752968d}{Nameable}} (string name)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable_aa596f6e0f23d36f7f0f82e442826853e}{Compare\+To}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable}{ILotus\+Nameable}}? other)
+\begin{DoxyCompactList}\small\item\em Сравнение объектов для упорядочивания. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable_ab8d403bfa482eced355056fd9ed38a9e}{Compare\+To}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable}{Nameable}}? other)
+\begin{DoxyCompactList}\small\item\em Сравнение объектов для упорядочивания. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable_ac39edf161727f65072494977173c0548}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base}{Lotus.\+Core.\+Property\+Changed\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base_aeedef6782cf8c61599513af983b5742e}{On\+Property\+Changed}} (\mbox{[}Caller\+Member\+Name\mbox{]} string? property\+Name=null)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base_acccfdc166e6dfcc9e99c290dc38331e5}{On\+Property\+Changed}} (Property\+Changed\+Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{Lotus.\+Core.\+ILotus\+View\+Model$<$ TModel $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_a7d62d7bc36dd3446ae45cfd88b35fbd6}{Open\+Context\+Menu}} (object context\+Menu)
+\begin{DoxyCompactList}\small\item\em Открытие контекстного меню. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a6eb1cf9a11aefea18e425e99ca24575f}\label{class_lotus_1_1_core_1_1_view_model_a6eb1cf9a11aefea18e425e99ca24575f} 
+static readonly bool {\bfseries Is\+Support\+Nameable} = typeof(TModel).Is\+Support\+Interface$<$\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable}{ILotus\+Nameable}}$>$()
+\begin{DoxyCompactList}\small\item\em Статус реализации модели интерейса ILotus\+Nameable. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a598937fe6b498b516b1b11b0faf9ebe1}\label{class_lotus_1_1_core_1_1_view_model_a598937fe6b498b516b1b11b0faf9ebe1} 
+static readonly bool {\bfseries Is\+Support\+Identifier\+Int} = typeof(TModel).Is\+Support\+Interface$<$\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_int}{ILotus\+Identifier\+Int}}$>$()
+\begin{DoxyCompactList}\small\item\em Статус реализации модели интерейса ILotus\+Identifier\+Int. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a26cdd33c2f8ddf4308991d0eded3bb35}\label{class_lotus_1_1_core_1_1_view_model_a26cdd33c2f8ddf4308991d0eded3bb35} 
+static readonly bool {\bfseries Is\+Support\+Identifier\+Long} = typeof(TModel).Is\+Support\+Interface$<$\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_long}{ILotus\+Identifier\+Long}}$>$()
+\begin{DoxyCompactList}\small\item\em Статус реализации модели интерейса ILotus\+Identifier\+Long. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a043f7280a0fe3842949bfbe61138ee24}\label{class_lotus_1_1_core_1_1_view_model_a043f7280a0fe3842949bfbe61138ee24} 
+static readonly bool {\bfseries Is\+Support\+Model\+Selected} = typeof(TModel).Is\+Support\+Interface$<$\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_model_selected}{ILotus\+Model\+Selected}}$>$()
+\begin{DoxyCompactList}\small\item\em Статус реализации модели интерейса ILotus\+Model\+Selected. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_ac6763306a03c83fd549fb908c2bbe21c}\label{class_lotus_1_1_core_1_1_view_model_ac6763306a03c83fd549fb908c2bbe21c} 
+static readonly bool {\bfseries Is\+Support\+Model\+Enabled} = typeof(TModel).Is\+Support\+Interface$<$\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_model_enabled}{ILotus\+Model\+Enabled}}$>$()
+\begin{DoxyCompactList}\small\item\em Статус реализации модели интерейса ILotus\+Model\+Enabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_acc23cea5e30e62106bea914765379b0e}\label{class_lotus_1_1_core_1_1_view_model_acc23cea5e30e62106bea914765379b0e} 
+virtual void {\bfseries Raise\+Is\+Selected\+Changed} ()
+\begin{DoxyCompactList}\small\item\em Изменение выбора элемента View\+Model. Метод автоматически вызывается после установки соответствующего свойства. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a742ef48dcb6bc368d8c3a796d2e25e9a}\label{class_lotus_1_1_core_1_1_view_model_a742ef48dcb6bc368d8c3a796d2e25e9a} 
+virtual void {\bfseries Raise\+Is\+Enabled\+Changed} ()
+\begin{DoxyCompactList}\small\item\em Изменение доступности элемента View\+Model. Метод автоматически вызывается после установки соответствующего свойства. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_ae9489ed1024f7c209f7ae02f7a2415fc}\label{class_lotus_1_1_core_1_1_view_model_ae9489ed1024f7c209f7ae02f7a2415fc} 
+virtual void {\bfseries Raise\+Is\+Checked\+Changed} ()
+\begin{DoxyCompactList}\small\item\em Изменение выбора элемента View\+Model. Метод автоматически вызывается после установки соответствующего свойства. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_ab9fa20b8eaaf70b436eee2b7e733ecf9}\label{class_lotus_1_1_core_1_1_view_model_ab9fa20b8eaaf70b436eee2b7e733ecf9} 
+virtual void {\bfseries Raise\+Is\+Presented\+Changed} ()
+\begin{DoxyCompactList}\small\item\em Изменение статуса отображения View\+Model. Метод автоматически вызывается после установки соответствующего свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable}{Lotus.\+Core.\+Nameable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries Raise\+Name\+Changed} ()
+\begin{DoxyCompactList}\small\item\em Изменение имени объекта. Метод автоматически вызывается после установки соответствующего свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a584fc70407cc4365a5e009c11c1d7342}\label{class_lotus_1_1_core_1_1_view_model_a584fc70407cc4365a5e009c11c1d7342} 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Selected} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_a601f9bffd27b6b93dbfc3f728ea217c6}{Is\+Selected}}))
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a044806270cad2e7f3a7081ba8253b6de}\label{class_lotus_1_1_core_1_1_view_model_a044806270cad2e7f3a7081ba8253b6de} 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Enabled} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_a23b33c4cae12de454c1488c245d8bb3e}{Is\+Enabled}}))
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a33a3c3b21c5a7a7fa67deb0589100b03}\label{class_lotus_1_1_core_1_1_view_model_a33a3c3b21c5a7a7fa67deb0589100b03} 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Checked} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_a1f8c72b85e759af90e94331d8d25bd90}{Is\+Checked}}))
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a32a59550080df2fc18ddc15c27cd924a}\label{class_lotus_1_1_core_1_1_view_model_a32a59550080df2fc18ddc15c27cd924a} 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Presented} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_aca2c79383adeca695871d8d6afcddaf7}{Is\+Presented}}))
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a846f40c9695ec2e007bdb55a6f6b137a}\label{class_lotus_1_1_core_1_1_view_model_a846f40c9695ec2e007bdb55a6f6b137a} 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Edit\+Mode} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_a5ae54e43adf7393dfb265a0226406f94}{Is\+Edit\+Mode}}))
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable}{Lotus.\+Core.\+Nameable}}}
+\begin{DoxyCompactItemize}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Name} = new(nameof(\mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable_a17bc358696950d8b8301a29c38cd1f86}{Name}}))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_aef161ec058fd951d9228a78537afc359}{IOwner}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец объекта. \end{DoxyCompactList}\item 
+TModel \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model_a3c1bd24be16c50e3a38f96b1f8ab424d}{Model}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Модель. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a601f9bffd27b6b93dbfc3f728ea217c6}\label{class_lotus_1_1_core_1_1_view_model_a601f9bffd27b6b93dbfc3f728ea217c6} 
+bool {\bfseries Is\+Selected}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Выбор элемента View\+Model. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a23b33c4cae12de454c1488c245d8bb3e}\label{class_lotus_1_1_core_1_1_view_model_a23b33c4cae12de454c1488c245d8bb3e} 
+bool {\bfseries Is\+Enabled}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Доступность элемента View\+Model. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a1f8c72b85e759af90e94331d8d25bd90}\label{class_lotus_1_1_core_1_1_view_model_a1f8c72b85e759af90e94331d8d25bd90} 
+bool? {\bfseries Is\+Checked}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Выбор элемента элемента View\+Model. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_aca2c79383adeca695871d8d6afcddaf7}\label{class_lotus_1_1_core_1_1_view_model_aca2c79383adeca695871d8d6afcddaf7} 
+bool {\bfseries Is\+Presented}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Отображение элемента View\+Model в отдельном контексте. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a5ae54e43adf7393dfb265a0226406f94}\label{class_lotus_1_1_core_1_1_view_model_a5ae54e43adf7393dfb265a0226406f94} 
+bool {\bfseries Is\+Edit\+Mode}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус элемента View\+Model находящегося в режиме редактирования. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a05adb0a9173e0cd19e68c23513fe0943}\label{class_lotus_1_1_core_1_1_view_model_a05adb0a9173e0cd19e68c23513fe0943} 
+object {\bfseries UIElement}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Элемент пользовательского интерфейса который отображает данную View\+Model. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a107ffd92f09fe05eaa2aff3f6affb8cb}\label{class_lotus_1_1_core_1_1_view_model_a107ffd92f09fe05eaa2aff3f6affb8cb} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu}{CUIContext\+Menu}} {\bfseries UIContext\+Menu}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Контекстное меню элемента View\+Model. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a7c14387757ef3991b4b6f5f87989f0d9}\label{class_lotus_1_1_core_1_1_view_model_a7c14387757ef3991b4b6f5f87989f0d9} 
+virtual bool {\bfseries UIDraggable\+Status}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возможность перемещать View\+Model в элементе пользовательского интерфейса. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable}{Lotus.\+Core.\+Nameable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual string \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable_a17bc358696950d8b8301a29c38cd1f86}{Name}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Наименование объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable}{Lotus.\+Core.\+ILotus\+Nameable}}}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{Lotus.\+Core.\+ILotus\+View\+Model$<$ TModel $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+object \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_af4648cefdf7fd4ac84c058801fda6172}{Model}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Модель. \end{DoxyCompactList}\item 
+new TModel \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_a8d68530f01aed8358c4f00e7de364285}{Model}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Модель. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_aab9c07c84cbf104a35dd43d691e5e8d9}{Is\+Selected}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Выбор элемента View\+Model. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_a296d40ef957f90d081597f826c781f1b}{Is\+Enabled}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Доступность элемента View\+Model. \end{DoxyCompactList}\item 
+bool? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_a0c34245bc855ab436a3193b216d85e64}{Is\+Checked}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Выбор элемента View\+Model. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_ae3b2cdff935efb2ce395fc47635eb44c}{Is\+Presented}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Отображение элемента View\+Model. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_aeefa3fc8c5c5523181519f9e8638ae2b}{Is\+Edit\+Mode}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус элемента View\+Model находящегося в режиме редактирования. \end{DoxyCompactList}\item 
+object {\bfseries UIElement}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Элемент пользовательского интерфейса который отображает данную View\+Model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu}{CUIContext\+Menu}} {\bfseries UIContext\+Menu}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Контекстное меню элемента View\+Model. \end{DoxyCompactList}\item 
+bool {\bfseries UIDraggable\+Status}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возможность перемещать View\+Model в элементе пользовательского интерфейса. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{Lotus.\+Core.\+ILotus\+Owned\+Object$<$ TOwner $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+TOwner? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object_a28b52590e38754d81d756a0b98a767af}{Owner}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Events inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base}{Lotus.\+Core.\+Property\+Changed\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+Property\+Changed\+Event\+Handler? {\bfseries Property\+Changed}
+\begin{DoxyCompactList}\small\item\em Событие срабатывает ПОСЛЕ изменения свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Шаблон определяющий минимальный View\+Model, который реализует основные параметры просмотра и управления. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TModel} & Тип модели.\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TModel} : {\em class}]\end{description}
+\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_aaec54e6b7e460763bac0a9eab1c5fcf1}\label{class_lotus_1_1_core_1_1_view_model_aaec54e6b7e460763bac0a9eab1c5fcf1} 
+\index{Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}!ViewModel@{ViewModel}}
+\index{ViewModel@{ViewModel}!Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}}
+\doxysubsubsection{\texorpdfstring{ViewModel()}{ViewModel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model}{Lotus.\+Core.\+View\+Model}}$<$ TModel $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model}{View\+Model}} (\begin{DoxyParamCaption}\item[{TModel}]{model,  }\item[{string}]{name = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Модель.\\
+\hline
+{\em name} & Служебное наименование View\+Model.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_aaec48dcae7ec4689034e9d2c1bd8d612}\label{class_lotus_1_1_core_1_1_view_model_aaec48dcae7ec4689034e9d2c1bd8d612} 
+\index{Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}!OpenContextMenu@{OpenContextMenu}}
+\index{OpenContextMenu@{OpenContextMenu}!Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}}
+\doxysubsubsection{\texorpdfstring{OpenContextMenu()}{OpenContextMenu()}}
+{\footnotesize\ttfamily virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model}{Lotus.\+Core.\+View\+Model}}$<$ TModel $>$.Open\+Context\+Menu (\begin{DoxyParamCaption}\item[{object}]{context\+Menu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Открытие контекстного меню. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context\+Menu} & Контекстное меню.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_af17301b4d32f1c74827dd28ab5d38f2c}\label{class_lotus_1_1_core_1_1_view_model_af17301b4d32f1c74827dd28ab5d38f2c} 
+\index{Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}!ToString@{ToString}}
+\index{ToString@{ToString}!Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model}{Lotus.\+Core.\+View\+Model}}$<$ TModel $>$.To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Преобразование к текстовому представлению. 
+
+\begin{DoxyReturn}{Returns}
+Служебное наименование View\+Model.
+\end{DoxyReturn}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_aef161ec058fd951d9228a78537afc359}\label{class_lotus_1_1_core_1_1_view_model_aef161ec058fd951d9228a78537afc359} 
+\index{Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}!IOwner@{IOwner}}
+\index{IOwner@{IOwner}!Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}}
+\doxysubsubsection{\texorpdfstring{IOwner}{IOwner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model}{Lotus.\+Core.\+View\+Model}}$<$ TModel $>$.IOwner\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Владелец объекта. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object_aa387fe4af4fcfaad4583624d00fcb271}{Lotus.\+Core.\+ILotus\+Owned\+Object$<$ TOwner $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_view_model_a3c1bd24be16c50e3a38f96b1f8ab424d}\label{class_lotus_1_1_core_1_1_view_model_a3c1bd24be16c50e3a38f96b1f8ab424d} 
+\index{Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}!Model@{Model}}
+\index{Model@{Model}!Lotus.Core.ViewModel$<$ TModel $>$@{Lotus.Core.ViewModel$<$ TModel $>$}}
+\doxysubsubsection{\texorpdfstring{Model}{Model}}
+{\footnotesize\ttfamily TModel \mbox{\hyperlink{class_lotus_1_1_core_1_1_view_model}{Lotus.\+Core.\+View\+Model}}$<$ TModel $>$.Model\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Модель. 
+
+Ссылка на данные которые связаны с данным элементом View\+Model. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mvvm/\+View\+Model/Lotus\+View\+Model.\+cs\end{DoxyCompactItemize}

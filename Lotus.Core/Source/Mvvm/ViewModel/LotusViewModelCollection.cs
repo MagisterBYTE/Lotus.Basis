@@ -286,9 +286,9 @@ namespace Lotus.Core
                 {
                     if (left.Model != null && right.Model != null)
                     {
-                        if (left.Model is IComparable<TModel> left_comparable)
+                        if (left.Model is IComparable<TModel> leftComparable)
                         {
-                            return left_comparable.CompareTo((TModel)right.Model);
+                            return leftComparable.CompareTo((TModel)right.Model);
                         }
                         else
                         {
@@ -297,9 +297,9 @@ namespace Lotus.Core
                     }
                     else
                     {
-                        if (left is IComparable left_comparable)
+                        if (left is IComparable leftComparable)
                         {
-                            return left_comparable.CompareTo(right);
+                            return leftComparable.CompareTo(right);
                         }
                         else
                         {
@@ -372,9 +372,9 @@ namespace Lotus.Core
             get { return _source; }
             set
             {
-                if (_source is INotifyCollectionChanged collection_changed)
+                if (_source is INotifyCollectionChanged collectionChanged)
                 {
-                    collection_changed.CollectionChanged -= OnCollectionChangedHandler;
+                    collectionChanged.CollectionChanged -= OnCollectionChangedHandler;
                 }
 
                 _source = value;
@@ -766,9 +766,9 @@ namespace Lotus.Core
             // Освобождаем только управляемые ресурсы
             if (disposing)
             {
-                if (_source is INotifyCollectionChanged collection_changed)
+                if (_source is INotifyCollectionChanged collectionChanged)
                 {
-                    collection_changed.CollectionChanged -= OnCollectionChangedHandler;
+                    collectionChanged.CollectionChanged -= OnCollectionChangedHandler;
                 }
             }
 
@@ -861,8 +861,8 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    var present_type = parameters.GetValueOfType<Type>();
-                    if (present_type != null)
+                    var presentType = parameters.GetValueOfType<Type>();
+                    if (presentType != null)
                     {
 
                     }
@@ -882,8 +882,8 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    var present_type = parameters.GetValueOfType<Type>();
-                    if (present_type != null)
+                    var presentType = parameters.GetValueOfType<Type>();
+                    if (presentType != null)
                     {
 
                     }
@@ -901,7 +901,7 @@ namespace Lotus.Core
         public virtual void AttachOwnedObject(ILotusOwnedObject ownedObject, bool add)
         {
             // Присоединять можем только объекты
-            if (ownedObject is ILotusViewModel view_model)
+            if (ownedObject is ILotusViewModel viewModel)
             {
                 // Если владелец есть
                 if (ownedObject.IOwner != null)
@@ -916,8 +916,8 @@ namespace Lotus.Core
 
                 if (add)
                 {
-                    view_model.IOwner = this;
-                    Add(view_model);
+                    viewModel.IOwner = this;
+                    Add(viewModel);
                 }
             }
         }
@@ -930,14 +930,14 @@ namespace Lotus.Core
         public virtual void DetachOwnedObject(ILotusOwnedObject ownedObject, bool remove)
         {
             // Отсоединять можем только объекты
-            if (ownedObject is ILotusViewModel view_model)
+            if (ownedObject is ILotusViewModel viewModel)
             {
                 ownedObject.IOwner = null;
 
                 if (remove)
                 {
                     // Ищем его
-                    var index = IndexOf(view_model);
+                    var index = IndexOf(viewModel);
                     if (index != -1)
                     {
                         // Удаляем
@@ -1008,16 +1008,16 @@ namespace Lotus.Core
                         // И проходит условия фильтрации
                         if (_filter(model))
                         {
-                            var view_model = CreateViewModel(model);
-                            view_model.IOwner = this;
+                            var viewModel = CreateViewModel(model);
+                            viewModel.IOwner = this;
 
-                            if (list[i] is ILotusViewModelOwner view_item_owner)
+                            if (list[i] is ILotusViewModelOwner viewItemOwner)
                             {
-                                view_item_owner.OwnerViewModel = view_model;
+                                viewItemOwner.OwnerViewModel = viewModel;
                             }
 
                             // Добавляем
-                            Add(view_model);
+                            Add(viewModel);
                         }
                     }
                 }
@@ -1029,16 +1029,16 @@ namespace Lotus.Core
                     // Если тип поддерживается
                     if (list[i] is TModel model)
                     {
-                        var view_model = CreateViewModel(model);
-                        view_model.IOwner = this;
+                        var viewModel = CreateViewModel(model);
+                        viewModel.IOwner = this;
 
-                        if (list[i] is ILotusViewModelOwner view_item_owner)
+                        if (list[i] is ILotusViewModelOwner viewItemOwner)
                         {
-                            view_item_owner.OwnerViewModel = view_model;
+                            viewItemOwner.OwnerViewModel = viewModel;
                         }
 
                         // Добавляем
-                        Add(view_model);
+                        Add(viewModel);
                     }
                 }
             }
@@ -1065,9 +1065,9 @@ namespace Lotus.Core
                 CreateFromList(list);
             }
 
-            if (_source is INotifyCollectionChanged collection_changed)
+            if (_source is INotifyCollectionChanged collectionChanged)
             {
-                collection_changed.CollectionChanged += OnCollectionChangedHandler;
+                collectionChanged.CollectionChanged += OnCollectionChangedHandler;
             }
         }
 
@@ -1098,9 +1098,9 @@ namespace Lotus.Core
                 {
                     if (IsSupportModelSelected)
                     {
-                        if (_arrayOfItems[_selectedIndex]?.Model is ILotusModelSelected selected_item)
+                        if (_arrayOfItems[_selectedIndex]?.Model is ILotusModelSelected selectedItem)
                         {
-                            selected_item.SetModelSelected(_arrayOfItems[_selectedIndex]!, false);
+                            selectedItem.SetModelSelected(_arrayOfItems[_selectedIndex]!, false);
                         }
                     }
                 }
@@ -1157,17 +1157,17 @@ namespace Lotus.Core
                 // Выключенный элемент выбрать нельзя
                 if (IsSupportModelSelected)
                 {
-                    var selected_item = _arrayOfItems[index]?.Model as ILotusModelSelected;
-                    if (selected_item != null && selected_item.CanModelSelected(_arrayOfItems[index]!) == false)
+                    var selectedItem = _arrayOfItems[index]?.Model as ILotusModelSelected;
+                    if (selectedItem != null && selectedItem.CanModelSelected(_arrayOfItems[index]!) == false)
                     {
                         return;
                     }
                 }
 
-                var old_index = _selectedIndex;
+                var oldIndex = _selectedIndex;
 
                 // Если выбран другой элемент
-                if (old_index != index)
+                if (oldIndex != index)
                 {
                     // Сохраняем старый выбор
                     _prevSelectedIndex = _selectedIndex;
@@ -1179,9 +1179,9 @@ namespace Lotus.Core
                         // Обновляем статус
                         if (IsSupportModelSelected)
                         {
-                            if (_arrayOfItems[_selectedIndex]?.Model is ILotusModelSelected selected_item)
+                            if (_arrayOfItems[_selectedIndex]?.Model is ILotusModelSelected selectedItem)
                             {
-                                selected_item.SetModelSelected(_arrayOfItems[_selectedIndex]!, true);
+                                selectedItem.SetModelSelected(_arrayOfItems[_selectedIndex]!, true);
                             }
                         }
 
@@ -1191,9 +1191,9 @@ namespace Lotus.Core
                             // Если нет мульти выбора
                             if (IsSupportModelSelected && _isEnabledUnselectingItem)
                             {
-                                if (_arrayOfItems[_prevSelectedIndex]?.Model is ILotusModelSelected prev_selected_item)
+                                if (_arrayOfItems[_prevSelectedIndex]?.Model is ILotusModelSelected prevSelectedItem)
                                 {
-                                    prev_selected_item.SetModelSelected(_arrayOfItems[_prevSelectedIndex]!, false);
+                                    prevSelectedItem.SetModelSelected(_arrayOfItems[_prevSelectedIndex]!, false);
                                 }
                             }
                         }
@@ -1221,9 +1221,9 @@ namespace Lotus.Core
                                 // Убираем выделение
                                 if (IsSupportModelSelected && _isEnabledUnselectingItem)
                                 {
-                                    if (_arrayOfItems[index]?.Model is ILotusModelSelected selected_item)
+                                    if (_arrayOfItems[index]?.Model is ILotusModelSelected selectedItem)
                                     {
-                                        selected_item.SetModelSelected(_arrayOfItems[index]!, false);
+                                        selectedItem.SetModelSelected(_arrayOfItems[index]!, false);
                                     }
                                 }
 
@@ -1251,9 +1251,9 @@ namespace Lotus.Core
                         // Выделяем элемент
                         if (IsSupportModelSelected)
                         {
-                            if (_arrayOfItems[index]?.Model is ILotusModelSelected selected_item)
+                            if (_arrayOfItems[index]?.Model is ILotusModelSelected selectedItem)
                             {
-                                selected_item.SetModelSelected(_arrayOfItems[index]!, true);
+                                selectedItem.SetModelSelected(_arrayOfItems[index]!, true);
                             }
                         }
 
@@ -1356,35 +1356,35 @@ namespace Lotus.Core
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        var new_models = args.NewItems;
-                        if (new_models != null && new_models.Count > 0)
+                        var newModels = args.NewItems;
+                        if (newModels != null && newModels.Count > 0)
                         {
-                            for (var i = 0; i < new_models.Count; i++)
+                            for (var i = 0; i < newModels.Count; i++)
                             {
                                 // Проверяем на дубликаты
-                                var is_dublicate = false;
+                                var isDublicate = false;
                                 for (var j = 0; j < Count; j++)
                                 {
-                                    if (_arrayOfItems[j]!.Model == new_models[i])
+                                    if (_arrayOfItems[j]!.Model == newModels[i])
                                     {
-                                        is_dublicate = true;
+                                        isDublicate = true;
                                         break;
                                     }
                                 }
 
-                                if (is_dublicate == false)
+                                if (isDublicate == false)
                                 {
-                                    var model = new_models[i] as TModel;
-                                    var view_model = CreateViewModel(model!);
-                                    view_model.IOwner = this;
+                                    var model = newModels[i] as TModel;
+                                    var viewModel = CreateViewModel(model!);
+                                    viewModel.IOwner = this;
 
-                                    if (model is ILotusViewModelOwner view_item_owner)
+                                    if (model is ILotusViewModelOwner viewItemOwner)
                                     {
-                                        view_item_owner.OwnerViewModel = view_model;
+                                        viewItemOwner.OwnerViewModel = viewModel;
                                     }
 
                                     // Добавляем
-                                    this.Add(view_model);
+                                    this.Add(viewModel);
                                 }
                             }
                         }
@@ -1392,22 +1392,22 @@ namespace Lotus.Core
                     break;
                 case NotifyCollectionChangedAction.Move:
                     {
-                        var old_index = args.OldStartingIndex;
-                        var new_index = args.NewStartingIndex;
-                        Move(old_index, new_index);
+                        var oldIndex = args.OldStartingIndex;
+                        var newIndex = args.NewStartingIndex;
+                        Move(oldIndex, newIndex);
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     {
-                        var old_models = args.OldItems;
-                        if (old_models != null && old_models.Count > 0)
+                        var oldModels = args.OldItems;
+                        if (oldModels != null && oldModels.Count > 0)
                         {
-                            for (var i = 0; i < old_models.Count; i++)
+                            for (var i = 0; i < oldModels.Count; i++)
                             {
-                                var model = old_models[i] as TModel;
+                                var model = oldModels[i] as TModel;
 
                                 // Находим элемент с данным контекстом
-                                ILotusViewModel? view_model = this.Search((item) =>
+                                ILotusViewModel? viewModel = this.Search((item) =>
                                 {
                                     if (Object.ReferenceEquals(item?.Model, model))
                                     {
@@ -1419,9 +1419,9 @@ namespace Lotus.Core
                                     }
                                 });
 
-                                if (view_model != null)
+                                if (viewModel != null)
                                 {
-                                    this.Remove(view_model);
+                                    this.Remove(viewModel);
                                 }
                             }
                         }

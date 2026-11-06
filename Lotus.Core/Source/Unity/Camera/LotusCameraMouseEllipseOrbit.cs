@@ -1,4 +1,4 @@
-﻿#if UNITY_2017_1_OR_NEWER
+#if UNITY_2017_1_OR_NEWER
 using System;
 
 using UnityEngine;
@@ -390,8 +390,8 @@ namespace Lotus.Core
                 var rotation = Quaternion.Euler(y, _angleX, 0);
                 transform.rotation = rotation;
 
-                Vector3 target_dir = transform.position - _target.position;
-                var angle = Vector3.Angle(target_dir, _target.forward);
+                Vector3 targetDir = transform.position - _target.position;
+                var angle = Vector3.Angle(targetDir, _target.forward);
                 var numerator = Mathf.Pow(_radiusEllipseA, 2) * Mathf.Pow(_radiusEllipseB, 2);
 
                 var denominator = (Mathf.Pow(_radiusEllipseA, 2) * Mathf.Pow(Mathf.Sin(angle * Mathf.Deg2Rad), 2)) +

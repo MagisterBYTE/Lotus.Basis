@@ -2,6 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Lotus.Core;
+
 namespace Lotus.Repository
 {
     /** \addtogroup RepositoryResourceFile

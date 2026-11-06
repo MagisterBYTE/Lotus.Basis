@@ -1,0 +1,50 @@
+\doxysubsection{Подсистема идентификаторов}
+\hypertarget{group___core_identifiers}{}\label{group___core_identifiers}\index{Подсистема идентификаторов@{Подсистема идентификаторов}}
+
+
+Подсистема идентификаторов определяет базовые понятия об идентификации и классы идентификации объектов.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier}{Lotus.\+Core.\+ILotus\+Identifier}}
+\begin{DoxyCompactList}\small\item\em Базовый интерфейс обозначающих что сущность поддерживает идентификацию. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_id}{Lotus.\+Core.\+ILotus\+Identifier\+Id$<$ TKey $>$}}
+\begin{DoxyCompactList}\small\item\em Определение шаблона интерфейса для идентификации сущности через уникальный идентификатор-\/ключ. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_global}{Lotus.\+Core.\+ILotus\+Identifier\+Global}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов реализующих идентификации через глобальный идентификатор. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_int}{Lotus.\+Core.\+ILotus\+Identifier\+Int}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов реализующих идентификации через уникальный числовой идентификатор. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_long}{Lotus.\+Core.\+ILotus\+Identifier\+Long}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов реализующих идентификации через уникальный числовой идентификатор. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable}{Lotus.\+Core.\+ILotus\+Nameable}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов реализующих понятие имени. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_identifier_dto_id}{Lotus.\+Core.\+Identifier\+Dto\+Id$<$ TKey $>$}}
+\begin{DoxyCompactList}\small\item\em Шаблонный класс для простых сущностей поддерживающих идентификатор. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_identifier_dto_int}{Lotus.\+Core.\+Identifier\+Dto\+Int}}
+\begin{DoxyCompactList}\small\item\em Базовый класс для простых сущностей реализующий идентификацию через уникальный числовой идентификатор. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_identifier_dto_long}{Lotus.\+Core.\+Identifier\+Dto\+Long}}
+\begin{DoxyCompactList}\small\item\em Базовый класс для простых сущностей реализующий идентификацию через уникальный числовой идентификатор. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_identifier_dto_guid}{Lotus.\+Core.\+Identifier\+Dto\+Guid}}
+\begin{DoxyCompactList}\small\item\em Базовый класс для простых сущностей реализующий идентификацию через глобальный идентификатор. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XGenerate\+Id}
+\begin{DoxyCompactList}\small\item\em Статический класс реализующий работу генерации идентификаторов и уникальных значений. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_identifier_id}{Lotus.\+Core.\+Identifier\+Id$<$ TKey $>$}}
+\begin{DoxyCompactList}\small\item\em Шаблонный класс для сущностей поддерживающих идентификатор. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_identifier_int}{Lotus.\+Core.\+Identifier\+Int}}
+\begin{DoxyCompactList}\small\item\em Базовый класс реализующий идентификацию через уникальный числовой идентификатор. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_identifier_long}{Lotus.\+Core.\+Identifier\+Long}}
+\begin{DoxyCompactList}\small\item\em Базовый класс реализующий идентификацию через уникальный числовой идентификатор. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_identifier_guid}{Lotus.\+Core.\+Identifier\+Guid}}
+\begin{DoxyCompactList}\small\item\em Базовый класс реализующий идентификацию через глобальный идентификатор. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable}{Lotus.\+Core.\+Nameable}}
+\begin{DoxyCompactList}\small\item\em Базовый класс реализующий имя объекта. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_nameable_int}{Lotus.\+Core.\+Nameable\+Int}}
+\begin{DoxyCompactList}\small\item\em Базовый класс реализующий имя объекта и уникальный числовой идентификатор. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема идентификаторов определяет базовые понятия об идентификации и классы идентификации объектов. 
+
+Под идентификацией объекта понимается наличие у сущности определённого уникального идентификатора по которому ее возможно однозначно найти или получить в определённом контексте.

@@ -1407,45 +1407,45 @@ namespace Lotus.Maths
 		/// <summary>
 		/// Проверка пересечения двух лучей.
 		/// </summary>
-		/// <param name="ray_pos_1">Позиция первого луча.</param>
-		/// <param name="ray_dir_1">Направление первого луча.</param>
-		/// <param name="ray_pos_2">Позиция второго луча.</param>
-		/// <param name="ray_dir_2">Направление второго луча.</param>
+		/// <param name="rayPos1">Позиция первого луча.</param>
+		/// <param name="rayDir1">Направление первого луча.</param>
+		/// <param name="rayPos2">Позиция второго луча.</param>
+		/// <param name="rayDir2">Направление второго луча.</param>
 		/// <param name="hit">Информация о пересечении.</param>
 		/// <returns>Тип пересечения.</returns>
-		public static TIntersectType2D RayToRay(UnityEngine.Vector2 ray_pos_1, UnityEngine.Vector2 ray_dir_1,
-			UnityEngine.Vector2 ray_pos_2, UnityEngine.Vector2 ray_dir_2, ref TIntersectHit2Df hit)
+		public static TIntersectType2D RayToRay(UnityEngine.Vector2 rayPos1, UnityEngine.Vector2 rayDir1,
+			UnityEngine.Vector2 rayPos2, UnityEngine.Vector2 rayDir2, ref TIntersectHit2Df hit)
 		{
-			return RayToRay(in ray_pos_1, in ray_dir_1, in ray_pos_2, in ray_dir_2, ref hit);
+			return RayToRay(in rayPos1, in rayDir1, in rayPos2, in rayDir2, ref hit);
 		}
 
 		/// <summary>
 		/// Проверка пересечения двух лучей.
 		/// </summary>
-		/// <param name="ray_pos_1">Позиция первого луча.</param>
-		/// <param name="ray_dir_1">Направление первого луча.</param>
-		/// <param name="ray_pos_2">Позиция второго луча.</param>
-		/// <param name="ray_dir_2">Направление второго луча.</param>
+		/// <param name="rayPos1">Позиция первого луча.</param>
+		/// <param name="rayDir1">Направление первого луча.</param>
+		/// <param name="rayPos2">Позиция второго луча.</param>
+		/// <param name="rayDir2">Направление второго луча.</param>
 		/// <param name="hit">Информация о пересечении.</param>
 		/// <returns>Тип пересечения.</returns>
-		public static TIntersectType2D RayToRay(in UnityEngine.Vector2 ray_pos_1, in UnityEngine.Vector2 ray_dir_1,
-			in UnityEngine.Vector2 ray_pos_2, in UnityEngine.Vector2 ray_dir_2, ref TIntersectHit2Df hit)
+		public static TIntersectType2D RayToRay(in UnityEngine.Vector2 rayPos1, in UnityEngine.Vector2 rayDir1,
+			in UnityEngine.Vector2 rayPos2, in UnityEngine.Vector2 rayDir2, ref TIntersectHit2Df hit)
 		{
-			UnityEngine.Vector2 diff = ray_pos_2 - ray_pos_1;
+			UnityEngine.Vector2 diff = rayPos2 - rayPos1;
 
-			var dotPerpD1D2 = ray_dir_1.DotPerp(in ray_dir_2);
+			var dotPerpD1D2 = rayDir1.DotPerp(in rayDir2);
 
 			if (Math.Abs(dotPerpD1D2) > XGeometry2D.Epsilon_f)
 			{
 				// Segments intersect in a single point.
 				var invDotPerpD1D2 = 1 / dotPerpD1D2;
 
-				var diffDotPerpD1 = diff.DotPerp(in ray_dir_1);
-				var diffDotPerpD2 = diff.DotPerp(in ray_dir_2);
+				var diffDotPerpD1 = diff.DotPerp(in rayDir1);
+				var diffDotPerpD2 = diff.DotPerp(in rayDir2);
 
 				hit.Distance1 = diffDotPerpD2 * invDotPerpD1D2;
 				hit.Distance2 = diffDotPerpD1 * invDotPerpD1D2;
-				UnityEngine.Vector2 p1 = ray_pos_1 + (ray_dir_1 * hit.Distance1);
+				UnityEngine.Vector2 p1 = rayPos1 + (rayDir1 * hit.Distance1);
 				hit.Point1 = new Vector2Df(p1.x, p1.y);
 				if (hit.Distance1 > 0 && hit.Distance2 > 0)
 				{
@@ -1460,7 +1460,7 @@ namespace Lotus.Maths
 
 			// Segments are parallel
 			diff.Normalize();
-			var diffDotPerpDir2 = diff.DotPerp(in ray_dir_2);
+			var diffDotPerpDir2 = diff.DotPerp(in rayDir2);
 			if (Math.Abs(diffDotPerpDir2) <= XGeometry2D.Epsilon_f)
 			{
 				// Segments are colinear
@@ -1473,40 +1473,40 @@ namespace Lotus.Maths
 		/// <summary>
 		/// Проверка пересечения двух лучей.
 		/// </summary>
-		/// <param name="ray_pos_1">Позиция первого луча.</param>
-		/// <param name="ray_dir_1">Направление первого луча.</param>
-		/// <param name="ray_pos_2">Позиция второго луча.</param>
-		/// <param name="ray_dir_2">Направление второго луча.</param>
+		/// <param name="rayPos1">Позиция первого луча.</param>
+		/// <param name="rayDir1">Направление первого луча.</param>
+		/// <param name="rayPos2">Позиция второго луча.</param>
+		/// <param name="rayDir2">Направление второго луча.</param>
 		/// <param name="hit">Информация о пересечении.</param>
 		/// <returns>Статус пересечения.</returns>
-		public static Boolean RayToRay(UnityEngine.Vector2 ray_pos_1, UnityEngine.Vector2 ray_dir_1,
-			UnityEngine.Vector2 ray_pos_2, UnityEngine.Vector2 ray_dir_2)
+		public static Boolean RayToRay(UnityEngine.Vector2 rayPos1, UnityEngine.Vector2 rayDir1,
+			UnityEngine.Vector2 rayPos2, UnityEngine.Vector2 rayDir2)
 		{
-			return RayToRay(in ray_pos_1, in ray_dir_1, in ray_pos_2, in ray_dir_2);
+			return RayToRay(in rayPos1, in rayDir1, in rayPos2, in rayDir2);
 		}
 
 		/// <summary>
 		/// Проверка пересечения двух лучей.
 		/// </summary>
-		/// <param name="ray_pos_1">Позиция первого луча.</param>
-		/// <param name="ray_dir_1">Направление первого луча.</param>
-		/// <param name="ray_pos_2">Позиция второго луча.</param>
-		/// <param name="ray_dir_2">Направление второго луча.</param>
+		/// <param name="rayPos1">Позиция первого луча.</param>
+		/// <param name="rayDir1">Направление первого луча.</param>
+		/// <param name="rayPos2">Позиция второго луча.</param>
+		/// <param name="rayDir2">Направление второго луча.</param>
 		/// <param name="hit">Информация о пересечении.</param>
 		/// <returns>Статус пересечения.</returns>
-		public static Boolean RayToRay(in UnityEngine.Vector2 ray_pos_1, in UnityEngine.Vector2 ray_dir_1,
-			in UnityEngine.Vector2 ray_pos_2, in UnityEngine.Vector2 ray_dir_2)
+		public static Boolean RayToRay(in UnityEngine.Vector2 rayPos1, in UnityEngine.Vector2 rayDir1,
+			in UnityEngine.Vector2 rayPos2, in UnityEngine.Vector2 rayDir2)
 		{
-			UnityEngine.Vector2 diff = ray_pos_2 - ray_pos_1;
-			var dotPerpD1D2 = ray_dir_1.DotPerp(in ray_dir_2);
+			UnityEngine.Vector2 diff = rayPos2 - rayPos1;
+			var dotPerpD1D2 = rayDir1.DotPerp(in rayDir2);
 
 			if (Math.Abs(dotPerpD1D2) > XGeometry2D.Epsilon_f)
 			{
 				// Segments intersect in a single point.
 				var invDotPerpD1D2 = 1.0f / dotPerpD1D2;
 
-				var diffDotPerpD1 = diff.DotPerp(in ray_dir_1);
-				var diffDotPerpD2 = diff.DotPerp(in ray_dir_2);
+				var diffDotPerpD1 = diff.DotPerp(in rayDir1);
+				var diffDotPerpD2 = diff.DotPerp(in rayDir2);
 
 				var distance1 = diffDotPerpD2 * invDotPerpD1D2;
 				var distance2 = diffDotPerpD1 * invDotPerpD1D2;
@@ -1918,39 +1918,39 @@ namespace Lotus.Maths
 		/// <summary>
 		/// Проверка пересечения двух отрезков.
 		/// </summary>
-		/// <param name="start_1">Начало первого отрезка.</param>
-		/// <param name="end_1">Конец первого отрезка.</param>
-		/// <param name="start_2">Начало второго отрезка.</param>
-		/// <param name="end_2">Конец второго отрезка.</param>
+		/// <param name="start1">Начало первого отрезка.</param>
+		/// <param name="end1">Конец первого отрезка.</param>
+		/// <param name="start2">Начало второго отрезка.</param>
+		/// <param name="end2">Конец второго отрезка.</param>
 		/// <returns>Статус пересечения.</returns>
-		public static Boolean SegmentToSegment(UnityEngine.Vector2 start_1, UnityEngine.Vector2 end_1,
-			UnityEngine.Vector2 start_2, UnityEngine.Vector2 end_2)
+		public static Boolean SegmentToSegment(UnityEngine.Vector2 start1, UnityEngine.Vector2 end1,
+			UnityEngine.Vector2 start2, UnityEngine.Vector2 end2)
 		{
-			return SegmentToSegment(in start_1, in end_1, in start_2, in end_2);
+			return SegmentToSegment(in start1, in end1, in start2, in end2);
 		}
 
 		/// <summary>
 		/// Проверка пересечения двух отрезков.
 		/// </summary>
-		/// <param name="start_1">Начало первого отрезка.</param>
-		/// <param name="end_1">Конец первого отрезка.</param>
-		/// <param name="start_2">Начало второго отрезка.</param>
-		/// <param name="end_2">Конец второго отрезка.</param>
+		/// <param name="start1">Начало первого отрезка.</param>
+		/// <param name="end1">Конец первого отрезка.</param>
+		/// <param name="start2">Начало второго отрезка.</param>
+		/// <param name="end2">Конец второго отрезка.</param>
 		/// <returns>Статус пересечения.</returns>
-		public static Boolean SegmentToSegment(in UnityEngine.Vector2 start_1, in UnityEngine.Vector2 end_1,
-			in UnityEngine.Vector2 start_2, in UnityEngine.Vector2 end_2)
+		public static Boolean SegmentToSegment(in UnityEngine.Vector2 start1, in UnityEngine.Vector2 end1,
+			in UnityEngine.Vector2 start2, in UnityEngine.Vector2 end2)
 		{
-			var x1 = start_1.x;
-			var y1 = start_1.y;
+			var x1 = start1.x;
+			var y1 = start1.y;
 
-			var x2 = end_1.x;
-			var y2 = end_1.y;
+			var x2 = end1.x;
+			var y2 = end1.y;
 
-			var x3 = start_2.x;
-			var y3 = start_2.y;
+			var x3 = start2.x;
+			var y3 = start2.y;
 
-			var x4 = end_2.x;
-			var y4 = end_2.y;
+			var x4 = end2.x;
+			var y4 = end2.y;
 
 			// Проверяем параллельность
 			var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
@@ -1992,26 +1992,26 @@ namespace Lotus.Maths
 		/// <summary>
 		/// Проверка пересечения двух отрезков.
 		/// </summary>
-		/// <param name="start_1">Начало первого отрезка.</param>
-		/// <param name="end_1">Конец первого отрезка.</param>
-		/// <param name="start_2">Начало второго отрезка.</param>
-		/// <param name="end_2">Конец второго отрезка.</param>
+		/// <param name="start1">Начало первого отрезка.</param>
+		/// <param name="end1">Конец первого отрезка.</param>
+		/// <param name="start2">Начало второго отрезка.</param>
+		/// <param name="end2">Конец второго отрезка.</param>
 		/// <param name="hit">Информация о пересечении.</param>
 		/// <returns>Статус пересечения.</returns>
-		public static TIntersectType2D SegmentToSegment(in UnityEngine.Vector2 start_1, in UnityEngine.Vector2 end_1,
-			in UnityEngine.Vector2 start_2, in UnityEngine.Vector2 end_2, ref TIntersectHit2Df hit)
+		public static TIntersectType2D SegmentToSegment(in UnityEngine.Vector2 start1, in UnityEngine.Vector2 end1,
+			in UnityEngine.Vector2 start2, in UnityEngine.Vector2 end2, ref TIntersectHit2Df hit)
 		{
-			var x1 = start_1.x;
-			var y1 = start_1.y;
+			var x1 = start1.x;
+			var y1 = start1.y;
 
-			var x2 = end_1.x;
-			var y2 = end_1.y;
+			var x2 = end1.x;
+			var y2 = end1.y;
 
-			var x3 = start_2.x;
-			var y3 = start_2.y;
+			var x3 = start2.x;
+			var y3 = start2.y;
 
-			var x4 = end_2.x;
-			var y4 = end_2.y;
+			var x4 = end2.x;
+			var y4 = end2.y;
 
 			// Проверяем параллельность
 			var d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
@@ -2215,24 +2215,24 @@ namespace Lotus.Maths
         /// <summary>
         /// Проверка пересечения двух отрезков.
         /// </summary>
-        /// <param name="left_a">Начало первого отрезка.</param>
-        /// <param name="left_b">Конец первого отрезка.</param>
-        /// <param name="sqr_left_length">Квадрат длины первого отрезка.</param>
-        /// <param name="right_a">Начало второго отрезка.</param>
-        /// <param name="right_b">Конец второго отрезка.</param>
+        /// <param name="leftA">Начало первого отрезка.</param>
+        /// <param name="leftB">Конец первого отрезка.</param>
+        /// <param name="sqrLeftLength">Квадрат длины первого отрезка.</param>
+        /// <param name="rightA">Начало второго отрезка.</param>
+        /// <param name="rightB">Конец второго отрезка.</param>
         /// <param name="hit">Информация о пересечении.</param>
         /// <returns>Статус пересечения.</returns>
-        private static bool SegmentSegmentCollinear(in Vector2Df left_a, in Vector2Df left_b, float sqr_left_length,
-            in Vector2Df right_a, in Vector2Df right_b, out TIntersectHit2Df hit)
+        private static bool SegmentSegmentCollinear(in Vector2Df leftA, in Vector2Df leftB, float sqrLeftLength,
+            in Vector2Df rightA, in Vector2Df rightB, out TIntersectHit2Df hit)
         {
-            var leftDirection = left_b - left_a;
-            var rightAProjection = Vector2Df.Dot(in leftDirection, right_a - left_b);
+            var leftDirection = leftB - leftA;
+            var rightAProjection = Vector2Df.Dot(in leftDirection, rightA - leftB);
             if (Math.Abs(rightAProjection) < XGeometry2D.Epsilon_f)
             {
                 // LB == RA
                 // LA------LB
                 //         RA------RB
-                hit = TIntersectHit2Df.Point(left_b);
+                hit = TIntersectHit2Df.Point(leftB);
                 return true;
             }
             if (rightAProjection < 0)
@@ -2243,16 +2243,16 @@ namespace Lotus.Maths
                 //     RA--RB
                 //     RA------RB
                 Vector2Df pointB;
-                var rightBProjection = Vector2Df.Dot(in leftDirection, right_b - left_a);
-                if (rightBProjection > sqr_left_length)
+                var rightBProjection = Vector2Df.Dot(in leftDirection, rightB - leftA);
+                if (rightBProjection > sqrLeftLength)
                 {
-                    pointB = left_b;
+                    pointB = leftB;
                 }
                 else
                 {
-                    pointB = right_b;
+                    pointB = rightB;
                 }
-                hit = TIntersectHit2Df.Segment(in right_a, in pointB);
+                hit = TIntersectHit2Df.Segment(in rightA, in pointB);
                 return true;
             }
             // LB < RA

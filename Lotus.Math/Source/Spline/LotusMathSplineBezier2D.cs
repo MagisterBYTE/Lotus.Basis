@@ -484,25 +484,25 @@ namespace Lotus.Maths
         /// <returns>Позиция точки на сплайне.</returns>
         public override Vector2Df CalculatePoint(float time)
         {
-            int index_curve;
+            int indexCurve;
             if (time >= 1f)
             {
                 time = 1f;
-                index_curve = _controlPoints.Length - 4;
+                indexCurve = _controlPoints.Length - 4;
             }
             else
             {
                 time = XMath.Clamp01(time) * CurveCount;
-                index_curve = (int)time;
-                time -= index_curve;
-                index_curve *= 3;
+                indexCurve = (int)time;
+                time -= indexCurve;
+                indexCurve *= 3;
             }
 
             var point = BezierCubic2D.CalculatePoint(time,
-                ref _controlPoints[index_curve],
-                ref _controlPoints[index_curve + 1],
-                ref _controlPoints[index_curve + 2],
-                ref _controlPoints[index_curve + 3]);
+                ref _controlPoints[indexCurve],
+                ref _controlPoints[indexCurve + 1],
+                ref _controlPoints[indexCurve + 2],
+                ref _controlPoints[indexCurve + 3]);
 
             return point;
         }

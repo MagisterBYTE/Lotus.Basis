@@ -1,0 +1,263 @@
+\doxysection{Lotus.\+Core.\+CMessage\+Args Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_message_args}{}\label{class_lotus_1_1_core_1_1_c_message_args}\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+
+
+Базовый класс для определения аргумента сообщения.  
+
+
+Inheritance diagram for Lotus.\+Core.\+CMessage\+Args\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_c_message_args}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a0b33f31d761520525e644199669361a9}\label{class_lotus_1_1_core_1_1_c_message_args_a0b33f31d761520525e644199669361a9} 
+{\bfseries CMessage\+Args} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_ae5b8e764665fa7df77ac0f18a214e72b}{CMessage\+Args}} (string name, bool is\+Pool=false)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_a33f05661cc7540ba8913b5aaab282c26}{CMessage\+Args}} (int id, bool is\+Pool=false)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_aac2940423b5876881aafed51bffe8c3b}{CMessage\+Args}} (string name, int id, bool is\+Pool=false)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_a8ad7c36170af34f1d7b00ebbfe65e194}{CMessage\+Args}} (string name, object sender, bool is\+Pool=false)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_a62aefebb5467beadb48f6c2c6598e31e}{CMessage\+Args}} (int id, object sender, bool is\+Pool=false)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_a4f3ec3b4323d3c0bbade149eb0555158}{CMessage\+Args}} (string name, int id, object sender, bool is\+Pool=false)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_ab33899640da4407001d061fbc3853017}{CMessage\+Args}} (bool is\+Pool)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_a6aff63897df592caf9d175fa17a58015}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_a07aaaaddfc1952e74598bc30631a66ee}{On\+Pool\+Take}} ()
+\begin{DoxyCompactList}\small\item\em Псевдо-\/конструктор. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_a9b93f197fdecfb8c4008f2db9102d665}{On\+Pool\+Release}} ()
+\begin{DoxyCompactList}\small\item\em Псевдо-\/деструктор. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_ab8e7e215206ba669282aed459b536404}\label{class_lotus_1_1_core_1_1_c_message_args_ab8e7e215206ba669282aed459b536404} 
+int {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Уникальный идентификатор сообщения. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_ad5365e2949e8716c42dddb5c4722fe04}\label{class_lotus_1_1_core_1_1_c_message_args_ad5365e2949e8716c42dddb5c4722fe04} 
+string {\bfseries Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Наименование сообщения. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a859bb84cd9dfb81743982cf0822dfac4}\label{class_lotus_1_1_core_1_1_c_message_args_a859bb84cd9dfb81743982cf0822dfac4} 
+object? {\bfseries Data}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Данные сообщения. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a793063e69dd85e291975f43bd1d9dd99}\label{class_lotus_1_1_core_1_1_c_message_args_a793063e69dd85e291975f43bd1d9dd99} 
+object? {\bfseries Sender}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Источник сообщения. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args_a353b849e7ab3834566cb2ca52d69f8b6}{Is\+Pool\+Object}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус объекта из пула. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_pool_object}{Lotus.\+Core.\+ILotus\+Pool\+Object}}}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_id}{Lotus.\+Core.\+ILotus\+Identifier\+Id$<$ int $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ключ сущности. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Базовый класс для определения аргумента сообщения. 
+
+Фактические данный класс реализует полноценное хранение данных о произошедшем событии, источники событии. Чтобы исключить накладные расходы связанные с фрагментацией памяти малыми объектами, объекты классы управляются через пул. Таким образом фактически происходит циркуляция сообщений в системе без существенных накладных затрат 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_ae5b8e764665fa7df77ac0f18a214e72b}\label{class_lotus_1_1_core_1_1_c_message_args_ae5b8e764665fa7df77ac0f18a214e72b} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!CMessageArgs@{CMessageArgs}}
+\index{CMessageArgs@{CMessageArgs}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{CMessageArgs()}{CMessageArgs()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CMessage\+Args.\+CMessage\+Args (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{bool}]{is\+Pool = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя сообщения.\\
+\hline
+{\em is\+Pool} & Статус размещения объекта в пуле.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a33f05661cc7540ba8913b5aaab282c26}\label{class_lotus_1_1_core_1_1_c_message_args_a33f05661cc7540ba8913b5aaab282c26} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!CMessageArgs@{CMessageArgs}}
+\index{CMessageArgs@{CMessageArgs}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{CMessageArgs()}{CMessageArgs()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CMessage\+Args.\+CMessage\+Args (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{bool}]{is\+Pool = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Уникальный идентификатор сообщения.\\
+\hline
+{\em is\+Pool} & Статус размещения объекта в пуле.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_aac2940423b5876881aafed51bffe8c3b}\label{class_lotus_1_1_core_1_1_c_message_args_aac2940423b5876881aafed51bffe8c3b} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!CMessageArgs@{CMessageArgs}}
+\index{CMessageArgs@{CMessageArgs}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{CMessageArgs()}{CMessageArgs()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CMessage\+Args.\+CMessage\+Args (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{int}]{id,  }\item[{bool}]{is\+Pool = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя сообщения.\\
+\hline
+{\em id} & Уникальный идентификатор сообщения.\\
+\hline
+{\em is\+Pool} & Статус размещения объекта в пуле.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a8ad7c36170af34f1d7b00ebbfe65e194}\label{class_lotus_1_1_core_1_1_c_message_args_a8ad7c36170af34f1d7b00ebbfe65e194} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!CMessageArgs@{CMessageArgs}}
+\index{CMessageArgs@{CMessageArgs}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{CMessageArgs()}{CMessageArgs()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CMessage\+Args.\+CMessage\+Args (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{object}]{sender,  }\item[{bool}]{is\+Pool = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя сообщения.\\
+\hline
+{\em sender} & Компонент -\/ источник события.\\
+\hline
+{\em is\+Pool} & Статус размещения объекта в пуле.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a62aefebb5467beadb48f6c2c6598e31e}\label{class_lotus_1_1_core_1_1_c_message_args_a62aefebb5467beadb48f6c2c6598e31e} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!CMessageArgs@{CMessageArgs}}
+\index{CMessageArgs@{CMessageArgs}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{CMessageArgs()}{CMessageArgs()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CMessage\+Args.\+CMessage\+Args (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{object}]{sender,  }\item[{bool}]{is\+Pool = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Уникальный идентификатор сообщения.\\
+\hline
+{\em sender} & Источник события.\\
+\hline
+{\em is\+Pool} & Статус размещения объекта в пуле.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a4f3ec3b4323d3c0bbade149eb0555158}\label{class_lotus_1_1_core_1_1_c_message_args_a4f3ec3b4323d3c0bbade149eb0555158} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!CMessageArgs@{CMessageArgs}}
+\index{CMessageArgs@{CMessageArgs}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{CMessageArgs()}{CMessageArgs()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CMessage\+Args.\+CMessage\+Args (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{int}]{id,  }\item[{object}]{sender,  }\item[{bool}]{is\+Pool = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя сообщения.\\
+\hline
+{\em id} & Уникальный идентификатор сообщения.\\
+\hline
+{\em sender} & Компонент -\/ источник события.\\
+\hline
+{\em is\+Pool} & Статус размещения объекта в пуле.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_ab33899640da4407001d061fbc3853017}\label{class_lotus_1_1_core_1_1_c_message_args_ab33899640da4407001d061fbc3853017} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!CMessageArgs@{CMessageArgs}}
+\index{CMessageArgs@{CMessageArgs}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{CMessageArgs()}{CMessageArgs()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CMessage\+Args.\+CMessage\+Args (\begin{DoxyParamCaption}\item[{bool}]{is\+Pool }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+Pool} & Статус размещения объекта в пуле.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a9b93f197fdecfb8c4008f2db9102d665}\label{class_lotus_1_1_core_1_1_c_message_args_a9b93f197fdecfb8c4008f2db9102d665} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!OnPoolRelease@{OnPoolRelease}}
+\index{OnPoolRelease@{OnPoolRelease}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{OnPoolRelease()}{OnPoolRelease()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+CMessage\+Args.\+On\+Pool\+Release (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Псевдо-\/деструктор. 
+
+Вызывается диспетчером пула в момент попадания объекта в пул. 
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_pool_object_a61ad5f273a195951b1592d637b4d27e1}{Lotus.\+Core.\+ILotus\+Pool\+Object}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a07aaaaddfc1952e74598bc30631a66ee}\label{class_lotus_1_1_core_1_1_c_message_args_a07aaaaddfc1952e74598bc30631a66ee} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!OnPoolTake@{OnPoolTake}}
+\index{OnPoolTake@{OnPoolTake}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{OnPoolTake()}{OnPoolTake()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+CMessage\+Args.\+On\+Pool\+Take (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Псевдо-\/конструктор. 
+
+Вызывается диспетчером пула в момент взятия объекта из пула. 
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_pool_object_a87f286533a4d9105fa84186e2560da0e}{Lotus.\+Core.\+ILotus\+Pool\+Object}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a6aff63897df592caf9d175fa17a58015}\label{class_lotus_1_1_core_1_1_c_message_args_a6aff63897df592caf9d175fa17a58015} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!ToString@{ToString}}
+\index{ToString@{ToString}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily override string Lotus.\+Core.\+CMessage\+Args.\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Преобразование к текстовому представлению. 
+
+\begin{DoxyReturn}{Returns}
+Текстовое представление сообщения.
+\end{DoxyReturn}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_message_args_a353b849e7ab3834566cb2ca52d69f8b6}\label{class_lotus_1_1_core_1_1_c_message_args_a353b849e7ab3834566cb2ca52d69f8b6} 
+\index{Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}!IsPoolObject@{IsPoolObject}}
+\index{IsPoolObject@{IsPoolObject}!Lotus.Core.CMessageArgs@{Lotus.Core.CMessageArgs}}
+\doxysubsubsection{\texorpdfstring{IsPoolObject}{IsPoolObject}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+CMessage\+Args.\+Is\+Pool\+Object\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Статус объекта из пула. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_pool_object_a88a9ed3ae6f22f604dfc569c7166e1bd}{Lotus.\+Core.\+ILotus\+Pool\+Object}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Message/Lotus\+Message\+Common.\+cs\end{DoxyCompactItemize}

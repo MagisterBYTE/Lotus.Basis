@@ -1,0 +1,134 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Tree\+Node Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_tree_node}{}\label{interface_lotus_1_1_core_1_1_i_lotus_tree_node}\index{Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}}
+
+
+Определение интерфейса узла дерева.  
+
+
+Inheritance diagram for Lotus.\+Core.\+ILotus\+Tree\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.876712cm]{interface_lotus_1_1_core_1_1_i_lotus_tree_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a75f1aa131902364898a476a8bf68da18}{Is\+Selected}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус выбора узла. \end{DoxyCompactList}\item 
+bool? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node_adef9ac915da28d9cfdf85ad7da0ae397}{Is\+Checked}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус выбора узла флажком. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node_ae24784db7df373f83d92e6889fffa16c}{Is\+Expanded}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус раскрытия узла. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a94454901e2a76908ed6cb7010beb8326}{Order}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Порядок следования узла(индекс его расположения). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node}{ILotus\+Tree\+Node}}? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a01b13439659ddbe9a59acd7e4ea81932}{IParent\+Tree\+Node}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Родительский узел. \end{DoxyCompactList}\item 
+IEnumerable$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node}{ILotus\+Tree\+Node}} $>$? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a8765dd0e4c255b79d1b111e7bac0938f}{IChild\+Nodes}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список дочерних узлов. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_identifier_id}{Lotus.\+Core.\+ILotus\+Identifier\+Id$<$ Guid $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___core_common_types_ga5bba2c831ffe8257bbebb01ef844f9df}{TKey}} {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ключ сущности. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_check_one}{Lotus.\+Core.\+ILotus\+Check\+One$<$ ILotus\+Tree\+Node $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_check_one_a92964ee187ee3d4bdf24c985bcec6463}{Check\+One}} (Predicate$<$ TType?$>$ match)
+\begin{DoxyCompactList}\small\item\em Проверка объекта на удовлетворение указанного предиката. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Определение интерфейса узла дерева. 
+
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a8765dd0e4c255b79d1b111e7bac0938f}\label{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a8765dd0e4c255b79d1b111e7bac0938f} 
+\index{Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}!IChildNodes@{IChildNodes}}
+\index{IChildNodes@{IChildNodes}!Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}}
+\doxysubsubsection{\texorpdfstring{IChildNodes}{IChildNodes}}
+{\footnotesize\ttfamily IEnumerable$<$\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node}{ILotus\+Tree\+Node}}$>$? Lotus.\+Core.\+ILotus\+Tree\+Node.\+IChild\+Nodes\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Список дочерних узлов. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_tree_node_observable_acd5216bbfdcd9b3b3d47a4176a84ef6e}{Lotus.\+Core.\+Tree\+Node\+Observable}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a01b13439659ddbe9a59acd7e4ea81932}\label{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a01b13439659ddbe9a59acd7e4ea81932} 
+\index{Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}!IParentTreeNode@{IParentTreeNode}}
+\index{IParentTreeNode@{IParentTreeNode}!Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}}
+\doxysubsubsection{\texorpdfstring{IParentTreeNode}{IParentTreeNode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_tree_node}{ILotus\+Tree\+Node}}? Lotus.\+Core.\+ILotus\+Tree\+Node.\+IParent\+Tree\+Node\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Родительский узел. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_tree_node_observable_a8bf2b4c7bf07737529c215d13f15d392}{Lotus.\+Core.\+Tree\+Node\+Observable}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_tree_node_adef9ac915da28d9cfdf85ad7da0ae397}\label{interface_lotus_1_1_core_1_1_i_lotus_tree_node_adef9ac915da28d9cfdf85ad7da0ae397} 
+\index{Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}!IsChecked@{IsChecked}}
+\index{IsChecked@{IsChecked}!Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}}
+\doxysubsubsection{\texorpdfstring{IsChecked}{IsChecked}}
+{\footnotesize\ttfamily bool? Lotus.\+Core.\+ILotus\+Tree\+Node.\+Is\+Checked\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Статус выбора узла флажком. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_tree_node_observable_a86c01326f3aca690a8c8b9722c8d205e}{Lotus.\+Core.\+Tree\+Node\+Observable}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_tree_node_ae24784db7df373f83d92e6889fffa16c}\label{interface_lotus_1_1_core_1_1_i_lotus_tree_node_ae24784db7df373f83d92e6889fffa16c} 
+\index{Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}!IsExpanded@{IsExpanded}}
+\index{IsExpanded@{IsExpanded}!Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}}
+\doxysubsubsection{\texorpdfstring{IsExpanded}{IsExpanded}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+ILotus\+Tree\+Node.\+Is\+Expanded\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Статус раскрытия узла. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_tree_node_observable_aa538b3954ef0f996e1ed70b373db1d37}{Lotus.\+Core.\+Tree\+Node\+Observable}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a75f1aa131902364898a476a8bf68da18}\label{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a75f1aa131902364898a476a8bf68da18} 
+\index{Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}!IsSelected@{IsSelected}}
+\index{IsSelected@{IsSelected}!Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}}
+\doxysubsubsection{\texorpdfstring{IsSelected}{IsSelected}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+ILotus\+Tree\+Node.\+Is\+Selected\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Статус выбора узла. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_tree_node_observable_a96bea808dda7f1fb112440c5c067e1d2}{Lotus.\+Core.\+Tree\+Node\+Observable}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a94454901e2a76908ed6cb7010beb8326}\label{interface_lotus_1_1_core_1_1_i_lotus_tree_node_a94454901e2a76908ed6cb7010beb8326} 
+\index{Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}!Order@{Order}}
+\index{Order@{Order}!Lotus.Core.ILotusTreeNode@{Lotus.Core.ILotusTreeNode}}
+\doxysubsubsection{\texorpdfstring{Order}{Order}}
+{\footnotesize\ttfamily int Lotus.\+Core.\+ILotus\+Tree\+Node.\+Order\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Порядок следования узла(индекс его расположения). 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_tree_node_observable_aae2f815e2d43d75bfeb9be20d98141dc}{Lotus.\+Core.\+Tree\+Node\+Observable}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Tree/ITree\+Node.\+cs\end{DoxyCompactItemize}

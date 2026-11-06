@@ -1,0 +1,55 @@
+\doxysubsection{Подсистема интерфейсов}
+\hypertarget{group___core_interfaces}{}\label{group___core_interfaces}\index{Подсистема интерфейсов@{Подсистема интерфейсов}}
+
+
+Подсистема интерфейсов содержит базовые интерфейсы которые определяют различные аспекты работы с объектами.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_check_all}{Lotus.\+Core.\+ILotus\+Check\+All$<$ out TType $>$}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов поддерживающих проверку. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_check_one}{Lotus.\+Core.\+ILotus\+Check\+One$<$ out TType $>$}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов поддерживающих проверку. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_visit}{Lotus.\+Core.\+ILotus\+Visit$<$ out TType $>$}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов поддерживающих посещение посетителем. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_indexable}{Lotus.\+Core.\+ILotus\+Indexable}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов реализующих понятие индекса. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_constantable}{Lotus.\+Core.\+ILotus\+Constantable}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов поддерживающих понятие неизменяемости (константности). \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_not_calculation}{Lotus.\+Core.\+ILotus\+Not\+Calculation}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов которые могут не участвовать в расчетах. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_verified}{Lotus.\+Core.\+ILotus\+Verified}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов которые поддерживают верификацию данных. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{Lotus.\+Core.\+ILotus\+Owner\+Object}}
+\begin{DoxyCompactList}\small\item\em Базовый интерфейс реализующий понятие владельца. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_owner_object}{Lotus.\+Core.\+COwner\+Object}}
+\begin{DoxyCompactList}\small\item\em Базовый класс реализующий понятие владельца. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{Lotus.\+Core.\+ILotus\+Owned\+Object$<$ TOwner $>$}}
+\begin{DoxyCompactList}\small\item\em Интерфейс объекта которым владеют. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_owned_object}{Lotus.\+Core.\+COwned\+Object}}
+\begin{DoxyCompactList}\small\item\em Базовый класс реализующий объект которым владеют. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_owned_object}{Lotus.\+Core.\+Owned\+Object$<$ TOwner $>$}}
+\begin{DoxyCompactList}\small\item\em Шаблон объекта которым владеет определенный тип владельца. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_adapter}{Lotus.\+Core.\+ILotus\+Adapter}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов поддерживающих адаптацию к указанному типу. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_duplicate}{Lotus.\+Core.\+ILotus\+Duplicate$<$ out TType $>$}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов поддерживающих дублирование. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_discriminator}{Lotus.\+Core.\+ILotus\+Discriminator}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для идентификации типов объектов которые поддерживают иерархию. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_copy_parameters}{Lotus.\+Core.\+ILotus\+Copy\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для объектов поддерживающих копирование параметров с других объектов. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_before_load}{Lotus.\+Core.\+ILotus\+Before\+Load}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для информирование о начале процесса загрузки. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_after_load}{Lotus.\+Core.\+ILotus\+After\+Load}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для информирование о завершении процесса загрузки. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_before_save}{Lotus.\+Core.\+ILotus\+Before\+Save}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для информирование о начале процесса сохранения. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_after_save}{Lotus.\+Core.\+ILotus\+After\+Save}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для информирование о завершении процесса сохранения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема интерфейсов содержит базовые интерфейсы которые определяют различные аспекты работы с объектами. 
+

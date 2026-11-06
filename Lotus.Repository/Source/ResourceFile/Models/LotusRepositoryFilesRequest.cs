@@ -1,5 +1,7 @@
 using System;
 
+using Lotus.Core;
+
 namespace Lotus.Repository
 {
     /** \addtogroup RepositoryResourceFile

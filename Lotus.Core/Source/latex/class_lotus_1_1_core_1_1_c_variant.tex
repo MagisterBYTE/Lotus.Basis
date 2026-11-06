@@ -1,0 +1,325 @@
+\doxysection{Lotus.\+Core.\+CVariant Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_variant}{}\label{class_lotus_1_1_core_1_1_c_variant}\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+
+
+Универсальный тип данных.  
+
+
+Inheritance diagram for Lotus.\+Core.\+CVariant\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.113208cm]{class_lotus_1_1_core_1_1_c_variant}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a4a26b12f4172b3d15f2d424c5e1e8dc4}\label{class_lotus_1_1_core_1_1_c_variant_a4a26b12f4172b3d15f2d424c5e1e8dc4} 
+{\bfseries CVariant} ()
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные универсального типа нулевыми значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_ae2b41c95150bedbcba6311d7f7c261c1}{CVariant}} (object obj)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует данные универсального типа указанным объектом. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a5f9028b26c7a7122b61cb877804b62f5}{Compare\+To}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant}{CVariant}}? other)
+\begin{DoxyCompactList}\small\item\em Сравнение универсальных типов данных для упорядочивания. \end{DoxyCompactList}\item 
+override int \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_afb688cf0297dc0c2fad23813efbec011}{Get\+Hash\+Code}} ()
+\begin{DoxyCompactList}\small\item\em Получение хеш-\/кода объекта универсального типа данных. \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_aa5184287e77cdf5d1e0434debb79875f}{Clone}} ()
+\begin{DoxyCompactList}\small\item\em Полное копирование объекта универсального типа данных. \end{DoxyCompactList}\item 
+override? string \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_aab852c77db18189d0f2a5b2b0e2b5b4d}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a124abef36040218acee57c247a7fc46b}{To\+String}} (string format)
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a8be0679cbebbe6eb99ba5f7267827405}{Set}} (object value)
+\begin{DoxyCompactList}\small\item\em Установка значения универсального типа данных. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a239f0aa0d37c873d4d9dde057a6255af}{Set}} (Type type)
+\begin{DoxyCompactList}\small\item\em Установка типа универсального типа данных. \end{DoxyCompactList}\item 
+object? \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_ae8f46563e1f6ac8f13009cec82c8e937}{Get}} ()
+\begin{DoxyCompactList}\small\item\em Получение значение соответствующего типа. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a42ae357da7c16f1eee936764d5c7ea71}{Get\+As\+String}} ()
+\begin{DoxyCompactList}\small\item\em Получение значение как строкового типа. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a597d142d76698d537ba55be5ba0fcbb3}\label{class_lotus_1_1_core_1_1_c_variant_a597d142d76698d537ba55be5ba0fcbb3} 
+void {\bfseries Clear} ()
+\begin{DoxyCompactList}\small\item\em Очистка данных. \end{DoxyCompactList}\item 
+virtual string \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a81adb2d8f95c8090ac6756e973796f19}{Serialize\+To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Сериализация типа данных в строку. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant}{CVariant}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a3ffe9e6b0c045ae97a6bf1f37d959ad5}{Deserialize\+From\+String}} (string data)
+\begin{DoxyCompactList}\small\item\em Десереализация универсального типа данных из строки. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_ac959bdbc821af43973f337030c69686b}\label{class_lotus_1_1_core_1_1_c_variant_ac959bdbc821af43973f337030c69686b} 
+\mbox{\hyperlink{group___core_common_types_ga9fa21ec5ce1cb4da2fe29f8510371525}{TValue\+Type}} {\bfseries Value\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Тип данных значения. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a8877ed86be7ebf780479e32b7c9a31db}\label{class_lotus_1_1_core_1_1_c_variant_a8877ed86be7ebf780479e32b7c9a31db} 
+bool {\bfseries Boolean\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Логический тип. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a2abd258c46c7520529078c5e4934f4fd}\label{class_lotus_1_1_core_1_1_c_variant_a2abd258c46c7520529078c5e4934f4fd} 
+int {\bfseries Integer\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Целый тип. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525acf20423ed48998082c20099488a0917c}{Enum}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a0871b8fe35e68fa1473f3ce07998c5a7}{Enum\+Value}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Перечисление. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_acf9b4585b2e879270c09b2b3eaf119e2}\label{class_lotus_1_1_core_1_1_c_variant_acf9b4585b2e879270c09b2b3eaf119e2} 
+float {\bfseries Float\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Вещественный тип. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_ab4ba804010271ece566d448d3151f715}\label{class_lotus_1_1_core_1_1_c_variant_ab4ba804010271ece566d448d3151f715} 
+\mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525a8cf10d2341ed01492506085688270c1e}{Date\+Time}} {\bfseries Date\+Time\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Тип даты-\/времени. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_afdacaa6bd848d507f574bf27f4fea5b2}\label{class_lotus_1_1_core_1_1_c_variant_afdacaa6bd848d507f574bf27f4fea5b2} 
+string {\bfseries String\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Строковый тип. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a3afba9f9882b0deb5b8133d4e26033ca}\label{class_lotus_1_1_core_1_1_c_variant_a3afba9f9882b0deb5b8133d4e26033ca} 
+Vector2 {\bfseries Vector2\+DValue}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Двухмерный объект данных. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_aea6ad64ef4d4e4be49b974a92018e8f6}\label{class_lotus_1_1_core_1_1_c_variant_aea6ad64ef4d4e4be49b974a92018e8f6} 
+Vector3 {\bfseries Vector3\+DValue}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Трехмерный объект данных. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_ab6d7f2ab92967ee176e52896dff30065}\label{class_lotus_1_1_core_1_1_c_variant_ab6d7f2ab92967ee176e52896dff30065} 
+Vector4 {\bfseries Vector4\+DValue}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Четырехмерный объект данных. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_ab637e6786974bf9e694b10bef69bb3ed}\label{class_lotus_1_1_core_1_1_c_variant_ab637e6786974bf9e694b10bef69bb3ed} 
+\mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_color}{TColor}} {\bfseries Color\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Цвет. \end{DoxyCompactList}\item 
+object? \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a11f18b855d667d8bb954b21cf699b66b}{Sys\+Object}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Базовый объект. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}? \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant_a2a28ddeb92764333ab7b2404b4409592}{IOwner}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{Lotus.\+Core.\+ILotus\+Owned\+Object$<$ TOwner $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+TOwner? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object_a28b52590e38754d81d756a0b98a767af}{Owner}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Универсальный тип данных. 
+
+Реализация универсального типа данных с поддержкой сериализации на уровне Unity. Данный тип хранит один из возможных предопределённых типов данных. Для однозначной идентификации объектов которые не могут быть сведены к стандартному типу в поле CVariant.\+String\+Value храниться контекстная информация об объекте (его тип, ссылка и т.\+д.). При установке владельца интерфейса для уведомлений, объект уведомляет об изменении своих свойств. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_ae2b41c95150bedbcba6311d7f7c261c1}\label{class_lotus_1_1_core_1_1_c_variant_ae2b41c95150bedbcba6311d7f7c261c1} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!CVariant@{CVariant}}
+\index{CVariant@{CVariant}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{CVariant()}{CVariant()}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CVariant.\+CVariant (\begin{DoxyParamCaption}\item[{object}]{obj }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует данные универсального типа указанным объектом. 
+
+Тип объекта выводится автоматически. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Объект.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_aa5184287e77cdf5d1e0434debb79875f}\label{class_lotus_1_1_core_1_1_c_variant_aa5184287e77cdf5d1e0434debb79875f} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!Clone@{Clone}}
+\index{Clone@{Clone}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily object Lotus.\+Core.\+CVariant.\+Clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Полное копирование объекта универсального типа данных. 
+
+\begin{DoxyReturn}{Returns}
+Копия объекта универсального типа данных.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a5f9028b26c7a7122b61cb877804b62f5}\label{class_lotus_1_1_core_1_1_c_variant_a5f9028b26c7a7122b61cb877804b62f5} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!CompareTo@{CompareTo}}
+\index{CompareTo@{CompareTo}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{CompareTo()}{CompareTo()}}
+{\footnotesize\ttfamily int Lotus.\+Core.\+CVariant.\+Compare\+To (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant}{CVariant}}?}]{other }\end{DoxyParamCaption})}
+
+
+
+Сравнение универсальных типов данных для упорядочивания. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Объект универсального типа данных.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус сравнения.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a3ffe9e6b0c045ae97a6bf1f37d959ad5}\label{class_lotus_1_1_core_1_1_c_variant_a3ffe9e6b0c045ae97a6bf1f37d959ad5} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!DeserializeFromString@{DeserializeFromString}}
+\index{DeserializeFromString@{DeserializeFromString}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{DeserializeFromString()}{DeserializeFromString()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_variant}{CVariant}} Lotus.\+Core.\+CVariant.\+Deserialize\+From\+String (\begin{DoxyParamCaption}\item[{string}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Десереализация универсального типа данных из строки. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Строка данных.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Универсальный тип данных.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_ae8f46563e1f6ac8f13009cec82c8e937}\label{class_lotus_1_1_core_1_1_c_variant_ae8f46563e1f6ac8f13009cec82c8e937} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!Get@{Get}}
+\index{Get@{Get}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily object? Lotus.\+Core.\+CVariant.\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получение значение соответствующего типа. 
+
+\begin{DoxyReturn}{Returns}
+Значение.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a42ae357da7c16f1eee936764d5c7ea71}\label{class_lotus_1_1_core_1_1_c_variant_a42ae357da7c16f1eee936764d5c7ea71} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!GetAsString@{GetAsString}}
+\index{GetAsString@{GetAsString}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{GetAsString()}{GetAsString()}}
+{\footnotesize\ttfamily string? Lotus.\+Core.\+CVariant.\+Get\+As\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получение значение как строкового типа. 
+
+\begin{DoxyReturn}{Returns}
+Значение.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_afb688cf0297dc0c2fad23813efbec011}\label{class_lotus_1_1_core_1_1_c_variant_afb688cf0297dc0c2fad23813efbec011} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily override int Lotus.\+Core.\+CVariant.\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получение хеш-\/кода объекта универсального типа данных. 
+
+\begin{DoxyReturn}{Returns}
+Хеш-\/код.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a81adb2d8f95c8090ac6756e973796f19}\label{class_lotus_1_1_core_1_1_c_variant_a81adb2d8f95c8090ac6756e973796f19} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!SerializeToString@{SerializeToString}}
+\index{SerializeToString@{SerializeToString}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{SerializeToString()}{SerializeToString()}}
+{\footnotesize\ttfamily virtual string Lotus.\+Core.\+CVariant.\+Serialize\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Сериализация типа данных в строку. 
+
+\begin{DoxyReturn}{Returns}
+Строка данных.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a8be0679cbebbe6eb99ba5f7267827405}\label{class_lotus_1_1_core_1_1_c_variant_a8be0679cbebbe6eb99ba5f7267827405} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!Set@{Set}}
+\index{Set@{Set}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+CVariant.\+Set (\begin{DoxyParamCaption}\item[{object}]{value }\end{DoxyParamCaption})}
+
+
+
+Установка значения универсального типа данных. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Значение.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a239f0aa0d37c873d4d9dde057a6255af}\label{class_lotus_1_1_core_1_1_c_variant_a239f0aa0d37c873d4d9dde057a6255af} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!Set@{Set}}
+\index{Set@{Set}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+CVariant.\+Set (\begin{DoxyParamCaption}\item[{Type}]{type }\end{DoxyParamCaption})}
+
+
+
+Установка типа универсального типа данных. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Тип.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_aab852c77db18189d0f2a5b2b0e2b5b4d}\label{class_lotus_1_1_core_1_1_c_variant_aab852c77db18189d0f2a5b2b0e2b5b4d} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!ToString@{ToString}}
+\index{ToString@{ToString}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily override? string Lotus.\+Core.\+CVariant.\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Преобразование к текстовому представлению. 
+
+\begin{DoxyReturn}{Returns}
+Текстовое представление.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a124abef36040218acee57c247a7fc46b}\label{class_lotus_1_1_core_1_1_c_variant_a124abef36040218acee57c247a7fc46b} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!ToString@{ToString}}
+\index{ToString@{ToString}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily string? Lotus.\+Core.\+CVariant.\+To\+String (\begin{DoxyParamCaption}\item[{string}]{format }\end{DoxyParamCaption})}
+
+
+
+Преобразование к текстовому представлению. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em format} & Формат отображения.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Текстовое представление.
+\end{DoxyReturn}
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a0871b8fe35e68fa1473f3ce07998c5a7}\label{class_lotus_1_1_core_1_1_c_variant_a0871b8fe35e68fa1473f3ce07998c5a7} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!EnumValue@{EnumValue}}
+\index{EnumValue@{EnumValue}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{EnumValue}{EnumValue}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group___core_common_types_gga9fa21ec5ce1cb4da2fe29f8510371525acf20423ed48998082c20099488a0917c}{Enum}}? Lotus.\+Core.\+CVariant.\+Enum\+Value\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Перечисление. 
+
+Имя реального типа сохраняется в поле \+\_\+string\+Data. \Hypertarget{class_lotus_1_1_core_1_1_c_variant_a2a28ddeb92764333ab7b2404b4409592}\label{class_lotus_1_1_core_1_1_c_variant_a2a28ddeb92764333ab7b2404b4409592} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!IOwner@{IOwner}}
+\index{IOwner@{IOwner}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{IOwner}{IOwner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}? Lotus.\+Core.\+CVariant.\+IOwner\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Владелец. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object_aa387fe4af4fcfaad4583624d00fcb271}{Lotus.\+Core.\+ILotus\+Owned\+Object$<$ TOwner $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_variant_a11f18b855d667d8bb954b21cf699b66b}\label{class_lotus_1_1_core_1_1_c_variant_a11f18b855d667d8bb954b21cf699b66b} 
+\index{Lotus.Core.CVariant@{Lotus.Core.CVariant}!SysObject@{SysObject}}
+\index{SysObject@{SysObject}!Lotus.Core.CVariant@{Lotus.Core.CVariant}}
+\doxysubsubsection{\texorpdfstring{SysObject}{SysObject}}
+{\footnotesize\ttfamily object? Lotus.\+Core.\+CVariant.\+Sys\+Object\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Базовый объект. 
+
+Имя реального типа объекта сохраняется в поле \+\_\+string\+Data. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Common\+Types/Lotus\+Variant.\+cs\end{DoxyCompactItemize}

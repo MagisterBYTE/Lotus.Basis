@@ -98,23 +98,23 @@ namespace Lotus.Core
         /// <returns>Ссылка на новую сущность.</returns>
         public ref TEcsEntity NewEntity()
         {
-            int current_id;
+            int currentId;
 
             // Смотрим есть у нас освобожденный идентификатор
             if (_countRemovedEntity > 0)
             {
                 _countRemovedEntity--;
-                current_id = _removedEntities[_countRemovedEntity];
+                currentId = _removedEntities[_countRemovedEntity];
             }
             else
             {
-                current_id = _currentIdEntity;
+                currentId = _currentIdEntity;
                 _currentIdEntity++;
             }
 
-            if (current_id >= _maxCountEntity)
+            if (currentId >= _maxCountEntity)
             {
-                _maxCountEntity = Math.Max(current_id + 1, _maxCountEntity << 1);
+                _maxCountEntity = Math.Max(currentId + 1, _maxCountEntity << 1);
                 Array.Resize(ref _denseEntities, _maxCountEntity);
                 Array.Resize(ref _sparseEntities, _maxCountEntity);
                 Array.Resize(ref _removedEntities, _maxCountEntity);
@@ -128,12 +128,12 @@ namespace Lotus.Core
                 Array.Resize(ref _removedEntities, _maxCountEntity);
             }
 
-            var current_count = _countEntity;
-            _sparseEntities[current_id] = current_count;
-            _denseEntities[current_count] = new TEcsEntity(current_id);
+            var currentCount = _countEntity;
+            _sparseEntities[currentId] = currentCount;
+            _denseEntities[currentCount] = new TEcsEntity(currentId);
             _countEntity++;
 
-            return ref _denseEntities[current_count];
+            return ref _denseEntities[currentCount];
         }
 
         /// <summary>
@@ -185,10 +185,10 @@ namespace Lotus.Core
         public int[]? GetEntities<TComponent>() where TComponent : struct
         {
             var componentType = typeof(TComponent);
-            ILotusEcsComponentData? component_data;
-            if (_componentsData.TryGetValue(componentType, out component_data))
+            ILotusEcsComponentData? componentData;
+            if (_componentsData.TryGetValue(componentType, out componentData))
             {
-                return component_data.GetEntities();
+                return componentData.GetEntities();
             }
 
             return null;
@@ -205,16 +205,16 @@ namespace Lotus.Core
         public ref TComponent AddComponent<TComponent>(int entityId) where TComponent : struct
         {
             var componentType = typeof(TComponent);
-            ILotusEcsComponentData? component_data;
-            if (_componentsData.TryGetValue(componentType, out component_data))
+            ILotusEcsComponentData? componentData;
+            if (_componentsData.TryGetValue(componentType, out componentData))
             {
-                var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
+                var componentDataExist = (componentData as CEcsComponentData<TComponent>)!;
 
-                if (component_data_exist.HasEntity(entityId) == false)
+                if (componentDataExist.HasEntity(entityId) == false)
                 {
                     UpdateFilterComponentsForAdd(componentType);
 
-                    ref var value = ref component_data_exist.AddEntity(entityId);
+                    ref var value = ref componentDataExist.AddEntity(entityId);
                     return ref value;
                 }
                 else
@@ -282,10 +282,10 @@ namespace Lotus.Core
         public bool HasComponent<TComponent>(int entityId) where TComponent : struct
         {
             var componentType = typeof(TComponent);
-            ILotusEcsComponentData? component_data;
-            if (_componentsData.TryGetValue(componentType, out component_data))
+            ILotusEcsComponentData? componentData;
+            if (_componentsData.TryGetValue(componentType, out componentData))
             {
-                return component_data.HasEntity(entityId);
+                return componentData.HasEntity(entityId);
             }
 
             return false;
@@ -300,11 +300,11 @@ namespace Lotus.Core
         public ref TComponent GetComponent<TComponent>(int entityId) where TComponent : struct
         {
             var componentType = typeof(TComponent);
-            ILotusEcsComponentData? component_data;
-            if (_componentsData.TryGetValue(componentType, out component_data))
+            ILotusEcsComponentData? componentData;
+            if (_componentsData.TryGetValue(componentType, out componentData))
             {
-                var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
-                ref var value = ref component_data_exist.GetValue(entityId);
+                var componentDataExist = (componentData as CEcsComponentData<TComponent>)!;
+                ref var value = ref componentDataExist.GetValue(entityId);
                 return ref value;
             }
 
@@ -320,11 +320,11 @@ namespace Lotus.Core
         public void UpdateComponent<TComponent>(int entityId, in TComponent value) where TComponent : struct
         {
             var componentType = typeof(TComponent);
-            ILotusEcsComponentData? component_data;
-            if (_componentsData.TryGetValue(componentType, out component_data))
+            ILotusEcsComponentData? componentData;
+            if (_componentsData.TryGetValue(componentType, out componentData))
             {
-                var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
-                component_data_exist.SetValue(entityId, in value);
+                var componentDataExist = (componentData as CEcsComponentData<TComponent>)!;
+                componentDataExist.SetValue(entityId, in value);
             }
         }
 
@@ -336,11 +336,11 @@ namespace Lotus.Core
         public void RemoveComponent<TComponent>(int entityId) where TComponent : struct
         {
             var componentType = typeof(TComponent);
-            ILotusEcsComponentData? component_data;
-            if (_componentsData.TryGetValue(componentType, out component_data))
+            ILotusEcsComponentData? componentData;
+            if (_componentsData.TryGetValue(componentType, out componentData))
             {
-                var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
-                component_data_exist.RemoveEntity(entityId);
+                var componentDataExist = (componentData as CEcsComponentData<TComponent>)!;
+                componentDataExist.RemoveEntity(entityId);
             }
         }
 
@@ -352,11 +352,11 @@ namespace Lotus.Core
         public TComponent[]? GetComponents<TComponent>() where TComponent : struct
         {
             var componentType = typeof(TComponent);
-            ILotusEcsComponentData? component_data;
-            if (_componentsData.TryGetValue(componentType, out component_data))
+            ILotusEcsComponentData? componentData;
+            if (_componentsData.TryGetValue(componentType, out componentData))
             {
-                var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
-                return component_data_exist.Components._items;
+                var componentDataExist = (componentData as CEcsComponentData<TComponent>)!;
+                return componentDataExist.Components._items;
             }
 
             return null;
@@ -370,11 +370,11 @@ namespace Lotus.Core
         public CEcsComponentData<TComponent>? GetComponentData<TComponent>() where TComponent : struct
         {
             var componentType = typeof(TComponent);
-            ILotusEcsComponentData? component_data;
-            if (_componentsData.TryGetValue(componentType, out component_data))
+            ILotusEcsComponentData? componentData;
+            if (_componentsData.TryGetValue(componentType, out componentData))
             {
-                var component_data_exist = (component_data as CEcsComponentData<TComponent>)!;
-                return component_data_exist;
+                var componentDataExist = (componentData as CEcsComponentData<TComponent>)!;
+                return componentDataExist;
             }
 
             return null;

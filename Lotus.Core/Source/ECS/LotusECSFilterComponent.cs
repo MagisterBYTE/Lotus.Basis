@@ -201,8 +201,8 @@ namespace Lotus.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Exsist<TComponent>() where TComponent : struct
         {
-            var component_type = typeof(TComponent);
-            return _includedComponents.Contains(component_type) || _excludedComponents.Contains(component_type);
+            var componentType = typeof(TComponent);
+            return _includedComponents.Contains(componentType) || _excludedComponents.Contains(componentType);
         }
 
         /// <summary>
@@ -237,10 +237,10 @@ namespace Lotus.Core
         public ILotusEcsFilterComponent Exclude(Type componentType)
         {
             _excludedComponents.AddIfNotContains(componentType);
-            if (_world._componentsData.TryGetValue(componentType, out var component_data))
+            if (_world._componentsData.TryGetValue(componentType, out var componentData))
             {
-                var exclude_entities = component_data.GetEntities();
-                _entities.RemoveValues(exclude_entities);
+                var excludeEntities = componentData.GetEntities();
+                _entities.RemoveValues(excludeEntities);
             }
 
             return this;
@@ -255,24 +255,24 @@ namespace Lotus.Core
             _entities.Clear();
             if (_includedComponents.Count > 1)
             {
-                var first_type_filter = _includedComponents[0];
-                ILotusEcsComponentData? component_data;
-                if (_world._componentsData.TryGetValue(first_type_filter, out component_data))
+                var firstTypeFilter = _includedComponents[0];
+                ILotusEcsComponentData? componentData;
+                if (_world._componentsData.TryGetValue(firstTypeFilter, out componentData))
                 {
-                    var entities = component_data.GetEntities();
-                    for (var i = 0; i < component_data.Count; i++)
+                    var entities = componentData.GetEntities();
+                    for (var i = 0; i < componentData.Count; i++)
                     {
                         var id = entities[i];
-                        var find_count = 0;
+                        var findCount = 0;
                         for (var f = 1; f < _includedComponents.Count; f++)
                         {
-                            var type_filter = _includedComponents[f];
-                            ILotusEcsComponentData? filter_data;
-                            if (_world._componentsData.TryGetValue(type_filter, out filter_data))
+                            var typeFilter = _includedComponents[f];
+                            ILotusEcsComponentData? filterData;
+                            if (_world._componentsData.TryGetValue(typeFilter, out filterData))
                             {
-                                if (filter_data.HasEntity(id))
+                                if (filterData.HasEntity(id))
                                 {
-                                    find_count++;
+                                    findCount++;
                                 }
                             }
                             else
@@ -281,7 +281,7 @@ namespace Lotus.Core
                             }
                         }
 
-                        if (find_count == _includedComponents.Count - 1)
+                        if (findCount == _includedComponents.Count - 1)
                         {
                             AddEntity(id);
                         }
@@ -291,11 +291,11 @@ namespace Lotus.Core
 
             for (var i = 0; i < _excludedComponents.Count; i++)
             {
-                ILotusEcsComponentData? component_data;
-                if (_world._componentsData.TryGetValue(_excludedComponents[i], out component_data))
+                ILotusEcsComponentData? componentData;
+                if (_world._componentsData.TryGetValue(_excludedComponents[i], out componentData))
                 {
-                    var include_entities = component_data.GetEntities();
-                    _entities.RemoveValues(include_entities);
+                    var includeEntities = componentData.GetEntities();
+                    _entities.RemoveValues(includeEntities);
                 }
             }
         }

@@ -395,11 +395,11 @@ namespace Lotus.Core
         public static TColor DeserializeFromString(string data)
         {
             var color = new TColor();
-            var color_data = data.Split(',');
-            color.R = byte.Parse(color_data[0]);
-            color.G = byte.Parse(color_data[1]);
-            color.B = byte.Parse(color_data[2]);
-            color.A = byte.Parse(color_data[3]);
+            var colorData = data.Split(',');
+            color.R = byte.Parse(colorData[0]);
+            color.G = byte.Parse(colorData[1]);
+            color.B = byte.Parse(colorData[2]);
+            color.A = byte.Parse(colorData[3]);
             return color;
         }
         #endregion
@@ -639,11 +639,11 @@ namespace Lotus.Core
         {
             unchecked
             {
-                var hash_code = R.GetHashCode();
-                hash_code = (hash_code * 397) ^ G.GetHashCode();
-                hash_code = (hash_code * 397) ^ B.GetHashCode();
-                hash_code = (hash_code * 397) ^ A.GetHashCode();
-                return hash_code;
+                var hashCode = R.GetHashCode();
+                hashCode = (hashCode * 397) ^ G.GetHashCode();
+                hashCode = (hashCode * 397) ^ B.GetHashCode();
+                hashCode = (hashCode * 397) ^ A.GetHashCode();
+                return hashCode;
             }
         }
 

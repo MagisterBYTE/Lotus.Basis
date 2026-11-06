@@ -361,25 +361,25 @@ namespace Lotus.Algorithm
                 _directions = new int[4, 2] { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
             }
 
-            TPathPointStar parent_node;
-            parent_node.PathLengthFromStart = 0;
-            parent_node.HeuristicEstimatePathLength = _heuristicEstimate;
-            parent_node.EstimateFullPathLength = parent_node.PathLengthFromStart + parent_node.HeuristicEstimatePathLength;
-            parent_node.X = _start.X;
-            parent_node.Y = _start.Y;
-            parent_node.ParentX = parent_node.X;
-            parent_node.ParentY = parent_node.Y;
+            TPathPointStar parentNode;
+            parentNode.PathLengthFromStart = 0;
+            parentNode.HeuristicEstimatePathLength = _heuristicEstimate;
+            parentNode.EstimateFullPathLength = parentNode.PathLengthFromStart + parentNode.HeuristicEstimatePathLength;
+            parentNode.X = _start.X;
+            parentNode.Y = _start.Y;
+            parentNode.ParentX = parentNode.X;
+            parentNode.ParentY = parentNode.Y;
 
-            _openList.Push(parent_node);
+            _openList.Push(parentNode);
 
             while (_openList.Count > 0)
             {
-                parent_node = _openList.Pop();
+                parentNode = _openList.Pop();
 
                 // Если нашли
-                if (parent_node.X == _target.X && parent_node.Y == _target.Y)
+                if (parentNode.X == _target.X && parentNode.Y == _target.Y)
                 {
-                    _closeList.Add(parent_node);
+                    _closeList.Add(parentNode);
                     _isFoundPath = true;
                     break;
                 }
@@ -391,33 +391,33 @@ namespace Lotus.Algorithm
 
                 if (_punishChangeDirection)
                 {
-                    _horiz = parent_node.X - parent_node.ParentX;
+                    _horiz = parentNode.X - parentNode.ParentX;
                 }
 
                 // Проводим вычисления для каждого смежного элемента
                 for (var i = 0; i < (_isAllowDiagonal ? 8 : 4); i++)
                 {
-                    TPathPointStar new_node;
-                    new_node.X = parent_node.X + _directions[i, 0];
-                    new_node.Y = parent_node.Y + _directions[i, 1];
+                    TPathPointStar newNode;
+                    newNode.X = parentNode.X + _directions[i, 0];
+                    newNode.Y = parentNode.Y + _directions[i, 1];
 
-                    if (new_node.X < 0 || new_node.Y < 0 || new_node.X >= _map.MapWidth || new_node.Y >= _map.MapHeight)
+                    if (newNode.X < 0 || newNode.Y < 0 || newNode.X >= _map.MapWidth || newNode.Y >= _map.MapHeight)
                     {
                         continue;
                     }
 
-                    int new_length;
+                    int newLength;
                     if (_heavyDiagonals && i > 3)
                     {
-                        new_length = parent_node.PathLengthFromStart + (int)(_map.Map[new_node.X, new_node.Y] * 2.41f);
+                        newLength = parentNode.PathLengthFromStart + (int)(_map.Map[newNode.X, newNode.Y] * 2.41f);
                     }
                     else
                     {
-                        new_length = parent_node.PathLengthFromStart + _map.Map[new_node.X, new_node.Y];
+                        newLength = parentNode.PathLengthFromStart + _map.Map[newNode.X, newNode.Y];
                     }
 
 
-                    if (new_length == parent_node.PathLengthFromStart)
+                    if (newLength == parentNode.PathLengthFromStart)
                     {
                         //Unbrekeable
                         continue;
@@ -425,18 +425,18 @@ namespace Lotus.Algorithm
 
                     if (_punishChangeDirection)
                     {
-                        if (new_node.X - parent_node.X != 0)
+                        if (newNode.X - parentNode.X != 0)
                         {
                             if (_horiz == 0)
                             {
-                                new_length += 20;
+                                newLength += 20;
                             }
                         }
-                        if (new_node.Y - parent_node.Y != 0)
+                        if (newNode.Y - parentNode.Y != 0)
                         {
                             if (_horiz != 0)
                             {
-                                new_length += 20;
+                                newLength += 20;
                             }
                         }
                     }
@@ -444,13 +444,13 @@ namespace Lotus.Algorithm
                     var foundInOpenIndex = -1;
                     for (var j = 0; j < _openList.Count; j++)
                     {
-                        if (_openList[j].X == new_node.X && _openList[j].Y == new_node.Y)
+                        if (_openList[j].X == newNode.X && _openList[j].Y == newNode.Y)
                         {
                             foundInOpenIndex = j;
                             break;
                         }
                     }
-                    if (foundInOpenIndex != -1 && _openList[foundInOpenIndex].PathLengthFromStart <= new_length)
+                    if (foundInOpenIndex != -1 && _openList[foundInOpenIndex].PathLengthFromStart <= newLength)
                     {
                         continue;
                     }
@@ -458,74 +458,74 @@ namespace Lotus.Algorithm
                     var foundInCloseIndex = -1;
                     for (var j = 0; j < _closeList.Count; j++)
                     {
-                        if (_closeList[j].X == new_node.X && _closeList[j].Y == new_node.Y)
+                        if (_closeList[j].X == newNode.X && _closeList[j].Y == newNode.Y)
                         {
                             foundInCloseIndex = j;
                             break;
                         }
                     }
-                    if (foundInCloseIndex != -1 && (_reopenCloseNodes || _closeList[foundInCloseIndex].PathLengthFromStart <= new_length))
+                    if (foundInCloseIndex != -1 && (_reopenCloseNodes || _closeList[foundInCloseIndex].PathLengthFromStart <= newLength))
                     {
                         continue;
                     }
 
-                    new_node.ParentX = parent_node.X;
-                    new_node.ParentY = parent_node.Y;
-                    new_node.PathLengthFromStart = new_length;
+                    newNode.ParentX = parentNode.X;
+                    newNode.ParentY = parentNode.Y;
+                    newNode.PathLengthFromStart = newLength;
 
                     switch (_formula)
                     {
                         case THeuristicFormula.MaxDXDY:
                             {
-                                new_node.HeuristicEstimatePathLength = _heuristicEstimate * Math.Max(Math.Abs(new_node.X - _target.X), Math.Abs(new_node.Y - _target.Y));
+                                newNode.HeuristicEstimatePathLength = _heuristicEstimate * Math.Max(Math.Abs(newNode.X - _target.X), Math.Abs(newNode.Y - _target.Y));
                             }
                             break;
                         case THeuristicFormula.DiagonalShortCut:
                             {
-                                var hDiagonal = Math.Min(Math.Abs(new_node.X - _target.X), Math.Abs(new_node.Y - _target.Y));
-                                var hStraight = Math.Abs(new_node.X - _target.X) + Math.Abs(new_node.Y - _target.Y);
-                                new_node.HeuristicEstimatePathLength = (_heuristicEstimate * 2 * hDiagonal) + (_heuristicEstimate * (hStraight - (2 * hDiagonal)));
+                                var hDiagonal = Math.Min(Math.Abs(newNode.X - _target.X), Math.Abs(newNode.Y - _target.Y));
+                                var hStraight = Math.Abs(newNode.X - _target.X) + Math.Abs(newNode.Y - _target.Y);
+                                newNode.HeuristicEstimatePathLength = (_heuristicEstimate * 2 * hDiagonal) + (_heuristicEstimate * (hStraight - (2 * hDiagonal)));
                             }
                             break;
                         case THeuristicFormula.Euclidean:
                             {
-                                new_node.HeuristicEstimatePathLength = (int)(_heuristicEstimate * Math.Sqrt(Math.Pow(new_node.X - _target.X, 2) + Math.Pow(new_node.Y - _target.Y, 2)));
+                                newNode.HeuristicEstimatePathLength = (int)(_heuristicEstimate * Math.Sqrt(Math.Pow(newNode.X - _target.X, 2) + Math.Pow(newNode.Y - _target.Y, 2)));
                             }
                             break;
                         case THeuristicFormula.EuclideanNoSQR:
                             {
-                                new_node.HeuristicEstimatePathLength = (int)(_heuristicEstimate * (Math.Pow(new_node.X - _target.X, 2) + Math.Pow(new_node.Y - _target.Y, 2)));
+                                newNode.HeuristicEstimatePathLength = (int)(_heuristicEstimate * (Math.Pow(newNode.X - _target.X, 2) + Math.Pow(newNode.Y - _target.Y, 2)));
                             }
                             break;
                         case THeuristicFormula.Custom1:
-                            var dxy = new TMapPoint(Math.Abs(_target.X - new_node.X), Math.Abs(_target.Y - new_node.Y));
+                            var dxy = new TMapPoint(Math.Abs(_target.X - newNode.X), Math.Abs(_target.Y - newNode.Y));
                             var orthogonal = Math.Abs(dxy.X - dxy.Y);
                             var diagonal = Math.Abs((dxy.X + dxy.Y - orthogonal) / 2);
-                            new_node.HeuristicEstimatePathLength = _heuristicEstimate * (diagonal + orthogonal + dxy.X + dxy.Y);
+                            newNode.HeuristicEstimatePathLength = _heuristicEstimate * (diagonal + orthogonal + dxy.X + dxy.Y);
                             break;
                         default:
                             {
-                                new_node.HeuristicEstimatePathLength = _heuristicEstimate * (Math.Abs(new_node.X - _target.X) + Math.Abs(new_node.Y - _target.Y));
+                                newNode.HeuristicEstimatePathLength = _heuristicEstimate * (Math.Abs(newNode.X - _target.X) + Math.Abs(newNode.Y - _target.Y));
                             }
                             break;
                     }
 
                     if (_tieBreaker)
                     {
-                        var dx1 = parent_node.X - _target.X;
-                        var dy1 = parent_node.Y - _target.Y;
+                        var dx1 = parentNode.X - _target.X;
+                        var dy1 = parentNode.Y - _target.Y;
                         var dx2 = _start.X - _target.X;
                         var dy2 = _start.Y - _target.Y;
                         var cross = Math.Abs((dx1 * dy2) - (dx2 * dy1));
-                        new_node.HeuristicEstimatePathLength = (int)(new_node.HeuristicEstimatePathLength + (cross * 0.001));
+                        newNode.HeuristicEstimatePathLength = (int)(newNode.HeuristicEstimatePathLength + (cross * 0.001));
                     }
 
-                    new_node.EstimateFullPathLength = new_node.PathLengthFromStart + new_node.HeuristicEstimatePathLength;
+                    newNode.EstimateFullPathLength = newNode.PathLengthFromStart + newNode.HeuristicEstimatePathLength;
 
-                    _openList.Push(new_node);
+                    _openList.Push(newNode);
                 }
 
-                _closeList.Add(parent_node);
+                _closeList.Add(parentNode);
             }
 
             return _isFoundPath;
@@ -571,16 +571,16 @@ namespace Lotus.Algorithm
                 _directions = new int[4, 2] { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
             }
 
-            TPathPointStar parent_node;
-            parent_node.PathLengthFromStart = 0;
-            parent_node.HeuristicEstimatePathLength = _heuristicEstimate;
-            parent_node.EstimateFullPathLength = parent_node.PathLengthFromStart + parent_node.HeuristicEstimatePathLength;
-            parent_node.X = _start.X;
-            parent_node.Y = _start.Y;
-            parent_node.ParentX = parent_node.X;
-            parent_node.ParentY = parent_node.Y;
+            TPathPointStar parentNode;
+            parentNode.PathLengthFromStart = 0;
+            parentNode.HeuristicEstimatePathLength = _heuristicEstimate;
+            parentNode.EstimateFullPathLength = parentNode.PathLengthFromStart + parentNode.HeuristicEstimatePathLength;
+            parentNode.X = _start.X;
+            parentNode.Y = _start.Y;
+            parentNode.ParentX = parentNode.X;
+            parentNode.ParentY = parentNode.Y;
 
-            _openList.Push(parent_node);
+            _openList.Push(parentNode);
         }
 
         /// <summary>
@@ -597,12 +597,12 @@ namespace Lotus.Algorithm
                 return false;
             }
 
-            var parent_node = _openList.Pop();
+            var parentNode = _openList.Pop();
 
             // Если нашли
-            if (parent_node.X == _target.X && parent_node.Y == _target.Y)
+            if (parentNode.X == _target.X && parentNode.Y == _target.Y)
             {
-                _closeList.Add(parent_node);
+                _closeList.Add(parentNode);
                 return false;
             }
 
@@ -613,33 +613,33 @@ namespace Lotus.Algorithm
 
             if (_punishChangeDirection)
             {
-                _horiz = parent_node.X - parent_node.ParentX;
+                _horiz = parentNode.X - parentNode.ParentX;
             }
 
             // Проводим вычисления для каждого смежного элемента
             for (var i = 0; i < (_isAllowDiagonal ? 8 : 4); i++)
             {
-                TPathPointStar new_node;
-                new_node.X = parent_node.X + _directions![i, 0];
-                new_node.Y = parent_node.Y + _directions![i, 1];
+                TPathPointStar newNode;
+                newNode.X = parentNode.X + _directions![i, 0];
+                newNode.Y = parentNode.Y + _directions![i, 1];
 
-                if (new_node.X < 0 || new_node.Y < 0 || new_node.X >= _map.MapWidth || new_node.Y >= _map.MapHeight)
+                if (newNode.X < 0 || newNode.Y < 0 || newNode.X >= _map.MapWidth || newNode.Y >= _map.MapHeight)
                 {
                     continue;
                 }
 
-                int new_length;
+                int newLength;
                 if (_heavyDiagonals && i > 3)
                 {
-                    new_length = parent_node.PathLengthFromStart + (int)(_map.Map[new_node.X, new_node.Y] * 2.41f);
+                    newLength = parentNode.PathLengthFromStart + (int)(_map.Map[newNode.X, newNode.Y] * 2.41f);
                 }
                 else
                 {
-                    new_length = parent_node.PathLengthFromStart + _map.Map[new_node.X, new_node.Y];
+                    newLength = parentNode.PathLengthFromStart + _map.Map[newNode.X, newNode.Y];
                 }
 
 
-                if (new_length == parent_node.PathLengthFromStart)
+                if (newLength == parentNode.PathLengthFromStart)
                 {
                     //Unbrekeable
                     continue;
@@ -647,107 +647,107 @@ namespace Lotus.Algorithm
 
                 if (_punishChangeDirection)
                 {
-                    if (new_node.X - parent_node.X != 0)
+                    if (newNode.X - parentNode.X != 0)
                     {
                         if (_horiz == 0)
                         {
-                            new_length += 20;
+                            newLength += 20;
                         }
                     }
-                    if (new_node.Y - parent_node.Y != 0)
+                    if (newNode.Y - parentNode.Y != 0)
                     {
                         if (_horiz != 0)
                         {
-                            new_length += 20;
+                            newLength += 20;
                         }
                     }
                 }
 
-                var found_in_open_index = -1;
+                var foundInOpenIndex = -1;
                 for (var j = 0; j < _openList.Count; j++)
                 {
-                    if (_openList[j].X == new_node.X && _openList[j].Y == new_node.Y)
+                    if (_openList[j].X == newNode.X && _openList[j].Y == newNode.Y)
                     {
-                        found_in_open_index = j;
+                        foundInOpenIndex = j;
                         break;
                     }
                 }
-                if (found_in_open_index != -1 && _openList[found_in_open_index].PathLengthFromStart <= new_length)
+                if (foundInOpenIndex != -1 && _openList[foundInOpenIndex].PathLengthFromStart <= newLength)
                 {
                     continue;
                 }
 
-                var found_in_close_index = -1;
+                var foundInCloseIndex = -1;
                 for (var j = 0; j < _closeList.Count; j++)
                 {
-                    if (_closeList[j].X == new_node.X && _closeList[j].Y == new_node.Y)
+                    if (_closeList[j].X == newNode.X && _closeList[j].Y == newNode.Y)
                     {
-                        found_in_close_index = j;
+                        foundInCloseIndex = j;
                         break;
                     }
                 }
-                if (found_in_close_index != -1 && (_reopenCloseNodes || _closeList[found_in_close_index].PathLengthFromStart <= new_length))
+                if (foundInCloseIndex != -1 && (_reopenCloseNodes || _closeList[foundInCloseIndex].PathLengthFromStart <= newLength))
                 {
                     continue;
                 }
 
-                new_node.ParentX = parent_node.X;
-                new_node.ParentY = parent_node.Y;
-                new_node.PathLengthFromStart = new_length;
+                newNode.ParentX = parentNode.X;
+                newNode.ParentY = parentNode.Y;
+                newNode.PathLengthFromStart = newLength;
 
                 switch (_formula)
                 {
                     case THeuristicFormula.MaxDXDY:
                         {
-                            new_node.HeuristicEstimatePathLength = _heuristicEstimate * Math.Max(Math.Abs(new_node.X - _target.X), Math.Abs(new_node.Y - _target.Y));
+                            newNode.HeuristicEstimatePathLength = _heuristicEstimate * Math.Max(Math.Abs(newNode.X - _target.X), Math.Abs(newNode.Y - _target.Y));
                         }
                         break;
                     case THeuristicFormula.DiagonalShortCut:
                         {
-                            var h_diagonal = Math.Min(Math.Abs(new_node.X - _target.X), Math.Abs(new_node.Y - _target.Y));
-                            var h_straight = Math.Abs(new_node.X - _target.X) + Math.Abs(new_node.Y - _target.Y);
-                            new_node.HeuristicEstimatePathLength = (_heuristicEstimate * 2 * h_diagonal) + (_heuristicEstimate * (h_straight - (2 * h_diagonal)));
+                            var hDiagonal = Math.Min(Math.Abs(newNode.X - _target.X), Math.Abs(newNode.Y - _target.Y));
+                            var hStraight = Math.Abs(newNode.X - _target.X) + Math.Abs(newNode.Y - _target.Y);
+                            newNode.HeuristicEstimatePathLength = (_heuristicEstimate * 2 * hDiagonal) + (_heuristicEstimate * (hStraight - (2 * hDiagonal)));
                         }
                         break;
                     case THeuristicFormula.Euclidean:
                         {
-                            new_node.HeuristicEstimatePathLength = (int)(_heuristicEstimate * Math.Sqrt(Math.Pow(new_node.X - _target.X, 2) + Math.Pow(new_node.Y - _target.Y, 2)));
+                            newNode.HeuristicEstimatePathLength = (int)(_heuristicEstimate * Math.Sqrt(Math.Pow(newNode.X - _target.X, 2) + Math.Pow(newNode.Y - _target.Y, 2)));
                         }
                         break;
                     case THeuristicFormula.EuclideanNoSQR:
                         {
-                            new_node.HeuristicEstimatePathLength = (int)(_heuristicEstimate * (Math.Pow(new_node.X - _target.X, 2) + Math.Pow(new_node.Y - _target.Y, 2)));
+                            newNode.HeuristicEstimatePathLength = (int)(_heuristicEstimate * (Math.Pow(newNode.X - _target.X, 2) + Math.Pow(newNode.Y - _target.Y, 2)));
                         }
                         break;
                     case THeuristicFormula.Custom1:
-                        var dxy = new TMapPoint(Math.Abs(_target.X - new_node.X), Math.Abs(_target.Y - new_node.Y));
+                        var dxy = new TMapPoint(Math.Abs(_target.X - newNode.X), Math.Abs(_target.Y - newNode.Y));
                         var Orthogonal = Math.Abs(dxy.X - dxy.Y);
                         var Diagonal = Math.Abs((dxy.X + dxy.Y - Orthogonal) / 2);
-                        new_node.HeuristicEstimatePathLength = _heuristicEstimate * (Diagonal + Orthogonal + dxy.X + dxy.Y);
+                        newNode.HeuristicEstimatePathLength = _heuristicEstimate * (Diagonal + Orthogonal + dxy.X + dxy.Y);
                         break;
                     default:
                         {
-                            new_node.HeuristicEstimatePathLength = _heuristicEstimate * (Math.Abs(new_node.X - _target.X) + Math.Abs(new_node.Y - _target.Y));
+                            newNode.HeuristicEstimatePathLength = _heuristicEstimate * (Math.Abs(newNode.X - _target.X) + Math.Abs(newNode.Y - _target.Y));
                         }
                         break;
                 }
 
                 if (_tieBreaker)
                 {
-                    var dx1 = parent_node.X - _target.X;
-                    var dy1 = parent_node.Y - _target.Y;
+                    var dx1 = parentNode.X - _target.X;
+                    var dy1 = parentNode.Y - _target.Y;
                     var dx2 = _start.X - _target.X;
                     var dy2 = _start.Y - _target.Y;
                     var cross = Math.Abs((dx1 * dy2) - (dx2 * dy1));
-                    new_node.HeuristicEstimatePathLength = (int)(new_node.HeuristicEstimatePathLength + (cross * 0.001));
+                    newNode.HeuristicEstimatePathLength = (int)(newNode.HeuristicEstimatePathLength + (cross * 0.001));
                 }
 
-                new_node.EstimateFullPathLength = new_node.PathLengthFromStart + new_node.HeuristicEstimatePathLength;
+                newNode.EstimateFullPathLength = newNode.PathLengthFromStart + newNode.HeuristicEstimatePathLength;
 
-                _openList.Push(new_node);
+                _openList.Push(newNode);
             }
 
-            _closeList.Add(parent_node);
+            _closeList.Add(parentNode);
 
             return true;
         }

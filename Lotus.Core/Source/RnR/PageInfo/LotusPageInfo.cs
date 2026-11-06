@@ -1,0 +1,89 @@
+namespace Lotus.Core
+{
+    /** \addtogroup CoreRequestAndResponse
+    *@{*/
+    /// <summary>
+    /// Интерфейс для постраничного запроса данных.
+    /// </summary>
+    public interface ILotusPageInfoRequest
+    {
+        /// <summary>
+        /// Номер страницы, отсчет от нуля.
+        /// </summary>
+        int PageNumber { get; set; }
+
+        /// <summary>
+        /// Размер страницы.
+        /// </summary>
+        int PageSize { get; set; }
+    }
+
+    /// <summary>
+    /// Класс для постраничного запроса данных.
+    /// </summary>
+    public class PageInfoRequest : ILotusPageInfoRequest
+    {
+        /// <summary>
+        /// Номер страницы, отсчет от нуля.
+        /// </summary>
+        public int PageNumber { get; set; }
+
+        /// <summary>
+        /// Размер страницы.
+        /// </summary>
+        public int PageSize { get; set; }
+    }
+
+    /// <summary>
+    /// Интерфейс для постраничного получения данных.
+    /// </summary>
+    public interface ILotusPageInfoResponse
+    {
+        /// <summary>
+        /// Номер страницы, отсчет от нуля.
+        /// </summary>
+        int PageNumber { get; set; }
+
+        /// <summary>
+        /// Размер страницы.
+        /// </summary>
+        int PageSize { get; set; }
+
+        /// <summary>
+        /// Количество данных на текущей странице.
+        /// </summary>
+        int CurrentPageSize { get; set; }
+
+        /// <summary>
+        /// Общее количество данных по данному запросу.
+        /// </summary>
+        int TotalCount { get; set; }
+    }
+
+    /// <summary>
+    /// Класс для постраничного получения данных.
+    /// </summary>
+    public class PageInfoResponse : ILotusPageInfoResponse
+    {
+        /// <summary>
+        /// Номер страницы, отсчет от нуля.
+        /// </summary>
+        public int PageNumber { get; set; }
+
+        /// <summary>
+        /// Размер страницы.
+        /// </summary>
+        public int PageSize { get; set; }
+
+        /// <summary>
+        /// Количество данных на текущей странице.
+        /// </summary>
+        public int CurrentPageSize { get; set; }
+
+        /// <summary>
+        /// Общее количество данных по данному запросу.
+        /// </summary>
+        public int TotalCount { get; set; }
+    }
+    /**@}*/
+}

@@ -1,3 +1,5 @@
+using Lotus.Core;
+
 namespace Lotus.Repository
 {
     /// <summary>

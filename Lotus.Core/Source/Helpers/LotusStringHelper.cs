@@ -297,7 +297,7 @@ namespace Lotus.Core
                         // В ключ записываем данные разделения
                         var key = token;
 
-                        var current_value = "";
+                        var currentValue = "";
 
                         // Читаем данные (со следующей строк)
                         for (var j = i + 1; j < lines.Length; j++)
@@ -318,9 +318,9 @@ namespace Lotus.Core
                             }
 
                             // Добавляем в значение
-                            if (string.IsNullOrEmpty(current_value))
+                            if (string.IsNullOrEmpty(currentValue))
                             {
-                                current_value = lines[j].Trim();
+                                currentValue = lines[j].Trim();
                             }
                             else
                             {
@@ -330,13 +330,13 @@ namespace Lotus.Core
                                 }
                                 else
                                 {
-                                    current_value += XCharHelper.NewLine + lines[j].Trim();
+                                    currentValue += XCharHelper.NewLine + lines[j].Trim();
                                 }
                             }
                         }
 
                         // Конец
-                        result.Add(new KeyValuePair<string, string>(key, current_value));
+                        result.Add(new KeyValuePair<string, string>(key, currentValue));
                     }
                 }
             }
@@ -376,7 +376,7 @@ namespace Lotus.Core
                         // В ключ записываем данные разделения
                         var key = token;
 
-                        var current_value = "";
+                        var currentValue = "";
 
                         // Читаем данные (со следующей строк)
                         for (var j = i + 1; j < lines.Length; j++)
@@ -400,9 +400,9 @@ namespace Lotus.Core
                             }
 
                             // Добавляем в значение
-                            if (string.IsNullOrEmpty(current_value))
+                            if (string.IsNullOrEmpty(currentValue))
                             {
-                                current_value = lines[j].Trim();
+                                currentValue = lines[j].Trim();
                             }
                             else
                             {
@@ -412,13 +412,13 @@ namespace Lotus.Core
                                 }
                                 else
                                 {
-                                    current_value += XCharHelper.NewLine + lines[j].Trim();
+                                    currentValue += XCharHelper.NewLine + lines[j].Trim();
                                 }
                             }
                         }
 
                         // Конец
-                        result.Add(new KeyValuePair<string, string>(key, current_value));
+                        result.Add(new KeyValuePair<string, string>(key, currentValue));
                     }
                 }
             }

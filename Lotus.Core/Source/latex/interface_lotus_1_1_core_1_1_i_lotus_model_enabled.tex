@@ -1,0 +1,44 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Model\+Enabled Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_model_enabled}{}\label{interface_lotus_1_1_core_1_1_i_lotus_model_enabled}\index{Lotus.Core.ILotusModelEnabled@{Lotus.Core.ILotusModelEnabled}}
+
+
+Определение интерфейса для объекта(модели) который может быть недоступен.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_model_enabled_a5b07c4f2417e7f10a6dd8d0e902de10d}{Set\+Model\+Enabled}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model, bool enabled)
+\begin{DoxyCompactList}\small\item\em Установка статуса недоступности объекта(модели). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Определение интерфейса для объекта(модели) который может быть недоступен. 
+
+Обычно логика пользовательского интерфейса должно быть отделена от основной логики приложения, однако иногда бывает необходимость определять некоторые типовые действия в элементах пользовательского интерфейса и правильно на них реагировать. 
+
+Благодаря реализации данному интерфейсу объект(модель) может реагировать когда он недоступен, а также корректно реагировать на этот статус. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_model_enabled_a5b07c4f2417e7f10a6dd8d0e902de10d}\label{interface_lotus_1_1_core_1_1_i_lotus_model_enabled_a5b07c4f2417e7f10a6dd8d0e902de10d} 
+\index{Lotus.Core.ILotusModelEnabled@{Lotus.Core.ILotusModelEnabled}!SetModelEnabled@{SetModelEnabled}}
+\index{SetModelEnabled@{SetModelEnabled}!Lotus.Core.ILotusModelEnabled@{Lotus.Core.ILotusModelEnabled}}
+\doxysubsubsection{\texorpdfstring{SetModelEnabled()}{SetModelEnabled()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Model\+Enabled.\+Set\+Model\+Enabled (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model,  }\item[{bool}]{enabled }\end{DoxyParamCaption})}
+
+
+
+Установка статуса недоступности объекта(модели). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент View\+Model.\\
+\hline
+{\em enabled} & Статус недоступности.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mvvm/\+View\+Model/Lotus\+View\+Model\+Common.\+cs\end{DoxyCompactItemize}

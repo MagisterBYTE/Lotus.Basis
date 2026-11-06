@@ -1,0 +1,44 @@
+\doxysubsection{Подсистема сообщений}
+\hypertarget{group___core_message}{}\label{group___core_message}\index{Подсистема сообщений@{Подсистема сообщений}}
+
+
+Централизованная подсистема сообщений. Подсистема сообщений предназначена для уведомления всех подписчиков о произошедшем событии посредством соответствующих издателей.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_message_args}{Lotus.\+Core.\+CMessage\+Args}}
+\begin{DoxyCompactList}\small\item\em Базовый класс для определения аргумента сообщения. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XMessage\+Dispatcher}
+\begin{DoxyCompactList}\small\item\em Центральный диспетчер для работы с сообщениями. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XMessage\+Handler\+Result\+Code}
+\begin{DoxyCompactList}\small\item\em Статический класс для определения типовых кодов обработки сообщения. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_message_handler}{Lotus.\+Core.\+ILotus\+Message\+Handler}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для определения возможности обработки сообщения. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_publisher}{Lotus.\+Core.\+ILotus\+Publisher}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса издателя сообщений. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_publisher}{Lotus.\+Core.\+CPublisher}}
+\begin{DoxyCompactList}\small\item\em Издателя сообщения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Централизованная подсистема сообщений. Подсистема сообщений предназначена для уведомления всех подписчиков о произошедшем событии посредством соответствующих издателей. 
+
+\hypertarget{group___core_message_autotoc_md2}{}\doxysubsubsubsection{\texorpdfstring{Возможности/особенности}{Возможности/особенности}}\label{group___core_message_autotoc_md2}
+
+\begin{DoxyEnumerate}
+\item Возможность отправить сообщение любым подписчикам
+\item Легкость реализации обработчика сообщений
+\item Минимальные накладные расходы, высокая скорость работы
+\item Низкая связность и зависимость подсистемы от других подсистем
+\item Полностью интегрирована в систему \doxylink{namespace_lotus}{Lotus} в качестве основной
+\end{DoxyEnumerate}\hypertarget{group___core_message_autotoc_md3}{}\doxysubsubsubsection{\texorpdfstring{Описание}{Описание}}\label{group___core_message_autotoc_md3}
+Подсистема сообщений очень простая и основана на паттерне подписчик/издатель. Отправка сообщений происходит через издателя, и также возможно через статический метод центрального диспетчера сообщений (который создает при необходимости издателя по умолчанию) \doxylink{class_lotus_1_1_core_1_1_c_publisher}{Lotus.\+Core.\+CPublisher}. Для обработки сообщения нужно реализовать соответствующий интерфейс \doxylink{interface_lotus_1_1_core_1_1_i_lotus_message_handler}{Lotus.\+Core.\+ILotus\+Message\+Handler}. Компонент с реализаций интерфейса нужно зарегистрировать в либо диспетчере, либо в соответствующем издателе. Сообщения поступают в очередь и последовательно обрабатываются. Сообщения можно послать подписчикам издателя или через диспетчер всем подписчикам. Сообщения также можно послать из консоли(для Unity). Многие подсистемы реализует интерфейс сообщений для централизованного и унифицированного управления.\hypertarget{group___core_message_autotoc_md4}{}\doxysubsubsubsection{\texorpdfstring{Использование}{Использование}}\label{group___core_message_autotoc_md4}
+
+\begin{DoxyEnumerate}
+\item Реализовать интерфейс \doxylink{interface_lotus_1_1_core_1_1_i_lotus_message_handler}{Lotus.\+Core.\+ILotus\+Message\+Handler}
+\item Зарегистрировать компонент в конкретном издателе \doxylink{class_lotus_1_1_core_1_1_c_publisher}{Lotus.\+Core.\+CPublisher}
+\item Теперь можно посылать команды через издателя \doxylink{class_lotus_1_1_core_1_1_c_publisher}{Lotus.\+Core.\+CPublisher}
+\item Методы диспетчер или издателя нужно использовать в ручную(непосредственно вызывать методы в нужных местах)
+\end{DoxyEnumerate}

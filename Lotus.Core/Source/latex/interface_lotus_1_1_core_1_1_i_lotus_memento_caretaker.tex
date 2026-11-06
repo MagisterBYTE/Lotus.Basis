@@ -1,0 +1,93 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Memento\+Caretaker Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker}{}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker}\index{Lotus.Core.ILotusMementoCaretaker@{Lotus.Core.ILotusMementoCaretaker}}
+
+
+Интерфейс смотрителя за объектом.  
+
+
+Inheritance diagram for Lotus.\+Core.\+ILotus\+Memento\+Caretaker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_a5d55451df819d0388b0759b670752d44}{Save\+State}} (string state\+Name)
+\begin{DoxyCompactList}\small\item\em Сохранить состояние объекта. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_af65299454f3466bafda5c1abee397a9a}{Restore\+State}} (string state\+Name)
+\begin{DoxyCompactList}\small\item\em Восстановить состояние объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_originator}{ILotus\+Memento\+Originator}} \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_af4af25cc00788574825ea6d43f00e241}{Memento\+Originator}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Объект состояние которого сохраняется и восстанавливается. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Интерфейс смотрителя за объектом. 
+
+Смотритель может сохранить состояние объекта и восстановить его. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_af65299454f3466bafda5c1abee397a9a}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_af65299454f3466bafda5c1abee397a9a} 
+\index{Lotus.Core.ILotusMementoCaretaker@{Lotus.Core.ILotusMementoCaretaker}!RestoreState@{RestoreState}}
+\index{RestoreState@{RestoreState}!Lotus.Core.ILotusMementoCaretaker@{Lotus.Core.ILotusMementoCaretaker}}
+\doxysubsubsection{\texorpdfstring{RestoreState()}{RestoreState()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Memento\+Caretaker.\+Restore\+State (\begin{DoxyParamCaption}\item[{string}]{state\+Name }\end{DoxyParamCaption})}
+
+
+
+Восстановить состояние объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state\+Name} & Наименование состояния объекта.\\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_caretaker_a7b37ada9a713211bd4faec356a8eb186}{Lotus.\+Core.\+CMemento\+Caretaker}}, and \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_caretaker_changed_ac170820cce8154de4527f9d321629e59}{Lotus.\+Core.\+CMemento\+Caretaker\+Changed}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_a5d55451df819d0388b0759b670752d44}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_a5d55451df819d0388b0759b670752d44} 
+\index{Lotus.Core.ILotusMementoCaretaker@{Lotus.Core.ILotusMementoCaretaker}!SaveState@{SaveState}}
+\index{SaveState@{SaveState}!Lotus.Core.ILotusMementoCaretaker@{Lotus.Core.ILotusMementoCaretaker}}
+\doxysubsubsection{\texorpdfstring{SaveState()}{SaveState()}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+ILotus\+Memento\+Caretaker.\+Save\+State (\begin{DoxyParamCaption}\item[{string}]{state\+Name }\end{DoxyParamCaption})}
+
+
+
+Сохранить состояние объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state\+Name} & Наименование состояния объекта.\\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_caretaker_ab0d3f55ad32b87125df19939e8171de1}{Lotus.\+Core.\+CMemento\+Caretaker}}, and \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_caretaker_changed_a103e2fb9ef9a31e6662503650e022baa}{Lotus.\+Core.\+CMemento\+Caretaker\+Changed}}.
+
+
+
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_af4af25cc00788574825ea6d43f00e241}\label{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker_af4af25cc00788574825ea6d43f00e241} 
+\index{Lotus.Core.ILotusMementoCaretaker@{Lotus.Core.ILotusMementoCaretaker}!MementoOriginator@{MementoOriginator}}
+\index{MementoOriginator@{MementoOriginator}!Lotus.Core.ILotusMementoCaretaker@{Lotus.Core.ILotusMementoCaretaker}}
+\doxysubsubsection{\texorpdfstring{MementoOriginator}{MementoOriginator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_originator}{ILotus\+Memento\+Originator}} Lotus.\+Core.\+ILotus\+Memento\+Caretaker.\+Memento\+Originator\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Объект состояние которого сохраняется и восстанавливается. 
+
+
+
+Implemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_caretaker_a53bc2888da6c948479ebf627c588a7e3}{Lotus.\+Core.\+CMemento\+Caretaker}}, and \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_caretaker_changed_afb2d19c3f87c596385a7c20ddca656ea}{Lotus.\+Core.\+CMemento\+Caretaker\+Changed}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Memento/Lotus\+Memento\+Caretaker.\+cs\end{DoxyCompactItemize}

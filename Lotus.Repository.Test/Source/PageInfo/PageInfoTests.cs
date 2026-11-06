@@ -1,3 +1,5 @@
+using Lotus.Core;
+
 namespace Lotus.Repository
 {
     /// <summary>
@@ -11,44 +13,44 @@ namespace Lotus.Repository
         [Fact]
         public static void TestPageInfoHelpers()
         {
-            var pages20_100 = XPageInfoHelpers.ToPageInfo(20, 100);
+            var pages20100 = XPageInfoHelpers.ToPageInfo(20, 100);
 
-            Assert.Single(pages20_100);
-            Assert.Equal(0, pages20_100[0].PageNumber);
-            Assert.Equal(20, pages20_100[0].PageSize);
+            Assert.Single(pages20100);
+            Assert.Equal(0, pages20100[0].PageNumber);
+            Assert.Equal(20, pages20100[0].PageSize);
 
 
-            var pages41_10 = XPageInfoHelpers.ToPageInfo(41, 10);
+            var pages4110 = XPageInfoHelpers.ToPageInfo(41, 10);
 
-            Assert.Equal(5, pages41_10.Length);
+            Assert.Equal(5, pages4110.Length);
 
-            Assert.Equal(0, pages41_10[0].PageNumber);
-            Assert.Equal(10, pages41_10[0].PageSize);
+            Assert.Equal(0, pages4110[0].PageNumber);
+            Assert.Equal(10, pages4110[0].PageSize);
 
-            Assert.Equal(1, pages41_10[1].PageNumber);
-            Assert.Equal(10, pages41_10[1].PageSize);
+            Assert.Equal(1, pages4110[1].PageNumber);
+            Assert.Equal(10, pages4110[1].PageSize);
 
-            Assert.Equal(2, pages41_10[2].PageNumber);
-            Assert.Equal(10, pages41_10[2].PageSize);
+            Assert.Equal(2, pages4110[2].PageNumber);
+            Assert.Equal(10, pages4110[2].PageSize);
 
-            Assert.Equal(3, pages41_10[3].PageNumber);
-            Assert.Equal(10, pages41_10[3].PageSize);
+            Assert.Equal(3, pages4110[3].PageNumber);
+            Assert.Equal(10, pages4110[3].PageSize);
 
-            Assert.Equal(4, pages41_10[4].PageNumber);
-            Assert.Equal(1, pages41_10[4].PageSize);
+            Assert.Equal(4, pages4110[4].PageNumber);
+            Assert.Equal(1, pages4110[4].PageSize);
 
-            var pages501_9 = XPageInfoHelpers.ToPageInfo(501, 9);
+            var pages5019 = XPageInfoHelpers.ToPageInfo(501, 9);
 
-            Assert.Equal(56, pages501_9.Length);
+            Assert.Equal(56, pages5019.Length);
 
-            Assert.Equal(0, pages501_9[0].PageNumber);
-            Assert.Equal(9, pages501_9[0].PageSize);
+            Assert.Equal(0, pages5019[0].PageNumber);
+            Assert.Equal(9, pages5019[0].PageSize);
 
-            Assert.Equal(1, pages501_9[1].PageNumber);
-            Assert.Equal(9, pages501_9[1].PageSize);
+            Assert.Equal(1, pages5019[1].PageNumber);
+            Assert.Equal(9, pages5019[1].PageSize);
 
-            Assert.Equal(55, pages501_9[55].PageNumber);
-            Assert.Equal(6, pages501_9[55].PageSize);
+            Assert.Equal(55, pages5019[55].PageNumber);
+            Assert.Equal(6, pages5019[55].PageSize);
         }
     }
 }

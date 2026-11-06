@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using Lotus.Core;
+
 namespace Lotus.Repository
 {
     /** \addtogroup RepositoryStorage

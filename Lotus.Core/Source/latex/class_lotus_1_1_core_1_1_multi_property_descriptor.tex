@@ -1,0 +1,154 @@
+\doxysection{Lotus.\+Core.\+Multi\+Property\+Descriptor Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor}{}\label{class_lotus_1_1_core_1_1_multi_property_descriptor}\index{Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}}
+
+
+Дескриптор свойства, предназначенный для одновременного управления значением одного и того же свойства в группе объектов.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Multi\+Property\+Descriptor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_multi_property_descriptor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_multi_property_descriptor_a777d4f8b734594dd36a05e08909766ce}{Multi\+Property\+Descriptor}} (Property\+Descriptor base\+Prop, \mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{List}}$<$ object $>$ targets)
+\begin{DoxyCompactList}\small\item\em Инициализирует новый экземпляр Multi\+Property\+Descriptor. \end{DoxyCompactList}\item 
+override? object \mbox{\hyperlink{class_lotus_1_1_core_1_1_multi_property_descriptor_a6c165b7ad7fcb362985bbf3875a8b484}{Get\+Value}} (object? component)
+\begin{DoxyCompactList}\small\item\em Возвращает значение свойства. Если у всех объектов значения одинаковы — возвращает это значение, иначе возвращает null. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_multi_property_descriptor_a8911d0055769d92dcac57f058465a4be}{Set\+Value}} (object? component, object? value)
+\begin{DoxyCompactList}\small\item\em Устанавливает новое значение свойства для всех целевых объектов. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_multi_property_descriptor_a0fa4b700a1131eef34696c98e5755031}{Can\+Reset\+Value}} (object component)
+\begin{DoxyCompactList}\small\item\em Определяет, можно ли сбросить значение свойства к состоянию по умолчанию. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_multi_property_descriptor_a2b3df19fedab936e605bc24072b8e556}{Reset\+Value}} (object component)
+\begin{DoxyCompactList}\small\item\em Сбрасывает значение свойства ко всем целевым объектам. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_multi_property_descriptor_a9d44483361beec3080d33439a73d77c4}{Should\+Serialize\+Value}} (object component)
+\begin{DoxyCompactList}\small\item\em Определяет, должно ли значение свойства сериализоваться. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_a7219ecd4b87cf0b0b273276b40143415}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_a7219ecd4b87cf0b0b273276b40143415} 
+override Type {\bfseries Component\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возвращает тип компонента, которому принадлежит это свойство. Используется Multi\+Object для корректной работы с Property\+Grid. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_ab6e71441a981403a5c4316daba84b043}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_ab6e71441a981403a5c4316daba84b043} 
+override bool {\bfseries Is\+Read\+Only}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Указывает, является ли свойство доступным только для чтения. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_a09a08c2e83db9e545aa5a3e588d55ea8}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_a09a08c2e83db9e545aa5a3e588d55ea8} 
+override Type {\bfseries Property\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возвращает тип данных свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Дескриптор свойства, предназначенный для одновременного управления значением одного и того же свойства в группе объектов. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_a777d4f8b734594dd36a05e08909766ce}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_a777d4f8b734594dd36a05e08909766ce} 
+\index{Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}!MultiPropertyDescriptor@{MultiPropertyDescriptor}}
+\index{MultiPropertyDescriptor@{MultiPropertyDescriptor}!Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{MultiPropertyDescriptor()}{MultiPropertyDescriptor()}}
+{\footnotesize\ttfamily Lotus.\+Core.\+Multi\+Property\+Descriptor.\+Multi\+Property\+Descriptor (\begin{DoxyParamCaption}\item[{Property\+Descriptor}]{base\+Prop,  }\item[{\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{List}}$<$ object $>$}]{targets }\end{DoxyParamCaption})}
+
+
+
+Инициализирует новый экземпляр Multi\+Property\+Descriptor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Prop} & Базовый дескриптор свойства для копирования атрибутов и метаданных.\\
+\hline
+{\em targets} & Список объектов, значения которых будут синхронизироваться.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_a0fa4b700a1131eef34696c98e5755031}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_a0fa4b700a1131eef34696c98e5755031} 
+\index{Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}!CanResetValue@{CanResetValue}}
+\index{CanResetValue@{CanResetValue}!Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{CanResetValue()}{CanResetValue()}}
+{\footnotesize\ttfamily override bool Lotus.\+Core.\+Multi\+Property\+Descriptor.\+Can\+Reset\+Value (\begin{DoxyParamCaption}\item[{object}]{component }\end{DoxyParamCaption})}
+
+
+
+Определяет, можно ли сбросить значение свойства к состоянию по умолчанию. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em component} & Объект для проверки.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_a6c165b7ad7fcb362985bbf3875a8b484}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_a6c165b7ad7fcb362985bbf3875a8b484} 
+\index{Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily override? object Lotus.\+Core.\+Multi\+Property\+Descriptor.\+Get\+Value (\begin{DoxyParamCaption}\item[{object?}]{component }\end{DoxyParamCaption})}
+
+
+
+Возвращает значение свойства. Если у всех объектов значения одинаковы — возвращает это значение, иначе возвращает null. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em component} & Игнорируется, так как используются внутренние цели \+\_\+targets.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Общее значение или null.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_a2b3df19fedab936e605bc24072b8e556}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_a2b3df19fedab936e605bc24072b8e556} 
+\index{Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}!ResetValue@{ResetValue}}
+\index{ResetValue@{ResetValue}!Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{ResetValue()}{ResetValue()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+Multi\+Property\+Descriptor.\+Reset\+Value (\begin{DoxyParamCaption}\item[{object}]{component }\end{DoxyParamCaption})}
+
+
+
+Сбрасывает значение свойства ко всем целевым объектам. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em component} & Объект, на котором производится сброс.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_a8911d0055769d92dcac57f058465a4be}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_a8911d0055769d92dcac57f058465a4be} 
+\index{Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+Multi\+Property\+Descriptor.\+Set\+Value (\begin{DoxyParamCaption}\item[{object?}]{component,  }\item[{object?}]{value }\end{DoxyParamCaption})}
+
+
+
+Устанавливает новое значение свойства для всех целевых объектов. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em component} & Компонент, инициирующий изменение.\\
+\hline
+{\em value} & Новое значение для установки.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_multi_property_descriptor_a9d44483361beec3080d33439a73d77c4}\label{class_lotus_1_1_core_1_1_multi_property_descriptor_a9d44483361beec3080d33439a73d77c4} 
+\index{Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}!ShouldSerializeValue@{ShouldSerializeValue}}
+\index{ShouldSerializeValue@{ShouldSerializeValue}!Lotus.Core.MultiPropertyDescriptor@{Lotus.Core.MultiPropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{ShouldSerializeValue()}{ShouldSerializeValue()}}
+{\footnotesize\ttfamily override bool Lotus.\+Core.\+Multi\+Property\+Descriptor.\+Should\+Serialize\+Value (\begin{DoxyParamCaption}\item[{object}]{component }\end{DoxyParamCaption})}
+
+
+
+Определяет, должно ли значение свойства сериализоваться. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em component} & Проверяемый объект.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Всегда false для исключения дублирования данных.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Component\+Model/Lotus\+Multi\+Property\+Descriptor.\+cs\end{DoxyCompactItemize}

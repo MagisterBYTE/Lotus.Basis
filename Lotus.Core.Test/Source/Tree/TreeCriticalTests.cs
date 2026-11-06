@@ -55,7 +55,7 @@ namespace Lotus.Core.Tree
         }
 
         /// <summary>
-        /// Тест TreeNodeBuilder - корректная работа с исправленными именами переменных (nodeNew вместо node_new, nodeRoot вместо node_root).
+        /// Тест TreeNodeBuilder - корректная работа с исправленными именами переменных (nodeNew вместо nodeNew, nodeRoot вместо nodeRoot).
         /// </summary>
         [Test]
         public void TreeNodeBuilder_ByFilter_ShouldUseCorrectVariableNames()

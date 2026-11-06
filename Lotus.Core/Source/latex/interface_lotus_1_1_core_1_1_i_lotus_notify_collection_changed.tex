@@ -1,0 +1,41 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Notify\+Collection\+Changed Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_notify_collection_changed}{}\label{interface_lotus_1_1_core_1_1_i_lotus_notify_collection_changed}\index{Lotus.Core.ILotusNotifyCollectionChanged@{Lotus.Core.ILotusNotifyCollectionChanged}}
+
+
+Определение дополнительного интерфейса для нотификации изменения коллекции.  
+
+
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Action$<$ \mbox{\hyperlink{group___core_notify_interfaces_ga13e1179d0286602e99b333a35fbc0e66}{TNotify\+Collection\+Changed\+Action}}, object, int, int $>$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_notify_collection_changed_a40f69da0d76db48ae5d94e9eaaa535ba}{On\+Collection\+Changed}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации о любом изменении коллекции. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Определение дополнительного интерфейса для нотификации изменения коллекции. 
+
+Реализация данного интерфейса любой коллекции определяет так называемую наблюдаемую коллекцию. Наблюдаемая коллекция -\/ коллекция которая информирует о всех изменения которые происходят с ней 
+
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_notify_collection_changed_a40f69da0d76db48ae5d94e9eaaa535ba}\label{interface_lotus_1_1_core_1_1_i_lotus_notify_collection_changed_a40f69da0d76db48ae5d94e9eaaa535ba} 
+\index{Lotus.Core.ILotusNotifyCollectionChanged@{Lotus.Core.ILotusNotifyCollectionChanged}!OnCollectionChanged@{OnCollectionChanged}}
+\index{OnCollectionChanged@{OnCollectionChanged}!Lotus.Core.ILotusNotifyCollectionChanged@{Lotus.Core.ILotusNotifyCollectionChanged}}
+\doxysubsubsection{\texorpdfstring{OnCollectionChanged}{OnCollectionChanged}}
+{\footnotesize\ttfamily Action$<$\mbox{\hyperlink{group___core_notify_interfaces_ga13e1179d0286602e99b333a35fbc0e66}{TNotify\+Collection\+Changed\+Action}}, object, int, int$>$ Lotus.\+Core.\+ILotus\+Notify\+Collection\+Changed.\+On\+Collection\+Changed\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Событие для нотификации о любом изменении коллекции. 
+
+Аргументы\+:
+\begin{DoxyItemize}
+\item Тип происходящего действия
+\item Объект -\/ элемент над которым производится действия, либо коллекция
+\item Индекс элемента
+\item Количество элементов Интерпретацию передаваемых аргументов смотреть в комментариях к перечислению TNotify\+Collection\+Changed\+Action 
+\end{DoxyItemize}
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mvvm/\+Notify\+Interfaces/Lotus\+Notify\+Collection\+Changed.\+cs\end{DoxyCompactItemize}

@@ -20,10 +20,10 @@ namespace Lotus.Core
         /// <returns>Узел дерева представляющего собой директорию.</returns>
         public static CFileSystemDirectory Build(string path)
         {
-            var dir_info = new DirectoryInfo(path);
-            var dir_model = new CFileSystemDirectory(dir_info);
-            dir_model.RecursiveFileSystemInfo();
-            return dir_model;
+            var dirInfo = new DirectoryInfo(path);
+            var dirModel = new CFileSystemDirectory(dirInfo);
+            dirModel.RecursiveFileSystemInfo();
+            return dirModel;
         }
         #endregion
 
@@ -319,21 +319,21 @@ namespace Lotus.Core
         {
             _entities.Clear();
 
-            var dirs_info = Info.GetDirectories();
-            var files_info = Info.GetFiles();
+            var dirsInfo = Info.GetDirectories();
+            var filesInfo = Info.GetFiles();
 
             // Сначала директории
-            for (var i = 0; i < dirs_info.Length; i++)
+            for (var i = 0; i < dirsInfo.Length; i++)
             {
-                var dir_info = dirs_info[i];
-                AddDirectory(dir_info);
+                var dirInfo = dirsInfo[i];
+                AddDirectory(dirInfo);
             }
 
             // Теперь файлы
-            for (var i = 0; i < files_info.Length; i++)
+            for (var i = 0; i < filesInfo.Length; i++)
             {
-                var file_info = files_info[i];
-                AddFile(file_info);
+                var fileInfo = filesInfo[i];
+                AddFile(fileInfo);
             }
         }
 
@@ -344,22 +344,22 @@ namespace Lotus.Core
         {
             _entities.Clear();
 
-            var dirs_info = Info.GetDirectories();
-            var files_info = Info.GetFiles();
+            var dirsInfo = Info.GetDirectories();
+            var filesInfo = Info.GetFiles();
 
             // Сначала директории
-            for (var i = 0; i < dirs_info.Length; i++)
+            for (var i = 0; i < dirsInfo.Length; i++)
             {
-                var dir_info = dirs_info[i];
-                var directory = AddDirectory(dir_info);
+                var dirInfo = dirsInfo[i];
+                var directory = AddDirectory(dirInfo);
                 directory?.GetFileSystemItems();
             }
 
             // Теперь файлы
-            for (var i = 0; i < files_info.Length; i++)
+            for (var i = 0; i < filesInfo.Length; i++)
             {
-                var file_info = files_info[i];
-                AddFile(file_info);
+                var fileInfo = filesInfo[i];
+                AddFile(fileInfo);
             }
         }
 
@@ -408,39 +408,39 @@ namespace Lotus.Core
         /// </summary>
         public void RecursiveFileSystemInfoTwoLevel()
         {
-            var dirs_info = Info.GetDirectories();
-            var files_info = Info.GetFiles();
+            var dirsInfo = Info.GetDirectories();
+            var filesInfo = Info.GetFiles();
 
             // Сначала директории
-            for (var i = 0; i < dirs_info.Length; i++)
+            for (var i = 0; i < dirsInfo.Length; i++)
             {
-                var dir_info = dirs_info[i];
-                var sub_directory = AddDirectory(dir_info);
+                var dirInfo = dirsInfo[i];
+                var subDirectory = AddDirectory(dirInfo);
 
                 //// 2 уровень
-                //for (Int32 i2 = 0; i2 < dirs_info.Length; i2++)
+                //for (Int32 i2 = 0; i2 < dirsInfo.Length; i2++)
                 //{
-                //	//DirectoryInfo[] sub_directories_2 = dirs_info[i2].GetDirectories();
-                //	//FileInfo[] files_2 = dirs_info[i2].GetFiles();
+                //	//DirectoryInfo[] subDirectories2 = dirsInfo[i2].GetDirectories();
+                //	//FileInfo[] files2 = dirsInfo[i2].GetFiles();
 
                 //	//// Сначала директории
-                //	//for (Int32 i2d = 0; i2d < sub_directories_2.Length; i2d++)
+                //	//for (Int32 i2d = 0; i2d < subDirectories2.Length; i2d++)
                 //	//{
-                //	//	CFileSystemDirectory sub_directory_node2 = new CFileSystemDirectory(sub_directories_2[i2d]);
+                //	//	CFileSystemDirectory subDirectoryNode2 = new CFileSystemDirectory(subDirectories2[i2d]);
 
-                //	//	if (sub_directory_node2.Name.Contains(".git")) continue;
-                //	//	if (sub_directory_node2.Name.Contains(".vs")) continue;
+                //	//	if (subDirectoryNode2.Name.Contains(".git")) continue;
+                //	//	if (subDirectoryNode2.Name.Contains(".vs")) continue;
 
-                //	//	sub_directory_node.Entities.Add(sub_directory_node2);
+                //	//	subDirectoryNode.Entities.Add(subDirectoryNode2);
                 //	//}
                 //}
             }
 
             // Теперь файлы
-            for (var i = 0; i < files_info.Length; i++)
+            for (var i = 0; i < filesInfo.Length; i++)
             {
-                var file_info = files_info[i];
-                AddFile(file_info);
+                var fileInfo = filesInfo[i];
+                AddFile(fileInfo);
             }
         }
 
@@ -450,31 +450,31 @@ namespace Lotus.Core
         /// <param name="parentDirectoryNode">Родительский узел директории.</param>
         protected void RecursiveFileSystemInfo(CFileSystemDirectory parentDirectoryNode)
         {
-            var sub_directories = parentDirectoryNode.Info.GetDirectories();
+            var subDirectories = parentDirectoryNode.Info.GetDirectories();
             var files = parentDirectoryNode.Info.GetFiles();
 
             // Сначала директории
-            for (var i = 0; i < sub_directories.Length; i++)
+            for (var i = 0; i < subDirectories.Length; i++)
             {
-                var sub_directory_node = new CFileSystemDirectory(sub_directories[i]);
+                var subDirectoryNode = new CFileSystemDirectory(subDirectories[i]);
 
-                if (sub_directory_node.Name.Contains(".git")) continue;
-                if (sub_directory_node.Name.Contains(".vs")) continue;
+                if (subDirectoryNode.Name.Contains(".git")) continue;
+                if (subDirectoryNode.Name.Contains(".vs")) continue;
 
-                _entities.Add(sub_directory_node);
+                _entities.Add(subDirectoryNode);
 
-                sub_directory_node.RecursiveFileSystemInfo(sub_directory_node);
+                subDirectoryNode.RecursiveFileSystemInfo(subDirectoryNode);
             }
 
             // Теперь файлы
             for (var i = 0; i < files.Length; i++)
             {
-                var file_info = files[i];
+                var fileInfo = files[i];
 
-                if (file_info.Extension == ".meta") continue;
+                if (fileInfo.Extension == ".meta") continue;
 
-                var file_node = new CFileSystemFile(file_info);
-                _entities.Add(file_node);
+                var fileNode = new CFileSystemFile(fileInfo);
+                _entities.Add(fileNode);
             }
         }
 
@@ -487,10 +487,10 @@ namespace Lotus.Core
         {
             for (var i = 0; i < _entities.Count; i++)
             {
-                var dir_node = _entities[i] as CFileSystemDirectory;
-                if (dir_node != null)
+                var dirNode = _entities[i] as CFileSystemDirectory;
+                if (dirNode != null)
                 {
-                    if (dir_node.Info.Name == dirInfo.Name)
+                    if (dirNode.Info.Name == dirInfo.Name)
                     {
                         return true;
                     }
@@ -509,10 +509,10 @@ namespace Lotus.Core
         {
             for (var i = 0; i < _entities.Count; i++)
             {
-                var file_node = _entities[i] as CFileSystemFile;
-                if (file_node != null && file_node.Info != null)
+                var fileNode = _entities[i] as CFileSystemFile;
+                if (fileNode != null && fileNode.Info != null)
                 {
-                    if (file_node.Info.Name == fileInfo.Name)
+                    if (fileNode.Info.Name == fileInfo.Name)
                     {
                         return true;
                     }
@@ -531,12 +531,12 @@ namespace Lotus.Core
         {
             for (var i = 0; i < _entities.Count; i++)
             {
-                var dir_node = _entities[i] as CFileSystemDirectory;
-                if (dir_node != null && dir_node.Info != null)
+                var dirNode = _entities[i] as CFileSystemDirectory;
+                if (dirNode != null && dirNode.Info != null)
                 {
-                    if (dir_node.Info.Name == dirInfo.Name)
+                    if (dirNode.Info.Name == dirInfo.Name)
                     {
-                        return dir_node;
+                        return dirNode;
                     }
                 }
             }
@@ -553,12 +553,12 @@ namespace Lotus.Core
         {
             for (var i = 0; i < _entities.Count; i++)
             {
-                var file_node = _entities[i] as CFileSystemFile;
-                if (file_node != null && file_node.Info != null)
+                var fileNode = _entities[i] as CFileSystemFile;
+                if (fileNode != null && fileNode.Info != null)
                 {
-                    if (file_node.Info.Name == fileInfo.Name)
+                    if (fileNode.Info.Name == fileInfo.Name)
                     {
-                        return file_node;
+                        return fileNode;
                     }
                 }
             }
@@ -575,27 +575,27 @@ namespace Lotus.Core
         {
             if (isDirectoryName)
             {
-                var dest_path_dir = Path.Combine(path, Info.Name);
-                if (Directory.Exists(dest_path_dir) == false)
+                var destPathDir = Path.Combine(path, Info.Name);
+                if (Directory.Exists(destPathDir) == false)
                 {
-                    Directory.CreateDirectory(dest_path_dir);
+                    Directory.CreateDirectory(destPathDir);
                 }
             }
 
             for (var i = 0; i < _entities.Count; i++)
             {
-                var file_node = _entities[i] as CFileSystemFile;
-                if (file_node != null && file_node.Info != null)
+                var fileNode = _entities[i] as CFileSystemFile;
+                if (fileNode != null && fileNode.Info != null)
                 {
                     if (isDirectoryName)
                     {
-                        var dest_path = Path.Combine(path, Info.Name, file_node.Info.Name);
-                        File.Copy(file_node.Info.FullName, dest_path);
+                        var destPath = Path.Combine(path, Info.Name, fileNode.Info.Name);
+                        File.Copy(fileNode.Info.FullName, destPath);
                     }
                     else
                     {
-                        var dest_path = Path.Combine(path, file_node.Info.Name);
-                        File.Copy(file_node.Info.FullName, dest_path);
+                        var destPath = Path.Combine(path, fileNode.Info.Name);
+                        File.Copy(fileNode.Info.FullName, destPath);
                     }
                 }
             }

@@ -239,7 +239,7 @@ namespace Lotus.Maths
                 /* generate N words at one time */
                 short kk;
 
-                if (_mti == SIZE + 1)   /* if init_genrand() has not been called, */
+                if (_mti == SIZE + 1)   /* if initGenrand() has not been called, */
                     InitGenrand(5489); /* a default initial seed is used */
 
                 for (kk = 0; kk < SIZE - PERIOD; kk++)

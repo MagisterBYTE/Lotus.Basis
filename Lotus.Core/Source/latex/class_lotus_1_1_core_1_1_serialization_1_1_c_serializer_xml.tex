@@ -1,0 +1,57 @@
+\doxysection{Lotus.\+Core.\+Serialization.\+CSerializer\+Xml Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_serialization_1_1_c_serializer_xml}{}\label{class_lotus_1_1_core_1_1_serialization_1_1_c_serializer_xml}\index{Lotus.Core.Serialization.CSerializerXml@{Lotus.Core.Serialization.CSerializerXml}}
+
+
+Cериализатор для сохранения/загрузки объектов в формат Xml.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Serialization.\+CSerializer\+Xml\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_lotus_1_1_core_1_1_serialization_1_1_c_serializer_xml}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer}{Lotus.\+Core.\+Serialization.\+CBase\+Serializer}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries CBase\+Serializer} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer_ae00352ec5ce129ccbc06d3adfbaf6c1f}{CBase\+Serializer}} (string name)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer_a83540e58e011459ad5d8611c426e8492}{Save\+To}} (string file\+Name, object instance, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameters}{CParameters}}? parameters=null)
+\begin{DoxyCompactList}\small\item\em Сохранения объекта в файл. \end{DoxyCompactList}\item 
+virtual ? object \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer_abce0400af5077668a76322acb286c5df}{Load\+From}} (string file\+Name, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameters}{CParameters}}? parameters=null)
+\begin{DoxyCompactList}\small\item\em Загрузка объекта из файла. \end{DoxyCompactList}\item 
+virtual ? TResult\+Type \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer_a8d70d99ba21acefcb07110335e0ff6fd}{Load\+From$<$ TResult\+Type $>$}} (string file\+Name, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameters}{CParameters}}? parameters=null)
+\begin{DoxyCompactList}\small\item\em Загрузка объекта из файла. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer_ad91ad2a1a11f98e7af5ea131258ec180}{Update\+From}} (object instance, string file\+Name, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameters}{CParameters}}? parameters=null)
+\begin{DoxyCompactList}\small\item\em Обновление объекта из файла. \end{DoxyCompactList}\item 
+void {\bfseries Update\+Serializable\+Before\+Save} ()
+\begin{DoxyCompactList}\small\item\em Обновление объектов поддерживающих интерфейс сериализации перед сохранением. \end{DoxyCompactList}\item 
+void {\bfseries Update\+Serializable\+After\+Save} ()
+\begin{DoxyCompactList}\small\item\em Обновление объектов поддерживающих интерфейс сериализации после сохранения. \end{DoxyCompactList}\item 
+void {\bfseries Update\+Serializable\+Before\+Load} ()
+\begin{DoxyCompactList}\small\item\em Обновление объектов поддерживающих интерфейс сериализации перед загрузкой. \end{DoxyCompactList}\item 
+void {\bfseries Update\+Serializable\+After\+Load} ()
+\begin{DoxyCompactList}\small\item\em Обновление объектов поддерживающих интерфейс сериализации после полной загрузки. \end{DoxyCompactList}\item 
+void {\bfseries Clear\+Serializable\+Objects} ()
+\begin{DoxyCompactList}\small\item\em Очистка словаря объектов поддерживающих интерфейс сериализации. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer}{Lotus.\+Core.\+Serialization.\+CBase\+Serializer}}}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_serialization_1_1_c_base_serializer_aa4afc8733111d6da2b799535b5927359}{Name}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имя сериализатора. \end{DoxyCompactList}\item 
+virtual Func$<$ string, object $>$ {\bfseries Constructor}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Конструктор для создания объекта по имени типа. \end{DoxyCompactList}\item 
+virtual Dictionary$<$ long, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_serialization_1_1_i_lotus_serializable_object}{ILotus\+Serializable\+Object}} $>$ {\bfseries Serializable\+Objects}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Словарь всех объектов поддерживающих интерфейс сериализации объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_nameable}{Lotus.\+Core.\+ILotus\+Nameable}}}
+
+
+\doxysubsection{Detailed Description}
+Cериализатор для сохранения/загрузки объектов в формат Xml. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Serialization/\+Serializers/\+Xml/Lotus\+Serializer\+Xml.\+cs\end{DoxyCompactItemize}

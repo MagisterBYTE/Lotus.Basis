@@ -38,8 +38,8 @@ namespace Lotus.Core
                 {
                     if (_info != null)
                     {
-                        var new_file_path = XFilePath.GetPathForRenameFile(_info.FullName, value);
-                        File.Move(_info.FullName, new_file_path);
+                        var newFilePath = XFilePath.GetPathForRenameFile(_info.FullName, value);
+                        File.Move(_info.FullName, newFilePath);
                         _name = value;
                         OnPropertyChanged(PropertyArgsName);
                         RaiseNameChanged();
@@ -124,8 +124,8 @@ namespace Lotus.Core
 #if UNITY_EDITOR
 			if (_info != null)
 			{
-                string new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, newFileName);
-				_info = new FileInfo(new_path);
+                string newPath = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, newFileName);
+				_info = new FileInfo(newPath);
 				_name = _info.Name;
 				OnPropertyChanged(PropertyArgsName);
 				RaiseNameChanged();
@@ -144,18 +144,18 @@ namespace Lotus.Core
         {
             if (_info != null)
             {
-                var file_name = _info.Name.RemoveExtension();
+                var fileName = _info.Name.RemoveExtension();
                 switch (searchOption)
                 {
                     case TStringSearchOption.Start:
                         {
-                            var index = file_name.IndexOf(check);
+                            var index = fileName.IndexOf(check);
                             if (index > -1)
                             {
 #if UNITY_EDITOR
-								file_name = file_name.Remove(index, check.Length);
-                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, file_name);
-                                    _info = new FileInfo(new_path);
+								fileName = fileName.Remove(index, check.Length);
+                                    var newPath = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, fileName);
+                                    _info = new FileInfo(newPath);
                                     _name = _info.Name;
 #else
 
@@ -165,13 +165,13 @@ namespace Lotus.Core
                         break;
                     case TStringSearchOption.End:
                         {
-                            var index = file_name.LastIndexOf(check);
+                            var index = fileName.LastIndexOf(check);
                             if (index > -1)
                             {
 #if UNITY_EDITOR
-								file_name = file_name.Remove(index, check.Length);
-                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, file_name);
-                                    _info = new FileInfo(new_path);
+								fileName = fileName.Remove(index, check.Length);
+                                    var newPath = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, fileName);
+                                    _info = new FileInfo(newPath);
                                     _name = _info.Name;
 #else
 
@@ -199,18 +199,18 @@ namespace Lotus.Core
         {
             if (_info != null)
             {
-                var file_name = _info.Name.RemoveExtension();
+                var fileName = _info.Name.RemoveExtension();
                 switch (searchOption)
                 {
                     case TStringSearchOption.Start:
                         {
-                            var index = file_name.IndexOf(source);
+                            var index = fileName.IndexOf(source);
                             if (index > -1)
                             {
 #if UNITY_EDITOR
-								file_name = file_name.Replace(source, target);
-                                    var new_path = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, file_name);
-                                    _info = new FileInfo(new_path);
+								fileName = fileName.Replace(source, target);
+                                    var newPath = XEditorAssetDatabase.RenameAssetFromFullPath(_info.FullName, fileName);
+                                    _info = new FileInfo(newPath);
                                     _name = _info.Name;
 #else
 

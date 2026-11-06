@@ -1,0 +1,702 @@
+\doxysection{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy\texorpdfstring{$<$}{<} TView\+Model\+Hierarchy, TModel \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+
+
+Шаблон коллекции для элементов View\+Model которая поддерживает концепцию просмотра и управления с полноценной поддержкой всех операций.  
+
+
+Inheritance diagram for Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy\texorpdfstring{$<$}{<} TView\+Model\+Hierarchy, TModel \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.413793cm]{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a52053aab36b3b3486fb75f028f0b370d}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a52053aab36b3b3486fb75f028f0b370d} 
+{\bfseries Collection\+View\+Model\+Hierarchy} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_aec054d855076446ded12958464b182ba}{Collection\+View\+Model\+Hierarchy}} (string name)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a4f9b96ed45cf80827881391a10c3ec37}{Collection\+View\+Model\+Hierarchy}} (string name, object source)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+override object \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_af6b744a17512ec6a57b9db6e1e915d83}{Clone}} ()
+\begin{DoxyCompactList}\small\item\em Получение копии объекта. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a10c386b13ce2d40faa362f889c615dbb}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}$<$ TModel\+Data $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a8143eb790e18289335c3262a71bbfb7f}{Create\+View\+Model$<$ TModel\+Data $>$}} (TModel\+Data model)
+\begin{DoxyCompactList}\small\item\em Создание конкретной View\+Model для указанной модели. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a3f9cb269a5c1366847faaabe736467bc}{Reset\+Source}} ()
+\begin{DoxyCompactList}\small\item\em Переустановка источника данных. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a7e1b70bb8e6c3da0cbf6f1ed3860d0c3}{Unset\+All\+Selected}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} exclude)
+\begin{DoxyCompactList}\small\item\em Выключение выбора всех элементов View\+Model кроме исключаемого. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a9e43ba3c10b5b00708b1e8feceeb1b8d}{Unset\+All\+Present}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} exclude, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameters}{CParameters}} parameters)
+\begin{DoxyCompactList}\small\item\em Выключение презентации сех элементов View\+Model кроме исключаемого. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_aca0ba460963661a97b26fa8dbe2db653}{Create\+View\+Model\+Hierarchy}} (object model, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}? parent)
+\begin{DoxyCompactList}\small\item\em Создание конкретной View\+Model для указанной модели. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_aed82041df77708749eed2ef121378290}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_aed82041df77708749eed2ef121378290} 
+virtual void {\bfseries Expanded} ()
+\begin{DoxyCompactList}\small\item\em Раскрытие всего элемента View\+Model. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a18c157440be38e88055e1417b4246357}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a18c157440be38e88055e1417b4246357} 
+virtual void {\bfseries Collapsed} ()
+\begin{DoxyCompactList}\small\item\em Сворачивание всего элемента View\+Model. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_adae4d727cc6163055c14f62793259fc6}{Get\+Count\+Checked}} ()
+\begin{DoxyCompactList}\small\item\em Получение количество выделенных элементов View\+Model включая дочерние. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a37cc6aed1b18aff63923a8db69ea8af3}{Visit}} (Predicate$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}} $>$ match)
+\begin{DoxyCompactList}\small\item\em Посещение каждого элемента View\+Model с указанным предикатом. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_ac577655421c6733f511bba10c54c7fe0}{Update\+Owned\+Objects}} ()
+\begin{DoxyCompactList}\small\item\em Обновление связей для зависимых объектов. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6f72e472f02040510133bfd4454fb890}{On\+Notify\+Updating}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, object? data, string data\+Name)
+\begin{DoxyCompactList}\small\item\em Информирование данного объекта о начале изменения данных указанного объекта. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_ad5399444ac515e4dd50f90cf9dffc333}{On\+Notify\+Updated}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, object? data, string data\+Name)
+\begin{DoxyCompactList}\small\item\em Информирование данного объекта об окончании изменении данных указанного объекта. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a332bdb9213f9e80a34ccc94692cbc729}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a332bdb9213f9e80a34ccc94692cbc729} 
+override void {\bfseries Sort\+Ascending} ()
+\begin{DoxyCompactList}\small\item\em Сортировка списка по возрастанию. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6cfccfaf4e26b2713529809a200dc89d}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6cfccfaf4e26b2713529809a200dc89d} 
+override void {\bfseries Sort\+Descending} ()
+\begin{DoxyCompactList}\small\item\em Сортировка списка по убыванию. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a1d0becb12551e810e6791ac091a9939b}{Dublicate\+Selected\+Item}} ()
+\begin{DoxyCompactList}\small\item\em Дублирование текущего элемента и добавление элемента в список элементов. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a596e4e0d9eb91b18e0c2110c34ee3f2e}{Delete\+Selected\+Item}} ()
+\begin{DoxyCompactList}\small\item\em Удаление текущего элемента из списка (удаляется объект). \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a5c3d28629e76eaa094beb3555544d6f5}{Move\+Selected\+Backward}} ()
+\begin{DoxyCompactList}\small\item\em Перемещение текущего элемента назад. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a7526b1fd73797d9bc27ee0584b3e9bd7}{Move\+Selected\+Forward}} ()
+\begin{DoxyCompactList}\small\item\em Перемещение текущего элемента вперед. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Collection\+View\+Model} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a207d884d6a64f2e186b86cc8b2915c64}{Collection\+View\+Model}} (string name)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_ad08e4a589825d411c982c45c5b6e6ff4}{Collection\+View\+Model}} (string name, object source)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a457d6df74b5d788c307464d4e5d2c5af}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Освобождение управляемых ресурсов. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a60ae6bf23c453712d472598983ce019e}{Create\+View\+Model}} (object model)
+\begin{DoxyCompactList}\small\item\em Создание конкретной View\+Model для указанной модели. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_ae980106953f8c6ea5a2d17cfa89ccdcd}{Attach\+Owned\+Object}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, bool add)
+\begin{DoxyCompactList}\small\item\em Присоединение указанного зависимого объекта. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a572aac2f1513b1b5377b3d59597c52a4}{Detach\+Owned\+Object}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, bool remove)
+\begin{DoxyCompactList}\small\item\em Отсоединение указанного зависимого объекта. \end{DoxyCompactList}\item 
+override void {\bfseries Sort\+Ascending} ()
+\begin{DoxyCompactList}\small\item\em Сортировка списка по возрастанию. \end{DoxyCompactList}\item 
+override void {\bfseries Sort\+Descending} ()
+\begin{DoxyCompactList}\small\item\em Сортировка списка по убыванию. \end{DoxyCompactList}\item 
+void {\bfseries Unselect} ()
+\begin{DoxyCompactList}\small\item\em Сброс выделения списка. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a3e7a6295e08b661e9d74d854a6ffa595}{Get\+Selected\+Indexes}} ()
+\begin{DoxyCompactList}\small\item\em Служебный метод. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model}{Lotus.\+Core.\+ILotus\+Collection\+View\+Model}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_adb5935d0b73c769bc3280c0da9a4ac95}{Create\+View\+Model}} (object model)
+\begin{DoxyCompactList}\small\item\em Создание конкретной View\+Model для указанной модели. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{Lotus.\+Core.\+ILotus\+Owner\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object_a0971113308b9cd7a8cae08324fcd728d}{Attach\+Owned\+Object}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, bool add)
+\begin{DoxyCompactList}\small\item\em Присоединение указанного зависимого объекта. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object_ac80151d28ee8d543d81b55963b90c1d1}{Detach\+Owned\+Object}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, bool remove)
+\begin{DoxyCompactList}\small\item\em Отсоединение указанного зависимого объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static TView\+Model\+Hierarchy \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a1dd0e7cdc5211a96697fdf21150528e3}{Build}} (TModel root\+Model, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}} owner)
+\begin{DoxyCompactList}\small\item\em Рекурсивное создание элементов View\+Model. \end{DoxyCompactList}\item 
+static TView\+Model\+Hierarchy \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a785e6197e2a08ec2f2b62f56d654646b}{Build}} (TModel model, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}? parent, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}} owner)
+\begin{DoxyCompactList}\small\item\em Рекурсивное создание элементов View\+Model. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6117976e922976b44ba21abdd90e4728}{Build\+From\+Parent}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}? parent, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}} owner)
+\begin{DoxyCompactList}\small\item\em Рекурсивное создание элементов View\+Model. \end{DoxyCompactList}\item 
+static TView\+Model\+Hierarchy \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a110e4c738d4860c36fef5635f9f5b690}{Build\+Filter}} (TModel root\+Model, Predicate$<$ TModel?$>$ filter, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}} owner)
+\begin{DoxyCompactList}\small\item\em Рекурсивное создание элементов View\+Model. \end{DoxyCompactList}\item 
+static TView\+Model\+Hierarchy \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6cadfe70933f2c38b2d9df628c9dd06d}{Build\+Filter}} (TModel model, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}? parent, Predicate$<$ TModel?$>$ filter, \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}} owner)
+\begin{DoxyCompactList}\small\item\em Рекурсивное создание элементов View\+Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_abd23b22fd7b05c05096c8da1086ec2a7}{Comprare\+Of\+Ascending}} (TView\+Model? left, TView\+Model? right)
+\begin{DoxyCompactList}\small\item\em Сравнение элементов View\+Model по возрастанию. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static readonly bool {\bfseries Is\+Support\+Nameable}
+\begin{DoxyCompactList}\small\item\em Статус реализации типом интерейса ILotus\+Nameable. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Support\+Identifier\+Int}
+\begin{DoxyCompactList}\small\item\em Статус реализации типом интерейса ILotus\+Identifier\+Int. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Support\+Model\+Selected}
+\begin{DoxyCompactList}\small\item\em Статус реализации типом интерейса ILotus\+Model\+Selected. \end{DoxyCompactList}\item 
+static readonly bool {\bfseries Is\+Support\+Model\+Enabled}
+\begin{DoxyCompactList}\small\item\em Статус реализации типом интерейса ILotus\+Model\+Enabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a6e11113e001d8b7e00fb043e207bbc15}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Освобождение управляемых ресурсов. \end{DoxyCompactList}\item 
+virtual void {\bfseries Raise\+Name\+Changed} ()
+\begin{DoxyCompactList}\small\item\em Изменение имени коллекции. Метод автоматически вызывается после установки соответствующего свойства. \end{DoxyCompactList}\item 
+virtual void {\bfseries Raise\+Is\+Filtered\+Changed} ()
+\begin{DoxyCompactList}\small\item\em Изменение статуса сортировки коллекции. Метод автоматически вызывается после установки соответствующего свойства. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a5eeaa80e763fc50e4443b4eac0b45174}{Create\+From\+List}} (IList list)
+\begin{DoxyCompactList}\small\item\em Инициализация коллекции посредством указанного обобщённого списка. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a7ab8bfafad1f8f0794c50eb79a705a57}{On\+Collection\+Changed\+Handler}} (object? sender, Notify\+Collection\+Changed\+Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Обработчик события изменения данных источника привязки. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Name}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Selected\+View\+Model}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Presented\+View\+Model}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Filtered}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Sorted}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Ascending\+Sorted}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Multi\+Selected}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Mode\+Select\+Add\+Remove}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Always\+Selected\+Item}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Enabled\+Unselecting\+Item}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual string {\bfseries Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Наименование коллекции. \end{DoxyCompactList}\item 
+object {\bfseries Source}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Источник данных. \end{DoxyCompactList}\item 
+IList {\bfseries IView\+Models}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список элементов View\+Model. \end{DoxyCompactList}\item 
+int {\bfseries Count\+View\+Models}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество элементов View\+Model. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_ac0ced742999cd9d67970c86d4b8e7019}{Selected\+Index}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Выбранный индекс элемента View\+Model, -\/1 выбора нет. \end{DoxyCompactList}\item 
+int {\bfseries Prev\+Selected\+Index}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Предпоследний выбранный индекс элемента View\+Model, -\/1 выбора нет. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}? {\bfseries ISelected\+View\+Model}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Текущий выбранный элемент View\+Model. \end{DoxyCompactList}\item 
+TView\+Model? {\bfseries Selected\+View\+Model}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Текущий выбранный элемент View\+Model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}? {\bfseries IPresented\+View\+Model}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Текущий элемент View\+Model для отображения в отдельном контексте. \end{DoxyCompactList}\item 
+TView\+Model? {\bfseries Presented\+View\+Model}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Текущий элемент View\+Model для отображения в отдельном контексте. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Filtered}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус фильтрации коллекции. \end{DoxyCompactList}\item 
+Predicate$<$ TModel?$>$ {\bfseries Filter}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Функтор осуществляющий фильтрацию данных. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Sorted}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус сортировки коллекции. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Ascending\+Sorted}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус сортировки коллекции по возрастанию. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Multi\+Selected}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возможность выбора нескольких элементов View\+Model. \end{DoxyCompactList}\item 
+bool {\bfseries Mode\+Select\+Add\+Remove}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Режим выбора нескольких элементов View\+Model (первый раз выделение, второй раз снятие выделения). \end{DoxyCompactList}\item 
+bool {\bfseries Always\+Selected\+Item}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em При множественном выборе всегда должен быть выбран хотя бы один элемент. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_ac20409ac2a390cf35d1e6dae4bd84f1b}{Is\+Enabled\+Unselecting\+Item}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Режим включения отмены выделения элемента. \end{DoxyCompactList}\item 
+Action {\bfseries On\+Current\+Item\+Changed}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации об изменение текущего выбранного элемента. \end{DoxyCompactList}\item 
+Action$<$ int $>$ {\bfseries On\+Selected\+Index\+Changed}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации об изменение индекса выбранного элемента. Аргумент -\/ индекс выбранного элемента. \end{DoxyCompactList}\item 
+Action$<$ int $>$ {\bfseries On\+Selection\+Add\+Item}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации о добавлении элемента к списку выделенных(после добавления). Аргумент -\/ индекс (позиция) добавляемого элемента. \end{DoxyCompactList}\item 
+Action$<$ int $>$ {\bfseries On\+Selection\+Removed\+Item}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации о удалении элемента из списка выделенных(после удаления). Аргумент -\/ индекс (позиция) удаляемого элемента. \end{DoxyCompactList}\item 
+Action$<$ TView\+Model $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_ae8079331c01d94c31d505ef83ab77048}{On\+Selected\+Item}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации о выборе элемента. \end{DoxyCompactList}\item 
+Action$<$ TView\+Model $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a865f212291863af0997cc3d156ecf082}{On\+Activated\+Item}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Событие для нотификации о активации элемента. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model}{Lotus.\+Core.\+ILotus\+Collection\+View\+Model}}}
+\begin{DoxyCompactItemize}
+\item 
+object \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a65293612bd90472a4c18d3442ca8517e}{Source}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Источник данных. \end{DoxyCompactList}\item 
+IList \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_ab535a8a2a94034ae4f16d8b81882a126}{IView\+Models}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список элементов View\+Model. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a661cfb33f953554cd90708c56c051654}{Count\+View\+Models}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество элементов View\+Model. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a2e8cf3b48cc5a751a74aacae2fe1e209}{Selected\+Index}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Выбранный индекс элемента View\+Model, -\/1 выбора нет. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a6977c7ed84537fbb42bc3da1b412653f}{Prev\+Selected\+Index}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Предпоследний выбранный индекс элемента View\+Model, -\/1 выбора нет. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a72b04b839d926de1e7fc3eb3608d0404}{ISelected\+View\+Model}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Текущий выбранный элемент View\+Model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}? \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a9b87b1e27c3c967a664cbc98f7284836}{IPresented\+View\+Model}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Текущий элемент View\+Model для отображения в отдельном контексте. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_ad83f5074122a19bc121401b000166a08}{Is\+Filtered}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус фильтрации коллекции. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a5303ca04f192beba1f89c0cbd5b10914}{Is\+Sorted}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус сортировки коллекции. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a0f4cd4edd797759f4f041fc2ff749634}{Is\+Ascending\+Sorted}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус сортировки коллекции по возрастанию. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a3d07d940a4e2baef7d4e38e012137f3d}{Is\+Multi\+Selected}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Возможность выбора нескольких элементов View\+Model. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a5a2bae58a265b1e8ce4eb78d78e80c69}{Mode\+Select\+Add\+Remove}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Режим выбора нескольких элементов View\+Model (первый раз выделение, второй раз снятие выделения). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_a3eaa05f989c69574b1ec0abe4baed96f}{Always\+Selected\+Item}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em При множественном выборе всегда должен быть выбран хотя бы один элемент. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_ab40a8f34d6d9b232cf24a221599d32fc}{Is\+Enabled\+Unselecting\+Item}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Режим включения отмены выделения элемента View\+Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Шаблон коллекции для элементов View\+Model которая поддерживает концепцию просмотра и управления с полноценной поддержкой всех операций. 
+
+Данная коллекции позволяет управлять видимостью данных, обеспечивает их сортировку, группировку, фильтрацию, позволяет выбирать данные и производить над ними операции. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TView\+Model\+Hierarchy} & Тип элемента View\+Model.\\
+\hline
+{\em TModel} & Тип модели.\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em TView\+Model\+Hierarchy} : {\em \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}}]\item[{\em TModel} : {\em class}]\end{description}
+\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_aec054d855076446ded12958464b182ba}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_aec054d855076446ded12958464b182ba} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!CollectionViewModelHierarchy@{CollectionViewModelHierarchy}}
+\index{CollectionViewModelHierarchy@{CollectionViewModelHierarchy}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{CollectionViewModelHierarchy()}{CollectionViewModelHierarchy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Collection\+View\+Model\+Hierarchy}} (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя коллекции.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a4f9b96ed45cf80827881391a10c3ec37}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a4f9b96ed45cf80827881391a10c3ec37} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!CollectionViewModelHierarchy@{CollectionViewModelHierarchy}}
+\index{CollectionViewModelHierarchy@{CollectionViewModelHierarchy}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{CollectionViewModelHierarchy()}{CollectionViewModelHierarchy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Collection\+View\+Model\+Hierarchy}} (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{object}]{source }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя коллекции.\\
+\hline
+{\em source} & Источник данных.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a785e6197e2a08ec2f2b62f56d654646b}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a785e6197e2a08ec2f2b62f56d654646b} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!Build@{Build}}
+\index{Build@{Build}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static TView\+Model\+Hierarchy \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Build (\begin{DoxyParamCaption}\item[{TModel}]{model,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}?}]{parent,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$}]{owner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Рекурсивное создание элементов View\+Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Модель.\\
+\hline
+{\em parent} & Родительский элемент View\+Model.\\
+\hline
+{\em owner} & Коллекция владелец.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Элемент View\+Model.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a1dd0e7cdc5211a96697fdf21150528e3}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a1dd0e7cdc5211a96697fdf21150528e3} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!Build@{Build}}
+\index{Build@{Build}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static TView\+Model\+Hierarchy \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Build (\begin{DoxyParamCaption}\item[{TModel}]{root\+Model,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$}]{owner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Рекурсивное создание элементов View\+Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root\+Model} & Корневая модель.\\
+\hline
+{\em owner} & Коллекция владелец.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Элемент View\+Model.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6cadfe70933f2c38b2d9df628c9dd06d}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6cadfe70933f2c38b2d9df628c9dd06d} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!BuildFilter@{BuildFilter}}
+\index{BuildFilter@{BuildFilter}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{BuildFilter()}{BuildFilter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static TView\+Model\+Hierarchy \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Build\+Filter (\begin{DoxyParamCaption}\item[{TModel}]{model,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}?}]{parent,  }\item[{Predicate$<$ TModel?$>$}]{filter,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$}]{owner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Рекурсивное создание элементов View\+Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Модель.\\
+\hline
+{\em parent} & Родительский элемент View\+Model.\\
+\hline
+{\em filter} & Предикат фильтрации.\\
+\hline
+{\em owner} & Коллекция владелец.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Элемент View\+Model.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a110e4c738d4860c36fef5635f9f5b690}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a110e4c738d4860c36fef5635f9f5b690} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!BuildFilter@{BuildFilter}}
+\index{BuildFilter@{BuildFilter}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{BuildFilter()}{BuildFilter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static TView\+Model\+Hierarchy \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Build\+Filter (\begin{DoxyParamCaption}\item[{TModel}]{root\+Model,  }\item[{Predicate$<$ TModel?$>$}]{filter,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$}]{owner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Рекурсивное создание элементов View\+Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root\+Model} & Корневая модель.\\
+\hline
+{\em filter} & Предикат фильтрации.\\
+\hline
+{\em owner} & Коллекция владелец.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Элемент View\+Model.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6117976e922976b44ba21abdd90e4728}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6117976e922976b44ba21abdd90e4728} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!BuildFromParent@{BuildFromParent}}
+\index{BuildFromParent@{BuildFromParent}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{BuildFromParent()}{BuildFromParent()}}
+{\footnotesize\ttfamily static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Build\+From\+Parent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}?}]{parent,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy}{ILotus\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$}]{owner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Рекурсивное создание элементов View\+Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Родительский элемент View\+Model.\\
+\hline
+{\em owner} & Коллекция владелец.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_af6b744a17512ec6a57b9db6e1e915d83}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_af6b744a17512ec6a57b9db6e1e915d83} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!Clone@{Clone}}
+\index{Clone@{Clone}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily override object \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение копии объекта. 
+
+\begin{DoxyReturn}{Returns}
+Копия объекта.
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a652e0ac6a5895f2afc0fb769510262b3}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a8143eb790e18289335c3262a71bbfb7f}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a8143eb790e18289335c3262a71bbfb7f} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!CreateViewModel$<$ TModelData $>$@{CreateViewModel$<$ TModelData $>$}}
+\index{CreateViewModel$<$ TModelData $>$@{CreateViewModel$<$ TModelData $>$}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{CreateViewModel$<$ TModelData $>$()}{CreateViewModel< TModelData >()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}$<$ TModel\+Data $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a60ae6bf23c453712d472598983ce019e}{Create\+View\+Model}}$<$ TModel\+Data $>$ (\begin{DoxyParamCaption}\item[{TModel\+Data}]{model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Создание конкретной View\+Model для указанной модели. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TModel\+Data} & Тип модели.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Модель.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+View\+Model.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_aca0ba460963661a97b26fa8dbe2db653}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_aca0ba460963661a97b26fa8dbe2db653} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!CreateViewModelHierarchy@{CreateViewModelHierarchy}}
+\index{CreateViewModelHierarchy@{CreateViewModelHierarchy}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{CreateViewModelHierarchy()}{CreateViewModelHierarchy()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}} \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Create\+View\+Model\+Hierarchy (\begin{DoxyParamCaption}\item[{object}]{model,  }\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}}?}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Создание конкретной View\+Model для указанной модели. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Модель.\\
+\hline
+{\em parent} & Родительская модель.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+View\+Model.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_view_model_hierarchy_a99f865e454377b0aa92ee7f548a05c69}{Lotus.\+Core.\+ILotus\+Collection\+View\+Model\+Hierarchy}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_file_system_ae4059091e511967f3fa35ae6c31e8131}{Lotus.\+Core.\+Collection\+View\+Model\+File\+System}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a596e4e0d9eb91b18e0c2110c34ee3f2e}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a596e4e0d9eb91b18e0c2110c34ee3f2e} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!DeleteSelectedItem@{DeleteSelectedItem}}
+\index{DeleteSelectedItem@{DeleteSelectedItem}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{DeleteSelectedItem()}{DeleteSelectedItem()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Delete\+Selected\+Item (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Удаление текущего элемента из списка (удаляется объект). 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_aafb96d5d1cdede91d04d560b28b7050a}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a1d0becb12551e810e6791ac091a9939b}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a1d0becb12551e810e6791ac091a9939b} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!DublicateSelectedItem@{DublicateSelectedItem}}
+\index{DublicateSelectedItem@{DublicateSelectedItem}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{DublicateSelectedItem()}{DublicateSelectedItem()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Dublicate\+Selected\+Item (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Дублирование текущего элемента и добавление элемента в список элементов. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a4a86527c4bac6ef8bc1b12b7b2d54cb3}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_adae4d727cc6163055c14f62793259fc6}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_adae4d727cc6163055c14f62793259fc6} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!GetCountChecked@{GetCountChecked}}
+\index{GetCountChecked@{GetCountChecked}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{GetCountChecked()}{GetCountChecked()}}
+{\footnotesize\ttfamily virtual int \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Get\+Count\+Checked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Получение количество выделенных элементов View\+Model включая дочерние. 
+
+\begin{DoxyReturn}{Returns}
+Количество выделенных элементов View\+Model.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a5c3d28629e76eaa094beb3555544d6f5}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a5c3d28629e76eaa094beb3555544d6f5} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!MoveSelectedBackward@{MoveSelectedBackward}}
+\index{MoveSelectedBackward@{MoveSelectedBackward}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{MoveSelectedBackward()}{MoveSelectedBackward()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Move\+Selected\+Backward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Перемещение текущего элемента назад. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a3b1a19c849b4fd6ad3774be0bb58f41c}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a7526b1fd73797d9bc27ee0584b3e9bd7}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a7526b1fd73797d9bc27ee0584b3e9bd7} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!MoveSelectedForward@{MoveSelectedForward}}
+\index{MoveSelectedForward@{MoveSelectedForward}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{MoveSelectedForward()}{MoveSelectedForward()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Move\+Selected\+Forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Перемещение текущего элемента вперед. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a730007d3798b2dcd1020058dd79711b2}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_ad5399444ac515e4dd50f90cf9dffc333}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_ad5399444ac515e4dd50f90cf9dffc333} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!OnNotifyUpdated@{OnNotifyUpdated}}
+\index{OnNotifyUpdated@{OnNotifyUpdated}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{OnNotifyUpdated()}{OnNotifyUpdated()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.On\+Notify\+Updated (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}}}]{owned\+Object,  }\item[{object?}]{data,  }\item[{string}]{data\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Информирование данного объекта об окончании изменении данных указанного объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owned\+Object} & Зависимый объект.\\
+\hline
+{\em data} & Объект, данные которого изменились.\\
+\hline
+{\em data\+Name} & Имя данных.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_ade4c89190e9c70fe8f74c028fc06e42b}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6f72e472f02040510133bfd4454fb890}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a6f72e472f02040510133bfd4454fb890} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!OnNotifyUpdating@{OnNotifyUpdating}}
+\index{OnNotifyUpdating@{OnNotifyUpdating}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{OnNotifyUpdating()}{OnNotifyUpdating()}}
+{\footnotesize\ttfamily override bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.On\+Notify\+Updating (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}}}]{owned\+Object,  }\item[{object?}]{data,  }\item[{string}]{data\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Информирование данного объекта о начале изменения данных указанного объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owned\+Object} & Зависимый объект.\\
+\hline
+{\em data} & Объект данные которого будут меняться.\\
+\hline
+{\em data\+Name} & Имя данных.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус разрешения/согласования изменения данных.
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a41e18594d5d4b9e4680ff0fb2ea6316e}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a3f9cb269a5c1366847faaabe736467bc}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a3f9cb269a5c1366847faaabe736467bc} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!ResetSource@{ResetSource}}
+\index{ResetSource@{ResetSource}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{ResetSource()}{ResetSource()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Reset\+Source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Переустановка источника данных. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a304e9517ecc45f0283111db13ed33c39}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a10c386b13ce2d40faa362f889c615dbb}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a10c386b13ce2d40faa362f889c615dbb} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!ToString@{ToString}}
+\index{ToString@{ToString}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Преобразование к текстовому представлению. 
+
+\begin{DoxyReturn}{Returns}
+Имя коллекции.
+\end{DoxyReturn}
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a9e43ba3c10b5b00708b1e8feceeb1b8d}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a9e43ba3c10b5b00708b1e8feceeb1b8d} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!UnsetAllPresent@{UnsetAllPresent}}
+\index{UnsetAllPresent@{UnsetAllPresent}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{UnsetAllPresent()}{UnsetAllPresent()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Unset\+All\+Present (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{exclude,  }\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameters}{CParameters}}}]{parameters }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Выключение презентации сех элементов View\+Model кроме исключаемого. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exclude} & Исключаемый элемент View\+Model.\\
+\hline
+{\em parameters} & Параметры контекста исключения.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a9ac286b36d6988cf7219b8e28fe42489}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a7e1b70bb8e6c3da0cbf6f1ed3860d0c3}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a7e1b70bb8e6c3da0cbf6f1ed3860d0c3} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!UnsetAllSelected@{UnsetAllSelected}}
+\index{UnsetAllSelected@{UnsetAllSelected}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{UnsetAllSelected()}{UnsetAllSelected()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Unset\+All\+Selected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{exclude }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Выключение выбора всех элементов View\+Model кроме исключаемого. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exclude} & Исключаемый элемент View\+Model.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a6d22f11588a8a3ff03f37bb59fd42cb8}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_ac577655421c6733f511bba10c54c7fe0}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_ac577655421c6733f511bba10c54c7fe0} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!UpdateOwnedObjects@{UpdateOwnedObjects}}
+\index{UpdateOwnedObjects@{UpdateOwnedObjects}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{UpdateOwnedObjects()}{UpdateOwnedObjects()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Update\+Owned\+Objects (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Обновление связей для зависимых объектов. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_a7f82b6a0c3a9ca90681f52c60802d0d7}{Lotus.\+Core.\+Collection\+View\+Model$<$ TView\+Model\+Hierarchy, TModel $>$}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a37cc6aed1b18aff63923a8db69ea8af3}\label{class_lotus_1_1_core_1_1_collection_view_model_hierarchy_a37cc6aed1b18aff63923a8db69ea8af3} 
+\index{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}!Visit@{Visit}}
+\index{Visit@{Visit}!Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$@{Lotus.Core.CollectionViewModelHierarchy$<$ TViewModelHierarchy, TModel $>$}}
+\doxysubsubsection{\texorpdfstring{Visit()}{Visit()}}
+{\footnotesize\ttfamily virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_collection_view_model_hierarchy}{Lotus.\+Core.\+Collection\+View\+Model\+Hierarchy}}$<$ TView\+Model\+Hierarchy, TModel $>$.Visit (\begin{DoxyParamCaption}\item[{Predicate$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model_hierarchy}{ILotus\+View\+Model\+Hierarchy}} $>$}]{match }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Посещение каждого элемента View\+Model с указанным предикатом. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em match} & Предикат.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mvvm/\+View\+Model/Lotus\+View\+Model\+Hierarchy\+Collection.\+cs\end{DoxyCompactItemize}

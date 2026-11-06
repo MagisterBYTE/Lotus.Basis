@@ -1,0 +1,295 @@
+\doxysection{Lotus.\+Core.\+CUIContext\+Menu Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu}{}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu}\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+
+
+Класс инкапсулирующий контекстное меню.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a22a2cfb2936241c57035f15d0b4f820f}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a22a2cfb2936241c57035f15d0b4f820f} 
+{\bfseries CUIContext\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab9e3bc6c0d0f4c11d549bc7c2895c181}{CUIContext\+Menu}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}? view\+Model)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a5d92be21f88a3b4b9bbeede9fb823ccf}{CUIContext\+Menu}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}? view\+Model, params \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}}\mbox{[}$\,$\mbox{]}? items)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab37dc8d60e3c0f5b3f03ea162aa87538}{Add\+Item}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} menu\+Item)
+\begin{DoxyCompactList}\small\item\em Добавление элемента меню. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a1072af05c34411f5d6fc302e43026231}{Add\+Item}} (params \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}}\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Добавление элементов меню. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6fdd79469cff9f771a10c3df53d34b94}{Add\+Item}} (string name, Action$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} $>$ on\+Action)
+\begin{DoxyCompactList}\small\item\em Добавление элемента меню. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a9514e6b5b61f2d937590a13c3a5ffa23}{Add\+Item}} (string name, Action$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} $>$ on\+Action, Action$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} $>$ on\+After\+Action)
+\begin{DoxyCompactList}\small\item\em Добавление элемента меню. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_ad6b42792535ce51f6df9e7c93f387155}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_ad6b42792535ce51f6df9e7c93f387155} 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}? {\bfseries View\+Model}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_ae0f1575261d8e5902e08bc44109aed2c}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_ae0f1575261d8e5902e08bc44109aed2c} 
+bool? {\bfseries Is\+Created\+Items}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a8e6752c05ba4be5b860254be93066c92}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a8e6752c05ba4be5b860254be93066c92} 
+\mbox{\hyperlink{group___core_parameters_gga187e165224a3b1ab40b2f0718a65bb73a4ee29ca12c7d126654bd0e5275de6135}{List}}$<$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} $>$ {\bfseries Items}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a2b76c25b21091b5d4d3b71a962c38b56}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a2b76c25b21091b5d4d3b71a962c38b56} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} {\bfseries Load} = new("{}Загрузить..."{}, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a0345cd5d46e196f666c2bcf129b91e77}{On\+Load\+Item\+Click}})
+\begin{DoxyCompactList}\small\item\em Элемент меню -\/ загрузить объект из файла. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a60ef5f1221a4a70eff20d3fc81f40867}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a60ef5f1221a4a70eff20d3fc81f40867} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} {\bfseries Save} = new("{}Сохранить..."{}, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a0606b94199450049ff4fe67cad684101}{On\+Save\+Item\+Click}})
+\begin{DoxyCompactList}\small\item\em Элемент меню -\/ сохранить объект в файл. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a81d8cb2ab40ff5f08e1ebc8fa2383395}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a81d8cb2ab40ff5f08e1ebc8fa2383395} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} {\bfseries Remove} = new("{}Удалить"{}, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab3e951298bdebf94bc1243e0a42327f2}{On\+Remove\+Item\+Click}})
+\begin{DoxyCompactList}\small\item\em Элемент меню -\/ удалить объект. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac14ec5776be0176f21caa662a95f63e4}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac14ec5776be0176f21caa662a95f63e4} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} {\bfseries Duplicate} = new("{}Дублировать"{}, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a3cbca8ae80988807db553710f17cf4fc}{On\+Duplicate\+Item\+Click}})
+\begin{DoxyCompactList}\small\item\em Элемент меню -\/ дублировать объект. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a7903253c7ae82753823619f4f84333eb}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a7903253c7ae82753823619f4f84333eb} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} {\bfseries Move\+Up} = new("{}Переместить вверх"{}, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6db2da6ef353269332a6cf7a530473d8}{On\+Move\+Up\+Item\+Click}})
+\begin{DoxyCompactList}\small\item\em Элемент меню -\/ переместить объект вверх. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6e74d36f6bdfa0817daa744278054175}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6e74d36f6bdfa0817daa744278054175} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} {\bfseries Move\+Down} = new("{}Переместить вниз"{}, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac1d68252ae9ccffa1be296056f5c45e2}{On\+Move\+Down\+Item\+Click}})
+\begin{DoxyCompactList}\small\item\em Элемент меню -\/ переместить объект вниз. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a9edf24a7274f5db27d92d6b2c15a1f9e}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a9edf24a7274f5db27d92d6b2c15a1f9e} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}} {\bfseries Not\+Calculation} = new("{}Не учитывать в расчетах"{}, \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac72182115f0d0f4f503f624fb9946f05}{On\+Not\+Calculation\+Item\+Click}})
+\begin{DoxyCompactList}\small\item\em Элемент меню -\/ не учитывать объект в расчетах. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a0345cd5d46e196f666c2bcf129b91e77}{On\+Load\+Item\+Click}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model)
+\begin{DoxyCompactList}\small\item\em Обработка события загрузка объекта из файла. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a0606b94199450049ff4fe67cad684101}{On\+Save\+Item\+Click}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model)
+\begin{DoxyCompactList}\small\item\em Обработка события сохранения объекта в файл. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab3e951298bdebf94bc1243e0a42327f2}{On\+Remove\+Item\+Click}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model)
+\begin{DoxyCompactList}\small\item\em Обработка события удаления объекта. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a3cbca8ae80988807db553710f17cf4fc}{On\+Duplicate\+Item\+Click}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model)
+\begin{DoxyCompactList}\small\item\em Обработка события дублирование объекта. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6db2da6ef353269332a6cf7a530473d8}{On\+Move\+Up\+Item\+Click}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model)
+\begin{DoxyCompactList}\small\item\em Обработка события перемещение объекта вверх. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac1d68252ae9ccffa1be296056f5c45e2}{On\+Move\+Down\+Item\+Click}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model)
+\begin{DoxyCompactList}\small\item\em Обработка события перемещение объекта вниз. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac72182115f0d0f4f503f624fb9946f05}{On\+Not\+Calculation\+Item\+Click}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} view\+Model)
+\begin{DoxyCompactList}\small\item\em Обработка события смены статуса объекта для учитывания в расчетах. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс инкапсулирующий контекстное меню. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab9e3bc6c0d0f4c11d549bc7c2895c181}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab9e3bc6c0d0f4c11d549bc7c2895c181} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!CUIContextMenu@{CUIContextMenu}}
+\index{CUIContextMenu@{CUIContextMenu}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{CUIContextMenu()}{CUIContextMenu()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CUIContext\+Menu.\+CUIContext\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}?}]{view\+Model }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a5d92be21f88a3b4b9bbeede9fb823ccf}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a5d92be21f88a3b4b9bbeede9fb823ccf} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!CUIContextMenu@{CUIContextMenu}}
+\index{CUIContextMenu@{CUIContextMenu}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{CUIContextMenu()}{CUIContextMenu()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CUIContext\+Menu.\+CUIContext\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}?}]{view\+Model,  }\item[{params \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}}?\mbox{[}$\,$\mbox{]}}]{items }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+{\em items} & Набор элементов меню.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab37dc8d60e3c0f5b3f03ea162aa87538}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab37dc8d60e3c0f5b3f03ea162aa87538} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!AddItem@{AddItem}}
+\index{AddItem@{AddItem}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{AddItem()}{AddItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+CUIContext\+Menu.\+Add\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}}}]{menu\+Item }\end{DoxyParamCaption})}
+
+
+
+Добавление элемента меню. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em menu\+Item} & Элемент меню.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a1072af05c34411f5d6fc302e43026231}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a1072af05c34411f5d6fc302e43026231} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!AddItem@{AddItem}}
+\index{AddItem@{AddItem}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{AddItem()}{AddItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void Lotus.\+Core.\+CUIContext\+Menu.\+Add\+Item (\begin{DoxyParamCaption}\item[{params \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_u_i_context_menu_item}{CUIContext\+Menu\+Item}}\mbox{[}$\,$\mbox{]}}]{items }\end{DoxyParamCaption})}
+
+
+
+Добавление элементов меню. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em items} & Набор элементов меню.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6fdd79469cff9f771a10c3df53d34b94}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6fdd79469cff9f771a10c3df53d34b94} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!AddItem@{AddItem}}
+\index{AddItem@{AddItem}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{AddItem()}{AddItem()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+CUIContext\+Menu.\+Add\+Item (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{Action$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} $>$}]{on\+Action }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление элемента меню. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя элемента меню.\\
+\hline
+{\em on\+Action} & Обработчик событие основного действия.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a9514e6b5b61f2d937590a13c3a5ffa23}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a9514e6b5b61f2d937590a13c3a5ffa23} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!AddItem@{AddItem}}
+\index{AddItem@{AddItem}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{AddItem()}{AddItem()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+CUIContext\+Menu.\+Add\+Item (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{Action$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} $>$}]{on\+Action,  }\item[{Action$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}} $>$}]{on\+After\+Action }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление элемента меню. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Имя элемента меню.\\
+\hline
+{\em on\+Action} & Обработчик событие основного действия.\\
+\hline
+{\em on\+After\+Action} & Дополнительный обработчик события после основного действия.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a3cbca8ae80988807db553710f17cf4fc}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a3cbca8ae80988807db553710f17cf4fc} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!OnDuplicateItemClick@{OnDuplicateItemClick}}
+\index{OnDuplicateItemClick@{OnDuplicateItemClick}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{OnDuplicateItemClick()}{OnDuplicateItemClick()}}
+{\footnotesize\ttfamily static void Lotus.\+Core.\+CUIContext\+Menu.\+On\+Duplicate\+Item\+Click (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Обработка события дублирование объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a0345cd5d46e196f666c2bcf129b91e77}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a0345cd5d46e196f666c2bcf129b91e77} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!OnLoadItemClick@{OnLoadItemClick}}
+\index{OnLoadItemClick@{OnLoadItemClick}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{OnLoadItemClick()}{OnLoadItemClick()}}
+{\footnotesize\ttfamily static void Lotus.\+Core.\+CUIContext\+Menu.\+On\+Load\+Item\+Click (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Обработка события загрузка объекта из файла. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac1d68252ae9ccffa1be296056f5c45e2}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac1d68252ae9ccffa1be296056f5c45e2} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!OnMoveDownItemClick@{OnMoveDownItemClick}}
+\index{OnMoveDownItemClick@{OnMoveDownItemClick}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{OnMoveDownItemClick()}{OnMoveDownItemClick()}}
+{\footnotesize\ttfamily static void Lotus.\+Core.\+CUIContext\+Menu.\+On\+Move\+Down\+Item\+Click (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Обработка события перемещение объекта вниз. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6db2da6ef353269332a6cf7a530473d8}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a6db2da6ef353269332a6cf7a530473d8} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!OnMoveUpItemClick@{OnMoveUpItemClick}}
+\index{OnMoveUpItemClick@{OnMoveUpItemClick}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{OnMoveUpItemClick()}{OnMoveUpItemClick()}}
+{\footnotesize\ttfamily static void Lotus.\+Core.\+CUIContext\+Menu.\+On\+Move\+Up\+Item\+Click (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Обработка события перемещение объекта вверх. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac72182115f0d0f4f503f624fb9946f05}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_ac72182115f0d0f4f503f624fb9946f05} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!OnNotCalculationItemClick@{OnNotCalculationItemClick}}
+\index{OnNotCalculationItemClick@{OnNotCalculationItemClick}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{OnNotCalculationItemClick()}{OnNotCalculationItemClick()}}
+{\footnotesize\ttfamily static void Lotus.\+Core.\+CUIContext\+Menu.\+On\+Not\+Calculation\+Item\+Click (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Обработка события смены статуса объекта для учитывания в расчетах. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab3e951298bdebf94bc1243e0a42327f2}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_ab3e951298bdebf94bc1243e0a42327f2} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!OnRemoveItemClick@{OnRemoveItemClick}}
+\index{OnRemoveItemClick@{OnRemoveItemClick}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{OnRemoveItemClick()}{OnRemoveItemClick()}}
+{\footnotesize\ttfamily static void Lotus.\+Core.\+CUIContext\+Menu.\+On\+Remove\+Item\+Click (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Обработка события удаления объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_u_i_context_menu_a0606b94199450049ff4fe67cad684101}\label{class_lotus_1_1_core_1_1_c_u_i_context_menu_a0606b94199450049ff4fe67cad684101} 
+\index{Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}!OnSaveItemClick@{OnSaveItemClick}}
+\index{OnSaveItemClick@{OnSaveItemClick}!Lotus.Core.CUIContextMenu@{Lotus.Core.CUIContextMenu}}
+\doxysubsubsection{\texorpdfstring{OnSaveItemClick()}{OnSaveItemClick()}}
+{\footnotesize\ttfamily static void Lotus.\+Core.\+CUIContext\+Menu.\+On\+Save\+Item\+Click (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_view_model}{ILotus\+View\+Model}}}]{view\+Model }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Обработка события сохранения объекта в файл. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Model} & Элемент отображения.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mvvm/\+View\+Model/Lotus\+View\+Model\+Context\+Menu.\+cs\end{DoxyCompactItemize}

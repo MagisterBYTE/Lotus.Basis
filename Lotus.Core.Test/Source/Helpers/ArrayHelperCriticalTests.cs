@@ -11,7 +11,7 @@ namespace Lotus.Core.Helpers
     public class ArrayHelperCriticalTests
     {
         /// <summary>
-        /// Тест AddRange - критический баг был исправлен (array = items вместо array = new_array).
+        /// Тест AddRange - критический баг был исправлен (array = items вместо array = newArray).
         /// </summary>
         [Test]
         public void AddRange_WithInsufficientCapacity_ResizesArrayCorrectly()

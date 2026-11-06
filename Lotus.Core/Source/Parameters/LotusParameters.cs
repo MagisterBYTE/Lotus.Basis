@@ -597,11 +597,11 @@ namespace Lotus.Core
         /// <param name="fileName">Полное имя файла.</param>
         public void Load(string fileName)
         {
-            //FileStream file_stream = new FileStream(file_name, FileMode.Open);
-            //JsonDocument json_doc = JsonDocument.Parse(file_stream);
-            //JsonElement root_element = json_doc.RootElement;
+            //FileStream fileStream = new FileStream(fileName, FileMode.Open);
+            //JsonDocument jsonDoc = JsonDocument.Parse(fileStream);
+            //JsonElement rootElement = jsonDoc.RootElement;
 
-            //foreach (JsonProperty item in root_element.EnumerateObject())
+            //foreach (JsonProperty item in rootElement.EnumerateObject())
             //{
             //	switch (item.Value.ValueKind)
             //	{
@@ -647,7 +647,7 @@ namespace Lotus.Core
             //	}
             //}
 
-            //file_stream.Close();
+            //fileStream.Close();
         }
         #endregion
 

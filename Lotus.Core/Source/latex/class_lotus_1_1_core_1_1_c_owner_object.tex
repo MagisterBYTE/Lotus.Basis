@@ -1,0 +1,160 @@
+\doxysection{Lotus.\+Core.\+COwner\+Object Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_owner_object}{}\label{class_lotus_1_1_core_1_1_c_owner_object}\index{Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}}
+
+
+Базовый класс реализующий понятие владельца.  
+
+
+Inheritance diagram for Lotus.\+Core.\+COwner\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_lotus_1_1_core_1_1_c_owner_object}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_owner_object_a2a35093d0de7baba5ad9520a24fb7540}\label{class_lotus_1_1_core_1_1_c_owner_object_a2a35093d0de7baba5ad9520a24fb7540} 
+{\bfseries COwner\+Object} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_owner_object_af34d3afd74cf961474fb4b3c381f45ab}{Attach\+Owned\+Object}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, bool add)
+\begin{DoxyCompactList}\small\item\em Присоединение указанного зависимого объекта. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_owner_object_ab1dbdac1f1e5616712766af7b269ee03}{Detach\+Owned\+Object}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, bool remove)
+\begin{DoxyCompactList}\small\item\em Отсоединение указанного зависимого объекта. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_owner_object_a55a5ebf45b2ef38e06e185b9ef7ef294}{Update\+Owned\+Objects}} ()
+\begin{DoxyCompactList}\small\item\em Обновление связей для зависимых объектов. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_owner_object_abfe894ae6d81dfd34e06a6956e0c2ba9}{On\+Notify\+Updating}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, object? data, string data\+Name)
+\begin{DoxyCompactList}\small\item\em Информирование данного объекта о начале изменения данных указанного зависимого объекта. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_owner_object_aaf59fbb9f0802ee3a498c48248dd93c6}{On\+Notify\+Updated}} (\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}} owned\+Object, object? data, string data\+Name)
+\begin{DoxyCompactList}\small\item\em Информирование данного объекта об окончании изменении данных указанного объекта. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base}{Lotus.\+Core.\+Property\+Changed\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base_aeedef6782cf8c61599513af983b5742e}{On\+Property\+Changed}} (\mbox{[}Caller\+Member\+Name\mbox{]} string? property\+Name=null)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base_acccfdc166e6dfcc9e99c290dc38331e5}{On\+Property\+Changed}} (Property\+Changed\+Event\+Args args)
+\begin{DoxyCompactList}\small\item\em Вспомогательный метод для нотификации изменений свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Events inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_property_changed_base}{Lotus.\+Core.\+Property\+Changed\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+Property\+Changed\+Event\+Handler? {\bfseries Property\+Changed}
+\begin{DoxyCompactList}\small\item\em Событие срабатывает ПОСЛЕ изменения свойства. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Базовый класс реализующий понятие владельца. 
+
+Владелец обладает каким-\/либо объектом и поддерживает основные операции по обновлению связей, присоединением и отсоединением зависимого объекта 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_owner_object_af34d3afd74cf961474fb4b3c381f45ab}\label{class_lotus_1_1_core_1_1_c_owner_object_af34d3afd74cf961474fb4b3c381f45ab} 
+\index{Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}!AttachOwnedObject@{AttachOwnedObject}}
+\index{AttachOwnedObject@{AttachOwnedObject}!Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}}
+\doxysubsubsection{\texorpdfstring{AttachOwnedObject()}{AttachOwnedObject()}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+COwner\+Object.\+Attach\+Owned\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}}}]{owned\+Object,  }\item[{bool}]{add }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Присоединение указанного зависимого объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owned\+Object} & Объект.\\
+\hline
+{\em add} & Статус добавления в коллекцию.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object_a0971113308b9cd7a8cae08324fcd728d}{Lotus.\+Core.\+ILotus\+Owner\+Object}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_owner_object_ab1dbdac1f1e5616712766af7b269ee03}\label{class_lotus_1_1_core_1_1_c_owner_object_ab1dbdac1f1e5616712766af7b269ee03} 
+\index{Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}!DetachOwnedObject@{DetachOwnedObject}}
+\index{DetachOwnedObject@{DetachOwnedObject}!Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}}
+\doxysubsubsection{\texorpdfstring{DetachOwnedObject()}{DetachOwnedObject()}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+COwner\+Object.\+Detach\+Owned\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}}}]{owned\+Object,  }\item[{bool}]{remove }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Отсоединение указанного зависимого объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owned\+Object} & Объект.\\
+\hline
+{\em remove} & Статус удаления из коллекции.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object_ac80151d28ee8d543d81b55963b90c1d1}{Lotus.\+Core.\+ILotus\+Owner\+Object}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_owner_object_aaf59fbb9f0802ee3a498c48248dd93c6}\label{class_lotus_1_1_core_1_1_c_owner_object_aaf59fbb9f0802ee3a498c48248dd93c6} 
+\index{Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}!OnNotifyUpdated@{OnNotifyUpdated}}
+\index{OnNotifyUpdated@{OnNotifyUpdated}!Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}}
+\doxysubsubsection{\texorpdfstring{OnNotifyUpdated()}{OnNotifyUpdated()}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+COwner\+Object.\+On\+Notify\+Updated (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}}}]{owned\+Object,  }\item[{object?}]{data,  }\item[{string}]{data\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Информирование данного объекта об окончании изменении данных указанного объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owned\+Object} & Зависимый объект.\\
+\hline
+{\em data} & Объект, данные которого изменились.\\
+\hline
+{\em data\+Name} & Имя данных.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object_af4fa51af9b094cf591f46ac03f248a25}{Lotus.\+Core.\+ILotus\+Owner\+Object}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_owner_object_abfe894ae6d81dfd34e06a6956e0c2ba9}\label{class_lotus_1_1_core_1_1_c_owner_object_abfe894ae6d81dfd34e06a6956e0c2ba9} 
+\index{Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}!OnNotifyUpdating@{OnNotifyUpdating}}
+\index{OnNotifyUpdating@{OnNotifyUpdating}!Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}}
+\doxysubsubsection{\texorpdfstring{OnNotifyUpdating()}{OnNotifyUpdating()}}
+{\footnotesize\ttfamily virtual bool Lotus.\+Core.\+COwner\+Object.\+On\+Notify\+Updating (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owned_object}{ILotus\+Owned\+Object}}}]{owned\+Object,  }\item[{object?}]{data,  }\item[{string}]{data\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Информирование данного объекта о начале изменения данных указанного зависимого объекта. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em owned\+Object} & Зависимый объект.\\
+\hline
+{\em data} & Объект, данные которого будут меняться.\\
+\hline
+{\em data\+Name} & Имя данных.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Статус разрешения/согласования изменения данных.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object_a70af6a1f21427ea69e443c888e4c0d0d}{Lotus.\+Core.\+ILotus\+Owner\+Object}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_owner_object_a55a5ebf45b2ef38e06e185b9ef7ef294}\label{class_lotus_1_1_core_1_1_c_owner_object_a55a5ebf45b2ef38e06e185b9ef7ef294} 
+\index{Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}!UpdateOwnedObjects@{UpdateOwnedObjects}}
+\index{UpdateOwnedObjects@{UpdateOwnedObjects}!Lotus.Core.COwnerObject@{Lotus.Core.COwnerObject}}
+\doxysubsubsection{\texorpdfstring{UpdateOwnedObjects()}{UpdateOwnedObjects()}}
+{\footnotesize\ttfamily virtual void Lotus.\+Core.\+COwner\+Object.\+Update\+Owned\+Objects (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Обновление связей для зависимых объектов. 
+
+
+
+Implements \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object_a9bff59dc631e9b3ae9d832c750a34432}{Lotus.\+Core.\+ILotus\+Owner\+Object}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Interfaces/Lotus\+Interface\+Owner.\+cs\end{DoxyCompactItemize}

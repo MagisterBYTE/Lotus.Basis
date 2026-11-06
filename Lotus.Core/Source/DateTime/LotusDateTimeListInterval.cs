@@ -70,8 +70,8 @@ namespace Lotus.Core
         {
             get
             {
-                double count_days = (DateLast - DateFirst).HasValue ? (DateLast - DateFirst)!.Value.Days : 0;
-                return (int)Math.Ceiling(count_days / 7.0);
+                double countDays = (DateLast - DateFirst).HasValue ? (DateLast - DateFirst)!.Value.Days : 0;
+                return (int)Math.Ceiling(countDays / 7.0);
             }
         }
 
@@ -160,9 +160,9 @@ namespace Lotus.Core
             Clear();
 
             var current = startData;
-            var first_item = Activator.CreateInstance<TItemTimeable>();
-            first_item.Date = startData;
-            Add(first_item);
+            var firstItem = Activator.CreateInstance<TItemTimeable>();
+            firstItem.Date = startData;
+            Add(firstItem);
             switch (_timeInterval)
             {
                 case TTimeInterval.Minutely:
@@ -173,9 +173,9 @@ namespace Lotus.Core
 
                             if (current <= endData)
                             {
-                                var current_item = Activator.CreateInstance<TItemTimeable>();
-                                current_item.Date = current;
-                                Add(current_item);
+                                var currentItem = Activator.CreateInstance<TItemTimeable>();
+                                currentItem.Date = current;
+                                Add(currentItem);
                             }
                         }
                     }
@@ -188,9 +188,9 @@ namespace Lotus.Core
 
                             if (current <= endData)
                             {
-                                var current_item = Activator.CreateInstance<TItemTimeable>();
-                                current_item.Date = current;
-                                Add(current_item);
+                                var currentItem = Activator.CreateInstance<TItemTimeable>();
+                                currentItem.Date = current;
+                                Add(currentItem);
                             }
                         }
                     }
@@ -203,9 +203,9 @@ namespace Lotus.Core
 
                             if (current <= endData)
                             {
-                                var current_item = Activator.CreateInstance<TItemTimeable>();
-                                current_item.Date = current;
-                                Add(current_item);
+                                var currentItem = Activator.CreateInstance<TItemTimeable>();
+                                currentItem.Date = current;
+                                Add(currentItem);
                             }
                         }
                     }
@@ -218,9 +218,9 @@ namespace Lotus.Core
 
                             if (current <= endData && current.DayOfWeek == DayOfWeek.Monday)
                             {
-                                var current_item = Activator.CreateInstance<TItemTimeable>();
-                                current_item.Date = current;
-                                Add(current_item);
+                                var currentItem = Activator.CreateInstance<TItemTimeable>();
+                                currentItem.Date = current;
+                                Add(currentItem);
                             }
                         }
                     }
@@ -233,9 +233,9 @@ namespace Lotus.Core
 
                             if (current <= endData && current.Day == 1)
                             {
-                                var current_item = Activator.CreateInstance<TItemTimeable>();
-                                current_item.Date = current;
-                                Add(current_item);
+                                var currentItem = Activator.CreateInstance<TItemTimeable>();
+                                currentItem.Date = current;
+                                Add(currentItem);
                             }
                         }
                     }
@@ -248,9 +248,9 @@ namespace Lotus.Core
 
                             if (current <= endData && current.DayOfYear == 1)
                             {
-                                var current_item = Activator.CreateInstance<TItemTimeable>();
-                                current_item.Date = current;
-                                Add(current_item);
+                                var currentItem = Activator.CreateInstance<TItemTimeable>();
+                                currentItem.Date = current;
+                                Add(currentItem);
                             }
                         }
                     }
@@ -315,11 +315,11 @@ namespace Lotus.Core
         {
             if (index > 0)
             {
-                var start_index = (int)Math.Floor(index);
-                var end_index = (int)Math.Ceiling(index);
-                var delta = index - start_index;
+                var startIndex = (int)Math.Floor(index);
+                var endIndex = (int)Math.Ceiling(index);
+                var delta = index - startIndex;
 
-                return _arrayOfItems[start_index]!.Date.GetInterpolatedDate(_arrayOfItems[end_index]!.Date, delta);
+                return _arrayOfItems[startIndex]!.Date.GetInterpolatedDate(_arrayOfItems[endIndex]!.Date, delta);
             }
             else
             {
@@ -427,10 +427,10 @@ namespace Lotus.Core
         public virtual TResult GetListPeriod<TResult>(DateTime startDate, DateTime endData)
             where TResult : ListTimeInterval<TItemTimeable>, new()
         {
-            var start_index = GetIndexFromDate(startDate);
-            var end_index = GetIndexFromDate(endData);
+            var startIndex = GetIndexFromDate(startDate);
+            var endIndex = GetIndexFromDate(endData);
 
-            return GetListPeriod<TResult>(start_index, end_index);
+            return GetListPeriod<TResult>(startIndex, endIndex);
         }
 
         /// <summary>
@@ -468,10 +468,10 @@ namespace Lotus.Core
         public virtual TResult? DuplicateListPeriod<TResult>(DateTime startDate, DateTime endData)
             where TResult : ListTimeInterval<TItemTimeable>, new()
         {
-            var start_index = GetIndexFromDate(startDate);
-            var end_index = GetIndexFromDate(endData);
+            var startIndex = GetIndexFromDate(startDate);
+            var endIndex = GetIndexFromDate(endData);
 
-            return DuplicateListPeriod<TResult>(start_index, end_index);
+            return DuplicateListPeriod<TResult>(startIndex, endIndex);
         }
 
         /// <summary>
@@ -642,10 +642,10 @@ namespace Lotus.Core
         public virtual TResult? GetConvertedListPeriodAndInterval<TResult>(TTimeInterval timeInterval, DateTime startDate, DateTime endData)
             where TResult : ListTimeInterval<TItemTimeable>, new()
         {
-            var index_from = GetIndexFromDate(startDate);
-            var index_to = GetIndexFromDate(endData);
+            var indexFrom = GetIndexFromDate(startDate);
+            var indexTo = GetIndexFromDate(endData);
 
-            return GetConvertedListPeriodAndInterval<TResult>(timeInterval, index_from, index_to);
+            return GetConvertedListPeriodAndInterval<TResult>(timeInterval, indexFrom, indexTo);
         }
         #endregion
     }

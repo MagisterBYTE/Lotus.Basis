@@ -666,11 +666,11 @@ namespace Lotus.Core
 					case TValueType.TextAsset:
 						{
 							// Сравниваем по имени
-							UnityEngine.Object unity_object_this = _unityData;
-							UnityEngine.Object unity_object_other = other._unityData;
-							if(unity_object_this != null && unity_object_other != null)
+							UnityEngine.Object unityObjectThis = _unityData;
+							UnityEngine.Object unityObjectOther = other._unityData;
+							if(unityObjectThis != null && unityObjectOther != null)
 							{
-								result = string.CompareOrdinal(unity_object_this.name, unity_object_other.name);
+								result = string.CompareOrdinal(unityObjectThis.name, unityObjectOther.name);
 							}
 						}
 						break;
@@ -1017,9 +1017,9 @@ namespace Lotus.Core
 							// Проверка на тип Unity
 							if (type == typeof(UnityEngine.GameObject))
 							{
-								var game_object = value as UnityEngine.GameObject;
+								var gameObject = value as UnityEngine.GameObject;
 								_unityData = value as UnityEngine.GameObject;
-								if (game_object.scene.name == null)
+								if (gameObject.scene.name == null)
 								{
 									_valueType = TValueType.Model;
 									if (_owner != null) _owner.OnNotifyUpdated(this, ModelValue, nameof(ModelValue));

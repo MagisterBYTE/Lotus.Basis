@@ -1,0 +1,71 @@
+\doxysection{Lotus.\+Core.\+CEcs\+Systems Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems}{}\label{class_lotus_1_1_core_1_1_c_ecs_systems}\index{Lotus.Core.CEcsSystems@{Lotus.Core.CEcsSystems}}
+
+
+Класс содержащий контекст ECS.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a4e2a55006a24c2873e5264a6cedf94dc}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a4e2a55006a24c2873e5264a6cedf94dc} 
+{\bfseries CEcs\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a6a874e23c5a5409c646c464b87dde68b}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a6a874e23c5a5409c646c464b87dde68b} 
+void {\bfseries On\+Pre\+Init\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Исполнения всех подсистем для реализации логики в момент инициализации. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a24ab26dc8ddb0981bd10a0e928bcd318}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a24ab26dc8ddb0981bd10a0e928bcd318} 
+void {\bfseries On\+Init\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Исполнения всех подсистем для реализации логики в момент инициализации. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a25d51718d015b15ed5396877224bf669}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a25d51718d015b15ed5396877224bf669} 
+void {\bfseries On\+Update\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Исполнения всех подсистем для реализации логики постоянного обновления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a89aa5b62f70d85086bf13cafdd1fa9a2}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a89aa5b62f70d85086bf13cafdd1fa9a2} 
+void {\bfseries On\+Late\+Update\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Исполнения всех подсистем для реализации логики постоянного обновления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_ac74def5e757579c154dd9097ec5e7903}\label{class_lotus_1_1_core_1_1_c_ecs_systems_ac74def5e757579c154dd9097ec5e7903} 
+void {\bfseries On\+Fixed\+Update\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Исполнения всех подсистем для реализации логики постоянного обновления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_af52771d6552fbe795beedcd8bd1a48fa}\label{class_lotus_1_1_core_1_1_c_ecs_systems_af52771d6552fbe795beedcd8bd1a48fa} 
+void {\bfseries On\+Destroy\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Исполнения всех подсистем для реализации логики удаления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a8d7b48927fae384b28e66f1cc04944db}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a8d7b48927fae384b28e66f1cc04944db} 
+void {\bfseries On\+Post\+Destroy\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Исполнения всех подсистем для реализации логики удаления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a983cfa336042b3b2f44c3eb8692591ce}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a983cfa336042b3b2f44c3eb8692591ce} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_ecs_world}{CEcs\+World}} $>$ {\bfseries Worlds}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список миров. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a2819d0eecc910c1ada6aeb1e527f67ec}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a2819d0eecc910c1ada6aeb1e527f67ec} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_ecs_lotus_pre_init_system}{IEcs\+Lotus\+Pre\+Init\+System}} $>$ {\bfseries Pre\+Init\+Systems}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список подсистем для реализации логики в момент инициализации. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a4fbbaf7167b8a9b506711203df61ee9f}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a4fbbaf7167b8a9b506711203df61ee9f} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_ecs_lotus_init_system}{IEcs\+Lotus\+Init\+System}} $>$ {\bfseries Init\+Systems}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список подсистем для реализации логики в момент инициализации. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_abd57a0b64d4d3c3d4b7bbd1f9b789b9c}\label{class_lotus_1_1_core_1_1_c_ecs_systems_abd57a0b64d4d3c3d4b7bbd1f9b789b9c} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_ecs_lotus_update_system}{IEcs\+Lotus\+Update\+System}} $>$ {\bfseries Update\+Systems}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список подсистем для реализации логики постоянного обновления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_aaca6da9c219bb7ba1912cc0b26980916}\label{class_lotus_1_1_core_1_1_c_ecs_systems_aaca6da9c219bb7ba1912cc0b26980916} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_ecs_lotus_late_update_system}{IEcs\+Lotus\+Late\+Update\+System}} $>$ {\bfseries Late\+Update\+Systems}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список подсистем для реализации логики постоянного обновления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_aafba91e28a602267ab9daf6d23abe23e}\label{class_lotus_1_1_core_1_1_c_ecs_systems_aafba91e28a602267ab9daf6d23abe23e} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_ecs_lotus_fixed_update_system}{IEcs\+Lotus\+Fixed\+Update\+System}} $>$ {\bfseries Fixed\+Update\+Systems}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список подсистем для реализации логики фиксированного обновления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_ad8bbbce7945ff913744a60a245a27df3}\label{class_lotus_1_1_core_1_1_c_ecs_systems_ad8bbbce7945ff913744a60a245a27df3} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_ecs_destroy_system}{IEcs\+Destroy\+System}} $>$ {\bfseries Destroy\+Systems}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список подсистем для реализации логики удаления. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_ecs_systems_a2fbffda68d1d3e18561eecad2f3d1bf4}\label{class_lotus_1_1_core_1_1_c_ecs_systems_a2fbffda68d1d3e18561eecad2f3d1bf4} 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_ecs_post_destroy_system}{IEcs\+Post\+Destroy\+System}} $>$ {\bfseries Post\+Destroy\+Systems}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список подсистем для реализации логики удаления. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс содержащий контекст ECS. 
+
+Определение системы в ECS которая является контейнером для основной логики для обработки отфильтрованных сущностей. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ECS/Lotus\+ECSSystems.\+cs\end{DoxyCompactItemize}

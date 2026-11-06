@@ -108,25 +108,25 @@ namespace Lotus.Maths
         [Test]
         public static void TestMathClosest2D()
         {
-            var line_pos = new Vector2Df(0, 8);
-            var line_dir = new Vector2Df(1, -1).Normalized;
+            var linePos = new Vector2Df(0, 8);
+            var lineDir = new Vector2Df(1, -1).Normalized;
             var point = new Vector2Df(4, 2);
             float distance;
-            var result = XClosest2D.PointLine(point, line_pos, line_dir, out distance);
+            var result = XClosest2D.PointLine(point, linePos, lineDir, out distance);
             ClassicAssert.AreEqual(true, Vector2Df.Approximately(result, new Vector2Df(5, 3), 0.1f));
             ClassicAssert.AreEqual(true, XMath.Approximately(distance, 7f, 0.1f));
 
             point = new Vector2Df(2, 5);
-            result = XClosest2D.PointLine(point, line_pos, line_dir, out distance);
+            result = XClosest2D.PointLine(point, linePos, lineDir, out distance);
             ClassicAssert.AreEqual(true, Vector2Df.Approximately(result, new Vector2Df(2.5f, 5.5f), 0.1f));
             ClassicAssert.AreEqual(true, XMath.Approximately(distance, 3.5f, 0.1f));
 
-            result = XClosest2D.PointSegment(point, line_pos, new Vector2Df(8, 0), out distance);
+            result = XClosest2D.PointSegment(point, linePos, new Vector2Df(8, 0), out distance);
             ClassicAssert.AreEqual(true, Vector2Df.Approximately(result, new Vector2Df(2.5f, 5.5f), 0.1f));
             ClassicAssert.AreEqual(true, XMath.Approximately(distance, 0.3f, 0.1f));
 
             point = new Vector2Df(2.5f, 5.5f);
-            result = XClosest2D.PointSegment(point, line_pos, new Vector2Df(8, 0), out distance);
+            result = XClosest2D.PointSegment(point, linePos, new Vector2Df(8, 0), out distance);
             ClassicAssert.AreEqual(true, Vector2Df.Approximately(result, new Vector2Df(2.5f, 5.5f), 0.1f));
             ClassicAssert.AreEqual(true, XMath.Approximately(distance, 0.315f, 0.01f));
         }

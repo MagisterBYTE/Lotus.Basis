@@ -314,12 +314,12 @@ namespace Lotus.Core
 		/// <param name="start">Начальное значение.</param>
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
-		/// <param name="easing_type">Тип функции скорости.</param>
+		/// <param name="easingType">Тип функции скорости.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 Interpolation(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time, TEasingType easing_type)
+		public static UnityEngine.Vector2 Interpolation(UnityEngine.Vector2 start, UnityEngine.Vector2 end, float time, TEasingType easingType)
 		{
 			UnityEngine.Vector2 value = UnityEngine.Vector2.zero;
-			switch (easing_type)
+			switch (easingType)
 			{
 				case TEasingType.Linear:
 					{
@@ -429,12 +429,12 @@ namespace Lotus.Core
 		/// <param name="start">Начальное значение.</param>
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
-		/// <param name="easing_type">Тип функции скорости.</param>
+		/// <param name="easingType">Тип функции скорости.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector2 Interpolation(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time, TEasingType easing_type)
+		public static UnityEngine.Vector2 Interpolation(ref UnityEngine.Vector2 start, ref UnityEngine.Vector2 end, float time, TEasingType easingType)
 		{
 			UnityEngine.Vector2 value = UnityEngine.Vector2.zero;
-			switch (easing_type)
+			switch (easingType)
 			{
 				case TEasingType.Linear:
 					{
@@ -544,12 +544,12 @@ namespace Lotus.Core
 		/// <param name="start">Начальное значение.</param>
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
-		/// <param name="easing_type">Тип функции скорости.</param>
+		/// <param name="easingType">Тип функции скорости.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 Interpolation(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time, TEasingType easing_type)
+		public static UnityEngine.Vector3 Interpolation(UnityEngine.Vector3 start, UnityEngine.Vector3 end, float time, TEasingType easingType)
 		{
 			UnityEngine.Vector3 value = UnityEngine.Vector3.zero;
-			switch (easing_type)
+			switch (easingType)
 			{
 				case TEasingType.Linear:
 					{
@@ -659,12 +659,12 @@ namespace Lotus.Core
 		/// <param name="start">Начальное значение.</param>
 		/// <param name="end">Конечное значение.</param>
 		/// <param name="time">Время от 0 до 1.</param>
-		/// <param name="easing_type">Тип функции скорости.</param>
+		/// <param name="easingType">Тип функции скорости.</param>
 		/// <returns>Текущие значение.</returns>
-		public static UnityEngine.Vector3 Interpolation(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time, TEasingType easing_type)
+		public static UnityEngine.Vector3 Interpolation(ref UnityEngine.Vector3 start, ref UnityEngine.Vector3 end, float time, TEasingType easingType)
 		{
 			UnityEngine.Vector3 value = UnityEngine.Vector3.zero;
-			switch (easing_type)
+			switch (easingType)
 			{
 				case TEasingType.Linear:
 					{

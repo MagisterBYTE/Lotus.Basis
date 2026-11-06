@@ -1,0 +1,542 @@
+\doxysection{Lotus.\+Core.\+CText\+Generate\+Code\+CSharp Class Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp}{}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp}\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+
+
+Простой генератор программного кода на языке C\# на основе текстовых данных.  
+
+
+Inheritance diagram for Lotus.\+Core.\+CText\+Generate\+Code\+CSharp\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_ac100e7356351de32779ce66745efe9e0}{CText\+Generate\+Code\+CSharp}} (int capacity=24)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a83932afe4ff496d831229cf3694dc5a4}{CText\+Generate\+Code\+CSharp}} (string str)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_abccb802ad4d19c450a4c55b894856fb0}{Add\+Delimiter\+Part}} ()
+\begin{DoxyCompactList}\small\item\em Добавление разделителя для части. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a35facb14c3261e2b2c058d44f1bc7dde}{Add\+Delimiter\+Section}} ()
+\begin{DoxyCompactList}\small\item\em Добавление разделителя для секции. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a0f3b0fab3d208bb3b5147b08f2453a00}{Add\+Namespace\+Using}} (params string\mbox{[}$\,$\mbox{]} namespaces)
+\begin{DoxyCompactList}\small\item\em Добавление используемых пространств имён. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a8116afd731c08ad616a7f72cfb70c201}{Add\+Namespace\+Open}} (string space\+Name)
+\begin{DoxyCompactList}\small\item\em Добавление открытие пространства имени. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_af2a321b6218a3a30911202ae4924116b}{Add\+Namespace\+Close}} ()
+\begin{DoxyCompactList}\small\item\em Добавление закрытия пространства имени. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a4a7878801e3fb4f06b405240b1c23eb8}{Add\+Class\+Public}} (string class\+Name)
+\begin{DoxyCompactList}\small\item\em Добавление декларации публичного класса. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_aebd3e33892ed4c2a280c0aa281c3d741}{Add\+Class\+Static\+Public}} (string class\+Name)
+\begin{DoxyCompactList}\small\item\em Добавление декларации статического публичного класса. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a3f636cc01b74b265663328eab0f3926b}{Add\+Class\+End\+Declaration}} ()
+\begin{DoxyCompactList}\small\item\em Добавление окончание декларации класса. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a1a603a5a14d16993cc7491cba346e4cc}{Add\+Field\+Const\+Public}} (string type\+Name, string field\+Name, string value)
+\begin{DoxyCompactList}\small\item\em Добавление декларации константного публичного поля. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a2dc1b829f3bbd1d96a4bce040f8887f6}{Add\+Field\+Const\+Public\+String}} (string field\+Name, string value)
+\begin{DoxyCompactList}\small\item\em Добавление декларации константного публичного поля типа String. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a9f1dc3a768ff35009d1b390d2c13aa61}{Add\+Field\+Static\+Readonly\+Public}} (string type\+Name, string field\+Name, string value)
+\begin{DoxyCompactList}\small\item\em Добавление декларации статического поля только для чтения. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a56b2cafef689d636a6ae58929af9b7a8}{Add\+Constructor}} (string constructor, string? base\+Body)
+\begin{DoxyCompactList}\small\item\em Добавление декларации конструктора. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a754ab306cee0ef0d52e253853581192d}{Add\+Constructor\+Close}} ()
+\begin{DoxyCompactList}\small\item\em Добавление окончание декларации конструктора. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_ac56984bbaf44ad1d7a29e5f10c215762}{Add\+Method\+With\+Body}} (string signature\+Method, params string\mbox{[}$\,$\mbox{]} body\+Methods)
+\begin{DoxyCompactList}\small\item\em Добавление метода вместе с телом. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_adf13a4d6e7eeffed4c6a8f576f9b84d3}{Add\+Comment}} (string text)
+\begin{DoxyCompactList}\small\item\em Добавление комментария. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a113a2e9aa4a0db90b2b31ef30df05600}{Add\+Comment\+Section}} (string text)
+\begin{DoxyCompactList}\small\item\em Добавление комментария для секции или раздела. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_aaa5f0e1718b4525ad68fb788e1021978}{Add\+Comment\+Summary}} (bool delimiter\+Section\+Before, string text, bool delimiter\+Section\+After)
+\begin{DoxyCompactList}\small\item\em Добавление стандартного краткого комментария XML. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a42ded62fe58cb4262ced30edc7f7c655}{Add\+Comment\+Summary\+For\+Data}} (string text)
+\begin{DoxyCompactList}\small\item\em Добавление стандартного краткого комментария XML для полей и свойств. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a0f18173eb6d51549815910b54301c81c}{Add\+Comment\+Remarks\+For\+Data}} (string text)
+\begin{DoxyCompactList}\small\item\em Добавление стандартного расширенного комментария XML для полей и свойств. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries Add\+Block\+Open} ()
+\begin{DoxyCompactList}\small\item\em Добавление открытия блока. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ad89105a2eb6fed0926dd6008ebc9bf38}{Add\+Block\+Close}} (string? adding\+Text=null)
+\begin{DoxyCompactList}\small\item\em Добавление закрытия блока. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a5f6c026d14a285014dca487a927db747}{Add\+File\+Header}} (string module\+Name, string subsystem\+Name)
+\begin{DoxyCompactList}\small\item\em Добавление стандартного заголовка для файлов кода проекта \doxylink{namespace_lotus}{Lotus}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a76fad5ca6f832d2e700ff6fd326685e9}{Add\+File\+Brief\+Desc}} (string file\+Name, string brief\+Desc)
+\begin{DoxyCompactList}\small\item\em Добавление имени файла и краткое описание. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a76e5f63cbac3aaad967005ec69949dc0}{Add\+File\+Version}} (string version="{}1.\+0.\+0.\+0"{}, string date="{}04.\+04.\+2020"{})
+\begin{DoxyCompactList}\small\item\em Добавление версии и даты изменения файла. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ab242aa6c20c76050a113a38698c68358}{Add\+Doxygen\+Add\+To\+Group}} (string group\+Name)
+\begin{DoxyCompactList}\small\item\em Добавление команды Doxygen -\/ добавить в группу. \end{DoxyCompactList}\item 
+virtual void {\bfseries Add\+Doxygen\+End\+Group} ()
+\begin{DoxyCompactList}\small\item\em Добавление команды Doxygen -\/ окончание группы. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list}{Lotus.\+Core.\+CText\+List}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_abd68aa0cc0a8628c271dd4f1b726190d}{CText\+List}} (int capacity=24)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_ad3dd2992be179c2c0ca0e3dec8d516f3}{CText\+List}} (string str)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_a6fd6dd37309e9c0ca52cf80686688a8e}{CText\+List}} (IEnumerable$<$ string $>$ strings)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_a55c9866fcbae64b6afd9e1a85302c2b9}{Add}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_line}{CText\+Line}} line)
+\begin{DoxyCompactList}\small\item\em Добавление строки текстовых данных. \end{DoxyCompactList}\item 
+void {\bfseries Add\+New\+Line} ()
+\begin{DoxyCompactList}\small\item\em Добавление пустой новой строки. \end{DoxyCompactList}\item 
+void {\bfseries Add\+Empty\+Line} ()
+\begin{DoxyCompactList}\small\item\em Добавление пустой строки. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_accf255f05ce74314f003f846907049f6}{Remove\+To\+Line}} (string line\+To)
+\begin{DoxyCompactList}\small\item\em Удаление строк с начала до первого совпадения. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_a273f000e0dab42f7db55c90fe9452121}{Replace\+First}} (string old\+Line, string new\+Line)
+\begin{DoxyCompactList}\small\item\em Замена первого вхождения. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_ad05e794ca57ea4aa9f50f16e67144d8e}{Replace\+All}} (string old\+Line, string new\+Line)
+\begin{DoxyCompactList}\small\item\em Замена всех вхождений. \end{DoxyCompactList}\item 
+void {\bfseries Add\+Dot\+To\+Comment} ()
+\begin{DoxyCompactList}\small\item\em Добавить точку в конце комментария. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_ad77014e517418daf3dfae12a69f07021}{Remove\+Empty\+Braces}} (string prev\+Value)
+\begin{DoxyCompactList}\small\item\em Удалить пустые скобки. \end{DoxyCompactList}\item 
+void {\bfseries Remove\+Regions} ()
+\begin{DoxyCompactList}\small\item\em Удалить пустые регионы \end{DoxyCompactList}\item 
+void {\bfseries Remove\+Tabs} ()
+\begin{DoxyCompactList}\small\item\em Удалить табы \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_a261960d18a470cae914becc9b860b726}{Insert\+Empty\+Line\+Before\+Namespace}} (string name\+Space)
+\begin{DoxyCompactList}\small\item\em Вставить пустую строку перед указанным пространством имени. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_a37305070e719e1adf058538d48981874}{Set\+Length}} (int length)
+\begin{DoxyCompactList}\small\item\em Установить длины строк. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_a0236b8827364430a0331f8cfdc9d6a54}{Set\+Length}} (int length, char symbol)
+\begin{DoxyCompactList}\small\item\em Установить длины строк. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_ae9cc6cef64f87ccfe23f17c326ece487}{Set\+Length\+And\+Last\+Char}} (int length, char symbol)
+\begin{DoxyCompactList}\small\item\em Установить длины строк с указанным последним символом. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_a1ac9979de532f3be61d4abeead6a5b4e}{Set\+Length\+With\+Tabs}} (int length, int tabs\+Equiv=4)
+\begin{DoxyCompactList}\small\item\em Установить длины строк с учетом начальных символов табуляции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_aab6b21bc81b1019070399337dfa7add0}{Set\+Length\+With\+Tabs}} (int length, char symbol, int tabs\+Equiv=4)
+\begin{DoxyCompactList}\small\item\em Установить длины строк с учетом начальных символов табуляции. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_ad25ddc1ecd697914660edb6c15f8619b}{Set\+Length\+With\+Tabs\+Only\+Delimiters}} (int length, int tabs\+Equiv=4)
+\begin{DoxyCompactList}\small\item\em Установить длины строк с учетом начальных символов табуляции только для разделителей. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list_a28784eca5645ff8da66bdf183a530cc3}{Save}} (string file\+Name)
+\begin{DoxyCompactList}\small\item\em Сохранения списка строк текстовых данных в файл. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_abcf8f1afa0820bc4fa98eb5daae621f9}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_abcf8f1afa0820bc4fa98eb5daae621f9} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_line}{CText\+Line}} {\bfseries Delimiter\+Part} = new("{}//"{}, \textquotesingle{}=\textquotesingle{}, 120)
+\begin{DoxyCompactList}\small\item\em Разделитель для части. \end{DoxyCompactList}\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a22316eca79343978d2cc21598d08b717}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a22316eca79343978d2cc21598d08b717} 
+static readonly \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_line}{CText\+Line}} {\bfseries Delimiter\+Section} = new("{}//"{}, \textquotesingle{}-\/\textquotesingle{}, 120)
+\begin{DoxyCompactList}\small\item\em Разделитель для секции. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ac650e1a97c01ea751b2de81c69b783c5}{CText\+Generate\+Code\+Base}} (int capacity=24)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a6067b1d5ceaf27b997604ab157783755}{CText\+Generate\+Code\+Base}} (string str)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_list}{Lotus.\+Core.\+CText\+List}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries Current\+Indent}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Уровень вложенности строки при добавлении новых строк. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{List\+Array}}$<$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_line}{CText\+Line}} $>$ {\bfseries Lines}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Список строк. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Простой генератор программного кода на языке C\# на основе текстовых данных. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_ac100e7356351de32779ce66745efe9e0}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_ac100e7356351de32779ce66745efe9e0} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!CTextGenerateCodeCSharp@{CTextGenerateCodeCSharp}}
+\index{CTextGenerateCodeCSharp@{CTextGenerateCodeCSharp}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{CTextGenerateCodeCSharp()}{CTextGenerateCodeCSharp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+CText\+Generate\+Code\+CSharp (\begin{DoxyParamCaption}\item[{int}]{capacity = {\ttfamily 24} }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & Начальная максимальная емкость списка.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a83932afe4ff496d831229cf3694dc5a4}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a83932afe4ff496d831229cf3694dc5a4} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!CTextGenerateCodeCSharp@{CTextGenerateCodeCSharp}}
+\index{CTextGenerateCodeCSharp@{CTextGenerateCodeCSharp}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{CTextGenerateCodeCSharp()}{CTextGenerateCodeCSharp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+CText\+Generate\+Code\+CSharp (\begin{DoxyParamCaption}\item[{string}]{str }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Строка.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a3f636cc01b74b265663328eab0f3926b}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a3f636cc01b74b265663328eab0f3926b} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddClassEndDeclaration@{AddClassEndDeclaration}}
+\index{AddClassEndDeclaration@{AddClassEndDeclaration}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddClassEndDeclaration()}{AddClassEndDeclaration()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Class\+End\+Declaration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление окончание декларации класса. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a7648a934abb193404bdfbb15364f4aa4}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a4a7878801e3fb4f06b405240b1c23eb8}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a4a7878801e3fb4f06b405240b1c23eb8} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddClassPublic@{AddClassPublic}}
+\index{AddClassPublic@{AddClassPublic}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddClassPublic()}{AddClassPublic()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Class\+Public (\begin{DoxyParamCaption}\item[{string}]{class\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление декларации публичного класса. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em class\+Name} & Имя класса.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_aeef76c04e881e946c69c3e3ede169590}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_aebd3e33892ed4c2a280c0aa281c3d741}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_aebd3e33892ed4c2a280c0aa281c3d741} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddClassStaticPublic@{AddClassStaticPublic}}
+\index{AddClassStaticPublic@{AddClassStaticPublic}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddClassStaticPublic()}{AddClassStaticPublic()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Class\+Static\+Public (\begin{DoxyParamCaption}\item[{string}]{class\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление декларации статического публичного класса. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em class\+Name} & Имя класса.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ab0e17c8e0e9bc0a8ea6d06d9dfd0b99d}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_adf13a4d6e7eeffed4c6a8f576f9b84d3}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_adf13a4d6e7eeffed4c6a8f576f9b84d3} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddComment@{AddComment}}
+\index{AddComment@{AddComment}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddComment()}{AddComment()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Comment (\begin{DoxyParamCaption}\item[{string}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление комментария. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Текст комментария.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_afddd798447a8825c9c6231cbbee8ad8d}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a0f18173eb6d51549815910b54301c81c}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a0f18173eb6d51549815910b54301c81c} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddCommentRemarksForData@{AddCommentRemarksForData}}
+\index{AddCommentRemarksForData@{AddCommentRemarksForData}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddCommentRemarksForData()}{AddCommentRemarksForData()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Comment\+Remarks\+For\+Data (\begin{DoxyParamCaption}\item[{string}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление стандартного расширенного комментария XML для полей и свойств. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Текст комментария.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ada61c7f6b63bf398cb34e4a3291e1549}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a113a2e9aa4a0db90b2b31ef30df05600}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a113a2e9aa4a0db90b2b31ef30df05600} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddCommentSection@{AddCommentSection}}
+\index{AddCommentSection@{AddCommentSection}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddCommentSection()}{AddCommentSection()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Comment\+Section (\begin{DoxyParamCaption}\item[{string}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление комментария для секции или раздела. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Текст комментария.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_af12f403f183b44901ab5e6f6665e651a}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_aaa5f0e1718b4525ad68fb788e1021978}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_aaa5f0e1718b4525ad68fb788e1021978} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddCommentSummary@{AddCommentSummary}}
+\index{AddCommentSummary@{AddCommentSummary}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddCommentSummary()}{AddCommentSummary()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Comment\+Summary (\begin{DoxyParamCaption}\item[{bool}]{delimiter\+Section\+Before,  }\item[{string}]{text,  }\item[{bool}]{delimiter\+Section\+After }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление стандартного краткого комментария XML. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delimiter\+Section\+Before} & Статус добавления разделителя секции перед комментарием.\\
+\hline
+{\em text} & Текст комментария.\\
+\hline
+{\em delimiter\+Section\+After} & Статус добавления разделителя секции после комментария .\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ae6920c6bbc16ed187bfb31dafb21f894}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a42ded62fe58cb4262ced30edc7f7c655}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a42ded62fe58cb4262ced30edc7f7c655} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddCommentSummaryForData@{AddCommentSummaryForData}}
+\index{AddCommentSummaryForData@{AddCommentSummaryForData}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddCommentSummaryForData()}{AddCommentSummaryForData()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Comment\+Summary\+For\+Data (\begin{DoxyParamCaption}\item[{string}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление стандартного краткого комментария XML для полей и свойств. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Текст комментария.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_abaf39d765dcb8c3fe08aa75e60ee2e8f}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a56b2cafef689d636a6ae58929af9b7a8}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a56b2cafef689d636a6ae58929af9b7a8} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddConstructor@{AddConstructor}}
+\index{AddConstructor@{AddConstructor}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddConstructor()}{AddConstructor()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Constructor (\begin{DoxyParamCaption}\item[{string}]{constructor,  }\item[{string?}]{base\+Body }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление декларации конструктора. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em constructor} & Конструктор.\\
+\hline
+{\em base\+Body} & Базовый конструктор.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a8d83bbc793bd0036e5f6402a1e70766c}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a754ab306cee0ef0d52e253853581192d}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a754ab306cee0ef0d52e253853581192d} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddConstructorClose@{AddConstructorClose}}
+\index{AddConstructorClose@{AddConstructorClose}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddConstructorClose()}{AddConstructorClose()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Constructor\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление окончание декларации конструктора. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ade9c4956834058221f037f55b855fdeb}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_abccb802ad4d19c450a4c55b894856fb0}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_abccb802ad4d19c450a4c55b894856fb0} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddDelimiterPart@{AddDelimiterPart}}
+\index{AddDelimiterPart@{AddDelimiterPart}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddDelimiterPart()}{AddDelimiterPart()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Delimiter\+Part (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление разделителя для части. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a4155f0677a47ded4670fdc60d26baec8}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a35facb14c3261e2b2c058d44f1bc7dde}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a35facb14c3261e2b2c058d44f1bc7dde} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddDelimiterSection@{AddDelimiterSection}}
+\index{AddDelimiterSection@{AddDelimiterSection}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddDelimiterSection()}{AddDelimiterSection()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Delimiter\+Section (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление разделителя для секции. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ad205ad567d99571c96e10953b95b0a96}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a1a603a5a14d16993cc7491cba346e4cc}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a1a603a5a14d16993cc7491cba346e4cc} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddFieldConstPublic@{AddFieldConstPublic}}
+\index{AddFieldConstPublic@{AddFieldConstPublic}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddFieldConstPublic()}{AddFieldConstPublic()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Field\+Const\+Public (\begin{DoxyParamCaption}\item[{string}]{type\+Name,  }\item[{string}]{field\+Name,  }\item[{string}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление декларации константного публичного поля. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Имя типа.\\
+\hline
+{\em field\+Name} & Имя поля.\\
+\hline
+{\em value} & Значения поля.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a463ef65bf96d13606df3c5af88bee383}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a2dc1b829f3bbd1d96a4bce040f8887f6}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a2dc1b829f3bbd1d96a4bce040f8887f6} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddFieldConstPublicString@{AddFieldConstPublicString}}
+\index{AddFieldConstPublicString@{AddFieldConstPublicString}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddFieldConstPublicString()}{AddFieldConstPublicString()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Field\+Const\+Public\+String (\begin{DoxyParamCaption}\item[{string}]{field\+Name,  }\item[{string}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление декларации константного публичного поля типа String. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field\+Name} & Имя поля.\\
+\hline
+{\em value} & Значения поля.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a9aa750abe3fe05212b8495b01391ebd5}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a9f1dc3a768ff35009d1b390d2c13aa61}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a9f1dc3a768ff35009d1b390d2c13aa61} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddFieldStaticReadonlyPublic@{AddFieldStaticReadonlyPublic}}
+\index{AddFieldStaticReadonlyPublic@{AddFieldStaticReadonlyPublic}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddFieldStaticReadonlyPublic()}{AddFieldStaticReadonlyPublic()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Field\+Static\+Readonly\+Public (\begin{DoxyParamCaption}\item[{string}]{type\+Name,  }\item[{string}]{field\+Name,  }\item[{string}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление декларации статического поля только для чтения. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Имя типа.\\
+\hline
+{\em field\+Name} & Имя поля.\\
+\hline
+{\em value} & Значения поля.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a860f64a6d9bb3c14e0dd67fcfe102922}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_ac56984bbaf44ad1d7a29e5f10c215762}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_ac56984bbaf44ad1d7a29e5f10c215762} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddMethodWithBody@{AddMethodWithBody}}
+\index{AddMethodWithBody@{AddMethodWithBody}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddMethodWithBody()}{AddMethodWithBody()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Method\+With\+Body (\begin{DoxyParamCaption}\item[{string}]{signature\+Method,  }\item[{params string\mbox{[}$\,$\mbox{]}}]{body\+Methods }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление метода вместе с телом. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signature\+Method} & Сигнатура метода.\\
+\hline
+{\em body\+Methods} & Список инструкций метода.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a16d66d8b55125e4f6572d8ebc293cf6d}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_af2a321b6218a3a30911202ae4924116b}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_af2a321b6218a3a30911202ae4924116b} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddNamespaceClose@{AddNamespaceClose}}
+\index{AddNamespaceClose@{AddNamespaceClose}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddNamespaceClose()}{AddNamespaceClose()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Namespace\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление закрытия пространства имени. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a09437178e075aeef309a3fd5e37fefc2}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a8116afd731c08ad616a7f72cfb70c201}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a8116afd731c08ad616a7f72cfb70c201} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddNamespaceOpen@{AddNamespaceOpen}}
+\index{AddNamespaceOpen@{AddNamespaceOpen}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddNamespaceOpen()}{AddNamespaceOpen()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Namespace\+Open (\begin{DoxyParamCaption}\item[{string}]{space\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление открытие пространства имени. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em space\+Name} & Имя пространства имён.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_a65f3c865f154d851d8b72061a4ff6678}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+\Hypertarget{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a0f3b0fab3d208bb3b5147b08f2453a00}\label{class_lotus_1_1_core_1_1_c_text_generate_code_c_sharp_a0f3b0fab3d208bb3b5147b08f2453a00} 
+\index{Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}!AddNamespaceUsing@{AddNamespaceUsing}}
+\index{AddNamespaceUsing@{AddNamespaceUsing}!Lotus.Core.CTextGenerateCodeCSharp@{Lotus.Core.CTextGenerateCodeCSharp}}
+\doxysubsubsection{\texorpdfstring{AddNamespaceUsing()}{AddNamespaceUsing()}}
+{\footnotesize\ttfamily override void Lotus.\+Core.\+CText\+Generate\+Code\+CSharp.\+Add\+Namespace\+Using (\begin{DoxyParamCaption}\item[{params string\mbox{[}$\,$\mbox{]}}]{namespaces }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Добавление используемых пространств имён. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em namespaces} & Список пространства имён.\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_text_generate_code_base_ac5306b87455f6df32eba1661e2656cbd}{Lotus.\+Core.\+CText\+Generate\+Code\+Base}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Text/Lotus\+Text\+Generate\+Code\+CSharp.\+cs\end{DoxyCompactItemize}

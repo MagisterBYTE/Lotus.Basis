@@ -194,9 +194,9 @@ namespace Lotus.Core
         /// <returns>Статус равенства объектов.</returns>
         public override bool Equals(object? obj)
         {
-            if (obj is CTextStr text_str)
+            if (obj is CTextStr textStr)
             {
-                return _rawString == text_str._rawString;
+                return _rawString == textStr._rawString;
             }
             return base.Equals(obj);
         }
@@ -303,11 +303,11 @@ namespace Lotus.Core
         /// <summary>
         /// Неявное преобразование в объект типа String.
         /// </summary>
-        /// <param name="text_str">Строка.</param>
+        /// <param name="textStr">Строка.</param>
         /// <returns>Строка.</returns>
-        public static implicit operator string(CTextStr text_str)
+        public static implicit operator string(CTextStr textStr)
         {
-            return text_str.RawString;
+            return textStr.RawString;
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿#if UNITY_2017_1_OR_NEWER
+#if UNITY_2017_1_OR_NEWER
 using System;
 
 using UnityEngine;
@@ -171,10 +171,10 @@ namespace Lotus.Core
             if (_isOrbit)
             {
                 // Приближение камеры
-                var delta_zoom = XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
-                if (Mathf.Approximately(delta_zoom, 0) == false && _isZoom)
+                var deltaZoom = XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
+                if (Mathf.Approximately(deltaZoom, 0) == false && _isZoom)
                 {
-                    _orbitDistance += delta_zoom;
+                    _orbitDistance += deltaZoom;
                 }
 
                 // Получаем текущие положение камеры
@@ -200,12 +200,12 @@ namespace Lotus.Core
             else
             {
                 // Приближение камеры
-                var delta_zoom = XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
-                if (Mathf.Approximately(delta_zoom, 0) == false && _isZoom)
+                var deltaZoom = XInputDispatcher.GetAxis(XCameraInput.AxisOrbitName);
+                if (Mathf.Approximately(deltaZoom, 0) == false && _isZoom)
                 {
                     Vector3 dir = _target.position - _thisTransform.position;
                     _orbitDistance = dir.magnitude;
-                    _thisTransform.position += dir * delta_zoom;
+                    _thisTransform.position += dir * deltaZoom;
                     _distance = _target.position - _thisTransform.position;
                 }
 

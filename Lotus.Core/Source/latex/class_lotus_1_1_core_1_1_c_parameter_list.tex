@@ -1,0 +1,164 @@
+\doxysection{Lotus.\+Core.\+CParameter\+List\texorpdfstring{$<$}{<} TType \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_lotus_1_1_core_1_1_c_parameter_list}{}\label{class_lotus_1_1_core_1_1_c_parameter_list}\index{Lotus.Core.CParameterList$<$ TType $>$@{Lotus.Core.CParameterList$<$ TType $>$}}
+
+
+Класс для представления параметра значения которого представляет собой список указанного типа.  
+
+
+Inheritance diagram for Lotus.\+Core.\+CParameter\+List\texorpdfstring{$<$}{<} TType \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lotus_1_1_core_1_1_c_parameter_list}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_parameter_list_ab1348ad3f2d2d0a7392717fb3e7e5cf2}\label{class_lotus_1_1_core_1_1_c_parameter_list_ab1348ad3f2d2d0a7392717fb3e7e5cf2} 
+{\bfseries CParameter\+List} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list_a3f21b236203f07c4660dc19e843d89f3}{CParameter\+List}} (string parameter\+Name, params TType\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list_a20d7a7f310198638add476107c19d607}{CParameter\+List}} (int id, params TType\mbox{[}$\,$\mbox{]} items)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list_a75f9ab4b6ba418db7c8614dedf1de7f2}{Write\+To\+Json}} (Stream\+Writer stream\+Writer, int depth, bool is\+Array)
+\begin{DoxyCompactList}\small\item\em Запись в строковый поток в формате Json. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item}{Lotus.\+Core.\+Parameter\+Item$<$ List\+Array$<$ TType $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_aa3524dd2c75dc14904a3d519a16a57d7}{Compare\+To}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item}{Parameter\+Item}}$<$ TValue $>$? other)
+\begin{DoxyCompactList}\small\item\em Сравнение параметров для упорядочивания. \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_a2c25abc9b81b253c93a6700660d2301e}{Clone}} ()
+\begin{DoxyCompactList}\small\item\em Полное копирование параметра. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item}{Parameter\+Item}}$<$ TValue $>$ \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_a29485ef5c362345b2227b9807baa1724}{Duplicate}} (\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameters}{CParameters}}? parameters=null)
+\begin{DoxyCompactList}\small\item\em Получение дубликата объекта. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_a2d0bd6d6b1f4bcb5e7402cf95f0f6508}{To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Преобразование к текстовому представлению. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_af323428e01555763cf263364b6c8b15b}{Write\+To\+Json}} (Stream\+Writer stream\+Writer, int depth, bool is\+Array)
+\begin{DoxyCompactList}\small\item\em Запись в строковый поток в формате Json. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lotus_1_1_core_1_1_c_parameter_list_a724406bcf614bfb94d65b7c2d9b9ccb0}\label{class_lotus_1_1_core_1_1_c_parameter_list_a724406bcf614bfb94d65b7c2d9b9ccb0} 
+override \mbox{\hyperlink{group___core_parameters_ga187e165224a3b1ab40b2f0718a65bb73}{TParameter\+Value\+Type}} {\bfseries Value\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Тип данных значения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item}{Lotus.\+Core.\+Parameter\+Item$<$ List\+Array$<$ TType $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_aa3d6dad7ed4203e53f02230e4cc74e96}{Name}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Наименование параметра. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{group___core_parameters_ga187e165224a3b1ab40b2f0718a65bb73}{TParameter\+Value\+Type}} {\bfseries Value\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Тип данных значения. \end{DoxyCompactList}\item 
+TValue? {\bfseries Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Значение параметра. \end{DoxyCompactList}\item 
+long {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Уникальный идентификатор параметра. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_ada7e9e415f416be87c49f716cd89bf8b}{Is\+Active}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Активность параметра. \end{DoxyCompactList}\item 
+byte {\bfseries User\+Tag}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Пользовательский тэг данных. \end{DoxyCompactList}\item 
+byte {\bfseries User\+Data}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Пользовательский тип данных. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_owner_object}{ILotus\+Owner\+Object}}? {\bfseries IOwner}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Владелец параметра. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item}{Lotus.\+Core.\+Parameter\+Item$<$ List\+Array$<$ TType $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Parameter\+Item} ()
+\begin{DoxyCompactList}\small\item\em Конструктор по умолчанию инициализирует объект класса предустановленными значениями. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_a798325c0a7c4450d4e1e87032740f9fc}{Parameter\+Item}} (string parameter\+Name)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item_a599c16f97eac7d26163d6c59d3052c1c}{Parameter\+Item}} (long id)
+\begin{DoxyCompactList}\small\item\em Конструктор инициализирует объект класса указанными параметрами. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_lotus_1_1_core_1_1_parameter_item}{Lotus.\+Core.\+Parameter\+Item$<$ List\+Array$<$ TType $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Name}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Id}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+IValue}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Value}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+Is\+Active}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+User\+Tag}
+\item 
+static readonly Property\+Changed\+Event\+Args {\bfseries Property\+Args\+User\+Data}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс для представления параметра значения которого представляет собой список указанного типа. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TType} & Тип элемента списка.\\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_parameter_list_a3f21b236203f07c4660dc19e843d89f3}\label{class_lotus_1_1_core_1_1_c_parameter_list_a3f21b236203f07c4660dc19e843d89f3} 
+\index{Lotus.Core.CParameterList$<$ TType $>$@{Lotus.Core.CParameterList$<$ TType $>$}!CParameterList@{CParameterList}}
+\index{CParameterList@{CParameterList}!Lotus.Core.CParameterList$<$ TType $>$@{Lotus.Core.CParameterList$<$ TType $>$}}
+\doxysubsubsection{\texorpdfstring{CParameterList()}{CParameterList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list}{Lotus.\+Core.\+CParameter\+List}}$<$ TType $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list}{CParameter\+List}} (\begin{DoxyParamCaption}\item[{string}]{parameter\+Name,  }\item[{params TType\mbox{[}$\,$\mbox{]}}]{items }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameter\+Name} & Имя параметра.\\
+\hline
+{\em items} & Список элементов.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_lotus_1_1_core_1_1_c_parameter_list_a20d7a7f310198638add476107c19d607}\label{class_lotus_1_1_core_1_1_c_parameter_list_a20d7a7f310198638add476107c19d607} 
+\index{Lotus.Core.CParameterList$<$ TType $>$@{Lotus.Core.CParameterList$<$ TType $>$}!CParameterList@{CParameterList}}
+\index{CParameterList@{CParameterList}!Lotus.Core.CParameterList$<$ TType $>$@{Lotus.Core.CParameterList$<$ TType $>$}}
+\doxysubsubsection{\texorpdfstring{CParameterList()}{CParameterList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list}{Lotus.\+Core.\+CParameter\+List}}$<$ TType $>$.\mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list}{CParameter\+List}} (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{params TType\mbox{[}$\,$\mbox{]}}]{items }\end{DoxyParamCaption})}
+
+
+
+Конструктор инициализирует объект класса указанными параметрами. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Идентификатор параметра.\\
+\hline
+{\em items} & Список элементов.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lotus_1_1_core_1_1_c_parameter_list_a75f9ab4b6ba418db7c8614dedf1de7f2}\label{class_lotus_1_1_core_1_1_c_parameter_list_a75f9ab4b6ba418db7c8614dedf1de7f2} 
+\index{Lotus.Core.CParameterList$<$ TType $>$@{Lotus.Core.CParameterList$<$ TType $>$}!WriteToJson@{WriteToJson}}
+\index{WriteToJson@{WriteToJson}!Lotus.Core.CParameterList$<$ TType $>$@{Lotus.Core.CParameterList$<$ TType $>$}}
+\doxysubsubsection{\texorpdfstring{WriteToJson()}{WriteToJson()}}
+{\footnotesize\ttfamily override void \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_parameter_list}{Lotus.\+Core.\+CParameter\+List}}$<$ TType $>$.Write\+To\+Json (\begin{DoxyParamCaption}\item[{Stream\+Writer}]{stream\+Writer,  }\item[{int}]{depth,  }\item[{bool}]{is\+Array }\end{DoxyParamCaption})}
+
+
+
+Запись в строковый поток в формате Json. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream\+Writer} & Строковый поток.\\
+\hline
+{\em depth} & Текущая глубина вложенности.\\
+\hline
+{\em is\+Array} & Статус массива.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Parameters/Lotus\+Parameter\+List.\+cs\end{DoxyCompactItemize}

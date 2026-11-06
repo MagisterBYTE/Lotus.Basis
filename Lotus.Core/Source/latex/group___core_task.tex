@@ -1,0 +1,99 @@
+\doxysubsection{Подсистема задач}
+\hypertarget{group___core_task}{}\label{group___core_task}\index{Подсистема задач@{Подсистема задач}}
+
+
+Подсистема задач (не потоки) предназначена для формирования задачи или группы задачи которая может выполняться последовательно или параллельно, с определенным режимом выполнения, а также с возможностью приостановки и дальнейшего выполнения.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task}{Lotus.\+Core.\+ILotus\+Task}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для определения задачи. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task_info}{Lotus.\+Core.\+ILotus\+Task\+Info}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для определения задачи с возможность информирования о ходе ее выполнения. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_task_holder}{Lotus.\+Core.\+CTask\+Holder}}
+\begin{DoxyCompactList}\small\item\em Класс-\/оболочка для хранения определенной задачи. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_task_executor}{Lotus.\+Core.\+ILotus\+Task\+Executor}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса исполнителя задачи. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_executor}{Lotus.\+Core.\+Task\+Executor}}
+\begin{DoxyCompactList}\small\item\em Исполнитель задачи. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_group_task}{Lotus.\+Core.\+Group\+Task}}
+\begin{DoxyCompactList}\small\item\em Класс для реализации группы задач. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_task_group_executor}{Lotus.\+Core.\+Task\+Group\+Executor}}
+\begin{DoxyCompactList}\small\item\em Исполнитель группы задачи. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{Lotus.\+Core.\+TTask\+Method}} \{ \mbox{\hyperlink{group___core_task_gga8073bc2350bdea7c9e59abd959dd92d6ab998dcbe672236bed799e0418d0eb892}{Lotus.\+Core.\+TTask\+Method.\+Each\+Frame}}
+, \mbox{\hyperlink{group___core_task_gga8073bc2350bdea7c9e59abd959dd92d6a84a9a3474f119832b09ff2c5f0819189}{Lotus.\+Core.\+TTask\+Method.\+Every\+Frame}}
+ \}
+\begin{DoxyCompactList}\small\item\em Способ выполнения задачи. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{group___core_task_ga244a3b151abf09a5e1b22d5bd4c6c8a8}{Lotus.\+Core.\+TTask\+Execute\+Mode}} \{ \mbox{\hyperlink{group___core_task_gga244a3b151abf09a5e1b22d5bd4c6c8a8a98402eecfbcefc336954458a01752131}{Lotus.\+Core.\+TTask\+Execute\+Mode.\+Parallel}}
+, \mbox{\hyperlink{group___core_task_gga244a3b151abf09a5e1b22d5bd4c6c8a8aed8c7cc41f88344feb452c7f1722ff6c}{Lotus.\+Core.\+TTask\+Execute\+Mode.\+Sequentially}}
+ \}
+\begin{DoxyCompactList}\small\item\em Режим выполнения группы задач. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема задач (не потоки) предназначена для формирования задачи или группы задачи которая может выполняться последовательно или параллельно, с определенным режимом выполнения, а также с возможностью приостановки и дальнейшего выполнения. 
+
+\hypertarget{group___core_task_autotoc_md11}{}\doxysubsubsubsection{\texorpdfstring{Возможности/особенности}{Возможности/особенности}}\label{group___core_task_autotoc_md11}
+
+\begin{DoxyEnumerate}
+\item Выполнение задачи по критериям интерфейса \doxylink{interface_lotus_1_1_core_1_1_i_lotus_task}{Lotus.\+Core.\+ILotus\+Task}.
+\item Поддержка задержки начала выполнения, паузы, информирования о ходе выполнения задачи.
+\item Работа с группами задач, возможность запускать последовательно и параллельно исполнения в группе.
+\item Задержка при выполнение задач группы, информирования об окончании выполнения каждой задачи.
+\end{DoxyEnumerate}\hypertarget{group___core_task_autotoc_md12}{}\doxysubsubsubsection{\texorpdfstring{Описание}{Описание}}\label{group___core_task_autotoc_md12}
+Соответствующая задача формируется классом на основе реализации интерфейса. Под задачей понимается элементарная единица выполнения с правильно реализованным интерфейсов, выполняемая определённым способом с возможностью информирования об окончании задачи, паузой и принудительной остановкой выполнения задачи.
+
+Под группой задач понимается несколько задач выполняемых параллельно или последовательно определённым способом(в том числе с задержкой) с возможностью информирования об окончании выполнения всех задач группы, паузой и принудительной остановкой выполнения группы задачи.\hypertarget{group___core_task_autotoc_md13}{}\doxysubsubsubsection{\texorpdfstring{Использование}{Использование}}\label{group___core_task_autotoc_md13}
+
+\begin{DoxyEnumerate}
+\item Правильно реализовать интерфейс \doxylink{interface_lotus_1_1_core_1_1_i_lotus_task}{Lotus.\+Core.\+ILotus\+Task}.
+\item Сформировать задачу или группу задач и запустить на исполнение методами \doxylink{class_lotus_1_1_core_1_1_task_executor}{Lotus.\+Core.\+Task\+Executor} или \doxylink{class_lotus_1_1_core_1_1_task_group_executor}{Lotus.\+Core.\+Task\+Group\+Executor}
+\item Методы исполнителя задач нужно использовать в ручную(непосредственно вызывать его методы в нужных местах)
+\end{DoxyEnumerate}
+
+\doxysubsubsection{Enumeration Type Documentation}
+\Hypertarget{group___core_task_ga244a3b151abf09a5e1b22d5bd4c6c8a8}\label{group___core_task_ga244a3b151abf09a5e1b22d5bd4c6c8a8} 
+\index{Подсистема задач@{Подсистема задач}!TTaskExecuteMode@{TTaskExecuteMode}}
+\index{TTaskExecuteMode@{TTaskExecuteMode}!Подсистема задач@{Подсистема задач}}
+\doxysubsubsubsection{\texorpdfstring{TTaskExecuteMode}{TTaskExecuteMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group___core_task_ga244a3b151abf09a5e1b22d5bd4c6c8a8}{Lotus.\+Core.\+TTask\+Execute\+Mode}}}
+
+
+
+Режим выполнения группы задач. 
+
+Применяется когда группа задач сформирована из нескольких задач. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Parallel@{Parallel}!Подсистема задач@{Подсистема задач}}\index{Подсистема задач@{Подсистема задач}!Parallel@{Parallel}}}\Hypertarget{group___core_task_gga244a3b151abf09a5e1b22d5bd4c6c8a8a98402eecfbcefc336954458a01752131}\label{group___core_task_gga244a3b151abf09a5e1b22d5bd4c6c8a8a98402eecfbcefc336954458a01752131} 
+Parallel&Параллельное выполнении всех задач группы. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Sequentially@{Sequentially}!Подсистема задач@{Подсистема задач}}\index{Подсистема задач@{Подсистема задач}!Sequentially@{Sequentially}}}\Hypertarget{group___core_task_gga244a3b151abf09a5e1b22d5bd4c6c8a8aed8c7cc41f88344feb452c7f1722ff6c}\label{group___core_task_gga244a3b151abf09a5e1b22d5bd4c6c8a8aed8c7cc41f88344feb452c7f1722ff6c} 
+Sequentially&Последовательно выполнении всех задач группы. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}\label{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6} 
+\index{Подсистема задач@{Подсистема задач}!TTaskMethod@{TTaskMethod}}
+\index{TTaskMethod@{TTaskMethod}!Подсистема задач@{Подсистема задач}}
+\doxysubsubsubsection{\texorpdfstring{TTaskMethod}{TTaskMethod}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group___core_task_ga8073bc2350bdea7c9e59abd959dd92d6}{Lotus.\+Core.\+TTask\+Method}}}
+
+
+
+Способ выполнения задачи. 
+
+Способ выполнения задачи определяет временные параметры выполнения задачи. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EachFrame@{EachFrame}!Подсистема задач@{Подсистема задач}}\index{Подсистема задач@{Подсистема задач}!EachFrame@{EachFrame}}}\Hypertarget{group___core_task_gga8073bc2350bdea7c9e59abd959dd92d6ab998dcbe672236bed799e0418d0eb892}\label{group___core_task_gga8073bc2350bdea7c9e59abd959dd92d6ab998dcbe672236bed799e0418d0eb892} 
+Each\+Frame&Задача выполняется каждый кадр в методе Update. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EveryFrame@{EveryFrame}!Подсистема задач@{Подсистема задач}}\index{Подсистема задач@{Подсистема задач}!EveryFrame@{EveryFrame}}}\Hypertarget{group___core_task_gga8073bc2350bdea7c9e59abd959dd92d6a84a9a3474f119832b09ff2c5f0819189}\label{group___core_task_gga8073bc2350bdea7c9e59abd959dd92d6a84a9a3474f119832b09ff2c5f0819189} 
+Every\+Frame&Задача выполняется каждый определенный кадр в методе Update. Например каждый десятый. Применяется для задач не критичных к производительности. \\
+\hline
+
+\end{DoxyEnumFields}

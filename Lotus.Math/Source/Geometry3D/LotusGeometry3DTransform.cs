@@ -214,8 +214,8 @@ namespace Lotus.Maths
         public readonly void SetRotateAround(in Vector3Df center, in Vector3Df axis, float angle, Transform3Df parent)
         {
             // Глобальное вращение
-            //Vector3Df axis_d = new Vector3Df(axis);
-            //Quaternion3D rotation = new Quaternion3D(axis_d, angle + 180);
+            //Vector3Df axisD = new Vector3Df(axis);
+            //Quaternion3D rotation = new Quaternion3D(axisD, angle + 180);
             //mPositionPivot = rotation.TransformVector(ref mOriginalPosition);
             //mPositionGlobal = center - parent.Pivot;
             //mAngleAxisGlobal = angle;
@@ -246,9 +246,9 @@ namespace Lotus.Maths
         public readonly void RotateAround(in Vector3Df center, in Vector3Df axis, float angle, Transform3Df parent)
         {
             //// Глобальное вращение
-            //Vector3Df axis_d = new Vector3Df(axis);
+            //Vector3Df axisD = new Vector3Df(axis);
             //mAngleAxisGlobal += angle;
-            //Quaternion3D rotation = new Quaternion3D(axis_d, mAngleAxisGlobal + 180);
+            //Quaternion3D rotation = new Quaternion3D(axisD, mAngleAxisGlobal + 180);
 
             //// 1) Переносим позицию в локальный центр
             ////Vector3Df position = mOriginalPosition + center;

@@ -1,0 +1,155 @@
+\doxysection{Lotus.\+Core.\+ILotus\+Ecs\+Entity Interface Reference}
+\hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity}{}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity}\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+
+
+Интерфейс для определения сущности.  
+
+
+Inheritance diagram for Lotus.\+Core.\+ILotus\+Ecs\+Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a3ecb2f820658dd5a57beac43d53a99b1}{Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Идентификатор сущности. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_ad6a9d172bb5f28e0354137825fe5b74b}{Is\+Enabled}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус активности сущности. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a6aa69477caac6df0bea59a1198c4a240}{Layer}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Слой расположения сущности. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a84aad5f61d15cab54d6300c1be798f3f}{Tag}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Тег сущности. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_af24bad4d29499614abda2ef70db19e0b}{Group}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Группа, которой принадлежит сущность. \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a6b8a1153325d33e2e9dc276e98ea25e7}{Marked}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус маркировки сущности. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a14bab31ecf1511a031f16b85e45ff407}{Component\+Count}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество компонентов. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a494248d8d066a0d7edff1495e3ddb9a4}{Is\+Destroyed}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Статус уничтожения сущности. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Интерфейс для определения сущности. 
+
+\doxysubsection{Property Documentation}
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a14bab31ecf1511a031f16b85e45ff407}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a14bab31ecf1511a031f16b85e45ff407} 
+\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}!ComponentCount@{ComponentCount}}
+\index{ComponentCount@{ComponentCount}!Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+\doxysubsubsection{\texorpdfstring{ComponentCount}{ComponentCount}}
+{\footnotesize\ttfamily int Lotus.\+Core.\+ILotus\+Ecs\+Entity.\+Component\+Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Количество компонентов. 
+
+
+
+Implemented in \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_ecs_entity_a4ff7c61cae92aab90f400f569eed245a}{Lotus.\+Core.\+TEcs\+Entity}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_af24bad4d29499614abda2ef70db19e0b}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_af24bad4d29499614abda2ef70db19e0b} 
+\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}!Group@{Group}}
+\index{Group@{Group}!Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+\doxysubsubsection{\texorpdfstring{Group}{Group}}
+{\footnotesize\ttfamily byte Lotus.\+Core.\+ILotus\+Ecs\+Entity.\+Group\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Группа, которой принадлежит сущность. 
+
+Является вспомогательной характеристикой сущности и используется на усмотрения пользователя. 
+
+Implemented in \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_ecs_entity_a28b94c9357d299fe368b368f69198058}{Lotus.\+Core.\+TEcs\+Entity}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a3ecb2f820658dd5a57beac43d53a99b1}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a3ecb2f820658dd5a57beac43d53a99b1} 
+\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}!Id@{Id}}
+\index{Id@{Id}!Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily int Lotus.\+Core.\+ILotus\+Ecs\+Entity.\+Id\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Идентификатор сущности. 
+
+Является уникальным в пределах одного мира. 
+
+Implemented in \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_ecs_entity_ae4d4860555a9b87d174ec2cde9cc7e2e}{Lotus.\+Core.\+TEcs\+Entity}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a494248d8d066a0d7edff1495e3ddb9a4}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a494248d8d066a0d7edff1495e3ddb9a4} 
+\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}!IsDestroyed@{IsDestroyed}}
+\index{IsDestroyed@{IsDestroyed}!Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+\doxysubsubsection{\texorpdfstring{IsDestroyed}{IsDestroyed}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+ILotus\+Ecs\+Entity.\+Is\+Destroyed\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Статус уничтожения сущности. 
+
+
+
+Implemented in \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_ecs_entity_aa7578ba04c4ab7ff1b947f29186f251c}{Lotus.\+Core.\+TEcs\+Entity}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_ad6a9d172bb5f28e0354137825fe5b74b}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_ad6a9d172bb5f28e0354137825fe5b74b} 
+\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}!IsEnabled@{IsEnabled}}
+\index{IsEnabled@{IsEnabled}!Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+\doxysubsubsection{\texorpdfstring{IsEnabled}{IsEnabled}}
+{\footnotesize\ttfamily bool Lotus.\+Core.\+ILotus\+Ecs\+Entity.\+Is\+Enabled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Статус активности сущности. 
+
+Только активные сущности обрабатываются системами. 
+
+Implemented in \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_ecs_entity_a3e6afd85cd131dfbd92f61a47b2e1887}{Lotus.\+Core.\+TEcs\+Entity}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a6aa69477caac6df0bea59a1198c4a240}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a6aa69477caac6df0bea59a1198c4a240} 
+\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}!Layer@{Layer}}
+\index{Layer@{Layer}!Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+\doxysubsubsection{\texorpdfstring{Layer}{Layer}}
+{\footnotesize\ttfamily byte Lotus.\+Core.\+ILotus\+Ecs\+Entity.\+Layer\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Слой расположения сущности. 
+
+Является вспомогательной характеристикой сущности и используется на усмотрения пользователя. 
+
+Implemented in \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_ecs_entity_accc4c41c6469256244d59ef06297899b}{Lotus.\+Core.\+TEcs\+Entity}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a6b8a1153325d33e2e9dc276e98ea25e7}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a6b8a1153325d33e2e9dc276e98ea25e7} 
+\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}!Marked@{Marked}}
+\index{Marked@{Marked}!Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+\doxysubsubsection{\texorpdfstring{Marked}{Marked}}
+{\footnotesize\ttfamily byte Lotus.\+Core.\+ILotus\+Ecs\+Entity.\+Marked\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Статус маркировки сущности. 
+
+Является вспомогательной характеристикой сущности и используется на усмотрения пользователя. 
+
+Implemented in \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_ecs_entity_a3510448a96263f8edc54e28633fdb319}{Lotus.\+Core.\+TEcs\+Entity}}.
+
+\Hypertarget{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a84aad5f61d15cab54d6300c1be798f3f}\label{interface_lotus_1_1_core_1_1_i_lotus_ecs_entity_a84aad5f61d15cab54d6300c1be798f3f} 
+\index{Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}!Tag@{Tag}}
+\index{Tag@{Tag}!Lotus.Core.ILotusEcsEntity@{Lotus.Core.ILotusEcsEntity}}
+\doxysubsubsection{\texorpdfstring{Tag}{Tag}}
+{\footnotesize\ttfamily byte Lotus.\+Core.\+ILotus\+Ecs\+Entity.\+Tag\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Тег сущности. 
+
+Является вспомогательной характеристикой сущности и используется на усмотрения пользователя. 
+
+Implemented in \mbox{\hyperlink{struct_lotus_1_1_core_1_1_t_ecs_entity_aa6b45145b73011fa939453bf3590343c}{Lotus.\+Core.\+TEcs\+Entity}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ECS/Lotus\+ECSEntity.\+cs\end{DoxyCompactItemize}

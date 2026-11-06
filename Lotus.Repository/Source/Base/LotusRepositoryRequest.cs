@@ -6,7 +6,7 @@ using Lotus.Core;
 namespace Lotus.Repository
 {
     /** \addtogroup RepositoryBase
-	*@{*/
+    *@{*/
     /// <summary>
     /// Базовый интерфейс запроса данных.
     /// </summary>

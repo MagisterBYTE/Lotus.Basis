@@ -106,15 +106,15 @@ namespace Lotus.Core
                 }
                 else
                 {
-                    if (left is IComparable<TType> left_comparable)
+                    if (left is IComparable<TType> leftComparable)
                     {
-                        return left_comparable.CompareTo(right);
+                        return leftComparable.CompareTo(right);
                     }
                     else
                     {
-                        if (left is IComparable left_comparable_generic)
+                        if (left is IComparable leftComparableGeneric)
                         {
-                            return left_comparable_generic.CompareTo(right);
+                            return leftComparableGeneric.CompareTo(right);
                         }
                         else
                         {

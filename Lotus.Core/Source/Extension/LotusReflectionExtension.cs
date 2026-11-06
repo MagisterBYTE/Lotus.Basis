@@ -218,29 +218,29 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                var base_type = @this.BaseType;
-                if (base_type != null)
+                var baseType = @this.BaseType;
+                if (baseType != null)
                 {
-                    status = base_type.IsGenericType && (base_type.Name == ICOLLECTION1 || base_type.Name == COLLECTION1);
+                    status = baseType.IsGenericType && (baseType.Name == ICOLLECTION1 || baseType.Name == COLLECTION1);
                 }
 
                 // И еще последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = base_type.IsGenericType && (base_type.Name == ICOLLECTION1 || base_type.Name == COLLECTION1);
+                        status = baseType.IsGenericType && (baseType.Name == ICOLLECTION1 || baseType.Name == COLLECTION1);
                     }
                 }
 
                 // И еще один последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = base_type.IsGenericType && (base_type.Name == ICOLLECTION1 || base_type.Name == COLLECTION1);
+                        status = baseType.IsGenericType && (baseType.Name == ICOLLECTION1 || baseType.Name == COLLECTION1);
                     }
                 }
 
@@ -263,29 +263,29 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                var base_type = @this.BaseType;
-                if (base_type != null)
+                var baseType = @this.BaseType;
+                if (baseType != null)
                 {
-                    status = base_type.IsGenericType && (base_type.Name == ILIST1 || base_type.Name == LIST1);
+                    status = baseType.IsGenericType && (baseType.Name == ILIST1 || baseType.Name == LIST1);
                 }
 
                 // И еще последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = base_type.IsGenericType && (base_type.Name == ILIST1 || base_type.Name == LIST1);
+                        status = baseType.IsGenericType && (baseType.Name == ILIST1 || baseType.Name == LIST1);
                     }
                 }
 
                 // И еще один последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = base_type.IsGenericType && (base_type.Name == ILIST1 || base_type.Name == LIST1);
+                        status = baseType.IsGenericType && (baseType.Name == ILIST1 || baseType.Name == LIST1);
                     }
                 }
 
@@ -307,29 +307,29 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                var base_type = @this.BaseType;
-                if (base_type != null)
+                var baseType = @this.BaseType;
+                if (baseType != null)
                 {
-                    status = base_type.IsGenericType && base_type.Name == LIST_ARRAY1;
+                    status = baseType.IsGenericType && baseType.Name == LIST_ARRAY1;
                 }
 
                 // И еще последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = base_type.IsGenericType && base_type.Name == LIST_ARRAY1;
+                        status = baseType.IsGenericType && baseType.Name == LIST_ARRAY1;
                     }
                 }
 
                 // И еще один последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = base_type.IsGenericType && base_type.Name == LIST_ARRAY1;
+                        status = baseType.IsGenericType && baseType.Name == LIST_ARRAY1;
                     }
                 }
 
@@ -348,29 +348,29 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                var base_type = @this.BaseType;
-                if (base_type != null)
+                var baseType = @this.BaseType;
+                if (baseType != null)
                 {
-                    status = base_type.IsGenericType && base_type.Name == OBSERVABLE_COLLECTION1;
+                    status = baseType.IsGenericType && baseType.Name == OBSERVABLE_COLLECTION1;
                 }
 
                 // И еще последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = base_type.IsGenericType && base_type.Name == OBSERVABLE_COLLECTION1;
+                        status = baseType.IsGenericType && baseType.Name == OBSERVABLE_COLLECTION1;
                     }
                 }
 
                 // И еще один последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = base_type.IsGenericType && base_type.Name == OBSERVABLE_COLLECTION1;
+                        status = baseType.IsGenericType && baseType.Name == OBSERVABLE_COLLECTION1;
                     }
                 }
 
@@ -398,29 +398,29 @@ namespace Lotus.Core
             if (status == false)
             {
                 // Пробуем проверить базовый тип
-                var base_type = @this.BaseType;
-                if (base_type != null)
+                var baseType = @this.BaseType;
+                if (baseType != null)
                 {
-                    status = IsGenericCollectionType(base_type);
+                    status = IsGenericCollectionType(baseType);
                 }
 
                 // И еще последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = IsGenericCollectionType(base_type);
+                        status = IsGenericCollectionType(baseType);
                     }
                 }
 
                 // И еще один последний уровень
-                if (status == false && base_type != null)
+                if (status == false && baseType != null)
                 {
-                    base_type = @this.BaseType!.BaseType!.BaseType;
-                    if (base_type != null)
+                    baseType = @this.BaseType!.BaseType!.BaseType;
+                    if (baseType != null)
                     {
-                        status = IsGenericCollectionType(base_type);
+                        status = IsGenericCollectionType(baseType);
                     }
                 }
 
@@ -467,32 +467,32 @@ namespace Lotus.Core
                 else
                 {
                     // Пробуем проверить базовый тип
-                    var base_type = @this.BaseType;
-                    if (base_type != null)
+                    var baseType = @this.BaseType;
+                    if (baseType != null)
                     {
-                        if (IsGenericCollectionType(base_type))
+                        if (IsGenericCollectionType(baseType))
                         {
-                            return base_type.GetGenericArguments()[0];
+                            return baseType.GetGenericArguments()[0];
                         }
                         else
                         {
                             // И еще один уровень
-                            base_type = @this.BaseType!.BaseType;
-                            if (base_type != null)
+                            baseType = @this.BaseType!.BaseType;
+                            if (baseType != null)
                             {
-                                if (IsGenericCollectionType(base_type))
+                                if (IsGenericCollectionType(baseType))
                                 {
-                                    return base_type.GetGenericArguments()[0];
+                                    return baseType.GetGenericArguments()[0];
                                 }
                                 else
                                 {
                                     // И еще один последний уровень
-                                    base_type = @this.BaseType!.BaseType!.BaseType;
-                                    if (base_type != null)
+                                    baseType = @this.BaseType!.BaseType!.BaseType;
+                                    if (baseType != null)
                                     {
-                                        if (IsGenericCollectionType(base_type))
+                                        if (IsGenericCollectionType(baseType))
                                         {
-                                            return base_type.GetGenericArguments()[0];
+                                            return baseType.GetGenericArguments()[0];
                                         }
                                     }
                                 }
@@ -534,12 +534,12 @@ namespace Lotus.Core
                 else
                 {
                     // Пробуем проверить базовый тип
-                    var base_type = @this.BaseType;
-                    if (base_type != null)
+                    var baseType = @this.BaseType;
+                    if (baseType != null)
                     {
-                        if (IsGenericCollectionType(base_type))
+                        if (IsGenericCollectionType(baseType))
                         {
-                            return base_type.GetGenericArguments()[0];
+                            return baseType.GetGenericArguments()[0];
                         }
                     }
                 }
@@ -659,10 +659,10 @@ namespace Lotus.Core
         /// <returns>Значение поля.</returns>
         public static TValue? GetStaticFieldValue<TValue>(this Type @this, string fieldName)
         {
-            var field_info = @this.GetField(fieldName, BindingFlags.Public | BindingFlags.Static);
-            if (field_info != null)
+            var fieldInfo = @this.GetField(fieldName, BindingFlags.Public | BindingFlags.Static);
+            if (fieldInfo != null)
             {
-                return (TValue?)field_info.GetValue(null);
+                return (TValue?)fieldInfo.GetValue(null);
             }
 
             return default;
@@ -688,10 +688,10 @@ namespace Lotus.Core
         /// <returns>Значение свойства.</returns>
         public static TValue? GetStaticPropertyValue<TValue>(this Type @this, string propertyName)
         {
-            var property_info = @this.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static);
-            if (property_info != null)
+            var propertyInfo = @this.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static);
+            if (propertyInfo != null)
             {
-                return (TValue?)property_info.GetValue(null, null);
+                return (TValue?)propertyInfo.GetValue(null, null);
             }
 
             return default;
@@ -909,22 +909,22 @@ namespace Lotus.Core
         /// <returns>Путь метаданных члена объекта.</returns>
         public static string GetMemberPath(this MemberInfo @this)
         {
-            var base_path = @this.DeclaringType?.Name + '.' + @this.Name;
+            var basePath = @this.DeclaringType?.Name + '.' + @this.Name;
             if (@this.DeclaringType?.DeclaringType != null)
             {
                 if (@this.DeclaringType.DeclaringType.DeclaringType != null)
                 {
                     return @this.DeclaringType?.DeclaringType.DeclaringType.Name + '.' +
-                        @this.DeclaringType?.DeclaringType.Name + '.' + base_path;
+                        @this.DeclaringType?.DeclaringType.Name + '.' + basePath;
                 }
                 else
                 {
-                    return @this.DeclaringType?.DeclaringType.Name + '.' + base_path;
+                    return @this.DeclaringType?.DeclaringType.Name + '.' + basePath;
                 }
             }
             else
             {
-                return base_path;
+                return basePath;
             }
         }
 

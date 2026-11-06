@@ -13,20 +13,20 @@ namespace Lotus.Core.Extensions
         [Test]
         public void Common()
         {
-            var test_beetwen = "Use the Assert[2222] class[00000] to";
-            ClassicAssert.AreEqual(test_beetwen.RemoveAllBetweenSymbol('[', ']'),
+            var testBeetwen = "Use the Assert[2222] class[00000] to";
+            ClassicAssert.AreEqual(testBeetwen.RemoveAllBetweenSymbol('[', ']'),
                 "Use the Assert[] class[] to");
 
-            test_beetwen = "Use the Assert[2222] class";
-            ClassicAssert.AreEqual(test_beetwen.RemoveAllBetweenSymbol('[', ']'),
+            testBeetwen = "Use the Assert[2222] class";
+            ClassicAssert.AreEqual(testBeetwen.RemoveAllBetweenSymbol('[', ']'),
                 "Use the Assert[] class");
 
-            var test_beetwen_all = "Use the Assert[2222] class";
-            ClassicAssert.AreEqual(test_beetwen_all.RemoveAllBetweenSymbolWithSymbols('[', ']'),
+            var testBeetwenAll = "Use the Assert[2222] class";
+            ClassicAssert.AreEqual(testBeetwenAll.RemoveAllBetweenSymbolWithSymbols('[', ']'),
                 "Use the Assert class");
 
-            test_beetwen_all = "Use the Assert[2222] class[00000] to";
-            ClassicAssert.AreEqual(test_beetwen_all.RemoveAllBetweenSymbolWithSymbols('[', ']'),
+            testBeetwenAll = "Use the Assert[2222] class[00000] to";
+            ClassicAssert.AreEqual(testBeetwenAll.RemoveAllBetweenSymbolWithSymbols('[', ']'),
                 "Use the Assert class to");
 
 

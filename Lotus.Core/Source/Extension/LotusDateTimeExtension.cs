@@ -58,8 +58,8 @@ namespace Lotus.Core
         /// <returns>Дата.</returns>
         public static DateTime GetInterpolatedDate(this DateTime @this, DateTime endDate, float time)
         {
-            var total_second = (endDate - @this).TotalSeconds;
-            var result = @this + TimeSpan.FromSeconds(total_second * time);
+            var totalSecond = (endDate - @this).TotalSeconds;
+            var result = @this + TimeSpan.FromSeconds(totalSecond * time);
 
             return result;
         }
@@ -88,7 +88,7 @@ namespace Lotus.Core
         }
 
         /// <summary>
-        /// Преобразование в текстовый формат даты/времени: "yy_mm_dd@hh_mm_ss".
+        /// Преобразование в текстовый формат даты/времени: "yyMmDd@hhMmSs".
         /// </summary>
         /// <param name="this">Дата/время.</param>
         /// <returns>Дата/время в текстовом формате.</returns>

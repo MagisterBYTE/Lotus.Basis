@@ -1,0 +1,27 @@
+\doxysubsection{Подсистема результата операции}
+\hypertarget{group___core_results_system}{}\label{group___core_results_system}\index{Подсистема результата операции@{Подсистема результата операции}}
+
+
+Подсистема результата операции реализует общую схему ответа/результата выполнения различных операций(вызов метода, дополнительные данные в ответе и т.\+д) от различных подсистем и определяет успешность/не успешность ответа, а также вспомогательную информацию.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_result}{Lotus.\+Core.\+Result$<$ TValue $>$}}
+\begin{DoxyCompactList}\small\item\em Класс определяющий некий результат/ответ операции. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result}{Lotus.\+Core.\+ILotus\+Result$<$ TValue $>$}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для представления ответа/результата операции. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result_exception}{Lotus.\+Core.\+ILotus\+Result\+Exception}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для поддержки концепции результата/ответа операции для исключений. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XResult\+Exception\+Extension}
+\begin{DoxyCompactList}\small\item\em Статический класс для реализации методов расширения стандартные исключений. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_result_message}{Lotus.\+Core.\+ILotus\+Result\+Message}}
+\begin{DoxyCompactList}\small\item\em Определение интерфейса для отдельного текста ответа/результата операции. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_result_message}{Lotus.\+Core.\+Result\+Message}}
+\begin{DoxyCompactList}\small\item\em Произвольный текст ответа/результата операции. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема результата операции реализует общую схему ответа/результата выполнения различных операций(вызов метода, дополнительные данные в ответе и т.\+д) от различных подсистем и определяет успешность/не успешность ответа, а также вспомогательную информацию. 
+

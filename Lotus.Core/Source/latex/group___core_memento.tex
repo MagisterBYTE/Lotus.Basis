@@ -1,0 +1,29 @@
+\doxysubsection{Подсистема хранения состояний}
+\hypertarget{group___core_memento}{}\label{group___core_memento}\index{Подсистема хранения состояний@{Подсистема хранения состояний}}
+
+
+Подсистема хранения состояний обеспечивает сохранения состояния объекта/системы и возможность его последующего восстановления. Является основой для шаблона проектирования повторении и отмены действия.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_caretaker}{Lotus.\+Core.\+ILotus\+Memento\+Caretaker}}
+\begin{DoxyCompactList}\small\item\em Интерфейс смотрителя за объектом. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_caretaker}{Lotus.\+Core.\+CMemento\+Caretaker}}
+\begin{DoxyCompactList}\small\item\em Класс реализующий смотрителя за объектом. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_caretaker_changed}{Lotus.\+Core.\+CMemento\+Caretaker\+Changed}}
+\begin{DoxyCompactList}\small\item\em Класс реализующий смотрителя за объектом с поддержкой отмены/повторения действий. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_manager}{Lotus.\+Core.\+ILotus\+Memento\+Manager}}
+\begin{DoxyCompactList}\small\item\em Интерфейс менеджера для отмены/повторения действия. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_c_memento_manager}{Lotus.\+Core.\+CMemento\+Manager}}
+\begin{DoxyCompactList}\small\item\em Менеджер для отмены/повторения действия. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_originator}{Lotus.\+Core.\+ILotus\+Memento\+Originator}}
+\begin{DoxyCompactList}\small\item\em Интерфейс объекта для который имеет внутреннее состояние с возможностью его предоставить и в последующем восстановить. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_memento_state}{Lotus.\+Core.\+ILotus\+Memento\+State}}
+\begin{DoxyCompactList}\small\item\em Интерфейс для представления состояния с возможностью отмены/повторения действия. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Подсистема хранения состояний обеспечивает сохранения состояния объекта/системы и возможность его последующего восстановления. Является основой для шаблона проектирования повторении и отмены действия. 
+

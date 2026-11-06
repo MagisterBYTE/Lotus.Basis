@@ -153,24 +153,24 @@ namespace Lotus.Core
         {
             if (viewModel != null && viewModel.Model != null)
             {
-                var file_name = XFileDialog.Open();
-                if (file_name != null && file_name.IsExists())
+                var fileName = XFileDialog.Open();
+                if (fileName != null && fileName.IsExists())
                 {
                     // Уведомляем о начале загрузки
-                    if (viewModel.Model is ILotusBeforeLoad before_load)
+                    if (viewModel.Model is ILotusBeforeLoad beforeLoad)
                     {
-                        before_load.OnBeforeLoad(null);
+                        beforeLoad.OnBeforeLoad(null);
                     }
 
-                    if (viewModel.Model is ILotusOwnerObject owner_object)
+                    if (viewModel.Model is ILotusOwnerObject ownerObject)
                     {
-                        owner_object.UpdateOwnedObjects();
+                        ownerObject.UpdateOwnedObjects();
                     }
 
                     // Уведомляем об окончании загрузки
-                    if (viewModel.Model is ILotusAfterLoad after_load)
+                    if (viewModel.Model is ILotusAfterLoad afterLoad)
                     {
-                        after_load.OnAfterLoad(null);
+                        afterLoad.OnAfterLoad(null);
                     }
                 }
             }
@@ -184,21 +184,21 @@ namespace Lotus.Core
         {
             if (viewModel != null && viewModel.Model != null)
             {
-                var file_name = XFileDialog.Save();
-                if (file_name != null && file_name.IsExists())
+                var fileName = XFileDialog.Save();
+                if (fileName != null && fileName.IsExists())
                 {
                     // Уведомляем о начале сохранения 
-                    if (viewModel.Model is ILotusBeforeSave before_save)
+                    if (viewModel.Model is ILotusBeforeSave beforeSave)
                     {
-                        before_save.OnBeforeSave(null);
+                        beforeSave.OnBeforeSave(null);
                     }
 
-                    XSerializationDispatcher.SaveTo(file_name, viewModel.Model);
+                    XSerializationDispatcher.SaveTo(fileName, viewModel.Model);
 
                     // Уведомляем об окончании сохранения 
-                    if (viewModel.Model is ILotusAfterSave after_save)
+                    if (viewModel.Model is ILotusAfterSave afterSave)
                     {
-                        after_save.OnAfterSave(null);
+                        afterSave.OnAfterSave(null);
                     }
                 }
             }
@@ -224,15 +224,15 @@ namespace Lotus.Core
             }
 
             // Удаляем реальные данные
-            if (viewModel.Model is ILotusOwnerObject owner_data_context)
+            if (viewModel.Model is ILotusOwnerObject ownerDataContext)
             {
-                owner_data_context.DetachOwnedObject((viewModel.Model as ILotusOwnedObject)!, true);
+                ownerDataContext.DetachOwnedObject((viewModel.Model as ILotusOwnedObject)!, true);
             }
             else
             {
-                //if (view_item.DataContext is IList data_context)
+                //if (viewItem.DataContext is IList dataContext)
                 //{
-                //	list.Remove(view_item.DataContext);
+                //	list.Remove(viewItem.DataContext);
                 //}
             }
         }

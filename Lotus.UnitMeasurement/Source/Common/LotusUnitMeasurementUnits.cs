@@ -17,29 +17,29 @@ namespace Lotus.UnitMeasurement
         public static TMeasurementType GetMeasurementType(Enum unitType)
         {
             var type = unitType.GetType();
-            var measurement_type = TMeasurementType.Undefined;
+            var measurementType = TMeasurementType.Undefined;
             switch (type.Name)
             {
                 case nameof(TUnitThing):
                     {
-                        measurement_type = TMeasurementType.Thing;
+                        measurementType = TMeasurementType.Thing;
                     }
                     break;
                 case nameof(TUnitLength):
                     {
-                        measurement_type = TMeasurementType.Length;
+                        measurementType = TMeasurementType.Length;
                     }
                     break;
                 case nameof(TUnitArea):
                     {
-                        measurement_type = TMeasurementType.Area;
+                        measurementType = TMeasurementType.Area;
                     }
                     break;
                 default:
                     break;
             }
 
-            return measurement_type;
+            return measurementType;
         }
     }
     /**@}*/

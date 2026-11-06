@@ -1,4 +1,4 @@
-﻿#if UNITY_2017_1_OR_NEWER
+#if UNITY_2017_1_OR_NEWER
 using System;
 
 using UnityEngine;
@@ -330,28 +330,28 @@ namespace Lotus.Core
         public void SmoothFollowLook()
         {
             // Calculate the current rotation angles
-            var wanted_rotation_angle = Target.eulerAngles.y;
-            var wanted_height = Target.position.y + _height;
+            var wantedRotationAngle = Target.eulerAngles.y;
+            var wantedHeight = Target.position.y + _height;
 
-            var current_rotation_angle = transform.eulerAngles.y;
-            var current_height = transform.position.y;
+            var currentRotationAngle = transform.eulerAngles.y;
+            var currentHeight = transform.position.y;
 
             // Damp the rotation around the y-axis
-            current_rotation_angle = Mathf.LerpAngle(current_rotation_angle, wanted_rotation_angle, _rotateDamping * Time.deltaTime);
+            currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, _rotateDamping * Time.deltaTime);
 
             // Damp the height
-            current_height = Mathf.Lerp(current_height, wanted_height, _heightDamping * Time.deltaTime);
+            currentHeight = Mathf.Lerp(currentHeight, wantedHeight, _heightDamping * Time.deltaTime);
 
             // Convert the angle into a rotation
-            var current_rotation = Quaternion.Euler(0, current_rotation_angle, 0);
+            var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
 
             // Set the position of the camera on the x-z plane to:
             // distance meters behind the target
             transform.position = _target.position;
-            transform.position -= current_rotation * Vector3.forward * _distance;
+            transform.position -= currentRotation * Vector3.forward * _distance;
 
             // Set the height of the camera
-            transform.position = new Vector3(transform.position.x, current_height, transform.position.z);
+            transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
 
             //Always look at the target
             transform.LookAt(Target);
@@ -366,37 +366,37 @@ namespace Lotus.Core
             _isControl = false;
 
             // Calculate the current rotation angles
-            var wanted_rotation_angle = Target.eulerAngles.y;
-            var wanted_height = Target.position.y + _height;
+            var wantedRotationAngle = Target.eulerAngles.y;
+            var wantedHeight = Target.position.y + _height;
 
-            var current_rotation_angle = transform.eulerAngles.y;
-            var current_height = transform.position.y;
+            var currentRotationAngle = transform.eulerAngles.y;
+            var currentHeight = transform.position.y;
 
             // Damp the rotation around the y-axis
-            current_rotation_angle = Mathf.LerpAngle(current_rotation_angle, wanted_rotation_angle, _rotateDamping * Time.deltaTime);
+            currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, _rotateDamping * Time.deltaTime);
 
             // Damp the height
-            current_height = Mathf.Lerp(current_height, wanted_height, _heightDamping * Time.deltaTime);
+            currentHeight = Mathf.Lerp(currentHeight, wantedHeight, _heightDamping * Time.deltaTime);
 
             // Convert the angle into a rotation
-            var current_rotation = Quaternion.Euler(0, current_rotation_angle, 0);
+            var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
 
             // Set the position of the camera on the x-z plane to:
             // distance meters behind the target
             Vector3 position = _target.position;
-            position -= current_rotation * Vector3.forward * _distance;
+            position -= currentRotation * Vector3.forward * _distance;
 
             // Set the height of the camera
-            var target_position = new Vector3(position.x, current_height, position.z);
+            var targetPosition = new Vector3(position.x, currentHeight, position.z);
 
-            var look_target = Quaternion.LookRotation((_target.position - target_position).normalized);
+            var lookTarget = Quaternion.LookRotation((_target.position - targetPosition).normalized);
 
-            this.MoveTo(0.5f, target_position, TEasingType.CubeInOut, () =>
+            this.MoveTo(0.5f, targetPosition, TEasingType.CubeInOut, () =>
             {
                 _isControl = true;
             });
 
-            this.RotationTo(0.5f, look_target, TEasingType.SineInOut);
+            this.RotationTo(0.5f, lookTarget, TEasingType.SineInOut);
         }
         #endregion
     }

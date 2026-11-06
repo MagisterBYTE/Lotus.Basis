@@ -102,14 +102,14 @@ namespace Lotus.Core
             ResetModel(modelInstance);
             if (_mode != TBindingMode.ViewData)
             {
-                var member_name_model = _modelMemberName;
+                var memberNameModel = _modelMemberName;
                 if (_modelMemberType == TBindingMemberType.Property)
                 {
-                    member_name_model = "set_" + _modelMemberName;
+                    memberNameModel = "set_" + _modelMemberName;
                 }
                 try
                 {
-                    _actionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, member_name_model);
+                    _actionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, memberNameModel);
                 }
                 catch (Exception exc)
                 {
@@ -136,14 +136,14 @@ namespace Lotus.Core
                 _modelMemberName = memberName;
                 if (_mode != TBindingMode.ViewData)
                 {
-                    var member_name_model = _modelMemberName;
+                    var memberNameModel = _modelMemberName;
                     if (_modelMemberType == TBindingMemberType.Property)
                     {
-                        member_name_model = "set_" + _modelMemberName;
+                        memberNameModel = "set_" + _modelMemberName;
                     }
                     try
                     {
-                        _actionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, member_name_model);
+                        _actionModel = (Action<TTypeModel>)Delegate.CreateDelegate(typeof(Action<TTypeModel>), modelInstance, memberNameModel);
                     }
                     catch (Exception exc)
                     {
@@ -232,14 +232,14 @@ namespace Lotus.Core
             ResetView(viewInstance);
             if (_mode != TBindingMode.DataManager)
             {
-                var member_name_view = _viewMemberName;
+                var memberNameView = _viewMemberName;
                 if (_viewMemberType == TBindingMemberType.Property)
                 {
-                    member_name_view = "set_" + _viewMemberName;
+                    memberNameView = "set_" + _viewMemberName;
                 }
                 try
                 {
-                    _actionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, member_name_view);
+                    _actionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, memberNameView);
                 }
                 catch (Exception exc)
                 {
@@ -266,14 +266,14 @@ namespace Lotus.Core
                 _viewMemberName = memberName;
                 if (_mode != TBindingMode.DataManager)
                 {
-                    var member_name_view = _viewMemberName;
+                    var memberNameView = _viewMemberName;
                     if (_viewMemberType == TBindingMemberType.Property)
                     {
-                        member_name_view = "set_" + _viewMemberName;
+                        memberNameView = "set_" + _viewMemberName;
                     }
                     try
                     {
-                        _actionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, member_name_view);
+                        _actionView = (Action<TTypeView>)Delegate.CreateDelegate(typeof(Action<TTypeView>), viewInstance, memberNameView);
                     }
                     catch (Exception exc)
                     {

@@ -1,0 +1,38 @@
+\doxysubsection{Подсистема коллекций}
+\hypertarget{group___core_collections}{}\label{group___core_collections}\index{Подсистема коллекций@{Подсистема коллекций}}
+
+
+Дополнительные коллекции данных.  
+
+
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interface_lotus_1_1_core_1_1_i_lotus_collection_item}{Lotus.\+Core.\+ILotus\+Collection\+Item}}
+\begin{DoxyCompactList}\small\item\em Базовый интерфейс для определения объекта служащего элементом коллекции. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_deque_array}{Lotus.\+Core.\+Deque\+Array$<$ TItem $>$}}
+\begin{DoxyCompactList}\small\item\em Двусторонняя очередь на основе массива. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_dictionary_list}{Lotus.\+Core.\+Dictionary\+List$<$ TKey, TValue $>$}}
+\begin{DoxyCompactList}\small\item\em Словарь содержащий в качестве значений список определенного типа. \end{DoxyCompactList}\item 
+class {\bfseries Lotus.\+Core.\+XHash\+Helpers}
+\begin{DoxyCompactList}\small\item\em Статический класс для работы с простыми числами. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_hash_set_array}{Lotus.\+Core.\+Hash\+Set\+Array$<$ TItem $>$}}
+\begin{DoxyCompactList}\small\item\em Hash\+Set\+Array на основе массива. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_list_array}{Lotus.\+Core.\+List\+Array$<$ TItem $>$}}
+\begin{DoxyCompactList}\small\item\em Список на основе массива. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_priority_queue}{Lotus.\+Core.\+Priority\+Queue$<$ TItem $>$}}
+\begin{DoxyCompactList}\small\item\em Очередь с приоритетом. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_queue_array}{Lotus.\+Core.\+Queue\+Array$<$ TItem $>$}}
+\begin{DoxyCompactList}\small\item\em Очередь на основе массива. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_sparse_set}{Lotus.\+Core.\+Sparse\+Set$<$ TItem $>$}}
+\begin{DoxyCompactList}\small\item\em Высокопроизводительная коллекция основанная на уплотнённом и разряженном массиве. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_lotus_1_1_core_1_1_stack_array}{Lotus.\+Core.\+Stack\+Array$<$ TItem $>$}}
+\begin{DoxyCompactList}\small\item\em Стек на основе массива. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Дополнительные коллекции данных. 
+
+Реализация дополнительных коллекций на основе массива которые обеспечивает расширенную функциональность, поддержку обобщенного интерфейса IList, уведомлений о смене состояний, а также более высокую скорость работы за счет непосредственного доступа к массиву.
+
+Большинство коллекций поддерживает сериализацию на уровне Unity, также предусмотрен встроенный редактор для расширенного управления и отображения коллекцией (в том числе и с возможностью перемещать элементы).

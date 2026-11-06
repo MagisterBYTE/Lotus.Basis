@@ -42,7 +42,7 @@ namespace Lotus.Core.Task
         }
 
         /// <summary>
-        /// Тест GroupTask - корректная работа с исправленными именами переменных (taskHolder вместо task_holder).
+        /// Тест GroupTask - корректная работа с исправленными именами переменных (taskHolder вместо taskHolder).
         /// </summary>
         [Test]
         public void GroupTask_Add_ShouldUseCorrectVariableNames()
@@ -61,7 +61,7 @@ namespace Lotus.Core.Task
         }
 
         /// <summary>
-        /// Тест GroupTask - корректная работа с исправленными именами переменных (isCompleted, isAllCompleted вместо is_completed, is_all_completed).
+        /// Тест GroupTask - корректная работа с исправленными именами переменных (isCompleted, isAllCompleted вместо isCompleted, isAllCompleted).
         /// </summary>
         [Test]
         public void GroupTask_ExecuteInParallel_ShouldUseCorrectVariableNames()
@@ -101,7 +101,7 @@ namespace Lotus.Core.Task
         }
 
         /// <summary>
-        /// Тест TaskExecutor - корректная работа с исправленными именами переменных (taskHolder вместо task_holder).
+        /// Тест TaskExecutor - корректная работа с исправленными именами переменных (taskHolder вместо taskHolder).
         /// </summary>
         [Test]
         public void TaskExecutor_AddTask_ShouldUseCorrectVariableNames()
@@ -119,7 +119,7 @@ namespace Lotus.Core.Task
         }
 
         /// <summary>
-        /// Тест TaskGroupExecutor - корректная работа с исправленными именами переменных (groupTask вместо group_task).
+        /// Тест TaskGroupExecutor - корректная работа с исправленными именами переменных (groupTask вместо groupTask).
         /// </summary>
         [Test]
         public void TaskGroupExecutor_AddGroupTask_ShouldUseCorrectVariableNames()

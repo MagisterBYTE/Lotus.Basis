@@ -534,10 +534,10 @@ namespace Lotus.Maths
         /// </summary>
         public void Normalize()
         {
-            var inv_lentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
-            X *= inv_lentgh;
-            Y *= inv_lentgh;
-            Z *= inv_lentgh;
+            var invLentgh = XMath.InvSqrt((X * X) + (Y * Y) + (Z * Z));
+            X *= invLentgh;
+            Y *= invLentgh;
+            Z *= invLentgh;
         }
 
         /// <summary>

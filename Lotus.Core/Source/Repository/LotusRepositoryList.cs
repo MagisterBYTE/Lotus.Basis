@@ -78,7 +78,7 @@ namespace Lotus.Core
         public async ValueTask<TEntity?> GetByIdAsync(TKey id, CancellationToken token = default)
         {
             var result = _list.Find(entity => entity.Id.Equals(id));
-            return await ValueTask.FromResult(result);
+            return await XValueTask.FromResult(result);
         }
 
         /// <inheritdoc/>
@@ -110,7 +110,7 @@ namespace Lotus.Core
                 }
             }
 
-            return await ValueTask.FromResult(result);
+            return await XValueTask.FromResult(result);
         }
 
         /// <inheritdoc/>
@@ -138,7 +138,7 @@ namespace Lotus.Core
                 return false;
             });
 
-            return await ValueTask.FromResult(result);
+            return await XValueTask.FromResult(result);
         }
 
         /// <inheritdoc/>
@@ -173,11 +173,11 @@ namespace Lotus.Core
                 };
 
                 _list.Add(result);
-                return await ValueTask.FromResult(result);
+                return await XValueTask.FromResult(result);
             }
             else
             {
-                return await ValueTask.FromResult(result);
+                return await XValueTask.FromResult(result);
             }
         }
 
@@ -192,7 +192,7 @@ namespace Lotus.Core
         public async ValueTask<TEntity> AddAsync(TEntity entity, CancellationToken token = default)
         {
             _list.Add(entity);
-            return await ValueTask.FromResult(entity);
+            return await XValueTask.FromResult(entity);
         }
 
         /// <inheritdoc/>

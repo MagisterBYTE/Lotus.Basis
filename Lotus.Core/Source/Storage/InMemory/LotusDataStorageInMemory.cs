@@ -97,7 +97,7 @@ namespace Lotus.Core
         public virtual ValueTask<int> SaveChangesAsync(CancellationToken token = default)
         {
             token.ThrowIfCancellationRequested();
-            return ValueTask.FromResult(SaveChanges());
+            return XValueTask.FromResult(SaveChanges());
         }
         #endregion
 
@@ -161,7 +161,7 @@ namespace Lotus.Core
         protected virtual void HydrateNavigation<TEntity>(PropertyInfo navigationProperty)
             where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(navigationProperty);
+            XArgumentNull.ThrowIfNull(navigationProperty, nameof(navigationProperty));
 
             var collectionItemType = navigationProperty.PropertyType.GetClassicCollectionItemType();
             if (collectionItemType is not null)
@@ -365,7 +365,7 @@ namespace Lotus.Core
         public virtual IQueryable<TEntity> Query<TEntity>(Action<ILotusIncludeBuilder<TEntity>> include)
             where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(include);
+            XArgumentNull.ThrowIfNull(include, nameof(include));
             var builder = new InMemoryIncludeBuilder<TEntity>(this);
             include(builder);
             builder.Apply();
@@ -388,7 +388,7 @@ namespace Lotus.Core
 
             public ILotusIncludeBuilder<TEntity> Include<TProperty>(Expression<Func<TEntity, TProperty>> navigation)
             {
-                ArgumentNullException.ThrowIfNull(navigation);
+                XArgumentNull.ThrowIfNull(navigation, nameof(navigation));
                 var property = GetNavigationProperty(navigation);
                 if (property is not null)
                 {
@@ -439,7 +439,7 @@ namespace Lotus.Core
             where TKey : struct, IEquatable<TKey>
         {
             token.ThrowIfCancellationRequested();
-            return ValueTask.FromResult(GetById<TEntity, TKey>(id));
+            return XValueTask.FromResult(GetById<TEntity, TKey>(id));
         }
 
         /// <inheritdoc/>
@@ -447,7 +447,7 @@ namespace Lotus.Core
             where TEntity : class, ILotusIdentifierId<TKey>
             where TKey : struct, IEquatable<TKey>
         {
-            ArgumentNullException.ThrowIfNull(ids);
+            XArgumentNull.ThrowIfNull(ids, nameof(ids));
             var idSet = ids as ISet<TKey> ?? ids.ToHashSet();
             var list = _structure.GetOrCreateList<TEntity>();
             var result = new List<TEntity?>();
@@ -468,7 +468,7 @@ namespace Lotus.Core
             where TKey : struct, IEquatable<TKey>
         {
             token.ThrowIfCancellationRequested();
-            return ValueTask.FromResult(GetByIds<TEntity, TKey>(ids));
+            return XValueTask.FromResult(GetByIds<TEntity, TKey>(ids));
         }
 
         /// <inheritdoc/>
@@ -482,7 +482,7 @@ namespace Lotus.Core
             where TEntity : class, ILotusNameable
         {
             token.ThrowIfCancellationRequested();
-            return ValueTask.FromResult(GetByName<TEntity>(name));
+            return XValueTask.FromResult(GetByName<TEntity>(name));
         }
 
         /// <inheritdoc/>
@@ -509,13 +509,13 @@ namespace Lotus.Core
             where TKey : struct, IEquatable<TKey>
         {
             token.ThrowIfCancellationRequested();
-            return ValueTask.FromResult(GetOrAdd<TEntity, TKey>(id));
+            return XValueTask.FromResult(GetOrAdd<TEntity, TKey>(id));
         }
 
         /// <inheritdoc/>
         public TEntity Add<TEntity>(TEntity entity) where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(entity);
+            XArgumentNull.ThrowIfNull(entity, nameof(entity));
             _structure.GetOrCreateList<TEntity>().Add(entity);
             MarkChanged();
             return entity;
@@ -526,7 +526,7 @@ namespace Lotus.Core
             where TEntity : class
         {
             token.ThrowIfCancellationRequested();
-            return ValueTask.FromResult(Add(entity));
+            return XValueTask.FromResult(Add(entity));
         }
 
         /// <inheritdoc/>
@@ -534,7 +534,7 @@ namespace Lotus.Core
             where TEntity : class, ILotusIdentifierId<TKey>, new()
             where TKey : struct, IEquatable<TKey>
         {
-            ArgumentNullException.ThrowIfNull(entity);
+            XArgumentNull.ThrowIfNull(entity, nameof(entity));
             var list = _structure.GetOrCreateList<TEntity>();
             var index = FindIndexById<TEntity, TKey>(list, entity.Id);
             if (index < 0)
@@ -555,13 +555,13 @@ namespace Lotus.Core
             where TKey : struct, IEquatable<TKey>
         {
             token.ThrowIfCancellationRequested();
-            return ValueTask.FromResult(AddOrUpdate<TEntity, TKey>(entity));
+            return XValueTask.FromResult(AddOrUpdate<TEntity, TKey>(entity));
         }
 
         /// <inheritdoc/>
         public void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(entities);
+            XArgumentNull.ThrowIfNull(entities, nameof(entities));
             var items = entities as ICollection<TEntity> ?? entities.ToArray();
             _structure.GetOrCreateList<TEntity>().AddRange(items);
             MarkChanged(items.Count);
@@ -579,7 +579,7 @@ namespace Lotus.Core
         /// <inheritdoc/>
         public TEntity Update<TEntity>(TEntity entity) where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(entity);
+            XArgumentNull.ThrowIfNull(entity, nameof(entity));
             MarkChanged();
             return entity;
         }
@@ -587,17 +587,23 @@ namespace Lotus.Core
         /// <inheritdoc/>
         public void UpdateRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(entities);
+            XArgumentNull.ThrowIfNull(entities, nameof(entities));
+#if UNITY_2017_1_OR_NEWER
+            var count = entities is ICollection<TEntity> collection
+                ? collection.Count
+                : entities.Count();
+#else
             var count = entities.TryGetNonEnumeratedCount(out var nonEnumeratedCount)
                 ? nonEnumeratedCount
                 : entities.Count();
+#endif
             MarkChanged(Math.Max(count, 1));
         }
 
         /// <inheritdoc/>
         public void Remove<TEntity>(TEntity entity) where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(entity);
+            XArgumentNull.ThrowIfNull(entity, nameof(entity));
             if (_structure.GetOrCreateList<TEntity>().Remove(entity))
             {
                 MarkChanged();
@@ -607,7 +613,7 @@ namespace Lotus.Core
         /// <inheritdoc/>
         public void RemoveRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(entities);
+            XArgumentNull.ThrowIfNull(entities, nameof(entities));
             var list = _structure.GetOrCreateList<TEntity>();
             var removed = 0;
             foreach (var entity in entities)
@@ -629,7 +635,7 @@ namespace Lotus.Core
             where TEntity : class, ILotusIdentifierId<TKey>, new()
             where TKey : struct, IEquatable<TKey>
         {
-            ArgumentNullException.ThrowIfNull(entities);
+            XArgumentNull.ThrowIfNull(entities, nameof(entities));
             var newEntities = entities.ToList();
             var newIds = newEntities.Select(x => x.Id).ToHashSet();
             var list = _structure.GetOrCreateList<TEntity>();

@@ -21,6 +21,28 @@ namespace Lotus.Repository
     public class DataStorageContextDb<TContext> : StorageBaseContextDb<TContext>, ILotusDataStorage
         where TContext : ContextDbStorageStructure
     {
+        #region Types
+        /// <summary>
+        /// EF Core построитель Include.
+        /// </summary>
+        private sealed class EfIncludeBuilder<TEntity> : ILotusIncludeBuilder<TEntity>
+            where TEntity : class
+        {
+            public IQueryable<TEntity> Query { get; private set; }
+
+            public EfIncludeBuilder(IQueryable<TEntity> query)
+            {
+                Query = query;
+            }
+
+            public ILotusIncludeBuilder<TEntity> Include<TProperty>(Expression<Func<TEntity, TProperty>> navigation)
+            {
+                Query = EntityFrameworkQueryableExtensions.Include(Query, navigation);
+                return this;
+            }
+        }
+        #endregion
+
         #region Constructors
         /// <summary>
         /// Конструктор инициализирует объект класса указанными параметрами.
@@ -51,26 +73,6 @@ namespace Lotus.Repository
             var builder = new EfIncludeBuilder<TEntity>(_context.Set<TEntity>());
             include(builder);
             return builder.Query;
-        }
-
-        /// <summary>
-        /// EF Core построитель Include.
-        /// </summary>
-        private sealed class EfIncludeBuilder<TEntity> : ILotusIncludeBuilder<TEntity>
-            where TEntity : class
-        {
-            public IQueryable<TEntity> Query { get; private set; }
-
-            public EfIncludeBuilder(IQueryable<TEntity> query)
-            {
-                Query = query;
-            }
-
-            public ILotusIncludeBuilder<TEntity> Include<TProperty>(Expression<Func<TEntity, TProperty>> navigation)
-            {
-                Query = EntityFrameworkQueryableExtensions.Include(Query, navigation);
-                return this;
-            }
         }
 
         /// <summary>

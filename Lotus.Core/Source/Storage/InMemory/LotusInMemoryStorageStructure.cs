@@ -87,7 +87,7 @@ namespace Lotus.Core
         /// <inheritdoc/>
         public void Register<TEntity>(List<TEntity> list) where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(list);
+            XArgumentNull.ThrowIfNull(list, nameof(list));
             _lists[typeof(TEntity)] = list;
         }
         #endregion
@@ -127,7 +127,7 @@ namespace Lotus.Core
         /// <returns>Список или null.</returns>
         public IList? GetList(Type entityType)
         {
-            ArgumentNullException.ThrowIfNull(entityType);
+            XArgumentNull.ThrowIfNull(entityType, nameof(entityType));
             return _lists.TryGetValue(entityType, out var boxed) ? boxed as IList : null;
         }
 
@@ -138,7 +138,7 @@ namespace Lotus.Core
         /// <returns>Список.</returns>
         public IList GetOrCreateList(Type entityType)
         {
-            ArgumentNullException.ThrowIfNull(entityType);
+            XArgumentNull.ThrowIfNull(entityType, nameof(entityType));
             if (_lists.TryGetValue(entityType, out var boxed) && boxed is IList existing)
             {
                 return existing;
@@ -157,7 +157,7 @@ namespace Lotus.Core
         /// <param name="source">Источник данных.</param>
         public void ReplaceListContent<TEntity>(IEnumerable<TEntity> source) where TEntity : class
         {
-            ArgumentNullException.ThrowIfNull(source);
+            XArgumentNull.ThrowIfNull(source, nameof(source));
             var list = GetOrCreateList<TEntity>();
             list.Clear();
             list.AddRange(source);
@@ -203,7 +203,7 @@ namespace Lotus.Core
         /// <param name="source">Источник.</param>
         public void CopyListsFrom(StorageStructureInMemory source)
         {
-            ArgumentNullException.ThrowIfNull(source);
+            XArgumentNull.ThrowIfNull(source, nameof(source));
 
             foreach (var pair in source._lists)
             {

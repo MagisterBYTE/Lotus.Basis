@@ -513,7 +513,7 @@ namespace Lotus.Core
         }
 
         /// <inheritdoc/>
-        public TEntity Add<TEntity>(TEntity entity) where TEntity : class
+        public virtual TEntity Add<TEntity>(TEntity entity) where TEntity : class
         {
             XArgumentNull.ThrowIfNull(entity, nameof(entity));
             _structure.GetOrCreateList<TEntity>().Add(entity);
@@ -559,7 +559,7 @@ namespace Lotus.Core
         }
 
         /// <inheritdoc/>
-        public void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        public virtual void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
             XArgumentNull.ThrowIfNull(entities, nameof(entities));
             var items = entities as ICollection<TEntity> ?? entities.ToArray();

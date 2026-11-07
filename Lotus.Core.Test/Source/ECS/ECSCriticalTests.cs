@@ -1,13 +1,10 @@
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.ECS
 {
     /// <summary>
     /// Тесты для критических участков ECS системы.
     /// </summary>
-    [TestFixture]
     public class ECSCriticalTests
     {
         /// <summary>
@@ -21,7 +18,7 @@ namespace Lotus.Core.ECS
         /// <summary>
         /// Тест GetEntity - возвращает dummy entity для несуществующего id.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetEntity_WithNonExistentId_ReturnsDummyEntity()
         {
             var world = new CEcsWorld();
@@ -37,7 +34,7 @@ namespace Lotus.Core.ECS
         /// <summary>
         /// Тест GetEntity - возвращает правильную сущность для существующего id.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetEntity_WithExistentId_ReturnsCorrectEntity()
         {
             var world = new CEcsWorld();
@@ -45,13 +42,13 @@ namespace Lotus.Core.ECS
 
             ref var result = ref world.GetEntity(entity.Id);
 
-            ClassicAssert.AreEqual(entity.Id, result.Id);
+            Assert.Equal(entity.Id, result.Id);
         }
 
         /// <summary>
         /// Тест RemoveEntity - корректно удаляет сущность и обновляет индексы.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveEntity_RemovesEntityAndUpdatesIndices()
         {
             var world = new CEcsWorld();
@@ -63,21 +60,21 @@ namespace Lotus.Core.ECS
             var id2 = entity2.Id;
             var id3 = entity3.Id;
 
-            ClassicAssert.AreEqual(3, world.CountEntity);
-            ClassicAssert.IsTrue(world.ContainsEntity(id2));
+            Assert.Equal(3, world.CountEntity);
+            Assert.True(world.ContainsEntity(id2));
 
             world.RemoveEntity(id2);
 
-            ClassicAssert.AreEqual(2, world.CountEntity);
-            ClassicAssert.IsFalse(world.ContainsEntity(id2));
-            ClassicAssert.IsTrue(world.ContainsEntity(id1));
-            ClassicAssert.IsTrue(world.ContainsEntity(id3));
+            Assert.Equal(2, world.CountEntity);
+            Assert.False(world.ContainsEntity(id2));
+            Assert.True(world.ContainsEntity(id1));
+            Assert.True(world.ContainsEntity(id3));
         }
 
         /// <summary>
         /// Тест AddComponent - выбрасывает исключение при попытке добавить существующий компонент.
         /// </summary>
-        [Test]
+        [Fact]
         public void AddComponent_WithExistingComponent_ThrowsException()
         {
             var world = new CEcsWorld();
@@ -88,7 +85,7 @@ namespace Lotus.Core.ECS
             component.Value = 100;
             var entityId = entity.Id;
 
-            ClassicAssert.Throws<Exception>(() =>
+            Assert.Throws<Exception>(() =>
             {
                 world.AddComponent<TTestComponent>(entityId);
             });
@@ -97,14 +94,14 @@ namespace Lotus.Core.ECS
         /// <summary>
         /// Тест GetComponent - выбрасывает исключение для несуществующего компонента.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetComponent_WithNonExistentComponent_ThrowsException()
         {
             var world = new CEcsWorld();
             ref var entity = ref world.NewEntity();
             var entityId = entity.Id;
 
-            ClassicAssert.Throws<Exception>(() =>
+            Assert.Throws<Exception>(() =>
             {
                 ref var component = ref world.GetComponent<TTestComponent>(entityId);
             });
@@ -113,7 +110,7 @@ namespace Lotus.Core.ECS
         /// <summary>
         /// Тест GetOrAddComponent - возвращает существующий компонент.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetOrAddComponent_WithExistingComponent_ReturnsExisting()
         {
             var world = new CEcsWorld();
@@ -124,14 +121,14 @@ namespace Lotus.Core.ECS
 
             ref var component2 = ref world.GetOrAddComponent<TTestComponent>(entity.Id);
 
-            ClassicAssert.AreEqual(100, component2.Value);
-            ClassicAssert.AreEqual(1, world.GetComponentData<TTestComponent>()!.Count);
+            Assert.Equal(100, component2.Value);
+            Assert.Equal(1, world.GetComponentData<TTestComponent>()!.Count);
         }
 
         /// <summary>
         /// Тест GetOrAddComponent - создает новый компонент если не существует.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetOrAddComponent_WithNonExistentComponent_CreatesNew()
         {
             var world = new CEcsWorld();
@@ -140,54 +137,54 @@ namespace Lotus.Core.ECS
             ref var component = ref world.GetOrAddComponent<TTestComponent>(entity.Id);
             component.Value = 200;
 
-            ClassicAssert.AreEqual(200, component.Value);
-            ClassicAssert.IsTrue(world.HasComponent<TTestComponent>(entity.Id));
+            Assert.Equal(200, component.Value);
+            Assert.True(world.HasComponent<TTestComponent>(entity.Id));
         }
 
         /// <summary>
         /// Тест RemoveComponent - корректно удаляет компонент и обновляет счетчик.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveComponent_RemovesComponentAndUpdatesCount()
         {
             var world = new CEcsWorld();
             ref var entity = ref world.NewEntity();
 
             world.AddComponent<TTestComponent>(entity.Id);
-            ClassicAssert.IsTrue(world.HasComponent<TTestComponent>(entity.Id));
-            ClassicAssert.AreEqual(1, entity.ComponentCount);
+            Assert.True(world.HasComponent<TTestComponent>(entity.Id));
+            Assert.Equal(1, entity.ComponentCount);
 
             world.RemoveComponent<TTestComponent>(entity.Id);
-            ClassicAssert.IsFalse(world.HasComponent<TTestComponent>(entity.Id));
-            ClassicAssert.AreEqual(0, entity.ComponentCount);
+            Assert.False(world.HasComponent<TTestComponent>(entity.Id));
+            Assert.Equal(0, entity.ComponentCount);
         }
 
         /// <summary>
         /// Тест RemoveEntity - корректно обрабатывает удаление сущности с компонентами.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveEntity_WithComponents_HandlesCorrectly()
         {
             var world = new CEcsWorld();
             ref var entity = ref world.NewEntity();
 
             world.AddComponent<TTestComponent>(entity.Id);
-            ClassicAssert.IsTrue(world.HasComponent<TTestComponent>(entity.Id));
+            Assert.True(world.HasComponent<TTestComponent>(entity.Id));
 
             world.RemoveEntity(entity.Id);
-            ClassicAssert.IsFalse(world.ContainsEntity(entity.Id));
+            Assert.False(world.ContainsEntity(entity.Id));
         }
 
         /// <summary>
         /// Тест ContainsEntity - корректно проверяет существование сущности.
         /// </summary>
-        [Test]
+        [Fact]
         public void ContainsEntity_ChecksExistenceCorrectly()
         {
             var world = new CEcsWorld();
             ref var entity = ref world.NewEntity();
 
-            ClassicAssert.IsTrue(world.ContainsEntity(entity.Id));
+            Assert.True(world.ContainsEntity(entity.Id));
         }
     }
 }

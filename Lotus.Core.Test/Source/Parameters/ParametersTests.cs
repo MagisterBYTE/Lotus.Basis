@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEditor;
 #endif
-using NUnit.Framework;
 
 namespace Lotus.Core.Parameters
 {
@@ -14,7 +13,7 @@ namespace Lotus.Core.Parameters
         /// <summary>
         /// Тестирование подсистемы параметрических объектов.
         /// </summary>
-        [Test]
+        [Fact]
         public static void Create()
         {
             // Просто объект

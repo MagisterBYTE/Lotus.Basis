@@ -1,14 +1,11 @@
 using System;
 using System.Reflection;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Reflection
 {
     /// <summary>
     /// Тесты для критических участков Reflection (исправление ArgList3[3] -> ArgList3[2]).
     /// </summary>
-    [TestFixture]
     public class ReflectionCriticalTests
     {
         /// <summary>
@@ -39,7 +36,7 @@ namespace Lotus.Core.Reflection
         /// <summary>
         /// Тест InvokeMethod с тремя аргументами - критический баг был исправлен (ArgList3[3] -> ArgList3[2]).
         /// </summary>
-        [Test]
+        [Fact]
         public void InvokeMethod_WithThreeArguments_UsesCorrectIndex()
         {
             // Arrange
@@ -50,14 +47,14 @@ namespace Lotus.Core.Reflection
             var result = reflectedType.InvokeMethod("InstanceMethod", instance, 2, 3, 4);
 
             // Assert - проверяем что метод вызван корректно (2 * 3 * 4 = 24)
-            ClassicAssert.IsNotNull(result, "Result should not be null");
-            ClassicAssert.AreEqual(24, result, "Method should be invoked with correct arguments");
+            Assert.NotNull(result);
+            Assert.Equal(24, result);
         }
 
         /// <summary>
         /// Тест InvokeMethod с тремя аргументами для статического метода.
         /// </summary>
-        [Test]
+        [Fact]
         public void InvokeMethod_StaticMethodWithThreeArguments_UsesCorrectIndex()
         {
             // Arrange
@@ -67,14 +64,14 @@ namespace Lotus.Core.Reflection
             var result = reflectedType.InvokeMethod("StaticMethod", null, 10, 20, 30);
 
             // Assert - проверяем что метод вызван корректно (10 + 20 + 30 = 60)
-            ClassicAssert.IsNotNull(result, "Result should not be null");
-            ClassicAssert.AreEqual(60, result, "Static method should be invoked with correct arguments");
+            Assert.NotNull(result);
+            Assert.Equal(60, result);
         }
 
         /// <summary>
         /// Тест InvokeMethod с тремя строковыми аргументами.
         /// </summary>
-        [Test]
+        [Fact]
         public void InvokeMethod_WithThreeStringArguments_UsesCorrectIndex()
         {
             // Arrange
@@ -85,14 +82,14 @@ namespace Lotus.Core.Reflection
             var result = reflectedType.InvokeMethod("MethodWithStrings", instance, "A", "B", "C");
 
             // Assert
-            ClassicAssert.IsNotNull(result, "Result should not be null");
-            ClassicAssert.AreEqual("A-B-C", result, "Method should concatenate strings correctly");
+            Assert.NotNull(result);
+            Assert.Equal("A-B-C", result);
         }
 
         /// <summary>
         /// Тест InvokeMethod с тремя аргументами - проверка что все аргументы передаются корректно.
         /// </summary>
-        [Test]
+        [Fact]
         public void InvokeMethod_WithThreeArguments_PassesAllArgumentsCorrectly()
         {
             // Arrange
@@ -104,14 +101,14 @@ namespace Lotus.Core.Reflection
             var result2 = reflectedType.InvokeMethod("InstanceMethod", instance, 5, 6, 7);
 
             // Assert
-            ClassicAssert.AreEqual(6, result1, "First call: 1 * 2 * 3 = 6");
-            ClassicAssert.AreEqual(210, result2, "Second call: 5 * 6 * 7 = 210");
+            Assert.Equal(6, result1);
+            Assert.Equal(210, result2);
         }
 
         /// <summary>
         /// Тест InvokeMethod с несуществующим методом.
         /// </summary>
-        [Test]
+        [Fact]
         public void InvokeMethod_WithNonExistentMethod_ReturnsNull()
         {
             // Arrange
@@ -122,13 +119,13 @@ namespace Lotus.Core.Reflection
             var result = reflectedType.InvokeMethod("NonExistentMethod", instance, 1, 2, 3);
 
             // Assert
-            ClassicAssert.IsNull(result, "Non-existent method should return null");
+            Assert.Null(result);
         }
 
         /// <summary>
         /// Тест GetField - корректная работа с исправленными именами переменных (fieldInfo вместо fieldInfo).
         /// </summary>
-        [Test]
+        [Fact]
         public void GetField_WithValidFieldName_ReturnsFieldInfo()
         {
             // Arrange
@@ -138,14 +135,14 @@ namespace Lotus.Core.Reflection
             var fieldInfo = reflectedType.GetField("FieldValue");
 
             // Assert
-            ClassicAssert.IsNotNull(fieldInfo, "FieldInfo should not be null");
-            ClassicAssert.AreEqual("FieldValue", fieldInfo.Name, "Field name should match");
+            Assert.NotNull(fieldInfo);
+            Assert.Equal("FieldValue", fieldInfo.Name);
         }
 
         /// <summary>
         /// Тест GetProperty - корректная работа с исправленными именами переменных (propertyInfo вместо propertyInfo).
         /// </summary>
-        [Test]
+        [Fact]
         public void GetProperty_WithValidPropertyName_ReturnsPropertyInfo()
         {
             // Arrange
@@ -155,14 +152,14 @@ namespace Lotus.Core.Reflection
             var propertyInfo = reflectedType.GetProperty("Value");
 
             // Assert
-            ClassicAssert.IsNotNull(propertyInfo, "PropertyInfo should not be null");
-            ClassicAssert.AreEqual("Value", propertyInfo.Name, "Property name should match");
+            Assert.NotNull(propertyInfo);
+            Assert.Equal("Value", propertyInfo.Name);
         }
 
         /// <summary>
         /// Тест GetMethod - корректная работа с исправленными именами переменных (methodInfo вместо methodInfo).
         /// </summary>
-        [Test]
+        [Fact]
         public void GetMethod_WithValidMethodName_ReturnsMethodInfo()
         {
             // Arrange
@@ -172,8 +169,8 @@ namespace Lotus.Core.Reflection
             var methodInfo = reflectedType.GetMethod("InstanceMethod");
 
             // Assert
-            ClassicAssert.IsNotNull(methodInfo, "MethodInfo should not be null");
-            ClassicAssert.AreEqual("InstanceMethod", methodInfo.Name, "Method name should match");
+            Assert.NotNull(methodInfo);
+            Assert.Equal("InstanceMethod", methodInfo.Name);
         }
     }
 }

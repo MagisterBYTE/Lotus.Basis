@@ -2,15 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Tree
 {
-    [TestFixture]
     public class TreeNodeBuilderTests
     {
-        [Test]
+        [Fact]
         public void ByFilter_ShouldBuildTreeBasedOnFilter()
         {
             // Arrange
@@ -27,13 +24,13 @@ namespace Lotus.Core.Tree
             var result = TreeNodeBuilder.ByFilter(root, filter, transform);
 
             // Assert
-            ClassicAssert.IsNotNull(result);
-            ClassicAssert.AreEqual(root.Id, result.Id);
-            ClassicAssert.AreEqual(1, result.IChildNodes?.Count());
-            ClassicAssert.AreEqual(child1.Id, result.IChildNodes?.First().Id);
+            Assert.NotNull(result);
+            Assert.Equal(root.Id, result.Id);
+            Assert.Equal(1, result.IChildNodes?.Count());
+            Assert.Equal(child1.Id, result.IChildNodes?.First().Id);
         }
 
-        [Test]
+        [Fact]
         public void ByFlatList_ShouldBuildHierarchyFromFlatList()
         {
             // Arrange
@@ -48,9 +45,9 @@ namespace Lotus.Core.Tree
             TreeNodeBuilder.ByFlatList(root, flatList);
 
             // Assert
-            ClassicAssert.AreEqual(2, root.IChildNodes?.Count());
-            ClassicAssert.AreEqual(1, child1.IChildNodes?.Count());
-            ClassicAssert.AreEqual(grandChild, child1.IChildNodes?.First());
+            Assert.Equal(2, root.IChildNodes?.Count());
+            Assert.Equal(1, child1.IChildNodes?.Count());
+            Assert.Equal(grandChild, child1.IChildNodes?.First());
         }
     }
 }

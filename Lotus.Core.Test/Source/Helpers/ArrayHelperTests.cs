@@ -1,14 +1,11 @@
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Helpers
 {
-    [TestFixture]
     public class ArrayHelperTests
     {
         #region Add Methods Tests
 
-        [Test]
+        [Fact]
         public void Add_ShouldAddItemToEndOfArray()
         {
             // Arrange
@@ -19,12 +16,12 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.Add(originalArray, itemToAdd);
 
             // Assert
-            ClassicAssert.AreEqual(4, result.Length);
-            ClassicAssert.AreEqual(4, result[3]);
-            CollectionAssert.AreEqual(new[] { 1, 2, 3, 4 }, result);
+            Assert.Equal(4, result.Length);
+            Assert.Equal(4, result[3]);
+            Assert.Equal(new[] { 1, 2, 3, 4 }, result);
         }
 
-        [Test]
+        [Fact]
         public void Add_WithRefCount_ShouldAddItemToEndOfArray()
         {
             // Arrange
@@ -38,12 +35,12 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.Add(originalArray, ref currentCount, itemToAdd);
 
             // Assert
-            ClassicAssert.AreEqual(4, result.Length); // Capacity remains same
-            ClassicAssert.AreEqual(3, currentCount); // Count increased
-            ClassicAssert.AreEqual(3, result[2]); // Item added at correct position
+            Assert.Equal(4, result.Length); // Capacity remains same
+            Assert.Equal(3, currentCount); // Count increased
+            Assert.Equal(3, result[2]); // Item added at correct position
         }
 
-        [Test]
+        [Fact]
         public void Add_WithRefCount_ShouldResizeWhenFull()
         {
             // Arrange
@@ -57,12 +54,12 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.Add(originalArray, ref currentCount, itemToAdd);
 
             // Assert
-            ClassicAssert.AreEqual(4, result.Length); // Capacity doubled
-            ClassicAssert.AreEqual(3, currentCount);
-            ClassicAssert.AreEqual(3, result[2]);
+            Assert.Equal(4, result.Length); // Capacity doubled
+            Assert.Equal(3, currentCount);
+            Assert.Equal(3, result[2]);
         }
 
-        [Test]
+        [Fact]
         public void AddRange_ShouldAddMultipleItems()
         {
             // Arrange
@@ -76,16 +73,16 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.AddRange(originalArray, ref currentCount, itemsToAdd);
 
             // Assert
-            ClassicAssert.AreEqual(5, result.Length); // Capacity remains same
-            ClassicAssert.AreEqual(4, currentCount);
-            CollectionAssert.AreEqual(new[] { 1, 2, 3, 4 }, result[0..4]);
+            Assert.Equal(5, result.Length); // Capacity remains same
+            Assert.Equal(4, currentCount);
+            Assert.Equal(new[] { 1, 2, 3, 4 }, result[0..4]);
         }
 
         #endregion
 
         #region Insert Methods Tests
 
-        [Test]
+        [Fact]
         public void InsertAt_ShouldInsertItemAtSpecifiedIndex()
         {
             // Arrange
@@ -96,11 +93,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.InsertAt(originalArray, itemToInsert, 2);
 
             // Assert
-            ClassicAssert.AreEqual(4, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 2, 3, 4 }, result);
+            Assert.Equal(4, result.Length);
+            Assert.Equal(new[] { 1, 2, 3, 4 }, result);
         }
 
-        [Test]
+        [Fact]
         public void InsertAt_WithMultipleItems_ShouldInsertItemsAtSpecifiedIndex()
         {
             // Arrange
@@ -111,11 +108,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.InsertAt(originalArray, 1, itemsToInsert);
 
             // Assert
-            ClassicAssert.AreEqual(5, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 2, 3, 4, 5 }, result);
+            Assert.Equal(5, result.Length);
+            Assert.Equal(new[] { 1, 2, 3, 4, 5 }, result);
         }
 
-        [Test]
+        [Fact]
         public void Push_ShouldInsertItemAtBeginning()
         {
             // Arrange
@@ -126,15 +123,15 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.Push(originalArray, itemToInsert);
 
             // Assert
-            ClassicAssert.AreEqual(4, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 2, 3, 4 }, result);
+            Assert.Equal(4, result.Length);
+            Assert.Equal(new[] { 1, 2, 3, 4 }, result);
         }
 
         #endregion
 
         #region Remove Methods Tests
 
-        [Test]
+        [Fact]
         public void RemoveAt_ShouldRemoveItemAtIndex()
         {
             // Arrange
@@ -144,11 +141,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveAt(originalArray, 1);
 
             // Assert
-            ClassicAssert.AreEqual(3, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 3, 4 }, result);
+            Assert.Equal(3, result.Length);
+            Assert.Equal(new[] { 1, 3, 4 }, result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveAt_WithCount_ShouldRemoveMultipleItems()
         {
             // Arrange
@@ -158,11 +155,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveAt(originalArray, 1, 2);
 
             // Assert
-            ClassicAssert.AreEqual(3, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 4, 5 }, result);
+            Assert.Equal(3, result.Length);
+            Assert.Equal(new[] { 1, 4, 5 }, result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveRange_ShouldRemoveItemsBetweenIndices()
         {
             // Arrange
@@ -172,11 +169,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveRange(originalArray, 1, 3);
 
             // Assert
-            ClassicAssert.AreEqual(2, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 5 }, result);
+            Assert.Equal(2, result.Length);
+            Assert.Equal(new[] { 1, 5 }, result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveFirst_ShouldRemoveFirstItem()
         {
             // Arrange
@@ -186,11 +183,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveFirst(originalArray);
 
             // Assert
-            ClassicAssert.AreEqual(2, result.Length);
-            CollectionAssert.AreEqual(new[] { 2, 3 }, result);
+            Assert.Equal(2, result.Length);
+            Assert.Equal(new[] { 2, 3 }, result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveFirst_WithCount_ShouldRemoveFirstItems()
         {
             // Arrange
@@ -200,11 +197,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveFirst(originalArray, 2);
 
             // Assert
-            ClassicAssert.AreEqual(2, result.Length);
-            CollectionAssert.AreEqual(new[] { 3, 4 }, result);
+            Assert.Equal(2, result.Length);
+            Assert.Equal(new[] { 3, 4 }, result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveLast_ShouldRemoveLastItem()
         {
             // Arrange
@@ -214,11 +211,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveLast(originalArray);
 
             // Assert
-            ClassicAssert.AreEqual(2, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 2 }, result);
+            Assert.Equal(2, result.Length);
+            Assert.Equal(new[] { 1, 2 }, result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveLast_WithCount_ShouldRemoveLastItems()
         {
             // Arrange
@@ -228,11 +225,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveLast(originalArray, 2);
 
             // Assert
-            ClassicAssert.AreEqual(2, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 2 }, result);
+            Assert.Equal(2, result.Length);
+            Assert.Equal(new[] { 1, 2 }, result);
         }
 
-        [Test]
+        [Fact]
         public void Remove_ShouldRemoveFirstMatchingItem()
         {
             // Arrange
@@ -242,11 +239,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.Remove(originalArray, 2);
 
             // Assert
-            ClassicAssert.AreEqual(4, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 3, 2, 4 }, result);
+            Assert.Equal(4, result.Length);
+            Assert.Equal(new[] { 1, 3, 2, 4 }, result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveAll_ShouldRemoveAllMatchingItems()
         {
             // Arrange
@@ -256,15 +253,15 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveAll(originalArray, 2);
 
             // Assert
-            ClassicAssert.AreEqual(3, result.Length);
-            CollectionAssert.AreEqual(new[] { 1, 3, 4 }, result);
+            Assert.Equal(3, result.Length);
+            Assert.Equal(new[] { 1, 3, 4 }, result);
         }
 
         #endregion
 
         #region Shift Methods Tests
 
-        [Test]
+        [Fact]
         public void Shift_ShouldMoveItemsRight()
         {
             // Arrange
@@ -274,10 +271,10 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.Shift(originalArray, 1, 1, 2);
 
             // Assert
-            CollectionAssert.AreEqual(new[] { 1, 4, 2, 3, 5 }, result);
+            Assert.Equal(new[] { 1, 4, 2, 3, 5 }, result);
         }
 
-        [Test]
+        [Fact]
         public void Shift_ShouldMoveItemsLeft()
         {
             // Arrange
@@ -287,10 +284,10 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.Shift(originalArray, 2, -1, 2);
 
             // Assert
-            CollectionAssert.AreEqual(new[] { 1, 3, 4, 2, 5 }, result);
+            Assert.Equal(new[] { 1, 3, 4, 2, 5 }, result);
         }
 
-        [Test]
+        [Fact]
         public void ShiftRight_ShouldMoveItemRight()
         {
             // Arrange
@@ -300,10 +297,10 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.ShiftRight(originalArray, 1);
 
             // Assert
-            CollectionAssert.AreEqual(new[] { 1, 3, 2, 4 }, result);
+            Assert.Equal(new[] { 1, 3, 2, 4 }, result);
         }
 
-        [Test]
+        [Fact]
         public void ShiftLeft_ShouldMoveItemLeft()
         {
             // Arrange
@@ -313,14 +310,14 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.ShiftLeft(originalArray, 2);
 
             // Assert
-            CollectionAssert.AreEqual(new[] { 1, 3, 2, 4 }, result);
+            Assert.Equal(new[] { 1, 3, 2, 4 }, result);
         }
 
         #endregion
 
         #region Edge Cases Tests
 
-        [Test]
+        [Fact]
         public void RemoveAt_WithInvalidIndex_ShouldReturnSameArray()
         {
             // Arrange
@@ -331,11 +328,11 @@ namespace Lotus.Core.Helpers
             var result2 = XArrayHelper.RemoveAt(originalArray, 10);
 
             // Assert
-            CollectionAssert.AreEqual(originalArray, result1);
-            CollectionAssert.AreEqual(originalArray, result2);
+            Assert.Equal(originalArray, result1);
+            Assert.Equal(originalArray, result2);
         }
 
-        [Test]
+        [Fact]
         public void RemoveAt_WithZeroCount_ShouldReturnSameArray()
         {
             // Arrange
@@ -345,10 +342,10 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.RemoveAt(originalArray, 1, 0);
 
             // Assert
-            CollectionAssert.AreEqual(originalArray, result);
+            Assert.Equal(originalArray, result);
         }
 
-        [Test]
+        [Fact]
         public void Shift_WithInvalidParameters_ShouldHandleGracefully()
         {
             // Arrange
@@ -360,9 +357,9 @@ namespace Lotus.Core.Helpers
             var result3 = XArrayHelper.Shift(originalArray, 1, -10, 2); // Large negative offset
 
             // Assert
-            ClassicAssert.AreEqual(5, result1.Length);
-            ClassicAssert.AreEqual(5, result2.Length);
-            ClassicAssert.AreEqual(5, result3.Length);
+            Assert.Equal(5, result1.Length);
+            Assert.Equal(5, result2.Length);
+            Assert.Equal(5, result3.Length);
         }
 
         #endregion

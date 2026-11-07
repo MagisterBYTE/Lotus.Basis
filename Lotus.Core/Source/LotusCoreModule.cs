@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleToAttribute("Lotus.Core.Test")]
-[assembly: InternalsVisibleToAttribute("Lotus.Repository.Test")]
 
 namespace Lotus.Core
 {

@@ -2,8 +2,6 @@
 using UnityEngine;
 using UnityEditor;
 #endif
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Protection
 {
@@ -15,13 +13,13 @@ namespace Lotus.Core.Protection
         /// <summary>
         /// Тестирование методов защиты.
         /// </summary>
-        [Test]
+        [Fact]
         public static void Encrypted_Decrypted()
         {
             TProtectionInt protectInd = 6566;
             var encryptedValue = protectInd.EncryptedValue;
             int decryptedValue = protectInd;
-            ClassicAssert.AreEqual(6566, decryptedValue);
+            Assert.Equal(6566, decryptedValue);
         }
     }
 }

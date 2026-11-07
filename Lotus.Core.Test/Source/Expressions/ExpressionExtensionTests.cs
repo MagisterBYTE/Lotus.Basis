@@ -1,15 +1,12 @@
 using System;
 using System.Linq.Expressions;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Expressions
 {
-    [TestFixture]
     public class ExpressionExtensionTests
     {
-        [Test]
+        [Fact]
         public void AsFunc_ExtensionMethod_ShouldWorkSameAsStaticMethod()
         {
             // Arrange
@@ -19,10 +16,10 @@ namespace Lotus.Core.Expressions
             var func = expression.AsFunc();
 
             // Assert
-            ClassicAssert.AreEqual(2, func(1));
+            Assert.Equal(2, func(1));
         }
 
-        [Test]
+        [Fact]
         public void From_ShouldComposeExpressionsCorrectly()
         {
             // Arrange
@@ -35,10 +32,10 @@ namespace Lotus.Core.Expressions
             var testDate = new DateTime(2023, 5, 15); // Day = 15
 
             // Assert
-            ClassicAssert.AreEqual(2, func(testDate)); // "15".Length == 2
+            Assert.Equal(2, func(testDate)); // "15".Length == 2
         }
 
-        [Test]
+        [Fact]
         public void GetPropertyExpression_WithSingleProperty_ShouldReturnCorrectExpression()
         {
             // Arrange
@@ -48,10 +45,10 @@ namespace Lotus.Core.Expressions
             var expr = parameter.GetPropertyExpression("Length");
 
             // Assert
-            ClassicAssert.AreEqual("s.Length", expr.ToString());
+            Assert.Equal("s.Length", expr.ToString());
         }
 
-        [Test]
+        [Fact]
         public void GetPropertyExpression_WithNestedProperties_ShouldReturnCorrectExpression()
         {
             // Arrange
@@ -62,8 +59,8 @@ namespace Lotus.Core.Expressions
             var expr2 = parameter.GetPropertyExpression(new[] { "Date", "Year" });
 
             // Assert
-            ClassicAssert.AreEqual("d.Date.Year", expr1.ToString());
-            ClassicAssert.AreEqual(expr1.ToString(), expr2.ToString());
+            Assert.Equal("d.Date.Year", expr1.ToString());
+            Assert.Equal(expr1.ToString(), expr2.ToString());
         }
     }
 }

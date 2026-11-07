@@ -1,20 +1,17 @@
 using System;
 using System.IO;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Text
 {
     /// <summary>
     /// Тесты для критических участков Text (исправление имен переменных).
     /// </summary>
-    [TestFixture]
     public class TextCriticalTests
     {
         /// <summary>
         /// Тест CTextGenerateCodeCSharp - корректная работа с исправленными именами переменных (delimiterPart вместо delimiterPart).
         /// </summary>
-        [Test]
+        [Fact]
         public void CTextGenerateCodeCSharp_AddDelimiterPart_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -24,14 +21,14 @@ namespace Lotus.Core.Text
             generator.AddDelimiterPart();
 
             // Assert
-            ClassicAssert.AreEqual(1, generator.Lines.Count, "Delimiter part should be added");
-            ClassicAssert.IsTrue(generator.Lines[0].RawString.Contains("//"), "Should contain comment delimiter");
+            Assert.Equal(1, generator.Lines.Count);
+            Assert.True(generator.Lines[0].RawString.Contains("//"), "Should contain comment delimiter");
         }
 
         /// <summary>
         /// Тест CTextGenerateCodeCSharp - корректная работа с исправленными именами переменных (delimiterSection вместо delimiterSection).
         /// </summary>
-        [Test]
+        [Fact]
         public void CTextGenerateCodeCSharp_AddDelimiterSection_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -41,14 +38,14 @@ namespace Lotus.Core.Text
             generator.AddDelimiterSection();
 
             // Assert
-            ClassicAssert.AreEqual(1, generator.Lines.Count, "Delimiter section should be added");
-            ClassicAssert.IsTrue(generator.Lines[0].RawString.Contains("//"), "Should contain comment delimiter");
+            Assert.Equal(1, generator.Lines.Count);
+            Assert.True(generator.Lines[0].RawString.Contains("//"), "Should contain comment delimiter");
         }
 
         /// <summary>
         /// Тест CTextList - корректная работа с исправленными именами переменных (streamWriter вместо streamWriter).
         /// </summary>
-        [Test]
+        [Fact]
         public void CTextList_Save_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -63,11 +60,11 @@ namespace Lotus.Core.Text
                 textList.Save(testFileName);
 
                 // Assert
-                ClassicAssert.IsTrue(File.Exists(testFileName), "File should be created");
+                Assert.True(File.Exists(testFileName), "File should be created");
                 var lines = File.ReadAllLines(testFileName);
-                ClassicAssert.AreEqual(2, lines.Length, "File should contain 2 lines");
-                ClassicAssert.AreEqual("Line 1", lines[0], "First line should match");
-                ClassicAssert.AreEqual("Line 2", lines[1], "Second line should match");
+                Assert.Equal(2, lines.Length);
+                Assert.Equal("Line 1", lines[0]);
+                Assert.Equal("Line 2", lines[1]);
             }
             finally
             {
@@ -82,7 +79,7 @@ namespace Lotus.Core.Text
         /// <summary>
         /// Тест CTextBase - корректная работа с исправленными именами переменных (countTabs вместо countTabs).
         /// </summary>
-        [Test]
+        [Fact]
         public void CTextBase_SetLengthWithTabs_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -93,14 +90,14 @@ namespace Lotus.Core.Text
             textLine.SetLengthWithTabs(20, 4);
 
             // Assert
-            ClassicAssert.AreEqual(14, textLine.Length, "Length should be set to 20");
-            ClassicAssert.IsTrue(textLine.RawString.StartsWith("\t\t"), "Should preserve tabs at start");
+            Assert.Equal(14, textLine.Length);
+            Assert.True(textLine.RawString.StartsWith("\t\t"), "Should preserve tabs at start");
         }
 
         /// <summary>
         /// Тест CTextBase - SetLengthWithTabs с символом использует исправленное имя переменной countTabs.
         /// </summary>
-        [Test]
+        [Fact]
         public void CTextBase_SetLengthWithTabsWithSymbol_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -110,9 +107,9 @@ namespace Lotus.Core.Text
             textLine.SetLengthWithTabs(20, '-', 4);
 
             // Assert
-            ClassicAssert.AreEqual(14, textLine.Length, "Length should be set to 20");
-            ClassicAssert.IsTrue(textLine.RawString.StartsWith("\t\t"), "Should preserve tabs at start");
-            ClassicAssert.IsTrue(textLine.RawString.EndsWith("-"), "Should end with specified symbol");
+            Assert.Equal(14, textLine.Length);
+            Assert.True(textLine.RawString.StartsWith("\t\t"), "Should preserve tabs at start");
+            Assert.True(textLine.RawString.EndsWith("-"), "Should end with specified symbol");
         }
     }
 }

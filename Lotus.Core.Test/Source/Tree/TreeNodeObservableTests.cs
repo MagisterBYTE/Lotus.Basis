@@ -1,35 +1,32 @@
 using System;
 using System.Collections.Generic;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Tree
 {
-    [TestFixture]
     public class TreeNodeObservableTests
     {
-        [Test]
+        [Fact]
         public void Constructor_ShouldInitializeProperties()
         {
             // Arrange & Act
             var node = new TreeNodeObservable();
 
             // Assert
-            ClassicAssert.AreEqual(Guid.Empty, node.Id);
-            ClassicAssert.IsEmpty(node.TextNode);
-            ClassicAssert.IsFalse(node.IsSelected);
-            ClassicAssert.IsFalse(node.IsExpanded);
-            ClassicAssert.AreEqual(false, node.IsChecked);
-            ClassicAssert.AreEqual(-1, node.Order);
-            ClassicAssert.IsNull(node.IParentTreeNode);
-            ClassicAssert.IsNotNull(node.IChildNodes);
-            ClassicAssert.IsEmpty(node.IChildNodes);
-            ClassicAssert.IsNotNull(node.Attributes);
-            ClassicAssert.IsEmpty(node.Attributes);
+            Assert.Equal(Guid.Empty, node.Id);
+            Assert.Empty(node.TextNode);
+            Assert.False(node.IsSelected);
+            Assert.False(node.IsExpanded);
+            Assert.Equal(false, node.IsChecked);
+            Assert.Equal(-1, node.Order);
+            Assert.Null(node.IParentTreeNode);
+            Assert.NotNull(node.IChildNodes);
+            Assert.Empty(node.IChildNodes);
+            Assert.NotNull(node.Attributes);
+            Assert.Empty(node.Attributes);
         }
 
-        [Test]
+        [Fact]
         public void PropertyChanges_ShouldRaisePropertyChanged()
         {
             // Arrange
@@ -46,14 +43,14 @@ namespace Lotus.Core.Tree
             node.Order = 1;
 
             // Assert
-            ClassicAssert.Contains(nameof(TreeNodeObservable.TextNode), changedProperties);
-            ClassicAssert.Contains(nameof(TreeNodeObservable.IsSelected), changedProperties);
-            ClassicAssert.Contains(nameof(TreeNodeObservable.IsExpanded), changedProperties);
-            ClassicAssert.Contains(nameof(TreeNodeObservable.IsChecked), changedProperties);
-            ClassicAssert.Contains(nameof(TreeNodeObservable.Order), changedProperties);
+            Assert.Contains(nameof(TreeNodeObservable.TextNode), changedProperties);
+            Assert.Contains(nameof(TreeNodeObservable.IsSelected), changedProperties);
+            Assert.Contains(nameof(TreeNodeObservable.IsExpanded), changedProperties);
+            Assert.Contains(nameof(TreeNodeObservable.IsChecked), changedProperties);
+            Assert.Contains(nameof(TreeNodeObservable.Order), changedProperties);
         }
 
-        [Test]
+        [Fact]
         public void CheckOne_ShouldReturnTrueWhenPredicateMatches()
         {
             // Arrange
@@ -62,12 +59,12 @@ namespace Lotus.Core.Tree
             node.ChildNodes.Add(child);
 
             // Act & Assert
-            ClassicAssert.IsTrue(node.CheckOne(n => n?.Id == node.Id));
-            ClassicAssert.IsTrue(node.CheckOne(n => n?.Id == child.Id));
-            ClassicAssert.IsFalse(node.CheckOne(n => n?.Id == Guid.NewGuid()));
+            Assert.True(node.CheckOne(n => n?.Id == node.Id));
+            Assert.True(node.CheckOne(n => n?.Id == child.Id));
+            Assert.False(node.CheckOne(n => n?.Id == Guid.NewGuid()));
         }
 
-        [Test]
+        [Fact]
         public void UpdateParentsCheckedStatus_ShouldUpdateParentCheckedState()
         {
             // Arrange
@@ -82,10 +79,10 @@ namespace Lotus.Core.Tree
             child2.IsChecked = true;
 
             // Assert
-            ClassicAssert.AreEqual(true, parent.IsChecked);
+            Assert.Equal(true, parent.IsChecked);
         }
 
-        [Test]
+        [Fact]
         public void UpdateChildsCheckedStatus_ShouldUpdateChildrenCheckedState()
         {
             // Arrange
@@ -99,11 +96,11 @@ namespace Lotus.Core.Tree
             parent.IsChecked = true;
 
             // Assert
-            ClassicAssert.AreEqual(true, child1.IsChecked);
-            ClassicAssert.AreEqual(true, child2.IsChecked);
+            Assert.Equal(true, child1.IsChecked);
+            Assert.Equal(true, child2.IsChecked);
         }
 
-        [Test]
+        [Fact]
         public void Attributes_ShouldStoreAndRetrieveValues()
         {
             // Arrange
@@ -116,7 +113,7 @@ namespace Lotus.Core.Tree
             var result = node.GetCustomAttributeInt(key);
 
             // Assert
-            ClassicAssert.AreEqual(value, result);
+            Assert.Equal(value, result);
         }
     }
 }

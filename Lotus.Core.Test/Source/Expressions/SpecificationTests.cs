@@ -1,12 +1,9 @@
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 using System;
 using System.Linq.Expressions;
 
 namespace Lotus.Core.Expressions
 {
-    [TestFixture]
     public class SpecificationTests
     {
         private class TestItem
@@ -15,7 +12,7 @@ namespace Lotus.Core.Expressions
             public string Name { get; set; }
         }
 
-        [Test]
+        [Fact]
         public void IsSatisfiedBy_ShouldEvaluateExpression()
         {
             // Arrange
@@ -24,11 +21,11 @@ namespace Lotus.Core.Expressions
             var item2 = new TestItem { Value = 4 };
 
             // Act & Assert
-            ClassicAssert.IsTrue(spec.IsSatisfiedBy(item1));
-            ClassicAssert.IsFalse(spec.IsSatisfiedBy(item2));
+            Assert.True(spec.IsSatisfiedBy(item1));
+            Assert.False(spec.IsSatisfiedBy(item2));
         }
 
-        [Test]
+        [Fact]
         public void AndOperator_ShouldCombineSpecifications()
         {
             // Arrange
@@ -41,11 +38,11 @@ namespace Lotus.Core.Expressions
             var combined = spec1 & spec2;
 
             // Assert
-            ClassicAssert.IsTrue(combined.IsSatisfiedBy(item1));
-            ClassicAssert.IsFalse(combined.IsSatisfiedBy(item2));
+            Assert.True(combined.IsSatisfiedBy(item1));
+            Assert.False(combined.IsSatisfiedBy(item2));
         }
 
-        [Test]
+        [Fact]
         public void OrOperator_ShouldCombineSpecifications()
         {
             // Arrange
@@ -59,12 +56,12 @@ namespace Lotus.Core.Expressions
             var combined = spec1 | spec2;
 
             // Assert
-            ClassicAssert.IsTrue(combined.IsSatisfiedBy(item1));
-            ClassicAssert.IsTrue(combined.IsSatisfiedBy(item2));
-            ClassicAssert.IsFalse(combined.IsSatisfiedBy(item3));
+            Assert.True(combined.IsSatisfiedBy(item1));
+            Assert.True(combined.IsSatisfiedBy(item2));
+            Assert.False(combined.IsSatisfiedBy(item3));
         }
 
-        [Test]
+        [Fact]
         public void NotOperator_ShouldNegateSpecification()
         {
             // Arrange
@@ -76,11 +73,11 @@ namespace Lotus.Core.Expressions
             var negated = !spec;
 
             // Assert
-            ClassicAssert.IsFalse(negated.IsSatisfiedBy(item1));
-            ClassicAssert.IsTrue(negated.IsSatisfiedBy(item2));
+            Assert.False(negated.IsSatisfiedBy(item1));
+            Assert.True(negated.IsSatisfiedBy(item2));
         }
 
-        [Test]
+        [Fact]
         public void ImplicitConversion_ToExpression_ShouldWork()
         {
             // Arrange
@@ -90,11 +87,11 @@ namespace Lotus.Core.Expressions
             Expression<Func<TestItem, bool>> expr = spec;
 
             // Assert
-            ClassicAssert.IsNotNull(expr);
-            ClassicAssert.IsInstanceOf<Expression<Func<TestItem, bool>>>(expr);
+            Assert.NotNull(expr);
+            Assert.IsAssignableFrom<Expression<Func<TestItem, bool>>>(expr);
         }
 
-        [Test]
+        [Fact]
         public void ImplicitConversion_FromExpression_ShouldWork()
         {
             // Arrange
@@ -104,11 +101,11 @@ namespace Lotus.Core.Expressions
             Specification<TestItem> spec = expr;
 
             // Assert
-            ClassicAssert.IsNotNull(spec);
-            ClassicAssert.IsTrue(spec.IsSatisfiedBy(new TestItem { Value = 6 }));
+            Assert.NotNull(spec);
+            Assert.True(spec.IsSatisfiedBy(new TestItem { Value = 6 }));
         }
 
-        [Test]
+        [Fact]
         public void From_ShouldCreateSpecificationForParentType()
         {
             // Arrange
@@ -121,8 +118,8 @@ namespace Lotus.Core.Expressions
             var item2 = new TestItem { Name = "short" };
 
             // Assert
-            ClassicAssert.IsTrue(parentSpec.IsSatisfiedBy(item1));
-            ClassicAssert.IsFalse(parentSpec.IsSatisfiedBy(item2));
+            Assert.True(parentSpec.IsSatisfiedBy(item1));
+            Assert.False(parentSpec.IsSatisfiedBy(item2));
         }
     }
 }

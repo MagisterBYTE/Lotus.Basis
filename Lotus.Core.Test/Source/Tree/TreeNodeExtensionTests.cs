@@ -1,14 +1,11 @@
 using System;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Tree
 {
-    [TestFixture]
     public class TreeNodeExtensionTests
     {
-        [Test]
+        [Fact]
         public void ExpandAll_ShouldSetIsExpandedTrueForAllNodes()
         {
             // Arrange
@@ -24,13 +21,13 @@ namespace Lotus.Core.Tree
             root.ExpandAll();
 
             // Assert
-            ClassicAssert.IsTrue(root.IsExpanded);
-            ClassicAssert.IsTrue(child1.IsExpanded);
-            ClassicAssert.IsTrue(child2.IsExpanded);
-            ClassicAssert.IsTrue(grandChild.IsExpanded);
+            Assert.True(root.IsExpanded);
+            Assert.True(child1.IsExpanded);
+            Assert.True(child2.IsExpanded);
+            Assert.True(grandChild.IsExpanded);
         }
 
-        [Test]
+        [Fact]
         public void CollapseAll_ShouldSetIsExpandedFalseForAllNodes()
         {
             // Arrange
@@ -46,13 +43,13 @@ namespace Lotus.Core.Tree
             root.CollapseAll();
 
             // Assert
-            ClassicAssert.IsFalse(root.IsExpanded);
-            ClassicAssert.IsFalse(child1.IsExpanded);
-            ClassicAssert.IsFalse(child2.IsExpanded);
-            ClassicAssert.IsFalse(grandChild.IsExpanded);
+            Assert.False(root.IsExpanded);
+            Assert.False(child1.IsExpanded);
+            Assert.False(child2.IsExpanded);
+            Assert.False(grandChild.IsExpanded);
         }
 
-        [Test]
+        [Fact]
         public void CheckAll_ShouldSetIsCheckedTrueForAllNodes()
         {
             // Arrange
@@ -68,13 +65,13 @@ namespace Lotus.Core.Tree
             root.CheckAll();
 
             // Assert
-            ClassicAssert.AreEqual(true, root.IsChecked);
-            ClassicAssert.AreEqual(true, child1.IsChecked);
-            ClassicAssert.AreEqual(true, child2.IsChecked);
-            ClassicAssert.AreEqual(true, grandChild.IsChecked);
+            Assert.Equal(true, root.IsChecked);
+            Assert.Equal(true, child1.IsChecked);
+            Assert.Equal(true, child2.IsChecked);
+            Assert.Equal(true, grandChild.IsChecked);
         }
 
-        [Test]
+        [Fact]
         public void UncheckAll_ShouldSetIsCheckedFalseForAllNodes()
         {
             // Arrange
@@ -90,13 +87,13 @@ namespace Lotus.Core.Tree
             root.UncheckAll();
 
             // Assert
-            ClassicAssert.AreEqual(false, root.IsChecked);
-            ClassicAssert.AreEqual(false, child1.IsChecked);
-            ClassicAssert.AreEqual(false, child2.IsChecked);
-            ClassicAssert.AreEqual(false, grandChild.IsChecked);
+            Assert.Equal(false, root.IsChecked);
+            Assert.Equal(false, child1.IsChecked);
+            Assert.Equal(false, child2.IsChecked);
+            Assert.Equal(false, grandChild.IsChecked);
         }
 
-        [Test]
+        [Fact]
         public void ToFlatListDescendants_ShouldReturnAllDescendants()
         {
             // Arrange
@@ -112,13 +109,13 @@ namespace Lotus.Core.Tree
             var flatList = root.ToFlatListDescendants<TreeNodeObservable>();
 
             // Assert
-            ClassicAssert.AreEqual(3, flatList.Count);
-            ClassicAssert.Contains(child1, flatList);
-            ClassicAssert.Contains(child2, flatList);
-            ClassicAssert.Contains(grandChild, flatList);
+            Assert.Equal(3, flatList.Count);
+            Assert.Contains(child1, flatList);
+            Assert.Contains(child2, flatList);
+            Assert.Contains(grandChild, flatList);
         }
 
-        [Test]
+        [Fact]
         public void FindDescendants_ShouldFindMatchingNode()
         {
             // Arrange
@@ -136,10 +133,10 @@ namespace Lotus.Core.Tree
             var foundNode = root.FindDescendants(n => n.Id == targetId);
 
             // Assert
-            ClassicAssert.AreEqual(grandChild, foundNode);
+            Assert.Equal(grandChild, foundNode);
         }
 
-        [Test]
+        [Fact]
         public void FindAncestors_ShouldFindMatchingNode()
         {
             // Arrange
@@ -157,10 +154,10 @@ namespace Lotus.Core.Tree
             var foundNode = grandChild.FindAncestors(n => n.Id == targetId);
 
             // Assert
-            ClassicAssert.AreEqual(root, foundNode);
+            Assert.Equal(root, foundNode);
         }
 
-        [Test]
+        [Fact]
         public void UpdateOrderDescendants_ShouldSetOrderForAllNodes()
         {
             // Arrange
@@ -176,9 +173,9 @@ namespace Lotus.Core.Tree
             root.UpdateOrderDescendants();
 
             // Assert
-            ClassicAssert.AreEqual(0, child1.Order);
-            ClassicAssert.AreEqual(1, child2.Order);
-            ClassicAssert.AreEqual(0, grandChild.Order);
+            Assert.Equal(0, child1.Order);
+            Assert.Equal(1, child2.Order);
+            Assert.Equal(0, grandChild.Order);
         }
     }
 }

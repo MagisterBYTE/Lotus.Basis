@@ -2,8 +2,6 @@
 using UnityEngine;
 using UnityEditor;
 #endif
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Extensions
 {
@@ -61,25 +59,25 @@ namespace Lotus.Core.Extensions
         /// <summary>
         /// Тестирование методов <see cref="XReflectionTypeExtension"/>.
         /// </summary>
-        [Test]
+        [Fact]
         public static void TestExtensionReflection()
         {
             // Проверка типа на поддержку интерфейса
-            ClassicAssert.AreEqual(typeof(A).IsSupportInterface<IA>(), true);
-            ClassicAssert.AreEqual(typeof(A).IsSupportInterface<IB>(), false);
+            Assert.Equal(typeof(A).IsSupportInterface<IA>(), true);
+            Assert.Equal(typeof(A).IsSupportInterface<IB>(), false);
 
-            ClassicAssert.AreEqual(typeof(B).IsSupportInterface<IA>(), true);
-            ClassicAssert.AreEqual(typeof(B).IsSupportInterface<IB>(), true);
+            Assert.Equal(typeof(B).IsSupportInterface<IA>(), true);
+            Assert.Equal(typeof(B).IsSupportInterface<IB>(), true);
 
             // Проверка типа на базовый класс
-            ClassicAssert.AreEqual(typeof(B).IsSubclassOf(typeof(object)), true);
-            ClassicAssert.AreEqual(typeof(B).IsSubclassOf(typeof(A)), true);
-            ClassicAssert.AreEqual(typeof(B).IsSubclassOf(typeof(B)), false);
+            Assert.Equal(typeof(B).IsSubclassOf(typeof(object)), true);
+            Assert.Equal(typeof(B).IsSubclassOf(typeof(A)), true);
+            Assert.Equal(typeof(B).IsSubclassOf(typeof(B)), false);
 
             // Проверка на равенство
-            ClassicAssert.AreEqual(typeof(B).IsAssignableFrom(typeof(A)), false);
-            ClassicAssert.AreEqual(typeof(B).IsAssignableFrom(typeof(B)), true);
-            ClassicAssert.AreEqual(typeof(B).IsAssignableFrom(typeof(C)), true);
+            Assert.Equal(typeof(B).IsAssignableFrom(typeof(A)), false);
+            Assert.Equal(typeof(B).IsAssignableFrom(typeof(B)), true);
+            Assert.Equal(typeof(B).IsAssignableFrom(typeof(C)), true);
         }
     }
 }

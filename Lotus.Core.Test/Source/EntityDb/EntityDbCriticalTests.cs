@@ -1,19 +1,16 @@
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.EntityDb
 {
     /// <summary>
     /// Тесты для критических участков EntityDb системы.
     /// </summary>
-    [TestFixture]
     public class EntityDbCriticalTests
     {
         /// <summary>
         /// Тест BaseEntityDb - корректная работа с ключом int.
         /// </summary>
-        [Test]
+        [Fact]
         public void BaseEntityDb_WithIntKey_WorksCorrectly()
         {
             var entity = new BaseEntityDb<int>
@@ -21,14 +18,14 @@ namespace Lotus.Core.EntityDb
                 Id = 123
             };
 
-            ClassicAssert.AreEqual(123, entity.Id);
-            ClassicAssert.AreEqual("123", entity.ToString());
+            Assert.Equal(123, entity.Id);
+            Assert.Equal("123", entity.ToString());
         }
 
         /// <summary>
         /// Тест BaseEntityDb - корректная работа с ключом Guid.
         /// </summary>
-        [Test]
+        [Fact]
         public void BaseEntityDb_WithGuidKey_WorksCorrectly()
         {
             var guid = Guid.NewGuid();
@@ -37,14 +34,14 @@ namespace Lotus.Core.EntityDb
                 Id = guid
             };
 
-            ClassicAssert.AreEqual(guid, entity.Id);
-            ClassicAssert.AreEqual(guid.ToString(), entity.ToString());
+            Assert.Equal(guid, entity.Id);
+            Assert.Equal(guid.ToString(), entity.ToString());
         }
 
         /// <summary>
         /// Тест EntityDb - корректная работа с датами создания и модификации.
         /// </summary>
-        [Test]
+        [Fact]
         public void EntityDb_WithDates_WorksCorrectly()
         {
             var created = DateTime.UtcNow.AddDays(-10);
@@ -57,15 +54,15 @@ namespace Lotus.Core.EntityDb
                 Modified = modified
             };
 
-            ClassicAssert.AreEqual(456, entity.Id);
-            ClassicAssert.AreEqual(created, entity.Created);
-            ClassicAssert.AreEqual(modified, entity.Modified);
+            Assert.Equal(456, entity.Id);
+            Assert.Equal(created, entity.Created);
+            Assert.Equal(modified, entity.Modified);
         }
 
         /// <summary>
         /// Тест EntityDbSoftDeletable - корректная работа с мягким удалением.
         /// </summary>
-        [Test]
+        [Fact]
         public void EntityDbSoftDeletable_WithSoftDelete_WorksCorrectly()
         {
             var deleted = DateTime.UtcNow;
@@ -78,15 +75,15 @@ namespace Lotus.Core.EntityDb
                 Deleted = deleted
             };
 
-            ClassicAssert.AreEqual(789, entity.Id);
-            ClassicAssert.IsNotNull(entity.Deleted);
-            ClassicAssert.AreEqual(deleted, entity.Deleted);
+            Assert.Equal(789, entity.Id);
+            Assert.NotNull(entity.Deleted);
+            Assert.Equal(deleted, entity.Deleted);
         }
 
         /// <summary>
         /// Тест EntityDbSoftDeletable - корректная работа без удаления.
         /// </summary>
-        [Test]
+        [Fact]
         public void EntityDbSoftDeletable_WithoutDelete_WorksCorrectly()
         {
             var entity = new EntityDbSoftDeletable<int>
@@ -97,14 +94,14 @@ namespace Lotus.Core.EntityDb
                 Deleted = null
             };
 
-            ClassicAssert.AreEqual(999, entity.Id);
-            ClassicAssert.IsNull(entity.Deleted);
+            Assert.Equal(999, entity.Id);
+            Assert.Null(entity.Deleted);
         }
 
         /// <summary>
         /// Тест EntityDb - корректная реализация интерфейса ILotusEntityDb.
         /// </summary>
-        [Test]
+        [Fact]
         public void EntityDb_ImplementsILotusEntityDb()
         {
             var entity = new EntityDb<int>
@@ -115,10 +112,10 @@ namespace Lotus.Core.EntityDb
             };
 
             ILotusEntityDb<int>? interfaceEntity = entity;
-            ClassicAssert.IsNotNull(interfaceEntity);
-            ClassicAssert.AreEqual(111, interfaceEntity.Id);
-            ClassicAssert.IsTrue(interfaceEntity.Created > DateTime.MinValue);
-            ClassicAssert.IsTrue(interfaceEntity.Modified > DateTime.MinValue);
+            Assert.NotNull(interfaceEntity);
+            Assert.Equal(111, interfaceEntity.Id);
+            Assert.True(interfaceEntity.Created > DateTime.MinValue);
+            Assert.True(interfaceEntity.Modified > DateTime.MinValue);
         }
     }
 }

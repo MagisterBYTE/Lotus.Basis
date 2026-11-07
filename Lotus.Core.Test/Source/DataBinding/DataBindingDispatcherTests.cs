@@ -1,15 +1,12 @@
 using System;
 using System.ComponentModel;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.DataBinding
 {
     /// <summary>
     /// Тесты для <see cref="XBindingDispatcher"/>.
     /// </summary>
-    [TestFixture]
-    public class DataBindingDispatcherTests
+    public class DataBindingDispatcherTests : IDisposable
     {
         /// <summary>
         /// Тестовый класс модели.
@@ -61,14 +58,12 @@ namespace Lotus.Core.DataBinding
             }
         }
 
-        [SetUp]
-        public void SetUp()
+        public DataBindingDispatcherTests()
         {
             XBindingDispatcher.ClearBindings();
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             XBindingDispatcher.ClearBindings();
         }
@@ -76,7 +71,7 @@ namespace Lotus.Core.DataBinding
         /// <summary>
         /// Тест создания привязки через рефлексию.
         /// </summary>
-        [Test]
+        [Fact]
         public void CreateReflection_CreatesBinding()
         {
             var model = new TestModel { Name = "Test" };
@@ -84,15 +79,15 @@ namespace Lotus.Core.DataBinding
 
             var binding = XBindingDispatcher.CreateReflection("TestBinding", model, "Name", view, "DisplayName");
 
-            ClassicAssert.IsNotNull(binding);
-            ClassicAssert.AreEqual("TestBinding", binding.Name);
-            ClassicAssert.AreEqual(1, XBindingDispatcher.Bindings.Count);
+            Assert.NotNull(binding);
+            Assert.Equal("TestBinding", binding.Name);
+            Assert.Equal(1, XBindingDispatcher.Bindings.Count);
         }
 
         /// <summary>
         /// Тест получения привязки по имени.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetBinding_WithExistingName_ReturnsBinding()
         {
             var model = new TestModel { Name = "Test" };
@@ -101,56 +96,56 @@ namespace Lotus.Core.DataBinding
             XBindingDispatcher.CreateReflection("TestBinding", model, "Name", view, "DisplayName");
             var binding = XBindingDispatcher.GetBinding("TestBinding");
 
-            ClassicAssert.IsNotNull(binding);
-            ClassicAssert.AreEqual("TestBinding", binding.Name);
+            Assert.NotNull(binding);
+            Assert.Equal("TestBinding", binding.Name);
         }
 
         /// <summary>
         /// Тест получения привязки по несуществующему имени возвращает null.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetBinding_WithNonExistentName_ReturnsNull()
         {
             var binding = XBindingDispatcher.GetBinding("NonExistent");
-            ClassicAssert.IsNull(binding);
+            Assert.Null(binding);
         }
 
         /// <summary>
         /// Тест удаления привязки по имени.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveBinding_WithName_RemovesBinding()
         {
             var model = new TestModel { Name = "Test" };
             var view = new TestView();
 
             XBindingDispatcher.CreateReflection("TestBinding", model, "Name", view, "DisplayName");
-            ClassicAssert.AreEqual(1, XBindingDispatcher.Bindings.Count);
+            Assert.Equal(1, XBindingDispatcher.Bindings.Count);
 
             XBindingDispatcher.RemoveBinding("TestBinding");
-            ClassicAssert.AreEqual(0, XBindingDispatcher.Bindings.Count);
+            Assert.Equal(0, XBindingDispatcher.Bindings.Count);
         }
 
         /// <summary>
         /// Тест удаления привязки по объекту.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveBinding_WithBindingObject_RemovesBinding()
         {
             var model = new TestModel { Name = "Test" };
             var view = new TestView();
 
             var binding = XBindingDispatcher.CreateReflection("TestBinding", model, "Name", view, "DisplayName");
-            ClassicAssert.AreEqual(1, XBindingDispatcher.Bindings.Count);
+            Assert.Equal(1, XBindingDispatcher.Bindings.Count);
 
             XBindingDispatcher.RemoveBinding(binding);
-            ClassicAssert.AreEqual(0, XBindingDispatcher.Bindings.Count);
+            Assert.Equal(0, XBindingDispatcher.Bindings.Count);
         }
 
         /// <summary>
         /// Тест очистки всех привязок.
         /// </summary>
-        [Test]
+        [Fact]
         public void ClearBindings_RemovesAllBindings()
         {
             var model = new TestModel { Name = "Test" };
@@ -158,32 +153,32 @@ namespace Lotus.Core.DataBinding
 
             XBindingDispatcher.CreateReflection("Binding1", model, "Name", view, "DisplayName");
             XBindingDispatcher.CreateReflection("Binding2", model, "Name", view, "DisplayName");
-            ClassicAssert.AreEqual(2, XBindingDispatcher.Bindings.Count);
+            Assert.Equal(2, XBindingDispatcher.Bindings.Count);
 
             XBindingDispatcher.ClearBindings();
-            ClassicAssert.AreEqual(0, XBindingDispatcher.Bindings.Count);
+            Assert.Equal(0, XBindingDispatcher.Bindings.Count);
         }
 
         /// <summary>
         /// Тест установки статуса включенности привязки.
         /// </summary>
-        [Test]
+        [Fact]
         public void SetBindingEnabled_SetsIsEnabled()
         {
             var model = new TestModel { Name = "Test" };
             var view = new TestView();
 
             var binding = XBindingDispatcher.CreateReflection("TestBinding", model, "Name", view, "DisplayName");
-            ClassicAssert.IsTrue(binding.IsEnabled);
+            Assert.True(binding.IsEnabled);
 
             XBindingDispatcher.SetBindingEnabled("TestBinding", false);
-            ClassicAssert.IsFalse(binding.IsEnabled);
+            Assert.False(binding.IsEnabled);
         }
 
         /// <summary>
         /// Тест установки объекта модели привязки.
         /// </summary>
-        [Test]
+        [Fact]
         public void SetBindingModel_SetsModelInstance()
         {
             var model1 = new TestModel { Name = "Test1" };
@@ -194,13 +189,13 @@ namespace Lotus.Core.DataBinding
             XBindingDispatcher.SetBindingModel("TestBinding", model2);
 
             var model = XBindingDispatcher.GetBindingModel("TestBinding");
-            ClassicAssert.AreEqual(model2, model);
+            Assert.Equal(model2, model);
         }
 
         /// <summary>
         /// Тест установки объекта представления привязки.
         /// </summary>
-        [Test]
+        [Fact]
         public void SetBindingView_SetsViewInstance()
         {
             var model = new TestModel { Name = "Test" };
@@ -211,13 +206,13 @@ namespace Lotus.Core.DataBinding
             XBindingDispatcher.SetBindingView("TestBinding", view2);
 
             var view = XBindingDispatcher.GetBindingView("TestBinding");
-            ClassicAssert.AreEqual(view2, view);
+            Assert.Equal(view2, view);
         }
 
         /// <summary>
         /// Тест получения значения модели привязки.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetBindingModelValue_ReturnsModelValue()
         {
             var model = new TestModel { Name = "TestValue" };
@@ -226,13 +221,13 @@ namespace Lotus.Core.DataBinding
             XBindingDispatcher.CreateReflection("TestBinding", model, "Name", view, "DisplayName");
             var value = XBindingDispatcher.GetBindingModelValue("TestBinding");
 
-            ClassicAssert.AreEqual("TestValue", value);
+            Assert.Equal("TestValue", value);
         }
 
         /// <summary>
         /// Тест получения значения представления привязки.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetBindingViewValue_ReturnsViewValue()
         {
             var model = new TestModel { Name = "Test" };
@@ -241,13 +236,13 @@ namespace Lotus.Core.DataBinding
             XBindingDispatcher.CreateReflection("TestBinding", model, "Name", view, "DisplayName");
             var value = XBindingDispatcher.GetBindingViewValue("TestBinding");
 
-            ClassicAssert.AreEqual("ViewValue", value);
+            Assert.Equal("ViewValue", value);
         }
 
         /// <summary>
         /// Тест создания привязки через делегат.
         /// </summary>
-        [Test]
+        [Fact]
         public void CreateDelegate_CreatesBinding()
         {
             var model = new TestModel { Name = "Test" };
@@ -255,15 +250,15 @@ namespace Lotus.Core.DataBinding
 
             var binding = XBindingDispatcher.CreateDelegate<string, string>("TestBinding", model, "Name", view, "DisplayName");
 
-            ClassicAssert.IsNotNull(binding);
-            ClassicAssert.AreEqual("TestBinding", binding.Name);
-            ClassicAssert.AreEqual(1, XBindingDispatcher.Bindings.Count);
+            Assert.NotNull(binding);
+            Assert.Equal("TestBinding", binding.Name);
+            Assert.Equal(1, XBindingDispatcher.Bindings.Count);
         }
 
         /// <summary>
         /// Тест создания привязки через делегат с конвертером.
         /// </summary>
-        [Test]
+        [Fact]
         public void CreateDelegate_WithConverter_CreatesBinding()
         {
             var model = new TestModel { Name = "Test" };
@@ -274,8 +269,8 @@ namespace Lotus.Core.DataBinding
                 TBindingMode.ViewData,
                 s => s.ToUpper());
 
-            ClassicAssert.IsNotNull(binding);
-            ClassicAssert.IsNotNull(binding.OnConvertToView);
+            Assert.NotNull(binding);
+            Assert.NotNull(binding.OnConvertToView);
         }
     }
 }

@@ -1,18 +1,14 @@
 using System;
 using System.IO;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Logger
 {
     /// <summary>
     /// Тесты для критических участков Logger (исправление имен переменных).
     /// </summary>
-    [TestFixture]
-    public class LoggerCriticalTests
+    public class LoggerCriticalTests : IDisposable
     {
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             XLogger.Messages.Clear();
         }
@@ -20,7 +16,7 @@ namespace Lotus.Core.Logger
         /// <summary>
         /// Тест SaveToText - корректная работа с исправленными именами переменных (fileStream, streamWriter).
         /// </summary>
-        [Test]
+        [Fact]
         public void SaveToText_WithMessages_SavesToFileCorrectly()
         {
             // Arrange
@@ -37,11 +33,11 @@ namespace Lotus.Core.Logger
                 XLogger.SaveToText(tempFile);
 
                 // Assert - проверяем что файл создан и содержит сообщения
-                ClassicAssert.IsTrue(File.Exists(tempFile), "File should be created");
+                Assert.True(File.Exists(tempFile), "File should be created");
 
                 var content = File.ReadAllText(tempFile);
-                ClassicAssert.IsTrue(content.Contains("Test message 1"), "File should contain first message");
-                ClassicAssert.IsTrue(content.Contains("Test message 2"), "File should contain second message");
+                Assert.True(content.Contains("Test message 1"), "File should contain first message");
+                Assert.True(content.Contains("Test message 2"), "File should contain second message");
             }
             finally
             {
@@ -55,7 +51,7 @@ namespace Lotus.Core.Logger
         /// <summary>
         /// Тест SaveToText - корректная обработка пустого списка сообщений.
         /// </summary>
-        [Test]
+        [Fact]
         public void SaveToText_WithEmptyMessages_CreatesEmptyFile()
         {
             // Arrange
@@ -68,9 +64,9 @@ namespace Lotus.Core.Logger
                 XLogger.SaveToText(tempFile);
 
                 // Assert
-                ClassicAssert.IsTrue(File.Exists(tempFile), "File should be created even with empty messages");
+                Assert.True(File.Exists(tempFile), "File should be created even with empty messages");
                 var content = File.ReadAllText(tempFile);
-                ClassicAssert.IsEmpty(content, "File should be empty");
+                Assert.Empty(content);
             }
             finally
             {
@@ -84,7 +80,7 @@ namespace Lotus.Core.Logger
         /// <summary>
         /// Тест SaveToText - корректное закрытие потоков (исправленные имена переменных).
         /// </summary>
-        [Test]
+        [Fact]
         public void SaveToText_ClosesStreamsCorrectly()
         {
             // Arrange
@@ -102,7 +98,7 @@ namespace Lotus.Core.Logger
                 // Если потоки не закрыты, это может вызвать проблемы
                 using (var fileStream = new FileStream(tempFile, FileMode.Open, FileAccess.Read))
                 {
-                    ClassicAssert.IsTrue(fileStream.CanRead, "File should be readable after SaveToText");
+                    Assert.True(fileStream.CanRead, "File should be readable after SaveToText");
                 }
             }
             finally

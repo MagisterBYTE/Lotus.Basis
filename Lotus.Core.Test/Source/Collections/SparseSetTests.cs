@@ -3,18 +3,15 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Collections
 {
-    [TestFixture]
     public class SparseSetTests
     {
         /// <summary>
         /// Тестирование методов <see cref="SparseSet"/>.
         /// </summary>
-        [Test]
+        [Fact]
         public void AllMethods()
         {
             var sparseSet = new SparseSet(1024);
@@ -23,44 +20,44 @@ namespace Lotus.Core.Collections
             sparseSet.Add(25); // 2
             sparseSet.Add(30); // 3
 
-            ClassicAssert.AreEqual(sparseSet.Contains(15), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(20), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(25), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(30), true);
-            ClassicAssert.AreEqual(sparseSet.Count, 4);
-            ClassicAssert.AreEqual(sparseSet.MaxCount, 1024);
+            Assert.Equal(sparseSet.Contains(15), true);
+            Assert.Equal(sparseSet.Contains(20), true);
+            Assert.Equal(sparseSet.Contains(25), true);
+            Assert.Equal(sparseSet.Contains(30), true);
+            Assert.Equal(sparseSet.Count, 4);
+            Assert.Equal(sparseSet.MaxCount, 1024);
 
             sparseSet.Remove(20);
 
-            ClassicAssert.AreEqual(sparseSet.Contains(20), false);
-            ClassicAssert.AreEqual(sparseSet[0], 15);
-            ClassicAssert.AreEqual(sparseSet[1], 30);
-            ClassicAssert.AreEqual(sparseSet[2], 25);
+            Assert.Equal(sparseSet.Contains(20), false);
+            Assert.Equal(sparseSet[0], 15);
+            Assert.Equal(sparseSet[1], 30);
+            Assert.Equal(sparseSet[2], 25);
 
-            ClassicAssert.AreEqual(sparseSet.Count, 3);
-            ClassicAssert.AreEqual(sparseSet.MaxCount, 1024);
+            Assert.Equal(sparseSet.Count, 3);
+            Assert.Equal(sparseSet.MaxCount, 1024);
 
             sparseSet.Add(1024);
-            ClassicAssert.AreEqual(sparseSet.Contains(1024), true);
-            ClassicAssert.AreEqual(sparseSet.Count, 4);
-            ClassicAssert.AreEqual(sparseSet.MaxCount, 2048);
+            Assert.Equal(sparseSet.Contains(1024), true);
+            Assert.Equal(sparseSet.Count, 4);
+            Assert.Equal(sparseSet.MaxCount, 2048);
 
             sparseSet.AddValues(233, 3666, 15, 5555, 66, 777);
-            ClassicAssert.AreEqual(sparseSet.Contains(233), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(3666), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(5555), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(15), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(66), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(777), true);
-            ClassicAssert.AreEqual(sparseSet.Count, 9);
-            ClassicAssert.AreEqual(sparseSet.MaxCount, 8192);
+            Assert.Equal(sparseSet.Contains(233), true);
+            Assert.Equal(sparseSet.Contains(3666), true);
+            Assert.Equal(sparseSet.Contains(5555), true);
+            Assert.Equal(sparseSet.Contains(15), true);
+            Assert.Equal(sparseSet.Contains(66), true);
+            Assert.Equal(sparseSet.Contains(777), true);
+            Assert.Equal(sparseSet.Count, 9);
+            Assert.Equal(sparseSet.MaxCount, 8192);
 
             sparseSet.RemoveValues(233, 3666, 5555, 15, 66, 777);
-            ClassicAssert.AreEqual(sparseSet.Count, 3);
-            ClassicAssert.AreEqual(sparseSet.Contains(1024), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(25), true);
-            ClassicAssert.AreEqual(sparseSet.Contains(30), true);
-            ClassicAssert.AreEqual(sparseSet.MaxCount, 8192);
+            Assert.Equal(sparseSet.Count, 3);
+            Assert.Equal(sparseSet.Contains(1024), true);
+            Assert.Equal(sparseSet.Contains(25), true);
+            Assert.Equal(sparseSet.Contains(30), true);
+            Assert.Equal(sparseSet.MaxCount, 8192);
         }
     }
 }

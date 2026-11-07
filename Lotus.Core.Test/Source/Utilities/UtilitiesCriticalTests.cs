@@ -1,19 +1,16 @@
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Utilities
 {
     /// <summary>
     /// Тесты для критических участков Utilities.
     /// </summary>
-    [TestFixture]
     public class UtilitiesCriticalTests
     {
         /// <summary>
         /// Тест XValueSet - установка значения структуры.
         /// </summary>
-        [Test]
+        [Fact]
         public void XValueSet_SetStruct_ShouldReturnTrueWhenValueChanges()
         {
             // Arrange
@@ -24,14 +21,14 @@ namespace Lotus.Core.Utilities
             var result = XValueSet.SetStruct(ref currentValue, newValue);
 
             // Assert
-            ClassicAssert.IsTrue(result, "Should return true when value changes");
-            ClassicAssert.AreEqual(20, currentValue, "Current value should be updated");
+            Assert.True(result, "Should return true when value changes");
+            Assert.Equal(20, currentValue);
         }
 
         /// <summary>
         /// Тест XValueSet - установка значения структуры с тем же значением.
         /// </summary>
-        [Test]
+        [Fact]
         public void XValueSet_SetStruct_WithSameValue_ShouldReturnFalse()
         {
             // Arrange
@@ -42,14 +39,14 @@ namespace Lotus.Core.Utilities
             var result = XValueSet.SetStruct(ref currentValue, newValue);
 
             // Assert
-            ClassicAssert.IsFalse(result, "Should return false when value doesn't change");
-            ClassicAssert.AreEqual(10, currentValue, "Current value should remain unchanged");
+            Assert.False(result, "Should return false when value doesn't change");
+            Assert.Equal(10, currentValue);
         }
 
         /// <summary>
         /// Тест XValueSet - установка значения класса.
         /// </summary>
-        [Test]
+        [Fact]
         public void XValueSet_SetClass_ShouldReturnTrueWhenValueChanges()
         {
             // Arrange
@@ -60,14 +57,14 @@ namespace Lotus.Core.Utilities
             var result = XValueSet.SetClass(ref currentValue, newValue);
 
             // Assert
-            ClassicAssert.IsTrue(result, "Should return true when value changes");
-            ClassicAssert.AreEqual("New", currentValue, "Current value should be updated");
+            Assert.True(result, "Should return true when value changes");
+            Assert.Equal("New", currentValue);
         }
 
         /// <summary>
         /// Тест XValueSet - установка значения класса с null.
         /// </summary>
-        [Test]
+        [Fact]
         public void XValueSet_SetClass_WithNull_ShouldWorkCorrectly()
         {
             // Arrange
@@ -78,14 +75,14 @@ namespace Lotus.Core.Utilities
             var result = XValueSet.SetClass(ref currentValue, newValue);
 
             // Assert
-            ClassicAssert.IsTrue(result, "Should return true when setting to null");
-            ClassicAssert.IsNull(currentValue, "Current value should be null");
+            Assert.True(result, "Should return true when setting to null");
+            Assert.Null(currentValue);
         }
 
         /// <summary>
         /// Тест XDisposer - базовое освобождение ресурсов.
         /// </summary>
-        [Test]
+        [Fact]
         public void XDisposer_SafeDispose_ShouldWorkCorrectly()
         {
             // Arrange
@@ -97,28 +94,28 @@ namespace Lotus.Core.Utilities
             XDisposer.SafeDispose(ref resource);
 
             // Assert
-            ClassicAssert.IsTrue(disposed, "Disposable should be disposed");
-            ClassicAssert.IsNull(resource, "Resource should be set to null");
+            Assert.True(disposed, "Disposable should be disposed");
+            Assert.Null(resource);
         }
 
         /// <summary>
         /// Тест XDisposer - освобождение null объекта не должно вызывать исключение.
         /// </summary>
-        [Test]
+        [Fact]
         public void XDisposer_SafeDisposeNull_ShouldNotThrow()
         {
             // Arrange
             TestDisposable? resource = null;
 
             // Act & Assert
-            ClassicAssert.DoesNotThrow(() => XDisposer.SafeDispose(ref resource), "Disposing null should not throw");
-            ClassicAssert.IsNull(resource, "Resource should remain null");
+            XDisposer.SafeDispose(ref resource);
+            Assert.Null(resource);
         }
 
         /// <summary>
         /// Тест XPacked - базовые операции упаковки/распаковки int.
         /// </summary>
-        [Test]
+        [Fact]
         public void XPacked_PackInteger_ShouldWorkCorrectly()
         {
             // Arrange
@@ -132,13 +129,13 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackInteger(pack, bitStart, bitCount);
 
             // Assert
-            ClassicAssert.AreEqual(originalValue, unpacked, "Unpacked value should match original");
+            Assert.Equal(originalValue, unpacked);
         }
 
         /// <summary>
         /// Тест XPacked - упаковка/распаковка bool.
         /// </summary>
-        [Test]
+        [Fact]
         public void XPacked_PackBoolean_ShouldWorkCorrectly()
         {
             // Arrange
@@ -151,13 +148,13 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackBoolean(pack, bitStart);
 
             // Assert
-            ClassicAssert.AreEqual(originalValue, unpacked, "Unpacked value should match original");
+            Assert.Equal(originalValue, unpacked);
         }
 
         /// <summary>
         /// Тест XPacked - упаковка/распаковка long.
         /// </summary>
-        [Test]
+        [Fact]
         public void XPacked_PackLong_ShouldWorkCorrectly()
         {
             // Arrange
@@ -171,7 +168,7 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackLong(pack, bitStart, bitCount);
 
             // Assert
-            ClassicAssert.AreEqual(originalValue, unpacked, "Unpacked value should match original");
+            Assert.Equal(originalValue, unpacked);
         }
 
         /// <summary>

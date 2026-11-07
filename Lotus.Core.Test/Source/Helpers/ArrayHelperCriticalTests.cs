@@ -1,19 +1,16 @@
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Helpers
 {
     /// <summary>
     /// Тесты для критических участков ArrayHelper (исправление AddRange).
     /// </summary>
-    [TestFixture]
     public class ArrayHelperCriticalTests
     {
         /// <summary>
         /// Тест AddRange - критический баг был исправлен (array = items вместо array = newArray).
         /// </summary>
-        [Test]
+        [Fact]
         public void AddRange_WithInsufficientCapacity_ResizesArrayCorrectly()
         {
             // Arrange - массив с недостаточной емкостью
@@ -27,19 +24,19 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.AddRange(originalArray, ref currentCount, itemsToAdd);
 
             // Assert - проверяем что массив был корректно расширен (не заменен на items)
-            ClassicAssert.AreEqual(5, result.Length, "Array should be resized to accommodate new items");
-            ClassicAssert.AreEqual(5, currentCount, "Count should be updated");
-            ClassicAssert.AreEqual(10, result[0], "Original item at index 0 should be preserved");
-            ClassicAssert.AreEqual(20, result[1], "Original item at index 1 should be preserved");
-            ClassicAssert.AreEqual(30, result[2], "New item at index 2 should be added");
-            ClassicAssert.AreEqual(40, result[3], "New item at index 3 should be added");
-            ClassicAssert.AreEqual(50, result[4], "New item at index 4 should be added");
+            Assert.Equal(5, result.Length);
+            Assert.Equal(5, currentCount);
+            Assert.Equal(10, result[0]);
+            Assert.Equal(20, result[1]);
+            Assert.Equal(30, result[2]);
+            Assert.Equal(40, result[3]);
+            Assert.Equal(50, result[4]);
         }
 
         /// <summary>
         /// Тест AddRange - с достаточной емкостью массива.
         /// </summary>
-        [Test]
+        [Fact]
         public void AddRange_WithSufficientCapacity_DoesNotResize()
         {
             // Arrange - массив с достаточной емкостью
@@ -53,18 +50,18 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.AddRange(originalArray, ref currentCount, itemsToAdd);
 
             // Assert
-            ClassicAssert.AreEqual(10, result.Length, "Array should not be resized");
-            ClassicAssert.AreEqual(4, currentCount, "Count should be updated");
-            ClassicAssert.AreEqual(10, result[0], "Original item at index 0 should be preserved");
-            ClassicAssert.AreEqual(20, result[1], "Original item at index 1 should be preserved");
-            ClassicAssert.AreEqual(30, result[2], "New item at index 2 should be added");
-            ClassicAssert.AreEqual(40, result[3], "New item at index 3 should be added");
+            Assert.Equal(10, result.Length);
+            Assert.Equal(4, currentCount);
+            Assert.Equal(10, result[0]);
+            Assert.Equal(20, result[1]);
+            Assert.Equal(30, result[2]);
+            Assert.Equal(40, result[3]);
         }
 
         /// <summary>
         /// Тест AddRange - с пустым массивом элементов для добавления.
         /// </summary>
-        [Test]
+        [Fact]
         public void AddRange_WithEmptyItems_DoesNotChangeArray()
         {
             // Arrange
@@ -78,16 +75,16 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.AddRange(originalArray, ref currentCount, itemsToAdd);
 
             // Assert
-            ClassicAssert.AreEqual(5, result.Length, "Array length should remain unchanged");
-            ClassicAssert.AreEqual(2, currentCount, "Count should remain unchanged");
-            ClassicAssert.AreEqual(10, result[0], "Original item should be preserved");
-            ClassicAssert.AreEqual(20, result[1], "Original item should be preserved");
+            Assert.Equal(5, result.Length);
+            Assert.Equal(2, currentCount);
+            Assert.Equal(10, result[0]);
+            Assert.Equal(20, result[1]);
         }
 
         /// <summary>
         /// Тест AddRange - с большим количеством элементов для добавления.
         /// </summary>
-        [Test]
+        [Fact]
         public void AddRange_WithLargeNumberOfItems_ResizesCorrectly()
         {
             // Arrange
@@ -104,11 +101,11 @@ namespace Lotus.Core.Helpers
             var result = XArrayHelper.AddRange(originalArray, ref currentCount, itemsToAdd);
 
             // Assert
-            ClassicAssert.AreEqual(101, result.Length, "Array should be resized to accommodate all items");
-            ClassicAssert.AreEqual(101, currentCount, "Count should be updated");
-            ClassicAssert.AreEqual(1, result[0], "Original item should be preserved");
-            ClassicAssert.AreEqual(2, result[1], "First new item should be added");
-            ClassicAssert.AreEqual(101, result[100], "Last new item should be added");
+            Assert.Equal(101, result.Length);
+            Assert.Equal(101, currentCount);
+            Assert.Equal(1, result[0]);
+            Assert.Equal(2, result[1]);
+            Assert.Equal(101, result[100]);
         }
     }
 }

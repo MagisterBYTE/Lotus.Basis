@@ -1,13 +1,10 @@
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Task
 {
     /// <summary>
     /// Тесты для критических участков Task (исправление имен переменных и опечатки в комментарии).
     /// </summary>
-    [TestFixture]
     public class TaskCriticalTests
     {
         /// <summary>
@@ -44,7 +41,7 @@ namespace Lotus.Core.Task
         /// <summary>
         /// Тест GroupTask - корректная работа с исправленными именами переменных (taskHolder вместо taskHolder).
         /// </summary>
-        [Test]
+        [Fact]
         public void GroupTask_Add_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -56,14 +53,14 @@ namespace Lotus.Core.Task
             groupTask.Add(task);
 
             // Assert
-            ClassicAssert.AreEqual(1, groupTask.Tasks.Count, "Task should be added");
-            ClassicAssert.AreEqual(task, groupTask.Tasks[0].Task, "Task should match");
+            Assert.Equal(1, groupTask.Tasks.Count);
+            Assert.Equal(task, groupTask.Tasks[0].Task);
         }
 
         /// <summary>
         /// Тест GroupTask - корректная работа с исправленными именами переменных (isCompleted, isAllCompleted вместо isCompleted, isAllCompleted).
         /// </summary>
-        [Test]
+        [Fact]
         public void GroupTask_ExecuteInParallel_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -82,14 +79,14 @@ namespace Lotus.Core.Task
             groupTask.ExecuteInParallel();
 
             // Assert
-            ClassicAssert.IsTrue(groupTask.IsCompleted, "Group task should be completed");
-            ClassicAssert.IsFalse(groupTask.IsRunning, "Group task should not be running");
+            Assert.True(groupTask.IsCompleted, "Group task should be completed");
+            Assert.False(groupTask.IsRunning, "Group task should not be running");
         }
 
         /// <summary>
         /// Тест GroupTask - конструктор с исправленным комментарием "Без имени" вместо "Без имение".
         /// </summary>
-        [Test]
+        [Fact]
         public void GroupTask_Constructor_ShouldUseCorrectComment()
         {
             // Arrange & Act
@@ -97,13 +94,13 @@ namespace Lotus.Core.Task
             var groupTask = new GroupTask(executor); // Использует конструктор с комментарием "Без имени"
 
             // Assert
-            ClassicAssert.AreEqual("Без имени", groupTask.Name, "Name should be 'Без имени' (not 'Без имение')");
+            Assert.Equal("Без имени", groupTask.Name);
         }
 
         /// <summary>
         /// Тест TaskExecutor - корректная работа с исправленными именами переменных (taskHolder вместо taskHolder).
         /// </summary>
-        [Test]
+        [Fact]
         public void TaskExecutor_AddTask_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -114,14 +111,14 @@ namespace Lotus.Core.Task
             executor.AddTask(task, TTaskMethod.EachFrame);
 
             // Assert
-            ClassicAssert.AreEqual(1, executor.Tasks.Count, "Task should be added");
-            ClassicAssert.AreEqual(task, executor.Tasks[0].Task, "Task should match");
+            Assert.Equal(1, executor.Tasks.Count);
+            Assert.Equal(task, executor.Tasks[0].Task);
         }
 
         /// <summary>
         /// Тест TaskGroupExecutor - корректная работа с исправленными именами переменных (groupTask вместо groupTask).
         /// </summary>
-        [Test]
+        [Fact]
         public void TaskGroupExecutor_AddGroupTask_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -132,15 +129,15 @@ namespace Lotus.Core.Task
             var groupTask = executor.AddGroupTask("TestGroup", task);
 
             // Assert
-            ClassicAssert.IsNotNull(groupTask, "Group task should be created");
-            ClassicAssert.AreEqual("TestGroup", groupTask.Name, "Group task name should match");
-            ClassicAssert.AreEqual(1, groupTask.Tasks.Count, "Group task should contain one task");
+            Assert.NotNull(groupTask);
+            Assert.Equal("TestGroup", groupTask.Name);
+            Assert.Equal(1, groupTask.Tasks.Count);
         }
 
         /// <summary>
         /// Тест TaskGroupExecutor - OnUpdate использует исправленное имя переменной groupTask.
         /// </summary>
-        [Test]
+        [Fact]
         public void TaskGroupExecutor_OnUpdate_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -153,7 +150,7 @@ namespace Lotus.Core.Task
             executor.OnUpdate();
 
             // Assert - проверяем что метод работает корректно
-            ClassicAssert.IsNotNull(groupTask, "Group task should exist");
+            Assert.NotNull(groupTask);
         }
     }
 }

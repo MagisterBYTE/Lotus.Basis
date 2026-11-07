@@ -1,13 +1,10 @@
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Memento
 {
     /// <summary>
     /// Тесты для критических участков Memento (исправление имени переменной itemToRedo).
     /// </summary>
-    [TestFixture]
     public class MementoCriticalTests
     {
         /// <summary>
@@ -35,7 +32,7 @@ namespace Lotus.Core.Memento
         /// <summary>
         /// Тест Redo - корректная работа с исправленным именем переменной (itemToRedo вместо itemToRedo).
         /// </summary>
-        [Test]
+        [Fact]
         public void Redo_WithValidState_ExecutesCorrectly()
         {
             // Arrange
@@ -48,22 +45,22 @@ namespace Lotus.Core.Memento
 
             // Undo последнее действие
             manager.Undo();
-            ClassicAssert.AreEqual(1, state1.Value);
-            ClassicAssert.AreEqual(0, state1.UndoCount);
+            Assert.Equal(1, state1.Value);
+            Assert.Equal(0, state1.UndoCount);
 
             // Act - используем Redo с исправленным именем переменной
             manager.Redo();
 
             // Assert - проверяем что Redo выполнился корректно
-            ClassicAssert.AreEqual(1, state2.RedoCount, "Redo should be called on correct state");
-            ClassicAssert.IsTrue(manager.CanUndo, "Should be able to undo after redo");
-            ClassicAssert.IsFalse(manager.CanRedo, "Should not be able to redo after last redo");
+            Assert.Equal(1, state2.RedoCount);
+            Assert.True(manager.CanUndo, "Should be able to undo after redo");
+            Assert.False(manager.CanRedo, "Should not be able to redo after last redo");
         }
 
         /// <summary>
         /// Тест Redo - корректный индекс при выполнении Redo.
         /// </summary>
-        [Test]
+        [Fact]
         public void Redo_WithMultipleStates_UsesCorrectIndex()
         {
             // Arrange
@@ -84,15 +81,15 @@ namespace Lotus.Core.Memento
             manager.Redo();
 
             // Assert
-            ClassicAssert.AreEqual(1, state2.RedoCount, "Should redo state2");
-            ClassicAssert.AreEqual(0, state3.RedoCount, "Should not redo state3 yet");
-            ClassicAssert.IsTrue(manager.CanRedo, "Should be able to redo state3");
+            Assert.Equal(1, state2.RedoCount);
+            Assert.Equal(0, state3.RedoCount);
+            Assert.True(manager.CanRedo, "Should be able to redo state3");
         }
 
         /// <summary>
         /// Тест Redo - корректная обработка когда Redo невозможен.
         /// </summary>
-        [Test]
+        [Fact]
         public void Redo_WhenCannotRedo_DoesNothing()
         {
             // Arrange
@@ -100,19 +97,19 @@ namespace Lotus.Core.Memento
             var state1 = new TestMementoState { Value = 1 };
 
             manager.AddStateToHistory(state1);
-            ClassicAssert.IsFalse(manager.CanRedo, "Should not be able to redo when at end");
+            Assert.False(manager.CanRedo, "Should not be able to redo when at end");
 
             // Act
             manager.Redo();
 
             // Assert
-            ClassicAssert.AreEqual(0, state1.RedoCount, "Redo should not be called when CanRedo is false");
+            Assert.Equal(0, state1.RedoCount);
         }
 
         /// <summary>
         /// Тест Redo - последовательные вызовы Redo.
         /// </summary>
-        [Test]
+        [Fact]
         public void Redo_SequentialCalls_WorkCorrectly()
         {
             // Arrange
@@ -136,10 +133,10 @@ namespace Lotus.Core.Memento
             manager.Redo();
 
             // Assert
-            ClassicAssert.AreEqual(1, state1.RedoCount, "State1 should be redone");
-            ClassicAssert.AreEqual(1, state2.RedoCount, "State2 should be redone");
-            ClassicAssert.AreEqual(1, state3.RedoCount, "State3 should be redone");
-            ClassicAssert.IsFalse(manager.CanRedo, "Should not be able to redo after all redone");
+            Assert.Equal(1, state1.RedoCount);
+            Assert.Equal(1, state2.RedoCount);
+            Assert.Equal(1, state3.RedoCount);
+            Assert.False(manager.CanRedo, "Should not be able to redo after all redone");
         }
     }
 }

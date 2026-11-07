@@ -2,8 +2,6 @@
 using UnityEngine;
 using UnityEditor;
 #endif
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.ECS
 {
@@ -47,7 +45,7 @@ namespace Lotus.Core.ECS
         /// <summary>
         /// Тестирование методов подсистемы ECS.
         /// </summary>
-        [Test]
+        [Fact]
         public static void TestECS()
         {
             var world = new CEcsWorld();
@@ -70,7 +68,7 @@ namespace Lotus.Core.ECS
             filterHealth.Include<THealth>().Include<TPlayer>();
 
             var filterEntities = filterHealth.GetEntities();
-            ClassicAssert.AreEqual(filterHealth.CountEntities, 2);
+            Assert.Equal(filterHealth.CountEntities, 2);
             for (var i = 0; i < filterHealth.CountEntities; i++)
             {
                 ref var health = ref world.GetComponent<THealth>(filterEntities[i]);
@@ -82,7 +80,7 @@ namespace Lotus.Core.ECS
 
             filterHealth.Include<TDeadStatus>();
             filterEntities = filterHealth.GetEntities();
-            ClassicAssert.AreEqual(filterHealth.CountEntities, 0);
+            Assert.Equal(filterHealth.CountEntities, 0);
             for (var i = 0; i < filterHealth.CountEntities; i++)
             {
                 ref var health = ref world.GetComponent<THealth>(filterEntities[i]);
@@ -92,15 +90,15 @@ namespace Lotus.Core.ECS
                 player.Id = 17;
             }
 
-            ClassicAssert.AreEqual(world.HasComponent<TWeapon>(pety.Id), true);
-            ClassicAssert.AreEqual(world.HasComponent<THealth>(pety.Id), true);
-            ClassicAssert.AreEqual(world.HasComponent<TPlayer>(pety.Id), true);
+            Assert.Equal(world.HasComponent<TWeapon>(pety.Id), true);
+            Assert.Equal(world.HasComponent<THealth>(pety.Id), true);
+            Assert.Equal(world.HasComponent<TPlayer>(pety.Id), true);
 
-            ClassicAssert.AreEqual(world.HasComponent<TWeapon>(sany.Id), true);
-            ClassicAssert.AreEqual(world.HasComponent<THealth>(sany.Id), true);
+            Assert.Equal(world.HasComponent<TWeapon>(sany.Id), true);
+            Assert.Equal(world.HasComponent<THealth>(sany.Id), true);
 
-            ClassicAssert.AreEqual(world.HasComponent<THealth>(igor.Id), true);
-            ClassicAssert.AreEqual(world.HasComponent<TPlayer>(igor.Id), true);
+            Assert.Equal(world.HasComponent<THealth>(igor.Id), true);
+            Assert.Equal(world.HasComponent<TPlayer>(igor.Id), true);
         }
     }
 }

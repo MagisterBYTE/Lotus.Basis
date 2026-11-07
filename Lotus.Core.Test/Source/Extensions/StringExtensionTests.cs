@@ -1,32 +1,29 @@
 using System;
 using System.Collections.Generic;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Extensions
 {
-    [TestFixture]
     public class StringExtensionTests
     {
         #region Check Methods Tests
-        [Test]
+        [Fact]
         public void Common()
         {
             var testBeetwen = "Use the Assert[2222] class[00000] to";
-            ClassicAssert.AreEqual(testBeetwen.RemoveAllBetweenSymbol('[', ']'),
+            Assert.Equal(testBeetwen.RemoveAllBetweenSymbol('[', ']'),
                 "Use the Assert[] class[] to");
 
             testBeetwen = "Use the Assert[2222] class";
-            ClassicAssert.AreEqual(testBeetwen.RemoveAllBetweenSymbol('[', ']'),
+            Assert.Equal(testBeetwen.RemoveAllBetweenSymbol('[', ']'),
                 "Use the Assert[] class");
 
             var testBeetwenAll = "Use the Assert[2222] class";
-            ClassicAssert.AreEqual(testBeetwenAll.RemoveAllBetweenSymbolWithSymbols('[', ']'),
+            Assert.Equal(testBeetwenAll.RemoveAllBetweenSymbolWithSymbols('[', ']'),
                 "Use the Assert class");
 
             testBeetwenAll = "Use the Assert[2222] class[00000] to";
-            ClassicAssert.AreEqual(testBeetwenAll.RemoveAllBetweenSymbolWithSymbols('[', ']'),
+            Assert.Equal(testBeetwenAll.RemoveAllBetweenSymbolWithSymbols('[', ']'),
                 "Use the Assert class to");
 
 
@@ -37,11 +34,11 @@ namespace Lotus.Core.Extensions
             var eqal21 = "привет";
             var eqal22 = "Привет";
 
-            ClassicAssert.AreEqual(eqal21.Equal(eqal11), true);
-            ClassicAssert.AreEqual(eqal21.Equal(eqal12), false);
+            Assert.Equal(eqal21.Equal(eqal11), true);
+            Assert.Equal(eqal21.Equal(eqal12), false);
 
-            ClassicAssert.AreEqual(eqal22.EqualIgnoreCase(eqal11), true);
-            ClassicAssert.AreEqual(eqal22.EqualIgnoreCase(eqal12), true);
+            Assert.Equal(eqal22.EqualIgnoreCase(eqal11), true);
+            Assert.Equal(eqal22.EqualIgnoreCase(eqal12), true);
 
 
             var test = "Use the Assert class to test conditions class.";
@@ -49,45 +46,45 @@ namespace Lotus.Core.Extensions
             test = test.RemoveFirstMatch("566");
 
             test = test.RemoveFirstMatch("class");
-            ClassicAssert.AreEqual(test, "Use the Assert  to test conditions class.");
+            Assert.Equal(test, "Use the Assert  to test conditions class.");
 
 
             test = "Use the Assert class to test conditions class.";
             test = test.RemoveLastMatch("class");
-            ClassicAssert.AreEqual(test, "Use the Assert class to test conditions .");
+            Assert.Equal(test, "Use the Assert class to test conditions .");
 
             test = "Use the Assert class to test conditions class.xtx";
             test = test.RemoveExtension();
-            ClassicAssert.AreEqual(test, "Use the Assert class to test conditions class");
+            Assert.Equal(test, "Use the Assert class to test conditions class");
 
             test = "Проверяемая строка хороша";
             test = test.RemoveFromSearchOption("хороша", TStringSearchOption.End);
-            ClassicAssert.AreEqual(test, "Проверяемая строка ");
+            Assert.Equal(test, "Проверяемая строка ");
 
             test = "dfsfsd[778]sdfsd[090]";
             var nf = test.ExtractNumber();
-            ClassicAssert.AreEqual(nf, 778);
+            Assert.Equal(nf, 778);
 
             test = "dfsfsd[778]sdfsd[090]";
             var nl = test.ExtractNumberLast();
-            ClassicAssert.AreEqual(nl, 90);
+            Assert.Equal(nl, 90);
 
             test = "/// <param name=\"begin\">String begin.</param>";
             var token = test.ExtractString(">", "<");
-            ClassicAssert.AreEqual(token, "String begin.");
+            Assert.Equal(token, "String begin.");
 
             test = "222.3333";
             var before = test.SubstringTo(".", false);
-            ClassicAssert.AreEqual(before, "222");
+            Assert.Equal(before, "222");
 
             var after = test.SubstringFrom(".", false);
-            ClassicAssert.AreEqual(after, "3333");
+            Assert.Equal(after, "3333");
 
             before = test.SubstringTo(".", true);
-            ClassicAssert.AreEqual(before, "222.");
+            Assert.Equal(before, "222.");
 
             after = test.SubstringFrom(".", true);
-            ClassicAssert.AreEqual(after, ".3333");
+            Assert.Equal(after, ".3333");
 
 
             //
@@ -95,111 +92,111 @@ namespace Lotus.Core.Extensions
             //
             test = "yield null to skip";
             test = test.ToWordUpper();
-            ClassicAssert.AreEqual(test, "Yield null to skip");
+            Assert.Equal(test, "Yield null to skip");
         }
 
 
-        [Test]
+        [Fact]
         public void IsNull_ShouldReturnTrueForNullString()
         {
             // Arrange
             string nullString = null;
 
             // Act & Assert
-            ClassicAssert.IsTrue(nullString.IsNull());
+            Assert.True(nullString.IsNull());
         }
 
-        [Test]
+        [Fact]
         public void IsNull_ShouldReturnFalseForNonNullString()
         {
             // Arrange
             var testString = "test";
 
             // Act & Assert
-            ClassicAssert.IsFalse(testString.IsNull());
+            Assert.False(testString.IsNull());
         }
 
-        [Test]
+        [Fact]
         public void IsExists_ShouldReturnTrueForNonEmptyString()
         {
             // Arrange
             var testString = "test";
 
             // Act & Assert
-            ClassicAssert.IsTrue(testString.IsExists());
+            Assert.True(testString.IsExists());
         }
 
-        [Test]
+        [Fact]
         public void IsExists_ShouldReturnFalseForEmptyString()
         {
             // Arrange
             var emptyString = string.Empty;
 
             // Act & Assert
-            ClassicAssert.IsFalse(emptyString.IsExists());
+            Assert.False(emptyString.IsExists());
         }
 
-        [Test]
+        [Fact]
         public void IsLatinSymbols_ShouldReturnTrueForLatinString()
         {
             // Arrange
             var latinString = "Hello";
 
             // Act & Assert
-            ClassicAssert.IsTrue(latinString.IsLatinSymbols());
+            Assert.True(latinString.IsLatinSymbols());
         }
 
-        [Test]
+        [Fact]
         public void IsLatinSymbols_ShouldReturnFalseForNonLatinString()
         {
             // Arrange
             var cyrillicString = "Привет";
 
             // Act & Assert
-            ClassicAssert.IsFalse(cyrillicString.IsLatinSymbols());
+            Assert.False(cyrillicString.IsLatinSymbols());
         }
 
-        [Test]
+        [Fact]
         public void IsCyrillicSymbols_ShouldReturnTrueForCyrillicString()
         {
             // Arrange
             var cyrillicString = "Привет";
 
             // Act & Assert
-            ClassicAssert.IsTrue(cyrillicString.IsCyrillicSymbols());
+            Assert.True(cyrillicString.IsCyrillicSymbols());
         }
 
-        [Test]
+        [Fact]
         public void IsCyrillicSymbols_ShouldReturnFalseForNonCyrillicString()
         {
             // Arrange
             var latinString = "Hello";
 
             // Act & Assert
-            ClassicAssert.IsFalse(latinString.IsCyrillicSymbols());
+            Assert.False(latinString.IsCyrillicSymbols());
         }
 
-        [Test]
+        [Fact]
         public void IsLetterSymbols_ShouldReturnTrueForStringWithLetters()
         {
             // Arrange
             var letterString = "Hello123";
 
             // Act & Assert
-            ClassicAssert.IsTrue(letterString.IsLetterSymbols());
+            Assert.True(letterString.IsLetterSymbols());
         }
 
-        [Test]
+        [Fact]
         public void IsLetterSymbols_ShouldReturnFalseForStringWithoutLetters()
         {
             // Arrange
             var numberString = "12345";
 
             // Act & Assert
-            ClassicAssert.IsFalse(numberString.IsLetterSymbols());
+            Assert.False(numberString.IsLetterSymbols());
         }
 
-        [Test]
+        [Fact]
         public void IsDotOrCommaSymbols_ShouldReturnTrueForStringWithDotOrComma()
         {
             // Arrange
@@ -207,25 +204,25 @@ namespace Lotus.Core.Extensions
             var commaString = "123,45";
 
             // Act & Assert
-            ClassicAssert.IsTrue(dotString.IsDotOrCommaSymbols());
-            ClassicAssert.IsTrue(commaString.IsDotOrCommaSymbols());
+            Assert.True(dotString.IsDotOrCommaSymbols());
+            Assert.True(commaString.IsDotOrCommaSymbols());
         }
 
-        [Test]
+        [Fact]
         public void IsDotOrCommaSymbols_ShouldReturnFalseForStringWithoutDotOrComma()
         {
             // Arrange
             var testString = "12345";
 
             // Act & Assert
-            ClassicAssert.IsFalse(testString.IsDotOrCommaSymbols());
+            Assert.False(testString.IsDotOrCommaSymbols());
         }
 
         #endregion
 
         #region Equal Methods Tests
 
-        [Test]
+        [Fact]
         public void Equal_ShouldReturnTrueForSameStringsCaseSensitive()
         {
             // Arrange
@@ -233,10 +230,10 @@ namespace Lotus.Core.Extensions
             var str2 = "Hello";
 
             // Act & Assert
-            ClassicAssert.IsTrue(str1.Equal(str2));
+            Assert.True(str1.Equal(str2));
         }
 
-        [Test]
+        [Fact]
         public void Equal_ShouldReturnFalseForDifferentCaseStrings()
         {
             // Arrange
@@ -244,10 +241,10 @@ namespace Lotus.Core.Extensions
             var str2 = "hello";
 
             // Act & Assert
-            ClassicAssert.IsFalse(str1.Equal(str2));
+            Assert.False(str1.Equal(str2));
         }
 
-        [Test]
+        [Fact]
         public void EqualIgnoreCase_ShouldReturnTrueForSameStringsIgnoreCase()
         {
             // Arrange
@@ -255,10 +252,10 @@ namespace Lotus.Core.Extensions
             var str2 = "hello";
 
             // Act & Assert
-            ClassicAssert.IsTrue(str1.EqualIgnoreCase(str2));
+            Assert.True(str1.EqualIgnoreCase(str2));
         }
 
-        [Test]
+        [Fact]
         public void EqualIgnoreCase_ShouldReturnFalseForDifferentStrings()
         {
             // Arrange
@@ -266,14 +263,14 @@ namespace Lotus.Core.Extensions
             var str2 = "World";
 
             // Act & Assert
-            ClassicAssert.IsFalse(str1.EqualIgnoreCase(str2));
+            Assert.False(str1.EqualIgnoreCase(str2));
         }
 
         #endregion
 
         #region Convert Methods Tests
 
-        [Test]
+        [Fact]
         public void ToFloat_ShouldConvertValidStringToFloat()
         {
             // Arrange
@@ -283,10 +280,10 @@ namespace Lotus.Core.Extensions
             var result = numberString.ToFloat();
 
             // Assert
-            ClassicAssert.AreEqual(123.45f, result, 0.001f);
+            Assert.Equal(123.45f, result, 0.001f);
         }
 
-        [Test]
+        [Fact]
         public void ToFloatUnchecked_ShouldConvertValidStringToFloat()
         {
             // Arrange
@@ -296,14 +293,14 @@ namespace Lotus.Core.Extensions
             var result = numberString.ToFloatUnchecked();
 
             // Assert
-            ClassicAssert.AreEqual(123.45f, result, 0.001f);
+            Assert.Equal(123.45f, result, 0.001f);
         }
 
         #endregion
 
         #region Transform Methods Tests
 
-        [Test]
+        [Fact]
         public void GetVerticalCopy_ShouldInsertNewLinesBetweenCharacters()
         {
             // Arrange
@@ -313,10 +310,10 @@ namespace Lotus.Core.Extensions
             var result = testString.GetVerticalCopy();
 
             // Assert
-            ClassicAssert.AreEqual("H\ne\nl\nl\no", result);
+            Assert.Equal("H\ne\nl\nl\no", result);
         }
 
-        [Test]
+        [Fact]
         public void GetReverseCopy_ShouldReverseString()
         {
             // Arrange
@@ -326,10 +323,10 @@ namespace Lotus.Core.Extensions
             var result = testString.GetReverseCopy();
 
             // Assert
-            ClassicAssert.AreEqual("olleH", result);
+            Assert.Equal("olleH", result);
         }
 
-        [Test]
+        [Fact]
         public void InsertSymbols_ShouldInsertSymbolsAtSpecifiedPosition()
         {
             // Arrange
@@ -339,10 +336,10 @@ namespace Lotus.Core.Extensions
             var result = testString.InsertSymbols('!', 3, 2);
 
             // Assert
-            ClassicAssert.AreEqual("Hel!!lo", result);
+            Assert.Equal("Hel!!lo", result);
         }
 
-        [Test]
+        [Fact]
         public void SetLength_ShouldTruncateLongerString()
         {
             // Arrange
@@ -352,10 +349,10 @@ namespace Lotus.Core.Extensions
             var result = testString.SetLength(3, ' ');
 
             // Assert
-            ClassicAssert.AreEqual("Hel", result);
+            Assert.Equal("Hel", result);
         }
 
-        [Test]
+        [Fact]
         public void SetLength_ShouldPadShorterString()
         {
             // Arrange
@@ -365,14 +362,14 @@ namespace Lotus.Core.Extensions
             var result = testString.SetLength(5, '*');
 
             // Assert
-            ClassicAssert.AreEqual("Hi***", result);
+            Assert.Equal("Hi***", result);
         }
 
         #endregion
 
         #region Calc Methods Tests
 
-        [Test]
+        [Fact]
         public void GetCountSymbol_ShouldReturnCorrectCount()
         {
             // Arrange
@@ -382,10 +379,10 @@ namespace Lotus.Core.Extensions
             var count = testString.GetCountSymbol('l');
 
             // Assert
-            ClassicAssert.AreEqual(2, count);
+            Assert.Equal(2, count);
         }
 
-        [Test]
+        [Fact]
         public void GetCountNewLine_ShouldReturnCorrectCount()
         {
             // Arrange
@@ -395,10 +392,10 @@ namespace Lotus.Core.Extensions
             var count = testString.GetCountNewLine();
 
             // Assert
-            ClassicAssert.AreEqual(2, count);
+            Assert.Equal(2, count);
         }
 
-        [Test]
+        [Fact]
         public void GetCountTab_ShouldReturnCorrectCount()
         {
             // Arrange
@@ -408,24 +405,24 @@ namespace Lotus.Core.Extensions
             var count = testString.GetCountTab();
 
             // Assert
-            ClassicAssert.AreEqual(2, count);
+            Assert.Equal(2, count);
         }
 
         #endregion
 
         #region Find Methods Tests
 
-        [Test]
+        [Fact]
         public void Contains_WithComparison_ShouldFindStringCaseInsensitive()
         {
             // Arrange
             var testString = "Hello World";
 
             // Act & Assert
-            ClassicAssert.IsTrue(testString.Contains("world", StringComparison.OrdinalIgnoreCase));
+            Assert.True(testString.Contains("world", StringComparison.OrdinalIgnoreCase));
         }
 
-        [Test]
+        [Fact]
         public void IndexOf_WithList_ShouldFindFirstOccurrence()
         {
             // Arrange
@@ -436,14 +433,14 @@ namespace Lotus.Core.Extensions
             var index = testString.IndexOf(searchList);
 
             // Assert
-            ClassicAssert.AreEqual(6, index);
+            Assert.Equal(6, index);
         }
 
         #endregion
 
         #region Remove Methods Tests
 
-        [Test]
+        [Fact]
         public void RemoveTo_ShouldRemoveCharactersUpToMatch()
         {
             // Arrange
@@ -453,10 +450,10 @@ namespace Lotus.Core.Extensions
             var result = testString.RemoveTo("World");
 
             // Assert
-            ClassicAssert.AreEqual("World", result);
+            Assert.Equal("World", result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveToWith_ShouldRemoveCharactersIncludingMatch()
         {
             // Arrange
@@ -466,10 +463,10 @@ namespace Lotus.Core.Extensions
             var result = testString.RemoveToWith("Hello ");
 
             // Assert
-            ClassicAssert.AreEqual("World", result);
+            Assert.Equal("World", result);
         }
 
-        [Test]
+        [Fact]
         public void RemoveFrom_ShouldRemoveCharactersAfterMatch()
         {
             // Arrange
@@ -479,14 +476,14 @@ namespace Lotus.Core.Extensions
             var result = testString.RemoveFrom("Hello");
 
             // Assert
-            ClassicAssert.AreEqual("Hello", result);
+            Assert.Equal("Hello", result);
         }
 
         #endregion
 
         #region Extract Methods Tests
 
-        [Test]
+        [Fact]
         public void SubstringTo_ShouldReturnSubstringUpToMatch()
         {
             // Arrange
@@ -496,10 +493,10 @@ namespace Lotus.Core.Extensions
             var result = testString.SubstringTo("World", false);
 
             // Assert
-            ClassicAssert.AreEqual("Hello ", result);
+            Assert.Equal("Hello ", result);
         }
 
-        [Test]
+        [Fact]
         public void ExtractNumber_ShouldExtractFirstNumber()
         {
             // Arrange
@@ -509,10 +506,10 @@ namespace Lotus.Core.Extensions
             var number = testString.ExtractNumber();
 
             // Assert
-            ClassicAssert.AreEqual(123, number);
+            Assert.Equal(123, number);
         }
 
-        [Test]
+        [Fact]
         public void ExtractString_ShouldExtractBetweenDelimiters()
         {
             // Arrange
@@ -522,14 +519,14 @@ namespace Lotus.Core.Extensions
             var result = testString.ExtractString("[", "]");
 
             // Assert
-            ClassicAssert.AreEqual("John", result);
+            Assert.Equal("John", result);
         }
 
         #endregion
 
         #region Word Methods Tests
 
-        [Test]
+        [Fact]
         public void ToWordUpper_ShouldCapitalizeFirstLetter()
         {
             // Arrange
@@ -539,10 +536,10 @@ namespace Lotus.Core.Extensions
             var result = testString.ToWordUpper();
 
             // Assert
-            ClassicAssert.AreEqual("Hello", result);
+            Assert.Equal("Hello", result);
         }
 
-        [Test]
+        [Fact]
         public void ToWordLower_ShouldLowercaseFirstLetter()
         {
             // Arrange
@@ -552,10 +549,10 @@ namespace Lotus.Core.Extensions
             var result = testString.ToWordLower();
 
             // Assert
-            ClassicAssert.AreEqual("hello", result);
+            Assert.Equal("hello", result);
         }
 
-        [Test]
+        [Fact]
         public void ToTitleCase_ShouldConvertUnderscoresToCamelCase()
         {
             // Arrange
@@ -565,10 +562,10 @@ namespace Lotus.Core.Extensions
             var result = testString.ToTitleCase();
 
             // Assert
-            ClassicAssert.AreEqual("HelloWorld", result);
+            Assert.Equal("HelloWorld", result);
         }
 
-        [Test]
+        [Fact]
         public void ToConstCase_ShouldConvertCamelCaseToUnderscores()
         {
             // Arrange
@@ -578,7 +575,7 @@ namespace Lotus.Core.Extensions
             var result = testString.ToConstCase();
 
             // Assert
-            ClassicAssert.AreEqual("HELLO_WORLD", result);
+            Assert.Equal("HELLO_WORLD", result);
         }
 
         #endregion

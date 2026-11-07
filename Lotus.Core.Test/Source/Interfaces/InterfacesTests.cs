@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-using NUnit.Framework;
 
 namespace Lotus.Core.Interfaces
 {
@@ -56,7 +55,7 @@ namespace Lotus.Core.Interfaces
         /// <summary>
         /// Тестирование методов <see cref="ILotusDuplicate{TType}"/>.
         /// </summary>
-        [Test]
+        [Fact]
         public static void TestInterfaceDuplicate()
         {
             TestA result = null;

@@ -1,13 +1,10 @@
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.DateTimes
 {
     /// <summary>
     /// Тесты для критических исправлений в <see cref="ListTimeInterval{TItemTimeable}"/>.
     /// </summary>
-    [TestFixture]
     public class DateTimeListIntervalTests
     {
         /// <summary>
@@ -41,7 +38,7 @@ namespace Lotus.Core.DateTimes
         /// <summary>
         /// Тест метода AssignTimePeriod - исправленное имя метода (было AssingTimePeriod).
         /// </summary>
-        [Test]
+        [Fact]
         public void AssignTimePeriod_WithValidDates_CreatesCorrectInterval()
         {
             var from = new DateTime(2014, 1, 2, 12, 17, 0, DateTimeKind.Utc);
@@ -50,13 +47,13 @@ namespace Lotus.Core.DateTimes
 
             list.AssignTimePeriod(from, to);
 
-            ClassicAssert.AreEqual(19, list.Count); // 35 - 17 + 1 = 19
+            Assert.Equal(19, list.Count); // 35 - 17 + 1 = 19
         }
 
         /// <summary>
         /// Тест метода DuplicateListPeriod - исправленное имя метода (было DublicateListPeriod).
         /// </summary>
-        [Test]
+        [Fact]
         public void DuplicateListPeriod_WithValidIndices_ReturnsCorrectList()
         {
             var from = new DateTime(2014, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -66,14 +63,14 @@ namespace Lotus.Core.DateTimes
 
             var duplicate = list.DuplicateListPeriod<ListTimeInterval<TestTimePeriod>>(0, 4);
 
-            ClassicAssert.IsNotNull(duplicate);
-            ClassicAssert.AreEqual(5, duplicate.Count); // Индексы 0-4 включительно
+            Assert.NotNull(duplicate);
+            Assert.Equal(5, duplicate.Count); // Индексы 0-4 включительно
         }
 
         /// <summary>
         /// Тест метода DuplicateListPeriod - с датами.
         /// </summary>
-        [Test]
+        [Fact]
         public void DuplicateListPeriod_WithValidDates_ReturnsCorrectList()
         {
             var from = new DateTime(2014, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -85,14 +82,14 @@ namespace Lotus.Core.DateTimes
             var endDate = new DateTime(2014, 1, 5, 0, 0, 0, DateTimeKind.Utc);
             var duplicate = list.DuplicateListPeriod<ListTimeInterval<TestTimePeriod>>(startDate, endDate);
 
-            ClassicAssert.IsNotNull(duplicate);
-            ClassicAssert.IsTrue(duplicate.Count > 0);
+            Assert.NotNull(duplicate);
+            Assert.True(duplicate.Count > 0);
         }
 
         /// <summary>
         /// Тест метода AssignTimePeriod - с обратным порядком дат.
         /// </summary>
-        [Test]
+        [Fact]
         public void AssignTimePeriod_WithReversedDates_HandlesCorrectly()
         {
             var from = new DateTime(2014, 1, 10, 0, 0, 0, DateTimeKind.Utc);
@@ -102,13 +99,13 @@ namespace Lotus.Core.DateTimes
             // Метод должен корректно обработать обратный порядок
             list.AssignTimePeriod(from, to);
 
-            ClassicAssert.IsTrue(list.Count >= 0);
+            Assert.True(list.Count >= 0);
         }
 
         /// <summary>
         /// Тест метода AssignTimePeriod - с одинаковыми датами.
         /// </summary>
-        [Test]
+        [Fact]
         public void AssignTimePeriod_WithSameDates_CreatesSingleItem()
         {
             var date = new DateTime(2014, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -116,7 +113,7 @@ namespace Lotus.Core.DateTimes
 
             list.AssignTimePeriod(date, date);
 
-            ClassicAssert.AreEqual(1, list.Count);
+            Assert.Equal(1, list.Count);
         }
     }
 }

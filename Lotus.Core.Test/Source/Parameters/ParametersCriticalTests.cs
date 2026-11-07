@@ -1,20 +1,17 @@
 using System;
 using System.IO;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Parameters
 {
     /// <summary>
     /// Тесты для критических участков Parameters (исправление имен переменных в SaveToJson).
     /// </summary>
-    [TestFixture]
     public class ParametersCriticalTests
     {
         /// <summary>
         /// Тест SaveToJson - корректная работа с исправленными именами переменных (fileStream, streamWriter).
         /// </summary>
-        [Test]
+        [Fact]
         public void SaveToJson_WithValidParameters_SavesToFileCorrectly()
         {
             // Arrange
@@ -30,12 +27,12 @@ namespace Lotus.Core.Parameters
                 parameters.SaveToJson(tempFile, true);
 
                 // Assert - проверяем что файл создан и содержит данные
-                ClassicAssert.IsTrue(File.Exists(tempFile), "File should be created");
+                Assert.True(File.Exists(tempFile), "File should be created");
 
                 var content = File.ReadAllText(tempFile);
-                ClassicAssert.IsTrue(content.Contains("TestParams"), "File should contain parameter name");
-                ClassicAssert.IsTrue(content.Contains("TestValue"), "File should contain parameter value");
-                ClassicAssert.IsTrue(content.Contains("42"), "File should contain integer value");
+                Assert.True(content.Contains("TestParams"), "File should contain parameter name");
+                Assert.True(content.Contains("TestValue"), "File should contain parameter value");
+                Assert.True(content.Contains("42"), "File should contain integer value");
             }
             finally
             {
@@ -49,7 +46,7 @@ namespace Lotus.Core.Parameters
         /// <summary>
         /// Тест SaveToJson - корректное закрытие потоков (исправленные имена переменных).
         /// </summary>
-        [Test]
+        [Fact]
         public void SaveToJson_ClosesStreamsCorrectly()
         {
             // Arrange
@@ -64,7 +61,7 @@ namespace Lotus.Core.Parameters
                 // Assert - проверяем что файл доступен для чтения (потоки закрыты)
                 using (var fileStream = new FileStream(tempFile, FileMode.Open, FileAccess.Read))
                 {
-                    ClassicAssert.IsTrue(fileStream.CanRead, "File should be readable after SaveToJson");
+                    Assert.True(fileStream.CanRead, "File should be readable after SaveToJson");
                 }
             }
             finally
@@ -79,7 +76,7 @@ namespace Lotus.Core.Parameters
         /// <summary>
         /// Тест SaveToJson - корректная работа с UTF-8 кодировкой.
         /// </summary>
-        [Test]
+        [Fact]
         public void SaveToJson_WithUtf8Encoding_SavesCorrectly()
         {
             // Arrange
@@ -96,8 +93,8 @@ namespace Lotus.Core.Parameters
 
                 // Assert - проверяем что UTF-8 символы сохранены корректно
                 var content = File.ReadAllText(tempFile, System.Text.Encoding.UTF8);
-                ClassicAssert.IsTrue(content.Contains("Привет"), "File should contain Russian text");
-                ClassicAssert.IsTrue(content.Contains("你好"), "File should contain Chinese text");
+                Assert.True(content.Contains("Привет"), "File should contain Russian text");
+                Assert.True(content.Contains("你好"), "File should contain Chinese text");
             }
             finally
             {
@@ -111,7 +108,7 @@ namespace Lotus.Core.Parameters
         /// <summary>
         /// Тест SaveToJson - корректная работа с вложенными параметрами.
         /// </summary>
-        [Test]
+        [Fact]
         public void SaveToJson_WithNestedParameters_SavesCorrectly()
         {
             // Arrange
@@ -130,9 +127,9 @@ namespace Lotus.Core.Parameters
                 parameters.SaveToJson(tempFile, true);
 
                 // Assert
-                ClassicAssert.IsTrue(File.Exists(tempFile), "File should be created");
+                Assert.True(File.Exists(tempFile), "File should be created");
                 var content = File.ReadAllText(tempFile);
-                ClassicAssert.IsTrue(content.Contains("Root"), "File should contain root parameter");
+                Assert.True(content.Contains("Root"), "File should contain root parameter");
             }
             finally
             {

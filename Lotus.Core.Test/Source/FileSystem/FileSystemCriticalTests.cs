@@ -1,20 +1,17 @@
 using System;
 using System.IO;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.FileSystem
 {
     /// <summary>
     /// Тесты для критических участков FileSystem (исправление RecursiveFileSystemInfo).
     /// </summary>
-    [TestFixture]
     public class FileSystemCriticalTests
     {
         /// <summary>
         /// Тест RecursiveFileSystemInfo - корректное имя метода (было исправлено с RecursiveFileSysteInfo).
         /// </summary>
-        [Test]
+        [Fact]
         public void RecursiveFileSystemInfo_WithValidPath_WorksCorrectly()
         {
             // Arrange - создаем временную директорию
@@ -34,7 +31,7 @@ namespace Lotus.Core.FileSystem
                 directory.RecursiveFileSystemInfo();
 
                 // Assert - проверяем что метод выполнился без ошибок
-                ClassicAssert.IsTrue(directory.Entities.Count > 0, "Directory should contain entities");
+                Assert.True(directory.Entities.Count > 0, "Directory should contain entities");
             }
             finally
             {
@@ -49,7 +46,7 @@ namespace Lotus.Core.FileSystem
         /// <summary>
         /// Тест RecursiveFileSystemInfo - корректная обработка пустой директории.
         /// </summary>
-        [Test]
+        [Fact]
         public void RecursiveFileSystemInfo_WithEmptyDirectory_WorksCorrectly()
         {
             // Arrange
@@ -64,7 +61,7 @@ namespace Lotus.Core.FileSystem
                 directory.RecursiveFileSystemInfo();
 
                 // Assert
-                ClassicAssert.IsNotNull(directory.Entities);
+                Assert.NotNull(directory.Entities);
                 // Пустая директория может содержать 0 элементов или только саму себя
             }
             finally
@@ -79,7 +76,7 @@ namespace Lotus.Core.FileSystem
         /// <summary>
         /// Тест RecursiveFileSystemInfo - корректная обработка несуществующей директории.
         /// </summary>
-        [Test]
+        [Fact]
         public void RecursiveFileSystemInfo_WithNonExistentDirectory_HandlesGracefully()
         {
             // Arrange
@@ -90,7 +87,7 @@ namespace Lotus.Core.FileSystem
             var directory = new CFileSystemDirectory(nonExistentDir);
             
             // Метод может выбросить исключение для несуществующей директории, что нормально
-            ClassicAssert.Throws<DirectoryNotFoundException>(() =>
+            Assert.Throws<DirectoryNotFoundException>(() =>
             {
                 directory.RecursiveFileSystemInfo();
             });
@@ -99,7 +96,7 @@ namespace Lotus.Core.FileSystem
         /// <summary>
         /// Тест RecursiveFileSystemInfoTwoLevel - корректное имя метода.
         /// </summary>
-        [Test]
+        [Fact]
         public void RecursiveFileSystemInfoTwoLevel_WithValidPath_WorksCorrectly()
         {
             // Arrange
@@ -119,7 +116,7 @@ namespace Lotus.Core.FileSystem
                 directory.RecursiveFileSystemInfoTwoLevel();
 
                 // Assert
-                ClassicAssert.IsTrue(directory.Entities.Count > 0, "Directory should contain entities");
+                Assert.True(directory.Entities.Count > 0, "Directory should contain entities");
             }
             finally
             {

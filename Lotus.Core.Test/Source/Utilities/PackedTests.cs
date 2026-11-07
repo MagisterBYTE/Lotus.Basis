@@ -1,14 +1,11 @@
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Utilities
 {
-    [TestFixture]
     public class PackedTests
     {
         #region Pack/Unpack Integer Tests
 
-        [Test]
+        [Fact]
         public void PackInteger_ShouldPackValueCorrectly()
         {
             // Arrange
@@ -21,10 +18,10 @@ namespace Lotus.Core.Utilities
             XPacked.PackInteger(ref packed, bitStart, bitCount, valueToPack);
 
             // Assert
-            ClassicAssert.AreEqual(0b10100000, packed);
+            Assert.Equal(0b10100000, packed);
         }
 
-        [Test]
+        [Fact]
         public void UnpackInteger_ShouldUnpackValueCorrectly()
         {
             // Arrange
@@ -36,10 +33,10 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackInteger(packed, bitStart, bitCount);
 
             // Assert
-            ClassicAssert.AreEqual(0b1010, unpacked); // 10 in decimal
+            Assert.Equal(0b1010, unpacked); // 10 in decimal
         }
 
-        [Test]
+        [Fact]
         public void PackAndUnpackInteger_ShouldBeReversible()
         {
             // Arrange
@@ -53,14 +50,14 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackInteger(packed, bitStart, bitCount);
 
             // Assert
-            ClassicAssert.AreEqual(originalValue, unpacked);
+            Assert.Equal(originalValue, unpacked);
         }
 
         #endregion
 
         #region Pack/Unpack Long Tests
 
-        [Test]
+        [Fact]
         public void PackLong_ShouldPackValueCorrectly()
         {
             // Arrange
@@ -73,10 +70,10 @@ namespace Lotus.Core.Utilities
             XPacked.PackLong(ref packed, bitStart, bitCount, valueToPack);
 
             // Assert
-            ClassicAssert.AreEqual(0b10100000, packed);
+            Assert.Equal(0b10100000, packed);
         }
 
-        [Test]
+        [Fact]
         public void UnpackLong_ShouldUnpackValueCorrectly()
         {
             // Arrange
@@ -88,10 +85,10 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackLong(packed, bitStart, bitCount);
 
             // Assert
-            ClassicAssert.AreEqual(0b1010, unpacked); // 10 in decimal
+            Assert.Equal(0b1010, unpacked); // 10 in decimal
         }
 
-        [Test]
+        [Fact]
         public void PackAndUnpackLong_ShouldBeReversible()
         {
             // Arrange
@@ -105,14 +102,14 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackLong(packed, bitStart, bitCount);
 
             // Assert
-            ClassicAssert.AreEqual(originalValue, unpacked);
+            Assert.Equal(originalValue, unpacked);
         }
 
         #endregion
 
         #region Pack/Unpack Boolean Tests
 
-        [Test]
+        [Fact]
         public void PackBoolean_ShouldPackTrueCorrectly()
         {
             // Arrange
@@ -123,10 +120,10 @@ namespace Lotus.Core.Utilities
             XPacked.PackBoolean(ref packed, bitStart, true);
 
             // Assert
-            ClassicAssert.AreEqual(0b00100000, packed);
+            Assert.Equal(0b00100000, packed);
         }
 
-        [Test]
+        [Fact]
         public void PackBoolean_ShouldPackFalseCorrectly()
         {
             // Arrange
@@ -137,10 +134,10 @@ namespace Lotus.Core.Utilities
             XPacked.PackBoolean(ref packed, bitStart, false);
 
             // Assert
-            ClassicAssert.AreEqual(0b11110111, packed);
+            Assert.Equal(0b11110111, packed);
         }
 
-        [Test]
+        [Fact]
         public void UnpackBoolean_ShouldUnpackTrueCorrectly()
         {
             // Arrange
@@ -151,10 +148,10 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackBoolean(packed, bitStart);
 
             // Assert
-            ClassicAssert.IsTrue(unpacked);
+            Assert.True(unpacked);
         }
 
-        [Test]
+        [Fact]
         public void UnpackBoolean_ShouldUnpackFalseCorrectly()
         {
             // Arrange
@@ -165,10 +162,10 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackBoolean(packed, bitStart);
 
             // Assert
-            ClassicAssert.IsFalse(unpacked);
+            Assert.False(unpacked);
         }
 
-        [Test]
+        [Fact]
         public void PackAndUnpackBoolean_ShouldBeReversible()
         {
             // Arrange
@@ -181,14 +178,14 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackBoolean(packed, bitStart);
 
             // Assert
-            ClassicAssert.AreEqual(originalValue, unpacked);
+            Assert.Equal(originalValue, unpacked);
         }
 
         #endregion
 
         #region Edge Cases Tests
 
-        [Test]
+        [Fact]
         public void PackInteger_WithZeroBitCount_ShouldNotModifyPack()
         {
             // Arrange
@@ -201,10 +198,10 @@ namespace Lotus.Core.Utilities
             XPacked.PackInteger(ref packed, bitStart, bitCount, valueToPack);
 
             // Assert
-            ClassicAssert.AreEqual(0xFFFFFFF, packed);
+            Assert.Equal(0xFFFFFFF, packed);
         }
 
-        [Test]
+        [Fact]
         public void UnpackInteger_WithZeroBitCount_ShouldReturnZero()
         {
             // Arrange
@@ -216,10 +213,10 @@ namespace Lotus.Core.Utilities
             var unpacked = XPacked.UnpackInteger(packed, bitStart, bitCount);
 
             // Assert
-            ClassicAssert.AreEqual(0, unpacked);
+            Assert.Equal(0, unpacked);
         }
 
-        [Test]
+        [Fact]
         public void PackLong_WithBitCount64_ShouldHandleFullRange()
         {
             // Arrange
@@ -232,10 +229,10 @@ namespace Lotus.Core.Utilities
             XPacked.PackLong(ref packed, bitStart, bitCount, valueToPack);
 
             // Assert
-            ClassicAssert.AreEqual(long.MaxValue / 2, packed);
+            Assert.Equal(long.MaxValue / 2, packed);
         }
 
-        [Test]
+        [Fact]
         public void PackedInteger()
         {
             //
@@ -248,7 +245,7 @@ namespace Lotus.Core.Utilities
 
             var unPack0 = XPacked.UnpackInteger(pack0, 0, 28);
 
-            ClassicAssert.AreEqual(unPack0, uid);
+            Assert.Equal(unPack0, uid);
 
             //
             // Запись 15 бит с 4 бита
@@ -259,7 +256,7 @@ namespace Lotus.Core.Utilities
 
             var unPack4 = XPacked.UnpackInteger(pack4, 4, 15);
 
-            ClassicAssert.AreEqual(unPack4, uid);
+            Assert.Equal(unPack4, uid);
 
             //
             // Запись 27 бит с 4 бита
@@ -270,7 +267,7 @@ namespace Lotus.Core.Utilities
 
             var unPack27 = XPacked.UnpackInteger(pack27, 4, 27);
 
-            ClassicAssert.AreEqual(unPack27, uid);
+            Assert.Equal(unPack27, uid);
 
 
             //
@@ -282,10 +279,10 @@ namespace Lotus.Core.Utilities
 
             var unPack420 = XPacked.UnpackInteger(pack420, 4, 27);
 
-            ClassicAssert.AreEqual(unPack420, uid);
+            Assert.Equal(unPack420, uid);
         }
 
-        [Test]
+        [Fact]
         public void PackedLong()
         {
             //
@@ -298,7 +295,7 @@ namespace Lotus.Core.Utilities
 
             var unPack0 = XPacked.UnpackLong(pack0, 0, 28);
 
-            ClassicAssert.AreEqual(unPack0, uid);
+            Assert.Equal(unPack0, uid);
 
             //
             // Запись 15 бит с 4 бита
@@ -309,7 +306,7 @@ namespace Lotus.Core.Utilities
 
             var unPack4 = XPacked.UnpackLong(pack4, 4, 15);
 
-            ClassicAssert.AreEqual(unPack4, uid);
+            Assert.Equal(unPack4, uid);
 
             //
             // Запись 27 бит с 4 бита
@@ -320,7 +317,7 @@ namespace Lotus.Core.Utilities
 
             var unPack27 = XPacked.UnpackLong(pack27, 4, 27);
 
-            ClassicAssert.AreEqual(unPack27, uid);
+            Assert.Equal(unPack27, uid);
 
 
             //
@@ -332,7 +329,7 @@ namespace Lotus.Core.Utilities
 
             var unPack420 = XPacked.UnpackLong(pack420, 20, 4);
 
-            ClassicAssert.AreEqual(unPack420, uid);
+            Assert.Equal(unPack420, uid);
 
             //
             // Запись 24 бит с 0 бита
@@ -343,7 +340,7 @@ namespace Lotus.Core.Utilities
 
             var unPack240 = XPacked.UnpackLong(pack240, 0, 24);
 
-            ClassicAssert.AreEqual(unPack240, uid);
+            Assert.Equal(unPack240, uid);
 
             //
             // Запись 16 бит с 40 бита
@@ -354,7 +351,7 @@ namespace Lotus.Core.Utilities
 
             var unPack1640 = XPacked.UnpackLong(pack1640, 40, 16);
 
-            ClassicAssert.AreEqual(unPack1640, uid);
+            Assert.Equal(unPack1640, uid);
 
             //
             // Запись 24 бит с 40 бита
@@ -365,7 +362,7 @@ namespace Lotus.Core.Utilities
 
             var unPack2440 = XPacked.UnpackLong(pack2440, 40, 24);
 
-            ClassicAssert.AreEqual(unPack2440, uid);
+            Assert.Equal(unPack2440, uid);
 
             //
             // Запись 40 бит с 24 бита
@@ -376,7 +373,7 @@ namespace Lotus.Core.Utilities
 
             var unPack4024 = XPacked.UnpackLong(pack4024, 24, 40);
 
-            ClassicAssert.AreEqual(unPack4024, uid);
+            Assert.Equal(unPack4024, uid);
 
             //
             // Упаковка
@@ -389,10 +386,10 @@ namespace Lotus.Core.Utilities
             XPacked.PackLong(ref packUid, 24, 40, dateTime);
 
             var unHashCode = (int)XPacked.UnpackLong(packUid, 0, 24);
-            ClassicAssert.AreEqual(unHashCode, hashCode);
+            Assert.Equal(unHashCode, hashCode);
 
             var unDateTime = XPacked.UnpackLong(packUid, 24, 40);
-            ClassicAssert.AreEqual(unDateTime, dateTime);
+            Assert.Equal(unDateTime, dateTime);
         }
 
         #endregion

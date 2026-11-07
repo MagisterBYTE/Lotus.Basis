@@ -1,15 +1,12 @@
 using System;
 using System.Linq.Expressions;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Expressions
 {
-    [TestFixture]
     public class CompiledExpressionsTests
     {
-        [Test]
+        [Fact]
         public void AsFunc_ShouldCompileAndCacheExpression()
         {
             // Arrange
@@ -20,9 +17,9 @@ namespace Lotus.Core.Expressions
             var func2 = XCompiledExpressions<int, int>.AsFunc(expression);
 
             // Assert
-            ClassicAssert.AreEqual(4, func1(2));
-            ClassicAssert.AreEqual(6, func1(3));
-            ClassicAssert.AreSame(func1, func2, "Should return cached delegate");
+            Assert.Equal(4, func1(2));
+            Assert.Equal(6, func1(3));
+            Assert.Same(func1, func2);
         }
     }
 }

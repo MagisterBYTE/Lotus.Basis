@@ -1,19 +1,16 @@
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Identifiers
 {
     /// <summary>
     /// Тесты для критических участков GenerateId (исправление опечатки elapsedMillisecond).
     /// </summary>
-    [TestFixture]
     public class GenerateIdCriticalTests
     {
         /// <summary>
         /// Тест GenerateNext - исправленная опечатка (было elapsedMillsecond).
         /// </summary>
-        [Test]
+        [Fact]
         public void GenerateNext_ReturnsCorrectMillisecondValue()
         {
             // Arrange
@@ -27,14 +24,14 @@ namespace Lotus.Core.Identifiers
             var expectedMin = (int)((beforeCall - new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)).Ticks / 100000);
             var expectedMax = (int)((afterCall - new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)).Ticks / 100000);
 
-            ClassicAssert.GreaterOrEqual(result, expectedMin, "Result should be >= minimum expected value");
-            ClassicAssert.LessOrEqual(result, expectedMax, "Result should be <= maximum expected value");
+            Assert.True(result >= expectedMin, "Result should be >= minimum expected value");
+            Assert.True(result <= expectedMax, "Result should be <= maximum expected value");
         }
 
         /// <summary>
         /// Тест GenerateNext - последовательные вызовы возвращают возрастающие значения.
         /// </summary>
-        [Test]
+        [Fact]
         public void GenerateNext_SequentialCalls_ReturnIncreasingValues()
         {
             // Arrange & Act
@@ -43,13 +40,13 @@ namespace Lotus.Core.Identifiers
             var id2 = XGenerateId.GenerateNext();
 
             // Assert
-            ClassicAssert.GreaterOrEqual(id2, id1, "Second call should return value >= first call");
+            Assert.True(id2 >= id1, "Second call should return value >= first call");
         }
 
         /// <summary>
         /// Тест Generate - корректная работа с elapsedMillisecond (исправленная опечатка).
         /// </summary>
-        [Test]
+        [Fact]
         public void Generate_UsesCorrectMillisecondCalculation()
         {
             // Arrange
@@ -63,16 +60,16 @@ namespace Lotus.Core.Identifiers
             // Assert - проверяем что дата распаковывается корректно
             var unpackedDate = XGenerateId.UnpackIdToDateTime(id);
 
-            ClassicAssert.GreaterOrEqual(unpackedDate, beforeGeneration.AddMilliseconds(-10), 
+            Assert.True(unpackedDate >= beforeGeneration.AddMilliseconds(-10),
                 "Unpacked date should be close to generation time");
-            ClassicAssert.LessOrEqual(unpackedDate, afterGeneration.AddMilliseconds(10), 
+            Assert.True(unpackedDate <= afterGeneration.AddMilliseconds(10),
                 "Unpacked date should be close to generation time");
         }
 
         /// <summary>
         /// Тест Generate - корректная работа с null объектом.
         /// </summary>
-        [Test]
+        [Fact]
         public void Generate_WithNull_ReturnsNegativeOne()
         {
             // Arrange
@@ -82,13 +79,13 @@ namespace Lotus.Core.Identifiers
             var result = XGenerateId.Generate(nullObject!);
 
             // Assert
-            ClassicAssert.AreEqual(-1, result, "Null object should return -1");
+            Assert.Equal(-1, result);
         }
 
         /// <summary>
         /// Тест UnpackIdToDateTime - корректная распаковка даты из идентификатора.
         /// </summary>
-        [Test]
+        [Fact]
         public void UnpackIdToDateTime_UnpacksCorrectDateTime()
         {
             // Arrange
@@ -99,16 +96,16 @@ namespace Lotus.Core.Identifiers
             var unpackedDate = XGenerateId.UnpackIdToDateTime(id);
 
             // Assert
-            ClassicAssert.GreaterOrEqual(unpackedDate, new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+            Assert.True(unpackedDate >= new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                 "Unpacked date should be >= start date");
-            ClassicAssert.LessOrEqual(unpackedDate, DateTime.UtcNow.AddMinutes(1),
+            Assert.True(unpackedDate <= DateTime.UtcNow.AddMinutes(1),
                 "Unpacked date should be <= current time");
         }
 
         /// <summary>
         /// Тест UnpackIdToHashCode - корректная распаковка хеш-кода.
         /// </summary>
-        [Test]
+        [Fact]
         public void UnpackIdToHashCode_UnpacksCorrectHashCode()
         {
             // Arrange
@@ -120,8 +117,7 @@ namespace Lotus.Core.Identifiers
             var unpackedHash = XGenerateId.UnpackIdToHashCode(id);
 
             // Assert
-            ClassicAssert.AreEqual(expectedHash, unpackedHash, 
-                "Unpacked hash code should match original (rounded to multiple of 16)");
+            Assert.Equal(expectedHash, unpackedHash);
         }
     }
 }

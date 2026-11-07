@@ -1,14 +1,11 @@
 using System;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Identifiers
 {
-    [TestFixture]
     public class GenerateIdTests
     {
-        [Test]
+        [Fact]
         public void Identifier()
         {
             var test = "TestIdentifier";
@@ -20,10 +17,10 @@ namespace Lotus.Core.Identifiers
             var oh = test.GetHashCode() / 16 * 16;
             var rh = XGenerateId.UnpackIdToHashCode(uid);
 
-            ClassicAssert.AreEqual(rh, oh);
+            Assert.Equal(rh, oh);
         }
 
-        [Test]
+        [Fact]
         public void Generate_WithNullObject_ShouldReturnNegativeOne()
         {
             // Arrange
@@ -33,10 +30,10 @@ namespace Lotus.Core.Identifiers
             var result = XGenerateId.Generate(nullObject);
 
             // Assert
-            ClassicAssert.AreEqual(-1, result);
+            Assert.Equal(-1, result);
         }
 
-        [Test]
+        [Fact]
         public void Generate_WithNonNullObject_ShouldReturnPositiveId()
         {
             // Arrange
@@ -46,10 +43,10 @@ namespace Lotus.Core.Identifiers
             var result = XGenerateId.Generate(testObject);
 
             // Assert
-            ClassicAssert.Greater(result, 0);
+            Assert.True(result > 0);
         }
 
-        [Test]
+        [Fact]
         public void Generate_ShouldProduceDifferentIdsForDifferentObjects()
         {
             // Arrange
@@ -61,10 +58,10 @@ namespace Lotus.Core.Identifiers
             var id2 = XGenerateId.Generate(obj2);
 
             // Assert
-            ClassicAssert.AreNotEqual(id1, id2);
+            Assert.NotEqual(id1, id2);
         }
 
-        [Test]
+        [Fact]
         public void GenerateNext_ShouldReturnIncreasingValues()
         {
             // Arrange & Act
@@ -72,10 +69,10 @@ namespace Lotus.Core.Identifiers
             var id2 = XGenerateId.GenerateNext();
 
             // Assert
-            ClassicAssert.GreaterOrEqual(id2, id1);
+            Assert.True(id2 >= id1);
         }
 
-        [Test]
+        [Fact]
         public void UnpackIdToHashCode_ShouldReturnOriginalHashCodeDividedBy16()
         {
             // Arrange
@@ -87,10 +84,10 @@ namespace Lotus.Core.Identifiers
             var unpackedHash = XGenerateId.UnpackIdToHashCode(id);
 
             // Assert
-            ClassicAssert.AreEqual(expectedHash, unpackedHash / 16);
+            Assert.Equal(expectedHash, unpackedHash / 16);
         }
 
-        [Test]
+        [Fact]
         public void UnpackIdToDateTime_ShouldReturnRecentDateTime()
         {
             // Arrange
@@ -104,11 +101,11 @@ namespace Lotus.Core.Identifiers
             var afterGeneration = DateTime.UtcNow;
 
             // Assert
-            ClassicAssert.GreaterOrEqual(unpackedDate.Second, beforeGeneration.Second);
-            ClassicAssert.LessOrEqual(unpackedDate.Second, afterGeneration.Second);
+            Assert.True(unpackedDate.Second >= beforeGeneration.Second);
+            Assert.True(unpackedDate.Second <= afterGeneration.Second);
         }
 
-        [Test]
+        [Fact]
         public void UnpackIdToDateTime_ShouldReturnDateAfterStartDate()
         {
             // Arrange
@@ -119,7 +116,7 @@ namespace Lotus.Core.Identifiers
             var unpackedDate = XGenerateId.UnpackIdToDateTime(id);
 
             // Assert
-            ClassicAssert.GreaterOrEqual(unpackedDate, new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+            Assert.True(unpackedDate >= new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc));
         }
     }
 }

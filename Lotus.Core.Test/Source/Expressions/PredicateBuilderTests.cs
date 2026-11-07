@@ -1,15 +1,12 @@
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 using System;
 using System.Linq.Expressions;
 
 namespace Lotus.Core.Expressions
 {
-    [TestFixture]
     public class PredicateBuilderTests
     {
-        [Test]
+        [Fact]
         public void And_ShouldCombineExpressionsWithAndAlso()
         {
             // Arrange
@@ -21,12 +18,12 @@ namespace Lotus.Core.Expressions
             var func = combined.Compile();
 
             // Assert
-            ClassicAssert.IsTrue(func(7));
-            ClassicAssert.IsFalse(func(3));
-            ClassicAssert.IsFalse(func(11));
+            Assert.True(func(7));
+            Assert.False(func(3));
+            Assert.False(func(11));
         }
 
-        [Test]
+        [Fact]
         public void Or_ShouldCombineExpressionsWithOrElse()
         {
             // Arrange
@@ -38,12 +35,12 @@ namespace Lotus.Core.Expressions
             var func = combined.Compile();
 
             // Assert
-            ClassicAssert.IsTrue(func(3));
-            ClassicAssert.IsTrue(func(11));
-            ClassicAssert.IsFalse(func(7));
+            Assert.True(func(3));
+            Assert.True(func(11));
+            Assert.False(func(7));
         }
 
-        [Test]
+        [Fact]
         public void Not_ShouldNegateExpression()
         {
             // Arrange
@@ -54,8 +51,8 @@ namespace Lotus.Core.Expressions
             var func = negated.Compile();
 
             // Assert
-            ClassicAssert.IsTrue(func(3));
-            ClassicAssert.IsFalse(func(7));
+            Assert.True(func(3));
+            Assert.False(func(7));
         }
     }
 

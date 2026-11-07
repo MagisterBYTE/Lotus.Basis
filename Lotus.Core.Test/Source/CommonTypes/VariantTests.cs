@@ -2,22 +2,17 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-using NUnit.Framework.Legacy;
-
 namespace Lotus.Core.CommonTypes
 {
     /// <summary>
     /// Тесты для <see cref="CVariant"/>.
     /// </summary>
-    [TestFixture]
     public class VariantTests
     {
         /// <summary>
         /// Тест метода GetHashCode - исправленный метод без бесконечной рекурсии.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetHashCode_DoesNotCauseInfiniteRecursion()
         {
             var variant1 = new CVariant();
@@ -30,13 +25,13 @@ namespace Lotus.Core.CommonTypes
             var hash1 = variant1.GetHashCode();
             var hash2 = variant2.GetHashCode();
 
-            ClassicAssert.AreEqual(hash1, hash2);
+            Assert.Equal(hash1, hash2);
         }
 
         /// <summary>
         /// Тест метода GetHashCode - возвращает разные хеши для разных значений.
         /// </summary>
-        [Test]
+        [Fact]
         public void GetHashCode_ReturnsDifferentHashesForDifferentValues()
         {
             var variant1 = new CVariant();
@@ -48,65 +43,65 @@ namespace Lotus.Core.CommonTypes
             var hash1 = variant1.GetHashCode();
             var hash2 = variant2.GetHashCode();
 
-            ClassicAssert.AreNotEqual(hash1, hash2);
+            Assert.NotEqual(hash1, hash2);
         }
 
         /// <summary>
         /// Тест метода DeserializeFromString - реализованный метод парсит тип.
         /// </summary>
-        [Test]
+        [Fact]
         public void DeserializeFromString_WithValidFormat_ParsesType()
         {
             var variant = CVariant.DeserializeFromString("[Integer]");
 
-            ClassicAssert.IsNotNull(variant);
+            Assert.NotNull(variant);
             // Проверяем, что тип был установлен через свойство ValueType
-            ClassicAssert.AreEqual(TValueType.Integer, variant.ValueType);
+            Assert.Equal(TValueType.Integer, variant.ValueType);
         }
 
         /// <summary>
         /// Тест метода DeserializeFromString - с пустой строкой возвращает пустой вариант.
         /// </summary>
-        [Test]
+        [Fact]
         public void DeserializeFromString_WithEmptyString_ReturnsEmptyVariant()
         {
             var variant = CVariant.DeserializeFromString("");
 
-            ClassicAssert.IsNotNull(variant);
+            Assert.NotNull(variant);
             // Пустой вариант имеет тип Void по умолчанию
-            ClassicAssert.AreEqual(TValueType.Void, variant.ValueType);
+            Assert.Equal(TValueType.Void, variant.ValueType);
         }
 
         /// <summary>
         /// Тест метода DeserializeFromString - с null возвращает пустой вариант.
         /// </summary>
-        [Test]
+        [Fact]
         public void DeserializeFromString_WithNull_ReturnsEmptyVariant()
         {
             var variant = CVariant.DeserializeFromString(null!);
 
-            ClassicAssert.IsNotNull(variant);
+            Assert.NotNull(variant);
             // Пустой вариант имеет тип Void по умолчанию
-            ClassicAssert.AreEqual(TValueType.Void, variant.ValueType);
+            Assert.Equal(TValueType.Void, variant.ValueType);
         }
 
         /// <summary>
         /// Тест метода DeserializeFromString - с нераспознанным форматом возвращает пустой вариант.
         /// </summary>
-        [Test]
+        [Fact]
         public void DeserializeFromString_WithInvalidFormat_ReturnsEmptyVariant()
         {
             var variant = CVariant.DeserializeFromString("InvalidFormat");
 
-            ClassicAssert.IsNotNull(variant);
+            Assert.NotNull(variant);
             // Нераспознанный формат возвращает пустой вариант с типом Void
-            ClassicAssert.AreEqual(TValueType.Void, variant.ValueType);
+            Assert.Equal(TValueType.Void, variant.ValueType);
         }
 
         /// <summary>
         /// Тест уведомлений о свойствах - BooleanValue.
         /// </summary>
-        [Test]
+        [Fact]
         public void BooleanValue_NotifiesOwner()
         {
             var notified = false;
@@ -123,15 +118,15 @@ namespace Lotus.Core.CommonTypes
 
             variant.BooleanValue = true;
 
-            ClassicAssert.IsTrue(notified);
-            ClassicAssert.IsTrue(notifiedValue);
-            ClassicAssert.AreEqual(nameof(CVariant.BooleanValue), notifiedProperty);
+            Assert.True(notified);
+            Assert.True(notifiedValue);
+            Assert.Equal(nameof(CVariant.BooleanValue), notifiedProperty);
         }
 
         /// <summary>
         /// Тест уведомлений о свойствах - IntegerValue.
         /// </summary>
-        [Test]
+        [Fact]
         public void IntegerValue_NotifiesOwner()
         {
             var notified = false;
@@ -148,15 +143,15 @@ namespace Lotus.Core.CommonTypes
 
             variant.IntegerValue = 42;
 
-            ClassicAssert.IsTrue(notified);
-            ClassicAssert.AreEqual(42, notifiedValue);
-            ClassicAssert.AreEqual(nameof(CVariant.IntegerValue), notifiedProperty);
+            Assert.True(notified);
+            Assert.Equal(42, notifiedValue);
+            Assert.Equal(nameof(CVariant.IntegerValue), notifiedProperty);
         }
 
         /// <summary>
         /// Тест уведомлений о свойствах - StringValue.
         /// </summary>
-        [Test]
+        [Fact]
         public void StringValue_NotifiesOwner()
         {
             var notified = false;
@@ -173,61 +168,61 @@ namespace Lotus.Core.CommonTypes
 
             variant.StringValue = "Test";
 
-            ClassicAssert.IsTrue(notified);
-            ClassicAssert.AreEqual("Test", notifiedValue);
-            ClassicAssert.AreEqual(nameof(CVariant.StringValue), notifiedProperty);
+            Assert.True(notified);
+            Assert.Equal("Test", notifiedValue);
+            Assert.Equal(nameof(CVariant.StringValue), notifiedProperty);
         }
 
         /// <summary>
         /// Тест различных типов значений - Boolean.
         /// </summary>
-        [Test]
+        [Fact]
         public void BooleanValue_SetsCorrectType()
         {
             var variant = new CVariant();
             variant.BooleanValue = true;
 
-            ClassicAssert.AreEqual(TValueType.Boolean, variant.ValueType);
-            ClassicAssert.IsTrue(variant.BooleanValue);
+            Assert.Equal(TValueType.Boolean, variant.ValueType);
+            Assert.True(variant.BooleanValue);
         }
 
         /// <summary>
         /// Тест различных типов значений - Integer.
         /// </summary>
-        [Test]
+        [Fact]
         public void IntegerValue_SetsCorrectType()
         {
             var variant = new CVariant();
             variant.IntegerValue = 42;
 
-            ClassicAssert.AreEqual(TValueType.Integer, variant.ValueType);
-            ClassicAssert.AreEqual(42, variant.IntegerValue);
+            Assert.Equal(TValueType.Integer, variant.ValueType);
+            Assert.Equal(42, variant.IntegerValue);
         }
 
         /// <summary>
         /// Тест различных типов значений - Float.
         /// </summary>
-        [Test]
+        [Fact]
         public void FloatValue_SetsCorrectType()
         {
             var variant = new CVariant();
             variant.FloatValue = 3.14f;
 
-            ClassicAssert.AreEqual(TValueType.Float, variant.ValueType);
-            ClassicAssert.AreEqual(3.14f, variant.FloatValue, 0.001f);
+            Assert.Equal(TValueType.Float, variant.ValueType);
+            Assert.Equal(3.14f, variant.FloatValue, 0.001f);
         }
 
         /// <summary>
         /// Тест различных типов значений - String.
         /// </summary>
-        [Test]
+        [Fact]
         public void StringValue_SetsCorrectType()
         {
             var variant = new CVariant();
             variant.StringValue = "Test";
 
-            ClassicAssert.AreEqual(TValueType.String, variant.ValueType);
-            ClassicAssert.AreEqual("Test", variant.StringValue);
+            Assert.Equal(TValueType.String, variant.ValueType);
+            Assert.Equal("Test", variant.StringValue);
         }
 
         /// <summary>

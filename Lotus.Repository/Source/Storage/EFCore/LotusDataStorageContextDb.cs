@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
 using Lotus.Core;
+
+using Mapster;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +18,8 @@ namespace Lotus.Repository
     /// <summary>
     /// Класс представляющий собой хранилища данных для EF Core.
     /// </summary>
-    public class DataStorageContextDb<TContext> : StorageBaseContextDb<TContext>, ILotusDataStorage where TContext : ContextDbStorageStructure
+    public class DataStorageContextDb<TContext> : StorageBaseContextDb<TContext>, ILotusDataStorage
+        where TContext : ContextDbStorageStructure
     {
         #region Constructors
         /// <summary>
@@ -37,6 +41,36 @@ namespace Lotus.Repository
         public IQueryable<TEntity> Query<TEntity>() where TEntity : class
         {
             return _context.Set<TEntity>();
+        }
+
+        /// <inheritdoc/>
+        public IQueryable<TEntity> Query<TEntity>(Action<ILotusIncludeBuilder<TEntity>> include)
+            where TEntity : class
+        {
+            ArgumentNullException.ThrowIfNull(include);
+            var builder = new EfIncludeBuilder<TEntity>(_context.Set<TEntity>());
+            include(builder);
+            return builder.Query;
+        }
+
+        /// <summary>
+        /// EF Core построитель Include.
+        /// </summary>
+        private sealed class EfIncludeBuilder<TEntity> : ILotusIncludeBuilder<TEntity>
+            where TEntity : class
+        {
+            public IQueryable<TEntity> Query { get; private set; }
+
+            public EfIncludeBuilder(IQueryable<TEntity> query)
+            {
+                Query = query;
+            }
+
+            public ILotusIncludeBuilder<TEntity> Include<TProperty>(Expression<Func<TEntity, TProperty>> navigation)
+            {
+                Query = EntityFrameworkQueryableExtensions.Include(Query, navigation);
+                return this;
+            }
         }
 
         /// <summary>
@@ -399,6 +433,202 @@ namespace Lotus.Repository
                 }
             }
         }
+
+        #region IQueryable
+        /// <inheritdoc/>
+        public async Task<TEntity?> SingleOrDefaultAsync<TEntity>(CancellationToken cancellationToken = default(CancellationToken))
+            where TEntity : class
+        {
+            var query = _context.Set<TEntity>();
+            return await query.SingleOrDefaultAsync(cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        public async Task<TEntity?> SingleOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken))
+            where TEntity : class
+        {
+            var query = _context.Set<TEntity>();
+            return await query.SingleOrDefaultAsync(predicate, cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        public async Task<TEntity?> SingleOrDefaultAsync<TEntity>(IQueryable<TEntity> query, CancellationToken cancellationToken = default(CancellationToken))
+            where TEntity : class
+        {
+            return await query.SingleOrDefaultAsync(cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        public async Task<TEntity?> SingleOrDefaultAsync<TEntity>(IQueryable<TEntity> query, Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken))
+            where TEntity : class
+        {
+            return await query.SingleOrDefaultAsync(predicate, cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        public async Task<TEntity?> FirstOrDefaultAsync<TEntity>(CancellationToken cancellationToken = default(CancellationToken))
+            where TEntity : class
+        {
+            var query = _context.Set<TEntity>();
+            return await query.FirstOrDefaultAsync(cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        public async Task<TEntity?> FirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken))
+            where TEntity : class
+        {
+            var query = _context.Set<TEntity>();
+            return await query.FirstOrDefaultAsync(predicate, cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        public async Task<TEntity?> FirstOrDefaultAsync<TEntity>(IQueryable<TEntity> query, CancellationToken cancellationToken = default(CancellationToken))
+            where TEntity : class
+        {
+            return await query.SingleOrDefaultAsync(cancellationToken);
+        }
+
+        /// <inheritdoc/>
+        public async Task<TEntity?> FirstOrDefaultAsync<TEntity>(IQueryable<TEntity> query, Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken))
+            where TEntity : class
+        {
+            return await query.SingleOrDefaultAsync(predicate, cancellationToken);
+        }
+        #endregion
+
+        #region Paging
+        /// <inheritdoc/>
+        public async Task<ResponsePage<TResponse>> PageAsync<TEntity, TResponse>(IOrderedQueryable<TEntity> query, Request request, CancellationToken token = default)
+            where TEntity : class
+            where TResponse : class
+        {
+            if (request.PageInfo is null)
+            {
+                return await PageAsync<TEntity, TResponse>(query, token);
+            }
+            else
+            {
+                return await PageAsync<TEntity, TResponse>(query, request.PageInfo.PageNumber,
+                    request.PageInfo.PageSize, token);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async Task<ResponsePage<TEntity>> PageAsync<TEntity>(IOrderedQueryable<TEntity> query, Request request, CancellationToken token = default)
+            where TEntity : class
+        {
+            if (request.PageInfo is null)
+            {
+                return await PageAsync<TEntity>(query, token);
+            }
+            else
+            {
+                return await PageAsync<TEntity>(query, request.PageInfo.PageNumber,
+                    request.PageInfo.PageSize, token);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async Task<ResponsePage<TResponse>> PageAsync<TEntity, TResponse>(IOrderedQueryable<TEntity> query, int page, int pageSize, CancellationToken token = default)
+            where TEntity : class
+            where TResponse : class
+        {
+            var totalCount = await query.CountAsync(token);
+            var data = await query.Paging(page, pageSize)
+                .ProjectToType<TResponse>()
+                .ToArrayAsync(token);
+
+            var pageInfo = new PageInfoResponse()
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                CurrentPageSize = data.Length,
+                TotalCount = totalCount,
+            };
+
+            var paging = new ResponsePage<TResponse>
+            {
+                PageInfo = pageInfo,
+                Payload = data
+            };
+
+            return paging;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ResponsePage<TEntity>> PageAsync<TEntity>(IOrderedQueryable<TEntity> query, int page, int pageSize, CancellationToken token = default)
+            where TEntity : class
+        {
+            var totalCount = await query.CountAsync(token);
+            var data = await query.Paging(page, pageSize)
+                .ToArrayAsync(token);
+
+            var pageInfo = new PageInfoResponse()
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                CurrentPageSize = data.Length,
+                TotalCount = totalCount,
+            };
+
+            var paging = new ResponsePage<TEntity>
+            {
+                PageInfo = pageInfo,
+                Payload = data
+            };
+
+            return paging;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ResponsePage<TResponse>> PageAsync<TEntity, TResponse>(IOrderedQueryable<TEntity> query, CancellationToken token = default)
+            where TEntity : class
+            where TResponse : class
+        {
+            var totalCount = await query.CountAsync(token);
+            var data = await query.ProjectToType<TResponse>().ToArrayAsync(token);
+
+            var pageInfo = new PageInfoResponse()
+            {
+                PageNumber = 0,
+                PageSize = totalCount,
+                CurrentPageSize = data.Length,
+                TotalCount = totalCount,
+            };
+
+            var paging = new ResponsePage<TResponse>
+            {
+                PageInfo = pageInfo,
+                Payload = data
+            };
+
+            return paging;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ResponsePage<TEntity>> PageAsync<TEntity>(IOrderedQueryable<TEntity> query, CancellationToken token = default)
+            where TEntity : class
+        {
+            var totalCount = await query.CountAsync(token);
+            var data = await query.ToArrayAsync(token);
+
+            var pageInfo = new PageInfoResponse()
+            {
+                PageNumber = 0,
+                PageSize = totalCount,
+                CurrentPageSize = data.Length,
+                TotalCount = totalCount,
+            };
+
+            var paging = new ResponsePage<TEntity>
+            {
+                PageInfo = pageInfo,
+                Payload = data
+            };
+
+            return paging;
+        }
+        #endregion
 
         /// <summary>
         /// Сохранить в хранилище все изменения.

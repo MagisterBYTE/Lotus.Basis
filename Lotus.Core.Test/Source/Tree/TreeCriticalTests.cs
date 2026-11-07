@@ -1,20 +1,17 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Tree
 {
     /// <summary>
     /// Тесты для критических участков Tree (исправление опечаток и оптимизация).
     /// </summary>
-    [TestFixture]
     public class TreeCriticalTests
     {
         /// <summary>
         /// Тест TreeNodeExtension - исправление опечатки в имени класса TreeNodeOrderComprare -> TreeNodeOrderCompare.
         /// </summary>
-        [Test]
+        [Fact]
         public void TreeNodeExtension_CompareByOrder_ShouldUseCorrectClassName()
         {
             // Arrange
@@ -26,17 +23,17 @@ namespace Lotus.Core.Tree
             var comparer = XTreeNodeExtension.CompareByOrder;
 
             // Assert
-            ClassicAssert.IsNotNull(comparer, "Comparer should not be null");
-            ClassicAssert.IsInstanceOf<XTreeNodeExtension.TreeNodeOrderCompare>(comparer, "Should be TreeNodeOrderCompare (not TreeNodeOrderComprare)");
-            ClassicAssert.Less(comparer.Compare(node1, node2), 0, "node1 should be less than node2");
-            ClassicAssert.Greater(comparer.Compare(node3, node2), 0, "node3 should be greater than node2");
-            ClassicAssert.AreEqual(0, comparer.Compare(node1, node1), "Same nodes should be equal");
+            Assert.NotNull(comparer);
+            Assert.IsType<XTreeNodeExtension.TreeNodeOrderCompare>(comparer);
+            Assert.True(comparer.Compare(node1, node2) < 0, "node1 should be less than node2");
+            Assert.True(comparer.Compare(node3, node2) > 0, "node3 should be greater than node2");
+            Assert.Equal(0, comparer.Compare(node1, node1));
         }
 
         /// <summary>
         /// Тест TreeNodeExtension - исправление опечатки в комментарии "Отчистить" -> "Очистить".
         /// </summary>
-        [Test]
+        [Fact]
         public void TreeNodeExtension_ClearAndAddTreeNodes_ShouldHaveCorrectComment()
         {
             // Arrange
@@ -51,13 +48,13 @@ namespace Lotus.Core.Tree
             parent.ClearAndAddTreeNodes(newChildren);
 
             // Assert
-            ClassicAssert.AreEqual(1, parent.ChildNodes!.Count, "Should have one child after clear and add");
+            Assert.Equal(1, parent.ChildNodes!.Count);
         }
 
         /// <summary>
         /// Тест TreeNodeBuilder - корректная работа с исправленными именами переменных (nodeNew вместо nodeNew, nodeRoot вместо nodeRoot).
         /// </summary>
-        [Test]
+        [Fact]
         public void TreeNodeBuilder_ByFilter_ShouldUseCorrectVariableNames()
         {
             // Arrange
@@ -73,14 +70,14 @@ namespace Lotus.Core.Tree
                 node => new TreeNodeObservable { TextNode = node.ToString() + "_Copy" });
 
             // Assert
-            ClassicAssert.IsNotNull(result, "Result should not be null");
-            ClassicAssert.IsTrue(result!.ToString().Contains("Root"), "Should contain root text");
+            Assert.NotNull(result);
+            Assert.True(result!.ToString().Contains("Root"), "Should contain root text");
         }
 
         /// <summary>
         /// Тест TreeNodeObservable - оптимизация дублированного кода в UpdateParentsCheckedStatus (один раз parent is TreeNodeObservable вместо двух).
         /// </summary>
-        [Test]
+        [Fact]
         public void TreeNodeObservable_UpdateParentsCheckedStatus_ShouldUseOptimizedCode()
         {
             // Arrange
@@ -98,13 +95,13 @@ namespace Lotus.Core.Tree
             child2.IsChecked = true;
 
             // Assert - проверяем что родитель обновился корректно
-            ClassicAssert.IsTrue(parent.IsChecked == true, "Parent should be checked when all children are checked");
+            Assert.True(parent.IsChecked == true, "Parent should be checked when all children are checked");
         }
 
         /// <summary>
         /// Тест TreeNodeObservable - UpdateParentsCheckedStatus с частично отмеченными узлами.
         /// </summary>
-        [Test]
+        [Fact]
         public void TreeNodeObservable_UpdateParentsCheckedStatus_WithPartiallyChecked_ShouldSetNull()
         {
             // Arrange
@@ -120,13 +117,13 @@ namespace Lotus.Core.Tree
             child2.IsChecked = false;
 
             // Assert - родитель должен быть null (частично отмечен)
-            ClassicAssert.IsNull(parent.IsChecked, "Parent should be null when children are partially checked");
+            Assert.Null(parent.IsChecked);
         }
 
         /// <summary>
         /// Тест TreeNodeObservable - UpdateParentsCheckedStatus с неотмеченными узлами.
         /// </summary>
-        [Test]
+        [Fact]
         public void TreeNodeObservable_UpdateParentsCheckedStatus_WithUnchecked_ShouldSetFalse()
         {
             // Arrange
@@ -142,13 +139,13 @@ namespace Lotus.Core.Tree
             child2.IsChecked = false;
 
             // Assert
-            ClassicAssert.IsFalse(parent.IsChecked, "Parent should be false when all children are unchecked");
+            Assert.False(parent.IsChecked, "Parent should be false when all children are unchecked");
         }
 
         /// <summary>
         /// Тест TreeNodeExtension - SortChilds использует исправленное имя CompareByOrder.
         /// </summary>
-        [Test]
+        [Fact]
         public void TreeNodeExtension_SortChilds_ShouldUseCorrectComparerName()
         {
             // Arrange
@@ -164,9 +161,9 @@ namespace Lotus.Core.Tree
             parent.SortChilds();
 
             // Assert
-            ClassicAssert.AreEqual(1, parent.ChildNodes![0].Order, "First child should have order 1");
-            ClassicAssert.AreEqual(2, parent.ChildNodes[1].Order, "Second child should have order 2");
-            ClassicAssert.AreEqual(3, parent.ChildNodes[2].Order, "Third child should have order 3");
+            Assert.Equal(1, parent.ChildNodes![0].Order);
+            Assert.Equal(2, parent.ChildNodes[1].Order);
+            Assert.Equal(3, parent.ChildNodes[2].Order);
         }
     }
 }

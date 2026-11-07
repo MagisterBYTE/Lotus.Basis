@@ -1,19 +1,16 @@
 using System.Collections.Generic;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Collections
 {
     /// <summary>
     /// Тесты для <see cref="DictionaryList{TKey, TValue}"/>.
     /// </summary>
-    [TestFixture]
     public class DictionaryListTests
     {
         /// <summary>
         /// Тест метода RemoveValue - оптимизированный поиск.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveValue_RemovesItemFromAnyList()
         {
             var dictionary = new DictionaryList<string, int>();
@@ -24,17 +21,17 @@ namespace Lotus.Core.Collections
 
             var result = dictionary.RemoveValueAll(20);
 
-            ClassicAssert.IsTrue(result);
-            ClassicAssert.IsTrue(dictionary.ContainsKey("key1"));
-            ClassicAssert.IsTrue(dictionary.ContainsKey("key2"));
-            ClassicAssert.AreEqual(1, dictionary["key1"].Count);
-            ClassicAssert.AreEqual(1, dictionary["key2"].Count);
+            Assert.True(result);
+            Assert.True(dictionary.ContainsKey("key1"));
+            Assert.True(dictionary.ContainsKey("key2"));
+            Assert.Equal(1, dictionary["key1"].Count);
+            Assert.Equal(1, dictionary["key2"].Count);
         }
 
         /// <summary>
         /// Тест метода RemoveValue - удаляет ключ если список становится пустым.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveValue_RemovesKeyWhenListBecomesEmpty()
         {
             var dictionary = new DictionaryList<string, int>();
@@ -42,14 +39,14 @@ namespace Lotus.Core.Collections
 
             var result = dictionary.RemoveValueAll(10);
 
-            ClassicAssert.IsTrue(result);
-            ClassicAssert.IsFalse(dictionary.ContainsKey("key1"));
+            Assert.True(result);
+            Assert.False(dictionary.ContainsKey("key1"));
         }
 
         /// <summary>
         /// Тест метода RemoveValue - возвращает false если элемент не найден.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveValue_WithNonExistentItem_ReturnsFalse()
         {
             var dictionary = new DictionaryList<string, int>();
@@ -57,21 +54,21 @@ namespace Lotus.Core.Collections
 
             var result = dictionary.RemoveValueFirst(99);
 
-            ClassicAssert.IsFalse(result);
-            ClassicAssert.IsTrue(dictionary.ContainsKey("key1"));
+            Assert.False(result);
+            Assert.True(dictionary.ContainsKey("key1"));
         }
 
         /// <summary>
         /// Тест метода RemoveValue - работает с пустым словарем.
         /// </summary>
-        [Test]
+        [Fact]
         public void RemoveValue_WithEmptyDictionary_ReturnsFalse()
         {
             var dictionary = new DictionaryList<string, int>();
 
             var result = dictionary.RemoveValueAll(10);
 
-            ClassicAssert.IsFalse(result);
+            Assert.False(result);
         }
     }
 }

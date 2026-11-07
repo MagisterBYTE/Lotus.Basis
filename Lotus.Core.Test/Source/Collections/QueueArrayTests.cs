@@ -5,32 +5,28 @@ using UnityEditor;
 
 using System;
 
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Lotus.Core.Collections
 {
-    [TestFixture]
     public class QueueArrayTests
     {
         private QueueArray<int> _queue;
 
-        [SetUp]
-        public void SetUp()
+        public QueueArrayTests()
         {
             _queue = new QueueArray<int>();
         }
 
-        [Test]
+        [Fact]
         public void Enqueue_AddsItemToQueue()
         {
             _queue.Enqueue(10);
 
-            ClassicAssert.AreEqual(1, _queue.Count);
-            ClassicAssert.AreEqual(10, _queue.Peek());
+            Assert.Equal(1, _queue.Count);
+            Assert.Equal(10, _queue.Peek());
         }
 
-        [Test]
+        [Fact]
         public void Dequeue_RemovesAndReturnsItemFromHead()
         {
             _queue.Enqueue(10);
@@ -38,12 +34,12 @@ namespace Lotus.Core.Collections
 
             var result = _queue.Dequeue();
 
-            ClassicAssert.AreEqual(10, result);
-            ClassicAssert.AreEqual(1, _queue.Count);
-            ClassicAssert.AreEqual(20, _queue.Peek());
+            Assert.Equal(10, result);
+            Assert.Equal(1, _queue.Count);
+            Assert.Equal(20, _queue.Peek());
         }
 
-        [Test]
+        [Fact]
         public void Peek_ReturnsItemFromHeadWithoutRemovingIt()
         {
             _queue.Enqueue(10);
@@ -51,22 +47,22 @@ namespace Lotus.Core.Collections
 
             var result = _queue.Peek();
 
-            ClassicAssert.AreEqual(10, result);
-            ClassicAssert.AreEqual(2, _queue.Count);
+            Assert.Equal(10, result);
+            Assert.Equal(2, _queue.Count);
         }
 
-        [Test]
+        [Fact]
         public void Contains_ReturnsTrueIfItemExistsInQueue()
         {
             _queue.Enqueue(10);
             _queue.Enqueue(20);
 
-            ClassicAssert.IsTrue(_queue.Contains(10));
-            ClassicAssert.IsTrue(_queue.Contains(20));
-            ClassicAssert.IsFalse(_queue.Contains(30));
+            Assert.True(_queue.Contains(10));
+            Assert.True(_queue.Contains(20));
+            Assert.False(_queue.Contains(30));
         }
 
-        [Test]
+        [Fact]
         public void Clear_RemovesAllItemsFromQueue()
         {
             _queue.Enqueue(10);
@@ -74,66 +70,66 @@ namespace Lotus.Core.Collections
 
             _queue.Clear();
 
-            ClassicAssert.AreEqual(0, _queue.Count);
-            ClassicAssert.AreEqual(0, _queue.Head);
-            ClassicAssert.AreEqual(-1, _queue.Tail);
+            Assert.Equal(0, _queue.Count);
+            Assert.Equal(0, _queue.Head);
+            Assert.Equal(-1, _queue.Tail);
         }
 
-        [Test]
+        [Fact]
         public void Head_ReturnsCorrectIndex()
         {
             _queue.Enqueue(10);
             _queue.Enqueue(20);
             _queue.Dequeue();
 
-            ClassicAssert.AreEqual(1, _queue.Head);
+            Assert.Equal(1, _queue.Head);
         }
 
-        [Test]
+        [Fact]
         public void Tail_ReturnsCorrectIndex()
         {
             _queue.Enqueue(10);
             _queue.Enqueue(20);
 
-            ClassicAssert.AreEqual(1, _queue.Tail);
+            Assert.Equal(1, _queue.Tail);
         }
 
-        [Test]
+        [Fact]
         public void Indexer_ReturnsCorrectItem()
         {
             _queue.Enqueue(10);
             _queue.Enqueue(20);
             _queue.Enqueue(30);
 
-            ClassicAssert.AreEqual(10, _queue[0]);
-            ClassicAssert.AreEqual(20, _queue[1]);
-            ClassicAssert.AreEqual(30, _queue[2]);
+            Assert.Equal(10, _queue[0]);
+            Assert.Equal(20, _queue[1]);
+            Assert.Equal(30, _queue[2]);
         }
 
-        [Test]
+        [Fact]
         public void Indexer_SetsCorrectItem()
         {
             _queue.Enqueue(10);
             _queue.Enqueue(20);
             _queue[1] = 25;
 
-            ClassicAssert.AreEqual(25, _queue[1]);
+            Assert.Equal(25, _queue[1]);
         }
 
-        [Test]
+        [Fact]
         public void GetElement_ReturnsCorrectItem()
         {
             _queue.Enqueue(10);
             _queue.Enqueue(20);
 
-            ClassicAssert.AreEqual(10, _queue.GetElement(0));
-            ClassicAssert.AreEqual(20, _queue.GetElement(1));
+            Assert.Equal(10, _queue.GetElement(0));
+            Assert.Equal(20, _queue.GetElement(1));
         }
 
         /// <summary>
         /// Тестирование методов <see cref="QueueArray{TItem}"/>.
         /// </summary>
-        [Test]
+        [Fact]
         public void AllMethods()
         {
             var queue = new QueueArray<int>();
@@ -145,14 +141,14 @@ namespace Lotus.Core.Collections
             queue.Enqueue(50);
             queue.Enqueue(30);
 
-            ClassicAssert.AreEqual(queue.Dequeue(), 100);
-            ClassicAssert.AreEqual(queue.Dequeue(), 90);
-            ClassicAssert.AreEqual(queue.Dequeue(), 80);
-            ClassicAssert.AreEqual(queue.Dequeue(), 70);
-            ClassicAssert.AreEqual(queue.Dequeue(), 60);
-            ClassicAssert.AreEqual(queue.Dequeue(), 50);
-            ClassicAssert.AreEqual(queue.Dequeue(), 30);
-            ClassicAssert.AreEqual(queue.Count, 0);
+            Assert.Equal(queue.Dequeue(), 100);
+            Assert.Equal(queue.Dequeue(), 90);
+            Assert.Equal(queue.Dequeue(), 80);
+            Assert.Equal(queue.Dequeue(), 70);
+            Assert.Equal(queue.Dequeue(), 60);
+            Assert.Equal(queue.Dequeue(), 50);
+            Assert.Equal(queue.Dequeue(), 30);
+            Assert.Equal(queue.Count, 0);
         }
     }
 }

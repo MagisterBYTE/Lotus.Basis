@@ -71,13 +71,13 @@ namespace Lotus.Core
         /// <inheritdoc/>
         public TEntity? GetById(TKey id)
         {
-            return _list.Find(x => x.Equals(id));
+            return _list.Find(entity => entity.Id.Equals(id));
         }
 
         /// <inheritdoc/>
         public async ValueTask<TEntity?> GetByIdAsync(TKey id, CancellationToken token = default)
         {
-            var result = _list.Find(x => x.Equals(id));
+            var result = _list.Find(entity => entity.Id.Equals(id));
             return await ValueTask.FromResult(result);
         }
 
@@ -87,7 +87,7 @@ namespace Lotus.Core
             var result = new List<TEntity?>();
             foreach (var id in ids)
             {
-                var entity = _list.Find(x => x.Equals(id));
+                var entity = _list.Find(x => x.Id.Equals(id));
                 if (entity is not null)
                 {
                     result.Add(entity);
@@ -238,7 +238,7 @@ namespace Lotus.Core
         /// <inheritdoc/>
         public void RemoveId(TKey id)
         {
-            var entity = _list.Find(x => x.Equals(id));
+            var entity = _list.Find(x => x.Id.Equals(id));
             if (entity is not null)
             {
                 _list.Remove(entity);
@@ -250,7 +250,7 @@ namespace Lotus.Core
         {
             foreach (var id in ids)
             {
-                var entity = _list.Find(x => x.Equals(id));
+                var entity = _list.Find(x => x.Id.Equals(id));
                 if (entity is not null)
                 {
                     _list.Remove(entity);
